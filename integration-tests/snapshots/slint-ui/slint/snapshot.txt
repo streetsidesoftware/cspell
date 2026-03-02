@@ -3,7 +3,7 @@ Repository: slint-ui/slint
 Url: "https://github.com/slint-ui/slint"
 Args: ["--config=../../../../repositories/config/slint/cspell.config.yaml","--issues-summary-report","."]
 Lines:
- CSpell: Files checked: 2797, skipped: 3, Issues found: 5784 in 980 files.
+ CSpell: Files checked: 2804, skipped: 3, Issues found: 5853 in 986 files.
  exit code: 1
 AGENTS.md:149:18    - Unknown word (libxcb)     -- sudo apt install libxcb-shape0-dev libxcb-xfixes
 AGENTS.md:149:36    - Unknown word (libxcb)     -- install libxcb-shape0-dev libxcb-xfixes0-dev libxkbcommon
@@ -55,98 +55,102 @@ REUSE.toml:42:8      - Unknown word (vscodeignore) -- "**/.vscodeignore",
 REUSE.toml:78:18     - Unknown word (redpixel)     -- "api/cpp/tests/redpixel.png",
 REUSE.toml:85:13     - Unknown word (sdkconfig)    -- "demos/**/sdkconfig**",
 about.toml:23:8      - Unknown word (noassertion) -- filter-noassertion = true
-api/cpp/CMakeLists.txt:114:140   - Unknown word (libseat)     -- fullscreen on Linux. Requires libseat. If you don't have libseat
-api/cpp/CMakeLists.txt:114:167   - Unknown word (libseat)     -- libseat. If you don't have libseat, select `backend-linuxkms
-api/cpp/CMakeLists.txt:114:192   - Unknown word (linuxkms)    -- libseat, select `backend-linuxkms-noseat` instead." OFF
-api/cpp/CMakeLists.txt:114:201   - Unknown word (noseat)      -- select `backend-linuxkms-noseat` instead." OFF "NOT
-api/cpp/CMakeLists.txt:114:40    - Unknown word (linuxkms)    -- dependent_feature(backend-linuxkms "Enable support for
-api/cpp/CMakeLists.txt:115:40    - Unknown word (linuxkms)    -- dependent_feature(backend-linuxkms-noseat "Enable support
-api/cpp/CMakeLists.txt:115:49    - Unknown word (noseat)      -- feature(backend-linuxkms-noseat "Enable support for
-api/cpp/CMakeLists.txt:133:29    - Unknown word (staticlib)   -- set(rustc_lib_type "staticlib")
-api/cpp/CMakeLists.txt:146:19    - Unknown word (hostbuild)   -- corrosion_set_hostbuild(slint-compiler)
-api/cpp/CMakeLists.txt:154:17    - Unknown word (dlopening)   -- # Switch to dlopening fontconfig in the slint
-api/cpp/CMakeLists.txt:154:27    - Unknown word (fontconfig)  -- Switch to dlopening fontconfig in the slint-compiler
-api/cpp/CMakeLists.txt:155:22    - Unknown word (Yocto)       -- # for example in Yocto environments, PKG_CONFIG
-api/cpp/CMakeLists.txt:157:14    - Unknown word (CROSSCOMPILING) -- if(CMAKE_CROSSCOMPILING)
-api/cpp/CMakeLists.txt:158:46    - Unknown word (fontconfig)     -- slint_compiler_features "fontconfig-dlopen")
-api/cpp/CMakeLists.txt:158:57    - Unknown word (dlopen)         -- features "fontconfig-dlopen")
-api/cpp/CMakeLists.txt:164:14    - Unknown word (jemalloc)       -- # Enable jemalloc, except when cross-compiling
-api/cpp/CMakeLists.txt:165:18    - Unknown word (CROSSCOMPILING) -- if(NOT CMAKE_CROSSCOMPILING)
-api/cpp/CMakeLists.txt:166:46    - Unknown word (jemalloc)       -- slint_compiler_features "jemalloc")
-api/cpp/CMakeLists.txt:183:28    - Unknown word (TOPLEVEL)       -- (APPLE AND SLINT_IS_TOPLEVEL_BUILD AND BUILD_SHARED
-api/cpp/CMakeLists.txt:185:92    - Unknown word (libslint)       -- install_name,@rpath/libslint_cpp.dylib,-current_version
-api/cpp/CMakeLists.txt:187:71    - Unknown word (SONAME)         -- PROPERTIES IMPORTED_NO_SONAME 0)
-api/cpp/CMakeLists.txt:188:68    - Unknown word (SONAME)         -- PROPERTIES IMPORTED_SONAME libslint_cpp.dylib)
-api/cpp/CMakeLists.txt:188:75    - Unknown word (libslint)       -- PROPERTIES IMPORTED_SONAME libslint_cpp.dylib)
-api/cpp/CMakeLists.txt:197:40    - Unknown word (bigobj)         -- CXX_COMPILER_ID:MSVC>:/bigobj>
-api/cpp/CMakeLists.txt:198:45    - Unknown word (mbig)           -- COMPILER_ID:Clang>:-Wa,-mbig-obj>
-api/cpp/CMakeLists.txt:199:43    - Unknown word (mbig)           -- COMPILER_ID:GNU>:-Wa,-mbig-obj>
-api/cpp/CMakeLists.txt:210:5     - Unknown word (endforeach)     -- endforeach()
-api/cpp/CMakeLists.txt:217:45    - Unknown word (STREQUAL)       -- PLATFORM AND NOT IDF_TARGET STREQUAL "esp32p4")
-api/cpp/CMakeLists.txt:219:39    - Unknown word (println)        -- APPEND features "esp-println/${IDF_TARGET}")
-api/cpp/CMakeLists.txt:290:40    - Unknown word (STREQUAL)       -- AND NOT SLINT_STYLE STREQUAL "native")
-api/cpp/CMakeLists.txt:296:34    - Unknown word (buildroot)      -- environments such as buildroot set PKG_CONFIG_SYSROOT
-api/cpp/CMakeLists.txt:310:22    - Unknown word (CLANGCC)        -- find_program(CLANGCC clang)
-api/cpp/CMakeLists.txt:311:22    - Unknown word (CLANGCXX)       -- find_program(CLANGCXX clang++)
-api/cpp/CMakeLists.txt:312:12    - Unknown word (CLANGCC)        -- if(CLANGCC AND NOT DEFINED ENV
-api/cpp/CMakeLists.txt:312:40    - Unknown word (CLANGCC)        -- AND NOT DEFINED ENV{CLANGCC})
-api/cpp/CMakeLists.txt:317:17    - Unknown word (CLANGCC)        -- CLANGCC=${CLANGCC}
-api/cpp/CMakeLists.txt:317:27    - Unknown word (CLANGCC)        -- CLANGCC=${CLANGCC}
-api/cpp/CMakeLists.txt:320:12    - Unknown word (CLANGCXX)       -- if(CLANGCXX AND NOT DEFINED ENV
-api/cpp/CMakeLists.txt:320:41    - Unknown word (CLANGCXX)       -- AND NOT DEFINED ENV{CLANGCXX})
-api/cpp/CMakeLists.txt:325:17    - Unknown word (CLANGCXX)       -- CLANGCXX=${CLANGCXX}
-api/cpp/CMakeLists.txt:325:28    - Unknown word (CLANGCXX)       -- CLANGCXX=${CLANGCXX}
-api/cpp/CMakeLists.txt:332:65    - Unknown word (Yocto)          -- bet. Unfortunately in Yocto environments, CC will
-api/cpp/CMakeLists.txt:333:51    - Unknown word (CFLAGS)         -- The same applies to CFLAGS, which may contain target
-api/cpp/CMakeLists.txt:337:71    - Unknown word (CFLAGS)         -- clang or gcc and empty CFLAGS_<host triplet>
-api/cpp/CMakeLists.txt:338:18    - Unknown word (CROSSCOMPILING) -- if(CMAKE_CROSSCOMPILING AND Rust_CARGO_HOST
-api/cpp/CMakeLists.txt:359:21    - Unknown word (CFLAGS)         -- CFLAGS_${cargo_host_target
-api/cpp/CMakeLists.txt:370:5     - Unknown word (endforeach)     -- endforeach()
-api/cpp/CMakeLists.txt:382:61    - Unknown word (pathdata)       -- generated_include/slint_pathdata_internal.h
-api/cpp/CMakeLists.txt:386:61    - Unknown word (sharedvector)   -- generated_include/slint_sharedvector_internal.h
-api/cpp/CMakeLists.txt:402:5     - Unknown word (endforeach)     -- endforeach()
+api/cpp/CMakeLists.txt:116:140   - Unknown word (libseat)     -- fullscreen on Linux. Requires libseat. If you don't have libseat
+api/cpp/CMakeLists.txt:116:167   - Unknown word (libseat)     -- libseat. If you don't have libseat, select `backend-linuxkms
+api/cpp/CMakeLists.txt:116:192   - Unknown word (linuxkms)    -- libseat, select `backend-linuxkms-noseat` instead." OFF
+api/cpp/CMakeLists.txt:116:201   - Unknown word (noseat)      -- select `backend-linuxkms-noseat` instead." OFF "NOT
+api/cpp/CMakeLists.txt:116:40    - Unknown word (linuxkms)    -- dependent_feature(backend-linuxkms "Enable support for
+api/cpp/CMakeLists.txt:117:40    - Unknown word (linuxkms)    -- dependent_feature(backend-linuxkms-noseat "Enable support
+api/cpp/CMakeLists.txt:117:49    - Unknown word (noseat)      -- feature(backend-linuxkms-noseat "Enable support for
+api/cpp/CMakeLists.txt:135:29    - Unknown word (staticlib)   -- set(rustc_lib_type "staticlib")
+api/cpp/CMakeLists.txt:148:19    - Unknown word (hostbuild)   -- corrosion_set_hostbuild(slint-compiler)
+api/cpp/CMakeLists.txt:156:17    - Unknown word (dlopening)   -- # Switch to dlopening fontconfig in the slint
+api/cpp/CMakeLists.txt:156:27    - Unknown word (fontconfig)  -- Switch to dlopening fontconfig in the slint-compiler
+api/cpp/CMakeLists.txt:157:22    - Unknown word (Yocto)       -- # for example in Yocto environments, PKG_CONFIG
+api/cpp/CMakeLists.txt:159:14    - Unknown word (CROSSCOMPILING) -- if(CMAKE_CROSSCOMPILING)
+api/cpp/CMakeLists.txt:160:46    - Unknown word (fontconfig)     -- slint_compiler_features "fontconfig-dlopen")
+api/cpp/CMakeLists.txt:160:57    - Unknown word (dlopen)         -- features "fontconfig-dlopen")
+api/cpp/CMakeLists.txt:166:14    - Unknown word (jemalloc)       -- # Enable jemalloc, except when cross-compiling
+api/cpp/CMakeLists.txt:167:18    - Unknown word (CROSSCOMPILING) -- if(NOT CMAKE_CROSSCOMPILING)
+api/cpp/CMakeLists.txt:168:46    - Unknown word (jemalloc)       -- slint_compiler_features "jemalloc")
+api/cpp/CMakeLists.txt:185:28    - Unknown word (TOPLEVEL)       -- (APPLE AND SLINT_IS_TOPLEVEL_BUILD AND BUILD_SHARED
+api/cpp/CMakeLists.txt:187:92    - Unknown word (libslint)       -- install_name,@rpath/libslint_cpp.dylib,-current_version
+api/cpp/CMakeLists.txt:189:71    - Unknown word (SONAME)         -- PROPERTIES IMPORTED_NO_SONAME 0)
+api/cpp/CMakeLists.txt:190:68    - Unknown word (SONAME)         -- PROPERTIES IMPORTED_SONAME libslint_cpp.dylib)
+api/cpp/CMakeLists.txt:190:75    - Unknown word (libslint)       -- PROPERTIES IMPORTED_SONAME libslint_cpp.dylib)
+api/cpp/CMakeLists.txt:199:40    - Unknown word (bigobj)         -- CXX_COMPILER_ID:MSVC>:/bigobj>
+api/cpp/CMakeLists.txt:200:45    - Unknown word (mbig)           -- COMPILER_ID:Clang>:-Wa,-mbig-obj>
+api/cpp/CMakeLists.txt:201:43    - Unknown word (mbig)           -- COMPILER_ID:GNU>:-Wa,-mbig-obj>
+api/cpp/CMakeLists.txt:212:5     - Unknown word (endforeach)     -- endforeach()
+api/cpp/CMakeLists.txt:219:45    - Unknown word (STREQUAL)       -- PLATFORM AND NOT IDF_TARGET STREQUAL "esp32p4")
+api/cpp/CMakeLists.txt:221:39    - Unknown word (println)        -- APPEND features "esp-println/${IDF_TARGET}")
+api/cpp/CMakeLists.txt:292:40    - Unknown word (STREQUAL)       -- AND NOT SLINT_STYLE STREQUAL "native")
+api/cpp/CMakeLists.txt:298:34    - Unknown word (buildroot)      -- environments such as buildroot set PKG_CONFIG_SYSROOT
+api/cpp/CMakeLists.txt:312:22    - Unknown word (CLANGCC)        -- find_program(CLANGCC clang)
+api/cpp/CMakeLists.txt:313:22    - Unknown word (CLANGCXX)       -- find_program(CLANGCXX clang++)
+api/cpp/CMakeLists.txt:314:12    - Unknown word (CLANGCC)        -- if(CLANGCC AND NOT DEFINED ENV
+api/cpp/CMakeLists.txt:314:40    - Unknown word (CLANGCC)        -- AND NOT DEFINED ENV{CLANGCC})
+api/cpp/CMakeLists.txt:319:17    - Unknown word (CLANGCC)        -- CLANGCC=${CLANGCC}
+api/cpp/CMakeLists.txt:319:27    - Unknown word (CLANGCC)        -- CLANGCC=${CLANGCC}
+api/cpp/CMakeLists.txt:322:12    - Unknown word (CLANGCXX)       -- if(CLANGCXX AND NOT DEFINED ENV
+api/cpp/CMakeLists.txt:322:41    - Unknown word (CLANGCXX)       -- AND NOT DEFINED ENV{CLANGCXX})
+api/cpp/CMakeLists.txt:327:17    - Unknown word (CLANGCXX)       -- CLANGCXX=${CLANGCXX}
+api/cpp/CMakeLists.txt:327:28    - Unknown word (CLANGCXX)       -- CLANGCXX=${CLANGCXX}
+api/cpp/CMakeLists.txt:334:65    - Unknown word (Yocto)          -- bet. Unfortunately in Yocto environments, CC will
+api/cpp/CMakeLists.txt:335:51    - Unknown word (CFLAGS)         -- The same applies to CFLAGS, which may contain target
+api/cpp/CMakeLists.txt:339:71    - Unknown word (CFLAGS)         -- clang or gcc and empty CFLAGS_<host triplet>
+api/cpp/CMakeLists.txt:340:18    - Unknown word (CROSSCOMPILING) -- if(CMAKE_CROSSCOMPILING AND Rust_CARGO_HOST
+api/cpp/CMakeLists.txt:361:21    - Unknown word (CFLAGS)         -- CFLAGS_${cargo_host_target
+api/cpp/CMakeLists.txt:372:5     - Unknown word (endforeach)     -- endforeach()
+api/cpp/CMakeLists.txt:384:61    - Unknown word (pathdata)       -- generated_include/slint_pathdata_internal.h
+api/cpp/CMakeLists.txt:388:61    - Unknown word (sharedvector)   -- generated_include/slint_sharedvector_internal.h
+api/cpp/CMakeLists.txt:404:5     - Unknown word (endforeach)     -- endforeach()
 api/cpp/CMakeLists.txt:41:12     - Unknown word (TOUPPER)    -- string(TOUPPER "${cargo_feature}" cmake
-api/cpp/CMakeLists.txt:447:31    - Unknown word (RELWITHDEBINFO) -- IMPORTED_LOCATION_RELWITHDEBINFO IMPORTED_LOCATION_MINSIZEREL
-api/cpp/CMakeLists.txt:447:64    - Unknown word (MINSIZEREL)     -- WITHDEBINFO IMPORTED_LOCATION_MINSIZEREL
-api/cpp/CMakeLists.txt:448:22    - Unknown word (IMPLIB)         -- IMPORTED_IMPLIB IMPORTED_IMPLIB_DEBUG
-api/cpp/CMakeLists.txt:448:38    - Unknown word (IMPLIB)         -- IMPORTED_IMPLIB IMPORTED_IMPLIB_DEBUG IMPORTED_IMPLIB
-api/cpp/CMakeLists.txt:448:60    - Unknown word (IMPLIB)         -- IMPLIB_DEBUG IMPORTED_IMPLIB_RELEASE
-api/cpp/CMakeLists.txt:449:22    - Unknown word (IMPLIB)         -- IMPORTED_IMPLIB_RELWITHDEBINFO IMPORTED
-api/cpp/CMakeLists.txt:449:29    - Unknown word (RELWITHDEBINFO) -- IMPORTED_IMPLIB_RELWITHDEBINFO IMPORTED_IMPLIB_MINSIZEREL
-api/cpp/CMakeLists.txt:449:53    - Unknown word (IMPLIB)         -- RELWITHDEBINFO IMPORTED_IMPLIB_MINSIZEREL)
-api/cpp/CMakeLists.txt:449:60    - Unknown word (MINSIZEREL)     -- ELWITHDEBINFO IMPORTED_IMPLIB_MINSIZEREL)
-api/cpp/CMakeLists.txt:456:9     - Unknown word (endforeach)     -- endforeach()
-api/cpp/CMakeLists.txt:458:38    - Unknown word (SONAME)         -- Corrosion sets IMPORTED_NO_SONAME and for macOS we reset
-api/cpp/CMakeLists.txt:459:28    - Unknown word (SONAME)         -- # and set IMPORTED_SONAME. Make sure to propagate
-api/cpp/CMakeLists.txt:461:34    - Unknown word (SONAME)         -- foreach(prop IMPORTED_NO_SONAME IMPORTED_SONAME)
-api/cpp/CMakeLists.txt:466:9     - Unknown word (endforeach)     -- endforeach()
-api/cpp/CMakeLists.txt:475:5     - Unknown word (endfunction)    -- endfunction()
-api/cpp/CMakeLists.txt:494:5     - Unknown word (CPACK)          -- set(CPACK_PACKAGE_NAME "Slint
-api/cpp/CMakeLists.txt:495:5     - Unknown word (CPACK)          -- set(CPACK_PACKAGE_VENDOR "Slint
-api/cpp/CMakeLists.txt:496:5     - Unknown word (CPACK)          -- set(CPACK_VERBATIM_VARIABLES true
-api/cpp/CMakeLists.txt:497:5     - Unknown word (CPACK)          -- set(CPACK_PACKAGE_VERSION_MAJOR
-api/cpp/CMakeLists.txt:498:5     - Unknown word (CPACK)          -- set(CPACK_PACKAGE_VERSION_MINOR
-api/cpp/CMakeLists.txt:504:11    - Unknown word (NSIS)           -- set(CPACK_NSIS_DEFINES "ManifestDPIAware
-api/cpp/CMakeLists.txt:528:27    - Unknown word (STREQUAL)       -- NOT Rust_CARGO_TARGET STREQUAL Rust_CARGO_HOST_TARGET
+api/cpp/CMakeLists.txt:449:31    - Unknown word (RELWITHDEBINFO) -- IMPORTED_LOCATION_RELWITHDEBINFO IMPORTED_LOCATION_MINSIZEREL
+api/cpp/CMakeLists.txt:449:64    - Unknown word (MINSIZEREL)     -- WITHDEBINFO IMPORTED_LOCATION_MINSIZEREL
+api/cpp/CMakeLists.txt:450:22    - Unknown word (IMPLIB)         -- IMPORTED_IMPLIB IMPORTED_IMPLIB_DEBUG
+api/cpp/CMakeLists.txt:450:38    - Unknown word (IMPLIB)         -- IMPORTED_IMPLIB IMPORTED_IMPLIB_DEBUG IMPORTED_IMPLIB
+api/cpp/CMakeLists.txt:450:60    - Unknown word (IMPLIB)         -- IMPLIB_DEBUG IMPORTED_IMPLIB_RELEASE
+api/cpp/CMakeLists.txt:451:22    - Unknown word (IMPLIB)         -- IMPORTED_IMPLIB_RELWITHDEBINFO IMPORTED
+api/cpp/CMakeLists.txt:451:29    - Unknown word (RELWITHDEBINFO) -- IMPORTED_IMPLIB_RELWITHDEBINFO IMPORTED_IMPLIB_MINSIZEREL
+api/cpp/CMakeLists.txt:451:53    - Unknown word (IMPLIB)         -- RELWITHDEBINFO IMPORTED_IMPLIB_MINSIZEREL)
+api/cpp/CMakeLists.txt:451:60    - Unknown word (MINSIZEREL)     -- ELWITHDEBINFO IMPORTED_IMPLIB_MINSIZEREL)
+api/cpp/CMakeLists.txt:458:9     - Unknown word (endforeach)     -- endforeach()
+api/cpp/CMakeLists.txt:460:38    - Unknown word (SONAME)         -- Corrosion sets IMPORTED_NO_SONAME and for macOS we reset
+api/cpp/CMakeLists.txt:461:28    - Unknown word (SONAME)         -- # and set IMPORTED_SONAME. Make sure to propagate
+api/cpp/CMakeLists.txt:463:34    - Unknown word (SONAME)         -- foreach(prop IMPORTED_NO_SONAME IMPORTED_SONAME)
+api/cpp/CMakeLists.txt:468:9     - Unknown word (endforeach)     -- endforeach()
+api/cpp/CMakeLists.txt:477:5     - Unknown word (endfunction)    -- endfunction()
+api/cpp/CMakeLists.txt:496:5     - Unknown word (CPACK)          -- set(CPACK_PACKAGE_NAME "Slint
+api/cpp/CMakeLists.txt:497:5     - Unknown word (CPACK)          -- set(CPACK_PACKAGE_VENDOR "Slint
+api/cpp/CMakeLists.txt:498:5     - Unknown word (CPACK)          -- set(CPACK_VERBATIM_VARIABLES true
+api/cpp/CMakeLists.txt:499:5     - Unknown word (CPACK)          -- set(CPACK_PACKAGE_VERSION_MAJOR
+api/cpp/CMakeLists.txt:500:5     - Unknown word (CPACK)          -- set(CPACK_PACKAGE_VERSION_MINOR
+api/cpp/CMakeLists.txt:506:11    - Unknown word (NSIS)           -- set(CPACK_NSIS_DEFINES "ManifestDPIAware
+api/cpp/CMakeLists.txt:530:27    - Unknown word (STREQUAL)       -- NOT Rust_CARGO_TARGET STREQUAL Rust_CARGO_HOST_TARGET
 api/cpp/CMakeLists.txt:54:1      - Unknown word (endfunction) -- endfunction()
 api/cpp/CMakeLists.txt:58:12     - Unknown word (TOUPPER)     -- string(TOUPPER "${cargo_feature}" cmake
 api/cpp/CMakeLists.txt:71:1      - Unknown word (endfunction) -- endfunction()
-api/cpp/CMakeLists.txt:80:12     - Unknown word (TOUPPER)     -- string(TOUPPER "${renderer}" cmake
-api/cpp/CMakeLists.txt:87:1      - Unknown word (endfunction) -- endfunction()
+api/cpp/CMakeLists.txt:77:22     - Unknown word (libm)        -- define_cargo_feature(libm "This feature enables
+api/cpp/CMakeLists.txt:77:95     - Unknown word (libm)        -- emulation using the libm crate. Use this in MCU
+api/cpp/CMakeLists.txt:81:12     - Unknown word (TOUPPER)     -- string(TOUPPER "${renderer}" cmake
+api/cpp/CMakeLists.txt:88:1      - Unknown word (endfunction) -- endfunction()
 api/cpp/README.md:78:40     - Unknown word (cortexa)    -- sdk/environment-setup-cortexa53-crypto-poky-linux
 api/cpp/README.md:82:54     - Unknown word (DCMAKE)     -- -unknown-linux-gnu -DCMAKE_INSTALL_PREFIX=/slint
-api/cpp/cbindgen.rs:1028:13   - Unknown word (linuxkms)   -- backend_linuxkms
-api/cpp/cbindgen.rs:1029:13   - Unknown word (linuxkms)   -- backend_linuxkms_noseat
-api/cpp/cbindgen.rs:1029:22   - Unknown word (noseat)     -- backend_linuxkms_noseat
-api/cpp/cbindgen.rs:462:26    - Unknown word (singleshot) -- "slint_timer_singleshot",
-api/cpp/cbindgen.rs:515:31    - Unknown word (oklch)      -- "slint_color_from_oklch",
-api/cpp/cbindgen.rs:516:29    - Unknown word (oklch)      -- "slint_color_to_oklch",],
-api/cpp/cbindgen.rs:592:29    - Unknown word (hinstance)  -- "slint_windowrc_hinstance_win32",
-api/cpp/cbindgen.rs:593:29    - Unknown word (wlsurface)  -- "slint_windowrc_wlsurface_wayland",
-api/cpp/cbindgen.rs:594:29    - Unknown word (wldisplay)  -- "slint_windowrc_wldisplay_wayland",
-api/cpp/cbindgen.rs:595:29    - Unknown word (nsview)     -- "slint_windowrc_nsview_appkit",
-api/cpp/cbindgen.rs:595:36    - Unknown word (appkit)     -- slint_windowrc_nsview_appkit",
-api/cpp/cbindgen.rs:846:35    - Unknown word (qwidget)    -- virtual void *qwidget() const = 0;
+api/cpp/cbindgen.rs:1030:13   - Unknown word (linuxkms)   -- backend_linuxkms
+api/cpp/cbindgen.rs:1031:13   - Unknown word (linuxkms)   -- backend_linuxkms_noseat
+api/cpp/cbindgen.rs:1031:22   - Unknown word (noseat)     -- backend_linuxkms_noseat
+api/cpp/cbindgen.rs:223:15    - Unknown word (Strin)      -- ("StringArg".into(), "slint
+api/cpp/cbindgen.rs:392:10    - Unknown word (Strin)      -- "StringArg",
+api/cpp/cbindgen.rs:464:26    - Unknown word (singleshot) -- "slint_timer_singleshot",
+api/cpp/cbindgen.rs:517:31    - Unknown word (oklch)      -- "slint_color_from_oklch",
+api/cpp/cbindgen.rs:518:29    - Unknown word (oklch)      -- "slint_color_to_oklch",],
+api/cpp/cbindgen.rs:594:29    - Unknown word (hinstance)  -- "slint_windowrc_hinstance_win32",
+api/cpp/cbindgen.rs:595:29    - Unknown word (wlsurface)  -- "slint_windowrc_wlsurface_wayland",
+api/cpp/cbindgen.rs:596:29    - Unknown word (wldisplay)  -- "slint_windowrc_wldisplay_wayland",
+api/cpp/cbindgen.rs:597:29    - Unknown word (nsview)     -- "slint_windowrc_nsview_appkit",
+api/cpp/cbindgen.rs:597:36    - Unknown word (appkit)     -- slint_windowrc_nsview_appkit",
+api/cpp/cbindgen.rs:848:35    - Unknown word (qwidget)    -- virtual void *qwidget() const = 0;
 api/cpp/cmake/SlintConfig.cmake.in:10:19     - Unknown word (STREQUAL)   -- if(_IMPORT_PREFIX STREQUAL "/")
 api/cpp/cmake/SlintConfig.cmake.in:44:1      - Unknown word (endfunction) -- endfunction()
 api/cpp/cmake/SlintConfig.cmake.in:48:24     - Unknown word (STREQUAL)    -- if (SLINT_COMPILER STREQUAL "download")
@@ -262,9 +266,9 @@ api/cpp/include/slint-stm32.h:99:13     - Unknown word (LTDC)       -- HAL_LTDC_
 api/cpp/include/slint-stm32.h:99:36     - Unknown word (hlcd)       -- LTDC_RegisterCallback(&hlcd_ltdc, HAL_LTDC_RELOAD
 api/cpp/include/slint-stm32.h:99:41     - Unknown word (ltdc)       -- RegisterCallback(&hlcd_ltdc, HAL_LTDC_RELOAD_EVENT
 api/cpp/include/slint-stm32.h:99:51     - Unknown word (LTDC)       -- isterCallback(&hlcd_ltdc, HAL_LTDC_RELOAD_EVENT_CB_ID,
-api/cpp/include/slint.h:230:22    - Unknown word (itemvtable) -- item_layout_info(VT *itemvtable, ItemType *item_ptr
-api/cpp/include/slint.h:235:12    - Unknown word (itemvtable) -- return itemvtable->layout_info({ itemvtable
-api/cpp/include/slint.h:235:38    - Unknown word (itemvtable) -- itemvtable->layout_info({ itemvtable, item_ptr }, orientation
+api/cpp/include/slint.h:242:22    - Unknown word (itemvtable) -- item_layout_info(VT *itemvtable, ItemType *item_ptr
+api/cpp/include/slint.h:247:12    - Unknown word (itemvtable) -- return itemvtable->layout_info({ itemvtable
+api/cpp/include/slint.h:247:38    - Unknown word (itemvtable) -- itemvtable->layout_info({ itemvtable, item_ptr }, orientation
 api/cpp/include/slint.h:29:6      - Unknown word (endrst)     -- /// \endrst
 api/cpp/include/slint_color.h:171:36    - Unknown word (Oklch)      -- Construct a color from the Oklch color space components
 api/cpp/include/slint_color.h:172:9     - Unknown word (Oklch)      -- /// Oklch is a perceptually uniform
@@ -1539,10 +1543,10 @@ docs/development/layout-system.md:106:84    - Unknown word (flexbox)    -- which
 docs/development/layout-system.md:121:19    - Unknown word (layoutinfo) -- - layoutinfo-h, layoutinfo-v (constraints)
 docs/development/layout-system.md:121:5     - Unknown word (layoutinfo) -- - layoutinfo-h, layoutinfo-v (constraints
 docs/development/layout-system.md:133:69    - Unknown word (flexbox)    -- sizes for items in a flexbox layout |
-docs/development/layout-system.md:145:9     - Unknown word (elems)      -- pub elems: Vec<GridLayoutElement
-docs/development/layout-system.md:151:9     - Unknown word (elems)      -- pub elems: Vec<LayoutItem>,
+docs/development/layout-system.md:146:9     - Unknown word (elems)      -- pub elems: Vec<GridLayoutElement
+docs/development/layout-system.md:152:9     - Unknown word (elems)      -- pub elems: Vec<LayoutItem>,
 docs/development/layout-system.md:19:27     - Unknown word (Flexbox)    -- FlexBoxLayout** - CSS Flexbox layout
-docs/development/layout-system.md:202:43    - Unknown word (eprintln)   -- propagation**: Add `eprintln!` in `LayoutInfo::merge
+docs/development/layout-system.md:314:43    - Unknown word (eprintln)   -- propagation**: Add `eprintln!` in `LayoutInfo::merge
 docs/development/model-repeater-system.md:36:28     - Unknown word (usize)      -- row_count(&self) -> usize;
 docs/development/model-repeater-system.md:39:29     - Unknown word (usize)      -- row_data(&self, row: usize) -> Option<Self::Data
 docs/development/model-repeater-system.md:42:33     - Unknown word (usize)      -- row_data(&self, row: usize, data: Self::Data)
@@ -1946,36 +1950,41 @@ examples/layouts/vertical-layout-with-model.slint:1:48      - Unknown word (KDAB
 examples/layouts/vertical-layout-with-model.slint:41:36     - Unknown word (dfaure)        -- "David", account: "dfaure", animal: "a bird"
 examples/layouts/vertical-layout-with-model.slint:43:18     - Unknown word (Randriana)     -- { name: "Randriana Tzimabazafi", account
 examples/layouts/vertical-layout-with-model.slint:43:28     - Unknown word (Tzimabazafi)   -- { name: "Randriana Tzimabazafi", account: "rt", animal
-examples/mcu-board-support/README.md:109:14    - Unknown word (THUMBV)     -- CARGO_TARGET_THUMBV6M_NONE_EABI_LINKER=
-examples/mcu-board-support/README.md:109:221   - Unknown word (thumbv)     -- pico-st7789 --target=thumbv6m-none-eabi --release
-examples/mcu-board-support/README.md:109:235   - Unknown word (eabi)       -- target=thumbv6m-none-eabi --release
-examples/mcu-board-support/README.md:109:28    - Unknown word (EABI)       -- TARGET_THUMBV6M_NONE_EABI_LINKER="flip-link" CARGO
-examples/mcu-board-support/README.md:109:65    - Unknown word (THUMBV)     -- flip-link" CARGO_TARGET_THUMBV6M_NONE_EABI_RUNNER=
-examples/mcu-board-support/README.md:109:79    - Unknown word (EABI)       -- TARGET_THUMBV6M_NONE_EABI_RUNNER="probe-rs run
-examples/mcu-board-support/README.md:128:29    - Unknown word (eabi)       -- target=thumbv6m-none-eabi",
-examples/mcu-board-support/README.md:174:62    - Unknown word (eabi)       -- target/thumbv6m-none-eabi/release-with-debug/printerdem
-examples/mcu-board-support/README.md:189:229   - Unknown word (eabihf)     -- target=thumbv7em-none-eabihf --release
-examples/mcu-board-support/README.md:189:48    - Unknown word (THUMBV)     -- LEVEL=s CARGO_TARGET_THUMBV7EM_NONE_EABIHF_RUNNER
-examples/mcu-board-support/README.md:189:63    - Unknown word (EABIHF)     -- TARGET_THUMBV7EM_NONE_EABIHF_RUNNER="probe-rs run
-examples/mcu-board-support/README.md:197:242   - Unknown word (eabihf)     -- target=thumbv8m.main-none-eabihf --release
-examples/mcu-board-support/README.md:197:48    - Unknown word (THUMBV)     -- LEVEL=s CARGO_TARGET_THUMBV8M_MAIN_NONE_EABIHF_RUNNER
-examples/mcu-board-support/README.md:197:67    - Unknown word (EABIHF)     -- TARGET_THUMBV8M_MAIN_NONE_EABIHF_RUNNER="probe-rs run
-examples/mcu-board-support/README.md:207:22    - Unknown word (esplash)    -- When flashing, with `esplash`, you will be prompted
-examples/mcu-board-support/README.md:238:31    - Unknown word (AMOLED)     -- Waveshare ESP32-S3 Touch AMOLED 1.8"
-examples/mcu-board-support/README.md:238:6     - Unknown word (Waveshare)  -- #### Waveshare ESP32-S3 Touch AMOLED
-examples/mcu-board-support/README.md:240:30    - Unknown word (AMOLED)     -- Waveshare ESP32-S3 Touch AMOLED 1.8" board features
-examples/mcu-board-support/README.md:240:5     - Unknown word (Waveshare)  -- The Waveshare ESP32-S3 Touch AMOLED
-examples/mcu-board-support/README.md:241:8     - Unknown word (AMOLED)     -- - 1.8" AMOLED display with 368x44
-examples/mcu-board-support/README.md:244:36    - Unknown word (PSRAM)      -- with 16MB flash and 8MB PSRAM
-examples/mcu-board-support/README.md:249:153   - Unknown word (waveshare)  -- features=mcu-board-support/waveshare-esp32-s3-touch-amoled
-examples/mcu-board-support/README.md:249:178   - Unknown word (amoled)     -- waveshare-esp32-s3-touch-amoled-1-8 --release --config
-examples/mcu-board-support/README.md:249:235   - Unknown word (waveshare)  -- examples/mcu-board-support/waveshare_esp32_s3_touch_amoled
-examples/mcu-board-support/README.md:249:260   - Unknown word (amoled)     -- waveshare_esp32_s3_touch_amoled_1_8/cargo-config.toml
-examples/mcu-board-support/README.md:258:36    - Unknown word (PSRAM)      -- with 16MB flash and 8MB PSRAM
-examples/mcu-board-support/README.md:277:30    - Unknown word (Smartwin)   -- in combination with [Smartwin displays](https://shop
-examples/mcu-board-support/README.md:277:97    - Unknown word (Schukat)    -- de/EUR/c/ESOP) from Schukat.
-examples/mcu-board-support/README.md:282:153   - Unknown word (esope)      -- features=mcu-board-support/esope-sld-c-w-s3 --release
-examples/mcu-board-support/README.md:282:216   - Unknown word (esope)      -- examples/mcu-board-support/esope_sld_c_w_s3/cargo-config
+examples/mcu-board-support/README.md:101:12    - Unknown word (Waveshare)  -- ### On the Waveshare Pico2 Touch LCD 2.8
+examples/mcu-board-support/README.md:103:6     - Unknown word (Waveshare)  -- The [Waveshare Pico2 Touch LCD 2.8
+examples/mcu-board-support/README.md:108:112   - Unknown word (thumbv)     -- touch-lcd-2-8 --target=thumbv8m.main-none-eabihf
+examples/mcu-board-support/README.md:108:131   - Unknown word (eabihf)     -- target=thumbv8m.main-none-eabihf --release
+examples/mcu-board-support/README.md:111:14    - Unknown word (picotool)   -- Flash using [picotool](https://github.com
+examples/mcu-board-support/README.md:114:1     - Unknown word (picotool)   -- picotool load -u -v -x -t elf
+examples/mcu-board-support/README.md:114:57    - Unknown word (eabihf)     -- target/thumbv8m.main-none-eabihf/release/printerdemo
+examples/mcu-board-support/README.md:125:14    - Unknown word (THUMBV)     -- CARGO_TARGET_THUMBV6M_NONE_EABI_LINKER=
+examples/mcu-board-support/README.md:125:235   - Unknown word (eabi)       -- target=thumbv6m-none-eabi --release
+examples/mcu-board-support/README.md:125:28    - Unknown word (EABI)       -- TARGET_THUMBV6M_NONE_EABI_LINKER="flip-link" CARGO
+examples/mcu-board-support/README.md:125:65    - Unknown word (THUMBV)     -- flip-link" CARGO_TARGET_THUMBV6M_NONE_EABI_RUNNER=
+examples/mcu-board-support/README.md:125:79    - Unknown word (EABI)       -- TARGET_THUMBV6M_NONE_EABI_RUNNER="probe-rs run
+examples/mcu-board-support/README.md:144:29    - Unknown word (eabi)       -- target=thumbv6m-none-eabi",
+examples/mcu-board-support/README.md:190:62    - Unknown word (eabi)       -- target/thumbv6m-none-eabi/release-with-debug/printerdem
+examples/mcu-board-support/README.md:205:229   - Unknown word (eabihf)     -- target=thumbv7em-none-eabihf --release
+examples/mcu-board-support/README.md:205:48    - Unknown word (THUMBV)     -- LEVEL=s CARGO_TARGET_THUMBV7EM_NONE_EABIHF_RUNNER
+examples/mcu-board-support/README.md:205:63    - Unknown word (EABIHF)     -- TARGET_THUMBV7EM_NONE_EABIHF_RUNNER="probe-rs run
+examples/mcu-board-support/README.md:213:48    - Unknown word (THUMBV)     -- LEVEL=s CARGO_TARGET_THUMBV8M_MAIN_NONE_EABIHF_RUNNER
+examples/mcu-board-support/README.md:213:67    - Unknown word (EABIHF)     -- TARGET_THUMBV8M_MAIN_NONE_EABIHF_RUNNER="probe-rs run
+examples/mcu-board-support/README.md:223:22    - Unknown word (esplash)    -- When flashing, with `esplash`, you will be prompted
+examples/mcu-board-support/README.md:254:31    - Unknown word (AMOLED)     -- Waveshare ESP32-S3 Touch AMOLED 1.8"
+examples/mcu-board-support/README.md:254:6     - Unknown word (Waveshare)  -- #### Waveshare ESP32-S3 Touch AMOLED
+examples/mcu-board-support/README.md:256:30    - Unknown word (AMOLED)     -- Waveshare ESP32-S3 Touch AMOLED 1.8" board features
+examples/mcu-board-support/README.md:256:5     - Unknown word (Waveshare)  -- The Waveshare ESP32-S3 Touch AMOLED
+examples/mcu-board-support/README.md:257:8     - Unknown word (AMOLED)     -- - 1.8" AMOLED display with 368x44
+examples/mcu-board-support/README.md:260:36    - Unknown word (PSRAM)      -- with 16MB flash and 8MB PSRAM
+examples/mcu-board-support/README.md:265:153   - Unknown word (waveshare)  -- features=mcu-board-support/waveshare-esp32-s3-touch-amoled
+examples/mcu-board-support/README.md:265:178   - Unknown word (amoled)     -- waveshare-esp32-s3-touch-amoled-1-8 --release --config
+examples/mcu-board-support/README.md:265:235   - Unknown word (waveshare)  -- examples/mcu-board-support/waveshare_esp32_s3_touch_amoled
+examples/mcu-board-support/README.md:265:260   - Unknown word (amoled)     -- waveshare_esp32_s3_touch_amoled_1_8/cargo-config.toml
+examples/mcu-board-support/README.md:274:36    - Unknown word (PSRAM)      -- with 16MB flash and 8MB PSRAM
+examples/mcu-board-support/README.md:293:30    - Unknown word (Smartwin)   -- in combination with [Smartwin displays](https://shop
+examples/mcu-board-support/README.md:293:97    - Unknown word (Schukat)    -- de/EUR/c/ESOP) from Schukat.
+examples/mcu-board-support/README.md:298:153   - Unknown word (esope)      -- features=mcu-board-support/esope-sld-c-w-s3 --release
+examples/mcu-board-support/README.md:298:216   - Unknown word (esope)      -- examples/mcu-board-support/esope_sld_c_w_s3/cargo-config
 examples/mcu-board-support/README.md:58:104    - Unknown word (thumbv)     -- pico-st7789 --target=thumbv6m-none-eabi --release
 examples/mcu-board-support/README.md:58:118    - Unknown word (eabi)       -- target=thumbv6m-none-eabi --release
 examples/mcu-board-support/README.md:67:58     - Unknown word (bootsel)    -- Raspberry Pi Pico: push the "bootsel" white button on the
@@ -1992,6 +2001,7 @@ examples/mcu-board-support/README.md:96:1      - Unknown word (udisksctl)  -- ud
 examples/mcu-board-support/README.md:98:1      - Unknown word (picotool)   -- picotool load -u -v -x -t elf
 examples/mcu-board-support/README.md:98:38     - Unknown word (thumbv)     -- -v -x -t elf target/thumbv8m.main-none-eabihf/release
 examples/mcu-board-support/README.md:98:57     - Unknown word (eabihf)     -- target/thumbv8m.main-none-eabihf/release/printerdemo
+examples/mcu-board-support/embassy.rs:14:50     - Unknown word (wakeups)    -- forever (only timer-based wakeups will occur).
 examples/mcu-board-support/esope_sld_c_w_s3.rs:109:33    - Unknown word (PSRAM)      -- memory status before PSRAM init
 examples/mcu-board-support/esope_sld_c_w_s3.rs:111:30    - Unknown word (PSRAM)      -- ("Heap usage before PSRAM init: {} bytes", heap
 examples/mcu-board-support/esope_sld_c_w_s3.rs:118:20    - Unknown word (psram)      -- let heap_after_psram = esp_alloc::HEAP.used
@@ -2065,18 +2075,18 @@ examples/mcu-board-support/esp32_s3_lcd_ev_board.rs:356:24    - Unknown word (xf
 examples/mcu-board-support/esp32_s3_lcd_ev_board.rs:357:48    - Unknown word (xfer)       -- let (res, dpi2, tx2) = xfer.wait();
 examples/mcu-board-support/esp32_s3_lcd_ev_board/cargo-config.toml:10:35     - Unknown word (Tlinkall)   -- -C", "link-arg=-Wl,-Tlinkall.x"]
 examples/mcu-board-support/esp32_s3_lcd_ev_board/cargo-config.toml:6:16      - Unknown word (PSRAM)      -- ESP_HAL_CONFIG_PSRAM_MODE = "octal"
-examples/mcu-board-support/lib.rs:100:20    - Unknown word (esope)      -- feature = "esope-sld-c-w-s3",
-examples/mcu-board-support/lib.rs:101:20    - Unknown word (waveshare)  -- feature = "waveshare-esp32-s3-touch-amoled
-examples/mcu-board-support/lib.rs:101:45    - Unknown word (amoled)     -- waveshare-esp32-s3-touch-amoled-1-8",
-examples/mcu-board-support/lib.rs:47:5      - Unknown word (esope)      -- mod esope_sld_c_w_s3;
-examples/mcu-board-support/lib.rs:54:30     - Unknown word (amoled)     -- waveshare_esp32_s3_touch_amoled_1_8;
-examples/mcu-board-support/lib.rs:54:5      - Unknown word (waveshare)  -- mod waveshare_esp32_s3_touch_amoled
-examples/mcu-board-support/lib.rs:74:16     - Unknown word (esope)      -- feature = "esope-sld-c-w-s3",
-examples/mcu-board-support/lib.rs:75:16     - Unknown word (waveshare)  -- feature = "waveshare-esp32-s3-touch-amoled
-examples/mcu-board-support/lib.rs:75:41     - Unknown word (amoled)     -- waveshare-esp32-s3-touch-amoled-1-8",
-examples/mcu-board-support/lib.rs:87:16     - Unknown word (esope)      -- feature = "esope-sld-c-w-s3",
-examples/mcu-board-support/lib.rs:88:16     - Unknown word (waveshare)  -- feature = "waveshare-esp32-s3-touch-amoled
-examples/mcu-board-support/lib.rs:88:41     - Unknown word (amoled)     -- waveshare-esp32-s3-touch-amoled-1-8",
+examples/mcu-board-support/lib.rs:107:20    - Unknown word (esope)      -- feature = "esope-sld-c-w-s3",
+examples/mcu-board-support/lib.rs:108:20    - Unknown word (waveshare)  -- feature = "waveshare-esp32-s3-touch-amoled
+examples/mcu-board-support/lib.rs:108:45    - Unknown word (amoled)     -- waveshare-esp32-s3-touch-amoled-1-8",
+examples/mcu-board-support/lib.rs:52:5      - Unknown word (esope)      -- mod esope_sld_c_w_s3;
+examples/mcu-board-support/lib.rs:59:30     - Unknown word (amoled)     -- waveshare_esp32_s3_touch_amoled_1_8;
+examples/mcu-board-support/lib.rs:59:5      - Unknown word (waveshare)  -- mod waveshare_esp32_s3_touch_amoled
+examples/mcu-board-support/lib.rs:80:16     - Unknown word (esope)      -- feature = "esope-sld-c-w-s3",
+examples/mcu-board-support/lib.rs:81:16     - Unknown word (waveshare)  -- feature = "waveshare-esp32-s3-touch-amoled
+examples/mcu-board-support/lib.rs:81:41     - Unknown word (amoled)     -- waveshare-esp32-s3-touch-amoled-1-8",
+examples/mcu-board-support/lib.rs:94:16     - Unknown word (esope)      -- feature = "esope-sld-c-w-s3",
+examples/mcu-board-support/lib.rs:95:16     - Unknown word (waveshare)  -- feature = "waveshare-esp32-s3-touch-amoled
+examples/mcu-board-support/lib.rs:95:41     - Unknown word (amoled)     -- waveshare-esp32-s3-touch-amoled-1-8",
 examples/mcu-board-support/m5stack_cores3.rs:138:23    - Unknown word (PSRAM)      -- // Initialize the PSRAM allocator.
 examples/mcu-board-support/m5stack_cores3.rs:139:45    - Unknown word (PSRAM)      -- allocator!(peripherals.PSRAM, esp_hal::psram);
 examples/mcu-board-support/m5stack_cores3.rs:302:15    - Unknown word (mosi)       -- .with_mosi(peripherals.GPIO37)
@@ -2124,6 +2134,48 @@ examples/mcu-board-support/pico2_st7789/rp_pico2.rs:77:37     - Unknown word (Ua
 examples/mcu-board-support/pico2_st7789/rp_pico2.rs:85:17     - Unknown word (UART)       -- /// UART Function alias for pin
 examples/mcu-board-support/pico2_st7789/rp_pico2.rs:86:21     - Unknown word (Uart)       -- FunctionUart, PullNone: Gp0Uart0Tx
 examples/mcu-board-support/pico2_st7789/rp_pico2.rs:86:40     - Unknown word (Uart)       -- FunctionUart, PullNone: Gp0Uart0Tx,
+examples/mcu-board-support/pico2_touch_lcd_2_8.rs:106:29    - Unknown word (mipidsi)    -- -- Display init via mipidsi ---
+examples/mcu-board-support/pico2_touch_lcd_2_8.rs:108:12    - Unknown word (MIPIDSI)    -- static MIPIDSI_BUF: StaticCell<[u8
+examples/mcu-board-support/pico2_touch_lcd_2_8.rs:109:26    - Unknown word (MIPIDSI)    -- let mipidsi_buffer = MIPIDSI_BUF.init([0u8; 512]
+examples/mcu-board-support/pico2_touch_lcd_2_8.rs:109:9     - Unknown word (mipidsi)    -- let mipidsi_buffer = MIPIDSI_BUF
+examples/mcu-board-support/pico2_touch_lcd_2_8.rs:110:69    - Unknown word (mipidsi)    -- new(display_spi, dc, mipidsi_buffer);
+examples/mcu-board-support/pico2_touch_lcd_2_8.rs:11:21     - Unknown word (Llff)       -- use embedded_alloc::LlffHeap as Heap;
+examples/mcu-board-support/pico2_touch_lcd_2_8.rs:17:44     - Unknown word (Treq)       -- dma::vals::{DataSize, TreqSel};
+examples/mcu-board-support/pico2_touch_lcd_2_8.rs:260:15    - Unknown word (treq)       -- w.set_treq_sel(TreqSel::SPI1_TX
+examples/mcu-board-support/pico2_touch_lcd_2_8.rs:260:24    - Unknown word (Treq)       -- w.set_treq_sel(TreqSel::SPI1_TX);
+examples/mcu-board-support/pico2_touch_lcd_2_8.rs:344:39    - Unknown word (mipidsi)    -- Send window command via mipidsi (empty pixel iterator
+examples/mcu-board-support/pico2_touch_lcd_2_8.rs:39:26     - Unknown word (defmt)      -- Raw UART0 writer for defmt_serial.
+examples/mcu-board-support/pico2_touch_lcd_2_8.rs:39:9      - Unknown word (UART)       -- /// Raw UART0 writer for defmt_serial
+examples/mcu-board-support/pico2_touch_lcd_2_8.rs:40:54     - Unknown word (defmt)      -- embedded_io 0.6, but defmt_serial 0.11.0 requires
+examples/mcu-board-support/pico2_touch_lcd_2_8.rs:41:47     - Unknown word (UART)       -- mismatch by writing to UART0 registers directly
+examples/mcu-board-support/pico2_touch_lcd_2_8.rs:42:11     - Unknown word (Uart)       -- struct RawUart0;
+examples/mcu-board-support/pico2_touch_lcd_2_8.rs:44:11     - Unknown word (UART)       -- // RP2350 UART0 register addresses
+examples/mcu-board-support/pico2_touch_lcd_2_8.rs:45:7      - Unknown word (UART)       -- const UART0_DR: *mut u32 = 0x4
+examples/mcu-board-support/pico2_touch_lcd_2_8.rs:46:7      - Unknown word (UART)       -- const UART0_FR: *const u32 = 0x
+examples/mcu-board-support/pico2_touch_lcd_2_8.rs:48:38     - Unknown word (Uart)       -- serial::EraseWrite for RawUart0 {
+examples/mcu-board-support/pico2_touch_lcd_2_8.rs:52:80     - Unknown word (TXFF)       -- (1 << 5) != 0 {} // TXFF
+examples/mcu-board-support/pico2_touch_lcd_2_8.rs:72:22     - Unknown word (defmt)      -- // --- UART0 for defmt_serial (GPIO0 = TX)
+examples/mcu-board-support/pico2_touch_lcd_2_8.rs:73:20     - Unknown word (Uart)       -- // Use embassy UartTx to configure pin mux
+examples/mcu-board-support/pico2_touch_lcd_2_8.rs:74:8      - Unknown word (defmt)      -- // defmt_serial needs embedded
+examples/mcu-board-support/pico2_touch_lcd_2_8.rs:77:17     - Unknown word (uart)       -- let mut uart_config = embassy_rp
+examples/mcu-board-support/pico2_touch_lcd_2_8.rs:78:21     - Unknown word (baudrate)   -- uart_config.baudrate = 115200;
+examples/mcu-board-support/pico2_touch_lcd_2_8.rs:78:9      - Unknown word (uart)       -- uart_config.baudrate = 1
+examples/mcu-board-support/pico2_touch_lcd_2_8.rs:79:13     - Unknown word (uart)       -- let uart = embassy_rp::uart:
+examples/mcu-board-support/pico2_touch_lcd_2_8.rs:79:38     - Unknown word (Uart)       -- = embassy_rp::uart::UartTx::new_blocking(p.UART
+examples/mcu-board-support/pico2_touch_lcd_2_8.rs:79:77     - Unknown word (uart)       -- blocking(p.UART0, p.PIN_0, uart_config);
+examples/mcu-board-support/pico2_touch_lcd_2_8.rs:80:27     - Unknown word (uart)       -- core::mem::forget(uart); // keep UART0 configured
+examples/mcu-board-support/pico2_touch_lcd_2_8.rs:82:41     - Unknown word (Uart)       -- CELL: StaticCell<RawUart0> = StaticCell::new
+examples/mcu-board-support/pico2_touch_lcd_2_8.rs:86:39     - Unknown word (SCLK)       -- for display (GPIO10 = SCLK, GPIO11 = MOSI) ---
+examples/mcu-board-support/pico2_touch_lcd_2_8.rs:86:54     - Unknown word (MOSI)       -- GPIO10 = SCLK, GPIO11 = MOSI) ---
+examples/mcu-board-support/pico2_touch_lcd_2_8/board_config.toml:4:17      - Unknown word (nmagic)     -- link_args = ["--nmagic", "-Tlink.x", "-Tdefmt
+examples/mcu-board-support/pico2_touch_lcd_2_8/board_config.toml:4:28      - Unknown word (Tlink)      -- args = ["--nmagic", "-Tlink.x", "-Tdefmt.x"]
+examples/mcu-board-support/pico2_touch_lcd_2_8/board_config.toml:4:40      - Unknown word (Tdefmt)     -- nmagic", "-Tlink.x", "-Tdefmt.x"]
+examples/mcu-board-support/pico2_touch_lcd_2_8/memory.x:10:8      - Unknown word (Waveshare)  -- * Waveshare RP2350-Touch-LCD-2.
+examples/mcu-board-support/pico2_touch_lcd_2_8/memory.x:33:32     - Unknown word (picotool)   -- where the Boot ROM (and picotool) can find it
+examples/mcu-board-support/pico2_touch_lcd_2_8/memory.x:45:2      - Unknown word (stext)      -- _stext = ADDR(.start_block
+examples/mcu-board-support/pico2_touch_lcd_2_8/memory.x:48:12     - Unknown word (Picotool)   -- /* ### Picotool 'Binary Info' Entries
+examples/mcu-board-support/pico2_touch_lcd_2_8/memory.x:50:8      - Unknown word (Picotool)   -- * Picotool looks through this block
+examples/mcu-board-support/pico2_touch_lcd_2_8/memory.x:77:17     - Unknown word (uninit)     -- } INSERT AFTER .uninit;
 examples/mcu-board-support/pico_st7789.rs:134:13    - Unknown word (sclk)       -- let spi_sclk = pins.gpio10.into_function
 examples/mcu-board-support/pico_st7789.rs:135:13    - Unknown word (mosi)       -- let spi_mosi = pins.gpio11.into_function
 examples/mcu-board-support/pico_st7789.rs:138:44    - Unknown word (mosi)       -- :new(pac.SPI1, (spi_mosi, spi_miso, spi_sclk
@@ -2294,11 +2346,11 @@ examples/mcu-board-support/stm32u5g9j_dk2.rs:17:40     - Unknown word (Ltdc)    
 examples/mcu-board-support/stm32u5g9j_dk2.rs:17:51     - Unknown word (Ltdc)       -- LtdcConfiguration, LtdcLayer, LtdcLayerConfig, PolarityActive
 examples/mcu-board-support/stm32u5g9j_dk2.rs:224:77    - Unknown word (entrancy)   -- event_loop` prevents re-entrancy and thus multiple mutable
 examples/mcu-board-support/stm32u5g9j_dk2.rs:23:5      - Unknown word (hspi)       -- mod hspi;
-examples/mcu-board-support/stm32u5g9j_dk2.rs:262:19    - Unknown word (Octa)       -- _flash: hspi::OctaDtrFlashMemory<'static
-examples/mcu-board-support/stm32u5g9j_dk2.rs:262:75    - Unknown word (HSPI)       -- stm32::peripherals::HSPI1>,
-examples/mcu-board-support/stm32u5g9j_dk2.rs:265:74    - Unknown word (LTDC)       -- stm32::peripherals::LTDC>,
+examples/mcu-board-support/stm32u5g9j_dk2.rs:263:19    - Unknown word (Octa)       -- _flash: hspi::OctaDtrFlashMemory<'static
+examples/mcu-board-support/stm32u5g9j_dk2.rs:263:75    - Unknown word (HSPI)       -- stm32::peripherals::HSPI1>,
+examples/mcu-board-support/stm32u5g9j_dk2.rs:266:74    - Unknown word (LTDC)       -- stm32::peripherals::LTDC>,
 examples/mcu-board-support/stm32u5g9j_dk2.rs:28:21     - Unknown word (Llff)       -- use embedded_alloc::LlffHeap as Heap;
-examples/mcu-board-support/stm32u5g9j_dk2.rs:317:24    - Unknown word (dcache)     -- self.scb.clean_dcache_by_slice(self.work_fb
+examples/mcu-board-support/stm32u5g9j_dk2.rs:318:24    - Unknown word (dcache)     -- self.scb.clean_dcache_by_slice(self.work_fb
 examples/mcu-board-support/stm32u5g9j_dk2.rs:33:25     - Unknown word (Irqs)       -- bind_interrupts!(struct Irqs {
 examples/mcu-board-support/stm32u5g9j_dk2.rs:34:49     - Unknown word (LTDC)       -- InterruptHandler<peripherals::LTDC>;
 examples/mcu-board-support/stm32u5g9j_dk2.rs:34:5      - Unknown word (LTDC)       -- LTDC => ltdc::InterruptHandler
@@ -2762,29 +2814,29 @@ helper_crates/vtable/tests/test_vtable.rs:153:16    - Unknown word (vras)       
 helper_crates/vtable/tests/test_vtable.rs:154:13    - Unknown word (vras)          -- assert!(vras.downcast::<SomeStruct
 helper_crates/vtable/tests/test_vtable.rs:171:9     - Unknown word (vref)          -- new_vref!(let re : VRef<XxxVTable
 helper_crates/vtable/tests/test_vtable.rs:175:9     - Unknown word (vref)          -- new_vref!(let mut re_mut : VRefMut
-internal/backends/android-activity/androidwindowadapter.rs:150:19    - Unknown word (preedit)    -- if !props.preedit_text.is_empty() {
-internal/backends/android-activity/androidwindowadapter.rs:151:35    - Unknown word (preedit)    -- text.insert_str(props.preedit_offset, props.preedit
-internal/backends/android-activity/androidwindowadapter.rs:151:57    - Unknown word (preedit)    -- preedit_offset, props.preedit_text.as_str());
-internal/backends/android-activity/androidwindowadapter.rs:159:37    - Unknown word (preedit)    -- compose_region: (!props.preedit_text.is_empty()).then
-internal/backends/android-activity/androidwindowadapter.rs:160:30    - Unknown word (preedit)    -- start: props.preedit_offset,
-internal/backends/android-activity/androidwindowadapter.rs:646:16    - Unknown word (teriary)    -- if toggled.teriary() {
-internal/backends/android-activity/androidwindowadapter.rs:679:18    - Unknown word (Endcall)    -- Keycode::Endcall => None,
-internal/backends/android-activity/androidwindowadapter.rs:752:18    - Unknown word (Headsethook) -- Keycode::Headsethook => None,
-internal/backends/android-activity/androidwindowadapter.rs:767:18    - Unknown word (Pictsymbols) -- Keycode::Pictsymbols => None,
-internal/backends/android-activity/androidwindowadapter.rs:779:24    - Unknown word (Thumbl)      -- Keycode::ButtonThumbl => None,
-internal/backends/android-activity/androidwindowadapter.rs:780:24    - Unknown word (Thumbr)      -- Keycode::ButtonThumbr => None,
-internal/backends/android-activity/androidwindowadapter.rs:793:18    - Unknown word (Sysrq)       -- Keycode::Sysrq => Some(Key::SysReq
-internal/backends/android-activity/androidwindowadapter.rs:817:18    - Unknown word (Numpad)      -- Keycode::Numpad0 => Some("0".into()
-internal/backends/android-activity/androidwindowadapter.rs:818:18    - Unknown word (Numpad)      -- Keycode::Numpad1 => Some("1".into()
-internal/backends/android-activity/androidwindowadapter.rs:819:18    - Unknown word (Numpad)      -- Keycode::Numpad2 => Some("2".into()
-internal/backends/android-activity/androidwindowadapter.rs:820:18    - Unknown word (Numpad)      -- Keycode::Numpad3 => Some("3".into()
-internal/backends/android-activity/androidwindowadapter.rs:821:18    - Unknown word (Numpad)      -- Keycode::Numpad4 => Some("4".into()
-internal/backends/android-activity/androidwindowadapter.rs:884:18    - Unknown word (Zenkaku)     -- Keycode::ZenkakuHankaku => None,
-internal/backends/android-activity/androidwindowadapter.rs:884:25    - Unknown word (Hankaku)     -- Keycode::ZenkakuHankaku => None,
-internal/backends/android-activity/androidwindowadapter.rs:885:18    - Unknown word (Eisu)        -- Keycode::Eisu => None,
-internal/backends/android-activity/androidwindowadapter.rs:886:18    - Unknown word (Muhenkan)    -- Keycode::Muhenkan => None,
-internal/backends/android-activity/androidwindowadapter.rs:887:18    - Unknown word (Henkan)      -- Keycode::Henkan => None,
-internal/backends/android-activity/androidwindowadapter.rs:897:18    - Unknown word (Wakeup)      -- Keycode::Wakeup => None,
+internal/backends/android-activity/androidwindowadapter.rs:149:19    - Unknown word (preedit)    -- if !props.preedit_text.is_empty() {
+internal/backends/android-activity/androidwindowadapter.rs:150:35    - Unknown word (preedit)    -- text.insert_str(props.preedit_offset, props.preedit
+internal/backends/android-activity/androidwindowadapter.rs:150:57    - Unknown word (preedit)    -- preedit_offset, props.preedit_text.as_str());
+internal/backends/android-activity/androidwindowadapter.rs:158:37    - Unknown word (preedit)    -- compose_region: (!props.preedit_text.is_empty()).then
+internal/backends/android-activity/androidwindowadapter.rs:159:30    - Unknown word (preedit)    -- start: props.preedit_offset,
+internal/backends/android-activity/androidwindowadapter.rs:695:16    - Unknown word (teriary)    -- if toggled.teriary() {
+internal/backends/android-activity/androidwindowadapter.rs:728:18    - Unknown word (Endcall)    -- Keycode::Endcall => None,
+internal/backends/android-activity/androidwindowadapter.rs:801:18    - Unknown word (Headsethook) -- Keycode::Headsethook => None,
+internal/backends/android-activity/androidwindowadapter.rs:816:18    - Unknown word (Pictsymbols) -- Keycode::Pictsymbols => None,
+internal/backends/android-activity/androidwindowadapter.rs:828:24    - Unknown word (Thumbl)      -- Keycode::ButtonThumbl => None,
+internal/backends/android-activity/androidwindowadapter.rs:829:24    - Unknown word (Thumbr)      -- Keycode::ButtonThumbr => None,
+internal/backends/android-activity/androidwindowadapter.rs:842:18    - Unknown word (Sysrq)       -- Keycode::Sysrq => Some(Key::SysReq
+internal/backends/android-activity/androidwindowadapter.rs:866:18    - Unknown word (Numpad)      -- Keycode::Numpad0 => Some("0".into()
+internal/backends/android-activity/androidwindowadapter.rs:867:18    - Unknown word (Numpad)      -- Keycode::Numpad1 => Some("1".into()
+internal/backends/android-activity/androidwindowadapter.rs:868:18    - Unknown word (Numpad)      -- Keycode::Numpad2 => Some("2".into()
+internal/backends/android-activity/androidwindowadapter.rs:869:18    - Unknown word (Numpad)      -- Keycode::Numpad3 => Some("3".into()
+internal/backends/android-activity/androidwindowadapter.rs:870:18    - Unknown word (Numpad)      -- Keycode::Numpad4 => Some("4".into()
+internal/backends/android-activity/androidwindowadapter.rs:933:18    - Unknown word (Zenkaku)     -- Keycode::ZenkakuHankaku => None,
+internal/backends/android-activity/androidwindowadapter.rs:933:25    - Unknown word (Hankaku)     -- Keycode::ZenkakuHankaku => None,
+internal/backends/android-activity/androidwindowadapter.rs:934:18    - Unknown word (Eisu)        -- Keycode::Eisu => None,
+internal/backends/android-activity/androidwindowadapter.rs:935:18    - Unknown word (Muhenkan)    -- Keycode::Muhenkan => None,
+internal/backends/android-activity/androidwindowadapter.rs:936:18    - Unknown word (Henkan)      -- Keycode::Henkan => None,
+internal/backends/android-activity/androidwindowadapter.rs:946:18    - Unknown word (Wakeup)      -- Keycode::Wakeup => None,
 internal/backends/android-activity/build.rs:57:13     - Unknown word (Dexer)      -- let o = Dexer::new()
 internal/backends/android-activity/build.rs:63:41     - Unknown word (multidex)   -- min_api(20) // disable multidex for single dex file
 internal/backends/android-activity/build.rs:7:21      - Unknown word (Dexer)      -- use android_build::{Dexer, JavaBuild};
@@ -2845,37 +2897,37 @@ internal/backends/linuxkms/calloop_backend.rs:219:19    - Unknown word (libinput
 internal/backends/linuxkms/calloop_backend.rs:224:42    - Unknown word (linuxkms)   -- format!("Re-entering the linuxkms event loop is currently
 internal/backends/linuxkms/calloop_backend.rs:49:24     - Unknown word (wakeup)     -- signal.wakeup();
 internal/backends/linuxkms/calloop_backend.rs:80:5      - Unknown word (libinput)   -- libinput_event_hook: Option<Box
-internal/backends/linuxkms/calloop_backend/input.rs:100:53    - Unknown word (RDONLY)     -- nix::fcntl::OFlag::O_RDONLY)
-internal/backends/linuxkms/calloop_backend/input.rs:101:59    - Unknown word (RDWR)       -- nix::fcntl::OFlag::O_RDWR),
-internal/backends/linuxkms/calloop_backend/input.rs:104:53    - Unknown word (WRONLY)     -- nix::fcntl::OFlag::O_WRONLY)
-internal/backends/linuxkms/calloop_backend/input.rs:105:59    - Unknown word (RDWR)       -- nix::fcntl::OFlag::O_RDWR),
-internal/backends/linuxkms/calloop_backend/input.rs:122:5     - Unknown word (keystate)   -- keystate: Option<xkb::State>
-internal/backends/linuxkms/calloop_backend/input.rs:146:13    - Unknown word (keystate)   -- keystate: Default::default()
-internal/backends/linuxkms/calloop_backend/input.rs:26:12     - Unknown word (Libinput)   -- use input::LibinputInterface;
-internal/backends/linuxkms/calloop_backend/input.rs:280:46    - Unknown word (keystate)   -- xkb_key_state = self.keystate.get_or_insert_with(
-internal/backends/linuxkms/calloop_backend/input.rs:282:29    - Unknown word (keymap)     -- let keymap =
-internal/backends/linuxkms/calloop_backend/input.rs:283:34    - Unknown word (Keymap)     -- xkb::Keymap::new_from_names(&xkb
-internal/backends/linuxkms/calloop_backend/input.rs:284:58    - Unknown word (keymap)     -- expect("Error compiling keymap");
-internal/backends/linuxkms/calloop_backend/input.rs:285:42    - Unknown word (keymap)     -- xkb::State::new(&keymap)
-internal/backends/linuxkms/calloop_backend/input.rs:309:58    - Unknown word (Keysym)     -- alt && sym == xkb::Keysym::BackSpace
-internal/backends/linuxkms/calloop_backend/input.rs:310:62    - Unknown word (Keysym)     -- alt && sym == xkb::Keysym::Delete
-internal/backends/linuxkms/calloop_backend/input.rs:314:41    - Unknown word (Keysym)     -- } else if (xkb::Keysym::XF86_Switch_VT_1..
-internal/backends/linuxkms/calloop_backend/input.rs:314:73    - Unknown word (Keysym)     -- _Switch_VT_1..=xkb::Keysym::XF86_Switch_VT_12)
-internal/backends/linuxkms/calloop_backend/input.rs:374:26    - Unknown word (Keysym)     -- map_key_sym(sym: xkb::Keysym) -> Option<SharedString
-internal/backends/linuxkms/calloop_backend/input.rs:375:18    - Unknown word (keysym)     -- macro_rules! keysym_to_string {
-internal/backends/linuxkms/calloop_backend/input.rs:383:47    - Unknown word (keysym)     -- common::for_each_keys!(keysym_to_string);
-internal/backends/linuxkms/calloop_backend/input.rs:41:61     - Unknown word (Libinput)   -- libseat::Seat>>) -> input::Libinput {
-internal/backends/linuxkms/calloop_backend/input.rs:43:17     - Unknown word (libinput)   -- let mut libinput = input::Libinput::new
-internal/backends/linuxkms/calloop_backend/input.rs:43:35     - Unknown word (Libinput)   -- mut libinput = input::Libinput::new_with_udev(Self
-internal/backends/linuxkms/calloop_backend/input.rs:47:9      - Unknown word (libinput)   -- libinput.udev_assign_seat(&seat
-internal/backends/linuxkms/calloop_backend/input.rs:48:9      - Unknown word (libinput)   -- libinput
+internal/backends/linuxkms/calloop_backend/input.rs:100:59    - Unknown word (RDWR)       -- nix::fcntl::OFlag::O_RDWR),
+internal/backends/linuxkms/calloop_backend/input.rs:103:53    - Unknown word (WRONLY)     -- nix::fcntl::OFlag::O_WRONLY)
+internal/backends/linuxkms/calloop_backend/input.rs:104:59    - Unknown word (RDWR)       -- nix::fcntl::OFlag::O_RDWR),
+internal/backends/linuxkms/calloop_backend/input.rs:126:5     - Unknown word (keystate)   -- keystate: Option<xkb::State>
+internal/backends/linuxkms/calloop_backend/input.rs:150:13    - Unknown word (keystate)   -- keystate: Default::default()
+internal/backends/linuxkms/calloop_backend/input.rs:25:12     - Unknown word (Libinput)   -- use input::LibinputInterface;
+internal/backends/linuxkms/calloop_backend/input.rs:321:46    - Unknown word (keystate)   -- xkb_key_state = self.keystate.get_or_insert_with(
+internal/backends/linuxkms/calloop_backend/input.rs:323:29    - Unknown word (keymap)     -- let keymap =
+internal/backends/linuxkms/calloop_backend/input.rs:324:34    - Unknown word (Keymap)     -- xkb::Keymap::new_from_names(&xkb
+internal/backends/linuxkms/calloop_backend/input.rs:325:58    - Unknown word (keymap)     -- expect("Error compiling keymap");
+internal/backends/linuxkms/calloop_backend/input.rs:326:42    - Unknown word (keymap)     -- xkb::State::new(&keymap)
+internal/backends/linuxkms/calloop_backend/input.rs:350:58    - Unknown word (Keysym)     -- alt && sym == xkb::Keysym::BackSpace
+internal/backends/linuxkms/calloop_backend/input.rs:351:62    - Unknown word (Keysym)     -- alt && sym == xkb::Keysym::Delete
+internal/backends/linuxkms/calloop_backend/input.rs:355:41    - Unknown word (Keysym)     -- } else if (xkb::Keysym::XF86_Switch_VT_1..
+internal/backends/linuxkms/calloop_backend/input.rs:355:73    - Unknown word (Keysym)     -- _Switch_VT_1..=xkb::Keysym::XF86_Switch_VT_12)
+internal/backends/linuxkms/calloop_backend/input.rs:40:61     - Unknown word (Libinput)   -- libseat::Seat>>) -> input::Libinput {
+internal/backends/linuxkms/calloop_backend/input.rs:415:26    - Unknown word (Keysym)     -- map_key_sym(sym: xkb::Keysym) -> Option<SharedString
+internal/backends/linuxkms/calloop_backend/input.rs:416:18    - Unknown word (keysym)     -- macro_rules! keysym_to_string {
+internal/backends/linuxkms/calloop_backend/input.rs:424:47    - Unknown word (keysym)     -- common::for_each_keys!(keysym_to_string);
+internal/backends/linuxkms/calloop_backend/input.rs:42:17     - Unknown word (libinput)   -- let mut libinput = input::Libinput::new
+internal/backends/linuxkms/calloop_backend/input.rs:42:35     - Unknown word (Libinput)   -- mut libinput = input::Libinput::new_with_udev(Self
+internal/backends/linuxkms/calloop_backend/input.rs:46:9      - Unknown word (libinput)   -- libinput.udev_assign_seat(&seat
+internal/backends/linuxkms/calloop_backend/input.rs:47:9      - Unknown word (libinput)   -- libinput
 internal/backends/linuxkms/calloop_backend/input.rs:4:64      - Unknown word (libinput)   -- receive input events from libinput
-internal/backends/linuxkms/calloop_backend/input.rs:53:10     - Unknown word (Libinput)   -- impl<'a> LibinputInterface for SeatWrap
-internal/backends/linuxkms/calloop_backend/input.rs:61:51     - Unknown word (Fcntl)      -- fcntl(fd, nix::fcntl::FcntlArg::F_SETFL(flags))
-internal/backends/linuxkms/calloop_backend/input.rs:61:63     - Unknown word (SETFL)      -- :fcntl::FcntlArg::F_SETFL(flags))
-internal/backends/linuxkms/calloop_backend/input.rs:62:58     - Unknown word (libinput)   -- format!("Error applying libinput provided open fd flags
-internal/backends/linuxkms/calloop_backend/input.rs:73:39     - Unknown word (libseat)    -- Transfer ownership back to libseat
-internal/backends/linuxkms/calloop_backend/input.rs:86:28     - Unknown word (Libinput)   -- pub fn new() -> input::Libinput {
+internal/backends/linuxkms/calloop_backend/input.rs:52:10     - Unknown word (Libinput)   -- impl<'a> LibinputInterface for SeatWrap
+internal/backends/linuxkms/calloop_backend/input.rs:60:51     - Unknown word (Fcntl)      -- fcntl(fd, nix::fcntl::FcntlArg::F_SETFL(flags))
+internal/backends/linuxkms/calloop_backend/input.rs:60:63     - Unknown word (SETFL)      -- :fcntl::FcntlArg::F_SETFL(flags))
+internal/backends/linuxkms/calloop_backend/input.rs:61:58     - Unknown word (libinput)   -- format!("Error applying libinput provided open fd flags
+internal/backends/linuxkms/calloop_backend/input.rs:72:39     - Unknown word (libseat)    -- Transfer ownership back to libseat
+internal/backends/linuxkms/calloop_backend/input.rs:85:28     - Unknown word (Libinput)   -- pub fn new() -> input::Libinput {
+internal/backends/linuxkms/calloop_backend/input.rs:99:53     - Unknown word (RDONLY)     -- nix::fcntl::OFlag::O_RDONLY)
 internal/backends/linuxkms/display.rs:13:9      - Unknown word (gbmdisplay) -- pub mod gbmdisplay;
 internal/backends/linuxkms/display.rs:19:9      - Unknown word (swdisplay)  -- pub mod swdisplay;
 internal/backends/linuxkms/display.rs:21:9      - Unknown word (vulkandisplay) -- pub mod vulkandisplay;
@@ -3121,19 +3173,19 @@ internal/backends/qt/qt_widgets/palette.rs:141:52    - Unknown word (Midlight)  
 internal/backends/qt/qt_widgets/scrollview.rs:373:18    - Unknown word (foac)       -- bool foac = qApp->style()->styleHint
 internal/backends/qt/qt_widgets/scrollview.rs:376:17    - Unknown word (foac)       -- if (foac) {
 internal/backends/qt/qt_widgets/scrollview.rs:390:20    - Unknown word (foac)       -- return foac;
-internal/backends/qt/qt_window.rs:1112:21   - Unknown word (constexpr)  -- constexpr int QT_MAX_CACHED_GLYPH
-internal/backends/qt/qt_window.rs:1201:72   - Unknown word (fontique)   -- atomically incremented in fontique) and the font collection
-internal/backends/qt/qt_window.rs:1846:39   - Unknown word (qsize)      -- qttypes::QSize = into_qsize(logical_size);
-internal/backends/qt/qt_window.rs:1986:18   - Unknown word (qsize)      -- into_qsize,
+internal/backends/qt/qt_window.rs:1114:21   - Unknown word (constexpr)  -- constexpr int QT_MAX_CACHED_GLYPH
+internal/backends/qt/qt_window.rs:1203:72   - Unknown word (fontique)   -- atomically incremented in fontique) and the font collection
+internal/backends/qt/qt_window.rs:1853:39   - Unknown word (qsize)      -- qttypes::QSize = into_qsize(logical_size);
 internal/backends/qt/qt_window.rs:1993:18   - Unknown word (qsize)      -- into_qsize,
-internal/backends/qt/qt_window.rs:2007:9    - Unknown word (qsize)      -- fn into_qsize(logical_size: i_slint
-internal/backends/qt/qt_window.rs:2074:26   - Unknown word (Nesw)       -- MouseCursor::NeswResize => key_generated
+internal/backends/qt/qt_window.rs:2000:18   - Unknown word (qsize)      -- into_qsize,
+internal/backends/qt/qt_window.rs:2014:9    - Unknown word (qsize)      -- fn into_qsize(logical_size: i_slint
+internal/backends/qt/qt_window.rs:2081:26   - Unknown word (Nesw)       -- MouseCursor::NeswResize => key_generated
 internal/backends/qt/qt_window.rs:336:21    - Unknown word (preedit)    -- QString preedit_string = event->preeditString
 internal/backends/qt/qt_window.rs:336:45    - Unknown word (preedit)    -- preedit_string = event->preeditString();
 internal/backends/qt/qt_window.rs:344:17    - Unknown word (preedit)    -- int preedit_cursor = -1;
 internal/backends/qt/qt_window.rs:348:25    - Unknown word (preedit)    -- preedit_cursor = QStringView
 internal/backends/qt/qt_window.rs:348:54    - Unknown word (preedit)    -- cursor = QStringView(preedit_string).left(attribute
-internal/backends/qt/qt_window.rs:951:26    - Unknown word (additinoal) -- // Don't add any additinoal calls here without adjusting
+internal/backends/qt/qt_window.rs:952:26    - Unknown word (additinoal) -- // Don't add any additinoal calls here without adjusting
 internal/backends/selector/api.rs:219:54    - Unknown word (libinput)   -- to use the specified libinput event filter hook when
 internal/backends/selector/api.rs:225:56    - Unknown word (libinput)   -- behind the [`unstable-libinput-09` feature flag](slint
 internal/backends/selector/api.rs:229:17    - Unknown word (libinput)   -- pub fn with_libinput_event_hook(
@@ -3195,11 +3247,11 @@ internal/backends/winit/drag_resize_window.rs:73:9      - Unknown word (ydir)   
 internal/backends/winit/drag_resize_window.rs:81:17     - Unknown word (xdir)       -- Some(match (xdir, ydir) {
 internal/backends/winit/drag_resize_window.rs:81:23     - Unknown word (ydir)       -- Some(match (xdir, ydir) {
 internal/backends/winit/event_loop.rs:20:21     - Unknown word (corelib)    -- use i_slint_core as corelib;
-internal/backends/winit/event_loop.rs:285:49    - Unknown word (Preedit)    -- Ime(winit::event::Ime::Preedit(string, preedit_selection
-internal/backends/winit/event_loop.rs:285:65    - Unknown word (preedit)    -- Ime::Preedit(string, preedit_selection)) => {
-internal/backends/winit/event_loop.rs:288:21    - Unknown word (preedit)    -- preedit_text: string.into()
-internal/backends/winit/event_loop.rs:289:21    - Unknown word (preedit)    -- preedit_selection: preedit_selection
-internal/backends/winit/event_loop.rs:289:40    - Unknown word (preedit)    -- preedit_selection: preedit_selection.map(|e| e
+internal/backends/winit/event_loop.rs:294:49    - Unknown word (Preedit)    -- Ime(winit::event::Ime::Preedit(string, preedit_selection
+internal/backends/winit/event_loop.rs:294:65    - Unknown word (preedit)    -- Ime::Preedit(string, preedit_selection)) => {
+internal/backends/winit/event_loop.rs:297:21    - Unknown word (preedit)    -- preedit_text: string.into()
+internal/backends/winit/event_loop.rs:298:21    - Unknown word (preedit)    -- preedit_selection: preedit_selection
+internal/backends/winit/event_loop.rs:298:40    - Unknown word (preedit)    -- preedit_selection: preedit_selection.map(|e| e
 internal/backends/winit/frame_throttle.rs:41:30     - Unknown word (millihertz) -- let refresh_interval_millihertz = self
 internal/backends/winit/frame_throttle.rs:46:54     - Unknown word (millihertz) -- monitor.refresh_rate_millihertz())
 internal/backends/winit/frame_throttle.rs:51:79     - Unknown word (millihertz) -- / refresh_interval_millihertz);
@@ -3249,12 +3301,12 @@ internal/backends/winit/wasm_input_helper.rs:240:31    - Unknown word (compositi
 internal/backends/winit/wasm_input_helper.rs:244:21    - Unknown word (preedit)           -- preedit_text: data.into(),
 internal/backends/winit/wasm_input_helper.rs:301:60    - Unknown word (Backtab)           -- => return Some(Key::Backtab.into()),
 internal/backends/winit/wasm_input_helper.rs:64:30     - Unknown word (autocapitalize) -- input.set_attribute("autocapitalize", "none").unwrap();
-internal/backends/winit/winitwindowadapter.rs:1217:46   - Unknown word (propgate)   -- don't ignore error, propgate to caller
-internal/backends/winit/winitwindowadapter.rs:1302:50   - Unknown word (propgate)   -- don't ignore error, propgate to caller
-internal/backends/winit/winitwindowadapter.rs:1608:38   - Unknown word (propgate)   -- don't ignore error, propgate to caller
-internal/common/builtin_structs.rs:111:21    - Unknown word (preedit)    -- preedit_text: SharedString,
-internal/common/builtin_structs.rs:112:50    - Unknown word (preedit)    -- selection within the preedit_text
-internal/common/builtin_structs.rs:113:21    - Unknown word (preedit)    -- preedit_selection: Option<core
+internal/backends/winit/winitwindowadapter.rs:1215:46   - Unknown word (propgate)   -- don't ignore error, propgate to caller
+internal/backends/winit/winitwindowadapter.rs:1300:50   - Unknown word (propgate)   -- don't ignore error, propgate to caller
+internal/backends/winit/winitwindowadapter.rs:1606:38   - Unknown word (propgate)   -- don't ignore error, propgate to caller
+internal/common/builtin_structs.rs:112:21    - Unknown word (preedit)    -- preedit_text: SharedString,
+internal/common/builtin_structs.rs:113:50    - Unknown word (preedit)    -- selection within the preedit_text
+internal/common/builtin_structs.rs:114:21    - Unknown word (preedit)    -- preedit_selection: Option<core
 internal/common/color_parsing.rs:100:15    - Unknown word (darkslateblue)  -- ("darkslateblue", parse_color_literal
 internal/common/color_parsing.rs:101:15    - Unknown word (darkslategray)  -- ("darkslategray", parse_color_literal
 internal/common/color_parsing.rs:102:15    - Unknown word (darkslategrey)  -- ("darkslategrey", parse_color_literal
@@ -3351,7 +3403,7 @@ internal/common/key_codes.rs:37:15     - Unknown word (Backtab)    -- '\u{0019}'
 internal/common/lib.rs:17:9      - Unknown word (sharedfontique) -- pub mod sharedfontique;
 internal/common/lib.rs:6:39      - Unknown word (fontique)   -- any(feature = "shared-fontique", feature = "color-parsing
 internal/common/sharedfontique.rs:10:18     - Unknown word (fontique)   -- /// Create a new fontique Collection.
-internal/common/sharedfontique.rs:173:5     - Unknown word (Wraper)         -- /// Wraper around fontique::Blob
+internal/common/sharedfontique.rs:171:5     - Unknown word (Wraper)         -- /// Wraper around fontique::Blob
 internal/common/sharedfontique.rs:23:36     - Unknown word (sharedfontique) -- data = include_bytes!("sharedfontique/DejaVuSans.ttf");
 internal/common/sharedfontique.rs:4:9       - Unknown word (fontique)   -- pub use fontique;
 internal/common/styled_text.rs:107:42    - Unknown word (seperated)  -- has been parsed and seperated into paragraphs
@@ -3367,12 +3419,12 @@ internal/compiler/builtins.slint:209:34    - Unknown word (propgataion) -- prope
 internal/compiler/builtins.slint:210:30    - Unknown word (propgataion) -- property <duration> propgataion-delay: 100ms;
 internal/compiler/builtins.slint:401:27    - Unknown word (preedit)     -- out property <string> preedit-text;
 internal/compiler/builtins.slint:588:53    - Unknown word (constexpr)   -- ClosePolicy> close-policy; // constexpr hardcoded in typeregister
-internal/compiler/expression_tree.rs:1241:59   - Unknown word (alredy)     -- store, and stores are alredy checked
-internal/compiler/expression_tree.rs:1328:33   - Unknown word (conv)       -- "tmpobj_conv_{}",
+internal/compiler/expression_tree.rs:1283:59   - Unknown word (alredy)     -- store, and stores are alredy checked
+internal/compiler/expression_tree.rs:1371:33   - Unknown word (conv)       -- "tmpobj_conv_{}",
 internal/compiler/expression_tree.rs:147:5     - Unknown word (Oklch)      -- Oklch,
-internal/compiler/expression_tree.rs:1531:70   - Unknown word (Constexpr)  -- PropertyVisibility::Constexpr {
-internal/compiler/expression_tree.rs:1961:64   - Unknown word (flexbox)    -- => write!(f, "solve_flexbox_layout(..)"),
-internal/compiler/expression_tree.rs:1962:64   - Unknown word (flexbox)    -- xLayoutInfo(..) => write!(f, "flexbox_layout_info(..)"),
+internal/compiler/expression_tree.rs:1574:70   - Unknown word (Constexpr)  -- PropertyVisibility::Constexpr {
+internal/compiler/expression_tree.rs:2027:64   - Unknown word (flexbox)    -- => write!(f, "solve_flexbox_layout(..)"),
+internal/compiler/expression_tree.rs:2028:64   - Unknown word (flexbox)    -- xLayoutInfo(..) => write!(f, "flexbox_layout_info(..)"),
 internal/compiler/expression_tree.rs:237:10    - Unknown word (Oklch)      -- ColorOklchStruct: (Type::Color
 internal/compiler/expression_tree.rs:263:5     - Unknown word (Oklch)      -- Oklch: (Type::Float32, Type
 internal/compiler/expression_tree.rs:78:10     - Unknown word (Oklch)      -- ColorOklchStruct,
@@ -3400,20 +3452,20 @@ internal/compiler/generator/cpp.rs:3441:44   - Unknown word (targetstruct) -- (S
 internal/compiler/generator/cpp.rs:3441:61   - Unknown word (targetstruct) -- None, targetstruct) if targetstruct.is_some() => {
 internal/compiler/generator/cpp.rs:3455:26   - Unknown word (sourcestruct) -- (sourcestruct, StructName::None) if
 internal/compiler/generator/cpp.rs:3455:61   - Unknown word (sourcestruct) -- StructName::None) if sourcestruct.is_some() => {
-internal/compiler/generator/cpp.rs:3864:28   - Unknown word (flexbox)      -- } => generate_with_flexbox_layout_item_info(
+internal/compiler/generator/cpp.rs:3889:28   - Unknown word (flexbox)      -- } => generate_with_flexbox_layout_item_info(
 internal/compiler/generator/cpp.rs:38:37     - Unknown word (reflexpr)   -- protected", "public", "reflexpr", "register", "reinterpret
-internal/compiler/generator/cpp.rs:4093:31   - Unknown word (Oklch)        -- BuiltinFunction::ColorOklchStruct => {
-internal/compiler/generator/cpp.rs:4094:28   - Unknown word (oklch)        -- format!("{}.to_oklch()", a.next().unwrap
-internal/compiler/generator/cpp.rs:4133:26   - Unknown word (Oklch)        -- BuiltinFunction::Oklch => {
-internal/compiler/generator/cpp.rs:4363:36   - Unknown word (textinput)    -- format!("slint_textinput_set_selection_offsets
-internal/compiler/generator/cpp.rs:4373:46   - Unknown word (fontmetrics)  -- slint_cpp_text_item_fontmetrics(&{window}.handle(),
-internal/compiler/generator/cpp.rs:4448:57   - Unknown word (Retart)       -- error: invalid args to RetartTimer {arguments:?}"
-internal/compiler/generator/cpp.rs:4563:18   - Unknown word (flexbox)      -- fn generate_with_flexbox_layout_item_info(
-internal/compiler/generator/cpp.rs:4801:17   - Unknown word (strs)         -- let all_strs = ms.iter().flatten
-internal/compiler/generator/cpp.rs:4802:17   - Unknown word (strs)         -- let all_strs_len = all_strs.clone
-internal/compiler/generator/cpp.rs:4802:32   - Unknown word (strs)         -- let all_strs_len = all_strs.clone().count();
-internal/compiler/generator/cpp.rs:4806:34   - Unknown word (strs)         -- array_size: Some(all_strs_len),
-internal/compiler/generator/cpp.rs:4809:21   - Unknown word (strs)         -- all_strs.map(|s| format_smolstr
+internal/compiler/generator/cpp.rs:4118:31   - Unknown word (Oklch)        -- BuiltinFunction::ColorOklchStruct => {
+internal/compiler/generator/cpp.rs:4119:28   - Unknown word (oklch)        -- format!("{}.to_oklch()", a.next().unwrap
+internal/compiler/generator/cpp.rs:4158:26   - Unknown word (Oklch)        -- BuiltinFunction::Oklch => {
+internal/compiler/generator/cpp.rs:4388:36   - Unknown word (textinput)    -- format!("slint_textinput_set_selection_offsets
+internal/compiler/generator/cpp.rs:4398:46   - Unknown word (fontmetrics)  -- slint_cpp_text_item_fontmetrics(&{window}.handle(),
+internal/compiler/generator/cpp.rs:4473:57   - Unknown word (Retart)       -- error: invalid args to RetartTimer {arguments:?}"
+internal/compiler/generator/cpp.rs:4588:18   - Unknown word (flexbox)      -- fn generate_with_flexbox_layout_item_info(
+internal/compiler/generator/cpp.rs:4826:17   - Unknown word (strs)         -- let all_strs = ms.iter().flatten
+internal/compiler/generator/cpp.rs:4827:17   - Unknown word (strs)         -- let all_strs_len = all_strs.clone
+internal/compiler/generator/cpp.rs:4827:32   - Unknown word (strs)         -- let all_strs_len = all_strs.clone().count();
+internal/compiler/generator/cpp.rs:4831:34   - Unknown word (strs)         -- array_size: Some(all_strs_len),
+internal/compiler/generator/cpp.rs:4834:21   - Unknown word (strs)         -- all_strs.map(|s| format_smolstr
 internal/compiler/generator/cpp.rs:676:28    - Unknown word (udpated)    -- // udpated here.
 internal/compiler/generator/cpp_live_preview.rs:86:20     - Unknown word (constexpr)  -- "{0}if constexpr(std::is_same_v<T, {
 internal/compiler/generator/python.rs:160:17    - Unknown word (structty)   -- fn try_from(structty: &Rc<crate::langtype
@@ -3458,12 +3510,12 @@ internal/compiler/generator/rust.rs:2454:60   - Unknown word (targetstruct) -- s
 internal/compiler/generator/rust.rs:2457:26   - Unknown word (sourcestruct) -- (sourcestruct, StructName::None) if
 internal/compiler/generator/rust.rs:2457:61   - Unknown word (sourcestruct) -- StructName::None) if sourcestruct.is_some() => {
 internal/compiler/generator/rust.rs:276:40    - Unknown word (rescope)    -- unknown_lints, if_let_rescope, tail_expr_drop_order
-internal/compiler/generator/rust.rs:2897:28   - Unknown word (flexbox)      -- } => generate_with_flexbox_layout_item_info(
-internal/compiler/generator/rust.rs:3398:31   - Unknown word (Oklch)        -- BuiltinFunction::ColorOklchStruct => quote!( #(
-internal/compiler/generator/rust.rs:3398:64   - Unknown word (oklch)        -- > quote!( #(#a)*.to_oklch()),
-internal/compiler/generator/rust.rs:3454:26   - Unknown word (Oklch)        -- BuiltinFunction::Oklch => {
-internal/compiler/generator/rust.rs:3867:18   - Unknown word (flexbox)      -- fn generate_with_flexbox_layout_item_info(
-internal/compiler/generator/rust.rs:3897:53   - Unknown word (flexbox)      -- No repeater_steps for flexbox
+internal/compiler/generator/rust.rs:2920:28   - Unknown word (flexbox)      -- } => generate_with_flexbox_layout_item_info(
+internal/compiler/generator/rust.rs:3421:31   - Unknown word (Oklch)        -- BuiltinFunction::ColorOklchStruct => quote!( #(
+internal/compiler/generator/rust.rs:3421:64   - Unknown word (oklch)        -- > quote!( #(#a)*.to_oklch()),
+internal/compiler/generator/rust.rs:3477:26   - Unknown word (Oklch)        -- BuiltinFunction::Oklch => {
+internal/compiler/generator/rust.rs:3898:18   - Unknown word (flexbox)      -- fn generate_with_flexbox_layout_item_info(
+internal/compiler/generator/rust.rs:3928:53   - Unknown word (flexbox)      -- No repeater_steps for flexbox
 internal/compiler/generator/rust.rs:480:35    - Unknown word (gloabls)    -- //(quote!(#shared_gloabls_var_name),quote!(let
 internal/compiler/langtype.rs:1038:48   - Unknown word (implemenation) -- this in sync with the implemenation in core/input.rs
 internal/compiler/langtype.rs:167:42    - Unknown word (pathdata)   -- PathData => write!(f, "pathdata"),
@@ -3486,11 +3538,11 @@ internal/compiler/lib.rs:6:13      - Unknown word (docsrs)     -- #![cfg_attr(do
 internal/compiler/literals.rs:60:36     - Unknown word (fooo)       -- unescape_string(r#""fooo\""#), None);
 internal/compiler/literals.rs:73:42     - Unknown word (qsdf)       -- unescape_string(r#""xxx\u{qsdf}""#), None);
 internal/compiler/llr.rs:16:9      - Unknown word (optim)      -- pub mod optim_passes {
-internal/compiler/llr/expression.rs:835:40    - Unknown word (subcomponent's) -- go from the current subcomponent's context, to the context
+internal/compiler/llr/expression.rs:861:40    - Unknown word (subcomponent's) -- go from the current subcomponent's context, to the context
 internal/compiler/llr/lower_expression.rs:11:38     - Unknown word (flexbox)    -- layout_info, compute_flexbox_layout_info, compute
 internal/compiler/llr/lower_expression.rs:12:51     - Unknown word (flexbox)    -- solve_box_layout, solve_flexbox_layout, solve_grid_layout
-internal/compiler/llr/lower_expression.rs:282:57    - Unknown word (flexbox)    -- olveFlexBoxLayout(l) => solve_flexbox_layout(l, ctx),
-internal/compiler/llr/lower_expression.rs:283:68    - Unknown word (flexbox)    -- oxLayoutInfo(l, o) => compute_flexbox_layout_info(l, *o, ctx
+internal/compiler/llr/lower_expression.rs:301:57    - Unknown word (flexbox)    -- olveFlexBoxLayout(l) => solve_flexbox_layout(l, ctx),
+internal/compiler/llr/lower_expression.rs:302:68    - Unknown word (flexbox)    -- oxLayoutInfo(l, o) => compute_flexbox_layout_info(l, *o, ctx
 internal/compiler/llr/lower_layout_expression.rs:297:21    - Unknown word (flexbox)    -- pub(super) fn solve_flexbox_layout(
 internal/compiler/llr/lower_layout_expression.rs:305:15    - Unknown word (flexbox)    -- let fld = flexbox_layout_data(layout,
 internal/compiler/llr/lower_layout_expression.rs:352:34    - Unknown word (flexbox)    -- function: "solve_flexbox_layout".into(),
@@ -3507,22 +3559,25 @@ internal/compiler/llr/lower_layout_expression.rs:870:24    - Unknown word (propr
 internal/compiler/llr/lower_layout_expression.rs:871:28    - Unknown word (propref)    -- let rowspan_expr = propref(&elem.cell.borrow()
 internal/compiler/llr/lower_layout_expression.rs:872:28    - Unknown word (propref)    -- let colspan_expr = propref(&elem.cell.borrow()
 internal/compiler/llr/lower_to_item_tree.rs:56:24     - Unknown word (codegen)    -- // For C++ codegen, the root component
-internal/compiler/llr/optim_passes/inline_expressions.rs:129:31    - Unknown word (Oklch)      -- BuiltinFunction::ColorOklchStruct => 50,
-internal/compiler/llr/optim_passes/inline_expressions.rs:139:26    - Unknown word (Oklch)      -- BuiltinFunction::Oklch => 50,
+internal/compiler/llr/optim_passes/inline_expressions.rs:130:31    - Unknown word (Oklch)      -- BuiltinFunction::ColorOklchStruct => 50,
+internal/compiler/llr/optim_passes/inline_expressions.rs:140:26    - Unknown word (Oklch)      -- BuiltinFunction::Oklch => 50,
 internal/compiler/lookup.rs:1005:47   - Unknown word (Oklch)      -- BuiltinFunction::ColorOklchStruct)
 internal/compiler/lookup.rs:1040:31   - Unknown word (oklch)      -- .or_else(|| f("to-oklch", member_function(BuiltinFunc
 internal/compiler/lookup.rs:1040:77   - Unknown word (Oklch)      -- BuiltinFunction::ColorOklchStruct)))
 internal/compiler/lookup.rs:835:28    - Unknown word (oklch)      -- .or_else(|| f("oklch", BuiltinMacroFunction
 internal/compiler/lookup.rs:835:58    - Unknown word (Oklch)      -- BuiltinMacroFunction::Oklch))
-internal/compiler/object_tree.rs:2437:17   - Unknown word (exisitng)   -- let exisitng_binding = match &prop
-internal/compiler/object_tree.rs:2450:45   - Unknown word (exisitng)   -- existing_binding) = exisitng_binding {
-internal/compiler/object_tree.rs:342:41    - Unknown word (orignates)  -- structs, enums, that orignates from an
-internal/compiler/object_tree.rs:3512:34   - Unknown word (layoutinfo) -- SmolStr::new_static("layoutinfo-v"),
-internal/compiler/object_tree.rs:3517:34   - Unknown word (layoutinfo) -- SmolStr::new_static("layoutinfo-h"),
-internal/compiler/object_tree.rs:369:87    - Unknown word (iterface)   -- Emits an error if the iterface could not be found,
-internal/compiler/object_tree.rs:591:5     - Unknown word (Constexpr)  -- Constexpr,
-internal/compiler/object_tree.rs:607:33    - Unknown word (Constexpr)  -- PropertyVisibility::Constexpr => f.write_str("constexpr
-internal/compiler/object_tree.rs:607:59    - Unknown word (constexpr)  -- Constexpr => f.write_str("constexpr"),
+internal/compiler/object_tree.rs:2974:34   - Unknown word (layoutinfo) -- SmolStr::new_static("layoutinfo-v"),
+internal/compiler/object_tree.rs:2979:34   - Unknown word (layoutinfo) -- SmolStr::new_static("layoutinfo-h"),
+internal/compiler/object_tree.rs:348:41    - Unknown word (orignates)  -- structs, enums, that orignates from an
+internal/compiler/object_tree.rs:529:5     - Unknown word (Constexpr)  -- Constexpr,
+internal/compiler/object_tree.rs:545:33    - Unknown word (Constexpr)  -- PropertyVisibility::Constexpr => f.write_str("constexpr
+internal/compiler/object_tree.rs:545:59    - Unknown word (constexpr)  -- Constexpr => f.write_str("constexpr"),
+internal/compiler/object_tree/interfaces.rs:1:21      - Unknown word (Klarälvdalens) -- // Copyright © 2026 Klarälvdalens Datakonsult AB, a KDAB
+internal/compiler/object_tree/interfaces.rs:1:35      - Unknown word (Datakonsult)   -- 2026 Klarälvdalens Datakonsult AB, a KDAB Group company
+internal/compiler/object_tree/interfaces.rs:1:53      - Unknown word (KDAB)          -- arälvdalens Datakonsult AB, a KDAB Group company <info
+internal/compiler/object_tree/interfaces.rs:416:17    - Unknown word (exisitng)      -- let exisitng_binding = match &prop
+internal/compiler/object_tree/interfaces.rs:429:45    - Unknown word (exisitng)      -- existing_binding) = exisitng_binding {
+internal/compiler/object_tree/interfaces.rs:44:87     - Unknown word (iterface)      -- Emits an error if the iterface could not be found,
 internal/compiler/parser-test-macro/lib.rs:122:36    - Unknown word (Punct)      -- let Some(TokenTree::Punct(p)) = attr.next() {
 internal/compiler/parser-test-macro/lib.rs:158:36    - Unknown word (Punct)      -- TokenTree::Punct(p) if p.as_char() =
 internal/compiler/parser-test-macro/lib.rs:161:36    - Unknown word (Punct)      -- TokenTree::Punct(p) if p.as_char() =
@@ -3542,16 +3597,16 @@ internal/compiler/passes/binding_analysis.rs:271:17    - Unknown word (rowcol)  
 internal/compiler/passes/binding_analysis.rs:272:32    - Unknown word (elems)      -- for it in grid.elems.iter() {
 internal/compiler/passes/binding_analysis.rs:278:30    - Unknown word (rowcol)     -- .get(rowcol_prop_name)
 internal/compiler/passes/binding_analysis.rs:283:33    - Unknown word (rowcol)     -- rowcol_prop_name, child.borrow
-internal/compiler/passes/binding_analysis.rs:533:47    - Unknown word (elems)      -- items_dependencies(l.elems.iter(), *o, vis);
-internal/compiler/passes/binding_analysis.rs:571:56    - Unknown word (elems)      -- dependencies(layout.elems.iter(), Orientation
-internal/compiler/passes/binding_analysis.rs:572:56    - Unknown word (elems)      -- dependencies(layout.elems.iter(), Orientation
-internal/compiler/passes/binding_analysis.rs:580:26    - Unknown word (rowcol)     -- layout.visit_rowcol_named_references(&mut
-internal/compiler/passes/binding_analysis.rs:594:24    - Unknown word (elems)      -- layout.elems.iter().map(|it| &it
-internal/compiler/passes/collect_subcomponents.rs:14:16     - Unknown word (subcomponents) -- pub fn collect_subcomponents(doc: &Document) {
-internal/compiler/passes/collect_subcomponents.rs:18:17     - Unknown word (subcomponents) -- collect_subcomponents_recursive(&component
-internal/compiler/passes/collect_subcomponents.rs:23:12     - Unknown word (subcomponents) -- fn collect_subcomponents_recursive(
-internal/compiler/passes/collect_subcomponents.rs:39:17     - Unknown word (subcomponents) -- collect_subcomponents_recursive(&base_comp
-internal/compiler/passes/collect_subcomponents.rs:47:17     - Unknown word (subcomponents) -- collect_subcomponents_recursive(&popup.component
+internal/compiler/passes/binding_analysis.rs:536:47    - Unknown word (elems)      -- items_dependencies(l.elems.iter(), *o, vis);
+internal/compiler/passes/binding_analysis.rs:574:56    - Unknown word (elems)      -- dependencies(layout.elems.iter(), Orientation
+internal/compiler/passes/binding_analysis.rs:575:56    - Unknown word (elems)      -- dependencies(layout.elems.iter(), Orientation
+internal/compiler/passes/binding_analysis.rs:583:26    - Unknown word (rowcol)     -- layout.visit_rowcol_named_references(&mut
+internal/compiler/passes/binding_analysis.rs:597:24    - Unknown word (elems)      -- layout.elems.iter().map(|it| &it
+internal/compiler/passes/collect_subcomponents.rs:16:16     - Unknown word (subcomponents) -- pub fn collect_subcomponents(doc: &Document) {
+internal/compiler/passes/collect_subcomponents.rs:20:17     - Unknown word (subcomponents) -- collect_subcomponents_recursive(&component
+internal/compiler/passes/collect_subcomponents.rs:25:12     - Unknown word (subcomponents) -- fn collect_subcomponents_recursive(
+internal/compiler/passes/collect_subcomponents.rs:41:17     - Unknown word (subcomponents) -- collect_subcomponents_recursive(&base_comp
+internal/compiler/passes/collect_subcomponents.rs:49:17     - Unknown word (subcomponents) -- collect_subcomponents_recursive(&popup.component
 internal/compiler/passes/const_propagation.rs:377:78    - Unknown word (intput)     -- stores the value of `intput` in a local variable
 internal/compiler/passes/default_geometry.rs:216:30    - Unknown word (layoutinfo) -- SmolStr::new_static("layoutinfo-v"),
 internal/compiler/passes/default_geometry.rs:221:30    - Unknown word (layoutinfo) -- SmolStr::new_static("layoutinfo-h"),
@@ -3561,9 +3616,9 @@ internal/compiler/passes/embed_glyphs.rs:293:50    - Unknown word (charmap)    -
 internal/compiler/passes/embed_glyphs.rs:359:53    - Unknown word (charmap)    -- f| swash_font_ref(f).charmap().map(*code_point)
 internal/compiler/passes/embed_glyphs.rs:363:45    - Unknown word (charmap)    -- glyph_id = font_ref.charmap().map(*code_point);
 internal/compiler/passes/embed_glyphs.rs:435:43    - Unknown word (charmap)    -- swash_font_ref(font).charmap().map(*code_point)
-internal/compiler/passes/embed_glyphs.rs:485:15    - Unknown word (msdfgen)    -- // Unlike msdfgen, the transformation
-internal/compiler/passes/embed_glyphs.rs:486:18    - Unknown word (msdf)       -- // `generate_msdf` function – the coordinates
-internal/compiler/passes/embed_glyphs.rs:511:40    - Unknown word (fsdm)       -- y coordinate (as the fsdm crate has the y axis
+internal/compiler/passes/embed_glyphs.rs:486:15    - Unknown word (msdfgen)    -- // Unlike msdfgen, the transformation
+internal/compiler/passes/embed_glyphs.rs:487:18    - Unknown word (msdf)       -- // `generate_msdf` function – the coordinates
+internal/compiler/passes/embed_glyphs.rs:512:40    - Unknown word (fsdm)       -- y coordinate (as the fsdm crate has the y axis
 internal/compiler/passes/embed_images.rs:366:28    - Unknown word (usvg)       -- use resvg::{tiny_skia, usvg};
 internal/compiler/passes/embed_images.rs:369:60    - Unknown word (svgz)       -- == Some(OsStr::new("svgz"))
 internal/compiler/passes/flickable.rs:137:17    - Unknown word (minmax)     -- let forward_minmax_of = |prop: &'static
@@ -3571,16 +3626,17 @@ internal/compiler/passes/flickable.rs:154:17    - Unknown word (minmax)     -- f
 internal/compiler/passes/flickable.rs:155:17    - Unknown word (minmax)     -- forward_minmax_of("preferred-height
 internal/compiler/passes/flickable.rs:158:17    - Unknown word (minmax)     -- forward_minmax_of("max-width", MinMaxOp
 internal/compiler/passes/flickable.rs:159:17    - Unknown word (minmax)     -- forward_minmax_of("preferred-width
-internal/compiler/passes/focus_handling.rs:115:15    - Unknown word (uncallable) -- fn remove_uncallable_forwards(&mut self)
-internal/compiler/passes/focus_handling.rs:120:46    - Unknown word (unfocusable) -- Cannot forward focus to unfocusable element".into(),
-internal/compiler/passes/focus_handling.rs:40:31     - Unknown word (uncallable) -- local_forwards.remove_uncallable_forwards();
-internal/compiler/passes/focus_handling.rs:65:67     - Unknown word (uncallable) -- valid. The error remove_uncallable_forwards pass will
-internal/compiler/passes/inlining.rs:592:29    - Unknown word (elems)      -- for e in &mut l.elems {
-internal/compiler/passes/inlining.rs:599:34    - Unknown word (elems)      -- for e in &mut layout.elems {
-internal/compiler/passes/inlining.rs:605:34    - Unknown word (elems)      -- for e in &mut layout.elems {
+internal/compiler/passes/focus_handling.rs:117:15    - Unknown word (uncallable) -- fn remove_uncallable_forwards(&mut self)
+internal/compiler/passes/focus_handling.rs:122:46    - Unknown word (unfocusable) -- Cannot forward focus to unfocusable element".into(),
+internal/compiler/passes/focus_handling.rs:42:31     - Unknown word (uncallable) -- local_forwards.remove_uncallable_forwards();
+internal/compiler/passes/focus_handling.rs:67:67     - Unknown word (uncallable) -- valid. The error remove_uncallable_forwards pass will
+internal/compiler/passes/inlining.rs:594:29    - Unknown word (elems)      -- for e in &mut l.elems {
+internal/compiler/passes/inlining.rs:601:34    - Unknown word (elems)      -- for e in &mut layout.elems {
+internal/compiler/passes/inlining.rs:607:34    - Unknown word (elems)      -- for e in &mut layout.elems {
 internal/compiler/passes/lower_component_container.rs:10:23     - Unknown word (Emtpy)      -- ! if false: Emtpy {}
 internal/compiler/passes/lower_layout.rs:112:34    - Unknown word (flexbox)    -- FlexBoxLayout" => lower_flexbox_layout(elem, diag),
-internal/compiler/passes/lower_layout.rs:1236:43   - Unknown word (trunc)      -- 6::MAX as f64 || !v.trunc().approx_eq(v) {
+internal/compiler/passes/lower_layout.rs:1374:13   - Unknown word (rowcol)     -- fn set_grid_rowcol_from_cache(
+internal/compiler/passes/lower_layout.rs:1437:43   - Unknown word (trunc)      -- 6::MAX as f64 || !v.trunc().approx_eq(v) {
 internal/compiler/passes/lower_layout.rs:165:9     - Unknown word (elems)      -- elems: Default::default()
 internal/compiler/passes/lower_layout.rs:188:30    - Unknown word (layoutinfo) -- SmolStr::new_static("layoutinfo-h"),
 internal/compiler/passes/lower_layout.rs:193:30    - Unknown word (layoutinfo) -- SmolStr::new_static("layoutinfo-v"),
@@ -3589,15 +3645,17 @@ internal/compiler/passes/lower_layout.rs:417:24    - Unknown word (propref)    -
 internal/compiler/passes/lower_layout.rs:418:24    - Unknown word (propref)    -- let col_expr = propref("col");
 internal/compiler/passes/lower_layout.rs:419:28    - Unknown word (propref)    -- let rowspan_expr = propref("rowspan");
 internal/compiler/passes/lower_layout.rs:420:28    - Unknown word (propref)    -- let colspan_expr = propref("colspan");
-internal/compiler/passes/lower_layout.rs:540:18    - Unknown word (elems)      -- self.elems.push(grid_layout_element
-internal/compiler/passes/lower_layout.rs:591:14    - Unknown word (elems)      -- self.elems.push(grid_layout_element
-internal/compiler/passes/lower_layout.rs:603:9     - Unknown word (elems)      -- elems: Default::default()
-internal/compiler/passes/lower_layout.rs:611:30    - Unknown word (layoutinfo) -- SmolStr::new_static("layoutinfo-v"),
-internal/compiler/passes/lower_layout.rs:616:30    - Unknown word (layoutinfo) -- SmolStr::new_static("layoutinfo-h"),
-internal/compiler/passes/lower_layout.rs:652:28    - Unknown word (elems)      -- let index = layout.elems.len() * 2;
-internal/compiler/passes/lower_layout.rs:711:10    - Unknown word (flexbox)    -- fn lower_flexbox_layout(layout_element
-internal/compiler/passes/lower_layout.rs:712:73    - Unknown word (flexbox)    -- behaves like start in flexbox
-internal/compiler/passes/lower_layout.rs:744:30    - Unknown word (layoutinfo) -- SmolStr::new_static("layoutinfo-v"),
+internal/compiler/passes/lower_layout.rs:538:26    - Unknown word (rowcol)     -- set_grid_rowcol_from_cache(
+internal/compiler/passes/lower_layout.rs:565:18    - Unknown word (elems)      -- self.elems.push(grid_layout_element
+internal/compiler/passes/lower_layout.rs:605:18    - Unknown word (rowcol)     -- set_grid_rowcol_from_cache(
+internal/compiler/passes/lower_layout.rs:634:14    - Unknown word (elems)      -- self.elems.push(grid_layout_element
+internal/compiler/passes/lower_layout.rs:646:9     - Unknown word (elems)      -- elems: Default::default()
+internal/compiler/passes/lower_layout.rs:654:30    - Unknown word (layoutinfo) -- SmolStr::new_static("layoutinfo-v"),
+internal/compiler/passes/lower_layout.rs:659:30    - Unknown word (layoutinfo) -- SmolStr::new_static("layoutinfo-h"),
+internal/compiler/passes/lower_layout.rs:695:28    - Unknown word (elems)      -- let index = layout.elems.len() * 2;
+internal/compiler/passes/lower_layout.rs:754:10    - Unknown word (flexbox)    -- fn lower_flexbox_layout(layout_element
+internal/compiler/passes/lower_layout.rs:755:73    - Unknown word (flexbox)    -- behaves like start in flexbox
+internal/compiler/passes/lower_layout.rs:787:30    - Unknown word (layoutinfo) -- SmolStr::new_static("layoutinfo-v"),
 internal/compiler/passes/lower_menus.rs:389:13    - Unknown word (supportes)  -- let supportes_native_menu_bar = Expression
 internal/compiler/passes/lower_menus.rs:401:22    - Unknown word (supportes)  -- rhs: supportes_native_menu_bar.into
 internal/compiler/passes/lower_menus.rs:404:26    - Unknown word (supportes)  -- None => Some(supportes_native_menu_bar),
@@ -3605,21 +3663,24 @@ internal/compiler/passes/lower_menus.rs:410:33    - Unknown word (menulayout) --
 internal/compiler/passes/lower_repeated_rows.rs:1:16      - Unknown word (Klarälvdalens) -- // Copyright © Klarälvdalens Datakonsult AB, a KDAB
 internal/compiler/passes/lower_repeated_rows.rs:1:30      - Unknown word (Datakonsult)   -- Copyright © Klarälvdalens Datakonsult AB, a KDAB Group company
 internal/compiler/passes/lower_repeated_rows.rs:1:48      - Unknown word (KDAB)          -- arälvdalens Datakonsult AB, a KDAB Group company, info
-internal/compiler/passes/remove_return.rs:518:21    - Unknown word (conv)       -- "tmpobj_ret_conv_{}",
-internal/compiler/passes/resolving.rs:1036:20   - Unknown word (Unshiftable)   -- // Unshiftable keys ignore the shift
-internal/compiler/passes/resolving.rs:1038:32   - Unknown word (Unshiftable)   -- ShiftBehavior::Unshiftable => {}
-internal/compiler/passes/resolving.rs:1376:13   - Unknown word (unaryop)       -- fn from_unaryop_expression_node(
-internal/compiler/passes/resolving.rs:1596:8    - Unknown word (Unshiftable)   -- // Unshiftable keys have the same key
-internal/compiler/passes/resolving.rs:1599:5    - Unknown word (Unshiftable)   -- Unshiftable,
-internal/compiler/passes/resolving.rs:1615:60   - Unknown word (Unshiftable)   -- keycode, ShiftBehavior::Unshiftable))
-internal/compiler/passes/resolving.rs:1757:17   - Unknown word (depr)          -- if let Some(depr) = result.deprecated
-internal/compiler/passes/resolving.rs:1758:64   - Unknown word (depr)          -- warning(&first_str, depr, &first);
-internal/compiler/passes/resolving.rs:1984:32   - Unknown word (descr)         -- let ty_descr = match expression.ty
-internal/compiler/passes/resolving.rs:2003:87   - Unknown word (descr)         -- }", next.text(), ty_descr),
+internal/compiler/passes/remove_return.rs:519:21    - Unknown word (conv)       -- "tmpobj_ret_conv_{}",
+internal/compiler/passes/resolving.rs:1000:53   - Unknown word (uppercased)    -- format!("Use uppercase {uppercased} instead")
+internal/compiler/passes/resolving.rs:1041:20   - Unknown word (Unshiftable)   -- // Unshiftable keys ignore the shift
+internal/compiler/passes/resolving.rs:1043:32   - Unknown word (Unshiftable)   -- ShiftBehavior::Unshiftable => {}
+internal/compiler/passes/resolving.rs:1381:13   - Unknown word (unaryop)       -- fn from_unaryop_expression_node(
+internal/compiler/passes/resolving.rs:1601:8    - Unknown word (Unshiftable)   -- // Unshiftable keys have the same key
+internal/compiler/passes/resolving.rs:1604:5    - Unknown word (Unshiftable)   -- Unshiftable,
+internal/compiler/passes/resolving.rs:1620:60   - Unknown word (Unshiftable)   -- keycode, ShiftBehavior::Unshiftable))
+internal/compiler/passes/resolving.rs:1762:17   - Unknown word (depr)          -- if let Some(depr) = result.deprecated
+internal/compiler/passes/resolving.rs:1763:64   - Unknown word (depr)          -- warning(&first_str, depr, &first);
+internal/compiler/passes/resolving.rs:1989:32   - Unknown word (descr)         -- let ty_descr = match expression.ty
+internal/compiler/passes/resolving.rs:2008:87   - Unknown word (descr)         -- }", next.text(), ty_descr),
 internal/compiler/passes/resolving.rs:989:39    - Unknown word (shiftbehavior) -- if let Some((key, shiftbehavior)) = lookup_key(key_name
 internal/compiler/passes/resolving.rs:992:29    - Unknown word (shiftbehavior) -- shiftbehavior,
+internal/compiler/passes/resolving.rs:997:29    - Unknown word (uppercased)    -- let uppercased = key_name.to_uppercase
+internal/compiler/passes/resolving.rs:998:51    - Unknown word (uppercased)    -- hint = if lookup_key(&uppercased).is_some() {
 internal/compiler/passes/resolving/remove_noop.rs:54:48     - Unknown word (efffects)   -- because they may have side-efffects.
-internal/compiler/passes/shortcuts.rs:56:57     - Unknown word (Shorcut)    -- note("First duplicate Shorcut defined here".into(
+internal/compiler/passes/shortcuts.rs:53:57     - Unknown word (Shorcut)    -- note("First duplicate Shorcut defined here".into(
 internal/compiler/passes/windows.rs:119:118   - Unknown word (elemrc)     -- elemrc| Rc::ptr_eq(&elemrc, &win_elem)))
 internal/compiler/passes/windows.rs:119:98    - Unknown word (elemrc)     -- upgrade().is_some_and(|elemrc| Rc::ptr_eq(&elemrc
 internal/compiler/passes/z_order.rs:19:33     - Unknown word (zorder)     -- reorder_children_by_zorder(elem, diag);
@@ -3785,10 +3846,11 @@ internal/compiler/tests/syntax/interfaces/interfaces.slint:1:53      - Unknown w
 internal/compiler/tests/syntax/interfaces/interfaces_colon_equal.slint:1:21      - Unknown word (Klarälvdalens) -- // Copyright © 2025 Klarälvdalens Datakonsult AB, a KDAB
 internal/compiler/tests/syntax/interfaces/interfaces_colon_equal.slint:1:35      - Unknown word (Datakonsult)   -- 2025 Klarälvdalens Datakonsult AB, a KDAB Group company
 internal/compiler/tests/syntax/interfaces/interfaces_colon_equal.slint:1:53      - Unknown word (KDAB)          -- arälvdalens Datakonsult AB, a KDAB Group company <info
-internal/compiler/tests/syntax/interfaces/uses_errors.slint:129:18    - Unknown word (Duplicat)      -- export component DuplicatPropertyOnBase uses
+internal/compiler/tests/syntax/interfaces/uses_errors.slint:177:18    - Unknown word (Duplicat)      -- export component DuplicatPropertyOnBase uses
 internal/compiler/tests/syntax/interfaces/uses_errors.slint:1:21      - Unknown word (Klarälvdalens) -- // Copyright © 2025 Klarälvdalens Datakonsult AB, a KDAB
 internal/compiler/tests/syntax/interfaces/uses_errors.slint:1:35      - Unknown word (Datakonsult)   -- 2025 Klarälvdalens Datakonsult AB, a KDAB Group company
 internal/compiler/tests/syntax/interfaces/uses_errors.slint:1:53      - Unknown word (KDAB)          -- arälvdalens Datakonsult AB, a KDAB Group company <info
+internal/compiler/tests/syntax/interfaces/uses_errors.slint:74:48     - Unknown word (Propert)       -- ChildDoesNotImplementInterfacePropert2 uses { ValidInterface
 internal/compiler/tests/syntax/layout/flexbox_layout_properties.slint:1:16      - Unknown word (Klarälvdalens) -- // Copyright © Klarälvdalens Datakonsult AB, a KDAB
 internal/compiler/tests/syntax/layout/flexbox_layout_properties.slint:1:30      - Unknown word (Datakonsult)   -- Copyright © Klarälvdalens Datakonsult AB, a KDAB Group company
 internal/compiler/tests/syntax/layout/flexbox_layout_properties.slint:1:48      - Unknown word (KDAB)          -- arälvdalens Datakonsult AB, a KDAB Group company, info
@@ -3820,10 +3882,10 @@ internal/compiler/tests/syntax/parse_error/struct.slint:4:15      - Unknown word
 internal/compiler/tests/syntax/parse_error/struct.slint:5:15      - Unknown word (Fliese)     -- fliesen: [FlieseData];
 internal/compiler/tests/syntax/parse_error/struct.slint:5:5       - Unknown word (fliesen)    -- fliesen: [FlieseData];
 internal/compiler/tests/syntax/parse_error/struct.slint:7:5       - Unknown word (zeilenzahl) -- zeilenzahl: { x: int; };
-internal/compiler/tests/syntax_tests.rs:149:59    - Unknown word (rfind)      -- .line_begin_offset].rfind('\n').unwrap_or(0);
-internal/compiler/tests/syntax_tests.rs:155:52    - Unknown word (rfind)      -- source[..line_offset].rfind('\n') {
+internal/compiler/tests/syntax_tests.rs:145:59    - Unknown word (rfind)      -- .line_begin_offset].rfind('\n').unwrap_or(0);
+internal/compiler/tests/syntax_tests.rs:151:52    - Unknown word (rfind)      -- source[..line_offset].rfind('\n') {
 internal/compiler/tests/syntax_tests.rs:31:89     - Unknown word (maching)    -- filter out tests not maching that pattern
-internal/compiler/tests/syntax_tests.rs:99:80     - Unknown word (FEFF)       -- source.starts_with("\u{FEFF}") {
+internal/compiler/tests/syntax_tests.rs:95:80     - Unknown word (FEFF)       -- source.starts_with("\u{FEFF}") {
 internal/compiler/tests/typeloader/dependency_local.slint:4:32      - Unknown word (incpath)    -- AnotherType } from "./incpath/dependency_from_incpath
 internal/compiler/tests/typeloader/dependency_local.slint:4:56      - Unknown word (incpath)    -- incpath/dependency_from_incpath.slint";
 internal/compiler/tests/typeloader/dependency_test_main.slint:5:46      - Unknown word (incpath)    -- from "dependency_from_incpath.slint";
@@ -3840,26 +3902,26 @@ internal/compiler/translations.rs:112:55    - Unknown word (contextid)  -- strin
 internal/compiler/translations.rs:118:65    - Unknown word (contextid)  -- clone(), plural.clone(), contextid.clone())) {
 internal/compiler/translations.rs:126:43    - Unknown word (msgctxt)    -- catalog.find_by_msgid_msgctxt(original.as_str(), contextid
 internal/compiler/translations.rs:38:36     - Unknown word (msgctx)     -- msgid, msgid_plural, msgctx) to the index in the
-internal/compiler/typeloader.rs:1587:14   - Unknown word (splitn)      -- .splitn(2, '/')
-internal/compiler/typeloader.rs:1796:13   - Unknown word (incdir)      -- let mut incdir = test_source_path.clone
-internal/compiler/typeloader.rs:1797:18   - Unknown word (incpath)     -- incdir.push("incpath");
-internal/compiler/typeloader.rs:1797:5    - Unknown word (incdir)      -- incdir.push("incpath");
+internal/compiler/typeloader.rs:1609:14   - Unknown word (splitn)      -- .splitn(2, '/')
 internal/compiler/typeloader.rs:17:13     - Unknown word (fileaccess) -- use crate::{fileaccess, langtype, layout, parser
 internal/compiler/typeloader.rs:17:25     - Unknown word (langtype)   -- crate::{fileaccess, langtype, layout, parser};
-internal/compiler/typeloader.rs:1801:42   - Unknown word (incdir)      -- include_paths = vec![incdir];
-internal/compiler/typeloader.rs:1831:10   - Unknown word (incpath)     -- "incpath/local_helper_type.slint
-internal/compiler/typeloader.rs:1832:10   - Unknown word (incpath)     -- "incpath/dependency_from_incpath
-internal/compiler/typeloader.rs:1832:34   - Unknown word (incpath)     -- incpath/dependency_from_incpath.slint",
-internal/compiler/typeloader.rs:1846:42   - Unknown word (incpath)     -- test_source_path.join("incpath/local_helper_type.slint
-internal/compiler/typeloader.rs:1866:13   - Unknown word (incdir)      -- let mut incdir = test_source_path.clone
-internal/compiler/typeloader.rs:1867:5    - Unknown word (incdir)      -- incdir.push("incpath");
-internal/compiler/typeloader.rs:2078:11   - Unknown word (libfile)     -- ("libfile.slint".into(), test
-internal/compiler/typeloader.rs:2090:31   - Unknown word (libfile)     -- LibraryType } from "@libfile.slint";
-internal/compiler/typeloader.rs:2118:11   - Unknown word (libfile)     -- ("libfile.slint".into(), test
-internal/compiler/typeloader.rs:2132:21   - Unknown word (libfile)     -- import { C } from "@libfile.slint/unknown.slint
-internal/compiler/typeloader.rs:89:22     - Unknown word (importident) -- pub fn from_node(importident: syntax_nodes::ImportIdentifi
-internal/compiler/typeloader.rs:91:42     - Unknown word (importident) -- normalize_identifier(importident.ExternalName().text
-internal/compiler/typeloader.rs:93:35     - Unknown word (importident) -- internal_name = match importident.InternalName() {
+internal/compiler/typeloader.rs:1818:13   - Unknown word (incdir)      -- let mut incdir = test_source_path.clone
+internal/compiler/typeloader.rs:1819:18   - Unknown word (incpath)     -- incdir.push("incpath");
+internal/compiler/typeloader.rs:1819:5    - Unknown word (incdir)      -- incdir.push("incpath");
+internal/compiler/typeloader.rs:1823:42   - Unknown word (incdir)      -- include_paths = vec![incdir];
+internal/compiler/typeloader.rs:1853:10   - Unknown word (incpath)     -- "incpath/local_helper_type.slint
+internal/compiler/typeloader.rs:1854:10   - Unknown word (incpath)     -- "incpath/dependency_from_incpath
+internal/compiler/typeloader.rs:1854:34   - Unknown word (incpath)     -- incpath/dependency_from_incpath.slint",
+internal/compiler/typeloader.rs:1868:42   - Unknown word (incpath)     -- test_source_path.join("incpath/local_helper_type.slint
+internal/compiler/typeloader.rs:1888:13   - Unknown word (incdir)      -- let mut incdir = test_source_path.clone
+internal/compiler/typeloader.rs:1889:5    - Unknown word (incdir)      -- incdir.push("incpath");
+internal/compiler/typeloader.rs:2100:11   - Unknown word (libfile)     -- ("libfile.slint".into(), test
+internal/compiler/typeloader.rs:2112:31   - Unknown word (libfile)     -- LibraryType } from "@libfile.slint";
+internal/compiler/typeloader.rs:2140:11   - Unknown word (libfile)     -- ("libfile.slint".into(), test
+internal/compiler/typeloader.rs:2154:21   - Unknown word (libfile)     -- import { C } from "@libfile.slint/unknown.slint
+internal/compiler/typeloader.rs:90:22     - Unknown word (importident) -- pub fn from_node(importident: syntax_nodes::ImportIdentifi
+internal/compiler/typeloader.rs:92:42     - Unknown word (importident) -- normalize_identifier(importident.ExternalName().text
+internal/compiler/typeloader.rs:94:35     - Unknown word (importident) -- internal_name = match importident.InternalName() {
 internal/compiler/typeregister.rs:263:75    - Unknown word (Constexpr)  -- PropertyVisibility::Constexpr),
 internal/compiler/typeregister.rs:277:37    - Unknown word (Constexpr)  -- PropertyVisibility::Constexpr,
 internal/compiler/typeregister.rs:282:37    - Unknown word (Constexpr)  -- PropertyVisibility::Constexpr,
@@ -4057,13 +4119,13 @@ internal/core/graphics/wgpu_28.rs:56:30     - Unknown word (waitable)   -- let d
 internal/core/graphics/wgpu_28.rs:57:47     - Unknown word (Waitable)   -- :Dx12UseFrameLatencyWaitableObject::from_env().unwrap
 internal/core/graphics/wgpu_28.rs:66:33     - Unknown word (waitable)   -- latency_waitable_object: dx12_latency
 internal/core/graphics/wgpu_28.rs:66:63     - Unknown word (waitable)   -- object: dx12_latency_waitable_object,
-internal/core/input.rs:1141:8    - Unknown word (Unapply)       -- // Unapply the translation to go
-internal/core/input.rs:1144:12   - Unknown word (Unapply)       -- // Unapply other transforms.
-internal/core/input.rs:274:5     - Unknown word (altgr)      -- altgr: bool,
-internal/core/input.rs:290:42    - Unknown word (altgr)      -- codes::AltGr => self.altgr = pressed,
-internal/core/input.rs:309:21    - Unknown word (altgr)      -- if self.altgr {
-internal/core/input.rs:564:52    - Unknown word (implemenation) -- this in sync with the implemenation in compiler/langtype
-internal/core/input.rs:564:78    - Unknown word (langtype)      -- implemenation in compiler/langtype.rs
+internal/core/input.rs:1139:8    - Unknown word (Unapply)       -- // Unapply the translation to go
+internal/core/input.rs:1142:12   - Unknown word (Unapply)       -- // Unapply other transforms.
+internal/core/input.rs:275:5     - Unknown word (altgr)      -- altgr: bool,
+internal/core/input.rs:291:42    - Unknown word (altgr)      -- codes::AltGr => self.altgr = pressed,
+internal/core/input.rs:310:21    - Unknown word (altgr)      -- if self.altgr {
+internal/core/input.rs:562:52    - Unknown word (implemenation) -- this in sync with the implemenation in compiler/langtype
+internal/core/input.rs:562:78    - Unknown word (langtype)      -- implemenation in compiler/langtype.rs
 internal/core/item_tree.rs:413:17    - Unknown word (unclipped)  -- /// item's (unclipped) geometry (also in window
 internal/core/items.rs:1450:32   - Unknown word (windowitem) -- extern "C" fn slint_windowitem_hide(
 internal/core/items.rs:1640:32   - Unknown word (contextmenu) -- extern "C" fn slint_contextmenu_close(
@@ -4077,36 +4139,36 @@ internal/core/items/flickable.rs:259:19    - Unknown word (tmax)       -- } else
 internal/core/items/flickable.rs:260:13    - Unknown word (tmax)       -- tmax
 internal/core/items/flickable.rs:262:13    - Unknown word (tmin)       -- tmin
 internal/core/items/flickable.rs:363:20    - Unknown word (heurstics)  -- /// We use two heurstics: First, a timeout after
-internal/core/items/input_items.rs:885:36    - Unknown word (swipegesturehandler) -- extern "C" fn slint_swipegesturehandler_cancel(
-internal/core/items/text.rs:1118:22   - Unknown word (preedit)    -- self.preedit_text.set(event.preedit
+internal/core/items/input_items.rs:879:36    - Unknown word (swipegesturehandler) -- extern "C" fn slint_swipegesturehandler_cancel(
+internal/core/items/text.rs:1121:22   - Unknown word (preedit)    -- self.preedit_text.set(event.preedit
 internal/core/items/text.rs:12:82     - Unknown word (Strin)      -- EventButton, RenderingResult, StringArg,
-internal/core/items/text.rs:2263:32   - Unknown word (textinput)  -- extern "C" fn slint_textinput_set_selection_offsets
-internal/core/items/text.rs:2280:32   - Unknown word (textinput)  -- extern "C" fn slint_textinput_select_all(
-internal/core/items/text.rs:2295:32   - Unknown word (textinput)  -- extern "C" fn slint_textinput_clear_selection(
-internal/core/items/text.rs:2310:32   - Unknown word (textinput)  -- extern "C" fn slint_textinput_cut(
-internal/core/items/text.rs:2325:32   - Unknown word (textinput)  -- extern "C" fn slint_textinput_copy(
-internal/core/items/text.rs:2353:24   - Unknown word (fontmetrics) -- pub fn slint_text_item_fontmetrics(
-internal/core/items/text.rs:2371:46   - Unknown word (fontmetrics) -- slint_cpp_text_item_fontmetrics(
-internal/core/items/text.rs:2380:25   - Unknown word (fontmetrics) -- slint_text_item_fontmetrics(window_adapter, self
+internal/core/items/text.rs:2266:32   - Unknown word (textinput)  -- extern "C" fn slint_textinput_set_selection_offsets
+internal/core/items/text.rs:2283:32   - Unknown word (textinput)  -- extern "C" fn slint_textinput_select_all(
+internal/core/items/text.rs:2298:32   - Unknown word (textinput)  -- extern "C" fn slint_textinput_clear_selection(
+internal/core/items/text.rs:2313:32   - Unknown word (textinput)  -- extern "C" fn slint_textinput_cut(
+internal/core/items/text.rs:2328:32   - Unknown word (textinput)  -- extern "C" fn slint_textinput_copy(
+internal/core/items/text.rs:2356:24   - Unknown word (fontmetrics) -- pub fn slint_text_item_fontmetrics(
+internal/core/items/text.rs:2374:46   - Unknown word (fontmetrics) -- slint_cpp_text_item_fontmetrics(
+internal/core/items/text.rs:2383:25   - Unknown word (fontmetrics) -- slint_text_item_fontmetrics(window_adapter, self
 internal/core/items/text.rs:241:32    - Unknown word (Strin)      -- link_clicked: Callback<StringArg>,
-internal/core/items/text.rs:678:36    - Unknown word (preedit)    -- the selection within a preedit
-internal/core/items/text.rs:748:9     - Unknown word (preedit)    -- pub preedit_text: Property<SharedString
-internal/core/items/text.rs:749:32    - Unknown word (preedit)    -- selection within the preedit (cursor and anchor)
-internal/core/items/text.rs:750:5     - Unknown word (preedit)    -- preedit_selection: Property
-internal/core/items/text.rs:934:123   - Unknown word (behaviour)  -- to implement a custom behaviour
-internal/core/layout.rs:1172:35   - Unknown word (flexbox)    -- module for taffy-based flexbox layout
-internal/core/layout.rs:1173:5    - Unknown word (flexbox)    -- mod flexbox_taffy {
-internal/core/layout.rs:1184:24   - Unknown word (Flexbox)    -- /// Parameters for FlexboxTaffyBuilder::new
-internal/core/layout.rs:1201:16   - Unknown word (Flexbox)    -- pub struct FlexboxTaffyBuilder {
-internal/core/layout.rs:1207:10   - Unknown word (Flexbox)    -- impl FlexboxTaffyBuilder {
-internal/core/layout.rs:1208:26   - Unknown word (flexbox)    -- /// Create a new flexbox layout tree from item
-internal/core/layout.rs:1463:14   - Unknown word (flexbox)    -- pub fn solve_flexbox_layout(
-internal/core/layout.rs:1487:38   - Unknown word (Flexbox)    -- builder = flexbox_taffy::FlexboxTaffyBuilder::new(flexbox
-internal/core/layout.rs:1526:8    - Unknown word (flexbox)    -- pub fn flexbox_layout_info(
-internal/core/layout.rs:1595:38   - Unknown word (Flexbox)    -- builder = flexbox_taffy::FlexboxTaffyBuilder::new(flexbox
+internal/core/items/text.rs:679:36    - Unknown word (preedit)    -- the selection within a preedit
+internal/core/items/text.rs:749:9     - Unknown word (preedit)    -- pub preedit_text: Property<SharedString
+internal/core/items/text.rs:750:32    - Unknown word (preedit)    -- selection within the preedit (cursor and anchor)
+internal/core/items/text.rs:751:5     - Unknown word (preedit)    -- preedit_selection: Property
+internal/core/items/text.rs:935:123   - Unknown word (behaviour)  -- to implement a custom behaviour
+internal/core/layout.rs:1267:35   - Unknown word (flexbox)    -- module for taffy-based flexbox layout
+internal/core/layout.rs:1268:5    - Unknown word (flexbox)    -- mod flexbox_taffy {
+internal/core/layout.rs:1279:24   - Unknown word (Flexbox)    -- /// Parameters for FlexboxTaffyBuilder::new
+internal/core/layout.rs:1296:16   - Unknown word (Flexbox)    -- pub struct FlexboxTaffyBuilder {
+internal/core/layout.rs:1302:10   - Unknown word (Flexbox)    -- impl FlexboxTaffyBuilder {
+internal/core/layout.rs:1303:26   - Unknown word (flexbox)    -- /// Create a new flexbox layout tree from item
+internal/core/layout.rs:1558:14   - Unknown word (flexbox)    -- pub fn solve_flexbox_layout(
+internal/core/layout.rs:1582:38   - Unknown word (Flexbox)    -- builder = flexbox_taffy::FlexboxTaffyBuilder::new(flexbox
+internal/core/layout.rs:1621:8    - Unknown word (flexbox)    -- pub fn flexbox_layout_info(
+internal/core/layout.rs:1690:38   - Unknown word (Flexbox)    -- builder = flexbox_taffy::FlexboxTaffyBuilder::new(flexbox
 internal/core/lib.rs:8:13      - Unknown word (docsrs)     -- #![cfg_attr(docsrs, feature(doc_cfg))]
-internal/core/model.rs:1695:8    - Unknown word (modeliter)  -- fn modeliter_in_bounds() {
-internal/core/model.rs:1730:17   - Unknown word (doesnt)     -- fn vecmodel_doesnt_require_default() {
+internal/core/model.rs:1694:8    - Unknown word (modeliter)  -- fn modeliter_in_bounds() {
+internal/core/model.rs:1729:17   - Unknown word (doesnt)     -- fn vecmodel_doesnt_require_default() {
 internal/core/model.rs:185:33    - Unknown word (dowcast)    -- common reason why the dowcast fails at run-time is
 internal/core/model.rs:186:49    - Unknown word (downcasted) -- created and the model downcasted. To debug this at compile
 internal/core/model/adapters.rs:1247:36   - Unknown word (opsom)      -- SharedString::from("opsom"));
@@ -4136,22 +4198,22 @@ internal/core/platform.rs:246:17    - Unknown word (EVENTLOOP)  -- EVENTLOOP_PRO
 internal/core/properties/change_tracker.rs:323:123   - Unknown word (detroyed)   -- called as it is being detroyed from `change`
 internal/core/properties/change_tracker.rs:354:11    - Unknown word (mutliple)   -- fn change_mutliple_dependencies() {
 internal/core/properties/change_tracker.rs:75:28     - Unknown word (ttime)      -- be called the firs ttime if the initial value
-internal/core/properties/properties_animations.rs:495:42    - Unknown word (fractual)   -- test_delayed_animation_fractual_iteration_triggered
-internal/core/properties/properties_animations.rs:537:13    - Unknown word (fractual)   -- // (fractual) end of animation
+internal/core/properties/properties_animations.rs:496:42    - Unknown word (fractual)   -- test_delayed_animation_fractual_iteration_triggered
+internal/core/properties/properties_animations.rs:538:13    - Unknown word (fractual)   -- // (fractual) end of animation
 internal/core/sharedvector.rs:679:31    - Unknown word (sharedvector) -- serialize_deserialize_sharedvector() {
 internal/core/string.rs:690:31    - Unknown word (sharedstring) -- serialize_deserialize_sharedstring() {
 internal/core/styled_text.rs:4:42      - Unknown word (seperated)  -- has been parsed and seperated into paragraphs
-internal/core/textlayout.rs:41:5      - Unknown word (glyphclusters) -- mod glyphclusters;
-internal/core/textlayout.rs:45:9      - Unknown word (sharedparley)  -- pub mod sharedparley;
-internal/core/textlayout.rs:49:5      - Unknown word (linebreaker)   -- mod linebreaker;
+internal/core/textlayout.rs:42:5      - Unknown word (glyphclusters) -- mod glyphclusters;
+internal/core/textlayout.rs:46:9      - Unknown word (sharedparley)  -- pub mod sharedparley;
+internal/core/textlayout.rs:50:5      - Unknown word (linebreaker)   -- mod linebreaker;
 internal/core/textlayout/glyphclusters.rs:68:16     - Unknown word (Rustybuzz)  -- // Rustybuzz uses a relative byte
-internal/core/textlayout/linebreaker.rs:445:24    - Unknown word (orld)       -- let text = "HelloW orldHellow";
-internal/core/textlayout/linebreaker.rs:445:28    - Unknown word (Hellow)     -- let text = "HelloW orldHellow";
-internal/core/textlayout/linebreaker.rs:458:43    - Unknown word (orld)       -- ].line_text(text), "orldH");
-internal/core/textlayout/linebreaker.rs:459:43    - Unknown word (ellow)      -- ].line_text(text), "ellow");
-internal/core/textlayout/linebreaker.rs:465:24    - Unknown word (orld)       -- let text = "HelloW orldHellow";
-internal/core/textlayout/linebreaker.rs:465:28    - Unknown word (Hellow)     -- let text = "HelloW orldHellow";
-internal/core/textlayout/linebreaker.rs:478:43    - Unknown word (orld)       -- ].line_text(text), "orldH");
+internal/core/textlayout/linebreaker.rs:444:24    - Unknown word (orld)       -- let text = "HelloW orldHellow";
+internal/core/textlayout/linebreaker.rs:444:28    - Unknown word (Hellow)     -- let text = "HelloW orldHellow";
+internal/core/textlayout/linebreaker.rs:457:43    - Unknown word (orld)       -- ].line_text(text), "orldH");
+internal/core/textlayout/linebreaker.rs:458:43    - Unknown word (ellow)      -- ].line_text(text), "ellow");
+internal/core/textlayout/linebreaker.rs:464:24    - Unknown word (orld)       -- let text = "HelloW orldHellow";
+internal/core/textlayout/linebreaker.rs:464:28    - Unknown word (Hellow)     -- let text = "HelloW orldHellow";
+internal/core/textlayout/linebreaker.rs:477:43    - Unknown word (orld)       -- ].line_text(text), "orldH");
 internal/core/textlayout/shaping.rs:242:28    - Unknown word (defதோசை)       -- let text = "abc🍌🐒defதோசை.";
 internal/core/textlayout/shaping.rs:249:43    - Unknown word (தோசை)          -- itemizer.next(), Some("தோசை."));
 internal/core/textlayout/shaping.rs:313:9     - Unknown word (dejavu)        -- fn with_dejavu_font<R>(mut callback
@@ -4162,21 +4224,22 @@ internal/core/textlayout/shaping.rs:331:34    - Unknown word (dejavu)         --
 internal/core/textlayout/shaping.rs:340:10    - Unknown word (dejavu)         -- with_dejavu_font(|face| {
 internal/core/textlayout/shaping.rs:88:28     - Unknown word (bidi)       -- boundaries when the bidi level changes or an
 internal/core/textlayout/shaping.rs:89:18     - Unknown word (lineseparator) -- // paragraph/lineseparator/space is encountered
-internal/core/textlayout/sharedparley.rs:101:17    - Unknown word (textinput)  -- fn new_from_textinput(
-internal/core/textlayout/sharedparley.rs:1076:53   - Unknown word (preedit)    -- visual_representation.preedit_range.is_empty() {
-internal/core/textlayout/sharedparley.rs:1077:31   - Unknown word (preedit)    -- visual_representation.preedit_range.start..visual
-internal/core/textlayout/sharedparley.rs:1077:74   - Unknown word (preedit)    -- visual_representation.preedit_range.end
-internal/core/textlayout/sharedparley.rs:1124:19   - Unknown word (rectange)   -- .fill_rectange_with_color(selection
-internal/core/textlayout/sharedparley.rs:1150:32   - Unknown word (rectange)   -- item_renderer.fill_rectange_with_color(cursor_rect
-internal/core/textlayout/sharedparley.rs:1204:35   - Unknown word (fontique)   -- font_request.query_fontique(&mut font_ctx.collection
-internal/core/textlayout/sharedparley.rs:1206:25   - Unknown word (charmap)    -- let char_map = font.charmap()?;
-internal/core/textlayout/sharedparley.rs:1241:28   - Unknown word (fontique)   -- font_request.query_fontique(&mut font_ctx.collection
-internal/core/textlayout/sharedparley.rs:392:43    - Unknown word (elipsis)    -- if failed to get the elipsis glyph for some rare
-internal/core/textlayout/sharedparley.rs:393:13    - Unknown word (elipsis)    -- let get_elipsis_glyph = |font_context
-internal/core/textlayout/sharedparley.rs:410:17    - Unknown word (elipsis)    -- get_elipsis_glyph(font_context)
-internal/core/textlayout/sharedparley.rs:410:51    - Unknown word (elipsis)    -- font_context).map(|(elipsis_glyph, font_for_elipsis
-internal/core/textlayout/sharedparley.rs:410:75    - Unknown word (elipsis)    -- elipsis_glyph, font_for_elipsis_glyph)| {
-internal/core/textlayout/sharedparley.rs:67:13     - Unknown word (rectange)   -- fn fill_rectange_with_color(&mut self
+internal/core/textlayout/sharedparley.rs:109:13    - Unknown word (rectange)   -- fn fill_rectange_with_color(&mut self
+internal/core/textlayout/sharedparley.rs:1180:53   - Unknown word (preedit)    -- visual_representation.preedit_range.is_empty() {
+internal/core/textlayout/sharedparley.rs:1181:31   - Unknown word (preedit)    -- visual_representation.preedit_range.start..visual
+internal/core/textlayout/sharedparley.rs:1181:74   - Unknown word (preedit)    -- visual_representation.preedit_range.end
+internal/core/textlayout/sharedparley.rs:1229:19   - Unknown word (rectange)   -- .fill_rectange_with_color(selection
+internal/core/textlayout/sharedparley.rs:1255:32   - Unknown word (rectange)   -- item_renderer.fill_rectange_with_color(cursor_rect
+internal/core/textlayout/sharedparley.rs:1311:35   - Unknown word (fontique)   -- font_request.query_fontique(&mut font_ctx.collection
+internal/core/textlayout/sharedparley.rs:1313:25   - Unknown word (charmap)    -- let char_map = font.charmap()?;
+internal/core/textlayout/sharedparley.rs:1348:28   - Unknown word (fontique)   -- font_request.query_fontique(&mut font_ctx.collection
+internal/core/textlayout/sharedparley.rs:143:17    - Unknown word (textinput)  -- fn new_from_textinput(
+internal/core/textlayout/sharedparley.rs:436:43    - Unknown word (elipsis)    -- if failed to get the elipsis glyph for some rare
+internal/core/textlayout/sharedparley.rs:437:13    - Unknown word (elipsis)    -- let get_elipsis_glyph = |font_context
+internal/core/textlayout/sharedparley.rs:454:17    - Unknown word (elipsis)    -- get_elipsis_glyph(font_context)
+internal/core/textlayout/sharedparley.rs:454:51    - Unknown word (elipsis)    -- font_context).map(|(elipsis_glyph, font_for_elipsis
+internal/core/textlayout/sharedparley.rs:454:75    - Unknown word (elipsis)    -- elipsis_glyph, font_for_elipsis_glyph)| {
+internal/core/textlayout/sharedparley.rs:503:5     - Unknown word (RAII)       -- /// RAII guard: takes Vec out
 internal/core/translations.rs:188:5     - Unknown word (contextid)  -- contextid: &str,
 internal/core/translations.rs:209:31    - Unknown word (contextid)  -- let context = if !contextid.is_empty() { Some(contextid
 internal/core/translations.rs:209:59    - Unknown word (contextid)  -- contextid.is_empty() { Some(contextid.as_ref()) } else { None
@@ -4195,28 +4258,31 @@ internal/core/translations.rs:324:70    - Unknown word (strs)           -- then(
 internal/core/translations.rs:334:5     - Unknown word (strs)           -- strs: &[Option<&[&str]>]
 internal/core/translations.rs:342:38    - Unknown word (strs)           -- translations, rule) = match strs.get(idx) {
 internal/core/translations.rs:504:88    - Unknown word (indice)         -- language, the corresponding indice is one past the last
-internal/core/window.rs:1212:15   - Unknown word (componentrc)   -- popup_componentrc: &ItemTreeRc,
-internal/core/window.rs:1249:60   - Unknown word (componentrc)   -- ItemTreeRc::borrow_pin(popup_componentrc);
-internal/core/window.rs:1318:84   - Unknown word (componentrc)   -- set_component(popup_componentrc);
-internal/core/window.rs:1331:30   - Unknown word (componentrc)   -- component: popup_componentrc.clone(),
-internal/core/window.rs:1571:40   - Unknown word (unmaximized)   -- window as maximized or unmaximized
-internal/core/window.rs:1582:40   - Unknown word (unminimized)   -- window as minimized or unminimized
-internal/core/window.rs:2256:22   - Unknown word (HINSTANCE)     -- /// Returns the `HINSTANCE` associated with this
-internal/core/window.rs:2258:45   - Unknown word (hinstance)     -- C" fn slint_windowrc_hinstance_win32(
-internal/core/window.rs:2268:18   - Unknown word (hinstance)     -- .hinstance
-internal/core/window.rs:2269:23   - Unknown word (hinstance)     -- .map(|hinstance| isize::from(hinstance
-internal/core/window.rs:2269:46   - Unknown word (hinstance)     -- hinstance| isize::from(hinstance) as *mut c_void)
-internal/core/window.rs:2278:45   - Unknown word (wlsurface)     -- C" fn slint_windowrc_wlsurface_wayland(
-internal/core/window.rs:2295:45   - Unknown word (wldisplay)     -- C" fn slint_windowrc_wldisplay_wayland(
-internal/core/window.rs:2313:45   - Unknown word (nsview)        -- C" fn slint_windowrc_nsview_appkit(
-internal/core/window.rs:2313:52   - Unknown word (appkit)        -- slint_windowrc_nsview_appkit(
-internal/core/window.rs:2320:66   - Unknown word (appkit)        -- RawWindowHandle::AppKit(appkit) = window_handle.as
-internal/core/window.rs:2322:13   - Unknown word (appkit)        -- appkit.ns_view.as_ptr()
+internal/core/window.rs:1441:11   - Unknown word (datastructure) -- /// Inner datastructure for the [`crate::api
+internal/core/window.rs:2230:15   - Unknown word (componentrc)   -- popup_componentrc: &ItemTreeRc,
+internal/core/window.rs:2267:60   - Unknown word (componentrc)   -- ItemTreeRc::borrow_pin(popup_componentrc);
+internal/core/window.rs:2336:84   - Unknown word (componentrc)   -- set_component(popup_componentrc);
+internal/core/window.rs:2349:30   - Unknown word (componentrc)   -- component: popup_componentrc.clone(),
+internal/core/window.rs:2589:40   - Unknown word (unmaximized)   -- window as maximized or unmaximized
+internal/core/window.rs:2600:40   - Unknown word (unminimized)   -- window as minimized or unminimized
 internal/core/window.rs:283:9     - Unknown word (preedit)    -- pub preedit_text: SharedString,
 internal/core/window.rs:284:19    - Unknown word (preedit)    -- /// When the `preedit_text` is not empty,
 internal/core/window.rs:285:9     - Unknown word (preedit)    -- pub preedit_offset: usize,
+internal/core/window.rs:3273:22   - Unknown word (HINSTANCE)     -- /// Returns the `HINSTANCE` associated with this
+internal/core/window.rs:3275:45   - Unknown word (hinstance)     -- C" fn slint_windowrc_hinstance_win32(
+internal/core/window.rs:3285:18   - Unknown word (hinstance)     -- .hinstance
+internal/core/window.rs:3286:23   - Unknown word (hinstance)     -- .map(|hinstance| isize::from(hinstance
+internal/core/window.rs:3286:46   - Unknown word (hinstance)     -- hinstance| isize::from(hinstance) as *mut c_void)
+internal/core/window.rs:3295:45   - Unknown word (wlsurface)     -- C" fn slint_windowrc_wlsurface_wayland(
+internal/core/window.rs:3312:45   - Unknown word (wldisplay)     -- C" fn slint_windowrc_wldisplay_wayland(
+internal/core/window.rs:3330:45   - Unknown word (nsview)        -- C" fn slint_windowrc_nsview_appkit(
+internal/core/window.rs:3330:52   - Unknown word (appkit)        -- slint_windowrc_nsview_appkit(
+internal/core/window.rs:3337:66   - Unknown word (appkit)        -- RawWindowHandle::AppKit(appkit) = window_handle.as
+internal/core/window.rs:3339:13   - Unknown word (appkit)        -- appkit.ns_view.as_ptr()
 internal/core/window.rs:415:27    - Unknown word (behaviour)  -- / Defines the close behaviour of the popup.
-internal/core/window.rs:441:11    - Unknown word (datastructure) -- /// Inner datastructure for the [`crate::api
+internal/core/window.rs:621:44    - Unknown word (lerp)       -- position.cast::<f32>().lerp(b.position.cast::<f
+internal/core/window.rs:911:33    - Unknown word (rpos)       -- if let Some((_, rpos)) = remaining {
+internal/core/window.rs:913:35    - Unknown word (rpos)       -- position: rpos,
 internal/core/window/popup.rs:4:5       - Unknown word (Pupup)      -- //! Pupup window handling helpers
 internal/core/window/popup.rs:59:27     - Unknown word (unclipped)  -- test_place_popup_fixed_unclipped() {
 internal/interpreter/api.rs:1165:61   - Unknown word (compilerlib) -- exposes the `Type` from compilerlib.
@@ -4237,19 +4303,19 @@ internal/interpreter/api.rs:2051:33   - Unknown word (Dont)                     
 internal/interpreter/api.rs:2059:52   - Unknown word (yoyo)                          -- "My_Super_Global", "yoyo", &[]),
 internal/interpreter/dynamic_item_tree.rs:2236:18   - Unknown word (ctypes)     -- #[allow(improper_ctypes_definitions)]
 internal/interpreter/dynamic_type.rs:171:59    - Unknown word (autorefs)   -- a dangerous_implicit_autorefs error
-internal/interpreter/eval.rs:1035:29   - Unknown word (textinput)  -- if let Some(textinput) =
-internal/interpreter/eval.rs:1046:21   - Unknown word (textinput)  -- textinput.set_selection_offsets
-internal/interpreter/eval.rs:1190:31   - Unknown word (Oklch)      -- BuiltinFunction::ColorOklchStruct => {
-internal/interpreter/eval.rs:1192:74   - Unknown word (Oklch)      -- argument count to ColorOklchStruct")
-internal/interpreter/eval.rs:1195:46   - Unknown word (oklch)      -- color = brush.color().to_oklch();
-internal/interpreter/eval.rs:1343:26   - Unknown word (Oklch)      -- BuiltinFunction::Oklch => {
-internal/interpreter/eval.rs:1627:17   - Unknown word (textinput)  -- if let Some(textinput) = ItemRef::downcast
-internal/interpreter/eval.rs:1629:29   - Unknown word (textinput)  -- "select-all" => textinput.select_all(&window_adapter
-internal/interpreter/eval.rs:1630:34   - Unknown word (textinput)  -- clear-selection" => textinput.clear_selection(&window
-internal/interpreter/eval.rs:225:68    - Unknown word (trunc)      -- => Value::Number(n.trunc()),
+internal/interpreter/eval.rs:1095:29   - Unknown word (textinput)  -- if let Some(textinput) =
+internal/interpreter/eval.rs:1106:21   - Unknown word (textinput)  -- textinput.set_selection_offsets
+internal/interpreter/eval.rs:1250:31   - Unknown word (Oklch)      -- BuiltinFunction::ColorOklchStruct => {
+internal/interpreter/eval.rs:1252:74   - Unknown word (Oklch)      -- argument count to ColorOklchStruct")
+internal/interpreter/eval.rs:1255:46   - Unknown word (oklch)      -- color = brush.color().to_oklch();
+internal/interpreter/eval.rs:1403:26   - Unknown word (Oklch)      -- BuiltinFunction::Oklch => {
+internal/interpreter/eval.rs:1687:17   - Unknown word (textinput)  -- if let Some(textinput) = ItemRef::downcast
+internal/interpreter/eval.rs:1689:29   - Unknown word (textinput)  -- "select-all" => textinput.select_all(&window_adapter
+internal/interpreter/eval.rs:1690:34   - Unknown word (textinput)  -- clear-selection" => textinput.clear_selection(&window
+internal/interpreter/eval.rs:226:68    - Unknown word (trunc)      -- => Value::Number(n.trunc()),
 internal/interpreter/eval.rs:24:21     - Unknown word (corelib)    -- use i_slint_core as corelib;
-internal/interpreter/eval.rs:568:30    - Unknown word (minmax)     -- .expect("minmax lhs expression did not
-internal/interpreter/eval.rs:574:30    - Unknown word (minmax)     -- .expect("minmax rhs expression did not
+internal/interpreter/eval.rs:628:30    - Unknown word (minmax)     -- .expect("minmax lhs expression did not
+internal/interpreter/eval.rs:634:30    - Unknown word (minmax)     -- .expect("minmax rhs expression did not
 internal/interpreter/eval_layout.rs:179:21    - Unknown word (flexbox)    -- pub(crate) fn solve_flexbox_layout(
 internal/interpreter/eval_layout.rs:180:5     - Unknown word (flexbox)    -- flexbox_layout: &i_slint_compiler
 internal/interpreter/eval_layout.rs:189:29    - Unknown word (flexbox)    -- flexbox_layout_data(flexbox_layout, component,
@@ -4273,11 +4339,11 @@ internal/interpreter/json.rs:366:33    - Unknown word (xfdeg)      -- "\"@linear
 internal/interpreter/json.rs:4:49      - Unknown word (desrialize) -- the code serialize and desrialize `Value`s to JSON
 internal/interpreter/lib.rs:4:13      - Unknown word (docsrs)     -- #![cfg_attr(docsrs, feature(doc_cfg))]
 internal/interpreter/live_preview.rs:313:51    - Unknown word (fsevents)   -- mode. On the upside, fsevents works already recursively
-internal/renderers/femtovg/itemrenderer.rs:1153:34   - Unknown word (blitting)   -- / since we are just blitting a texture. This saves
-internal/renderers/femtovg/itemrenderer.rs:609:30    - Unknown word (blitting)   -- / since we are just blitting a texture. This saves
+internal/renderers/femtovg/itemrenderer.rs:1157:34   - Unknown word (blitting)   -- / since we are just blitting a texture. This saves
+internal/renderers/femtovg/itemrenderer.rs:610:30    - Unknown word (blitting)   -- / since we are just blitting a texture. This saves
 internal/renderers/femtovg/lib.rs:39:5      - Unknown word (itemrenderer) -- mod itemrenderer;
-internal/renderers/femtovg/lib.rs:458:85    - Unknown word (linuxkms)     -- accessed from the winit/linuxkms backends, but not
 internal/renderers/femtovg/lib.rs:45:20     - Unknown word (VGWGPU)       -- pub use wgpu::FemtoVGWGPURenderer;
+internal/renderers/femtovg/lib.rs:472:85    - Unknown word (linuxkms)     -- accessed from the winit/linuxkms backends, but not
 internal/renderers/femtovg/opengl.rs:225:79    - Unknown word (webgl)      -- &id, context_type: "webgl2" };
 internal/renderers/femtovg/wgpu.rs:152:13    - Unknown word (swapchain)  -- let swapchain_capabilities = surface
 internal/renderers/femtovg/wgpu.rs:153:13    - Unknown word (swapchain)  -- let swapchain_format = swapchain_capabiliti
@@ -4318,18 +4384,18 @@ internal/renderers/skia/d3d_surface.rs:63:9      - Unknown word (dxgi)        --
 internal/renderers/skia/d3d_surface.rs:89:13     - Unknown word (dxgi)        -- dxgi_factory.CreateSwapChainForHwn
 internal/renderers/skia/d3d_surface.rs:93:25     - Unknown word (IDXGI)       -- let swap_chain: IDXGISwapChain3 =
 internal/renderers/skia/font_cache.rs:15:33     - Unknown word (fontique's) -- preventing eviction from fontique's shared cache (see commit
-internal/renderers/skia/itemrenderer.rs:122:78    - Unknown word (PREMUL)     -- INTERPOLATE_COLORS_IN_PREMUL,
-internal/renderers/skia/itemrenderer.rs:140:78    - Unknown word (PREMUL)     -- INTERPOLATE_COLORS_IN_PREMUL,
-internal/renderers/skia/itemrenderer.rs:178:35    - Unknown word (Premul)     -- skia_safe::AlphaType::Premul,
-internal/renderers/skia/itemrenderer.rs:364:39    - Unknown word (Premul)     -- skia_safe::AlphaType::Premul,
-internal/renderers/skia/itemrenderer.rs:596:31    - Unknown word (skpath)     -- let (physical_offset, skpath): (crate::euclid::Vector
-internal/renderers/skia/itemrenderer.rs:601:25    - Unknown word (skpath)     -- let mut skpath = skia_safe::Path::new
-internal/renderers/skia/itemrenderer.rs:606:29    - Unknown word (skpath)     -- skpath.move_to(to_skia_point
-internal/renderers/skia/itemrenderer.rs:611:29    - Unknown word (skpath)     -- skpath.line_to(to_skia_point
-internal/renderers/skia/itemrenderer.rs:616:29    - Unknown word (skpath)     -- skpath.quad_to(
-internal/renderers/skia/itemrenderer.rs:731:43    - Unknown word (Premul)     -- skia_safe::AlphaType::Premul,
-internal/renderers/skia/itemrenderer.rs:847:43    - Unknown word (Premul)     -- skia_safe::AlphaType::Premul,
-internal/renderers/skia/lib.rs:1081:53   - Unknown word (upcasting)    -- return self to allow upcasting.
+internal/renderers/skia/itemrenderer.rs:125:78    - Unknown word (PREMUL)     -- INTERPOLATE_COLORS_IN_PREMUL,
+internal/renderers/skia/itemrenderer.rs:143:78    - Unknown word (PREMUL)     -- INTERPOLATE_COLORS_IN_PREMUL,
+internal/renderers/skia/itemrenderer.rs:181:35    - Unknown word (Premul)     -- skia_safe::AlphaType::Premul,
+internal/renderers/skia/itemrenderer.rs:369:39    - Unknown word (Premul)     -- skia_safe::AlphaType::Premul,
+internal/renderers/skia/itemrenderer.rs:599:31    - Unknown word (skpath)     -- let (physical_offset, skpath): (crate::euclid::Vector
+internal/renderers/skia/itemrenderer.rs:604:25    - Unknown word (skpath)     -- let mut skpath = skia_safe::Path::new
+internal/renderers/skia/itemrenderer.rs:609:29    - Unknown word (skpath)     -- skpath.move_to(to_skia_point
+internal/renderers/skia/itemrenderer.rs:614:29    - Unknown word (skpath)     -- skpath.line_to(to_skia_point
+internal/renderers/skia/itemrenderer.rs:619:29    - Unknown word (skpath)     -- skpath.quad_to(
+internal/renderers/skia/itemrenderer.rs:734:43    - Unknown word (Premul)     -- skia_safe::AlphaType::Premul,
+internal/renderers/skia/itemrenderer.rs:850:43    - Unknown word (Premul)     -- skia_safe::AlphaType::Premul,
+internal/renderers/skia/lib.rs:1103:53   - Unknown word (upcasting)    -- return self to allow upcasting.
 internal/renderers/skia/lib.rs:43:5      - Unknown word (itemrenderer) -- mod itemrenderer;
 internal/renderers/skia/metal_surface.rs:149:9     - Unknown word (autoreleasepool) -- autoreleasepool(|_| {
 internal/renderers/skia/metal_surface.rs:179:43    - Unknown word (BGRA)            -- skia_safe::ColorType::BGRA8888,
@@ -4547,16 +4613,16 @@ internal/renderers/software/fonts/vectorfont.rs:24:8      - Unknown word (Render
 internal/renderers/software/fonts/vectorfont.rs:26:39     - Unknown word (Renderable) -- WeightScale<GlyphCacheKey, RenderableVectorGlyph> for RenderableGly
 internal/renderers/software/fonts/vectorfont.rs:26:66     - Unknown word (Renderable) -- RenderableVectorGlyph> for RenderableGlyphWeightScale {
 internal/renderers/software/fonts/vectorfont.rs:27:49     - Unknown word (Renderable) -- GlyphCacheKey, value: &RenderableVectorGlyph) -> usize
-internal/renderers/software/lib.rs:2372:41   - Unknown word (fract)      -- let fract_x = normalize(
-internal/renderers/software/lib.rs:2375:74   - Unknown word (fract)      -- delta32 * off_x as i32 + fract_x;
-internal/renderers/software/lib.rs:2376:41   - Unknown word (fract)      -- let fract_y =
-internal/renderers/software/lib.rs:2378:74   - Unknown word (fract)      -- delta32 * off_y as i32 + fract_y;
+internal/renderers/software/lib.rs:2408:41   - Unknown word (fract)      -- let fract_x = normalize(
+internal/renderers/software/lib.rs:2411:74   - Unknown word (fract)      -- delta32 * off_x as i32 + fract_x;
+internal/renderers/software/lib.rs:2412:41   - Unknown word (fract)      -- let fract_y =
+internal/renderers/software/lib.rs:2414:74   - Unknown word (fract)      -- delta32 * off_y as i32 + fract_y;
 internal/renderers/software/lib.rs:6:13      - Unknown word (docsrs)     -- #![cfg_attr(docsrs, feature(doc_cfg))]
 internal/renderers/software/path.rs:121:71    - Unknown word (premultiplication) -- coverage to maintain premultiplication
 logo/README.md:44:116    - Unknown word (whitebg)    -- the versions with ***whitebg***.
 logo/README.md:51:14     - Unknown word (CMYK)       -- * For Print: CMYK = 75,45,0,0,
 logo/README.md:52:19     - Unknown word (Pantone)    -- * For Spot Color (Pantone): PMS 2727 C.
-pnpm-workspace.yaml:22:5      - Unknown word (biomejs)    -- '@biomejs/biome': 2.4.0
+pnpm-workspace.yaml:22:5      - Unknown word (biomejs)    -- '@biomejs/biome': 2.4.4
 pnpm-workspace.yaml:29:14     - Unknown word (ctrf)       -- playwright-ctrf-json-reporter: 0.0.
 pnpm-workspace.yaml:30:3      - Unknown word (rehype)     -- rehype-external-links: 3.0
 pnpm-workspace.yaml:34:3      - Unknown word (vite)       -- vite: 7.3.1
@@ -4859,6 +4925,9 @@ tests/cases/interfaces/callbacks.slint:1:53      - Unknown word (KDAB)          
 tests/cases/interfaces/implements.slint:1:21      - Unknown word (Klarälvdalens) -- // Copyright © 2025 Klarälvdalens Datakonsult AB, a KDAB
 tests/cases/interfaces/implements.slint:1:35      - Unknown word (Datakonsult)   -- 2025 Klarälvdalens Datakonsult AB, a KDAB Group company
 tests/cases/interfaces/implements.slint:1:53      - Unknown word (KDAB)          -- arälvdalens Datakonsult AB, a KDAB Group company <info
+tests/cases/interfaces/implements_defaults.slint:1:21      - Unknown word (Klarälvdalens) -- // Copyright © 2026 Klarälvdalens Datakonsult AB, a KDAB
+tests/cases/interfaces/implements_defaults.slint:1:35      - Unknown word (Datakonsult)   -- 2026 Klarälvdalens Datakonsult AB, a KDAB Group company
+tests/cases/interfaces/implements_defaults.slint:1:53      - Unknown word (KDAB)          -- arälvdalens Datakonsult AB, a KDAB Group company <info
 tests/cases/interfaces/implements_inherits.slint:1:21      - Unknown word (Klarälvdalens) -- // Copyright © 2025 Klarälvdalens Datakonsult AB, a KDAB
 tests/cases/interfaces/implements_inherits.slint:1:35      - Unknown word (Datakonsult)   -- 2025 Klarälvdalens Datakonsult AB, a KDAB Group company
 tests/cases/interfaces/implements_inherits.slint:1:53      - Unknown word (KDAB)          -- arälvdalens Datakonsult AB, a KDAB Group company <info
@@ -5263,6 +5332,7 @@ tests/cases/types/string_to_uppercase.slint:36:34     - Unknown word (ὈΔΥΣ�
 tests/cases/types/string_to_uppercase.slint:38:29     - Unknown word (TSCHÜSS)    -- equal(instance.bye, "TSCHÜSS");
 tests/cases/types/string_to_uppercase.slint:7:37      - Unknown word (ὀδυσσεύς)   -- property<string> odysseus: "ὀδυσσεύς".to-uppercase();
 tests/cases/types/string_to_uppercase.slint:9:32      - Unknown word (tschüß)     -- property<string> bye: "tschüß".to-uppercase();
+tests/cases/types/styled_text.slint:21:62     - Unknown word (ello)       -- markdown("**H{}**", "ello"), @markdown("*{}*"
 tests/cases/widgets/combobox.slint:199:17    - Unknown word (unfocus)    -- instance.invoke_unfocus();
 tests/cases/widgets/combobox.slint:30:21     - Unknown word (unfocus)    -- public function unfocus() {
 tests/cases/widgets/datepicker.slint:22:18     - Unknown word (datepicker) -- root.datepicker-created = true;
@@ -5424,15 +5494,15 @@ tests/screenshots/fonts/convert.sh:8:46      - Unknown word (fonttools)  -- pyft
 tests/screenshots/fonts/convert.sh:8:93      - Unknown word (fonttools)  -- available via `brew install fonttools`,
 tests/screenshots/fonts/convert.sh:9:28      - Unknown word (fonttools)  -- sudo apt-get install fonttools`.
 tools/compiler/main.rs:11:16     - Unknown word (jemalloc)   -- feature = "jemalloc",
-tools/compiler/main.rs:14:24     - Unknown word (Jemalloc)   -- use tikv_jemallocator::Jemalloc;
-tools/compiler/main.rs:17:16     - Unknown word (jemalloc)   -- feature = "jemalloc",
-tools/compiler/main.rs:21:16     - Unknown word (Jemalloc)   -- static GLOBAL: Jemalloc = Jemalloc;
-tools/compiler/main.rs:21:27     - Unknown word (Jemalloc)   -- static GLOBAL: Jemalloc = Jemalloc;
-tools/compiler/main.rs:221:17    - Unknown word (depfile)    -- if let Some(depfile) = args.depfile {
-tools/compiler/main.rs:221:33    - Unknown word (depfile)    -- Some(depfile) = args.depfile {
-tools/compiler/main.rs:222:58    - Unknown word (depfile)    -- std::fs::File::create(depfile)?);
-tools/compiler/main.rs:76:19     - Unknown word (depfile)    -- #[arg(long = "depfile", name = "dependency
-tools/compiler/main.rs:77:5      - Unknown word (depfile)    -- depfile: Option<std::path::PathBuf
+tools/compiler/main.rs:18:24     - Unknown word (Jemalloc)   -- use tikv_jemallocator::Jemalloc;
+tools/compiler/main.rs:21:16     - Unknown word (jemalloc)   -- feature = "jemalloc",
+tools/compiler/main.rs:229:17    - Unknown word (depfile)    -- if let Some(depfile) = args.depfile {
+tools/compiler/main.rs:229:33    - Unknown word (depfile)    -- Some(depfile) = args.depfile {
+tools/compiler/main.rs:230:58    - Unknown word (depfile)    -- std::fs::File::create(depfile)?);
+tools/compiler/main.rs:29:16     - Unknown word (Jemalloc)   -- static GLOBAL: Jemalloc = Jemalloc;
+tools/compiler/main.rs:29:27     - Unknown word (Jemalloc)   -- static GLOBAL: Jemalloc = Jemalloc;
+tools/compiler/main.rs:84:19     - Unknown word (depfile)    -- #[arg(long = "depfile", name = "dependency
+tools/compiler/main.rs:85:5      - Unknown word (depfile)    -- depfile: Option<std::path::PathBuf
 tools/compiler/pyproject.toml:23:7      - Unknown word (maturin)    -- [tool.maturin]
 tools/compiler/pyproject.toml:5:14      - Unknown word (maturin)    -- requires = ["maturin>=1.9,<2.0"]
 tools/compiler/pyproject.toml:6:18      - Unknown word (maturin)    -- build-backend = "maturin"
@@ -5520,11 +5590,10 @@ tools/lsp/language/completion.rs:1221:31   - Unknown word (funi)       -- pure f
 tools/lsp/language/completion.rs:1233:31   - Unknown word (funi)       -- pure function funi() {}
 tools/lsp/language/completion.rs:1245:18   - Unknown word (funi)       -- "funi()",
 tools/lsp/language/semantic_tokens.rs:188:43    - Unknown word (rfind)      -- start = len(&text[(text.rfind('\n').unwrap() + 1)
-tools/lsp/main.rs:50:24     - Unknown word (Jemalloc)   -- use tikv_jemallocator::Jemalloc;
-tools/lsp/main.rs:58:16     - Unknown word (Jemalloc)   -- static GLOBAL: Jemalloc = Jemalloc;
-tools/lsp/main.rs:58:27     - Unknown word (Jemalloc)   -- static GLOBAL: Jemalloc = Jemalloc;
-tools/lsp/preview.rs:182:82    - Unknown word (recompiles) -- from the LSP when it recompiles, so
-tools/lsp/preview/connector/native.rs:197:25    - Unknown word (Confrolled) -- /// Creates a RemoteConfrolledPreviewToLsp connector
+tools/lsp/main.rs:51:24     - Unknown word (Jemalloc)   -- use tikv_jemallocator::Jemalloc;
+tools/lsp/main.rs:60:16     - Unknown word (Jemalloc)   -- static GLOBAL: Jemalloc = Jemalloc;
+tools/lsp/main.rs:60:27     - Unknown word (Jemalloc)   -- static GLOBAL: Jemalloc = Jemalloc;
+tools/lsp/preview.rs:184:82    - Unknown word (recompiles) -- from the LSP when it recompiles, so
 tools/lsp/preview/eval.rs:11:41     - Unknown word (langtype)   -- compiler::{expression_tree, langtype};
 tools/lsp/preview/eval.rs:505:31    - Unknown word (Oklch)      -- BuiltinFunction::ColorOklchStruct => {
 tools/lsp/preview/eval.rs:510:46    - Unknown word (oklch)      -- color = brush.color().to_oklch();
@@ -5534,12 +5603,12 @@ tools/lsp/preview/outline.rs:331:70    - Unknown word (rsplit)     -- item_offse
 tools/lsp/preview/outline.rs:72:55     - Unknown word (amound)     -- expand` and return the amound of rows added
 tools/lsp/preview/properties.rs:101:4     - Unknown word (accessiblity) -- // accessiblity properties or layout
 tools/lsp/preview/properties.rs:872:34    - Unknown word (peclaration)  -- .ok_or("property peclaration has no colon")?;
-tools/lsp/preview/ui.rs:1101:8    - Unknown word (structurize) -- fn structurize(row: ModelRc<PropertyValue
-tools/lsp/preview/ui.rs:1139:21   - Unknown word (structurize) -- let structure = structurize(row)?;
-tools/lsp/preview/ui.rs:1432:25   - Unknown word (Sometype)    -- type_name: "Sometype".into(),
-tools/lsp/preview/ui.rs:1455:42   - Unknown word (BBBX)        -- test_property("bbb", "BBBX"),
-tools/lsp/preview/ui.rs:1477:44   - Unknown word (BBBX)        -- value.code.as_str(), "BBBX");
-tools/lsp/preview/ui.rs:2147:26   - Unknown word (stuct)       -- fn test_table_row_to_stuct() {
+tools/lsp/preview/ui.rs:1098:8    - Unknown word (structurize) -- fn structurize(row: ModelRc<PropertyValue
+tools/lsp/preview/ui.rs:1136:21   - Unknown word (structurize) -- let structure = structurize(row)?;
+tools/lsp/preview/ui.rs:1429:25   - Unknown word (Sometype)    -- type_name: "Sometype".into(),
+tools/lsp/preview/ui.rs:1452:42   - Unknown word (BBBX)        -- test_property("bbb", "BBBX"),
+tools/lsp/preview/ui.rs:1474:44   - Unknown word (BBBX)        -- value.code.as_str(), "BBBX");
+tools/lsp/preview/ui.rs:2144:26   - Unknown word (stuct)       -- fn test_table_row_to_stuct() {
 tools/lsp/preview/ui.rs:9:41      - Unknown word (langtype)   -- compiler::{expression_tree, langtype};
 tools/lsp/preview/ui/palette.rs:13:41     - Unknown word (langtype)   -- compiler::{expression_tree, langtype, object_tree};
 tools/lsp/preview/ui/palette.rs:670:60    - Unknown word (darkred)    -- unwrap().name, "Colors.darkred");
@@ -5597,17 +5666,17 @@ tools/tr-extractor/main.rs:280:21    - Unknown word (nctx)       -- nl: @tr("rw\
 tools/tr-extractor/main.rs:282:37    - Unknown word (xgettext)   -- comment does not count : xgettext takes the comment next
 tools/tr-extractor/main.rs:313:32    - Unknown word (nctx)       -- new("r\nw", "", "rw\nctx", "", &[18]),
 tools/tr-extractor/main.rs:337:17    - Unknown word (msgctx)     -- msgctx: b.msgctxt.as_deref
-tools/viewer/main.rs:131:54    - Unknown word (fswatch)    -- reload { Some(start_fswatch_thread(args.clone()
-tools/viewer/main.rs:131:9     - Unknown word (fswatcher)  -- let fswatcher = if args.auto_reload
-tools/viewer/main.rs:132:41    - Unknown word (fswatcher)  -- init_compiler(&args, fswatcher);
-tools/viewer/main.rs:138:34    - Unknown word (compents)   -- component is used, r.compents contains only one element
-tools/viewer/main.rs:191:5     - Unknown word (fswatcher)  -- fswatcher: Option<Arc<Mutex<notify
-tools/viewer/main.rs:19:24     - Unknown word (Jemalloc)   -- use tikv_jemallocator::Jemalloc;
-tools/viewer/main.rs:213:28    - Unknown word (fswatcher)  -- let Some(watcher) = fswatcher {
-tools/viewer/main.rs:23:16     - Unknown word (Jemalloc)   -- static GLOBAL: Jemalloc = Jemalloc;
-tools/viewer/main.rs:23:27     - Unknown word (Jemalloc)   -- static GLOBAL: Jemalloc = Jemalloc;
-tools/viewer/main.rs:290:10    - Unknown word (fswatch)    -- fn start_fswatch_thread(args: Cli) -
-tools/viewer/main.rs:315:28    - Unknown word (fswatcher)  -- fn reload(args: Cli, fswatcher: Arc<Mutex<notify::Recommende
+tools/viewer/main.rs:139:54    - Unknown word (fswatch)    -- reload { Some(start_fswatch_thread(args.clone()
+tools/viewer/main.rs:139:9     - Unknown word (fswatcher)  -- let fswatcher = if args.auto_reload
+tools/viewer/main.rs:140:41    - Unknown word (fswatcher)  -- init_compiler(&args, fswatcher);
+tools/viewer/main.rs:146:34    - Unknown word (compents)   -- component is used, r.compents contains only one element
+tools/viewer/main.rs:199:5     - Unknown word (fswatcher)  -- fswatcher: Option<Arc<Mutex<notify
+tools/viewer/main.rs:221:28    - Unknown word (fswatcher)  -- let Some(watcher) = fswatcher {
+tools/viewer/main.rs:23:24     - Unknown word (Jemalloc)   -- use tikv_jemallocator::Jemalloc;
+tools/viewer/main.rs:298:10    - Unknown word (fswatch)    -- fn start_fswatch_thread(args: Cli) -
+tools/viewer/main.rs:31:16     - Unknown word (Jemalloc)   -- static GLOBAL: Jemalloc = Jemalloc;
+tools/viewer/main.rs:31:27     - Unknown word (Jemalloc)   -- static GLOBAL: Jemalloc = Jemalloc;
+tools/viewer/main.rs:322:28    - Unknown word (fswatcher)  -- fn reload(args: Cli, fswatcher: Arc<Mutex<notify::Recommende
 ui-libraries/material/docs/MIGRATION.md:65:6      - Unknown word (twelf)      -- - `twelf_hour_model` → `twelfth
 ui-libraries/material/docs/MIGRATION.md:67:11     - Unknown word (labl)       -- - `hour_labl` → `hour_label` (typo
 ui-libraries/material/docs/README.md:47:35     - Unknown word (Lmaterial)  -- slint-docsnapper -- -Lmaterial=$PWD/ui-libraries/material
