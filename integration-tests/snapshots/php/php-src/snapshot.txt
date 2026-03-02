@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 2274, Issues found: 29995 in 1572 files.
+ CSpell: Files checked: 2274, Issues found: 30052 in 1572 files.
  exit code: 1
 CODING_STANDARDS.md:101:23    - Unknown word (intvl)      -- // Could be 'date_intvl_create_from_date_str
 CODING_STANDARDS.md:110:8     - Unknown word (setclientencoding) -- pg_setclientencoding
@@ -245,10 +245,10 @@ Zend/Optimizer/zend_inference.c:4081:49   - Unknown word (phpt)        -- tests/
 Zend/Optimizer/zend_inference.c:457:21    - Unknown word (Pearce's)   -- /* Find SCCs using Pearce's algorithm. */
 Zend/Optimizer/zend_inference.h:221:29    - Unknown word (sccs)       -- API void zend_ssa_find_sccs(const zend_op_array
 Zend/Optimizer/zend_inference.h:222:54    - Unknown word (raena)      -- inference(zend_arena **raena, const zend_op_array
-Zend/Optimizer/zend_optimizer.c:1460:8    - Unknown word (recalc)     -- zend_recalc_live_ranges(op_array
+Zend/Optimizer/zend_optimizer.c:1466:8    - Unknown word (recalc)     -- zend_recalc_live_ranges(op_array
 Zend/Optimizer/zend_optimizer.c:15:15     - Unknown word (Andi)       -- | Authors: Andi Gutmans <andi@php.net
-Zend/Optimizer/zend_optimizer.c:1696:11   - Unknown word (recalc)     -- zend_recalc_live_ranges(op_array
-Zend/Optimizer/zend_optimizer.c:1701:11   - Unknown word (recalc)     -- zend_recalc_live_ranges(op_array
+Zend/Optimizer/zend_optimizer.c:1702:11   - Unknown word (recalc)     -- zend_recalc_live_ranges(op_array
+Zend/Optimizer/zend_optimizer.c:1707:11   - Unknown word (recalc)     -- zend_recalc_live_ranges(op_array
 Zend/Optimizer/zend_optimizer.c:388:48    - Unknown word (phpt)       -- opcache/tests/opt/sccp_010.phpt) */
 Zend/Optimizer/zend_optimizer.c:721:21    - Unknown word (jumptable)  -- const HashTable *jumptable = Z_ARRVAL(ZEND_OP2
 Zend/Optimizer/zend_optimizer.c:723:26    - Unknown word (jumptable)  -- ZEND_HASH_FOREACH_VAL(jumptable, zv) {
@@ -8939,8 +8939,8 @@ ext/ldap/ldap.c:19:20     - Unknown word (Goldstein)  -- | Doug Goldstein <cardo
 ext/ldap/ldap.c:20:15     - Unknown word (Côme)       -- | Côme Chilliet  <mcmic@php
 ext/ldap/ldap.c:20:20     - Unknown word (Chilliet)   -- | Côme Chilliet <mcmic@php.net>
 ext/ldap/ldap.c:2158:101  - Unknown word (lderrno)         -- ldap_err2string(_get_lderrno(ld->link)));
-ext/ldap/ldap.c:2882:19   - Unknown word (lderrno)         -- RETURN_LONG(_get_lderrno(ld->link));
-ext/ldap/ldap.c:2913:18   - Unknown word (lderrno)         -- ld_errno = _get_lderrno(ld->link);
+ext/ldap/ldap.c:2887:19   - Unknown word (lderrno)         -- RETURN_LONG(_get_lderrno(ld->link));
+ext/ldap/ldap.c:2918:18   - Unknown word (lderrno)         -- ld_errno = _get_lderrno(ld->link);
 ext/ldap/ldap.c:293:27    - Unknown word (pperr)      -- LDAPPasswordPolicyError pperr;
 ext/ldap/ldap.c:295:70    - Unknown word (pperr)      -- ctrl, &expire, &grace, &pperr);
 ext/ldap/ldap.c:302:9     - Unknown word (pperr)      -- if ( pperr != PP_noError ) {
@@ -8953,94 +8953,94 @@ ext/ldap/ldap.c:315:65    - Unknown word (lcookie)    -- ctrl, &lestimated, &lco
 ext/ldap/ldap.c:324:35    - Unknown word (lestimated) -- long(&value, "size", lestimated);
 ext/ldap/ldap.c:325:40    - Unknown word (lcookie)    -- stringl(&value, "cookie", lcookie.bv_val, lcookie.bv_len
 ext/ldap/ldap.c:325:56    - Unknown word (lcookie)    -- cookie", lcookie.bv_val, lcookie.bv_len);
-ext/ldap/ldap.c:3364:34   - Unknown word (matcheddn)       -- *result, *errcode, *matcheddn = NULL, *errmsg = NULL
-ext/ldap/ldap.c:3368:9    - Unknown word (lreferrals)      -- char **lreferrals;
-ext/ldap/ldap.c:3369:21   - Unknown word (lerrmsg)         -- char *lmatcheddn, *lerrmsg;
-ext/ldap/ldap.c:3369:8    - Unknown word (lmatcheddn)      -- char *lmatcheddn, *lerrmsg;
-ext/ldap/ldap.c:3370:10   - Unknown word (lerrcode)        -- int rc, lerrcode;
-ext/ldap/ldap.c:3372:114  - Unknown word (matcheddn)       -- result_ce, &errcode, &matcheddn, &errmsg, &referrals
-ext/ldap/ldap.c:3382:57   - Unknown word (lerrcode)        -- ldap_result->result, &lerrcode,
-ext/ldap/ldap.c:3383:18   - Unknown word (lmatcheddn)      -- matcheddn ? &lmatcheddn : NULL,
-ext/ldap/ldap.c:3383:5    - Unknown word (matcheddn)       -- matcheddn ? &lmatcheddn : NULL
-ext/ldap/ldap.c:3384:15   - Unknown word (lerrmsg)         -- errmsg ? &lerrmsg : NULL,
-ext/ldap/ldap.c:3385:18   - Unknown word (lreferrals)      -- referrals ? &lreferrals : NULL,
-ext/ldap/ldap.c:3393:36   - Unknown word (lerrcode)        -- ASSIGN_REF_LONG(errcode, lerrcode);
-ext/ldap/ldap.c:3403:7    - Unknown word (lreferrals)      -- if (lreferrals != NULL) {
-ext/ldap/ldap.c:3404:18   - Unknown word (lreferrals)      -- char **refp = lreferrals;
-ext/ldap/ldap.c:3409:26   - Unknown word (lreferrals)      -- ldap_memvfree((void**)lreferrals);
-ext/ldap/ldap.c:3413:7    - Unknown word (lerrmsg)         -- if (lerrmsg == NULL) {
-ext/ldap/ldap.c:3416:39   - Unknown word (lerrmsg)         -- ASSIGN_REF_STRING(errmsg, lerrmsg);
-ext/ldap/ldap.c:3417:17   - Unknown word (lerrmsg)         -- ldap_memfree(lerrmsg);
-ext/ldap/ldap.c:3420:6    - Unknown word (matcheddn)       -- if (matcheddn) {
-ext/ldap/ldap.c:3421:7    - Unknown word (lmatcheddn)      -- if (lmatcheddn == NULL) {
-ext/ldap/ldap.c:3422:37   - Unknown word (matcheddn)       -- ASSIGN_REF_EMPTY_STRING(matcheddn);
-ext/ldap/ldap.c:3424:42   - Unknown word (lmatcheddn)      -- REF_STRING(matcheddn, lmatcheddn);
-ext/ldap/ldap.c:3425:17   - Unknown word (lmatcheddn)      -- ldap_memfree(lmatcheddn);
-ext/ldap/ldap.c:3434:45   - Unknown word (Pierangelo)      -- operation response parsing, Pierangelo Masarati */
-ext/ldap/ldap.c:3434:56   - Unknown word (Masarati)        -- parsing, Pierangelo Masarati */
-ext/ldap/ldap.c:3442:8    - Unknown word (lretoid)         -- char *lretoid;
-ext/ldap/ldap.c:3443:17   - Unknown word (lretdata)        -- struct berval *lretdata;
-ext/ldap/ldap.c:3457:15   - Unknown word (lretoid)         -- retoid ? &lretoid: NULL,
-ext/ldap/ldap.c:3458:16   - Unknown word (lretdata)        -- retdata ? &lretdata: NULL,
-ext/ldap/ldap.c:3466:7    - Unknown word (lretoid)         -- if (lretoid == NULL) {
-ext/ldap/ldap.c:3469:39   - Unknown word (lretoid)         -- ASSIGN_REF_STRING(retoid, lretoid);
-ext/ldap/ldap.c:3470:17   - Unknown word (lretoid)         -- ldap_memfree(lretoid);
-ext/ldap/ldap.c:3476:7    - Unknown word (lretdata)        -- if (lretdata == NULL) {
-ext/ldap/ldap.c:3479:41   - Unknown word (lretdata)        -- REF_STRINGL(retdata, lretdata->bv_val, lretdata->bv
-ext/ldap/ldap.c:3479:59   - Unknown word (lretdata)        -- retdata, lretdata->bv_val, lretdata->bv_len);
-ext/ldap/ldap.c:3624:46   - Unknown word (Opppb)           -- parameters(ZEND_NUM_ARGS(), "Opppb|h!", &link, ldap_link
-ext/ldap/ldap.c:3730:23   - Unknown word (ECNAME)          -- ifdef LDAP_OPT_X_TLS_ECNAME
-ext/ldap/ldap.c:3731:18   - Unknown word (ECNAME)          -- LDAP_OPT_X_TLS_ECNAME,
-ext/ldap/ldap.c:3927:86   - Unknown word (charslen)        -- chars, const size_t charslen, bool escape)
-ext/ldap/ldap.c:3930:13   - Unknown word (charslen)        -- while (i < charslen) {
-ext/ldap/ldap.c:3938:23   - Unknown word (ignoreslen)      -- size_t valuelen = 0, ignoreslen = 0;
-ext/ldap/ldap.c:3940:23   - Unknown word (havecharlist)   -- bool map[256] = {0}, havecharlist = false;
-ext/ldap/ldap.c:3942:83   - Unknown word (ignoreslen)     -- valuelen, &ignores, &ignoreslen, &flags) != SUCCESS
-ext/ldap/ldap.c:3951:3    - Unknown word (havecharlist)   -- havecharlist = true;
+ext/ldap/ldap.c:3369:34   - Unknown word (matcheddn)       -- *result, *errcode, *matcheddn = NULL, *errmsg = NULL
+ext/ldap/ldap.c:3373:9    - Unknown word (lreferrals)      -- char **lreferrals;
+ext/ldap/ldap.c:3374:21   - Unknown word (lerrmsg)         -- char *lmatcheddn, *lerrmsg;
+ext/ldap/ldap.c:3374:8    - Unknown word (lmatcheddn)      -- char *lmatcheddn, *lerrmsg;
+ext/ldap/ldap.c:3375:10   - Unknown word (lerrcode)        -- int rc, lerrcode;
+ext/ldap/ldap.c:3377:114  - Unknown word (matcheddn)       -- result_ce, &errcode, &matcheddn, &errmsg, &referrals
+ext/ldap/ldap.c:3387:57   - Unknown word (lerrcode)        -- ldap_result->result, &lerrcode,
+ext/ldap/ldap.c:3388:18   - Unknown word (lmatcheddn)      -- matcheddn ? &lmatcheddn : NULL,
+ext/ldap/ldap.c:3388:5    - Unknown word (matcheddn)       -- matcheddn ? &lmatcheddn : NULL
+ext/ldap/ldap.c:3389:15   - Unknown word (lerrmsg)         -- errmsg ? &lerrmsg : NULL,
+ext/ldap/ldap.c:3390:18   - Unknown word (lreferrals)      -- referrals ? &lreferrals : NULL,
+ext/ldap/ldap.c:3398:36   - Unknown word (lerrcode)        -- ASSIGN_REF_LONG(errcode, lerrcode);
+ext/ldap/ldap.c:3408:7    - Unknown word (lreferrals)      -- if (lreferrals != NULL) {
+ext/ldap/ldap.c:3409:18   - Unknown word (lreferrals)      -- char **refp = lreferrals;
+ext/ldap/ldap.c:3414:26   - Unknown word (lreferrals)      -- ldap_memvfree((void**)lreferrals);
+ext/ldap/ldap.c:3418:7    - Unknown word (lerrmsg)         -- if (lerrmsg == NULL) {
+ext/ldap/ldap.c:3421:39   - Unknown word (lerrmsg)         -- ASSIGN_REF_STRING(errmsg, lerrmsg);
+ext/ldap/ldap.c:3422:17   - Unknown word (lerrmsg)         -- ldap_memfree(lerrmsg);
+ext/ldap/ldap.c:3425:6    - Unknown word (matcheddn)       -- if (matcheddn) {
+ext/ldap/ldap.c:3426:7    - Unknown word (lmatcheddn)      -- if (lmatcheddn == NULL) {
+ext/ldap/ldap.c:3427:37   - Unknown word (matcheddn)       -- ASSIGN_REF_EMPTY_STRING(matcheddn);
+ext/ldap/ldap.c:3429:42   - Unknown word (lmatcheddn)      -- REF_STRING(matcheddn, lmatcheddn);
+ext/ldap/ldap.c:3430:17   - Unknown word (lmatcheddn)      -- ldap_memfree(lmatcheddn);
+ext/ldap/ldap.c:3439:45   - Unknown word (Pierangelo)      -- operation response parsing, Pierangelo Masarati */
+ext/ldap/ldap.c:3439:56   - Unknown word (Masarati)        -- parsing, Pierangelo Masarati */
+ext/ldap/ldap.c:3447:8    - Unknown word (lretoid)         -- char *lretoid;
+ext/ldap/ldap.c:3448:17   - Unknown word (lretdata)        -- struct berval *lretdata;
+ext/ldap/ldap.c:3462:15   - Unknown word (lretoid)         -- retoid ? &lretoid: NULL,
+ext/ldap/ldap.c:3463:16   - Unknown word (lretdata)        -- retdata ? &lretdata: NULL,
+ext/ldap/ldap.c:3471:7    - Unknown word (lretoid)         -- if (lretoid == NULL) {
+ext/ldap/ldap.c:3474:39   - Unknown word (lretoid)         -- ASSIGN_REF_STRING(retoid, lretoid);
+ext/ldap/ldap.c:3475:17   - Unknown word (lretoid)         -- ldap_memfree(lretoid);
+ext/ldap/ldap.c:3481:7    - Unknown word (lretdata)        -- if (lretdata == NULL) {
+ext/ldap/ldap.c:3484:41   - Unknown word (lretdata)        -- REF_STRINGL(retdata, lretdata->bv_val, lretdata->bv
+ext/ldap/ldap.c:3484:59   - Unknown word (lretdata)        -- retdata, lretdata->bv_val, lretdata->bv_len);
+ext/ldap/ldap.c:3629:46   - Unknown word (Opppb)           -- parameters(ZEND_NUM_ARGS(), "Opppb|h!", &link, ldap_link
+ext/ldap/ldap.c:3735:23   - Unknown word (ECNAME)          -- ifdef LDAP_OPT_X_TLS_ECNAME
+ext/ldap/ldap.c:3736:18   - Unknown word (ECNAME)          -- LDAP_OPT_X_TLS_ECNAME,
+ext/ldap/ldap.c:3932:86   - Unknown word (charslen)        -- chars, const size_t charslen, bool escape)
+ext/ldap/ldap.c:3935:13   - Unknown word (charslen)        -- while (i < charslen) {
+ext/ldap/ldap.c:3943:23   - Unknown word (ignoreslen)      -- size_t valuelen = 0, ignoreslen = 0;
+ext/ldap/ldap.c:3945:23   - Unknown word (havecharlist)   -- bool map[256] = {0}, havecharlist = false;
+ext/ldap/ldap.c:3947:83   - Unknown word (ignoreslen)     -- valuelen, &ignores, &ignoreslen, &flags) != SUCCESS
 ext/ldap/ldap.c:3956:3    - Unknown word (havecharlist)   -- havecharlist = true;
-ext/ldap/ldap.c:3960:7    - Unknown word (havecharlist)   -- if (!havecharlist) {
-ext/ldap/ldap.c:3966:6    - Unknown word (ignoreslen)     -- if (ignoreslen) {
-ext/ldap/ldap.c:3967:47   - Unknown word (ignoreslen)     -- chars(map, ignores, ignoreslen, false);
-ext/ldap/ldap.c:4026:29   - Unknown word (Pierangelo)     -- Extended operations, Pierangelo Masarati */
-ext/ldap/ldap.c:4026:40   - Unknown word (Masarati)       -- operations, Pierangelo Masarati */
-ext/ldap/ldap.c:4033:16   - Unknown word (lreqdata)       -- struct berval lreqdata, *lretdata = NULL;
-ext/ldap/ldap.c:4060:3    - Unknown word (lreqdata)       -- lreqdata.bv_val = ZSTR_VAL(reqdata
-ext/ldap/ldap.c:4061:3    - Unknown word (lreqdata)       -- lreqdata.bv_len = ZSTR_LEN(reqdata
-ext/ldap/ldap.c:4063:3    - Unknown word (lreqdata)       -- lreqdata.bv_len = 0;
-ext/ldap/ldap.c:4077:4    - Unknown word (lreqdata)       -- lreqdata.bv_len > 0 ? &lreqdata
-ext/ldap/ldap.c:4157:16   - Unknown word (luser)          -- struct berval luser = { 0L, NULL };
-ext/ldap/ldap.c:4158:16   - Unknown word (loldpw)         -- struct berval loldpw = { 0L, NULL };
-ext/ldap/ldap.c:4159:16   - Unknown word (lnewpw)         -- struct berval lnewpw = { 0L, NULL };
-ext/ldap/ldap.c:4160:16   - Unknown word (lgenpasswd)     -- struct berval lgenpasswd = { 0L, NULL };
-ext/ldap/ldap.c:4161:45   - Unknown word (requestctrls)   -- lserverctrls = NULL, *requestctrls[2] = { NULL, NULL }
-ext/ldap/ldap.c:4167:108  - Unknown word (loldpw)         -- val, &luser.bv_len, &loldpw.bv_val, &loldpw.bv_len
-ext/ldap/ldap.c:4167:124  - Unknown word (loldpw)         -- len, &loldpw.bv_val, &loldpw.bv_len, &lnewpw.bv_val
-ext/ldap/ldap.c:4167:140  - Unknown word (lnewpw)         -- val, &loldpw.bv_len, &lnewpw.bv_val, &lnewpw.bv_len
-ext/ldap/ldap.c:4167:156  - Unknown word (lnewpw)         -- len, &lnewpw.bv_val, &lnewpw.bv_len, &serverctrls
-ext/ldap/ldap.c:4167:48   - Unknown word (sssz)           -- ZEND_NUM_ARGS(), "O|sssz/", &link, ldap_link
-ext/ldap/ldap.c:4167:78   - Unknown word (luser)          -- link, ldap_link_ce, &luser.bv_val, &luser.bv_len
-ext/ldap/ldap.c:4167:93   - Unknown word (luser)          -- ce, &luser.bv_val, &luser.bv_len, &loldpw.bv_val
-ext/ldap/ldap.c:4177:4    - Unknown word (requestctrls)   -- requestctrls[0] = ctrl;
-ext/ldap/ldap.c:4183:30   - Unknown word (luser)          -- ldap_passwd(ld->link, &luser,
-ext/ldap/ldap.c:4184:24   - Unknown word (loldpw)         -- loldpw.bv_len > 0 ? &loldpw : NULL,
-ext/ldap/ldap.c:4184:3    - Unknown word (loldpw)         -- loldpw.bv_len > 0 ? &loldpw
-ext/ldap/ldap.c:4185:24   - Unknown word (lnewpw)         -- lnewpw.bv_len > 0 ? &lnewpw : NULL,
-ext/ldap/ldap.c:4185:3    - Unknown word (lnewpw)         -- lnewpw.bv_len > 0 ? &lnewpw
-ext/ldap/ldap.c:4186:3    - Unknown word (requestctrls)   -- requestctrls,
-ext/ldap/ldap.c:4189:6    - Unknown word (requestctrls)   -- if (requestctrls[0] != NULL) {
-ext/ldap/ldap.c:4190:21   - Unknown word (requestctrls)   -- ldap_control_free(requestctrls[0]);
-ext/ldap/ldap.c:4207:46   - Unknown word (lgenpasswd)     -- ld->link, ldap_res, &lgenpasswd);
-ext/ldap/ldap.c:4227:7    - Unknown word (lgenpasswd)     -- if (lgenpasswd.bv_len == 0) {
-ext/ldap/ldap.c:4230:19   - Unknown word (lgenpasswd)     -- RETVAL_STRINGL(lgenpasswd.bv_val, lgenpasswd.bv
-ext/ldap/ldap.c:4230:38   - Unknown word (lgenpasswd)     -- STRINGL(lgenpasswd.bv_val, lgenpasswd.bv_len);
-ext/ldap/ldap.c:4258:17   - Unknown word (lauthzid)       -- struct berval *lauthzid;
-ext/ldap/ldap.c:4270:32   - Unknown word (lauthzid)       -- whoami_s(ld->link, &lauthzid, NULL, NULL);
-ext/ldap/ldap.c:4276:6    - Unknown word (lauthzid)       -- if (lauthzid == NULL) {
-ext/ldap/ldap.c:4279:18   - Unknown word (lauthzid)       -- RETVAL_STRINGL(lauthzid->bv_val, lauthzid->bv
-ext/ldap/ldap.c:4279:36   - Unknown word (lauthzid)       -- STRINGL(lauthzid->bv_val, lauthzid->bv_len);
-ext/ldap/ldap.c:4294:12   - Unknown word (lttl)           -- ber_int_t lttl;
-ext/ldap/ldap.c:4306:2    - Unknown word (lttl)           -- lttl = (ber_int_t) ttl;
-ext/ldap/ldap.c:4308:38   - Unknown word (lttl)           -- refresh_s(ld->link, &ldn, lttl, &newttl, NULL, NULL
+ext/ldap/ldap.c:3961:3    - Unknown word (havecharlist)   -- havecharlist = true;
+ext/ldap/ldap.c:3965:7    - Unknown word (havecharlist)   -- if (!havecharlist) {
+ext/ldap/ldap.c:3971:6    - Unknown word (ignoreslen)     -- if (ignoreslen) {
+ext/ldap/ldap.c:3972:47   - Unknown word (ignoreslen)     -- chars(map, ignores, ignoreslen, false);
+ext/ldap/ldap.c:4031:29   - Unknown word (Pierangelo)     -- Extended operations, Pierangelo Masarati */
+ext/ldap/ldap.c:4031:40   - Unknown word (Masarati)       -- operations, Pierangelo Masarati */
+ext/ldap/ldap.c:4038:16   - Unknown word (lreqdata)       -- struct berval lreqdata, *lretdata = NULL;
+ext/ldap/ldap.c:4065:3    - Unknown word (lreqdata)       -- lreqdata.bv_val = ZSTR_VAL(reqdata
+ext/ldap/ldap.c:4066:3    - Unknown word (lreqdata)       -- lreqdata.bv_len = ZSTR_LEN(reqdata
+ext/ldap/ldap.c:4068:3    - Unknown word (lreqdata)       -- lreqdata.bv_len = 0;
+ext/ldap/ldap.c:4082:4    - Unknown word (lreqdata)       -- lreqdata.bv_len > 0 ? &lreqdata
+ext/ldap/ldap.c:4162:16   - Unknown word (luser)          -- struct berval luser = { 0L, NULL };
+ext/ldap/ldap.c:4163:16   - Unknown word (loldpw)         -- struct berval loldpw = { 0L, NULL };
+ext/ldap/ldap.c:4164:16   - Unknown word (lnewpw)         -- struct berval lnewpw = { 0L, NULL };
+ext/ldap/ldap.c:4165:16   - Unknown word (lgenpasswd)     -- struct berval lgenpasswd = { 0L, NULL };
+ext/ldap/ldap.c:4166:45   - Unknown word (requestctrls)   -- lserverctrls = NULL, *requestctrls[2] = { NULL, NULL }
+ext/ldap/ldap.c:4172:108  - Unknown word (loldpw)         -- val, &luser.bv_len, &loldpw.bv_val, &loldpw.bv_len
+ext/ldap/ldap.c:4172:124  - Unknown word (loldpw)         -- len, &loldpw.bv_val, &loldpw.bv_len, &lnewpw.bv_val
+ext/ldap/ldap.c:4172:140  - Unknown word (lnewpw)         -- val, &loldpw.bv_len, &lnewpw.bv_val, &lnewpw.bv_len
+ext/ldap/ldap.c:4172:156  - Unknown word (lnewpw)         -- len, &lnewpw.bv_val, &lnewpw.bv_len, &serverctrls
+ext/ldap/ldap.c:4172:48   - Unknown word (sssz)           -- ZEND_NUM_ARGS(), "O|sssz/", &link, ldap_link
+ext/ldap/ldap.c:4172:78   - Unknown word (luser)          -- link, ldap_link_ce, &luser.bv_val, &luser.bv_len
+ext/ldap/ldap.c:4172:93   - Unknown word (luser)          -- ce, &luser.bv_val, &luser.bv_len, &loldpw.bv_val
+ext/ldap/ldap.c:4182:4    - Unknown word (requestctrls)   -- requestctrls[0] = ctrl;
+ext/ldap/ldap.c:4188:30   - Unknown word (luser)          -- ldap_passwd(ld->link, &luser,
+ext/ldap/ldap.c:4189:24   - Unknown word (loldpw)         -- loldpw.bv_len > 0 ? &loldpw : NULL,
+ext/ldap/ldap.c:4189:3    - Unknown word (loldpw)         -- loldpw.bv_len > 0 ? &loldpw
+ext/ldap/ldap.c:4190:24   - Unknown word (lnewpw)         -- lnewpw.bv_len > 0 ? &lnewpw : NULL,
+ext/ldap/ldap.c:4190:3    - Unknown word (lnewpw)         -- lnewpw.bv_len > 0 ? &lnewpw
+ext/ldap/ldap.c:4191:3    - Unknown word (requestctrls)   -- requestctrls,
+ext/ldap/ldap.c:4194:6    - Unknown word (requestctrls)   -- if (requestctrls[0] != NULL) {
+ext/ldap/ldap.c:4195:21   - Unknown word (requestctrls)   -- ldap_control_free(requestctrls[0]);
+ext/ldap/ldap.c:4212:46   - Unknown word (lgenpasswd)     -- ld->link, ldap_res, &lgenpasswd);
+ext/ldap/ldap.c:4232:7    - Unknown word (lgenpasswd)     -- if (lgenpasswd.bv_len == 0) {
+ext/ldap/ldap.c:4235:19   - Unknown word (lgenpasswd)     -- RETVAL_STRINGL(lgenpasswd.bv_val, lgenpasswd.bv
+ext/ldap/ldap.c:4235:38   - Unknown word (lgenpasswd)     -- STRINGL(lgenpasswd.bv_val, lgenpasswd.bv_len);
+ext/ldap/ldap.c:4263:17   - Unknown word (lauthzid)       -- struct berval *lauthzid;
+ext/ldap/ldap.c:4275:32   - Unknown word (lauthzid)       -- whoami_s(ld->link, &lauthzid, NULL, NULL);
+ext/ldap/ldap.c:4281:6    - Unknown word (lauthzid)       -- if (lauthzid == NULL) {
+ext/ldap/ldap.c:4284:18   - Unknown word (lauthzid)       -- RETVAL_STRINGL(lauthzid->bv_val, lauthzid->bv
+ext/ldap/ldap.c:4284:36   - Unknown word (lauthzid)       -- STRINGL(lauthzid->bv_val, lauthzid->bv_len);
+ext/ldap/ldap.c:4299:12   - Unknown word (lttl)           -- ber_int_t lttl;
+ext/ldap/ldap.c:4311:2    - Unknown word (lttl)           -- lttl = (ber_int_t) ttl;
+ext/ldap/ldap.c:4313:38   - Unknown word (lttl)           -- refresh_s(ld->link, &ldn, lttl, &newttl, NULL, NULL
 ext/ldap/ldap.c:790:8     - Unknown word (ctrlarray)  -- zval* ctrlarray;
 ext/ldap/ldap.c:797:34    - Unknown word (ctrlarray)  -- FOREACH_VAL(controls, ctrlarray) {
 ext/ldap/ldap.c:798:16    - Unknown word (ctrlarray)  -- if (Z_TYPE_P(ctrlarray) != IS_ARRAY) {
@@ -16986,18 +16986,18 @@ ext/opcache/jit/ir/dynasm/minilua.c:923:25    - Unknown word (Cclosure)        -
 ext/opcache/jit/ir/dynasm/minilua.c:924:5     - Unknown word (Lclosure)        -- sizeLclosure(c->l.nupvalues);
 ext/opcache/jit/ir/dynasm/minilua.c:944:9     - Unknown word (INDEXK)          -- #define INDEXK(r)((int)(r)&~(1<<(9
 ext/opcache/jit/ir/dynasm/minilua.c:945:9     - Unknown word (RKASK)           -- #define RKASK(x)((x)|(1<<(9-1)))
-ext/opcache/jit/ir/ir.c:2143:42   - Unknown word (RLOAD)      -- insn->op3].op == IR_RLOAD
-ext/opcache/jit/ir/ir.c:2160:29   - Unknown word (RSTORE)     -- else if (insn->op == IR_RSTORE) {
-ext/opcache/jit/ir/ir.c:2448:21   - Unknown word (insterted)  -- // TODO: VAR may be insterted after some "memory"
-ext/opcache/jit/ir/ir.c:2574:49   - Unknown word (ZEXT)       -- SEXT || insn->op == IR_ZEXT || insn->op == IR_BITCAST
-ext/opcache/jit/ir/ir.c:3137:10   - Unknown word (IJMP)       -- void _ir_IJMP(ir_ctx *ctx, ir_ref
-ext/opcache/jit/ir/ir.c:3140:34   - Unknown word (IJMP)       -- control = ir_emit3(ctx, IR_IJMP, ctx->control, addr
-ext/opcache/jit/ir/ir.c:3145:12   - Unknown word (IGOTO)      -- ir_ref _ir_IGOTO(ir_ctx *ctx, ir_ref
-ext/opcache/jit/ir/ir.c:3150:40   - Unknown word (IGOTO)      -- ref = ir_emit2(ctx, IR_IGOTO, ctx->control, addr
-ext/opcache/jit/ir/ir.c:3296:12   - Unknown word (RLOAD)      -- ir_ref _ir_RLOAD(ir_ctx *ctx, ir_type
-ext/opcache/jit/ir/ir.c:3299:48   - Unknown word (RLOAD)      -- emit2(ctx, IR_OPT(IR_RLOAD, type), ctx->control
-ext/opcache/jit/ir/ir.c:3302:10   - Unknown word (RSTORE)     -- void _ir_RSTORE(ir_ctx *ctx, ir_ref
-ext/opcache/jit/ir/ir.c:3305:34   - Unknown word (RSTORE)     -- control = ir_emit3(ctx, IR_RSTORE, ctx->control, val,
+ext/opcache/jit/ir/ir.c:2151:42   - Unknown word (RLOAD)      -- insn->op3].op == IR_RLOAD
+ext/opcache/jit/ir/ir.c:2168:29   - Unknown word (RSTORE)     -- else if (insn->op == IR_RSTORE) {
+ext/opcache/jit/ir/ir.c:2456:21   - Unknown word (insterted)  -- // TODO: VAR may be insterted after some "memory"
+ext/opcache/jit/ir/ir.c:2582:49   - Unknown word (ZEXT)       -- SEXT || insn->op == IR_ZEXT || insn->op == IR_BITCAST
+ext/opcache/jit/ir/ir.c:3145:10   - Unknown word (IJMP)       -- void _ir_IJMP(ir_ctx *ctx, ir_ref
+ext/opcache/jit/ir/ir.c:3148:34   - Unknown word (IJMP)       -- control = ir_emit3(ctx, IR_IJMP, ctx->control, addr
+ext/opcache/jit/ir/ir.c:3153:12   - Unknown word (IGOTO)      -- ir_ref _ir_IGOTO(ir_ctx *ctx, ir_ref
+ext/opcache/jit/ir/ir.c:3158:40   - Unknown word (IGOTO)      -- ref = ir_emit2(ctx, IR_IGOTO, ctx->control, addr
+ext/opcache/jit/ir/ir.c:3304:12   - Unknown word (RLOAD)      -- ir_ref _ir_RLOAD(ir_ctx *ctx, ir_type
+ext/opcache/jit/ir/ir.c:3307:48   - Unknown word (RLOAD)      -- emit2(ctx, IR_OPT(IR_RLOAD, type), ctx->control
+ext/opcache/jit/ir/ir.c:3310:10   - Unknown word (RSTORE)     -- void _ir_RSTORE(ir_ctx *ctx, ir_ref
+ext/opcache/jit/ir/ir.c:3313:34   - Unknown word (RSTORE)     -- control = ir_emit3(ctx, IR_RSTORE, ctx->control, val,
 ext/opcache/jit/ir/ir.c:410:24    - Unknown word (optx)       -- ctx->ir_base[IR_NULL].optx = IR_OPT(IR_C_ADDR,
 ext/opcache/jit/ir/ir.c:412:25    - Unknown word (optx)       -- ctx->ir_base[IR_FALSE].optx = IR_OPT(IR_C_BOOL,
 ext/opcache/jit/ir/ir.c:414:24    - Unknown word (optx)       -- ctx->ir_base[IR_TRUE].optx = IR_OPT(IR_C_BOOL,
@@ -17080,30 +17080,32 @@ ext/opcache/jit/ir/ir_builder.h:615:47    - Unknown word (IJMP)       -- _ir_IJM
 ext/opcache/jit/ir/ir_builder.h:665:12    - Unknown word (RSTORE)     -- void _ir_RSTORE(ir_ctx *ctx, ir_ref
 ext/opcache/jit/ir/ir_builder.h:700:12    - Unknown word (IGOTO)      -- ir_ref _ir_IGOTO(ir_ctx *ctx, ir_ref
 ext/opcache/jit/ir/ir_builder.h:701:12    - Unknown word (IJMP)       -- void _ir_IJMP(ir_ctx *ctx, ir_ref
-ext/opcache/jit/ir/ir_cfg.c:1051:25   - Unknown word (Sreedhar)    -- Identify loops. See Sreedhar et al, "Identifying
-ext/opcache/jit/ir/ir_cfg.c:1060:15   - Unknown word (delyed)      -- /* process delyed irreducible loops *
-ext/opcache/jit/ir/ir_cfg.c:1073:41   - Unknown word (irreucible)  -- closing edge(s) of the irreucible loop */
-ext/opcache/jit/ir/ir_cfg.c:1082:65   - Unknown word (capasity)    -- bitset_len(ir_worklist_capasity(&work)));
-ext/opcache/jit/ir/ir_cfg.c:1144:64   - Unknown word (capasity)    -- bitset_len(ir_worklist_capasity(&work)));
-ext/opcache/jit/ir/ir_cfg.c:120:24    - Unknown word (clenu)      -- *q = IR_UNUSED; /* clenu-op the removed tail
-ext/opcache/jit/ir/ir_cfg.c:1261:9    - Unknown word (Pettis)      -- * Karl Pettis and Robert C. Hansen
-ext/opcache/jit/ir/ir_cfg.c:1291:23   - Unknown word (Ducasse)     -- * Polito Guillermo, Ducasse Stephane, and Tesone
-ext/opcache/jit/ir/ir_cfg.c:1291:31   - Unknown word (Stephane)    -- Polito Guillermo, Ducasse Stephane, and Tesone Pablo (
-ext/opcache/jit/ir/ir_cfg.c:1291:45   - Unknown word (Tesone)      -- Ducasse Stephane, and Tesone Pablo (2021)
-ext/opcache/jit/ir/ir_cfg.c:1291:5    - Unknown word (Polito)      -- * Polito Guillermo, Ducasse Stephane
-ext/opcache/jit/ir/ir_cfg.c:1381:20   - Unknown word (trankdir)    -- fprintf(stderr, "\trankdir=TB;\n");
-ext/opcache/jit/ir/ir_cfg.c:1392:17   - Unknown word (penwidth)    -- is_head ? ",penwidth=3" : "",
-ext/opcache/jit/ir/ir_cfg.c:1398:17   - Unknown word (penwidth)    -- is_head ? ",penwidth=3" : "",
-ext/opcache/jit/ir/ir_cfg.c:1856:9    - Unknown word (Pettis)      -- * Karl Pettis and Robert C. Hansen
-ext/opcache/jit/ir/ir_cfg.c:1992:24   - Unknown word (termintated) -- Mark "stop" blocks termintated with UNREACHABLE as
-ext/opcache/jit/ir/ir_cfg.c:2031:19   - Unknown word (Pettis)      -- /* The bottom-up Pettis-Hansen algorithm is
-ext/opcache/jit/ir/ir_cfg.c:224:19    - Unknown word (falgs)      -- uint32_t bb_init_falgs;
-ext/opcache/jit/ir/ir_cfg.c:264:25    - Unknown word (untill)     -- Skip control nodes untill BB start */
-ext/opcache/jit/ir/ir_cfg.c:271:56    - Unknown word (untill)     -- connected control blocks untill BB start
-ext/opcache/jit/ir/ir_cfg.c:304:26    - Unknown word (untill)     -- Skip control nodes untill BB end */
-ext/opcache/jit/ir/ir_cfg.c:328:26    - Unknown word (UNREACHABKE) -- SCCP already removed UNREACHABKE blocks, otherwise all
-ext/opcache/jit/ir/ir_cfg.c:329:10    - Unknown word (falgs)       -- bb_init_falgs = (ctx->flags2 & IR
-ext/opcache/jit/ir/ir_cfg.c:356:24    - Unknown word (falgs)       -- bb->flags = bb_init_falgs;
+ext/opcache/jit/ir/ir_cfg.c:1026:39   - Unknown word (irreucible)  -- closing edge(s) of the irreucible loop */
+ext/opcache/jit/ir/ir_cfg.c:1029:61   - Unknown word (capasity)    -- bitset_len(ir_worklist_capasity(work)));
+ext/opcache/jit/ir/ir_cfg.c:1176:64   - Unknown word (capasity)    -- bitset_len(ir_worklist_capasity(&work)));
+ext/opcache/jit/ir/ir_cfg.c:1194:18   - Unknown word (capasity)    -- if (!ir_list_capasity(&irreducible_list))
+ext/opcache/jit/ir/ir_cfg.c:1243:14   - Unknown word (capasity)    -- if (ir_list_capasity(&irreducible_list))
+ext/opcache/jit/ir/ir_cfg.c:124:24    - Unknown word (clenu)      -- *q = IR_UNUSED; /* clenu-op the removed tail
+ext/opcache/jit/ir/ir_cfg.c:1302:9    - Unknown word (Pettis)      -- * Karl Pettis and Robert C. Hansen
+ext/opcache/jit/ir/ir_cfg.c:1332:23   - Unknown word (Ducasse)     -- * Polito Guillermo, Ducasse Stephane, and Tesone
+ext/opcache/jit/ir/ir_cfg.c:1332:31   - Unknown word (Stephane)    -- Polito Guillermo, Ducasse Stephane, and Tesone Pablo (
+ext/opcache/jit/ir/ir_cfg.c:1332:45   - Unknown word (Tesone)      -- Ducasse Stephane, and Tesone Pablo (2021)
+ext/opcache/jit/ir/ir_cfg.c:1332:5    - Unknown word (Polito)      -- * Polito Guillermo, Ducasse Stephane
+ext/opcache/jit/ir/ir_cfg.c:1422:20   - Unknown word (trankdir)    -- fprintf(stderr, "\trankdir=TB;\n");
+ext/opcache/jit/ir/ir_cfg.c:1433:17   - Unknown word (penwidth)    -- is_head ? ",penwidth=3" : "",
+ext/opcache/jit/ir/ir_cfg.c:1439:17   - Unknown word (penwidth)    -- is_head ? ",penwidth=3" : "",
+ext/opcache/jit/ir/ir_cfg.c:1911:9    - Unknown word (Pettis)      -- * Karl Pettis and Robert C. Hansen
+ext/opcache/jit/ir/ir_cfg.c:2047:24   - Unknown word (termintated) -- Mark "stop" blocks termintated with UNREACHABLE as
+ext/opcache/jit/ir/ir_cfg.c:2086:19   - Unknown word (Pettis)      -- /* The bottom-up Pettis-Hansen algorithm is
+ext/opcache/jit/ir/ir_cfg.c:228:19    - Unknown word (falgs)      -- uint32_t bb_init_falgs;
+ext/opcache/jit/ir/ir_cfg.c:268:25    - Unknown word (untill)     -- Skip control nodes untill BB start */
+ext/opcache/jit/ir/ir_cfg.c:275:56    - Unknown word (untill)     -- connected control blocks untill BB start
+ext/opcache/jit/ir/ir_cfg.c:308:26    - Unknown word (untill)     -- Skip control nodes untill BB end */
+ext/opcache/jit/ir/ir_cfg.c:332:26    - Unknown word (UNREACHABKE) -- SCCP already removed UNREACHABKE blocks, otherwise all
+ext/opcache/jit/ir/ir_cfg.c:333:10    - Unknown word (falgs)       -- bb_init_falgs = (ctx->flags2 & IR
+ext/opcache/jit/ir/ir_cfg.c:360:24    - Unknown word (falgs)       -- bb->flags = bb_init_falgs;
+ext/opcache/jit/ir/ir_cfg.c:983:24    - Unknown word (Sreedhar)    -- Identify loops. See Sreedhar et al, "Identifying
+ext/opcache/jit/ir/ir_cfg.c:984:7     - Unknown word (Ramalingam)  -- * G. Ramalingam "Identifying Loops In
 ext/opcache/jit/ir/ir_check.c:408:14    - Unknown word (IJMP)       -- case IR_IJMP:
 ext/opcache/jit/ir/ir_check.c:415:14    - Unknown word (IGOTO)      -- case IR_IGOTO:
 ext/opcache/jit/ir/ir_disasm.c:146:15    - Unknown word (rotateleft)  -- ir_syms_rotateleft(sym);
@@ -17189,44 +17191,44 @@ ext/opcache/jit/ir/ir_elf.h:87:9      - Unknown word (ELFSYM)      -- #define EL
 ext/opcache/jit/ir/ir_elf.h:88:9      - Unknown word (ELFSYM)      -- #define ELFSYM_INFO(bind, type) ((
 ext/opcache/jit/ir/ir_elf.h:91:2      - Unknown word (ELFSYM)      -- ELFSYM_TYPE_DATA = 2,
 ext/opcache/jit/ir/ir_elf.h:92:2      - Unknown word (ELFSYM)      -- ELFSYM_TYPE_FUNC = 2,
-ext/opcache/jit/ir/ir_emit.c:305:35    - Unknown word (Warray)     -- diagnostic ignored "-Warray-bounds"
-ext/opcache/jit/ir/ir_emit.c:310:12    - Unknown word (dynasm)     -- # include "dynasm/dasm_proto.h"
-ext/opcache/jit/ir/ir_emit.c:310:19    - Unknown word (dasm)       -- # include "dynasm/dasm_proto.h"
-ext/opcache/jit/ir/ir_emit.c:311:12    - Unknown word (dynasm)     -- # include "dynasm/dasm_x86.h"
-ext/opcache/jit/ir/ir_emit.c:311:19    - Unknown word (dasm)       -- # include "dynasm/dasm_x86.h"
-ext/opcache/jit/ir/ir_emit.c:313:12    - Unknown word (dynasm)     -- # include "dynasm/dasm_proto.h"
-ext/opcache/jit/ir/ir_emit.c:313:19    - Unknown word (dasm)       -- # include "dynasm/dasm_proto.h"
-ext/opcache/jit/ir/ir_emit.c:314:26    - Unknown word (dasm)       -- static int ir_add_veneer(dasm_State *Dst, void *buffer
-ext/opcache/jit/ir/ir_emit.c:316:12    - Unknown word (dynasm)     -- # include "dynasm/dasm_arm64.h"
-ext/opcache/jit/ir/ir_emit.c:316:19    - Unknown word (dasm)       -- # include "dynasm/dasm_arm64.h"
-ext/opcache/jit/ir/ir_emit.c:31:9      - Unknown word (DASM)       -- #define DASM_M_GROW(ctx, t, p, sz
-ext/opcache/jit/ir/ir_emit.c:328:21    - Unknown word (dessa)      -- static void ir_emit_dessa_moves(ir_ctx *ctx, int
-ext/opcache/jit/ir/ir_emit.c:35:35     - Unknown word (DASM)       -- limit = sizeof(t) * DASM_SEC2POS(1); \
-ext/opcache/jit/ir/ir_emit.c:37:27     - Unknown word (DASM)       -- Dst_REF->status = DASM_S_NOMEM; \
-ext/opcache/jit/ir/ir_emit.c:394:18    - Unknown word (sequentialization) -- * Parallel copy sequentialization algorithm
-ext/opcache/jit/ir/ir_emit.c:396:47    - Unknown word (desriebed)         -- based on algorithm 1 desriebed in
-ext/opcache/jit/ir/ir_emit.c:398:11    - Unknown word (Boissinot)         -- * Benoit Boissinot, Alain Darte, Fabrice
-ext/opcache/jit/ir/ir_emit.c:398:22    - Unknown word (Alain)             -- * Benoit Boissinot, Alain Darte, Fabrice Rastello
-ext/opcache/jit/ir/ir_emit.c:398:28    - Unknown word (Darte)             -- Benoit Boissinot, Alain Darte, Fabrice Rastello, Benoit
-ext/opcache/jit/ir/ir_emit.c:398:35    - Unknown word (Fabrice)           -- Boissinot, Alain Darte, Fabrice Rastello, Benoit Dupont
-ext/opcache/jit/ir/ir_emit.c:398:4     - Unknown word (Benoit)            -- * Benoit Boissinot, Alain Darte
-ext/opcache/jit/ir/ir_emit.c:398:43    - Unknown word (Rastello)          -- Alain Darte, Fabrice Rastello, Benoit Dupont de Dinechin
-ext/opcache/jit/ir/ir_emit.c:398:53    - Unknown word (Benoit)            -- Darte, Fabrice Rastello, Benoit Dupont de Dinechin,
-ext/opcache/jit/ir/ir_emit.c:398:70    - Unknown word (Dinechin)          -- Rastello, Benoit Dupont de Dinechin, Christophe Guillon
-ext/opcache/jit/ir/ir_emit.c:398:91    - Unknown word (Guillon)           -- Dinechin, Christophe Guillon.
-ext/opcache/jit/ir/ir_emit.c:462:66    - Unknown word (requre)            -- trees (this doesn't requre temporary registers
-ext/opcache/jit/ir/ir_emit.c:485:52    - Unknown word (temoraries)        -- that are the same as temoraries are already moved *
-ext/opcache/jit/ir/ir_emit.c:489:56    - Unknown word (reuires)           -- axles" - cycles (this reuires temporary registers
-ext/opcache/jit/ir/ir_emit.c:48:9      - Unknown word (DASM)       -- #define DASM_M_FREE(ctx, p, sz) ir
-ext/opcache/jit/ir/ir_emit.c:51:10     - Unknown word (DASM)       -- # define DASM_CHECKS
-ext/opcache/jit/ir/ir_emit.c:551:21    - Unknown word (dessa)             -- static void ir_emit_dessa_move(ir_ctx *ctx, ir
-ext/opcache/jit/ir/ir_emit.c:60:20     - Unknown word (dessa)      -- typedef struct _ir_dessa_copy {
-ext/opcache/jit/ir/ir_emit.c:612:26    - Unknown word (dessa)             -- ALWAYS_INLINE void ir_dessa_resolve_cycle(ir_ctx
-ext/opcache/jit/ir/ir_emit.c:64:6      - Unknown word (dessa)      -- } ir_dessa_copy;
-ext/opcache/jit/ir/ir_emit.c:679:67    - Unknown word (requres)           -- isolated or "blocked" cycle requres an additional temporary
-ext/opcache/jit/ir/ir_emit.c:778:57    - Unknown word (requres)           -- axles" - cycles (this requres temporary registers
-ext/opcache/jit/ir/ir_emit.c:855:24    - Unknown word (alocated)          -- ir_reg src = ir_get_alocated_reg(ctx, ref, k);
-ext/opcache/jit/ir/ir_emit.c:877:49    - Unknown word (phpt)              -- opcache/tests/jit/gh11917.phpt failure on Linux 32
+ext/opcache/jit/ir/ir_emit.c:309:35    - Unknown word (Warray)     -- diagnostic ignored "-Warray-bounds"
+ext/opcache/jit/ir/ir_emit.c:314:12    - Unknown word (dynasm)     -- # include "dynasm/dasm_proto.h"
+ext/opcache/jit/ir/ir_emit.c:314:19    - Unknown word (dasm)       -- # include "dynasm/dasm_proto.h"
+ext/opcache/jit/ir/ir_emit.c:315:12    - Unknown word (dynasm)     -- # include "dynasm/dasm_x86.h"
+ext/opcache/jit/ir/ir_emit.c:315:19    - Unknown word (dasm)       -- # include "dynasm/dasm_x86.h"
+ext/opcache/jit/ir/ir_emit.c:317:12    - Unknown word (dynasm)     -- # include "dynasm/dasm_proto.h"
+ext/opcache/jit/ir/ir_emit.c:317:19    - Unknown word (dasm)       -- # include "dynasm/dasm_proto.h"
+ext/opcache/jit/ir/ir_emit.c:318:26    - Unknown word (dasm)       -- static int ir_add_veneer(dasm_State *Dst, void *buffer
+ext/opcache/jit/ir/ir_emit.c:320:12    - Unknown word (dynasm)     -- # include "dynasm/dasm_arm64.h"
+ext/opcache/jit/ir/ir_emit.c:320:19    - Unknown word (dasm)       -- # include "dynasm/dasm_arm64.h"
+ext/opcache/jit/ir/ir_emit.c:332:21    - Unknown word (dessa)      -- static void ir_emit_dessa_moves(ir_ctx *ctx, int
+ext/opcache/jit/ir/ir_emit.c:35:9      - Unknown word (DASM)       -- #define DASM_M_GROW(ctx, t, p, sz
+ext/opcache/jit/ir/ir_emit.c:398:18    - Unknown word (sequentialization) -- * Parallel copy sequentialization algorithm
+ext/opcache/jit/ir/ir_emit.c:39:35     - Unknown word (DASM)       -- limit = sizeof(t) * DASM_SEC2POS(1); \
+ext/opcache/jit/ir/ir_emit.c:400:47    - Unknown word (desriebed)         -- based on algorithm 1 desriebed in
+ext/opcache/jit/ir/ir_emit.c:402:11    - Unknown word (Boissinot)         -- * Benoit Boissinot, Alain Darte, Fabrice
+ext/opcache/jit/ir/ir_emit.c:402:22    - Unknown word (Alain)             -- * Benoit Boissinot, Alain Darte, Fabrice Rastello
+ext/opcache/jit/ir/ir_emit.c:402:28    - Unknown word (Darte)             -- Benoit Boissinot, Alain Darte, Fabrice Rastello, Benoit
+ext/opcache/jit/ir/ir_emit.c:402:35    - Unknown word (Fabrice)           -- Boissinot, Alain Darte, Fabrice Rastello, Benoit Dupont
+ext/opcache/jit/ir/ir_emit.c:402:4     - Unknown word (Benoit)            -- * Benoit Boissinot, Alain Darte
+ext/opcache/jit/ir/ir_emit.c:402:43    - Unknown word (Rastello)          -- Alain Darte, Fabrice Rastello, Benoit Dupont de Dinechin
+ext/opcache/jit/ir/ir_emit.c:402:53    - Unknown word (Benoit)            -- Darte, Fabrice Rastello, Benoit Dupont de Dinechin,
+ext/opcache/jit/ir/ir_emit.c:402:70    - Unknown word (Dinechin)          -- Rastello, Benoit Dupont de Dinechin, Christophe Guillon
+ext/opcache/jit/ir/ir_emit.c:402:91    - Unknown word (Guillon)           -- Dinechin, Christophe Guillon.
+ext/opcache/jit/ir/ir_emit.c:41:27     - Unknown word (DASM)       -- Dst_REF->status = DASM_S_NOMEM; \
+ext/opcache/jit/ir/ir_emit.c:466:66    - Unknown word (requre)            -- trees (this doesn't requre temporary registers
+ext/opcache/jit/ir/ir_emit.c:489:52    - Unknown word (temoraries)        -- that are the same as temoraries are already moved *
+ext/opcache/jit/ir/ir_emit.c:493:56    - Unknown word (reuires)           -- axles" - cycles (this reuires temporary registers
+ext/opcache/jit/ir/ir_emit.c:52:9      - Unknown word (DASM)       -- #define DASM_M_FREE(ctx, p, sz) ir
+ext/opcache/jit/ir/ir_emit.c:555:21    - Unknown word (dessa)             -- static void ir_emit_dessa_move(ir_ctx *ctx, ir
+ext/opcache/jit/ir/ir_emit.c:55:10     - Unknown word (DASM)       -- # define DASM_CHECKS
+ext/opcache/jit/ir/ir_emit.c:616:26    - Unknown word (dessa)             -- ALWAYS_INLINE void ir_dessa_resolve_cycle(ir_ctx
+ext/opcache/jit/ir/ir_emit.c:64:20     - Unknown word (dessa)      -- typedef struct _ir_dessa_copy {
+ext/opcache/jit/ir/ir_emit.c:683:67    - Unknown word (requres)           -- isolated or "blocked" cycle requres an additional temporary
+ext/opcache/jit/ir/ir_emit.c:68:6      - Unknown word (dessa)      -- } ir_dessa_copy;
+ext/opcache/jit/ir/ir_emit.c:782:57    - Unknown word (requres)           -- axles" - cycles (this requres temporary registers
+ext/opcache/jit/ir/ir_emit.c:859:24    - Unknown word (alocated)          -- ir_reg src = ir_get_alocated_reg(ctx, ref, k);
+ext/opcache/jit/ir/ir_emit.c:881:49    - Unknown word (phpt)              -- opcache/tests/jit/gh11917.phpt failure on Linux 32
 ext/opcache/jit/ir/ir_fold.h:1370:9    - Unknown word (ZEXT)       -- IR_FOLD(ZEXT(C_I8))
 ext/opcache/jit/ir/ir_fold.h:1371:9    - Unknown word (ZEXT)       -- IR_FOLD(ZEXT(C_U8))
 ext/opcache/jit/ir/ir_fold.h:1372:9    - Unknown word (ZEXT)       -- IR_FOLD(ZEXT(C_BOOL))
@@ -17234,10 +17236,10 @@ ext/opcache/jit/ir/ir_fold.h:1373:9    - Unknown word (ZEXT)       -- IR_FOLD(ZE
 ext/opcache/jit/ir/ir_fold.h:1380:9    - Unknown word (ZEXT)       -- IR_FOLD(ZEXT(C_I16))
 ext/opcache/jit/ir/ir_fold.h:3462:12   - Unknown word (flase)      -- /* a ? flase : true => !a */
 ext/opcache/jit/ir/ir_gcm.c:116:14    - Unknown word (LICM)       -- /* Avoid LICM if LOOP doesn't have
-ext/opcache/jit/ir/ir_gcm.c:1281:17   - Unknown word (optx)       -- base[IR_TRUE].optx = IR_OPT(IR_C_BOOL,
-ext/opcache/jit/ir/ir_gcm.c:1283:18   - Unknown word (optx)       -- base[IR_FALSE].optx = IR_OPT(IR_C_BOOL,
-ext/opcache/jit/ir/ir_gcm.c:1285:17   - Unknown word (optx)       -- base[IR_NULL].optx = IR_OPT(IR_C_ADDR,
-ext/opcache/jit/ir/ir_gcm.c:1332:13   - Unknown word (optx)       -- new_insn->optx = insn->optx;
+ext/opcache/jit/ir/ir_gcm.c:1290:17   - Unknown word (optx)       -- base[IR_TRUE].optx = IR_OPT(IR_C_BOOL,
+ext/opcache/jit/ir/ir_gcm.c:1292:18   - Unknown word (optx)       -- base[IR_FALSE].optx = IR_OPT(IR_C_BOOL,
+ext/opcache/jit/ir/ir_gcm.c:1294:17   - Unknown word (optx)       -- base[IR_NULL].optx = IR_OPT(IR_C_ADDR,
+ext/opcache/jit/ir/ir_gcm.c:1341:13   - Unknown word (optx)       -- new_insn->optx = insn->optx;
 ext/opcache/jit/ir/ir_gcm.c:151:67    - Unknown word (sunking)    -- splitting the node and sunking the clones
 ext/opcache/jit/ir/ir_gcm.c:153:30    - Unknown word (Benedikt)   -- code is based on the Benedikt Meurer's idea first
 ext/opcache/jit/ir/ir_gcm.c:153:39    - Unknown word (Meurer's)   -- based on the Benedikt Meurer's idea first implemented
@@ -17247,105 +17249,106 @@ ext/opcache/jit/ir/ir_gcm.c:741:51    - Unknown word (xlat)       -- ir_ctx *ctx
 ext/opcache/jit/ir/ir_gcm.c:758:8     - Unknown word (xlat)       -- if (_xlat[key]) {
 ext/opcache/jit/ir/ir_gcm.c:759:11    - Unknown word (xlat)       -- key = _xlat[key];
 ext/opcache/jit/ir/ir_gcm.c:762:16    - Unknown word (xlat)       -- IR_ASSERT(_xlat[b1->val]);
+ext/opcache/jit/ir/ir_gcm.c:845:63    - Unknown word (successurs) -- block only after all its successurs (except back-edges)
 ext/opcache/jit/ir/ir_gcm.c:8:77      - Unknown word (PLDI)       -- numbering" Submitted to PLDI'95.
-ext/opcache/jit/ir/ir_gdb.c:100:2     - Unknown word (GDBJIT)     -- GDBJIT_SECT_NULL,
-ext/opcache/jit/ir/ir_gdb.c:101:2     - Unknown word (GDBJIT)     -- GDBJIT_SECT_text,
-ext/opcache/jit/ir/ir_gdb.c:102:2     - Unknown word (GDBJIT)     -- GDBJIT_SECT_eh_frame,
-ext/opcache/jit/ir/ir_gdb.c:103:14    - Unknown word (shstrtab)   -- GDBJIT_SECT_shstrtab,
-ext/opcache/jit/ir/ir_gdb.c:103:2     - Unknown word (GDBJIT)     -- GDBJIT_SECT_shstrtab,
-ext/opcache/jit/ir/ir_gdb.c:104:2     - Unknown word (GDBJIT)     -- GDBJIT_SECT_strtab,
-ext/opcache/jit/ir/ir_gdb.c:119:20    - Unknown word (gdbjit)     -- typedef struct _ir_gdbjit_obj {
-ext/opcache/jit/ir/ir_gdb.c:121:9     - Unknown word (sectheader) -- ir_elf_sectheader sect[GDBJIT_SECT__MAX
-ext/opcache/jit/ir/ir_gdb.c:124:6     - Unknown word (gdbjit)     -- } ir_gdbjit_obj;
-ext/opcache/jit/ir/ir_gdb.c:126:31    - Unknown word (elfhdr)     -- const ir_elf_header ir_elfhdr_template = {
-ext/opcache/jit/ir/ir_gdb.c:127:3     - Unknown word (emagic)     -- .emagic = { 0x7f, 'E',
-ext/opcache/jit/ir/ir_gdb.c:129:3     - Unknown word (eclass)     -- .eclass = 2,
-ext/opcache/jit/ir/ir_gdb.c:131:3     - Unknown word (eclass)     -- .eclass = 1,
-ext/opcache/jit/ir/ir_gdb.c:134:3     - Unknown word (eendian)    -- .eendian = 2,
-ext/opcache/jit/ir/ir_gdb.c:136:3     - Unknown word (eendian)    -- .eendian = 1,
-ext/opcache/jit/ir/ir_gdb.c:140:3     - Unknown word (eosabi)     -- .eosabi = 0,  /* TODO:
-ext/opcache/jit/ir/ir_gdb.c:142:3     - Unknown word (eosabi)     -- .eosabi = 9,
-ext/opcache/jit/ir/ir_gdb.c:144:3     - Unknown word (eosabi)     -- .eosabi = 12,
-ext/opcache/jit/ir/ir_gdb.c:146:3     - Unknown word (eosabi)     -- .eosabi = 2,
-ext/opcache/jit/ir/ir_gdb.c:148:3     - Unknown word (eosabi)     -- .eosabi = 0,
-ext/opcache/jit/ir/ir_gdb.c:154:3     - Unknown word (eabiversion) -- .eabiversion = 0,
-ext/opcache/jit/ir/ir_gdb.c:155:3     - Unknown word (epad)        -- .epad = { 0, 0, 0,
-ext/opcache/jit/ir/ir_gdb.c:168:3     - Unknown word (phofs)       -- .phofs = 0,
-ext/opcache/jit/ir/ir_gdb.c:169:29    - Unknown word (gdbjit)      -- = offsetof(ir_gdbjit_obj, sect),
-ext/opcache/jit/ir/ir_gdb.c:169:3     - Unknown word (shofs)       -- .shofs = offsetof(ir
-ext/opcache/jit/ir/ir_gdb.c:171:3     - Unknown word (ehsize)      -- .ehsize = sizeof(ir_elf
-ext/opcache/jit/ir/ir_gdb.c:172:3     - Unknown word (phentsize)   -- .phentsize = 0,
-ext/opcache/jit/ir/ir_gdb.c:173:3     - Unknown word (phnum)       -- .phnum = 0,
-ext/opcache/jit/ir/ir_gdb.c:174:3     - Unknown word (shentsize)   -- .shentsize = sizeof(ir_elf_sectheader
-ext/opcache/jit/ir/ir_gdb.c:174:31    - Unknown word (sectheader)  -- shentsize = sizeof(ir_elf_sectheader),
-ext/opcache/jit/ir/ir_gdb.c:175:3     - Unknown word (shnum)       -- .shnum = GDBJIT_SECT
-ext/opcache/jit/ir/ir_gdb.c:176:29    - Unknown word (shstrtab)    -- shstridx = GDBJIT_SECT_shstrtab
-ext/opcache/jit/ir/ir_gdb.c:176:3     - Unknown word (shstridx)    -- .shstridx = GDBJIT_SECT_shstrtab
-ext/opcache/jit/ir/ir_gdb.c:180:20    - Unknown word (gdbjit)      -- typedef struct _ir_gdbjit_ctx {
-ext/opcache/jit/ir/ir_gdb.c:183:12    - Unknown word (mcaddr)      -- uintptr_t mcaddr; /* Machine code
-ext/opcache/jit/ir/ir_gdb.c:184:11    - Unknown word (szmcode)     -- uint32_t szmcode; /* Size of machine
-ext/opcache/jit/ir/ir_gdb.c:189:5     - Unknown word (gdbjit)      -- ir_gdbjit_obj obj;       /* In
-ext/opcache/jit/ir/ir_gdb.c:193:27    - Unknown word (strz)        -- static uint32_t ir_gdbjit_strz(ir_gdbjit_ctx *ctx,
-ext/opcache/jit/ir/ir_gdb.c:224:23    - Unknown word (secthdr)     -- static void ir_gdbjit_secthdr(ir_gdbjit_ctx *ctx)
-ext/opcache/jit/ir/ir_gdb.c:226:9     - Unknown word (sectheader)  -- ir_elf_sectheader *sect;
-ext/opcache/jit/ir/ir_gdb.c:230:9     - Unknown word (SECTDEF)     -- #define SECTDEF(id, tp, al)
-ext/opcache/jit/ir/ir_gdb.c:232:25    - Unknown word (strz)        -- sect->name = ir_gdbjit_strz(ctx, "." #id);  \
-ext/opcache/jit/ir/ir_gdb.c:233:15    - Unknown word (ELFSECT)     -- sect->type = ELFSECT_TYPE_##tp;
-ext/opcache/jit/ir/ir_gdb.c:236:2     - Unknown word (SECTDEF)     -- SECTDEF(text, NOBITS, 16);
-ext/opcache/jit/ir/ir_gdb.c:237:16    - Unknown word (ELFSECT)     -- sect->flags = ELFSECT_FLAGS_ALLOC|ELFSECT
-ext/opcache/jit/ir/ir_gdb.c:237:36    - Unknown word (ELFSECT)     -- ELFSECT_FLAGS_ALLOC|ELFSECT_FLAGS_EXEC;
-ext/opcache/jit/ir/ir_gdb.c:238:20    - Unknown word (mcaddr)      -- sect->addr = ctx->mcaddr;
-ext/opcache/jit/ir/ir_gdb.c:240:20    - Unknown word (szmcode)     -- sect->size = ctx->szmcode;
-ext/opcache/jit/ir/ir_gdb.c:242:2     - Unknown word (SECTDEF)     -- SECTDEF(eh_frame, PROGBITS,
-ext/opcache/jit/ir/ir_gdb.c:243:16    - Unknown word (ELFSECT)     -- sect->flags = ELFSECT_FLAGS_ALLOC;
-ext/opcache/jit/ir/ir_gdb.c:245:10    - Unknown word (shstrtab)    -- SECTDEF(shstrtab, STRTAB, 1);
-ext/opcache/jit/ir/ir_gdb.c:245:2     - Unknown word (SECTDEF)     -- SECTDEF(shstrtab, STRTAB, 1
-ext/opcache/jit/ir/ir_gdb.c:246:2     - Unknown word (SECTDEF)     -- SECTDEF(strtab, STRTAB, 1);
-ext/opcache/jit/ir/ir_gdb.c:269:24    - Unknown word (strz)        -- sym->name = ir_gdbjit_strz(ctx, "JIT code");
-ext/opcache/jit/ir/ir_gdb.c:270:17    - Unknown word (ELFSECT)     -- sym->sectidx = ELFSECT_IDX_ABS;
-ext/opcache/jit/ir/ir_gdb.c:270:7     - Unknown word (sectidx)     -- sym->sectidx = ELFSECT_IDX_ABS;
-ext/opcache/jit/ir/ir_gdb.c:271:14    - Unknown word (ELFSYM)      -- sym->info = ELFSYM_INFO(ELFSYM_BIND_LOCAL
-ext/opcache/jit/ir/ir_gdb.c:271:26    - Unknown word (ELFSYM)      -- >info = ELFSYM_INFO(ELFSYM_BIND_LOCAL, ELFSYM_TYPE
-ext/opcache/jit/ir/ir_gdb.c:271:45    - Unknown word (ELFSYM)      -- INFO(ELFSYM_BIND_LOCAL, ELFSYM_TYPE_FILE);
-ext/opcache/jit/ir/ir_gdb.c:274:24    - Unknown word (strz)        -- sym->name = ir_gdbjit_strz(ctx, ctx->name);
-ext/opcache/jit/ir/ir_gdb.c:275:7     - Unknown word (sectidx)     -- sym->sectidx = GDBJIT_SECT_text;
-ext/opcache/jit/ir/ir_gdb.c:277:19    - Unknown word (szmcode)     -- sym->size = ctx->szmcode;
-ext/opcache/jit/ir/ir_gdb.c:278:14    - Unknown word (ELFSYM)      -- sym->info = ELFSYM_INFO(ELFSYM_BIND_GLOBAL
-ext/opcache/jit/ir/ir_gdb.c:278:26    - Unknown word (ELFSYM)      -- >info = ELFSYM_INFO(ELFSYM_BIND_GLOBAL, ELFSYM
-ext/opcache/jit/ir/ir_gdb.c:285:9     - Unknown word (SECTALIGN)   -- #define SECTALIGN(p, a) \
-ext/opcache/jit/ir/ir_gdb.c:296:44    - Unknown word (strz)        -- ctx->p = p, ir_gdbjit_strz(ctx, (str)), p = ctx
-ext/opcache/jit/ir/ir_gdb.c:297:9     - Unknown word (DALIGNNOP)   -- #define DALIGNNOP(s) while ((uintptr
-ext/opcache/jit/ir/ir_gdb.c:302:23    - Unknown word (ehframe)     -- static void ir_gdbjit_ehframe(ir_gdbjit_ctx *ctx,
-ext/opcache/jit/ir/ir_gdb.c:322:3     - Unknown word (DALIGNNOP)   -- DALIGNNOP(sizeof(uintptr_t));
-ext/opcache/jit/ir/ir_gdb.c:329:13    - Unknown word (szmcode)     -- DU32(ctx->szmcode); /* Machine
-ext/opcache/jit/ir/ir_gdb.c:352:3     - Unknown word (DALIGNNOP)   -- DALIGNNOP(sizeof(uintptr_t));
-ext/opcache/jit/ir/ir_gdb.c:369:14    - Unknown word (mcaddr)      -- DADDR(ctx->mcaddr); /* DW_AT_low_pc
-ext/opcache/jit/ir/ir_gdb.c:370:14    - Unknown word (mcaddr)      -- DADDR(ctx->mcaddr + ctx->szmcode);  /
-ext/opcache/jit/ir/ir_gdb.c:370:28    - Unknown word (szmcode)     -- DADDR(ctx->mcaddr + ctx->szmcode); /* DW_AT_high_pc
-ext/opcache/jit/ir/ir_gdb.c:377:23    - Unknown word (debugabbrev) -- static void ir_gdbjit_debugabbrev(ir_gdbjit_ctx *ctx)
-ext/opcache/jit/ir/ir_gdb.c:400:9     - Unknown word (DLNE)        -- #define DLNE(op, s) (DB(DW_LNS_extended
-ext/opcache/jit/ir/ir_gdb.c:421:3     - Unknown word (DLNE)        -- DLNE(DW_LNE_set_address,
-ext/opcache/jit/ir/ir_gdb.c:422:14    - Unknown word (mcaddr)      -- DADDR(ctx->mcaddr);
-ext/opcache/jit/ir/ir_gdb.c:426:3     - Unknown word (DLNE)        -- DLNE(DW_LNE_end_sequence
-ext/opcache/jit/ir/ir_gdb.c:433:8     - Unknown word (DLNE)        -- #undef DLNE
-ext/opcache/jit/ir/ir_gdb.c:444:8     - Unknown word (DALIGNNOP)   -- #undef DALIGNNOP
-ext/opcache/jit/ir/ir_gdb.c:447:26    - Unknown word (initf)       -- typedef void (*ir_gdbjit_initf) (ir_gdbjit_ctx *ctx
-ext/opcache/jit/ir/ir_gdb.c:465:24    - Unknown word (elfhdr)      -- memcpy(&obj->hdr, &ir_elfhdr_template, sizeof(ir
-ext/opcache/jit/ir/ir_gdb.c:466:38    - Unknown word (sectheader)  -- sect, 0, sizeof(ir_elf_sectheader) * GDBJIT_SECT__MAX
-ext/opcache/jit/ir/ir_gdb.c:471:114   - Unknown word (shstrtab)    -- done(ctx, GDBJIT_SECT_shstrtab);
-ext/opcache/jit/ir/ir_gdb.c:471:38    - Unknown word (shstrtab)    -- initsect(ctx, GDBJIT_SECT_shstrtab); ir_gdbjit_secthdr
-ext/opcache/jit/ir/ir_gdb.c:471:59    - Unknown word (secthdr)     -- shstrtab); ir_gdbjit_secthdr(ctx); ir_gdbjit_initsect
-ext/opcache/jit/ir/ir_gdb.c:474:63    - Unknown word (debugabbrev) -- debug_abbrev); ir_gdbjit_debugabbrev(ctx); ir_gdbjit_initsect
-ext/opcache/jit/ir/ir_gdb.c:476:2     - Unknown word (SECTALIGN)   -- SECTALIGN(ctx->p, sizeof(uintptr
-ext/opcache/jit/ir/ir_gdb.c:477:59    - Unknown word (ehframe)     -- eh_frame); ir_gdbjit_ehframe(ctx, sp_offset, sp_adjustment
+ext/opcache/jit/ir/ir_gdb.c:104:2     - Unknown word (GDBJIT)     -- GDBJIT_SECT_NULL,
+ext/opcache/jit/ir/ir_gdb.c:105:2     - Unknown word (GDBJIT)     -- GDBJIT_SECT_text,
+ext/opcache/jit/ir/ir_gdb.c:106:2     - Unknown word (GDBJIT)     -- GDBJIT_SECT_eh_frame,
+ext/opcache/jit/ir/ir_gdb.c:107:14    - Unknown word (shstrtab)   -- GDBJIT_SECT_shstrtab,
+ext/opcache/jit/ir/ir_gdb.c:107:2     - Unknown word (GDBJIT)     -- GDBJIT_SECT_shstrtab,
+ext/opcache/jit/ir/ir_gdb.c:108:2     - Unknown word (GDBJIT)     -- GDBJIT_SECT_strtab,
+ext/opcache/jit/ir/ir_gdb.c:123:20    - Unknown word (gdbjit)     -- typedef struct _ir_gdbjit_obj {
+ext/opcache/jit/ir/ir_gdb.c:125:9     - Unknown word (sectheader) -- ir_elf_sectheader sect[GDBJIT_SECT__MAX
+ext/opcache/jit/ir/ir_gdb.c:128:6     - Unknown word (gdbjit)     -- } ir_gdbjit_obj;
+ext/opcache/jit/ir/ir_gdb.c:130:31    - Unknown word (elfhdr)     -- const ir_elf_header ir_elfhdr_template = {
+ext/opcache/jit/ir/ir_gdb.c:131:3     - Unknown word (emagic)     -- .emagic = { 0x7f, 'E',
+ext/opcache/jit/ir/ir_gdb.c:133:3     - Unknown word (eclass)     -- .eclass = 2,
+ext/opcache/jit/ir/ir_gdb.c:135:3     - Unknown word (eclass)     -- .eclass = 1,
+ext/opcache/jit/ir/ir_gdb.c:138:3     - Unknown word (eendian)    -- .eendian = 2,
+ext/opcache/jit/ir/ir_gdb.c:140:3     - Unknown word (eendian)    -- .eendian = 1,
+ext/opcache/jit/ir/ir_gdb.c:144:3     - Unknown word (eosabi)     -- .eosabi = 0,  /* TODO:
+ext/opcache/jit/ir/ir_gdb.c:146:3     - Unknown word (eosabi)     -- .eosabi = 9,
+ext/opcache/jit/ir/ir_gdb.c:148:3     - Unknown word (eosabi)     -- .eosabi = 12,
+ext/opcache/jit/ir/ir_gdb.c:150:3     - Unknown word (eosabi)     -- .eosabi = 2,
+ext/opcache/jit/ir/ir_gdb.c:152:3     - Unknown word (eosabi)     -- .eosabi = 0,
+ext/opcache/jit/ir/ir_gdb.c:158:3     - Unknown word (eabiversion) -- .eabiversion = 0,
+ext/opcache/jit/ir/ir_gdb.c:159:3     - Unknown word (epad)        -- .epad = { 0, 0, 0,
+ext/opcache/jit/ir/ir_gdb.c:172:3     - Unknown word (phofs)       -- .phofs = 0,
+ext/opcache/jit/ir/ir_gdb.c:173:29    - Unknown word (gdbjit)      -- = offsetof(ir_gdbjit_obj, sect),
+ext/opcache/jit/ir/ir_gdb.c:173:3     - Unknown word (shofs)       -- .shofs = offsetof(ir
+ext/opcache/jit/ir/ir_gdb.c:175:3     - Unknown word (ehsize)      -- .ehsize = sizeof(ir_elf
+ext/opcache/jit/ir/ir_gdb.c:176:3     - Unknown word (phentsize)   -- .phentsize = 0,
+ext/opcache/jit/ir/ir_gdb.c:177:3     - Unknown word (phnum)       -- .phnum = 0,
+ext/opcache/jit/ir/ir_gdb.c:178:3     - Unknown word (shentsize)   -- .shentsize = sizeof(ir_elf_sectheader
+ext/opcache/jit/ir/ir_gdb.c:178:31    - Unknown word (sectheader)  -- shentsize = sizeof(ir_elf_sectheader),
+ext/opcache/jit/ir/ir_gdb.c:179:3     - Unknown word (shnum)       -- .shnum = GDBJIT_SECT
+ext/opcache/jit/ir/ir_gdb.c:180:29    - Unknown word (shstrtab)    -- shstridx = GDBJIT_SECT_shstrtab
+ext/opcache/jit/ir/ir_gdb.c:180:3     - Unknown word (shstridx)    -- .shstridx = GDBJIT_SECT_shstrtab
+ext/opcache/jit/ir/ir_gdb.c:184:20    - Unknown word (gdbjit)      -- typedef struct _ir_gdbjit_ctx {
+ext/opcache/jit/ir/ir_gdb.c:187:12    - Unknown word (mcaddr)      -- uintptr_t mcaddr; /* Machine code
+ext/opcache/jit/ir/ir_gdb.c:188:11    - Unknown word (szmcode)     -- uint32_t szmcode; /* Size of machine
+ext/opcache/jit/ir/ir_gdb.c:193:5     - Unknown word (gdbjit)      -- ir_gdbjit_obj obj;       /* In
+ext/opcache/jit/ir/ir_gdb.c:197:27    - Unknown word (strz)        -- static uint32_t ir_gdbjit_strz(ir_gdbjit_ctx *ctx,
+ext/opcache/jit/ir/ir_gdb.c:228:23    - Unknown word (secthdr)     -- static void ir_gdbjit_secthdr(ir_gdbjit_ctx *ctx)
+ext/opcache/jit/ir/ir_gdb.c:230:9     - Unknown word (sectheader)  -- ir_elf_sectheader *sect;
+ext/opcache/jit/ir/ir_gdb.c:234:9     - Unknown word (SECTDEF)     -- #define SECTDEF(id, tp, al)
+ext/opcache/jit/ir/ir_gdb.c:236:25    - Unknown word (strz)        -- sect->name = ir_gdbjit_strz(ctx, "." #id);  \
+ext/opcache/jit/ir/ir_gdb.c:237:15    - Unknown word (ELFSECT)     -- sect->type = ELFSECT_TYPE_##tp;
+ext/opcache/jit/ir/ir_gdb.c:240:2     - Unknown word (SECTDEF)     -- SECTDEF(text, NOBITS, 16);
+ext/opcache/jit/ir/ir_gdb.c:241:16    - Unknown word (ELFSECT)     -- sect->flags = ELFSECT_FLAGS_ALLOC|ELFSECT
+ext/opcache/jit/ir/ir_gdb.c:241:36    - Unknown word (ELFSECT)     -- ELFSECT_FLAGS_ALLOC|ELFSECT_FLAGS_EXEC;
+ext/opcache/jit/ir/ir_gdb.c:242:20    - Unknown word (mcaddr)      -- sect->addr = ctx->mcaddr;
+ext/opcache/jit/ir/ir_gdb.c:244:20    - Unknown word (szmcode)     -- sect->size = ctx->szmcode;
+ext/opcache/jit/ir/ir_gdb.c:246:2     - Unknown word (SECTDEF)     -- SECTDEF(eh_frame, PROGBITS,
+ext/opcache/jit/ir/ir_gdb.c:247:16    - Unknown word (ELFSECT)     -- sect->flags = ELFSECT_FLAGS_ALLOC;
+ext/opcache/jit/ir/ir_gdb.c:249:10    - Unknown word (shstrtab)    -- SECTDEF(shstrtab, STRTAB, 1);
+ext/opcache/jit/ir/ir_gdb.c:249:2     - Unknown word (SECTDEF)     -- SECTDEF(shstrtab, STRTAB, 1
+ext/opcache/jit/ir/ir_gdb.c:250:2     - Unknown word (SECTDEF)     -- SECTDEF(strtab, STRTAB, 1);
+ext/opcache/jit/ir/ir_gdb.c:273:24    - Unknown word (strz)        -- sym->name = ir_gdbjit_strz(ctx, "JIT code");
+ext/opcache/jit/ir/ir_gdb.c:274:17    - Unknown word (ELFSECT)     -- sym->sectidx = ELFSECT_IDX_ABS;
+ext/opcache/jit/ir/ir_gdb.c:274:7     - Unknown word (sectidx)     -- sym->sectidx = ELFSECT_IDX_ABS;
+ext/opcache/jit/ir/ir_gdb.c:275:14    - Unknown word (ELFSYM)      -- sym->info = ELFSYM_INFO(ELFSYM_BIND_LOCAL
+ext/opcache/jit/ir/ir_gdb.c:275:26    - Unknown word (ELFSYM)      -- >info = ELFSYM_INFO(ELFSYM_BIND_LOCAL, ELFSYM_TYPE
+ext/opcache/jit/ir/ir_gdb.c:275:45    - Unknown word (ELFSYM)      -- INFO(ELFSYM_BIND_LOCAL, ELFSYM_TYPE_FILE);
+ext/opcache/jit/ir/ir_gdb.c:278:24    - Unknown word (strz)        -- sym->name = ir_gdbjit_strz(ctx, ctx->name);
+ext/opcache/jit/ir/ir_gdb.c:279:7     - Unknown word (sectidx)     -- sym->sectidx = GDBJIT_SECT_text;
+ext/opcache/jit/ir/ir_gdb.c:281:19    - Unknown word (szmcode)     -- sym->size = ctx->szmcode;
+ext/opcache/jit/ir/ir_gdb.c:282:14    - Unknown word (ELFSYM)      -- sym->info = ELFSYM_INFO(ELFSYM_BIND_GLOBAL
+ext/opcache/jit/ir/ir_gdb.c:282:26    - Unknown word (ELFSYM)      -- >info = ELFSYM_INFO(ELFSYM_BIND_GLOBAL, ELFSYM
+ext/opcache/jit/ir/ir_gdb.c:289:9     - Unknown word (SECTALIGN)   -- #define SECTALIGN(p, a) \
+ext/opcache/jit/ir/ir_gdb.c:300:44    - Unknown word (strz)        -- ctx->p = p, ir_gdbjit_strz(ctx, (str)), p = ctx
+ext/opcache/jit/ir/ir_gdb.c:301:9     - Unknown word (DALIGNNOP)   -- #define DALIGNNOP(s) while ((uintptr
+ext/opcache/jit/ir/ir_gdb.c:306:23    - Unknown word (ehframe)     -- static void ir_gdbjit_ehframe(ir_gdbjit_ctx *ctx,
+ext/opcache/jit/ir/ir_gdb.c:326:3     - Unknown word (DALIGNNOP)   -- DALIGNNOP(sizeof(uintptr_t));
+ext/opcache/jit/ir/ir_gdb.c:333:13    - Unknown word (szmcode)     -- DU32(ctx->szmcode); /* Machine
+ext/opcache/jit/ir/ir_gdb.c:356:3     - Unknown word (DALIGNNOP)   -- DALIGNNOP(sizeof(uintptr_t));
+ext/opcache/jit/ir/ir_gdb.c:373:14    - Unknown word (mcaddr)      -- DADDR(ctx->mcaddr); /* DW_AT_low_pc
+ext/opcache/jit/ir/ir_gdb.c:374:14    - Unknown word (mcaddr)      -- DADDR(ctx->mcaddr + ctx->szmcode);  /
+ext/opcache/jit/ir/ir_gdb.c:374:28    - Unknown word (szmcode)     -- DADDR(ctx->mcaddr + ctx->szmcode); /* DW_AT_high_pc
+ext/opcache/jit/ir/ir_gdb.c:381:23    - Unknown word (debugabbrev) -- static void ir_gdbjit_debugabbrev(ir_gdbjit_ctx *ctx)
+ext/opcache/jit/ir/ir_gdb.c:404:9     - Unknown word (DLNE)        -- #define DLNE(op, s) (DB(DW_LNS_extended
+ext/opcache/jit/ir/ir_gdb.c:425:3     - Unknown word (DLNE)        -- DLNE(DW_LNE_set_address,
+ext/opcache/jit/ir/ir_gdb.c:426:14    - Unknown word (mcaddr)      -- DADDR(ctx->mcaddr);
+ext/opcache/jit/ir/ir_gdb.c:430:3     - Unknown word (DLNE)        -- DLNE(DW_LNE_end_sequence
+ext/opcache/jit/ir/ir_gdb.c:437:8     - Unknown word (DLNE)        -- #undef DLNE
+ext/opcache/jit/ir/ir_gdb.c:448:8     - Unknown word (DALIGNNOP)   -- #undef DALIGNNOP
+ext/opcache/jit/ir/ir_gdb.c:451:26    - Unknown word (initf)       -- typedef void (*ir_gdbjit_initf) (ir_gdbjit_ctx *ctx
+ext/opcache/jit/ir/ir_gdb.c:469:24    - Unknown word (elfhdr)      -- memcpy(&obj->hdr, &ir_elfhdr_template, sizeof(ir
+ext/opcache/jit/ir/ir_gdb.c:470:38    - Unknown word (sectheader)  -- sect, 0, sizeof(ir_elf_sectheader) * GDBJIT_SECT__MAX
+ext/opcache/jit/ir/ir_gdb.c:475:114   - Unknown word (shstrtab)    -- done(ctx, GDBJIT_SECT_shstrtab);
+ext/opcache/jit/ir/ir_gdb.c:475:38    - Unknown word (shstrtab)    -- initsect(ctx, GDBJIT_SECT_shstrtab); ir_gdbjit_secthdr
+ext/opcache/jit/ir/ir_gdb.c:475:59    - Unknown word (secthdr)     -- shstrtab); ir_gdbjit_secthdr(ctx); ir_gdbjit_initsect
+ext/opcache/jit/ir/ir_gdb.c:478:63    - Unknown word (debugabbrev) -- debug_abbrev); ir_gdbjit_debugabbrev(ctx); ir_gdbjit_initsect
+ext/opcache/jit/ir/ir_gdb.c:480:2     - Unknown word (SECTALIGN)   -- SECTALIGN(ctx->p, sizeof(uintptr
+ext/opcache/jit/ir/ir_gdb.c:481:59    - Unknown word (ehframe)     -- eh_frame); ir_gdbjit_ehframe(ctx, sp_offset, sp_adjustment
 ext/opcache/jit/ir/ir_patch.c:205:20    - Unknown word (CBNZ)       -- // B.cond, CBZ, CBNZ (imm19:5..23)
 ext/opcache/jit/ir/ir_patch.c:223:12    - Unknown word (TBNZ)       -- // TBZ, TBNZ (imm14:5..18)
-ext/opcache/jit/ir/ir_perf.c:146:14    - Unknown word (emagic)     -- elf_hdr.emagic[0] != 0x7f ||
-ext/opcache/jit/ir/ir_perf.c:147:14    - Unknown word (emagic)     -- elf_hdr.emagic[1] != 'E' ||
-ext/opcache/jit/ir/ir_perf.c:148:14    - Unknown word (emagic)     -- elf_hdr.emagic[2] != 'L' ||
-ext/opcache/jit/ir/ir_perf.c:149:14    - Unknown word (emagic)     -- elf_hdr.emagic[3] != 'F') {
-ext/opcache/jit/ir/ir_perf.c:40:53     - Unknown word (vtunes)     -- as it conflicts with vtunes types.
-ext/opcache/jit/ir/ir_perf.c:56:35     - Unknown word (UNFO)       -- PERF_JITDUMP_UNWINDING_UNFO 4
+ext/opcache/jit/ir/ir_perf.c:150:14    - Unknown word (emagic)     -- elf_hdr.emagic[0] != 0x7f ||
+ext/opcache/jit/ir/ir_perf.c:151:14    - Unknown word (emagic)     -- elf_hdr.emagic[1] != 'E' ||
+ext/opcache/jit/ir/ir_perf.c:152:14    - Unknown word (emagic)     -- elf_hdr.emagic[2] != 'L' ||
+ext/opcache/jit/ir/ir_perf.c:153:14    - Unknown word (emagic)     -- elf_hdr.emagic[3] != 'F') {
+ext/opcache/jit/ir/ir_perf.c:44:53     - Unknown word (vtunes)     -- as it conflicts with vtunes types.
+ext/opcache/jit/ir/ir_perf.c:60:35     - Unknown word (UNFO)       -- PERF_JITDUMP_UNWINDING_UNFO 4
 ext/opcache/jit/ir/ir_private.h:1031:20   - Unknown word (DESSA)      -- #define IR_LR_HAVE_DESSA_MOVES (1<<25)
 ext/opcache/jit/ir/ir_private.h:1074:11   - Unknown word (optx)       -- __insn->optx = IR_NOP; \
 ext/opcache/jit/ir/ir_private.h:1119:15   - Unknown word (DESSA)      -- #define IR_BB_DESSA_MOVES (1<<5) /
@@ -17602,15 +17605,15 @@ ext/opcache/jit/zend_jit_ir.c:12108:70  - Unknown word (deoptimization) -- resul
 ext/opcache/jit/zend_jit_ir.c:124:13    - Unknown word (ZEXT)       -- # define ir_ZEXT_L ir_ZEXT_I
 ext/opcache/jit/zend_jit_ir.c:124:31    - Unknown word (ZEXT)       -- ir_ZEXT_L ir_ZEXT_I64
 ext/opcache/jit/zend_jit_ir.c:1311:6    - Unknown word (Deoptimization) -- /* Deoptimization */
-ext/opcache/jit/zend_jit_ir.c:14479:68  - Unknown word (deoptimization) -- result type guard (during deoptimization) */
-ext/opcache/jit/zend_jit_ir.c:14546:24  - Unknown word (flase)          -- ir_ref if_null_or_flase = ir_IF(ir_LE(prop_type
-ext/opcache/jit/zend_jit_ir.c:14547:33  - Unknown word (flase)          -- TRUE_cold(if_null_or_flase);
-ext/opcache/jit/zend_jit_ir.c:14552:29  - Unknown word (flase)          -- IF_FALSE(if_null_or_flase);
-ext/opcache/jit/zend_jit_ir.c:14938:87  - Unknown word (doding)         -- happens on IS_UNDEF, doding
+ext/opcache/jit/zend_jit_ir.c:14486:68  - Unknown word (deoptimization) -- result type guard (during deoptimization) */
+ext/opcache/jit/zend_jit_ir.c:14553:24  - Unknown word (flase)          -- ir_ref if_null_or_flase = ir_IF(ir_LE(prop_type
+ext/opcache/jit/zend_jit_ir.c:14554:33  - Unknown word (flase)          -- TRUE_cold(if_null_or_flase);
+ext/opcache/jit/zend_jit_ir.c:14559:29  - Unknown word (flase)          -- IF_FALSE(if_null_or_flase);
+ext/opcache/jit/zend_jit_ir.c:14945:87  - Unknown word (doding)         -- happens on IS_UNDEF, doding
 ext/opcache/jit/zend_jit_ir.c:156:13    - Unknown word (ZEXT)       -- # define ir_ZEXT_L ir_ZEXT_I
 ext/opcache/jit/zend_jit_ir.c:156:31    - Unknown word (ZEXT)       -- ir_ZEXT_L ir_ZEXT_I32
-ext/opcache/jit/zend_jit_ir.c:16735:12  - Unknown word (deoptimization) -- jit->ctx.deoptimization_exits = jit->trace-
-ext/opcache/jit/zend_jit_ir.c:17247:21  - Unknown word (deoptimizer)    -- static int zend_jit_deoptimizer_start(zend_jit_ctx
+ext/opcache/jit/zend_jit_ir.c:16742:12  - Unknown word (deoptimization) -- jit->ctx.deoptimization_exits = jit->trace-
+ext/opcache/jit/zend_jit_ir.c:17254:21  - Unknown word (deoptimizer)    -- static int zend_jit_deoptimizer_start(zend_jit_ctx
 ext/opcache/jit/zend_jit_ir.c:177:37    - Unknown word (rers)       -- structure to collect IT rers for the following use
 ext/opcache/jit/zend_jit_ir.c:1943:6    - Unknown word (IJMP)           -- ir_IJMP(jit_STUB_ADDR(jit, jit
 ext/opcache/jit/zend_jit_ir.c:2008:12   - Unknown word (ZEXT)           -- ref = ir_ZEXT_A(ref);
@@ -18287,59 +18290,56 @@ ext/openssl/xp_ssl.c:767:21    - Unknown word (pwsz)        -- ssl_policy_params
 ext/openssl/xp_ssl.c:85:20     - Unknown word (ECDH)       -- #ifndef OPENSSL_NO_ECDH
 ext/openssl/xp_ssl.c:86:14     - Unknown word (ECDH)       -- #define HAVE_ECDH 1
 ext/openssl/xp_ssl.c:89:20     - Unknown word (TLSEXT)     -- #ifndef OPENSSL_NO_TLSEXT
-ext/pcntl/pcntl.c:1180:13   - Unknown word (SIGRTMIN)    -- #if defined(SIGRTMIN) && defined(SIGRTMAX
-ext/pcntl/pcntl.c:1181:7    - Unknown word (SIGRTMIN)    -- if (SIGRTMIN <= signo && signo <
+ext/pcntl/pcntl.c:1177:13   - Unknown word (SIGRTMIN)    -- #if defined(SIGRTMIN) && defined(SIGRTMAX
+ext/pcntl/pcntl.c:1177:34   - Unknown word (SIGRTMAX)    -- SIGRTMIN) && defined(SIGRTMAX)
+ext/pcntl/pcntl.c:1178:7    - Unknown word (SIGRTMIN)    -- if (SIGRTMIN <= signo && signo <
 ext/pcntl/pcntl.c:143:13    - Unknown word (FORKX)       -- #ifdef HAVE_FORKX
-ext/pcntl/pcntl.c:1525:15   - Unknown word (RFMEM)       -- if ((flags & RFMEM) != 0) {
-ext/pcntl/pcntl.c:1526:50   - Unknown word (RFMEM)       -- , "must not include RFMEM value, not allowed within
-ext/pcntl/pcntl.c:1530:15   - Unknown word (RFSIGSHARE)  -- if ((flags & RFSIGSHARE) != 0) {
-ext/pcntl/pcntl.c:1531:50   - Unknown word (RFSIGSHARE)  -- , "must not include RFSIGSHARE value, not allowed within
-ext/pcntl/pcntl.c:1535:16   - Unknown word (RFFDG)       -- if ((flags & (RFFDG | RFCFDG)) == (RFFDG
-ext/pcntl/pcntl.c:1535:24   - Unknown word (RFCFDG)      -- if ((flags & (RFFDG | RFCFDG)) == (RFFDG | RFCFDG
-ext/pcntl/pcntl.c:1535:37   - Unknown word (RFFDG)       -- RFFDG | RFCFDG)) == (RFFDG | RFCFDG)) {
-ext/pcntl/pcntl.c:1535:45   - Unknown word (RFCFDG)      -- RFCFDG)) == (RFFDG | RFCFDG)) {
-ext/pcntl/pcntl.c:1536:55   - Unknown word (RFFDG)       -- must not include both RFFDG and RFCFDG, because
-ext/pcntl/pcntl.c:1536:65   - Unknown word (RFCFDG)      -- include both RFFDG and RFCFDG, because these flags
-ext/pcntl/pcntl.c:1541:17   - Unknown word (RFPROC)      -- if (!(flags & (RFPROC))) {
-ext/pcntl/pcntl.c:1542:12   - Unknown word (RFPROC)      -- flags |= RFPROC;
-ext/pcntl/pcntl.c:1545:8    - Unknown word (RFTSIGZMB)   -- #ifdef RFTSIGZMB
-ext/pcntl/pcntl.c:1546:15   - Unknown word (RFTSIGZMB)   -- if ((flags & RFTSIGZMB) != 0) {
-ext/pcntl/pcntl.c:1547:12   - Unknown word (RFTSIGFLAGS) -- flags |= RFTSIGFLAGS(csignal);
-ext/pcntl/pcntl.c:1572:13   - Unknown word (FORKX)       -- #ifdef HAVE_FORKX
-ext/pcntl/pcntl.c:1573:25   - Unknown word (forkx)       -- {{ proto bool pcntl_forkx(int flags)
-ext/pcntl/pcntl.c:1576:9    - Unknown word (NOSIGCHLD)   -- FORK_NOSIGCHLD: SIGCHLD signal ignored
-ext/pcntl/pcntl.c:1577:20   - Unknown word (forkx)       -- PHP_FUNCTION(pcntl_forkx)
-ext/pcntl/pcntl.c:1586:19   - Unknown word (NOSIGCHLD)   -- if (flags < FORK_NOSIGCHLD || flags > FORK_WAITPID
-ext/pcntl/pcntl.c:1587:46   - Unknown word (NOSIGCHLD)   -- error(1, "must be FORK_NOSIGCHLD or FORK_WAITPID");
-ext/pcntl/pcntl.c:1591:8    - Unknown word (forkx)       -- pid = forkx(flags);
-ext/pcntl/pcntl.c:1689:20   - Unknown word (getcpuaffinity) -- PHP_FUNCTION(pcntl_getcpuaffinity)
-ext/pcntl/pcntl.c:1705:12   - Unknown word (getaffinity)    -- if (sched_getaffinity(pid, PCNTL_CPUSET_SIZE
-ext/pcntl/pcntl.c:1737:20   - Unknown word (setcpuaffinity) -- PHP_FUNCTION(pcntl_setcpuaffinity)
-ext/pcntl/pcntl.c:1742:8    - Unknown word (hmask)          -- zval *hmask = NULL, *ncpu;
-ext/pcntl/pcntl.c:1747:17   - Unknown word (hmask)          -- Z_PARAM_ARRAY(hmask)
-ext/pcntl/pcntl.c:1751:50   - Unknown word (hmask)          -- elements(Z_ARRVAL_P(hmask)) == 0) {
-ext/pcntl/pcntl.c:1751:7    - Unknown word (hmask)          -- if (!hmask || zend_hash_num_elements
-ext/pcntl/pcntl.c:1761:35   - Unknown word (hmask)          -- FOREACH_VAL(Z_ARRVAL_P(hmask), ncpu) {
-ext/pcntl/pcntl.c:1872:20   - Unknown word (getqos)         -- PHP_FUNCTION(pcntl_getqos_class)
-ext/pcntl/pcntl.c:1889:20   - Unknown word (setqos)         -- PHP_FUNCTION(pcntl_setqos_class)
-ext/pcntl/pcntl.c:1903:33   - Unknown word (setqos)         -- throw_error(NULL, "pcntl_setqos_class failed");
+ext/pcntl/pcntl.c:1534:15   - Unknown word (RFMEM)       -- if ((flags & RFMEM) != 0) {
+ext/pcntl/pcntl.c:1535:50   - Unknown word (RFMEM)       -- , "must not include RFMEM value, not allowed within
+ext/pcntl/pcntl.c:1539:15   - Unknown word (RFSIGSHARE)  -- if ((flags & RFSIGSHARE) != 0) {
+ext/pcntl/pcntl.c:1540:50   - Unknown word (RFSIGSHARE)  -- , "must not include RFSIGSHARE value, not allowed within
+ext/pcntl/pcntl.c:1544:16   - Unknown word (RFFDG)       -- if ((flags & (RFFDG | RFCFDG)) == (RFFDG
+ext/pcntl/pcntl.c:1544:24   - Unknown word (RFCFDG)      -- if ((flags & (RFFDG | RFCFDG)) == (RFFDG | RFCFDG
+ext/pcntl/pcntl.c:1544:37   - Unknown word (RFFDG)       -- RFFDG | RFCFDG)) == (RFFDG | RFCFDG)) {
+ext/pcntl/pcntl.c:1544:45   - Unknown word (RFCFDG)      -- RFCFDG)) == (RFFDG | RFCFDG)) {
+ext/pcntl/pcntl.c:1545:55   - Unknown word (RFFDG)       -- must not include both RFFDG and RFCFDG, because
+ext/pcntl/pcntl.c:1545:65   - Unknown word (RFCFDG)      -- include both RFFDG and RFCFDG, because these flags
+ext/pcntl/pcntl.c:1550:17   - Unknown word (RFPROC)      -- if (!(flags & (RFPROC))) {
+ext/pcntl/pcntl.c:1551:12   - Unknown word (RFPROC)      -- flags |= RFPROC;
+ext/pcntl/pcntl.c:1554:8    - Unknown word (RFTSIGZMB)   -- #ifdef RFTSIGZMB
+ext/pcntl/pcntl.c:1555:15   - Unknown word (RFTSIGZMB)   -- if ((flags & RFTSIGZMB) != 0) {
+ext/pcntl/pcntl.c:1556:12   - Unknown word (RFTSIGFLAGS) -- flags |= RFTSIGFLAGS(csignal);
+ext/pcntl/pcntl.c:1581:13   - Unknown word (FORKX)       -- #ifdef HAVE_FORKX
+ext/pcntl/pcntl.c:1582:25   - Unknown word (forkx)       -- {{ proto bool pcntl_forkx(int flags)
+ext/pcntl/pcntl.c:1585:9    - Unknown word (NOSIGCHLD)   -- FORK_NOSIGCHLD: SIGCHLD signal ignored
+ext/pcntl/pcntl.c:1586:20   - Unknown word (forkx)       -- PHP_FUNCTION(pcntl_forkx)
+ext/pcntl/pcntl.c:1595:19   - Unknown word (NOSIGCHLD)   -- if (flags < FORK_NOSIGCHLD || flags > FORK_WAITPID
+ext/pcntl/pcntl.c:1596:46   - Unknown word (NOSIGCHLD)   -- error(1, "must be FORK_NOSIGCHLD or FORK_WAITPID");
+ext/pcntl/pcntl.c:1600:8    - Unknown word (forkx)       -- pid = forkx(flags);
+ext/pcntl/pcntl.c:1698:20   - Unknown word (getcpuaffinity) -- PHP_FUNCTION(pcntl_getcpuaffinity)
+ext/pcntl/pcntl.c:1714:12   - Unknown word (getaffinity)    -- if (sched_getaffinity(pid, PCNTL_CPUSET_SIZE
+ext/pcntl/pcntl.c:1746:20   - Unknown word (setcpuaffinity) -- PHP_FUNCTION(pcntl_setcpuaffinity)
+ext/pcntl/pcntl.c:1751:8    - Unknown word (hmask)          -- zval *hmask = NULL, *ncpu;
+ext/pcntl/pcntl.c:1756:17   - Unknown word (hmask)          -- Z_PARAM_ARRAY(hmask)
+ext/pcntl/pcntl.c:1760:50   - Unknown word (hmask)          -- elements(Z_ARRVAL_P(hmask)) == 0) {
+ext/pcntl/pcntl.c:1760:7    - Unknown word (hmask)          -- if (!hmask || zend_hash_num_elements
+ext/pcntl/pcntl.c:1770:35   - Unknown word (hmask)          -- FOREACH_VAL(Z_ARRVAL_P(hmask), ncpu) {
+ext/pcntl/pcntl.c:1881:20   - Unknown word (getqos)         -- PHP_FUNCTION(pcntl_getqos_class)
+ext/pcntl/pcntl.c:1898:20   - Unknown word (setqos)         -- PHP_FUNCTION(pcntl_setqos_class)
+ext/pcntl/pcntl.c:1912:33   - Unknown word (setqos)         -- throw_error(NULL, "pcntl_setqos_class failed");
 ext/pcntl/pcntl.c:214:8     - Unknown word (SIGRTMAX)    -- #ifdef SIGRTMAX
-ext/pcntl/pcntl.c:215:33    - Unknown word (incorrecrt)  -- least FreeBSD reports an incorrecrt NSIG that does not include
 ext/pcntl/pcntl.c:216:8     - Unknown word (SIGRTMAX)    -- * As SIGRTMAX may be a dynamic value
 ext/pcntl/pcntl.c:217:13    - Unknown word (SIGRTMAX)    -- if (NSIG < SIGRTMAX + 1) {
 ext/pcntl/pcntl.c:218:26    - Unknown word (SIGRTMAX)    -- PCNTL_G(num_signals) = SIGRTMAX + 1;
-ext/pcntl/pcntl.c:440:12    - Unknown word (wrusage)     -- struct __wrusage wrusage;
-ext/pcntl/pcntl.c:440:20    - Unknown word (wrusage)     -- struct __wrusage wrusage;
-ext/pcntl/pcntl.c:441:11    - Unknown word (wrusage)     -- memset(&wrusage, 0, sizeof(struct _
-ext/pcntl/pcntl.c:441:39    - Unknown word (wrusage)     -- 0, sizeof(struct __wrusage));
-ext/pcntl/pcntl.c:442:76    - Unknown word (wrusage)     -- status, (int) options, &wrusage, &siginfo);
+ext/pcntl/pcntl.c:445:12    - Unknown word (wrusage)     -- struct __wrusage wrusage;
+ext/pcntl/pcntl.c:445:20    - Unknown word (wrusage)     -- struct __wrusage wrusage;
+ext/pcntl/pcntl.c:446:11    - Unknown word (wrusage)     -- memset(&wrusage, 0, sizeof(struct _
+ext/pcntl/pcntl.c:446:39    - Unknown word (wrusage)     -- 0, sizeof(struct __wrusage));
+ext/pcntl/pcntl.c:447:76    - Unknown word (wrusage)     -- status, (int) options, &wrusage, &siginfo);
 ext/pcntl/pcntl.c:53:26     - Unknown word (JAILID)     -- defined (HAVE_DECL_P_JAILID) && HAVE_DECL_P_JAILID
 ext/pcntl/pcntl.c:53:49     - Unknown word (JAILID)     -- JAILID) && HAVE_DECL_P_JAILID == 1
 ext/pcntl/pcntl.c:77:16     - Unknown word (getaffinity) -- #define sched_getaffinity(p, c, m) syscall(SYS
 ext/pcntl/pcntl.c:77:56     - Unknown word (getaffinity) -- syscall(SYS__sched_getaffinity, p, 0, c, m)
-ext/pcntl/pcntl.c:874:13    - Unknown word (SIGRTMAX)    -- #if defined(SIGRTMAX)
-ext/pcntl/pcntl.c:875:5     - Unknown word (oddily)      -- // oddily enough, NSIG on freebsd
-ext/pcntl/pcntl.c:875:60    - Unknown word (SIGRTMIN)    -- reports only 32 whereas SIGRTMIN starts at 65.
 ext/pcntl/pcntl.c:97:16     - Unknown word (getaffinity) -- #define sched_getaffinity(p, c, m) pset_bind(PS
 ext/pcntl/pcntl.stub.php:1000:13   - Unknown word (ECAPMODE)     -- const PCNTL_ECAPMODE = UNKNOWN;
 ext/pcntl/pcntl.stub.php:100:21    - Unknown word (idtype)     -- /* FreeBSD specific idtype */
@@ -22552,31 +22552,31 @@ ext/pcre/pcre2lib/pcre2_xclass.c:272:15    - Unknown word (PXPUNCT)    -- case P
 ext/pcre/pcre2lib/pcre2_xclass.c:281:15    - Unknown word (PXXDIGIT)   -- case PT_PXXDIGIT:
 ext/pcre/pcre2lib/pcre2_xclass.c:42:33     - Unknown word (possessify) -- is used by pcre2_auto_possessify() and by both pcre2
 ext/pcre/php_pcre.c:120:20    - Unknown word (BADUTFOFFSET) -- case PCRE2_ERROR_BADUTFOFFSET:
-ext/pcre/php_pcre.c:1256:40   - Unknown word (ovector)      -- offsets = pcre2_get_ovector_pointer(match_data)
-ext/pcre/php_pcre.c:1366:72   - Unknown word (ATSTART)      -- we set PCRE2_NOTEMPTY_ATSTART and try
-ext/pcre/php_pcre.c:1371:42   - Unknown word (ATSTART)      -- CHECK | PCRE2_NOTEMPTY_ATSTART | PCRE2_ANCHORED, match
-ext/pcre/php_pcre.c:1379:45   - Unknown word (ATSTART)      -- previously set PCRE2_NOTEMPTY_ATSTART after a null match,
-ext/pcre/php_pcre.c:1644:40   - Unknown word (ovector)      -- offsets = pcre2_get_ovector_pointer(match_data)
-ext/pcre/php_pcre.c:1766:72   - Unknown word (ATSTART)      -- we set PCRE2_NOTEMPTY_ATSTART and try
-ext/pcre/php_pcre.c:1771:42   - Unknown word (ATSTART)      -- CHECK | PCRE2_NOTEMPTY_ATSTART | PCRE2_ANCHORED, match
-ext/pcre/php_pcre.c:1893:40   - Unknown word (ovector)      -- offsets = pcre2_get_ovector_pointer(match_data)
+ext/pcre/php_pcre.c:1261:40   - Unknown word (ovector)      -- offsets = pcre2_get_ovector_pointer(match_data)
+ext/pcre/php_pcre.c:1382:72   - Unknown word (ATSTART)      -- we set PCRE2_NOTEMPTY_ATSTART and try
+ext/pcre/php_pcre.c:1387:42   - Unknown word (ATSTART)      -- CHECK | PCRE2_NOTEMPTY_ATSTART | PCRE2_ANCHORED, match
+ext/pcre/php_pcre.c:1395:45   - Unknown word (ATSTART)      -- previously set PCRE2_NOTEMPTY_ATSTART after a null match,
+ext/pcre/php_pcre.c:1665:40   - Unknown word (ovector)      -- offsets = pcre2_get_ovector_pointer(match_data)
+ext/pcre/php_pcre.c:1787:72   - Unknown word (ATSTART)      -- we set PCRE2_NOTEMPTY_ATSTART and try
+ext/pcre/php_pcre.c:1792:42   - Unknown word (ATSTART)      -- CHECK | PCRE2_NOTEMPTY_ATSTART | PCRE2_ANCHORED, match
+ext/pcre/php_pcre.c:1915:40   - Unknown word (ovector)      -- offsets = pcre2_get_ovector_pointer(match_data)
 ext/pcre/php_pcre.c:206:7     - Unknown word (gctx)         -- if (!gctx) {
 ext/pcre/php_pcre.c:207:3     - Unknown word (gctx)         -- gctx = pcre2_general_context
 ext/pcre/php_pcre.c:208:8     - Unknown word (gctx)         -- if (!gctx) {
 ext/pcre/php_pcre.c:215:39    - Unknown word (gctx)         -- compile_context_create(gctx);
-ext/pcre/php_pcre.c:2256:8    - Unknown word (zcount)       -- zval *zcount,
-ext/pcre/php_pcre.c:2320:6    - Unknown word (zcount)       -- if (zcount) {
-ext/pcre/php_pcre.c:2321:28   - Unknown word (zcount)       -- TRY_ASSIGN_REF_LONG(zcount, replace_count);
-ext/pcre/php_pcre.c:2331:8    - Unknown word (zcount)       -- zval *zcount = NULL;
-ext/pcre/php_pcre.c:2340:16   - Unknown word (zcount)       -- Z_PARAM_ZVAL(zcount)
-ext/pcre/php_pcre.c:2598:40   - Unknown word (ovector)      -- offsets = pcre2_get_ovector_pointer(match_data)
-ext/pcre/php_pcre.c:3056:26   - Unknown word (decref)       -- PHPAPI void php_pcre_pce_decref(pcre_cache_entry *pce
+ext/pcre/php_pcre.c:2278:8    - Unknown word (zcount)       -- zval *zcount,
+ext/pcre/php_pcre.c:2342:6    - Unknown word (zcount)       -- if (zcount) {
+ext/pcre/php_pcre.c:2343:28   - Unknown word (zcount)       -- TRY_ASSIGN_REF_LONG(zcount, replace_count);
+ext/pcre/php_pcre.c:2353:8    - Unknown word (zcount)       -- zval *zcount = NULL;
+ext/pcre/php_pcre.c:2362:16   - Unknown word (zcount)       -- Z_PARAM_ZVAL(zcount)
+ext/pcre/php_pcre.c:2623:40   - Unknown word (ovector)      -- offsets = pcre2_get_ovector_pointer(match_data)
+ext/pcre/php_pcre.c:3092:26   - Unknown word (decref)       -- PHPAPI void php_pcre_pce_decref(pcre_cache_entry *pce
 ext/pcre/php_pcre.c:584:14    - Unknown word (eoptions)     -- uint32_t eoptions = 0;
 ext/pcre/php_pcre.c:656:23    - Unknown word (backslashed)  -- but skipping the backslashed delimiters.  If the
 ext/pcre/php_pcre.c:716:14    - Unknown word (eoptions)     -- case 'r':	eoptions |= PCRE2_EXTRA_CASELESS
 ext/pcre/php_pcre.c:73:33     - Unknown word (gctx)       -- pcre2_general_context *gctx = NULL;
 ext/pcre/php_pcre.c:772:40    - Unknown word (eoptions)     -- extra_options(cctx, eoptions);
-ext/pcre/php_pcre.c:854:18    - Unknown word (especually)   -- * as hash keys especually for this table.
+ext/pcre/php_pcre.c:856:18    - Unknown word (especually)   -- * as hash keys especually for this table.
 ext/pcre/php_pcre.h:65:40     - Unknown word (gctx)       -- general_context *php_pcre_gctx(void);
 ext/pcre/php_pcre.h:68:26     - Unknown word (decref)     -- PHPAPI void php_pcre_pce_decref(pcre_cache_entry *)
 ext/pcre/php_pcre.h:86:25     - Unknown word (gctx)       -- pcre2_general_context *gctx_zmm;
@@ -23892,19 +23892,20 @@ ext/reflection/php_reflection.c:5673:5    - Unknown word (dynam)       -- dynam_
 ext/reflection/php_reflection.c:5676:7    - Unknown word (dynam)       -- if (dynam_prop == 0) {
 ext/reflection/php_reflection.c:5686:6    - Unknown word (dynam)       -- if (dynam_prop == 0) {
 ext/reflection/php_reflection.c:5697:20   - Unknown word (dynam)       -- reference->prop = dynam_prop ? NULL : property
-ext/reflection/php_reflection.c:6720:9    - Unknown word (addinientry) -- /* {{{ _addinientry */
-ext/reflection/php_reflection.c:6721:14   - Unknown word (addinientry) -- static void _addinientry(zend_ini_entry *ini
-ext/reflection/php_reflection.c:6747:4    - Unknown word (addinientry) -- _addinientry(ini_entry, return_value
-ext/reflection/php_reflection.c:6766:9    - Unknown word (zclass)      -- zval zclass;
-ext/reflection/php_reflection.c:6767:39   - Unknown word (zclass)      -- reflection_class_factory(ce, &zclass);
-ext/reflection/php_reflection.c:6768:53   - Unknown word (zclass)      -- class_array), name, &zclass);
+ext/reflection/php_reflection.c:6832:77   - Unknown word (REINITABLE)  -- prop_val) & IS_PROP_REINITABLE)) {
+ext/reflection/php_reflection.c:6956:9    - Unknown word (addinientry) -- /* {{{ _addinientry */
+ext/reflection/php_reflection.c:6957:14   - Unknown word (addinientry) -- static void _addinientry(zend_ini_entry *ini
+ext/reflection/php_reflection.c:6983:4    - Unknown word (addinientry) -- _addinientry(ini_entry, return_value
+ext/reflection/php_reflection.c:7002:9    - Unknown word (zclass)      -- zval zclass;
+ext/reflection/php_reflection.c:7003:39   - Unknown word (zclass)      -- reflection_class_factory(ce, &zclass);
+ext/reflection/php_reflection.c:7004:53   - Unknown word (zclass)      -- class_array), name, &zclass);
 ext/reflection/php_reflection.c:760:48    - Unknown word (ASTVAL)      -- zend_ast_export("", Z_ASTVAL_P(value), "");
 ext/reflection/php_reflection.c:979:8     - Unknown word (DEINDIRECT)  -- ZVAL_DEINDIRECT(prop);
-ext/reflection/php_reflection_arginfo.h:1502:144  - Unknown word (setaccessible) -- entry->function_table, "setaccessible", sizeof("setaccessible
-ext/reflection/php_reflection_arginfo.h:1502:168  - Unknown word (setaccessible) -- setaccessible", sizeof("setaccessible") - 1), ZSTR_KNOWN(ZEND
-ext/reflection/php_reflection_arginfo.h:1502:44   - Unknown word (setaccessible) -- attribute_Deprecated_func_setaccessible_0 = zend_add_function
-ext/reflection/php_reflection_arginfo.h:1503:38   - Unknown word (setaccessible) -- attribute_Deprecated_func_setaccessible_0->args[0].value, ZSTR
-ext/reflection/php_reflection_arginfo.h:1504:28   - Unknown word (setaccessible) -- attribute_Deprecated_func_setaccessible_0->args[0].name = ZSTR
+ext/reflection/php_reflection_arginfo.h:1513:144  - Unknown word (setaccessible) -- entry->function_table, "setaccessible", sizeof("setaccessible
+ext/reflection/php_reflection_arginfo.h:1513:168  - Unknown word (setaccessible) -- setaccessible", sizeof("setaccessible") - 1), ZSTR_KNOWN(ZEND
+ext/reflection/php_reflection_arginfo.h:1513:44   - Unknown word (setaccessible) -- attribute_Deprecated_func_setaccessible_0 = zend_add_function
+ext/reflection/php_reflection_arginfo.h:1514:38   - Unknown word (setaccessible) -- attribute_Deprecated_func_setaccessible_0->args[0].value, ZSTR
+ext/reflection/php_reflection_arginfo.h:1515:28   - Unknown word (setaccessible) -- attribute_Deprecated_func_setaccessible_0->args[0].name = ZSTR
 ext/session/mod_mm.c:420:19    - Unknown word (ehash)      -- ps_sd **ohash, **ehash;
 ext/session/mod_mm.c:432:2     - Unknown word (ehash)      -- ehash = data->hash + data
 ext/session/mod_mm.c:85:10     - Unknown word (ohash)      -- ps_sd **ohash, **ehash;
@@ -25291,6 +25292,11 @@ ext/sodium/libsodium.c:3621:36   - Unknown word (RISTRETTO)     -- be SODIUM_CRY
 ext/sodium/libsodium.c:37:15     - Unknown word (AESGCM)     -- # define HAVE_AESGCM 1
 ext/sodium/libsodium.c:3843:40   - Unknown word (NONREDUCEDSCALARBYTES) -- crypto_core_ristretto255_NONREDUCEDSCALARBYTES) {
 ext/sodium/libsodium.c:3845:49   - Unknown word (NONREDUCEDSCALARBYTES) -- CRYPTO_CORE_RISTRETTO255_NONREDUCEDSCALARBYTES bytes long");
+ext/sodium/libsodium.c:4544:32   - Unknown word (turboshake)            -- FUNCTION(sodium_crypto_xof_turboshake128)
+ext/sodium/libsodium.c:4561:17   - Unknown word (turboshake)            -- if (crypto_xof_turboshake128((unsigned char *
+ext/sodium/libsodium.c:4571:32   - Unknown word (turboshake)            -- FUNCTION(sodium_crypto_xof_turboshake128_init)
+ext/sodium/libsodium.c:4573:13   - Unknown word (turboshake)            -- crypto_xof_turboshake128_state state_tmp
+ext/sodium/libsodium.c:4585:18   - Unknown word (turboshake)            -- if (crypto_xof_turboshake128_init(&state_tmp)
 ext/sodium/libsodium.c:668:74    - Unknown word (KEYPAIRBYTES) -- be SODIUM_CRYPTO_BOX_KEYPAIRBYTES bytes long");
 ext/sodium/libsodium.c:691:74    - Unknown word (KEYPAIRBYTES) -- be SODIUM_CRYPTO_BOX_KEYPAIRBYTES bytes long");
 ext/sodium/libsodium.c:69:21     - Unknown word (chacha)     -- #ifndef crypto_aead_chacha20poly1305_IETF_KEYBYTES
@@ -25530,11 +25536,79 @@ ext/sodium/libsodium.stub.php:74:33     - Unknown word (NSECBYTES)  -- crypto_ae
 ext/sodium/libsodium.stub.php:783:17    - Unknown word (memzero)               -- function sodium_memzero(#[\SensitiveParameter
 ext/sodium/libsodium.stub.php:787:17    - Unknown word (unpad)                 -- function sodium_unpad(#[\SensitiveParameter
 ext/sodium/libsodium.stub.php:79:33     - Unknown word (NPUBBYTES)  -- crypto_aead_aegis256_NPUBBYTES
+ext/sodium/libsodium.stub.php:804:15    - Unknown word (ipcrypt)               -- #ifdef crypto_ipcrypt_KEYBYTES
+ext/sodium/libsodium.stub.php:807:19    - Unknown word (ipcrypt)               -- * @cvalue crypto_ipcrypt_BYTES
+ext/sodium/libsodium.stub.php:809:21    - Unknown word (IPCRYPT)               -- const SODIUM_CRYPTO_IPCRYPT_BYTES = UNKNOWN;
+ext/sodium/libsodium.stub.php:812:19    - Unknown word (ipcrypt)               -- * @cvalue crypto_ipcrypt_KEYBYTES
+ext/sodium/libsodium.stub.php:814:21    - Unknown word (IPCRYPT)               -- const SODIUM_CRYPTO_IPCRYPT_KEYBYTES = UNKNOWN;
+ext/sodium/libsodium.stub.php:817:19    - Unknown word (ipcrypt)               -- * @cvalue crypto_ipcrypt_ND_KEYBYTES
+ext/sodium/libsodium.stub.php:819:21    - Unknown word (IPCRYPT)               -- const SODIUM_CRYPTO_IPCRYPT_ND_KEYBYTES = UNKNOWN
+ext/sodium/libsodium.stub.php:822:19    - Unknown word (ipcrypt)               -- * @cvalue crypto_ipcrypt_ND_TWEAKBYTES
+ext/sodium/libsodium.stub.php:822:30    - Unknown word (TWEAKBYTES)            -- cvalue crypto_ipcrypt_ND_TWEAKBYTES
+ext/sodium/libsodium.stub.php:824:21    - Unknown word (IPCRYPT)               -- const SODIUM_CRYPTO_IPCRYPT_ND_TWEAKBYTES = UNKNOWN
+ext/sodium/libsodium.stub.php:824:32    - Unknown word (TWEAKBYTES)            -- SODIUM_CRYPTO_IPCRYPT_ND_TWEAKBYTES = UNKNOWN;
+ext/sodium/libsodium.stub.php:827:30    - Unknown word (INPUTBYTES)            -- cvalue crypto_ipcrypt_ND_INPUTBYTES
+ext/sodium/libsodium.stub.php:829:21    - Unknown word (IPCRYPT)               -- const SODIUM_CRYPTO_IPCRYPT_ND_INPUTBYTES = UNKNOWN
+ext/sodium/libsodium.stub.php:829:32    - Unknown word (INPUTBYTES)            -- SODIUM_CRYPTO_IPCRYPT_ND_INPUTBYTES = UNKNOWN;
+ext/sodium/libsodium.stub.php:832:30    - Unknown word (OUTPUTBYTES)           -- cvalue crypto_ipcrypt_ND_OUTPUTBYTES
+ext/sodium/libsodium.stub.php:834:32    - Unknown word (OUTPUTBYTES)           -- SODIUM_CRYPTO_IPCRYPT_ND_OUTPUTBYTES = UNKNOWN;
+ext/sodium/libsodium.stub.php:842:31    - Unknown word (TWEAKBYTES)            -- cvalue crypto_ipcrypt_NDX_TWEAKBYTES
+ext/sodium/libsodium.stub.php:844:33    - Unknown word (TWEAKBYTES)            -- SODIUM_CRYPTO_IPCRYPT_NDX_TWEAKBYTES = UNKNOWN;
+ext/sodium/libsodium.stub.php:847:31    - Unknown word (INPUTBYTES)            -- cvalue crypto_ipcrypt_NDX_INPUTBYTES
+ext/sodium/libsodium.stub.php:849:33    - Unknown word (INPUTBYTES)            -- SODIUM_CRYPTO_IPCRYPT_NDX_INPUTBYTES = UNKNOWN;
 ext/sodium/libsodium.stub.php:84:33     - Unknown word (ABYTES)     -- crypto_aead_aegis256_ABYTES
+ext/sodium/libsodium.stub.php:852:31    - Unknown word (OUTPUTBYTES)           -- cvalue crypto_ipcrypt_NDX_OUTPUTBYTES
+ext/sodium/libsodium.stub.php:854:33    - Unknown word (OUTPUTBYTES)          -- SODIUM_CRYPTO_IPCRYPT_NDX_OUTPUTBYTES = UNKNOWN;
+ext/sodium/libsodium.stub.php:895:28    - Unknown word (STATEBYTES)           -- crypto_xof_shake128_STATEBYTES
+ext/sodium/libsodium.stub.php:898:32    - Unknown word (BLOCKBYTES)           -- crypto_xof_shake128_BLOCKBYTES
+ext/sodium/libsodium.stub.php:900:34    - Unknown word (BLOCKBYTES)           -- CRYPTO_XOF_SHAKE128_BLOCKBYTES = UNKNOWN;
+ext/sodium/libsodium.stub.php:903:32    - Unknown word (STATEBYTES)           -- crypto_xof_shake128_STATEBYTES
+ext/sodium/libsodium.stub.php:905:34    - Unknown word (STATEBYTES)           -- CRYPTO_XOF_SHAKE128_STATEBYTES = UNKNOWN;
+ext/sodium/libsodium.stub.php:908:32    - Unknown word (BLOCKBYTES)           -- crypto_xof_shake256_BLOCKBYTES
+ext/sodium/libsodium.stub.php:910:34    - Unknown word (BLOCKBYTES)           -- CRYPTO_XOF_SHAKE256_BLOCKBYTES = UNKNOWN;
+ext/sodium/libsodium.stub.php:913:32    - Unknown word (STATEBYTES)           -- crypto_xof_shake256_STATEBYTES
+ext/sodium/libsodium.stub.php:915:34    - Unknown word (STATEBYTES)           -- CRYPTO_XOF_SHAKE256_STATEBYTES = UNKNOWN;
+ext/sodium/libsodium.stub.php:918:23    - Unknown word (turboshake)           -- @cvalue crypto_xof_turboshake128_BLOCKBYTES
+ext/sodium/libsodium.stub.php:918:37    - Unknown word (BLOCKBYTES)           -- crypto_xof_turboshake128_BLOCKBYTES
 ext/sodium/libsodium.stub.php:91:24     - Unknown word (chacha)     -- @cvalue crypto_aead_chacha20poly1305_KEYBYTES
+ext/sodium/libsodium.stub.php:920:25    - Unknown word (TURBOSHAKE)           -- const SODIUM_CRYPTO_XOF_TURBOSHAKE128_BLOCKBYTES = UNKNOWN
+ext/sodium/libsodium.stub.php:923:23    - Unknown word (turboshake)           -- @cvalue crypto_xof_turboshake128_STATEBYTES
+ext/sodium/libsodium.stub.php:925:25    - Unknown word (TURBOSHAKE)           -- const SODIUM_CRYPTO_XOF_TURBOSHAKE128_STATEBYTES = UNKNOWN
+ext/sodium/libsodium.stub.php:928:23    - Unknown word (turboshake)           -- @cvalue crypto_xof_turboshake256_BLOCKBYTES
+ext/sodium/libsodium.stub.php:930:25    - Unknown word (TURBOSHAKE)           -- const SODIUM_CRYPTO_XOF_TURBOSHAKE256_BLOCKBYTES = UNKNOWN
+ext/sodium/libsodium.stub.php:933:23    - Unknown word (turboshake)           -- @cvalue crypto_xof_turboshake256_STATEBYTES
+ext/sodium/libsodium.stub.php:935:25    - Unknown word (TURBOSHAKE)           -- const SODIUM_CRYPTO_XOF_TURBOSHAKE256_STATEBYTES = UNKNOWN
 ext/sodium/libsodium.stub.php:93:26     - Unknown word (CHACHA)     -- const SODIUM_CRYPTO_AEAD_CHACHA20POLY1305_KEYBYTES
+ext/sodium/libsodium.stub.php:953:28    - Unknown word (turboshake)           -- function sodium_crypto_xof_turboshake128(int $length, string
 ext/sodium/libsodium.stub.php:96:24     - Unknown word (chacha)     -- @cvalue crypto_aead_chacha20poly1305_NSECBYTES
 ext/sodium/libsodium.stub.php:98:26     - Unknown word (CHACHA)     -- const SODIUM_CRYPTO_AEAD_CHACHA20POLY1305_NSECBYTES
+ext/sodium/libsodium_arginfo.h:1004:47   - Unknown word (SCRYPTSALSA)  -- SODIUM_CRYPTO_PWHASH_SCRYPTSALSA208SHA256_SALTBYTES"
+ext/sodium/libsodium_arginfo.h:1005:49   - Unknown word (SCRYPTSALSA)  -- SODIUM_CRYPTO_PWHASH_SCRYPTSALSA208SHA256_STRPREFIX"
+ext/sodium/libsodium_arginfo.h:1006:47   - Unknown word (SCRYPTSALSA)  -- SODIUM_CRYPTO_PWHASH_SCRYPTSALSA208SHA256_OPSLIMIT_INTERACTIVE
+ext/sodium/libsodium_arginfo.h:1007:47   - Unknown word (SCRYPTSALSA)  -- SODIUM_CRYPTO_PWHASH_SCRYPTSALSA208SHA256_MEMLIMIT_INTERACTIVE
+ext/sodium/libsodium_arginfo.h:1008:47   - Unknown word (SCRYPTSALSA)  -- SODIUM_CRYPTO_PWHASH_SCRYPTSALSA208SHA256_OPSLIMIT_SENSITIVE
+ext/sodium/libsodium_arginfo.h:1011:40   - Unknown word (SCALARMULT)   -- CONSTANT("SODIUM_CRYPTO_SCALARMULT_BYTES", crypto_scalarmult
+ext/sodium/libsodium_arginfo.h:1012:40   - Unknown word (SCALARMULT)   -- CONSTANT("SODIUM_CRYPTO_SCALARMULT_SCALARBYTES", crypto
+ext/sodium/libsodium_arginfo.h:1022:45   - Unknown word (KEYPAIRBYTES) -- "SODIUM_CRYPTO_SIGN_KEYPAIRBYTES", SODIUM_CRYPTO_SIGN
+ext/sodium/libsodium_arginfo.h:1036:40   - Unknown word (SCALARMULT)   -- CONSTANT("SODIUM_CRYPTO_SCALARMULT_RISTRETTO255_BYTES"
+ext/sodium/libsodium_arginfo.h:1036:51   - Unknown word (RISTRETTO)    -- SODIUM_CRYPTO_SCALARMULT_RISTRETTO255_BYTES", crypto_scalarmult
+ext/sodium/libsodium_arginfo.h:1037:40   - Unknown word (SCALARMULT)   -- CONSTANT("SODIUM_CRYPTO_SCALARMULT_RISTRETTO255_SCALARBYTES
+ext/sodium/libsodium_arginfo.h:1037:51   - Unknown word (RISTRETTO)    -- SODIUM_CRYPTO_SCALARMULT_RISTRETTO255_SCALARBYTES", crypto
+ext/sodium/libsodium_arginfo.h:1038:45   - Unknown word (RISTRETTO)    -- "SODIUM_CRYPTO_CORE_RISTRETTO255_BYTES", crypto_core
+ext/sodium/libsodium_arginfo.h:1039:45   - Unknown word (RISTRETTO)    -- "SODIUM_CRYPTO_CORE_RISTRETTO255_HASHBYTES", crypto
+ext/sodium/libsodium_arginfo.h:1040:45   - Unknown word (RISTRETTO)    -- "SODIUM_CRYPTO_CORE_RISTRETTO255_SCALARBYTES", crypto
+ext/sodium/libsodium_arginfo.h:1041:107  - Unknown word (NONREDUCEDSCALARBYTES) -- crypto_core_ristretto255_NONREDUCEDSCALARBYTES, CONST_PERSISTENT);
+ext/sodium/libsodium_arginfo.h:1041:58   - Unknown word (NONREDUCEDSCALARBYTES) -- CRYPTO_CORE_RISTRETTO255_NONREDUCEDSCALARBYTES", crypto_core_ristretto
+ext/sodium/libsodium_arginfo.h:1062:44   - Unknown word (TURBOSHAKE)            -- CONSTANT("SODIUM_CRYPTO_XOF_TURBOSHAKE128_BLOCKBYTES", crypto
+ext/sodium/libsodium_arginfo.h:1063:44   - Unknown word (TURBOSHAKE)            -- CONSTANT("SODIUM_CRYPTO_XOF_TURBOSHAKE128_STATEBYTES", crypto
+ext/sodium/libsodium_arginfo.h:1064:44   - Unknown word (TURBOSHAKE)            -- CONSTANT("SODIUM_CRYPTO_XOF_TURBOSHAKE256_BLOCKBYTES", crypto
+ext/sodium/libsodium_arginfo.h:1065:44   - Unknown word (TURBOSHAKE)            -- CONSTANT("SODIUM_CRYPTO_XOF_TURBOSHAKE256_STATEBYTES", crypto
+ext/sodium/libsodium_arginfo.h:1068:18   - Unknown word (AESGCM)                -- #if defined(HAVE_AESGCM)
+ext/sodium/libsodium_arginfo.h:1070:190  - Unknown word (SENSITIVEPARAMETER)    -- ZSTR_KNOWN(ZEND_STR_SENSITIVEPARAMETER), 0);
+ext/sodium/libsodium_arginfo.h:1072:190  - Unknown word (SENSITIVEPARAMETER)    -- ZSTR_KNOWN(ZEND_STR_SENSITIVEPARAMETER), 0);
+ext/sodium/libsodium_arginfo.h:1074:190  - Unknown word (SENSITIVEPARAMETER)    -- ZSTR_KNOWN(ZEND_STR_SENSITIVEPARAMETER), 0);
+ext/sodium/libsodium_arginfo.h:1078:190  - Unknown word (SENSITIVEPARAMETER)    -- ZSTR_KNOWN(ZEND_STR_SENSITIVEPARAMETER), 0);
+ext/sodium/libsodium_arginfo.h:1080:190  - Unknown word (SENSITIVEPARAMETER)    -- ZSTR_KNOWN(ZEND_STR_SENSITIVEPARAMETER), 0);
 ext/sodium/libsodium_arginfo.h:162:25    - Unknown word (ristretto)  -- defined(crypto_core_ristretto255_HASHBYTES)
 ext/sodium/libsodium_arginfo.h:163:68    - Unknown word (ristretto)  -- arginfo_sodium_crypto_core_ristretto255_add, 0, 2, IS_STRING
 ext/sodium/libsodium_arginfo.h:168:68    - Unknown word (ristretto)  -- arginfo_sodium_crypto_core_ristretto255_from_hash, 0, 1,
@@ -25551,64 +25625,46 @@ ext/sodium/libsodium_arginfo.h:313:63    - Unknown word (scalarmult)  -- arginfo
 ext/sodium/libsodium_arginfo.h:332:33    - Unknown word (xchacha)     -- crypto_secretstream_xchacha20poly1305_ABYTES)
 ext/sodium/libsodium_arginfo.h:344:88    - Unknown word (XCHACHA)     -- CRYPTO_SECRETSTREAM_XCHACHA20POLY1305_TAG_MESSAGE
 ext/sodium/libsodium_arginfo.h:484:31    - Unknown word (scalarmult)  -- arginfo_sodium_crypto_scalarmult_base arginfo_sodium
-ext/sodium/libsodium_arginfo.h:487:18    - Unknown word (AESGCM)      -- #if defined(HAVE_AESGCM)
-ext/sodium/libsodium_arginfo.h:508:48    - Unknown word (NPUBBYTES)   -- xchacha20poly1305_IETF_NPUBBYTES)
-ext/sodium/libsodium_arginfo.h:562:27    - Unknown word (scryptsalsa) -- defined(crypto_pwhash_scryptsalsa208sha256_SALTBYTES)
-ext/sodium/libsodium_arginfo.h:567:29    - Unknown word (scalarmult)  -- FUNCTION(sodium_crypto_scalarmult);
-ext/sodium/libsodium_arginfo.h:622:18    - Unknown word (AESGCM)      -- #if defined(HAVE_AESGCM)
-ext/sodium/libsodium_arginfo.h:643:48    - Unknown word (NPUBBYTES)   -- xchacha20poly1305_IETF_NPUBBYTES)
+ext/sodium/libsodium_arginfo.h:558:35    - Unknown word (turboshake)  -- arginfo_sodium_crypto_xof_turboshake128 arginfo_sodium_crypto
+ext/sodium/libsodium_arginfo.h:560:35    - Unknown word (turboshake)  -- arginfo_sodium_crypto_xof_turboshake128_init arginfo_sodium
+ext/sodium/libsodium_arginfo.h:562:35    - Unknown word (turboshake)  -- arginfo_sodium_crypto_xof_turboshake128_update arginfo_sodium
+ext/sodium/libsodium_arginfo.h:564:35    - Unknown word (turboshake)  -- arginfo_sodium_crypto_xof_turboshake128_squeeze arginfo_sodium
+ext/sodium/libsodium_arginfo.h:566:35    - Unknown word (turboshake)  -- arginfo_sodium_crypto_xof_turboshake256 arginfo_sodium_crypto
+ext/sodium/libsodium_arginfo.h:576:18    - Unknown word (AESGCM)      -- #if defined(HAVE_AESGCM)
+ext/sodium/libsodium_arginfo.h:597:48    - Unknown word (NPUBBYTES)   -- xchacha20poly1305_IETF_NPUBBYTES)
 ext/sodium/libsodium_arginfo.h:64:68     - Unknown word (chacha)     -- arginfo_sodium_crypto_aead_chacha20poly1305_decrypt,
+ext/sodium/libsodium_arginfo.h:651:27    - Unknown word (scryptsalsa) -- defined(crypto_pwhash_scryptsalsa208sha256_SALTBYTES)
+ext/sodium/libsodium_arginfo.h:656:29    - Unknown word (scalarmult)  -- FUNCTION(sodium_crypto_scalarmult);
 ext/sodium/libsodium_arginfo.h:71:68     - Unknown word (chacha)     -- arginfo_sodium_crypto_aead_chacha20poly1305_encrypt,
-ext/sodium/libsodium_arginfo.h:758:22    - Unknown word (libsodium)   -- static void register_libsodium_symbols(int module_number
-ext/sodium/libsodium_arginfo.h:763:18    - Unknown word (AESGCM)      -- #if defined(HAVE_AESGCM)
-ext/sodium/libsodium_arginfo.h:766:55    - Unknown word (NPUBBYTES)   -- CRYPTO_AEAD_AES256GCM_NPUBBYTES", crypto_aead_aes25
-ext/sodium/libsodium_arginfo.h:766:89    - Unknown word (NPUBBYTES)   -- crypto_aead_aes256gcm_NPUBBYTES, CONST_PERSISTENT);
-ext/sodium/libsodium_arginfo.h:781:45    - Unknown word (CHACHA)      -- "SODIUM_CRYPTO_AEAD_CHACHA20POLY1305_KEYBYTES"
-ext/sodium/libsodium_arginfo.h:782:45    - Unknown word (CHACHA)      -- "SODIUM_CRYPTO_AEAD_CHACHA20POLY1305_NSECBYTES
-ext/sodium/libsodium_arginfo.h:783:45    - Unknown word (CHACHA)      -- "SODIUM_CRYPTO_AEAD_CHACHA20POLY1305_NPUBBYTES
-ext/sodium/libsodium_arginfo.h:784:45    - Unknown word (CHACHA)      -- "SODIUM_CRYPTO_AEAD_CHACHA20POLY1305_ABYTES", crypto
-ext/sodium/libsodium_arginfo.h:785:45    - Unknown word (CHACHA)      -- "SODIUM_CRYPTO_AEAD_CHACHA20POLY1305_IETF_KEYBYTES
+ext/sodium/libsodium_arginfo.h:745:18    - Unknown word (AESGCM)      -- #if defined(HAVE_AESGCM)
+ext/sodium/libsodium_arginfo.h:766:48    - Unknown word (NPUBBYTES)   -- xchacha20poly1305_IETF_NPUBBYTES)
 ext/sodium/libsodium_arginfo.h:78:68     - Unknown word (chacha)     -- arginfo_sodium_crypto_aead_chacha20poly1305_keygen, 0
-ext/sodium/libsodium_arginfo.h:790:45    - Unknown word (XCHACHA)     -- "SODIUM_CRYPTO_AEAD_XCHACHA20POLY1305_IETF_KEYBYTES
-ext/sodium/libsodium_arginfo.h:791:45    - Unknown word (XCHACHA)     -- "SODIUM_CRYPTO_AEAD_XCHACHA20POLY1305_IETF_NSECBYTES
-ext/sodium/libsodium_arginfo.h:792:45    - Unknown word (XCHACHA)     -- "SODIUM_CRYPTO_AEAD_XCHACHA20POLY1305_IETF_NPUBBYTES
-ext/sodium/libsodium_arginfo.h:793:45    - Unknown word (XCHACHA)     -- "SODIUM_CRYPTO_AEAD_XCHACHA20POLY1305_IETF_ABYTES
-ext/sodium/libsodium_arginfo.h:797:44    - Unknown word (SEALBYTES)   -- CONSTANT("SODIUM_CRYPTO_BOX_SEALBYTES", crypto_box_SEALBYTES
-ext/sodium/libsodium_arginfo.h:797:67    - Unknown word (SEALBYTES)   -- SEALBYTES", crypto_box_SEALBYTES, CONST_PERSISTENT);
 ext/sodium/libsodium_arginfo.h:7:18      - Unknown word (AESGCM)     -- #if defined(HAVE_AESGCM)
-ext/sodium/libsodium_arginfo.h:800:44    - Unknown word (KEYPAIRBYTES) -- CONSTANT("SODIUM_CRYPTO_BOX_KEYPAIRBYTES", SODIUM_CRYPTO_BOX
-ext/sodium/libsodium_arginfo.h:800:77    - Unknown word (KEYPAIRBYTES) -- , SODIUM_CRYPTO_BOX_KEYPAIRBYTES(), CONST_PERSISTENT
-ext/sodium/libsodium_arginfo.h:812:43    - Unknown word (KEYPAIRBYTES) -- CONSTANT("SODIUM_CRYPTO_KX_KEYPAIRBYTES", SODIUM_CRYPTO_KX_KEYPAIRBYT
-ext/sodium/libsodium_arginfo.h:812:75    - Unknown word (KEYPAIRBYTES) -- YPAIRBYTES", SODIUM_CRYPTO_KX_KEYPAIRBYTES(), CONST_PERSISTENT
 ext/sodium/libsodium_arginfo.h:81:36     - Unknown word (chacha)     -- arginfo_sodium_crypto_aead_chacha20poly1305_ietf_decrypt
 ext/sodium/libsodium_arginfo.h:81:93     - Unknown word (chacha)     -- arginfo_sodium_crypto_aead_chacha20poly1305_decrypt
-ext/sodium/libsodium_arginfo.h:847:47    - Unknown word (SCRYPTSALSA)  -- SODIUM_CRYPTO_PWHASH_SCRYPTSALSA208SHA256_SALTBYTES"
-ext/sodium/libsodium_arginfo.h:848:49    - Unknown word (SCRYPTSALSA)  -- SODIUM_CRYPTO_PWHASH_SCRYPTSALSA208SHA256_STRPREFIX"
-ext/sodium/libsodium_arginfo.h:849:47    - Unknown word (SCRYPTSALSA)  -- SODIUM_CRYPTO_PWHASH_SCRYPTSALSA208SHA256_OPSLIMIT_INTERACTIVE
-ext/sodium/libsodium_arginfo.h:850:47    - Unknown word (SCRYPTSALSA)  -- SODIUM_CRYPTO_PWHASH_SCRYPTSALSA208SHA256_MEMLIMIT_INTERACTIVE
-ext/sodium/libsodium_arginfo.h:851:47    - Unknown word (SCRYPTSALSA)  -- SODIUM_CRYPTO_PWHASH_SCRYPTSALSA208SHA256_OPSLIMIT_SENSITIVE
-ext/sodium/libsodium_arginfo.h:854:40    - Unknown word (SCALARMULT)   -- CONSTANT("SODIUM_CRYPTO_SCALARMULT_BYTES", crypto_scalarmult
-ext/sodium/libsodium_arginfo.h:855:40    - Unknown word (SCALARMULT)   -- CONSTANT("SODIUM_CRYPTO_SCALARMULT_SCALARBYTES", crypto
-ext/sodium/libsodium_arginfo.h:865:45    - Unknown word (KEYPAIRBYTES) -- "SODIUM_CRYPTO_SIGN_KEYPAIRBYTES", SODIUM_CRYPTO_SIGN
-ext/sodium/libsodium_arginfo.h:879:40    - Unknown word (SCALARMULT)   -- CONSTANT("SODIUM_CRYPTO_SCALARMULT_RISTRETTO255_BYTES"
-ext/sodium/libsodium_arginfo.h:879:51    - Unknown word (RISTRETTO)    -- SODIUM_CRYPTO_SCALARMULT_RISTRETTO255_BYTES", crypto_scalarmult
 ext/sodium/libsodium_arginfo.h:87:25     - Unknown word (xchacha)    -- defined(crypto_aead_xchacha20poly1305_IETF_NPUBBYTES
 ext/sodium/libsodium_arginfo.h:87:48     - Unknown word (NPUBBYTES)  -- xchacha20poly1305_IETF_NPUBBYTES)
-ext/sodium/libsodium_arginfo.h:880:40    - Unknown word (SCALARMULT)   -- CONSTANT("SODIUM_CRYPTO_SCALARMULT_RISTRETTO255_SCALARBYTES
-ext/sodium/libsodium_arginfo.h:880:51    - Unknown word (RISTRETTO)    -- SODIUM_CRYPTO_SCALARMULT_RISTRETTO255_SCALARBYTES", crypto
-ext/sodium/libsodium_arginfo.h:881:45    - Unknown word (RISTRETTO)    -- "SODIUM_CRYPTO_CORE_RISTRETTO255_BYTES", crypto_core
-ext/sodium/libsodium_arginfo.h:882:45    - Unknown word (RISTRETTO)    -- "SODIUM_CRYPTO_CORE_RISTRETTO255_HASHBYTES", crypto
-ext/sodium/libsodium_arginfo.h:883:45    - Unknown word (RISTRETTO)    -- "SODIUM_CRYPTO_CORE_RISTRETTO255_SCALARBYTES", crypto
-ext/sodium/libsodium_arginfo.h:884:107   - Unknown word (NONREDUCEDSCALARBYTES) -- crypto_core_ristretto255_NONREDUCEDSCALARBYTES, CONST_PERSISTENT);
-ext/sodium/libsodium_arginfo.h:884:58    - Unknown word (NONREDUCEDSCALARBYTES) -- CRYPTO_CORE_RISTRETTO255_NONREDUCEDSCALARBYTES", crypto_core_ristretto
-ext/sodium/libsodium_arginfo.h:887:18    - Unknown word (AESGCM)                -- #if defined(HAVE_AESGCM)
-ext/sodium/libsodium_arginfo.h:889:190   - Unknown word (SENSITIVEPARAMETER)    -- ZSTR_KNOWN(ZEND_STR_SENSITIVEPARAMETER), 0);
 ext/sodium/libsodium_arginfo.h:88:68     - Unknown word (xchacha)    -- arginfo_sodium_crypto_aead_xchacha20poly1305_ietf_decrypt
-ext/sodium/libsodium_arginfo.h:891:190   - Unknown word (SENSITIVEPARAMETER)    -- ZSTR_KNOWN(ZEND_STR_SENSITIVEPARAMETER), 0);
-ext/sodium/libsodium_arginfo.h:893:190   - Unknown word (SENSITIVEPARAMETER)    -- ZSTR_KNOWN(ZEND_STR_SENSITIVEPARAMETER), 0);
-ext/sodium/libsodium_arginfo.h:897:190   - Unknown word (SENSITIVEPARAMETER)    -- ZSTR_KNOWN(ZEND_STR_SENSITIVEPARAMETER), 0);
-ext/sodium/libsodium_arginfo.h:899:190   - Unknown word (SENSITIVEPARAMETER)    -- ZSTR_KNOWN(ZEND_STR_SENSITIVEPARAMETER), 0);
+ext/sodium/libsodium_arginfo.h:915:22    - Unknown word (libsodium)   -- static void register_libsodium_symbols(int module_number
+ext/sodium/libsodium_arginfo.h:920:18    - Unknown word (AESGCM)      -- #if defined(HAVE_AESGCM)
+ext/sodium/libsodium_arginfo.h:923:55    - Unknown word (NPUBBYTES)   -- CRYPTO_AEAD_AES256GCM_NPUBBYTES", crypto_aead_aes25
+ext/sodium/libsodium_arginfo.h:923:89    - Unknown word (NPUBBYTES)   -- crypto_aead_aes256gcm_NPUBBYTES, CONST_PERSISTENT);
+ext/sodium/libsodium_arginfo.h:938:45    - Unknown word (CHACHA)      -- "SODIUM_CRYPTO_AEAD_CHACHA20POLY1305_KEYBYTES"
+ext/sodium/libsodium_arginfo.h:939:45    - Unknown word (CHACHA)      -- "SODIUM_CRYPTO_AEAD_CHACHA20POLY1305_NSECBYTES
+ext/sodium/libsodium_arginfo.h:940:45    - Unknown word (CHACHA)      -- "SODIUM_CRYPTO_AEAD_CHACHA20POLY1305_NPUBBYTES
+ext/sodium/libsodium_arginfo.h:941:45    - Unknown word (CHACHA)      -- "SODIUM_CRYPTO_AEAD_CHACHA20POLY1305_ABYTES", crypto
+ext/sodium/libsodium_arginfo.h:942:45    - Unknown word (CHACHA)      -- "SODIUM_CRYPTO_AEAD_CHACHA20POLY1305_IETF_KEYBYTES
+ext/sodium/libsodium_arginfo.h:947:45    - Unknown word (XCHACHA)     -- "SODIUM_CRYPTO_AEAD_XCHACHA20POLY1305_IETF_KEYBYTES
+ext/sodium/libsodium_arginfo.h:948:45    - Unknown word (XCHACHA)     -- "SODIUM_CRYPTO_AEAD_XCHACHA20POLY1305_IETF_NSECBYTES
+ext/sodium/libsodium_arginfo.h:949:45    - Unknown word (XCHACHA)     -- "SODIUM_CRYPTO_AEAD_XCHACHA20POLY1305_IETF_NPUBBYTES
+ext/sodium/libsodium_arginfo.h:950:45    - Unknown word (XCHACHA)     -- "SODIUM_CRYPTO_AEAD_XCHACHA20POLY1305_IETF_ABYTES
+ext/sodium/libsodium_arginfo.h:954:44    - Unknown word (SEALBYTES)   -- CONSTANT("SODIUM_CRYPTO_BOX_SEALBYTES", crypto_box_SEALBYTES
+ext/sodium/libsodium_arginfo.h:954:67    - Unknown word (SEALBYTES)   -- SEALBYTES", crypto_box_SEALBYTES, CONST_PERSISTENT);
+ext/sodium/libsodium_arginfo.h:957:44    - Unknown word (KEYPAIRBYTES) -- CONSTANT("SODIUM_CRYPTO_BOX_KEYPAIRBYTES", SODIUM_CRYPTO_BOX
+ext/sodium/libsodium_arginfo.h:957:77    - Unknown word (KEYPAIRBYTES) -- , SODIUM_CRYPTO_BOX_KEYPAIRBYTES(), CONST_PERSISTENT
 ext/sodium/libsodium_arginfo.h:95:68     - Unknown word (xchacha)    -- arginfo_sodium_crypto_aead_xchacha20poly1305_ietf_keygen
+ext/sodium/libsodium_arginfo.h:969:43    - Unknown word (KEYPAIRBYTES) -- CONSTANT("SODIUM_CRYPTO_KX_KEYPAIRBYTES", SODIUM_CRYPTO_KX_KEYPAIRBYT
+ext/sodium/libsodium_arginfo.h:969:75    - Unknown word (KEYPAIRBYTES) -- YPAIRBYTES", SODIUM_CRYPTO_KX_KEYPAIRBYTES(), CONST_PERSISTENT
 ext/sodium/libsodium_arginfo.h:98:68     - Unknown word (xchacha)    -- arginfo_sodium_crypto_aead_xchacha20poly1305_ietf_encrypt
 ext/sodium/php_libsodium.h:17:13     - Unknown word (LIBSODIUM)  -- #ifndef PHP_LIBSODIUM_H
 ext/sodium/php_libsodium.h:18:13     - Unknown word (LIBSODIUM)  -- #define PHP_LIBSODIUM_H
@@ -25972,13 +26028,13 @@ ext/standard/basic_functions.c:1172:8    - Unknown word (UNPOISON)   -- MSAN_UNP
 ext/standard/basic_functions.c:120:22    - Unknown word (msan)       -- include <sanitizer/msan_interface.h>
 ext/standard/basic_functions.c:13:15     - Unknown word (Andi)       -- | Authors: Andi Gutmans <andi@php.net
 ext/standard/basic_functions.c:173:6     - Unknown word (MSVCRT)     -- /* MSVCRT has a bug in putenv
-ext/standard/basic_functions.c:1809:8    - Unknown word (hicompiled) -- char *hicompiled_string_description;
-ext/standard/basic_functions.c:1827:2    - Unknown word (hicompiled) -- hicompiled_string_description
-ext/standard/basic_functions.c:1829:49   - Unknown word (hicompiled) -- syntax_highlighter_ini, hicompiled_string_description)
-ext/standard/basic_functions.c:1830:8    - Unknown word (hicompiled) -- efree(hicompiled_string_description)
-ext/standard/basic_functions.c:2189:5    - Unknown word (MSAN)       -- /* MSAN false positive, getservbyport
-ext/standard/basic_functions.c:2191:4    - Unknown word (msan)       -- __msan_unpoison_string(serv
-ext/standard/basic_functions.c:2191:9    - Unknown word (unpoison)   -- __msan_unpoison_string(serv->s_name
+ext/standard/basic_functions.c:1815:8    - Unknown word (hicompiled) -- char *hicompiled_string_description;
+ext/standard/basic_functions.c:1836:2    - Unknown word (hicompiled) -- hicompiled_string_description
+ext/standard/basic_functions.c:1838:49   - Unknown word (hicompiled) -- syntax_highlighter_ini, hicompiled_string_description)
+ext/standard/basic_functions.c:1839:8    - Unknown word (hicompiled) -- efree(hicompiled_string_description)
+ext/standard/basic_functions.c:2198:5    - Unknown word (MSAN)       -- /* MSAN false positive, getservbyport
+ext/standard/basic_functions.c:2200:4    - Unknown word (msan)       -- __msan_unpoison_string(serv
+ext/standard/basic_functions.c:2200:9    - Unknown word (unpoison)   -- __msan_unpoison_string(serv->s_name
 ext/standard/basic_functions.c:313:13    - Unknown word (INTRIN)     -- #ifdef ZEND_INTRIN_SSE4_2_FUNC_PTR
 ext/standard/basic_functions.c:314:31    - Unknown word (intrin)     -- MINIT_SUBMODULE(string_intrin)
 ext/standard/basic_functions.c:317:13    - Unknown word (INTRIN)     -- #ifdef ZEND_INTRIN_SSE4_2_PCLMUL_FUNC_PTR
@@ -28629,6 +28685,7 @@ run-tests.php:679:18    - Unknown word (PHPDBG)       -- putenv("TEST_PHPDBG_EXE
 run-tests.php:680:24    - Unknown word (PHPDBG)       -- $environment['TEST_PHPDBG_EXECUTABLE_ESCAPED'
 run-tests.php:691:45    - Unknown word (redir)        -- merge($test_files, $redir_tests);
 run-tests.php:736:48    - Unknown word (phpt)         -- of all test files (*.phpt).
+run-tests.php:862:68    - Unknown word (SHLIB)        -- Z0-9]+)\.(?:' . PHP_SHLIB_SUFFIX . ')$/', $file
 run-tests.php:90:20     - Unknown word (sdir)        -- --temp-source <sdir> --temp-target <tdir
 run-tests.php:90:42     - Unknown word (tdir)        -- sdir> --temp-target <tdir> [--temp-urlbase <url
 run-tests.php:90:56     - Unknown word (urlbase)     -- target <tdir> [--temp-urlbase <url>]
