@@ -24,6 +24,7 @@ export enum ElementType {
     RegExp = 6,
     Date = 7,
     BigInt = 8,
+    StringTable = 128,
 }
 interface EmptyObject {
     readonly t?: ElementType.Object;
@@ -45,7 +46,8 @@ export type ArrayBasedElements =
     | RegExpElement
     | SetElement
     | StringElement
-    | SubStringElement;
+    | SubStringElement
+    | StringTableElement;
 
 export type Index = number;
 /**
@@ -92,7 +94,11 @@ export type BigIntElement = readonly [type: ElementType.BigInt, value: Index];
  */
 export type ArrayElement = readonly [type: ElementType.Array, ...Index[]];
 
-export type FlattenedElement = Readonly<PrimitiveElement | ObjectBasedElements | ArrayBasedElements>;
+export type StringTableElement = readonly [type: ElementType.StringTable, ...string[]];
+
+export type FlattenedElement = Readonly<
+    PrimitiveElement | ObjectBasedElements | ArrayBasedElements | StringTableElement
+>;
 
 type Header = string;
 export type Flatpacked = [Header, ...FlattenedElement[]];
@@ -121,6 +127,12 @@ export interface FlatpackOptions {
      * The format of the output. If not specified, the latest format will be used.
      */
     format?: 'V1' | 'V2';
+
+    /**
+     * Use a string table to store unique strings and reference them by index.
+     * This forces the format to be at least V2.
+     */
+    useStringTable?: boolean;
 }
 
 /**

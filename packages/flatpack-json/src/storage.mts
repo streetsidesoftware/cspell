@@ -19,10 +19,11 @@ import type {
     RegExpElement,
     Serializable,
     SetElement,
+    StringTableElement,
     SubStringElement,
     Unpacked,
 } from './types.mjs';
-import { blockSplitRegex, dataHeader, ElementType } from './types.mjs';
+import { blockSplitRegex, dataHeader, dataHeaderV1_0, dataHeaderV2_0, ElementType } from './types.mjs';
 
 const collator = new Intl.Collator('en', {
     usage: 'sort',
@@ -45,6 +46,7 @@ interface FoundSubString {
 
 export class CompactStorage {
     private data = [dataHeader] as Flatpacked;
+    private stringTable: StringTableElement | undefined;
     private dedupe = true;
     private sortKeys = true;
     private emptyObjIdx = 0;
@@ -70,10 +72,28 @@ export class CompactStorage {
      */
     private knownStringsRev = new Trie<TrieData>();
     private cachedElements = new Map<number, CacheMap>();
+    private stringTableLookup = new Map<string, number>();
 
     constructor(readonly options?: FlatpackOptions | undefined) {
         this.dedupe = options?.dedupe ?? true;
         this.sortKeys = options?.sortKeys || this.dedupe;
+        let stringTableAllowed = dataHeader !== dataHeaderV1_0;
+        if (options?.format === 'V1') {
+            this.data[0] = dataHeaderV1_0;
+            stringTableAllowed = false;
+        }
+        if (options?.format === 'V2') {
+            this.data[0] = dataHeaderV2_0;
+            stringTableAllowed = true;
+        }
+        if (options?.useStringTable && !options.format) {
+            this.data[0] = dataHeaderV2_0;
+            stringTableAllowed = true;
+        }
+        if (options?.useStringTable || (options?.useStringTable !== false && stringTableAllowed)) {
+            this.stringTable = [ElementType.StringTable];
+            this.data[1] = this.stringTable;
+        }
     }
 
     private primitiveToIdx(value: Primitive): number {
@@ -117,17 +137,34 @@ export class CompactStorage {
         return cost;
     }
 
-    private addKnownString(idx: number, value: string) {
+    private addToKnownStrings(idx: number, value: string) {
         if (value.length >= minSubStringLen) {
             const data = { idx, value };
-            this.knownStrings.add(value.length > 256 ? [...value].slice(0, 256) : value, data);
-            this.knownStringsRev.add(revStr(value, 256), data);
+            const chars = [...value];
+            if (chars.length > 256) {
+                this.knownStrings.add(chars.slice(0, 256), data);
+                this.knownStringsRev.add(chars.slice(-256).reverse(), data);
+                return;
+            }
+
+            this.knownStrings.add(chars, data);
+            this.knownStringsRev.add(chars.reverse(), data);
         }
     }
 
     private addStringPrimitive(value: string): number {
+        const strTableIdx = this.stringTableLookup.get(value);
+        if (strTableIdx) {
+            return -strTableIdx;
+        }
+        const stringTable = this.stringTable as string[] | undefined;
+        if (stringTable && value.length >= minSubStringLen && value.length > Math.log10(stringTable.length)) {
+            const idx = stringTable.push(value) - 1;
+            this.stringTableLookup.set(value, idx);
+            return -idx;
+        }
         const idx = this.data.push(value) - 1;
-        this.addKnownString(idx, value);
+        this.addToKnownStrings(idx, value);
         this.cache.set(value, idx);
         return idx;
     }
@@ -165,7 +202,7 @@ export class CompactStorage {
             const v = [sIdx, this.stringToIdx(value.slice(subStr.length))];
             const idx = this.data.push([ElementType.String, ...v]) - 1;
             this.cache.set(value, idx);
-            this.addKnownString(idx, value);
+            this.addToKnownStrings(idx, value);
             return idx;
         }
 
@@ -178,7 +215,7 @@ export class CompactStorage {
         const v = [this.stringToIdx(value.slice(0, -subStr.length)), sIdx];
         const idx = this.data.push([ElementType.String, ...v]) - 1;
         this.cache.set(value, idx);
-        this.addKnownString(idx, value);
+        this.addToKnownStrings(idx, value);
         return idx;
     }
 
@@ -487,7 +524,10 @@ export class CompactStorage {
 
     toJSON<V extends Serializable>(json: V): Flatpacked {
         this.softReset();
-        this.valueToIdx(json);
+        const lastIdx = this.valueToIdx(json);
+        if (lastIdx < 0) {
+            this.data.push([ElementType.String, lastIdx]);
+        }
         return this.options?.optimize ? optimizeFlatpacked(this.data) : this.data;
     }
 }
