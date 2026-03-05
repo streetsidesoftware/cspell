@@ -41,6 +41,9 @@ export function optimizeFlatpacked(data: Flatpacked): Flatpacked {
                 stringTableRefCounts.set(index, (stringTableRefCounts.get(index) || 0) + 1);
                 continue;
             }
+            if (!index) {
+                continue;
+            }
             const ref = indexToRefElement.get(index);
             assert(ref, `Invalid reference index: ${index}`);
             ref.refCount++;

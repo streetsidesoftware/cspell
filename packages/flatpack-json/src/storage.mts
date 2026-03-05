@@ -155,13 +155,14 @@ export class CompactStorage {
     private addStringPrimitive(value: string): number {
         const strTableIdx = this.stringTableLookup.get(value);
         if (strTableIdx) {
-            return -strTableIdx;
+            return strTableIdx;
         }
         const stringTable = this.stringTable as string[] | undefined;
-        if (stringTable && value.length >= minSubStringLen && value.length > Math.log10(stringTable.length)) {
-            const idx = stringTable.push(value) - 1;
+        if (stringTable) {
+            const idx = -(stringTable.push(value) - 1);
             this.stringTableLookup.set(value, idx);
-            return -idx;
+            this.addToKnownStrings(idx, value);
+            return idx;
         }
         const idx = this.data.push(value) - 1;
         this.addToKnownStrings(idx, value);
@@ -181,7 +182,12 @@ export class CompactStorage {
             return found;
         }
 
-        if (forceStringPrimitives || value.length < minSubStringLen || blockSplitRegex.test(value)) {
+        if (
+            forceStringPrimitives ||
+            value.length < minSubStringLen ||
+            blockSplitRegex.test(value) ||
+            this.stringTable
+        ) {
             return this.addStringPrimitive(value);
         }
 

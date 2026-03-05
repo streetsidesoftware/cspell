@@ -1,4 +1,4 @@
-import { readFile } from 'node:fs/promises';
+import fs from 'node:fs/promises';
 
 import { findMatchingFileTypes } from '@cspell/filetypes';
 import { describe, expect, test } from 'vitest';
@@ -7,7 +7,9 @@ import { stringify, toJSON } from './storage.mjs';
 import { stringifyFlatpacked } from './stringify.mjs';
 import { fromJSON } from './unpack.mjs';
 
-const urlFileList = new URL('../fixtures/fileList.txt', import.meta.url);
+const urlFixtures = new URL('../fixtures/', import.meta.url);
+const urlFileList = new URL('fileList.txt', urlFixtures);
+const urlNpmV1 = new URL('.npm-packages-info-v1.json', urlFixtures);
 const baseFilename = new URL(import.meta.url).pathname.split('/').slice(-1).join('').split('.').slice(0, -2).join('.');
 
 describe('dehydrate', async () => {
@@ -159,8 +161,21 @@ describe('dehydrate', async () => {
     });
 });
 
+describe('v1 to v2', async () => {
+    const contentNpmV1 = await fs.readFile(urlNpmV1, 'utf8');
+
+    test('npmV1 to V2', async () => {
+        const data = fromJSON(JSON.parse(contentNpmV1));
+        expect(fromJSON(toJSON(data, { useStringTable: true, dedupe: true }))).toEqual(data);
+        const jsonStr = stringify(data, true, { optimize: true, useStringTable: true, dedupe: true });
+        await fs.writeFile(new URL('.npm-packages-info-v2.json', urlFixtures), jsonStr);
+
+        expect(fromJSON(JSON.parse(jsonStr))).toEqual(data);
+    });
+});
+
 async function sampleFileList() {
-    const data = await readFile(urlFileList, 'utf8');
+    const data = await fs.readFile(urlFileList, 'utf8');
     const files = data.split('\n');
     return files;
 }
