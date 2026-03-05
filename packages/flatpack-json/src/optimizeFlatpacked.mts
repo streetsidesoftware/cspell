@@ -1,48 +1,90 @@
 import assert from 'node:assert';
 
-import type { ArrayBasedElements, Flatpacked, FlattenedElement } from './types.mjs';
+import type { ArrayBasedElements, Flatpacked, FlattenedElement, StringTableElement } from './types.mjs';
 import { ElementType, supportedHeaders } from './types.mjs';
 
 export function optimizeFlatpacked(data: Flatpacked): Flatpacked {
-    const [header] = data;
+    const [header, maybeStringTable] = data;
+
+    if (data[1] === undefined || data[2] === undefined) {
+        return data;
+    }
+
     if (!supportedHeaders.has(header)) {
         throw new Error('Invalid header');
     }
 
-    const elementRefs = data.map((element, index) => ({ origIndex: index, refCount: 0, index: 0, element }));
-    const indexToRefElement = new Map<number, RefElement>(elementRefs.entries());
+    const stringTable =
+        maybeStringTable && Array.isArray(maybeStringTable) && maybeStringTable[0] === ElementType.StringTable
+            ? (maybeStringTable as StringTableElement)
+            : undefined;
+
+    const startIndex = stringTable ? 2 : 1;
+
+    const elements = data.slice(startIndex);
+
+    const elementRefs = elements.map((element, index) => ({
+        origIndex: index + startIndex,
+        refCount: 0,
+        index: 0,
+        element,
+    }));
+    const indexToRefElement = new Map<number, RefElement>(
+        elementRefs.map((refElement) => [refElement.origIndex, refElement]),
+    );
+    const stringTableRefCounts = new Map<number, number>();
 
     for (const refElement of elementRefs) {
-        if (refElement.origIndex === 0) {
-            continue;
-        }
         const indexes = getRefIndexes(refElement.element);
         for (const index of indexes) {
+            if (index < 0) {
+                stringTableRefCounts.set(index, (stringTableRefCounts.get(index) || 0) + 1);
+                continue;
+            }
             const ref = indexToRefElement.get(index);
             assert(ref, `Invalid reference index: ${index}`);
             ref.refCount++;
         }
     }
 
-    const sortedRefElements = elementRefs.slice(2).sort((a, b) => b.refCount - a.refCount || a.origIndex - b.origIndex);
-    sortedRefElements.forEach((refElement, index) => {
-        refElement.index = index + 2;
-    });
+    const sortedRefElements = elementRefs.sort((a, b) => b.refCount - a.refCount || a.origIndex - b.origIndex);
 
     const indexMap = new Map<number, number>([
         [0, 0],
         [1, 1],
     ]);
-    sortedRefElements.forEach((refElement) => {
-        indexMap.set(refElement.origIndex, refElement.index);
+
+    if (stringTable) {
+        indexMap.set(2, 2);
+    }
+
+    for (const refElement of sortedRefElements) {
+        const idx = indexMap.get(refElement.origIndex) ?? indexMap.size;
+        refElement.index = idx;
+        indexMap.set(refElement.origIndex, idx);
+    }
+
+    const sortedStringTableIndexes = [...stringTableRefCounts.entries()].sort((a, b) => b[1] - a[1] || a[0] - b[0]);
+    sortedStringTableIndexes.forEach(([index], i) => {
+        indexMap.set(index, -(i + 1));
     });
 
-    const optimizedElements: FlattenedElement[] = [
-        data[1],
-        ...sortedRefElements.map((refElement) => refElement.element),
-    ].map((element) => patchIndexes(element, indexMap));
+    const stringTableElements: FlattenedElement[] = [];
 
-    return [header, ...optimizedElements];
+    // sort the string table.
+    if (stringTable) {
+        const strings = sortedStringTableIndexes.map(([index]) => stringTable[-index] as string);
+        stringTableElements.push([ElementType.StringTable, ...strings]);
+    }
+
+    const result: Flatpacked = [header, ...stringTableElements];
+
+    for (const refElement of sortedRefElements) {
+        const element = patchIndexes(refElement.element, indexMap);
+        result[refElement.index] = element;
+    }
+
+    return result;
 }
 
 function patchIndexes(elem: FlattenedElement, indexMap: Map<number, number>): FlattenedElement {
@@ -107,7 +149,7 @@ function patchIndexes(elem: FlattenedElement, indexMap: Map<number, number>): Fl
         return elem;
     }
 
-    assert(typeof elem === 'boolean');
+    assert(typeof elem === 'boolean', `Expected boolean, got ${typeof elem}`);
     return elem;
 }
 

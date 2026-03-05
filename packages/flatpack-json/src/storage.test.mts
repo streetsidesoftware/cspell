@@ -79,36 +79,38 @@ describe('dehydrate', async () => {
     });
 
     test.each`
-        data                                                                                            | options
-        ${undefined}                                                                                    | ${undefined}
-        ${'string'}                                                                                     | ${undefined}
-        ${1}                                                                                            | ${undefined}
-        ${1.1}                                                                                          | ${undefined}
-        ${null}                                                                                         | ${undefined}
-        ${true}                                                                                         | ${undefined}
-        ${false}                                                                                        | ${undefined}
-        ${[]}                                                                                           | ${undefined}
-        ${[1, 2]}                                                                                       | ${undefined}
-        ${['apple', 'banana', 'apple', 'banana', 'apple', 'pineapple']}                                 | ${undefined}
-        ${new Set(['apple', 'banana', 'pineapple'])}                                                    | ${undefined}
-        ${new Set(['pineapple', 'apple', 'banana'])}                                                    | ${undefined}
-        ${new Map([['apple', 1], ['banana', 2], ['pineapple', 3]])}                                     | ${undefined}
-        ${{}}                                                                                           | ${undefined}
-        ${[{}, {}, {}]}                                                                                 | ${undefined}
-        ${{ a: 1 }}                                                                                     | ${undefined}
-        ${{ a: { b: 1 } }}                                                                              | ${undefined}
-        ${{ a: { a: 'a', b: 42 } }}                                                                     | ${undefined}
-        ${{ a: [1] }}                                                                                   | ${undefined}
-        ${{ values: ['apple', 'banana', 'pineapple'], set: new Set(['apple', 'banana', 'pineapple']) }} | ${undefined}
-        ${[{ a: 'a', b: 'b' }, { a: 'c', b: 'd' }, { b: 'b', a: 'a' }, ['a', 'b'], ['c', 'd']]}         | ${undefined}
-        ${[{ a: 'a', b: 'b' }, { a: 'a', b: 'b' }, { a: 'a', b: 'b' }, { a: 'a', b: 'b' }]}             | ${{ dedupe: false }}
-        ${sampleNestedData()}                                                                           | ${undefined}
-        ${sampleRepeatedStrings()}                                                                      | ${undefined}
-        ${/[\p{L}\p{M}]+/gu}                                                                            | ${undefined}
-        ${[/[\p{L}\p{M}]+/gu, /[\p{L}\p{M}]+/gu, /[\p{Lu}\p{M}]+/gu]}                                   | ${undefined}
-        ${[new Date('2024-01-01'), new Date('2024-01-01'), new Date('2024-01-02')]}                     | ${undefined}
-        ${[1n, 2n, 1n, 2n, biMaxSafe, -biMaxSafe, biMaxSafe + 1n, -biMaxSafe - 1n]}                     | ${undefined}
-        ${[Object(1n), Object('hello'), Object(/\w+/g), Object(null), Object([]), Object('hello')]}     | ${undefined}
+        data                                                                                                | options
+        ${undefined}                                                                                        | ${undefined}
+        ${'string'}                                                                                         | ${undefined}
+        ${1}                                                                                                | ${undefined}
+        ${1.1}                                                                                              | ${undefined}
+        ${null}                                                                                             | ${undefined}
+        ${true}                                                                                             | ${undefined}
+        ${false}                                                                                            | ${undefined}
+        ${[]}                                                                                               | ${undefined}
+        ${[1, 2]}                                                                                           | ${undefined}
+        ${['apple', 'banana', 'apple', 'banana', 'apple', 'pineapple']}                                     | ${undefined}
+        ${['pineapple', 'apple', 'grape', 'banana', 'apple', 'banana', 'apple', 'pineapple']}               | ${undefined}
+        ${new Set(['apple', 'banana', 'pineapple'])}                                                        | ${undefined}
+        ${new Set(['pineapple', 'apple', 'banana'])}                                                        | ${undefined}
+        ${new Map([['apple', 1], ['banana', 2], ['pineapple', 3]])}                                         | ${undefined}
+        ${{}}                                                                                               | ${undefined}
+        ${[{}, {}, {}]}                                                                                     | ${undefined}
+        ${{ a: 1 }}                                                                                         | ${undefined}
+        ${{ a: { b: 1 } }}                                                                                  | ${undefined}
+        ${{ a: { a: 'a', b: 42 } }}                                                                         | ${undefined}
+        ${{ a: [1] }}                                                                                       | ${undefined}
+        ${{ values: ['apple', 'banana', 'pineapple'], set: new Set(['apple', 'banana', 'pineapple']) }}     | ${undefined}
+        ${{ values: ['', 'apple', 'banana', 'pineapple'], set: new Set(['apple', 'banana', 'pineapple']) }} | ${undefined}
+        ${[{ a: 'a', b: 'b' }, { a: 'c', b: 'd' }, { b: 'b', a: 'a' }, ['a', 'b'], ['c', 'd']]}             | ${undefined}
+        ${[{ a: 'a', b: 'b' }, { a: 'a', b: 'b' }, { a: 'a', b: 'b' }, { a: 'a', b: 'b' }]}                 | ${{ dedupe: false }}
+        ${sampleNestedData()}                                                                               | ${undefined}
+        ${sampleRepeatedStrings()}                                                                          | ${undefined}
+        ${/[\p{L}\p{M}]+/gu}                                                                                | ${undefined}
+        ${[/[\p{L}\p{M}]+/gu, /[\p{L}\p{M}]+/gu, /[\p{Lu}\p{M}]+/gu]}                                       | ${undefined}
+        ${[new Date('2024-01-01'), new Date('2024-01-01'), new Date('2024-01-02')]}                         | ${undefined}
+        ${[1n, 2n, 1n, 2n, biMaxSafe, -biMaxSafe, biMaxSafe + 1n, -biMaxSafe - 1n]}                         | ${undefined}
+        ${[Object(1n), Object('hello'), Object(/\w+/g), Object(null), Object([]), Object('hello')]}         | ${undefined}
     `('dehydrate useStringTable $data $options', ({ data, options }) => {
         options = { ...options, useStringTable: true };
         const v = toJSON(data, { ...options });
@@ -117,9 +119,9 @@ describe('dehydrate', async () => {
         expect(fromJSON(JSON.parse(JSON.stringify(v)))).toEqual(data);
         expect(fromJSON(JSON.parse(stringify(data)))).toEqual(data);
         expect(fromJSON(JSON.parse(stringify(data, false)))).toEqual(data);
-        // const vv = toJSON(data, { ...options, optimize: true });
-        // expect(vv).toMatchSnapshot('optimized');
-        // expect(fromJSON(vv)).toEqual(data);
+        const vv = toJSON(data, { ...options, optimize: true });
+        expect(vv).toMatchSnapshot('optimized');
+        expect(fromJSON(vv)).toEqual(data);
     });
 
     test.each`
