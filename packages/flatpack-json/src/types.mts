@@ -116,17 +116,31 @@ export interface FlatpackOptions {
      * Try to optimize the size of the output.
      */
     optimize?: boolean;
+
+    /**
+     * The format of the output. If not specified, the latest format will be used.
+     */
+    format?: 'V1' | 'V2';
 }
 
 /**
  * Legacy header for Flatpack JSON.
  */
 export const dataHeaderV0_1 = 'Dehydrated JSON v1' as const;
+export const dataHeaderV1_0 = 'Flatpack JSON v1' as const;
+export const dataHeaderV2_0 = 'Flatpack JSON v2' as const;
 /**
  * The current header for Flatpack JSON.
  */
-export const dataHeader = 'Flatpack JSON v1' as const;
+export const dataHeader: string = dataHeaderV1_0;
 /**
  * The set of supported headers for Flatpack JSON.
  */
-export const supportedHeaders: Set<string> = new Set<string>([dataHeaderV0_1, dataHeader]);
+export const supportedHeaders: Set<string> = new Set<string>([dataHeaderV0_1, dataHeaderV1_0, dataHeaderV2_0]);
+
+export interface FlatpackApi {
+    setValue(value: Serializable): void;
+    toJSON(): Flatpacked;
+    stringify(): string;
+    toValue(): Unpacked;
+}

@@ -32,7 +32,7 @@ import type {
     SimplePrimitive,
     Unpacked,
 } from './types.mjs';
-import { blockSplitRegex, dataHeaderV1_0 as dataHeader } from './types.mjs';
+import { blockSplitRegex, dataHeaderV2_0 as dataHeader } from './types.mjs';
 import { fromJSON } from './unpack.mjs';
 
 const collator = new Intl.Collator('en', {
@@ -51,7 +51,7 @@ const useSuffix = true;
 
 const maxCachedStringLen = 256;
 
-export class FlatpackStoreV1 implements FlatpackApi {
+export class FlatpackStoreV2 implements FlatpackApi {
     private knownElements = new Set<RefElements>();
     private assignedElements = new Map<RefElements, number>();
     private elements: (RefElements | undefined)[] = [undefined];
@@ -694,12 +694,12 @@ export class FlatpackStoreV1 implements FlatpackApi {
         return data;
     }
 
-    static fromJSON(data: Flatpacked): FlatpackStoreV1 {
-        return new FlatpackStoreV1(new FlatpackedWrapper(data));
+    static fromJSON(data: Flatpacked): FlatpackStoreV2 {
+        return new FlatpackStoreV2(new FlatpackedWrapper(data));
     }
 
-    static parse(content: string): FlatpackStoreV1 {
-        return new FlatpackStoreV1(FlatpackedWrapper.parse(content));
+    static parse(content: string): FlatpackStoreV2 {
+        return new FlatpackStoreV2(FlatpackedWrapper.parse(content));
     }
 
     stringify(): string {
@@ -739,7 +739,7 @@ function reverse(value: string | string[]): string[] {
 }
 
 export function toJSON<V extends Serializable>(json: V, options?: FlatpackOptions): Flatpacked {
-    return new FlatpackStoreV1(json, options).toJSON();
+    return new FlatpackStoreV2(json, options).toJSON();
 }
 
 export function stringify(data: Unpacked, pretty = true): string {
