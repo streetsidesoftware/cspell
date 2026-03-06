@@ -24,6 +24,7 @@ export enum ElementType {
     RegExp = 6,
     Date = 7,
     BigInt = 8,
+    StringTable = 128,
 }
 interface EmptyObject {
     readonly t?: ElementType.Object;
@@ -45,7 +46,8 @@ export type ArrayBasedElements =
     | RegExpElement
     | SetElement
     | StringElement
-    | SubStringElement;
+    | SubStringElement
+    | StringTableElement;
 
 export type Index = number;
 /**
@@ -92,7 +94,13 @@ export type BigIntElement = readonly [type: ElementType.BigInt, value: Index];
  */
 export type ArrayElement = readonly [type: ElementType.Array, ...Index[]];
 
-export type FlattenedElement = Readonly<PrimitiveElement | ObjectBasedElements | ArrayBasedElements>;
+export type StringTableEntry = string | number[];
+
+export type StringTableElement = readonly [type: ElementType.StringTable, ...StringTableEntry[]];
+
+export type FlattenedElement = Readonly<
+    PrimitiveElement | ObjectBasedElements | ArrayBasedElements | StringTableElement
+>;
 
 type Header = string;
 export type Flatpacked = [Header, ...FlattenedElement[]];
@@ -116,17 +124,44 @@ export interface FlatpackOptions {
      * Try to optimize the size of the output.
      */
     optimize?: boolean;
+
+    /**
+     * The format of the output. If not specified, the latest format will be used.
+     */
+    format?: 'V1' | 'V2';
+
+    /**
+     * Use a string table to store unique strings and reference them by index.
+     * This forces the format to be at least V2.
+     */
+    useStringTable?: boolean;
 }
 
 /**
  * Legacy header for Flatpack JSON.
  */
 export const dataHeaderV0_1 = 'Dehydrated JSON v1' as const;
+export const dataHeaderV1_0 = 'Flatpack JSON v1' as const;
+export const dataHeaderV2_0 = 'Flatpack JSON v2' as const;
 /**
  * The current header for Flatpack JSON.
  */
-export const dataHeader = 'Flatpack JSON v1' as const;
+export const dataHeader: string = dataHeaderV1_0;
 /**
  * The set of supported headers for Flatpack JSON.
  */
-export const supportedHeaders: Set<string> = new Set<string>([dataHeaderV0_1, dataHeader]);
+export const supportedHeaders: Set<string> = new Set<string>([dataHeaderV0_1, dataHeaderV1_0, dataHeaderV2_0]);
+
+export interface FlatpackApi {
+    setValue(value: Serializable): void;
+    toJSON(): Flatpacked;
+    stringify(): string;
+    toValue(): Unpacked;
+}
+
+export function isStringTableElement(elem: FlattenedElement): elem is StringTableElement {
+    if (!Array.isArray(elem)) {
+        return false;
+    }
+    return elem[0] === ElementType.StringTable;
+}

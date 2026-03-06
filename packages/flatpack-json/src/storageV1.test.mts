@@ -1,16 +1,14 @@
-import fs from 'node:fs/promises';
+import { readFile } from 'node:fs/promises';
 
 import { findMatchingFileTypes } from '@cspell/filetypes';
 import { describe, expect, test } from 'vitest';
 
-import { stringify, toJSON } from './storage.mjs';
+import { stringify, toJSON } from './storageV1.mjs';
 import { stringifyFlatpacked } from './stringify.mjs';
 import { fromJSON } from './unpack.mjs';
 
-const urlFixtures = new URL('../fixtures/', import.meta.url);
-const urlFileList = new URL('fileList.txt', urlFixtures);
-const urlNpmV1 = new URL('.npm-packages-info-v1.json', urlFixtures);
-const baseFilename = new URL(import.meta.url).pathname.split('/').slice(-1).join('').split('.').slice(0, -2).join('.');
+const urlFileList = new URL('../fixtures/fileList.txt', import.meta.url);
+const baseFilename = 'storage';
 
 describe('dehydrate', async () => {
     test.each`
@@ -69,61 +67,12 @@ describe('dehydrate', async () => {
         ${[1n, 2n, 1n, 2n, biMaxSafe, -biMaxSafe, biMaxSafe + 1n, -biMaxSafe - 1n]}                     | ${undefined}
         ${[Object(1n), Object('hello'), Object(/\w+/g), Object(null), Object([]), Object('hello')]}     | ${undefined}
     `('dehydrate $data $options', ({ data, options }) => {
-        const v = toJSON(data, { ...options });
+        const v = toJSON(data, { dedupe: options?.dedupe });
         expect(v).toMatchSnapshot();
         expect(fromJSON(v)).toEqual(data);
         expect(fromJSON(JSON.parse(JSON.stringify(v)))).toEqual(data);
         expect(fromJSON(JSON.parse(stringify(data)))).toEqual(data);
         expect(fromJSON(JSON.parse(stringify(data, false)))).toEqual(data);
-        const vv = toJSON(data, { ...options, optimize: true });
-        expect(vv).toMatchSnapshot('optimized');
-        expect(fromJSON(vv)).toEqual(data);
-    });
-
-    test.each`
-        data                                                                                                | options
-        ${undefined}                                                                                        | ${undefined}
-        ${'string'}                                                                                         | ${undefined}
-        ${1}                                                                                                | ${undefined}
-        ${1.1}                                                                                              | ${undefined}
-        ${null}                                                                                             | ${undefined}
-        ${true}                                                                                             | ${undefined}
-        ${false}                                                                                            | ${undefined}
-        ${[]}                                                                                               | ${undefined}
-        ${[1, 2]}                                                                                           | ${undefined}
-        ${['apple', 'banana', 'apple', 'banana', 'apple', 'pineapple']}                                     | ${undefined}
-        ${['pineapple', 'apple', 'grape', 'banana', 'apple', 'banana', 'apple', 'pineapple']}               | ${undefined}
-        ${new Set(['apple', 'banana', 'pineapple'])}                                                        | ${undefined}
-        ${new Set(['pineapple', 'apple', 'banana'])}                                                        | ${undefined}
-        ${new Map([['apple', 1], ['banana', 2], ['pineapple', 3]])}                                         | ${undefined}
-        ${{}}                                                                                               | ${undefined}
-        ${[{}, {}, {}]}                                                                                     | ${undefined}
-        ${{ a: 1 }}                                                                                         | ${undefined}
-        ${{ a: { b: 1 } }}                                                                                  | ${undefined}
-        ${{ a: { a: 'a', b: 42 } }}                                                                         | ${undefined}
-        ${{ a: [1] }}                                                                                       | ${undefined}
-        ${{ values: ['apple', 'banana', 'pineapple'], set: new Set(['apple', 'banana', 'pineapple']) }}     | ${undefined}
-        ${{ values: ['', 'apple', 'banana', 'pineapple'], set: new Set(['apple', 'banana', 'pineapple']) }} | ${undefined}
-        ${[{ a: 'a', b: 'b' }, { a: 'c', b: 'd' }, { b: 'b', a: 'a' }, ['a', 'b'], ['c', 'd']]}             | ${undefined}
-        ${[{ a: 'a', b: 'b' }, { a: 'a', b: 'b' }, { a: 'a', b: 'b' }, { a: 'a', b: 'b' }]}                 | ${{ dedupe: false }}
-        ${sampleNestedData()}                                                                               | ${undefined}
-        ${sampleRepeatedStrings()}                                                                          | ${undefined}
-        ${/[\p{L}\p{M}]+/gu}                                                                                | ${undefined}
-        ${[/[\p{L}\p{M}]+/gu, /[\p{L}\p{M}]+/gu, /[\p{Lu}\p{M}]+/gu]}                                       | ${undefined}
-        ${[new Date('2024-01-01'), new Date('2024-01-01'), new Date('2024-01-02')]}                         | ${undefined}
-        ${[1n, 2n, 1n, 2n, biMaxSafe, -biMaxSafe, biMaxSafe + 1n, -biMaxSafe - 1n]}                         | ${undefined}
-        ${[Object(1n), Object('hello'), Object(/\w+/g), Object(null), Object([]), Object('hello')]}         | ${undefined}
-    `('dehydrate useStringTable $data $options', ({ data, options }) => {
-        options = { ...options, useStringTable: true };
-        const v = toJSON(data, { ...options });
-        expect(v).toMatchSnapshot();
-        expect(fromJSON(v)).toEqual(data);
-        expect(fromJSON(JSON.parse(JSON.stringify(v)))).toEqual(data);
-        expect(fromJSON(JSON.parse(stringify(data)))).toEqual(data);
-        expect(fromJSON(JSON.parse(stringify(data, false)))).toEqual(data);
-        const vv = toJSON(data, { ...options, optimize: true });
-        expect(vv).toMatchSnapshot('optimized');
-        expect(fromJSON(vv)).toEqual(data);
     });
 
     test.each`
@@ -161,21 +110,8 @@ describe('dehydrate', async () => {
     });
 });
 
-describe('v1 to v2', async () => {
-    const contentNpmV1 = await fs.readFile(urlNpmV1, 'utf8');
-
-    test('npmV1 to V2', async () => {
-        const data = fromJSON(JSON.parse(contentNpmV1));
-        expect(fromJSON(toJSON(data, { useStringTable: true, dedupe: true }))).toEqual(data);
-        const jsonStr = stringify(data, true, { optimize: true, useStringTable: true, dedupe: true });
-        await fs.writeFile(new URL('.npm-packages-info-v2.json', urlFixtures), jsonStr);
-
-        expect(fromJSON(JSON.parse(jsonStr))).toEqual(data);
-    });
-});
-
 async function sampleFileList() {
-    const data = await fs.readFile(urlFileList, 'utf8');
+    const data = await readFile(urlFileList, 'utf8');
     const files = data.split('\n');
     return files;
 }

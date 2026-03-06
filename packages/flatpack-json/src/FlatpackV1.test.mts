@@ -4,8 +4,8 @@ import { findMatchingFileTypes } from '@cspell/filetypes';
 import { createPatch } from 'diff';
 import { describe, expect, test } from 'vitest';
 
-import { FlatpackStore, stringify, toJSON } from './Flatpack.mjs';
-import { deepEqual } from './proxy.mts';
+import { FlatpackStoreV1 as FlatpackStore, stringify, toJSON } from './FlatpackV1.mjs';
+import { deepEqual } from './proxy.mjs';
 import { stringifyFlatpacked } from './stringify.mjs';
 import { fromJSON } from './unpack.mjs';
 

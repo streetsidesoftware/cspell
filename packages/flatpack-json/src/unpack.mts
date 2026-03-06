@@ -1,5 +1,6 @@
 import assert from 'node:assert';
 
+import { StringTable } from './stringTable.mjs';
 import type {
     ArrayBasedElements,
     ArrayElement,
@@ -18,6 +19,7 @@ import type {
     Serializable,
     SetElement,
     StringElement,
+    StringTableElement,
     SubStringElement,
     Unpacked,
 } from './types.mjs';
@@ -25,6 +27,8 @@ import { ElementType, supportedHeaders } from './types.mjs';
 
 export function fromJSON(data: Flatpacked): Unpacked {
     const [header] = data;
+
+    let stringTable: StringTable | undefined;
 
     if (!supportedHeaders.has(header)) {
         throw new Error('Invalid header');
@@ -79,9 +83,9 @@ export function fromJSON(data: Flatpacked): Unpacked {
     }
 
     function toString(idx: number, elem: StringElement | string): string {
-        const s = typeof elem === 'string' ? elem : idxToValue(elem.slice(1) as number[]);
+        const s = typeof elem === 'string' ? elem : idxToString(elem.slice(1) as number[]);
         cache.set(idx, s);
-        return s as string;
+        return s;
     }
 
     function toObj(idx: number, elem: ObjectElement): PrimitiveObject {
@@ -164,22 +168,31 @@ export function fromJSON(data: Flatpacked): Unpacked {
             case ElementType.BigInt: {
                 return toBigInt(idx, element as BigIntElement);
             }
+            case ElementType.StringTable: {
+                stringTable = new StringTable(element as StringTableElement);
+                return idxToValue(idx + 1);
+            }
         }
         return toArr(idx, element as ArrayElement);
     }
 
-    function idxToValue(idx: number | number[]): Serializable {
+    function idxToString(idx: number | number[]): string {
+        if (!idx) return '';
+        if (Array.isArray(idx)) {
+            return joinToString(idx.map((i) => idxToValue(i)));
+        }
+        return idxToValue(idx) as string;
+    }
+
+    function idxToValue(idx: number): Serializable {
         if (!idx) return undefined;
+        if (idx < 0) {
+            return stringTable ? stringTable.get(-idx) : undefined;
+        }
         const found = cache.get(idx);
         if (found !== undefined) {
             if (typeof idx === 'number') referenced.add(idx);
             return found as Serializable;
-        }
-
-        if (Array.isArray(idx)) {
-            // it is a nested string;
-            const parts = idx.map((i) => idxToValue(i));
-            return joinToString(parts);
         }
 
         const element = data[idx];
