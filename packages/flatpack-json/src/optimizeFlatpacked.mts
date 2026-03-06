@@ -32,13 +32,11 @@ export function optimizeFlatpacked(data: Flatpacked): Flatpacked {
     const indexToRefElement = new Map<number, RefElement>(
         elementRefs.map((refElement) => [refElement.origIndex, refElement]),
     );
-    const stringTableRefCounts = new Map<number, number>();
 
     for (const refElement of elementRefs) {
         const indexes = getRefIndexes(refElement.element);
         for (const index of indexes) {
             if (index < 0) {
-                stringTableRefCounts.set(index, (stringTableRefCounts.get(index) || 0) + 1);
                 continue;
             }
             if (!index) {
@@ -67,18 +65,7 @@ export function optimizeFlatpacked(data: Flatpacked): Flatpacked {
         indexMap.set(refElement.origIndex, idx);
     }
 
-    const sortedStringTableIndexes = [...stringTableRefCounts.entries()].sort((a, b) => b[1] - a[1] || a[0] - b[0]);
-    sortedStringTableIndexes.forEach(([index], i) => {
-        indexMap.set(index, -(i + 1));
-    });
-
-    const stringTableElements: FlattenedElement[] = [];
-
-    // sort the string table.
-    if (stringTable) {
-        const strings = sortedStringTableIndexes.map(([index]) => stringTable[-index] as string);
-        stringTableElements.push([ElementType.StringTable, ...strings]);
-    }
+    const stringTableElements = stringTable ? [stringTable] : [];
 
     const result: Flatpacked = [header, ...stringTableElements];
 
@@ -92,6 +79,7 @@ export function optimizeFlatpacked(data: Flatpacked): Flatpacked {
 
 function patchIndexes(elem: FlattenedElement, indexMap: Map<number, number>): FlattenedElement {
     function mapIndex(index: number): number {
+        if (index < 0) return index;
         const v = indexMap.get(index);
         assert(v !== undefined, `Invalid index: ${index}`);
         return v;

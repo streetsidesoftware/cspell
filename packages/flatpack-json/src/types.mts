@@ -94,7 +94,9 @@ export type BigIntElement = readonly [type: ElementType.BigInt, value: Index];
  */
 export type ArrayElement = readonly [type: ElementType.Array, ...Index[]];
 
-export type StringTableElement = readonly [type: ElementType.StringTable, ...string[]];
+export type StringTableEntry = string | number[];
+
+export type StringTableElement = readonly [type: ElementType.StringTable, ...StringTableEntry[]];
 
 export type FlattenedElement = Readonly<
     PrimitiveElement | ObjectBasedElements | ArrayBasedElements | StringTableElement

@@ -1621,13 +1621,13 @@ exports[`dehydrate > dehydrate useStringTable /[\\p{L}\\p{M}]+/gu undefined > op
   "Flatpack JSON v2",
   [
     128,
-    "gu",
     "[\\p{L}\\p{M}]+",
+    "gu",
   ],
   [
     6,
-    -2,
     -1,
+    -2,
   ],
 ]
 `;
@@ -1695,21 +1695,21 @@ exports[`dehydrate > dehydrate useStringTable [ 'pineapple', 'apple', 'grape', '
   "Flatpack JSON v2",
   [
     128,
-    "apple",
-    "banana",
     "pineapple",
+    "apple",
     "grape",
+    "banana",
   ],
   [
     0,
-    -3,
     -1,
+    -2,
+    -3,
+    -4,
+    -2,
     -4,
     -2,
     -1,
-    -2,
-    -1,
-    -3,
   ],
 ]
 `;
@@ -1743,9 +1743,9 @@ exports[`dehydrate > dehydrate useStringTable [ /[\\p{L}\\p{M}]+/gu, /[\\p{L}\\p
   "Flatpack JSON v2",
   [
     128,
+    "[\\p{L}\\p{M}]+",
     "gu",
     "[\\p{Lu}\\p{M}]+",
-    "[\\p{L}\\p{M}]+",
   ],
   [
     0,
@@ -1755,13 +1755,13 @@ exports[`dehydrate > dehydrate useStringTable [ /[\\p{L}\\p{M}]+/gu, /[\\p{L}\\p
   ],
   [
     6,
-    -3,
     -1,
+    -2,
   ],
   [
     6,
+    -3,
     -2,
-    -1,
   ],
 ]
 `;
@@ -1799,8 +1799,8 @@ exports[`dehydrate > dehydrate useStringTable [ { a: 'a', b: 'b' }, { a: 'a', b:
   "Flatpack JSON v2",
   [
     128,
-    "b",
     "a",
+    "b",
   ],
   [
     0,
@@ -1816,13 +1816,13 @@ exports[`dehydrate > dehydrate useStringTable [ { a: 'a', b: 'b' }, { a: 'a', b:
   ],
   [
     0,
-    -2,
     -1,
+    -2,
   ],
   [
     0,
-    -2,
     -1,
+    -2,
   ],
   [
     1,
@@ -1831,13 +1831,13 @@ exports[`dehydrate > dehydrate useStringTable [ { a: 'a', b: 'b' }, { a: 'a', b:
   ],
   [
     0,
-    -2,
     -1,
+    -2,
   ],
   [
     0,
-    -2,
     -1,
+    -2,
   ],
   [
     1,
@@ -1846,13 +1846,13 @@ exports[`dehydrate > dehydrate useStringTable [ { a: 'a', b: 'b' }, { a: 'a', b:
   ],
   [
     0,
-    -2,
     -1,
+    -2,
   ],
   [
     0,
-    -2,
     -1,
+    -2,
   ],
   [
     1,
@@ -1861,13 +1861,13 @@ exports[`dehydrate > dehydrate useStringTable [ { a: 'a', b: 'b' }, { a: 'a', b:
   ],
   [
     0,
-    -2,
     -1,
+    -2,
   ],
   [
     0,
-    -2,
     -1,
+    -2,
   ],
 ]
 `;
@@ -1955,10 +1955,10 @@ exports[`dehydrate > dehydrate useStringTable [ { a: 'a', b: 'b' }, { a: 'c', b:
   "Flatpack JSON v2",
   [
     128,
-    "d",
-    "c",
-    "b",
     "a",
+    "b",
+    "c",
+    "d",
   ],
   [
     0,
@@ -1970,8 +1970,8 @@ exports[`dehydrate > dehydrate useStringTable [ { a: 'a', b: 'b' }, { a: 'c', b:
   ],
   [
     0,
-    -4,
-    -3,
+    -1,
+    -2,
   ],
   [
     1,
@@ -1980,8 +1980,8 @@ exports[`dehydrate > dehydrate useStringTable [ { a: 'a', b: 'b' }, { a: 'c', b:
   ],
   [
     0,
-    -2,
-    -1,
+    -3,
+    -4,
   ],
   [
     1,
@@ -2101,9 +2101,9 @@ exports[`dehydrate > dehydrate useStringTable [ 1n, 'hello', /\\w+/g, {}, [], 'h
   "Flatpack JSON v2",
   [
     128,
-    "g",
-    "\\w+",
     "hello",
+    "\\w+",
+    "g",
   ],
   [
     0,
@@ -2117,7 +2117,7 @@ exports[`dehydrate > dehydrate useStringTable [ 1n, 'hello', /\\w+/g, {}, [], 'h
   [
     1,
     0,
-    -3,
+    -1,
   ],
   [
     1,
@@ -2132,7 +2132,7 @@ exports[`dehydrate > dehydrate useStringTable [ 1n, 'hello', /\\w+/g, {}, [], 'h
   [
     6,
     -2,
-    -1,
+    -3,
   ],
   {},
   [
@@ -2191,8 +2191,8 @@ exports[`dehydrate > dehydrate useStringTable [ 1n, 2n, 1n, 2n, 9007199254740991
   "Flatpack JSON v2",
   [
     128,
-    "-9007199254740992",
     "9007199254740992",
+    "-9007199254740992",
   ],
   [
     0,
@@ -2227,11 +2227,11 @@ exports[`dehydrate > dehydrate useStringTable [ 1n, 2n, 1n, 2n, 9007199254740991
   -9007199254740991,
   [
     8,
-    -2,
+    -1,
   ],
   [
     8,
-    -1,
+    -2,
   ],
 ]
 `;
@@ -2417,27 +2417,27 @@ exports[`dehydrate > dehydrate useStringTable { a: { a: 'a', b: 'b' }, b: { a: '
   "Flatpack JSON v2",
   [
     128,
-    "pineapple",
-    "banana",
-    "apple",
-    "r",
-    "b",
     "a",
-    "rr",
-    "gu",
-    "[\\p{L}\\p{M}]+",
-    "d",
-    "c",
-    "values",
-    "ss",
-    "s",
-    "rValues",
-    "nnn",
-    "nn",
-    "n",
-    "mm",
-    "m",
+    "b",
     "cValues",
+    "m",
+    "mm",
+    "n",
+    "nn",
+    "nnn",
+    "r",
+    "rValues",
+    "s",
+    "ss",
+    "values",
+    "c",
+    "d",
+    "apple",
+    "banana",
+    "pineapple",
+    "[\\p{L}\\p{M}]+",
+    "gu",
+    "rr",
   ],
   [
     1,
@@ -2446,13 +2446,13 @@ exports[`dehydrate > dehydrate useStringTable { a: { a: 'a', b: 'b' }, b: { a: '
   ],
   [
     0,
-    -6,
-    -5,
+    -1,
+    -2,
   ],
   [
     6,
-    -9,
-    -8,
+    -19,
+    -20,
   ],
   [
     1,
@@ -2466,8 +2466,8 @@ exports[`dehydrate > dehydrate useStringTable { a: { a: 'a', b: 'b' }, b: { a: '
   ],
   [
     0,
-    -11,
-    -10,
+    -14,
+    -15,
   ],
   [
     0,
@@ -2481,9 +2481,9 @@ exports[`dehydrate > dehydrate useStringTable { a: { a: 'a', b: 'b' }, b: { a: '
   ],
   [
     0,
-    -3,
-    -2,
-    -1,
+    -16,
+    -17,
+    -18,
   ],
   [
     5,
@@ -2501,19 +2501,19 @@ exports[`dehydrate > dehydrate useStringTable { a: { a: 'a', b: 'b' }, b: { a: '
   ],
   [
     0,
-    -6,
-    -5,
-    -21,
-    -20,
-    -19,
-    -18,
-    -17,
-    -16,
+    -1,
+    -2,
+    -3,
     -4,
-    -15,
-    -14,
-    -13,
+    -5,
+    -6,
+    -7,
+    -8,
+    -9,
+    -10,
+    -11,
     -12,
+    -13,
   ],
   [
     0,
@@ -2533,8 +2533,8 @@ exports[`dehydrate > dehydrate useStringTable { a: { a: 'a', b: 'b' }, b: { a: '
   ],
   [
     0,
-    -4,
-    -7,
+    -9,
+    -21,
   ],
   [
     0,
@@ -2543,9 +2543,9 @@ exports[`dehydrate > dehydrate useStringTable { a: { a: 'a', b: 'b' }, b: { a: '
   ],
   [
     0,
-    -1,
-    -2,
-    -3,
+    -18,
+    -17,
+    -16,
   ],
   [
     1,
@@ -2803,8 +2803,8 @@ exports[`dehydrate > dehydrate useStringTable { a: { b: 1 } } undefined > optimi
   "Flatpack JSON v2",
   [
     128,
-    "b",
     "a",
+    "b",
   ],
   [
     1,
@@ -2813,7 +2813,7 @@ exports[`dehydrate > dehydrate useStringTable { a: { b: 1 } } undefined > optimi
   ],
   [
     0,
-    -2,
+    -1,
   ],
   [
     0,
@@ -2826,7 +2826,7 @@ exports[`dehydrate > dehydrate useStringTable { a: { b: 1 } } undefined > optimi
   ],
   [
     0,
-    -1,
+    -2,
   ],
   [
     0,
@@ -2927,14 +2927,14 @@ exports[`dehydrate > dehydrate useStringTable { fruit: [ 'apple', 'banana', 'app
   "Flatpack JSON v2",
   [
     128,
+    "fruit",
+    "joinFruit",
+    "sentence",
     "apple",
     "banana",
-    "There is a bit of fruit on the table. Some banana, apple, and pineapple.",
-    "apple-banana-apple-banana-apple-pineapple",
     "pineapple",
-    "sentence",
-    "joinFruit",
-    "fruit",
+    "apple-banana-apple-banana-apple-pineapple",
+    "There is a bit of fruit on the table. Some banana, apple, and pineapple.",
   ],
   [
     1,
@@ -2943,24 +2943,24 @@ exports[`dehydrate > dehydrate useStringTable { fruit: [ 'apple', 'banana', 'app
   ],
   [
     0,
-    -8,
-    -7,
-    -6,
-  ],
-  [
-    0,
-    5,
-    -4,
+    -1,
+    -2,
     -3,
   ],
   [
     0,
-    -1,
-    -2,
-    -1,
-    -2,
-    -1,
+    5,
+    -7,
+    -8,
+  ],
+  [
+    0,
+    -4,
     -5,
+    -4,
+    -5,
+    -4,
+    -6,
   ],
 ]
 `;
@@ -3013,12 +3013,12 @@ exports[`dehydrate > dehydrate useStringTable { values: [ '', 'apple', 'banana',
   "Flatpack JSON v2",
   [
     128,
-    "pineapple",
-    "banana",
-    "apple",
-    "",
-    "values",
     "set",
+    "values",
+    "apple",
+    "banana",
+    "pineapple",
+    "",
   ],
   [
     1,
@@ -3027,8 +3027,8 @@ exports[`dehydrate > dehydrate useStringTable { values: [ '', 'apple', 'banana',
   ],
   [
     0,
-    -6,
-    -5,
+    -1,
+    -2,
   ],
   [
     0,
@@ -3042,15 +3042,15 @@ exports[`dehydrate > dehydrate useStringTable { values: [ '', 'apple', 'banana',
   [
     0,
     -3,
-    -2,
-    -1,
+    -4,
+    -5,
   ],
   [
     0,
-    -4,
+    -6,
     -3,
-    -2,
-    -1,
+    -4,
+    -5,
   ],
 ]
 `;
@@ -3107,11 +3107,11 @@ exports[`dehydrate > dehydrate useStringTable { values: [ 'apple', 'banana', 'pi
   "Flatpack JSON v2",
   [
     128,
-    "pineapple",
-    "banana",
-    "apple",
-    "values",
     "set",
+    "values",
+    "apple",
+    "banana",
+    "pineapple",
   ],
   [
     1,
@@ -3121,13 +3121,13 @@ exports[`dehydrate > dehydrate useStringTable { values: [ 'apple', 'banana', 'pi
   [
     0,
     -3,
-    -2,
-    -1,
+    -4,
+    -5,
   ],
   [
     0,
-    -5,
-    -4,
+    -1,
+    -2,
   ],
   [
     0,
@@ -3245,9 +3245,9 @@ exports[`dehydrate > dehydrate useStringTable Map{ 'apple' => 1, 'banana' => 2, 
   "Flatpack JSON v2",
   [
     128,
-    "pineapple",
-    "banana",
     "apple",
+    "banana",
+    "pineapple",
   ],
   [
     5,
@@ -3256,9 +3256,9 @@ exports[`dehydrate > dehydrate useStringTable Map{ 'apple' => 1, 'banana' => 2, 
   ],
   [
     0,
-    -3,
-    -2,
     -1,
+    -2,
+    -3,
   ],
   [
     0,
@@ -3309,9 +3309,9 @@ exports[`dehydrate > dehydrate useStringTable Set{ 'apple', 'banana', 'pineapple
   "Flatpack JSON v2",
   [
     128,
-    "pineapple",
-    "banana",
     "apple",
+    "banana",
+    "pineapple",
   ],
   [
     4,
@@ -3319,9 +3319,9 @@ exports[`dehydrate > dehydrate useStringTable Set{ 'apple', 'banana', 'pineapple
   ],
   [
     0,
-    -3,
-    -2,
     -1,
+    -2,
+    -3,
   ],
 ]
 `;
@@ -3353,9 +3353,9 @@ exports[`dehydrate > dehydrate useStringTable Set{ 'pineapple', 'apple', 'banana
   "Flatpack JSON v2",
   [
     128,
-    "banana",
-    "apple",
     "pineapple",
+    "apple",
+    "banana",
   ],
   [
     4,
@@ -3363,9 +3363,9 @@ exports[`dehydrate > dehydrate useStringTable Set{ 'pineapple', 'apple', 'banana
   ],
   [
     0,
-    -3,
-    -2,
     -1,
+    -2,
+    -3,
   ],
 ]
 `;

@@ -1,5 +1,6 @@
 import assert from 'node:assert';
 
+import { StringTable } from './stringTable.mjs';
 import type {
     ArrayBasedElements,
     ArrayElement,
@@ -27,7 +28,7 @@ import { ElementType, supportedHeaders } from './types.mjs';
 export function fromJSON(data: Flatpacked): Unpacked {
     const [header] = data;
 
-    let stringTable: StringTableElement | undefined;
+    let stringTable: StringTable | undefined;
 
     if (!supportedHeaders.has(header)) {
         throw new Error('Invalid header');
@@ -168,7 +169,7 @@ export function fromJSON(data: Flatpacked): Unpacked {
                 return toBigInt(idx, element as BigIntElement);
             }
             case ElementType.StringTable: {
-                stringTable = element as StringTableElement;
+                stringTable = new StringTable(element as StringTableElement);
                 return idxToValue(idx + 1);
             }
         }
@@ -186,7 +187,7 @@ export function fromJSON(data: Flatpacked): Unpacked {
     function idxToValue(idx: number): Serializable {
         if (!idx) return undefined;
         if (idx < 0) {
-            return stringTable ? (stringTable[-idx] as string) : undefined;
+            return stringTable ? stringTable.get(-idx) : undefined;
         }
         const found = cache.get(idx);
         if (found !== undefined) {
