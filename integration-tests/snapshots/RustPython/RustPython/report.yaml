@@ -3,9 +3,9 @@ Repository: RustPython/RustPython
 Url: https://github.com/RustPython/RustPython.git
 Args: '["**"]'
 Summary:
-  files: 758
-  filesWithIssues: 165
-  issues: 1217
+  files: 762
+  filesWithIssues: 166
+  issues: 1222
   errors: 0
 Errors: []
 
@@ -82,17 +82,18 @@ issues:
   - "benches/README.md:66:1          rustflags       U       rustflags = ["
   - "benches/test_benchmarks.py:19:18        nbody       U       ['benchmarks/nbody.py'],"
   - "build.rs:1:1\tNo issues found"
-  - "Cargo.toml:93:62        redoxer         U       to compile/check with redoxer"
-  - "Cargo.toml:107:28       nsis            U       package.metadata.packager.nsis]"
-  - "Cargo.toml:161:80       oldtime         U       features = [\"clock\", \"oldtime\", \"std\"] }"
-  - "Cargo.toml:177:119      zerocopy        U       \"socket\", \"sched\", \"zerocopy\", \"dir\", \"hostname\""
-  - "Cargo.toml:200:1        scopeguard      U       scopeguard = \"1\""
+  - "Cargo.toml:104:62       redoxer         U       to compile/check with redoxer"
+  - "Cargo.toml:118:28       nsis            U       package.metadata.packager.nsis]"
+  - "Cargo.toml:172:80       oldtime         U       features = [\"clock\", \"oldtime\", \"std\"] }"
+  - "Cargo.toml:188:119      zerocopy        U       \"socket\", \"sched\", \"zerocopy\", \"dir\", \"hostname\""
+  - "Cargo.toml:211:1        scopeguard      U       scopeguard = \"1\""
   - "code-of-conduct.md:1:1\tNo issues found"
   - "crates/codegen/Cargo.toml:1:1\tNo issues found"
   - "crates/codegen/src/compile.rs:1:1\tNo issues found"
   - "crates/codegen/src/error.rs:1:1\tNo issues found"
   - "crates/codegen/src/ir.rs:1:1\tNo issues found"
   - "crates/codegen/src/lib.rs:1:1\tNo issues found"
+  - "crates/codegen/src/snapshots/rustpython_codegen__compile__tests__const_bool_not_op.snap:1:1\tNo issues found"
   - "crates/codegen/src/snapshots/rustpython_codegen__compile__tests__if_ands.snap:1:1\tNo issues found"
   - "crates/codegen/src/snapshots/rustpython_codegen__compile__tests__if_mixed.snap:1:1\tNo issues found"
   - "crates/codegen/src/snapshots/rustpython_codegen__compile__tests__if_ors.snap:1:1\tNo issues found"
@@ -353,6 +354,7 @@ issues:
   - "crates/vm/src/convert/transmute_from.rs:1:1\tNo issues found"
   - "crates/vm/src/convert/try_from.rs:1:1\tNo issues found"
   - "crates/vm/src/coroutine.rs:1:1\tNo issues found"
+  - "crates/vm/src/datastack.rs:1:1\tNo issues found"
   - "crates/vm/src/dict_inner.rs:1:1\tNo issues found"
   - "crates/vm/src/eval.rs:1:1\tNo issues found"
   - "crates/vm/src/exception_group.rs:1:1\tNo issues found"
@@ -370,6 +372,7 @@ issues:
   - "crates/vm/src/function/mod.rs:1:1\tNo issues found"
   - "crates/vm/src/function/number.rs:1:1\tNo issues found"
   - "crates/vm/src/function/protocol.rs:1:1\tNo issues found"
+  - "crates/vm/src/function/time.rs:1:1\tNo issues found"
   - "crates/vm/src/gc_state.rs:1:1\tNo issues found"
   - "crates/vm/src/getpath.rs:1:1\tNo issues found"
   - "crates/vm/src/import.rs:1:1\tNo issues found"
@@ -1356,6 +1359,7 @@ issues:
   - "extra_tests/snippets/testutils.py:73:33         klass           U       lambda: isinstance(obj, klass), [\"isisntance(\", _typed"
   - "extra_tests/snippets/testutils.py:73:43         isisntance      U       isinstance(obj, klass), [\"isisntance(\", _typed(obj), \",\""
   - "extra_tests/snippets/testutils.py:73:75         klass           U       , _typed(obj), \",\", klass, \")\"]"
+  - "extra_tests/snippets/vm_specialization.py:1:1\tNo issues found"
   - "extra_tests/snippets/xfail_assert.py:1:1\tNo issues found"
   - "extra_tests/test_snippets.py:27:5           pushd           U       def pushd(path):"
   - "extra_tests/test_snippets.py:58:41          jobserver       U       = \"info,cargo=error,jobserver=error\""
@@ -1553,7 +1557,11 @@ issues:
   - "scripts/generate_sre_constants.py:107:17        ATCODES     U       ns[\"ATCODES\"],"
   - "scripts/generate_sre_constants.py:115:17        CHCODES     U       ns[\"CHCODES\"],"
   - "scripts/install-openssl.ps1:1:12        Actix       U       # From the Actix Web windows workflow"
-  - "scripts/libc_posix.py:1:1\tNo issues found"
+  - "scripts/libc_posix.py:87:39         freebsdlike                         U       BASE_URL}/src/unix/bsd/freebsdlike/dragonfly/mod.rs\","
+  - "scripts/libc_posix.py:94:39         freebsdlike                         U       BASE_URL}/src/unix/bsd/freebsdlike/freebsd/mod.rs\","
+  - "scripts/libc_posix.py:117:39        netbsdlike                          U       BASE_URL}/src/unix/bsd/netbsdlike/netbsd/mod.rs\","
+  - "scripts/libc_posix.py:190:26        contants (constants, contents)      U       Step 1: Get all OS contants that we do want from"
+  - "scripts/libc_posix.py:207:54        groupped (grouped)                  U       wanted\" consts. Build a groupped mapping of `{cfgs}"
   - "scripts/make_ssl_data_rs.py:49:36       AKID        U       error reasons, X509_R_AKID_MISMATCH\"\"\""
   - "scripts/make_ssl_data_rs.py:52:36       errtxt      U       in _file_search(args.errtxt, pat):"
   - "scripts/make_ssl_data_rs.py:53:26       errname     U       reason, libname, errname, num = match.groups"
@@ -1729,11 +1737,11 @@ issues:
   - "scripts/whats_left.py:413:46        cpymod                  U       rustpymod[item][\"sig\"] != cpymod[item][\"sig\"]"
   - "scripts/whats_left.py:431:33        cpymods                 U       cpython_modules\"] = cpymods"
   - "scripts/whats_left.py:432:17        implementeds            U       result[\"not_implementeds\"] = not_implementeds"
-  - "scripts/whats_left.py:502:23        rustpy                  U       for i, (item, rustpy_value, cpython_value"
-  - "scripts/whats_left.py:505:16        rustpy                  U       if rustpy_value is None or rustpy"
-  - "scripts/whats_left.py:505:40        rustpy                  U       rustpy_value is None or rustpy_value.startswith(\"ValueError"
-  - "scripts/whats_left.py:506:17        rustpy                  U       rustpy_value = f\" {rustpy_value"
-  - "scripts/whats_left.py:506:36        rustpy                  U       rustpy_value = f\" {rustpy_value}\""
+  - "scripts/whats_left.py:506:23        rustpy                  U       for i, (item, rustpy_value, cpython_value"
+  - "scripts/whats_left.py:509:16        rustpy                  U       if rustpy_value is None or rustpy"
+  - "scripts/whats_left.py:509:40        rustpy                  U       rustpy_value is None or rustpy_value.startswith(\"ValueError"
+  - "scripts/whats_left.py:510:17        rustpy                  U       rustpy_value = f\" {rustpy_value"
+  - "scripts/whats_left.py:510:36        rustpy                  U       rustpy_value = f\" {rustpy_value}\""
   - "src/interpreter.rs:1:1\tNo issues found"
   - "src/lib.rs:1:1\tNo issues found"
   - "src/main.rs:1:1\tNo issues found"

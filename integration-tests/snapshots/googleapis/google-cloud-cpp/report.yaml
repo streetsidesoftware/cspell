@@ -3,9 +3,9 @@ Repository: googleapis/google-cloud-cpp
 Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
-  files: 20787
+  files: 20794
   filesWithIssues: 8093
-  issues: 46792
+  issues: 46800
   errors: 0
 Errors: []
 
@@ -233,16 +233,15 @@ issues:
   - "doc/packaging.md:239:32         debuginfo           U       makecache && sudo dnf debuginfo-install -y glibc"
   - "doc/packaging.md:268:6          ldconfig            U       sudo ldconfig && cd /var/tmp && rm"
   - "doc/packaging.md:343:23         libopenssl          U       libcurl-devel libopenssl-devel nlohmann_json"
-  - "doc/packaging.md:344:20         libprotobuf         U       grpc-devel libprotobuf-devel"
-  - "doc/packaging.md:353:28         usrlocal            U       tee /etc/ld.so.conf.d/usrlocal.conf"
-  - "doc/packaging.md:412:24         noninteractive      U       export DEBIAN_FRONTEND=noninteractive"
-  - "doc/packaging.md:426:9          libsystemd          U       libsystemd-dev"
-  - "doc/packaging.md:459:8          DABSL               U       -DABSL_BUILD_TESTING=OFF \\"
-  - "doc/packaging.md:476:10         Dprotobuf           U       -Dprotobuf_BUILD_TESTS=OFF \\"
-  - "doc/packaging.md:549:22         GRPCPP              U       -DgRPC_BUILD_GRPCPP_OTEL_PLUGIN=ON \\"
-  - "doc/packaging.md:672:8          DJSON               U       -DJSON_BuildTests=OFF \\"
-  - "doc/packaging.md:1055:21        epel                U       sudo dnf install -y epel-release && \\"
-  - "doc/packaging.md:1059:35        binutils            U       autoconf automake libtool binutils dnf-utils"
+  - "doc/packaging.md:352:28         usrlocal            U       tee /etc/ld.so.conf.d/usrlocal.conf"
+  - "doc/packaging.md:369:8          DABSL               U       -DABSL_BUILD_TESTING=OFF \\"
+  - "doc/packaging.md:387:10         Dprotobuf           U       -Dprotobuf_BUILD_TESTS=OFF \\"
+  - "doc/packaging.md:496:24         noninteractive      U       export DEBIAN_FRONTEND=noninteractive"
+  - "doc/packaging.md:510:9          libsystemd          U       libsystemd-dev"
+  - "doc/packaging.md:633:22         GRPCPP              U       -DgRPC_BUILD_GRPCPP_OTEL_PLUGIN=ON \\"
+  - "doc/packaging.md:756:8          DJSON               U       -DJSON_BuildTests=OFF \\"
+  - "doc/packaging.md:1139:21        epel                U       sudo dnf install -y epel-release && \\"
+  - "doc/packaging.md:1143:35        binutils            U       autoconf automake libtool binutils dnf-utils"
   - "doc/product-neutral-guides/core-concepts.md:38:10       cerr    U       std::cerr << \"RPC failed: \" <"
   - "doc/product-neutral-guides/core-concepts.md:42:8        cout    U       std::cout << \"Success: \" << *response"
   - "doc/public-api.md:163:20        lgoogle     U       e.g., by using `-lgoogle_cloud_cpp_bigtable`"
@@ -362,11 +361,12 @@ issues:
   - "generator/BUILD.bazel:120:34        commandlineflag     U       abseil-cpp//absl/flags:commandlineflag\","
   - "generator/CMakeLists.txt:152:22         libprotoc                   U       protobuf::libprotoc"
   - "generator/CMakeLists.txt:180:44         HDRS                        U       cpp(PROTO_SRCS PROTO_HDRS generator_config.proto"
+  - "generator/CMakeLists.txt:186:40         libprotobuf                 U       PUBLIC protobuf::libprotobuf)"
   - "generator/CMakeLists.txt:282:26         everytime (every time)      U       build all the tests everytime they create a new package"
-  - "generator/generator_config.textproto:1840:15        Abac            U       \"SetLegacyAbac(std::string const&,"
-  - "generator/generator_config.textproto:2624:7         Multicloud      U       # GKE Multicloud"
-  - "generator/generator_config.textproto:2667:3         Hypercompute    U       # Hypercompute Cluster"
-  - "generator/generator_config.textproto:3847:12        Hmac            U       \"CreateHmacKey\","
+  - "generator/generator_config.textproto:1841:15        Abac            U       \"SetLegacyAbac(std::string const&,"
+  - "generator/generator_config.textproto:2625:7         Multicloud      U       # GKE Multicloud"
+  - "generator/generator_config.textproto:2668:3         Hypercompute    U       # Hypercompute Cluster"
+  - "generator/generator_config.textproto:3848:12        Hmac            U       \"CreateHmacKey\","
   - "generator/integration_tests/backup.proto:27:40          genproto    U       \"google.golang.org/genproto/googleapis/test/admin"
   - "generator/integration_tests/golden/doc/options.dox:2:2          defgroup    U       @defgroup generator-integration"
   - "generator/integration_tests/golden/v1/golden_kitchen_sink_client.h:288:43       cloudresourcemanager    U       organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"
@@ -522,7 +522,7 @@ issues:
   - "google/cloud/bigtable/testing/mock_async_failing_rpc_factory.h:72:74        nooo    U       PERMISSION_DENIED, \"nooo\");"
   - "google/cloud/bigtable/testing/random_names.cc:47:41         abcdefghijlkmnopqrstuvwxyz      U       generator, size, \"abcdefghijlkmnopqrstuvwxyz0123456789\");"
   - "google/cloud/bigtable/tests/mutations_integration_test.cc:120:16        decodeable (decodable)      U       // *will* be decodeable to in int64_t. I don"
-  - "google/cloud/bigtable/tests/table_admin_integration_test.cc:222:16      newfam      U       \"newfam\", GC::Intersection(GC"
+  - "google/cloud/bigtable/tests/table_admin_integration_test.cc:226:16      newfam      U       \"newfam\", GC::Intersection(GC"
   - "google/cloud/bigtable/tools/convert_acceptance_tests.py:87:13       rowkey      U       rowkey_string = base64.b64decode"
   - "google/cloud/bigtable/value_test.cc:864:14      infval      U       auto const infval = std::numeric_limits"
   - "google/cloud/bigtable/value_test.cc:865:14      nanval      U       auto const nanval = std::nan(\"NaN\");"
@@ -874,6 +874,7 @@ issues:
   - "google/cloud/storage/internal/object_requests_test.cc:261:61        NEFCQ       U       encryption-key: MTIzNEFCQ0Q=\"));"
   - "google/cloud/storage/internal/object_requests_test.cc:281:61        QUJDRD      U       source-encryption-key: QUJDRDEyMzQ=\"));"
   - "google/cloud/storage/internal/object_requests_test.cc:606:27        sdlkj       U       \"&upload_id=xa298sd_sdlkj2\";"
+  - "google/cloud/storage/internal/object_requests_test.cc:987:32        preprod     U       upsert(\"environment\", {\"preprod\", {}, {}});"
   - "google/cloud/storage/internal/object_write_streambuf_test.cc:367:39         Putn    U       ectWriteStreambufTest, MixPutcPutn) {"
   - "google/cloud/storage/internal/tuple_filter_test.cc:66:25        rvalues     U       Test that forwarding rvalues works."
   - "google/cloud/storage/policy_document_test.cc:160:8          asdfasdfasdf    U       \"asdfasdfasdf\", \"asdfasdfasdf\"};"
