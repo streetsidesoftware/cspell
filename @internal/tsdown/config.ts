@@ -28,6 +28,22 @@ export function createConfig(config: UserConfig | UserConfig[]): UserConfig | Us
     return defineConfig({ ...defaultConfig, ...config });
 }
 
+/**
+ * Merge the provided deps config with the default deps config.
+ *
+ * Usage:
+ * ```ts
+ * import { createConfig, deps } from '@internal/tsdown';
+ *
+ * const config = createConfig({
+ *     entry: ['src/index.ts'],
+ *     outDir: 'dist',
+ *     ...deps({ onlyAllowBundle: ['gensequence'] }),
+ * });
+ * ```
+ * @param deps - config to merge
+ * @returns a config object with the merged deps config
+ */
 export function deps(deps: UserConfig['deps']): UserConfig {
     return {
         deps: { ...defaultDeps, ...deps },
