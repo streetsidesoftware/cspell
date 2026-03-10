@@ -19,6 +19,7 @@ export default createConfig([
         outDir: 'dist/test/fixtures/dictionaries/btrie',
         format: ['esm'],
         tsconfig: 'fixtures/tsconfig.json',
+        dts: false,
         sourcemap: false,
         plugins: [dictionaryBundler()],
         clean: true,

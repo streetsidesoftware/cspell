@@ -9,6 +9,7 @@ export default createConfig([
         outDir: 'dist',
         format: ['esm'],
         sourcemap: false,
+        dts: false,
         // plugins: [dictionaryBundler({ include: [/cspell-default/], debug: false })],
         plugins: [dictionaryBundler({ include: [/no-match/], debug: false })],
         clean: true,
