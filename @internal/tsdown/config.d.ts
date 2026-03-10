@@ -1,4 +1,4 @@
-import { DepsConfig, UserConfig, UserConfig as UserConfig$1, defineConfig } from "tsdown";
+import { DepsConfig, UserConfig, UserConfig as UserConfig$1, defineConfig } from 'tsdown';
 
 //#region config.d.ts
 declare const defaultDeps: DepsConfig;
