@@ -5,13 +5,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsdown"
+    "build": "tsdown",
+    "postinstall": "pnpm build"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "exports": {
-    ".": "./config.js"
+    ".": "./dist/config.js"
   },
   "devDependencies": {},
   "peerDependencies": {
