@@ -107,7 +107,7 @@ describe('StringTable', () => {
 
         expect(builder.build()).toEqual([...stringTableElement, 'mango']);
         const map = builder.sortEntriesByRefCount();
-        expect(builder.build()).toEqual([128, [1, 4, 2], 'apple', 'mango', 'banana', '-', 'orange', 'grape', 'melon']);
+        expect(builder.build()).toEqual([128, [2, 5, 4], 'apple', 'mango', 'banana', '-', 'orange', 'grape', 'melon']);
         expect(map).toEqual(
             new Map([
                 [0, 0],
@@ -121,6 +121,60 @@ describe('StringTable', () => {
                 [8, 3], // mango
             ]),
         );
+    });
+
+    test('StringTableBuilder with tokenization', () => {
+        const stringTableElement: StringTableElement = [128, 'apple', 'banana', [1, 4, 2], '-'];
+        const builder = new StringTableBuilder(stringTableElement);
+        builder.add('orange');
+        builder.add('grape');
+        builder.add('melon');
+        builder.add('apple-orange');
+        builder.add('banana-grape');
+        builder.add('mango-banana');
+        builder.tokenizeAllEntries();
+        const elements = builder.build();
+        expect([...new StringTable(elements).values()]).toEqual([
+            'apple',
+            'banana',
+            'apple-banana',
+            '-',
+            'orange',
+            'grape',
+            'melon',
+            'apple-orange',
+            'banana-grape',
+            'mango-banana',
+            'mango',
+        ]);
+        expect(elements).toEqual([
+            128,
+            'apple',
+            'banana',
+            [1, 4, 2],
+            '-',
+            'orange',
+            'grape',
+            'melon',
+            [1, 4, 5],
+            [2, 4, 6],
+            [11, 4, 2],
+            'mango',
+        ]);
+        builder.sortEntriesByRefCount();
+        expect([...new StringTable(builder.build()).values()]).toEqual([
+            '-',
+            'banana',
+            'orange',
+            'grape',
+            'apple',
+            'melon',
+            'apple-orange',
+            'banana-grape',
+            'mango-banana',
+            'mango',
+            'apple-banana',
+        ]);
     });
 });
 

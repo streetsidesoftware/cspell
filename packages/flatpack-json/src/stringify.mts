@@ -1,6 +1,6 @@
 import type { Flatpacked } from './types.mjs';
 
-const maxLineLength = 120;
+const maxLineLength = 512;
 const maxBatchSize = 64;
 
 export interface StringifyOptions {

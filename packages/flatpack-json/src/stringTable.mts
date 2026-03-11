@@ -56,11 +56,11 @@ const tokenRegex = /\w+/g;
 
 export class StringTableBuilder {
     splitStrings: boolean = false;
-    private stringToIndex = new Map<string, number>();
-    private entries: BuilderEntry[] = [{ value: '', entry: '', refCount: 0 }];
-    private availableIndexes: number[] = [];
-    private tokenRegex = tokenRegex;
-    private splitIntoTokens = false;
+    #stringToIndex = new Map<string, number>();
+    #entries: BuilderEntry[] = [{ value: '', entry: '', refCount: 0 }];
+    #availableIndexes: number[] = [];
+    tokenRegex: RegExp = tokenRegex;
+    #splitIntoTokens: boolean = false;
 
     constructor(stringTableElement?: StringTableElement) {
         if (!stringTableElement) return;
@@ -69,21 +69,29 @@ export class StringTableBuilder {
         for (const [idx, value] of st.entries()) {
             if (!idx) continue;
             const entry = stringTableElement[idx] as StringTableEntry;
-            this.entries[idx] = { value, entry, refCount: 0 };
+            this.#entries[idx] = { value, entry, refCount: 0 };
             if (Array.isArray(entry) && !entry.length) {
-                this.availableIndexes.push(idx);
+                this.#availableIndexes.push(idx);
                 continue;
             }
-            if (!this.stringToIndex.has(value)) {
-                this.stringToIndex.set(value, idx);
+            if (!this.#stringToIndex.has(value)) {
+                this.#stringToIndex.set(value, idx);
             }
         }
     }
 
+    set splitIntoTokensWhenAdding(value: boolean) {
+        this.#splitIntoTokens = value;
+    }
+
+    get splitIntoTokensWhenAdding(): boolean {
+        return this.#splitIntoTokens;
+    }
+
     add(str: string): number {
-        const found = this.stringToIndex.get(str);
+        const found = this.#stringToIndex.get(str);
         if (found !== undefined) {
-            const entry = this.entries[found];
+            const entry = this.#entries[found];
             entry.refCount++;
             return found;
         }
@@ -92,7 +100,7 @@ export class StringTableBuilder {
     }
 
     getIndex(str: string): number | undefined {
-        return this.stringToIndex.get(str);
+        return this.#stringToIndex.get(str);
     }
 
     get(index: number): string | undefined {
@@ -121,7 +129,7 @@ export class StringTableBuilder {
 
     #getEntry(index: number): BuilderEntry | undefined {
         index = index < 0 ? -index : index;
-        return this.entries[index];
+        return this.#entries[index];
     }
 
     #getEntryCheckBounds(index: number): BuilderEntry {
@@ -133,26 +141,59 @@ export class StringTableBuilder {
     }
 
     #append(str: string): number {
-        const found = this.stringToIndex.get(str);
+        const found = this.#stringToIndex.get(str);
         if (found !== undefined) {
             return found;
         }
         const entry: BuilderEntry = { value: str, entry: str, refCount: 1 };
-        const idx = this.availableIndexes.shift() ?? this.entries.length;
-        this.entries[idx] = entry;
-        this.stringToIndex.set(str, idx);
+        const idx = this.#availableIndexes.shift() ?? this.#entries.length;
+        this.#entries[idx] = entry;
+        this.#stringToIndex.set(str, idx);
+        if (this.#splitIntoTokens) {
+            this.#splitEntryIntoTokens(entry);
+        }
         return idx;
     }
 
+    #splitEntryIntoTokens(entry: BuilderEntry): void {
+        if (Array.isArray(entry.entry)) return;
+        if (!entry.value) return;
+        const regex = new RegExp(this.tokenRegex);
+        const indexes: number[] = [...entry.value.matchAll(regex)].flatMap((match) => [
+            match.index,
+            match.index + match[0].length,
+        ]);
+        if (!indexes.length) return;
+        if (indexes.length === 2 && indexes[0] === 0 && indexes[1] === entry.value.length) {
+            return;
+        }
+        const subEntries: number[] = [];
+        entry.entry = subEntries;
+        indexes.push(entry.value.length);
+        let lastIndex = 0;
+        for (const index of indexes) {
+            if (index === lastIndex) continue;
+            const value = entry.value.slice(lastIndex, index);
+            subEntries.push(this.add(value));
+            lastIndex = index;
+        }
+    }
+
     clearUnusedEntries(): void {
-        for (let i = 1; i < this.entries.length; i++) {
-            const entry = this.entries[i];
+        for (let i = 1; i < this.#entries.length; i++) {
+            const entry = this.#entries[i];
             if (entry.refCount > 0) continue;
-            if (this.stringToIndex.get(entry.value) === i) {
-                this.stringToIndex.delete(entry.value);
+            if (this.#stringToIndex.get(entry.value) === i) {
+                this.#stringToIndex.delete(entry.value);
             }
-            this.entries[i] = { value: '', entry: [], refCount: 0 };
-            this.availableIndexes.push(i);
+            this.#entries[i] = { value: '', entry: [], refCount: 0 };
+            this.#availableIndexes.push(i);
+        }
+    }
+
+    tokenizeAllEntries(): void {
+        for (const entry of this.#entries) {
+            this.#splitEntryIntoTokens(entry);
         }
     }
 
@@ -163,14 +204,21 @@ export class StringTableBuilder {
      * @returns a map of old indexes to new indexes after sorting. The index 0 is always mapped to itself.
      */
     sortEntriesByRefCount(): Map<number, number> {
-        const mapEntryToOldIndex = new Map<BuilderEntry, number>(this.entries.map((entry, index) => [entry, index]));
+        const mapEntryToOldIndex = new Map<BuilderEntry, number>(this.#entries.map((entry, index) => [entry, index]));
 
-        const entry0 = this.entries[0];
-        const sorted = this.entries.sort((a, b) =>
+        const entry0 = this.#entries[0];
+        const sorted = this.#entries.sort((a, b) =>
             a === entry0 ? -1 : b === entry0 ? 1 : b.refCount - a.refCount || getOldIndex(a) - getOldIndex(b),
         );
 
-        return new Map<number, number>(sorted.map((entry, index) => [getOldIndex(entry), index]));
+        const oldIndexToNew = new Map<number, number>(sorted.map((entry, index) => [getOldIndex(entry), index]));
+
+        for (const entry of this.#entries) {
+            if (!Array.isArray(entry.entry)) continue;
+            entry.entry = entry.entry.map((i) => oldIndexToNew.get(i) ?? i);
+        }
+
+        return oldIndexToNew;
 
         function getOldIndex(entry: BuilderEntry): number {
             const oldIndex = mapEntryToOldIndex.get(entry);
@@ -180,6 +228,6 @@ export class StringTableBuilder {
     }
 
     build(): StringTableElement {
-        return [ElementType.StringTable, ...this.entries.slice(1).map((e) => e.entry)];
+        return [ElementType.StringTable, ...this.#entries.slice(1).map((e) => e.entry)];
     }
 }
