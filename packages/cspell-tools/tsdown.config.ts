@@ -1,15 +1,11 @@
-import type { UserConfig } from 'tsdown';
-import { defineConfig } from 'tsdown';
+import type { UserConfig } from '@internal/tsdown';
+import { createConfig } from '@internal/tsdown';
 
-const config: UserConfig = defineConfig({
+const config: UserConfig = createConfig({
     tsconfig: './tsconfig.esm.json',
     entry: ['src/app.ts', 'src/index.ts'],
     outDir: 'dist',
     format: ['esm'],
-    dts: true,
-    sourcemap: true,
-    clean: true,
-    inlineOnly: [],
 });
 
 export default config;

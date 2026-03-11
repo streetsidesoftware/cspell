@@ -1,18 +1,14 @@
-import { defineConfig, type UserConfig } from 'tsdown';
+import type { UserConfig } from '@internal/tsdown';
+import { createConfig, deps } from '@internal/tsdown';
 
 const baseConfig: UserConfig = {
     entry: ['src/index.ts'],
     outDir: 'dist',
-    format: ['esm'],
-    target: 'Node20',
     fixedExtension: false,
-    dts: true,
-    sourcemap: true,
-    clean: true,
     platform: 'neutral',
-    inlineOnly: ['gensequence'],
+    ...deps({ onlyAllowBundle: ['gensequence'] }),
 };
 
-const config: UserConfig[] = defineConfig([baseConfig]);
+const config: UserConfig[] = createConfig([baseConfig]);
 
 export default config;

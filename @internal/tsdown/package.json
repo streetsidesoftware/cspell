@@ -1,0 +1,17 @@
+{
+  "name": "@internal/tsdown",
+  "version": "1.0.0",
+  "description": "Internal tsdown configuration and utilities.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsdown",
+    "postinstall": "pnpm build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "exports": {
+    ".": "./dist/config.js"
+  }
+}
