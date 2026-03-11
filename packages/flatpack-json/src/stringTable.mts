@@ -1,68 +1,130 @@
-import { Trie } from './Trie.mjs';
 import { ElementType, type StringTableElement, type StringTableEntry } from './types.mjs';
 
 export class StringTable {
     constructor(readonly stringTableElement: StringTableElement) {}
 
-    get(index: number): string {
+    get(index: number): string | undefined {
         if (!index) return '';
         index = index < 0 ? -index : index;
+        if (index >= this.stringTableElement.length) return undefined;
         return this.#getCompoundString(index);
+    }
+
+    *entries(): Iterable<[number, string]> {
+        for (let i = 1; i < this.stringTableElement.length; i++) {
+            yield [i, this.#getCompoundString(i)];
+        }
+    }
+
+    *values(): Iterable<string> {
+        for (const entry of this.entries()) {
+            yield entry[1];
+        }
+    }
+
+    get size(): number {
+        return this.stringTableElement.length;
     }
 
     #getCompoundString(index: number, visited = new Set<number>()): string {
         if (visited.has(index)) {
             throw new Error(`Circular reference in string table at index ${index}`);
         }
-        visited.add(index);
         const entry = this.stringTableElement[index];
         if (typeof entry === 'string') {
             return entry;
         }
         if (Array.isArray(entry)) {
-            return entry.map((i) => this.#getCompoundString(i, visited)).join('');
+            visited.add(index);
+            const value = entry.map((i) => this.#getCompoundString(i, visited)).join('');
+            visited.delete(index);
+            return value;
         }
         throw new Error(`Invalid string table entry at index ${index}`);
     }
 }
 
-interface TrieData {
-    idx: number;
-    value: string;
-}
-
 interface BuilderEntry {
     value: string;
     entry: StringTableEntry;
+    refCount: number;
 }
 
-const useSplits = false;
-
 export class StringTableBuilder {
+    splitStrings: boolean = false;
     private stringToIndex = new Map<string, number>();
-    private entries: BuilderEntry[] = [{ value: '', entry: '' }];
-    private knownStrings = new Trie<TrieData>();
+    private entries: BuilderEntry[] = [{ value: '', entry: '', refCount: 0 }];
+    private availableIndexes: number[] = [];
+
+    constructor(stringTableElement?: StringTableElement) {
+        if (!stringTableElement) return;
+
+        const st = new StringTable(stringTableElement);
+        for (const [idx, value] of st.entries()) {
+            if (!idx) continue;
+            const entry = stringTableElement[idx] as StringTableEntry;
+            this.entries[idx] = { value, entry, refCount: 0 };
+            if (this.stringToIndex.has(value)) continue;
+            if (Array.isArray(entry) && !entry.length) {
+                this.availableIndexes.push(idx);
+                continue;
+            }
+            this.stringToIndex.set(value, idx);
+        }
+    }
 
     add(str: string): number {
         const found = this.stringToIndex.get(str);
         if (found !== undefined) {
+            const entry = this.entries[found];
+            entry.refCount++;
             return found;
         }
         if (!str) {
             return this.#append('');
         }
-        const foundInTrie = this.knownStrings.find(str);
-        if (!foundInTrie) {
-            const idx = this.#append(str);
-            return idx;
-        }
-        const idx = this.#append(str);
-        this.#splitStrings(foundInTrie.found);
-        return idx;
+        return this.#append(str);
     }
 
-    get(str: string): number | undefined {
+    getIndex(str: string): number | undefined {
         return this.stringToIndex.get(str);
+    }
+
+    get(index: number): string | undefined {
+        const entry = this.#getEntry(index);
+        return entry?.value;
+    }
+
+    /**
+     * Increments the reference count for the given index.
+     * @param index - The index of the string in the string table. The absolute value is used.
+     * @returns the new reference count for the string at the given index.
+     */
+    addRef(index: number): number {
+        const entry = this.#getEntryCheckBounds(index);
+        const count = ++entry.refCount;
+        if (count === 1 && Array.isArray(entry.entry)) {
+            entry.entry.forEach((i) => this.addRef(i));
+        }
+        return count;
+    }
+
+    getRefCount(index: number): number {
+        const entry = this.#getEntryCheckBounds(index);
+        return entry.refCount;
+    }
+
+    #getEntry(index: number): BuilderEntry | undefined {
+        index = index < 0 ? -index : index;
+        return this.entries[index];
+    }
+
+    #getEntryCheckBounds(index: number): BuilderEntry {
+        const entry = this.#getEntry(index);
+        if (!entry) {
+            throw new Error(`Invalid string table index: ${index}`);
+        }
+        return entry;
     }
 
     #append(str: string): number {
@@ -70,70 +132,24 @@ export class StringTableBuilder {
         if (found !== undefined) {
             return found;
         }
-        const entry: BuilderEntry = { value: str, entry: str };
-        const idx = this.entries.push(entry) - 1;
+        const entry: BuilderEntry = { value: str, entry: str, refCount: 1 };
+        const idx = this.availableIndexes.shift() ?? this.entries.length;
+        this.entries[idx] = entry;
         this.stringToIndex.set(str, idx);
-        this.knownStrings.add(str, { idx, value: str });
         return idx;
     }
 
-    #splitStrings(prefix: string): void {
-        if (!prefix) return;
-        console.log(`Splitting strings with prefix: ${prefix}`);
-        if (!useSplits) return;
-        const indexes = stringIndexesToSplit(this.knownStrings, prefix);
-        for (const idx of indexes) {
-            const entry = this.entries[idx];
-            if (entry.value === prefix) {
-                continue;
-            }
-            this.#splitEntry(this.entries[idx], prefix);
+    clearUnusedEntries(): void {
+        for (let i = 1; i < this.entries.length; i++) {
+            const entry = this.entries[i];
+            if (entry.refCount > 0) continue;
+            this.stringToIndex.delete(entry.value);
+            this.entries[i] = { value: '', entry: [], refCount: 0 };
+            this.availableIndexes.push(i);
         }
-    }
-
-    #splitEntry(entry: BuilderEntry, prefix: string): void {
-        let prefixIdx = this.stringToIndex.get(prefix) ?? this.entries.length;
-        const suffix = entry.value.slice(prefix.length);
-
-        const currentCost = entryCost(entry.entry);
-        const suffixCost = this.stringToIndex.get(suffix) ? 0 : entryCost(suffix);
-        const prefixCost = this.stringToIndex.get(prefix) ? 0 : entryCost(prefix);
-
-        if (typeof entry.entry === 'string') {
-            const cost = entryCost([prefixIdx, this.entries.length]) + suffixCost + prefixCost;
-            if (cost > currentCost) return;
-            prefixIdx = this.#append(prefix);
-            const suffixIdx = this.add(suffix);
-            entry.entry = [prefixIdx, suffixIdx];
-            return;
-        }
-
-        const cost = entryCost([prefixIdx, ...entry.entry]) + suffixCost;
-        if (cost > currentCost) return;
-        // @todo: split concatenated entries.
     }
 
     build(): StringTableElement {
         return [ElementType.StringTable, ...this.entries.slice(1).map((e) => e.entry)];
     }
-}
-
-function entryCost(entry: StringTableEntry): number {
-    if (typeof entry === 'string') {
-        return entry.length + 2;
-    }
-    let cost = 1 + entry.length; // array overhead + index size
-    for (const idx of entry) {
-        cost += Math.log10(idx); // index size
-    }
-    return cost;
-}
-
-function stringIndexesToSplit(trie: Trie<TrieData>, prefix: string): number[] {
-    const result: number[] = [];
-    for (const { node, found } of trie.walk(prefix)) {
-        if (node.d?.value !== found) continue;
-        result.push(node.d.idx);
-    }
-    return result;
 }
