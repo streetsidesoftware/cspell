@@ -81,6 +81,47 @@ describe('StringTable', () => {
         const newStringTableElement = builder.build();
         expect(newStringTableElement).toEqual([128, 'apple', 'banana', [1, 4, 2], '-', []]);
     });
+
+    test('StringTableBuilder sorted by refCount', () => {
+        const stringTableElement: StringTableElement = [
+            128,
+            'apple',
+            'banana',
+            [1, 4, 2],
+            '-',
+            'orange',
+            'grape',
+            'melon',
+        ];
+        const builder = new StringTableBuilder(stringTableElement);
+        expect(builder.add('apple')).toBe(1);
+        expect(builder.add('banana')).toBe(2);
+        expect(builder.add('apple-banana')).toBe(3);
+        expect(builder.add('apple-banana')).toBe(3);
+        expect(builder.add('apple-banana')).toBe(3);
+        expect(builder.add('orange')).toBe(5);
+        expect(builder.add('apple')).toBe(1);
+        expect(builder.add('-')).toBe(4);
+        expect(builder.add('mango')).toBe(8);
+        expect(builder.add('mango')).toBe(8);
+
+        expect(builder.build()).toEqual([...stringTableElement, 'mango']);
+        const map = builder.sortEntriesByRefCount();
+        expect(builder.build()).toEqual([128, [1, 4, 2], 'apple', 'mango', 'banana', '-', 'orange', 'grape', 'melon']);
+        expect(map).toEqual(
+            new Map([
+                [0, 0],
+                [1, 2], // apple
+                [2, 4], // banana
+                [3, 1], // apple-banana
+                [4, 5], // -
+                [5, 6], // orange
+                [6, 7], // grape
+                [7, 8], // melon
+                [8, 3], // mango
+            ]),
+        );
+    });
 });
 
 describe('StringTable', () => {

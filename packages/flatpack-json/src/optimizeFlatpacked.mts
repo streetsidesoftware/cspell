@@ -1,5 +1,6 @@
 import assert from 'node:assert';
 
+import { StringTableBuilder } from './stringTable.mjs';
 import type { ArrayBasedElements, Flatpacked, FlattenedElement, StringTableElement } from './types.mjs';
 import { ElementType, supportedHeaders } from './types.mjs';
 
@@ -33,10 +34,13 @@ export function optimizeFlatpacked(data: Flatpacked): Flatpacked {
         elementRefs.map((refElement) => [refElement.origIndex, refElement]),
     );
 
+    const stringTableBuilder = new StringTableBuilder(stringTable);
+
     for (const refElement of elementRefs) {
         const indexes = getRefIndexes(refElement.element);
         for (const index of indexes) {
             if (index < 0) {
+                stringTableBuilder.addRef(-index);
                 continue;
             }
             if (!index) {
@@ -65,7 +69,14 @@ export function optimizeFlatpacked(data: Flatpacked): Flatpacked {
         indexMap.set(refElement.origIndex, idx);
     }
 
-    const stringTableElements = stringTable ? [stringTable] : [];
+    for (const [oldStrIndex, newStrIndex] of stringTableBuilder.sortEntriesByRefCount()) {
+        if (!oldStrIndex || !newStrIndex) {
+            continue;
+        }
+        indexMap.set(-oldStrIndex, -newStrIndex);
+    }
+
+    const stringTableElements = stringTable ? [stringTableBuilder.build()] : [];
 
     const result: Flatpacked = [header, ...stringTableElements];
 
@@ -79,8 +90,8 @@ export function optimizeFlatpacked(data: Flatpacked): Flatpacked {
 
 function patchIndexes(elem: FlattenedElement, indexMap: Map<number, number>): FlattenedElement {
     function mapIndex(index: number): number {
-        if (index < 0) return index;
         const v = indexMap.get(index);
+        if (v === undefined && index < 0) return index;
         assert(v !== undefined, `Invalid index: ${index}`);
         return v;
     }

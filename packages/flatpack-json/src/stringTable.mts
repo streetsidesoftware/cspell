@@ -1,3 +1,5 @@
+import assert from 'node:assert';
+
 import { ElementType, type StringTableElement, type StringTableEntry } from './types.mjs';
 
 export class StringTable {
@@ -50,11 +52,15 @@ interface BuilderEntry {
     refCount: number;
 }
 
+const tokenRegex = /\w+/g;
+
 export class StringTableBuilder {
     splitStrings: boolean = false;
     private stringToIndex = new Map<string, number>();
     private entries: BuilderEntry[] = [{ value: '', entry: '', refCount: 0 }];
     private availableIndexes: number[] = [];
+    private tokenRegex = tokenRegex;
+    private splitIntoTokens = false;
 
     constructor(stringTableElement?: StringTableElement) {
         if (!stringTableElement) return;
@@ -64,12 +70,13 @@ export class StringTableBuilder {
             if (!idx) continue;
             const entry = stringTableElement[idx] as StringTableEntry;
             this.entries[idx] = { value, entry, refCount: 0 };
-            if (this.stringToIndex.has(value)) continue;
             if (Array.isArray(entry) && !entry.length) {
                 this.availableIndexes.push(idx);
                 continue;
             }
-            this.stringToIndex.set(value, idx);
+            if (!this.stringToIndex.has(value)) {
+                this.stringToIndex.set(value, idx);
+            }
         }
     }
 
@@ -80,9 +87,7 @@ export class StringTableBuilder {
             entry.refCount++;
             return found;
         }
-        if (!str) {
-            return this.#append('');
-        }
+        str ||= '';
         return this.#append(str);
     }
 
@@ -143,9 +148,34 @@ export class StringTableBuilder {
         for (let i = 1; i < this.entries.length; i++) {
             const entry = this.entries[i];
             if (entry.refCount > 0) continue;
-            this.stringToIndex.delete(entry.value);
+            if (this.stringToIndex.get(entry.value) === i) {
+                this.stringToIndex.delete(entry.value);
+            }
             this.entries[i] = { value: '', entry: [], refCount: 0 };
             this.availableIndexes.push(i);
+        }
+    }
+
+    /**
+     * Sorts the entries in the string table by reference count, with the most referenced strings first.
+     * This can help reduce the size of the string table when serialized, as more frequently used strings
+     * will have smaller indexes.
+     * @returns a map of old indexes to new indexes after sorting. The index 0 is always mapped to itself.
+     */
+    sortEntriesByRefCount(): Map<number, number> {
+        const mapEntryToOldIndex = new Map<BuilderEntry, number>(this.entries.map((entry, index) => [entry, index]));
+
+        const entry0 = this.entries[0];
+        const sorted = this.entries.sort((a, b) =>
+            a === entry0 ? -1 : b === entry0 ? 1 : b.refCount - a.refCount || getOldIndex(a) - getOldIndex(b),
+        );
+
+        return new Map<number, number>(sorted.map((entry, index) => [getOldIndex(entry), index]));
+
+        function getOldIndex(entry: BuilderEntry): number {
+            const oldIndex = mapEntryToOldIndex.get(entry);
+            assert(oldIndex !== undefined, 'Entry not found in map');
+            return oldIndex;
         }
     }
 
