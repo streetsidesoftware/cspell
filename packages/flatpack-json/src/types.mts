@@ -129,12 +129,6 @@ export interface FlatpackOptions {
      * The format of the output. If not specified, the latest format will be used.
      */
     format?: 'V1' | 'V2';
-
-    /**
-     * Use a string table to store unique strings and reference them by index.
-     * This forces the format to be at least V2.
-     */
-    useStringTable?: boolean;
 }
 
 /**
@@ -165,3 +159,5 @@ export function isStringTableElement(elem: FlattenedElement): elem is StringTabl
     }
     return elem[0] === ElementType.StringTable;
 }
+
+export const symbolFlatpackElement: unique symbol = Symbol.for('flatpackElement');

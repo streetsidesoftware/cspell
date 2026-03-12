@@ -20,7 +20,7 @@ import type {
     Serializable,
     SetElement,
 } from './types.mjs';
-import { dataHeader, dataHeaderV1_0, dataHeaderV2_0, ElementType } from './types.mjs';
+import { dataHeaderV2_0, ElementType } from './types.mjs';
 
 const collator = new Intl.Collator('en', {
     usage: 'sort',
@@ -32,7 +32,7 @@ const collator = new Intl.Collator('en', {
 const compare = collator.compare;
 
 export class CompactStorageV2 extends CompactStorage {
-    private data = [dataHeader] as Flatpacked;
+    private data = [dataHeaderV2_0] as Flatpacked;
     private stringTable: StringTableBuilder | undefined;
     private dedupe = true;
     private sortKeys = true;
@@ -57,19 +57,8 @@ export class CompactStorageV2 extends CompactStorage {
         super(options);
         this.dedupe = options?.dedupe ?? true;
         this.sortKeys = options?.sortKeys || this.dedupe;
-        let stringTableAllowed = dataHeader !== dataHeaderV1_0;
-        if (options?.format === 'V2') {
-            this.data[0] = dataHeaderV2_0;
-            stringTableAllowed = true;
-        }
-        if (options?.useStringTable && !options.format) {
-            this.data[0] = dataHeaderV2_0;
-            stringTableAllowed = true;
-        }
-        if (options?.useStringTable || (options?.useStringTable !== false && stringTableAllowed)) {
-            this.stringTable = new StringTableBuilder();
-            this.data[1] = [ElementType.StringTable];
-        }
+        this.stringTable = new StringTableBuilder();
+        this.data[1] = [ElementType.StringTable];
     }
 
     private primitiveToIdx(value: Primitive): number {
@@ -87,15 +76,15 @@ export class CompactStorageV2 extends CompactStorage {
     }
 
     private addStringPrimitive(value: string): number {
-        const strTableIdx = this.stringTableLookup.get(value);
-        if (strTableIdx) {
-            return strTableIdx;
-        }
         const stringTable = this.stringTable;
         if (stringTable) {
             const idx = -stringTable.add(value);
             this.stringTableLookup.set(value, idx);
             return idx;
+        }
+        const strTableIdx = this.stringTableLookup.get(value);
+        if (strTableIdx) {
+            return strTableIdx;
         }
         const idx = this.data.push(value) - 1;
         this.cache.set(value, idx);

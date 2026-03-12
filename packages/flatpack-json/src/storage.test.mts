@@ -114,7 +114,7 @@ describe('dehydrate', async () => {
         ${[1n, 2n, 1n, 2n, biMaxSafe, -biMaxSafe, biMaxSafe + 1n, -biMaxSafe - 1n]}                         | ${undefined}
         ${[Object(1n), Object('hello'), Object(/\w+/g), Object(null), Object([]), Object('hello')]}         | ${undefined}
     `('dehydrate useStringTable $data $options', ({ data, options }) => {
-        options = { ...options, useStringTable: true };
+        options = { ...options, format: 'V2' };
         const v = toJSON(data, { ...options });
         expect(v).toMatchSnapshot();
         expect(fromJSON(v)).toEqual(data);
@@ -166,8 +166,8 @@ describe('v1 to v2', async () => {
 
     test('npmV1 to V2', async () => {
         const data = fromJSON(JSON.parse(contentNpmV1));
-        expect(fromJSON(toJSON(data, { useStringTable: true, dedupe: true }))).toEqual(data);
-        const jsonStr = stringify(data, true, { optimize: true, useStringTable: true, dedupe: true });
+        expect(fromJSON(toJSON(data, { format: 'V2', dedupe: true }))).toEqual(data);
+        const jsonStr = stringify(data, true, { optimize: true, format: 'V2', dedupe: true });
         await fs.writeFile(new URL('.npm-packages-info-v2.json', urlFixtures), jsonStr);
 
         expect(fromJSON(JSON.parse(jsonStr))).toEqual(data);

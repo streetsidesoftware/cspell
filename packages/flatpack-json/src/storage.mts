@@ -22,20 +22,12 @@ export function stringify(data: Unpacked, pretty = true, options?: FlatpackOptio
 
 function normalizeOptions(options?: FlatpackOptions): Required<FlatpackOptions> {
     let header = dataHeader;
-    let stringTableAllowed = dataHeader !== dataHeaderV1_0;
     if (options?.format === 'V1') {
         header = dataHeaderV1_0;
-        stringTableAllowed = false;
     }
     if (options?.format === 'V2') {
         header = dataHeaderV2_0;
-        stringTableAllowed = true;
     }
-    if (options?.useStringTable && !options.format) {
-        header = dataHeaderV2_0;
-        stringTableAllowed = true;
-    }
-    const useStringTable = stringTableAllowed && (options?.useStringTable || header === dataHeaderV2_0);
 
     const dedupe = options?.dedupe ?? true;
     const sortKeys = options?.sortKeys || dedupe;
@@ -43,7 +35,6 @@ function normalizeOptions(options?: FlatpackOptions): Required<FlatpackOptions> 
     const result: Required<FlatpackOptions> = {
         ...options,
         format: header === dataHeaderV1_0 ? 'V1' : 'V2',
-        useStringTable,
         dedupe,
         sortKeys,
         optimize: options?.optimize ?? false,
