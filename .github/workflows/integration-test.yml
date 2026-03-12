@@ -279,7 +279,7 @@ jobs:
 
       - name: Add comment to PR
         continue-on-error: true
-        uses: mshick/add-pr-comment@v2
+        uses: mshick/add-pr-comment@v3
         with:
           message: ${{ steps.report.outputs.report }}
 
