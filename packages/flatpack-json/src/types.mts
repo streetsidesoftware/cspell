@@ -167,7 +167,7 @@ export function isStringTableElement(elem: FlattenedElement): elem is StringTabl
     return elem[0] === ElementType.StringTable;
 }
 
-export const symbolFlatpackElement: unique symbol = Symbol.for('flatpackElement');
+export const symbolFlatpackAnnotation: unique symbol = Symbol.for('flatpackAnnotation');
 
 export interface UnpackedMetaData {
     src: Flatpacked;
@@ -175,7 +175,7 @@ export interface UnpackedMetaData {
 }
 
 export interface UnpackedAnnotation {
-    [symbolFlatpackElement]?: UnpackedMetaData;
+    [symbolFlatpackAnnotation]?: UnpackedMetaData;
 }
 
 export type AnnotateUnpacked<T> = T extends null ? T : T extends object ? T & UnpackedAnnotation : T;

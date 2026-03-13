@@ -20,10 +20,10 @@ import type {
     RegExpElement,
     Serializable,
     SetElement,
-    UnpackedAnnotation,
     UnpackedMetaData,
 } from './types.mjs';
-import { dataHeaderV2_0, ElementType, isStringTableElement, symbolFlatpackElement } from './types.mjs';
+import { dataHeaderV2_0, ElementType, isStringTableElement } from './types.mjs';
+import { extractUnpackedMetaData } from './unpackedAnnotation.mjs';
 import { WeakCache } from './WeakCache.mjs';
 
 type SimpleHash = number;
@@ -448,15 +448,4 @@ function isObjectWrapper(value: unknown): value is ObjectWrapper {
         typeof (value as ObjectWrapper).valueOf === 'function' &&
         value.valueOf() !== value
     );
-}
-
-function extractUnpackedMetaData(data: Serializable): UnpackedMetaData | undefined {
-    if (isAnnotateUnpacked(data)) {
-        return data[symbolFlatpackElement];
-    }
-    return undefined;
-}
-
-function isAnnotateUnpacked<T>(value: T): value is T & UnpackedAnnotation {
-    return typeof value === 'object' && value !== null && Object.hasOwn(value, symbolFlatpackElement);
 }
