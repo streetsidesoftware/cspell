@@ -1,6 +1,8 @@
 import assert from 'node:assert';
 
+import { StringTable } from './stringTable.mjs';
 import type {
+    AnnotateUnpacked,
     ArrayBasedElements,
     ArrayElement,
     BigIntElement,
@@ -14,23 +16,28 @@ import type {
     PrimitiveMap,
     PrimitiveObject,
     PrimitiveSet,
+    RawUnpacked,
     RegExpElement,
     Serializable,
     SetElement,
     StringElement,
+    StringTableElement,
     SubStringElement,
     Unpacked,
+    UnpackedMetaData,
 } from './types.mjs';
-import { ElementType, supportedHeaders } from './types.mjs';
+import { ElementType, supportedHeaders, symbolFlatpackAnnotation } from './types.mjs';
 
 export function fromJSON(data: Flatpacked): Unpacked {
     const [header] = data;
+
+    let stringTable: StringTable | undefined;
 
     if (!supportedHeaders.has(header)) {
         throw new Error('Invalid header');
     }
 
-    const cache = new Map<number | number[], Unpacked>([[0, undefined]]);
+    const cache = new Map<number | number[], RawUnpacked>([[0, undefined]]);
     /**
      * indexes that have been referenced by other objects.
      */
@@ -79,9 +86,9 @@ export function fromJSON(data: Flatpacked): Unpacked {
     }
 
     function toString(idx: number, elem: StringElement | string): string {
-        const s = typeof elem === 'string' ? elem : idxToValue(elem.slice(1) as number[]);
+        const s = typeof elem === 'string' ? elem : idxToString(elem.slice(1) as number[]);
         cache.set(idx, s);
-        return s as string;
+        return s;
     }
 
     function toObj(idx: number, elem: ObjectElement): PrimitiveObject {
@@ -164,22 +171,31 @@ export function fromJSON(data: Flatpacked): Unpacked {
             case ElementType.BigInt: {
                 return toBigInt(idx, element as BigIntElement);
             }
+            case ElementType.StringTable: {
+                stringTable = new StringTable(element as StringTableElement);
+                return idxToValue(idx + 1);
+            }
         }
         return toArr(idx, element as ArrayElement);
     }
 
-    function idxToValue(idx: number | number[]): Serializable {
+    function idxToString(idx: number | number[]): string {
+        if (!idx) return '';
+        if (Array.isArray(idx)) {
+            return joinToString(idx.map((i) => idxToValue(i)));
+        }
+        return idxToValue(idx) as string;
+    }
+
+    function idxToValue(idx: number): Unpacked {
         if (!idx) return undefined;
+        if (idx < 0) {
+            return stringTable ? stringTable.get(-idx) : undefined;
+        }
         const found = cache.get(idx);
         if (found !== undefined) {
             if (typeof idx === 'number') referenced.add(idx);
-            return found as Serializable;
-        }
-
-        if (Array.isArray(idx)) {
-            // it is a nested string;
-            const parts = idx.map((i) => idxToValue(i));
-            return joinToString(parts);
+            return annotateUnpacked(found, { src: data, index: idx });
         }
 
         const element = data[idx];
@@ -187,8 +203,12 @@ export function fromJSON(data: Flatpacked): Unpacked {
         if (typeof element === 'object') {
             // eslint-disable-next-line unicorn/no-null
             if (element === null) return null;
-            if (Array.isArray(element)) return handleArrayElement(idx, element as ArrayBasedElements);
-            return {};
+            if (Array.isArray(element))
+                return annotateUnpacked(handleArrayElement(idx, element as ArrayBasedElements), {
+                    src: data,
+                    index: idx,
+                });
+            return annotateUnpacked<PrimitiveObject>({}, { src: data, index: idx });
         }
         return element;
     }
@@ -206,4 +226,15 @@ function isArrayElement(value: FlattenedElement): value is ArrayElement {
 
 export function parse(data: string): Unpacked {
     return fromJSON(JSON.parse(data));
+}
+
+function annotateUnpacked<T extends RawUnpacked>(value: T, meta: UnpackedMetaData): AnnotateUnpacked<T> {
+    if (value && typeof value === 'object') {
+        if (Object.hasOwn(value, symbolFlatpackAnnotation)) {
+            return value as AnnotateUnpacked<T>;
+        }
+
+        return Object.defineProperty(value, symbolFlatpackAnnotation, { value: meta }) as AnnotateUnpacked<T>;
+    }
+    return value as AnnotateUnpacked<T>;
 }

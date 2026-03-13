@@ -3,14 +3,12 @@ import { readFile } from 'node:fs/promises';
 import { findMatchingFileTypes } from '@cspell/filetypes';
 import { describe, expect, test } from 'vitest';
 
-import { toJSON } from './storage.mjs';
+import { stringify, toJSON } from './storageV1.mjs';
 import { stringifyFlatpacked } from './stringify.mjs';
-import { symbolFlatpackAnnotation } from './types.mjs';
 import { fromJSON } from './unpack.mjs';
-import { extractUnpackedMetaData, isAnnotateUnpacked } from './unpackedAnnotation.mjs';
 
 const urlFileList = new URL('../fixtures/fileList.txt', import.meta.url);
-const baseFilename = new URL(import.meta.url).pathname.split('/').slice(-1).join('').split('.').slice(0, -2).join('.');
+const baseFilename = 'storage';
 
 describe('dehydrate', async () => {
     test.each`
@@ -22,16 +20,6 @@ describe('dehydrate', async () => {
         ${null}
         ${true}
         ${false}
-    `('dehydrate/hydrate $data', ({ data }) => {
-        const v = toJSON(data);
-        const r = fromJSON(v);
-        expect(r).toEqual(data);
-        expect(isAnnotateUnpacked(r)).toBe(typeof data === 'object' && data !== null);
-        expect(extractUnpackedMetaData(r)).toEqual(undefined);
-    });
-
-    test.each`
-        data
         ${[]}
         ${[1, 2]}
         ${['a', 'b', 'a', 'b']}
@@ -42,32 +30,7 @@ describe('dehydrate', async () => {
         ${{ a: [1] }}
     `('dehydrate/hydrate $data', ({ data }) => {
         const v = toJSON(data);
-        const r = fromJSON(v);
-        expect(r).toEqual(data);
-        expect(isAnnotateUnpacked(r)).toBe(typeof data === 'object' && data !== null);
-        expect(symbolFlatpackAnnotation in (r as object)).toBe(true);
-        expect(Object.hasOwn(r as object, symbolFlatpackAnnotation)).toBe(true);
-        expect(extractUnpackedMetaData(r)).toEqual({ src: v, index: 1 });
-    });
-
-    test.each`
-        data
-        ${[]}
-        ${[1, 2]}
-        ${['a', 'b', 'a', 'b']}
-        ${{}}
-        ${{ a: 1 }}
-        ${{ a: { b: 1 } }}
-        ${{ a: { a: 'a', b: 42 } }}
-        ${{ a: [1] }}
-    `('dehydrate/hydrate $data', ({ data }) => {
-        const v = toJSON(data, { format: 'V2' });
-        const r = fromJSON(v);
-        expect(r).toEqual(data);
-        expect(isAnnotateUnpacked(r)).toBe(typeof data === 'object' && data !== null);
-        expect(symbolFlatpackAnnotation in (r as object)).toBe(true);
-        expect(Object.hasOwn(r as object, symbolFlatpackAnnotation)).toBe(true);
-        expect(extractUnpackedMetaData(r)).toEqual({ src: v, index: 2 });
+        expect(fromJSON(v)).toEqual(data);
     });
 
     const biMaxSafe = BigInt(Number.MAX_SAFE_INTEGER);
@@ -85,6 +48,7 @@ describe('dehydrate', async () => {
         ${[1, 2]}                                                                                       | ${undefined}
         ${['apple', 'banana', 'apple', 'banana', 'apple', 'pineapple']}                                 | ${undefined}
         ${new Set(['apple', 'banana', 'pineapple'])}                                                    | ${undefined}
+        ${new Set(['pineapple', 'apple', 'banana'])}                                                    | ${undefined}
         ${new Map([['apple', 1], ['banana', 2], ['pineapple', 3]])}                                     | ${undefined}
         ${{}}                                                                                           | ${undefined}
         ${[{}, {}, {}]}                                                                                 | ${undefined}
@@ -107,6 +71,8 @@ describe('dehydrate', async () => {
         expect(v).toMatchSnapshot();
         expect(fromJSON(v)).toEqual(data);
         expect(fromJSON(JSON.parse(JSON.stringify(v)))).toEqual(data);
+        expect(fromJSON(JSON.parse(stringify(data)))).toEqual(data);
+        expect(fromJSON(JSON.parse(stringify(data, false)))).toEqual(data);
     });
 
     test.each`
@@ -181,6 +147,11 @@ function sampleNestedData() {
         ['a', 'a'],
         ['b', 'b'],
     ]);
+
+    const values = ['apple', 'banana', 'pineapple'];
+    const rValues = [...values].reverse();
+    const cValues = [...values];
+
     return {
         a,
         b,
@@ -190,5 +161,10 @@ function sampleNestedData() {
         s,
         r,
         m,
+        ss: s,
+        mm: m,
+        values,
+        rValues,
+        cValues,
     };
 }
