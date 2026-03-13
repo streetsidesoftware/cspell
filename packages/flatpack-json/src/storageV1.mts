@@ -9,8 +9,8 @@ import type {
     BigIntElement,
     DateElement,
     Flatpacked,
+    FlatpackIndex,
     FlatpackOptions,
-    Index,
     MapElement,
     ObjectElement,
     ObjectWrapper,
@@ -232,7 +232,7 @@ export class CompactStorageV1 extends CompactStorage {
         return this.storeElement(value, idx, element);
     }
 
-    private createUniqueKeys(keys: Serializable[], cacheValue = true): Index {
+    private createUniqueKeys(keys: Serializable[], cacheValue = true): FlatpackIndex {
         let k = this.arrToIdx(keys, cacheValue);
         const elementKeys = this.data[k] as ArrayElement;
         const uniqueKeys = new Set(elementKeys.slice(1));
@@ -361,7 +361,7 @@ export class CompactStorageV1 extends CompactStorage {
         return this.storeElement(value, idx, element);
     }
 
-    private storeElement(value: Serializable | ObjectWrapper, idx: Index, element: CachedElements): number {
+    private storeElement(value: Serializable | ObjectWrapper, idx: FlatpackIndex, element: CachedElements): number {
         const useIdx = this.dedupe ? this.cacheElement(idx, element) : idx;
 
         if (useIdx !== idx && idx === this.data.length - 1) {
@@ -374,7 +374,7 @@ export class CompactStorageV1 extends CompactStorage {
         return idx;
     }
 
-    private cacheElement(elemIdx: Index, element: CachedElements): number {
+    private cacheElement(elemIdx: FlatpackIndex, element: CachedElements): number {
         let map: CacheMap = this.cachedElements;
         for (let i = 0; i < element.length - 1; i++) {
             const idx = element[i];
@@ -410,7 +410,7 @@ export class CompactStorageV1 extends CompactStorage {
         return idx;
     }
 
-    private createArrayElementFromIndexValues(idx: Index, indexValues: Index[]): Index {
+    private createArrayElementFromIndexValues(idx: FlatpackIndex, indexValues: FlatpackIndex[]): FlatpackIndex {
         const element: ArrayElement = [ElementType.Array, ...indexValues];
         const useIdx = this.dedupe ? this.stashArray(idx, element) : idx;
 
@@ -517,7 +517,7 @@ interface TrieData {
     value: string;
 }
 
-type CacheMap = Map<Index, Index | CacheMap>;
+type CacheMap = Map<FlatpackIndex, FlatpackIndex | CacheMap>;
 type CachedElements = ObjectElement | SetElement | MapElement | RegExpElement | DateElement | BigIntElement;
 
 function isEqual(a: readonly number[], b: readonly number[]): boolean {

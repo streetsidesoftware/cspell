@@ -2,14 +2,15 @@ import assert from 'node:assert';
 
 import { CompactStorage } from './CompactStorage.mjs';
 import { optimizeFlatpacked } from './optimizeFlatpacked.mjs';
+import { RefCounter } from './RefCounter.mjs';
 import { StringTableBuilder } from './stringTable.mjs';
 import type {
     ArrayElement,
     BigIntElement,
     DateElement,
     Flatpacked,
+    FlatpackIndex,
     FlatpackOptions,
-    Index,
     MapElement,
     ObjectElement,
     ObjectWrapper,
@@ -19,8 +20,13 @@ import type {
     RegExpElement,
     Serializable,
     SetElement,
+    UnpackedAnnotation,
+    UnpackedMetaData,
 } from './types.mjs';
-import { dataHeaderV2_0, ElementType } from './types.mjs';
+import { dataHeaderV2_0, ElementType, isStringTableElement, symbolFlatpackElement } from './types.mjs';
+import { WeakCache } from './WeakCache.mjs';
+
+type SimpleHash = number;
 
 const collator = new Intl.Collator('en', {
     usage: 'sort',
@@ -32,36 +38,35 @@ const collator = new Intl.Collator('en', {
 const compare = collator.compare;
 
 export class CompactStorageV2 extends CompactStorage {
-    private data = [dataHeaderV2_0] as Flatpacked;
-    private stringTable: StringTableBuilder | undefined;
+    private data: Flatpacked;
+    private stringTable: StringTableBuilder;
     private dedupe = true;
     private sortKeys = true;
     private emptyObjIdx = 0;
     /**
      * Cache of primitives and objects that have been added to the data.
      */
-    private cache = new Map<unknown, number>([[undefined, 0]]);
+    private cache = new WeakCache<FlatpackIndex>([[undefined, 0]]);
     /**
      * Set of indexes that have been referenced by other indexes.
      */
-    private referenced = new Set<number>();
+    private referenced = new RefCounter<FlatpackIndex>();
     /**
      * Cache of arrays that have been deduped.
      * The key is a hash of the array elements as a function of the index of the element.
      */
-    private cachedArrays = new Map<number, { idx: number; v: ArrayElement }[]>();
-    private cachedElements = new Map<number, CacheMap>();
-    private stringTableLookup = new Map<string, number>();
+    private cachedArrays = new Map<SimpleHash, { idx: number; v: ArrayElement }[]>();
+    private cachedElements = new Map<FlatpackIndex, CacheMap>();
 
     constructor(options?: FlatpackOptions | undefined) {
         super(options);
         this.dedupe = options?.dedupe ?? true;
         this.sortKeys = options?.sortKeys || this.dedupe;
         this.stringTable = new StringTableBuilder();
-        this.data[1] = [ElementType.StringTable];
+        this.data = [dataHeaderV2_0, [ElementType.StringTable]];
     }
 
-    private primitiveToIdx(value: Primitive): number {
+    private primitiveToIdx(value: Primitive): FlatpackIndex {
         if (typeof value === 'string') return this.stringToIdx(value);
         if (typeof value === 'bigint') return this.bigintToIdx(value);
 
@@ -76,28 +81,16 @@ export class CompactStorageV2 extends CompactStorage {
     }
 
     private addStringPrimitive(value: string): number {
-        const stringTable = this.stringTable;
-        if (stringTable) {
-            const idx = -stringTable.add(value);
-            this.stringTableLookup.set(value, idx);
-            return idx;
-        }
-        const strTableIdx = this.stringTableLookup.get(value);
-        if (strTableIdx) {
-            return strTableIdx;
-        }
-        const idx = this.data.push(value) - 1;
-        this.cache.set(value, idx);
-        return idx;
+        return -this.stringTable.add(value);
     }
 
-    private duplicateIndex(idx: number): number {
+    private duplicateIndex(idx: FlatpackIndex): FlatpackIndex {
         const element = this.data[idx];
         const duplicate = this.data.push(element) - 1;
         return duplicate;
     }
 
-    private stringToIdx(value: string): number {
+    private stringToIdx(value: string): FlatpackIndex {
         const found = this.cache.get(value);
         if (found !== undefined) {
             return found;
@@ -106,7 +99,7 @@ export class CompactStorageV2 extends CompactStorage {
         return this.addStringPrimitive(value);
     }
 
-    private objSetToIdx(value: Set<Serializable>): number {
+    private objSetToIdx(value: Set<Serializable>): FlatpackIndex {
         const found = this.cache.get(value);
         if (found !== undefined) {
             this.referenced.add(found);
@@ -122,7 +115,7 @@ export class CompactStorageV2 extends CompactStorage {
         return this.storeElement(value, idx, element);
     }
 
-    private createUniqueKeys(keys: Serializable[], cacheValue = true): Index {
+    private createUniqueKeys(keys: Serializable[], cacheValue = true): FlatpackIndex {
         let k = this.arrToIdx(keys, cacheValue);
         const elementKeys = this.data[k] as ArrayElement;
         const uniqueKeys = new Set(elementKeys.slice(1));
@@ -141,7 +134,7 @@ export class CompactStorageV2 extends CompactStorage {
         return k;
     }
 
-    private objMapToIdx(value: Map<Serializable, Serializable>): number {
+    private objMapToIdx(value: Map<Serializable, Serializable>): FlatpackIndex {
         const found = this.cache.get(value);
         if (found !== undefined) {
             this.referenced.add(found);
@@ -165,7 +158,7 @@ export class CompactStorageV2 extends CompactStorage {
         return this.storeElement(value, idx, element);
     }
 
-    private objRegExpToIdx(value: RegExp): number {
+    private objRegExpToIdx(value: RegExp): FlatpackIndex {
         const found = this.cache.get(value);
         if (found !== undefined) {
             return found;
@@ -181,7 +174,7 @@ export class CompactStorageV2 extends CompactStorage {
         return this.storeElement(value, idx, element);
     }
 
-    private objDateToIdx(value: Date): number {
+    private objDateToIdx(value: Date): FlatpackIndex {
         const found = this.cache.get(value);
         if (found !== undefined) {
             return found;
@@ -193,7 +186,7 @@ export class CompactStorageV2 extends CompactStorage {
         return this.storeElement(value, idx, element);
     }
 
-    private bigintToIdx(value: bigint): number {
+    private bigintToIdx(value: bigint): FlatpackIndex {
         const found = this.cache.get(value);
         if (found !== undefined) {
             return found;
@@ -212,7 +205,7 @@ export class CompactStorageV2 extends CompactStorage {
         return this.storeElement(value, idx, element);
     }
 
-    private objToIdx(value: PrimitiveObject | ObjectWrapper): number {
+    private objToIdx(value: PrimitiveObject | ObjectWrapper): FlatpackIndex {
         const found = this.cache.get(value);
         if (found !== undefined) {
             this.referenced.add(found);
@@ -251,7 +244,18 @@ export class CompactStorageV2 extends CompactStorage {
         return this.storeElement(value, idx, element);
     }
 
-    private storeElement(value: Serializable | ObjectWrapper, idx: Index, element: CachedElements): number {
+    /**
+     * Store an element in the data array, using the cache if deduplication is enabled.
+     * @param value - the value being stored, used for caching purposes.
+     * @param idx - the index at which to store the element if it is not found in the cache.
+     * @param element - the element to store if it is not found in the cache.
+     * @returns the index at which the element is stored.
+     */
+    private storeElement(
+        value: Serializable | ObjectWrapper,
+        idx: FlatpackIndex,
+        element: CachedElements,
+    ): FlatpackIndex {
         const useIdx = this.dedupe ? this.cacheElement(idx, element) : idx;
 
         if (useIdx !== idx && idx === this.data.length - 1) {
@@ -264,7 +268,7 @@ export class CompactStorageV2 extends CompactStorage {
         return idx;
     }
 
-    private cacheElement(elemIdx: Index, element: CachedElements): number {
+    private cacheElement(elemIdx: FlatpackIndex, element: CachedElements): FlatpackIndex {
         let map: CacheMap = this.cachedElements;
         for (let i = 0; i < element.length - 1; i++) {
             const idx = element[i];
@@ -279,13 +283,13 @@ export class CompactStorageV2 extends CompactStorage {
         const idx = element[element.length - 1];
         const foundIdx = map.get(idx);
         if (typeof foundIdx === 'number') {
-            return this.referenced.has(elemIdx) ? elemIdx : foundIdx;
+            return this.referenced.hasRefs(elemIdx) ? elemIdx : foundIdx;
         }
         map.set(idx, elemIdx);
         return elemIdx;
     }
 
-    private stashArray(idx: number, element: ArrayElement): number {
+    private stashArray(idx: FlatpackIndex, element: ArrayElement): FlatpackIndex {
         const indexHash = simpleHash(element);
         let found = this.cachedArrays.get(indexHash);
         if (!found) {
@@ -294,13 +298,13 @@ export class CompactStorageV2 extends CompactStorage {
         }
         const foundIdx = found.find((entry) => isEqual(entry.v, element));
         if (foundIdx) {
-            return this.referenced.has(idx) ? idx : foundIdx.idx;
+            return this.referenced.hasRefs(idx) ? idx : foundIdx.idx;
         }
         found.push({ idx, v: element });
         return idx;
     }
 
-    private createArrayElementFromIndexValues(idx: Index, indexValues: Index[]): Index {
+    private createArrayElementFromIndexValues(idx: FlatpackIndex, indexValues: FlatpackIndex[]): FlatpackIndex {
         const element: ArrayElement = [ElementType.Array, ...indexValues];
         const useIdx = this.dedupe ? this.stashArray(idx, element) : idx;
 
@@ -321,7 +325,7 @@ export class CompactStorageV2 extends CompactStorage {
      * @param cacheValue - Whether to cache the value.
      * @returns the index of the array.
      */
-    private arrToIdx(value: PrimitiveArray, cacheValue = true): number {
+    private arrToIdx(value: PrimitiveArray, cacheValue = true): FlatpackIndex {
         const found = this.cache.get(value);
         if (found !== undefined) {
             this.referenced.add(found);
@@ -342,7 +346,7 @@ export class CompactStorageV2 extends CompactStorage {
         return useIdx;
     }
 
-    private valueToIdx(value: Serializable): number {
+    private valueToIdx(value: Serializable): FlatpackIndex {
         if (value === null) {
             return this.primitiveToIdx(value);
         }
@@ -375,10 +379,37 @@ export class CompactStorageV2 extends CompactStorage {
     private softReset(): void {
         this.cache.clear();
         this.cache.set(undefined, 0);
+        this.cachedArrays.clear();
+        this.cachedElements.clear();
+        this.referenced.clear();
+        this.data = [dataHeaderV2_0, [ElementType.StringTable]];
+    }
+
+    private useFlatpackMetaData(info: UnpackedMetaData | undefined): void {
+        const data = info?.src;
+        if (data?.[0] !== dataHeaderV2_0) {
+            return;
+        }
+        this.useFlatpackData(data);
+    }
+
+    private useFlatpackData(data: Flatpacked): void {
+        const st = data[1];
+        if (isStringTableElement(st)) {
+            this.stringTable = new StringTableBuilder(st);
+        }
+        if (data[0] !== dataHeaderV2_0) {
+            this.data = [dataHeaderV2_0, [ElementType.StringTable]];
+            return;
+        }
+        this.data = data;
+        // At the moment, only the string table is used.
+        this.data = [dataHeaderV2_0, [ElementType.StringTable]];
     }
 
     toJSON<V extends Serializable>(json: V): Flatpacked {
         this.softReset();
+        this.useFlatpackMetaData(extractUnpackedMetaData(json));
         const lastIdx = this.valueToIdx(json);
         if (lastIdx < 0) {
             this.data.push([ElementType.String, lastIdx]);
@@ -390,7 +421,7 @@ export class CompactStorageV2 extends CompactStorage {
     }
 }
 
-type CacheMap = Map<Index, Index | CacheMap>;
+type CacheMap = Map<FlatpackIndex, FlatpackIndex | CacheMap>;
 type CachedElements = ObjectElement | SetElement | MapElement | RegExpElement | DateElement | BigIntElement;
 
 function isEqual(a: readonly number[], b: readonly number[]): boolean {
@@ -417,4 +448,15 @@ function isObjectWrapper(value: unknown): value is ObjectWrapper {
         typeof (value as ObjectWrapper).valueOf === 'function' &&
         value.valueOf() !== value
     );
+}
+
+function extractUnpackedMetaData(data: Serializable): UnpackedMetaData | undefined {
+    if (isAnnotateUnpacked(data)) {
+        return data[symbolFlatpackElement];
+    }
+    return undefined;
+}
+
+function isAnnotateUnpacked<T>(value: T): value is T & UnpackedAnnotation {
+    return typeof value === 'object' && value !== null && Object.hasOwn(value, symbolFlatpackElement);
 }

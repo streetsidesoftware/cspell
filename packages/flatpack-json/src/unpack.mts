@@ -2,6 +2,7 @@ import assert from 'node:assert';
 
 import { StringTable } from './stringTable.mjs';
 import type {
+    AnnotateUnpacked,
     ArrayBasedElements,
     ArrayElement,
     BigIntElement,
@@ -15,6 +16,7 @@ import type {
     PrimitiveMap,
     PrimitiveObject,
     PrimitiveSet,
+    RawUnpacked,
     RegExpElement,
     Serializable,
     SetElement,
@@ -22,8 +24,9 @@ import type {
     StringTableElement,
     SubStringElement,
     Unpacked,
+    UnpackedMetaData,
 } from './types.mjs';
-import { ElementType, supportedHeaders } from './types.mjs';
+import { ElementType, supportedHeaders, symbolFlatpackElement } from './types.mjs';
 
 export function fromJSON(data: Flatpacked): Unpacked {
     const [header] = data;
@@ -34,7 +37,7 @@ export function fromJSON(data: Flatpacked): Unpacked {
         throw new Error('Invalid header');
     }
 
-    const cache = new Map<number | number[], Unpacked>([[0, undefined]]);
+    const cache = new Map<number | number[], RawUnpacked>([[0, undefined]]);
     /**
      * indexes that have been referenced by other objects.
      */
@@ -184,7 +187,7 @@ export function fromJSON(data: Flatpacked): Unpacked {
         return idxToValue(idx) as string;
     }
 
-    function idxToValue(idx: number): Serializable {
+    function idxToValue(idx: number): Unpacked {
         if (!idx) return undefined;
         if (idx < 0) {
             return stringTable ? stringTable.get(-idx) : undefined;
@@ -192,7 +195,7 @@ export function fromJSON(data: Flatpacked): Unpacked {
         const found = cache.get(idx);
         if (found !== undefined) {
             if (typeof idx === 'number') referenced.add(idx);
-            return found as Serializable;
+            return annotateUnpacked(found, { src: data, index: idx });
         }
 
         const element = data[idx];
@@ -200,8 +203,12 @@ export function fromJSON(data: Flatpacked): Unpacked {
         if (typeof element === 'object') {
             // eslint-disable-next-line unicorn/no-null
             if (element === null) return null;
-            if (Array.isArray(element)) return handleArrayElement(idx, element as ArrayBasedElements);
-            return {};
+            if (Array.isArray(element))
+                return annotateUnpacked(handleArrayElement(idx, element as ArrayBasedElements), {
+                    src: data,
+                    index: idx,
+                });
+            return annotateUnpacked<PrimitiveObject>({}, { src: data, index: idx });
         }
         return element;
     }
@@ -219,4 +226,15 @@ function isArrayElement(value: FlattenedElement): value is ArrayElement {
 
 export function parse(data: string): Unpacked {
     return fromJSON(JSON.parse(data));
+}
+
+function annotateUnpacked<T extends RawUnpacked>(value: T, meta: UnpackedMetaData): AnnotateUnpacked<T> {
+    if (value && typeof value === 'object') {
+        if (Object.hasOwn(value, symbolFlatpackElement)) {
+            return value as AnnotateUnpacked<T>;
+        }
+
+        return Object.defineProperty(value, symbolFlatpackElement, { value: meta }) as AnnotateUnpacked<T>;
+    }
+    return value as AnnotateUnpacked<T>;
 }
