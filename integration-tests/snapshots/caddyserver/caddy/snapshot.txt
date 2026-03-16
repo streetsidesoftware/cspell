@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 301, Issues found: 3978 in 270 files.
+ CSpell: Files checked: 301, Issues found: 3979 in 270 files.
  exit code: 1
 admin.go:1130:20   - Unknown word (Redir)       -- return errInternalRedir
 admin.go:1409:6    - Unknown word (loggable)    -- type loggableURLArray []*url.URL
@@ -916,12 +916,13 @@ cmd/commandfuncs.go:676:17    - Unknown word (Caddyfile)    -- configFile = "Cad
 cmd/commandfuncs.go:687:20    - Unknown word (caddyfile)    -- fmt.Print(string(caddyfile.Format(input)))
 cmd/commandfuncs.go:68:30     - Unknown word (pingback)    -- craft the command with a pingback address and with a
 cmd/commandfuncs.go:697:12    - Unknown word (caddyfile)    -- output := caddyfile.Format(input)
+cmd/commandfuncs.go:700:144   - Unknown word (Caddyfile)    -- here, this is either "Caddyfile" or admin-controlled
+cmd/commandfuncs.go:700:76    - Unknown word (gosec)        -- err != nil { //nolint:gosec // path traversal is
 cmd/commandfuncs.go:707:11    - Unknown word (difflib)      -- diff := difflib.Diff(
 cmd/commandfuncs.go:712:9     - Unknown word (difflib)      -- case difflib.Common:
 cmd/commandfuncs.go:714:9     - Unknown word (difflib)      -- case difflib.LeftOnly:
 cmd/commandfuncs.go:716:9     - Unknown word (difflib)      -- case difflib.RightOnly:
 cmd/commandfuncs.go:724:22    - Unknown word (caddyfile)    -- if warning, diff := caddyfile.FormattingDifference
-cmd/commandfuncs.go:725:130   - Unknown word (Caddyfile)    -- overwrite' to update your Caddyfile in-place instead of
 cmd/commandfuncs.go:725:58    - Unknown word (Caddyfile)    -- fmt.Errorf(`%s:%d: Caddyfile input is not formatted
 cmd/commandfuncs.go:77:44     - Unknown word (pingback)    -- os.Args[0], "run", "--pingback", ln.Addr().String(
 cmd/commandfuncs.go:77:77     - Unknown word (nolint)      -- ln.Addr().String()) //nolint:gosec // no command
@@ -3229,9 +3230,9 @@ modules/caddytls/certselection.go:56:116    - Unknown word (certmagic)   -- cert
 modules/caddytls/certselection.go:56:92     - Unknown word (certmagic)   -- ClientHelloInfo, choices []certmagic.Certificate) (certmagic
 modules/caddytls/certselection.go:57:19     - Unknown word (certmagic)   -- viable := make([]certmagic.Certificate, 0, len
 modules/caddytls/certselection.go:64:68     - Unknown word (gosec)       -- iteration variable (gosec warning)
-modules/caddytls/connpolicy.go:1041:33   - Unknown word (unmarshalable) -- PublicKeyAlgorithm is a JSON-unmarshalable wrapper type.
-modules/caddytls/connpolicy.go:1075:6    - Unknown word (destructable)  -- type destructableWriter struct{ *os.File
-modules/caddytls/connpolicy.go:1077:9    - Unknown word (destructable)  -- func (d destructableWriter) Destruct() error
+modules/caddytls/connpolicy.go:1046:33   - Unknown word (unmarshalable) -- PublicKeyAlgorithm is a JSON-unmarshalable wrapper type.
+modules/caddytls/connpolicy.go:1080:6    - Unknown word (destructable)  -- type destructableWriter struct{ *os.File
+modules/caddytls/connpolicy.go:1082:9    - Unknown word (destructable)  -- func (d destructableWriter) Destruct() error
 modules/caddytls/connpolicy.go:147:11    - Unknown word (Iface)       -- if tlsAppIface, err := ctx.AppIfConfigured
 modules/caddytls/connpolicy.go:15:9      - Unknown word (caddytls)   -- package caddytls
 modules/caddytls/connpolicy.go:174:40    - Unknown word (stdlib)      -- EncryptedClientHello.stdlibReady, nil
@@ -3295,10 +3296,10 @@ modules/caddytls/connpolicy.go:748:14    - Unknown word (caddyconfig)   -- ca.CA
 modules/caddytls/connpolicy.go:759:6     - Unknown word (ders)          -- var ders []string
 modules/caddytls/connpolicy.go:85:7      - Unknown word (Iface)       -- modIface, err := ctx.LoadModule
 modules/caddytls/connpolicy.go:89:32     - Unknown word (Iface)       -- handshakeContext = modIface.(HandshakeContext)
-modules/caddytls/connpolicy.go:966:13    - Unknown word (Certloaders)   -- trustedLeafCertloaders := []LeafCertificateLoader
-modules/caddytls/connpolicy.go:968:14    - Unknown word (Certloaders)   -- trustedLeafCertloaders = append(trustedLeafCertloade
-modules/caddytls/connpolicy.go:968:46    - Unknown word (Certloaders)   -- = append(trustedLeafCertloaders, loader.(LeafCertificateLoade
-modules/caddytls/connpolicy.go:971:36    - Unknown word (Certloaders)   -- := range trustedLeafCertloaders {
+modules/caddytls/connpolicy.go:971:13    - Unknown word (Certloaders)   -- trustedLeafCertloaders := []LeafCertificateLoader
+modules/caddytls/connpolicy.go:973:14    - Unknown word (Certloaders)   -- trustedLeafCertloaders = append(trustedLeafCertloade
+modules/caddytls/connpolicy.go:973:46    - Unknown word (Certloaders)   -- = append(trustedLeafCertloaders, loader.(LeafCertificateLoade
+modules/caddytls/connpolicy.go:976:36    - Unknown word (Certloaders)   -- := range trustedLeafCertloaders {
 modules/caddytls/connpolicy_test.go:15:9      - Unknown word (caddytls)   -- package caddytls
 modules/caddytls/connpolicy_test.go:23:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 modules/caddytls/connpolicy_test.go:24:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/caddyconfig
@@ -3419,7 +3420,7 @@ modules/caddytls/ech.go:996:4     - Unknown word (AEADID)      -- AEADID: hpke.A
 modules/caddytls/fileloader.go:15:9      - Unknown word (caddytls)   -- package caddytls
 modules/caddytls/fileloader.go:23:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 modules/caddytls/folderloader.go:15:9      - Unknown word (caddytls)   -- package caddytls
-modules/caddytls/folderloader.go:26:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
+modules/caddytls/folderloader.go:27:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 modules/caddytls/internalissuer.go:103:86    - Unknown word (certmagic)   -- CertificateRequest) (*certmagic.IssuedCertificate, error
 modules/caddytls/internalissuer.go:105:13    - Unknown word (caddypki)    -- authCfg := caddypki.AuthorityConfig{
 modules/caddytls/internalissuer.go:146:10    - Unknown word (certmagic)   -- return &certmagic.IssuedCertificate{
