@@ -113,6 +113,44 @@ describe('dehydrate', async () => {
     });
 
     test.each`
+        data                                                                                            | options
+        ${undefined}                                                                                    | ${undefined}
+        ${'string'}                                                                                     | ${undefined}
+        ${1}                                                                                            | ${undefined}
+        ${1.1}                                                                                          | ${undefined}
+        ${null}                                                                                         | ${undefined}
+        ${true}                                                                                         | ${undefined}
+        ${false}                                                                                        | ${undefined}
+        ${[]}                                                                                           | ${undefined}
+        ${[1, 2]}                                                                                       | ${undefined}
+        ${['apple', 'banana', 'apple', 'banana', 'apple', 'pineapple']}                                 | ${undefined}
+        ${new Set(['apple', 'banana', 'pineapple'])}                                                    | ${undefined}
+        ${new Map([['apple', 1], ['banana', 2], ['pineapple', 3]])}                                     | ${undefined}
+        ${{}}                                                                                           | ${undefined}
+        ${[{}, {}, {}]}                                                                                 | ${undefined}
+        ${{ a: 1 }}                                                                                     | ${undefined}
+        ${{ a: { b: 1 } }}                                                                              | ${undefined}
+        ${{ a: { a: 'a', b: 42 } }}                                                                     | ${undefined}
+        ${{ a: [1] }}                                                                                   | ${undefined}
+        ${{ values: ['apple', 'banana', 'pineapple'], set: new Set(['apple', 'banana', 'pineapple']) }} | ${undefined}
+        ${[{ a: 'a', b: 'b' }, { a: 'c', b: 'd' }, { b: 'b', a: 'a' }, ['a', 'b'], ['c', 'd']]}         | ${undefined}
+        ${[{ a: 'a', b: 'b' }, { a: 'a', b: 'b' }, { a: 'a', b: 'b' }, { a: 'a', b: 'b' }]}             | ${{ dedupe: false }}
+        ${sampleNestedData()}                                                                           | ${undefined}
+        ${sampleRepeatedStrings()}                                                                      | ${undefined}
+        ${/[\p{L}\p{M}]+/gu}                                                                            | ${undefined}
+        ${[/[\p{L}\p{M}]+/gu, /[\p{L}\p{M}]+/gu, /[\p{Lu}\p{M}]+/gu]}                                   | ${undefined}
+        ${[new Date('2024-01-01'), new Date('2024-01-01'), new Date('2024-01-02')]}                     | ${undefined}
+        ${[1n, 2n, 1n, 2n, biMaxSafe, -biMaxSafe, biMaxSafe + 1n, -biMaxSafe - 1n]}                     | ${undefined}
+        ${[Object(1n), Object('hello'), Object(/\w+/g), Object(null), Object([]), Object('hello')]}     | ${undefined}
+    `('dehydrate V2 $data $options', ({ data, options }) => {
+        const v = toJSON(data, { dedupe: options?.dedupe, format: 'V2' });
+        expect(v).toMatchSnapshot('flatpack');
+        expect(fromJSON(v)).toEqual(data);
+        expect(fromJSON(JSON.parse(JSON.stringify(v)))).toEqual(data);
+        expect(extractUnpackedMetaData(fromJSON(v))).toMatchSnapshot('meta');
+    });
+
+    test.each`
         name             | data                             | options
         ${'fileList'}    | ${await sampleFileList()}        | ${undefined}
         ${'fileObjects'} | ${await sampleFileListObjects()} | ${undefined}
@@ -145,7 +183,21 @@ describe('dehydrate', async () => {
         expect(hv.m).toEqual(value.m);
         expect(hv.n).toEqual(value.n);
     });
+
+    test('circular array', () => {
+        const b: CircularArray = ['3', '4'];
+        const a: CircularArray = [b, '1', '2'];
+        a.push(a);
+        b.push(a);
+        b.push(b);
+        const v = toJSON(a, { format: 'V2' });
+        const r = fromJSON(v) as CircularArray;
+        expect(r).toEqual([['3', '4', r, r[0]], '1', '2', r]);
+        expect(extractUnpackedMetaData(r)).toMatchSnapshot('meta');
+    });
 });
+
+type CircularArray = (string | CircularArray)[];
 
 async function sampleFileList() {
     const data = await readFile(urlFileList, 'utf8');

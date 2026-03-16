@@ -1,5 +1,38 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`dehydrate > circular array > meta 1`] = `
+{
+  "index": 2,
+  "meta": {
+    "flatpack": [
+      "Flatpack JSON v2",
+      [
+        128,
+        "3",
+        "4",
+        "1",
+        "2",
+      ],
+      [
+        0,
+        3,
+        -3,
+        -4,
+        2,
+      ],
+      [
+        0,
+        -1,
+        -2,
+        2,
+        3,
+      ],
+    ],
+    "referenced": RefCounter {},
+  },
+}
+`;
+
 exports[`dehydrate > dehydrate 'string' undefined 1`] = `
 [
   "Flatpack JSON v1",
@@ -717,6 +750,1709 @@ exports[`dehydrate > dehydrate Set{ 'apple', 'banana', 'pineapple' } undefined 1
   "pineapple",
 ]
 `;
+
+exports[`dehydrate > dehydrate V2 'string' undefined > flatpack 1`] = `
+[
+  "Flatpack JSON v2",
+  [
+    128,
+    "string",
+  ],
+  [
+    2,
+    -1,
+  ],
+]
+`;
+
+exports[`dehydrate > dehydrate V2 'string' undefined > meta 1`] = `undefined`;
+
+exports[`dehydrate > dehydrate V2 /[\\p{L}\\p{M}]+/gu undefined > flatpack 1`] = `
+[
+  "Flatpack JSON v2",
+  [
+    128,
+    "[\\p{L}\\p{M}]+",
+    "gu",
+  ],
+  [
+    6,
+    -1,
+    -2,
+  ],
+]
+`;
+
+exports[`dehydrate > dehydrate V2 /[\\p{L}\\p{M}]+/gu undefined > meta 1`] = `
+{
+  "index": 2,
+  "meta": {
+    "flatpack": [
+      "Flatpack JSON v2",
+      [
+        128,
+        "[\\p{L}\\p{M}]+",
+        "gu",
+      ],
+      [
+        6,
+        -1,
+        -2,
+      ],
+    ],
+    "referenced": RefCounter {},
+  },
+}
+`;
+
+exports[`dehydrate > dehydrate V2 [ 'apple', 'banana', 'apple', 'banana', 'apple', 'pineapple' ] undefined > flatpack 1`] = `
+[
+  "Flatpack JSON v2",
+  [
+    128,
+    "apple",
+    "banana",
+    "pineapple",
+  ],
+  [
+    0,
+    -1,
+    -2,
+    -1,
+    -2,
+    -1,
+    -3,
+  ],
+]
+`;
+
+exports[`dehydrate > dehydrate V2 [ 'apple', 'banana', 'apple', 'banana', 'apple', 'pineapple' ] undefined > meta 1`] = `
+{
+  "index": 2,
+  "meta": {
+    "flatpack": [
+      "Flatpack JSON v2",
+      [
+        128,
+        "apple",
+        "banana",
+        "pineapple",
+      ],
+      [
+        0,
+        -1,
+        -2,
+        -1,
+        -2,
+        -1,
+        -3,
+      ],
+    ],
+    "referenced": RefCounter {},
+  },
+}
+`;
+
+exports[`dehydrate > dehydrate V2 [ /[\\p{L}\\p{M}]+/gu, /[\\p{L}\\p{M}]+/gu, /[\\p{Lu}\\p{M}]+/gu ] undefined > flatpack 1`] = `
+[
+  "Flatpack JSON v2",
+  [
+    128,
+    "[\\p{L}\\p{M}]+",
+    "gu",
+    "[\\p{Lu}\\p{M}]+",
+  ],
+  [
+    0,
+    3,
+    3,
+    4,
+  ],
+  [
+    6,
+    -1,
+    -2,
+  ],
+  [
+    6,
+    -3,
+    -2,
+  ],
+]
+`;
+
+exports[`dehydrate > dehydrate V2 [ /[\\p{L}\\p{M}]+/gu, /[\\p{L}\\p{M}]+/gu, /[\\p{Lu}\\p{M}]+/gu ] undefined > meta 1`] = `
+{
+  "index": 2,
+  "meta": {
+    "flatpack": [
+      "Flatpack JSON v2",
+      [
+        128,
+        "[\\p{L}\\p{M}]+",
+        "gu",
+        "[\\p{Lu}\\p{M}]+",
+      ],
+      [
+        0,
+        3,
+        3,
+        4,
+      ],
+      [
+        6,
+        -1,
+        -2,
+      ],
+      [
+        6,
+        -3,
+        -2,
+      ],
+    ],
+    "referenced": RefCounter {},
+  },
+}
+`;
+
+exports[`dehydrate > dehydrate V2 [ { a: 'a', b: 'b' }, { a: 'a', b: 'b' }, { a: 'a', b: 'b' }, …(1) ] { dedupe: false } > flatpack 1`] = `
+[
+  "Flatpack JSON v2",
+  [
+    128,
+    "a",
+    "b",
+  ],
+  [
+    0,
+    3,
+    6,
+    9,
+    12,
+  ],
+  [
+    1,
+    4,
+    5,
+  ],
+  [
+    0,
+    -1,
+    -2,
+  ],
+  [
+    0,
+    -1,
+    -2,
+  ],
+  [
+    1,
+    7,
+    8,
+  ],
+  [
+    0,
+    -1,
+    -2,
+  ],
+  [
+    0,
+    -1,
+    -2,
+  ],
+  [
+    1,
+    10,
+    11,
+  ],
+  [
+    0,
+    -1,
+    -2,
+  ],
+  [
+    0,
+    -1,
+    -2,
+  ],
+  [
+    1,
+    13,
+    14,
+  ],
+  [
+    0,
+    -1,
+    -2,
+  ],
+  [
+    0,
+    -1,
+    -2,
+  ],
+]
+`;
+
+exports[`dehydrate > dehydrate V2 [ { a: 'a', b: 'b' }, { a: 'a', b: 'b' }, { a: 'a', b: 'b' }, …(1) ] { dedupe: false } > meta 1`] = `
+{
+  "index": 2,
+  "meta": {
+    "flatpack": [
+      "Flatpack JSON v2",
+      [
+        128,
+        "a",
+        "b",
+      ],
+      [
+        0,
+        3,
+        6,
+        9,
+        12,
+      ],
+      [
+        1,
+        4,
+        5,
+      ],
+      [
+        0,
+        -1,
+        -2,
+      ],
+      [
+        0,
+        -1,
+        -2,
+      ],
+      [
+        1,
+        7,
+        8,
+      ],
+      [
+        0,
+        -1,
+        -2,
+      ],
+      [
+        0,
+        -1,
+        -2,
+      ],
+      [
+        1,
+        10,
+        11,
+      ],
+      [
+        0,
+        -1,
+        -2,
+      ],
+      [
+        0,
+        -1,
+        -2,
+      ],
+      [
+        1,
+        13,
+        14,
+      ],
+      [
+        0,
+        -1,
+        -2,
+      ],
+      [
+        0,
+        -1,
+        -2,
+      ],
+    ],
+    "referenced": RefCounter {},
+  },
+}
+`;
+
+exports[`dehydrate > dehydrate V2 [ { a: 'a', b: 'b' }, { a: 'c', b: 'd' }, { b: 'b', a: 'a' }, …(2) ] undefined > flatpack 1`] = `
+[
+  "Flatpack JSON v2",
+  [
+    128,
+    "a",
+    "b",
+    "c",
+    "d",
+  ],
+  [
+    0,
+    3,
+    5,
+    3,
+    4,
+    6,
+  ],
+  [
+    1,
+    4,
+    4,
+  ],
+  [
+    0,
+    -1,
+    -2,
+  ],
+  [
+    1,
+    4,
+    6,
+  ],
+  [
+    0,
+    -3,
+    -4,
+  ],
+]
+`;
+
+exports[`dehydrate > dehydrate V2 [ { a: 'a', b: 'b' }, { a: 'c', b: 'd' }, { b: 'b', a: 'a' }, …(2) ] undefined > meta 1`] = `
+{
+  "index": 2,
+  "meta": {
+    "flatpack": [
+      "Flatpack JSON v2",
+      [
+        128,
+        "a",
+        "b",
+        "c",
+        "d",
+      ],
+      [
+        0,
+        3,
+        5,
+        3,
+        4,
+        6,
+      ],
+      [
+        1,
+        4,
+        4,
+      ],
+      [
+        0,
+        -1,
+        -2,
+      ],
+      [
+        1,
+        4,
+        6,
+      ],
+      [
+        0,
+        -3,
+        -4,
+      ],
+    ],
+    "referenced": RefCounter {},
+  },
+}
+`;
+
+exports[`dehydrate > dehydrate V2 [ {}, {}, {} ] undefined > flatpack 1`] = `
+[
+  "Flatpack JSON v2",
+  [
+    128,
+  ],
+  [
+    0,
+    3,
+    3,
+    3,
+  ],
+  {},
+]
+`;
+
+exports[`dehydrate > dehydrate V2 [ {}, {}, {} ] undefined > meta 1`] = `
+{
+  "index": 2,
+  "meta": {
+    "flatpack": [
+      "Flatpack JSON v2",
+      [
+        128,
+      ],
+      [
+        0,
+        3,
+        3,
+        3,
+      ],
+      {},
+    ],
+    "referenced": RefCounter {},
+  },
+}
+`;
+
+exports[`dehydrate > dehydrate V2 [ 1, 2 ] undefined > flatpack 1`] = `
+[
+  "Flatpack JSON v2",
+  [
+    128,
+  ],
+  [
+    0,
+    3,
+    4,
+  ],
+  1,
+  2,
+]
+`;
+
+exports[`dehydrate > dehydrate V2 [ 1, 2 ] undefined > meta 1`] = `
+{
+  "index": 2,
+  "meta": {
+    "flatpack": [
+      "Flatpack JSON v2",
+      [
+        128,
+      ],
+      [
+        0,
+        3,
+        4,
+      ],
+      1,
+      2,
+    ],
+    "referenced": RefCounter {},
+  },
+}
+`;
+
+exports[`dehydrate > dehydrate V2 [ 1n, 'hello', /\\w+/g, {}, [], 'hello' ] undefined > flatpack 1`] = `
+[
+  "Flatpack JSON v2",
+  [
+    128,
+    "hello",
+    "\\w+",
+    "g",
+  ],
+  [
+    0,
+    3,
+    6,
+    7,
+    8,
+    9,
+    6,
+  ],
+  [
+    1,
+    0,
+    4,
+  ],
+  [
+    8,
+    5,
+  ],
+  1,
+  [
+    1,
+    0,
+    -1,
+  ],
+  [
+    6,
+    -2,
+    -3,
+  ],
+  {},
+  [
+    0,
+  ],
+]
+`;
+
+exports[`dehydrate > dehydrate V2 [ 1n, 'hello', /\\w+/g, {}, [], 'hello' ] undefined > meta 1`] = `
+{
+  "index": 2,
+  "meta": {
+    "flatpack": [
+      "Flatpack JSON v2",
+      [
+        128,
+        "hello",
+        "\\w+",
+        "g",
+      ],
+      [
+        0,
+        3,
+        6,
+        7,
+        8,
+        9,
+        6,
+      ],
+      [
+        1,
+        0,
+        4,
+      ],
+      [
+        8,
+        5,
+      ],
+      1,
+      [
+        1,
+        0,
+        -1,
+      ],
+      [
+        6,
+        -2,
+        -3,
+      ],
+      {},
+      [
+        0,
+      ],
+    ],
+    "referenced": RefCounter {},
+  },
+}
+`;
+
+exports[`dehydrate > dehydrate V2 [ 1n, 2n, 1n, 2n, 9007199254740991n, -9007199254740991n, …(2) ] undefined > flatpack 1`] = `
+[
+  "Flatpack JSON v2",
+  [
+    128,
+    "9007199254740992",
+    "-9007199254740992",
+  ],
+  [
+    0,
+    3,
+    5,
+    3,
+    5,
+    7,
+    9,
+    11,
+    12,
+  ],
+  [
+    8,
+    4,
+  ],
+  1,
+  [
+    8,
+    6,
+  ],
+  2,
+  [
+    8,
+    8,
+  ],
+  9007199254740991,
+  [
+    8,
+    10,
+  ],
+  -9007199254740991,
+  [
+    8,
+    -1,
+  ],
+  [
+    8,
+    -2,
+  ],
+]
+`;
+
+exports[`dehydrate > dehydrate V2 [ 1n, 2n, 1n, 2n, 9007199254740991n, -9007199254740991n, …(2) ] undefined > meta 1`] = `
+{
+  "index": 2,
+  "meta": {
+    "flatpack": [
+      "Flatpack JSON v2",
+      [
+        128,
+        "9007199254740992",
+        "-9007199254740992",
+      ],
+      [
+        0,
+        3,
+        5,
+        3,
+        5,
+        7,
+        9,
+        11,
+        12,
+      ],
+      [
+        8,
+        4,
+      ],
+      1,
+      [
+        8,
+        6,
+      ],
+      2,
+      [
+        8,
+        8,
+      ],
+      9007199254740991,
+      [
+        8,
+        10,
+      ],
+      -9007199254740991,
+      [
+        8,
+        -1,
+      ],
+      [
+        8,
+        -2,
+      ],
+    ],
+    "referenced": RefCounter {},
+  },
+}
+`;
+
+exports[`dehydrate > dehydrate V2 [ Array(3) ] undefined > flatpack 1`] = `
+[
+  "Flatpack JSON v2",
+  [
+    128,
+  ],
+  [
+    0,
+    3,
+    3,
+    4,
+  ],
+  [
+    7,
+    1704067200000,
+  ],
+  [
+    7,
+    1704153600000,
+  ],
+]
+`;
+
+exports[`dehydrate > dehydrate V2 [ Array(3) ] undefined > meta 1`] = `
+{
+  "index": 2,
+  "meta": {
+    "flatpack": [
+      "Flatpack JSON v2",
+      [
+        128,
+      ],
+      [
+        0,
+        3,
+        3,
+        4,
+      ],
+      [
+        7,
+        1704067200000,
+      ],
+      [
+        7,
+        1704153600000,
+      ],
+    ],
+    "referenced": RefCounter {},
+  },
+}
+`;
+
+exports[`dehydrate > dehydrate V2 [] undefined > flatpack 1`] = `
+[
+  "Flatpack JSON v2",
+  [
+    128,
+  ],
+  [
+    0,
+  ],
+]
+`;
+
+exports[`dehydrate > dehydrate V2 [] undefined > meta 1`] = `
+{
+  "index": 2,
+  "meta": {
+    "flatpack": [
+      "Flatpack JSON v2",
+      [
+        128,
+      ],
+      [
+        0,
+      ],
+    ],
+    "referenced": RefCounter {},
+  },
+}
+`;
+
+exports[`dehydrate > dehydrate V2 { a: [ 1 ] } undefined > flatpack 1`] = `
+[
+  "Flatpack JSON v2",
+  [
+    128,
+    "a",
+  ],
+  [
+    1,
+    3,
+    4,
+  ],
+  [
+    0,
+    -1,
+  ],
+  [
+    0,
+    5,
+  ],
+  [
+    0,
+    6,
+  ],
+  1,
+]
+`;
+
+exports[`dehydrate > dehydrate V2 { a: [ 1 ] } undefined > meta 1`] = `
+{
+  "index": 2,
+  "meta": {
+    "flatpack": [
+      "Flatpack JSON v2",
+      [
+        128,
+        "a",
+      ],
+      [
+        1,
+        3,
+        4,
+      ],
+      [
+        0,
+        -1,
+      ],
+      [
+        0,
+        5,
+      ],
+      [
+        0,
+        6,
+      ],
+      1,
+    ],
+    "referenced": RefCounter {},
+  },
+}
+`;
+
+exports[`dehydrate > dehydrate V2 { a: { a: 'a', b: 'b' }, b: { a: 'c', b: 'd' }, …(6) } undefined > flatpack 1`] = `
+[
+  "Flatpack JSON v2",
+  [
+    128,
+    "a",
+    "b",
+    "m",
+    "n",
+    "nn",
+    "nnn",
+    "r",
+    "s",
+    "c",
+    "d",
+    "[\\p{L}\\p{M}]+",
+    "gu",
+    "rr",
+  ],
+  [
+    1,
+    3,
+    4,
+  ],
+  [
+    0,
+    -1,
+    -2,
+    -3,
+    -4,
+    -5,
+    -6,
+    -7,
+    -8,
+  ],
+  [
+    0,
+    5,
+    7,
+    9,
+    10,
+    10,
+    10,
+    11,
+    15,
+  ],
+  [
+    1,
+    6,
+    6,
+  ],
+  [
+    0,
+    -1,
+    -2,
+  ],
+  [
+    1,
+    6,
+    8,
+  ],
+  [
+    0,
+    -9,
+    -10,
+  ],
+  [
+    5,
+    6,
+    6,
+  ],
+  [
+    0,
+    5,
+    7,
+    5,
+    6,
+    8,
+    11,
+    12,
+  ],
+  [
+    6,
+    -11,
+    -12,
+  ],
+  [
+    1,
+    13,
+    14,
+  ],
+  [
+    0,
+    -7,
+    -13,
+  ],
+  [
+    0,
+    11,
+    11,
+  ],
+  [
+    4,
+    17,
+  ],
+  [
+    1,
+    6,
+    6,
+  ],
+  [
+    0,
+    5,
+    7,
+    16,
+    6,
+    8,
+    11,
+    12,
+  ],
+]
+`;
+
+exports[`dehydrate > dehydrate V2 { a: { a: 'a', b: 'b' }, b: { a: 'c', b: 'd' }, …(6) } undefined > meta 1`] = `
+{
+  "index": 2,
+  "meta": {
+    "flatpack": [
+      "Flatpack JSON v2",
+      [
+        128,
+        "a",
+        "b",
+        "m",
+        "n",
+        "nn",
+        "nnn",
+        "r",
+        "s",
+        "c",
+        "d",
+        "[\\p{L}\\p{M}]+",
+        "gu",
+        "rr",
+      ],
+      [
+        1,
+        3,
+        4,
+      ],
+      [
+        0,
+        -1,
+        -2,
+        -3,
+        -4,
+        -5,
+        -6,
+        -7,
+        -8,
+      ],
+      [
+        0,
+        5,
+        7,
+        9,
+        10,
+        10,
+        10,
+        11,
+        15,
+      ],
+      [
+        1,
+        6,
+        6,
+      ],
+      [
+        0,
+        -1,
+        -2,
+      ],
+      [
+        1,
+        6,
+        8,
+      ],
+      [
+        0,
+        -9,
+        -10,
+      ],
+      [
+        5,
+        6,
+        6,
+      ],
+      [
+        0,
+        5,
+        7,
+        5,
+        6,
+        8,
+        11,
+        12,
+      ],
+      [
+        6,
+        -11,
+        -12,
+      ],
+      [
+        1,
+        13,
+        14,
+      ],
+      [
+        0,
+        -7,
+        -13,
+      ],
+      [
+        0,
+        11,
+        11,
+      ],
+      [
+        4,
+        17,
+      ],
+      [
+        1,
+        6,
+        6,
+      ],
+      [
+        0,
+        5,
+        7,
+        16,
+        6,
+        8,
+        11,
+        12,
+      ],
+    ],
+    "referenced": RefCounter {},
+  },
+}
+`;
+
+exports[`dehydrate > dehydrate V2 { a: { a: 'a', b: 42 } } undefined > flatpack 1`] = `
+[
+  "Flatpack JSON v2",
+  [
+    128,
+    "a",
+    "b",
+  ],
+  [
+    1,
+    3,
+    4,
+  ],
+  [
+    0,
+    -1,
+  ],
+  [
+    0,
+    5,
+  ],
+  [
+    1,
+    6,
+    7,
+  ],
+  [
+    0,
+    -1,
+    -2,
+  ],
+  [
+    0,
+    -1,
+    8,
+  ],
+  42,
+]
+`;
+
+exports[`dehydrate > dehydrate V2 { a: { a: 'a', b: 42 } } undefined > meta 1`] = `
+{
+  "index": 2,
+  "meta": {
+    "flatpack": [
+      "Flatpack JSON v2",
+      [
+        128,
+        "a",
+        "b",
+      ],
+      [
+        1,
+        3,
+        4,
+      ],
+      [
+        0,
+        -1,
+      ],
+      [
+        0,
+        5,
+      ],
+      [
+        1,
+        6,
+        7,
+      ],
+      [
+        0,
+        -1,
+        -2,
+      ],
+      [
+        0,
+        -1,
+        8,
+      ],
+      42,
+    ],
+    "referenced": RefCounter {},
+  },
+}
+`;
+
+exports[`dehydrate > dehydrate V2 { a: { b: 1 } } undefined > flatpack 1`] = `
+[
+  "Flatpack JSON v2",
+  [
+    128,
+    "a",
+    "b",
+  ],
+  [
+    1,
+    3,
+    4,
+  ],
+  [
+    0,
+    -1,
+  ],
+  [
+    0,
+    5,
+  ],
+  [
+    1,
+    6,
+    7,
+  ],
+  [
+    0,
+    -2,
+  ],
+  [
+    0,
+    8,
+  ],
+  1,
+]
+`;
+
+exports[`dehydrate > dehydrate V2 { a: { b: 1 } } undefined > meta 1`] = `
+{
+  "index": 2,
+  "meta": {
+    "flatpack": [
+      "Flatpack JSON v2",
+      [
+        128,
+        "a",
+        "b",
+      ],
+      [
+        1,
+        3,
+        4,
+      ],
+      [
+        0,
+        -1,
+      ],
+      [
+        0,
+        5,
+      ],
+      [
+        1,
+        6,
+        7,
+      ],
+      [
+        0,
+        -2,
+      ],
+      [
+        0,
+        8,
+      ],
+      1,
+    ],
+    "referenced": RefCounter {},
+  },
+}
+`;
+
+exports[`dehydrate > dehydrate V2 { a: 1 } undefined > flatpack 1`] = `
+[
+  "Flatpack JSON v2",
+  [
+    128,
+    "a",
+  ],
+  [
+    1,
+    3,
+    4,
+  ],
+  [
+    0,
+    -1,
+  ],
+  [
+    0,
+    5,
+  ],
+  1,
+]
+`;
+
+exports[`dehydrate > dehydrate V2 { a: 1 } undefined > meta 1`] = `
+{
+  "index": 2,
+  "meta": {
+    "flatpack": [
+      "Flatpack JSON v2",
+      [
+        128,
+        "a",
+      ],
+      [
+        1,
+        3,
+        4,
+      ],
+      [
+        0,
+        -1,
+      ],
+      [
+        0,
+        5,
+      ],
+      1,
+    ],
+    "referenced": RefCounter {},
+  },
+}
+`;
+
+exports[`dehydrate > dehydrate V2 { fruit: [ 'apple', 'banana', 'apple', 'banana', 'apple', 'pineapple' ], …(2) } undefined > flatpack 1`] = `
+[
+  "Flatpack JSON v2",
+  [
+    128,
+    "fruit",
+    "joinFruit",
+    "sentence",
+    "apple",
+    "banana",
+    "pineapple",
+    "apple-banana-apple-banana-apple-pineapple",
+    "There is a bit of fruit on the table. Some banana, apple, and pineapple.",
+  ],
+  [
+    1,
+    3,
+    4,
+  ],
+  [
+    0,
+    -1,
+    -2,
+    -3,
+  ],
+  [
+    0,
+    5,
+    -7,
+    -8,
+  ],
+  [
+    0,
+    -4,
+    -5,
+    -4,
+    -5,
+    -4,
+    -6,
+  ],
+]
+`;
+
+exports[`dehydrate > dehydrate V2 { fruit: [ 'apple', 'banana', 'apple', 'banana', 'apple', 'pineapple' ], …(2) } undefined > meta 1`] = `
+{
+  "index": 2,
+  "meta": {
+    "flatpack": [
+      "Flatpack JSON v2",
+      [
+        128,
+        "fruit",
+        "joinFruit",
+        "sentence",
+        "apple",
+        "banana",
+        "pineapple",
+        "apple-banana-apple-banana-apple-pineapple",
+        "There is a bit of fruit on the table. Some banana, apple, and pineapple.",
+      ],
+      [
+        1,
+        3,
+        4,
+      ],
+      [
+        0,
+        -1,
+        -2,
+        -3,
+      ],
+      [
+        0,
+        5,
+        -7,
+        -8,
+      ],
+      [
+        0,
+        -4,
+        -5,
+        -4,
+        -5,
+        -4,
+        -6,
+      ],
+    ],
+    "referenced": RefCounter {},
+  },
+}
+`;
+
+exports[`dehydrate > dehydrate V2 { values: [ 'apple', 'banana', 'pineapple' ], …(1) } undefined > flatpack 1`] = `
+[
+  "Flatpack JSON v2",
+  [
+    128,
+    "set",
+    "values",
+    "apple",
+    "banana",
+    "pineapple",
+  ],
+  [
+    1,
+    3,
+    4,
+  ],
+  [
+    0,
+    -1,
+    -2,
+  ],
+  [
+    0,
+    5,
+    6,
+  ],
+  [
+    4,
+    6,
+  ],
+  [
+    0,
+    -3,
+    -4,
+    -5,
+  ],
+]
+`;
+
+exports[`dehydrate > dehydrate V2 { values: [ 'apple', 'banana', 'pineapple' ], …(1) } undefined > meta 1`] = `
+{
+  "index": 2,
+  "meta": {
+    "flatpack": [
+      "Flatpack JSON v2",
+      [
+        128,
+        "set",
+        "values",
+        "apple",
+        "banana",
+        "pineapple",
+      ],
+      [
+        1,
+        3,
+        4,
+      ],
+      [
+        0,
+        -1,
+        -2,
+      ],
+      [
+        0,
+        5,
+        6,
+      ],
+      [
+        4,
+        6,
+      ],
+      [
+        0,
+        -3,
+        -4,
+        -5,
+      ],
+    ],
+    "referenced": RefCounter {},
+  },
+}
+`;
+
+exports[`dehydrate > dehydrate V2 {} undefined > flatpack 1`] = `
+[
+  "Flatpack JSON v2",
+  [
+    128,
+  ],
+  {},
+]
+`;
+
+exports[`dehydrate > dehydrate V2 {} undefined > meta 1`] = `
+{
+  "index": 2,
+  "meta": {
+    "flatpack": [
+      "Flatpack JSON v2",
+      [
+        128,
+      ],
+      {},
+    ],
+    "referenced": RefCounter {},
+  },
+}
+`;
+
+exports[`dehydrate > dehydrate V2 1 undefined > flatpack 1`] = `
+[
+  "Flatpack JSON v2",
+  [
+    128,
+  ],
+  1,
+]
+`;
+
+exports[`dehydrate > dehydrate V2 1 undefined > meta 1`] = `undefined`;
+
+exports[`dehydrate > dehydrate V2 1.1 undefined > flatpack 1`] = `
+[
+  "Flatpack JSON v2",
+  [
+    128,
+  ],
+  1.1,
+]
+`;
+
+exports[`dehydrate > dehydrate V2 1.1 undefined > meta 1`] = `undefined`;
+
+exports[`dehydrate > dehydrate V2 Map{ 'apple' => 1, 'banana' => 2, 'pineapple' => 3 } undefined > flatpack 1`] = `
+[
+  "Flatpack JSON v2",
+  [
+    128,
+    "apple",
+    "banana",
+    "pineapple",
+  ],
+  [
+    5,
+    3,
+    4,
+  ],
+  [
+    0,
+    -1,
+    -2,
+    -3,
+  ],
+  [
+    0,
+    5,
+    6,
+    7,
+  ],
+  1,
+  2,
+  3,
+]
+`;
+
+exports[`dehydrate > dehydrate V2 Map{ 'apple' => 1, 'banana' => 2, 'pineapple' => 3 } undefined > meta 1`] = `
+{
+  "index": 2,
+  "meta": {
+    "flatpack": [
+      "Flatpack JSON v2",
+      [
+        128,
+        "apple",
+        "banana",
+        "pineapple",
+      ],
+      [
+        5,
+        3,
+        4,
+      ],
+      [
+        0,
+        -1,
+        -2,
+        -3,
+      ],
+      [
+        0,
+        5,
+        6,
+        7,
+      ],
+      1,
+      2,
+      3,
+    ],
+    "referenced": RefCounter {},
+  },
+}
+`;
+
+exports[`dehydrate > dehydrate V2 Set{ 'apple', 'banana', 'pineapple' } undefined > flatpack 1`] = `
+[
+  "Flatpack JSON v2",
+  [
+    128,
+    "apple",
+    "banana",
+    "pineapple",
+  ],
+  [
+    4,
+    3,
+  ],
+  [
+    0,
+    -1,
+    -2,
+    -3,
+  ],
+]
+`;
+
+exports[`dehydrate > dehydrate V2 Set{ 'apple', 'banana', 'pineapple' } undefined > meta 1`] = `
+{
+  "index": 2,
+  "meta": {
+    "flatpack": [
+      "Flatpack JSON v2",
+      [
+        128,
+        "apple",
+        "banana",
+        "pineapple",
+      ],
+      [
+        4,
+        3,
+      ],
+      [
+        0,
+        -1,
+        -2,
+        -3,
+      ],
+    ],
+    "referenced": RefCounter {},
+  },
+}
+`;
+
+exports[`dehydrate > dehydrate V2 false undefined > flatpack 1`] = `
+[
+  "Flatpack JSON v2",
+  [
+    128,
+  ],
+  false,
+]
+`;
+
+exports[`dehydrate > dehydrate V2 false undefined > meta 1`] = `undefined`;
+
+exports[`dehydrate > dehydrate V2 null undefined > flatpack 1`] = `
+[
+  "Flatpack JSON v2",
+  [
+    128,
+  ],
+  null,
+]
+`;
+
+exports[`dehydrate > dehydrate V2 null undefined > meta 1`] = `undefined`;
+
+exports[`dehydrate > dehydrate V2 true undefined > flatpack 1`] = `
+[
+  "Flatpack JSON v2",
+  [
+    128,
+  ],
+  true,
+]
+`;
+
+exports[`dehydrate > dehydrate V2 true undefined > meta 1`] = `undefined`;
+
+exports[`dehydrate > dehydrate V2 undefined undefined > flatpack 1`] = `
+[
+  "Flatpack JSON v2",
+  [
+    128,
+  ],
+]
+`;
+
+exports[`dehydrate > dehydrate V2 undefined undefined > meta 1`] = `undefined`;
 
 exports[`dehydrate > dehydrate false undefined 1`] = `
 [
