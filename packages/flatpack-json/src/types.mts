@@ -1,3 +1,5 @@
+import type { RefCounter } from './RefCounter.mjs';
+
 export type SimplePrimitive = string | number | boolean | null | undefined;
 export type Primitive = SimplePrimitive | RegExp | Date | bigint;
 export type PrimitiveSet = Set<Primitive | PrimitiveObject | PrimitiveArray | PrimitiveSet | PrimitiveMap>;
@@ -169,13 +171,20 @@ export function isStringTableElement(elem: FlattenedElement): elem is StringTabl
 
 export const symbolFlatpackAnnotation: unique symbol = Symbol.for('flatpackAnnotation');
 
-export interface UnpackedMetaData {
-    src: Flatpacked;
-    index: number;
+export interface UnpackMetaData {
+    /** The source of the unpacked data */
+    flatpack: Flatpacked;
+    /** The reference count of elements.  */
+    referenced: RefCounter<number>;
 }
 
 export interface UnpackedAnnotation {
-    [symbolFlatpackAnnotation]?: UnpackedMetaData;
+    meta: UnpackMetaData;
+    index: number;
 }
 
-export type AnnotateUnpacked<T> = T extends null ? T : T extends object ? T & UnpackedAnnotation : T;
+export interface UnpackedAnnotated {
+    [symbolFlatpackAnnotation]?: UnpackedAnnotation;
+}
+
+export type AnnotateUnpacked<T> = T extends null ? T : T extends object ? T & UnpackedAnnotated : T;

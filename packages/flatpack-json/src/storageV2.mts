@@ -20,7 +20,8 @@ import type {
     RegExpElement,
     Serializable,
     SetElement,
-    UnpackedMetaData,
+    UnpackedAnnotation,
+    UnpackMetaData,
 } from './types.mjs';
 import { dataHeaderV2_0, ElementType, isStringTableElement } from './types.mjs';
 import { extractUnpackedMetaData } from './unpackedAnnotation.mjs';
@@ -57,6 +58,7 @@ export class CompactStorageV2 extends CompactStorage {
      */
     private cachedArrays = new Map<SimpleHash, { idx: number; v: ArrayElement }[]>();
     private cachedElements = new Map<FlatpackIndex, CacheMap>();
+    private unpackMetaData: UnpackMetaData | undefined;
 
     constructor(options?: FlatpackOptions | undefined) {
         super(options);
@@ -385,24 +387,24 @@ export class CompactStorageV2 extends CompactStorage {
         this.data = [dataHeaderV2_0, [ElementType.StringTable]];
     }
 
-    private useFlatpackMetaData(info: UnpackedMetaData | undefined): void {
-        const data = info?.src;
-        if (data?.[0] !== dataHeaderV2_0) {
-            return;
-        }
-        this.useFlatpackData(data);
+    private useFlatpackMetaData(info: UnpackedAnnotation | undefined): void {
+        this.useFlatpackData(info?.meta);
     }
 
-    private useFlatpackData(data: Flatpacked): void {
-        const st = data[1];
-        if (isStringTableElement(st)) {
-            this.stringTable = new StringTableBuilder(st);
-        }
-        if (data[0] !== dataHeaderV2_0) {
+    private useFlatpackData(data: UnpackMetaData | undefined): void {
+        if (!data || data.flatpack[0] !== dataHeaderV2_0) {
             this.data = [dataHeaderV2_0, [ElementType.StringTable]];
             return;
         }
-        this.data = data;
+        this.unpackMetaData = data;
+        const flatpack: Flatpacked = [...data.flatpack];
+        const st = flatpack[1];
+        if (!isStringTableElement(st)) {
+            this.data = [dataHeaderV2_0, [ElementType.StringTable]];
+            return;
+        }
+        this.stringTable = new StringTableBuilder(st);
+        this.data = flatpack;
         // At the moment, only the string table is used.
         this.data = [dataHeaderV2_0, [ElementType.StringTable]];
     }

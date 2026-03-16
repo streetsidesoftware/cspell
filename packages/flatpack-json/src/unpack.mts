@@ -1,5 +1,6 @@
 import assert from 'node:assert';
 
+import { RefCounter } from './RefCounter.mjs';
 import { StringTable } from './stringTable.mjs';
 import type {
     AnnotateUnpacked,
@@ -24,13 +25,13 @@ import type {
     StringTableElement,
     SubStringElement,
     Unpacked,
-    UnpackedMetaData,
+    UnpackedAnnotation,
+    UnpackMetaData,
 } from './types.mjs';
 import { ElementType, supportedHeaders, symbolFlatpackAnnotation } from './types.mjs';
 
 export function fromJSON(data: Flatpacked): Unpacked {
     const [header] = data;
-
     let stringTable: StringTable | undefined;
 
     if (!supportedHeaders.has(header)) {
@@ -41,7 +42,12 @@ export function fromJSON(data: Flatpacked): Unpacked {
     /**
      * indexes that have been referenced by other objects.
      */
-    const referenced = new Set<number>();
+    const referenced = new RefCounter<number>();
+
+    const meta: UnpackMetaData = {
+        flatpack: data,
+        referenced,
+    };
 
     function mergeKeysValues<K>(keys: readonly K[], values: PrimitiveArray): [K, Serializable][] {
         return keys.map((key, i) => [key, values[i]]);
@@ -123,7 +129,7 @@ export function fromJSON(data: Flatpacked): Unpacked {
         cache.set(idx, placeHolder);
         const arr = refs.map(idxToValue);
         // check if the array has been referenced by another object.
-        if (!referenced.has(idx)) {
+        if (!referenced.hasRefs(idx)) {
             // It has not, just replace the placeholder with the array.
             cache.set(idx, arr);
             return arr;
@@ -195,7 +201,7 @@ export function fromJSON(data: Flatpacked): Unpacked {
         const found = cache.get(idx);
         if (found !== undefined) {
             if (typeof idx === 'number') referenced.add(idx);
-            return annotateUnpacked(found, { src: data, index: idx });
+            return annotateUnpacked(found, { meta, index: idx });
         }
 
         const element = data[idx];
@@ -205,10 +211,10 @@ export function fromJSON(data: Flatpacked): Unpacked {
             if (element === null) return null;
             if (Array.isArray(element))
                 return annotateUnpacked(handleArrayElement(idx, element as ArrayBasedElements), {
-                    src: data,
+                    meta,
                     index: idx,
                 });
-            return annotateUnpacked<PrimitiveObject>({}, { src: data, index: idx });
+            return annotateUnpacked<PrimitiveObject>({}, { meta, index: idx });
         }
         return element;
     }
@@ -228,7 +234,7 @@ export function parse(data: string): Unpacked {
     return fromJSON(JSON.parse(data));
 }
 
-function annotateUnpacked<T extends RawUnpacked>(value: T, meta: UnpackedMetaData): AnnotateUnpacked<T> {
+function annotateUnpacked<T extends RawUnpacked>(value: T, meta: UnpackedAnnotation): AnnotateUnpacked<T> {
     if (value && typeof value === 'object') {
         if (Object.hasOwn(value, symbolFlatpackAnnotation)) {
             return value as AnnotateUnpacked<T>;

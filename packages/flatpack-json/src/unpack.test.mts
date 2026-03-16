@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { findMatchingFileTypes } from '@cspell/filetypes';
 import { describe, expect, test } from 'vitest';
 
+import { RefCounter } from './RefCounter.mjs';
 import { toJSON } from './storage.mjs';
 import { stringifyFlatpacked } from './stringify.mjs';
 import { symbolFlatpackAnnotation } from './types.mjs';
@@ -47,7 +48,8 @@ describe('dehydrate', async () => {
         expect(isAnnotateUnpacked(r)).toBe(typeof data === 'object' && data !== null);
         expect(symbolFlatpackAnnotation in (r as object)).toBe(true);
         expect(Object.hasOwn(r as object, symbolFlatpackAnnotation)).toBe(true);
-        expect(extractUnpackedMetaData(r)).toEqual({ src: v, index: 1 });
+        const meta = expect.objectContaining({ flatpack: v, referenced: expect.any(RefCounter) });
+        expect(extractUnpackedMetaData(r)).toEqual({ meta, index: 1 });
     });
 
     test.each`
@@ -67,7 +69,8 @@ describe('dehydrate', async () => {
         expect(isAnnotateUnpacked(r)).toBe(typeof data === 'object' && data !== null);
         expect(symbolFlatpackAnnotation in (r as object)).toBe(true);
         expect(Object.hasOwn(r as object, symbolFlatpackAnnotation)).toBe(true);
-        expect(extractUnpackedMetaData(r)).toEqual({ src: v, index: 2 });
+        const meta = expect.objectContaining({ flatpack: v, referenced: expect.any(RefCounter) });
+        expect(extractUnpackedMetaData(r)).toEqual({ meta, index: 2 });
     });
 
     const biMaxSafe = BigInt(Number.MAX_SAFE_INTEGER);
