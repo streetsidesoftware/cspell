@@ -5,7 +5,7 @@ Args: '["**/*.go"]'
 Summary:
   files: 301
   filesWithIssues: 270
-  issues: 3978
+  issues: 3979
   errors: 0
 Errors: []
 
@@ -927,13 +927,14 @@ issues:
   - "cmd/commandfuncs.go:676:17      Caddyfile       U       configFile = \"Caddyfile\""
   - "cmd/commandfuncs.go:687:20      caddyfile       U       fmt.Print(string(caddyfile.Format(input)))"
   - "cmd/commandfuncs.go:697:12      caddyfile       U       output := caddyfile.Format(input)"
+  - "cmd/commandfuncs.go:700:76      gosec           U       err != nil { //nolint:gosec // path traversal is"
+  - "cmd/commandfuncs.go:700:144     Caddyfile       U       here, this is either \"Caddyfile\" or admin-controlled"
   - "cmd/commandfuncs.go:707:11      difflib         U       diff := difflib.Diff("
   - "cmd/commandfuncs.go:712:9       difflib         U       case difflib.Common:"
   - "cmd/commandfuncs.go:714:9       difflib         U       case difflib.LeftOnly:"
   - "cmd/commandfuncs.go:716:9       difflib         U       case difflib.RightOnly:"
   - "cmd/commandfuncs.go:724:22      caddyfile       U       if warning, diff := caddyfile.FormattingDifference"
   - "cmd/commandfuncs.go:725:58      Caddyfile       U       fmt.Errorf(`%s:%d: Caddyfile input is not formatted"
-  - "cmd/commandfuncs.go:725:130     Caddyfile       U       overwrite' to update your Caddyfile in-place instead of"
   - "cmd/commandfuncs.go:799:7       srldkjfsd       U       // \"srldkjfsd\"), if for some reason"
   - "cmd/commandfuncs.go:823:39      gosec           U       client.Do(req) //nolint:gosec // the only SSRF here"
   - "cmd/commandfuncs.go:823:81      sabatoge        U       SSRF here would be self-sabatoge I think"
@@ -3311,13 +3312,13 @@ issues:
   - "modules/caddytls/connpolicy.go:738:46       caddyconfig         U       append(ca.VerifiersRaw, caddyconfig.JSONModuleObject(unm"
   - "modules/caddytls/connpolicy.go:748:14       caddyconfig         U       ca.CARaw = caddyconfig.JSONModuleObject(fileMod"
   - "modules/caddytls/connpolicy.go:759:6        ders                U       var ders []string"
-  - "modules/caddytls/connpolicy.go:966:13       Certloaders         U       trustedLeafCertloaders := []LeafCertificateLoader"
-  - "modules/caddytls/connpolicy.go:968:14       Certloaders         U       trustedLeafCertloaders = append(trustedLeafCertloade"
-  - "modules/caddytls/connpolicy.go:968:46       Certloaders         U       = append(trustedLeafCertloaders, loader.(LeafCertificateLoade"
-  - "modules/caddytls/connpolicy.go:971:36       Certloaders         U       := range trustedLeafCertloaders {"
-  - "modules/caddytls/connpolicy.go:1041:33      unmarshalable       U       PublicKeyAlgorithm is a JSON-unmarshalable wrapper type."
-  - "modules/caddytls/connpolicy.go:1075:6       destructable        U       type destructableWriter struct{ *os.File"
-  - "modules/caddytls/connpolicy.go:1077:9       destructable        U       func (d destructableWriter) Destruct() error"
+  - "modules/caddytls/connpolicy.go:971:13       Certloaders         U       trustedLeafCertloaders := []LeafCertificateLoader"
+  - "modules/caddytls/connpolicy.go:973:14       Certloaders         U       trustedLeafCertloaders = append(trustedLeafCertloade"
+  - "modules/caddytls/connpolicy.go:973:46       Certloaders         U       = append(trustedLeafCertloaders, loader.(LeafCertificateLoade"
+  - "modules/caddytls/connpolicy.go:976:36       Certloaders         U       := range trustedLeafCertloaders {"
+  - "modules/caddytls/connpolicy.go:1046:33      unmarshalable       U       PublicKeyAlgorithm is a JSON-unmarshalable wrapper type."
+  - "modules/caddytls/connpolicy.go:1080:6       destructable        U       type destructableWriter struct{ *os.File"
+  - "modules/caddytls/connpolicy.go:1082:9       destructable        U       func (d destructableWriter) Destruct() error"
   - "modules/caddytls/distributedstek/distributedstek.go:15:12       distributedstek     U       // Package distributedstek provides TLS session"
   - "modules/caddytls/distributedstek/distributedstek.go:23:9        distributedstek     U       package distributedstek"
   - "modules/caddytls/distributedstek/distributedstek.go:36:14       caddyserver         U       \"github.com/caddyserver/certmagic\""
@@ -3424,7 +3425,7 @@ issues:
   - "modules/caddytls/fileloader.go:15:9         caddytls        U       package caddytls"
   - "modules/caddytls/fileloader.go:23:14        caddyserver     U       \"github.com/caddyserver/caddy/v2\""
   - "modules/caddytls/folderloader.go:15:9           caddytls        U       package caddytls"
-  - "modules/caddytls/folderloader.go:26:14          caddyserver     U       \"github.com/caddyserver/caddy/v2\""
+  - "modules/caddytls/folderloader.go:27:14          caddyserver     U       \"github.com/caddyserver/caddy/v2\""
   - "modules/caddytls/internalissuer_test.go:15:9        caddytls        U       package caddytls"
   - "modules/caddytls/internalissuer_test.go:28:14       caddyserver     U       \"github.com/caddyserver/caddy/v2\""
   - "modules/caddytls/internalissuer_test.go:29:14       caddyserver     U       \"github.com/caddyserver/caddy/v2/modules/caddypki"
