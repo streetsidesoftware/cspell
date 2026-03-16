@@ -166,10 +166,10 @@ export function fromJSON(data: Flatpacked): Unpacked {
     function handleArrayElement(
         idx: number,
         element: ArrayBasedElements,
-    ): PrimitiveArray | Primitive | PrimitiveObject | PrimitiveSet | PrimitiveMap {
+    ): PrimitiveArray | Primitive | PrimitiveObject | PrimitiveSet | PrimitiveMap | undefined {
         switch (element[0]) {
             case ElementType.Array: {
-                break;
+                return toArr(idx, element as ArrayElement);
             }
             case ElementType.Object: {
                 return toObj(idx, element as ObjectElement);
@@ -200,7 +200,7 @@ export function fromJSON(data: Flatpacked): Unpacked {
                 return idxToValue(idx + 1);
             }
         }
-        return toArr(idx, element as ArrayElement);
+        return undefined;
     }
 
     function idxToString(idx: number[]): string {

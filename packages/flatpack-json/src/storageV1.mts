@@ -3,7 +3,7 @@ import assert from 'node:assert';
 import { CompactStorage } from './CompactStorage.mjs';
 import { optimizeFlatpacked } from './optimizeFlatpacked.mjs';
 import { stringifyFlatpacked } from './stringify.mjs';
-import { Trie } from './Trie.mjs';
+import { TrieOfStrings } from './Trie.mjs';
 import type {
     ArrayElement,
     BigIntElement,
@@ -65,11 +65,11 @@ export class CompactStorageV1 extends CompactStorage {
     /**
      * Cache of strings used for prefix matching.
      */
-    private knownStrings = new Trie<TrieData>();
+    private knownStrings = new TrieOfStrings<TrieData>();
     /**
      * Cache of reversed strings used for suffix matching.
      */
-    private knownStringsRev = new Trie<TrieData>();
+    private knownStringsRev = new TrieOfStrings<TrieData>();
     private cachedElements = new Map<number, CacheMap>();
 
     constructor(options?: FlatpackOptions | undefined) {

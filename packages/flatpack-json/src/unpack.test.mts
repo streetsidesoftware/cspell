@@ -54,6 +54,23 @@ describe('dehydrate', async () => {
 
     test.each`
         data
+        ${undefined}
+        ${'string'}
+        ${1}
+        ${1.1}
+        ${null}
+        ${true}
+        ${false}
+    `('dehydrate/hydrate V2 $data', ({ data }) => {
+        const v = toJSON(data, { format: 'V2' });
+        const r = fromJSON(v);
+        expect(r).toEqual(data);
+        expect(isAnnotateUnpacked(r)).toBe(typeof data === 'object' && data !== null);
+        expect(extractUnpackedMetaData(r)).toEqual(undefined);
+    });
+
+    test.each`
+        data
         ${[]}
         ${[1, 2]}
         ${['a', 'b', 'a', 'b']}
@@ -62,7 +79,7 @@ describe('dehydrate', async () => {
         ${{ a: { b: 1 } }}
         ${{ a: { a: 'a', b: 42 } }}
         ${{ a: [1] }}
-    `('dehydrate/hydrate $data', ({ data }) => {
+    `('dehydrate/hydrate V2 $data', ({ data }) => {
         const v = toJSON(data, { format: 'V2' });
         const r = fromJSON(v);
         expect(r).toEqual(data);
@@ -129,6 +146,8 @@ describe('dehydrate', async () => {
         ${{}}                                                                                           | ${undefined}
         ${[{}, {}, {}]}                                                                                 | ${undefined}
         ${{ a: 1 }}                                                                                     | ${undefined}
+        ${[{ a: undefined, b: undefined }, { a: undefined, b: undefined }]}                             | ${undefined}
+        ${{ a: null }}                                                                                  | ${undefined}
         ${{ a: { b: 1 } }}                                                                              | ${undefined}
         ${{ a: { a: 'a', b: 42 } }}                                                                     | ${undefined}
         ${{ a: [1] }}                                                                                   | ${undefined}

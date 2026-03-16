@@ -20,7 +20,7 @@ import {
     SubStringRefElement,
 } from './RefElements.mjs';
 import { stringifyFlatpacked } from './stringify.mjs';
-import { Trie } from './Trie.mjs';
+import { TrieOfStrings } from './Trie.mjs';
 import type {
     FlatpackApi,
     Flatpacked,
@@ -85,12 +85,12 @@ export class FlatpackStoreV1 implements FlatpackApi {
     /**
      * Cache of strings that have been deduped and stored in the data array.
      */
-    private knownStrings = new Trie<TrieData>();
+    private knownStrings = new TrieOfStrings<TrieData>();
     /**
      * Cache of reversed strings that have been deduped and stored in the data array.
      * This is used to find matching suffixes.
      */
-    private knownStringsRev = new Trie<TrieData>();
+    private knownStringsRev = new TrieOfStrings<TrieData>();
 
     private refUndefined: PrimitiveRefElement<undefined>;
 

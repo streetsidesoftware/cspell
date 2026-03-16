@@ -1311,6 +1311,82 @@ exports[`dehydrate > dehydrate V2 [ { a: 'a', b: 'b' }, { a: 'c', b: 'd' }, { b:
 }
 `;
 
+exports[`dehydrate > dehydrate V2 [ { a: undefined, b: undefined }, { a: undefined, b: undefined } ] undefined > flatpack 1`] = `
+[
+  "Flatpack JSON v2",
+  [
+    128,
+    "a",
+    "b",
+  ],
+  [
+    0,
+    3,
+    3,
+  ],
+  [
+    1,
+    4,
+    5,
+  ],
+  [
+    0,
+    -1,
+    -2,
+  ],
+  [
+    0,
+    0,
+    0,
+  ],
+]
+`;
+
+exports[`dehydrate > dehydrate V2 [ { a: undefined, b: undefined }, { a: undefined, b: undefined } ] undefined > meta 1`] = `
+{
+  "index": 2,
+  "meta": {
+    "flatpack": [
+      "Flatpack JSON v2",
+      [
+        128,
+        "a",
+        "b",
+      ],
+      [
+        0,
+        3,
+        3,
+      ],
+      [
+        1,
+        4,
+        5,
+      ],
+      [
+        0,
+        -1,
+        -2,
+      ],
+      [
+        0,
+        0,
+        0,
+      ],
+    ],
+    "referenced": Map {
+      1 => 1,
+      2 => 1,
+      3 => 2,
+      4 => 1,
+      -1 => 1,
+      -2 => 1,
+      5 => 1,
+    },
+  },
+}
+`;
+
 exports[`dehydrate > dehydrate V2 [ {}, {}, {} ] undefined > flatpack 1`] = `
 [
   "Flatpack JSON v2",
@@ -2307,6 +2383,67 @@ exports[`dehydrate > dehydrate V2 { a: 1 } undefined > meta 1`] = `
         5,
       ],
       1,
+    ],
+    "referenced": Map {
+      1 => 1,
+      2 => 1,
+      3 => 1,
+      -1 => 1,
+      4 => 1,
+      5 => 1,
+    },
+  },
+}
+`;
+
+exports[`dehydrate > dehydrate V2 { a: null } undefined > flatpack 1`] = `
+[
+  "Flatpack JSON v2",
+  [
+    128,
+    "a",
+  ],
+  [
+    1,
+    3,
+    4,
+  ],
+  [
+    0,
+    -1,
+  ],
+  [
+    0,
+    5,
+  ],
+  null,
+]
+`;
+
+exports[`dehydrate > dehydrate V2 { a: null } undefined > meta 1`] = `
+{
+  "index": 2,
+  "meta": {
+    "flatpack": [
+      "Flatpack JSON v2",
+      [
+        128,
+        "a",
+      ],
+      [
+        1,
+        3,
+        4,
+      ],
+      [
+        0,
+        -1,
+      ],
+      [
+        0,
+        5,
+      ],
+      null,
     ],
     "referenced": Map {
       1 => 1,

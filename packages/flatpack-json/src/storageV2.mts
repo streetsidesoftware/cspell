@@ -4,6 +4,7 @@ import { CompactStorage } from './CompactStorage.mjs';
 import { optimizeFlatpacked } from './optimizeFlatpacked.mjs';
 import { RefCounter } from './RefCounter.mjs';
 import { StringTableBuilder } from './stringTable.mjs';
+import { Trie } from './Trie.mjs';
 import type {
     ArrayElement,
     BigIntElement,
@@ -11,6 +12,7 @@ import type {
     Flatpacked,
     FlatpackIndex,
     FlatpackOptions,
+    FlattenedElement,
     MapElement,
     ObjectElement,
     ObjectWrapper,
@@ -56,8 +58,8 @@ export class CompactStorageV2 extends CompactStorage {
      * Cache of arrays that have been deduped.
      * The key is a hash of the array elements as a function of the index of the element.
      */
-    private cachedArrays = new Map<SimpleHash, { idx: number; v: ArrayElement }[]>();
-    private cachedElements = new Map<FlatpackIndex, CacheMap>();
+    private cachedArrays = new Map<SimpleHash, number[]>();
+    private cachedElementsTrie = new Trie<unknown, FlatpackIndex>();
     private unpackMetaData: UnpackMetaData | undefined;
 
     constructor(options?: FlatpackOptions | undefined) {
@@ -271,23 +273,11 @@ export class CompactStorageV2 extends CompactStorage {
     }
 
     private cacheElement(elemIdx: FlatpackIndex, element: CachedElements): FlatpackIndex {
-        let map: CacheMap = this.cachedElements;
-        for (let i = 0; i < element.length - 1; i++) {
-            const idx = element[i];
-            let found = map.get(idx);
-            if (!found) {
-                found = new Map();
-                map.set(idx, found);
-            }
-            assert(found instanceof Map);
-            map = found;
+        const found = this.cachedElementsTrie.get(element);
+        if (found !== undefined) {
+            return this.referenced.hasRefs(elemIdx) ? elemIdx : found;
         }
-        const idx = element[element.length - 1];
-        const foundIdx = map.get(idx);
-        if (typeof foundIdx === 'number') {
-            return this.referenced.hasRefs(elemIdx) ? elemIdx : foundIdx;
-        }
-        map.set(idx, elemIdx);
+        this.cachedElementsTrie.set(element, elemIdx);
         return elemIdx;
     }
 
@@ -298,11 +288,11 @@ export class CompactStorageV2 extends CompactStorage {
             found = [];
             this.cachedArrays.set(indexHash, found);
         }
-        const foundIdx = found.find((entry) => isEqual(entry.v, element));
+        const foundIdx = found.find((entry) => isArrayEqual(this.data[entry], element));
         if (foundIdx) {
-            return this.referenced.hasRefs(idx) ? idx : foundIdx.idx;
+            return this.referenced.hasRefs(idx) ? idx : foundIdx;
         }
-        found.push({ idx, v: element });
+        found.push(idx);
         return idx;
     }
 
@@ -382,7 +372,7 @@ export class CompactStorageV2 extends CompactStorage {
         this.cache.clear();
         this.cache.set(undefined, 0);
         this.cachedArrays.clear();
-        this.cachedElements.clear();
+        this.cachedElementsTrie.clear();
         this.referenced.clear();
         this.data = [dataHeaderV2_0, [ElementType.StringTable]];
     }
@@ -399,14 +389,34 @@ export class CompactStorageV2 extends CompactStorage {
         this.unpackMetaData = data;
         const flatpack: Flatpacked = [...data.flatpack];
         const st = flatpack[1];
-        if (!isStringTableElement(st)) {
-            this.data = [dataHeaderV2_0, [ElementType.StringTable]];
-            return;
-        }
+        assert(isStringTableElement(st), 'Expected a string table element in the flatpack meta data');
         this.stringTable = new StringTableBuilder(st);
         this.data = flatpack;
-        // At the moment, only the string table is used.
-        this.data = [dataHeaderV2_0, [ElementType.StringTable]];
+        this.initFromFlatpackData(flatpack);
+        // Clear the referenced indexes since we don't want to treat them as referenced when we re-pack the data.
+        this.referenced.clear();
+    }
+
+    /**
+     * Cache the primitives from the unpacked data to improve performance when re-packing the same data.
+     */
+    private initFromFlatpackData(data: Flatpacked): void {
+        for (let i = 3; i < data.length; ++i) {
+            this.useFlattenedElement(data[i], i);
+        }
+    }
+
+    private useFlattenedElement(element: FlattenedElement, index: number): void {
+        if (!element || typeof element !== 'object') {
+            this.cache.set(element, index);
+            return;
+        }
+        if (!Array.isArray(element)) return;
+        if (element[0] === ElementType.Array) {
+            this.stashArray(index, element as ArrayElement);
+            return;
+        }
+        this.cachedElementsTrie.set(element, index);
     }
 
     toJSON<V extends Serializable>(json: V): Flatpacked {
@@ -423,10 +433,10 @@ export class CompactStorageV2 extends CompactStorage {
     }
 }
 
-type CacheMap = Map<FlatpackIndex, FlatpackIndex | CacheMap>;
 type CachedElements = ObjectElement | SetElement | MapElement | RegExpElement | DateElement | BigIntElement;
 
-function isEqual(a: readonly number[], b: readonly number[]): boolean {
+function isArrayEqual(a: readonly unknown[] | unknown, b: readonly unknown[]): boolean {
+    if (!Array.isArray(a) || !Array.isArray(b)) return false;
     if (a === b) return true;
     if (a.length !== b.length) return false;
     for (let i = 0; i < a.length; i++) {
