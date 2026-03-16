@@ -33,4 +33,8 @@ export class RefCounter<T> {
     [Symbol.iterator](): IterableIterator<[T, number]> {
         return this.#refCounts.entries();
     }
+
+    toJSON(): Map<T, number> {
+        return this.#refCounts;
+    }
 }

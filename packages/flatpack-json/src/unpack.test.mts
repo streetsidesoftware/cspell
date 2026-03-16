@@ -195,9 +195,32 @@ describe('dehydrate', async () => {
         expect(r).toEqual([['3', '4', r, r[0]], '1', '2', r]);
         expect(extractUnpackedMetaData(r)).toMatchSnapshot('meta');
     });
+
+    test('circular object', () => {
+        const data: CircularArray = ['data'];
+        data.push(data);
+        data.push('hello');
+        data.push(data);
+        const a: CircularObject = { name: 'a', data, head: undefined, tail: undefined };
+        const b: CircularObject = { name: 'b', data: 'data', head: a, tail: undefined };
+        const c: CircularObject = { name: 'c', data: ['data', 'head', 'name', 'tail'], head: b, tail: a };
+        a.tail = b;
+        a.head = c;
+        const v = toJSON(a, { format: 'V2' });
+        const r = fromJSON(v) as CircularObject;
+        expect(r).toEqual(a);
+        expect(extractUnpackedMetaData(r)).toMatchSnapshot('meta');
+    });
 });
 
-type CircularArray = (string | CircularArray)[];
+type CircularArray<T = string> = (T | CircularArray)[];
+
+type CircularObject = {
+    name: string;
+    data: string | CircularArray;
+    tail?: CircularObject | undefined;
+    head?: CircularObject | undefined;
+};
 
 async function sampleFileList() {
     const data = await readFile(urlFileList, 'utf8');

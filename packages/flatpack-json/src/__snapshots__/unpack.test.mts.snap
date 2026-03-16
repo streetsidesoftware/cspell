@@ -28,7 +28,106 @@ exports[`dehydrate > circular array > meta 1`] = `
         3,
       ],
     ],
-    "referenced": RefCounter {},
+    "referenced": Map {
+      1 => 1,
+      2 => 3,
+      3 => 2,
+      -1 => 1,
+      -2 => 1,
+      -3 => 1,
+      -4 => 1,
+    },
+  },
+}
+`;
+
+exports[`dehydrate > circular object > meta 1`] = `
+{
+  "index": 2,
+  "meta": {
+    "flatpack": [
+      "Flatpack JSON v2",
+      [
+        128,
+        "data",
+        "head",
+        "name",
+        "tail",
+        "hello",
+        "b",
+        "c",
+        "a",
+      ],
+      [
+        1,
+        3,
+        4,
+      ],
+      [
+        0,
+        -1,
+        -2,
+        -3,
+        -4,
+      ],
+      [
+        0,
+        5,
+        6,
+        -8,
+        8,
+      ],
+      [
+        0,
+        -1,
+        5,
+        -5,
+        5,
+      ],
+      [
+        1,
+        3,
+        7,
+      ],
+      [
+        0,
+        3,
+        8,
+        -7,
+        2,
+      ],
+      [
+        1,
+        3,
+        9,
+      ],
+      [
+        0,
+        -1,
+        2,
+        -6,
+        0,
+      ],
+    ],
+    "referenced": Map {
+      1 => 1,
+      2 => 3,
+      3 => 4,
+      -1 => 3,
+      -2 => 1,
+      -3 => 1,
+      -4 => 1,
+      4 => 1,
+      5 => 3,
+      -5 => 1,
+      6 => 1,
+      7 => 1,
+      8 => 2,
+      9 => 1,
+      -6 => 1,
+      -7 => 1,
+      -8 => 1,
+    },
   },
 }
 `;
@@ -800,7 +899,12 @@ exports[`dehydrate > dehydrate V2 /[\\p{L}\\p{M}]+/gu undefined > meta 1`] = `
         -2,
       ],
     ],
-    "referenced": RefCounter {},
+    "referenced": Map {
+      1 => 1,
+      2 => 1,
+      -1 => 1,
+      -2 => 1,
+    },
   },
 }
 `;
@@ -848,7 +952,13 @@ exports[`dehydrate > dehydrate V2 [ 'apple', 'banana', 'apple', 'banana', 'apple
         -3,
       ],
     ],
-    "referenced": RefCounter {},
+    "referenced": Map {
+      1 => 1,
+      2 => 1,
+      -1 => 3,
+      -2 => 2,
+      -3 => 1,
+    },
   },
 }
 `;
@@ -910,7 +1020,15 @@ exports[`dehydrate > dehydrate V2 [ /[\\p{L}\\p{M}]+/gu, /[\\p{L}\\p{M}]+/gu, /[
         -2,
       ],
     ],
-    "referenced": RefCounter {},
+    "referenced": Map {
+      1 => 1,
+      2 => 1,
+      3 => 2,
+      -1 => 1,
+      -2 => 2,
+      4 => 1,
+      -3 => 1,
+    },
   },
 }
 `;
@@ -1072,7 +1190,24 @@ exports[`dehydrate > dehydrate V2 [ { a: 'a', b: 'b' }, { a: 'a', b: 'b' }, { a:
         -2,
       ],
     ],
-    "referenced": RefCounter {},
+    "referenced": Map {
+      1 => 1,
+      2 => 1,
+      3 => 1,
+      4 => 1,
+      -1 => 8,
+      -2 => 8,
+      5 => 1,
+      6 => 1,
+      7 => 1,
+      8 => 1,
+      9 => 1,
+      10 => 1,
+      11 => 1,
+      12 => 1,
+      13 => 1,
+      14 => 1,
+    },
   },
 }
 `;
@@ -1160,7 +1295,18 @@ exports[`dehydrate > dehydrate V2 [ { a: 'a', b: 'b' }, { a: 'c', b: 'd' }, { b:
         -4,
       ],
     ],
-    "referenced": RefCounter {},
+    "referenced": Map {
+      1 => 1,
+      2 => 1,
+      3 => 2,
+      4 => 4,
+      -1 => 1,
+      -2 => 1,
+      5 => 1,
+      6 => 2,
+      -3 => 1,
+      -4 => 1,
+    },
   },
 }
 `;
@@ -1198,7 +1344,11 @@ exports[`dehydrate > dehydrate V2 [ {}, {}, {} ] undefined > meta 1`] = `
       ],
       {},
     ],
-    "referenced": RefCounter {},
+    "referenced": Map {
+      1 => 1,
+      2 => 1,
+      3 => 3,
+    },
   },
 }
 `;
@@ -1236,7 +1386,12 @@ exports[`dehydrate > dehydrate V2 [ 1, 2 ] undefined > meta 1`] = `
       1,
       2,
     ],
-    "referenced": RefCounter {},
+    "referenced": Map {
+      1 => 1,
+      2 => 1,
+      3 => 1,
+      4 => 1,
+    },
   },
 }
 `;
@@ -1332,7 +1487,20 @@ exports[`dehydrate > dehydrate V2 [ 1n, 'hello', /\\w+/g, {}, [], 'hello' ] unde
         0,
       ],
     ],
-    "referenced": RefCounter {},
+    "referenced": Map {
+      1 => 1,
+      2 => 1,
+      3 => 1,
+      4 => 1,
+      5 => 1,
+      6 => 2,
+      -1 => 1,
+      7 => 1,
+      -2 => 1,
+      -3 => 1,
+      8 => 1,
+      9 => 1,
+    },
   },
 }
 `;
@@ -1438,7 +1606,22 @@ exports[`dehydrate > dehydrate V2 [ 1n, 2n, 1n, 2n, 9007199254740991n, -90071992
         -2,
       ],
     ],
-    "referenced": RefCounter {},
+    "referenced": Map {
+      1 => 1,
+      2 => 1,
+      3 => 2,
+      4 => 1,
+      5 => 2,
+      6 => 1,
+      7 => 1,
+      8 => 1,
+      9 => 1,
+      10 => 1,
+      11 => 1,
+      -1 => 1,
+      12 => 1,
+      -2 => 1,
+    },
   },
 }
 `;
@@ -1490,7 +1673,12 @@ exports[`dehydrate > dehydrate V2 [ Array(3) ] undefined > meta 1`] = `
         1704153600000,
       ],
     ],
-    "referenced": RefCounter {},
+    "referenced": Map {
+      1 => 1,
+      2 => 1,
+      3 => 2,
+      4 => 1,
+    },
   },
 }
 `;
@@ -1520,7 +1708,10 @@ exports[`dehydrate > dehydrate V2 [] undefined > meta 1`] = `
         0,
       ],
     ],
-    "referenced": RefCounter {},
+    "referenced": Map {
+      1 => 1,
+      2 => 1,
+    },
   },
 }
 `;
@@ -1582,7 +1773,15 @@ exports[`dehydrate > dehydrate V2 { a: [ 1 ] } undefined > meta 1`] = `
       ],
       1,
     ],
-    "referenced": RefCounter {},
+    "referenced": Map {
+      1 => 1,
+      2 => 1,
+      3 => 1,
+      -1 => 1,
+      4 => 1,
+      5 => 1,
+      6 => 1,
+    },
   },
 }
 `;
@@ -1834,7 +2033,38 @@ exports[`dehydrate > dehydrate V2 { a: { a: 'a', b: 'b' }, b: { a: 'c', b: 'd' }
         12,
       ],
     ],
-    "referenced": RefCounter {},
+    "referenced": Map {
+      1 => 1,
+      2 => 1,
+      3 => 1,
+      -1 => 2,
+      -2 => 2,
+      -3 => 1,
+      -4 => 1,
+      -5 => 1,
+      -6 => 1,
+      -7 => 2,
+      -8 => 1,
+      4 => 1,
+      5 => 4,
+      6 => 9,
+      7 => 3,
+      8 => 3,
+      -9 => 1,
+      -10 => 1,
+      9 => 1,
+      10 => 3,
+      11 => 5,
+      -11 => 1,
+      -12 => 1,
+      12 => 2,
+      13 => 1,
+      -13 => 1,
+      14 => 1,
+      15 => 1,
+      17 => 1,
+      16 => 1,
+    },
   },
 }
 `;
@@ -1920,7 +2150,18 @@ exports[`dehydrate > dehydrate V2 { a: { a: 'a', b: 42 } } undefined > meta 1`] 
       ],
       42,
     ],
-    "referenced": RefCounter {},
+    "referenced": Map {
+      1 => 1,
+      2 => 1,
+      3 => 1,
+      -1 => 3,
+      4 => 1,
+      5 => 1,
+      6 => 1,
+      -2 => 1,
+      7 => 1,
+      8 => 1,
+    },
   },
 }
 `;
@@ -2002,7 +2243,18 @@ exports[`dehydrate > dehydrate V2 { a: { b: 1 } } undefined > meta 1`] = `
       ],
       1,
     ],
-    "referenced": RefCounter {},
+    "referenced": Map {
+      1 => 1,
+      2 => 1,
+      3 => 1,
+      -1 => 1,
+      4 => 1,
+      5 => 1,
+      6 => 1,
+      -2 => 1,
+      7 => 1,
+      8 => 1,
+    },
   },
 }
 `;
@@ -2056,7 +2308,14 @@ exports[`dehydrate > dehydrate V2 { a: 1 } undefined > meta 1`] = `
       ],
       1,
     ],
-    "referenced": RefCounter {},
+    "referenced": Map {
+      1 => 1,
+      2 => 1,
+      3 => 1,
+      -1 => 1,
+      4 => 1,
+      5 => 1,
+    },
   },
 }
 `;
@@ -2148,7 +2407,21 @@ exports[`dehydrate > dehydrate V2 { fruit: [ 'apple', 'banana', 'apple', 'banana
         -6,
       ],
     ],
-    "referenced": RefCounter {},
+    "referenced": Map {
+      1 => 1,
+      2 => 1,
+      3 => 1,
+      -1 => 1,
+      -2 => 1,
+      -3 => 1,
+      4 => 1,
+      5 => 1,
+      -4 => 3,
+      -5 => 2,
+      -6 => 1,
+      -7 => 1,
+      -8 => 1,
+    },
   },
 }
 `;
@@ -2232,7 +2505,19 @@ exports[`dehydrate > dehydrate V2 { values: [ 'apple', 'banana', 'pineapple' ], 
         -5,
       ],
     ],
-    "referenced": RefCounter {},
+    "referenced": Map {
+      1 => 1,
+      2 => 1,
+      3 => 1,
+      -1 => 1,
+      -2 => 1,
+      4 => 1,
+      5 => 1,
+      6 => 2,
+      -3 => 1,
+      -4 => 1,
+      -5 => 1,
+    },
   },
 }
 `;
@@ -2258,7 +2543,10 @@ exports[`dehydrate > dehydrate V2 {} undefined > meta 1`] = `
       ],
       {},
     ],
-    "referenced": RefCounter {},
+    "referenced": Map {
+      1 => 1,
+      2 => 1,
+    },
   },
 }
 `;
@@ -2352,7 +2640,18 @@ exports[`dehydrate > dehydrate V2 Map{ 'apple' => 1, 'banana' => 2, 'pineapple' 
       2,
       3,
     ],
-    "referenced": RefCounter {},
+    "referenced": Map {
+      1 => 1,
+      2 => 1,
+      3 => 1,
+      -1 => 1,
+      -2 => 1,
+      -3 => 1,
+      4 => 1,
+      5 => 1,
+      6 => 1,
+      7 => 1,
+    },
   },
 }
 `;
@@ -2402,7 +2701,14 @@ exports[`dehydrate > dehydrate V2 Set{ 'apple', 'banana', 'pineapple' } undefine
         -3,
       ],
     ],
-    "referenced": RefCounter {},
+    "referenced": Map {
+      1 => 1,
+      2 => 1,
+      3 => 1,
+      -1 => 1,
+      -2 => 1,
+      -3 => 1,
+    },
   },
 }
 `;

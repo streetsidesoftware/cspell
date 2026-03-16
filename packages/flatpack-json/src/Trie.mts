@@ -44,21 +44,6 @@ export class Trie<T> {
 
         return { node, found };
     }
-
-    *walk(prefix = ''): Iterable<FoundNode<T>> {
-        const found = this.findNode(prefix);
-        if (found?.found !== prefix) return;
-        yield* walkTrie(found.node, found.found);
-    }
-}
-
-export function* walkTrie<T>(node: TrieNode<T>, prefix = ''): Iterable<FoundNode<T>> {
-    yield { node, found: prefix };
-    if (node.c) {
-        for (const [k, n] of node.c) {
-            yield* walkTrie(n, prefix + k);
-        }
-    }
 }
 
 type ChildMap<T> = Map<string, TrieNode<T>>;

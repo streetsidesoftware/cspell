@@ -38,9 +38,11 @@ export function fromJSON(data: Flatpacked): Unpacked {
         throw new Error('Invalid header');
     }
 
-    const cache = new Map<number | number[], RawUnpacked>([[0, undefined]]);
+    const cache = new Map<number, RawUnpacked>([[0, undefined]]);
+
     /**
-     * indexes that have been referenced by other objects.
+     * indexes that have been referenced by multiple objects.
+     * A count of 1 means that there is only 1 reference.
      */
     const referenced = new RefCounter<number>();
 
@@ -49,6 +51,19 @@ export function fromJSON(data: Flatpacked): Unpacked {
         referenced,
     };
 
+    return idxToValue(1);
+
+    function cacheValue(idx: number, value: RawUnpacked): RawUnpacked {
+        assert(!cache.has(idx), `Index ${idx} already exists in cache`);
+        cache.set(idx, value);
+        return value;
+    }
+
+    function getCachedValue(idx: number): RawUnpacked | undefined {
+        referenced.add(idx);
+        return cache.get(idx);
+    }
+
     function mergeKeysValues<K>(keys: readonly K[], values: PrimitiveArray): [K, Serializable][] {
         return keys.map((key, i) => [key, values[i]]);
     }
@@ -56,7 +71,7 @@ export function fromJSON(data: Flatpacked): Unpacked {
     function toSet(idx: number, elem: SetElement): PrimitiveSet {
         const [_, k] = elem;
         const s: PrimitiveSet = k ? (new Set(idxToArr(k)) as PrimitiveSet) : new Set();
-        cache.set(idx, s);
+        cacheValue(idx, s);
         return s;
     }
 
@@ -64,7 +79,7 @@ export function fromJSON(data: Flatpacked): Unpacked {
         const [_, k, v] = elem;
         const m: PrimitiveMap =
             !k || !v ? new Map() : (new Map(mergeKeysValues(idxToArr(k), idxToArr(v))) as PrimitiveMap);
-        cache.set(idx, m);
+        cacheValue(idx, m);
         return m;
     }
 
@@ -73,42 +88,41 @@ export function fromJSON(data: Flatpacked): Unpacked {
         const p = idxToValue(pattern) as string;
         const f = idxToValue(flags) as string;
         const r = new RegExp(p, f);
-        cache.set(idx, r);
+        cacheValue(idx, r);
         return r;
     }
 
     function toBigInt(idx: number, elem: BigIntElement): bigint {
         const [_, vIdx] = elem;
         const r = BigInt(idxToValue(vIdx) as string | number);
-        cache.set(idx, r);
+        cacheValue(idx, r);
         return r;
     }
 
     function toDate(idx: number, elem: DateElement): Date {
         const [_, value] = elem;
         const r = new Date(value);
-        cache.set(idx, r);
+        cacheValue(idx, r);
         return r;
     }
 
     function toString(idx: number, elem: StringElement | string): string {
         const s = typeof elem === 'string' ? elem : idxToString(elem.slice(1) as number[]);
-        cache.set(idx, s);
+        cacheValue(idx, s);
         return s;
     }
 
     function toObj(idx: number, elem: ObjectElement): PrimitiveObject {
         const [_, k, v] = elem;
-
         // Object Wrapper
         if (!k && v) {
             const obj = Object(idxToValue(v));
-            cache.set(idx, obj);
+            cacheValue(idx, obj);
             return obj as PrimitiveObject;
         }
 
         const obj = {};
-        cache.set(idx, obj);
+        cacheValue(idx, obj);
 
         if (!k || !v) return obj;
         const keys = idxToArr(k) as string[];
@@ -118,6 +132,10 @@ export function fromJSON(data: Flatpacked): Unpacked {
     }
 
     function idxToArr(idx: number): PrimitiveArray {
+        const found = getCachedValue(idx);
+        if (found !== undefined) {
+            return found as PrimitiveArray;
+        }
         const element = data[idx];
         assert(isArrayElement(element));
         return toArr(idx, element);
@@ -126,12 +144,12 @@ export function fromJSON(data: Flatpacked): Unpacked {
     function toArr(idx: number, element: ArrayElement): PrimitiveArray {
         const placeHolder: Serializable[] = [];
         const refs = element.slice(1);
-        cache.set(idx, placeHolder);
+        cacheValue(idx, placeHolder);
         const arr = refs.map(idxToValue);
         // check if the array has been referenced by another object.
         if (!referenced.hasRefs(idx)) {
             // It has not, just replace the placeholder with the array.
-            cache.set(idx, arr);
+            cacheValue(idx, arr);
             return arr;
         }
         placeHolder.push(...arr);
@@ -141,7 +159,7 @@ export function fromJSON(data: Flatpacked): Unpacked {
     function handleSubStringElement(idx: number, refs: SubStringElement): string {
         const [_t, sIdx, len, offset = 0] = refs;
         const s = `${idxToValue(sIdx)}`.slice(offset, offset + len);
-        cache.set(idx, s);
+        cacheValue(idx, s);
         return s;
     }
 
@@ -185,22 +203,18 @@ export function fromJSON(data: Flatpacked): Unpacked {
         return toArr(idx, element as ArrayElement);
     }
 
-    function idxToString(idx: number | number[]): string {
-        if (!idx) return '';
-        if (Array.isArray(idx)) {
-            return joinToString(idx.map((i) => idxToValue(i)));
-        }
-        return idxToValue(idx) as string;
+    function idxToString(idx: number[]): string {
+        return joinToString(idx.map((i) => idxToValue(i)));
     }
 
     function idxToValue(idx: number): Unpacked {
         if (!idx) return undefined;
         if (idx < 0) {
-            return stringTable ? stringTable.get(-idx) : undefined;
+            referenced.add(idx);
+            return stringTable?.get(-idx);
         }
-        const found = cache.get(idx);
+        const found = getCachedValue(idx);
         if (found !== undefined) {
-            if (typeof idx === 'number') referenced.add(idx);
             return annotateUnpacked(found, { meta, index: idx });
         }
 
@@ -218,12 +232,10 @@ export function fromJSON(data: Flatpacked): Unpacked {
         }
         return element;
     }
-
-    return idxToValue(1);
 }
 
 function joinToString(parts: PrimitiveArray): string {
-    return parts.map((a) => (Array.isArray(a) ? joinToString(a) : a)).join('');
+    return parts.flat().join('');
 }
 
 function isArrayElement(value: FlattenedElement): value is ArrayElement {
