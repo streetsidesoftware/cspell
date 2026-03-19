@@ -203,7 +203,7 @@ describe('TrieOfStrings', () => {
     it('findNode should return partial match information', () => {
         const trie = new TrieOfStrings<number>();
         trie.add('hello', 42);
-        const result = trie.findNode('heyyo');
+        const result = trie.findNode('head');
         expect(result).toBeDefined();
         expect(result?.found).toBe(false);
         expect(result?.path).toEqual(['h', 'e']);
