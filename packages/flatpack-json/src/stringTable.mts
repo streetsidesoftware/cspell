@@ -218,6 +218,10 @@ export class StringTableBuilder {
             entry.entry = entry.entry.map((i) => oldIndexToNew.get(i) ?? i);
         }
 
+        for (const [str, oldIdx] of this.#stringToIndex.entries()) {
+            this.#stringToIndex.set(str, oldIndexToNew.get(oldIdx) ?? oldIdx);
+        }
+
         return oldIndexToNew;
 
         function getOldIndex(entry: BuilderEntry): number {
