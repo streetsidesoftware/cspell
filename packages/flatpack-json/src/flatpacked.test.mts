@@ -1,12 +1,17 @@
 import { describe, expect, it } from 'vitest';
 
-import { getIndexesReferencedByElement } from './getIndexesReferencedByElement.mjs';
+import { getFlatpackedRoot, getFlatpackedRootIdx, getIndexesReferencedByElement } from './flatpacked.mjs';
 import {
     type ArrayBasedElements,
     type ArrayElement,
+    dataHeaderV0_1,
+    dataHeaderV1_0,
+    dataHeaderV2_0,
     ElementType,
+    type Flatpacked,
     type ObjectElement,
     type StringElement,
+    type StringTableElement,
 } from './types.mjs';
 
 describe('getIndexesReferencedByElement', () => {
@@ -113,5 +118,41 @@ describe('getIndexesReferencedByElement', () => {
         it('should return empty array for boolean false', () => {
             expect(getIndexesReferencedByElement(false)).toEqual([]);
         });
+    });
+});
+
+describe('getFlatpackedRootIdx', () => {
+    it('should return index 1 for dataHeaderV1_0', () => {
+        const flatpack: Flatpacked = [dataHeaderV1_0, 'root'];
+        expect(getFlatpackedRootIdx(flatpack)).toBe(1);
+    });
+
+    it('should return index 1 for dataHeaderV0_1', () => {
+        const flatpack: Flatpacked = [dataHeaderV0_1, 'root'];
+        expect(getFlatpackedRootIdx(flatpack)).toBe(1);
+    });
+
+    it('should return index 2 if the first element is a string table', () => {
+        const stringTableElement: StringTableElement = [ElementType.StringTable, 'first'];
+        const flatpack: Flatpacked = [dataHeaderV2_0, stringTableElement, 'root'];
+        expect(getFlatpackedRootIdx(flatpack)).toBe(2);
+    });
+
+    it('should return index 1 if the first element is not a string table', () => {
+        const flatpack: Flatpacked = [dataHeaderV2_0, 'not a string table', 'root'];
+        expect(getFlatpackedRootIdx(flatpack)).toBe(1);
+    });
+});
+
+describe('getFlatpackedRoot', () => {
+    it('should return the root element', () => {
+        const flatpack: Flatpacked = [dataHeaderV1_0, 'root'];
+        expect(getFlatpackedRoot(flatpack)).toBe('root');
+    });
+
+    it('should return the root element when string table is present', () => {
+        const stringTableElement: StringTableElement = [ElementType.StringTable, 'first'];
+        const flatpack: Flatpacked = [dataHeaderV2_0, stringTableElement, 'root'];
+        expect(getFlatpackedRoot(flatpack)).toBe('root');
     });
 });

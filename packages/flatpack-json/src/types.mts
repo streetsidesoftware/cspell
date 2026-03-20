@@ -176,6 +176,12 @@ export interface UnpackMetaData {
     flatpack: Flatpacked;
     /** The reference count of elements.  */
     referenced: RefCounter<number>;
+    /**
+     * The index of the root element in the flatpack.
+     * In most cases, this will be 2 or 1 (if there is NOT a string table), but can be higher if there are more meta elements.
+     * The string table is a meta element, and should be included before the root element if it exists.
+     */
+    rootIndex: FlatpackIndex;
 }
 
 export interface UnpackedAnnotation {

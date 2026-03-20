@@ -274,14 +274,14 @@ export class CompactStorageV2 extends CompactStorage {
             this.cachedElementsTrie.set(element, elemIdx);
             return elemIdx;
         }
-        if (this.referencedFromCache.hasRefs(elemIdx)) {
-            if (!this.referencedFromCache.hasRefs(foundIdx)) {
+        if (this.referencedFromCache.isReferenced(elemIdx)) {
+            if (!this.referencedFromCache.isReferenced(foundIdx)) {
                 this.cachedElementsTrie.set(element, elemIdx);
             }
             return elemIdx;
         }
         const foundElement = this.data[foundIdx];
-        if (!this.referencedFromCache.hasRefs(foundIdx) && !isArrayEqual(foundElement, element)) {
+        if (!this.referencedFromCache.isReferenced(foundIdx) && !isArrayEqual(foundElement, element)) {
             this.cachedElementsTrie.set(element, elemIdx);
             return elemIdx;
         }
@@ -298,7 +298,7 @@ export class CompactStorageV2 extends CompactStorage {
         // It is possible for an array to have a circular reference to itself (possibly through a nested object).
         // In that case, we want to treat it as a unique array and not dedupe
         // it with other arrays that have the same content.
-        if (this.referencedFromCache.hasRefs(idx)) {
+        if (this.referencedFromCache.isReferenced(idx)) {
             found.push(idx);
             return idx;
         }
@@ -394,10 +394,11 @@ export class CompactStorageV2 extends CompactStorage {
         this.useFlatpackMetaData(info?.meta);
     }
 
-    private useFlatpackMetaData(data: UnpackMetaData | undefined): void {
+    useFlatpackMetaData(data: UnpackMetaData | undefined): void {
         if (!data || data.flatpack[0] !== dataHeaderV2_0) {
             return;
         }
+        this.softReset();
         this.unpackMetaData = data;
         const flatpack: Flatpacked = [...data.flatpack];
         const st = flatpack[1];

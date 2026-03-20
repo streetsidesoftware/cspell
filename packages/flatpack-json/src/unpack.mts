@@ -1,5 +1,6 @@
 import assert from 'node:assert';
 
+import { getFlatpackedRootIdx } from './flatpacked.mjs';
 import { RefCounter } from './RefCounter.mjs';
 import { StringTable } from './stringTable.mjs';
 import type {
@@ -49,6 +50,7 @@ export function fromJSON(data: Flatpacked): Unpacked {
     const meta: UnpackMetaData = {
         flatpack: data,
         referenced,
+        rootIndex: getFlatpackedRootIdx(data),
     };
 
     return idxToValue(1);
@@ -147,7 +149,7 @@ export function fromJSON(data: Flatpacked): Unpacked {
         cacheValue(idx, placeHolder);
         const arr = refs.map(idxToValue);
         // check if the array has been referenced by another object.
-        if (!referenced.hasRefs(idx)) {
+        if (!referenced.isReferenced(idx)) {
             // It has not, just replace the placeholder with the array.
             cacheValue(idx, arr);
             return arr;

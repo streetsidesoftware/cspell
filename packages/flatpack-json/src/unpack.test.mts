@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { findMatchingFileTypes } from '@cspell/filetypes';
 import { describe, expect, test } from 'vitest';
 
+import { generateUnpackMetaData } from './flatpacked.mjs';
 import { RefCounter } from './RefCounter.mjs';
 import { toJSON } from './storage.mjs';
 import { stringifyFlatpacked } from './stringify.mjs';
@@ -88,6 +89,8 @@ describe('dehydrate', async () => {
         expect(Object.hasOwn(r as object, symbolFlatpackAnnotation)).toBe(true);
         const meta = expect.objectContaining({ flatpack: v, referenced: expect.any(RefCounter) });
         expect(extractUnpackedMetaData(r)).toEqual({ meta, index: 2 });
+        const meta2 = generateUnpackMetaData(v);
+        expect(extractUnpackedMetaData(fromJSON(v))?.meta.referenced.toJSON()).toStrictEqual(meta2.referenced.toJSON());
     });
 
     const biMaxSafe = BigInt(Number.MAX_SAFE_INTEGER);
@@ -130,14 +133,24 @@ describe('dehydrate', async () => {
     });
 
     test.each`
+        data         | options
+        ${undefined} | ${undefined}
+        ${'string'}  | ${undefined}
+        ${1}         | ${undefined}
+        ${1.1}       | ${undefined}
+        ${null}      | ${undefined}
+        ${true}      | ${undefined}
+        ${false}     | ${undefined}
+    `('dehydrate V2 $data $options', ({ data, options }) => {
+        const v = toJSON(data, { dedupe: options?.dedupe, format: 'V2' });
+        expect(v).toMatchSnapshot('flatpack');
+        expect(fromJSON(v)).toEqual(data);
+        expect(fromJSON(JSON.parse(JSON.stringify(v)))).toEqual(data);
+        expect(extractUnpackedMetaData(fromJSON(v))).toMatchSnapshot('meta');
+    });
+
+    test.each`
         data                                                                                            | options
-        ${undefined}                                                                                    | ${undefined}
-        ${'string'}                                                                                     | ${undefined}
-        ${1}                                                                                            | ${undefined}
-        ${1.1}                                                                                          | ${undefined}
-        ${null}                                                                                         | ${undefined}
-        ${true}                                                                                         | ${undefined}
-        ${false}                                                                                        | ${undefined}
         ${[]}                                                                                           | ${undefined}
         ${[1, 2]}                                                                                       | ${undefined}
         ${['apple', 'banana', 'apple', 'banana', 'apple', 'pineapple']}                                 | ${undefined}
@@ -167,6 +180,8 @@ describe('dehydrate', async () => {
         expect(fromJSON(v)).toEqual(data);
         expect(fromJSON(JSON.parse(JSON.stringify(v)))).toEqual(data);
         expect(extractUnpackedMetaData(fromJSON(v))).toMatchSnapshot('meta');
+        const meta2 = generateUnpackMetaData(v);
+        expect(extractUnpackedMetaData(fromJSON(v))?.meta.referenced.toJSON()).toStrictEqual(meta2.referenced.toJSON());
     });
 
     test.each`

@@ -9,6 +9,9 @@ export class RefCounter<T> {
         }
     }
 
+    /**
+     * Increment the reference count for a value. If the value does not exist in the map, it will be added with a count of 1.
+     */
     add(value: T): void {
         const count = this.#refCounts.get(value) ?? 0;
         this.#refCounts.set(value, count + 1);
@@ -22,7 +25,7 @@ export class RefCounter<T> {
         return this.#refCounts.get(value) ?? 0;
     }
 
-    hasRefs(value: T): boolean {
+    isReferenced(value: T): boolean {
         return !!this.get(value);
     }
 

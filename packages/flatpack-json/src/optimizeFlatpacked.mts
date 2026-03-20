@@ -1,6 +1,6 @@
 import assert from 'node:assert';
 
-import { getIndexesReferencedByElement } from './getIndexesReferencedByElement.mjs';
+import { getIndexesReferencedByElement } from './flatpacked.mjs';
 import { StringTableBuilder } from './stringTable.mjs';
 import type { ArrayBasedElements, Flatpacked, FlattenedElement, StringTableElement } from './types.mjs';
 import { ElementType, supportedHeaders } from './types.mjs';
