@@ -24,26 +24,6 @@ describe('StringTable', () => {
         expect(builder.getRefCount(idx2)).toBe(1);
     });
 
-    test('StringTableBuilder', () => {
-        const builder = new StringTableBuilder();
-        const idx1 = builder.add('apple');
-        const idx2 = builder.add('banana');
-        const idx3 = builder.add('apple');
-        expect(idx1).toBe(idx3);
-        expect(builder.get(idx1)).toBe('apple');
-        expect(builder.get(idx2)).toBe('banana');
-        const stringTableElement = builder.build();
-        const stringTable = new StringTable(stringTableElement);
-        expect([...stringTable.entries()]).toEqual([
-            [1, 'apple'],
-            [2, 'banana'],
-        ]);
-        expect([...stringTable.values()]).toEqual(['apple', 'banana']);
-
-        expect(builder.getRefCount(idx1)).toBe(2);
-        expect(builder.getRefCount(idx2)).toBe(1);
-    });
-
     test('StringTableBuilder with empty string', () => {
         const builder = new StringTableBuilder();
         const idx1 = builder.add('');
