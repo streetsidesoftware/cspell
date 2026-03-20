@@ -150,6 +150,19 @@ describe('dehydrate', async () => {
         expect(hv.n).toEqual(value.n);
     });
 
+    test.each`
+        value
+        ${new Set([['a', 'b'], ['c', 'd'], ['c', 'd'], ['a', 'b']])}
+        ${new Set([{}, [], {}, []])}
+        ${new Set([new Set(), new Set(), new Set()])}
+        ${new Set([new Set([1]), new Set([1]), new Set([1])])}
+        ${new Set([new Map(), new Map(), new Map()])}
+    `("make sure dedupe doesn't break Sets $value", ({ value }) => {
+        const v = toJSON(value, { dedupe: true });
+        const hv = fromJSON(v);
+        expect(hv).toEqual(value);
+    });
+
     test("make sure dedupe doesn't break Maps", () => {
         const data = sampleNestedData();
         const value = { ...data, m: new Map(data.n.map((a) => [a, a])) };

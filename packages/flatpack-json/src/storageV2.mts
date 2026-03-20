@@ -53,7 +53,7 @@ export class CompactStorageV2 extends CompactStorage {
     /**
      * Set of indexes that have been referenced by other indexes.
      */
-    private referenced = new RefCounter<FlatpackIndex>();
+    private referencedFromCache = new RefCounter<FlatpackIndex>();
     /**
      * Cache of arrays that have been deduped.
      * The key is a hash of the array elements as a function of the index of the element.
@@ -95,7 +95,7 @@ export class CompactStorageV2 extends CompactStorage {
     }
 
     private stringToIdx(value: string): FlatpackIndex {
-        const found = this.cache.get(value);
+        const found = this.#getFromCacheAndReference(value);
         if (found !== undefined) {
             return found;
         }
@@ -104,9 +104,8 @@ export class CompactStorageV2 extends CompactStorage {
     }
 
     private objSetToIdx(value: Set<Serializable>): FlatpackIndex {
-        const found = this.cache.get(value);
+        const found = this.#getFromCacheAndReference(value);
         if (found !== undefined) {
-            this.referenced.add(found);
             return found;
         }
 
@@ -275,14 +274,14 @@ export class CompactStorageV2 extends CompactStorage {
             this.cachedElementsTrie.set(element, elemIdx);
             return elemIdx;
         }
-        if (this.referenced.hasRefs(elemIdx)) {
-            if (!this.referenced.hasRefs(foundIdx)) {
+        if (this.referencedFromCache.hasRefs(elemIdx)) {
+            if (!this.referencedFromCache.hasRefs(foundIdx)) {
                 this.cachedElementsTrie.set(element, elemIdx);
             }
             return elemIdx;
         }
         const foundElement = this.data[foundIdx];
-        if (!this.referenced.hasRefs(foundIdx) && !isArrayEqual(foundElement, element)) {
+        if (!this.referencedFromCache.hasRefs(foundIdx) && !isArrayEqual(foundElement, element)) {
             this.cachedElementsTrie.set(element, elemIdx);
             return elemIdx;
         }
@@ -296,10 +295,10 @@ export class CompactStorageV2 extends CompactStorage {
             found = [];
             this.cachedArrays.set(indexHash, found);
         }
-        // It is possible for an array to have a circular reference to itself (possibly through a nested object.).
+        // It is possible for an array to have a circular reference to itself (possibly through a nested object).
         // In that case, we want to treat it as a unique array and not dedupe
         // it with other arrays that have the same content.
-        if (this.referenced.hasRefs(idx)) {
+        if (this.referencedFromCache.hasRefs(idx)) {
             found.push(idx);
             return idx;
         }
@@ -387,7 +386,7 @@ export class CompactStorageV2 extends CompactStorage {
         this.cache.set(undefined, 0);
         this.cachedArrays.clear();
         this.cachedElementsTrie.clear();
-        this.referenced.clear();
+        this.referencedFromCache.clear();
         this.data = [dataHeaderV2_0, [ElementType.StringTable]];
     }
 
@@ -407,8 +406,7 @@ export class CompactStorageV2 extends CompactStorage {
         this.data = flatpack;
         this.initFromFlatpackData(flatpack);
         // Clear the referenced indexes since we don't want to treat them as referenced when we re-pack the data.
-        this.referenced.clear();
-        this.softReset();
+        this.referencedFromCache.clear();
     }
 
     /**
@@ -444,9 +442,13 @@ export class CompactStorageV2 extends CompactStorage {
     #getFromCacheAndReference(value: unknown): FlatpackIndex | undefined {
         const found = this.cache.get(value);
         if (found !== undefined) {
-            this.referenced.add(found);
+            this.#addReference(found);
         }
         return found;
+    }
+
+    #addReference(idx: FlatpackIndex): void {
+        this.referencedFromCache.add(idx);
     }
 
     toJSON<V extends Serializable>(json: V): Flatpacked {
