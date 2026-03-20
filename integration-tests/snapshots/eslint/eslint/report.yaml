@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: https://github.com/eslint/eslint
 Args: '[".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]'
 Summary:
-  files: 2049
+  files: 2050
   filesWithIssues: 292
   issues: 1489
   errors: 0
@@ -612,9 +612,9 @@ issues:
   - "lib/eslint/eslint-helpers.js:553:53         subsubdir           U       the form of \"subdir/subsubdir\"."
   - "lib/eslint/eslint-helpers.js:559:51         subd                U       pattern is passed (e.g., \"subd*\"). We want"
   - "lib/eslint/eslint-helpers.js:668:34         unconfigured        U       ignored\"|\"external\"|\"unconfigured\"} configStatus A status"
-  - "lib/eslint/eslint.js:434:14         Cloneability    U       const disableCloneabilityCheck = Symbol("
-  - "lib/eslint/eslint.js:435:20         uncloneable     U       \"Do not check for uncloneable options.\","
-  - "lib/eslint/eslint.js:685:23         UNCLONEABLE     U       error.code = \"ESLINT_UNCLONEABLE_OPTIONS\";"
+  - "lib/eslint/eslint.js:407:14         Cloneability    U       const disableCloneabilityCheck = Symbol("
+  - "lib/eslint/eslint.js:408:20         uncloneable     U       \"Do not check for uncloneable options.\","
+  - "lib/eslint/eslint.js:658:23         UNCLONEABLE     U       error.code = \"ESLINT_UNCLONEABLE_OPTIONS\";"
   - "lib/eslint/index.js:1:1\tNo issues found"
   - "lib/eslint/worker.js:163:94         parallelizable      U       tasks that are highly parallelizable and not repeated across"
   - "lib/languages/js/index.js:165:31        Feenstra    U       Copyright (c) 2013, Joel Feenstra"
@@ -1783,6 +1783,7 @@ issues:
   - "tests/fixtures/testers/rule-tester/no-schema-violation.js:1:1\tNo issues found"
   - "tests/fixtures/testers/rule-tester/no-test-filename:1:1\tNo issues found"
   - "tests/fixtures/testers/rule-tester/no-test-global.js:1:1\tNo issues found"
+  - "tests/fixtures/testers/rule-tester/no-test-runners.js:1:1\tNo issues found"
   - "tests/fixtures/testers/rule-tester/no-test-settings.js:1:1\tNo issues found"
   - "tests/fixtures/testers/rule-tester/no-var.js:1:1\tNo issues found"
   - "tests/fixtures/testers/rule-tester/suggestions.js:1:1\tNo issues found"
@@ -1886,9 +1887,8 @@ issues:
   - "tests/lib/linter/timing.js:1:1\tNo issues found"
   - "tests/lib/linter/vfile.js:1:1\tNo issues found"
   - "tests/lib/options.js:1:1\tNo issues found"
-  - "tests/lib/rule-tester/no-test-runners.js:1:1\tNo issues found"
   - "tests/lib/rule-tester/rule-tester.js:4096:13        outpt           U       outpt: \"var baz;\","
-  - "tests/lib/rule-tester/rule-tester.js:5279:12        Subclassing     U       describe(\"Subclassing\", () => {"
+  - "tests/lib/rule-tester/rule-tester.js:5294:12        Subclassing     U       describe(\"Subclassing\", () => {"
   - "tests/lib/rules/accessor-pairs.js:1:1\tNo issues found"
   - "tests/lib/rules/array-bracket-newline.js:1:1\tNo issues found"
   - "tests/lib/rules/array-bracket-spacing.js:74:69          n'quxx      U       { 'bar': 'baz' }], \\n'quxx': 1 \\n}]\","
@@ -2219,6 +2219,7 @@ issues:
   - "tests/lib/rules/utils/ast-utils.js:2092:10      invalidtoken    U       [[\"123invalidtoken\", \"(\"], false],"
   - "tests/lib/rules/utils/char-source.js:1:1\tNo issues found"
   - "tests/lib/rules/utils/fix-tracker.js:1:1\tNo issues found"
+  - "tests/lib/rules/utils/regular-expressions.js:1:1\tNo issues found"
   - "tests/lib/rules/valid-typeof.js:98:31       umdefined       U       if (typeof bar === 'umdefined') {}\","
   - "tests/lib/rules/vars-on-top.js:1:1\tNo issues found"
   - "tests/lib/rules/wrap-iife.js:1:1\tNo issues found"
