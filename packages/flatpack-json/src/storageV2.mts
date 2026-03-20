@@ -22,7 +22,6 @@ import type {
     RegExpElement,
     Serializable,
     SetElement,
-    UnpackedAnnotation,
     UnpackMetaData,
 } from './types.mjs';
 import { dataHeaderV2_0, ElementType, isStringTableElement } from './types.mjs';
@@ -46,6 +45,8 @@ export class CompactStorageV2 extends CompactStorage {
     private dedupe = true;
     private sortKeys = true;
     private emptyObjIdx = 0;
+    private rootIndex = 0;
+
     /**
      * Cache of primitives and objects that have been added to the data.
      */
@@ -68,18 +69,20 @@ export class CompactStorageV2 extends CompactStorage {
         this.sortKeys = options?.sortKeys || this.dedupe;
         this.stringTable = new StringTableBuilder();
         this.data = [dataHeaderV2_0, [ElementType.StringTable]];
+        this.rootIndex = this.data.length;
     }
 
-    private primitiveToIdx(value: Primitive): FlatpackIndex {
+    private primitiveToIdx(value: Primitive, useIdx?: FlatpackIndex | undefined): FlatpackIndex {
         if (typeof value === 'string') return this.stringToIdx(value);
         if (typeof value === 'bigint') return this.bigintToIdx(value);
 
         const found = this.cache.get(value);
-        if (found !== undefined) {
+        if (found !== undefined && this.data[found] === value) {
             return found;
         }
 
-        const idx = this.data.push(value) - 1;
+        const idx = useIdx ?? this.data.length;
+        this.data[idx] = value;
         this.#cacheValue(value, idx);
         return idx;
     }
@@ -351,7 +354,7 @@ export class CompactStorageV2 extends CompactStorage {
         return useIdx;
     }
 
-    private valueToIdx(value: Serializable): FlatpackIndex {
+    private valueToIdx(value: Serializable, _useIdx?: FlatpackIndex | undefined): FlatpackIndex {
         if (value === null) {
             return this.primitiveToIdx(value);
         }
@@ -390,10 +393,6 @@ export class CompactStorageV2 extends CompactStorage {
         this.data = [dataHeaderV2_0, [ElementType.StringTable]];
     }
 
-    private useFlatpackAnnotation(info: UnpackedAnnotation | undefined): void {
-        this.useFlatpackMetaData(info?.meta);
-    }
-
     useFlatpackMetaData(data: UnpackMetaData | undefined): void {
         if (!data || data.flatpack[0] !== dataHeaderV2_0) {
             return;
@@ -408,6 +407,7 @@ export class CompactStorageV2 extends CompactStorage {
         this.initFromFlatpackData(flatpack);
         // Clear the referenced indexes since we don't want to treat them as referenced when we re-pack the data.
         this.referencedFromCache.clear();
+        this.rootIndex = data.rootIndex;
     }
 
     /**
@@ -442,6 +442,7 @@ export class CompactStorageV2 extends CompactStorage {
 
     #getFromCacheAndReference(value: unknown): FlatpackIndex | undefined {
         const found = this.cache.get(value);
+        if (!found || this.data[found] !== value) return undefined;
         if (found !== undefined) {
             this.#addReference(found);
         }
@@ -454,8 +455,9 @@ export class CompactStorageV2 extends CompactStorage {
 
     toJSON<V extends Serializable>(json: V): Flatpacked {
         this.softReset();
-        this.useFlatpackAnnotation(extractUnpackedMetaData(json));
-        const lastIdx = this.valueToIdx(json);
+        const annotation = extractUnpackedMetaData(json);
+        this.useFlatpackMetaData(annotation?.meta ?? this.unpackMetaData);
+        const lastIdx = this.valueToIdx(json, this.rootIndex);
         if (lastIdx < 0) {
             this.data.push([ElementType.String, lastIdx]);
         }
