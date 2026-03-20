@@ -63,23 +63,23 @@ export class Trie<K, T> {
     size: number = 0;
 
     set(key: Iterable<K>, data: T): TrieNode<K, T> {
-        let added = 0;
         let node: TrieNode<K, T> = this.root;
         for (const k of key) {
             let c = node.c;
             if (!c) {
                 node.c = c = new Map();
-                added = 1;
             }
             let n = c.get(k);
             if (!n) {
                 c.set(k, (n = {}));
-                added = 1;
             }
             node = n;
         }
+        const wasSet = Object.hasOwn(node, 'd');
         node.d = data;
-        this.size += added;
+        if (!wasSet) {
+            ++this.size;
+        }
         return node;
     }
 
