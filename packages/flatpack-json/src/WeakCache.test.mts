@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, test } from 'vitest';
 
 import { WeakCache } from './WeakCache.mjs';
 
@@ -94,5 +94,13 @@ describe('WeakCache', () => {
         })();
         // After this block, obj is out of scope and may be GC'd.
         // We can't assert GC, but at least no error should occur.
+    });
+});
+
+describe('Assert WeakMap assumptions', () => {
+    test('WeakMap should not throw when calling has() with primitive keys', () => {
+        const weakMap = new WeakMap<object, string>();
+        expect(() => weakMap.has('foo' as unknown as object)).not.toThrow();
+        expect(weakMap.has('foo' as unknown as object)).toBe(false);
     });
 });
