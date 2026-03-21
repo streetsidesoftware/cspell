@@ -1,6 +1,7 @@
 import assert from 'node:assert';
 
 import { CompactStorage } from './CompactStorage.mjs';
+import { getFlatpackedRootIdx } from './flatpacked.mjs';
 import { optimizeFlatpacked } from './optimizeFlatpacked.mjs';
 import { RefCounter } from './RefCounter.mjs';
 import { StringTableBuilder } from './stringTable.mjs';
@@ -9,6 +10,7 @@ import type {
     ArrayElement,
     BigIntElement,
     DateElement,
+    EmptyElement,
     Flatpacked,
     FlatpackIndex,
     FlatpackOptions,
@@ -22,6 +24,7 @@ import type {
     RegExpElement,
     Serializable,
     SetElement,
+    StringTableElement,
     UnpackMetaData,
 } from './types.mjs';
 import { dataHeaderV2_0, ElementType, isStringTableElement } from './types.mjs';
@@ -40,7 +43,7 @@ const collator = new Intl.Collator('en', {
 const compare = collator.compare;
 
 export class CompactStorageV2 extends CompactStorage {
-    private data: Flatpacked;
+    private data: FlatpackData;
     private stringTable: StringTableBuilder;
     private dedupe = true;
     private sortKeys = true;
@@ -59,42 +62,34 @@ export class CompactStorageV2 extends CompactStorage {
      * Cache of arrays that have been deduped.
      * The key is a hash of the array elements as a function of the index of the element.
      */
-    private cachedArrays = new Map<SimpleHash, number[]>();
+    private cachedArrays = new Map<SimpleHash, FlatpackIndex[]>();
     private cachedElementsTrie = new Trie<unknown, FlatpackIndex>();
     private unpackMetaData: UnpackMetaData | undefined;
+    private used: Set<FlatpackIndex> = new Set();
 
     constructor(options?: FlatpackOptions | undefined) {
         super(options);
         this.dedupe = options?.dedupe ?? true;
         this.sortKeys = options?.sortKeys || this.dedupe;
-        this.stringTable = new StringTableBuilder();
-        this.data = [dataHeaderV2_0, [ElementType.StringTable]];
-        this.rootIndex = this.data.length;
+        this.data = new FlatpackData(undefined);
+        this.stringTable = this.data.stringTable;
     }
 
-    private primitiveToIdx(value: Primitive, useIdx?: FlatpackIndex | undefined): FlatpackIndex {
+    private primitiveToIdx(value: Primitive): FlatpackIndex {
         if (typeof value === 'string') return this.stringToIdx(value);
         if (typeof value === 'bigint') return this.bigintToIdx(value);
+        if (value === undefined) return 0;
 
-        const found = this.cache.get(value);
-        if (found !== undefined && this.data[found] === value) {
+        const found = this.#getFromCacheAndReference(value);
+        if (found !== undefined && this.data.get(found) === value) {
             return found;
         }
 
-        const idx = useIdx ?? this.data.length;
-        this.data[idx] = value;
-        this.#cacheValue(value, idx);
-        return idx;
+        return this.#setElement(value);
     }
 
     private addStringPrimitive(value: string): number {
         return -this.stringTable.add(value);
-    }
-
-    private duplicateIndex(idx: FlatpackIndex): FlatpackIndex {
-        const element = this.data[idx];
-        const duplicate = this.data.push(element) - 1;
-        return duplicate;
     }
 
     private stringToIdx(value: string): FlatpackIndex {
@@ -112,7 +107,7 @@ export class CompactStorageV2 extends CompactStorage {
             return found;
         }
 
-        const idx = this.data.push(0) - 1;
+        const idx = this.data.reserve();
         this.#cacheValue(value, idx);
         const keys = [...value];
 
@@ -123,19 +118,19 @@ export class CompactStorageV2 extends CompactStorage {
 
     private createUniqueKeys(keys: Serializable[], cacheValue = true): FlatpackIndex {
         let k = this.arrToIdx(keys, cacheValue);
-        const elementKeys = this.data[k] as ArrayElement;
+        const elementKeys = this.data.get(k) as ArrayElement;
         const uniqueKeys = new Set(elementKeys.slice(1));
         if (uniqueKeys.size !== keys.length) {
             // one or more of the keys got deduped. We need to duplicate it.
             uniqueKeys.clear();
             const indexes = elementKeys.slice(1).map((idx) => {
                 if (uniqueKeys.has(idx)) {
-                    return this.duplicateIndex(idx);
+                    return this.data.duplicateIndex(idx);
                 }
                 uniqueKeys.add(idx);
                 return idx;
             });
-            k = this.createArrayElementFromIndexValues(this.data.length, indexes);
+            k = this.createArrayElementFromIndexValues(this.data.reserve(), indexes);
         }
         return k;
     }
@@ -146,7 +141,7 @@ export class CompactStorageV2 extends CompactStorage {
             return found;
         }
 
-        const idx = this.data.push(0) - 1;
+        const idx = this.data.reserve();
         this.#cacheValue(value, idx);
         const entries = [...value.entries()];
 
@@ -169,7 +164,7 @@ export class CompactStorageV2 extends CompactStorage {
             return found;
         }
 
-        const idx = this.data.push(0) - 1;
+        const idx = this.data.reserve();
         this.#cacheValue(value, idx);
         const element: RegExpElement = [
             ElementType.RegExp,
@@ -185,7 +180,7 @@ export class CompactStorageV2 extends CompactStorage {
             return found;
         }
 
-        const idx = this.data.push(0) - 1;
+        const idx = this.data.reserve();
         this.#cacheValue(value, idx);
         const element: DateElement = [ElementType.Date, value.getTime()];
         return this.storeElement(value, idx, element);
@@ -197,7 +192,7 @@ export class CompactStorageV2 extends CompactStorage {
             return found;
         }
 
-        const idx = this.data.push(0) - 1;
+        const idx = this.data.reserve();
         this.#cacheValue(value, idx);
         const element: BigIntElement = [
             ElementType.BigInt,
@@ -217,7 +212,7 @@ export class CompactStorageV2 extends CompactStorage {
         }
 
         if (isObjectWrapper(value)) {
-            const idx = this.data.push({}) - 1;
+            const idx = this.data.add({});
             this.#cacheValue(value, idx);
             const element: ObjectElement = [ElementType.Object, 0, this.valueToIdx(value.valueOf())];
             return this.storeElement(value, idx, element);
@@ -229,12 +224,12 @@ export class CompactStorageV2 extends CompactStorage {
             if (this.emptyObjIdx) {
                 return this.emptyObjIdx;
             }
-            const idx = this.data.push({}) - 1;
+            const idx = this.data.add({});
             this.emptyObjIdx = idx;
             return idx;
         }
 
-        const idx = this.data.push(0) - 1;
+        const idx = this.data.reserve();
         this.#cacheValue(value, idx);
 
         if (this.sortKeys) {
@@ -258,20 +253,20 @@ export class CompactStorageV2 extends CompactStorage {
     private storeElement(
         value: Serializable | ObjectWrapper,
         idx: FlatpackIndex,
-        element: CachedElements,
+        element: CacheableElements,
     ): FlatpackIndex {
         const useIdx = this.dedupe ? this.cacheElement(idx, element) : idx;
 
-        if (useIdx !== idx && idx === this.data.length - 1) {
-            this.data.length = idx;
+        if (useIdx !== idx) {
+            this.data.delete(idx);
             return this.#cacheValue(value, useIdx);
         }
 
-        this.data[idx] = element;
+        this.data.set(idx, element);
         return idx;
     }
 
-    private cacheElement(elemIdx: FlatpackIndex, element: CachedElements): FlatpackIndex {
+    private cacheElement(elemIdx: FlatpackIndex, element: CacheableElements): FlatpackIndex {
         const foundIdx = this.cachedElementsTrie.get(element);
         if (foundIdx === undefined) {
             this.cachedElementsTrie.set(element, elemIdx);
@@ -283,7 +278,7 @@ export class CompactStorageV2 extends CompactStorage {
             }
             return elemIdx;
         }
-        const foundElement = this.data[foundIdx];
+        const foundElement = this.data.get(foundIdx);
         if (!this.referencedFromCache.isReferenced(foundIdx) && !isArrayEqual(foundElement, element)) {
             this.cachedElementsTrie.set(element, elemIdx);
             return elemIdx;
@@ -305,7 +300,7 @@ export class CompactStorageV2 extends CompactStorage {
             found.push(idx);
             return idx;
         }
-        const foundIdx = found.find((entry) => isArrayEqual(this.data[entry], element));
+        const foundIdx = found.find((entryIdx) => isArrayEqual(this.data.get(entryIdx), element));
         if (foundIdx) {
             return foundIdx;
         }
@@ -318,12 +313,12 @@ export class CompactStorageV2 extends CompactStorage {
         const useIdx = this.dedupe ? this.stashArray(idx, element) : idx;
 
         if (useIdx !== idx) {
-            assert(this.data.length === idx + 1, `Expected ${idx + 1} but got ${this.data.length}`);
-            this.data.length = idx;
+            this.data.delete(idx);
+            this.data.markUsed(useIdx);
             return useIdx;
         }
 
-        this.data[idx] = element;
+        this.data.set(idx, element);
 
         return idx;
     }
@@ -340,7 +335,7 @@ export class CompactStorageV2 extends CompactStorage {
             return found;
         }
 
-        const idx = this.data.push(0) - 1;
+        const idx = this.data.reserve();
         this.cache.set(value, idx);
 
         const useIdx = this.createArrayElementFromIndexValues(
@@ -354,7 +349,7 @@ export class CompactStorageV2 extends CompactStorage {
         return useIdx;
     }
 
-    private valueToIdx(value: Serializable, _useIdx?: FlatpackIndex | undefined): FlatpackIndex {
+    private valueToIdx(value: Serializable): FlatpackIndex {
         if (value === null) {
             return this.primitiveToIdx(value);
         }
@@ -381,6 +376,12 @@ export class CompactStorageV2 extends CompactStorage {
         return this.primitiveToIdx(value);
     }
 
+    #setElement(value: FlattenedElement): FlatpackIndex {
+        const idx = this.data.add(value);
+        this.#cacheValue(value, idx);
+        return idx;
+    }
+
     /**
      * Reset things in a way that allows for reuse.
      */
@@ -390,7 +391,9 @@ export class CompactStorageV2 extends CompactStorage {
         this.cachedArrays.clear();
         this.cachedElementsTrie.clear();
         this.referencedFromCache.clear();
-        this.data = [dataHeaderV2_0, [ElementType.StringTable]];
+        this.used.clear();
+        this.data = new FlatpackData([dataHeaderV2_0, this.stringTable.build()]);
+        this.stringTable = this.data.stringTable;
     }
 
     useFlatpackMetaData(data: UnpackMetaData | undefined): void {
@@ -399,12 +402,9 @@ export class CompactStorageV2 extends CompactStorage {
         }
         this.softReset();
         this.unpackMetaData = data;
-        const flatpack: Flatpacked = [...data.flatpack];
-        const st = flatpack[1];
-        assert(isStringTableElement(st), 'Expected a string table element in the flatpack meta data');
-        this.stringTable = new StringTableBuilder(st);
-        this.data = flatpack;
-        this.initFromFlatpackData(flatpack);
+        this.data = new FlatpackData(data.flatpack);
+        this.stringTable = this.data.stringTable;
+        this.initFromFlatpackData(this.data.flatpack);
         // Clear the referenced indexes since we don't want to treat them as referenced when we re-pack the data.
         this.referencedFromCache.clear();
         this.rootIndex = data.rootIndex;
@@ -442,8 +442,8 @@ export class CompactStorageV2 extends CompactStorage {
 
     #getFromCacheAndReference(value: unknown): FlatpackIndex | undefined {
         const found = this.cache.get(value);
-        if (!found || this.data[found] !== value) return undefined;
         if (found !== undefined) {
+            this.data.markUsed(found);
             this.#addReference(found);
         }
         return found;
@@ -457,18 +457,16 @@ export class CompactStorageV2 extends CompactStorage {
         this.softReset();
         const annotation = extractUnpackedMetaData(json);
         this.useFlatpackMetaData(annotation?.meta ?? this.unpackMetaData);
-        const lastIdx = this.valueToIdx(json, this.rootIndex);
+        const lastIdx = this.valueToIdx(json);
         if (lastIdx < 0) {
-            this.data.push([ElementType.String, lastIdx]);
+            this.data.add([ElementType.String, lastIdx]);
         }
-        if (this.stringTable) {
-            this.data[1] = this.stringTable.build();
-        }
-        return this.options?.optimize ? optimizeFlatpacked(this.data) : this.data;
+        const data = this.data.finalize();
+        return this.options?.optimize ? optimizeFlatpacked(data) : data;
     }
 }
 
-type CachedElements = ObjectElement | SetElement | MapElement | RegExpElement | DateElement | BigIntElement;
+type CacheableElements = ObjectElement | SetElement | MapElement | RegExpElement | DateElement | BigIntElement;
 
 function isArrayEqual(a: readonly unknown[] | unknown, b: readonly unknown[]): boolean {
     if (!Array.isArray(a) || !Array.isArray(b)) return false;
@@ -495,4 +493,104 @@ function isObjectWrapper(value: unknown): value is ObjectWrapper {
         typeof (value as ObjectWrapper).valueOf === 'function' &&
         value.valueOf() !== value
     );
+}
+
+const emptyElement: EmptyElement = [] as const;
+
+export class FlatpackData {
+    flatpack: Flatpacked;
+    stringTable: StringTableBuilder;
+    rootIndex: FlatpackIndex;
+    used: Set<FlatpackIndex> = new Set();
+    available: FlatpackIndex[] = [];
+
+    constructor(flatpack: Flatpacked | undefined) {
+        this.flatpack = flatpack ? [...flatpack] : [dataHeaderV2_0, [ElementType.StringTable]];
+        assert(
+            isStringTableElement(this.flatpack[1]),
+            'Expected a string table element at index 1 of the flatpack data',
+        );
+        this.stringTable = new StringTableBuilder(this.flatpack[1] as StringTableElement);
+        this.rootIndex = getFlatpackedRootIdx(this.flatpack);
+        this.#calcAvailableIndexes();
+    }
+
+    add(element: FlattenedElement): FlatpackIndex {
+        const idx = this.available.pop() ?? this.flatpack.length;
+        this.flatpack[idx] = element;
+        this.used.add(idx);
+        return idx;
+    }
+
+    reserve(): FlatpackIndex {
+        return this.add(emptyElement);
+    }
+
+    set(idx: FlatpackIndex, element: FlattenedElement): void {
+        this.used.add(idx);
+        this.flatpack[idx] = element;
+    }
+
+    get(idx: FlatpackIndex): FlattenedElement {
+        return this.flatpack[idx];
+    }
+
+    markUsed(idx: FlatpackIndex): void {
+        this.used.add(idx);
+    }
+
+    duplicateIndex(idx: FlatpackIndex): FlatpackIndex {
+        const element = this.get(idx);
+        return this.add(element);
+    }
+
+    delete(idx: FlatpackIndex): void {
+        this.used.delete(idx);
+        this.available.push(idx);
+        this.flatpack[idx] = emptyElement;
+    }
+
+    /**
+     * Calculate available indexes based on the current flatpack data.
+     * Any empty array is used as a placeholder for an available flatpack element.
+     */
+    #calcAvailableIndexes(): void {
+        const stop = this.rootIndex;
+        const data = this.flatpack;
+        for (let i = data.length - 1; i >= stop; i--) {
+            const elem = data[i];
+            if (elem === undefined || (Array.isArray(elem) && !elem.length)) {
+                this.available.push(i);
+                this.used.delete(i);
+                continue;
+            }
+        }
+    }
+
+    markUnusedAsAvailable(): void {
+        const available = new Set(this.available);
+        const stop = this.rootIndex;
+        const data = this.flatpack;
+        const empty = emptyElement;
+
+        for (let i = data.length - 1; i > stop; i--) {
+            if (this.used.has(i)) continue;
+            data[i] = empty;
+            available.add(i);
+        }
+
+        this.available = [...available];
+    }
+
+    finalize(): Flatpacked {
+        this.flatpack[1] = this.stringTable.build();
+        this.#calcAvailableIndexes();
+        this.markUnusedAsAvailable();
+        let idx = this.flatpack.length - 1;
+        while (idx >= this.rootIndex && !this.used.has(idx)) {
+            --idx;
+        }
+        this.flatpack.length = idx + 1;
+        return this.flatpack;
+    }
 }

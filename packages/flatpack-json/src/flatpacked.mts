@@ -35,7 +35,8 @@ export function getIndexesReferencedByElement(elem: FlattenedElement): FlatpackI
                 return [element[1]];
             }
         }
-        assert(false, 'Invalid element type');
+        if (!element.length) return [];
+        assert(false, 'Invalid element type.');
     }
 
     if (!elem) {

@@ -133,6 +133,7 @@ function patchIndexes(elem: FlattenedElement, indexMap: Map<number, number>): Fl
                 return [element[0], mapIndex(element[1])];
             }
         }
+        if (!element.length) return [];
         assert(false, 'Invalid element type');
     }
 

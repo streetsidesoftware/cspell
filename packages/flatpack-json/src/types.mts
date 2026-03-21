@@ -100,12 +100,14 @@ export type BigIntElement = readonly [type: ElementType.BigInt, value: FlatpackI
  */
 export type ArrayElement = readonly [type: ElementType.Array, ...FlatpackIndex[]];
 
+export type EmptyElement = readonly [];
+
 export type StringTableEntry = string | number[];
 
 export type StringTableElement = readonly [type: ElementType.StringTable, ...StringTableEntry[]];
 
 export type FlattenedElement = Readonly<
-    PrimitiveElement | ObjectBasedElements | ArrayBasedElements | StringTableElement
+    PrimitiveElement | ObjectBasedElements | ArrayBasedElements | StringTableElement | EmptyElement
 >;
 
 type Header = string;
