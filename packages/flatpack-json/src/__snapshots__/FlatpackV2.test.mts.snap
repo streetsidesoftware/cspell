@@ -10,7 +10,7 @@ exports[`Flatpack > Flatpack diff 'string', 'string + more' 1`] = `
  "Flatpack JSON v2",
 -[128,"string"],
 -[2,-1]
-+[128,"string","string + more"],
++[128,[],"string + more"],
 +[2,-2]
  ]
 "
@@ -48,8 +48,9 @@ exports[`Flatpack > Flatpack diff [ 'a', 'b', 'a', 'b', 'c' ], [ 'a' ] 1`] = `
 @@ -1,5 +1,5 @@
  [
  "Flatpack JSON v2",
- [128,"a","b","c"],
+-[128,"a","b","c"],
 -[0,-1,-2,-1,-2,-3]
++[128,"a",[],[]],
 +[0,-1]
  ]
 "
@@ -63,8 +64,9 @@ exports[`Flatpack > Flatpack diff [ 'api/api.d.ts', 'dist/esm/Cache/cspell.cache
 @@ -1,5 +1,5 @@
  [
  "Flatpack JSON v2",
- [128,"api/api.d.ts","dist/esm/Cache/cspell.cache.d.ts","dist/esm/Cache/cspell.cache.test.d.ts","dist/esm/Cache/index.d.ts","dist/esm/Cache/index.test.d.ts","dist/esm/Document/Document.d.ts","dist/esm/Document/index.d.ts","dist/esm/Document/isBinaryDoc.d.ts","dist/esm/Document/isBinaryDoc.test.d.ts","dist/esm/Document/normalizeLanguageIds.d.ts","dist/esm/Document/resolveDocument.d.ts","dist/esm/FeatureFlags/FeatureFalgs.test.d.ts","dist/esm/FeatureFlags/FeatureFlags.d.ts","dist/esm/FeatureFlags/index.d.ts","dist/esm/LanguageIds.d.ts","dist/esm/LanguageIds.test.d.ts","dist/esm/Models/CSpellSettingsInternalDef.d.ts","dist/esm/Models/PatternRegExp.d.ts","dist/esm/Models/PatternRegExp.test.d.ts","dist/esm/Models/Suggestion.d.ts"],
+-[128,"api/api.d.ts","dist/esm/Cache/cspell.cache.d.ts","dist/esm/Cache/cspell.cache.test.d.ts","dist/esm/Cache/index.d.ts","dist/esm/Cache/index.test.d.ts","dist/esm/Document/Document.d.ts","dist/esm/Document/index.d.ts","dist/esm/Document/isBinaryDoc.d.ts","dist/esm/Document/isBinaryDoc.test.d.ts","dist/esm/Document/normalizeLanguageIds.d.ts","dist/esm/Document/resolveDocument.d.ts","dist/esm/FeatureFlags/FeatureFalgs.test.d.ts","dist/esm/FeatureFlags/FeatureFlags.d.ts","dist/esm/FeatureFlags/index.d.ts","dist/esm/LanguageIds.d.ts","dist/esm/LanguageIds.test.d.ts","dist/esm/Models/CSpellSettingsInternalDef.d.ts","dist/esm/Models/PatternRegExp.d.ts","dist/esm/Models/PatternRegExp.test.d.ts","dist/esm/Models/Suggestion.d.ts"],
 -[0,-1,-2,-3,-4,-5,-6,-7,-8,-9,-10,-11,-12,-13,-14,-15,-16,-17,-18,-19,-20]
++[128,"api/api.d.ts","dist/esm/Cache/cspell.cache.d.ts","dist/esm/Cache/cspell.cache.test.d.ts","dist/esm/Cache/index.d.ts","dist/esm/Cache/index.test.d.ts","dist/esm/Document/Document.d.ts","dist/esm/Document/index.d.ts","dist/esm/Document/isBinaryDoc.d.ts","dist/esm/Document/isBinaryDoc.test.d.ts","dist/esm/Document/normalizeLanguageIds.d.ts",[],[],[],[],[],"dist/esm/LanguageIds.test.d.ts","dist/esm/Models/CSpellSettingsInternalDef.d.ts","dist/esm/Models/PatternRegExp.d.ts","dist/esm/Models/PatternRegExp.test.d.ts","dist/esm/Models/Suggestion.d.ts"],
 +[0,-1,-2,-3,-4,-5,-6,-7,-8,-9,-10,-16,-17,-18,-19,-20]
  ]
 "

@@ -179,7 +179,7 @@ export class StringTableBuilder {
         }
     }
 
-    clearUnusedEntries(): void {
+    clearUnusedEntries(): this {
         for (let i = 1; i < this.#entries.length; i++) {
             const entry = this.#entries[i];
             if (entry.refCount > 0) continue;
@@ -189,12 +189,14 @@ export class StringTableBuilder {
             this.#entries[i] = { value: '', entry: [], refCount: 0 };
             this.#availableIndexes.push(i);
         }
+        return this;
     }
 
-    tokenizeAllEntries(): void {
+    tokenizeAllEntries(): this {
         for (const entry of this.#entries) {
             this.#splitEntryIntoTokens(entry);
         }
+        return this;
     }
 
     /**

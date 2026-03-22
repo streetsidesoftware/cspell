@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 
 import { findMatchingFileTypes } from '@cspell/filetypes';
+import { createPatch } from 'diff';
 import { describe, expect, test } from 'vitest';
 
 import { generateUnpackMetaData } from './flatpacked.mjs';
@@ -207,17 +208,38 @@ describe('v2 update value', () => {
 
     test('object reuse', () => {
         interface TT {
-            a: { b: number; c?: { b: number } };
-            c: { b: number };
+            [key: string]: Serializable;
         }
-        const data0 = { a: { b: 1 }, c: { b: 1 } };
+        const data0: TT = { a: { b: 1 }, c: { b: 1 } };
         const flat0 = toJSON(data0, optionsOptimize);
+        expect(stringifyFlatpacked(flat0)).toMatchSnapshot('flat0');
         const data1 = fromJSON<TT>(flat0);
         expect(data1).toEqual(data0);
+
+        // Update data1
         data1.a = { b: 2 };
-        const flat1 = toJSON(data1 as unknown as Serializable, optionsOptimize);
+        const flat1 = toJSON(data1, options);
+        expect(stringifyFlatpacked(flat1)).toMatchSnapshot('flat1');
         const data2 = fromJSON<TT>(flat1);
         expect(data2).toEqual({ a: { b: 2 }, c: { b: 1 } });
+
+        // Update data2
+        data2.b = { b: 1 };
+        data2.d = data2.b;
+
+        const flat2 = toJSON(data2, options);
+        expect(stringifyFlatpacked(flat2)).toMatchSnapshot('flat2');
+        const data3 = fromJSON<TT>(flat2);
+        expect(data3).toEqual({ a: { b: 2 }, b: { b: 1 }, c: { b: 1 }, d: { b: 1 } });
+
+        // Test diffs
+        expect(createPatch('data.json', stringifyFlatpacked(flat0), stringifyFlatpacked(flat1))).toMatchSnapshot(
+            'diff flat0 -> flat1',
+        );
+
+        expect(createPatch('data.json', stringifyFlatpacked(flat1), stringifyFlatpacked(flat2))).toMatchSnapshot(
+            'diff flat1 -> flat2',
+        );
     });
 });
 

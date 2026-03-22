@@ -601,7 +601,7 @@ export class FlatpackData {
     }
 
     finalize(): Flatpacked {
-        this.flatpack[1] = this.stringTable.build();
+        this.flatpack[1] = this.stringTable.clearUnusedEntries().build();
         this.#calcAvailableIndexes();
         this.markUnusedAsAvailable();
         let idx = this.flatpack.length - 1;
