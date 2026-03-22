@@ -38,6 +38,7 @@ export function normalizeOptions(options?: FlatpackOptions): Required<FlatpackOp
         dedupe,
         sortKeys,
         optimize: options?.optimize ?? false,
+        meta: options?.meta,
     };
     return result;
 }

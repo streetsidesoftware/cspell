@@ -1,6 +1,11 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, test } from 'vitest';
 
-import { getFlatpackedRoot, getFlatpackedRootIdx, getIndexesReferencedByElement } from './flatpacked.mjs';
+import {
+    extractObjectKeyAndValueIndexes,
+    getFlatpackedRoot,
+    getFlatpackedRootIdx,
+    getIndexesReferencedByElement,
+} from './flatpacked.mjs';
 import {
     type ArrayBasedElements,
     type ArrayElement,
@@ -154,5 +159,27 @@ describe('getFlatpackedRoot', () => {
         const stringTableElement: StringTableElement = [ElementType.StringTable, 'first'];
         const flatpack: Flatpacked = [dataHeaderV2_0, stringTableElement, 'root'];
         expect(getFlatpackedRoot(flatpack)).toBe('root');
+    });
+});
+
+describe('extractObjectKeyAndValueIndexes', () => {
+    it('should return key and value indexes for Object element', () => {
+        const elem: ObjectElement = [ElementType.Object, 5, 10];
+        expect(extractObjectKeyAndValueIndexes(elem)).toEqual([5, 10]);
+    });
+
+    it('should return empty array for non-Object element', () => {
+        const elem: ArrayElement = [ElementType.Array, 0, 1, 2];
+        expect(extractObjectKeyAndValueIndexes(elem)).toEqual([]);
+    });
+
+    test.each`
+        element
+        ${undefined}
+        ${null}
+        ${[ElementType.Array, 0, 1, 2]}
+        ${[ElementType.String, 0, 1, 2]}
+    `('extractObjectKeyAndValueIndexes on non-object elements $element', ({ element }) => {
+        expect(extractObjectKeyAndValueIndexes(element)).toEqual([]);
     });
 });

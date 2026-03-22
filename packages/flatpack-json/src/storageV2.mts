@@ -1,7 +1,7 @@
 import assert from 'node:assert';
 
 import { CompactStorage } from './CompactStorage.mjs';
-import { getFlatpackedRootIdx, getIndexesReferencedByElement } from './flatpacked.mjs';
+import { extractObjectKeyAndValueIndexes, getFlatpackedRootIdx, getIndexesReferencedByElement } from './flatpacked.mjs';
 import { optimizeFlatpacked } from './optimizeFlatpacked.mjs';
 import { RefCounter } from './RefCounter.mjs';
 import { StringTableBuilder } from './stringTable.mjs';
@@ -70,8 +70,12 @@ export class CompactStorageV2 extends CompactStorage {
         super(options);
         this.dedupe = options?.dedupe ?? true;
         this.sortKeys = options?.sortKeys || this.dedupe;
+        this.unpackMetaData = undefined;
         this.data = new FlatpackData(undefined);
         this.stringTable = this.data.stringTable;
+        if (options?.meta) {
+            this.useFlatpackMetaData(options.meta);
+        }
     }
 
     private primitiveToIdx(value: Primitive): FlatpackIndex {
@@ -223,17 +227,31 @@ export class CompactStorageV2 extends CompactStorage {
             return idx;
         }
 
-        const idx = this.#reserverForValue(value);
-
         if (this.sortKeys) {
             entries.sort(([a], [b]) => compare(a, b));
         }
 
-        const k = this.arrToIdx(entries.map(([key]) => key));
-        const v = this.arrToIdx(entries.map(([, value]) => value));
-
+        const idx = this.#reserverForValue(value);
+        const k = this.objectKeysOrValuesToIdx(entries.map(([key]) => key));
+        const v = this.objectKeysOrValuesToIdx(entries.map(([, value]) => value));
         const element: ObjectElement = [ElementType.Object, k, v];
         return this.storeElement(value, idx, element);
+    }
+
+    private objectKeysOrValuesToIdx(keys: Serializable[]): FlatpackIndex {
+        const element: ArrayElement = [ElementType.Array, ...this.mapValuesToIndexes(keys)];
+        const idx = this.data.reserve();
+        const useIdx = this.cacheElement(idx, element);
+        if (useIdx !== idx) {
+            this.data.delete(idx);
+            return useIdx;
+        }
+        this.data.set(idx, element);
+        return useIdx;
+    }
+
+    private mapValuesToIndexes(values: Serializable[]): FlatpackIndex[] {
+        return values.map((value) => this.valueToIdx(value));
     }
 
     /**
@@ -369,11 +387,6 @@ export class CompactStorageV2 extends CompactStorage {
     }
 
     #reserverForValue(value: Serializable, cacheValue = true): FlatpackIndex {
-        // const annotation = extractUnpackedMetaData(value);
-        // const possibleIdx = annotation?.index;
-        // if (possibleIdx && annotation?.meta === this.unpackMetaData && !this.data.isUsed(possibleIdx)) {
-        //     return possibleIdx;
-        // }
         const idx = this.data.reserve();
         if (cacheValue) {
             this.cache.set(value, idx);
@@ -410,7 +423,7 @@ export class CompactStorageV2 extends CompactStorage {
         this.unpackMetaData = data;
         this.data = new FlatpackData(data.flatpack);
         this.stringTable = this.data.stringTable;
-        this.initFromFlatpackData(this.data.flatpack);
+        this.initFromFlatpackData();
         // Clear the referenced indexes since we don't want to treat them as referenced when we re-pack the data.
         this.referencedFromCache.clear();
     }
@@ -418,14 +431,26 @@ export class CompactStorageV2 extends CompactStorage {
     /**
      * Cache the primitives from the unpacked data to improve performance when re-packing the same data.
      */
-    private initFromFlatpackData(data: Flatpacked): void {
+    private initFromFlatpackData(): void {
+        const data = this.data.flatpack;
         const rootIndex = getFlatpackedRootIdx(data);
+        const idxOfObjectKeysAndValues = new Set<FlatpackIndex>();
+        for (let i = rootIndex; i < data.length; ++i) {
+            const objKeysAndValues = extractObjectKeyAndValueIndexes(data[i]);
+            for (const idx of objKeysAndValues) {
+                idxOfObjectKeysAndValues.add(idx);
+            }
+        }
         for (let i = rootIndex + 1; i < data.length; ++i) {
-            this.useFlattenedElement(data[i], i);
+            this.useFlattenedElement(data[i], i, idxOfObjectKeysAndValues);
         }
     }
 
-    private useFlattenedElement(element: FlattenedElement, index: number): void {
+    private useFlattenedElement(
+        element: FlattenedElement,
+        index: number,
+        idxOfObjectKeysAndValues: Set<FlatpackIndex>,
+    ): void {
         // Primitives and null are cached directly.
         if (!element || typeof element !== 'object') {
             this.cache.set(element, index);
@@ -433,7 +458,7 @@ export class CompactStorageV2 extends CompactStorage {
         }
         if (!Array.isArray(element)) return;
         // Arrays are cached based on their content, so we need to handle them separately.
-        if (element[0] === ElementType.Array) {
+        if (!idxOfObjectKeysAndValues.has(index) && element[0] === ElementType.Array) {
             this.stashArray(index, element as ArrayElement);
             return;
         }
@@ -462,7 +487,7 @@ export class CompactStorageV2 extends CompactStorage {
     toJSON<V extends Serializable>(json: V): Flatpacked {
         this.softReset();
         const annotation = extractUnpackedMetaData(json);
-        this.useFlatpackMetaData(annotation?.meta ?? this.unpackMetaData);
+        this.useFlatpackMetaData(this.unpackMetaData ?? annotation?.meta);
         const lastIdx = this.valueToIdx(json);
         if (lastIdx < 0) {
             this.data.add([ElementType.String, lastIdx]);
@@ -472,7 +497,14 @@ export class CompactStorageV2 extends CompactStorage {
     }
 }
 
-type CacheableElements = ObjectElement | SetElement | MapElement | RegExpElement | DateElement | BigIntElement;
+type CacheableElements =
+    | ArrayElement // only object keys and object values can be cached using cacheElement
+    | ObjectElement
+    | SetElement
+    | MapElement
+    | RegExpElement
+    | DateElement
+    | BigIntElement;
 
 function isArrayEqual(a: readonly unknown[] | unknown, b: readonly unknown[]): boolean {
     if (!Array.isArray(a) || !Array.isArray(b)) return false;

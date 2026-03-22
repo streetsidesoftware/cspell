@@ -109,6 +109,7 @@ describe('dehydrate', async () => {
         ${{ values: ['apple', 'banana', 'pineapple'], set: new Set(['apple', 'banana', 'pineapple']) }}     | ${undefined}
         ${{ values: ['', 'apple', 'banana', 'pineapple'], set: new Set(['apple', 'banana', 'pineapple']) }} | ${undefined}
         ${[{ a: 'a', b: 'b' }, { a: 'c', b: 'd' }, { b: 'b', a: 'a' }, ['a', 'b'], ['c', 'd']]}             | ${undefined}
+        ${[{ a: 'a', b: 'b' }, { a: 'a', b: 'b' }, { a: 'a', b: 'b' }, { a: 'a', b: 'b' }]}                 | ${{}}
         ${[{ a: 'a', b: 'b' }, { a: 'a', b: 'b' }, { a: 'a', b: 'b' }, { a: 'a', b: 'b' }]}                 | ${{ dedupe: false }}
         ${sampleNestedData()}                                                                               | ${undefined}
         ${sampleRepeatedStrings()}                                                                          | ${undefined}

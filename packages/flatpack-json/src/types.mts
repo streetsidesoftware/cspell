@@ -138,6 +138,11 @@ export interface FlatpackOptions {
      * The format of the output. If not specified, the latest format will be used.
      */
     format?: 'V1' | 'V2';
+
+    /**
+     * Meta data to use when packing a value. This is used mainly to minimize the difference between the output of two similar values.
+     */
+    meta?: UnpackMetaData | undefined;
 }
 
 /**
