@@ -31,7 +31,7 @@ import type {
 } from './types.mjs';
 import { ElementType, supportedHeaders, symbolFlatpackAnnotation } from './types.mjs';
 
-export function fromJSON(data: Flatpacked): Unpacked {
+export function fromJSON<T = Unpacked>(data: Flatpacked): T {
     const [header] = data;
     let stringTable: StringTable | undefined;
 
@@ -53,7 +53,7 @@ export function fromJSON(data: Flatpacked): Unpacked {
         rootIndex: getFlatpackedRootIdx(data),
     };
 
-    return idxToValue(1);
+    return idxToValue(1) as T;
 
     function cacheValue(idx: number, value: RawUnpacked): RawUnpacked {
         assert(!cache.has(idx), `Index ${idx} already exists in cache`);

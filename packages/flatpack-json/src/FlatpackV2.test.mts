@@ -36,6 +36,10 @@ describe('Flatpack', async () => {
         expect(roundTripFlatpack(data)).toEqual(data);
     });
 
+    test('empty object reuse', () => {
+        expect(roundTripFlatpack({}, { dedupe: true })).toEqual({});
+    });
+
     const biMaxSafe = BigInt(Number.MAX_SAFE_INTEGER);
 
     test.each`

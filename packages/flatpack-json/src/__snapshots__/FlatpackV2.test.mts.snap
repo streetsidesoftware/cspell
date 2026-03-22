@@ -1,10 +1,202 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`Flatpack > Flatpack diff 'string', 'string + more' 1`] = `
+"Index: data
+===================================================================
+--- data
++++ data
+@@ -1,5 +1,5 @@
+ [
+ "Flatpack JSON v2",
+-[128,"string"],
+-[2,-1]
++[128,"string","string + more"],
++[2,-2]
+ ]
+"
+`;
+
 exports[`Flatpack > Flatpack diff 'string', 'string' 1`] = `
 "Index: data
 ===================================================================
 --- data
 +++ data
+"
+`;
+
+exports[`Flatpack > Flatpack diff [ 'a', 'b', 'a', 'b' ], [ 'a', 'b', 'a', 'b', 'c' ] 1`] = `
+"Index: data
+===================================================================
+--- data
++++ data
+@@ -1,5 +1,5 @@
+ [
+ "Flatpack JSON v2",
+-[128,"a","b"],
+-[0,-1,-2,-1,-2]
++[128,"a","b","c"],
++[0,-1,-2,-1,-2,-3]
+ ]
+"
+`;
+
+exports[`Flatpack > Flatpack diff [ 'a', 'b', 'a', 'b', 'c' ], [ 'a' ] 1`] = `
+"Index: data
+===================================================================
+--- data
++++ data
+@@ -1,5 +1,5 @@
+ [
+ "Flatpack JSON v2",
+ [128,"a","b","c"],
+-[0,-1,-2,-1,-2,-3]
++[0,-1]
+ ]
+"
+`;
+
+exports[`Flatpack > Flatpack diff [ 'api/api.d.ts', 'dist/esm/Cache/cspell.cache.d.ts', …(18) ], [ 'api/api.d.ts', 'dist/esm/Cache/cspell.cache.d.ts', …(13) ] 1`] = `
+"Index: data
+===================================================================
+--- data
++++ data
+@@ -1,5 +1,5 @@
+ [
+ "Flatpack JSON v2",
+ [128,"api/api.d.ts","dist/esm/Cache/cspell.cache.d.ts","dist/esm/Cache/cspell.cache.test.d.ts","dist/esm/Cache/index.d.ts","dist/esm/Cache/index.test.d.ts","dist/esm/Document/Document.d.ts","dist/esm/Document/index.d.ts","dist/esm/Document/isBinaryDoc.d.ts","dist/esm/Document/isBinaryDoc.test.d.ts","dist/esm/Document/normalizeLanguageIds.d.ts","dist/esm/Document/resolveDocument.d.ts","dist/esm/FeatureFlags/FeatureFalgs.test.d.ts","dist/esm/FeatureFlags/FeatureFlags.d.ts","dist/esm/FeatureFlags/index.d.ts","dist/esm/LanguageIds.d.ts","dist/esm/LanguageIds.test.d.ts","dist/esm/Models/CSpellSettingsInternalDef.d.ts","dist/esm/Models/PatternRegExp.d.ts","dist/esm/Models/PatternRegExp.test.d.ts","dist/esm/Models/Suggestion.d.ts"],
+-[0,-1,-2,-3,-4,-5,-6,-7,-8,-9,-10,-11,-12,-13,-14,-15,-16,-17,-18,-19,-20]
++[0,-1,-2,-3,-4,-5,-6,-7,-8,-9,-10,-16,-17,-18,-19,-20]
+ ]
+"
+`;
+
+exports[`Flatpack > Flatpack diff [ 'api/api.d.ts', 'dist/esm/Cache/cspell.cache.d.ts', …(18) ], [ 'api/api.d.ts', 'dist/esm/Cache/cspell.cache.d.ts', …(18) ] 1`] = `
+"Index: data
+===================================================================
+--- data
++++ data
+@@ -1,5 +1,5 @@
+ [
+ "Flatpack JSON v2",
+ [128,"api/api.d.ts","dist/esm/Cache/cspell.cache.d.ts","dist/esm/Cache/cspell.cache.test.d.ts","dist/esm/Cache/index.d.ts","dist/esm/Cache/index.test.d.ts","dist/esm/Document/Document.d.ts","dist/esm/Document/index.d.ts","dist/esm/Document/isBinaryDoc.d.ts","dist/esm/Document/isBinaryDoc.test.d.ts","dist/esm/Document/normalizeLanguageIds.d.ts","dist/esm/Document/resolveDocument.d.ts","dist/esm/FeatureFlags/FeatureFalgs.test.d.ts","dist/esm/FeatureFlags/FeatureFlags.d.ts","dist/esm/FeatureFlags/index.d.ts","dist/esm/LanguageIds.d.ts","dist/esm/LanguageIds.test.d.ts","dist/esm/Models/CSpellSettingsInternalDef.d.ts","dist/esm/Models/PatternRegExp.d.ts","dist/esm/Models/PatternRegExp.test.d.ts","dist/esm/Models/Suggestion.d.ts"],
+-[0,-1,-2,-3,-4,-5,-6,-7,-8,-9,-10,-11,-12,-13,-14,-15,-16,-17,-18,-19,-20]
++[0,-1,-2,-3,-4,-5,-6,-7,-8,-9,-10,-16,-17,-18,-19,-20,-11,-12,-13,-14,-15]
+ ]
+"
+`;
+
+exports[`Flatpack > Flatpack diff { a: [ 1 ] }, { a: [ 1, 2, 3 ] } 1`] = `
+"Index: data
+===================================================================
+--- data
++++ data
+@@ -1,9 +1,12 @@
+ [
+ "Flatpack JSON v2",
+ [128,"a"],
+-[1,3,4],
++[1,3,7],
+ [0,-1],
+-[0,5],
+-[0,6],
+-1
++[],[],
++1,
++[0,8],
++[0,6,9,10],
++2,
++3
+ ]
+"
+`;
+
+exports[`Flatpack > Flatpack diff { a: { a: 'a', b: 42 } }, { a: { a: 'a', b: 42 }, b: 42 } 1`] = `
+"Index: data
+===================================================================
+--- data
++++ data
+@@ -1,11 +1,11 @@
+ [
+ "Flatpack JSON v2",
+ [128,"a","b"],
+-[1,3,4],
+-[0,-1],
+-[0,5],
++[1,6,9],
++[],[],
+ [1,6,7],
+ [0,-1,-2],
+ [0,-1,8],
+-42
++42,
++[0,5,8]
+ ]
+"
+`;
+
+exports[`Flatpack > Flatpack diff { a: { b: 1 } }, { a: { b: 1 }, b: { a: 1 } } 1`] = `
+"Index: data
+===================================================================
+--- data
++++ data
+@@ -1,11 +1,14 @@
+ [
+ "Flatpack JSON v2",
+ [128,"a","b"],
+-[1,3,4],
++[1,9,10],
+ [0,-1],
+-[0,5],
++[],
+ [1,6,7],
+ [0,-2],
+ [0,8],
+-1
++1,
++[0,-1,-2],
++[0,5,11],
++[1,3,7]
+ ]
+"
+`;
+
+exports[`Flatpack > Flatpack diff { a: 1 }, { a: 1, b: 1 } 1`] = `
+"Index: data
+===================================================================
+--- data
++++ data
+@@ -1,8 +1,9 @@
+ [
+ "Flatpack JSON v2",
+-[128,"a"],
+-[1,3,4],
+-[0,-1],
+-[0,5],
+-1
++[128,"a","b"],
++[1,6,7],
++[],[],
++1,
++[0,-1,-2],
++[0,5,5]
+ ]
+"
+`;
+
+exports[`Flatpack > Flatpack diff {}, { a: 'a' } 1`] = `
+"Index: data
+===================================================================
+--- data
++++ data
+@@ -1,5 +1,6 @@
+ [
+ "Flatpack JSON v2",
+-[128],
+-{}
++[128,"a"],
++[1,3,3],
++[0,-1]
+ ]
 "
 `;
 

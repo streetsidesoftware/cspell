@@ -3,8 +3,11 @@ import fs from 'node:fs/promises';
 import { findMatchingFileTypes } from '@cspell/filetypes';
 import { describe, expect, test } from 'vitest';
 
-import { stringify, toJSON } from './storage.mjs';
+import { generateUnpackMetaData } from './flatpacked.mjs';
+import { normalizeOptions, stringify, toJSON } from './storage.mjs';
+import { CompactStorageV2 } from './storageV2.mjs';
 import { stringifyFlatpacked } from './stringify.mjs';
+import type { FlatpackOptions, Serializable } from './types.mjs';
 import { fromJSON } from './unpack.mjs';
 
 const urlFixtures = new URL('../fixtures/', import.meta.url);
@@ -184,6 +187,37 @@ describe('v1 to v2', async () => {
         await fs.writeFile(new URL('.npm-packages-info-v2.json', urlFixtures), jsonStr);
 
         expect(fromJSON(JSON.parse(jsonStr))).toEqual(data);
+    });
+});
+
+describe('v2 update value', () => {
+    const options = normalizeOptions({ format: 'V2', dedupe: true });
+    const optionsOptimize = normalizeOptions({ ...options, optimize: true });
+
+    test('empty object reuse', () => {
+        const value = {};
+        const options: FlatpackOptions = { format: 'V2', dedupe: true, optimize: true, sortKeys: true };
+        const storage = new CompactStorageV2(options);
+        const elements = storage.toJSON(value);
+        const meta = generateUnpackMetaData(elements);
+        storage.useFlatpackMetaData(meta);
+        const flat = storage.toJSON(value);
+        expect(flat).toEqual(elements);
+    });
+
+    test('object reuse', () => {
+        interface TT {
+            a: { b: number; c?: { b: number } };
+            c: { b: number };
+        }
+        const data0 = { a: { b: 1 }, c: { b: 1 } };
+        const flat0 = toJSON(data0, optionsOptimize);
+        const data1 = fromJSON<TT>(flat0);
+        expect(data1).toEqual(data0);
+        data1.a = { b: 2 };
+        const flat1 = toJSON(data1 as unknown as Serializable, optionsOptimize);
+        const data2 = fromJSON<TT>(flat1);
+        expect(data2).toEqual({ a: { b: 2 }, c: { b: 1 } });
     });
 });
 
