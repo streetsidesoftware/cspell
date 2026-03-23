@@ -10,6 +10,7 @@ import { CompactStorageV2 } from './storageV2.mjs';
 import { stringifyFlatpacked } from './stringify.mjs';
 import type { FlatpackOptions, Serializable } from './types.mjs';
 import { fromJSON } from './unpack.mjs';
+import { extractUnpackedMetaData } from './unpackedAnnotation.mjs';
 
 const urlFixtures = new URL('../fixtures/', import.meta.url);
 const urlFileList = new URL('fileList.txt', urlFixtures);
@@ -230,6 +231,7 @@ describe('v2 update value', () => {
 
         const flat2 = toJSON(data2, options);
         expect(stringifyFlatpacked(flat2)).toMatchSnapshot('flat2');
+        expect(toJSON(Object.assign({}, data2), { ...options, meta: extractUnpackedMetaData(data2) })).toEqual(flat2);
         const data3 = fromJSON<TT>(flat2);
         expect(data3).toEqual({ a: { b: 2 }, b: { b: 1 }, c: { b: 1 }, d: { b: 1 } });
 
@@ -241,6 +243,28 @@ describe('v2 update value', () => {
         expect(createPatch('data.json', stringifyFlatpacked(flat1), stringifyFlatpacked(flat2))).toMatchSnapshot(
             'diff flat1 -> flat2',
         );
+    });
+
+    test('object reuse with option meta data', () => {
+        interface TT {
+            [key: string]: Serializable;
+        }
+        const data0: TT = { a: { b: 1 }, c: { b: 1 } };
+        const flat0 = toJSON(data0, optionsOptimize);
+        expect(stringifyFlatpacked(flat0)).toMatchSnapshot('flat0');
+        const data1 = fromJSON<TT>(flat0);
+        expect(data1).toEqual(data0);
+
+        // Update data1
+        data1.a = { b: 2 };
+        const flat1 = toJSON(data1, options);
+        // Use the meta data from data1
+        expect(toJSON(Object.assign({}, data1), { ...options, meta: extractUnpackedMetaData(data1) })).toEqual(flat1);
+        // Do not use the meta data from data1 and expect a different result.
+        expect(toJSON(Object.assign({}, data1), options)).not.toEqual(flat1);
+        expect(stringifyFlatpacked(flat1)).toMatchSnapshot('flat1');
+        const data2 = fromJSON(flat1);
+        expect(data2).toEqual({ a: { b: 2 }, c: { b: 1 } });
     });
 });
 

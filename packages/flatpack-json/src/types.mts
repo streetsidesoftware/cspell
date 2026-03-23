@@ -169,13 +169,6 @@ export interface FlatpackApi {
     toValue(): Unpacked;
 }
 
-export function isStringTableElement(elem: FlattenedElement): elem is StringTableElement {
-    if (!Array.isArray(elem)) {
-        return false;
-    }
-    return elem[0] === ElementType.StringTable;
-}
-
 export const symbolFlatpackAnnotation: unique symbol = Symbol.for('flatpackAnnotation');
 
 export interface UnpackMetaData {

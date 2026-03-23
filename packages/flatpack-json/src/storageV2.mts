@@ -1,7 +1,12 @@
 import assert from 'node:assert';
 
 import { CompactStorage } from './CompactStorage.mjs';
-import { extractObjectKeyAndValueIndexes, getFlatpackedRootIdx, getIndexesReferencedByElement } from './flatpacked.mjs';
+import {
+    extractObjectKeyAndValueIndexes,
+    getFlatpackedRootIdx,
+    getIndexesReferencedByElement,
+    isStringTableElement,
+} from './flatpacked.mjs';
 import { optimizeFlatpacked } from './optimizeFlatpacked.mjs';
 import { RefCounter } from './RefCounter.mjs';
 import { StringTableBuilder } from './stringTable.mjs';
@@ -27,8 +32,8 @@ import type {
     StringTableElement,
     UnpackMetaData,
 } from './types.mjs';
-import { dataHeaderV2_0, ElementType, isStringTableElement } from './types.mjs';
-import { extractUnpackedMetaData } from './unpackedAnnotation.mjs';
+import { dataHeaderV2_0, ElementType } from './types.mjs';
+import { extractUnpackedAnnotation } from './unpackedAnnotation.mjs';
 import { WeakCache } from './WeakCache.mjs';
 
 type SimpleHash = number;
@@ -486,7 +491,7 @@ export class CompactStorageV2 extends CompactStorage {
 
     toJSON<V extends Serializable>(json: V): Flatpacked {
         this.softReset();
-        const annotation = extractUnpackedMetaData(json);
+        const annotation = extractUnpackedAnnotation(json);
         this.useFlatpackMetaData(this.unpackMetaData ?? annotation?.meta);
         const lastIdx = this.valueToIdx(json);
         if (lastIdx < 0) {

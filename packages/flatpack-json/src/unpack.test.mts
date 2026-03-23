@@ -9,7 +9,7 @@ import { toJSON } from './storage.mjs';
 import { stringifyFlatpacked } from './stringify.mjs';
 import { symbolFlatpackAnnotation } from './types.mjs';
 import { fromJSON } from './unpack.mjs';
-import { extractUnpackedMetaData, isAnnotateUnpacked } from './unpackedAnnotation.mjs';
+import { extractUnpackedAnnotation, isAnnotateUnpacked } from './unpackedAnnotation.mjs';
 
 const urlFileList = new URL('../fixtures/fileList.txt', import.meta.url);
 const baseFilename = new URL(import.meta.url).pathname.split('/').slice(-1).join('').split('.').slice(0, -2).join('.');
@@ -29,7 +29,7 @@ describe('dehydrate', async () => {
         const r = fromJSON(v);
         expect(r).toEqual(data);
         expect(isAnnotateUnpacked(r)).toBe(typeof data === 'object' && data !== null);
-        expect(extractUnpackedMetaData(r)).toEqual(undefined);
+        expect(extractUnpackedAnnotation(r)).toEqual(undefined);
     });
 
     test.each`
@@ -50,7 +50,7 @@ describe('dehydrate', async () => {
         expect(symbolFlatpackAnnotation in (r as object)).toBe(true);
         expect(Object.hasOwn(r as object, symbolFlatpackAnnotation)).toBe(true);
         const meta = expect.objectContaining({ flatpack: v, referenced: expect.any(RefCounter) });
-        expect(extractUnpackedMetaData(r)).toEqual({ meta, index: 1 });
+        expect(extractUnpackedAnnotation(r)).toEqual({ meta, index: 1 });
     });
 
     test.each`
@@ -67,7 +67,7 @@ describe('dehydrate', async () => {
         const r = fromJSON(v);
         expect(r).toEqual(data);
         expect(isAnnotateUnpacked(r)).toBe(typeof data === 'object' && data !== null);
-        expect(extractUnpackedMetaData(r)).toEqual(undefined);
+        expect(extractUnpackedAnnotation(r)).toEqual(undefined);
     });
 
     test.each`
@@ -88,9 +88,11 @@ describe('dehydrate', async () => {
         expect(symbolFlatpackAnnotation in (r as object)).toBe(true);
         expect(Object.hasOwn(r as object, symbolFlatpackAnnotation)).toBe(true);
         const meta = expect.objectContaining({ flatpack: v, referenced: expect.any(RefCounter) });
-        expect(extractUnpackedMetaData(r)).toEqual({ meta, index: 2 });
+        expect(extractUnpackedAnnotation(r)).toEqual({ meta, index: 2 });
         const meta2 = generateUnpackMetaData(v);
-        expect(extractUnpackedMetaData(fromJSON(v))?.meta.referenced.toJSON()).toStrictEqual(meta2.referenced.toJSON());
+        expect(extractUnpackedAnnotation(fromJSON(v))?.meta.referenced.toJSON()).toStrictEqual(
+            meta2.referenced.toJSON(),
+        );
     });
 
     const biMaxSafe = BigInt(Number.MAX_SAFE_INTEGER);
@@ -146,7 +148,7 @@ describe('dehydrate', async () => {
         expect(v).toMatchSnapshot('flatpack');
         expect(fromJSON(v)).toEqual(data);
         expect(fromJSON(JSON.parse(JSON.stringify(v)))).toEqual(data);
-        expect(extractUnpackedMetaData(fromJSON(v))).toMatchSnapshot('meta');
+        expect(extractUnpackedAnnotation(fromJSON(v))).toMatchSnapshot('meta');
     });
 
     test.each`
@@ -179,9 +181,11 @@ describe('dehydrate', async () => {
         expect(v).toMatchSnapshot('flatpack');
         expect(fromJSON(v)).toEqual(data);
         expect(fromJSON(JSON.parse(JSON.stringify(v)))).toEqual(data);
-        expect(extractUnpackedMetaData(fromJSON(v))).toMatchSnapshot('meta');
+        expect(extractUnpackedAnnotation(fromJSON(v))).toMatchSnapshot('meta');
         const meta2 = generateUnpackMetaData(v);
-        expect(extractUnpackedMetaData(fromJSON(v))?.meta.referenced.toJSON()).toStrictEqual(meta2.referenced.toJSON());
+        expect(extractUnpackedAnnotation(fromJSON(v))?.meta.referenced.toJSON()).toStrictEqual(
+            meta2.referenced.toJSON(),
+        );
     });
 
     test.each`
@@ -227,7 +231,7 @@ describe('dehydrate', async () => {
         const v = toJSON(a, { format: 'V2' });
         const r = fromJSON(v) as CircularArray;
         expect(r).toEqual([['3', '4', r, r[0]], '1', '2', r]);
-        expect(extractUnpackedMetaData(r)).toMatchSnapshot('meta');
+        expect(extractUnpackedAnnotation(r)).toMatchSnapshot('meta');
     });
 
     test('circular object', () => {
@@ -243,7 +247,7 @@ describe('dehydrate', async () => {
         const v = toJSON(a, { format: 'V2' });
         const r = fromJSON(v) as CircularObject;
         expect(r).toEqual(a);
-        expect(extractUnpackedMetaData(r)).toMatchSnapshot('meta');
+        expect(extractUnpackedAnnotation(r)).toMatchSnapshot('meta');
     });
 });
 

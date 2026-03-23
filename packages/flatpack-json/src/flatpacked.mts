@@ -1,8 +1,15 @@
 import assert from 'node:assert';
 
 import { RefCounter } from './RefCounter.mjs';
-import type { ArrayBasedElements, Flatpacked, FlatpackIndex, FlattenedElement, UnpackMetaData } from './types.mjs';
-import { ElementType, isStringTableElement } from './types.mjs';
+import type {
+    ArrayBasedElements,
+    Flatpacked,
+    FlatpackIndex,
+    FlattenedElement,
+    StringTableElement,
+    UnpackMetaData,
+} from './types.mjs';
+import { ElementType } from './types.mjs';
 
 export function getIndexesReferencedByElement(elem: FlattenedElement): FlatpackIndex[] {
     if (!elem) {
@@ -124,4 +131,10 @@ export function generateUnpackMetaData(flatpack: Flatpacked): UnpackMetaData {
             calcReferenced(ref);
         }
     }
+}
+export function isStringTableElement(elem: FlattenedElement): elem is StringTableElement {
+    if (!Array.isArray(elem)) {
+        return false;
+    }
+    return elem[0] === ElementType.StringTable;
 }
