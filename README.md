@@ -119,6 +119,7 @@ Contributions are welcome! See our [contribution notes](CONTRIBUTING.md). **Note
 
 [<img alt="Contributor Jason3S" src="https://avatars.githubusercontent.com/u/3740137?v=4&size=128" width=64>](https://github.com/Jason3S)
 [<img alt="Contributor mrksbnc" src="https://avatars.githubusercontent.com/u/23279421?v=4&size=128" width=64>](https://github.com/mrksbnc)
+[<img alt="Contributor coliff" src="https://avatars.githubusercontent.com/u/1212885?v=4&size=128" width=64>](https://github.com/coliff)
 [<img alt="Contributor LuckyWindsck" src="https://avatars.githubusercontent.com/u/24631178?v=4&size=128" width=64>](https://github.com/LuckyWindsck)
 [<img alt="Contributor thompson-tomo" src="https://avatars.githubusercontent.com/u/19771933?v=4&size=128" width=64>](https://github.com/thompson-tomo)
 [<img alt="Contributor nschonni" src="https://avatars.githubusercontent.com/u/1297909?v=4&size=128" width=64>](https://github.com/nschonni)
@@ -128,7 +129,6 @@ Contributions are welcome! See our [contribution notes](CONTRIBUTING.md). **Note
 [<img alt="Contributor snyk-bot" src="https://avatars.githubusercontent.com/u/19733683?v=4&size=128" width=64>](https://github.com/snyk-bot)
 [<img alt="Contributor zo" src="https://avatars.githubusercontent.com/u/518711?v=4&size=128" width=64>](https://github.com/zo)
 [<img alt="Contributor dsanders11" src="https://avatars.githubusercontent.com/u/5820654?v=4&size=128" width=64>](https://github.com/dsanders11)
-[<img alt="Contributor coliff" src="https://avatars.githubusercontent.com/u/1212885?v=4&size=128" width=64>](https://github.com/coliff)
 [<img alt="Contributor benmccann" src="https://avatars.githubusercontent.com/u/322311?v=4&size=128" width=64>](https://github.com/benmccann)
 [<img alt="Contributor fisker" src="https://avatars.githubusercontent.com/u/172584?v=4&size=128" width=64>](https://github.com/fisker)
 [<img alt="Contributor dakotaJang" src="https://avatars.githubusercontent.com/u/22528264?v=4&size=128" width=64>](https://github.com/dakotaJang)
