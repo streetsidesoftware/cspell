@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 301, Issues found: 3979 in 270 files.
+ CSpell: Files checked: 302, Issues found: 3987 in 271 files.
  exit code: 1
 admin.go:1130:20   - Unknown word (Redir)       -- return errInternalRedir
 admin.go:1409:6    - Unknown word (loggable)    -- type loggableURLArray []*url.URL
@@ -2870,7 +2870,7 @@ modules/caddyhttp/vars.go:146:45    - Unknown word (caddyfile)   -- UnmarshalCad
 modules/caddyhttp/vars.go:154:13    - Unknown word (Errf)        -- return d.Errf("malformed vars matcher
 modules/caddyhttp/vars.go:158:13    - Unknown word (Errf)        -- return d.Errf("malformed vars matcher
 modules/caddyhttp/vars.go:15:9      - Unknown word (caddyhttp)  -- package caddyhttp
-modules/caddyhttp/vars.go:257:13    - Unknown word (Caddyfile)   -- // UnmarshalCaddyfile implements caddyfile
+modules/caddyhttp/vars.go:270:13    - Unknown word (Caddyfile)   -- // UnmarshalCaddyfile implements caddyfile
 modules/caddyhttp/vars.go:27:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 modules/caddyhttp/vars.go:28:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/caddyconfig
 modules/caddyhttp/vars.go:28:35     - Unknown word (caddyconfig) -- caddyserver/caddy/v2/caddyconfig/caddyfile"
@@ -3094,19 +3094,26 @@ modules/caddytls/automation.go:28:14     - Unknown word (mholt)       -- "github
 modules/caddytls/automation.go:28:20     - Unknown word (acmez)       -- "github.com/mholt/acmez/v3"
 modules/caddytls/automation.go:33:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 modules/caddytls/automation.go:44:40     - Unknown word (hostnames)   -- you don't know all the hostnames at
-modules/caddytls/automation.go:489:37    - Unknown word (ALPN)        -- configures the ACME TLS-ALPN challenge.
-modules/caddytls/automation.go:489:5     - Unknown word (TLSALPN)     -- // TLSALPN configures the ACME
-modules/caddytls/automation.go:492:11    - Unknown word (TLSALPN)     -- TLSALPN *TLSALPNChallengeConfig `json
-modules/caddytls/automation.go:492:2     - Unknown word (TLSALPN)     -- TLSALPN *TLSALPNChallengeConfig
-modules/caddytls/automation.go:492:45    - Unknown word (alpn)        -- LPNChallengeConfig `json:"tls-alpn,omitempty"`
-modules/caddytls/automation.go:515:30    - Unknown word (ALPN)        -- Applies to HTTP and TLS-ALPN challenges.)
-modules/caddytls/automation.go:540:4     - Unknown word (TLSALPN)     -- // TLSALPNChallengeConfig configures
-modules/caddytls/automation.go:540:51    - Unknown word (ALPN)        -- configures the ACME TLS-ALPN challenge.
-modules/caddytls/automation.go:541:6     - Unknown word (TLSALPN)     -- type TLSALPNChallengeConfig struct
-modules/caddytls/automation.go:542:22    - Unknown word (ALPN)        -- // If true, the TLS-ALPN challenge will be disabled
-modules/caddytls/automation.go:546:34    - Unknown word (ALPN)        -- challenge. Note that the TLS-ALPN challenge port
-modules/caddytls/automation.go:583:9     - Unknown word (acmez)       -- solver acmez.Solver
+modules/caddytls/automation.go:512:37    - Unknown word (ALPN)        -- configures the ACME TLS-ALPN challenge.
+modules/caddytls/automation.go:512:5     - Unknown word (TLSALPN)     -- // TLSALPN configures the ACME
+modules/caddytls/automation.go:515:11    - Unknown word (TLSALPN)     -- TLSALPN *TLSALPNChallengeConfig `json
+modules/caddytls/automation.go:515:2     - Unknown word (TLSALPN)     -- TLSALPN *TLSALPNChallengeConfig
+modules/caddytls/automation.go:515:45    - Unknown word (alpn)        -- LPNChallengeConfig `json:"tls-alpn,omitempty"`
+modules/caddytls/automation.go:538:30    - Unknown word (ALPN)        -- Applies to HTTP and TLS-ALPN challenges.)
+modules/caddytls/automation.go:563:4     - Unknown word (TLSALPN)     -- // TLSALPNChallengeConfig configures
+modules/caddytls/automation.go:563:51    - Unknown word (ALPN)        -- configures the ACME TLS-ALPN challenge.
+modules/caddytls/automation.go:564:6     - Unknown word (TLSALPN)     -- type TLSALPNChallengeConfig struct
+modules/caddytls/automation.go:565:22    - Unknown word (ALPN)        -- // If true, the TLS-ALPN challenge will be disabled
+modules/caddytls/automation.go:569:34    - Unknown word (ALPN)        -- challenge. Note that the TLS-ALPN challenge port
+modules/caddytls/automation.go:606:9     - Unknown word (acmez)       -- solver acmez.Solver
 modules/caddytls/automation.go:92:21     - Unknown word (hostnames)   -- // Which subjects (hostnames or IP addresses) this
+modules/caddytls/automation_test.go:12:15     - Unknown word (certmagic)   -- Managers: []certmagic.Manager{Tailscale{}
+modules/caddytls/automation_test.go:18:11     - Unknown word (certmagic)   -- }, nil, &certmagic.FileStorage{Path: t
+modules/caddytls/automation_test.go:1:9       - Unknown word (caddytls)   -- package caddytls
+modules/caddytls/automation_test.go:20:20     - Unknown word (certmagic)   -- t.Fatalf("making certmagic config: %v", err)
+modules/caddytls/automation_test.go:32:15     - Unknown word (certmagic)   -- Managers: []certmagic.Manager{Tailscale{}
+modules/caddytls/automation_test.go:6:14      - Unknown word (caddyserver) -- "github.com/caddyserver/certmagic"
+modules/caddytls/automation_test.go:6:26      - Unknown word (certmagic)   -- github.com/caddyserver/certmagic"
 modules/caddytls/capools.go:148:34    - Unknown word (Caddyfile)   -- FileCAPool) UnmarshalCaddyfile(d *caddyfile.Dispenser
 modules/caddytls/capools.go:148:47    - Unknown word (caddyfile)   -- UnmarshalCaddyfile(d *caddyfile.Dispenser) error {
 modules/caddytls/capools.go:148:7     - Unknown word (fcap)        -- func (fcap *FileCAPool) UnmarshalCaddyfi
@@ -3344,17 +3351,20 @@ modules/caddytls/distributedstek/distributedstek.go:57:2      - Unknown word (st
 modules/caddytls/distributedstek/distributedstek.go:65:13     - Unknown word (stek)            -- ID: "tls.stek.distributed",
 modules/caddytls/distributedstek/distributedstek.go:96:39     - Unknown word (caddytls)        -- Initialize(config *caddytls.SessionTicketService
 modules/caddytls/distributedstek/distributedstek.go:98:4      - Unknown word (stek)            -- s.stekConfig = config
-modules/caddytls/ech.go:1036:27   - Unknown word (KDFID)       -- AddUint16(uint16(cs.KDFID))
-modules/caddytls/ech.go:1037:27   - Unknown word (AEADID)      -- AddUint16(uint16(cs.AEADID))
-modules/caddytls/ech.go:1097:16   - Unknown word (weakrand)    -- num := uint8(weakrand.N(uint8Range)) //nolint
-modules/caddytls/ech.go:1097:42   - Unknown word (nolint)      -- weakrand.N(uint8Range)) //nolint:gosec
-modules/caddytls/ech.go:1097:49   - Unknown word (gosec)       -- uint8Range)) //nolint:gosec
-modules/caddytls/ech.go:1105:33   - Unknown word (subkeys)     -- to see if any of the subkeys use this config ID
-modules/caddytls/ech.go:1144:11   - Unknown word (errname)     -- // nolint:errname // The linter wants
-modules/caddytls/ech.go:1144:4    - Unknown word (nolint)      -- // nolint:errname // The linter
-modules/caddytls/ech.go:1162:50   - Unknown word (omitzero)    -- `json:"replaced,omitzero"`
-modules/caddytls/ech.go:1182:12   - Unknown word (TLSESNI)     -- const draftTLSESNI25 = 0xfe0d
+modules/caddytls/ech.go:1000:4    - Unknown word (KDFID)       -- KDFID: hpke.KDF(hpkeKDF)
+modules/caddytls/ech.go:1001:4    - Unknown word (AEADID)      -- AEADID: hpke.AEAD(hpkeAEAD
+modules/caddytls/ech.go:1041:27   - Unknown word (KDFID)       -- AddUint16(uint16(cs.KDFID))
+modules/caddytls/ech.go:1042:27   - Unknown word (AEADID)      -- AddUint16(uint16(cs.AEADID))
+modules/caddytls/ech.go:1102:16   - Unknown word (weakrand)    -- num := uint8(weakrand.N(uint8Range)) //nolint
+modules/caddytls/ech.go:1102:42   - Unknown word (nolint)      -- weakrand.N(uint8Range)) //nolint:gosec
+modules/caddytls/ech.go:1102:49   - Unknown word (gosec)       -- uint8Range)) //nolint:gosec
+modules/caddytls/ech.go:1110:33   - Unknown word (subkeys)     -- to see if any of the subkeys use this config ID
+modules/caddytls/ech.go:1149:11   - Unknown word (errname)     -- // nolint:errname // The linter wants
+modules/caddytls/ech.go:1149:4    - Unknown word (nolint)      -- // nolint:errname // The linter
+modules/caddytls/ech.go:1167:50   - Unknown word (omitzero)    -- `json:"replaced,omitzero"`
+modules/caddytls/ech.go:1187:12   - Unknown word (TLSESNI)     -- const draftTLSESNI25 = 0xfe0d
 modules/caddytls/ech.go:11:2      - Unknown word (weakrand)   -- weakrand "math/rand/v2"
+modules/caddytls/ech.go:189:35    - Unknown word (stdlib)      -- function sets/updates the stdlib-ready key list only
 modules/caddytls/ech.go:18:14     - Unknown word (caddyserver) -- "github.com/caddyserver/certmagic"
 modules/caddytls/ech.go:18:26     - Unknown word (certmagic)   -- github.com/caddyserver/certmagic"
 modules/caddytls/ech.go:19:25     - Unknown word (circl)       -- github.com/cloudflare/circl/hpke"
@@ -3364,59 +3374,57 @@ modules/caddytls/ech.go:20:25     - Unknown word (circl)       -- github.com/clo
 modules/caddytls/ech.go:21:14     - Unknown word (libdns)      -- "github.com/libdns/libdns"
 modules/caddytls/ech.go:21:21     - Unknown word (libdns)      -- "github.com/libdns/libdns"
 modules/caddytls/ech.go:25:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
-modules/caddytls/ech.go:296:6     - Unknown word (stdlib)      -- ech.stdlibReady = []tls.EncryptedClientH
-modules/caddytls/ech.go:297:9     - Unknown word (cfgs)        -- for _, cfgs := range ech.configs
-modules/caddytls/ech.go:298:23    - Unknown word (cfgs)        -- for _, cfg := range cfgs {
-modules/caddytls/ech.go:299:33    - Unknown word (stdlib)      -- stdlibReady = append(ech.stdlibReady, tls.EncryptedClientHell
-modules/caddytls/ech.go:299:8     - Unknown word (stdlib)      -- ech.stdlibReady = append(ech.stdlibReady
 modules/caddytls/ech.go:29:23     - Unknown word (ECHDNS)      -- caddy.RegisterModule(ECHDNSPublisher{})
-modules/caddytls/ech.go:328:28    - Unknown word (ECHDNS)      -- dnsProv, ok := t.dns.(ECHDNSProvider); ok {
-modules/caddytls/ech.go:332:8     - Unknown word (ECHDNS)      -- &ECHDNSPublisher{
-modules/caddytls/ech.go:605:26    - Unknown word (godoc)       -- to quote the Go 1.24 godoc (with typos of AEAD
-modules/caddytls/ech.go:609:29    - Unknown word (DHKEM)       -- should only specify the DHKEM(X25519, HKDF-SHA256
-modules/caddytls/ech.go:617:20    - Unknown word (hpke)        -- const kemChoice = hpke.KEM_X25519_HKDF_SHA
-modules/caddytls/ech.go:631:23    - Unknown word (TLSESNI)     -- Version: draftTLSESNI25,
-modules/caddytls/ech.go:634:3     - Unknown word (KEMID)       -- KEMID: kemChoice,
-modules/caddytls/ech.go:635:19    - Unknown word (hpke)        -- CipherSuites: []hpkeSymmetricCipherSuite
-modules/caddytls/ech.go:637:13    - Unknown word (hpke)        -- KDFID: hpke.KDF_HKDF_SHA256,
-modules/caddytls/ech.go:637:5     - Unknown word (KDFID)       -- KDFID: hpke.KDF_HKDF_SHA
-modules/caddytls/ech.go:638:13    - Unknown word (hpke)        -- AEADID: hpke.AEAD_AES128GCM,
-modules/caddytls/ech.go:638:5     - Unknown word (AEADID)      -- AEADID: hpke.AEAD_AES128GCM
-modules/caddytls/ech.go:641:5     - Unknown word (KDFID)       -- KDFID: hpke.KDF_HKDF_SHA
-modules/caddytls/ech.go:642:5     - Unknown word (AEADID)      -- AEADID: hpke.AEAD_AES256GCM
-modules/caddytls/ech.go:645:5     - Unknown word (KDFID)       -- KDFID: hpke.KDF_HKDF_SHA
-modules/caddytls/ech.go:646:5     - Unknown word (AEADID)      -- AEADID: hpke.AEAD_ChaCha20Poly
-modules/caddytls/ech.go:734:19    - Unknown word (hostnames)   -- // registers the hostnames for which it applies
+modules/caddytls/ech.go:301:6     - Unknown word (stdlib)      -- ech.stdlibReady = []tls.EncryptedClientH
+modules/caddytls/ech.go:302:9     - Unknown word (cfgs)        -- for _, cfgs := range ech.configs
+modules/caddytls/ech.go:303:23    - Unknown word (cfgs)        -- for _, cfg := range cfgs {
+modules/caddytls/ech.go:304:33    - Unknown word (stdlib)      -- stdlibReady = append(ech.stdlibReady, tls.EncryptedClientHell
+modules/caddytls/ech.go:304:8     - Unknown word (stdlib)      -- ech.stdlibReady = append(ech.stdlibReady
+modules/caddytls/ech.go:333:28    - Unknown word (ECHDNS)      -- dnsProv, ok := t.dns.(ECHDNSProvider); ok {
+modules/caddytls/ech.go:337:8     - Unknown word (ECHDNS)      -- &ECHDNSPublisher{
+modules/caddytls/ech.go:610:26    - Unknown word (godoc)       -- to quote the Go 1.24 godoc (with typos of AEAD
+modules/caddytls/ech.go:614:29    - Unknown word (DHKEM)       -- should only specify the DHKEM(X25519, HKDF-SHA256
+modules/caddytls/ech.go:622:20    - Unknown word (hpke)        -- const kemChoice = hpke.KEM_X25519_HKDF_SHA
+modules/caddytls/ech.go:636:23    - Unknown word (TLSESNI)     -- Version: draftTLSESNI25,
+modules/caddytls/ech.go:639:3     - Unknown word (KEMID)       -- KEMID: kemChoice,
+modules/caddytls/ech.go:640:19    - Unknown word (hpke)        -- CipherSuites: []hpkeSymmetricCipherSuite
+modules/caddytls/ech.go:642:13    - Unknown word (hpke)        -- KDFID: hpke.KDF_HKDF_SHA256,
+modules/caddytls/ech.go:642:5     - Unknown word (KDFID)       -- KDFID: hpke.KDF_HKDF_SHA
+modules/caddytls/ech.go:643:13    - Unknown word (hpke)        -- AEADID: hpke.AEAD_AES128GCM,
+modules/caddytls/ech.go:643:5     - Unknown word (AEADID)      -- AEADID: hpke.AEAD_AES128GCM
+modules/caddytls/ech.go:646:5     - Unknown word (KDFID)       -- KDFID: hpke.KDF_HKDF_SHA
+modules/caddytls/ech.go:647:5     - Unknown word (AEADID)      -- AEADID: hpke.AEAD_AES256GCM
+modules/caddytls/ech.go:650:5     - Unknown word (KDFID)       -- KDFID: hpke.KDF_HKDF_SHA
+modules/caddytls/ech.go:651:5     - Unknown word (AEADID)      -- AEADID: hpke.AEAD_ChaCha20Poly
+modules/caddytls/ech.go:739:19    - Unknown word (hostnames)   -- // registers the hostnames for which it applies
 modules/caddytls/ech.go:74:2      - Unknown word (stdlib)      -- stdlibReady []tls.EncryptedClientHel
-modules/caddytls/ech.go:759:4     - Unknown word (ECHDNS)      -- // ECHDNSProvider can service
-modules/caddytls/ech.go:760:6     - Unknown word (ECHDNS)      -- type ECHDNSProvider interface {
-modules/caddytls/ech.go:761:2     - Unknown word (libdns)      -- libdns.RecordGetter
-modules/caddytls/ech.go:762:2     - Unknown word (libdns)      -- libdns.RecordSetter
-modules/caddytls/ech.go:812:17    - Unknown word (certmagic)   -- nameservers := certmagic.RecursiveNameservers
-modules/caddytls/ech.go:818:16    - Unknown word (certmagic)   -- zone, err := certmagic.FindZoneByFQDN(ctx,
-modules/caddytls/ech.go:824:14    - Unknown word (libdns)      -- relName := libdns.RelativeName(domain
-modules/caddytls/ech.go:849:55    - Unknown word (svcb)        -- ServiceBinding); ok && svcb.Scheme == "https" {
-modules/caddytls/ech.go:849:8     - Unknown word (svcb)        -- if svcb, ok := rec.(libdns.ServiceBin
-modules/caddytls/ech.go:850:30    - Unknown word (svcb)        -- svcb.Target == "" || svcb.Target == "." {
-modules/caddytls/ech.go:850:9     - Unknown word (svcb)        -- if svcb.Target == "" || svcb
-modules/caddytls/ech.go:851:18    - Unknown word (svcb)        -- httpsRec = svcb
-modules/caddytls/ech.go:880:18    - Unknown word (SVCB)        -- // HTTPS and SVCB RRs: RFC 9460 (https
-modules/caddytls/ech.go:902:20    - Unknown word (esni)        -- // [draft-ietf-tls-esni-22](https://www.ietf
-modules/caddytls/ech.go:914:5     - Unknown word (Hpke)        -- // HpkeKeyConfig fields:
-modules/caddytls/ech.go:916:2     - Unknown word (KEMID)       -- KEMID hpke.KEM
+modules/caddytls/ech.go:764:4     - Unknown word (ECHDNS)      -- // ECHDNSProvider can service
+modules/caddytls/ech.go:765:6     - Unknown word (ECHDNS)      -- type ECHDNSProvider interface {
+modules/caddytls/ech.go:766:2     - Unknown word (libdns)      -- libdns.RecordGetter
+modules/caddytls/ech.go:767:2     - Unknown word (libdns)      -- libdns.RecordSetter
+modules/caddytls/ech.go:817:17    - Unknown word (certmagic)   -- nameservers := certmagic.RecursiveNameservers
+modules/caddytls/ech.go:823:16    - Unknown word (certmagic)   -- zone, err := certmagic.FindZoneByFQDN(ctx,
+modules/caddytls/ech.go:829:14    - Unknown word (libdns)      -- relName := libdns.RelativeName(domain
+modules/caddytls/ech.go:854:55    - Unknown word (svcb)        -- ServiceBinding); ok && svcb.Scheme == "https" {
+modules/caddytls/ech.go:854:8     - Unknown word (svcb)        -- if svcb, ok := rec.(libdns.ServiceBin
+modules/caddytls/ech.go:855:30    - Unknown word (svcb)        -- svcb.Target == "" || svcb.Target == "." {
+modules/caddytls/ech.go:855:9     - Unknown word (svcb)        -- if svcb.Target == "" || svcb
+modules/caddytls/ech.go:856:18    - Unknown word (svcb)        -- httpsRec = svcb
+modules/caddytls/ech.go:885:18    - Unknown word (SVCB)        -- // HTTPS and SVCB RRs: RFC 9460 (https
+modules/caddytls/ech.go:907:20    - Unknown word (esni)        -- // [draft-ietf-tls-esni-22](https://www.ietf
+modules/caddytls/ech.go:919:5     - Unknown word (Hpke)        -- // HpkeKeyConfig fields:
+modules/caddytls/ech.go:921:2     - Unknown word (KEMID)       -- KEMID hpke.KEM
 modules/caddytls/ech.go:92:13     - Unknown word (Iface)       -- for _, modIface := range mods.(map[string
 modules/caddytls/ech.go:93:77     - Unknown word (Iface)       -- Publication[i].publishers, modIface.(ECHPublisher))
-modules/caddytls/ech.go:942:33    - Unknown word (Tariq)       -- from github.com/OmarTariq612/goech with modifications
-modules/caddytls/ech.go:942:42    - Unknown word (goech)       -- github.com/OmarTariq612/goech with modifications.
-modules/caddytls/ech.go:943:43    - Unknown word (Tariq)       -- Copyright (c) 2023 Omar Tariq AbdEl-Raziq
-modules/caddytls/ech.go:943:55    - Unknown word (Raziq)       -- 23 Omar Tariq AbdEl-Raziq
-modules/caddytls/ech.go:951:28    - Unknown word (TLSESNI)     -- echCfg.Version != draftTLSESNI25 {
-modules/caddytls/ech.go:952:66    - Unknown word (TLSESNI)     -- be %d: got %d", draftTLSESNI25, echCfg.Version)
-modules/caddytls/ech.go:963:41    - Unknown word (KEMID)       -- 6((*uint16)(&echCfg.KEMID)) ||
-modules/caddytls/ech.go:971:13    - Unknown word (KEMID)       -- if !echCfg.KEMID.IsValid() {
-modules/caddytls/ech.go:972:50    - Unknown word (KEMID)       -- KEM ID: %d", echCfg.KEMID)
-modules/caddytls/ech.go:995:4     - Unknown word (KDFID)       -- KDFID: hpke.KDF(hpkeKDF)
-modules/caddytls/ech.go:996:4     - Unknown word (AEADID)      -- AEADID: hpke.AEAD(hpkeAEAD
+modules/caddytls/ech.go:947:33    - Unknown word (Tariq)       -- from github.com/OmarTariq612/goech with modifications
+modules/caddytls/ech.go:947:42    - Unknown word (goech)       -- github.com/OmarTariq612/goech with modifications.
+modules/caddytls/ech.go:948:43    - Unknown word (Tariq)       -- Copyright (c) 2023 Omar Tariq AbdEl-Raziq
+modules/caddytls/ech.go:948:55    - Unknown word (Raziq)       -- 23 Omar Tariq AbdEl-Raziq
+modules/caddytls/ech.go:956:28    - Unknown word (TLSESNI)     -- echCfg.Version != draftTLSESNI25 {
+modules/caddytls/ech.go:957:66    - Unknown word (TLSESNI)     -- be %d: got %d", draftTLSESNI25, echCfg.Version)
+modules/caddytls/ech.go:968:41    - Unknown word (KEMID)       -- 6((*uint16)(&echCfg.KEMID)) ||
+modules/caddytls/ech.go:976:13    - Unknown word (KEMID)       -- if !echCfg.KEMID.IsValid() {
+modules/caddytls/ech.go:977:50    - Unknown word (KEMID)       -- KEM ID: %d", echCfg.KEMID)
 modules/caddytls/fileloader.go:15:9      - Unknown word (caddytls)   -- package caddytls
 modules/caddytls/fileloader.go:23:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 modules/caddytls/folderloader.go:15:9      - Unknown word (caddytls)   -- package caddytls
