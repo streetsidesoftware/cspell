@@ -156,7 +156,7 @@ export type Headers = typeof dataHeaderV0_1 | typeof dataHeaderV1_0 | typeof dat
 /**
  * The current header for Flatpack JSON.
  */
-export const dataHeader: string = dataHeaderV1_0;
+export const dataHeader: string = dataHeaderV2_0;
 /**
  * The set of supported headers for Flatpack JSON.
  */

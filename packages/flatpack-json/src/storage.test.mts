@@ -1,4 +1,5 @@
 import fs from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
 
 import { findMatchingFileTypes } from '@cspell/filetypes';
 import { createPatch } from 'diff';
@@ -36,7 +37,7 @@ describe('dehydrate', async () => {
         ${{ a: { a: 'a', b: 42 } }}
         ${{ a: [1] }}
     `('dehydrate/hydrate $data', ({ data }) => {
-        const v = toJSON(data);
+        const v = toJSON(data, { format: 'V1' });
         expect(fromJSON(v)).toEqual(data);
     });
 
@@ -74,6 +75,7 @@ describe('dehydrate', async () => {
         ${[1n, 2n, 1n, 2n, biMaxSafe, -biMaxSafe, biMaxSafe + 1n, -biMaxSafe - 1n]}                     | ${undefined}
         ${[Object(1n), Object('hello'), Object(/\w+/g), Object(null), Object([]), Object('hello')]}     | ${undefined}
     `('dehydrate V1 $data $options', ({ data, options }) => {
+        options = { ...options, format: 'V1' };
         const v = toJSON(data, { ...options });
         expect(stringifyFlatpacked(v)).toMatchSnapshot();
         expect(fromJSON(v)).toEqual(data);
@@ -137,7 +139,7 @@ describe('dehydrate', async () => {
         ${'fileList'}    | ${await sampleFileList()}        | ${undefined}
         ${'fileObjects'} | ${await sampleFileListObjects()} | ${undefined}
     `('dehydrate $data $options', async ({ name, data, options }) => {
-        const v = toJSON(data, { dedupe: options?.dedupe });
+        const v = toJSON(data, { dedupe: options?.dedupe, format: 'V1' });
         await expect(stringifyFlatpacked(v)).toMatchFileSnapshot(`__snapshots__/${baseFilename}_${name}.jsonc`);
         await expect(JSON.stringify(v) + '\n').toMatchFileSnapshot(`__snapshots__/${baseFilename}_${name}.json`);
         await expect(JSON.stringify(data) + '\n').toMatchFileSnapshot(
@@ -187,8 +189,9 @@ describe('v1 to v2', async () => {
         const data = fromJSON(JSON.parse(contentNpmV1));
         expect(fromJSON(toJSON(data, { format: 'V2', dedupe: true }))).toEqual(data);
         const jsonStr = stringify(data, true, { optimize: true, format: 'V2', dedupe: true });
-        await fs.writeFile(new URL('.npm-packages-info-v2.json', urlFixtures), jsonStr);
-
+        const v2File = fileURLToPath(new URL('.npm-packages-info-v2.json', urlFixtures));
+        // await fs.writeFile(v2File, jsonStr);
+        await expect(jsonStr).toMatchFileSnapshot(v2File);
         expect(fromJSON(JSON.parse(jsonStr))).toEqual(data);
     });
 });
@@ -231,7 +234,7 @@ describe('v2 update value', () => {
 
         const flat2 = toJSON(data2, options);
         expect(stringifyFlatpacked(flat2)).toMatchSnapshot('flat2');
-        // expect(toJSON(Object.assign({}, data2), { ...options, meta: extractUnpackedMetaData(data2) })).toEqual(flat2);
+        expect(toJSON(Object.assign({}, data2), { ...options, meta: extractUnpackedMetaData(data2) })).toEqual(flat2);
         const data3 = fromJSON<TT>(flat2);
         expect(data3).toEqual({ a: { b: 2 }, b: { b: 1 }, c: { b: 1 }, d: { b: 1 } });
 

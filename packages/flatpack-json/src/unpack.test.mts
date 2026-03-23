@@ -43,7 +43,7 @@ describe('dehydrate', async () => {
         ${{ a: { a: 'a', b: 42 } }}
         ${{ a: [1] }}
     `('dehydrate/hydrate $data', ({ data }) => {
-        const v = toJSON(data);
+        const v = toJSON(data, { format: 'V1' });
         const r = fromJSON(v);
         expect(r).toEqual(data);
         expect(isAnnotateUnpacked(r)).toBe(typeof data === 'object' && data !== null);
@@ -128,7 +128,7 @@ describe('dehydrate', async () => {
         ${[1n, 2n, 1n, 2n, biMaxSafe, -biMaxSafe, biMaxSafe + 1n, -biMaxSafe - 1n]}                     | ${undefined}
         ${[Object(1n), Object('hello'), Object(/\w+/g), Object(null), Object([]), Object('hello')]}     | ${undefined}
     `('dehydrate $data $options', ({ data, options }) => {
-        const v = toJSON(data, { dedupe: options?.dedupe });
+        const v = toJSON(data, { dedupe: options?.dedupe, format: 'V1' });
         expect(v).toMatchSnapshot();
         expect(fromJSON(v)).toEqual(data);
         expect(fromJSON(JSON.parse(JSON.stringify(v)))).toEqual(data);
@@ -193,7 +193,7 @@ describe('dehydrate', async () => {
         ${'fileList'}    | ${await sampleFileList()}        | ${undefined}
         ${'fileObjects'} | ${await sampleFileListObjects()} | ${undefined}
     `('dehydrate $data $options', async ({ name, data, options }) => {
-        const v = toJSON(data, { dedupe: options?.dedupe });
+        const v = toJSON(data, { dedupe: options?.dedupe, format: 'V1' });
         await expect(stringifyFlatpacked(v)).toMatchFileSnapshot(`__snapshots__/${baseFilename}_${name}.jsonc`);
         await expect(JSON.stringify(v) + '\n').toMatchFileSnapshot(`__snapshots__/${baseFilename}_${name}.json`);
         await expect(JSON.stringify(data) + '\n').toMatchFileSnapshot(

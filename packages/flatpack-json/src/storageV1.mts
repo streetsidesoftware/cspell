@@ -23,7 +23,7 @@ import type {
     SubStringElement,
     Unpacked,
 } from './types.mjs';
-import { blockSplitRegex, dataHeader, ElementType } from './types.mjs';
+import { blockSplitRegex, dataHeaderV1_0, ElementType } from './types.mjs';
 
 const collator = new Intl.Collator('en', {
     usage: 'sort',
@@ -45,7 +45,7 @@ interface FoundSubString {
 }
 
 export class CompactStorageV1 extends CompactStorage {
-    private data = [dataHeader] as Flatpacked;
+    private data = [dataHeaderV1_0] as Flatpacked;
     private dedupe = true;
     private sortKeys = true;
     private emptyObjIdx = 0;
