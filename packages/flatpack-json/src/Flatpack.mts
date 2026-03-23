@@ -1,5 +1,5 @@
 import { FlatpackedWrapper } from './flatpackUtil.mjs';
-import { FlatpackStoreV1 } from './FlatpackV1.mjs';
+import { FlatpackStoreV2 } from './FlatpackV2.mjs';
 import { stringifyFlatpacked } from './stringify.mjs';
 import type { FlatpackApi, Flatpacked, FlatpackOptions, Serializable, Unpacked } from './types.mjs';
 import { fromJSON } from './unpack.mjs';
@@ -11,7 +11,7 @@ export class FlatpackStore implements FlatpackApi {
         value: Serializable | FlatpackedWrapper,
         readonly options?: FlatpackOptions | undefined,
     ) {
-        this.#flatpackApi = new FlatpackStoreV1(value, options);
+        this.#flatpackApi = new FlatpackStoreV2(value, options);
     }
 
     setValue(value: Serializable): void {
