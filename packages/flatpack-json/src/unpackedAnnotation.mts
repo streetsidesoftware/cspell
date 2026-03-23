@@ -8,7 +8,7 @@ import { symbolFlatpackAnnotation } from './types.mjs';
  * @returns The meta data or undefined if the value is not annotated.
  */
 export function extractUnpackedAnnotation(data: Serializable): UnpackedAnnotation | undefined {
-    if (isAnnotateUnpacked(data)) {
+    if (isUnpackedAnnotated(data)) {
         return data[symbolFlatpackAnnotation];
     }
     return undefined;
@@ -30,6 +30,6 @@ export function extractUnpackedMetaData(data: Serializable): UnpackMetaData | un
  * @param value - any value to test
  * @returns `value` has UnpackedAnnotation.
  */
-export function isAnnotateUnpacked<T>(value: T): value is T & UnpackedAnnotated {
+export function isUnpackedAnnotated<T>(value: T): value is T & UnpackedAnnotated {
     return typeof value === 'object' && value !== null && Object.hasOwn(value, symbolFlatpackAnnotation);
 }

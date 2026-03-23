@@ -9,7 +9,7 @@ import { toJSON } from './storage.mjs';
 import { stringifyFlatpacked } from './stringify.mjs';
 import { symbolFlatpackAnnotation } from './types.mjs';
 import { fromJSON } from './unpack.mjs';
-import { extractUnpackedAnnotation, isAnnotateUnpacked } from './unpackedAnnotation.mjs';
+import { extractUnpackedAnnotation, isUnpackedAnnotated } from './unpackedAnnotation.mjs';
 
 const urlFileList = new URL('../fixtures/fileList.txt', import.meta.url);
 const baseFilename = new URL(import.meta.url).pathname.split('/').slice(-1).join('').split('.').slice(0, -2).join('.');
@@ -28,7 +28,7 @@ describe('dehydrate', async () => {
         const v = toJSON(data);
         const r = fromJSON(v);
         expect(r).toEqual(data);
-        expect(isAnnotateUnpacked(r)).toBe(typeof data === 'object' && data !== null);
+        expect(isUnpackedAnnotated(r)).toBe(typeof data === 'object' && data !== null);
         expect(extractUnpackedAnnotation(r)).toEqual(undefined);
     });
 
@@ -46,7 +46,7 @@ describe('dehydrate', async () => {
         const v = toJSON(data, { format: 'V1' });
         const r = fromJSON(v);
         expect(r).toEqual(data);
-        expect(isAnnotateUnpacked(r)).toBe(typeof data === 'object' && data !== null);
+        expect(isUnpackedAnnotated(r)).toBe(typeof data === 'object' && data !== null);
         expect(symbolFlatpackAnnotation in (r as object)).toBe(true);
         expect(Object.hasOwn(r as object, symbolFlatpackAnnotation)).toBe(true);
         const meta = expect.objectContaining({ flatpack: v, referenced: expect.any(RefCounter) });
@@ -66,7 +66,7 @@ describe('dehydrate', async () => {
         const v = toJSON(data, { format: 'V2' });
         const r = fromJSON(v);
         expect(r).toEqual(data);
-        expect(isAnnotateUnpacked(r)).toBe(typeof data === 'object' && data !== null);
+        expect(isUnpackedAnnotated(r)).toBe(typeof data === 'object' && data !== null);
         expect(extractUnpackedAnnotation(r)).toEqual(undefined);
     });
 
@@ -84,7 +84,7 @@ describe('dehydrate', async () => {
         const v = toJSON(data, { format: 'V2' });
         const r = fromJSON(v);
         expect(r).toEqual(data);
-        expect(isAnnotateUnpacked(r)).toBe(typeof data === 'object' && data !== null);
+        expect(isUnpackedAnnotated(r)).toBe(typeof data === 'object' && data !== null);
         expect(symbolFlatpackAnnotation in (r as object)).toBe(true);
         expect(Object.hasOwn(r as object, symbolFlatpackAnnotation)).toBe(true);
         const meta = expect.objectContaining({ flatpack: v, referenced: expect.any(RefCounter) });
