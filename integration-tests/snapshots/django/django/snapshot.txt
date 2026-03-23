@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["--issues-summary-report","**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2897, Issues found: 8686 in 933 files.
+ CSpell: Files checked: 2897, Issues found: 8628 in 931 files.
  exit code: 1
 django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 django/apps/registry.py:134:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -1021,12 +1021,6 @@ django/contrib/sitemaps/views.py:24:54     - Unknown word (noodp)      -- Robots
 django/contrib/sites/management.py:39:60     - Unknown word (incrementation) -- instead of relying on auto-incrementation,
 django/contrib/staticfiles/handlers.py:110:23    - Unknown word (awrapper)   -- async def awrapper():
 django/contrib/staticfiles/handlers.py:114:42    - Unknown word (awrapper)   -- streaming_content = awrapper()
-django/contrib/staticfiles/handlers.py:17:37     - Unknown word (ASGI)       -- methods used by WSGI and ASGI handlers.
-django/contrib/staticfiles/handlers.py:84:55     - Unknown word (ASGI)       -- StaticFilesHandlerMixin, ASGIHandler):
-django/contrib/staticfiles/handlers.py:84:7      - Unknown word (ASGI)       -- class ASGIStaticFilesHandler(StaticFiles
-django/contrib/staticfiles/handlers.py:86:5      - Unknown word (ASGI)       -- ASGI application which wraps
-django/contrib/staticfiles/handlers.py:9:27      - Unknown word (asgi)       -- django.core.handlers.asgi import ASGIHandler
-django/contrib/staticfiles/handlers.py:9:39      - Unknown word (ASGI)       -- handlers.asgi import ASGIHandler
 django/contrib/staticfiles/management/commands/runserver.py:14:16     - Unknown word (nostatic)   -- "--nostatic",
 django/contrib/staticfiles/storage.py:170:58    - Unknown word (myfont)     -- face hack, like url(myfont.eot?#iefix")
 django/contrib/staticfiles/storage.py:170:70    - Unknown word (iefix)      -- like url(myfont.eot?#iefix")
@@ -1046,13 +1040,6 @@ django/contrib/syndication/views.py:46:17     - Unknown word (feedgen)    -- fee
 django/contrib/syndication/views.py:48:9      - Unknown word (feedgen)    -- feedgen.write(response, "utf
 django/contrib/syndication/views.py:84:24     - Unknown word (argcount)   -- # Check co_argcount rather than try/excepting
 django/contrib/syndication/views.py:95:28     - Unknown word (argcount)   -- if not code.co_argcount and not isinstance(
-django/core/asgi.py:13:12     - Unknown word (ASGI)       -- return ASGIHandler()
-django/core/asgi.py:2:27      - Unknown word (asgi)       -- django.core.handlers.asgi import ASGIHandler
-django/core/asgi.py:2:39      - Unknown word (ASGI)       -- handlers.asgi import ASGIHandler
-django/core/asgi.py:5:9       - Unknown word (asgi)       -- def get_asgi_application():
-django/core/asgi.py:7:38      - Unknown word (ASGI)       -- interface to Django's ASGI support. Return an ASGI
-django/core/asgi.py:7:62      - Unknown word (ASGI)       -- ASGI support. Return an ASGI 3 callable.
-django/core/asgi.py:9:40      - Unknown word (ASGI)       -- django.core.handlers.ASGIHandler a public API
 django/core/cache/backends/base.py:177:15    - Unknown word (atouch)     -- async def atouch(self, key, timeout=DEFAULT
 django/core/cache/backends/base.py:197:9     - Unknown word (pgsql)      -- pgsql) this can be *much*
 django/core/cache/backends/base.py:265:15    - Unknown word (ahas)       -- async def ahas_key(self, key, version
@@ -1115,13 +1102,8 @@ django/core/files/storage/memory.py:2:43      - Unknown word (Soyland)    -- inm
 django/core/files/storage/memory.py:2:52      - Unknown word (Seán)       -- BSD) by Cody Soyland, Seán Hayes, Tore Birkeland
 django/core/files/storage/memory.py:2:69      - Unknown word (Birkeland)  -- Soyland, Seán Hayes, Tore Birkeland,
 django/core/files/storage/memory.py:3:10      - Unknown word (Presta)     -- and Nick Presta.
-django/core/handlers/asgi.py:147:7     - Unknown word (ASGI)       -- class ASGIHandler(base.BaseHandler
-django/core/handlers/asgi.py:148:20    - Unknown word (ASGI)       -- """Handler for ASGI requests."""
-django/core/handlers/asgi.py:150:21    - Unknown word (ASGI)       -- request_class = ASGIRequest
 django/core/handlers/asgi.py:185:43    - Unknown word (asend)      -- signals.request_started.asend(sender=self.__class
 django/core/handlers/asgi.py:213:48    - Unknown word (asend)      -- signals.request_finished.asend(sender=self.__class
-django/core/handlers/asgi.py:39:7      - Unknown word (ASGI)       -- class ASGIRequest(HttpRequest)
-django/core/handlers/asgi.py:41:50     - Unknown word (ASGI)       -- that decodes from an ASGI-standard request dict
 django/core/handlers/base.py:195:58    - Unknown word (subthread)  -- synchronous view, run it in a subthread.
 django/core/handlers/base.py:249:56    - Unknown word (subthread)  -- synchronous view, run it in a subthread
 django/core/handlers/wsgi.py:151:12    - Unknown word (repercent)  -- return repercent_broken_unicode(path
@@ -1195,7 +1177,6 @@ django/core/management/commands/runserver.py:113:38    - Unknown word (autoreloa
 django/core/management/commands/runserver.py:157:23    - Unknown word (EADDRINUSE)   -- errno.EADDRINUSE: "That port is already
 django/core/management/commands/runserver.py:158:23    - Unknown word (EADDRNOTAVAIL) -- errno.EADDRNOTAVAIL: "That IP address can
 django/core/management/commands/runserver.py:16:1      - Unknown word (naiveip)    -- naiveip_re = _lazy_re_compile
-django/core/management/commands/runserver.py:197:67    - Unknown word (ASGI)          -- a production WSGI or ASGI server "
 django/core/management/commands/runserver.py:51:16     - Unknown word (nothreading) -- "--nothreading",
 django/core/management/commands/runserver.py:57:16     - Unknown word (noreload)    -- "--noreload",
 django/core/management/commands/runserver.py:91:26     - Unknown word (naiveip)     -- m = re.match(naiveip_re, options["addrport
@@ -1920,9 +1901,6 @@ django/http/multipartparser.py:751:9     - Unknown word (boundarystream) -- boun
 django/http/multipartparser.py:752:27    - Unknown word (boundarystream) -- for sub_stream in boundarystream:
 django/http/request.py:269:44    - Unknown word (schemeless) -- an absolute url (but schemeless and domainless) for
 django/http/request.py:269:59    - Unknown word (domainless) -- (but schemeless and domainless) for the
-django/http/request.py:540:12    - Unknown word (asgi)       -- def to_asgi_name(cls, header):
-django/http/request.py:551:12    - Unknown word (asgi)       -- def to_asgi_names(cls, headers)
-django/http/request.py:553:20    - Unknown word (asgi)       -- cls.to_asgi_name(header_name): value
 django/http/request.py:817:66    - Unknown word (codepoint)  -- with Unicode "unknown" codepoint
 django/http/request.py:818:7     - Unknown word (ufffd)      -- (\ufffd).
 django/http/response.py:487:23    - Unknown word (awrapper)   -- async def awrapper():
@@ -2072,25 +2050,15 @@ django/templatetags/i18n.py:98:26     - Unknown word (asvar)      -- context[sel
 django/templatetags/tz.py:12:7      - Unknown word (datetimeobject) -- class datetimeobject(datetime):
 django/templatetags/tz.py:54:32     - Unknown word (exceptionsm)    -- Filters must never raise exceptionsm, so catch everything
 django/templatetags/tz.py:73:14     - Unknown word (datetimeobject) -- result = datetimeobject(
-django/test/client.py:1454:36   - Unknown word (asgi)          -- urlconf = getattr(response.asgi_request, "urlconf",
 django/test/client.py:1491:36   - Unknown word (ahandle)       -- response = await self._ahandle_redirects(
 django/test/client.py:1521:36   - Unknown word (ahandle)       -- response = await self._ahandle_redirects(
 django/test/client.py:1554:36   - Unknown word (ahandle)       -- response = await self._ahandle_redirects(
 django/test/client.py:1584:36   - Unknown word (ahandle)       -- response = await self._ahandle_redirects(
 django/test/client.py:1619:36   - Unknown word (ahandle)       -- response = await self._ahandle_redirects(
-django/test/client.py:16:27     - Unknown word (asgi)       -- django.core.handlers.asgi import ASGIRequest
-django/test/client.py:16:39     - Unknown word (ASGI)       -- handlers.asgi import ASGIRequest
 django/test/client.py:232:31    - Unknown word (asend)      -- await request_started.asend(sender=self.__class
-django/test/client.py:235:19    - Unknown word (ASGI)       -- request = ASGIRequest(scope, LimitedStream
-django/test/client.py:244:34    - Unknown word (ASGI)       -- Attach the originating ASGI request to the response
-django/test/client.py:246:18    - Unknown word (asgi)       -- response.asgi_request = request
 django/test/client.py:399:69    - Unknown word (doseq)      -- urlencode(query_params, doseq=True)
 django/test/client.py:665:61    - Unknown word (doseq)      -- urlencode(query_params, doseq=True)
-django/test/client.py:676:37    - Unknown word (ASGI)       -- lets you create mock ASGI-like Request objects
-django/test/client.py:685:19    - Unknown word (ASGI)       -- a) this makes ASGIRequest subclasses, and
-django/test/client.py:695:14    - Unknown word (asgi)       -- "asgi": {"version": "3.0"
 django/test/client.py:766:57    - Unknown word (doseq)      -- urlencode(query_params, doseq=True)
-django/test/client.py:774:41    - Unknown word (asgi)       -- update(HttpHeaders.to_asgi_names(headers))
 django/test/client.py:816:15    - Unknown word (asession)   -- async def asession(self):
 django/test/client.py:841:15    - Unknown word (alogin)     -- async def alogin(self, **credentials
 django/test/client.py:843:41    - Unknown word (aauthenticate) -- contrib.auth import aauthenticate
@@ -2914,9 +2882,6 @@ tests/admin_scripts/tests.py:1419:44   - Unknown word (sdict)      -- settings("
 tests/admin_scripts/tests.py:1426:44   - Unknown word (sdict)      -- settings("settings.py", sdict={"BAD_VAR": 'DATABASES
 tests/admin_scripts/tests.py:1453:26   - Unknown word (scriptz)    -- apps=["admin_scriptz.broken_app"],
 tests/admin_scripts/tests.py:1461:39   - Unknown word (scriptz)    -- assertOutput(err, "admin_scriptz")
-tests/admin_scripts/tests.py:1634:59   - Unknown word (ASGI)       -- a production WSGI or ASGI server instead."
-tests/admin_scripts/tests.py:1653:59   - Unknown word (ASGI)       -- a production WSGI or ASGI server instead."
-tests/admin_scripts/tests.py:1672:59   - Unknown word (ASGI)       -- a production WSGI or ASGI server instead."
 tests/admin_scripts/tests.py:1867:56   - Unknown word (trackback)  -- support --verbosity and --trackback options."""
 tests/admin_scripts/tests.py:1870:40   - Unknown word (trackback)  -- assertNotInOutput(out, "--trackback")
 tests/admin_scripts/tests.py:1983:25   - Unknown word (altert)     -- def test_help_short_altert(self):
@@ -3582,18 +3547,8 @@ tests/apps/tests.py:539:45    - Unknown word (nsapp)       -- join(base_location
 tests/apps/tests.py:546:49    - Unknown word (nsapp)       -- settings(INSTALLED_APPS=["nsapp"]):
 tests/apps/tests.py:547:51    - Unknown word (nsapp)       -- apps.get_app_config("nsapp")
 tests/apps/tests.py:558:30    - Unknown word (nsapp)       -- components of the "nsapp" package.
-tests/asgi/tests.py:12:49     - Unknown word (ASGI)       -- staticfiles.handlers import ASGIStaticFilesHandler
-tests/asgi/tests.py:13:18     - Unknown word (asgi)       -- from django.core.asgi import get_asgi_application
-tests/asgi/tests.py:13:34     - Unknown word (asgi)       -- core.asgi import get_asgi_application
-tests/asgi/tests.py:15:27     - Unknown word (asgi)       -- django.core.handlers.asgi import ASGIHandler,
-tests/asgi/tests.py:15:39     - Unknown word (ASGI)       -- handlers.asgi import ASGIHandler, ASGIRequest
-tests/asgi/tests.py:15:52     - Unknown word (ASGI)       -- import ASGIHandler, ASGIRequest
 tests/asgi/tests.py:188:24    - Unknown word (referer)    -- [b"referer", b"Scotland"],
 tests/asgi/tests.py:189:24    - Unknown word (referer)    -- [b"referer", b"Wales"],
-tests/asgi/tests.py:47:34     - Unknown word (asgi)       -- settings(ROOT_URLCONF="asgi.urls")
-tests/asgi/tests.py:48:7      - Unknown word (ASGI)       -- class ASGITest(SimpleTestCase)
-tests/asgi/tests.py:55:24     - Unknown word (asgi)       -- async def test_get_asgi_application(self):
-tests/asgi/tests.py:57:54     - Unknown word (ASGI)       -- returns a functioning ASGI callable.
 tests/asgi/urls.py:23:44     - Unknown word (REFERER)    -- request.META.get("HTTP_REFERER") or "",
 tests/async/test_async_auth.py:106:27    - Unknown word (aforce)        -- async def test_client_aforce_login(self):
 tests/async/test_async_auth.py:107:27    - Unknown word (aforce)        -- await self.client.aforce_login(self.test_user
@@ -4790,10 +4745,6 @@ tests/forms_tests/tests/test_forms.py:924:13    - Unknown word (Beatle)         
 tests/forms_tests/tests/test_forms.py:950:15    - Unknown word (Beatle)           -- class BeatleForm(Form):
 tests/forms_tests/tests/test_forms.py:961:23    - Unknown word (Beatle)           -- fields = list(BeatleForm()["name"])
 tests/forms_tests/tests/test_forms.py:989:15    - Unknown word (Beatle)           -- class BeatleForm(Form):
-tests/forms_tests/tests/test_formsets.py:1049:66   - Unknown word (Fernet)       -- inkFormSet(initial=[{"name": "Fernet and Coke"}])
-tests/forms_tests/tests/test_formsets.py:1054:58   - Unknown word (Fernet)       -- form-0-name" value="Fernet and Coke"
-tests/forms_tests/tests/test_formsets.py:1075:23   - Unknown word (Fernet)       -- {"name": "Fernet and Coke"},
-tests/forms_tests/tests/test_formsets.py:1087:24   - Unknown word (Fernet)       -- value="Fernet and Coke"></div>
 tests/forms_tests/tests/test_formsets.py:1344:40   - Unknown word (mgmt)         -- someone fiddles with the mgmt form data...
 tests/forms_tests/tests/test_formsets.py:287:41    - Unknown word (Decemberists) -- Calexico", "100"), ("The Decemberists", "")], initial_forms
 tests/forms_tests/tests/test_formsets.py:561:38    - Unknown word (Decemberists) -- choices-1-choice": "The Decemberists",
@@ -7722,12 +7673,6 @@ tests/staticfiles_tests/cases.py:42:49     - Unknown word (asvar)      -- self, 
 tests/staticfiles_tests/cases.py:43:55     - Unknown word (asvar)      -- template_snippet(path, asvar)
 tests/staticfiles_tests/cases.py:46:53     - Unknown word (asvar)      -- exc, path, result, asvar=False, **kwargs):
 tests/staticfiles_tests/test_finders.py:108:37    - Unknown word (currsize)   -- assertEqual(cache_info.currsize, 1)
-tests/staticfiles_tests/test_handlers.py:15:11     - Unknown word (ASGI)       -- class TestASGIStaticFilesHandler(StaticFiles
-tests/staticfiles_tests/test_handlers.py:1:49      - Unknown word (ASGI)       -- staticfiles.handlers import ASGIStaticFilesHandler
-tests/staticfiles_tests/test_handlers.py:20:19     - Unknown word (ASGI)       -- handler = ASGIStaticFilesHandler(ASGIHandler
-tests/staticfiles_tests/test_handlers.py:2:27      - Unknown word (asgi)       -- django.core.handlers.asgi import ASGIHandler
-tests/staticfiles_tests/test_handlers.py:2:39      - Unknown word (ASGI)       -- handlers.asgi import ASGIHandler
-tests/staticfiles_tests/test_handlers.py:9:8       - Unknown word (ASGI)       -- """ASGI application that returns
 tests/staticfiles_tests/test_management.py:186:14    - Unknown word (collectstatis) -- def test_collectstatis_check(self):
 tests/staticfiles_tests/test_storage.py:123:58    - Unknown word (iefix)      -- font.b9b105392eb8.eot?#iefix", content)
 tests/staticfiles_tests/test_storage.py:124:67    - Unknown word (Zbse)       -- e42714.svg#webfontIyfZbseF", content)
@@ -8139,8 +8084,6 @@ tests/template_tests/urls.py:26:61     - Unknown word (метка)      -- views
 tests/template_tests/urls.py:26:67     - Unknown word (оператора)  -- client2, name="метка_оператора_2"),
 tests/template_tests/utils.py:104:14    - Unknown word (otherclass) -- self.otherclass = OtherClass()
 tests/template_tests/utils.py:177:20    - Unknown word (Žćžšđ)      -- return "ŠĐĆŽćžšđ"
-tests/test_client/tests.py:102:37    - Unknown word (asgi)       -- assertIs(response_copy.asgi_request, response.asgi
-tests/test_client/tests.py:102:60    - Unknown word (asgi)       -- asgi_request, response.asgi_request)
 tests/test_client/tests.py:106:54    - Unknown word (ufffd)      -- get("/get_view/?var=1\ufffd")
 tests/test_client/tests.py:107:54    - Unknown word (ufffd)      -- response.context["var"], "1\ufffd")
 tests/test_client/tests.py:1141:42   - Unknown word (faketoken)      -- authorization": "Bearer faketoken",
@@ -8148,7 +8091,6 @@ tests/test_client/tests.py:1145:68   - Unknown word (faketoken)      -- authoriz
 tests/test_client/tests.py:1152:42   - Unknown word (faketoken)      -- Authorization": "Bearer faketoken",
 tests/test_client/tests.py:1156:68   - Unknown word (faketoken)      -- authorization"], "Bearer faketoken")
 tests/test_client/tests.py:1167:46   - Unknown word (faketoken)      -- authorization": "Bearer faketoken",
-tests/test_client/tests.py:1281:43   - Unknown word (asgi)           -- assertEqual(response.asgi_request.GET["example
 tests/test_client/tests.py:208:62    - Unknown word (Slartibartfast) -- headers["X-DJANGO-TEST"], "Slartibartfast")
 tests/test_client/tests.py:262:60    - Unknown word (Gladwell)       -- title><author>Malcolm Gladwell</author></book>
 tests/test_client/tests.py:270:62    - Unknown word (Gladwell)       -- content, b"Blink - Malcolm Gladwell")
