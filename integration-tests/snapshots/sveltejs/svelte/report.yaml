@@ -3,9 +3,9 @@ Repository: sveltejs/svelte
 Url: https://github.com/sveltejs/svelte.git
 Args: '["**"]'
 Summary:
-  files: 8589
-  filesWithIssues: 593
-  issues: 3981
+  files: 8615
+  filesWithIssues: 600
+  issues: 3993
   errors: 0
 Errors: []
 
@@ -18,8 +18,8 @@ issues:
   - "documentation/docs/01-introduction/03-svelte-files.md:34:20         behaviour       U       <!-- TODO describe behaviour of `export` -->"
   - "documentation/docs/02-runes/01-what-are-runes.md:5:21           ruːn    U       > [!NOTE] **rune** /ruːn/ _noun_"
   - "documentation/docs/02-runes/02-$state.md:24:10          proxified       U       State is proxified recursively until Svelte"
-  - "documentation/docs/02-runes/03-$derived.md:83:33        deriveds    U       Prior to Svelte 5.25, deriveds were read-only."
-  - "documentation/docs/02-runes/03-$derived.md:85:4         Deriveds    U       ## Deriveds and reactivity"
+  - "documentation/docs/02-runes/03-$derived.md:94:33        deriveds    U       Prior to Svelte 5.25, deriveds were read-only."
+  - "documentation/docs/02-runes/03-$derived.md:96:4         Deriveds    U       ## Deriveds and reactivity"
   - "documentation/docs/02-runes/04-$effect.md:242:252       initialisation      U       outside of the component initialisation phase."
   - "documentation/docs/02-runes/04-$effect.md:261:215       synchronise         U       particular, avoid using it to synchronise state. Instead of this"
   - "documentation/docs/02-runes/05-$props.md:219:20         firstname       U       <label for=\"{uid}-firstname\">First Name: </label"
@@ -50,7 +50,7 @@ issues:
   - "documentation/docs/03-template-syntax/14-transition.md:166:3        onintroend      U       onintroend={() => (status = 'intro"
   - "documentation/docs/03-template-syntax/14-transition.md:167:3        onoutroend      U       onoutroend={() => (status = 'outro"
   - "documentation/docs/03-template-syntax/15-in-and-out.md:6:255        outroed     U       reversing, if the block is outroed while the transition"
-  - "documentation/docs/03-template-syntax/19-await-expressions.md:105:11        octarine    U       color = 'octarine';"
+  - "documentation/docs/03-template-syntax/19-await-expressions.md:110:11        octarine    U       color = 'octarine';"
   - "documentation/docs/04-styling/03-custom-properties.md:18:28         desugars    U       above code essentially desugars to this:"
   - "documentation/docs/05-special-elements/01-svelte-boundary.md:114:50         stringifiable       U       function must return a JSON-stringifiable object which will be"
   - "documentation/docs/05-special-elements/07-svelte-options.md:13:111      mathml      U       default), \"svg\" or \"mathml\""
@@ -1667,8 +1667,8 @@ issues:
   - "packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:861:42       selectedcontent     U       considered descendants of <selectedcontent>, which clones the selected"
   - "packages/svelte/src/compiler/phases/2-analyze/css/utils.js:28:28        deopt       U       and we don't want to deopt on `condition`"
   - "packages/svelte/src/compiler/phases/2-analyze/css/utils.js:34:29        cslx        U       will be processed by cslx, in which case falsy"
-  - "packages/svelte/src/compiler/phases/2-analyze/index.js:728:18       nonstate    U       // warn on any nonstate declarations that are"
-  - "packages/svelte/src/compiler/phases/2-analyze/index.js:1031:14      optimise    U       // TODO optimise this better"
+  - "packages/svelte/src/compiler/phases/2-analyze/index.js:733:18       nonstate    U       // warn on any nonstate declarations that are"
+  - "packages/svelte/src/compiler/phases/2-analyze/index.js:1036:14      optimise    U       // TODO optimise this better"
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/RegularElement.js:44:72          qirk    U       stripped because of a qirk:"
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/constants.js:36:19       labelable       U       export const a11y_labelable = ["
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/constants.js:251:3       impp            U       'impp'"
@@ -1717,15 +1717,15 @@ issues:
   - "packages/svelte/src/internal/client/proxy.js:41:12          proxyable       U       // if non-proxyable, or is already a proxy"
   - "packages/svelte/src/internal/client/proxy.js:91:32          inspectable     U       /** @type {any} */ (inspectable_array(/** @type {any"
   - "packages/svelte/src/internal/client/reactivity/batch.js:57:14       travelling      U       * When time travelling (i.e. working in one"
-  - "packages/svelte/src/internal/client/reactivity/batch.js:279:78      unskipping      U       rescheduled through unskipping the skipped branches"
-  - "packages/svelte/src/internal/client/reactivity/batch.js:622:85      AFAICT          U       legacy `$:` effects AFAICT — we can remove later"
-  - "packages/svelte/src/internal/client/reactivity/batch.js:639:64      unskipped       U       because a branch is being unskipped,"
-  - "packages/svelte/src/internal/client/reactivity/batch.js:793:82      nullpointers    U       else we could run into nullpointers"
-  - "packages/svelte/src/internal/client/reactivity/batch.js:1095:32     thath           U       they depend on things thath changed"
-  - "packages/svelte/src/internal/client/reactivity/deriveds.js:124:6        deferreds       U       var deferreds = new Map();"
+  - "packages/svelte/src/internal/client/reactivity/batch.js:308:78      unskipping      U       rescheduled through unskipping the skipped branches"
+  - "packages/svelte/src/internal/client/reactivity/batch.js:708:85      AFAICT          U       legacy `$:` effects AFAICT — we can remove later"
+  - "packages/svelte/src/internal/client/reactivity/batch.js:725:64      unskipped       U       because a branch is being unskipped,"
+  - "packages/svelte/src/internal/client/reactivity/batch.js:879:82      nullpointers    U       else we could run into nullpointers"
+  - "packages/svelte/src/internal/client/reactivity/batch.js:1181:32     thath           U       they depend on things thath changed"
+  - "packages/svelte/src/internal/client/reactivity/deriveds.js:128:6        deferreds       U       var deferreds = new Map();"
   - "packages/svelte/src/internal/client/reactivity/effects.js:13:2          untracking      U       untracking,"
   - "packages/svelte/src/internal/client/reactivity/sources.js:277:63        overfiring      U       - this way we avoid overfiring."
-  - "packages/svelte/src/internal/client/runtime.js:135:90       depedencies (dependencies)      U       to avoid duplicating depedencies inside a reaction *"
+  - "packages/svelte/src/internal/client/runtime.js:136:90       depedencies (dependencies)      U       to avoid duplicating depedencies inside a reaction *"
   - "packages/svelte/src/internal/client/timing.js:12:5          bunder      U       // bunder will eval and remove"
   - "packages/svelte/src/internal/client/types.d.ts:9:8          hydratables     U       /** hydratables */"
   - "packages/svelte/src/internal/server/crypto.js:18:63         analysers       U       directly because static analysers will think we rely on"
@@ -1747,7 +1747,7 @@ issues:
   - "packages/svelte/src/internal/shared/clone.js:35:8           uncloned    U       let uncloned = slice.map((path)"
   - "packages/svelte/src/internal/shared/dev.js:49:9         posixified      U       const posixified = line.replaceAll('"
   - "packages/svelte/src/motion/public.d.ts:1:25         Unsubscriber    U       import { Readable, type Unsubscriber } from '../store/public"
-  - "packages/svelte/src/motion/tweened.js:163:31        tweens      U       wrapper for a value that tweens smoothly to its target"
+  - "packages/svelte/src/motion/tweened.js:162:31        tweens      U       wrapper for a value that tweens smoothly to its target"
   - "packages/svelte/src/reactivity/create-subscriber.js:79:13       subcribe (subscribe)    U       // re-subcribe unnecessarily and create"
   - "packages/svelte/src/reactivity/reactive-value.js:13:43          onsubscribe     U       ) => void) => void} onsubscribe"
   - "packages/svelte/src/reactivity/set.js:127:39        nilly       U       create sources willy-nilly to track all possible"
@@ -1918,6 +1918,7 @@ issues:
   - "packages/svelte/tests/runtime-runes/samples/async-derived-in-multiple-effects/Component.svelte:8:31         mulitple (multiple)     U       derived that depends on mulitple sources"
   - "packages/svelte/tests/runtime-runes/samples/async-each/_config.js:8:11          defg    U       <button>defg</button>"
   - "packages/svelte/tests/runtime-runes/samples/async-error/_config.js:31:78        wheee       U       button>step 3</button><h1>wheee</h1>'"
+  - "packages/svelte/tests/runtime-runes/samples/async-inspect-build/main.svelte:4:33        shouldnt (should not)       U       inspect after await shouldnt break builds\");"
   - "packages/svelte/tests/runtime-runes/samples/async-resolve-stale/_config.js:5:59         macrotasks      U       test because of the macrotasks in App.svelte"
   - "packages/svelte/tests/runtime-runes/samples/attribute-boolean-case-insensitivity/main.svelte:14:80          DISABLEPICTUREINPICTURE     U       val} PLAYSINLINE={val} DISABLEPICTUREINPICTURE={val} DISABLEREMOTEPLAYBACK"
   - "packages/svelte/tests/runtime-runes/samples/attribute-boolean-case-insensitivity/main.svelte:14:110         DISABLEREMOTEPLAYBACK       U       DISABLEPICTUREINPICTURE={val} DISABLEREMOTEPLAYBACK={val}></video>"
@@ -1957,7 +1958,6 @@ issues:
   - "packages/svelte/tests/runtime-runes/samples/proxy-set-accessor/_config.js:20:30         SVELTEY     U       equal(input.value, 'SVELTEY');"
   - "packages/svelte/tests/runtime-runes/samples/reactive-to-string/main.svelte:6:6          rmap    U       let rmap = new SvelteMap();"
   - "packages/svelte/tests/runtime-runes/samples/reactive-to-string/main.svelte:7:6          rset    U       let rset = new SvelteSet();"
-  - "packages/svelte/tests/runtime-runes/samples/set-context-after-mount/_config.js:13:64        shouldnt (should not)       U       experimental async but really shouldnt'"
   - "packages/svelte/tests/server-side-rendering/samples/contenteditable-bindings-escaped/_expected.html:1:51        pwnd    U       \">&lt;script>alert('pwnd')&lt;/script></div>"
   - "packages/svelte/tests/server-side-rendering/samples/contenteditable-bindings-escaped/main.svelte:2:22           scri    U       let data = $state(\"<scri\"+\"pt>alert('pwnd')<"
   - "packages/svelte/tests/server-side-rendering/samples/css-injected-options-minify/_expected_head.html:1:43        glmj    U       glmj\">.foo.svelte-1h3glmj {color:green;}.foo.svelte"
