@@ -64,4 +64,22 @@ describe('RefCounter', () => {
         expect(numCounter.get(1)).toBe(2);
         expect(numCounter.get(2)).toBe(1);
     });
+
+    it('should delete entries', () => {
+        counter.set('a', 3);
+        counter.set('b', 2);
+        expect(counter.delete('a')).toBe(true);
+        expect(counter.get('a')).toBe(0);
+        expect(counter.isReferenced('a')).toBe(false);
+        expect(counter.isReferenced('b')).toBe(true);
+        expect(counter.delete('c')).toBe(false);
+    });
+
+    it('should have a value', () => {
+        counter.set('a', 3);
+        counter.set('b', 2);
+        expect(counter.has('a')).toBe(true);
+        expect(counter.has('b')).toBe(true);
+        expect(counter.has('c')).toBe(false);
+    });
 });

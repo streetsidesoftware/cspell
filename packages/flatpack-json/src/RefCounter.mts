@@ -21,6 +21,10 @@ export class RefCounter<T> {
         this.#refCounts.set(value, count);
     }
 
+    has(value: T): boolean {
+        return this.#refCounts.has(value);
+    }
+
     get(value: T): number {
         return this.#refCounts.get(value) ?? 0;
     }
@@ -31,6 +35,10 @@ export class RefCounter<T> {
 
     clear(): void {
         this.#refCounts.clear();
+    }
+
+    delete(value: T): boolean {
+        return this.#refCounts.delete(value);
     }
 
     [Symbol.iterator](): IterableIterator<[T, number]> {
