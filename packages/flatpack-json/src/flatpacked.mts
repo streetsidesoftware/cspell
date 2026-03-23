@@ -6,6 +6,7 @@ import type {
     Flatpacked,
     FlatpackIndex,
     FlattenedElement,
+    ObjectElement,
     StringTableElement,
     UnpackMetaData,
 } from './types.mjs';
@@ -89,6 +90,16 @@ export function extractObjectKeyAndValueIndexes(elem: FlattenedElement): Flatpac
     return [];
 }
 
+type KeyValueIndexes = [key: FlatpackIndex, value: FlatpackIndex];
+
+export function extractObjectKeyAndValueIndexesFrom(elem: ObjectElement): KeyValueIndexes;
+export function extractObjectKeyAndValueIndexesFrom(elem: undefined): undefined;
+export function extractObjectKeyAndValueIndexesFrom(elem: FlattenedElement | undefined): KeyValueIndexes | undefined;
+export function extractObjectKeyAndValueIndexesFrom(elem: FlattenedElement | undefined): KeyValueIndexes | undefined {
+    if (!isObjectElement(elem)) return undefined;
+    return [elem[1], elem[2]];
+}
+
 export function getFlatpackedRootIdx(flatpack: Flatpacked): FlatpackIndex {
     let idx: FlatpackIndex = 1;
     if (isStringTableElement(flatpack[idx])) {
@@ -132,9 +143,17 @@ export function generateUnpackMetaData(flatpack: Flatpacked): UnpackMetaData {
         }
     }
 }
-export function isStringTableElement(elem: FlattenedElement): elem is StringTableElement {
+
+export function isStringTableElement(elem: FlattenedElement | undefined): elem is StringTableElement {
     if (!Array.isArray(elem)) {
         return false;
     }
     return elem[0] === ElementType.StringTable;
+}
+
+export function isObjectElement(elem: FlattenedElement | undefined): elem is ObjectElement {
+    if (!Array.isArray(elem)) {
+        return false;
+    }
+    return elem[0] === ElementType.Object;
 }

@@ -1,6 +1,10 @@
 import { CompactStorage } from './CompactStorage.mjs';
 import { FlatpackData } from './FlatpackData.mjs';
-import { extractObjectKeyAndValueIndexes, getFlatpackedRootIdx } from './flatpacked.mjs';
+import {
+    extractObjectKeyAndValueIndexes,
+    extractObjectKeyAndValueIndexesFrom,
+    getFlatpackedRootIdx,
+} from './flatpacked.mjs';
 import { optimizeFlatpacked } from './optimizeFlatpacked.mjs';
 import { RefCounter } from './RefCounter.mjs';
 import type { StringTableBuilder } from './stringTable.mjs';
@@ -229,15 +233,23 @@ export class CompactStorageV2 extends CompactStorage {
         }
 
         const idx = this.#reserverForValue(value);
-        const k = this.objectKeysOrValuesToIdx(entries.map(([key]) => key));
-        const v = this.objectKeysOrValuesToIdx(entries.map(([, value]) => value));
+        const kvp = this.#getObjectKeyValueIndexesFromMetaData(idx);
+        const k = this.objectKeysOrValuesToIdx(
+            entries.map(([key]) => key),
+            kvp?.[0],
+        );
+        const v = this.objectKeysOrValuesToIdx(
+            entries.map(([, value]) => value),
+            kvp?.[1],
+        );
         const element: ObjectElement = [ElementType.Object, k, v];
         return this.storeElement(value, idx, element);
     }
 
-    private objectKeysOrValuesToIdx(keys: Serializable[]): FlatpackIndex {
+    private objectKeysOrValuesToIdx(keys: Serializable[], idx: FlatpackIndex | undefined): FlatpackIndex {
         const element: ArrayElement = [ElementType.Array, ...this.mapValuesToIndexes(keys)];
-        const useIdx = this.cacheElement(undefined, element);
+        const cachedIdx = this.cacheElement(element, idx);
+        const useIdx = idx ?? cachedIdx;
         this.data.set(useIdx, element);
         return useIdx;
     }
@@ -258,7 +270,7 @@ export class CompactStorageV2 extends CompactStorage {
         idx: FlatpackIndex,
         element: CacheableElements,
     ): FlatpackIndex {
-        const useIdx = this.dedupe ? this.cacheElement(idx, element) : idx;
+        const useIdx = this.dedupe ? this.cacheElement(element, idx) : idx;
 
         if (useIdx !== idx) {
             this.data.delete(idx);
@@ -269,7 +281,7 @@ export class CompactStorageV2 extends CompactStorage {
         return idx;
     }
 
-    private cacheElement(elemIdx: FlatpackIndex | undefined, element: CacheableElements): FlatpackIndex {
+    private cacheElement(element: CacheableElements, elemIdx: FlatpackIndex | undefined): FlatpackIndex {
         const foundIdx = this.cachedElementsTrie.get(element);
         if (foundIdx === undefined) {
             const idx = elemIdx ?? this.data.reserve();
@@ -381,7 +393,7 @@ export class CompactStorageV2 extends CompactStorage {
     }
 
     #reserverForValue(value: Serializable, cacheValue = true): FlatpackIndex {
-        const valueIdx = this.#getValueIndexFromAnnotation(value);
+        const valueIdx = this.#getAvailableValueIndexFromAnnotation(value);
         const idx = valueIdx ?? this.data.reserve();
         this.data.markUsed(idx);
         if (cacheValue) {
@@ -390,10 +402,31 @@ export class CompactStorageV2 extends CompactStorage {
         return idx;
     }
 
+    #getAvailableValueIndexFromAnnotation(value: Serializable): FlatpackIndex | undefined {
+        const idx = this.#getValueIndexFromAnnotation(value);
+        return idx !== undefined && !this.data.isUsed(idx) ? idx : undefined;
+    }
+
     #getValueIndexFromAnnotation(value: Serializable): FlatpackIndex | undefined {
         const annotation = extractUnpackedAnnotation(value);
         if (!annotation || annotation.meta !== this.unpackMetaData) return undefined;
-        return this.data.isUsed(annotation.index) ? undefined : annotation.index && undefined;
+        return annotation.index;
+    }
+
+    #getSrcElementFromMetaData(idx: FlatpackIndex): FlattenedElement | undefined {
+        const flatpack = this.unpackMetaData?.flatpack;
+        return flatpack?.[idx];
+    }
+
+    #getObjectKeyValueIndexesFromMetaData(
+        idx: FlatpackIndex,
+    ): [key: FlatpackIndex | undefined, value: FlatpackIndex | undefined] | undefined {
+        const kvp = extractObjectKeyAndValueIndexesFrom(this.#getSrcElementFromMetaData(idx));
+        if (!kvp) return undefined;
+        const [k, v] = kvp;
+        const key = (k && this.data.claimOwnership(k, idx) === idx && k) || undefined;
+        const value = (v && this.data.claimOwnership(v, idx) === idx && v) || undefined;
+        return [key, value];
     }
 
     #setElement(value: FlattenedElement): FlatpackIndex {
