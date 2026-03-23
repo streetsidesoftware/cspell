@@ -35,15 +35,13 @@ jobs:
     steps:
       # Drafts your next Release notes as Pull Requests are merged into "main"
       - id: release-drafter
-        uses: release-drafter/release-drafter@6a93d829887aa2e0748befe2e808c66c0ec6e4c7 # v5
+        uses: release-drafter/release-drafter@139054aeaa9adc52ab36ddf67437541f039b88e2 # v7.1.1
         # (Optional) specify config name to use, relative to .github/. Default: release-drafter.yml
         # with:
         #   config-name: my-config.yml
         #   disable-autolabeler: true
         with:
           # See [Release Drafter is *sometimes* including unmerged PRs · Issue #917 · release-drafter/release-drafter](https://github.com/release-drafter/release-drafter/issues/917)
-          disable-releaser: false
-          disable-autolabeler: true
           commitish: ${{ env.REF_BRANCH }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
