@@ -1,4 +1,5 @@
-import { encodeTextToUtf8_32Rev, type TextCursor, type Utf8_32Rev } from './Utf8.ts';
+import type { TextCursor, Utf8_32Rev } from './Utf8.ts';
+import { encodeTextToUtf8_32Rev } from './Utf8.ts';
 
 /**
  * Represents the conversion state from text to utf8.

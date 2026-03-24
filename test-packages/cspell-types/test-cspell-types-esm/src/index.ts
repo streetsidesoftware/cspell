@@ -1,10 +1,5 @@
-import {
-    type Issue,
-    IssueType,
-    type MessageEmitter,
-    MessageTypes,
-    type SpellingErrorEmitter,
-} from '@cspell/cspell-types';
+import type { Issue, MessageEmitter, SpellingErrorEmitter } from '@cspell/cspell-types';
+import { IssueType, MessageTypes } from '@cspell/cspell-types';
 
 import { parserName } from './parser.js';
 

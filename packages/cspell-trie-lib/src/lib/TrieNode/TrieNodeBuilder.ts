@@ -1,4 +1,5 @@
-import { type BuilderCursor, insertWordsAtCursor, type TrieBuilder } from '../Builder/index.ts';
+import type { BuilderCursor, TrieBuilder } from '../Builder/index.ts';
+import { insertWordsAtCursor } from '../Builder/index.ts';
 import { TrieInfoBuilder } from '../ITrieNode/TrieInfo.ts';
 import type { PartialTrieOptions, TrieOptions } from '../trie.ts';
 import { assert } from '../utils/assert.ts';

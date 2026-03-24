@@ -3,13 +3,8 @@ import assert from 'node:assert';
 import type { CSpellSettings } from '@cspell/cspell-types';
 import { describe, test } from 'mocha';
 
-import {
-    type CSpellOptions,
-    defaultOptions,
-    defineCSpellConfig,
-    defineCSpellPluginOptions,
-    type Options,
-} from './options.cjs';
+import type { CSpellOptions, Options } from './options.cjs';
+import { defaultOptions, defineCSpellConfig, defineCSpellPluginOptions } from './options.cjs';
 
 describe('options', () => {
     test('Options are compatible with cspell-types', () => {

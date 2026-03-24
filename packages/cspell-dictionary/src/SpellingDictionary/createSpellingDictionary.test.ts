@@ -1,7 +1,8 @@
 import { promises as fs } from 'node:fs';
 
 import type { DictionaryInformation } from '@cspell/cspell-types';
-import { buildITrieFromWords, type ITrie, parseDictionaryLines } from 'cspell-trie-lib';
+import type { ITrie } from 'cspell-trie-lib';
+import { buildITrieFromWords, parseDictionaryLines } from 'cspell-trie-lib';
 import { describe, expect, test } from 'vitest';
 
 import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary.js';

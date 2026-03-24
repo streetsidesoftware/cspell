@@ -1,4 +1,5 @@
-import { opCombine, opCombine as opPipe, type Operator, opFilter, opMap } from '@cspell/cspell-pipe/sync';
+import type { Operator } from '@cspell/cspell-pipe/sync';
+import { opCombine, opCombine as opPipe, opFilter, opMap } from '@cspell/cspell-pipe/sync';
 import { createDictionaryLineParser } from 'cspell-trie-lib';
 import { uniqueFilter } from 'hunspell-reader';
 

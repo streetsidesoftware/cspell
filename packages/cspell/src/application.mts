@@ -12,7 +12,8 @@ import {
 } from 'cspell-lib';
 
 import { getReporter } from './cli-reporter.js';
-import { configInit, type InitOptions } from './config/index.js';
+import type { InitOptions } from './config/index.js';
+import { configInit } from './config/index.js';
 import { console } from './console.js';
 import type { TimedSuggestionsForWordResult } from './emitters/suggestionsEmitter.js';
 import { getFeatureFlags, parseFeatureFlags } from './featureFlags/index.js';

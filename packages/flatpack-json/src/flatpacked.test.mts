@@ -6,18 +6,15 @@ import {
     getFlatpackedRootIdx,
     getIndexesReferencedByElement,
 } from './flatpacked.mjs';
-import {
-    type ArrayBasedElements,
-    type ArrayElement,
-    dataHeaderV0_1,
-    dataHeaderV1_0,
-    dataHeaderV2_0,
-    ElementType,
-    type Flatpacked,
-    type ObjectElement,
-    type StringElement,
-    type StringTableElement,
+import type {
+    ArrayBasedElements,
+    ArrayElement,
+    Flatpacked,
+    ObjectElement,
+    StringElement,
+    StringTableElement,
 } from './types.mjs';
+import { dataHeaderV0_1, dataHeaderV1_0, dataHeaderV2_0, ElementType } from './types.mjs';
 
 describe('getIndexesReferencedByElement', () => {
     describe('Array element type', () => {

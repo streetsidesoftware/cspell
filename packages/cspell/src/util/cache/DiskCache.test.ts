@@ -1,6 +1,7 @@
 import { pathToFileURL } from 'node:url';
 
-import { afterEach, beforeEach, describe, expect, type Mock, test, vi } from 'vitest';
+import type { Mock } from 'vitest';
+import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 
 import * as fileHelper from '../../util/fileHelper.js';
 import type { CachedFileResult, CSpellCacheMeta, DiskCache } from './DiskCache.js';

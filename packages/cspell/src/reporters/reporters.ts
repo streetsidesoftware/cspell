@@ -1,20 +1,19 @@
 import assert from 'node:assert';
 
-import {
-    type CSpellReporter,
-    type CSpellReporterModule,
-    type CSpellSettings,
-    type FeaturesSupportedByReporter,
-    type FileSettings,
-    type Issue,
-    IssueType,
-    type ProgressFileComplete,
-    type ReporterConfiguration,
-    type ReporterSettings,
-    type ReportIssueOptions,
-    type RunResult,
-    unknownWordsChoices,
+import type {
+    CSpellReporter,
+    CSpellReporterModule,
+    CSpellSettings,
+    FeaturesSupportedByReporter,
+    FileSettings,
+    Issue,
+    ProgressFileComplete,
+    ReporterConfiguration,
+    ReporterSettings,
+    ReportIssueOptions,
+    RunResult,
 } from '@cspell/cspell-types';
+import { IssueType, unknownWordsChoices } from '@cspell/cspell-types';
 import { dynamicImport } from '@cspell/dynamic-import';
 
 import { pkgDir } from '../pkgInfo.js';

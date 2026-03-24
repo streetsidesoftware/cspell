@@ -4,6 +4,7 @@
 import cspellESLintPluginRecommended from '@cspell/eslint-plugin/recommended';
 import eslint from '@eslint/js';
 import { defineConfig } from 'eslint/config';
+import importPlugin from 'eslint-plugin-import';
 import nodePlugin from 'eslint-plugin-n';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import unicorn from 'eslint-plugin-unicorn';
@@ -235,7 +236,27 @@ export default defineConfig(
     },
     {
         files: ['**/*.{ts,mts,cts,tsx}'],
+        ignores: ['**/*.d.*'],
+        plugins: {
+            import: importPlugin,
+        },
+        languageOptions: {
+            parser: tsEslint.parser,
+            parserOptions: {
+                // project: true, // Uses your tsconfig.json
+            },
+        },
+        settings: {
+            'import/resolver': {
+                // This is the critical part for TypeScript support
+                typescript: {
+                    alwaysTryTypes: true,
+                },
+            },
+        },
         rules: {
+            'import/consistent-type-specifier-style': ['error', 'prefer-top-level'],
+            'import/no-duplicates': ['error', { 'prefer-inline': false }],
             '@typescript-eslint/no-import-type-side-effects': 'error',
             '@typescript-eslint/consistent-type-imports': [
                 'error',

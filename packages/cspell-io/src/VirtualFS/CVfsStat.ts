@@ -1,4 +1,5 @@
-import { FileType, type Stats } from '../models/Stats.js';
+import type { Stats } from '../models/Stats.js';
+import { FileType } from '../models/Stats.js';
 import { CFileType } from './CFileType.js';
 import type { VfsStat } from './VFileSystem.js';
 

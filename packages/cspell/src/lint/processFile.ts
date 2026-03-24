@@ -19,8 +19,7 @@ import {
     Text as cspellText,
 } from 'cspell-lib';
 
-import type { ProcessFileReporter } from '../reporters/LintFileResult.js';
-import type { LintFileResult } from '../reporters/LintFileResult.js';
+import type { LintFileResult, ProcessFileReporter } from '../reporters/LintFileResult.js';
 import { mergeReportIssueOptions, ReportItemCollector } from '../reporters/reporters.js';
 import type { CSpellLintResultCache } from '../util/cache/CSpellLintResultCache.js';
 import type { ConfigInfo } from '../util/configFileHelper.js';

@@ -2,12 +2,12 @@ import type { TrieInfo } from '../ITrieNode/TrieInfo.ts';
 import type { StringTable } from '../StringTable/StringTable.ts';
 import { measurePerf } from '../utils/performance.ts';
 import { TrieBlob } from './TrieBlob.ts';
+import type { TrieBlobNode32 } from './TrieBlobFormat.ts';
 import {
     NodeChildIndexRefShift,
     NodeHeaderNumChildrenMask,
     NodeHeaderNumChildrenShift,
     NodeMaskCharByte,
-    type TrieBlobNode32,
 } from './TrieBlobFormat.ts';
 
 type TrieBlobNode = number[] | TrieBlobNode32;

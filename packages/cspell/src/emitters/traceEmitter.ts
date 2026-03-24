@@ -7,7 +7,8 @@ import { console } from '../console.js';
 import type { TableRow } from '../util/table.js';
 import { tableToLines } from '../util/table.js';
 import type { DictionaryPathFormat } from './DictionaryPathFormat.js';
-import { formatDictionaryLocation, type PathInterface } from './helpers.js';
+import type { PathInterface } from './helpers.js';
+import { formatDictionaryLocation } from './helpers.js';
 
 export interface EmitTraceOptions {
     /** current working directory */

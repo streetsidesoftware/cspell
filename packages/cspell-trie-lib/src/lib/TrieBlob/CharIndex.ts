@@ -1,4 +1,5 @@
-import { encodeTextToUtf8, encodeToUtf8_32, type Utf8_32 } from './Utf8.ts';
+import type { Utf8_32 } from './Utf8.ts';
+import { encodeTextToUtf8, encodeToUtf8_32 } from './Utf8.ts';
 
 export type Utf8Seq = Readonly<number[]>;
 

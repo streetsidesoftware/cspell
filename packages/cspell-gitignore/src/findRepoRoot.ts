@@ -1,5 +1,6 @@
 import { toFileDirURL, toFilePathOrHref } from '@cspell/url';
-import { getDefaultVirtualFs, type VFileSystem } from 'cspell-io';
+import type { VFileSystem } from 'cspell-io';
+import { getDefaultVirtualFs } from 'cspell-io';
 
 /**
  * Find the git repository root directory.

@@ -4,8 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 import type { CSpellSettings, CSpellUserSettings, ImportFileRef, Source } from '@cspell/cspell-types';
 import type { CSpellConfigFileReaderWriter, ICSpellConfigFile, IO, TextFile } from 'cspell-config-lib';
-import { CSpellConfigFile, CSpellConfigFileWithErrors } from 'cspell-config-lib';
-import { createReaderWriter } from 'cspell-config-lib';
+import { createReaderWriter, CSpellConfigFile, CSpellConfigFileWithErrors } from 'cspell-config-lib';
 import { CSPELL_VFS_PROTOCOL, isUrlLike, toFileURL } from 'cspell-io';
 import { URI, Utils as UriUtils } from 'vscode-uri';
 

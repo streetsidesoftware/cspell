@@ -1,10 +1,10 @@
 import { opConcatMap, opMap, pipeSync } from '@cspell/cspell-pipe/sync';
-import { type CSpellUserSettings, type TextOffset, unknownWordsChoices } from '@cspell/cspell-types';
+import type { CSpellUserSettings, TextOffset } from '@cspell/cspell-types';
+import { unknownWordsChoices } from '@cspell/cspell-types';
 import { createInlineSpellingDictionary, createSuggestDictionary } from 'cspell-dictionary';
 import { describe, expect, test } from 'vitest';
 
-import { finalizeSettings } from '../Settings/index.js';
-import { createCSpellSettingsInternal as csi } from '../Settings/index.js';
+import { createCSpellSettingsInternal as csi, finalizeSettings } from '../Settings/index.js';
 import type { SpellingDictionaryOptions } from '../SpellingDictionary/index.js';
 import { createCollection, createSpellingDictionary, getDictionaryInternal } from '../SpellingDictionary/index.js';
 import { FreqCounter } from '../util/FreqCounter.js';

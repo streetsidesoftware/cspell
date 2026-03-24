@@ -5,8 +5,7 @@ import streamConsumers from 'node:stream/consumers';
 import { toFileDirURL, toFilePathOrHref, toFileURL, urlRelative } from '@cspell/url';
 import type { BufferEncoding } from 'cspell-io';
 import { getStat, readFileText as cioReadFile, toURL } from 'cspell-io';
-import type { Document } from 'cspell-lib';
-import type * as cspell from 'cspell-lib';
+import type { Document, SpellCheckFilePerf } from 'cspell-lib';
 import { fileToDocument, isBinaryFile as isUriBinaryFile } from 'cspell-lib';
 
 import { asyncAwait, asyncFlatten, asyncMap, asyncPipe, mergeAsyncIterables } from './async.js';
@@ -24,7 +23,7 @@ export interface FileInfo {
     errorCode?: string;
 }
 
-export type Perf = cspell.SpellCheckFilePerf;
+export type Perf = SpellCheckFilePerf;
 
 export function fileInfoToDocument(
     fileInfo: FileInfo,

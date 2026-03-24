@@ -6,7 +6,8 @@ import { ITrieImpl as ITrieClass, iTrieToStructuredStringLines } from './ITrie.t
 import type { ITrieNode } from './ITrieNode/ITrieNode.ts';
 import { parseDictionary, parseDictionaryLegacy } from './SimpleDictionaryParser.ts';
 import type { SuggestionOptions } from './suggestions/genSuggestionsOptions.ts';
-import { suggestionCollector, type SuggestionCollectorOptions } from './suggestions/suggestCollector.ts';
+import type { SuggestionCollectorOptions } from './suggestions/suggestCollector.ts';
+import { suggestionCollector } from './suggestions/suggestCollector.ts';
 import { clean } from './utils/clean.ts';
 import { normalizeWordToLowercase } from './utils/normalizeWord.ts';
 import { CompoundWordsMethod } from './walker/index.ts';

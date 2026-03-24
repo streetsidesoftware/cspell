@@ -1,12 +1,8 @@
-import { type StringTable, StringTableBuilder } from '../StringTable/StringTable.ts';
+import type { StringTable } from '../StringTable/StringTable.ts';
+import { StringTableBuilder } from '../StringTable/StringTable.ts';
 import { measurePerf } from '../utils/performance.ts';
-import {
-    NodeHeaderEOWMask,
-    NodeHeaderPrefixMask,
-    NodeHeaderPrefixShift,
-    NodeMaskCharByte,
-    type TrieBlobNode32,
-} from './TrieBlobFormat.ts';
+import type { TrieBlobNode32 } from './TrieBlobFormat.ts';
+import { NodeHeaderEOWMask, NodeHeaderPrefixMask, NodeHeaderPrefixShift, NodeMaskCharByte } from './TrieBlobFormat.ts';
 
 const MAX_AUTO_ADD_TO_STRING_TABLE = 4;
 

@@ -2,15 +2,8 @@ import assert from 'node:assert';
 
 import { getFlatpackedRootIdx, getIndexesReferencedByElement, isStringTableElement } from './flatpacked.mjs';
 import { StringTableBuilder } from './stringTable.mjs';
-import {
-    dataHeaderV2_0,
-    ElementType,
-    type EmptyElement,
-    type Flatpacked,
-    type FlatpackIndex,
-    type FlattenedElement,
-    type StringTableElement,
-} from './types.mjs';
+import type { EmptyElement, Flatpacked, FlatpackIndex, FlattenedElement, StringTableElement } from './types.mjs';
+import { dataHeaderV2_0, ElementType } from './types.mjs';
 
 const emptyElement: EmptyElement = [] as const;
 
