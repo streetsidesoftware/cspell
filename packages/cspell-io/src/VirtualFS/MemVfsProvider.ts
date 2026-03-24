@@ -1,5 +1,6 @@
 import { urlOrReferenceToUrl } from '../common/index.js';
-import type { DisposableEx, type FileReference, type FileResource, FileType, type Stats } from '../models/index.js';
+import type { DisposableEx, FileReference, FileResource, Stats } from '../models/index.js';
+import { FileType } from '../models/index.js';
 import { VFSNotFoundError, VFSNotSupported } from './errors.js';
 import type { FileSystemProviderInfo, UrlOrReference, VfsDirEntry } from './VFileSystem.js';
 import { FSCapabilityFlags } from './VFileSystem.js';

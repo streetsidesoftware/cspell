@@ -16,15 +16,8 @@ import {
     StringPrimitiveRefElement,
     SubStringRefElement,
 } from './RefElements.mjs';
-import type {
-    ArrayBasedElements,
-    type ArrayElement,
-    ElementType,
-    Flatpacked,
-    type FlattenedElement,
-    ObjectWrapperElement,
-    supportedHeaders,
-} from './types.mjs';
+import type { ArrayBasedElements, ArrayElement, Flatpacked, FlattenedElement, ObjectWrapperElement } from './types.mjs';
+import { ElementType, supportedHeaders } from './types.mjs';
 
 export function fromElement(elem: FlattenedElement, resolve: (index: number) => RefElements): RefElements {
     function handleArrayElement(element: ArrayBasedElements) {

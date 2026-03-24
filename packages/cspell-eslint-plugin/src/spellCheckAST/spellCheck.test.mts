@@ -4,12 +4,8 @@ import assert from 'node:assert';
 
 import type { UnknownWordsChoices } from 'cspell-lib';
 
-import type {
-    type mapReportToUnknownWordChoices,
-    ReportTypes,
-    spellCheck,
-    type SpellCheckOptions,
-} from './spellCheck.mjs';
+import type { mapReportToUnknownWordChoices, ReportTypes, SpellCheckOptions } from './spellCheck.mjs';
+import { spellCheck } from './spellCheck.mjs';
 
 type MapReportToUnknownWordChoicesConst = typeof mapReportToUnknownWordChoices;
 
