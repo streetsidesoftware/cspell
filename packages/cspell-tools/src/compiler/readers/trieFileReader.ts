@@ -1,7 +1,8 @@
 import { readFile } from 'node:fs/promises';
 import { gunzipSync } from 'node:zlib';
 
-import { decodeTrie, type ITrie } from 'cspell-trie-lib';
+import type { ITrie } from 'cspell-trie-lib';
+import { decodeTrie } from 'cspell-trie-lib';
 
 import type { DictionaryReader } from './ReaderOptions.ts';
 

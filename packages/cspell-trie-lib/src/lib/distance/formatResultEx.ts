@@ -1,6 +1,7 @@
 import type { ExResult } from './distanceAStarWeighted.ts';
 import { distanceAStarWeightedEx } from './distanceAStarWeighted.ts';
-import { createWeightCostCalculator, type WeightMap } from './weightedMaps.ts';
+import type { WeightMap } from './weightedMaps.ts';
+import { createWeightCostCalculator } from './weightedMaps.ts';
 
 function pL(s: string, w: number) {
     const strWidth = vizWidth(s);

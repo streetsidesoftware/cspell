@@ -7,8 +7,7 @@ import type { Linter } from 'eslint';
 import { RuleTester } from 'eslint';
 
 import type { Options as RuleOptions } from '../plugin/index.cjs';
-import { defineCSpellConfig, defineCSpellPluginOptions } from '../plugin/index.cjs';
-import Rule from '../plugin/index.cjs';
+import Rule, { defineCSpellConfig, defineCSpellPluginOptions } from '../plugin/index.cjs';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const root = path.resolve(__dirname, '../..');

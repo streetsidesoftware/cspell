@@ -10,12 +10,8 @@ import { TrieNodeTrie } from '../TrieNode/TrieNodeTrie.ts';
 import { cleanCopy } from '../utils/util.ts';
 import { CompoundWordsMethod } from '../walker/index.ts';
 import type { GenSuggestionOptions, SuggestionOptions } from './genSuggestionsOptions.ts';
-import {
-    compSuggestionResults,
-    isSuggestionResult,
-    suggestionCollector,
-    type SuggestionCollectorOptions,
-} from './suggestCollector.ts';
+import type { SuggestionCollectorOptions } from './suggestCollector.ts';
+import { compSuggestionResults, isSuggestionResult, suggestionCollector } from './suggestCollector.ts';
 import { genSuggestions, suggest } from './suggestTrieData.ts';
 
 describe('Validate Suggest', () => {

@@ -9,7 +9,8 @@ import { ansiWidth, pruneAnsiTextEnd, pruneAnsiTextStart } from '../util/ansi.js
 import type { TableCell, TableRow } from '../util/table.js';
 import { tableToLines } from '../util/table.js';
 import type { DictionaryPathFormat } from './DictionaryPathFormat.js';
-import { formatDictionaryLocation, type PathInterface } from './helpers.js';
+import type { PathInterface } from './helpers.js';
+import { formatDictionaryLocation } from './helpers.js';
 
 export interface EmitDictOptions {
     /** current working directory */

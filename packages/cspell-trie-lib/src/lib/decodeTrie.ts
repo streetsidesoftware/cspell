@@ -1,5 +1,6 @@
 import { decodeTrieData } from './io/index.ts';
-import { type ITrie, ITrieImpl } from './ITrie.ts';
+import type { ITrie } from './ITrie.ts';
+import { ITrieImpl } from './ITrie.ts';
 import type { ParseDictionaryOptions } from './SimpleDictionaryParser.ts';
 import { parseDictionary } from './SimpleDictionaryParser.ts';
 import { encodeITrieToBTrie } from './TrieBlob/index.ts';

@@ -18,8 +18,12 @@ import { toFileUrl } from '../util/url.js';
 import * as util from '../util/util.js';
 import { configSettingsFileVersion0_1, ENV_CSPELL_GLOB_ROOT } from './constants.js';
 import type { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from './internal/index.js';
-import { calcDictionaryDefsToLoad, mapDictDefsToInternal } from './internal/index.js';
-import { cleanCSpellSettingsInternal as csi, isCSpellSettingsInternal } from './internal/index.js';
+import {
+    calcDictionaryDefsToLoad,
+    cleanCSpellSettingsInternal as csi,
+    isCSpellSettingsInternal,
+    mapDictDefsToInternal,
+} from './internal/index.js';
 import { mergeList, mergeListUnique } from './mergeList.js';
 import { resolvePatterns } from './patterns.js';
 import { CwdUrlResolver } from './resolveCwd.js';

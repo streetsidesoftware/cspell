@@ -5,7 +5,8 @@ import { pathToFileURL } from 'node:url';
 import { createFilter, dataToEsm } from '@rollup/pluginutils';
 import type { CSpellConfigFileReaderWriter } from 'cspell-config-lib';
 import { createReaderWriter } from 'cspell-config-lib';
-import { createUnplugin, type UnpluginInstance } from 'unplugin';
+import type { UnpluginInstance } from 'unplugin';
+import { createUnplugin } from 'unplugin';
 
 import { CSpellDictionaryBundler } from './bundler.ts';
 import type { Options } from './options.ts';

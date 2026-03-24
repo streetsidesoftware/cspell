@@ -22,7 +22,8 @@ import { iTrieNodeIdToTrieBlobNodeRefParts, trieBlobNodeRefToITrieNodeId } from 
 import type { U8Array, U32Array } from './TypedArray.ts';
 import { createUint8ArrayCursor } from './TypedArrayCursor.ts';
 import { Utf8Accumulator } from './Utf8.ts';
-import { createTextToUtf8Cursor, type TextToUtf8Cursor } from './Utf8Cursor.ts';
+import type { TextToUtf8Cursor } from './Utf8Cursor.ts';
+import { createTextToUtf8Cursor } from './Utf8Cursor.ts';
 
 interface Ref extends TrieBlobNodeRef {
     /** the prefix bytes if they exist */

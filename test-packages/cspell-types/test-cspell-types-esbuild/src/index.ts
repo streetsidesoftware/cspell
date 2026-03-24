@@ -1,10 +1,5 @@
-import {
-    type Issue,
-    IssueType,
-    type MessageEmitter,
-    MessageTypes,
-    type SpellingErrorEmitter,
-} from '@cspell/cspell-types';
+import type { Issue, MessageEmitter, SpellingErrorEmitter } from '@cspell/cspell-types';
+import { IssueType, MessageTypes } from '@cspell/cspell-types';
 
 export function gatherIssues(text: string): Issue[] {
     const issues: Issue[] = [];

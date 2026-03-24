@@ -1,4 +1,5 @@
-import { type ITrie, parseDictionary } from 'cspell-trie-lib';
+import type { ITrie } from 'cspell-trie-lib';
+import { parseDictionary } from 'cspell-trie-lib';
 
 import type { Reader } from './ReaderOptions.ts';
 import { readTextFile } from './readTextFile.ts';

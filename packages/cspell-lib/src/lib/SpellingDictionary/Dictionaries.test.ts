@@ -6,9 +6,13 @@ import { describe, expect, test } from 'vitest';
 
 import { pathPackageRoot } from '../../test-util/test.locations.js';
 import { createDictionaryReferenceCollection } from '../Settings/DictionaryReferenceCollection.js';
-import { getDefaultBundledSettingsAsync, loadConfig } from '../Settings/index.js';
-import { createCSpellSettingsInternal as csi } from '../Settings/index.js';
-import { filterDictDefsToLoad, mapDictDefToInternal } from '../Settings/index.js';
+import {
+    createCSpellSettingsInternal as csi,
+    filterDictDefsToLoad,
+    getDefaultBundledSettingsAsync,
+    loadConfig,
+    mapDictDefToInternal,
+} from '../Settings/index.js';
 import * as Dictionaries from './Dictionaries.js';
 import { isSpellingDictionaryLoadError } from './SpellingDictionaryError.js';
 

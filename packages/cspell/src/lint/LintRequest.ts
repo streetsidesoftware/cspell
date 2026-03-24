@@ -1,6 +1,7 @@
 import * as path from 'node:path';
 
-import { type CSpellUserSettings, unknownWordsChoices, type UnknownWordsConfiguration } from '@cspell/cspell-types';
+import type { CSpellUserSettings, UnknownWordsConfiguration } from '@cspell/cspell-types';
+import { unknownWordsChoices } from '@cspell/cspell-types';
 
 import type { CSpellConfigFile, LinterCliOptions, LinterOptions } from '../options.js';
 import type { FinalizedReporter } from '../reporters/LintFileResult.js';

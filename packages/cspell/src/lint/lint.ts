@@ -10,7 +10,8 @@ import { toFileURL } from '@cspell/url';
 import chalk from 'chalk';
 import { dictionaryCacheEnableLogging, dictionaryCacheGetLog } from 'cspell-dictionary';
 import { findRepoRoot, GitIgnore } from 'cspell-gitignore';
-import { GlobMatcher, type GlobMatchOptions, type GlobPatternNormalized, type GlobPatternWithRoot } from 'cspell-glob';
+import type { GlobMatchOptions, GlobPatternNormalized, GlobPatternWithRoot } from 'cspell-glob';
+import { GlobMatcher } from 'cspell-glob';
 import type { Logger } from 'cspell-lib';
 import {
     ENV_CSPELL_GLOB_ROOT,
@@ -28,7 +29,8 @@ import { npmPackage } from '../pkgInfo.js';
 import type { FinalizedReporter } from '../reporters/index.js';
 import { LintReporter } from '../reporters/index.js';
 import { calcCacheSettings } from '../util/cache/index.js';
-import { type ConfigInfo, readConfig } from '../util/configFileHelper.js';
+import type { ConfigInfo } from '../util/configFileHelper.js';
+import { readConfig } from '../util/configFileHelper.js';
 import { CheckFailed, toApplicationError } from '../util/errors.js';
 import { findFiles, isFile, isNotDir, readFileListFiles, relativeToCwd, resolveFilename } from '../util/fileHelper.js';
 import type { GlobOptions } from '../util/glob.js';

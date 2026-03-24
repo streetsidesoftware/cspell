@@ -19,8 +19,11 @@ import type { TextDocument, TextDocumentLine, TextDocumentRef } from '../Models/
 import { documentUriToURL, updateTextDocument } from '../Models/TextDocument.js';
 import type { ValidationIssue } from '../Models/ValidationIssue.js';
 import { createPerfTimer, measurePerf } from '../perf/index.js';
-import type { ImportFileRefWithError } from '../Settings/index.js';
-import type { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Settings/index.js';
+import type {
+    CSpellSettingsInternal,
+    CSpellSettingsInternalFinalized,
+    ImportFileRefWithError,
+} from '../Settings/index.js';
 import {
     extractImportErrors,
     finalizeSettings,

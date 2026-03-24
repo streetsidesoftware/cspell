@@ -1,6 +1,7 @@
 import assert from 'node:assert';
 
-import { ElementType, type StringTableElement, type StringTableEntry } from './types.mjs';
+import type { StringTableElement, StringTableEntry } from './types.mjs';
+import { ElementType } from './types.mjs';
 
 export class StringTable {
     constructor(readonly stringTableElement: StringTableElement) {}

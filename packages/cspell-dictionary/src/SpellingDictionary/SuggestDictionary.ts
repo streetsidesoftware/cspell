@@ -13,7 +13,8 @@ import type {
     SuggestDictionary,
 } from './SpellingDictionary.js';
 import type { SuggestOptions } from './SuggestOptions.js';
-import { processEntriesToTyposDef, type TypoEntry, type TyposDef } from './Typos/index.js';
+import type { TypoEntry, TyposDef } from './Typos/index.js';
+import { processEntriesToTyposDef } from './Typos/index.js';
 import { extractAllSuggestions } from './Typos/util.js';
 
 export interface PreferredSuggestionResult extends SuggestionResult {

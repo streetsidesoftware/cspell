@@ -1,4 +1,5 @@
-import { type TextEncoding, toFileURL } from 'cspell-io';
+import type { TextEncoding } from 'cspell-io';
+import { toFileURL } from 'cspell-io';
 
 import { readTextFile } from '../fileSystem.js';
 import { toIterableIterator } from './iterableIteratorLib.js';

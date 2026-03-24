@@ -1,6 +1,7 @@
 import assert from 'node:assert';
 
 import type { CSpellSettings } from '@cspell/cspell-types';
+import type { Node as YamlNode, Pair } from 'yaml';
 import {
     Document as YamlDocument,
     isAlias,
@@ -9,8 +10,6 @@ import {
     isPair,
     isScalar,
     isSeq,
-    type Node as YamlNode,
-    type Pair,
     parseDocument,
     Scalar,
     stringify,
