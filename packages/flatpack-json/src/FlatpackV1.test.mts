@@ -1,13 +1,20 @@
 import { readFile } from 'node:fs/promises';
 
 import { findMatchingFileTypes } from '@cspell/filetypes';
+import { createPatch } from 'diff';
 import { describe, expect, test } from 'vitest';
 
-import { fromJSON, toJSON } from './index.js';
+import { FlatpackStoreV1 as FlatpackStore, stringify, toJSON } from './FlatpackV1.mjs';
+import { deepEqual } from './proxy.mjs';
+import { stringifyFlatpacked } from './stringify.mjs';
+import { fromJSON } from './unpack.mjs';
 
 const urlFileList = new URL('../fixtures/fileList.txt', import.meta.url);
+const baseFilename = new URL(import.meta.url).pathname.split('/').slice(-1).join('').split('.').slice(0, -2).join('.');
 
-describe('dehydrate', async () => {
+describe('Flatpack', async () => {
+    const sampleFiles = await sampleFileList();
+
     test.each`
         data
         ${undefined}
@@ -44,8 +51,12 @@ describe('dehydrate', async () => {
         ${[]}                                                                                           | ${undefined}
         ${[1, 2]}                                                                                       | ${undefined}
         ${['apple', 'banana', 'apple', 'banana', 'apple', 'pineapple']}                                 | ${undefined}
+        ${['apple pie', 'apple', 'banana', 'apple-banana']}                                             | ${undefined}
         ${new Set(['apple', 'banana', 'pineapple'])}                                                    | ${undefined}
+        ${new Set(['pineapple', 'apple', 'banana'])}                                                    | ${undefined}
+        ${[new Set(['a', 'b', 'c']), new Set(['a', 'b', 'c']), new Set(['a', 'b', 'c'])]}               | ${undefined}
         ${new Map([['apple', 1], ['banana', 2], ['pineapple', 3]])}                                     | ${undefined}
+        ${[new Map([['a', 1], ['b', 2], ['p', 3]]), new Map([['a', 1], ['b', 2], ['p', 3]])]}           | ${undefined}
         ${{}}                                                                                           | ${undefined}
         ${[{}, {}, {}]}                                                                                 | ${undefined}
         ${{ a: 1 }}                                                                                     | ${undefined}
@@ -63,21 +74,54 @@ describe('dehydrate', async () => {
         ${[1n, 2n, 1n, 2n, biMaxSafe, -biMaxSafe, biMaxSafe + 1n, -biMaxSafe - 1n]}                     | ${undefined}
         ${[Object(1n), Object('hello'), Object(/\w+/g), Object(null), Object([]), Object('hello')]}     | ${undefined}
     `('dehydrate $data $options', ({ data, options }) => {
-        const v = toJSON(data, { dedupe: options?.dedupe, format: 'V1' });
+        const v = toJSON(data, { dedupe: options?.dedupe });
         expect(v).toMatchSnapshot();
         expect(fromJSON(v)).toEqual(data);
         expect(fromJSON(JSON.parse(JSON.stringify(v)))).toEqual(data);
+        expect(fromJSON(JSON.parse(stringify(data)))).toEqual(data);
+        expect(fromJSON(JSON.parse(stringify(data, false)))).toEqual(data);
+
+        // Make sure we can rebuild from the Flattened data.
+        const fp = FlatpackStore.fromJSON(v);
+        expect(fromJSON(fp.toJSON())).toEqual(data);
+    });
+
+    test.each`
+        data
+        ${undefined}
+        ${'string'}
+        ${1}
+        ${1.1}
+        ${null}
+        ${true}
+        ${false}
+        ${[]}
+        ${[1, 2]}
+        ${['a', 'b', 'a', 'b']}
+        ${{}}
+        ${{ a: 1 }}
+        ${{ a: { b: 1 } }}
+        ${{ a: { a: 'a', b: 42 } }}
+        ${{ a: [1] }}
+    `('toJSON/fromJSON $data', ({ data }) => {
+        const v = toJSON(data);
+        expect(fromJSON(v)).toEqual(data);
+        const fp = FlatpackStore.fromJSON(v);
+        expect(fp.toJSON()).toEqual(v);
+        expect(fp.toValue()).toEqual(data);
     });
 
     test.each`
         name             | data                             | options
-        ${'fileList'}    | ${await sampleFileList()}        | ${undefined}
+        ${'fileList'}    | ${sampleFiles}                   | ${undefined}
         ${'fileObjects'} | ${await sampleFileListObjects()} | ${undefined}
     `('dehydrate $data $options', async ({ name, data, options }) => {
-        const v = toJSON(data, { dedupe: options?.dedupe, format: 'V1' });
-        await expect(v).toMatchFileSnapshot(`__snapshots__/${name}.jsonc`);
-        await expect(JSON.stringify(v) + '\n').toMatchFileSnapshot(`__snapshots__/${name}.json`);
-        await expect(JSON.stringify(data) + '\n').toMatchFileSnapshot(`__snapshots__/${name}.data.json`);
+        const v = toJSON(data, { dedupe: options?.dedupe });
+        await expect(stringifyFlatpacked(v)).toMatchFileSnapshot(`__snapshots__/${baseFilename}_${name}.jsonc`);
+        await expect(JSON.stringify(v) + '\n').toMatchFileSnapshot(`__snapshots__/${baseFilename}_${name}.json`);
+        await expect(JSON.stringify(data) + '\n').toMatchFileSnapshot(
+            `__snapshots__/${baseFilename}_${name}.data.json`,
+        );
         expect(fromJSON(v)).toEqual(data);
     });
 
@@ -99,6 +143,69 @@ describe('dehydrate', async () => {
         const hv = fromJSON(v) as typeof value;
         expect(hv.m).toEqual(value.m);
         expect(hv.n).toEqual(value.n);
+    });
+
+    const shortSampleFiles = sampleFiles.slice(0, 20);
+
+    test.each`
+        data                         | updated
+        ${undefined}                 | ${undefined}
+        ${'string'}                  | ${'string'}
+        ${'string'}                  | ${'string + more'}
+        ${['a', 'b', 'a', 'b']}      | ${['a', 'b', 'a', 'b', 'c']}
+        ${['a', 'b', 'a', 'b', 'c']} | ${['a']}
+        ${{}}                        | ${{ a: 'a' }}
+        ${{ a: 1 }}                  | ${{ a: 1, b: 1 }}
+        ${{ a: { b: 1 } }}           | ${{ a: { b: 1 }, b: { a: 1 } }}
+        ${{ a: { a: 'a', b: 42 } }}  | ${{ a: { a: 'a', b: 42 }, b: 42 }}
+        ${{ a: [1] }}                | ${{ a: [1, 2, 3] }}
+        ${shortSampleFiles}          | ${[...shortSampleFiles.slice(0, 10), ...shortSampleFiles.slice(15)]}
+        ${shortSampleFiles}          | ${[...shortSampleFiles.slice(0, 10), ...shortSampleFiles.slice(15), ...shortSampleFiles.slice(10, 15)]}
+    `('Flatpack diff $data, $updated', ({ data, updated }) => {
+        const fp = new FlatpackStore(data);
+        const v = fp.toJSON();
+        const s0 = fp.stringify();
+        fp.setValue(updated);
+        expect(fromJSON(fp.toJSON())).toEqual(updated);
+        const s1 = fp.stringify();
+        const diff = createPatch('data', s0, s1);
+        expect(diff).toMatchSnapshot();
+
+        const fp2 = FlatpackStore.fromJSON(v);
+        expect(fp2.toJSON()).toEqual(v);
+        fp2.setValue(updated);
+        expect(fromJSON(fp.toJSON())).toEqual(updated);
+        const s2 = fp.stringify();
+        expect(s2).toEqual(s1);
+    });
+
+    test('Updating the object used.', () => {
+        const data: Record<string, number | string | number[]> & { d: number[] } = { a: 1, b: 2, d: [1, 2, 3] };
+        const fp = new FlatpackStore(data);
+        const v = fp.toJSON();
+        expect(fromJSON(v)).toEqual(data);
+        data.c = 3;
+        data.d.push(4);
+        fp.setValue(data);
+        expect(fromJSON(fp.toJSON())).toEqual(data);
+        expect(fp.toJSON()).not.toEqual(v);
+    });
+
+    test.each`
+        data
+        ${undefined}
+        ${'string'}
+        ${1}
+        ${1.1}
+        ${null}
+        ${true}
+        ${false}
+        ${new Date()}
+        ${/[a-z]+/}
+    `('toValue $data', ({ data }) => {
+        const fp = new FlatpackStore(data);
+        expect(fp.toValue()).toEqual(data);
+        expect(fp._toValueProxy()).toEqual(data);
     });
 });
 
@@ -139,6 +246,11 @@ function sampleNestedData() {
         ['a', 'a'],
         ['b', 'b'],
     ]);
+
+    const values = ['apple', 'banana', 'pineapple'];
+    const rValues = [...values].reverse();
+    const cValues = [...values];
+
     return {
         a,
         b,
@@ -148,5 +260,41 @@ function sampleNestedData() {
         s,
         r,
         m,
+        ss: s,
+        mm: m,
+        values,
+        rValues,
+        cValues,
     };
 }
+
+describe('Flatpack value proxy', () => {
+    test.each`
+        value
+        ${undefined}
+        ${'string'}
+        ${1}
+        ${1.1}
+        ${null}
+        ${true}
+        ${false}
+        ${[]}
+        ${[1, 2]}
+        ${['a', 'b', 'a', 'b']}
+        ${{}}
+        ${{ a: 1 }}
+        ${{ a: { b: 1 } }}
+        ${{ a: { a: 'a', b: 42 } }}
+        ${{ a: [1] }}
+        ${new Set(['apple', 'banana', 'pineapple'])}
+        ${new Map([['apple', 1], ['banana', 2], ['pineapple', 3]])}
+        ${/[\p{L}\p{M}]+/gu}
+        ${new Date('2024-01-01')}
+    `('identity $value', ({ value }) => {
+        const fp = new FlatpackStore(value);
+        const proxy = fp._toValueProxy();
+        expect(deepEqual(proxy, value)).toBe(true);
+        !(proxy instanceof Map || proxy instanceof Set) && expect(proxy).toEqual(value);
+        expect(fp._toValueProxy()).toBe(proxy);
+    });
+});

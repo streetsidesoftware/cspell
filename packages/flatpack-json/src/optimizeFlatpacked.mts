@@ -1,53 +1,98 @@
 import assert from 'node:assert';
 
-import type { ArrayBasedElements, Flatpacked, FlattenedElement } from './types.mjs';
+import { getIndexesReferencedByElement } from './flatpacked.mjs';
+import { StringTableBuilder } from './stringTable.mjs';
+import type { ArrayBasedElements, Flatpacked, FlattenedElement, StringTableElement } from './types.mjs';
 import { ElementType, supportedHeaders } from './types.mjs';
 
 export function optimizeFlatpacked(data: Flatpacked): Flatpacked {
-    const [header] = data;
+    const [header, maybeStringTable] = data;
+
+    if (data[1] === undefined || data[2] === undefined) {
+        return data;
+    }
+
     if (!supportedHeaders.has(header)) {
         throw new Error('Invalid header');
     }
 
-    const elementRefs = data.map((element, index) => ({ origIndex: index, refCount: 0, index: 0, element }));
-    const indexToRefElement = new Map<number, RefElement>(elementRefs.entries());
+    const stringTable =
+        maybeStringTable && Array.isArray(maybeStringTable) && maybeStringTable[0] === ElementType.StringTable
+            ? (maybeStringTable as StringTableElement)
+            : undefined;
+
+    const startIndex = stringTable ? 2 : 1;
+
+    const elements = data.slice(startIndex);
+
+    const elementRefs = elements.map((element, index) => ({
+        origIndex: index + startIndex,
+        refCount: 0,
+        index: 0,
+        element,
+    }));
+    const indexToRefElement = new Map<number, RefElement>(
+        elementRefs.map((refElement) => [refElement.origIndex, refElement]),
+    );
+
+    const stringTableBuilder = new StringTableBuilder(stringTable);
 
     for (const refElement of elementRefs) {
-        if (refElement.origIndex === 0) {
-            continue;
-        }
-        const indexes = getRefIndexes(refElement.element);
+        const indexes = getIndexesReferencedByElement(refElement.element);
         for (const index of indexes) {
+            if (index < 0) {
+                stringTableBuilder.addRef(-index);
+                continue;
+            }
+            if (!index) {
+                continue;
+            }
             const ref = indexToRefElement.get(index);
             assert(ref, `Invalid reference index: ${index}`);
             ref.refCount++;
         }
     }
 
-    const sortedRefElements = elementRefs.slice(2).sort((a, b) => b.refCount - a.refCount || a.origIndex - b.origIndex);
-    sortedRefElements.forEach((refElement, index) => {
-        refElement.index = index + 2;
-    });
+    const sortedRefElements = elementRefs.sort((a, b) => b.refCount - a.refCount || a.origIndex - b.origIndex);
 
     const indexMap = new Map<number, number>([
         [0, 0],
         [1, 1],
     ]);
-    sortedRefElements.forEach((refElement) => {
-        indexMap.set(refElement.origIndex, refElement.index);
-    });
 
-    const optimizedElements: FlattenedElement[] = [
-        data[1],
-        ...sortedRefElements.map((refElement) => refElement.element),
-    ].map((element) => patchIndexes(element, indexMap));
+    if (stringTable) {
+        indexMap.set(2, 2);
+    }
 
-    return [header, ...optimizedElements];
+    for (const refElement of sortedRefElements) {
+        const idx = indexMap.get(refElement.origIndex) ?? indexMap.size;
+        refElement.index = idx;
+        indexMap.set(refElement.origIndex, idx);
+    }
+
+    for (const [oldStrIndex, newStrIndex] of stringTableBuilder.sortEntriesByRefCount()) {
+        if (!oldStrIndex || !newStrIndex) {
+            continue;
+        }
+        indexMap.set(-oldStrIndex, -newStrIndex);
+    }
+
+    const stringTableElements = stringTable ? [stringTableBuilder.build()] : [];
+
+    const result: Flatpacked = [header, ...stringTableElements];
+
+    for (const refElement of sortedRefElements) {
+        const element = patchIndexes(refElement.element, indexMap);
+        result[refElement.index] = element;
+    }
+
+    return result;
 }
 
 function patchIndexes(elem: FlattenedElement, indexMap: Map<number, number>): FlattenedElement {
     function mapIndex(index: number): number {
         const v = indexMap.get(index);
+        if (v === undefined && index < 0) return index;
         assert(v !== undefined, `Invalid index: ${index}`);
         return v;
     }
@@ -88,6 +133,7 @@ function patchIndexes(elem: FlattenedElement, indexMap: Map<number, number>): Fl
                 return [element[0], mapIndex(element[1])];
             }
         }
+        if (!element.length) return [];
         assert(false, 'Invalid element type');
     }
 
@@ -107,65 +153,8 @@ function patchIndexes(elem: FlattenedElement, indexMap: Map<number, number>): Fl
         return elem;
     }
 
-    assert(typeof elem === 'boolean');
+    assert(typeof elem === 'boolean', `Expected boolean, got ${typeof elem}`);
     return elem;
-}
-
-function getRefIndexes(elem: FlattenedElement): number[] {
-    function handleArrayElement(element: ArrayBasedElements): number[] {
-        switch (element[0]) {
-            case ElementType.Array: {
-                return element.slice(1);
-            }
-            case ElementType.Object: {
-                return element.slice(1).filter((v) => !!v);
-            }
-            case ElementType.String: {
-                return element.slice(1);
-            }
-            case ElementType.SubString: {
-                return [element[1]];
-            }
-            case ElementType.Set: {
-                return element.slice(1);
-            }
-            case ElementType.Map: {
-                return element.slice(1);
-            }
-            case ElementType.RegExp: {
-                return element.slice(1);
-            }
-            case ElementType.Date: {
-                return [];
-            }
-            case ElementType.BigInt: {
-                return [element[1]];
-            }
-        }
-        assert(false, 'Invalid element type');
-    }
-
-    if (Array.isArray(elem)) {
-        return handleArrayElement(elem as ArrayBasedElements);
-    }
-
-    if (typeof elem === 'string') {
-        return [];
-    }
-
-    if (typeof elem === 'number') {
-        return [];
-    }
-
-    if (typeof elem === 'object') {
-        if (elem === null) {
-            return [];
-        }
-        return [];
-    }
-
-    assert(typeof elem === 'boolean');
-    return [];
 }
 
 interface RefElement {

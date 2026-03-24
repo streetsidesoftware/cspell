@@ -1,6 +1,10 @@
 import assert from 'node:assert';
 
+import { getFlatpackedRootIdx } from './flatpacked.mjs';
+import { RefCounter } from './RefCounter.mjs';
+import { StringTable } from './stringTable.mjs';
 import type {
+    AnnotateUnpacked,
     ArrayBasedElements,
     ArrayElement,
     BigIntElement,
@@ -14,27 +18,53 @@ import type {
     PrimitiveMap,
     PrimitiveObject,
     PrimitiveSet,
+    RawUnpacked,
     RegExpElement,
     Serializable,
     SetElement,
     StringElement,
+    StringTableElement,
     SubStringElement,
     Unpacked,
+    UnpackedAnnotation,
+    UnpackMetaData,
 } from './types.mjs';
-import { ElementType, supportedHeaders } from './types.mjs';
+import { ElementType, supportedHeaders, symbolFlatpackAnnotation } from './types.mjs';
 
-export function fromJSON(data: Flatpacked): Unpacked {
+export function fromJSON<T = Unpacked>(data: Flatpacked): T {
     const [header] = data;
+    let stringTable: StringTable | undefined;
 
     if (!supportedHeaders.has(header)) {
         throw new Error('Invalid header');
     }
 
-    const cache = new Map<number | number[], Unpacked>([[0, undefined]]);
+    const cache = new Map<number, RawUnpacked>([[0, undefined]]);
+
     /**
-     * indexes that have been referenced by other objects.
+     * indexes that have been referenced by multiple objects.
+     * A count of 1 means that there is only 1 reference.
      */
-    const referenced = new Set<number>();
+    const referenced = new RefCounter<number>();
+
+    const meta: UnpackMetaData = {
+        flatpack: data,
+        referenced,
+        rootIndex: getFlatpackedRootIdx(data),
+    };
+
+    return idxToValue(1) as T;
+
+    function cacheValue(idx: number, value: RawUnpacked): RawUnpacked {
+        assert(!cache.has(idx), `Index ${idx} already exists in cache`);
+        cache.set(idx, value);
+        return value;
+    }
+
+    function getCachedValue(idx: number): RawUnpacked | undefined {
+        referenced.add(idx);
+        return cache.get(idx);
+    }
 
     function mergeKeysValues<K>(keys: readonly K[], values: PrimitiveArray): [K, Serializable][] {
         return keys.map((key, i) => [key, values[i]]);
@@ -43,7 +73,7 @@ export function fromJSON(data: Flatpacked): Unpacked {
     function toSet(idx: number, elem: SetElement): PrimitiveSet {
         const [_, k] = elem;
         const s: PrimitiveSet = k ? (new Set(idxToArr(k)) as PrimitiveSet) : new Set();
-        cache.set(idx, s);
+        cacheValue(idx, s);
         return s;
     }
 
@@ -51,7 +81,7 @@ export function fromJSON(data: Flatpacked): Unpacked {
         const [_, k, v] = elem;
         const m: PrimitiveMap =
             !k || !v ? new Map() : (new Map(mergeKeysValues(idxToArr(k), idxToArr(v))) as PrimitiveMap);
-        cache.set(idx, m);
+        cacheValue(idx, m);
         return m;
     }
 
@@ -60,42 +90,41 @@ export function fromJSON(data: Flatpacked): Unpacked {
         const p = idxToValue(pattern) as string;
         const f = idxToValue(flags) as string;
         const r = new RegExp(p, f);
-        cache.set(idx, r);
+        cacheValue(idx, r);
         return r;
     }
 
     function toBigInt(idx: number, elem: BigIntElement): bigint {
         const [_, vIdx] = elem;
         const r = BigInt(idxToValue(vIdx) as string | number);
-        cache.set(idx, r);
+        cacheValue(idx, r);
         return r;
     }
 
     function toDate(idx: number, elem: DateElement): Date {
         const [_, value] = elem;
         const r = new Date(value);
-        cache.set(idx, r);
+        cacheValue(idx, r);
         return r;
     }
 
     function toString(idx: number, elem: StringElement | string): string {
-        const s = typeof elem === 'string' ? elem : idxToValue(elem.slice(1) as number[]);
-        cache.set(idx, s);
-        return s as string;
+        const s = typeof elem === 'string' ? elem : idxToString(elem.slice(1) as number[]);
+        cacheValue(idx, s);
+        return s;
     }
 
     function toObj(idx: number, elem: ObjectElement): PrimitiveObject {
         const [_, k, v] = elem;
-
         // Object Wrapper
         if (!k && v) {
             const obj = Object(idxToValue(v));
-            cache.set(idx, obj);
+            cacheValue(idx, obj);
             return obj as PrimitiveObject;
         }
 
         const obj = {};
-        cache.set(idx, obj);
+        cacheValue(idx, obj);
 
         if (!k || !v) return obj;
         const keys = idxToArr(k) as string[];
@@ -105,6 +134,10 @@ export function fromJSON(data: Flatpacked): Unpacked {
     }
 
     function idxToArr(idx: number): PrimitiveArray {
+        const found = getCachedValue(idx);
+        if (found !== undefined) {
+            return found as PrimitiveArray;
+        }
         const element = data[idx];
         assert(isArrayElement(element));
         return toArr(idx, element);
@@ -113,12 +146,12 @@ export function fromJSON(data: Flatpacked): Unpacked {
     function toArr(idx: number, element: ArrayElement): PrimitiveArray {
         const placeHolder: Serializable[] = [];
         const refs = element.slice(1);
-        cache.set(idx, placeHolder);
+        cacheValue(idx, placeHolder);
         const arr = refs.map(idxToValue);
         // check if the array has been referenced by another object.
-        if (!referenced.has(idx)) {
+        if (!referenced.isReferenced(idx)) {
             // It has not, just replace the placeholder with the array.
-            cache.set(idx, arr);
+            cacheValue(idx, arr);
             return arr;
         }
         placeHolder.push(...arr);
@@ -128,17 +161,17 @@ export function fromJSON(data: Flatpacked): Unpacked {
     function handleSubStringElement(idx: number, refs: SubStringElement): string {
         const [_t, sIdx, len, offset = 0] = refs;
         const s = `${idxToValue(sIdx)}`.slice(offset, offset + len);
-        cache.set(idx, s);
+        cacheValue(idx, s);
         return s;
     }
 
     function handleArrayElement(
         idx: number,
         element: ArrayBasedElements,
-    ): PrimitiveArray | Primitive | PrimitiveObject | PrimitiveSet | PrimitiveMap {
+    ): PrimitiveArray | Primitive | PrimitiveObject | PrimitiveSet | PrimitiveMap | undefined {
         switch (element[0]) {
             case ElementType.Array: {
-                break;
+                return toArr(idx, element as ArrayElement);
             }
             case ElementType.Object: {
                 return toObj(idx, element as ObjectElement);
@@ -164,22 +197,27 @@ export function fromJSON(data: Flatpacked): Unpacked {
             case ElementType.BigInt: {
                 return toBigInt(idx, element as BigIntElement);
             }
+            case ElementType.StringTable: {
+                stringTable = new StringTable(element as StringTableElement);
+                return idxToValue(idx + 1);
+            }
         }
-        return toArr(idx, element as ArrayElement);
+        return undefined;
     }
 
-    function idxToValue(idx: number | number[]): Serializable {
-        if (!idx) return undefined;
-        const found = cache.get(idx);
-        if (found !== undefined) {
-            if (typeof idx === 'number') referenced.add(idx);
-            return found as Serializable;
-        }
+    function idxToString(idx: number[]): string {
+        return joinToString(idx.map((i) => idxToValue(i)));
+    }
 
-        if (Array.isArray(idx)) {
-            // it is a nested string;
-            const parts = idx.map((i) => idxToValue(i));
-            return joinToString(parts);
+    function idxToValue(idx: number): Unpacked {
+        if (!idx) return undefined;
+        if (idx < 0) {
+            referenced.add(idx);
+            return stringTable?.get(-idx);
+        }
+        const found = getCachedValue(idx);
+        if (found !== undefined) {
+            return annotateUnpacked(found, { meta, index: idx });
         }
 
         const element = data[idx];
@@ -187,17 +225,19 @@ export function fromJSON(data: Flatpacked): Unpacked {
         if (typeof element === 'object') {
             // eslint-disable-next-line unicorn/no-null
             if (element === null) return null;
-            if (Array.isArray(element)) return handleArrayElement(idx, element as ArrayBasedElements);
-            return {};
+            if (Array.isArray(element))
+                return annotateUnpacked(handleArrayElement(idx, element as ArrayBasedElements), {
+                    meta,
+                    index: idx,
+                });
+            return annotateUnpacked<PrimitiveObject>({}, { meta, index: idx });
         }
         return element;
     }
-
-    return idxToValue(1);
 }
 
 function joinToString(parts: PrimitiveArray): string {
-    return parts.map((a) => (Array.isArray(a) ? joinToString(a) : a)).join('');
+    return parts.flat().join('');
 }
 
 function isArrayElement(value: FlattenedElement): value is ArrayElement {
@@ -206,4 +246,15 @@ function isArrayElement(value: FlattenedElement): value is ArrayElement {
 
 export function parse(data: string): Unpacked {
     return fromJSON(JSON.parse(data));
+}
+
+function annotateUnpacked<T extends RawUnpacked>(value: T, meta: UnpackedAnnotation): AnnotateUnpacked<T> {
+    if (value && typeof value === 'object') {
+        if (Object.hasOwn(value, symbolFlatpackAnnotation)) {
+            return value as AnnotateUnpacked<T>;
+        }
+
+        return Object.defineProperty(value, symbolFlatpackAnnotation, { value: meta }) as AnnotateUnpacked<T>;
+    }
+    return value as AnnotateUnpacked<T>;
 }

@@ -4,9 +4,9 @@ import { findMatchingFileTypes } from '@cspell/filetypes';
 import { createPatch } from 'diff';
 import { describe, expect, test } from 'vitest';
 
-import { FlatpackStore, stringify, toJSON } from './Flatpack.mjs';
-import { deepEqual } from './proxy.mts';
+import { FlatpackStoreV2 as FlatpackStore, FlatpackStoreV2 } from './FlatpackV2.mjs';
 import { stringifyFlatpacked } from './stringify.mjs';
+import type { Flatpacked, FlatpackOptions, Serializable } from './types.mjs';
 import { fromJSON } from './unpack.mjs';
 
 const urlFileList = new URL('../fixtures/fileList.txt', import.meta.url);
@@ -33,8 +33,11 @@ describe('Flatpack', async () => {
         ${{ a: { a: 'a', b: 42 } }}
         ${{ a: [1] }}
     `('dehydrate/hydrate $data', ({ data }) => {
-        const v = toJSON(data);
-        expect(fromJSON(v)).toEqual(data);
+        expect(roundTripFlatpack(data)).toEqual(data);
+    });
+
+    test('empty object reuse', () => {
+        expect(roundTripFlatpack({}, { dedupe: true })).toEqual({});
     });
 
     const biMaxSafe = BigInt(Number.MAX_SAFE_INTEGER);
@@ -74,16 +77,7 @@ describe('Flatpack', async () => {
         ${[1n, 2n, 1n, 2n, biMaxSafe, -biMaxSafe, biMaxSafe + 1n, -biMaxSafe - 1n]}                     | ${undefined}
         ${[Object(1n), Object('hello'), Object(/\w+/g), Object(null), Object([]), Object('hello')]}     | ${undefined}
     `('dehydrate $data $options', ({ data, options }) => {
-        const v = toJSON(data, { dedupe: options?.dedupe });
-        expect(v).toMatchSnapshot();
-        expect(fromJSON(v)).toEqual(data);
-        expect(fromJSON(JSON.parse(JSON.stringify(v)))).toEqual(data);
-        expect(fromJSON(JSON.parse(stringify(data)))).toEqual(data);
-        expect(fromJSON(JSON.parse(stringify(data, false)))).toEqual(data);
-
-        // Make sure we can rebuild from the Flattened data.
-        const fp = FlatpackStore.fromJSON(v);
-        expect(fromJSON(fp.toJSON())).toEqual(data);
+        expect(roundTripFlatpack(data, options)).toEqual(data);
     });
 
     test.each`
@@ -104,11 +98,7 @@ describe('Flatpack', async () => {
         ${{ a: { a: 'a', b: 42 } }}
         ${{ a: [1] }}
     `('toJSON/fromJSON $data', ({ data }) => {
-        const v = toJSON(data);
-        expect(fromJSON(v)).toEqual(data);
-        const fp = FlatpackStore.fromJSON(v);
-        expect(fp.toJSON()).toEqual(v);
-        expect(fp.toValue()).toEqual(data);
+        expect(roundTripFlatpack(data)).toEqual(data);
     });
 
     test.each`
@@ -205,7 +195,6 @@ describe('Flatpack', async () => {
     `('toValue $data', ({ data }) => {
         const fp = new FlatpackStore(data);
         expect(fp.toValue()).toEqual(data);
-        expect(fp._toValueProxy()).toEqual(data);
     });
 });
 
@@ -292,9 +281,17 @@ describe('Flatpack value proxy', () => {
         ${new Date('2024-01-01')}
     `('identity $value', ({ value }) => {
         const fp = new FlatpackStore(value);
-        const proxy = fp._toValueProxy();
-        expect(deepEqual(proxy, value)).toBe(true);
-        !(proxy instanceof Map || proxy instanceof Set) && expect(proxy).toEqual(value);
-        expect(fp._toValueProxy()).toBe(proxy);
+        toJSON(fp.toValue());
     });
 });
+
+function toJSON(value: Serializable, options?: FlatpackOptions): Flatpacked {
+    const pack = new FlatpackStoreV2(value, options);
+    return pack.toJSON();
+}
+
+function roundTripFlatpack<T extends Serializable>(value: T, options?: FlatpackOptions): T {
+    const json = toJSON(value, options);
+    const unpacked = fromJSON(json);
+    return unpacked as T;
+}

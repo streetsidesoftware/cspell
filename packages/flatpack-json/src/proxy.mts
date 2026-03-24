@@ -154,7 +154,6 @@ export function proxyMap<K, V>(
 
         set(key: K, value: V): this {
             const r = super.set(key, value);
-            console.log('set', key, value);
             onUpdate?.(this, key, value);
             return r;
         }

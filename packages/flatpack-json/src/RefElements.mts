@@ -4,7 +4,7 @@ import type {
     ArrayElement,
     BigIntElement,
     DateElement,
-    Index,
+    FlatpackIndex,
     MapElement,
     ObjectElement,
     ObjectWrapperElement,
@@ -21,7 +21,7 @@ export interface BaseRef {
     id: number;
 }
 
-export type FnIndexLookup = (ref: RefElements | undefined) => Index;
+export type FnIndexLookup = (ref: RefElements | undefined) => FlatpackIndex;
 
 export interface RefElement<T> extends BaseRef {
     toElement(lookupFn: FnIndexLookup): T;

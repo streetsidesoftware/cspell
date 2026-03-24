@@ -3,9 +3,12 @@ import { readFile } from 'node:fs/promises';
 import { findMatchingFileTypes } from '@cspell/filetypes';
 import { describe, expect, test } from 'vitest';
 
-import { fromJSON, toJSON } from './index.js';
+import { stringify, toJSON } from './storageV1.mjs';
+import { stringifyFlatpacked } from './stringify.mjs';
+import { fromJSON } from './unpack.mjs';
 
 const urlFileList = new URL('../fixtures/fileList.txt', import.meta.url);
+const baseFilename = 'storage';
 
 describe('dehydrate', async () => {
     test.each`
@@ -45,6 +48,7 @@ describe('dehydrate', async () => {
         ${[1, 2]}                                                                                       | ${undefined}
         ${['apple', 'banana', 'apple', 'banana', 'apple', 'pineapple']}                                 | ${undefined}
         ${new Set(['apple', 'banana', 'pineapple'])}                                                    | ${undefined}
+        ${new Set(['pineapple', 'apple', 'banana'])}                                                    | ${undefined}
         ${new Map([['apple', 1], ['banana', 2], ['pineapple', 3]])}                                     | ${undefined}
         ${{}}                                                                                           | ${undefined}
         ${[{}, {}, {}]}                                                                                 | ${undefined}
@@ -63,10 +67,12 @@ describe('dehydrate', async () => {
         ${[1n, 2n, 1n, 2n, biMaxSafe, -biMaxSafe, biMaxSafe + 1n, -biMaxSafe - 1n]}                     | ${undefined}
         ${[Object(1n), Object('hello'), Object(/\w+/g), Object(null), Object([]), Object('hello')]}     | ${undefined}
     `('dehydrate $data $options', ({ data, options }) => {
-        const v = toJSON(data, { dedupe: options?.dedupe, format: 'V1' });
+        const v = toJSON(data, { dedupe: options?.dedupe });
         expect(v).toMatchSnapshot();
         expect(fromJSON(v)).toEqual(data);
         expect(fromJSON(JSON.parse(JSON.stringify(v)))).toEqual(data);
+        expect(fromJSON(JSON.parse(stringify(data)))).toEqual(data);
+        expect(fromJSON(JSON.parse(stringify(data, false)))).toEqual(data);
     });
 
     test.each`
@@ -74,10 +80,12 @@ describe('dehydrate', async () => {
         ${'fileList'}    | ${await sampleFileList()}        | ${undefined}
         ${'fileObjects'} | ${await sampleFileListObjects()} | ${undefined}
     `('dehydrate $data $options', async ({ name, data, options }) => {
-        const v = toJSON(data, { dedupe: options?.dedupe, format: 'V1' });
-        await expect(v).toMatchFileSnapshot(`__snapshots__/${name}.jsonc`);
-        await expect(JSON.stringify(v) + '\n').toMatchFileSnapshot(`__snapshots__/${name}.json`);
-        await expect(JSON.stringify(data) + '\n').toMatchFileSnapshot(`__snapshots__/${name}.data.json`);
+        const v = toJSON(data, { dedupe: options?.dedupe });
+        await expect(stringifyFlatpacked(v)).toMatchFileSnapshot(`__snapshots__/${baseFilename}_${name}.jsonc`);
+        await expect(JSON.stringify(v) + '\n').toMatchFileSnapshot(`__snapshots__/${baseFilename}_${name}.json`);
+        await expect(JSON.stringify(data) + '\n').toMatchFileSnapshot(
+            `__snapshots__/${baseFilename}_${name}.data.json`,
+        );
         expect(fromJSON(v)).toEqual(data);
     });
 
@@ -139,6 +147,11 @@ function sampleNestedData() {
         ['a', 'a'],
         ['b', 'b'],
     ]);
+
+    const values = ['apple', 'banana', 'pineapple'];
+    const rValues = [...values].reverse();
+    const cValues = [...values];
+
     return {
         a,
         b,
@@ -148,5 +161,10 @@ function sampleNestedData() {
         s,
         r,
         m,
+        ss: s,
+        mm: m,
+        values,
+        rValues,
+        cValues,
     };
 }
