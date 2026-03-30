@@ -3,7 +3,7 @@ Repository: sveltejs/svelte
 Url: https://github.com/sveltejs/svelte.git
 Args: '["**"]'
 Summary:
-  files: 8615
+  files: 8669
   filesWithIssues: 600
   issues: 3993
   errors: 0
@@ -20,10 +20,10 @@ issues:
   - "documentation/docs/02-runes/02-$state.md:24:10          proxified       U       State is proxified recursively until Svelte"
   - "documentation/docs/02-runes/03-$derived.md:94:33        deriveds    U       Prior to Svelte 5.25, deriveds were read-only."
   - "documentation/docs/02-runes/03-$derived.md:96:4         Deriveds    U       ## Deriveds and reactivity"
-  - "documentation/docs/02-runes/04-$effect.md:242:252       initialisation      U       outside of the component initialisation phase."
-  - "documentation/docs/02-runes/04-$effect.md:261:215       synchronise         U       particular, avoid using it to synchronise state. Instead of this"
-  - "documentation/docs/02-runes/05-$props.md:219:20         firstname       U       <label for=\"{uid}-firstname\">First Name: </label"
-  - "documentation/docs/02-runes/05-$props.md:222:20         lastname        U       <label for=\"{uid}-lastname\">Last Name: </label"
+  - "documentation/docs/02-runes/04-$effect.md:261:252       initialisation      U       outside of the component initialisation phase."
+  - "documentation/docs/02-runes/04-$effect.md:280:215       synchronise         U       particular, avoid using it to synchronise state. Instead of this"
+  - "documentation/docs/02-runes/05-$props.md:236:20         firstname       U       <label for=\"{uid}-firstname\">First Name: </label"
+  - "documentation/docs/02-runes/05-$props.md:239:20         lastname        U       <label for=\"{uid}-lastname\">Last Name: </label"
   - "documentation/docs/02-runes/08-$host.md:32:2        ondecrement     U       ondecrement={() => count -= 1}"
   - "documentation/docs/02-runes/08-$host.md:33:2        onincrement     U       onincrement={() => count += 1}"
   - "documentation/docs/03-template-syntax/01-basic-markup.md:9:66           capitalised     U       regular HTML element. A capitalised tag or a tag that uses"
@@ -33,7 +33,7 @@ issues:
   - "documentation/docs/03-template-syntax/06-snippet.md:15:128      duplicative     U       Instead of writing duplicative code like [this](/playground"
   - "documentation/docs/03-template-syntax/08-@html.md:14:216        unsanitized     U       xss/). Never render unsanitized content."
   - "documentation/docs/03-template-syntax/12-bind.md:7:80           lvalue      U       expression` is an [_lvalue_](https://press.rebus"
-  - "documentation/docs/03-template-syntax/12-bind.md:167:60         Guac        U       group={fillings} value=\"Guac (extra)\" /> Guac (extra"
+  - "documentation/docs/03-template-syntax/12-bind.md:173:60         Guac        U       group={fillings} value=\"Guac (extra)\" /> Guac (extra"
   - "documentation/docs/03-template-syntax/13-use.md:14:11       myaction        U       function myaction(node) {"
   - "documentation/docs/03-template-syntax/13-use.md:61:7        onswiperight    U       * onswiperight: (e: CustomEvent) ="
   - "documentation/docs/03-template-syntax/13-use.md:62:7        onswipeleft     U       * onswipeleft: (e: CustomEvent) ="
@@ -50,7 +50,7 @@ issues:
   - "documentation/docs/03-template-syntax/14-transition.md:166:3        onintroend      U       onintroend={() => (status = 'intro"
   - "documentation/docs/03-template-syntax/14-transition.md:167:3        onoutroend      U       onoutroend={() => (status = 'outro"
   - "documentation/docs/03-template-syntax/15-in-and-out.md:6:255        outroed     U       reversing, if the block is outroed while the transition"
-  - "documentation/docs/03-template-syntax/19-await-expressions.md:110:11        octarine    U       color = 'octarine';"
+  - "documentation/docs/03-template-syntax/19-await-expressions.md:113:11        octarine    U       color = 'octarine';"
   - "documentation/docs/04-styling/03-custom-properties.md:18:28         desugars    U       above code essentially desugars to this:"
   - "documentation/docs/05-special-elements/01-svelte-boundary.md:114:50         stringifiable       U       function must return a JSON-stringifiable object which will be"
   - "documentation/docs/05-special-elements/07-svelte-options.md:13:111      mathml      U       default), \"svg\" or \"mathml\""
@@ -382,7 +382,7 @@ issues:
   - "packages/svelte/package.json:149:57         treeshakeability    U       node scripts/check-treeshakeability.js\","
   - "packages/svelte/package.json:153:7          jridgewell          U       \"@jridgewell/trace-mapping\": \"^0"
   - "packages/svelte/package.json:177:6          axobject            U       \"axobject-query\": \"^4.1.0\","
-  - "packages/svelte/package.json:181:6          esrap               U       \"esrap\": \"^2.2.2\","
+  - "packages/svelte/package.json:181:6          esrap               U       \"esrap\": \"^2.2.4\","
   - "packages/svelte/package.json:185:6          zimmerframe         U       \"zimmerframe\": \"^1.1.2\""
   - "packages/svelte/scripts/check-treeshakeability.js:21:15         importee    U       resolveId(importee) {"
   - "packages/svelte/scripts/check-treeshakeability.js:32:3          onwarn      U       onwarn: (warning, handle)"
@@ -1717,11 +1717,11 @@ issues:
   - "packages/svelte/src/internal/client/proxy.js:41:12          proxyable       U       // if non-proxyable, or is already a proxy"
   - "packages/svelte/src/internal/client/proxy.js:91:32          inspectable     U       /** @type {any} */ (inspectable_array(/** @type {any"
   - "packages/svelte/src/internal/client/reactivity/batch.js:57:14       travelling      U       * When time travelling (i.e. working in one"
-  - "packages/svelte/src/internal/client/reactivity/batch.js:308:78      unskipping      U       rescheduled through unskipping the skipped branches"
-  - "packages/svelte/src/internal/client/reactivity/batch.js:708:85      AFAICT          U       legacy `$:` effects AFAICT — we can remove later"
-  - "packages/svelte/src/internal/client/reactivity/batch.js:725:64      unskipped       U       because a branch is being unskipped,"
-  - "packages/svelte/src/internal/client/reactivity/batch.js:879:82      nullpointers    U       else we could run into nullpointers"
-  - "packages/svelte/src/internal/client/reactivity/batch.js:1181:32     thath           U       they depend on things thath changed"
+  - "packages/svelte/src/internal/client/reactivity/batch.js:314:78      unskipping      U       rescheduled through unskipping the skipped branches"
+  - "packages/svelte/src/internal/client/reactivity/batch.js:740:85      AFAICT          U       legacy `$:` effects AFAICT — we can remove later"
+  - "packages/svelte/src/internal/client/reactivity/batch.js:757:64      unskipped       U       because a branch is being unskipped,"
+  - "packages/svelte/src/internal/client/reactivity/batch.js:911:82      nullpointers    U       else we could run into nullpointers"
+  - "packages/svelte/src/internal/client/reactivity/batch.js:1213:32     thath           U       they depend on things thath changed"
   - "packages/svelte/src/internal/client/reactivity/deriveds.js:128:6        deferreds       U       var deferreds = new Map();"
   - "packages/svelte/src/internal/client/reactivity/effects.js:13:2          untracking      U       untracking,"
   - "packages/svelte/src/internal/client/reactivity/sources.js:277:63        overfiring      U       - this way we avoid overfiring."

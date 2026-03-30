@@ -3,9 +3,9 @@ Repository: eslint/eslint
 Url: https://github.com/eslint/eslint
 Args: '[".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]'
 Summary:
-  files: 2053
-  filesWithIssues: 292
-  issues: 1489
+  files: 2058
+  filesWithIssues: 293
+  issues: 1502
   errors: 0
 Errors: []
 
@@ -121,7 +121,7 @@ issues:
   - "docs/src/extend/custom-parsers.md:124:31        myparser    U       packages: [\"eslint-parser-myparser\"],"
   - "docs/src/extend/custom-processors.md:1:1\tNo issues found"
   - "docs/src/extend/custom-rule-tutorial.md:91:127      fixability      U       documentation, and fixability. In this case, the rule"
-  - "docs/src/extend/custom-rule-tutorial.md:180:4       endraw          U       {% endraw %}"
+  - "docs/src/extend/custom-rule-tutorial.md:184:4       endraw          U       {% endraw %}"
   - "docs/src/extend/custom-rules.md:1:1\tNo issues found"
   - "docs/src/extend/index.md:1:1\tNo issues found"
   - "docs/src/extend/languages.md:1:1\tNo issues found"
@@ -153,7 +153,7 @@ issues:
   - "docs/src/library/version-switcher.md:1:1\tNo issues found"
   - "docs/src/maintain/index.md:1:1\tNo issues found"
   - "docs/src/maintain/manage-issues.md:31:4         Triaging    U       ## Triaging Process"
-  - "docs/src/maintain/manage-releases.md:106:103        eslintbot       U       token is tied to the `eslintbot` npm account and needs"
+  - "docs/src/maintain/manage-releases.md:175:103        eslintbot       U       token is tied to the `eslintbot` npm account and needs"
   - "docs/src/maintain/overview.md:32:6          Stackaid    U       - [**Stackaid.us**](https://simulation"
   - "docs/src/maintain/review-pull-requests.md:1:1\tNo issues found"
   - "docs/src/maintain/working-groups.md:1:1\tNo issues found"
@@ -603,7 +603,7 @@ issues:
   - "lib/cli.js:1:1\tNo issues found"
   - "lib/config-api.js:1:1\tNo issues found"
   - "lib/config/config-loader.js:1:1\tNo issues found"
-  - "lib/config/config.js:568:47         inting      U       configuration rules while inting."
+  - "lib/config/config.js:638:47         inting      U       configuration rules while inting."
   - "lib/config/default-config.js:1:1\tNo issues found"
   - "lib/config/flat-config-array.js:1:1\tNo issues found"
   - "lib/config/flat-config-schema.js:263:36         incompat    U       messageTemplate = \"eslintrc-incompat\";"
@@ -1026,6 +1026,7 @@ issues:
   - "messages/plugin-conflict.js:1:1\tNo issues found"
   - "messages/plugin-invalid.js:1:1\tNo issues found"
   - "messages/plugin-missing.js:1:1\tNo issues found"
+  - "messages/rule-unsupported-language.js:1:1\tNo issues found"
   - "messages/shared.js:1:1\tNo issues found"
   - "messages/whitespace-found.js:1:1\tNo issues found"
   - "package.json:176:6          eslump          U       \"eslump\": \"^3.0.0\","
@@ -1844,7 +1845,7 @@ issues:
   - "tests/lib/cli.js:2012:37        oldx                U       = `--flag test_only_oldx --config ${configPath"
   - "tests/lib/config-api.js:1:1\tNo issues found"
   - "tests/lib/config/config-loader.js:1:1\tNo issues found"
-  - "tests/lib/config/config.js:1:1\tNo issues found"
+  - "tests/lib/config/config.js:1153:39      myns    U       schema: [], languages: [\"myns/lang\"] },"
   - "tests/lib/config/flat-config-array.js:222:19        noniterable         U       it(\"should allow noniterable baseConfig objects\""
   - "tests/lib/config/flat-config-array.js:1932:17       truex               U       foo: \"truex\","
   - "tests/lib/config/flat-config-array.js:2534:9        foox                U       foox: [1, \"bar\"],"
@@ -2217,11 +2218,16 @@ issues:
   - "tests/lib/rules/template-tag-spacing.js:1:1\tNo issues found"
   - "tests/lib/rules/unicode-bom.js:1:1\tNo issues found"
   - "tests/lib/rules/use-isnan.js:1:1\tNo issues found"
-  - "tests/lib/rules/utils/ast-utils.js:1315:8       ncde            U       \"ab\\ncde\\n\": ["
-  - "tests/lib/rules/utils/ast-utils.js:2092:10      invalidtoken    U       [[\"123invalidtoken\", \"(\"], false],"
+  - "tests/lib/rules/utils/ast-utils.js:1319:8       ncde            U       \"ab\\ncde\\n\": ["
+  - "tests/lib/rules/utils/ast-utils.js:2096:10      invalidtoken    U       [[\"123invalidtoken\", \"(\"], false],"
   - "tests/lib/rules/utils/char-source.js:1:1\tNo issues found"
   - "tests/lib/rules/utils/fix-tracker.js:1:1\tNo issues found"
   - "tests/lib/rules/utils/regular-expressions.js:1:1\tNo issues found"
+  - "tests/lib/rules/utils/unicode/is-combining-character.js:22:78       Visarga     U       // Devanagari Sign Visarga"
+  - "tests/lib/rules/utils/unicode/is-combining-character.js:23:76       Etnahta     U       true); // Hebrew Accent Etnahta"
+  - "tests/lib/rules/utils/unicode/is-emoji-modifier.js:1:1\tNo issues found"
+  - "tests/lib/rules/utils/unicode/is-regional-indicator-symbol.js:1:1\tNo issues found"
+  - "tests/lib/rules/utils/unicode/is-surrogate-pair.js:1:1\tNo issues found"
   - "tests/lib/rules/valid-typeof.js:98:31       umdefined       U       if (typeof bar === 'umdefined') {}\","
   - "tests/lib/rules/vars-on-top.js:1:1\tNo issues found"
   - "tests/lib/rules/wrap-iife.js:1:1\tNo issues found"
@@ -2510,7 +2516,7 @@ issuesSummary:
   - "text: elapseds, count: 1, files: 1,"
   - "text: eleventy, count: 3, files: 3,"
   - "text: endfor, count: 8, files: 4,"
-  - "text: endraw, count: 8, files: 4,"
+  - "text: endraw, count: 13, files: 5,"
   - "text: endregionfoo, count: 1, files: 1,"
   - "text: endset, count: 1, files: 1,"
   - "text: Enumerabl, count: 1, files: 1,"
@@ -2524,6 +2530,7 @@ issuesSummary:
   - "text: eslump, count: 5, files: 2,"
   - "text: estools, count: 1, files: 1,"
   - "text: esutils, count: 8, files: 3,"
+  - "text: Etnahta, count: 1, files: 1,"
   - "text: etters, count: 1, files: 1,"
   - "text: Europese, count: 1, files: 1,"
   - "text: exportee, count: 1, files: 1,"
@@ -2617,7 +2624,7 @@ issuesSummary:
   - "text: jscript, count: 2, files: 1,"
   - "text: jscsrs, count: 1, files: 1,"
   - "text: jsfmt, count: 5, files: 1,"
-  - "text: jslang, count: 18, files: 5,"
+  - "text: jslang, count: 19, files: 5,"
   - "text: jsonify, count: 5, files: 5,"
   - "text: Kanti, count: 1, files: 1,"
   - "text: Kanti's, count: 1, files: 1,"
@@ -2692,6 +2699,7 @@ issuesSummary:
   - "text: mylib, count: 7, files: 2,"
   - "text: mylibrary, count: 3, files: 1,"
   - "text: mymethod, count: 1, files: 1,"
+  - "text: myns, count: 5, files: 1,"
   - "text: mypackage, count: 4, files: 4,"
   - "text: myparser, count: 5, files: 1,"
   - "text: mysafereg, count: 1, files: 1,"
@@ -2890,6 +2898,7 @@ issuesSummary:
   - "text: verif, count: 3, files: 1,"
   - "text: verifsint, count: 4, files: 1,"
   - "text: verifuint, count: 4, files: 1,"
+  - "text: Visarga, count: 1, files: 1,"
   - "text: Vith, count: 1, files: 1,"
   - "text: Vithkuqi, count: 1, files: 1,"
   - "text: vsdoc, count: 1, files: 1,"
