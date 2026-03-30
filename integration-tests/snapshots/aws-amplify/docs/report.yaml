@@ -3,13 +3,18 @@ Repository: aws-amplify/docs
 Url: https://github.com/aws-amplify/docs.git
 Args: '["**/*.{md,mdx}"]'
 Summary:
-  files: 2874
-  filesWithIssues: 4
-  issues: 17
+  files: 2931
+  filesWithIssues: 5
+  issues: 22
   errors: 0
 Errors: []
 
 issues:
+  - "AGENTS.md:15:61         prebuild        U       # Full build (prebuild + next build + postbuild"
+  - "AGENTS.md:15:85         postbuild       U       prebuild + next build + postbuild)"
+  - "AGENTS.md:16:6          prebuild        U       yarn prebuild"
+  - "AGENTS.md:16:94         llms            U       flatDirectory.json, llms.txt"
+  - "AGENTS.md:260:60        postbuild       U       export-optimizer` during postbuild"
   - "public/images/gen2/q-developer/authentication.md:12:53          EXTERNALPROVIDERS           U       SHOULD BE INSIDE THE \"EXTERNALPROVIDERS\" OBJECT."
   - "public/images/gen2/q-developer/authentication.md:13:74          DOESNT (DOESN'T)            U       ATTRIBUTE YOU ARE ADDING DOESNT BELONG TO THE STANDARD"
   - "public/images/gen2/q-developer/authentication.md:15:6           STATNDARD                   U       6. STATNDARD ATTIBUTES THAT ARE ALLOWED"

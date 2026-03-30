@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: [".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 2053, Issues found: 1489 in 292 files.
+ CSpell: Files checked: 2058, Issues found: 1502 in 293 files.
  exit code: 1
 Makefile.js:1036:18   - Unknown word (Multifiles) -- function downloadMultifilesTestTarget() {
 Makefile.js:128:82    - Unknown word (ined)       -- followed by the string "ined".
@@ -72,14 +72,14 @@ docs/src/extend/code-path-analysis.md:582:3     - Unknown word (fuga)       -- f
 docs/src/extend/custom-formatters.md:223:61    - Unknown word (Guake)      -- www.iterm2.com/) or [Guake](http://guake-project
 docs/src/extend/custom-formatters.md:245:9     - Unknown word (eslintformatter) -- - `"eslintformatter"`
 docs/src/extend/custom-parsers.md:124:31    - Unknown word (myparser)   -- packages: ["eslint-parser-myparser"],
-docs/src/extend/custom-rule-tutorial.md:180:4     - Unknown word (endraw)     -- {% endraw %}
+docs/src/extend/custom-rule-tutorial.md:184:4     - Unknown word (endraw)     -- {% endraw %}
 docs/src/extend/custom-rule-tutorial.md:91:127    - Unknown word (fixability) -- documentation, and fixability. In this case, the rule
 docs/src/extend/plugin-migration-flat-config.md:242:17    - Unknown word (xdescribe)  -- xdescribe: true
 docs/src/extend/shareable-configs.md:24:55     - Unknown word (myconfig)   -- such as `eslint-config-myconfig`.
 docs/src/integrate/nodejs-api.md:218:35    - Unknown word (omittable)  -- parameter `options` is omittable.
 docs/src/integrate/nodejs-api.md:616:35    - Unknown word (Fvar)       -- new SourceCode("\uFEFFvar foo = bar;", ast);
 docs/src/maintain/manage-issues.md:31:4      - Unknown word (Triaging)   -- ## Triaging Process
-docs/src/maintain/manage-releases.md:106:103   - Unknown word (eslintbot)  -- token is tied to the `eslintbot` npm account and needs
+docs/src/maintain/manage-releases.md:175:103   - Unknown word (eslintbot)  -- token is tied to the `eslintbot` npm account and needs
 docs/src/maintain/overview.md:32:6      - Unknown word (Stackaid)   -- - [**Stackaid.us**](https://simulation
 docs/src/pages/flags.md:50:5      - Unknown word (endfor)     -- {%- endfor -%}
 docs/src/rules/arrow-body-style.md:51:14     - Unknown word (retv)       -- const bar = (retv, name) => {
@@ -201,7 +201,7 @@ lib/cli-engine/formatters/html.js:247:66    - Unknown word (noopener)   -- targe
 lib/cli-engine/formatters/html.js:247:75    - Unknown word (noreferrer) -- blank" rel="noopener noreferrer">${ruleId ? ruleId
 lib/cli-engine/formatters/html.js:46:48     - Unknown word (Neue)       -- family: Arial, "Helvetica Neue", Helvetica, sans-serif
 lib/cli-engine/lint-result-cache.js:13:58     - Unknown word (jsonify)    -- stable-stringify-without-jsonify");
-lib/config/config.js:568:47    - Unknown word (inting)     -- configuration rules while inting.
+lib/config/config.js:638:47    - Unknown word (inting)     -- configuration rules while inting.
 lib/config/flat-config-schema.js:263:36    - Unknown word (incompat)   -- messageTemplate = "eslintrc-incompat";
 lib/eslint/eslint-helpers.js:207:33    - Unknown word (humanfs)       -- hfs } = await import("@humanfs/node");
 lib/eslint/eslint-helpers.js:45:31     - Unknown word (humanwhocodes) -- import { Retrier } from "@humanwhocodes/retry";
@@ -276,6 +276,7 @@ tests/fixtures/rules/indent-legacy/indent-invalid-fixture-1.js:440:40    - Unkno
 tests/lib/cli-engine/formatters/html.js:789:42    - Unknown word (apos)       -- Unexpected &lt;&amp;&quot;&apos;&gt; foo.",
 tests/lib/cli.js:2012:37   - Unknown word (oldx)          -- = `--flag test_only_oldx --config ${configPath
 tests/lib/cli.js:351:11    - Unknown word (fakeformatter) -- `-f fakeformatter ${filePath} --no-config
+tests/lib/config/config.js:1153:39   - Unknown word (myns)       -- schema: [], languages: ["myns/lang"] },
 tests/lib/config/flat-config-array.js:1932:17   - Unknown word (truex)       -- foo: "truex",
 tests/lib/config/flat-config-array.js:222:19    - Unknown word (noniterable) -- it("should allow noniterable baseConfig objects"
 tests/lib/config/flat-config-array.js:2534:9    - Unknown word (foox)        -- foox: [1, "bar"],
@@ -395,8 +396,10 @@ tests/lib/rules/semi.js:380:59    - Unknown word (mylib)      -- named2 } from '
 tests/lib/rules/sort-keys.js:509:24    - Unknown word (abce)       -- // abce
 tests/lib/rules/spaced-comment.js:150:45    - Unknown word (xmldoc)     -- comment\n//----\n/// xmldoc style comment\n//!<
 tests/lib/rules/spaced-comment.js:769:14    - Unknown word (endregionfoo) -- code: "//#endregionfoo",
-tests/lib/rules/utils/ast-utils.js:1315:8    - Unknown word (ncde)       -- "ab\ncde\n": [
-tests/lib/rules/utils/ast-utils.js:2092:10   - Unknown word (invalidtoken) -- [["123invalidtoken", "("], false],
+tests/lib/rules/utils/ast-utils.js:1319:8    - Unknown word (ncde)       -- "ab\ncde\n": [
+tests/lib/rules/utils/ast-utils.js:2096:10   - Unknown word (invalidtoken) -- [["123invalidtoken", "("], false],
+tests/lib/rules/utils/unicode/is-combining-character.js:22:78     - Unknown word (Visarga)    -- // Devanagari Sign Visarga
+tests/lib/rules/utils/unicode/is-combining-character.js:23:76     - Unknown word (Etnahta)    -- true); // Hebrew Accent Etnahta
 tests/lib/rules/valid-typeof.js:98:31     - Unknown word (umdefined)  -- if (typeof bar === 'umdefined') {}",
 tests/lib/shared/string-utils.js:40:6      - Unknown word (uppercases) -- it("uppercases the first letter of
 tests/lib/types/types.test.ts:1038:7    - Unknown word (eslinter)   -- const eslinter = new ESLinter();
