@@ -2,7 +2,6 @@ import fs from 'node:fs';
 import { createRequire } from 'node:module';
 import * as os from 'node:os';
 import * as path from 'node:path';
-// eslint-disable-next-line n/no-unsupported-features/node-builtins
 import { getActiveResourcesInfo } from 'node:process';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import util from 'node:util';

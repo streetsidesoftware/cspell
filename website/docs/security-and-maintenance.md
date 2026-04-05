@@ -21,7 +21,8 @@ The maintainers of CSpell and thousands of other packages are working with Tidel
 
 |        | version | Node    | Status                | Maintenance | End of Free Support |
 | :----- | :------ | :------ | :-------------------- | :---------- | :------------------ |
-| cspell | 9.x     | 20.x    | In Active Development | TBD         | TBD                 |
+| cspell | 10.x    | 22.18.x | In Active Development | TBD         | TBD                 |
+| cspell | 9.x     | 20.x    | Maintenance           | 2026-04-05  | 2026-10-01          |
 | cspell | 8.x     | 18.x    | Maintenance           | 2025-05-01  | 2025-06-01          |
 | cspell | 7.x     | 16.x    | Paid support only[^1] | 2023-10-01  | 2023-11-07          |
 | cspell | 6.x     | 14.14.x | Paid support only[^1] | 2023-04-01  | 2023-05-01          |

@@ -1,4 +1,3 @@
-/* eslint-disable n/no-unsupported-features/node-builtins */
 import assert from 'node:assert';
 import type { Buffer } from 'node:buffer';
 import * as fs from 'node:fs/promises';

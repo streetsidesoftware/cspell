@@ -20,7 +20,7 @@ CSpell is a spell checker for code that supports multiple programming languages 
 
 ### Prerequisites
 
-- **Node.js:** 20.0.0+ (CI tests on 20.x & 24.x)
+- **Node.js:** 22.18.0+ (CI tests on 22.x, 24.x & 25.x)
 - **Package Manager:** pnpm 10.27.0+ (enforced via `packageManager` field)
 - **Corepack:** Enable with `corepack enable` (required for correct pnpm version)
 
@@ -74,7 +74,7 @@ pnpm run clean-build
 
 ### Build Configuration
 
-- **tsconfig.json** - Root TypeScript config (extends `@tsconfig/node20`)
+- **tsconfig.json** - Root TypeScript config (extends `@tsconfig/node22`)
 - **tsdown.config.ts** - Package-level bundler config (ESM + CJS outputs)
 - **vitest.config.mjs** - Test configuration
 - **eslint.config.mjs** - ESLint configuration
@@ -244,7 +244,7 @@ pnpm run update-integration-snapshots
 
 Located in `.github/workflows/`:
 
-- **test.yml** - Unit tests on Node 20.x & 24.x (Ubuntu + Windows)
+- **test.yml** - Unit tests on Node 22.x & 24.x (Ubuntu + Windows)
 - **lint.yml** - ESLint and Prettier checks
 - **coverage.yml** - Code coverage reporting
 - **integration-test.yml** - Integration tests against real repositories
