@@ -9,8 +9,6 @@ import { findUp } from '../../util/findUp.js';
 import { toFileUrl } from '../../util/url.js';
 import { UnsupportedPnpFile } from './ImportError.js';
 
-const importFresh = createImportFresh(import.meta.url);
-
 const defaultPnpFiles = ['.pnp.cjs', '.pnp.js'];
 
 const supportedSchemas = new Set(['file:']);
@@ -92,10 +90,12 @@ interface Pnp {
 }
 
 async function loadPnp(pnpFile: string): Promise<LoaderResult> {
-    const { default: pnp } = await importFresh<{ default?: Pnp }>(toFileUrl(pnpFile).href);
+    const pnpFileUrl = toFileUrl(pnpFile);
+    const importFresh = createImportFresh(pnpFileUrl);
+    const { default: pnp } = await importFresh<{ default?: Pnp }>(pnpFileUrl.href);
     if (pnp?.setup) {
         pnp.setup();
-        return toFileUrl(pnpFile);
+        return pnpFileUrl;
     }
     throw new UnsupportedPnpFile(`Unsupported pnp file: "${pnpFile}"`);
 }
