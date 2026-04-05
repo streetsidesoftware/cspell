@@ -82,6 +82,7 @@ async function loadPnpIfNeeded(found: string | undefined): Promise<LoaderResult>
 
     const r = loadPnp(found);
     cachedPnpImports.set(found, r);
+    // If loading fails, remove from cache so subsequent calls can retry.
     r.catch(() => cachedPnpImports.delete(found));
     return r;
 }
@@ -91,8 +92,8 @@ interface Pnp {
 }
 
 async function loadPnp(pnpFile: string): Promise<LoaderResult> {
-    const { default: pnp } = await importFresh<{ default: Pnp }>(toFileUrl(pnpFile).href);
-    if (pnp.setup) {
+    const { default: pnp } = await importFresh<{ default?: Pnp }>(toFileUrl(pnpFile).href);
+    if (pnp?.setup) {
         pnp.setup();
         return toFileUrl(pnpFile);
     }
