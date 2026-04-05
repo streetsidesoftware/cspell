@@ -20,7 +20,7 @@ CSpell is a spell checker for code that supports multiple programming languages 
 
 ### Prerequisites
 
-- **Node.js:** 22.18.0+ (CI tests on 22.x & 24.x)
+- **Node.js:** 22.18.0+ (CI tests on 22.x, 24.x & 25.x)
 - **Package Manager:** pnpm 10.27.0+ (enforced via `packageManager` field)
 - **Corepack:** Enable with `corepack enable` (required for correct pnpm version)
 
