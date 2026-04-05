@@ -3,12 +3,13 @@
  */
 import { fileURLToPath } from 'node:url';
 
-import clearModule from 'clear-module';
-import importFresh from 'import-fresh';
+import createImportFresh from 'import-fresh';
 
 import { findUp } from '../../util/findUp.js';
 import { toFileUrl } from '../../util/url.js';
 import { UnsupportedPnpFile } from './ImportError.js';
+
+const importFresh = createImportFresh(import.meta.url);
 
 const defaultPnpFiles = ['.pnp.cjs', '.pnp.js'];
 
@@ -18,7 +19,7 @@ export type LoaderResult = URL | undefined;
 
 const cachedRequests = new Map<string, Promise<LoaderResult>>();
 let lock: Promise<undefined> | undefined = undefined;
-const cachedPnpImportsSync = new Map<string, LoaderResult>();
+const cachedPnpImports = new Map<string, Promise<LoaderResult>>();
 const cachedRequestsSync = new Map<string, LoaderResult>();
 
 export class PnpLoader {
@@ -69,21 +70,19 @@ export function pnpLoader(pnpFiles?: string[]): PnpLoader {
     return new PnpLoader(pnpFiles);
 }
 
-/**
- * @param urlDirectory - directory to start at.
- */
 async function findPnpAndLoad(urlDirectory: URL, pnpFiles: string[]): Promise<LoaderResult> {
     const found = await findUp(pnpFiles, { cwd: fileURLToPath(urlDirectory) });
     return loadPnpIfNeeded(found);
 }
 
-function loadPnpIfNeeded(found: string | undefined): LoaderResult {
+async function loadPnpIfNeeded(found: string | undefined): Promise<LoaderResult> {
     if (!found) return undefined;
-    const c = cachedPnpImportsSync.get(found);
-    if (c || cachedPnpImportsSync.has(found)) return c;
+    const cached = cachedPnpImports.get(found);
+    if (cached) return cached;
 
     const r = loadPnp(found);
-    cachedPnpImportsSync.set(found, r);
+    cachedPnpImports.set(found, r);
+    r.catch(() => cachedPnpImports.delete(found));
     return r;
 }
 
@@ -91,8 +90,8 @@ interface Pnp {
     setup?: () => void;
 }
 
-function loadPnp(pnpFile: string): LoaderResult {
-    const pnp = importFresh<Pnp>(pnpFile);
+async function loadPnp(pnpFile: string): Promise<LoaderResult> {
+    const { default: pnp } = await importFresh<{ default: Pnp }>(toFileUrl(pnpFile).href);
     if (pnp.setup) {
         pnp.setup();
         return toFileUrl(pnpFile);
@@ -110,11 +109,9 @@ export function clearPnPGlobalCache(): Promise<undefined> {
 
 async function _cleanCache(): Promise<undefined> {
     await Promise.all([...cachedRequests.values()].map(rejectToUndefined));
-    const modules = [...cachedPnpImportsSync.values()];
-    modules.forEach((r) => r && clearModule.single(fileURLToPath(r)));
+    cachedPnpImports.clear();
     cachedRequests.clear();
     cachedRequestsSync.clear();
-    cachedPnpImportsSync.clear();
     return undefined;
 }
 
