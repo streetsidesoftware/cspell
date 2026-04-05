@@ -39,9 +39,9 @@ importers:
       '@swc-node/register':
         specifier: ^1.11.1
         version: 1.11.1(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@swc/core@1.15.11)(@swc/types@0.1.25)(typescript@5.9.3)
-      '@tsconfig/node20':
-        specifier: ^20.1.9
-        version: 20.1.9
+      '@tsconfig/node22':
+        specifier: ^22.0.2
+        version: 22.0.5
       '@types/node':
         specifier: ^22.19.15
         version: 22.19.15
@@ -59,7 +59,7 @@ importers:
         version: 4.4.4(eslint-plugin-import@2.32.0)(eslint@10.1.0(jiti@1.21.7))
       eslint-plugin-import:
         specifier: ^2.32.0
-        version: 2.32.0(@typescript-eslint/parser@8.57.2(eslint@10.1.0(jiti@1.21.7))(typescript@5.9.3))(eslint-import-resolver-typescript@4.4.4)(eslint@10.1.0(jiti@1.21.7))
+        version: 2.32.0(eslint-import-resolver-typescript@4.4.4)(eslint@10.1.0(jiti@1.21.7))
       eslint-plugin-n:
         specifier: ^17.24.0
         version: 17.24.0(eslint@10.1.0(jiti@1.21.7))(typescript@5.9.3)
@@ -4671,8 +4671,8 @@ packages:
     resolution: {integrity: sha512-+PmQX0PiAYPMeVYe237LJAYvOMYW1j2rH5YROyS3b4CTVJum34HfRvKvAzozHAQG0TnHNdUfY9nCeUyRAs//cw==}
     engines: {node: '>=14.16'}
 
-  '@tsconfig/node20@20.1.9':
-    resolution: {integrity: sha512-IjlTv1RsvnPtUcjTqtVsZExKVq+KQx4g5pCP5tI7rAs6Xesl2qFwSz/tPDBC4JajkL/MlezBu3gPUwqRHl+RIg==}
+  '@tsconfig/node22@22.0.5':
+    resolution: {integrity: sha512-hLf2ld+sYN/BtOJjHUWOk568dvjFQkHnLNa6zce25GIH+vxKfvTgm3qpaH6ToF5tu/NN0IH66s+Bb5wElHrLcw==}
 
   '@tsconfig/node24@24.0.4':
     resolution: {integrity: sha512-2A933l5P5oCbv6qSxHs7ckKwobs8BDAe9SJ/Xr2Hy+nDlwmLE1GhFh/g/vXGRZWgxBg9nX/5piDtHR9Dkw/XuA==}
@@ -15401,7 +15401,7 @@ snapshots:
     dependencies:
       defer-to-connect: 2.0.1
 
-  '@tsconfig/node20@20.1.9': {}
+  '@tsconfig/node22@22.0.5': {}
 
   '@tsconfig/node24@24.0.4': {}
 
@@ -15785,10 +15785,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/eslint-plugin@8.57.2(@typescript-eslint/parser@8.57.2(eslint@10.1.0(jiti@1.21.7))(typescript@5.9.3))(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3)':
+  '@typescript-eslint/eslint-plugin@8.57.2(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3))(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3)':
     dependencies:
       '@eslint-community/regexpp': 4.12.2
-      '@typescript-eslint/parser': 8.57.2(eslint@10.1.0(jiti@1.21.7))(typescript@5.9.3)
+      '@typescript-eslint/parser': 8.57.2(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3)
       '@typescript-eslint/scope-manager': 8.57.2
       '@typescript-eslint/type-utils': 8.57.2(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3)
       '@typescript-eslint/utils': 8.57.2(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3)
@@ -17825,7 +17825,7 @@ snapshots:
       tinyglobby: 0.2.15
       unrs-resolver: 1.11.1
     optionalDependencies:
-      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.57.2(eslint@10.1.0(jiti@1.21.7))(typescript@5.9.3))(eslint-import-resolver-typescript@4.4.4)(eslint@10.1.0(jiti@1.21.7))
+      eslint-plugin-import: 2.32.0(eslint-import-resolver-typescript@4.4.4)(eslint@10.1.0(jiti@1.21.7))
     transitivePeerDependencies:
       - supports-color
 
@@ -17854,11 +17854,10 @@ snapshots:
       - bluebird
       - supports-color
 
-  eslint-module-utils@2.12.1(@typescript-eslint/parser@8.57.2(eslint@10.1.0(jiti@1.21.7))(typescript@5.9.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@4.4.4)(eslint@10.1.0(jiti@1.21.7)):
+  eslint-module-utils@2.12.1(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@4.4.4)(eslint@10.1.0(jiti@1.21.7)):
     dependencies:
       debug: 3.2.7
     optionalDependencies:
-      '@typescript-eslint/parser': 8.57.2(eslint@10.1.0(jiti@1.21.7))(typescript@5.9.3)
       eslint: 10.1.0(jiti@1.21.7)
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 4.4.4(eslint-plugin-import@2.32.0)(eslint@10.1.0(jiti@1.21.7))
@@ -17879,7 +17878,7 @@ snapshots:
       eslint: 9.39.4(jiti@1.21.7)
       eslint-compat-utils: 0.5.1(eslint@9.39.4(jiti@1.21.7))
 
-  eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.57.2(eslint@10.1.0(jiti@1.21.7))(typescript@5.9.3))(eslint-import-resolver-typescript@4.4.4)(eslint@10.1.0(jiti@1.21.7)):
+  eslint-plugin-import@2.32.0(eslint-import-resolver-typescript@4.4.4)(eslint@10.1.0(jiti@1.21.7)):
     dependencies:
       '@rtsao/scc': 1.1.0
       array-includes: 3.1.9
@@ -17890,7 +17889,7 @@ snapshots:
       doctrine: 2.1.0
       eslint: 10.1.0(jiti@1.21.7)
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.12.1(@typescript-eslint/parser@8.57.2(eslint@10.1.0(jiti@1.21.7))(typescript@5.9.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@4.4.4)(eslint@10.1.0(jiti@1.21.7))
+      eslint-module-utils: 2.12.1(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@4.4.4)(eslint@10.1.0(jiti@1.21.7))
       hasown: 2.0.2
       is-core-module: 2.16.1
       is-glob: 4.0.3
@@ -17901,8 +17900,6 @@ snapshots:
       semver: 6.3.1
       string.prototype.trimend: 1.0.9
       tsconfig-paths: 3.15.0
-    optionalDependencies:
-      '@typescript-eslint/parser': 8.57.2(eslint@10.1.0(jiti@1.21.7))(typescript@5.9.3)
     transitivePeerDependencies:
       - eslint-import-resolver-typescript
       - eslint-import-resolver-webpack
@@ -22854,7 +22851,7 @@ snapshots:
 
   typescript-eslint@8.57.2(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3):
     dependencies:
-      '@typescript-eslint/eslint-plugin': 8.57.2(@typescript-eslint/parser@8.57.2(eslint@10.1.0(jiti@1.21.7))(typescript@5.9.3))(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3)
+      '@typescript-eslint/eslint-plugin': 8.57.2(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3))(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3)
       '@typescript-eslint/parser': 8.57.2(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3)
       '@typescript-eslint/typescript-estree': 8.57.2(typescript@5.9.3)
       '@typescript-eslint/utils': 8.57.2(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3)

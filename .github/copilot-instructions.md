@@ -74,7 +74,7 @@ pnpm run clean-build
 
 ### Build Configuration
 
-- **tsconfig.json** - Root TypeScript config (extends `@tsconfig/node20`)
+- **tsconfig.json** - Root TypeScript config (extends `@tsconfig/node22`)
 - **tsdown.config.ts** - Package-level bundler config (ESM + CJS outputs)
 - **vitest.config.mjs** - Test configuration
 - **eslint.config.mjs** - ESLint configuration
