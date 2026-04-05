@@ -1,5 +1,4 @@
 // @ts-check
-/* eslint-disable n/no-unsupported-features/node-builtins */
 
 import cspellESLintPluginRecommended from '@cspell/eslint-plugin/recommended';
 import eslint from '@eslint/js';

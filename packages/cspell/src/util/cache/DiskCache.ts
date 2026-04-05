@@ -263,7 +263,6 @@ async function getDependencyForUrl(remoteUrl: string | URL): Promise<Dependency>
     const url = new URL(remoteUrl);
 
     try {
-        // eslint-disable-next-line n/no-unsupported-features/node-builtins
         const response = await fetch(url, { method: 'HEAD' });
         const h =
             response.headers.get('etag') ||

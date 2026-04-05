@@ -38,7 +38,7 @@ function calcGetReleaseUrl(apiUrl: URL, tag: string): URL {
 export async function fetchGitHubReleaseData(request: Request): Promise<ReleaseData> {
     const { apiUrl, token, tag } = request;
     const url = calcGetReleaseUrl(apiUrl, tag);
-    // eslint-disable-next-line n/no-unsupported-features/node-builtins
+
     const response = await fetch(url, {
         headers: {
             Accept: 'application/vnd.github+json',

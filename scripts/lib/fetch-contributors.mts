@@ -1,5 +1,3 @@
-/* eslint-disable n/no-unsupported-features/node-builtins */
-
 const perPage = 100;
 
 export interface Contributor {

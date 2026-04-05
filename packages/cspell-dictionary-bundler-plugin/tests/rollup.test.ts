@@ -1,4 +1,3 @@
-/* eslint-disable n/no-unsupported-features/node-builtins */
 import path from 'node:path';
 
 import { rollupBuild, testFixtures } from '@sxzz/test-utils';

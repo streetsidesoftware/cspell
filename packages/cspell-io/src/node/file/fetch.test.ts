@@ -1,4 +1,3 @@
-/* eslint-disable n/no-unsupported-features/node-builtins */
 // eslint-disable-next-line simple-import-sort/imports
 import createFetchMock from 'vitest-fetch-mock';
 
