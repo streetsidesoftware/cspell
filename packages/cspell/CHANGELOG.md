@@ -3,6 +3,106 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v10.0.0 (2026-04-06)
+
+### Features
+
+<details>
+<summary>fix: upgrade import-fresh from v3 to v4 (<a href="https://github.com/streetsidesoftware/cspell/pull/8786">#8786</a>)</summary>
+
+### fix: upgrade import-fresh from v3 to v4 ([#8786](https://github.com/streetsidesoftware/cspell/pull/8786))
+
+## Summary
+
+Upgrades `import-fresh` from v3 to v4.
+
+## API changes in v4
+
+- **v3**: Synchronous default export — `importFresh(modulePath)` returns the module directly
+- **v4**: Factory pattern — `createImportFresh(parentURL)` returns an **async** function; v4 is ESM-only and uses Node.js module loader hooks instead of manipulating the require cache
+
+## Changes
+
+- **`packages/cspell-lib/package.json`**: bump `import-fresh` to `^4.0.0`; remove `clear-module` dependency (no longer needed since v4 uses module loader hooks instead of Node's require cache)
+- **`packages/cspell-lib/src/lib/Settings/Controller/pnpLoader.ts`**:
+  - Import `createImportFresh` factory; call `createImportFresh(pnpFileUrl)` at use time inside `loadPnp()`, bound to the pnp file's own URL so each load is correctly scoped to the file being loaded
+  - Make `loadPnp` and `loadPnpIfNeeded` async
+  - Change `cachedPnpImportsSync` → `cachedPnpImports` (now stores `Promise<LoaderResult>`)
+  - Remove `clearModule.single` usage (v4 cache-busts via loader hooks; clearing the require cache is no longer applicable)
+  - Pass a file URL (`toFileUrl(pnpFile).href`) to `importFresh` since v4 uses `import()` under the hood, which requires URLs or relative specifiers for absolute paths
+  - Use optional chaining on the module's default export to handle edge cases
+- **`test-packages/cspell-lib/test-cspell-lib-rollup/package.json`**: bump `import-fresh` to `^4.0.0`
+- **`test-packages/cspell-lib/test-cspell-lib-webpack/package.json`**: bump `import-fresh` to `^4.0.0`
+
+## Testing
+
+All 91 test files (1584 tests) pass, including the 10 dedicated `pnpLoader` tests.
+
+---
+
+</details>
+
+<details>
+<summary>feat!: Drop support for Node 20 (<a href="https://github.com/streetsidesoftware/cspell/pull/8779">#8779</a>)</summary>
+
+### feat!: Drop support for Node 20 ([#8779](https://github.com/streetsidesoftware/cspell/pull/8779))
+
+## Pull request overview
+
+This PR updates the monorepo to require Node.js 22.18+ (dropping Node 20 support), aligning package engine constraints, CI matrices, and documentation with the new baseline.
+
+**Changes:**
+
+- Bump `engines.node` across packages/test-packages to `>=22.18.0` and update root `@types/node` to `^22.19.15`.
+- Update CI workflows to test Node 22/24/25 and adjust integration update workflow to Node 22.
+- Remove `eslint-plugin-n` “unsupported node builtins” disables now that the minimum Node version includes those built-ins.
+
+---
+
+</details>
+
+### **BREAKING**
+
+<details>
+<summary>feat!: Drop support for Node 20 (<a href="https://github.com/streetsidesoftware/cspell/pull/8779">#8779</a>)</summary>
+
+### feat!: Drop support for Node 20 ([#8779](https://github.com/streetsidesoftware/cspell/pull/8779))
+
+## Pull request overview
+
+This PR updates the monorepo to require Node.js 22.18+ (dropping Node 20 support), aligning package engine constraints, CI matrices, and documentation with the new baseline.
+
+**Changes:**
+
+- Bump `engines.node` across packages/test-packages to `>=22.18.0` and update root `@types/node` to `^22.19.15`.
+- Update CI workflows to test Node 22/24/25 and adjust integration update workflow to Node 22.
+- Remove `eslint-plugin-n` “unsupported node builtins” disables now that the minimum Node version includes those built-ins.
+
+---
+
+</details>
+
+### Documentation
+
+<details>
+<summary>feat!: Drop support for Node 20 (<a href="https://github.com/streetsidesoftware/cspell/pull/8779">#8779</a>)</summary>
+
+### feat!: Drop support for Node 20 ([#8779](https://github.com/streetsidesoftware/cspell/pull/8779))
+
+## Pull request overview
+
+This PR updates the monorepo to require Node.js 22.18+ (dropping Node 20 support), aligning package engine constraints, CI matrices, and documentation with the new baseline.
+
+**Changes:**
+
+- Bump `engines.node` across packages/test-packages to `>=22.18.0` and update root `@types/node` to `^22.19.15`.
+- Update CI workflows to test Node 22/24/25 and adjust integration update workflow to Node 22.
+- Remove `eslint-plugin-n` “unsupported node builtins” disables now that the minimum Node version includes those built-ins.
+
+---
+
+</details>
+
 ## v9.8.0 (2026-03-30)
 
 ### Features
