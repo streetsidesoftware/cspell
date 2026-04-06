@@ -3,16 +3,20 @@ Repository: sveltejs/svelte
 Url: https://github.com/sveltejs/svelte.git
 Args: '["**"]'
 Summary:
-  files: 8669
-  filesWithIssues: 600
-  issues: 3993
+  files: 8677
+  filesWithIssues: 601
+  issues: 4003
   errors: 0
 Errors: []
 
 issues:
-  - "benchmarking/benchmarks/reactivity/index.js:4:2         sbench      U       sbench_create_0to1,"
+  - "benchmarking/benchmarks/reactivity/index.js:5:2         sbench      U       sbench_create_0to1,"
   - "benchmarking/benchmarks/reactivity/tests/kairo_mux.bench.js:9:8         splited (split)     U       const splited = heads"
-  - "benchmarking/run.js:5:21        kairo       U       // e.g. `pnpm bench kairo` to only run the kairo"
+  - "benchmarking/run.js:6:21        kairo       U       // e.g. `pnpm bench kairo` to only run the kairo"
+  - "benchmarking/utils.js:206:10        hotspot     U       const hotspot_rows = [...included"
+  - "benchmarking/utils.js:235:14        hotspots    U       '## Top hotspots',"
+  - "benchmarking/utils.js:254:80        Deopt       U       Hit count | Children | Deopt reason |',"
+  - "benchmarking/utils.js:288:10        deopt       U       const deoptReason = typeof node"
   - "CONTRIBUTING.md:22:5        Triaging    U       ### Triaging issues and pull requests"
   - "documentation/docs/01-introduction/02-getting-started.md:8:15           myapp       U       npx sv create myapp"
   - "documentation/docs/01-introduction/03-svelte-files.md:34:20         behaviour       U       <!-- TODO describe behaviour of `export` -->"
@@ -60,8 +64,8 @@ issues:
   - "documentation/docs/06-runtime/05-hydratable.md:20:305       datafetching    U       the scenes by whatever datafetching library you use. For"
   - "documentation/docs/07-misc/01-best-practices.md:4:19        bestpractices       U       name: svelte-core-bestpractices"
   - "documentation/docs/07-misc/03-typescript.md:31:110      transpiling                     U       just disappear when transpiling to JavaScript, such"
-  - "documentation/docs/07-misc/03-typescript.md:271:3       globalattribute                 U       globalattribute?: string;"
-  - "documentation/docs/07-misc/03-typescript.md:276:3       veryexperimentalattribute       U       veryexperimentalattribute?: string;"
+  - "documentation/docs/07-misc/03-typescript.md:255:3       globalattribute                 U       globalattribute?: string;"
+  - "documentation/docs/07-misc/03-typescript.md:260:3       veryexperimentalattribute       U       veryexperimentalattribute?: string;"
   - "documentation/docs/07-misc/04-custom-elements.md:86:4           clonable (cloneable)    U       clonable: true,"
   - "documentation/docs/07-misc/04-custom-elements.md:137:166        oneworld                U       treats `<custom-element oneworld={true}></custom-element"
   - "documentation/docs/07-misc/04-custom-elements.md:137:237        eworld                  U       stomElement.addEventListener('eworld', true)` (and not as"
@@ -1665,8 +1669,7 @@ issues:
   - "packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:356:18       combinators         U       // TODO other combinators"
   - "packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:377:29       unscopeable         U       a `:global(...)` or unscopeable selector, or"
   - "packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:861:42       selectedcontent     U       considered descendants of <selectedcontent>, which clones the selected"
-  - "packages/svelte/src/compiler/phases/2-analyze/css/utils.js:28:28        deopt       U       and we don't want to deopt on `condition`"
-  - "packages/svelte/src/compiler/phases/2-analyze/css/utils.js:34:29        cslx        U       will be processed by cslx, in which case falsy"
+  - "packages/svelte/src/compiler/phases/2-analyze/css/utils.js:34:29        cslx    U       will be processed by cslx, in which case falsy"
   - "packages/svelte/src/compiler/phases/2-analyze/index.js:733:18       nonstate    U       // warn on any nonstate declarations that are"
   - "packages/svelte/src/compiler/phases/2-analyze/index.js:1036:14      optimise    U       // TODO optimise this better"
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/RegularElement.js:44:72          qirk    U       stripped because of a qirk:"
@@ -1709,7 +1712,7 @@ issues:
   - "packages/svelte/src/internal/client/dom/blocks/branches.js:204:12       unskip          U       batch.unskip_effect(effect);"
   - "packages/svelte/src/internal/client/dom/blocks/branches.js:218:10       oncommit        U       batch.oncommit(this.#commit);"
   - "packages/svelte/src/internal/client/dom/blocks/branches.js:219:10       ondiscard       U       batch.ondiscard(this.#discard);"
-  - "packages/svelte/src/internal/client/dom/blocks/each.js:85:62        outrogroups     U       EachOutroGroup>} */ (state.outrogroups);"
+  - "packages/svelte/src/internal/client/dom/blocks/each.js:86:62        outrogroups     U       EachOutroGroup>} */ (state.outrogroups);"
   - "packages/svelte/src/internal/client/dom/elements/actions.js:18:8        inited      U       var inited = false;"
   - "packages/svelte/src/internal/client/dom/elements/attributes.js:587:16       contructor (constructor)    U       // Do not use contructor.name here as that's"
   - "packages/svelte/src/internal/client/dom/elements/bindings/input.js:31:14        numberlike      U       value = is_numberlike_input(input) ? to_number"
@@ -1718,13 +1721,13 @@ issues:
   - "packages/svelte/src/internal/client/proxy.js:91:32          inspectable     U       /** @type {any} */ (inspectable_array(/** @type {any"
   - "packages/svelte/src/internal/client/reactivity/batch.js:57:14       travelling      U       * When time travelling (i.e. working in one"
   - "packages/svelte/src/internal/client/reactivity/batch.js:314:78      unskipping      U       rescheduled through unskipping the skipped branches"
-  - "packages/svelte/src/internal/client/reactivity/batch.js:740:85      AFAICT          U       legacy `$:` effects AFAICT — we can remove later"
-  - "packages/svelte/src/internal/client/reactivity/batch.js:757:64      unskipped       U       because a branch is being unskipped,"
-  - "packages/svelte/src/internal/client/reactivity/batch.js:911:82      nullpointers    U       else we could run into nullpointers"
-  - "packages/svelte/src/internal/client/reactivity/batch.js:1213:32     thath           U       they depend on things thath changed"
+  - "packages/svelte/src/internal/client/reactivity/batch.js:744:85      AFAICT          U       legacy `$:` effects AFAICT — we can remove later"
+  - "packages/svelte/src/internal/client/reactivity/batch.js:761:64      unskipped       U       because a branch is being unskipped,"
+  - "packages/svelte/src/internal/client/reactivity/batch.js:915:82      nullpointers    U       else we could run into nullpointers"
+  - "packages/svelte/src/internal/client/reactivity/batch.js:1212:32     thath           U       they depend on things thath changed"
   - "packages/svelte/src/internal/client/reactivity/deriveds.js:128:6        deferreds       U       var deferreds = new Map();"
   - "packages/svelte/src/internal/client/reactivity/effects.js:13:2          untracking      U       untracking,"
-  - "packages/svelte/src/internal/client/reactivity/sources.js:277:63        overfiring      U       - this way we avoid overfiring."
+  - "packages/svelte/src/internal/client/reactivity/sources.js:269:63        overfiring      U       - this way we avoid overfiring."
   - "packages/svelte/src/internal/client/runtime.js:136:90       depedencies (dependencies)      U       to avoid duplicating depedencies inside a reaction *"
   - "packages/svelte/src/internal/client/timing.js:12:5          bunder      U       // bunder will eval and remove"
   - "packages/svelte/src/internal/client/types.d.ts:9:8          hydratables     U       /** hydratables */"

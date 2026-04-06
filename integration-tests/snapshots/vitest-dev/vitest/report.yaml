@@ -3,9 +3,9 @@ Repository: vitest-dev/vitest
 Url: https://github.com/vitest-dev/vitest
 Args: '["--issues-summary-report","--locale=en,en-GB","."]'
 Summary:
-  files: 2594
-  filesWithIssues: 413
-  issues: 5326
+  files: 2597
+  filesWithIssues: 414
+  issues: 5328
   errors: 0
 Errors: []
 
@@ -23,7 +23,7 @@ issues:
   - "AGENTS.md:141:57        Marko               U       React, Svelte, Lit, Marko)"
   - "docs/api/advanced/artifacts.md:28:41        recordartifact      U       <Experimental /> {#recordartifact}"
   - "docs/api/advanced/artifacts.md:54:43        testartifactbase    U       <Experimental /> {#testartifactbase}"
-  - "docs/api/advanced/artifacts.md:138:3        wcag                U       wcagLevel: 'A' | 'AA' |"
+  - "docs/api/advanced/artifacts.md:147:3        wcag                U       wcagLevel: 'A' | 'AA' |"
   - "docs/api/advanced/plugin.md:127:107     definecachekeygenerator     U       <Experimental /> {#definecachekeygenerator}"
   - "docs/api/advanced/reporters.md:87:20        onbrowserinit               U       ## onBrowserInit {#onbrowserinit}"
   - "docs/api/advanced/reporters.md:316:50       ontestcaseannotate          U       Version>3.2.0</Version> {#ontestcaseannotate}"
@@ -208,7 +208,7 @@ issues:
   - "packages/browser/context.d.ts:629:60        contenteditable     U       input`, `textarea` or `contenteditable` element."
   - "packages/browser/jest-dom.d.ts:460:69       describedby     U       \"Company logo\" aria-describedby=\"t1\" />"
   - "packages/browser/package.json:88:6          birpc       U       \"birpc\": \"catalog:\","
-  - "packages/browser/package.json:90:6          ivya        U       \"ivya\": \"^1.7.1\","
+  - "packages/browser/package.json:90:6          ivya        U       \"ivya\": \"^1.8.0\","
   - "packages/browser/src/client/client.ts:3:15          Birpc       U       import type { BirpcReturn } from 'birpc"
   - "packages/browser/src/client/orchestrator.ts:213:36      iframeerror     U       event = new CustomEvent('iframeerror', { detail: error }"
   - "packages/browser/src/client/public/error-catcher.js:29:17       Unhandler       U       function throwUnhandlerError(e) {"
@@ -239,7 +239,7 @@ issues:
   - "packages/runner/src/run.ts:282:9        timedout    U       let timedout = false"
   - "packages/runner/src/utils/tags.ts:76:16         LPAREN      U       | { type: 'LPAREN' }"
   - "packages/runner/src/utils/tags.ts:77:16         RPAREN      U       | { type: 'RPAREN' }"
-  - "packages/snapshot/src/port/inlineSnapshot.ts:109:11         Oneline     U       const isOneline = lines.length <= 1"
+  - "packages/snapshot/src/port/inlineSnapshot.ts:128:11         Oneline     U       const isOneline = lines.length <= 1"
   - "packages/spy/src/index.ts:444:68        Klass       U       with vi.spyOn(obj, 'Klass')"
   - "packages/ui/client/components/artifacts/visual-regression/SmallTabs.spec.ts:55:13       labelledby      U       'aria-labelledby',"
   - "packages/ui/client/components/ModuleGraphImportBreakdown.vue:36:11          raltive     U       const raltiveModule = duration.external"
@@ -314,7 +314,7 @@ issues:
   - "packages/vitest/LICENSE.md:793:22       Arnout              U       Copyright (c) 2013 Arnout Kazemier and contributors"
   - "packages/vitest/LICENSE.md:793:29       Kazemier            U       Copyright (c) 2013 Arnout Kazemier and contributors"
   - "packages/vitest/LICENSE.md:794:28       Pinca               U       Copyright (c) 2016 Luigi Pinca and contributors"
-  - "packages/vitest/package.json:195:6          tinyexec    U       \"tinyexec\": \"^1.0.2\","
+  - "packages/vitest/package.json:203:6          tinyexec    U       \"tinyexec\": \"^1.0.2\","
   - "packages/vitest/src/constants.ts:1:28           jsdocs      U       changed, update also jsdocs and docs"
   - "packages/vitest/src/integrations/mock/date.ts:5:24          Lauer       U       Copyright (c) 2014 Bob Lauer"
   - "packages/vitest/src/node/ast-collect.ts:576:34      dfsjo       U       pattern.replace(/%[i#dfsjo%]/g, m => kReplacers"
@@ -360,16 +360,16 @@ issues:
   - "pnpm-workspace.yaml:35:3        mlly            U       mlly: ^1.8.0"
   - "pnpm-workspace.yaml:36:3        rollup          U       rollup: $rollup"
   - "pnpm-workspace.yaml:37:3        vite            U       vite: $vite"
-  - "pnpm-workspace.yaml:55:11       estree          U       '@types/estree': ^1.0.8"
-  - "pnpm-workspace.yaml:61:11       yauzl           U       '@types/yauzl': ^2.10.3"
-  - "pnpm-workspace.yaml:63:5        vitejs          U       '@vitejs/plugin-vue': ^6.0.4"
-  - "pnpm-workspace.yaml:82:3        sirv            U       sirv: ^3.0.2"
-  - "pnpm-workspace.yaml:86:3        tinyglobby      U       tinyglobby: ^0.2.15"
-  - "pnpm-workspace.yaml:89:3        tinyspy         U       tinyspy: ^4.0.4"
-  - "pnpm-workspace.yaml:97:7        sveltejs        U       - '@sveltejs/kit'"
-  - "pnpm-workspace.yaml:99:5        edgedriver      U       - edgedriver"
-  - "pnpm-workspace.yaml:100:5       esbuild         U       - esbuild"
-  - "pnpm-workspace.yaml:101:5       geckodriver     U       - geckodriver"
+  - "pnpm-workspace.yaml:56:11       estree          U       '@types/estree': ^1.0.8"
+  - "pnpm-workspace.yaml:62:11       yauzl           U       '@types/yauzl': ^2.10.3"
+  - "pnpm-workspace.yaml:64:5        vitejs          U       '@vitejs/plugin-vue': ^6.0.4"
+  - "pnpm-workspace.yaml:83:3        sirv            U       sirv: ^3.0.2"
+  - "pnpm-workspace.yaml:87:3        tinyglobby      U       tinyglobby: ^0.2.15"
+  - "pnpm-workspace.yaml:90:3        tinyspy         U       tinyspy: ^4.0.4"
+  - "pnpm-workspace.yaml:98:7        sveltejs        U       - '@sveltejs/kit'"
+  - "pnpm-workspace.yaml:100:5       edgedriver      U       - edgedriver"
+  - "pnpm-workspace.yaml:101:5       esbuild         U       - esbuild"
+  - "pnpm-workspace.yaml:102:5       geckodriver     U       - geckodriver"
   - "README.md:112:5         Patak       U       ### Patak Sponsors"
   - "README.md:116:79        patak's     U       static/sponsors.svg' alt=\"patak's sponsors\"/>"
   - "README.md:128:5         patak       U       - [@patak-dev](https://github"
@@ -2015,8 +2015,8 @@ issues:
   - "test/cli/test/public-api.test.ts:18:25          Metas       U       const finishedTestCaseMetas: TaskMeta[] = []"
   - "test/cli/test/reporters/tree.test.ts:39:51          testname    U       when all passed with testname filter as a tree', async"
   - "test/cli/test/reporters/utils.ts:289:23         merror      U       content: '[33merror[39m',"
-  - "test/cli/test/scoped-fixtures.test.ts:1489:81       fixtu           U       cannot access file-scoped fixtu…"
-  - "test/cli/test/scoped-fixtures.test.ts:2682:77       productio       U       { scope: \"file\" }, \"productio…"
+  - "test/cli/test/scoped-fixtures.test.ts:1539:81       fixtu           U       cannot access file-scoped fixtu…"
+  - "test/cli/test/scoped-fixtures.test.ts:2798:77       productio       U       { scope: \"file\" }, \"productio…"
   - "test/cli/test/stacktraces.test.ts:51:24         framestack      U       // expect to print framestack of foo.js"
   - "test/cli/test/test-tags.test.ts:771:8       alid    U       'inv*alid',"
   - "test/config/fixtures/css/test/default-css.spec.ts:25:41         cdbed       U       module).toBe('_module_cdbed7')"
@@ -2039,6 +2039,7 @@ issues:
   - "test/core/test/mocking/vi-spyOn.test.ts:585:24      respy       U       test('vi.spyOn() can respy the metthod with new"
   - "test/core/test/mocking/vi-spyOn.test.ts:585:34      metthod     U       spyOn() can respy the metthod with new state when"
   - "test/core/test/module.test.ts:47:5          extect      U       it('extect vite.noExternal to be"
+  - "test/core/test/pretty-format.test.ts:512:27         symval      U       val[Symbol('sym')] = 'symval'"
   - "test/core/test/resolve-file-url.test.ts:4:48        Edep    U       ./resolve-file-url%7Edep.js', import.meta.url"
   - "test/coverage-test/fixtures/src/throws-error.ts:5:11        uncoverd    U       return \"uncoverd\";"
   - "test/coverage-test/fixtures/src/untested-with-]-in-filename.ts:9:11         Untetsted       U       return 'Untetsted'"
@@ -3748,6 +3749,7 @@ issuesSummary:
   - "text: swid, count: 2, files: 2,"
   - "text: swidtag, count: 2, files: 2,"
   - "text: swnwar, count: 2, files: 2,"
+  - "text: symval, count: 2, files: 1,"
   - "text: szlig, count: 4, files: 2,"
   - "text: Targaryen, count: 4, files: 2,"
   - "text: targetdesc, count: 2, files: 2,"

@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 302, Issues found: 3336 in 270 files.
+ CSpell: Files checked: 302, Issues found: 3334 in 270 files.
  exit code: 1
 admin.go:1000:38   - Unknown word (xxhash)      -- hash.Hash { return xxhash.New() }
 admin.go:1131:20   - Unknown word (Redir)       -- return errInternalRedir
@@ -1691,10 +1691,10 @@ modules/caddyhttp/responsewriter_test.go:1:9       - Unknown word (caddyhttp)  -
 modules/caddyhttp/responsewriter_test.go:22:6      - Unknown word (barebones)  -- // a barebones http.ResponseWriter
 modules/caddyhttp/reverseproxy/addresses.go:23:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 modules/caddyhttp/reverseproxy/admin.go:22:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
-modules/caddyhttp/reverseproxy/caddyfile.go:1213:14   - Unknown word (CAPEM)         -- h.TLS.RootCAPEMFiles = args
-modules/caddyhttp/reverseproxy/caddyfile.go:1338:19   - Unknown word (caddytls)      -- ca, ok := unm.(caddytls.CA)
-modules/caddyhttp/reverseproxy/caddyfile.go:1340:39   - Unknown word (caddytls)      -- "module %s is not a caddytls.CA", modID)
-modules/caddyhttp/reverseproxy/caddyfile.go:1345:21   - Unknown word (CAPEM)         -- if len(h.TLS.RootCAPEMFiles) != 0 {
+modules/caddyhttp/reverseproxy/caddyfile.go:1218:14   - Unknown word (CAPEM)         -- h.TLS.RootCAPEMFiles = args
+modules/caddyhttp/reverseproxy/caddyfile.go:1343:19   - Unknown word (caddytls)      -- ca, ok := unm.(caddytls.CA)
+modules/caddyhttp/reverseproxy/caddyfile.go:1345:39   - Unknown word (caddytls)      -- "module %s is not a caddytls.CA", modID)
+modules/caddyhttp/reverseproxy/caddyfile.go:1350:21   - Unknown word (CAPEM)         -- if len(h.TLS.RootCAPEMFiles) != 0 {
 modules/caddyhttp/reverseproxy/caddyfile.go:154:39    - Unknown word (caddyhttp)     -- nseMatchers = make(map[string]caddyhttp.ResponseMatcher)
 modules/caddyhttp/reverseproxy/caddyfile.go:170:13    - Unknown word (Errf)          -- return d.Errf("the scheme wss:// is
 modules/caddyhttp/reverseproxy/caddyfile.go:172:13    - Unknown word (Errf)          -- return d.Errf("the scheme ws:// is
@@ -1723,10 +1723,11 @@ modules/caddyhttp/reverseproxy/caddyfile.go:45:23     - Unknown word (httpcaddyf
 modules/caddyhttp/reverseproxy/caddyfile.go:45:46     - Unknown word (caddyhttp)     -- httpcaddyfile.Helper) (caddyhttp.MiddlewareHandler, error
 modules/caddyhttp/reverseproxy/caddyfile.go:659:5     - Unknown word (usize)         -- usize, err := humanize.ParseBytes
 modules/caddyhttp/reverseproxy/caddyfile.go:663:18    - Unknown word (usize)         -- size = int64(usize)
-modules/caddyhttp/reverseproxy/caddyfile.go:728:100   - Unknown word (hostport)      -- ] == "{http.request.hostport}") {
-modules/caddyhttp/reverseproxy/caddyfile.go:728:60    - Unknown word (hostport)      -- host") && (args[1] == "{hostport}" || args[1] == "{http
-modules/caddyhttp/reverseproxy/caddyfile.go:737:131   - Unknown word (hostport)      -- host}" || args[1] == "{hostport}" || args[1] == "{http
-modules/caddyhttp/reverseproxy/caddyfile.go:737:171   - Unknown word (hostport)      -- ] == "{http.request.hostport}") {
+modules/caddyhttp/reverseproxy/caddyfile.go:734:131   - Unknown word (hostport)      -- host}" || args[1] == "{hostport}" || args[1] == "{http
+modules/caddyhttp/reverseproxy/caddyfile.go:734:171   - Unknown word (hostport)      -- ] == "{http.request.hostport}") {
+modules/caddyhttp/reverseproxy/caddyfile.go:885:54    - Unknown word (hostport)      -- header_up host upstream_hostport' when proxying to HTTPS
+modules/caddyhttp/reverseproxy/caddyfile.go:889:30    - Unknown word (hostport)      -- hostVal == "{upstream_hostport}" || hostVal == "{http
+modules/caddyhttp/reverseproxy/caddyfile.go:889:85    - Unknown word (hostport)      -- reverse_proxy.upstream.hostport}" {
 modules/caddyhttp/reverseproxy/command.go:110:19    - Unknown word (httpcaddyfile) -- fromAddr, err := httpcaddyfile.ParseAddress(from)
 modules/caddyhttp/reverseproxy/command.go:180:17    - Unknown word (caddyconfig)   -- TransportRaw: caddyconfig.JSONModuleObject(ht
 modules/caddyhttp/reverseproxy/command.go:241:73    - Unknown word (hostport)      -- reverse_proxy.upstream.hostport}")
@@ -2581,48 +2582,48 @@ modules/caddypki/pki.go:95:69     - Unknown word (unconfigured) -- installation 
 modules/caddytls/acmeissuer.go:115:11    - Unknown word (certmagic)   -- template certmagic.ACMEIssuer // set at
 modules/caddytls/acmeissuer.go:116:12    - Unknown word (certmagic)   -- magic *certmagic.Config // set at
 modules/caddytls/acmeissuer.go:117:12    - Unknown word (certmagic)   -- issuer *certmagic.ACMEIssuer // set at
-modules/caddytls/acmeissuer.go:154:12    - Unknown word (certmagic)   -- var prov certmagic.DNSProvider
 modules/caddytls/acmeissuer.go:15:9      - Unknown word (caddytls)   -- package caddytls
-modules/caddytls/acmeissuer.go:162:19    - Unknown word (Iface)       -- } else if tlsAppIface, err := ctx.AppIfConfigured
-modules/caddytls/acmeissuer.go:165:20    - Unknown word (Iface)       -- tlsApp := tlsAppIface.(*TLS)
-modules/caddytls/acmeissuer.go:240:21    - Unknown word (TLSALPN)     -- if iss.Challenges.TLSALPN != nil {
-modules/caddytls/acmeissuer.go:241:20    - Unknown word (TLSALPN)     -- template.DisableTLSALPNChallenge = iss.Challenges
-modules/caddytls/acmeissuer.go:241:54    - Unknown word (TLSALPN)     -- LPNChallenge = iss.Challenges.TLSALPN.Disabled
-modules/caddytls/acmeissuer.go:242:16    - Unknown word (TLSALPN)     -- template.AltTLSALPNPort = iss.Challenges
-modules/caddytls/acmeissuer.go:242:45    - Unknown word (TLSALPN)     -- tTLSALPNPort = iss.Challenges.TLSALPN.AlternatePort
-modules/caddytls/acmeissuer.go:268:57    - Unknown word (SSLEAB)      -- err = iss.generateZeroSSLEABCredentials(ctx, acct
+modules/caddytls/acmeissuer.go:163:12    - Unknown word (certmagic)   -- var prov certmagic.DNSProvider
+modules/caddytls/acmeissuer.go:171:19    - Unknown word (Iface)       -- } else if tlsAppIface, err := ctx.AppIfConfigured
+modules/caddytls/acmeissuer.go:174:20    - Unknown word (Iface)       -- tlsApp := tlsAppIface.(*TLS)
+modules/caddytls/acmeissuer.go:249:21    - Unknown word (TLSALPN)     -- if iss.Challenges.TLSALPN != nil {
+modules/caddytls/acmeissuer.go:250:20    - Unknown word (TLSALPN)     -- template.DisableTLSALPNChallenge = iss.Challenges
+modules/caddytls/acmeissuer.go:250:54    - Unknown word (TLSALPN)     -- LPNChallenge = iss.Challenges.TLSALPN.Disabled
+modules/caddytls/acmeissuer.go:251:16    - Unknown word (TLSALPN)     -- template.AltTLSALPNPort = iss.Challenges
+modules/caddytls/acmeissuer.go:251:45    - Unknown word (TLSALPN)     -- tTLSALPNPort = iss.Challenges.TLSALPN.AlternatePort
+modules/caddytls/acmeissuer.go:277:57    - Unknown word (SSLEAB)      -- err = iss.generateZeroSSLEABCredentials(ctx, acct
 modules/caddytls/acmeissuer.go:29:14     - Unknown word (caddyserver) -- "github.com/caddyserver/certmagic"
 modules/caddytls/acmeissuer.go:29:26     - Unknown word (certmagic)   -- github.com/caddyserver/certmagic"
 modules/caddytls/acmeissuer.go:30:14     - Unknown word (caddyserver) -- "github.com/caddyserver/zerossl"
 modules/caddytls/acmeissuer.go:30:26     - Unknown word (zerossl)     -- github.com/caddyserver/zerossl"
-modules/caddytls/acmeissuer.go:317:16    - Unknown word (SSLEAB)      -- // generateZeroSSLEABCredentials generates
-modules/caddytls/acmeissuer.go:318:37    - Unknown word (usedif)      -- issuer. It should only be usedif the CA endpoint is ZeroSSL
-modules/caddytls/acmeissuer.go:319:36    - Unknown word (SSLEAB)      -- ACMEIssuer) generateZeroSSLEABCredentials(ctx context
 modules/caddytls/acmeissuer.go:31:14     - Unknown word (mholt)       -- "github.com/mholt/acmez/v3/acme"
 modules/caddytls/acmeissuer.go:31:20     - Unknown word (acmez)       -- "github.com/mholt/acmez/v3/acme"
-modules/caddytls/acmeissuer.go:329:14    - Unknown word (zerossl)     -- endpoint := zerossl.BaseURL + "/acme/eab
-modules/caddytls/acmeissuer.go:340:44    - Unknown word (nolint)      -- DefaultClient.Do(req) //nolint:gosec // no SSRF since
-modules/caddytls/acmeissuer.go:340:51    - Unknown word (gosec)       -- efaultClient.Do(req) //nolint:gosec // no SSRF since URL
-modules/caddytls/acmeissuer.go:352:3     - Unknown word (EABKID)      -- EABKID string `json:"eab
-modules/caddytls/acmeissuer.go:353:3     - Unknown word (EABHMAC)     -- EABHMACKey string `json:"eab
+modules/caddytls/acmeissuer.go:326:16    - Unknown word (SSLEAB)      -- // generateZeroSSLEABCredentials generates
+modules/caddytls/acmeissuer.go:327:37    - Unknown word (usedif)      -- issuer. It should only be usedif the CA endpoint is ZeroSSL
+modules/caddytls/acmeissuer.go:328:36    - Unknown word (SSLEAB)      -- ACMEIssuer) generateZeroSSLEABCredentials(ctx context
+modules/caddytls/acmeissuer.go:338:14    - Unknown word (zerossl)     -- endpoint := zerossl.BaseURL + "/acme/eab
+modules/caddytls/acmeissuer.go:349:44    - Unknown word (nolint)      -- DefaultClient.Do(req) //nolint:gosec // no SSRF since
+modules/caddytls/acmeissuer.go:349:51    - Unknown word (gosec)       -- efaultClient.Do(req) //nolint:gosec // no SSRF since URL
 modules/caddytls/acmeissuer.go:35:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
-modules/caddytls/acmeissuer.go:369:39    - Unknown word (EABKID)      -- String("key_id", result.EABKID))
+modules/caddytls/acmeissuer.go:361:3     - Unknown word (EABKID)      -- EABKID string `json:"eab
+modules/caddytls/acmeissuer.go:362:3     - Unknown word (EABHMAC)     -- EABHMACKey string `json:"eab
 modules/caddytls/acmeissuer.go:36:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/caddyconfig
 modules/caddytls/acmeissuer.go:36:35     - Unknown word (caddyconfig) -- caddyserver/caddy/v2/caddyconfig"
-modules/caddytls/acmeissuer.go:373:18    - Unknown word (EABKID)      -- KeyID: result.EABKID,
-modules/caddytls/acmeissuer.go:374:18    - Unknown word (EABHMAC)     -- MACKey: result.EABHMACKey,
+modules/caddytls/acmeissuer.go:378:39    - Unknown word (EABKID)      -- String("key_id", result.EABKID))
 modules/caddytls/acmeissuer.go:37:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/caddyconfig
 modules/caddytls/acmeissuer.go:37:35     - Unknown word (caddyconfig) -- caddyserver/caddy/v2/caddyconfig/caddyfile"
-modules/caddytls/acmeissuer.go:387:16    - Unknown word (tlsalpn)     -- // disable_tlsalpn_challenge
-modules/caddytls/acmeissuer.go:389:12    - Unknown word (tlsalpn)     -- // alt_tlsalpn_port <port>
-modules/caddytls/acmeissuer.go:422:14    - Unknown word (Errf)        -- return d.Errf("invalid lifetime %s
-modules/caddytls/acmeissuer.go:425:14    - Unknown word (Errf)        -- return d.Errf("lifetime must be >
-modules/caddytls/acmeissuer.go:431:14    - Unknown word (Errf)        -- return d.Errf("directory is already
-modules/caddytls/acmeissuer.go:459:14    - Unknown word (Errf)        -- return d.Errf("invalid timeout duration
-modules/caddytls/acmeissuer.go:475:17    - Unknown word (tlsalpn)     -- case "disable_tlsalpn_challenge":
-modules/caddytls/acmeissuer.go:492:14    - Unknown word (Errf)        -- return d.Errf("only accepted value
-modules/caddytls/acmeissuer.go:517:13    - Unknown word (tlsalpn)     -- case "alt_tlsalpn_port":
-modules/caddytls/acmeissuer.go:555:38    - Unknown word (caddyconfig) -- Challenges.DNS.ProviderRaw = caddyconfig.JSONModuleObject(unm
+modules/caddytls/acmeissuer.go:382:18    - Unknown word (EABKID)      -- KeyID: result.EABKID,
+modules/caddytls/acmeissuer.go:383:18    - Unknown word (EABHMAC)     -- MACKey: result.EABHMACKey,
+modules/caddytls/acmeissuer.go:396:16    - Unknown word (tlsalpn)     -- // disable_tlsalpn_challenge
+modules/caddytls/acmeissuer.go:398:12    - Unknown word (tlsalpn)     -- // alt_tlsalpn_port <port>
+modules/caddytls/acmeissuer.go:431:14    - Unknown word (Errf)        -- return d.Errf("invalid lifetime %s
+modules/caddytls/acmeissuer.go:434:14    - Unknown word (Errf)        -- return d.Errf("lifetime must be >
+modules/caddytls/acmeissuer.go:440:14    - Unknown word (Errf)        -- return d.Errf("directory is already
+modules/caddytls/acmeissuer.go:468:14    - Unknown word (Errf)        -- return d.Errf("invalid timeout duration
+modules/caddytls/acmeissuer.go:484:17    - Unknown word (tlsalpn)     -- case "disable_tlsalpn_challenge":
+modules/caddytls/acmeissuer.go:501:14    - Unknown word (Errf)        -- return d.Errf("only accepted value
+modules/caddytls/acmeissuer.go:526:13    - Unknown word (tlsalpn)     -- case "alt_tlsalpn_port":
+modules/caddytls/acmeissuer.go:564:38    - Unknown word (caddyconfig) -- Challenges.DNS.ProviderRaw = caddyconfig.JSONModuleObject(unm
 modules/caddytls/acmeissuer.go:59:27     - Unknown word (mothership)  -- not sent to any Caddy mothership or used for any purpose
 modules/caddytls/automation.go:104:5     - Unknown word (zerossl)     -- // zerossl.
 modules/caddytls/automation.go:15:9      - Unknown word (caddytls)   -- package caddytls
@@ -2656,65 +2657,62 @@ modules/caddytls/automation_test.go:20:20     - Unknown word (certmagic)   -- t.
 modules/caddytls/automation_test.go:32:15     - Unknown word (certmagic)   -- Managers: []certmagic.Manager{Tailscale{}
 modules/caddytls/automation_test.go:6:14      - Unknown word (caddyserver) -- "github.com/caddyserver/certmagic"
 modules/caddytls/automation_test.go:6:26      - Unknown word (certmagic)   -- github.com/caddyserver/certmagic"
-modules/caddytls/capools.go:148:7     - Unknown word (fcap)        -- func (fcap *FileCAPool) UnmarshalCaddyfi
-modules/caddytls/capools.go:150:2     - Unknown word (fcap)        -- fcap.TrustedCACertPEMFiles
-modules/caddytls/capools.go:150:38    - Unknown word (fcap)        -- rustedCACertPEMFiles = append(fcap.TrustedCACertPEMFiles
-modules/caddytls/capools.go:154:4     - Unknown word (fcap)        -- fcap.TrustedCACertPEMFiles
-modules/caddytls/capools.go:154:40    - Unknown word (fcap)        -- rustedCACertPEMFiles = append(fcap.TrustedCACertPEMFiles
-modules/caddytls/capools.go:156:13    - Unknown word (Errf)        -- return d.Errf("unrecognized directive
-modules/caddytls/capools.go:15:14     - Unknown word (caddyserver) -- "github.com/caddyserver/certmagic"
-modules/caddytls/capools.go:15:26     - Unknown word (certmagic)   -- github.com/caddyserver/certmagic"
-modules/caddytls/capools.go:174:10    - Unknown word (caddypki)    -- ca []*caddypki.CA
-modules/caddytls/capools.go:17:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
-modules/caddytls/capools.go:18:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/caddyconfig
-modules/caddytls/capools.go:18:35     - Unknown word (caddyconfig) -- caddyserver/caddy/v2/caddyconfig"
-modules/caddytls/capools.go:194:18    - Unknown word (caddypki)    -- pki := pkiApp.(*caddypki.PKI)
+modules/caddytls/capools.go:105:13    - Unknown word (Errf)        -- return d.Errf("unrecognized directive
+modules/caddytls/capools.go:16:14     - Unknown word (caddyserver) -- "github.com/caddyserver/certmagic"
+modules/caddytls/capools.go:16:26     - Unknown word (certmagic)   -- github.com/caddyserver/certmagic"
+modules/caddytls/capools.go:185:7     - Unknown word (fcap)        -- func (fcap *FileCAPool) UnmarshalCaddyfi
+modules/caddytls/capools.go:187:2     - Unknown word (fcap)        -- fcap.TrustedCACertPEMFiles
+modules/caddytls/capools.go:187:38    - Unknown word (fcap)        -- rustedCACertPEMFiles = append(fcap.TrustedCACertPEMFiles
+modules/caddytls/capools.go:18:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
+modules/caddytls/capools.go:191:4     - Unknown word (fcap)        -- fcap.TrustedCACertPEMFiles
+modules/caddytls/capools.go:191:40    - Unknown word (fcap)        -- rustedCACertPEMFiles = append(fcap.TrustedCACertPEMFiles
+modules/caddytls/capools.go:193:13    - Unknown word (Errf)        -- return d.Errf("unrecognized directive
 modules/caddytls/capools.go:19:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/caddyconfig
-modules/caddytls/capools.go:19:35     - Unknown word (caddyconfig) -- caddyserver/caddy/v2/caddyconfig/caddyfile"
+modules/caddytls/capools.go:19:35     - Unknown word (caddyconfig) -- caddyserver/caddy/v2/caddyconfig"
 modules/caddytls/capools.go:1:9       - Unknown word (caddytls)   -- package caddytls
-modules/caddytls/capools.go:20:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddypki
-modules/caddytls/capools.go:20:43     - Unknown word (caddypki)    -- caddyserver/caddy/v2/modules/caddypki"
-modules/caddytls/capools.go:219:7     - Unknown word (pkir)        -- func (pkir *PKIRootCAPool) UnmarshalCadd
-modules/caddytls/capools.go:221:2     - Unknown word (pkir)        -- pkir.Authority = append(pkir
-modules/caddytls/capools.go:221:26    - Unknown word (pkir)        -- pkir.Authority = append(pkir.Authority, d.RemainingArgs
-modules/caddytls/capools.go:225:28    - Unknown word (pkir)        -- pkir.Authority = append(pkir.Authority, d.RemainingArgs
-modules/caddytls/capools.go:225:4     - Unknown word (pkir)        -- pkir.Authority = append(pkir
-modules/caddytls/capools.go:227:13    - Unknown word (Errf)        -- return d.Errf("unrecognized directive
-modules/caddytls/capools.go:246:10    - Unknown word (caddypki)    -- ca []*caddypki.CA
-modules/caddytls/capools.go:266:18    - Unknown word (caddypki)    -- pki := pkiApp.(*caddypki.PKI)
-modules/caddytls/capools.go:300:13    - Unknown word (Errf)        -- return d.Errf("unrecognized directive
-modules/caddytls/capools.go:323:10    - Unknown word (certmagic)   -- storage certmagic.Storage
-modules/caddytls/capools.go:400:14    - Unknown word (Errf)        -- return d.Errf("module %s is not a
-modules/caddytls/capools.go:402:20    - Unknown word (caddyconfig) -- sp.StorageRaw = caddyconfig.JSONModuleObject(storage
-modules/caddytls/capools.go:418:50    - Unknown word (caddyhttp)   -- modifications: modules/caddyhttp/reverseproxy/httptransport
-modules/caddytls/capools.go:418:73    - Unknown word (httptransport) -- caddyhttp/reverseproxy/httptransport.go
-modules/caddytls/capools.go:465:39    - Unknown word (caddytls)      -- "module %s is not a caddytls.CA", modID)
-modules/caddytls/capools.go:467:14    - Unknown word (caddyconfig)   -- t.CARaw = caddyconfig.JSONModuleObject(ca
-modules/caddytls/capools.go:503:50    - Unknown word (caddyhttp)     -- modifications: modules/caddyhttp/reverseproxy/httptransport
-modules/caddytls/capools.go:503:73    - Unknown word (httptransport) -- caddyhttp/reverseproxy/httptransport.go
-modules/caddytls/capools.go:591:36    - Unknown word (nolint)        -- httpClient.Do(req) //nolint:gosec // SSRF false
-modules/caddytls/capools.go:591:43    - Unknown word (gosec)         -- httpClient.Do(req) //nolint:gosec // SSRF false positive
-modules/caddytls/capools.go:595:3     - Unknown word (pembs)         -- pembs, err := io.ReadAll(res
-modules/caddytls/capools.go:600:33    - Unknown word (pembs)         -- caPool.AppendCertsFromPEM(pembs) {
-modules/caddytls/capools.go:92:13     - Unknown word (Errf)        -- return d.Errf("unrecognized directive
-modules/caddytls/capools_test.go:10:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
-modules/caddytls/capools_test.go:116:26    - Unknown word (certificatest) -- name: "configuring no certificatest produces an error",
-modules/caddytls/capools_test.go:11:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/caddyconfig
-modules/caddytls/capools_test.go:11:35     - Unknown word (caddyconfig) -- caddyserver/caddy/v2/caddyconfig/caddyfile"
-modules/caddytls/capools_test.go:12:16     - Unknown word (caddyserver) -- _ "github.com/caddyserver/caddy/v2/modules/filestorage
-modules/caddytls/capools_test.go:17:28     - Unknown word (caddytest)   -- cert_file_1 = "../../caddytest/caddy.ca.cer"
-modules/caddytls/capools_test.go:195:4     - Unknown word (fcap)          -- fcap := &FileCAPool{}
-modules/caddytls/capools_test.go:196:14    - Unknown word (fcap)          -- if err := fcap.UnmarshalCaddyfile(tt
-modules/caddytls/capools_test.go:199:55    - Unknown word (fcap)          -- DeepEqual(&tt.expected, fcap) {
+modules/caddytls/capools.go:20:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/caddyconfig
+modules/caddytls/capools.go:20:35     - Unknown word (caddyconfig) -- caddyserver/caddy/v2/caddyconfig/caddyfile"
+modules/caddytls/capools.go:216:11    - Unknown word (caddypki)    -- ca []*caddypki.CA
+modules/caddytls/capools.go:21:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddypki
+modules/caddytls/capools.go:21:43     - Unknown word (caddypki)    -- caddyserver/caddy/v2/modules/caddypki"
+modules/caddytls/capools.go:237:18    - Unknown word (caddypki)    -- pki := pkiApp.(*caddypki.PKI)
+modules/caddytls/capools.go:269:7     - Unknown word (pkir)        -- func (pkir *PKIRootCAPool) UnmarshalCadd
+modules/caddytls/capools.go:271:2     - Unknown word (pkir)        -- pkir.Authority = append(pkir
+modules/caddytls/capools.go:271:26    - Unknown word (pkir)        -- pkir.Authority = append(pkir.Authority, d.RemainingArgs
+modules/caddytls/capools.go:275:28    - Unknown word (pkir)        -- pkir.Authority = append(pkir.Authority, d.RemainingArgs
+modules/caddytls/capools.go:275:4     - Unknown word (pkir)        -- pkir.Authority = append(pkir
+modules/caddytls/capools.go:277:13    - Unknown word (Errf)        -- return d.Errf("unrecognized directive
+modules/caddytls/capools.go:301:11    - Unknown word (caddypki)    -- ca []*caddypki.CA
+modules/caddytls/capools.go:322:18    - Unknown word (caddypki)    -- pki := pkiApp.(*caddypki.PKI)
+modules/caddytls/capools.go:362:13    - Unknown word (Errf)        -- return d.Errf("unrecognized directive
+modules/caddytls/capools.go:390:10    - Unknown word (certmagic)   -- storage certmagic.Storage
+modules/caddytls/capools.go:485:14    - Unknown word (Errf)        -- return d.Errf("module %s is not a
+modules/caddytls/capools.go:487:20    - Unknown word (caddyconfig) -- sp.StorageRaw = caddyconfig.JSONModuleObject(storage
+modules/caddytls/capools.go:554:39    - Unknown word (caddytls)    -- "module %s is not a caddytls.CA", modID)
+modules/caddytls/capools.go:556:14    - Unknown word (caddyconfig) -- t.CARaw = caddyconfig.JSONModuleObject(ca
+modules/caddytls/capools.go:681:36    - Unknown word (nolint)      -- httpClient.Do(req) //nolint:gosec // SSRF false
+modules/caddytls/capools.go:681:43    - Unknown word (gosec)       -- httpClient.Do(req) //nolint:gosec // SSRF false positive
+modules/caddytls/capools.go:685:3     - Unknown word (pembs)       -- pembs, err := io.ReadAll(res
+modules/caddytls/capools.go:694:14    - Unknown word (pembs)       -- pemData := pembs
+modules/caddytls/capools.go:927:44    - Unknown word (caddyconfig) -- append(ccp.SourcesRaw, caddyconfig.JSONModuleObject(ca
+modules/caddytls/capools_test.go:117:26    - Unknown word (certificatest) -- name: "configuring no certificatest produces an error",
+modules/caddytls/capools_test.go:11:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
+modules/caddytls/capools_test.go:12:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/caddyconfig
+modules/caddytls/capools_test.go:12:35     - Unknown word (caddyconfig) -- caddyserver/caddy/v2/caddyconfig/caddyfile"
+modules/caddytls/capools_test.go:13:16     - Unknown word (caddyserver) -- _ "github.com/caddyserver/caddy/v2/modules/filestorage
+modules/caddytls/capools_test.go:18:28     - Unknown word (caddytest)   -- cert_file_1 = "../../caddytest/caddy.ca.cer"
+modules/caddytls/capools_test.go:196:4     - Unknown word (fcap)          -- fcap := &FileCAPool{}
+modules/caddytls/capools_test.go:197:14    - Unknown word (fcap)          -- if err := fcap.UnmarshalCaddyfile(tt
 modules/caddytls/capools_test.go:1:9       - Unknown word (caddytls)   -- package caddytls
-modules/caddytls/capools_test.go:200:63    - Unknown word (fcap)          -- alCaddyfile() = %v, want %v", fcap, tt.expected)
-modules/caddytls/capools_test.go:217:26    - Unknown word (certificatest) -- name: "configuring no certificatest produces an error",
-modules/caddytls/capools_test.go:289:4     - Unknown word (pkir)          -- pkir := &PKIRootCAPool{}
-modules/caddytls/capools_test.go:290:14    - Unknown word (pkir)          -- if err := pkir.UnmarshalCaddyfile(tt
-modules/caddytls/capools_test.go:293:55    - Unknown word (pkir)          -- DeepEqual(&tt.expected, pkir) {
-modules/caddytls/capools_test.go:294:66    - Unknown word (pkir)          -- alCaddyfile() = %v, want %v", pkir, tt.expected)
-modules/caddytls/capools_test.go:311:26    - Unknown word (certificatest) -- name: "configuring no certificatest produces an error",
-modules/caddytls/capools_test.go:31:26     - Unknown word (certificatest) -- name: "configuring no certificatest produces an error",
+modules/caddytls/capools_test.go:200:55    - Unknown word (fcap)          -- DeepEqual(&tt.expected, fcap) {
+modules/caddytls/capools_test.go:201:63    - Unknown word (fcap)          -- alCaddyfile() = %v, want %v", fcap, tt.expected)
+modules/caddytls/capools_test.go:218:26    - Unknown word (certificatest) -- name: "configuring no certificatest produces an error",
+modules/caddytls/capools_test.go:290:4     - Unknown word (pkir)          -- pkir := &PKIRootCAPool{}
+modules/caddytls/capools_test.go:291:14    - Unknown word (pkir)          -- if err := pkir.UnmarshalCaddyfile(tt
+modules/caddytls/capools_test.go:294:55    - Unknown word (pkir)          -- DeepEqual(&tt.expected, pkir) {
+modules/caddytls/capools_test.go:295:66    - Unknown word (pkir)          -- alCaddyfile() = %v, want %v", pkir, tt.expected)
+modules/caddytls/capools_test.go:312:26    - Unknown word (certificatest) -- name: "configuring no certificatest produces an error",
+modules/caddytls/capools_test.go:32:26     - Unknown word (certificatest) -- name: "configuring no certificatest produces an error",
 modules/caddytls/certmanagers.go:13:14     - Unknown word (caddyserver) -- "github.com/caddyserver/certmagic"
 modules/caddytls/certmanagers.go:13:26     - Unknown word (certmagic)   -- github.com/caddyserver/certmagic"
 modules/caddytls/certmanagers.go:14:24     - Unknown word (tscert)      -- github.com/tailscale/tscert"

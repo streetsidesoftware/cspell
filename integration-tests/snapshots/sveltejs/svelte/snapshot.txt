@@ -3,12 +3,16 @@ Repository: sveltejs/svelte
 Url: "https://github.com/sveltejs/svelte.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 8669, Issues found: 3993 in 600 files.
+ CSpell: Files checked: 8677, Issues found: 4003 in 601 files.
  exit code: 1
 CONTRIBUTING.md:22:5      - Unknown word (Triaging)   -- ### Triaging issues and pull requests
-benchmarking/benchmarks/reactivity/index.js:4:2       - Unknown word (sbench)     -- sbench_create_0to1,
+benchmarking/benchmarks/reactivity/index.js:5:2       - Unknown word (sbench)     -- sbench_create_0to1,
 benchmarking/benchmarks/reactivity/tests/kairo_mux.bench.js:9:8       - Unknown word (splited)    -- const splited = heads
-benchmarking/run.js:5:21      - Unknown word (kairo)      -- // e.g. `pnpm bench kairo` to only run the kairo
+benchmarking/run.js:6:21      - Unknown word (kairo)      -- // e.g. `pnpm bench kairo` to only run the kairo
+benchmarking/utils.js:206:10    - Unknown word (hotspot)    -- const hotspot_rows = [...included
+benchmarking/utils.js:235:14    - Unknown word (hotspots)   -- '## Top hotspots',
+benchmarking/utils.js:254:80    - Unknown word (Deopt)      -- Hit count | Children | Deopt reason |',
+benchmarking/utils.js:288:10    - Unknown word (deopt)      -- const deoptReason = typeof node
 documentation/docs/01-introduction/02-getting-started.md:8:15      - Unknown word (myapp)      -- npx sv create myapp
 documentation/docs/01-introduction/03-svelte-files.md:34:20     - Unknown word (behaviour)  -- <!-- TODO describe behaviour of `export` -->
 documentation/docs/02-runes/01-what-are-runes.md:5:21      - Unknown word (ruːn)       -- > [!NOTE] **rune** /ruːn/ _noun_
@@ -54,8 +58,8 @@ documentation/docs/06-runtime/01-stores.md:307:159   - Unknown word (unsubscript
 documentation/docs/06-runtime/03-lifecycle-hooks.md:101:33    - Unknown word (autoscrolls) -- implement a chat window that autoscrolls to the bottom when new
 documentation/docs/06-runtime/05-hydratable.md:20:305    - Unknown word (datafetching) -- the scenes by whatever datafetching library you use. For
 documentation/docs/07-misc/01-best-practices.md:4:19      - Unknown word (bestpractices) -- name: svelte-core-bestpractices
-documentation/docs/07-misc/03-typescript.md:271:3     - Unknown word (globalattribute) -- globalattribute?: string;
-documentation/docs/07-misc/03-typescript.md:276:3     - Unknown word (veryexperimentalattribute) -- veryexperimentalattribute?: string;
+documentation/docs/07-misc/03-typescript.md:255:3     - Unknown word (globalattribute) -- globalattribute?: string;
+documentation/docs/07-misc/03-typescript.md:260:3     - Unknown word (veryexperimentalattribute) -- veryexperimentalattribute?: string;
 documentation/docs/07-misc/03-typescript.md:31:110    - Unknown word (transpiling) -- just disappear when transpiling to JavaScript, such
 documentation/docs/07-misc/04-custom-elements.md:137:166   - Unknown word (oneworld)   -- treats `<custom-element oneworld={true}></custom-element
 documentation/docs/07-misc/04-custom-elements.md:137:237   - Unknown word (eworld)     -- stomElement.addEventListener('eworld', true)` (and not as
@@ -1660,7 +1664,6 @@ packages/svelte/src/compiler/phases/1-parse/utils/fuzzymatch.js:6:25      - Unkn
 packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:356:18    - Unknown word (combinators) -- // TODO other combinators
 packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:377:29    - Unknown word (unscopeable) -- a `:global(...)` or unscopeable selector, or
 packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:861:42    - Unknown word (selectedcontent) -- considered descendants of <selectedcontent>, which clones the selected
-packages/svelte/src/compiler/phases/2-analyze/css/utils.js:28:28     - Unknown word (deopt)      -- and we don't want to deopt on `condition`
 packages/svelte/src/compiler/phases/2-analyze/css/utils.js:34:29     - Unknown word (cslx)       -- will be processed by cslx, in which case falsy
 packages/svelte/src/compiler/phases/2-analyze/index.js:1036:14   - Unknown word (optimise)   -- // TODO optimise this better
 packages/svelte/src/compiler/phases/2-analyze/index.js:733:18    - Unknown word (nonstate)   -- // warn on any nonstate declarations that are
@@ -1704,22 +1707,22 @@ packages/svelte/src/internal/client/dom/blocks/await.js:58:91     - Unknown word
 packages/svelte/src/internal/client/dom/blocks/branches.js:204:12    - Unknown word (unskip)     -- batch.unskip_effect(effect);
 packages/svelte/src/internal/client/dom/blocks/branches.js:218:10    - Unknown word (oncommit)   -- batch.oncommit(this.#commit);
 packages/svelte/src/internal/client/dom/blocks/branches.js:219:10    - Unknown word (ondiscard)  -- batch.ondiscard(this.#discard);
-packages/svelte/src/internal/client/dom/blocks/each.js:85:62     - Unknown word (outrogroups) -- EachOutroGroup>} */ (state.outrogroups);
+packages/svelte/src/internal/client/dom/blocks/each.js:86:62     - Unknown word (outrogroups) -- EachOutroGroup>} */ (state.outrogroups);
 packages/svelte/src/internal/client/dom/elements/actions.js:18:8      - Unknown word (inited)     -- var inited = false;
 packages/svelte/src/internal/client/dom/elements/attributes.js:587:16    - Unknown word (contructor) -- // Do not use contructor.name here as that's
 packages/svelte/src/internal/client/dom/elements/bindings/input.js:31:14     - Unknown word (numberlike) -- value = is_numberlike_input(input) ? to_number
 packages/svelte/src/internal/client/dom/elements/events.js:163:47    - Unknown word (expando)    -- GCed too early, the expando __root property
 packages/svelte/src/internal/client/proxy.js:41:12     - Unknown word (proxyable)  -- // if non-proxyable, or is already a proxy
 packages/svelte/src/internal/client/proxy.js:91:32     - Unknown word (inspectable) -- /** @type {any} */ (inspectable_array(/** @type {any
-packages/svelte/src/internal/client/reactivity/batch.js:1213:32   - Unknown word (thath)        -- they depend on things thath changed
+packages/svelte/src/internal/client/reactivity/batch.js:1212:32   - Unknown word (thath)        -- they depend on things thath changed
 packages/svelte/src/internal/client/reactivity/batch.js:314:78    - Unknown word (unskipping) -- rescheduled through unskipping the skipped branches
 packages/svelte/src/internal/client/reactivity/batch.js:57:14     - Unknown word (travelling) -- * When time travelling (i.e. working in one
-packages/svelte/src/internal/client/reactivity/batch.js:740:85    - Unknown word (AFAICT)     -- legacy `$:` effects AFAICT — we can remove later
-packages/svelte/src/internal/client/reactivity/batch.js:757:64    - Unknown word (unskipped)  -- because a branch is being unskipped,
-packages/svelte/src/internal/client/reactivity/batch.js:911:82    - Unknown word (nullpointers) -- else we could run into nullpointers
+packages/svelte/src/internal/client/reactivity/batch.js:744:85    - Unknown word (AFAICT)     -- legacy `$:` effects AFAICT — we can remove later
+packages/svelte/src/internal/client/reactivity/batch.js:761:64    - Unknown word (unskipped)  -- because a branch is being unskipped,
+packages/svelte/src/internal/client/reactivity/batch.js:915:82    - Unknown word (nullpointers) -- else we could run into nullpointers
 packages/svelte/src/internal/client/reactivity/deriveds.js:128:6     - Unknown word (deferreds)  -- var deferreds = new Map();
 packages/svelte/src/internal/client/reactivity/effects.js:13:2      - Unknown word (untracking) -- untracking,
-packages/svelte/src/internal/client/reactivity/sources.js:277:63    - Unknown word (overfiring) -- - this way we avoid overfiring.
+packages/svelte/src/internal/client/reactivity/sources.js:269:63    - Unknown word (overfiring) -- - this way we avoid overfiring.
 packages/svelte/src/internal/client/runtime.js:136:90    - Unknown word (depedencies) -- to avoid duplicating depedencies inside a reaction *
 packages/svelte/src/internal/client/timing.js:12:5      - Unknown word (bunder)     -- // bunder will eval and remove
 packages/svelte/src/internal/client/types.d.ts:9:8       - Unknown word (hydratables) -- /** hydratables */
