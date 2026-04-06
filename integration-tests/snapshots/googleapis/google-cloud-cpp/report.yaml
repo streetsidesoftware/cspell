@@ -3,9 +3,9 @@ Repository: googleapis/google-cloud-cpp
 Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
-  files: 20799
-  filesWithIssues: 8096
-  issues: 46806
+  files: 20800
+  filesWithIssues: 8097
+  issues: 46816
   errors: 0
 Errors: []
 
@@ -641,8 +641,8 @@ issues:
   - "google/cloud/internal/external_account_token_source_aws_test.cc:936:46      dgst    U       215\" | openssl dgst -sha256 -mac HMAC -macopt"
   - "google/cloud/internal/future_impl.h:182:34      Wmaybe      U       diagnostic ignored \"-Wmaybe-uninitialized\""
   - "google/cloud/internal/grpc_opentelemetry_test.cc:58:35          semconv     U       sc = ::opentelemetry::semconv;"
-  - "google/cloud/internal/http_header_test.cc:99:33         valuelongerthantruncatelength       U       HttpHeader long_value(\"key\", \"valuelongerthantruncatelength\");"
-  - "google/cloud/internal/http_header_test.cc:100:50        valuelonge                          U       DebugString(), Eq(\"key: valuelonge\"));"
+  - "google/cloud/internal/http_header_test.cc:141:33        valuelongerthantruncatelength       U       HttpHeader long_value(\"key\", \"valuelongerthantruncatelength\");"
+  - "google/cloud/internal/http_header_test.cc:142:50        valuelonge                          U       DebugString(), Eq(\"key: valuelonge\"));"
   - "google/cloud/internal/oauth2_refreshing_credentials_wrapper.h:40:16         refreshable     U       * Wrapper for refreshable parts of a Credentials"
   - "google/cloud/internal/oauth2_service_account_credentials_test.cc:111:33         Cerl        U       constexpr kAuthProviderX509CerlUrl ="
   - "google/cloud/internal/oauth2_service_account_credentials_test.cc:628:5          CNHKF       U       rmYdCNHKFXam78uCt7xQLw=="
@@ -822,6 +822,7 @@ issues:
   - "google/cloud/storage/doc/storage-mocking.dox:29:57          writeobject     U       samples.cc mock successful writeobject"
   - "google/cloud/storage/examples/CMakeLists.txt:36:20          autoclass       U       storage_bucket_autoclass_samples.cc"
   - "google/cloud/storage/examples/storage_async_samples.cc:178:8        coro    U       auto coro ="
+  - "google/cloud/storage/examples/storage_bucket_encryption_enforcement_samples.cc:40:23        GMEK    U       std::cout << \" GMEK Enforcement: NOT SET"
   - "google/cloud/storage/examples/storage_object_file_transfer_samples.cc:143:23        amet                U       Lorem ipsum dolor sit amet, consectetur adipiscing"
   - "google/cloud/storage/examples/storage_object_file_transfer_samples.cc:143:29        consectetur         U       ipsum dolor sit amet, consectetur adipiscing elit, sed"
   - "google/cloud/storage/examples/storage_object_file_transfer_samples.cc:143:41        adipiscing          U       sit amet, consectetur adipiscing elit, sed do eiusmod"
