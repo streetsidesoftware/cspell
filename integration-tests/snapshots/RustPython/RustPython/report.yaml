@@ -3,9 +3,9 @@ Repository: RustPython/RustPython
 Url: https://github.com/RustPython/RustPython.git
 Args: '["**"]'
 Summary:
-  files: 764
-  filesWithIssues: 90
-  issues: 587
+  files: 767
+  filesWithIssues: 91
+  issues: 591
   errors: 0
 Errors: []
 
@@ -743,8 +743,10 @@ issues:
   - "extra_tests/snippets/builtin_str.py:204:47      ehaha       U       cHallo\\x1cHELLO\\x1dhoho\\x1ehaha\\x85another\\u2028yetanother"
   - "extra_tests/snippets/builtin_str.py:212:10      hoho        U       \"hoho\\x1e\","
   - "extra_tests/snippets/builtin_str.py:213:10      haha        U       \"haha\\x85\","
-  - "extra_tests/snippets/builtin_str.py:735:28      afoo        U       assert s.removeprefix(\"afoo\") == s_ref"
-  - "extra_tests/snippets/builtin_str.py:782:28      fooa        U       assert s.removesuffix(\"fooa\") == s_ref"
+  - "extra_tests/snippets/builtin_str.py:238:9       Σίσυφος     U       assert \"Σίσυφος\".swapcase() == \"σΊΣΥΦΟΣ"
+  - "extra_tests/snippets/builtin_str.py:238:34      ΊΣΥΦΟΣ      U       Σίσυφος\".swapcase() == \"σΊΣΥΦΟΣ\""
+  - "extra_tests/snippets/builtin_str.py:737:28      afoo        U       assert s.removeprefix(\"afoo\") == s_ref"
+  - "extra_tests/snippets/builtin_str.py:784:28      fooa        U       assert s.removesuffix(\"fooa\") == s_ref"
   - "extra_tests/snippets/builtin_super.py:1:1\tNo issues found"
   - "extra_tests/snippets/builtin_thread.py:1:1\tNo issues found"
   - "extra_tests/snippets/builtin_tuple.py:1:1\tNo issues found"
@@ -962,6 +964,7 @@ issues:
   - "extra_tests/snippets/stdlib_sys_getframe.py:1:1\tNo issues found"
   - "extra_tests/snippets/stdlib_sys.py:1:1\tNo issues found"
   - "extra_tests/snippets/stdlib_termios.py:1:1\tNo issues found"
+  - "extra_tests/snippets/stdlib_threading.py:1:1\tNo issues found"
   - "extra_tests/snippets/stdlib_time.py:1:1\tNo issues found"
   - "extra_tests/snippets/stdlib_traceback.py:1:1\tNo issues found"
   - "extra_tests/snippets/stdlib_types.py:1:1\tNo issues found"
@@ -1105,7 +1108,10 @@ issues:
   - "scripts/cargo-llvm-cov.py:1:1\tNo issues found"
   - "scripts/check_redundant_patches.py:1:1\tNo issues found"
   - "scripts/checklist_template.md:1:1\tNo issues found"
+  - "scripts/compare_bytecode.py:1:1\tNo issues found"
   - "scripts/crawl_sourcecode.py:1:1\tNo issues found"
+  - "scripts/dis_dump.py:6:23        reprs       U       addresses in argument reprs."
+  - "scripts/dis_dump.py:78:42       reprs       U       addresses from other reprs"
   - "scripts/find_eq.py:1:1\tNo issues found"
   - "scripts/generate_checklist.py:1:1\tNo issues found"
   - "scripts/generate_opcode_metadata.py:57:9        sprio       U       sprio, oprio = ("
