@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: https://github.com/eslint/eslint
 Args: '[".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]'
 Summary:
-  files: 2058
+  files: 2060
   filesWithIssues: 294
   issues: 1504
   errors: 0
@@ -538,7 +538,7 @@ issues:
   - "docs/src/use/command-line-interface.md:318:68       levn            U       configuration specified with [levn](https://github.com"
   - "docs/src/use/command-line-interface.md:567:21       customformat    U       args: [\"-f\", \"./customformat.js\", \"file.js\"]"
   - "docs/src/use/configure/combine-configs.md:1:1\tNo issues found"
-  - "docs/src/use/configure/configuration-files.md:73:144        commonmark      U       language\"`, e.g. `\"markdown/commonmark\"`. (default: `\"js/js"
+  - "docs/src/use/configure/configuration-files.md:73:152        commonmark      U       nguageName\"`, e.g. `\"markdown/commonmark\"`. (default: `\"js/js"
   - "docs/src/use/configure/debug.md:30:44       nzakas      U       config from C:\\Users\\nzakas\\projects\\eslint\\eslint"
   - "docs/src/use/configure/ignore.md:95:165         mylibrary       U       unignores `node_modules/mylibrary`:"
   - "docs/src/use/configure/index.md:1:1\tNo issues found"
@@ -606,7 +606,7 @@ issues:
   - "lib/config/config.js:638:47         inting      U       configuration rules while inting."
   - "lib/config/default-config.js:1:1\tNo issues found"
   - "lib/config/flat-config-array.js:1:1\tNo issues found"
-  - "lib/config/flat-config-schema.js:263:36         incompat    U       messageTemplate = \"eslintrc-incompat\";"
+  - "lib/config/flat-config-schema.js:264:36         incompat    U       messageTemplate = \"eslintrc-incompat\";"
   - "lib/eslint/eslint-helpers.js:45:31          humanwhocodes       U       import { Retrier } from \"@humanwhocodes/retry\";"
   - "lib/eslint/eslint-helpers.js:207:33         humanfs             U       hfs } = await import(\"@humanfs/node\");"
   - "lib/eslint/eslint-helpers.js:555:53         subsubdir           U       the form of \"subdir/subsubdir\"."
@@ -638,8 +638,8 @@ issues:
   - "lib/linter/apply-disable-directives.js:1:1\tNo issues found"
   - "lib/linter/code-path-analysis/code-path-analyzer.js:1:1\tNo issues found"
   - "lib/linter/code-path-analysis/code-path-segment.js:1:1\tNo issues found"
-  - "lib/linter/code-path-analysis/code-path-state.js:1246:37        circuting       U       path due to the short-circuting, so we are just seeding"
-  - "lib/linter/code-path-analysis/code-path-state.js:1725:14        Segs            U       const prevSegsOfLeavingSegment = [headOfLeav"
+  - "lib/linter/code-path-analysis/code-path-state.js:1245:37        circuting       U       path due to the short-circuting, so we are just seeding"
+  - "lib/linter/code-path-analysis/code-path-state.js:1724:14        Segs            U       const prevSegsOfLeavingSegment = [headOfLeav"
   - "lib/linter/code-path-analysis/code-path.js:1:1\tNo issues found"
   - "lib/linter/code-path-analysis/debug-helpers.js:109:41       Graphvis    U       can be visualized with Graphvis."
   - "lib/linter/code-path-analysis/fork-context.js:1:1\tNo issues found"
@@ -1078,7 +1078,7 @@ issues:
   - "README.md:349:5         teamend                 U       <!--teamend-->"
   - "README.md:352:5         sponsorsstart           U       <!--sponsorsstart-->"
   - "README.md:361:105       Qlty                    U       d157d/logo.png\" alt=\"Qlty Software\" height=\"9"
-  - "README.md:363:503       aeriusventilation's     U       org/avatar.png\" alt=\"aeriusventilation's Org\" height=\"32\"></a"
+  - "README.md:363:511       aeriusventilation's     U       d71/avatar.png\" alt=\"aeriusventilation's Org\" height=\"32\"></a"
   - "README.md:368:5         sponsorsend             U       <!--sponsorsend-->"
   - "SUPPORT.md:1:1\tNo issues found"
   - "templates/blogpost.md.ejs:18:10         linkify     U       function linkify(line) {"
@@ -1262,6 +1262,7 @@ issues:
   - "tests/fixtures/code-path-analysis/function--in-logical-right.js:1:1\tNo issues found"
   - "tests/fixtures/code-path-analysis/function--new.js:1:1\tNo issues found"
   - "tests/fixtures/code-path-analysis/function--simple.js:1:1\tNo issues found"
+  - "tests/fixtures/code-path-analysis/generator-yield-return-1.js:1:1\tNo issues found"
   - "tests/fixtures/code-path-analysis/if-1.js:1:1\tNo issues found"
   - "tests/fixtures/code-path-analysis/if-2.js:1:1\tNo issues found"
   - "tests/fixtures/code-path-analysis/if-3.js:1:1\tNo issues found"
@@ -1338,6 +1339,7 @@ issues:
   - "tests/fixtures/code-path-analysis/switch--precedence.js:1:1\tNo issues found"
   - "tests/fixtures/code-path-analysis/switch--single-case-1.js:1:1\tNo issues found"
   - "tests/fixtures/code-path-analysis/switch--single-case-2.js:1:1\tNo issues found"
+  - "tests/fixtures/code-path-analysis/try--generator-yield-finally-1.js:1:1\tNo issues found"
   - "tests/fixtures/code-path-analysis/try--try-catch-1.js:1:1\tNo issues found"
   - "tests/fixtures/code-path-analysis/try--try-catch-2.js:1:1\tNo issues found"
   - "tests/fixtures/code-path-analysis/try--try-catch-3.js:1:1\tNo issues found"
@@ -1619,7 +1621,6 @@ issues:
   - "tests/fixtures/parsers/arrow-parens/generics-simple.js:1:1\tNo issues found"
   - "tests/fixtures/parsers/arrow-parens/identifier-type.js:323:17       binop       U       binop: null,"
   - "tests/fixtures/parsers/arrow-parens/return-type.js:1:1\tNo issues found"
-  - "tests/fixtures/parsers/babel-eslint10/object-pattern-with-rest-element.js:1:1\tNo issues found"
   - "tests/fixtures/parsers/babel-eslint5/destructuring-object-spread.js:1:1\tNo issues found"
   - "tests/fixtures/parsers/babel-eslint7/array-pattern-with-annotation.js:1:1\tNo issues found"
   - "tests/fixtures/parsers/babel-eslint7/function-type-annotation.js:1:1\tNo issues found"
@@ -1848,9 +1849,9 @@ issues:
   - "tests/lib/config/config-loader.js:1:1\tNo issues found"
   - "tests/lib/config/config.js:1153:39      myns    U       schema: [], languages: [\"myns/lang\"] },"
   - "tests/lib/config/flat-config-array.js:222:19        noniterable         U       it(\"should allow noniterable baseConfig objects\""
-  - "tests/lib/config/flat-config-array.js:1932:17       truex               U       foo: \"truex\","
-  - "tests/lib/config/flat-config-array.js:2534:9        foox                U       foox: [1, \"bar\"],"
-  - "tests/lib/config/flat-config-array.js:2560:10       doesnt (doesn't)    U       \"doesnt-exist/match\": \"error"
+  - "tests/lib/config/flat-config-array.js:1967:17       truex               U       foo: \"truex\","
+  - "tests/lib/config/flat-config-array.js:2569:9        foox                U       foox: [1, \"bar\"],"
+  - "tests/lib/config/flat-config-array.js:2595:10       doesnt (doesn't)    U       \"doesnt-exist/match\": \"error"
   - "tests/lib/config/flat-config-schema.js:1:1\tNo issues found"
   - "tests/lib/eslint/eslint.js:1071:25      foothis             U       output: \"var bar = foothis is a syntax error.\""
   - "tests/lib/eslint/eslint.js:1901:21      myjs                U       files: [\"**/*.myjs\"],"
@@ -2235,6 +2236,7 @@ issues:
   - "tests/lib/rules/wrap-regex.js:1:1\tNo issues found"
   - "tests/lib/rules/yield-star-spacing.js:1:1\tNo issues found"
   - "tests/lib/rules/yoda.js:1:1\tNo issues found"
+  - "tests/lib/services/processor-service.js:1:1\tNo issues found"
   - "tests/lib/services/warning-service.js:1:1\tNo issues found"
   - "tests/lib/shared/deep-merge-arrays.js:1:1\tNo issues found"
   - "tests/lib/shared/naming.js:1:1\tNo issues found"

@@ -3,7 +3,7 @@ Repository: sveltejs/svelte
 Url: "https://github.com/sveltejs/svelte.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 8677, Issues found: 4003 in 601 files.
+ CSpell: Files checked: 8701, Issues found: 4014 in 603 files.
  exit code: 1
 CONTRIBUTING.md:22:5      - Unknown word (Triaging)   -- ### Triaging issues and pull requests
 benchmarking/benchmarks/reactivity/index.js:5:2       - Unknown word (sbench)     -- sbench_create_0to1,
@@ -362,7 +362,7 @@ packages/svelte/elements.d.ts:99:2      - Unknown word (onpastecapture) -- onpas
 packages/svelte/elements.d.ts:9:20      - Unknown word (Benoit)     -- // Benoit Benezech <https://github
 packages/svelte/elements.d.ts:9:27      - Unknown word (Benezech)   -- Benoit Benezech <https://github.com
 packages/svelte/messages/client-errors/errors.md:133:161   - Unknown word (blockingly) -- running its function blockingly during hydration. This
-packages/svelte/messages/client-warnings/warnings.md:148:195   - Unknown word (refetched)  -- cause the image to be refetched (or in the case of an
+packages/svelte/messages/client-warnings/warnings.md:154:195   - Unknown word (refetched)  -- cause the image to be refetched (or in the case of an
 packages/svelte/messages/compile-errors/options.md:11:3      - Unknown word (Unrecognised) -- > Unrecognised compiler option %keypath
 packages/svelte/messages/compile-errors/options.md:9:12      - Unknown word (unrecognised) -- ## options_unrecognised
 packages/svelte/messages/compile-errors/template.md:210:32    - Unknown word (autoclosed) -- invalid_closing_tag_autoclosed
@@ -1696,7 +1696,7 @@ packages/svelte/src/compiler/utils/extract_svelte_ignore.js:16:16     - Unknown 
 packages/svelte/src/compiler/utils/mapped_code.js:134:6     - Unknown word (unswitched) -- // unswitched loops are faster
 packages/svelte/src/html-tree-validation.js:118:5     - Unknown word (bgsound)    -- 'bgsound',
 packages/svelte/src/index-client.js:20:29     - Unknown word (noone)      -- value; // let's hope noone modifies this global
-packages/svelte/src/internal/client/constants.js:73:47     - Unknown word (downleveling) -- like this because after downleveling the pure comment may
+packages/svelte/src/internal/client/constants.js:75:47     - Unknown word (downleveling) -- like this because after downleveling the pure comment may
 packages/svelte/src/internal/client/dev/debug.js:119:28    - Unknown word (cdeps)      -- console.groupCollapsed('%cdeps', 'font-weight: normal
 packages/svelte/src/internal/client/dev/debug.js:241:20    - Unknown word (creactions) -- console.group('%creactions', 'font-weight: bold
 packages/svelte/src/internal/client/dev/debug.js:454:19    - Unknown word (cbranch)    -- console.group(`%cbranch (${branch.status})$
@@ -1704,9 +1704,9 @@ packages/svelte/src/internal/client/dev/debug.js:457:17    - Unknown word (ceffe
 packages/svelte/src/internal/client/dev/debug.js:478:20    - Unknown word (cchild)     -- console.group('%cchild branches', 'font-weight
 packages/svelte/src/internal/client/dev/tracing.js:105:28    - Unknown word (cran)       -- console.log(`${prefix} %cran outside of an effect
 packages/svelte/src/internal/client/dom/blocks/await.js:58:91     - Unknown word (treeshaken) -- let` or else it isn't treeshaken out */
-packages/svelte/src/internal/client/dom/blocks/branches.js:204:12    - Unknown word (unskip)     -- batch.unskip_effect(effect);
-packages/svelte/src/internal/client/dom/blocks/branches.js:218:10    - Unknown word (oncommit)   -- batch.oncommit(this.#commit);
-packages/svelte/src/internal/client/dom/blocks/branches.js:219:10    - Unknown word (ondiscard)  -- batch.ondiscard(this.#discard);
+packages/svelte/src/internal/client/dom/blocks/branches.js:212:12    - Unknown word (unskip)     -- batch.unskip_effect(effect);
+packages/svelte/src/internal/client/dom/blocks/branches.js:226:10    - Unknown word (oncommit)   -- batch.oncommit(this.#commit);
+packages/svelte/src/internal/client/dom/blocks/branches.js:227:10    - Unknown word (ondiscard)  -- batch.ondiscard(this.#discard);
 packages/svelte/src/internal/client/dom/blocks/each.js:86:62     - Unknown word (outrogroups) -- EachOutroGroup>} */ (state.outrogroups);
 packages/svelte/src/internal/client/dom/elements/actions.js:18:8      - Unknown word (inited)     -- var inited = false;
 packages/svelte/src/internal/client/dom/elements/attributes.js:587:16    - Unknown word (contructor) -- // Do not use contructor.name here as that's
@@ -1714,16 +1714,17 @@ packages/svelte/src/internal/client/dom/elements/bindings/input.js:31:14     - U
 packages/svelte/src/internal/client/dom/elements/events.js:163:47    - Unknown word (expando)    -- GCed too early, the expando __root property
 packages/svelte/src/internal/client/proxy.js:41:12     - Unknown word (proxyable)  -- // if non-proxyable, or is already a proxy
 packages/svelte/src/internal/client/proxy.js:91:32     - Unknown word (inspectable) -- /** @type {any} */ (inspectable_array(/** @type {any
-packages/svelte/src/internal/client/reactivity/batch.js:1212:32   - Unknown word (thath)        -- they depend on things thath changed
-packages/svelte/src/internal/client/reactivity/batch.js:314:78    - Unknown word (unskipping) -- rescheduled through unskipping the skipped branches
+packages/svelte/src/internal/client/reactivity/batch.js:1258:32   - Unknown word (thath)        -- they depend on things thath changed
+packages/svelte/src/internal/client/reactivity/batch.js:185:3     - Unknown word (unskipped)  -- #unskipped_branches = new Set(
+packages/svelte/src/internal/client/reactivity/batch.js:329:78    - Unknown word (unskipping) -- rescheduled through unskipping the skipped branches
 packages/svelte/src/internal/client/reactivity/batch.js:57:14     - Unknown word (travelling) -- * When time travelling (i.e. working in one
-packages/svelte/src/internal/client/reactivity/batch.js:744:85    - Unknown word (AFAICT)     -- legacy `$:` effects AFAICT — we can remove later
-packages/svelte/src/internal/client/reactivity/batch.js:761:64    - Unknown word (unskipped)  -- because a branch is being unskipped,
-packages/svelte/src/internal/client/reactivity/batch.js:915:82    - Unknown word (nullpointers) -- else we could run into nullpointers
-packages/svelte/src/internal/client/reactivity/deriveds.js:128:6     - Unknown word (deferreds)  -- var deferreds = new Map();
+packages/svelte/src/internal/client/reactivity/batch.js:785:85    - Unknown word (AFAICT)     -- legacy `$:` effects AFAICT — we can remove later
+packages/svelte/src/internal/client/reactivity/batch.js:957:82    - Unknown word (nullpointers) -- else we could run into nullpointers
+packages/svelte/src/internal/client/reactivity/deriveds.js:127:6     - Unknown word (deferreds)  -- var deferreds = new Map();
 packages/svelte/src/internal/client/reactivity/effects.js:13:2      - Unknown word (untracking) -- untracking,
 packages/svelte/src/internal/client/reactivity/sources.js:269:63    - Unknown word (overfiring) -- - this way we avoid overfiring.
 packages/svelte/src/internal/client/runtime.js:136:90    - Unknown word (depedencies) -- to avoid duplicating depedencies inside a reaction *
+packages/svelte/src/internal/client/runtime.js:406:21    - Unknown word (reexecuted)  -- // DIRTY so it is reexecuted once someone wants its
 packages/svelte/src/internal/client/timing.js:12:5      - Unknown word (bunder)     -- // bunder will eval and remove
 packages/svelte/src/internal/client/types.d.ts:9:8       - Unknown word (hydratables) -- /** hydratables */
 packages/svelte/src/internal/server/crypto.js:18:63     - Unknown word (analysers)  -- directly because static analysers will think we rely on
@@ -1917,6 +1918,7 @@ packages/svelte/tests/runtime-runes/samples/async-derived-in-multiple-effects/Co
 packages/svelte/tests/runtime-runes/samples/async-each/_config.js:8:11      - Unknown word (defg)       -- <button>defg</button>
 packages/svelte/tests/runtime-runes/samples/async-error/_config.js:31:78     - Unknown word (wheee)      -- button>step 3</button><h1>wheee</h1>'
 packages/svelte/tests/runtime-runes/samples/async-inspect-build/main.svelte:4:33      - Unknown word (shouldnt)   -- inspect after await shouldnt break builds");
+packages/svelte/tests/runtime-runes/samples/async-reactivity-loss-no-false-positive-2/main.svelte:6:69      - Unknown word (reacitive)  -- should not result in reacitive loss warning
 packages/svelte/tests/runtime-runes/samples/async-resolve-stale/_config.js:5:59      - Unknown word (macrotasks) -- test because of the macrotasks in App.svelte
 packages/svelte/tests/runtime-runes/samples/attribute-boolean-case-insensitivity/main.svelte:14:110    - Unknown word (DISABLEREMOTEPLAYBACK)   -- DISABLEPICTUREINPICTURE={val} DISABLEREMOTEPLAYBACK={val}></video>
 packages/svelte/tests/runtime-runes/samples/attribute-boolean-case-insensitivity/main.svelte:14:80     - Unknown word (DISABLEPICTUREINPICTURE) -- val} PLAYSINLINE={val} DISABLEPICTUREINPICTURE={val} DISABLEREMOTEPLAYBACK

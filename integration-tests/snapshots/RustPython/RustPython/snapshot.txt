@@ -3,7 +3,7 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 764, Issues found: 587 in 90 files.
+ CSpell: Files checked: 767, Issues found: 591 in 91 files.
  exit code: 1
 Cargo.toml:105:62    - Unknown word (redoxer)    -- to compile/check with redoxer
 Cargo.toml:119:28    - Unknown word (nsis)       -- package.metadata.packager.nsis]
@@ -228,10 +228,12 @@ extra_tests/snippets/builtin_str.py:204:39    - Unknown word (dhoho)      -- x0c
 extra_tests/snippets/builtin_str.py:204:47    - Unknown word (ehaha)      -- cHallo\x1cHELLO\x1dhoho\x1ehaha\x85another\u2028yetanother
 extra_tests/snippets/builtin_str.py:212:10    - Unknown word (hoho)       -- "hoho\x1e",
 extra_tests/snippets/builtin_str.py:213:10    - Unknown word (haha)       -- "haha\x85",
+extra_tests/snippets/builtin_str.py:238:34    - Unknown word (ΊΣΥΦΟΣ)     -- Σίσυφος".swapcase() == "σΊΣΥΦΟΣ"
+extra_tests/snippets/builtin_str.py:238:9     - Unknown word (Σίσυφος)    -- assert "Σίσυφος".swapcase() == "σΊΣΥΦΟΣ
 extra_tests/snippets/builtin_str.py:40:21     - Unknown word (xyxyxy)     -- assert "xy" * 3 == "xyxyxy"
 extra_tests/snippets/builtin_str.py:44:21     - Unknown word (xyxyxy)     -- assert 3 * "xy" == "xyxyxy"
-extra_tests/snippets/builtin_str.py:735:28    - Unknown word (afoo)       -- assert s.removeprefix("afoo") == s_ref
-extra_tests/snippets/builtin_str.py:782:28    - Unknown word (fooa)       -- assert s.removesuffix("fooa") == s_ref
+extra_tests/snippets/builtin_str.py:737:28    - Unknown word (afoo)       -- assert s.removeprefix("afoo") == s_ref
+extra_tests/snippets/builtin_str.py:784:28    - Unknown word (fooa)       -- assert s.removesuffix("fooa") == s_ref
 extra_tests/snippets/builtin_str_encode.py:11:42     - Unknown word (estás)     -- UnicodeEncodeError, "¿como estás?".encode, "ascii")
 extra_tests/snippets/builtin_str_encode.py:21:25     - Unknown word (𝕐𝕥)       -- round_trip("☢🐣 ᖇ𝓤𝕊тⓟ𝕐𝕥卄σ𝔫 ♬👣")
 extra_tests/snippets/builtin_str_encode.py:22:19     - Unknown word (ק𝔂t)       -- round_trip("💀👌 ק𝔂tℍⓞ𝓷 ３  🔥👤")
@@ -485,6 +487,8 @@ scripts/bench.sh:1:21      - Unknown word (nbody)      -- for BENCH in "int" "nb
 scripts/bench.sh:1:29      - Unknown word (fannkuch)   -- BENCH in "int" "nbody" "fannkuch" "scimark"; do
 scripts/bench.sh:3:75      - Unknown word (pyperf)     -- BENCH}_cpython${CPYTHON}.pyperf"
 scripts/bench.sh:9:107     - Unknown word (pyperf)     -- rustpython_${RUSTPYTHON}.pyperf"
+scripts/dis_dump.py:6:23      - Unknown word (reprs)      -- addresses in argument reprs.
+scripts/dis_dump.py:78:42     - Unknown word (reprs)      -- addresses from other reprs
 scripts/generate_opcode_metadata.py:113:5     - Unknown word (deopts)     -- deopts = {}
 scripts/generate_opcode_metadata.py:116:9     - Unknown word (deopts)     -- deopts[deopt] = specialized
 scripts/generate_opcode_metadata.py:118:12    - Unknown word (deopts)     -- return deopts
