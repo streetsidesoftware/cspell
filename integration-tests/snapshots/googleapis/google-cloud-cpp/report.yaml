@@ -3,9 +3,9 @@ Repository: googleapis/google-cloud-cpp
 Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
-  files: 20916
+  files: 20924
   filesWithIssues: 8137
-  issues: 47078
+  issues: 47082
   errors: 0
 Errors: []
 
@@ -539,7 +539,7 @@ issues:
   - "google/cloud/binaryauthorization/doc/override-authentication.dox:12:10          binauthz    U       @snippet binauthz_management_service_v"
   - "google/cloud/binaryauthorization/v1/binauthz_management_service_v1_client.h:19:39       BINARYAUTHORIZATION     U       CLOUD_CPP_GOOGLE_CLOUD_BINARYAUTHORIZATION_V1_BINAUTHZ_MANAGEMENT"
   - "google/cloud/BUILD.bazel:59:15          DEFAULTLIB      U       \"-DEFAULTLIB:bcrypt.lib\","
-  - "google/cloud/capture_build_info.bzl:51:48       cxxopts         U       = ctx.fragments.cpp.cxxopts + ctx.fragments.cpp"
+  - "google/cloud/BUILD.bazel:241:5          cxxopts         U       cxxopts = [\"-DGOOGLE_CLOUD_CPP"
   - "google/cloud/capture_build_info.bzl:51:76       conlyopts       U       + ctx.fragments.cpp.conlyopts,"
   - "google/cloud/capture_build_info.bzl:64:57       fastbuild       U       COMPILATION_MODE\", \"fastbuild\")"
   - "google/cloud/ces/v1/agent_client.cc:786:70      Toolsets    U       AgentServiceClient::ListToolsets("
@@ -647,9 +647,9 @@ issues:
   - "google/cloud/internal/http_header_test.cc:141:33        valuelongerthantruncatelength       U       HttpHeader long_value(\"key\", \"valuelongerthantruncatelength\");"
   - "google/cloud/internal/http_header_test.cc:142:50        valuelonge                          U       DebugString(), Eq(\"key: valuelonge\"));"
   - "google/cloud/internal/oauth2_refreshing_credentials_wrapper.h:40:16         refreshable     U       * Wrapper for refreshable parts of a Credentials"
-  - "google/cloud/internal/oauth2_service_account_credentials_test.cc:111:33         Cerl        U       constexpr kAuthProviderX509CerlUrl ="
-  - "google/cloud/internal/oauth2_service_account_credentials_test.cc:628:5          CNHKF       U       rmYdCNHKFXam78uCt7xQLw=="
-  - "google/cloud/internal/oauth2_service_account_credentials_test.cc:648:13         SCCV        U       \"hRW9bSCCV8w1Ex+\""
+  - "google/cloud/internal/oauth2_service_account_credentials_test.cc:112:33         Cerl        U       constexpr kAuthProviderX509CerlUrl ="
+  - "google/cloud/internal/oauth2_service_account_credentials_test.cc:642:5          CNHKF       U       rmYdCNHKFXam78uCt7xQLw=="
+  - "google/cloud/internal/oauth2_service_account_credentials_test.cc:662:13         SCCV        U       \"hRW9bSCCV8w1Ex+\""
   - "google/cloud/internal/opentelemetry_context.h:36:8          GAPICs      U       * For GAPICs, the size never exceeds"
   - "google/cloud/internal/populate_common_options_test.cc:98:11         optionses       U       Options optionses[] = {"
   - "google/cloud/internal/rest_opentelemetry_test.cc:53:8           aaabbbbb    U       \"aaabbbbb\";"
