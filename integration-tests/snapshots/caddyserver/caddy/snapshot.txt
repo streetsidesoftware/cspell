@@ -3,48 +3,51 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 305, Issues found: 3361 in 273 files.
+ CSpell: Files checked: 306, Issues found: 3364 in 274 files.
  exit code: 1
-admin.go:1000:38   - Unknown word (xxhash)      -- hash.Hash { return xxhash.New() }
-admin.go:1131:20   - Unknown word (Redir)       -- return errInternalRedir
-admin.go:1410:6    - Unknown word (loggable)    -- type loggableURLArray []*url.URL
-admin.go:1412:10   - Unknown word (loggable)    -- func (ua loggableURLArray) MarshalLogArray
-admin.go:1433:21   - Unknown word (pidfile)     -- // PIDFile writes a pidfile to the file at filename
-admin.go:1441:2    - Unknown word (pidfile)     -- pidfile = filename
-admin.go:1451:31   - Unknown word (pidfile)     -- pidfile is the name of the pidfile, if any.
-admin.go:1451:4    - Unknown word (pidfile)     -- // pidfile is the name of the pidfile
-admin.go:1452:5    - Unknown word (pidfile)     -- var pidfile string
-admin.go:1454:15   - Unknown word (Redir)       -- // errInternalRedir indicates an internal
-admin.go:1459:16   - Unknown word (Redir)       -- var errInternalRedir = fmt.Errorf("internal
-admin.go:171:12    - Unknown word (certmagic)   -- issuers []certmagic.Issuer
-admin.go:335:26    - Unknown word (infosec)     -- security checks, the infosec community assures me
+admin.go:1002:38   - Unknown word (xxhash)      -- hash.Hash { return xxhash.New() }
+admin.go:1133:20   - Unknown word (Redir)       -- return errInternalRedir
+admin.go:1412:6    - Unknown word (loggable)    -- type loggableURLArray []*url.URL
+admin.go:1414:10   - Unknown word (loggable)    -- func (ua loggableURLArray) MarshalLogArray
+admin.go:1435:21   - Unknown word (pidfile)     -- // PIDFile writes a pidfile to the file at filename
+admin.go:1443:2    - Unknown word (pidfile)     -- pidfile = filename
+admin.go:1453:31   - Unknown word (pidfile)     -- pidfile is the name of the pidfile, if any.
+admin.go:1453:4    - Unknown word (pidfile)     -- // pidfile is the name of the pidfile
+admin.go:1454:5    - Unknown word (pidfile)     -- var pidfile string
+admin.go:1456:15   - Unknown word (Redir)       -- // errInternalRedir indicates an internal
+admin.go:1461:16   - Unknown word (Redir)       -- var errInternalRedir = fmt.Errorf("internal
+admin.go:173:12    - Unknown word (certmagic)   -- issuers []certmagic.Issuer
+admin.go:337:26    - Unknown word (infosec)     -- security checks, the infosec community assures me
 admin.go:43:14     - Unknown word (caddyserver) -- "github.com/caddyserver/certmagic"
 admin.go:43:26     - Unknown word (certmagic)   -- github.com/caddyserver/certmagic"
 admin.go:44:14     - Unknown word (cespare)     -- "github.com/cespare/xxhash/v2"
 admin.go:44:22     - Unknown word (xxhash)      -- "github.com/cespare/xxhash/v2"
-admin.go:469:24    - Unknown word (loggable)    -- zap.Array("origins", loggableURLArray(handler.allowedOrigin
-admin.go:486:16    - Unknown word (caddytls)    -- // import the caddytls package -- but it works
-admin.go:500:76    - Unknown word (certmagic)   -- Identity.issuers, issVal.(certmagic.Issuer))
-admin.go:513:25    - Unknown word (caddytls)    -- as explained in the caddytls package, they need access
-admin.go:516:30    - Unknown word (caddytls)    -- avoid import cycle with caddytls package, so manually
-admin.go:51:41     - Unknown word (certmagic)   -- provide a temporary certmagic.Storage so that cert
-admin.go:54:34     - Unknown word (certmagic)   -- testCertMagicStorageOverride certmagic.Storage
-admin.go:592:23    - Unknown word (stdlib)      -- / convert logger to stdlib so it can be used by
-admin.go:899:23    - Unknown word (Redir)       -- if err == errInternalRedir {
+admin.go:471:24    - Unknown word (loggable)    -- zap.Array("origins", loggableURLArray(handler.allowedOrigin
+admin.go:488:16    - Unknown word (caddytls)    -- // import the caddytls package -- but it works
+admin.go:49:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/internal"
+admin.go:502:76    - Unknown word (certmagic)   -- Identity.issuers, issVal.(certmagic.Issuer))
+admin.go:515:25    - Unknown word (caddytls)    -- as explained in the caddytls package, they need access
+admin.go:518:30    - Unknown word (caddytls)    -- avoid import cycle with caddytls package, so manually
+admin.go:53:41     - Unknown word (certmagic)   -- provide a temporary certmagic.Storage so that cert
+admin.go:56:34     - Unknown word (certmagic)   -- testCertMagicStorageOverride certmagic.Storage
+admin.go:594:23    - Unknown word (stdlib)      -- / convert logger to stdlib so it can be used by
+admin.go:805:34    - Unknown word (Loggable)    -- "headers", internal.LoggableHTTPHeader{Header: r
+admin.go:901:23    - Unknown word (Redir)       -- if err == errInternalRedir {
 admin_test.go:31:14     - Unknown word (caddyserver) -- "github.com/caddyserver/certmagic"
 admin_test.go:31:26     - Unknown word (certmagic)   -- github.com/caddyserver/certmagic"
-admin_test.go:424:10    - Unknown word (Provisionable) -- type mockProvisionableRouter struct {
-admin_test.go:430:14    - Unknown word (Provisionable) -- func (m *mockProvisionableRouter) Provision(Context
-admin_test.go:435:10    - Unknown word (Provisionable) -- type mockProvisionableModule struct {
-admin_test.go:436:7     - Unknown word (Provisionable) -- *mockProvisionableRouter
-admin_test.go:439:14    - Unknown word (Provisionable) -- func (m *mockProvisionableModule) CaddyModule(
-admin_test.go:44:8      - Unknown word (yourserver)  -- "yourserver": {
-admin_test.go:490:14    - Unknown word (provisionable) -- // Create provisionable module
-admin_test.go:707:25    - Unknown word (certmagic)     -- test.cfg.storage = &certmagic.FileStorage{Path: t
-admin_test.go:711:25    - Unknown word (certmagic)     -- identityCertCache = certmagic.NewCache(certmagic.CacheOptio
-admin_test.go:711:44    - Unknown word (certmagic)     -- certmagic.NewCache(certmagic.CacheOptions{
-admin_test.go:712:29    - Unknown word (certmagic)     -- GetConfigForCert: func(certmagic.Certificate) (*certmagic
-admin_test.go:904:37    - Unknown word (doesnt)        -- RawMessage(`{"module": "doesnt_exist"}`),
+admin_test.go:35:19     - Unknown word (zaptest)     -- "go.uber.org/zap/zaptest/observer"
+admin_test.go:46:8      - Unknown word (yourserver)  -- "yourserver": {
+admin_test.go:471:10    - Unknown word (Provisionable) -- type mockProvisionableRouter struct {
+admin_test.go:477:14    - Unknown word (Provisionable) -- func (m *mockProvisionableRouter) Provision(Context
+admin_test.go:482:10    - Unknown word (Provisionable) -- type mockProvisionableModule struct {
+admin_test.go:483:7     - Unknown word (Provisionable) -- *mockProvisionableRouter
+admin_test.go:486:14    - Unknown word (Provisionable) -- func (m *mockProvisionableModule) CaddyModule(
+admin_test.go:537:14    - Unknown word (provisionable) -- // Create provisionable module
+admin_test.go:754:25    - Unknown word (certmagic)     -- test.cfg.storage = &certmagic.FileStorage{Path: t
+admin_test.go:758:25    - Unknown word (certmagic)     -- identityCertCache = certmagic.NewCache(certmagic.CacheOptio
+admin_test.go:758:44    - Unknown word (certmagic)     -- certmagic.NewCache(certmagic.CacheOptions{
+admin_test.go:759:29    - Unknown word (certmagic)     -- GetConfigForCert: func(certmagic.Certificate) (*certmagic
+admin_test.go:951:37    - Unknown word (doesnt)        -- RawMessage(`{"module": "doesnt_exist"}`),
 caddy.go:1139:54   - Unknown word (caddyevents) -- current instance of the caddyevents app instead.
 caddy.go:1191:41   - Unknown word (specversion) -- string `json:"specversion"`
 caddy.go:1194:41   - Unknown word (datacontenttype) -- string `json:"datacontenttype,omitempty"`
@@ -117,13 +120,15 @@ caddyconfig/caddyfile/parse.go:234:14    - Unknown word (Errf)        -- return 
 caddyconfig/caddyfile/parse.go:247:13    - Unknown word (Errf)        -- return p.Errf("Site addresses cannot
 caddyconfig/caddyfile/parse.go:264:14    - Unknown word (Errf)        -- return p.Errf("Site addresses cannot
 caddyconfig/caddyfile/parse.go:27:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
-caddyconfig/caddyfile/parse.go:737:36    - Unknown word (Curlies)     -- parser) blockTokens(retainCurlies bool) ([]Token, error
-caddyconfig/caddyfile/parse.go:738:21    - Unknown word (curlies)     -- // block must have curlies.
-caddyconfig/caddyfile/parse.go:745:11    - Unknown word (Curlies)     -- if retainCurlies {
-caddyconfig/caddyfile/parse.go:752:14    - Unknown word (Curlies)     -- if retainCurlies {
+caddyconfig/caddyfile/parse.go:741:36    - Unknown word (Curlies)     -- parser) blockTokens(retainCurlies bool) ([]Token, error
+caddyconfig/caddyfile/parse.go:742:21    - Unknown word (curlies)     -- // block must have curlies.
+caddyconfig/caddyfile/parse.go:749:11    - Unknown word (Curlies)     -- if retainCurlies {
+caddyconfig/caddyfile/parse.go:756:14    - Unknown word (Curlies)     -- if retainCurlies {
 caddyconfig/caddyfile/parse_test.go:670:13    - Unknown word (foofoobarbar) -- expect: "foofoobarbar",
 caddyconfig/caddyfile/parse_test.go:682:13    - Unknown word (foobarfoobar) -- expect: "foobarfoobar",
 caddyconfig/caddyfile/parse_test.go:694:13    - Unknown word (foobarbaz)    -- expect: "foobarbaz",
+caddyconfig/caddyfile/parse_test.go:991:6     - Unknown word (redir)        -- redir https://example.net
+caddyconfig/caddyfile/parse_test.go:994:45    - Unknown word (redir)        -- ]string{"respond", "redir", "respond"},
 caddyconfig/configadapters.go:129:8     - Unknown word (caddyserver) -- // See caddyserver/caddy#3132.
 caddyconfig/configadapters.go:15:9      - Unknown word (caddyconfig) -- package caddyconfig
 caddyconfig/configadapters.go:21:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
@@ -856,6 +861,13 @@ filepath.go:33:5      - Unknown word (wderr)      -- if wderr != nil {
 filepath.go:34:14     - Unknown word (wderr)      -- return "", wderr
 filepath.go:39:9      - Unknown word (wderr)      -- var wd, wderr = os.Getwd()
 filepath_windows.go:24:14     - Unknown word (stdlib's)   -- // Just call stdlib's implementation which
+internal/logmarshalers.go:10:4      - Unknown word (Loggable)   -- // LoggableHTTPHeader makes an HTTP
+internal/logmarshalers.go:10:44     - Unknown word (loggable)   -- makes an HTTP header loggable with zap.Object().
+internal/logmarshalers.go:13:6      - Unknown word (Loggable)   -- type LoggableHTTPHeader struct {
+internal/logmarshalers.go:20:9      - Unknown word (Loggable)   -- func (h LoggableHTTPHeader) MarshalLogObject
+internal/logmarshalers.go:31:21     - Unknown word (Loggable)   -- enc.AddArray(key, LoggableStringArray(val))
+internal/logmarshalers.go:36:4      - Unknown word (Loggable)   -- // LoggableStringArray makes a slice
+internal/logmarshalers.go:36:49     - Unknown word (marshalable) -- makes a slice of strings marshalable for logging.
 internal/metrics/metrics_test.go:19:28     - Unknown word (ohno)       -- method: strings.Repeat("ohno", 9999), expected:
 internal/sockets.go:45:48     - Unknown word (rwxr)       -- returns a string like `-rwxr-xr--` for `u=rwx,g=rx
 internal/testmocks/dummyverifier.go:1:9       - Unknown word (testmocks)  -- package testmocks
@@ -964,39 +976,39 @@ modules/caddyfs/filesystem.go:13:35     - Unknown word (caddyconfig) -- caddyser
 modules/caddyfs/filesystem.go:13:47     - Unknown word (httpcaddyfile) -- caddy/v2/caddyconfig/httpcaddyfile"
 modules/caddyfs/filesystem.go:18:2      - Unknown word (httpcaddyfile) -- httpcaddyfile.RegisterGlobalOption
 modules/caddyfs/filesystem.go:1:9       - Unknown word (caddyfs)    -- package caddyfs
-modules/caddyhttp/app.go:118:26    - Unknown word (ALPN)        -- solving the ACME TLS-ALPN challenges, or whenever
-modules/caddyhttp/app.go:154:10    - Unknown word (caddytls)    -- tlsApp *caddytls.TLS
+modules/caddyhttp/app.go:123:26    - Unknown word (ALPN)        -- solving the ACME TLS-ALPN challenges, or whenever
+modules/caddyhttp/app.go:159:10    - Unknown word (caddytls)    -- tlsApp *caddytls.TLS
 modules/caddyhttp/app.go:15:9      - Unknown word (caddyhttp)  -- package caddyhttp
-modules/caddyhttp/app.go:180:8     - Unknown word (Iface)       -- tlsAppIface, err := ctx.App("tls
-modules/caddyhttp/app.go:184:21    - Unknown word (Iface)       -- app.tlsApp = tlsAppIface.(*caddytls.TLS)
-modules/caddyhttp/app.go:184:29    - Unknown word (caddytls)    -- tlsApp = tlsAppIface.(*caddytls.TLS)
-modules/caddyhttp/app.go:186:11    - Unknown word (Iface)       -- eventsAppIface, err := ctx.App("events
-modules/caddyhttp/app.go:213:25    - Unknown word (Iface)       -- srv.events = eventsAppIface.(*caddyevents.App)
-modules/caddyhttp/app.go:213:33    - Unknown word (caddyevents) -- events = eventsAppIface.(*caddyevents.App)
+modules/caddyhttp/app.go:185:8     - Unknown word (Iface)       -- tlsAppIface, err := ctx.App("tls
+modules/caddyhttp/app.go:189:21    - Unknown word (Iface)       -- app.tlsApp = tlsAppIface.(*caddytls.TLS)
+modules/caddyhttp/app.go:189:29    - Unknown word (caddytls)    -- tlsApp = tlsAppIface.(*caddytls.TLS)
+modules/caddyhttp/app.go:191:11    - Unknown word (Iface)       -- eventsAppIface, err := ctx.App("events
+modules/caddyhttp/app.go:218:25    - Unknown word (Iface)       -- srv.events = eventsAppIface.(*caddyevents.App)
+modules/caddyhttp/app.go:218:33    - Unknown word (caddyevents) -- events = eventsAppIface.(*caddyevents.App)
 modules/caddyhttp/app.go:33:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 modules/caddyhttp/app.go:34:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddyevents
 modules/caddyhttp/app.go:34:43     - Unknown word (caddyevents) -- caddyserver/caddy/v2/modules/caddyevents"
 modules/caddyhttp/app.go:35:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddytls
 modules/caddyhttp/app.go:35:43     - Unknown word (caddytls)    -- caddyserver/caddy/v2/modules/caddytls"
-modules/caddyhttp/app.go:449:12    - Unknown word (TLSALPN)     -- func removeTLSALPN(srv *Server, target
-modules/caddyhttp/app.go:459:10    - Unknown word (alpn)        -- for i, alpn := range cp.ALPN {
-modules/caddyhttp/app.go:459:27    - Unknown word (ALPN)        -- i, alpn := range cp.ALPN {
-modules/caddyhttp/app.go:460:7     - Unknown word (alpn)        -- if alpn == target {
-modules/caddyhttp/app.go:461:25    - Unknown word (ALPN)        -- cp.ALPN = append(cp.ALPN[:i], cp.ALPN[i+1:].
-modules/caddyhttp/app.go:461:38    - Unknown word (ALPN)        -- append(cp.ALPN[:i], cp.ALPN[i+1:]...)
-modules/caddyhttp/app.go:461:8     - Unknown word (ALPN)        -- cp.ALPN = append(cp.ALPN[:i
-modules/caddyhttp/app.go:472:57    - Unknown word (stdlib)      -- NewStdLogAt(app.logger.Named("stdlib"), zap.DebugLevel)
-modules/caddyhttp/app.go:502:10    - Unknown word (TLSALPN)     -- removeTLSALPN(srv, "h2")
-modules/caddyhttp/app.go:505:10    - Unknown word (TLSALPN)     -- removeTLSALPN(srv, "http/1.1")
-modules/caddyhttp/app.go:514:70    - Unknown word (alpn)        -- present, it's list of alpn versions will take precedence
-modules/caddyhttp/app.go:524:6     - Unknown word (nolint)      -- //nolint:errcheck
-modules/caddyhttp/app.go:556:5     - Unknown word (hostport)    -- hostport := listenAddr.JoinHostPort
-modules/caddyhttp/app.go:623:8     - Unknown word (nolint)      -- //nolint:errcheck
-modules/caddyhttp/app.go:631:26    - Unknown word (hostport)    -- zap.String("addr", hostport))
+modules/caddyhttp/app.go:454:12    - Unknown word (TLSALPN)     -- func removeTLSALPN(srv *Server, target
+modules/caddyhttp/app.go:464:10    - Unknown word (alpn)        -- for i, alpn := range cp.ALPN {
+modules/caddyhttp/app.go:464:27    - Unknown word (ALPN)        -- i, alpn := range cp.ALPN {
+modules/caddyhttp/app.go:465:7     - Unknown word (alpn)        -- if alpn == target {
+modules/caddyhttp/app.go:466:25    - Unknown word (ALPN)        -- cp.ALPN = append(cp.ALPN[:i], cp.ALPN[i+1:].
+modules/caddyhttp/app.go:466:38    - Unknown word (ALPN)        -- append(cp.ALPN[:i], cp.ALPN[i+1:]...)
+modules/caddyhttp/app.go:466:8     - Unknown word (ALPN)        -- cp.ALPN = append(cp.ALPN[:i
+modules/caddyhttp/app.go:477:57    - Unknown word (stdlib)      -- NewStdLogAt(app.logger.Named("stdlib"), zap.DebugLevel)
+modules/caddyhttp/app.go:507:10    - Unknown word (TLSALPN)     -- removeTLSALPN(srv, "h2")
+modules/caddyhttp/app.go:510:10    - Unknown word (TLSALPN)     -- removeTLSALPN(srv, "http/1.1")
+modules/caddyhttp/app.go:519:70    - Unknown word (alpn)        -- present, it's list of alpn versions will take precedence
+modules/caddyhttp/app.go:529:6     - Unknown word (nolint)      -- //nolint:errcheck
+modules/caddyhttp/app.go:561:5     - Unknown word (hostport)    -- hostport := listenAddr.JoinHostPort
+modules/caddyhttp/app.go:628:8     - Unknown word (nolint)      -- //nolint:errcheck
+modules/caddyhttp/app.go:636:26    - Unknown word (hostport)    -- zap.String("addr", hostport))
 modules/caddyhttp/app.go:63:19     - Unknown word (hostport)    -- // `{http.request.hostport}` | The host and port
-modules/caddyhttp/app.go:643:27    - Unknown word (hostport)    -- zap.String("file", hostport))
-modules/caddyhttp/app.go:649:70    - Unknown word (hostport)    -- zap.String("addr", hostport))
-modules/caddyhttp/app.go:761:14    - Unknown word (stdlib)      -- // so like stdlib, close listeners first
+modules/caddyhttp/app.go:648:27    - Unknown word (hostport)    -- zap.String("file", hostport))
+modules/caddyhttp/app.go:654:70    - Unknown word (hostport)    -- zap.String("addr", hostport))
+modules/caddyhttp/app.go:766:14    - Unknown word (stdlib)      -- // so like stdlib, close listeners first
 modules/caddyhttp/autohttps.go:144:26    - Unknown word (caddytls)    -- srv.TLSConnPolicies = caddytls.ConnectionPolicies{new
 modules/caddyhttp/autohttps.go:144:58    - Unknown word (caddytls)    -- ConnectionPolicies{new(caddytls.ConnectionPolicy)}
 modules/caddyhttp/autohttps.go:15:9      - Unknown word (caddyhttp)  -- package caddyhttp
@@ -1226,22 +1238,22 @@ modules/caddyhttp/fileserver/browse.go:62:33     - Unknown word (namedirfirst) -
 modules/caddyhttp/fileserver/browse.go:78:122    - Unknown word (caddyhttp)    -- *http.Request, next caddyhttp.Handler) error {
 modules/caddyhttp/fileserver/browse.go:78:7      - Unknown word (fsrv)         -- func (fsrv *FileServer) serveBrowse
 modules/caddyhttp/fileserver/browse.go:79:10     - Unknown word (fsrv)         -- if c := fsrv.logger.Check(zapcore
-modules/caddyhttp/fileserver/browsetplcontext.go:102:7     - Unknown word (fsrv)        -- if fsrv.Browse.RevealSymlinks
-modules/caddyhttp/fileserver/browsetplcontext.go:150:37    - Unknown word (browsable)   -- parent directory is browsable.
-modules/caddyhttp/fileserver/browsetplcontext.go:199:2     - Unknown word (lpath)       -- lpath := l.Path
-modules/caddyhttp/fileserver/browsetplcontext.go:200:15    - Unknown word (lpath)       -- if lpath[len(lpath)-1] == '/' {
-modules/caddyhttp/fileserver/browsetplcontext.go:200:5     - Unknown word (lpath)       -- if lpath[len(lpath)-1] == '/
-modules/caddyhttp/fileserver/browsetplcontext.go:201:11    - Unknown word (lpath)       -- lpath = lpath[:len(lpath)-1]
-modules/caddyhttp/fileserver/browsetplcontext.go:201:3     - Unknown word (lpath)       -- lpath = lpath[:len(lpath)
-modules/caddyhttp/fileserver/browsetplcontext.go:34:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
-modules/caddyhttp/fileserver/browsetplcontext.go:35:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddyhttp
-modules/caddyhttp/fileserver/browsetplcontext.go:35:43     - Unknown word (caddyhttp)   -- caddyserver/caddy/v2/modules/caddyhttp"
-modules/caddyhttp/fileserver/browsetplcontext.go:377:24    - Unknown word (namedirfirst) -- sortByNameDirFirst = "namedirfirst"
-modules/caddyhttp/fileserver/browsetplcontext.go:38:7      - Unknown word (fsrv)        -- func (fsrv *FileServer) directoryListing
-modules/caddyhttp/fileserver/browsetplcontext.go:39:17     - Unknown word (fsrv)        -- filesToHide := fsrv.transformHidePaths(repl
-modules/caddyhttp/fileserver/browsetplcontext.go:63:12     - Unknown word (fsrv)        -- if c := fsrv.logger.Check(zapcore
-modules/caddyhttp/fileserver/browsetplcontext.go:75:29     - Unknown word (fsrv)        -- := entry.IsDir() || fsrv.isSymlinkTargetDir(fileSystem
-modules/caddyhttp/fileserver/browsetplcontext.go:96:12     - Unknown word (caddyhttp)   -- path := caddyhttp.SanitizedPathJoin(root
+modules/caddyhttp/fileserver/browsetplcontext.go:101:7     - Unknown word (fsrv)        -- if fsrv.Browse.RevealSymlinks
+modules/caddyhttp/fileserver/browsetplcontext.go:149:37    - Unknown word (browsable)   -- parent directory is browsable.
+modules/caddyhttp/fileserver/browsetplcontext.go:198:2     - Unknown word (lpath)       -- lpath := l.Path
+modules/caddyhttp/fileserver/browsetplcontext.go:199:15    - Unknown word (lpath)       -- if lpath[len(lpath)-1] == '/' {
+modules/caddyhttp/fileserver/browsetplcontext.go:199:5     - Unknown word (lpath)       -- if lpath[len(lpath)-1] == '/
+modules/caddyhttp/fileserver/browsetplcontext.go:200:11    - Unknown word (lpath)       -- lpath = lpath[:len(lpath)-1]
+modules/caddyhttp/fileserver/browsetplcontext.go:200:3     - Unknown word (lpath)       -- lpath = lpath[:len(lpath)
+modules/caddyhttp/fileserver/browsetplcontext.go:33:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
+modules/caddyhttp/fileserver/browsetplcontext.go:34:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddyhttp
+modules/caddyhttp/fileserver/browsetplcontext.go:34:43     - Unknown word (caddyhttp)   -- caddyserver/caddy/v2/modules/caddyhttp"
+modules/caddyhttp/fileserver/browsetplcontext.go:376:24    - Unknown word (namedirfirst) -- sortByNameDirFirst = "namedirfirst"
+modules/caddyhttp/fileserver/browsetplcontext.go:37:7      - Unknown word (fsrv)        -- func (fsrv *FileServer) directoryListing
+modules/caddyhttp/fileserver/browsetplcontext.go:38:17     - Unknown word (fsrv)        -- filesToHide := fsrv.transformHidePaths(repl
+modules/caddyhttp/fileserver/browsetplcontext.go:62:12     - Unknown word (fsrv)        -- if c := fsrv.logger.Check(zapcore
+modules/caddyhttp/fileserver/browsetplcontext.go:74:29     - Unknown word (fsrv)        -- := entry.IsDir() || fsrv.isSymlinkTargetDir(fileSystem
+modules/caddyhttp/fileserver/browsetplcontext.go:95:12     - Unknown word (caddyhttp)   -- path := caddyhttp.SanitizedPathJoin(root
 modules/caddyhttp/fileserver/browsetplcontext_test.go:72:15     - Unknown word (corge)      -- {"/qux/quux/corge/", []crumb{
 modules/caddyhttp/fileserver/browsetplcontext_test.go:76:22     - Unknown word (corge)      -- {Link: "", Text: "corge"},
 modules/caddyhttp/fileserver/browsetplcontext_test.go:78:6      - Unknown word (مجلد)       -- {"/مجلد/", []crumb{
@@ -1514,16 +1526,17 @@ modules/caddyhttp/map/map_test.go:132:11    - Unknown word (caddyhttp)   -- repl
 modules/caddyhttp/map/map_test.go:138:11    - Unknown word (caddyhttp)   -- noop := caddyhttp.HandlerFunc(func(_ http
 modules/caddyhttp/map/map_test.go:1:9       - Unknown word (maphandler) -- package maphandler
 modules/caddyhttp/map/map_test.go:53:16     - Unknown word (Cxyz)        -- reqURI: "/ABCxyzDEF",
-modules/caddyhttp/marshalers.go:103:54    - Unknown word (loggable)    -- TLS connection state loggable with zap.Object().
 modules/caddyhttp/marshalers.go:15:9      - Unknown word (caddyhttp)  -- package caddyhttp
-modules/caddyhttp/marshalers.go:26:4      - Unknown word (Loggable)   -- // LoggableHTTPRequest makes an
-modules/caddyhttp/marshalers.go:26:46     - Unknown word (loggable)   -- makes an HTTP request loggable with zap.Object().
-modules/caddyhttp/marshalers.go:27:6      - Unknown word (Loggable)   -- type LoggableHTTPRequest struct {
-modules/caddyhttp/marshalers.go:34:9      - Unknown word (Loggable)   -- func (r LoggableHTTPRequest) MarshalLogObject
-modules/caddyhttp/marshalers.go:50:27     - Unknown word (Loggable)   -- AddObject("headers", LoggableHTTPHeader{
-modules/caddyhttp/marshalers.go:55:37     - Unknown word (Loggable)   -- transfer_encoding", LoggableStringArray(r.TransferEncoding
-modules/caddyhttp/marshalers.go:63:44     - Unknown word (loggable)   -- makes an HTTP header loggable with zap.Object().
-modules/caddyhttp/marshalers.go:89:49     - Unknown word (marshalable) -- makes a slice of strings marshalable for logging.
+modules/caddyhttp/marshalers.go:24:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/internal"
+modules/caddyhttp/marshalers.go:27:4      - Unknown word (Loggable)    -- // LoggableHTTPRequest makes an
+modules/caddyhttp/marshalers.go:27:46     - Unknown word (loggable)    -- makes an HTTP request loggable with zap.Object().
+modules/caddyhttp/marshalers.go:28:6      - Unknown word (Loggable)    -- type LoggableHTTPRequest struct {
+modules/caddyhttp/marshalers.go:35:9      - Unknown word (Loggable)    -- func (r LoggableHTTPRequest) MarshalLogObject
+modules/caddyhttp/marshalers.go:51:36     - Unknown word (Loggable)    -- "headers", internal.LoggableHTTPHeader{
+modules/caddyhttp/marshalers.go:56:46     - Unknown word (Loggable)    -- encoding", internal.LoggableStringArray(r.TransferEncoding
+modules/caddyhttp/marshalers.go:64:44     - Unknown word (loggable)    -- makes an HTTP header loggable with zap.Object().
+modules/caddyhttp/marshalers.go:67:49     - Unknown word (marshalable) -- makes a slice of strings marshalable for logging.
+modules/caddyhttp/marshalers.go:70:54     - Unknown word (loggable)    -- TLS connection state loggable with zap.Object().
 modules/caddyhttp/matchers.go:138:53    - Unknown word (escapings)   -- including those with bad escapings or illegal characters
 modules/caddyhttp/matchers.go:1404:13   - Unknown word (Iface)       -- for _, modIface := range modMap {
 modules/caddyhttp/matchers.go:1405:21   - Unknown word (Iface)       -- if mod, ok := modIface.(RequestMatcherWithError
@@ -1931,7 +1944,7 @@ modules/caddyhttp/reverseproxy/healthchecks.go:614:98    - Unknown word (forgett
 modules/caddyhttp/reverseproxy/hosts.go:26:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 modules/caddyhttp/reverseproxy/hosts.go:27:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddyhttp
 modules/caddyhttp/reverseproxy/hosts.go:27:43     - Unknown word (caddyhttp)   -- caddyserver/caddy/v2/modules/caddyhttp"
-modules/caddyhttp/reverseproxy/hosts.go:301:18    - Unknown word (caddyhttp)   -- dialInfo, ok := caddyhttp.GetVar(ctx, dialInfoVarKey
+modules/caddyhttp/reverseproxy/hosts.go:300:18    - Unknown word (caddyhttp)   -- dialInfo, ok := caddyhttp.GetVar(ctx, dialInfoVarKey
 modules/caddyhttp/reverseproxy/httptransport.go:232:3     - Unknown word (netaddr)     -- netaddr, err := caddy.ParseNetworkAdd
 modules/caddyhttp/reverseproxy/httptransport.go:236:6     - Unknown word (netaddr)     -- if netaddr.PortRangeSize() > 1
 modules/caddyhttp/reverseproxy/httptransport.go:239:10    - Unknown word (netaddr)     -- switch netaddr.Network {
@@ -3230,41 +3243,31 @@ modules/logging/filterencoder.go:29:14     - Unknown word (caddyserver) -- "gith
 modules/logging/filterencoder.go:29:35     - Unknown word (caddyconfig) -- caddyserver/caddy/v2/caddyconfig"
 modules/logging/filterencoder.go:30:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/caddyconfig
 modules/logging/filterencoder.go:30:35     - Unknown word (caddyconfig) -- caddyserver/caddy/v2/caddyconfig/caddyfile"
-modules/logging/filters.go:103:32    - Unknown word (caddyhttp)   -- ok := in.Interface.(caddyhttp.LoggableStringArray
-modules/logging/filters.go:103:42    - Unknown word (Loggable)    -- Interface.(caddyhttp.LoggableStringArray); ok {
-modules/logging/filters.go:104:20    - Unknown word (caddyhttp)   -- newArray := make(caddyhttp.LoggableStringArray
-modules/logging/filters.go:104:30    - Unknown word (Loggable)    -- newArray := make(caddyhttp.LoggableStringArray, len(array
+modules/logging/filters.go:103:41    - Unknown word (Loggable)    -- Interface.(internal.LoggableStringArray); ok {
+modules/logging/filters.go:104:29    - Unknown word (Loggable)    -- newArray := make(internal.LoggableStringArray, len(array
 modules/logging/filters.go:176:12    - Unknown word (Errf)        -- return d.Errf("too many arguments
 modules/logging/filters.go:181:13    - Unknown word (Errf)        -- return d.Errf("error parsing %s:
 modules/logging/filters.go:188:14    - Unknown word (Errf)        -- return d.Errf("error parsing %s:
 modules/logging/filters.go:202:14    - Unknown word (Errf)        -- return d.Errf("error parsing %s:
 modules/logging/filters.go:212:14    - Unknown word (Errf)        -- return d.Errf("error parsing %s:
-modules/logging/filters.go:244:32    - Unknown word (caddyhttp)   -- ok := in.Interface.(caddyhttp.LoggableStringArray
-modules/logging/filters.go:244:42    - Unknown word (Loggable)    -- Interface.(caddyhttp.LoggableStringArray); ok {
-modules/logging/filters.go:245:20    - Unknown word (caddyhttp)   -- newArray := make(caddyhttp.LoggableStringArray
-modules/logging/filters.go:245:30    - Unknown word (Loggable)    -- newArray := make(caddyhttp.LoggableStringArray, len(array
+modules/logging/filters.go:244:41    - Unknown word (Loggable)    -- Interface.(internal.LoggableStringArray); ok {
+modules/logging/filters.go:245:29    - Unknown word (Loggable)    -- newArray := make(internal.LoggableStringArray, len(array
 modules/logging/filters.go:30:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 modules/logging/filters.go:31:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/caddyconfig
 modules/logging/filters.go:31:35     - Unknown word (caddyconfig) -- caddyserver/caddy/v2/caddyconfig/caddyfile"
-modules/logging/filters.go:32:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddyhttp
-modules/logging/filters.go:32:43     - Unknown word (caddyhttp)   -- caddyserver/caddy/v2/modules/caddyhttp"
-modules/logging/filters.go:395:42    - Unknown word (Loggable)    -- Interface.(caddyhttp.LoggableStringArray); ok {
+modules/logging/filters.go:32:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/internal"
+modules/logging/filters.go:395:41    - Unknown word (Loggable)    -- Interface.(internal.LoggableStringArray); ok {
 modules/logging/filters_test.go:10:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 modules/logging/filters_test.go:112:38    - Unknown word (notexist)    -- replaceAction, Parameter: "notexist", Value: "REDACTED"
 modules/logging/filters_test.go:114:37    - Unknown word (notexist)    -- deleteAction, Parameter: "notexist"},
-modules/logging/filters_test.go:11:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddyhttp
-modules/logging/filters_test.go:11:43     - Unknown word (caddyhttp)   -- caddyserver/caddy/v2/modules/caddyhttp"
-modules/logging/filters_test.go:123:53    - Unknown word (Loggable)    -- Interface: caddyhttp.LoggableStringArray{
-modules/logging/filters_test.go:168:2     - Unknown word (outval)      -- outval := out.Interface.(caddyhttp
+modules/logging/filters_test.go:11:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/internal"
+modules/logging/filters_test.go:123:52    - Unknown word (Loggable)    -- Interface: internal.LoggableStringArray{
+modules/logging/filters_test.go:168:2     - Unknown word (outval)      -- outval := out.Interface.(internal
 modules/logging/filters_test.go:172:5     - Unknown word (outval)      -- if outval[0] != expected[0] {
-modules/logging/filters_test.go:58:43     - Unknown word (caddyhttp)   -- zapcore.Field{Interface: caddyhttp.LoggableStringArray
-modules/logging/filters_test.go:58:53     - Unknown word (Loggable)    -- Interface: caddyhttp.LoggableStringArray{
-modules/logging/filters_test.go:62:28     - Unknown word (caddyhttp)   -- ok := out.Interface.(caddyhttp.LoggableStringArray
-modules/logging/filters_test.go:62:38     - Unknown word (Loggable)    -- Interface.(caddyhttp.LoggableStringArray)
-modules/logging/filters_test.go:73:42     - Unknown word (caddyhttp)   -- zapcore.Field{Interface: caddyhttp.LoggableStringArray
-modules/logging/filters_test.go:73:52     - Unknown word (Loggable)    -- Interface: caddyhttp.LoggableStringArray{
-modules/logging/filters_test.go:77:27     - Unknown word (caddyhttp)   -- ok = out.Interface.(caddyhttp.LoggableStringArray
-modules/logging/filters_test.go:77:37     - Unknown word (Loggable)    -- Interface.(caddyhttp.LoggableStringArray)
+modules/logging/filters_test.go:58:52     - Unknown word (Loggable)    -- Interface: internal.LoggableStringArray{
+modules/logging/filters_test.go:62:37     - Unknown word (Loggable)    -- Interface.(internal.LoggableStringArray)
+modules/logging/filters_test.go:73:51     - Unknown word (Loggable)    -- Interface: internal.LoggableStringArray{
+modules/logging/filters_test.go:77:36     - Unknown word (Loggable)    -- Interface.(internal.LoggableStringArray)
 modules/logging/filters_test.go:92:20     - Unknown word (notexist)    -- {replaceAction, "notexist", "REDACTED"},
 modules/logging/filters_test.go:94:19     - Unknown word (notexist)    -- {deleteAction, "notexist", ""},
 modules/logging/journaldencoder.go:135:13    - Unknown word (Errf)        -- return d.Errf("unrecognized subdirective

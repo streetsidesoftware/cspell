@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["--issues-summary-report","**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2898, Issues found: 8642 in 932 files.
+ CSpell: Files checked: 2903, Issues found: 8712 in 935 files.
  exit code: 1
 django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 django/apps/registry.py:134:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -1226,7 +1226,7 @@ django/core/serializers/xml_serializer.py:16:19     - Unknown word (xmlutils)   
 django/core/serializers/xml_serializer.py:171:67    - Unknown word (subelements) -- keys are rolled out as subelements
 django/core/serializers/xml_serializer.py:373:46    - Unknown word (subelements) -- there are 'natural' subelements, it must be a natural
 django/core/serializers/xml_serializer.py:419:46    - Unknown word (subelements) -- there are 'natural' subelements, it must be a natural
-django/core/serializers/xml_serializer.py:488:33    - Unknown word (Heimes)      -- code based on Christian Heimes' defusedxml
+django/core/serializers/xml_serializer.py:507:33    - Unknown word (Heimes)      -- code based on Christian Heimes' defusedxml
 django/core/servers/basehttp.py:233:18    - Unknown word (requestline) -- self.raw_requestline = self.rfile.readline
 django/core/servers/basehttp.py:234:25    - Unknown word (requestline) -- if len(self.raw_requestline) > 65536:
 django/core/servers/basehttp.py:235:18    - Unknown word (requestline) -- self.requestline = ""
@@ -1351,10 +1351,10 @@ django/db/backends/oracle/creation.py:31:63     - Unknown word (keepdb)     -- a
 django/db/backends/oracle/creation.py:37:56     - Unknown word (keepdb)     -- parameters, verbosity, keepdb
 django/db/backends/oracle/creation.py:81:64     - Unknown word (keepdb)     -- parameters, verbosity, keepdb
 django/db/backends/oracle/creation.py:96:75     - Unknown word (keepdb)     -- parameters, verbosity, keepdb)
-django/db/backends/oracle/features.py:130:47    - Unknown word (NCLOB)       -- t support comparing NCLOB to NUMBER.": {
-django/db/backends/oracle/features.py:132:23    - Unknown word (textlink)    -- "test_textlink_filter",
+django/db/backends/oracle/features.py:131:47    - Unknown word (NCLOB)       -- t support comparing NCLOB to NUMBER.": {
+django/db/backends/oracle/features.py:133:23    - Unknown word (textlink)    -- "test_textlink_filter",
 django/db/backends/oracle/features.py:47:15     - Unknown word (uppercasing) -- # does by uppercasing all identifiers.
-django/db/backends/oracle/features.py:88:43     - Unknown word (unioning)    -- Django with respect to unioning ordered querysets (
+django/db/backends/oracle/features.py:89:43     - Unknown word (unioning)    -- Django with respect to unioning ordered querysets (
 django/db/backends/oracle/functions.py:20:17     - Unknown word (NUMTODSINTERVAL) -- function = "NUMTODSINTERVAL"
 django/db/backends/oracle/introspection.py:101:31    - Unknown word (mviews)     -- FROM user_mviews
 django/db/backends/oracle/introspection.py:102:32    - Unknown word (mviews)     -- WHERE user_mviews.mview_name = user_tables
@@ -1536,20 +1536,20 @@ django/db/backends/postgresql/schema.py:209:31    - Unknown word (indentity)  --
 django/db/backends/postgresql/schema.py:373:24    - Unknown word (collisdeterministic) -- SELECT collisdeterministic
 django/db/backends/postgresql/schema.py:375:23    - Unknown word (collname)            -- WHERE collname = %s
 django/db/backends/postgresql/schema.py:54:14     - Unknown word (indentity)  -- sql_drop_indentity = (
-django/db/backends/sqlite3/_functions.py:249:21    - Unknown word (dtdelta)       -- def _sqlite_prepare_dtdelta_param(conn, param):
-django/db/backends/sqlite3/_functions.py:258:20    - Unknown word (dtdelta)       -- def _sqlite_format_dtdelta(connector, lhs, rhs
-django/db/backends/sqlite3/_functions.py:269:36    - Unknown word (dtdelta)       -- lhs = _sqlite_prepare_dtdelta_param(connector, lhs
-django/db/backends/sqlite3/_functions.py:523:13    - Unknown word (Samp)          -- class StdDevSamp(ListAggregate):
-django/db/backends/sqlite3/_functions.py:531:10    - Unknown word (Samp)          -- class VarSamp(ListAggregate):
-django/db/backends/sqlite3/_functions.py:66:50     - Unknown word (dtdelta)    -- function("django_format_dtdelta", 3, _sqlite_format
-django/db/backends/sqlite3/_functions.py:66:78     - Unknown word (dtdelta)    -- , 3, _sqlite_format_dtdelta)
-django/db/backends/sqlite3/_functions.py:85:41     - Unknown word (SAMP)       -- create_aggregate("STDDEV_SAMP", 1, StdDevSamp)
-django/db/backends/sqlite3/_functions.py:85:57     - Unknown word (Samp)       -- STDDEV_SAMP", 1, StdDevSamp)
-django/db/backends/sqlite3/_functions.py:87:38     - Unknown word (SAMP)       -- create_aggregate("VAR_SAMP", 1, VarSamp)
-django/db/backends/sqlite3/_functions.py:87:51     - Unknown word (Samp)       -- aggregate("VAR_SAMP", 1, VarSamp)
-django/db/backends/sqlite3/_functions.py:89:33     - Unknown word (UUIDV)      -- connection.create_function("UUIDV4", 0, _sqlite_uuid4
-django/db/backends/sqlite3/_functions.py:91:37     - Unknown word (UUIDV)      -- connection.create_function("UUIDV7", 0, _sqlite_uuid7
-django/db/backends/sqlite3/_functions.py:93:26     - Unknown word (compileoption) -- sql = "select sqlite_compileoption_used('ENABLE_MATH_FUNCTIONS
+django/db/backends/sqlite3/_functions.py:253:21    - Unknown word (dtdelta)       -- def _sqlite_prepare_dtdelta_param(conn, param):
+django/db/backends/sqlite3/_functions.py:262:20    - Unknown word (dtdelta)       -- def _sqlite_format_dtdelta(connector, lhs, rhs
+django/db/backends/sqlite3/_functions.py:273:36    - Unknown word (dtdelta)       -- lhs = _sqlite_prepare_dtdelta_param(connector, lhs
+django/db/backends/sqlite3/_functions.py:527:13    - Unknown word (Samp)          -- class StdDevSamp(ListAggregate):
+django/db/backends/sqlite3/_functions.py:535:10    - Unknown word (Samp)          -- class VarSamp(ListAggregate):
+django/db/backends/sqlite3/_functions.py:67:50     - Unknown word (dtdelta)    -- function("django_format_dtdelta", 3, _sqlite_format
+django/db/backends/sqlite3/_functions.py:67:78     - Unknown word (dtdelta)    -- , 3, _sqlite_format_dtdelta)
+django/db/backends/sqlite3/_functions.py:86:41     - Unknown word (SAMP)       -- create_aggregate("STDDEV_SAMP", 1, StdDevSamp)
+django/db/backends/sqlite3/_functions.py:86:57     - Unknown word (Samp)       -- STDDEV_SAMP", 1, StdDevSamp)
+django/db/backends/sqlite3/_functions.py:88:38     - Unknown word (SAMP)       -- create_aggregate("VAR_SAMP", 1, VarSamp)
+django/db/backends/sqlite3/_functions.py:88:51     - Unknown word (Samp)       -- aggregate("VAR_SAMP", 1, VarSamp)
+django/db/backends/sqlite3/_functions.py:93:33     - Unknown word (UUIDV)      -- connection.create_function("UUIDV4", 0, _sqlite_uuid4
+django/db/backends/sqlite3/_functions.py:95:37     - Unknown word (UUIDV)      -- connection.create_function("UUIDV7", 0, _sqlite_uuid7
+django/db/backends/sqlite3/_functions.py:97:26     - Unknown word (compileoption) -- sql = "select sqlite_compileoption_used('ENABLE_MATH_FUNCTIONS
 django/db/backends/sqlite3/base.py:163:44    - Unknown word (DECLTYPES)  -- types": Database.PARSE_DECLTYPES | Database.PARSE_COLNAMES
 django/db/backends/sqlite3/base.py:163:71    - Unknown word (COLNAMES)   -- DECLTYPES | Database.PARSE_COLNAMES,
 django/db/backends/sqlite3/base.py:337:8     - Unknown word (QMARK)      -- FORMAT_QMARK_REGEX = _lazy_re_compile
@@ -1634,11 +1634,11 @@ django/db/migrations/state.py:820:24    - Unknown word (rels)       -- if not ex
 django/db/migrations/state.py:858:20    - Unknown word (rels)       -- if exclude_rels:
 django/db/models/__init__.py:125:6     - Unknown word (aprefetch)  -- "aprefetch_related_objects",
 django/db/models/__init__.py:58:5      - Unknown word (aprefetch)  -- aprefetch_related_objects,
-django/db/models/aggregates.py:294:33    - Unknown word (SAMP)       -- self.function = "STDDEV_SAMP" if sample else "STDDEV
-django/db/models/aggregates.py:298:83    - Unknown word (SAMP)       -- function == "STDDEV_SAMP"}
-django/db/models/aggregates.py:344:23    - Unknown word (LISTAGG)    -- function="LISTAGG",
-django/db/models/aggregates.py:413:30    - Unknown word (SAMP)       -- self.function = "VAR_SAMP" if sample else "VAR
-django/db/models/aggregates.py:417:80    - Unknown word (SAMP)       -- self.function == "VAR_SAMP"}
+django/db/models/aggregates.py:345:33    - Unknown word (SAMP)       -- self.function = "STDDEV_SAMP" if sample else "STDDEV
+django/db/models/aggregates.py:349:83    - Unknown word (SAMP)       -- function == "STDDEV_SAMP"}
+django/db/models/aggregates.py:395:23    - Unknown word (LISTAGG)    -- function="LISTAGG",
+django/db/models/aggregates.py:464:30    - Unknown word (SAMP)       -- self.function = "VAR_SAMP" if sample else "VAR
+django/db/models/aggregates.py:468:80    - Unknown word (SAMP)       -- self.function == "VAR_SAMP"}
 django/db/models/base.py:1152:19   - Unknown word (autopopulate)  -- # autopopulate the _order field
 django/db/models/base.py:117:9     - Unknown word (contributable) -- contributable_attrs = {}
 django/db/models/base.py:120:17    - Unknown word (contributable) -- contributable_attrs[obj_name] = obj
@@ -1725,21 +1725,21 @@ django/db/models/options.py:1005:13   - Unknown word (klass)      -- for klass i
 django/db/models/options.py:1008:36   - Unknown word (klass)      -- for name, value in klass.__dict__.items()
 django/db/models/options.py:1011:25   - Unknown word (klass)      -- seen |= set(klass.__dict__)
 django/db/models/options.py:545:33    - Unknown word (longwinded) -- The third filter is a longwinded way of checking f.related
-django/db/models/query.py:101:22    - Unknown word (klass)      -- compiler.klass_info,
-django/db/models/query.py:104:21    - Unknown word (klass)      -- model_cls = klass_info["model"]
-django/db/models/query.py:105:25    - Unknown word (klass)      -- select_fields = klass_info["select_fields
-django/db/models/query.py:115:17    - Unknown word (attnames)   -- attnames := [
-django/db/models/query.py:123:38    - Unknown word (attnames)   -- operator.attrgetter(*attnames),
-django/db/models/query.py:145:38    - Unknown word (attnames)   -- field, rel_objs, rel_attnames, rel_getter in known
-django/db/models/query.py:1499:68   - Unknown word (deindent)   -- the deprecation ends, deindent as:
-django/db/models/query.py:151:71    - Unknown word (attnames)   -- for attname in rel_attnames):
-django/db/models/query.py:2736:11   - Unknown word (aprefetch)  -- async def aprefetch_related_objects(model
-django/db/models/query.py:596:27    - Unknown word (aprefetch)  -- await aprefetch_related_objects(
-django/db/models/query.py:604:23    - Unknown word (aprefetch)  -- await aprefetch_related_objects(
-django/db/models/query.py:816:30    - Unknown word (childmost)  -- insert into the childmost table.
-django/db/models/query.py:900:13    - Unknown word (attnames)   -- attnames = list(get_filter_kwargs
-django/db/models/query.py:94:67     - Unknown word (klass)      -- fill compiler.select, klass_info,
-django/db/models/query.py:99:17     - Unknown word (klass)      -- select, klass_info, annotation_col
+django/db/models/query.py:101:17    - Unknown word (klass)      -- select, klass_info, annotation_col
+django/db/models/query.py:103:22    - Unknown word (klass)      -- compiler.klass_info,
+django/db/models/query.py:106:21    - Unknown word (klass)      -- model_cls = klass_info["model"]
+django/db/models/query.py:107:25    - Unknown word (klass)      -- select_fields = klass_info["select_fields
+django/db/models/query.py:117:17    - Unknown word (attnames)   -- attnames := [
+django/db/models/query.py:125:38    - Unknown word (attnames)   -- operator.attrgetter(*attnames),
+django/db/models/query.py:147:38    - Unknown word (attnames)   -- field, rel_objs, rel_attnames, rel_getter in known
+django/db/models/query.py:1501:68   - Unknown word (deindent)   -- the deprecation ends, deindent as:
+django/db/models/query.py:153:71    - Unknown word (attnames)   -- for attname in rel_attnames):
+django/db/models/query.py:2738:11   - Unknown word (aprefetch)  -- async def aprefetch_related_objects(model
+django/db/models/query.py:598:27    - Unknown word (aprefetch)  -- await aprefetch_related_objects(
+django/db/models/query.py:606:23    - Unknown word (aprefetch)  -- await aprefetch_related_objects(
+django/db/models/query.py:818:30    - Unknown word (childmost)  -- insert into the childmost table.
+django/db/models/query.py:902:13    - Unknown word (attnames)   -- attnames = list(get_filter_kwargs
+django/db/models/query.py:96:67     - Unknown word (klass)      -- fill compiler.select, klass_info,
 django/db/models/query_utils.py:26:49     - Unknown word (somecol)    -- converting lookups (fk__somecol). The contents
 django/db/models/query_utils.py:57:23     - Unknown word (reprs)      -- connector_reprs = ", ".join(f"{conn
 django/db/models/query_utils.py:58:69     - Unknown word (reprs)      -- be one of {connector_reprs}, or None.")
@@ -1803,12 +1803,12 @@ django/db/models/sql/query.py:1634:50   - Unknown word (someval)    -- IS NOT NU
 django/db/models/sql/query.py:1652:22   - Unknown word (someval)    -- # If someval is a nullable column
 django/db/models/sql/query.py:1652:52   - Unknown word (someval)    -- is a nullable column, someval IS NOT NULL is
 django/db/models/sql/query.py:2143:34   - Unknown word (louter)     -- trimmed_prefix, contains_louter = query.trim_start(names
-django/db/models/sql/query.py:2503:44   - Unknown word (datastructure) -- that we can use a set datastructure. We do the foo__bar
-django/db/models/sql/query.py:2700:42   - Unknown word (outerq)        -- lookup usable for doing outerq.filter(lookup=self)
-django/db/models/sql/query.py:2796:5    - Unknown word (dirn)          -- dirn = ORDER_DIR[default
-django/db/models/sql/query.py:2798:27   - Unknown word (dirn)          -- return field[1:], dirn[1]
-django/db/models/sql/query.py:2799:19   - Unknown word (dirn)          -- return field, dirn[0]
-django/db/models/sql/query.py:2862:61   - Unknown word (rels)          -- 2, if either of the rels produce NULL
+django/db/models/sql/query.py:2504:44   - Unknown word (datastructure) -- that we can use a set datastructure. We do the foo__bar
+django/db/models/sql/query.py:2701:42   - Unknown word (outerq)        -- lookup usable for doing outerq.filter(lookup=self)
+django/db/models/sql/query.py:2797:5    - Unknown word (dirn)          -- dirn = ORDER_DIR[default
+django/db/models/sql/query.py:2799:27   - Unknown word (dirn)          -- return field[1:], dirn[1]
+django/db/models/sql/query.py:2800:19   - Unknown word (dirn)          -- return field, dirn[0]
+django/db/models/sql/query.py:2863:61   - Unknown word (rels)          -- 2, if either of the rels produce NULL
 django/db/models/sql/query.py:364:53    - Unknown word (deepcopied) -- work when a Query is deepcopied."""
 django/db/models/sql/query.py:432:21    - Unknown word (klass)      -- def chain(self, klass=None):
 django/db/models/sql/query.py:435:13    - Unknown word (klass)      -- The klass argument changes the
@@ -2674,6 +2674,69 @@ scripts/manage_translations.py:53:28     - Unknown word (TRANSIFEX)   -- api_tok
 scripts/manage_translations.py:56:44     - Unknown word (transifexrc) -- path.expanduser("~/.transifexrc"))
 scripts/manage_translations.py:59:42     - Unknown word (TRANSIFEX)   -- "Please define the TRANSIFEX_API_TOKEN env var."
 scripts/manage_translations.py:92:47     - Unknown word (Transifex)   -- List languages using Transifex projects API.
+scripts/pr_quality/check_pr.py:153:19    - Unknown word (Trac)       -- """Return the Trac ticket ID string from
+scripts/pr_quality/check_pr.py:158:11    - Unknown word (trac)       -- def fetch_trac_ticket(ticket_id):
+scripts/pr_quality/check_pr.py:159:35    - Unknown word (Trac)       -- ticket data from the Trac JSON API.
+scripts/pr_quality/check_pr.py:175:53    - Unknown word (Trac)       -- ticket %s -- skipping Trac check.",
+scripts/pr_quality/check_pr.py:189:11    - Unknown word (trac)       -- def check_trac_ticket(pr_body, total
+scripts/pr_quality/check_pr.py:216:29    - Unknown word (TRAC)       -- return Message(*MISSING_TRAC_TICKET, threshold=threshold
+scripts/pr_quality/check_pr.py:219:11    - Unknown word (trac)       -- def check_trac_status(ticket_id, ticket
+scripts/pr_quality/check_pr.py:220:65    - Unknown word (checkin)    -- Accepted or Ready for checkin,
+scripts/pr_quality/check_pr.py:223:47    - Unknown word (trac)       -- dict returned by fetch_trac_ticket(). Passing None
+scripts/pr_quality/check_pr.py:231:22    - Unknown word (TRAC)       -- *INVALID_TRAC_STATUS,
+scripts/pr_quality/check_pr.py:246:18    - Unknown word (TRAC)       -- *INVALID_TRAC_STATUS,
+scripts/pr_quality/check_pr.py:252:11    - Unknown word (trac)       -- def check_trac_has_patch(ticket_id
+scripts/pr_quality/check_pr.py:302:18    - Unknown word (Trac's)     -- This enables Trac's auto-link feature, which
+scripts/pr_quality/check_pr.py:38:13     - Unknown word (TRAC)       -- INVALID_TRAC_STATUS,
+scripts/pr_quality/check_pr.py:46:13     - Unknown word (TRAC)       -- MISSING_TRAC_TICKET,
+scripts/pr_quality/check_pr.py:54:42     - Unknown word (Trac)       -- object() # Sentinel: Trac returned HTTP 404 for
+scripts/pr_quality/check_pr.py:60:42     - Unknown word (checkin)    -- Accepted", "Ready for checkin")
+scripts/pr_quality/check_pr.py:7:32      - Unknown word (Trac)       -- reported in a single pass. Trac status and has_patch
+scripts/pr_quality/errors.py:128:16    - Unknown word (Trac)       -- "Incorrect Trac Ticket Flag",
+scripts/pr_quality/errors.py:130:18    - Unknown word (Trac)       -- "flag set in Trac. This flag must be checked
+scripts/pr_quality/errors.py:133:30    - Unknown word (TRAC)       -- Open the ticket at {TRAC_URL}/ticket/{{ticket
+scripts/pr_quality/errors.py:136:33    - Unknown word (TRIAGING)   -- more information see {TRIAGING_URL}#has-patch.",
+scripts/pr_quality/errors.py:142:16    - Unknown word (Trac)       -- "it allows Trac to automatically link
+scripts/pr_quality/errors.py:148:9     - Unknown word (TRAC)       -- MISSING_TRAC_TICKET = (
+scripts/pr_quality/errors.py:149:14    - Unknown word (Trac)       -- "Missing Trac Ticket",
+scripts/pr_quality/errors.py:154:32    - Unknown word (unreviewed) -- Patches submitted against unreviewed tickets are unlikely
+scripts/pr_quality/errors.py:31:1      - Unknown word (TRIAGING)   -- TRIAGING_URL = f"{CONTRIBUTING
+scripts/pr_quality/errors.py:31:36     - Unknown word (triaging)   -- f"{CONTRIBUTING_URL}triaging-tickets/"
+scripts/pr_quality/errors.py:33:1      - Unknown word (TRAC)       -- TRAC_URL = "https://code
+scripts/pr_quality/errors.py:56:9      - Unknown word (TRAC)       -- INVALID_TRAC_STATUS = (
+scripts/pr_quality/errors.py:57:6      - Unknown word (Trac)       -- "Trac Ticket Not Ready for
+scripts/pr_quality/errors.py:59:55     - Unknown word (checkin)    -- Accepted* or *Ready for checkin* stage, "
+scripts/pr_quality/errors.py:63:31     - Unknown word (TRAC)       -- Check the ticket at {TRAC_URL}/ticket/{{ticket
+scripts/pr_quality/errors.py:64:13     - Unknown word (Unreviewed) -- "2. If *Unreviewed*, wait for a community
+scripts/pr_quality/errors.py:70:62     - Unknown word (TRIAGING)   -- triage process see {TRIAGING_URL}.",
+scripts/pr_quality/tests/test_check_pr.py:129:13    - Unknown word (hdrs)       -- hdrs=None,
+scripts/pr_quality/tests/test_check_pr.py:12:67     - Unknown word (TRAC)       -- LEVEL_WARNING, MISSING_TRAC_TICKET, Message
+scripts/pr_quality/tests/test_check_pr.py:154:9     - Unknown word (trac)       -- trac_data=UNSET,
+scripts/pr_quality/tests/test_check_pr.py:156:12    - Unknown word (trac)       -- if trac_data is UNSET:
+scripts/pr_quality/tests/test_check_pr.py:157:13    - Unknown word (trac)       -- trac_data = make_trac_json
+scripts/pr_quality/tests/test_check_pr.py:157:30    - Unknown word (trac)       -- trac_data = make_trac_json(stage="Accepted
+scripts/pr_quality/tests/test_check_pr.py:208:16    - Unknown word (Trac)       -- class TestFetchTracTicket(BaseTestCase)
+scripts/pr_quality/tests/test_check_pr.py:238:24    - Unknown word (djangoproject) -- self.assertIn("djangoproject.com/trac/api/tickets
+scripts/pr_quality/tests/test_check_pr.py:241:16    - Unknown word (Trac)          -- class TestCheckTracTicket(BaseTestCase)
+scripts/pr_quality/tests/test_check_pr.py:321:24    - Unknown word (checkin)       -- def test_ready_for_checkin_assigned_unresolved
+scripts/pr_quality/tests/test_check_pr.py:323:30    - Unknown word (checkin)       -- stage="Ready for checkin", status="assigned"
+scripts/pr_quality/tests/test_check_pr.py:328:24    - Unknown word (Unreviewed)    -- for stage in ["Unreviewed", "Someday/Maybe"]:
+scripts/pr_quality/tests/test_check_pr.py:334:46    - Unknown word (checkin)       -- Accepted", "Ready for checkin"):
+scripts/pr_quality/tests/test_check_pr.py:340:18    - Unknown word (worksforme)    -- "worksforme",
+scripts/pr_quality/tests/test_check_pr.py:341:18    - Unknown word (needsinfo)     -- "needsinfo",
+scripts/pr_quality/tests/test_check_pr.py:342:18    - Unknown word (needsnewfeatureprocess) -- "needsnewfeatureprocess",
+scripts/pr_quality/tests/test_check_pr.py:357:38    - Unknown word (Unreviewed)             -- make_trac_json(stage="Unreviewed")
+scripts/pr_quality/tests/test_check_pr.py:363:38    - Unknown word (Unreviewed)             -- make_trac_json(stage="Unreviewed", status="new", resolution
+scripts/pr_quality/tests/test_check_pr.py:366:31    - Unknown word (Unreviewed)             -- self.assertIn("stage='Unreviewed'", result.kwargs["current
+scripts/pr_quality/tests/test_check_pr.py:52:60     - Unknown word (Trac)       -- ticket flag in the Trac system.',
+scripts/pr_quality/tests/test_check_pr.py:66:16     - Unknown word (Trac)       -- f"#### Trac ticket number\n"
+scripts/pr_quality/tests/test_check_pr.py:67:53     - Unknown word (Trac)       -- with the corresponding Trac ticket number. -->\n
+scripts/pr_quality/tests/test_check_pr.py:758:38    - Unknown word (Unreviewed)             -- make_trac_json(stage="Unreviewed")
+scripts/pr_quality/tests/test_check_pr.py:90:10     - Unknown word (trac)       -- def make_trac_json(
+scripts/pr_quality/tests/test_check_pr.py:931:38    - Unknown word (TRAC)                   -- Message(*MISSING_TRAC_TICKET, threshold=8
+scripts/pr_quality/tests/test_check_pr.py:953:22    - Unknown word (someuser)               -- "someuser", "django/django",
+scripts/pr_quality/tests/test_check_pr.py:970:18    - Unknown word (someuser)               -- "someuser", "django/django",
+scripts/pr_quality/tests/test_check_pr.py:973:45    - Unknown word (someuser)               -- ssertEqual(params["author"], "someuser")
 tests/absolute_url_overrides/tests.py:32:41     - Unknown word (testb)      -- absolute_url_overrides.testb": lambda o: "/overridden
 tests/absolute_url_overrides/tests.py:47:41     - Unknown word (testc)      -- absolute_url_overrides.testc": lambda o: "/test-c
 tests/admin_changelist/admin.py:170:49    - Unknown word (swallowonetoone) -- , "load", "speed", "swallowonetoone")
@@ -3342,139 +3405,144 @@ tests/aggregation/test_filter_argument.py:200:23    - Unknown word (aggregrate) 
 tests/aggregation/test_filter_argument.py:201:9     - Unknown word (aggs)       -- aggs = (
 tests/aggregation/test_filter_argument.py:32:19     - Unknown word (Apress)     -- name="Apress", num_awards=3, duration
 tests/aggregation/test_filter_argument.py:46:19     - Unknown word (Sams)       -- name="Sams Teach Yourself Django
-tests/aggregation/tests.py:100:56    - Unknown word (Kaufmann)   -- create(name="Morgan Kaufmann", num_awards=9)
-tests/aggregation/tests.py:101:49    - Unknown word (Jonno's)    -- objects.create(name="Jonno's House of Books", num
-tests/aggregation/tests.py:1077:13   - Unknown word (qstr)       -- qstr = captured_queries[
-tests/aggregation/tests.py:1078:44   - Unknown word (qstr)       -- assertNotIn("for update", qstr)
-tests/aggregation/tests.py:1084:51   - Unknown word (qstr)       -- findall(r"order by (\w+)", qstr),
-tests/aggregation/tests.py:1088:46   - Unknown word (qstr)       -- assertNotIn("order by", qstr)
-tests/aggregation/tests.py:1089:30   - Unknown word (qstr)       -- self.assertEqual(qstr.count(" join "), 0)
-tests/aggregation/tests.py:1095:9    - Unknown word (thedate)    -- thedate = timezone.now()
-tests/aggregation/tests.py:1105:25   - Unknown word (thedate)    -- pubdate=thedate,
-tests/aggregation/tests.py:1111:14   - Unknown word (nonaggregate) -- def test_nonaggregate_aggregation_throws(self
-tests/aggregation/tests.py:1138:29   - Unknown word (Kaplan)       -- ("Jacob Kaplan-Moss", 129),
-tests/aggregation/tests.py:1140:31   - Unknown word (Forcier)      -- ("Jeffrey Forcier", 128),
-tests/aggregation/tests.py:1141:28   - Unknown word (Bissex)       -- ("Paul Bissex", 120),
-tests/aggregation/tests.py:1144:33   - Unknown word (Chun)         -- ("Wesley J. Chun", 176),
-tests/aggregation/tests.py:115:19    - Unknown word (Sams)       -- name="Sams Teach Yourself Django
-tests/aggregation/tests.py:1520:18   - Unknown word (Jonno's)      -- "Jonno's House of Books",
-tests/aggregation/tests.py:1798:45   - Unknown word (outeref)      -- ggregation_exists_multivalued_outeref(self):
-tests/aggregation/tests.py:1836:27   - Unknown word (Forcier)      -- ("Jeffrey Forcier", 1),
-tests/aggregation/tests.py:1838:29   - Unknown word (Chun)         -- ("Wesley J. Chun", 1),
-tests/aggregation/tests.py:184:29    - Unknown word (Pappa's)    -- name="Mamma and Pappa's Books",
-tests/aggregation/tests.py:2008:24   - Unknown word (Jonno's)      -- [{"name": "Jonno's House of Books", "books
-tests/aggregation/tests.py:2019:27   - Unknown word (Jonno's)      -- {"name": "Jonno's House of Books", "rating
-tests/aggregation/tests.py:2311:40   - Unknown word (Pappa's)      -- "name": "Mamma and Pappa's Books",
-tests/aggregation/tests.py:2337:9    - Unknown word (funcs)        -- funcs_with_inherited_constructors
-tests/aggregation/tests.py:2339:25   - Unknown word (funcs)        -- for function in funcs_with_inherited_constructors
-tests/aggregation/tests.py:2346:9    - Unknown word (funcs)        -- funcs_with_custom_constructors
-tests/aggregation/tests.py:2347:25   - Unknown word (funcs)        -- for function in funcs_with_custom_constructors
-tests/aggregation/tests.py:2369:31   - Unknown word (Apress'Sams'Prentice) -- "stringagg": "Apress'Sams'Prentice Hall'Morgan Kaufmann
-tests/aggregation/tests.py:2369:64   - Unknown word (Kaufmann'Jonno's)     -- Prentice Hall'Morgan Kaufmann'Jonno's House "
-tests/aggregation/tests.py:2379:49   - Unknown word (Pappa's)              -- Amazon.com;Mamma and Pappa's Books",
-tests/aggregation/tests.py:2383:28   - Unknown word (Pappa's)              -- "Mamma and Pappa's Books;Amazon.com;Books
-tests/aggregation/tests.py:2385:48   - Unknown word (Pappa's)              -- opening"), "Mamma and Pappa's Books;Amazon.com;Books
-tests/aggregation/tests.py:259:18    - Unknown word (Sams)       -- "Sams Teach Yourself Django
-tests/aggregation/tests.py:308:25    - Unknown word (Holovaty)   -- "Adrian Holovaty",
-tests/aggregation/tests.py:330:19    - Unknown word (Sams)       -- ("Sams Teach Yourself Django
-tests/aggregation/tests.py:347:19    - Unknown word (Sams)       -- ("Sams Teach Yourself Django
-tests/aggregation/tests.py:362:26    - Unknown word (Holovaty)   -- ("Adrian Holovaty", 4.5),
-tests/aggregation/tests.py:363:24    - Unknown word (Dayley)     -- ("Brad Dayley", 3.0),
-tests/aggregation/tests.py:364:25    - Unknown word (Kaplan)     -- ("Jacob Kaplan-Moss", 4.5),
-tests/aggregation/tests.py:366:24    - Unknown word (Bissex)     -- ("Paul Bissex", 4.0),
-tests/aggregation/tests.py:376:26    - Unknown word (Holovaty)   -- ("Adrian Holovaty", 1),
-tests/aggregation/tests.py:377:24    - Unknown word (Dayley)     -- ("Brad Dayley", 1),
-tests/aggregation/tests.py:378:25    - Unknown word (Kaplan)     -- ("Jacob Kaplan-Moss", 1),
-tests/aggregation/tests.py:380:27    - Unknown word (Forcier)    -- ("Jeffrey Forcier", 1),
-tests/aggregation/tests.py:381:24    - Unknown word (Bissex)     -- ("Paul Bissex", 1),
-tests/aggregation/tests.py:384:29    - Unknown word (Chun)       -- ("Wesley J. Chun", 1),
-tests/aggregation/tests.py:412:19    - Unknown word (Apress)     -- ("Apress", Decimal("59.69"))
-tests/aggregation/tests.py:413:19    - Unknown word (Jonno's)    -- ("Jonno's House of Books", None
-tests/aggregation/tests.py:414:26    - Unknown word (Kaufmann)   -- ("Morgan Kaufmann", Decimal("75.00"))
-tests/aggregation/tests.py:533:26    - Unknown word (Holovaty)   -- ("Adrian Holovaty", 32.0),
-tests/aggregation/tests.py:534:24    - Unknown word (Dayley)     -- ("Brad Dayley", None),
-tests/aggregation/tests.py:535:25    - Unknown word (Kaplan)     -- ("Jacob Kaplan-Moss", 29.5),
-tests/aggregation/tests.py:537:27    - Unknown word (Forcier)    -- ("Jeffrey Forcier", 27.0),
-tests/aggregation/tests.py:538:24    - Unknown word (Bissex)     -- ("Paul Bissex", 31.0),
-tests/aggregation/tests.py:541:29    - Unknown word (Chun)       -- ("Wesley J. Chun", Approximate(33.66
-tests/aggregation/tests.py:557:9     - Unknown word (aggs)       -- aggs = Book.objects.aggregate
-tests/aggregation/tests.py:562:26    - Unknown word (aggs)       -- self.assertEqual(aggs["distinct_ratings"]
-tests/aggregation/tests.py:614:35    - Unknown word (xprice)     -- Book.objects.annotate(xprice=F("price"))
-tests/aggregation/tests.py:629:35    - Unknown word (xprice)     -- Book.objects.annotate(xprice=F("price"))
-tests/aggregation/tests.py:631:32    - Unknown word (xprice)     -- .values("rating", "xprice")
-tests/aggregation/tests.py:758:15    - Unknown word (Apress)     -- ["Apress", "Prentice Hall",
-tests/aggregation/tests.py:75:53     - Unknown word (Holovaty)   -- create(name="Adrian Holovaty", age=34)
-tests/aggregation/tests.py:768:18    - Unknown word (Apress)     -- "Apress",
-tests/aggregation/tests.py:769:18    - Unknown word (Apress)     -- "Apress",
-tests/aggregation/tests.py:76:52     - Unknown word (Kaplan)     -- objects.create(name="Jacob Kaplan-Moss", age=35)
-tests/aggregation/tests.py:77:51     - Unknown word (Dayley)     -- objects.create(name="Brad Dayley", age=45)
-tests/aggregation/tests.py:79:54     - Unknown word (Forcier)    -- create(name="Jeffrey Forcier", age=37)
-tests/aggregation/tests.py:807:25    - Unknown word (Kaufmann)   -- "Morgan Kaufmann",
-tests/aggregation/tests.py:80:51     - Unknown word (Bissex)     -- objects.create(name="Paul Bissex", age=29)
-tests/aggregation/tests.py:81:56     - Unknown word (Chun)       -- create(name="Wesley J. Chun", age=25)
-tests/aggregation/tests.py:820:57    - Unknown word (Kaufmann)   -- Prentice Hall", "Morgan Kaufmann"],
-tests/aggregation/tests.py:831:30    - Unknown word (Kaufmann)   -- ["Sams", "Morgan Kaufmann", "Expensive Publisher
-tests/aggregation/tests.py:863:50    - Unknown word (Dayley)     -- QuerySetEqual(authors, ["Brad Dayley"], lambda a: a.name
-tests/aggregation/tests.py:94:19     - Unknown word (Apress)     -- name="Apress", num_awards=3, duration
-tests/aggregation/tests.py:97:19     - Unknown word (Sams)       -- name="Sams", num_awards=1, duration
-tests/aggregation_regress/tests.py:1012:54   - Unknown word (Holovaty)     -- 0]["name"], "Adrian Holovaty")
-tests/aggregation_regress/tests.py:1022:54   - Unknown word (Holovaty)     -- 0]["name"], "Adrian Holovaty")
-tests/aggregation_regress/tests.py:1032:54   - Unknown word (Holovaty)     -- 0]["name"], "Adrian Holovaty")
-tests/aggregation_regress/tests.py:1117:64   - Unknown word (Apress)       -- p in publishers), ["Apress", "Sams"])
-tests/aggregation_regress/tests.py:1342:25   - Unknown word (Kaufmann)     -- "Morgan Kaufmann",
-tests/aggregation_regress/tests.py:1456:49   - Unknown word (LOUTER)       -- join isn't promoted to LOUTER. This could
-tests/aggregation_regress/tests.py:1481:26   - Unknown word (Holovaty)     -- ("Adrian Holovaty", 1),
-tests/aggregation_regress/tests.py:1482:24   - Unknown word (Dayley)       -- ("Brad Dayley", 1),
-tests/aggregation_regress/tests.py:1483:25   - Unknown word (Kaplan)       -- ("Jacob Kaplan-Moss", 0),
-tests/aggregation_regress/tests.py:1485:27   - Unknown word (Forcier)      -- ("Jeffrey Forcier", 1),
-tests/aggregation_regress/tests.py:1486:24   - Unknown word (Bissex)       -- ("Paul Bissex", 0),
-tests/aggregation_regress/tests.py:1489:29   - Unknown word (Chun)         -- ("Wesley J. Chun", 0),
-tests/aggregation_regress/tests.py:1508:24   - Unknown word (Dayley)       -- ("Brad Dayley", 1),
-tests/aggregation_regress/tests.py:1509:25   - Unknown word (Kaplan)       -- ("Jacob Kaplan-Moss", 0),
-tests/aggregation_regress/tests.py:1511:27   - Unknown word (Forcier)      -- ("Jeffrey Forcier", 1),
-tests/aggregation_regress/tests.py:1512:24   - Unknown word (Bissex)       -- ("Paul Bissex", 0),
-tests/aggregation_regress/tests.py:1515:29   - Unknown word (Chun)         -- ("Wesley J. Chun", 0),
+tests/aggregation/tests.py:100:19    - Unknown word (Sams)       -- name="Sams", num_awards=1, duration
+tests/aggregation/tests.py:103:56    - Unknown word (Kaufmann)   -- create(name="Morgan Kaufmann", num_awards=9)
+tests/aggregation/tests.py:104:49    - Unknown word (Jonno's)    -- objects.create(name="Jonno's House of Books", num
+tests/aggregation/tests.py:1080:13   - Unknown word (qstr)       -- qstr = captured_queries[
+tests/aggregation/tests.py:1081:44   - Unknown word (qstr)       -- assertNotIn("for update", qstr)
+tests/aggregation/tests.py:1087:51   - Unknown word (qstr)       -- findall(r"order by (\w+)", qstr),
+tests/aggregation/tests.py:1091:46   - Unknown word (qstr)       -- assertNotIn("order by", qstr)
+tests/aggregation/tests.py:1092:30   - Unknown word (qstr)       -- self.assertEqual(qstr.count(" join "), 0)
+tests/aggregation/tests.py:1098:9    - Unknown word (thedate)    -- thedate = timezone.now()
+tests/aggregation/tests.py:1108:25   - Unknown word (thedate)    -- pubdate=thedate,
+tests/aggregation/tests.py:1114:14   - Unknown word (nonaggregate) -- def test_nonaggregate_aggregation_throws(self
+tests/aggregation/tests.py:1141:29   - Unknown word (Kaplan)       -- ("Jacob Kaplan-Moss", 129),
+tests/aggregation/tests.py:1143:31   - Unknown word (Forcier)      -- ("Jeffrey Forcier", 128),
+tests/aggregation/tests.py:1144:28   - Unknown word (Bissex)       -- ("Paul Bissex", 120),
+tests/aggregation/tests.py:1147:33   - Unknown word (Chun)         -- ("Wesley J. Chun", 176),
+tests/aggregation/tests.py:118:19    - Unknown word (Sams)       -- name="Sams Teach Yourself Django
+tests/aggregation/tests.py:1523:18   - Unknown word (Jonno's)      -- "Jonno's House of Books",
+tests/aggregation/tests.py:1801:45   - Unknown word (outeref)      -- ggregation_exists_multivalued_outeref(self):
+tests/aggregation/tests.py:1839:27   - Unknown word (Forcier)      -- ("Jeffrey Forcier", 1),
+tests/aggregation/tests.py:1841:29   - Unknown word (Chun)         -- ("Wesley J. Chun", 1),
+tests/aggregation/tests.py:187:29    - Unknown word (Pappa's)    -- name="Mamma and Pappa's Books",
+tests/aggregation/tests.py:2036:24   - Unknown word (Jonno's)      -- [{"name": "Jonno's House of Books", "books
+tests/aggregation/tests.py:2047:27   - Unknown word (Jonno's)      -- {"name": "Jonno's House of Books", "rating
+tests/aggregation/tests.py:2339:40   - Unknown word (Pappa's)      -- "name": "Mamma and Pappa's Books",
+tests/aggregation/tests.py:2365:9    - Unknown word (funcs)        -- funcs_with_inherited_constructors
+tests/aggregation/tests.py:2367:25   - Unknown word (funcs)        -- for function in funcs_with_inherited_constructors
+tests/aggregation/tests.py:2374:9    - Unknown word (funcs)        -- funcs_with_custom_constructors
+tests/aggregation/tests.py:2375:25   - Unknown word (funcs)        -- for function in funcs_with_custom_constructors
+tests/aggregation/tests.py:2411:40   - Unknown word (Albatros)     -- objects.create(name="Albatros", num_awards=0)
+tests/aggregation/tests.py:2427:40   - Unknown word (Albatros)     -- objects.create(name="Albatros", num_awards=0)
+tests/aggregation/tests.py:2435:40   - Unknown word (Albatros)     -- objects.create(name="Albatros", num_awards=0)
+tests/aggregation/tests.py:2451:40   - Unknown word (Albatros)     -- objects.create(name="Albatros", num_awards=0)
+tests/aggregation/tests.py:2474:40   - Unknown word (Albatros)     -- objects.create(name="Albatros", num_awards=0)
+tests/aggregation/tests.py:2492:31   - Unknown word (Apress'Sams'Prentice) -- "stringagg": "Apress'Sams'Prentice Hall'Morgan Kaufmann
+tests/aggregation/tests.py:2492:64   - Unknown word (Kaufmann'Jonno's)     -- Prentice Hall'Morgan Kaufmann'Jonno's House "
+tests/aggregation/tests.py:2502:49   - Unknown word (Pappa's)              -- Amazon.com;Mamma and Pappa's Books",
+tests/aggregation/tests.py:2506:28   - Unknown word (Pappa's)              -- "Mamma and Pappa's Books;Amazon.com;Books
+tests/aggregation/tests.py:2508:48   - Unknown word (Pappa's)              -- opening"), "Mamma and Pappa's Books;Amazon.com;Books
+tests/aggregation/tests.py:262:18    - Unknown word (Sams)       -- "Sams Teach Yourself Django
+tests/aggregation/tests.py:311:25    - Unknown word (Holovaty)   -- "Adrian Holovaty",
+tests/aggregation/tests.py:333:19    - Unknown word (Sams)       -- ("Sams Teach Yourself Django
+tests/aggregation/tests.py:350:19    - Unknown word (Sams)       -- ("Sams Teach Yourself Django
+tests/aggregation/tests.py:365:26    - Unknown word (Holovaty)   -- ("Adrian Holovaty", 4.5),
+tests/aggregation/tests.py:366:24    - Unknown word (Dayley)     -- ("Brad Dayley", 3.0),
+tests/aggregation/tests.py:367:25    - Unknown word (Kaplan)     -- ("Jacob Kaplan-Moss", 4.5),
+tests/aggregation/tests.py:369:24    - Unknown word (Bissex)     -- ("Paul Bissex", 4.0),
+tests/aggregation/tests.py:379:26    - Unknown word (Holovaty)   -- ("Adrian Holovaty", 1),
+tests/aggregation/tests.py:380:24    - Unknown word (Dayley)     -- ("Brad Dayley", 1),
+tests/aggregation/tests.py:381:25    - Unknown word (Kaplan)     -- ("Jacob Kaplan-Moss", 1),
+tests/aggregation/tests.py:383:27    - Unknown word (Forcier)    -- ("Jeffrey Forcier", 1),
+tests/aggregation/tests.py:384:24    - Unknown word (Bissex)     -- ("Paul Bissex", 1),
+tests/aggregation/tests.py:387:29    - Unknown word (Chun)       -- ("Wesley J. Chun", 1),
+tests/aggregation/tests.py:415:19    - Unknown word (Apress)     -- ("Apress", Decimal("59.69"))
+tests/aggregation/tests.py:416:19    - Unknown word (Jonno's)    -- ("Jonno's House of Books", None
+tests/aggregation/tests.py:417:26    - Unknown word (Kaufmann)   -- ("Morgan Kaufmann", Decimal("75.00"))
+tests/aggregation/tests.py:536:26    - Unknown word (Holovaty)   -- ("Adrian Holovaty", 32.0),
+tests/aggregation/tests.py:537:24    - Unknown word (Dayley)     -- ("Brad Dayley", None),
+tests/aggregation/tests.py:538:25    - Unknown word (Kaplan)     -- ("Jacob Kaplan-Moss", 29.5),
+tests/aggregation/tests.py:540:27    - Unknown word (Forcier)    -- ("Jeffrey Forcier", 27.0),
+tests/aggregation/tests.py:541:24    - Unknown word (Bissex)     -- ("Paul Bissex", 31.0),
+tests/aggregation/tests.py:544:29    - Unknown word (Chun)       -- ("Wesley J. Chun", Approximate(33.66
+tests/aggregation/tests.py:560:9     - Unknown word (aggs)       -- aggs = Book.objects.aggregate
+tests/aggregation/tests.py:565:26    - Unknown word (aggs)       -- self.assertEqual(aggs["distinct_ratings"]
+tests/aggregation/tests.py:617:35    - Unknown word (xprice)     -- Book.objects.annotate(xprice=F("price"))
+tests/aggregation/tests.py:632:35    - Unknown word (xprice)     -- Book.objects.annotate(xprice=F("price"))
+tests/aggregation/tests.py:634:32    - Unknown word (xprice)     -- .values("rating", "xprice")
+tests/aggregation/tests.py:761:15    - Unknown word (Apress)     -- ["Apress", "Prentice Hall",
+tests/aggregation/tests.py:771:18    - Unknown word (Apress)     -- "Apress",
+tests/aggregation/tests.py:772:18    - Unknown word (Apress)     -- "Apress",
+tests/aggregation/tests.py:78:53     - Unknown word (Holovaty)   -- create(name="Adrian Holovaty", age=34)
+tests/aggregation/tests.py:79:52     - Unknown word (Kaplan)     -- objects.create(name="Jacob Kaplan-Moss", age=35)
+tests/aggregation/tests.py:80:51     - Unknown word (Dayley)     -- objects.create(name="Brad Dayley", age=45)
+tests/aggregation/tests.py:810:25    - Unknown word (Kaufmann)   -- "Morgan Kaufmann",
+tests/aggregation/tests.py:823:57    - Unknown word (Kaufmann)   -- Prentice Hall", "Morgan Kaufmann"],
+tests/aggregation/tests.py:82:54     - Unknown word (Forcier)    -- create(name="Jeffrey Forcier", age=37)
+tests/aggregation/tests.py:834:30    - Unknown word (Kaufmann)   -- ["Sams", "Morgan Kaufmann", "Expensive Publisher
+tests/aggregation/tests.py:83:51     - Unknown word (Bissex)     -- objects.create(name="Paul Bissex", age=29)
+tests/aggregation/tests.py:84:56     - Unknown word (Chun)       -- create(name="Wesley J. Chun", age=25)
+tests/aggregation/tests.py:866:50    - Unknown word (Dayley)     -- QuerySetEqual(authors, ["Brad Dayley"], lambda a: a.name
+tests/aggregation/tests.py:97:19     - Unknown word (Apress)     -- name="Apress", num_awards=3, duration
+tests/aggregation_regress/tests.py:1020:54   - Unknown word (Holovaty)     -- 0]["name"], "Adrian Holovaty")
+tests/aggregation_regress/tests.py:1030:54   - Unknown word (Holovaty)     -- 0]["name"], "Adrian Holovaty")
+tests/aggregation_regress/tests.py:1040:54   - Unknown word (Holovaty)     -- 0]["name"], "Adrian Holovaty")
+tests/aggregation_regress/tests.py:1125:64   - Unknown word (Apress)       -- p in publishers), ["Apress", "Sams"])
+tests/aggregation_regress/tests.py:1350:25   - Unknown word (Kaufmann)     -- "Morgan Kaufmann",
+tests/aggregation_regress/tests.py:1464:49   - Unknown word (LOUTER)       -- join isn't promoted to LOUTER. This could
+tests/aggregation_regress/tests.py:1489:26   - Unknown word (Holovaty)     -- ("Adrian Holovaty", 1),
+tests/aggregation_regress/tests.py:1490:24   - Unknown word (Dayley)       -- ("Brad Dayley", 1),
+tests/aggregation_regress/tests.py:1491:25   - Unknown word (Kaplan)       -- ("Jacob Kaplan-Moss", 0),
+tests/aggregation_regress/tests.py:1493:27   - Unknown word (Forcier)      -- ("Jeffrey Forcier", 1),
+tests/aggregation_regress/tests.py:1494:24   - Unknown word (Bissex)       -- ("Paul Bissex", 0),
+tests/aggregation_regress/tests.py:1497:29   - Unknown word (Chun)         -- ("Wesley J. Chun", 0),
+tests/aggregation_regress/tests.py:1516:24   - Unknown word (Dayley)       -- ("Brad Dayley", 1),
+tests/aggregation_regress/tests.py:1517:25   - Unknown word (Kaplan)       -- ("Jacob Kaplan-Moss", 0),
+tests/aggregation_regress/tests.py:1519:27   - Unknown word (Forcier)      -- ("Jeffrey Forcier", 1),
+tests/aggregation_regress/tests.py:1520:24   - Unknown word (Bissex)       -- ("Paul Bissex", 0),
+tests/aggregation_regress/tests.py:1523:29   - Unknown word (Chun)         -- ("Wesley J. Chun", 0),
 tests/aggregation_regress/tests.py:162:29    - Unknown word (Pappa's)    -- name="Mamma and Pappa's Books",
-tests/aggregation_regress/tests.py:1658:9    - Unknown word (wmpk)         -- wmpk = WithManualPK.objects
-tests/aggregation_regress/tests.py:1660:23   - Unknown word (wmpk)         -- object_id=wmpk.id,
-tests/aggregation_regress/tests.py:1662:60   - Unknown word (wmpk)         -- objects.get_for_model(wmpk),
-tests/aggregation_regress/tests.py:1791:14   - Unknown word (fobj)         -- def test_fobj_group_by(self):
-tests/aggregation_regress/tests.py:1888:55   - Unknown word (Kaufmann)     -- 1", "name": "Morgan Kaufmann", "num_authors": 1}
-tests/aggregation_regress/tests.py:1943:42   - Unknown word (recipeunmanaged) -- annotate(num_recipes=Count("recipeunmanaged"))
-tests/aggregation_regress/tests.py:1974:38   - Unknown word (unpromoted)      -- the existing join is unpromoted when doing filtering
-tests/aggregation_regress/tests.py:1980:70   - Unknown word (LOUTER)          -- by annotate will be LOUTER
-tests/aggregation_regress/tests.py:328:19    - Unknown word (Sams)       -- name="Sams Teach Yourself Django
-tests/aggregation_regress/tests.py:350:19    - Unknown word (Sams)       -- name="Sams Teach Yourself Django
-tests/aggregation_regress/tests.py:378:26    - Unknown word (Sams)       -- "name": "Sams Teach Yourself Django
+tests/aggregation_regress/tests.py:1666:9    - Unknown word (wmpk)         -- wmpk = WithManualPK.objects
+tests/aggregation_regress/tests.py:1668:23   - Unknown word (wmpk)         -- object_id=wmpk.id,
+tests/aggregation_regress/tests.py:1670:60   - Unknown word (wmpk)         -- objects.get_for_model(wmpk),
+tests/aggregation_regress/tests.py:1799:14   - Unknown word (fobj)         -- def test_fobj_group_by(self):
+tests/aggregation_regress/tests.py:1896:55   - Unknown word (Kaufmann)     -- 1", "name": "Morgan Kaufmann", "num_authors": 1}
+tests/aggregation_regress/tests.py:1951:42   - Unknown word (recipeunmanaged) -- annotate(num_recipes=Count("recipeunmanaged"))
+tests/aggregation_regress/tests.py:1982:38   - Unknown word (unpromoted)      -- the existing join is unpromoted when doing filtering
+tests/aggregation_regress/tests.py:1988:70   - Unknown word (LOUTER)          -- by annotate will be LOUTER
+tests/aggregation_regress/tests.py:336:19    - Unknown word (Sams)       -- name="Sams Teach Yourself Django
+tests/aggregation_regress/tests.py:358:19    - Unknown word (Sams)       -- name="Sams Teach Yourself Django
+tests/aggregation_regress/tests.py:386:26    - Unknown word (Sams)       -- "name": "Sams Teach Yourself Django
 tests/aggregation_regress/tests.py:55:53     - Unknown word (Holovaty)   -- create(name="Adrian Holovaty", age=34)
 tests/aggregation_regress/tests.py:56:52     - Unknown word (Kaplan)     -- objects.create(name="Jacob Kaplan-Moss", age=35)
 tests/aggregation_regress/tests.py:57:51     - Unknown word (Dayley)     -- objects.create(name="Brad Dayley", age=45)
 tests/aggregation_regress/tests.py:59:54     - Unknown word (Forcier)    -- create(name="Jeffrey Forcier", age=37)
 tests/aggregation_regress/tests.py:60:51     - Unknown word (Bissex)     -- objects.create(name="Paul Bissex", age=29)
 tests/aggregation_regress/tests.py:61:56     - Unknown word (Chun)       -- create(name="Wesley J. Chun", age=25)
-tests/aggregation_regress/tests.py:620:35    - Unknown word (hardbackbook) -- contact, contact_id, hardbackbook, id, isbn, name, pages
-tests/aggregation_regress/tests.py:631:35    - Unknown word (hardbackbook) -- contact, contact_id, hardbackbook, id, isbn, name, num
-tests/aggregation_regress/tests.py:724:24    - Unknown word (fexpr)        -- def test_aggregate_fexpr(self):
-tests/aggregation_regress/tests.py:736:50    - Unknown word (Kaufmann)     -- 1, "name": "Morgan Kaufmann", "num_awards": 9},
+tests/aggregation_regress/tests.py:628:35    - Unknown word (hardbackbook) -- contact, contact_id, hardbackbook, id, isbn, name, pages
+tests/aggregation_regress/tests.py:639:35    - Unknown word (hardbackbook) -- contact, contact_id, hardbackbook, id, isbn, name, num
+tests/aggregation_regress/tests.py:732:24    - Unknown word (fexpr)        -- def test_aggregate_fexpr(self):
 tests/aggregation_regress/tests.py:73:49     - Unknown word (Apress)     -- objects.create(name="Apress", num_awards=3)
+tests/aggregation_regress/tests.py:744:50    - Unknown word (Kaufmann)     -- 1, "name": "Morgan Kaufmann", "num_awards": 9},
 tests/aggregation_regress/tests.py:74:49     - Unknown word (Sams)       -- objects.create(name="Sams", num_awards=1)
-tests/aggregation_regress/tests.py:750:43    - Unknown word (Apress)       -- books": 2, "name": "Apress", "num_awards": 3},
-tests/aggregation_regress/tests.py:751:43    - Unknown word (Jonno's)      -- books": 0, "name": "Jonno's House of Books", "num
-tests/aggregation_regress/tests.py:766:50    - Unknown word (Kaufmann)     -- 1, "name": "Morgan Kaufmann", "num_awards": 9},
+tests/aggregation_regress/tests.py:758:43    - Unknown word (Apress)       -- books": 2, "name": "Apress", "num_awards": 3},
+tests/aggregation_regress/tests.py:759:43    - Unknown word (Jonno's)      -- books": 0, "name": "Jonno's House of Books", "num
 tests/aggregation_regress/tests.py:76:56     - Unknown word (Kaufmann)   -- create(name="Morgan Kaufmann", num_awards=9)
+tests/aggregation_regress/tests.py:774:50    - Unknown word (Kaufmann)     -- 1, "name": "Morgan Kaufmann", "num_awards": 9},
 tests/aggregation_regress/tests.py:77:49     - Unknown word (Jonno's)    -- objects.create(name="Jonno's House of Books", num
-tests/aggregation_regress/tests.py:780:43    - Unknown word (Apress)       -- books": 2, "name": "Apress", "num_awards": 3},
-tests/aggregation_regress/tests.py:781:43    - Unknown word (Jonno's)      -- books": 0, "name": "Jonno's House of Books", "num
-tests/aggregation_regress/tests.py:830:44    - Unknown word (Jonno's)      -- objects.filter(name="Jonno's House of Books")
-tests/aggregation_regress/tests.py:845:30    - Unknown word (Jonno's)      -- "name": "Jonno's House of Books",
-tests/aggregation_regress/tests.py:893:54    - Unknown word (Apress)       -- Django Projects", 29.0, "Apress", "James Bennett"),
-tests/aggregation_regress/tests.py:898:30    - Unknown word (Forcier)      -- "Jeffrey Forcier",
-tests/aggregation_regress/tests.py:900:80    - Unknown word (Dayley)       -- 45.0, "Sams", "Brad Dayley"),
+tests/aggregation_regress/tests.py:788:43    - Unknown word (Apress)       -- books": 2, "name": "Apress", "num_awards": 3},
+tests/aggregation_regress/tests.py:789:43    - Unknown word (Jonno's)      -- books": 0, "name": "Jonno's House of Books", "num
+tests/aggregation_regress/tests.py:838:44    - Unknown word (Jonno's)      -- objects.filter(name="Jonno's House of Books")
+tests/aggregation_regress/tests.py:853:30    - Unknown word (Jonno's)      -- "name": "Jonno's House of Books",
+tests/aggregation_regress/tests.py:901:54    - Unknown word (Apress)       -- Django Projects", 29.0, "Apress", "James Bennett"),
+tests/aggregation_regress/tests.py:906:30    - Unknown word (Forcier)      -- "Jeffrey Forcier",
+tests/aggregation_regress/tests.py:908:80    - Unknown word (Dayley)       -- 45.0, "Sams", "Brad Dayley"),
 tests/aggregation_regress/tests.py:91:19     - Unknown word (Sams)       -- name="Sams Teach Yourself Django
-tests/aggregation_regress/tests.py:942:11    - Unknown word (realiased)    -- # realiased when used in a subquery
-tests/aggregation_regress/tests.py:960:9     - Unknown word (qstr)         -- qstr = str(
-tests/aggregation_regress/tests.py:968:26    - Unknown word (qstr)         -- self.assertEqual(qstr[qstr.index("GROUP BY
-tests/aggregation_regress/tests.py:968:31    - Unknown word (qstr)         -- self.assertEqual(qstr[qstr.index("GROUP BY") :
+tests/aggregation_regress/tests.py:950:11    - Unknown word (realiased)    -- # realiased when used in a subquery
+tests/aggregation_regress/tests.py:968:9     - Unknown word (qstr)         -- qstr = str(
+tests/aggregation_regress/tests.py:976:26    - Unknown word (qstr)         -- self.assertEqual(qstr[qstr.index("GROUP BY
+tests/aggregation_regress/tests.py:976:31    - Unknown word (qstr)         -- self.assertEqual(qstr[qstr.index("GROUP BY") :
 tests/annotations/tests.py:1007:30   - Unknown word (Holovaty)   -- name="Adrian Holovaty",
 tests/annotations/tests.py:1023:36   - Unknown word (Kaplan)     -- jacob_name": "Jacob Kaplan-Moss", "james_name"
 tests/annotations/tests.py:1046:44   - Unknown word (Sams)       -- books_qs, [{"name": "Sams"}, {"name": "Morgan
@@ -4539,13 +4607,14 @@ tests/file_uploads/views.py:59:23     - Unknown word (largefile)  -- obj.testfil
 tests/file_uploads/views.py:59:39     - Unknown word (largefile)  -- save(largefile.name, largefile)
 tests/files/tests.py:230:14    - Unknown word (noname)     -- def test_noname_file_default_name(self
 tests/files/tests.py:233:14    - Unknown word (noname)     -- def test_noname_file_get_size(self)
-tests/files/tests.py:254:44    - Unknown word (español)    -- assertIsInstance(ContentFile("español").read(), str)
+tests/files/tests.py:236:14    - Unknown word (noname)     -- def test_noname_bool(self):
+tests/files/tests.py:257:44    - Unknown word (español)    -- assertIsInstance(ContentFile("español").read(), str)
 tests/files/tests.py:36:34     - Unknown word (Cómo)       -- UploadedFile(name="¿Cómo?", content_type="text
-tests/files/tests.py:390:9     - Unknown word (brokenimg)  -- brokenimg.png is not a valid image
-tests/files/tests.py:391:24    - Unknown word (brokenimg)  -- $ echo "123" > brokenimg.png
-tests/files/tests.py:393:61    - Unknown word (brokenimg)  -- dirname(__file__), "brokenimg.png")
+tests/files/tests.py:393:9     - Unknown word (brokenimg)  -- brokenimg.png is not a valid image
+tests/files/tests.py:394:24    - Unknown word (brokenimg)  -- $ echo "123" > brokenimg.png
+tests/files/tests.py:396:61    - Unknown word (brokenimg)  -- dirname(__file__), "brokenimg.png")
 tests/files/tests.py:40:25     - Unknown word (djángö)     -- f = File(None, "djángö")
-tests/files/tests.py:448:23    - Unknown word (CIFS)       -- filesystem is CIFS, or when relabel is
+tests/files/tests.py:451:23    - Unknown word (CIFS)       -- filesystem is CIFS, or when relabel is
 tests/filtered_relation/tests.py:317:23    - Unknown word (multijoin)  -- def test_with_m2m_multijoin(self):
 tests/fixtures/models.py:4:63      - Unknown word (Fixure)     -- the database in bulk. Fixure data
 tests/fixtures/tests.py:1178:59   - Unknown word (doesnt)       -- named 'this_fixture_doesnt_exist' found."
@@ -6972,26 +7041,27 @@ tests/pagination/tests.py:977:31    - Unknown word (aiteration) -- def test_asyn
 tests/postgres_tests/array_default_migrations/0002_integerarraymodel_field_2.py:12:25     - Unknown word (integerarraydefaultmodel) -- model_name="integerarraydefaultmodel",
 tests/postgres_tests/migrations/0002_create_test_models.py:456:19    - Unknown word (bigints)    -- ("bigints", BigIntegerRangeField
 tests/postgres_tests/models.py:139:5     - Unknown word (bigints)    -- bigints = BigIntegerRangeField
-tests/postgres_tests/test_aggregates.py:252:9     - Unknown word (aggr)       -- aggr1 = AggregateTestModel
-tests/postgres_tests/test_aggregates.py:253:9     - Unknown word (aggr)       -- aggr2 = AggregateTestModel
-tests/postgres_tests/test_aggregates.py:254:52    - Unknown word (aggr)       -- create(related_field=aggr1, int1=1, int2=0)
-tests/postgres_tests/test_aggregates.py:255:52    - Unknown word (aggr)       -- create(related_field=aggr1, int1=2, int2=0)
-tests/postgres_tests/test_aggregates.py:256:52    - Unknown word (aggr)       -- create(related_field=aggr2, int1=3, int2=0)
-tests/postgres_tests/test_aggregates.py:280:33    - Unknown word (stattestmodel) -- array=ArrayAgg("stattestmodel__int1", filter=Q(stattestmode
-tests/postgres_tests/test_aggregates.py:280:64    - Unknown word (stattestmodel) -- tattestmodel__int1", filter=Q(stattestmodel__int2=0))
-tests/postgres_tests/test_aggregates.py:302:33    - Unknown word (stattestmodel) -- array=ArrayAgg("stattestmodel__int1", filter=Q(stattestmode
-tests/postgres_tests/test_aggregates.py:302:64    - Unknown word (stattestmodel) -- tattestmodel__int1", filter=Q(stattestmodel__int2=0))
-tests/postgres_tests/test_aggregates.py:315:30    - Unknown word (stattestmodel) -- "stattestmodel__int1",
-tests/postgres_tests/test_aggregates.py:500:22    - Unknown word (hotelreservation) -- "hotelreservation__requirements",
-tests/postgres_tests/test_aggregates.py:501:32    - Unknown word (hotelreservation) -- order_by="-hotelreservation__start",
-tests/postgres_tests/test_aggregates.py:554:50    - Unknown word (aggs)             -- tTestModel(related_field=self.aggs[0], int1=0, int2=5)
-tests/postgres_tests/test_aggregates.py:555:50    - Unknown word (aggs)             -- tTestModel(related_field=self.aggs[0], int1=1, int2=4)
-tests/postgres_tests/test_aggregates.py:556:50    - Unknown word (aggs)             -- tTestModel(related_field=self.aggs[0], int1=2, int2=3)
+tests/postgres_tests/test_aggregates.py:246:9     - Unknown word (aggr)       -- aggr1 = AggregateTestModel
+tests/postgres_tests/test_aggregates.py:247:9     - Unknown word (aggr)       -- aggr2 = AggregateTestModel
+tests/postgres_tests/test_aggregates.py:248:52    - Unknown word (aggr)       -- create(related_field=aggr1, int1=1, int2=0)
+tests/postgres_tests/test_aggregates.py:249:52    - Unknown word (aggr)       -- create(related_field=aggr1, int1=2, int2=0)
+tests/postgres_tests/test_aggregates.py:250:52    - Unknown word (aggr)       -- create(related_field=aggr2, int1=3, int2=0)
+tests/postgres_tests/test_aggregates.py:274:33    - Unknown word (stattestmodel) -- array=ArrayAgg("stattestmodel__int1", filter=Q(stattestmode
+tests/postgres_tests/test_aggregates.py:274:64    - Unknown word (stattestmodel) -- tattestmodel__int1", filter=Q(stattestmodel__int2=0))
+tests/postgres_tests/test_aggregates.py:296:33    - Unknown word (stattestmodel) -- array=ArrayAgg("stattestmodel__int1", filter=Q(stattestmode
+tests/postgres_tests/test_aggregates.py:296:64    - Unknown word (stattestmodel) -- tattestmodel__int1", filter=Q(stattestmodel__int2=0))
+tests/postgres_tests/test_aggregates.py:309:30    - Unknown word (stattestmodel) -- "stattestmodel__int1",
+tests/postgres_tests/test_aggregates.py:439:22    - Unknown word (hotelreservation) -- "hotelreservation__requirements",
+tests/postgres_tests/test_aggregates.py:440:32    - Unknown word (hotelreservation) -- order_by="-hotelreservation__start",
+tests/postgres_tests/test_aggregates.py:493:50    - Unknown word (aggs)             -- tTestModel(related_field=self.aggs[0], int1=0, int2=5)
+tests/postgres_tests/test_aggregates.py:494:50    - Unknown word (aggs)             -- tTestModel(related_field=self.aggs[0], int1=1, int2=4)
+tests/postgres_tests/test_aggregates.py:495:50    - Unknown word (aggs)             -- tTestModel(related_field=self.aggs[0], int1=2, int2=3)
+tests/postgres_tests/test_aggregates.py:524:23    - Unknown word (isnt)             -- def test_ordering_isnt_cleared_for_array_subquery
 tests/postgres_tests/test_aggregates.py:56:13     - Unknown word (aggs)       -- cls.aggs = AggregateTestModel
-tests/postgres_tests/test_aggregates.py:585:23    - Unknown word (isnt)             -- def test_ordering_isnt_cleared_for_array_subquery
-tests/postgres_tests/test_aggregates.py:802:19    - Unknown word (avgx)             -- def test_regr_avgx_general(self):
-tests/postgres_tests/test_aggregates.py:806:19    - Unknown word (avgy)             -- def test_regr_avgy_general(self):
-tests/postgres_tests/test_aggregates.py:849:19    - Unknown word (avgx)             -- def test_regr_avgx_with_related_obj_and
+tests/postgres_tests/test_aggregates.py:605:21    - Unknown word (bitagg)           -- bitagg=BitAggregate("integer
+tests/postgres_tests/test_aggregates.py:757:19    - Unknown word (avgx)             -- def test_regr_avgx_general(self):
+tests/postgres_tests/test_aggregates.py:761:19    - Unknown word (avgy)             -- def test_regr_avgy_general(self):
+tests/postgres_tests/test_aggregates.py:804:19    - Unknown word (avgx)             -- def test_regr_avgx_with_related_obj_and
 tests/postgres_tests/test_app_installed_check.py:30:32     - Unknown word (klass)      -- make_error(self, obj, klass_name):
 tests/postgres_tests/test_app_installed_check.py:34:20     - Unknown word (klass)      -- f"use {klass_name}.",
 tests/postgres_tests/test_apps.py:17:60     - Unknown word (oids)       -- signals import get_hstore_oids

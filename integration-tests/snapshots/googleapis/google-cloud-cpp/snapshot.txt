@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 20887, skipped: 29, Issues found: 47078 in 8137 files.
+ CSpell: Files checked: 20895, skipped: 29, Issues found: 47082 in 8137 files.
  exit code: 1
 ARCHITECTURE.md:158:48    - Unknown word (googlemock) -- implementation using `googlemock`
 BUILD.bazel:151:20    - Unknown word (ctype)      -- name = "enable-ctype-cord-workaround",
@@ -407,6 +407,7 @@ generator/internal/scaffold_generator_test.cc:423:38    - Unknown word (CXXLD)  
 generator/internal/scaffold_generator_test.cc:457:37    - Unknown word (Bazelrc)    -- ScaffoldGenerator, QuickstartBazelrc) {
 generator/internal/service_code_generator.h:204:46    - Unknown word (autopopulated) -- of the methods has an autopopulated `request_id`-like
 generator/templates/WORKSPACE.bazel:19:21     - Unknown word (Starlark)   -- # Add the necessary Starlark functions to fetch google
+google/cloud/BUILD.bazel:241:5     - Unknown word (cxxopts)    -- cxxopts = ["-DGOOGLE_CLOUD_CPP
 google/cloud/BUILD.bazel:59:15     - Unknown word (DEFAULTLIB) -- "-DEFAULTLIB:bcrypt.lib",
 google/cloud/accessapproval/doc/main.dox:3:2       - Unknown word (mainpage)   -- @mainpage Access Approval API
 google/cloud/accessapproval/v1/access_approval_client.h:19:39     - Unknown word (ACCESSAPPROVAL) -- CLOUD_CPP_GOOGLE_CLOUD_ACCESSAPPROVAL_V1_ACCESS_APPROVAL_CLIENT
@@ -535,7 +536,6 @@ google/cloud/binaryauthorization/doc/environment-variables.dox:12:21     - Unkno
 google/cloud/binaryauthorization/doc/environment-variables.dox:14:16     - Unknown word (Binauthz)   -- used by `MakeBinauthzManagementServiceV1Connection
 google/cloud/binaryauthorization/doc/override-authentication.dox:12:10     - Unknown word (binauthz)   -- @snippet binauthz_management_service_v
 google/cloud/binaryauthorization/v1/binauthz_management_service_v1_client.h:19:39     - Unknown word (BINARYAUTHORIZATION) -- CLOUD_CPP_GOOGLE_CLOUD_BINARYAUTHORIZATION_V1_BINAUTHZ_MANAGEMENT
-google/cloud/capture_build_info.bzl:51:48     - Unknown word (cxxopts)    -- = ctx.fragments.cpp.cxxopts + ctx.fragments.cpp
 google/cloud/capture_build_info.bzl:51:76     - Unknown word (conlyopts)  -- + ctx.fragments.cpp.conlyopts,
 google/cloud/capture_build_info.bzl:64:57     - Unknown word (fastbuild)  -- COMPILATION_MODE", "fastbuild")
 google/cloud/ces/v1/agent_client.cc:786:70    - Unknown word (Toolsets)   -- AgentServiceClient::ListToolsets(
@@ -643,9 +643,9 @@ google/cloud/internal/grpc_opentelemetry_test.cc:58:35     - Unknown word (semco
 google/cloud/internal/http_header_test.cc:141:33    - Unknown word (valuelongerthantruncatelength) -- HttpHeader long_value("key", "valuelongerthantruncatelength");
 google/cloud/internal/http_header_test.cc:142:50    - Unknown word (valuelonge)                    -- DebugString(), Eq("key: valuelonge"));
 google/cloud/internal/oauth2_refreshing_credentials_wrapper.h:40:16     - Unknown word (refreshable) -- * Wrapper for refreshable parts of a Credentials
-google/cloud/internal/oauth2_service_account_credentials_test.cc:111:33    - Unknown word (Cerl)       -- constexpr kAuthProviderX509CerlUrl =
-google/cloud/internal/oauth2_service_account_credentials_test.cc:628:5     - Unknown word (CNHKF)      -- rmYdCNHKFXam78uCt7xQLw==
-google/cloud/internal/oauth2_service_account_credentials_test.cc:648:13    - Unknown word (SCCV)       -- "hRW9bSCCV8w1Ex+"
+google/cloud/internal/oauth2_service_account_credentials_test.cc:112:33    - Unknown word (Cerl)       -- constexpr kAuthProviderX509CerlUrl =
+google/cloud/internal/oauth2_service_account_credentials_test.cc:642:5     - Unknown word (CNHKF)      -- rmYdCNHKFXam78uCt7xQLw==
+google/cloud/internal/oauth2_service_account_credentials_test.cc:662:13    - Unknown word (SCCV)       -- "hRW9bSCCV8w1Ex+"
 google/cloud/internal/opentelemetry_context.h:36:8      - Unknown word (GAPICs)     -- * For GAPICs, the size never exceeds
 google/cloud/internal/populate_common_options_test.cc:98:11     - Unknown word (optionses)  -- Options optionses[] = {
 google/cloud/internal/rest_opentelemetry_test.cc:53:8      - Unknown word (aaabbbbb)   -- "aaabbbbb";
