@@ -3,7 +3,7 @@ Repository: dart-lang/sdk
 Url: "https://github.com/dart-lang/sdk"
 Args: ["--issues-summary-report","--locale=en,en-GB","--exclude=tools/dom/**/*.json","--exclude=pkg/*/test/**","--exclude=**/*_data.*","--exclude=runtime/vm/**","--exclude=sdk/lib/html/**","--exclude=benchmarks/**","--exclude=**/*_test.*","--exclude=*/**/*.{json,yaml,yml}","--exclude=tests/corelib/regexp/**","--exclude=**/{third_party,assets}/**","**/*.{dart,md}"]
 Lines:
- CSpell: Files checked: 11179, Issues found: 9881 in 2107 files.
+ CSpell: Files checked: 11342, Issues found: 10099 in 2142 files.
  exit code: 1
 CONTRIBUTING.md:105:27    - Unknown word (presubmit)  -- CL. They can run the presubmit tests on your behalf
 CONTRIBUTING.md:112:52    - Unknown word (Tryjobs)    -- progress by looking at the "Tryjobs" panel in your review
@@ -199,10 +199,10 @@ pkg/_fe_analyzer_shared/lib/src/parser/class_member_parser.dart:40:13     - Unkn
 pkg/_fe_analyzer_shared/lib/src/parser/forwarding_listener.dart:1906:13   - Unknown word (danrubel)   -- // TODO(danrubel): hasSetEntry parameter
 pkg/_fe_analyzer_shared/lib/src/parser/identifier_context_impl.dart:491:15    - Unknown word (jensj)      -- // TODO(jensj): Why aren't an error
 pkg/_fe_analyzer_shared/lib/src/parser/parser_impl.dart:1352:28   - Unknown word (metadatum)  -- metadata> ::= (‘@’ <metadatum>)*
-pkg/_fe_analyzer_shared/lib/src/parser/parser_impl.dart:4288:34   - Unknown word (dartbug)    -- unless it's a late field (dartbug.com/40805).
+pkg/_fe_analyzer_shared/lib/src/parser/parser_impl.dart:4289:34   - Unknown word (dartbug)    -- unless it's a late field (dartbug.com/40805).
 pkg/_fe_analyzer_shared/lib/src/parser/parser_impl.dart:624:15    - Unknown word (kallentu)   -- // TODO(kallentu): Handle incorrect ordering
-pkg/_fe_analyzer_shared/lib/src/parser/parser_impl.dart:6762:13   - Unknown word (brianwilkerson) -- // TODO(brianwilkerson): If the next token
-pkg/_fe_analyzer_shared/lib/src/parser/parser_impl.dart:9741:17   - Unknown word (typeref)        -- // found <typeref> `?` <identifier>
+pkg/_fe_analyzer_shared/lib/src/parser/parser_impl.dart:6763:13   - Unknown word (brianwilkerson) -- // TODO(brianwilkerson): If the next token
+pkg/_fe_analyzer_shared/lib/src/parser/parser_impl.dart:9780:17   - Unknown word (typeref)        -- // found <typeref> `?` <identifier>
 pkg/_fe_analyzer_shared/lib/src/parser/quote.dart:6:56      - Unknown word (canonicalizer) -- shared/src/scanner/string_canonicalizer.dart';
 pkg/_fe_analyzer_shared/lib/src/scanner/abstract_scanner.dart:1497:15   - Unknown word (nextnext)   -- int nextnext = peek();
 pkg/_fe_analyzer_shared/lib/src/scanner/string_canonicalizer.dart:10:14     - Unknown word (Canonicalizer) -- final _StringCanonicalizer _canonicalizer = new
@@ -290,11 +290,11 @@ pkg/analysis_server/lib/src/services/correction/dart/join_else_with_if.dart:89:5
 pkg/analysis_server/lib/src/services/correction/dart/remove_dead_code.dart:331:19    - Unknown word (asashour)   -- // TODO(asashour): consider modifying
 pkg/analysis_server/lib/src/services/correction/dart/remove_method_declaration.dart:20:44     - Unknown word (Methoddeclaration) -- > DartFixKind.removeMethoddeclaration;
 pkg/analysis_server/lib/src/services/correction/dart/replace_with_eight_digit_hex.dart:62:12     - Unknown word (Defalt)     -- // Defalt to lower-case.
-pkg/analysis_server/lib/src/services/correction/fix.dart:1121:25   - Unknown word (parameterizing) -- TODO(pq): consider parameterizing: 'Make {fields} final
-pkg/analysis_server/lib/src/services/correction/fix.dart:944:9     - Unknown word (endtemplate) -- /// {@endtemplate}
+pkg/analysis_server/lib/src/services/correction/fix.dart:1123:25   - Unknown word (parameterizing) -- TODO(pq): consider parameterizing: 'Make {fields} final
+pkg/analysis_server/lib/src/services/correction/fix.dart:946:9     - Unknown word (endtemplate) -- /// {@endtemplate}
 pkg/analysis_server/lib/src/services/correction/fix/data_driven/replaced_by.dart:120:11    - Unknown word (brianwilkinson) -- // TODO(brianwilkinson): Maybe also handle
-pkg/analysis_server/lib/src/services/correction/fix_internal.dart:378:30    - Unknown word (Fromiterable) -- preferForElementsToMapFromiterable: [
-pkg/analysis_server/lib/src/services/correction/fix_internal.dart:407:22    - Unknown word (Wheretype)    -- diag.preferIterableWheretype: [ConvertToWhereType
+pkg/analysis_server/lib/src/services/correction/fix_internal.dart:379:30    - Unknown word (Fromiterable) -- preferForElementsToMapFromiterable: [
+pkg/analysis_server/lib/src/services/correction/fix_internal.dart:408:22    - Unknown word (Wheretype)    -- diag.preferIterableWheretype: [ConvertToWhereType
 pkg/analysis_server/lib/src/services/correction/levenshtein.dart:21:12     - Unknown word (Gusfield)   -- /// by Dan Gusfield and Chas Emerick's implementa
 pkg/analysis_server/lib/src/services/correction/levenshtein.dart:21:25     - Unknown word (Chas)       -- by Dan Gusfield and Chas Emerick's implementation
 pkg/analysis_server/lib/src/services/correction/levenshtein.dart:21:30     - Unknown word (Emerick's)  -- Dan Gusfield and Chas Emerick's implementation of the
@@ -317,11 +317,11 @@ pkg/analysis_server/lib/src/services/snippets/dart/for_in_statement.dart:11:26  
 pkg/analysis_server/lib/src/services/snippets/dart/if_else_statement.dart:30:19     - Unknown word (Indentedln) -- void writeIndentedln(String string) =>
 pkg/analysis_server/lib/src/services/user_prompts/user_prompts.dart:27:18     - Unknown word (Persistable) -- return _NotPersistableUserPromptPreferences
 pkg/analysis_server/lib/src/session_logger/entry_keys.dart:12:52     - Unknown word (associatd)  -- to access the message associatd with the entry.
-pkg/analysis_server/lib/src/status/diagnostics.dart:187:25    - Unknown word (octicon)    -- <span class="mega-octicon octicon-dashboard">
-pkg/analysis_server/lib/src/status/diagnostics.dart:402:2     - Unknown word (nowrap)     -- .nowrap {
-pkg/analysis_server/lib/src/status/diagnostics.dart:521:8     - Unknown word (onclick)    -- 'onclick': ?onClick,
+pkg/analysis_server/lib/src/status/diagnostics.dart:192:25    - Unknown word (octicon)    -- <span class="mega-octicon octicon-dashboard">
+pkg/analysis_server/lib/src/status/diagnostics.dart:374:30    - Unknown word (tabnav)     -- writeln('<div class="tabnav">');
+pkg/analysis_server/lib/src/status/diagnostics.dart:478:2     - Unknown word (nowrap)     -- .nowrap {
+pkg/analysis_server/lib/src/status/diagnostics.dart:598:8     - Unknown word (onclick)    -- 'onclick': ?onClick,
 pkg/analysis_server/lib/src/status/pages.dart:240:16    - Unknown word (simplicitly) -- // For simplicitly we only support POSTs
-pkg/analysis_server/lib/src/status/pages/contexts_page.dart:54:30     - Unknown word (tabnav)     -- writeln('<div class="tabnav">');
 pkg/analysis_server/lib/src/utilities/env.dart:22:26     - Unknown word (loca)       -- String, String> get _locaEnvironment =>
 pkg/analysis_server/lib/src/utilities/navigation/keyword_navigation_computer.dart:15:32     - Unknown word (Frament)    -- LibraryFragment libraryFrament;
 pkg/analysis_server/lib/src/utilities/profiling.dart:99:39     - Unknown word (tasklist)   -- await Process.run('tasklist', [
@@ -392,7 +392,7 @@ pkg/analyzer/lib/src/dart/analysis/index.dart:682:28    - Unknown word (Alis)   
 pkg/analyzer/lib/src/dart/analysis/performance_logger.dart:11:54     - Unknown word (Strink)     -- the need for the StreamStrinkSink?
 pkg/analyzer/lib/src/dart/ast/ast.dart:13643:25  - Unknown word (thie)       -- / Returns `null` is thie expression is a closure
 pkg/analyzer/lib/src/dart/ast/ast.dart:17068:13  - Unknown word (jmesserly)  -- // TODO(jmesserly): this depends on the
-pkg/analyzer/lib/src/dart/constant/evaluation.dart:2777:12   - Unknown word (superinitializer) -- /// If a superinitializer was encountered, the
+pkg/analyzer/lib/src/dart/constant/evaluation.dart:2796:12   - Unknown word (superinitializer) -- /// If a superinitializer was encountered, the
 pkg/analyzer/lib/src/dart/constant/evaluation.dart:291:26    - Unknown word (superconstructor) -- // No explicit superconstructor invocation found, so
 pkg/analyzer/lib/src/dart/element/least_upper_bound.dart:44:11     - Unknown word (leafp)      -- // TODO(leafp): Use matchTypes or
 pkg/analyzer/lib/src/dart/element/type_algebra.dart:377:9     - Unknown word (substitutor) -- var substitutor = this;
@@ -401,9 +401,9 @@ pkg/analyzer/lib/src/dart/resolver/ast_rewrite.dart:427:55    - Unknown word (Li
 pkg/analyzer/lib/src/dart/resolver/invocation_inferrer.dart:319:17    - Unknown word (Undeferred) -- _computeUndeferredParamInfo(
 pkg/analyzer/lib/src/dart/resolver/invocation_inferrer.dart:815:22    - Unknown word (undeferred) -- List<_ParamInfo> undeferredParamInfo,
 pkg/analyzer/lib/src/dartdoc/dartdoc_directive_info.dart:102:36    - Unknown word (Endtemplate) -- endIndex = from = _nextAtEndtemplate(comment, i);
-pkg/analyzer/lib/src/diagnostic/diagnostic.g.dart:17887:25  - Unknown word (contravariantly) -- error if `X` occurs contravariantly or invariantly in `T
-pkg/analyzer/lib/src/diagnostic/diagnostic.g.dart:3581:20   - Unknown word (Subclassing) -- problemMessage: "Subclassing '{0}' is deprecated
-pkg/analyzer/lib/src/diagnostic/diagnostic.g.dart:8061:69   - Unknown word (subclassable) -- can only be applied to subclassable "
+pkg/analyzer/lib/src/diagnostic/diagnostic.g.dart:17902:25  - Unknown word (contravariantly) -- error if `X` occurs contravariantly or invariantly in `T
+pkg/analyzer/lib/src/diagnostic/diagnostic.g.dart:3596:20   - Unknown word (Subclassing) -- problemMessage: "Subclassing '{0}' is deprecated
+pkg/analyzer/lib/src/diagnostic/diagnostic.g.dart:8076:69   - Unknown word (subclassable) -- can only be applied to subclassable "
 pkg/analyzer/lib/src/error/base_or_final_type_verifier.dart:17:31     - Unknown word (subelements) -- Helper for verifying that subelements of a base or final element
 pkg/analyzer/lib/src/error/base_or_final_type_verifier.dart:33:27     - Unknown word (subelement)  -- Check to ensure the subelement of a base or final element
 pkg/analyzer/lib/src/error/best_practices_verifier.dart:1158:18   - Unknown word (jwren's)    -- // Echoing jwren's `TODO` from _checkForDeprecat
@@ -433,8 +433,8 @@ pkg/analyzer/lib/src/summary/format.dart:441:49    - Unknown word (ADRU)       -
 pkg/analyzer/lib/src/summary/idl.dart:25:8      - Unknown word (Prelinked)  -- /// - "Prelinked" refers to information
 pkg/analyzer/lib/src/summary/idl.dart:36:35     - Unknown word (prelinked)  -- expect "linked" and "prelinked" dependencies to be
 pkg/analyzer/lib/src/summary2/binary_format_doc.dart:170:19    - Unknown word (witten)     -- /// Any string is witten as [Uint30] and is an
-pkg/analyzer/lib/src/summary2/bundle_writer.dart:375:15    - Unknown word (fshcheglov) -- // TODO(fshcheglov): Put these separate
-pkg/analyzer/lib/src/summary2/element_builder.dart:350:11    - Unknown word (implicits)  -- var implicitsMap = libraryBuilder
+pkg/analyzer/lib/src/summary2/bundle_writer.dart:380:15    - Unknown word (fshcheglov) -- // TODO(fshcheglov): Put these separate
+pkg/analyzer/lib/src/summary2/element_builder.dart:381:11    - Unknown word (implicits)  -- var implicitsMap = libraryBuilder
 pkg/analyzer/lib/src/test_utilities/mock_sdk.dart:437:45    - Unknown word (gettesr)    -- the SDK has abstract gettesr. The real implementations
 pkg/analyzer/lib/src/test_utilities/mock_sdk.dart:658:17    - Unknown word (uninstantiable) -- factory Null._uninstantiable() => throw 0;
 pkg/analyzer/lib/src/test_utilities/platform.dart:11:30     - Unknown word (overridding) -- TODO(dantup): Support overridding this with an env var
@@ -475,8 +475,8 @@ pkg/analyzer_utilities/lib/src/api_summary/src/api_description.dart:321:28    - 
 pkg/analyzer_utilities/lib/src/api_summary/src/api_description.dart:43:58     - Unknown word (Subinterface) -- getOrComputeImmediateSubinterfaceMap], to
 pkg/bisect_dart/lib/src/run_bisection.dart:45:14     - Unknown word (ascestor)   -- await _ascestorCommitHash(startHash
 pkg/bisect_dart/lib/src/run_process.dart:29:8      - Unknown word (SYSTEMROOT) -- 'SYSTEMROOT',
-pkg/cfg/lib/front_end/ast_to_ir.dart:1028:13   - Unknown word (alexmarkov) -- // TODO(alexmarkov): use proper devirtualization
-pkg/cfg/lib/front_end/ast_to_ir.dart:1869:24   - Unknown word (fullfilled) -- These requests are fullfilled in [AstToIr.visitTryFinally
+pkg/cfg/lib/front_end/ast_to_ir.dart:1055:13   - Unknown word (alexmarkov) -- // TODO(alexmarkov): use proper devirtualization
+pkg/cfg/lib/front_end/ast_to_ir.dart:1931:24   - Unknown word (fullfilled) -- These requests are fullfilled in [AstToIr.visitTryFinally
 pkg/cfg/lib/ir/dominators.dart:110:21    - Unknown word (Lengauer)   -- // version of the Lengauer-Tarjan algorithm (LT
 pkg/cfg/lib/ir/dominators.dart:110:30    - Unknown word (Tarjan)     -- version of the Lengauer-Tarjan algorithm (LT is normally
 pkg/cfg/lib/ir/dominators.dart:112:40    - Unknown word (semidominators) -- immediate dominators from semidominators. It also removes a
@@ -489,7 +489,7 @@ pkg/cfg/lib/ir/dominators.dart:16:19     - Unknown word (idom)       -- final In
 pkg/cfg/lib/ir/dominators.dart:206:40    - Unknown word (Ferrante)       -- attributed to a paper by Ferrante et al.
 pkg/cfg/lib/ir/dominators.dart:22:18     - Unknown word (postorder)  -- /// (preorder, postorder) numbers for a block
 pkg/cfg/lib/ir/dominators.dart:44:18     - Unknown word (Postorder)  -- _getDomPostorderNumber(blockA) < _getDomPostor
-pkg/cfg/lib/ir/functions.dart:236:34    - Unknown word (closurization) -- (result of function closurization).
+pkg/cfg/lib/ir/functions.dart:243:34    - Unknown word (closurization) -- (result of function closurization).
 pkg/cfg/lib/ir/instructions.dart:43:39     - Unknown word (deoptimization) -- exception handling and deoptimization).
 pkg/cfg/lib/ir/instructions.dart:563:57    - Unknown word (succesor)       -- block body (the first succesor of this
 pkg/cfg/lib/ir/instructions.dart:62:30     - Unknown word (imlplies)       -- a basic block (also imlplies inputs are linked in
@@ -787,29 +787,28 @@ pkg/dart2wasm/docs/inspecting_wasm.md:19:53     - Unknown word (shellrc)    -- .
 pkg/dart2wasm/docs/v8.md:19:20     - Unknown word (GOMA)       -- If it fails due to GOMA/RBE errors it may help
 pkg/dart2wasm/docs/v8.md:19:61     - Unknown word (goma)       -- may help ensuring all goma related
 pkg/dart2wasm/lib/await_transformer.dart:448:16    - Unknown word (omersa)     -- // TODO (omersa): We could mark [TreeNode
-pkg/dart2wasm/lib/class_info.dart:1046:23   - Unknown word (inheritence) -- // Traverse class inheritence graph in depth-first
-pkg/dart2wasm/lib/class_info.dart:194:33    - Unknown word (wich)       -- Object._objectHashCode` wich updates the field first
-pkg/dart2wasm/lib/class_info.dart:244:7     - Unknown word (Wherther)   -- /// Wherther the class's Wasm struct
-pkg/dart2wasm/lib/class_info.dart:248:7     - Unknown word (Cyclicness) -- /// Cyclicness is calculated after
-pkg/dart2wasm/lib/class_info.dart:260:7     - Unknown word (Nullabe)    -- /// Nullabe Wasm ref type for this
+pkg/dart2wasm/lib/class_info.dart:192:33    - Unknown word (wich)       -- Object._objectHashCode` wich updates the field first
+pkg/dart2wasm/lib/class_info.dart:242:7     - Unknown word (Wherther)   -- /// Wherther the class's Wasm struct
+pkg/dart2wasm/lib/class_info.dart:246:7     - Unknown word (Cyclicness) -- /// Cyclicness is calculated after
+pkg/dart2wasm/lib/class_info.dart:258:7     - Unknown word (Nullabe)    -- /// Nullabe Wasm ref type for this
+pkg/dart2wasm/lib/class_info.dart:935:23    - Unknown word (inheritence) -- // Traverse class inheritence graph in depth-first
 pkg/dart2wasm/lib/closures.dart:177:71    - Unknown word (vtables)    -- arguments will appear in vtables.
 pkg/dart2wasm/lib/closures.dart:207:61    - Unknown word (extry)      -- vtable layout with en extry point for each
-pkg/dart2wasm/lib/code_generator.dart:4430:16   - Unknown word (supersupertype) -- Supertype? supersupertype = node.target.enclosingClass
-pkg/dart2wasm/lib/code_generator.dart:4979:66   - Unknown word (indicies)       -- and enums (using their indicies). We
-pkg/dart2wasm/lib/code_generator.dart:758:62    - Unknown word (intead)     -- to the initial value, intead of reusing
-pkg/dart2wasm/lib/compile.dart:167:13    - Unknown word (multivalue) -- '--enable-multivalue',
-pkg/dart2wasm/lib/compile.dart:169:13    - Unknown word (nontrapping) -- '--enable-nontrapping-float-to-int',
-pkg/dart2wasm/lib/compile.dart:177:11    - Unknown word (unfinalizing) -- '--type-unfinalizing',
-pkg/dart2wasm/lib/compile.dart:180:6     - Unknown word (gufa)         -- '--gufa',
-pkg/dart2wasm/lib/compiler_options.dart:65:12     - Unknown word (Unopt)      -- bool saveUnopt = false;
-pkg/dart2wasm/lib/constants.dart:1305:27   - Unknown word (cinfo)      -- forceLazyConstant: (cinfo, m) {
-pkg/dart2wasm/lib/constants.dart:1876:40   - Unknown word (invidiual)  -- This avoids having many invidiual globals of the same
-pkg/dart2wasm/lib/constants.dart:1957:8    - Unknown word (initailizer) -- // initailizer.
-pkg/dart2wasm/lib/constants.dart:2165:10   - Unknown word (monolitic)   -- // monolitic.
-pkg/dart2wasm/lib/constants.dart:325:50    - Unknown word (immediatly) -- eager then it'll be immediatly placed in the main
-pkg/dart2wasm/lib/dart2wasm.dart:142:13    - Unknown word (tostring)   -- "delete-tostring-package-uri",
-pkg/dart2wasm/lib/dart2wasm.dart:240:14    - Unknown word (unopt)      -- Flag("save-unopt", (o, value) => o.saveUnopt
-pkg/dart2wasm/lib/dart2wasm.dart:278:42    - Unknown word (infile)     -- dart2wasm [<options>] <infile.dart> <outfile.wasm
+pkg/dart2wasm/lib/code_generator.dart:4486:16   - Unknown word (supersupertype) -- Supertype? supersupertype = node.target.enclosingClass
+pkg/dart2wasm/lib/code_generator.dart:5076:66   - Unknown word (indicies)       -- and enums (using their indicies). We
+pkg/dart2wasm/lib/code_generator.dart:761:62    - Unknown word (intead)     -- to the initial value, intead of reusing
+pkg/dart2wasm/lib/compile.dart:161:13    - Unknown word (multivalue) -- '--enable-multivalue',
+pkg/dart2wasm/lib/compile.dart:163:13    - Unknown word (nontrapping) -- '--enable-nontrapping-float-to-int',
+pkg/dart2wasm/lib/compile.dart:171:11    - Unknown word (unfinalizing) -- '--type-unfinalizing',
+pkg/dart2wasm/lib/compile.dart:174:6     - Unknown word (gufa)         -- '--gufa',
+pkg/dart2wasm/lib/compiler_options.dart:58:12     - Unknown word (Unopt)      -- bool saveUnopt = false;
+pkg/dart2wasm/lib/constants.dart:1177:27   - Unknown word (cinfo)      -- forceLazyConstant: (cinfo, m) {
+pkg/dart2wasm/lib/constants.dart:1704:40   - Unknown word (invidiual)  -- This avoids having many invidiual globals of the same
+pkg/dart2wasm/lib/constants.dart:1781:8    - Unknown word (initailizer) -- // initailizer.
+pkg/dart2wasm/lib/constants.dart:304:50    - Unknown word (immediatly) -- eager then it'll be immediatly placed in the main
+pkg/dart2wasm/lib/dart2wasm.dart:146:13    - Unknown word (tostring)   -- "delete-tostring-package-uri",
+pkg/dart2wasm/lib/dart2wasm.dart:206:14    - Unknown word (unopt)      -- Flag("save-unopt", (o, value) => o.saveUnopt
+pkg/dart2wasm/lib/dart2wasm.dart:244:42    - Unknown word (infile)     -- dart2wasm [<options>] <infile.dart> <outfile.wasm
 pkg/dart2wasm/lib/deferred_load/dependencies.dart:17:31     - Unknown word (devirtualizion) -- DevirtualizionOracle _devirtualizionOracle;
 pkg/dart2wasm/lib/deferred_load/dependencies.dart:17:9      - Unknown word (Devirtualizion) -- final DevirtualizionOracle _devirtualizionOracle
 pkg/dart2wasm/lib/deferred_load/dependencies.dart:721:59    - Unknown word (depencencies)   -- reference/constant/selector depencencies
@@ -821,40 +820,35 @@ pkg/dart2wasm/lib/deferred_load/partition.dart:350:10    - Unknown word (appliab
 pkg/dart2wasm/lib/deferred_loading.dart:90:35     - Unknown word (varity)     -- procedure. This can have a varity of reasons:
 pkg/dart2wasm/lib/dry_run.dart:95:13     - Unknown word (dryrun)     -- /// package:dryrun/test.dart 6:7 - JS interop
 pkg/dart2wasm/lib/dynamic_dispatch_table.dart:119:23    - Unknown word (selctor)    -- // require unique selctor offsets. This allows
-pkg/dart2wasm/lib/dynamic_dispatch_table.dart:148:18    - Unknown word (dyanmically) -- // We do not dyanmically dispatch on wasm objects
+pkg/dart2wasm/lib/dynamic_dispatch_table.dart:145:18    - Unknown word (dyanmically) -- // We do not dyanmically dispatch on wasm objects
 pkg/dart2wasm/lib/dynamic_dispatchers.dart:14:48     - Unknown word (dispachers) -- dispatchers per-module.dispachers
-pkg/dart2wasm/lib/dynamic_dispatchers.dart:281:17    - Unknown word (classid)    -- b.if_(); // classid match
-pkg/dart2wasm/lib/dynamic_module_kernel_metadata.dart:242:55    - Unknown word (updateable) -- reference that targets an updateable function.
-pkg/dart2wasm/lib/dynamic_modules.dart:1431:21   - Unknown word (entites)    -- /// Compare boxed entites via the values they
-pkg/dart2wasm/lib/dynamic_modules.dart:682:14    - Unknown word (Updateable) -- _createUpdateableFunction(
+pkg/dart2wasm/lib/dynamic_dispatchers.dart:277:17    - Unknown word (classid)    -- b.if_(); // classid match
 pkg/dart2wasm/lib/ffi_native_address_transformer.dart:29:11     - Unknown word (nativewrappers) -- 'dart:nativewrappers',
-pkg/dart2wasm/lib/functions.dart:67:13     - Unknown word (ftype)      -- final ftype = _makeFunctionType
-pkg/dart2wasm/lib/globals.dart:145:43    - Unknown word (Oterhwise)  -- null checks on usages. Oterhwise we use [useTableSlot
-pkg/dart2wasm/lib/intrinsics.dart:2160:16   - Unknown word (andnot)     -- b.v128_andnot();
-pkg/dart2wasm/lib/intrinsics.dart:2175:16   - Unknown word (bitselect)  -- b.v128_bitselect();
+pkg/dart2wasm/lib/functions.dart:103:17    - Unknown word (ftype)      -- final ftype = _makeFunctionType
+pkg/dart2wasm/lib/globals.dart:141:43    - Unknown word (Oterhwise)  -- null checks on usages. Oterhwise we use [useTableSlot
+pkg/dart2wasm/lib/intrinsics.dart:2188:16   - Unknown word (andnot)     -- b.v128_andnot();
+pkg/dart2wasm/lib/intrinsics.dart:2203:16   - Unknown word (bitselect)  -- b.v128_bitselect();
 pkg/dart2wasm/lib/intrinsics.dart:268:48    - Unknown word (pmin)       -- wasm', null, 'WasmF64x2|pmin'),
 pkg/dart2wasm/lib/intrinsics.dart:269:48    - Unknown word (pmax)       -- wasm', null, 'WasmF64x2|pmax'),
 pkg/dart2wasm/lib/intrinsics.dart:618:12    - Unknown word (bitlength)  -- // int.bitlength
-pkg/dart2wasm/lib/io_util.dart:225:15    - Unknown word (dyndata)    -- '.dyndata',
-pkg/dart2wasm/lib/js/callback_specializer.dart:71:11     - Unknown word (jsified)    -- final jsified = jsifyValue(
-pkg/dart2wasm/lib/js/interop_specializer.dart:165:27    - Unknown word (Notationable) -- static final RegExp _dotNotationable = RegExp(r'^[A-Za-z
-pkg/dart2wasm/lib/js/interop_transformer.dart:28:5      - Unknown word (simpify)    -- /// simpify this code significantly
-pkg/dart2wasm/lib/js/runtime_blob.dart:262:56    - Unknown word (varname)    -- ariableRegExp = RegExp(r'<<(?<varname>[A-Z_]+)>>');
-pkg/dart2wasm/lib/js/util.dart:672:11    - Unknown word (vardouble)  -- '#vardouble',
-pkg/dart2wasm/lib/js/util.dart:678:11    - Unknown word (varint)     -- '#varint',
+pkg/dart2wasm/lib/js/callback_specializer.dart:66:11     - Unknown word (jsified)    -- final jsified = jsifyValue(
+pkg/dart2wasm/lib/js/interop_specializer.dart:159:27    - Unknown word (Notationable) -- static final RegExp _dotNotationable = RegExp(r'^[A-Za-z
+pkg/dart2wasm/lib/js/interop_transformer.dart:27:5      - Unknown word (simpify)    -- /// simpify this code significantly
+pkg/dart2wasm/lib/js/runtime_blob.dart:221:56    - Unknown word (varname)    -- ariableRegExp = RegExp(r'<<(?<varname>[A-Z_]+)>>');
+pkg/dart2wasm/lib/js/util.dart:837:11    - Unknown word (vardouble)  -- '#vardouble',
+pkg/dart2wasm/lib/js/util.dart:843:11    - Unknown word (varint)     -- '#varint',
 pkg/dart2wasm/lib/list_factory_specializer.dart:251:27    - Unknown word (rearraning) -- hoist expressions when rearraning named parameters. Unwrap
 pkg/dart2wasm/lib/param_info.dart:14:34     - Unknown word (positonal)  -- Default values of optional positonal parameters. `positional
 pkg/dart2wasm/lib/reference_extensions.dart:43:8      - Unknown word (Expandos)   -- // Use Expandos to avoid keeping the
 pkg/dart2wasm/lib/source_map_utils.dart:28:46     - Unknown word (Unminified) -- minifiedClassNamesToUnminified = {};
 pkg/dart2wasm/lib/state_machine.dart:1242:23   - Unknown word (overriddenin) -- // This should be overriddenin `sync*` code generator
-pkg/dart2wasm/lib/translator.dart:1232:19   - Unknown word (funcref)       -- /// (`anyref`, `funcref` or `externref`).
-pkg/dart2wasm/lib/translator.dart:1532:24   - Unknown word (callsites)     -- // definitions and callsites, so the dynamic call
-pkg/dart2wasm/lib/translator.dart:1987:47   - Unknown word (devirtualizing) -- `Null` class, avoid devirtualizing to `Null` members.
-pkg/dart2wasm/lib/translator.dart:230:27    - Unknown word (superlass)  -- have class info for superlass/superinterface at <I
-pkg/dart2wasm/lib/translator.dart:361:59    - Unknown word (Instantiators) -- PartialInstantiator> _partialInstantiators = {};
-pkg/dart2wasm/lib/translator.dart:3711:31   - Unknown word (simultaniously) -- we build all modules simultaniously. But if we are e.g.
-pkg/dart2wasm/lib/types.dart:1229:28   - Unknown word (clss)       -- subclass to a super clss.
-pkg/dart2wasm/lib/types.dart:1451:19   - Unknown word (sustitution) -- [for (final sustitution in _substitutionTableByIndex
+pkg/dart2wasm/lib/translator.dart:1108:19   - Unknown word (funcref)       -- /// (`anyref`, `funcref` or `externref`).
+pkg/dart2wasm/lib/translator.dart:168:27    - Unknown word (superlass)  -- have class info for superlass/superinterface at <I
+pkg/dart2wasm/lib/translator.dart:1832:47   - Unknown word (devirtualizing) -- `Null` class, avoid devirtualizing to `Null` members.
+pkg/dart2wasm/lib/translator.dart:300:59    - Unknown word (Instantiators) -- PartialInstantiator> _partialInstantiators = {};
+pkg/dart2wasm/lib/translator.dart:3236:9    - Unknown word (callsites)      -- /// the callsites can instead call a forwarder
+pkg/dart2wasm/lib/types.dart:1184:28   - Unknown word (clss)       -- subclass to a super clss.
+pkg/dart2wasm/lib/types.dart:1399:19   - Unknown word (sustitution) -- [for (final sustitution in _substitutionTableByIndex
 pkg/dart_internal/README.md:15:24     - Unknown word (leafpetersen) -- out to @munificent or @leafpetersen and let us know.
 pkg/dart_runtime_service/README.md:18:123    - Unknown word (dwds)       -- vmservice` and `package:dwds`:
 pkg/dart_runtime_service/README.md:18:99     - Unknown word (vmservice)  -- on replacing `dart:_vmservice` and `package:dwds`
@@ -940,16 +934,64 @@ pkg/dtd_impl/lib/src/dtd_client.dart:388:24    - Unknown word (servicemethod) --
 pkg/dtd_impl/lib/src/service/connected_app_service.dart:39:25     - Unknown word (priveleged) -- This service allows priveleged clients like an IDE
 pkg/dtd_impl/lib/src/service/unified_analytics_service.dart:156:27    - Unknown word (verison)    -- a cleaned dart sdk verison
 pkg/dtd_impl/lib/src/service/unified_analytics_service.dart:196:15    - Unknown word (eliasyishak) -- // TODO(eliasyishak): pass this information
+pkg/dwds/CONTRIBUTING.md:136:27    - Unknown word (Webdev’s)   -- minor version, DWDS and Webdev’s min Dart SDK constraint
+pkg/dwds/CONTRIBUTING.md:143:4     - Unknown word (Hotfixes)   -- ## Hotfixes
+pkg/dwds/CONTRIBUTING.md:28:15     - Unknown word (DWDS)       -- change the DWDS dependency to point
+pkg/dwds/lib/dart_web_debug_service.dart:150:29    - Unknown word (unmigrated) -- // this won't break unmigrated tools.
+pkg/dwds/lib/src/debugging/chrome_inspector.dart:163:13    - Unknown word (alanknight) -- // TODO(alanknight): Support named arguments
+pkg/dwds/lib/src/debugging/classes.dart:94:30     - Unknown word (mapify)     -- final classDescriptor = _mapify(result.value);
+pkg/dwds/lib/src/debugging/dart_scope.dart:39:9      - Unknown word (chromedevtools) -- /// See chromedevtools.github.io/devtools-protocol
+pkg/dwds/lib/src/debugging/debugger.dart:414:17    - Unknown word (grouma)     -- // TODO(grouma) - Provide actual token
+pkg/dwds/lib/src/debugging/debugger.dart:47:20     - Unknown word (myapp)      -- /// e.g. 'packages/myapp/main.dart.lib.js' -
+pkg/dwds/lib/src/debugging/inspector.dart:24:19     - Unknown word (Memoizer)   -- var _scriptCacheMemoizer = AsyncMemoizer<List
+pkg/dwds/lib/src/debugging/location.dart:316:11    - Unknown word (memoizer)   -- final memoizer = _locationMemoizer
+pkg/dwds/lib/src/dwds_vm_client.dart:463:29    - Unknown word (Srcs)       -- final computedReloadedSrcs = Completer<void>()
+pkg/dwds/lib/src/handlers/injected_client_js.dart:1205:62   - Unknown word (subarray)   -- apply(null, charCodes.subarray(i, chunkEnd));\n"
+pkg/dwds/lib/src/handlers/injected_client_js.dart:1409:42   - Unknown word (nsme)       -- number, ieErrorCode, nsme, notClosure, nullCall
+pkg/dwds/lib/src/handlers/injected_client_js.dart:15818:35  - Unknown word (ufffd)       -- (result.indexOf(\"\\ufffd\") < 0)\n"
+pkg/dwds/lib/src/handlers/injected_client_js.dart:15844:21  - Unknown word (AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFFFFFFFFFFFFFFFFGGGGGGGGGGGGGGGGHHHHHHHHHHHHHHHHHHHHHHHHHHHIHHHJEEBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBKCCCCCCCCCCCCDCLONNNMEEEEEEEEEEE) -- " _s256_ = \"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFFFFFFFFFFFFFFFFGGGGGGGGGGGGGGGGHHHHHHHHHHHHHHHHHHHHHHHHHHHIHHHJEEBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBKCCCCCCCCCCCCDCLONNNMEEEEEEEEEEE\",\n"
+pkg/dwds/lib/src/handlers/injected_client_js.dart:15845:132  - Unknown word (AAAAAGG)                                                                                                                                                                                                                                                          -- AAAAA00000AAAAA:::::AAAAAGG000AAAAA00KKKAAAAAG:
+pkg/dwds/lib/src/handlers/injected_client_js.dart:15845:149  - Unknown word (KKKAAAAAG)                                                                                                                                                                                                                                                       -- :::AAAAAGG000AAAAA00KKKAAAAAG::::AAAAA:IIIIAAAAA0
+pkg/dwds/lib/src/handlers/injected_client_js.dart:15845:168  - Unknown word (IIIIAAAAA)                                                                                                                                                                                                                                                       -- 0KKKAAAAAG::::AAAAA:IIIIAAAAA000\\x800AAAAA\\x00\
+pkg/dwds/lib/src/handlers/injected_client_js.dart:15845:29  - Unknown word (XECCCCCN)                                                                                                                                                                                                                                                         -- _s144_ = \" \\x000:XECCCCCN:lDb \\x000:XECCCCCNvlDb
+pkg/dwds/lib/src/handlers/injected_client_js.dart:15845:49  - Unknown word (XECCCCC)                                                                                                                                                                                                                                                          -- XECCCCCN:lDb \\x000:XECCCCCNvlDb \\x000:XECCCCCN
+pkg/dwds/lib/src/handlers/injected_client_js.dart:16598:62  - Unknown word (Cannotfq)                                                                                                                                                                                                                                                        -- UnsupportedError\$(string\$.Cannotfq));\n"
+pkg/dwds/lib/src/handlers/injected_client_js.dart:16601:62  - Unknown word (Cannotff)                                                                                                                                                                                                                                                        -- UnsupportedError\$(string\$.Cannotff));\n"
+pkg/dwds/lib/src/handlers/injected_client_js.dart:16603:58  - Unknown word (Cannotn)                                                                                                                                                                                                                                                        -- UnsupportedError\$(string\$.Cannotn));\n"
+pkg/dwds/lib/src/handlers/injected_client_js.dart:1911:28   - Unknown word (rttc)       -- \$function = init.rttc[\"\" + \$length + \
+pkg/dwds/lib/src/handlers/injected_client_js.dart:20629:15  - Unknown word (unlisten)                                                                                                                                                                                                                                                       -- " _this._unlisten\$0();\n"
+pkg/dwds/lib/src/handlers/injected_client_js.dart:22624:8   - Unknown word (HTMLDD)                                                                                                                                                                                                                                                         -- " \"HTMLDDElement\": \"HTMLElement
+pkg/dwds/lib/src/handlers/injected_client_js.dart:22625:8   - Unknown word (HTMLDT)                                                                                                                                                                                                                                                         -- " \"HTMLDTElement\": \"HTMLElement
+pkg/dwds/lib/src/handlers/injected_client_js.dart:22691:142  - Unknown word (csisolatin)                                                                                                                                                                                                                                                    -- ibm819: 6, cp819: 7, csisolatin1: 8, \"iso-ir-6\":
+pkg/dwds/lib/src/handlers/injected_client_js.dart:22691:317  - Unknown word (csascii)                                                                                                                                                                                                                                                       -- ibm367: 16, cp367: 17, csascii: 18, ascii: 19, csutf
+pkg/dwds/lib/src/handlers/injected_client_js.dart:22691:341  - Unknown word (csutf)                                                                                                                                                                                                                                                         -- csascii: 18, ascii: 19, csutf8: 20, \"utf-8\": 21
+pkg/dwds/lib/src/handlers/injected_client_js.dart:8445:41   - Unknown word (arraybuffer) -- webSocket.binaryType = \"arraybuffer\";\n"
+pkg/dwds/lib/src/handlers/injected_client_js.dart:8724:46   - Unknown word (restarter)   -- asyncAwait(manager._restarter.hotReloadStart\$1(path
+pkg/dwds/lib/src/handlers/injected_client_js.dart:8991:22   - Unknown word (Restarter)   -- DdcLibraryBundleRestarter: function DdcLibraryBundleRes
+pkg/dwds/lib/src/handlers/injected_client_js.dart:9383:8    - Unknown word (isbool)      -- " \$isbool: 1\n"
+pkg/dwds/lib/src/handlers/injected_client_js.dart:9619:23   - Unknown word (undefineds)  -- var len, a, b, undefineds, i,\n"
+pkg/dwds/lib/src/handlers/injected_client_js.dart:9916:8    - Unknown word (isdouble)    -- " \$isdouble: 1,\n"
+pkg/dwds/lib/src/handlers/injected_client_js.dart:9917:8    - Unknown word (isnum)       -- " \$isnum: 1\n"
+pkg/dwds/lib/src/handlers/injected_client_js.dart:9924:8    - Unknown word (isint)       -- " \$isint: 1\n"
+pkg/dwds/lib/src/loaders/build_runner_strategy_provider.dart:87:48     - Unknown word (Nified)     -- file that contains a JSONified list of maps which follows
+pkg/dwds/lib/src/loaders/require.dart:197:1     - Unknown word (requirejs)  -- requirejs.onResourceLoad = function
+pkg/dwds/lib/src/services/chrome/chrome_proxy_service.dart:1356:11   - Unknown word (jsonified)  -- final jsonified = <String, Object?>
+pkg/dwds/lib/src/services/chrome/chrome_proxy_service.dart:275:16    - Unknown word (getcwd)     -- // causes `getcwd` system calls to fail
+pkg/dwds/lib/src/services/debug_service.dart:145:55    - Unknown word (seperately) -- connected DDS instance seperately instead of
+pkg/dwds_test_common/fixtures/_experiment/web/main.dart:41:31     - Unknown word (Vasya)      -- record = (true, cat: 'Vasya');
+pkg/dwds_test_common/fixtures/_experiment/web/main.dart:66:32     - Unknown word (greetee)    -- greeter = GreeterClass(greeteeName: 'Charlie Brown
+pkg/dwds_test_common/fixtures/_experiment/web/main.dart:84:16     - Unknown word (Prismo)     -- final dog = 'Prismo';
+pkg/dwds_test_common/lib/utilities.dart:70:29     - Unknown word (Webdev)     -- Expects one of [pathFromWebdev], [pathFromDwds] or
 pkg/expect/lib/expect.dart:490:29    - Unknown word (Throug)     -- ..,{"name":"[ ]FallThroug...
 pkg/expect/lib/variations.dart:95:32     - Unknown word (rruntime)   -- Symbol]s are minified, rruntime allocated `Symbol` objects
-pkg/front_end/benchmarks/patterns/generate_datatypes.dart:55:17     - Unknown word (datatypes)  -- import '../test_datatypes.dart';''');
+pkg/front_end/benchmarks/patterns/generate_datatypes.dart:57:17     - Unknown word (datatypes)  -- import '../test_datatypes.dart';''');
 pkg/front_end/benchmarks/patterns/test_datatypes.dart:57:32     - Unknown word (Zipf's)     -- johnniwinther): Should Zipf's Law be used for 'first
 pkg/front_end/lib/src/builder/declaration_builders.dart:10:28     - Unknown word (unaliasing) -- 'package:kernel/src/unaliasing.dart';
 pkg/front_end/lib/src/builder/type_alias_builder.dart:144:44    - Unknown word (Unaliasing) -- iasBuilder> _typeAliasesUsedInUnaliasing = [];
 pkg/front_end/lib/src/fragment/constructor/declaration.dart:139:63    - Unknown word (apriori)    -- the verifier to skip apriori erroneous
 pkg/front_end/lib/src/fragment/constructor/declaration.dart:472:14    - Unknown word (uninferred) -- // in an uninferred state for non-const
 pkg/front_end/lib/src/fragment/factory/encoding.dart:593:13    - Unknown word (hillerstrom) -- // TODO(hillerstrom): It would be preferable
-pkg/front_end/lib/src/kernel/body_builder.dart:1374:15   - Unknown word (kmillikin)  -- // TODO(kmillikin): Find a way to avoid
+pkg/front_end/lib/src/kernel/body_builder.dart:1379:15   - Unknown word (kmillikin)  -- // TODO(kmillikin): Find a way to avoid
 pkg/front_end/lib/src/kernel/constant_evaluator.dart:1192:40   - Unknown word (HVAR)       -- > `jointVariable` = HVAR{`declaredVariable.type
 pkg/front_end/lib/src/kernel/constant_evaluator.dart:4793:13   - Unknown word (kustermann) -- // TODO(kustermann): The heuristic of allowing
 pkg/front_end/lib/src/kernel/constant_evaluator.dart:974:35    - Unknown word (RVAR)       -- matchResultVariable: int RVAR = -1;
@@ -961,9 +1003,9 @@ pkg/front_end/lib/src/linux_and_intel_specific_perf.dart:72:9      - Unknown wor
 pkg/front_end/lib/src/linux_and_intel_specific_perf.dart:82:32     - Unknown word (tcsetattr)  -- magic-trace run -trigger tcsetattr -multi-thread -snapshot
 pkg/front_end/lib/src/source/source_loader.dart:1670:25   - Unknown word (exportees)  -- Set<LibraryBuilder> exportees = new Set<LibraryBuilder
 pkg/front_end/lib/src/source/source_loader.dart:1717:25   - Unknown word (exportee)   -- for (LibraryBuilder exportee in exportees) {
-pkg/front_end/lib/src/type_inference/inference_visitor.dart:527:59    - Unknown word (subterms)   -- type context for the subterms.
-pkg/front_end/lib/src/type_inference/inference_visitor.dart:8205:15   - Unknown word (unfutured)  -- DartType? unfuturedTypeContext = typeSchemaEnviro
-pkg/front_end/lib/src/type_inference/inference_visitor_base.dart:4713:15   - Unknown word (recursor)   -- recursor,
+pkg/front_end/lib/src/type_inference/inference_visitor.dart:528:59    - Unknown word (subterms)   -- type context for the subterms.
+pkg/front_end/lib/src/type_inference/inference_visitor.dart:8206:15   - Unknown word (unfutured)  -- DartType? unfuturedTypeContext = typeSchemaEnviro
+pkg/front_end/lib/src/type_inference/inference_visitor_base.dart:4718:15   - Unknown word (recursor)   -- recursor,
 pkg/front_end/lib/src/type_inference/matching_cache.dart:1355:21   - Unknown word (closurizing) -- // To avoid closurizing initializers we always
 pkg/front_end/lib/src/util/outline_extractor.dart:233:17    - Unknown word (premark)    -- Future<void> _premarkTopLevel(
 pkg/front_end/lib/src/util/outline_extractor.dart:236:14    - Unknown word (entrypointish) -- TopLevel entrypointish,
@@ -1120,7 +1162,6 @@ pkg/js_ast/lib/src/printer.dart:58:54     - Unknown word (unfinalized) -- the pr
 pkg/js_runtime/lib/synced/array_flags.dart:20:32     - Unknown word (modifable)  -- for which there in no modifable view of the underlying
 pkg/js_runtime/lib/synced/array_flags.dart:22:15     - Unknown word (absense)    -- /// Given the absense of append-only lists
 pkg/js_runtime/lib/synced/array_flags.dart:71:22     - Unknown word (occuring)   -- /// js_runtime, or occuring multiple times via inlining
-pkg/js_runtime/lib/synced/embedded_names.dart:184:48    - Unknown word (rttc)       -- COMBINATORS_PROPERTY = 'rttc';
 pkg/kernel/binary.md:1493:13   - Unknown word (finalizer)  -- Statement finalizer;
 pkg/kernel/binary.md:459:45    - Unknown word (Tearoff)    -- isExtensionTypeMember, hasWeakTearoffReferencePragma, IsLoweredLate
 pkg/kernel/lib/ast.dart:46:28     - Unknown word (overloader) -- index-setter, operator overloader, and factory constructor
@@ -1157,7 +1198,7 @@ pkg/linter/lib/src/rules/unintended_html_in_doc_comment.dart:86:4      - Unknown
 pkg/linter/lib/src/rules/unintended_html_in_doc_comment.dart:95:4      - Unknown word (samp)       -- 'samp',
 pkg/linter/lib/src/rules/unnecessary_overrides.dart:76:39     - Unknown word (proxify)    -- noSuchMethod' is mandatory to proxify.
 pkg/linter/lib/src/rules/unnecessary_parenthesis.dart:355:36    - Unknown word (sigle)      -- this expression is a sigle token.
-pkg/linter/lib/src/rules/unreachable_from_main.dart:319:45    - Unknown word (miscategorization) -- annotation would be a miscategorization if the type is
+pkg/linter/lib/src/rules/unreachable_from_main.dart:337:45    - Unknown word (miscategorization) -- annotation would be a miscategorization if the type is
 pkg/linter/lib/src/rules/use_build_context_synchronously.dart:537:25    - Unknown word (Guardable)  -- _inOrderAsyncStateGuardable([node.expression, .
 pkg/linter/lib/src/util/ascii_utils.dart:7:45      - Unknown word (performantly) -- would do so far more performantly).
 pkg/linter/lib/src/util/dart_type_utilities.dart:266:31    - Unknown word (subclassess) -- Unrelated enums (and subclassess of ProtobufEnum) have
@@ -1237,22 +1278,22 @@ pkg/native_compiler/lib/back_end/code_generator.dart:253:18    - Unknown word (r
 pkg/native_compiler/lib/back_end/code_generator.dart:256:20    - Unknown word (resusing)   -- // itself, resusing source registers which
 pkg/native_compiler/lib/back_end/constraints.dart:27:25     - Unknown word (fpreg)      -- String toString() => 'fpreg';
 pkg/native_compiler/lib/back_end/locations.dart:111:25    - Unknown word (vloc)       -- String toString() => 'vloc${location != null ?
-pkg/native_compiler/lib/back_end/register_allocator.dart:31:30     - Unknown word (Vivek)        -- Massimiliano Poletto and Vivek Sarkar "Linear scan
-pkg/native_compiler/lib/back_end/register_allocator.dart:31:5      - Unknown word (Massimiliano) -- /// Massimiliano Poletto and Vivek Sarkar
-pkg/native_compiler/lib/back_end/register_allocator.dart:33:36     - Unknown word (largerly)     -- variant of linear scan is largerly based on
-pkg/native_compiler/lib/back_end/register_allocator.dart:35:18     - Unknown word (Wimmer)       -- /// by Christian Wimmer (2004).
-pkg/native_compiler/lib/back_end/register_allocator.dart:959:24    - Unknown word (splittable)   -- / or an allocatable/splittable/spillable live range
+pkg/native_compiler/lib/back_end/register_allocator.dart:32:30     - Unknown word (Vivek)        -- Massimiliano Poletto and Vivek Sarkar "Linear scan
+pkg/native_compiler/lib/back_end/register_allocator.dart:32:5      - Unknown word (Massimiliano) -- /// Massimiliano Poletto and Vivek Sarkar
+pkg/native_compiler/lib/back_end/register_allocator.dart:34:36     - Unknown word (largerly)     -- variant of linear scan is largerly based on
+pkg/native_compiler/lib/back_end/register_allocator.dart:36:18     - Unknown word (Wimmer)       -- /// by Christian Wimmer (2004).
+pkg/native_compiler/lib/back_end/register_allocator.dart:994:24    - Unknown word (splittable)   -- / or an allocatable/splittable/spillable live range
 pkg/native_compiler/lib/runtime/vm_offsets.g.dart:151:11    - Unknown word (Megamorphic) -- int get MegamorphicCache_buckets_offset
 pkg/native_compiler/lib/runtime/vm_offsets.g.dart:240:24    - Unknown word (safepoint)   -- int get Thread_enter_safepoint_stub_offset => throw
-pkg/native_compiler/lib/runtime/vm_offsets.g.dart:2470:3    - Unknown word (Deopt)       -- DeoptForRewind,
+pkg/native_compiler/lib/runtime/vm_offsets.g.dart:2483:3    - Unknown word (Deopt)       -- DeoptForRewind,
 pkg/native_compiler/lib/runtime/vm_offsets.g.dart:251:24    - Unknown word (zerow)       -- int get Thread_float_zerow_address_offset => throw
-pkg/native_compiler/lib/runtime/vm_offsets.g.dart:2597:8    - Unknown word (Safepoint)   -- EnterSafepoint,
 pkg/native_compiler/lib/runtime/vm_offsets.g.dart:260:23    - Unknown word (deopt)       -- int get Thread_lazy_deopt_from_return_stub_offset
+pkg/native_compiler/lib/runtime/vm_offsets.g.dart:2610:8    - Unknown word (Safepoint)   -- EnterSafepoint,
 pkg/native_compiler/lib/runtime/vm_offsets.g.dart:265:18    - Unknown word (megamorphic) -- int get Thread_megamorphic_call_checked_entry_offset
-pkg/native_compiler/lib/runtime/vm_offsets.g.dart:2713:18   - Unknown word (Desciptor)   -- AdjustArgumentsDesciptorForImplicitClosure,
-pkg/native_compiler/lib/runtime/vm_offsets.g.dart:2735:3    - Unknown word (Libc)        -- LibcPow,
-pkg/native_compiler/lib/runtime/vm_offsets.g.dart:2737:7    - Unknown word (Fmod)        -- LibcFmod,
-pkg/native_compiler/lib/runtime/vm_offsets.g.dart:2757:7    - Unknown word (Unpoison)    -- MsanUnpoison,
+pkg/native_compiler/lib/runtime/vm_offsets.g.dart:2726:18   - Unknown word (Desciptor)   -- AdjustArgumentsDesciptorForImplicitClosure,
+pkg/native_compiler/lib/runtime/vm_offsets.g.dart:2748:3    - Unknown word (Libc)        -- LibcPow,
+pkg/native_compiler/lib/runtime/vm_offsets.g.dart:2750:7    - Unknown word (Fmod)        -- LibcFmod,
+pkg/native_compiler/lib/runtime/vm_offsets.g.dart:2770:7    - Unknown word (Unpoison)    -- MsanUnpoison,
 pkg/native_compiler/lib/runtime/vm_offsets.g.dart:358:21    - Unknown word (setjmp)      -- int get TsanUtils_setjmp_function_offset => throw
 pkg/native_compiler/lib/runtime/vm_offsets.g.dart:401:22    - Unknown word (Smiable)     -- int get MonomorphicSmiableCall_expected_cid_offset
 pkg/native_compiler/lib/snapshot/macho/macho_image_writer.dart:107:20    - Unknown word (CSMAGIC)    -- static const int CSMAGIC_CODEDIRECTORY = 0xfade
@@ -1378,7 +1419,6 @@ pkg/test_runner/bin/launch_browser.dart:8:7       - Unknown word (DARTBIN)    --
 pkg/test_runner/lib/src/android.dart:194:42    - Unknown word (getprop)    -- adbCommand(['shell', 'getprop', 'sys.boot_completed
 pkg/test_runner/lib/src/android.dart:269:35    - Unknown word (setprop)    -- adbCommand(['shell', 'setprop', name, value]);
 pkg/test_runner/lib/src/android.dart:287:12    - Unknown word (exitcode)   -- // The exitcode of 'adb shell ...' can
-pkg/test_runner/lib/src/browser.dart:278:37    - Unknown word (requirejs)  -- root_dart/third_party/requirejs/require.js"></script
 pkg/test_runner/lib/src/browser_controller.dart:1034:55   - Unknown word (httpserver)    -- print("Error occurred in httpserver: $e");
 pkg/test_runner/lib/src/browser_controller.dart:395:12    - Unknown word (bwsi)       -- "--bwsi",
 pkg/test_runner/lib/src/browser_controller.dart:429:62    - Unknown word (turnscreenon) -- nOnPackage = 'com.google.dart.turnscreenon';
@@ -1398,12 +1438,12 @@ pkg/test_runner/lib/src/compiler_configuration.dart:1433:31   - Unknown word (ao
 pkg/test_runner/lib/src/compiler_configuration.dart:460:13    - Unknown word (athom)      -- // TODO(athom): input filename extraction
 pkg/test_runner/lib/src/compiler_configuration.dart:941:17    - Unknown word (XARM)       -- // DebugXARM --> DebugSIMARM_X64
 pkg/test_runner/lib/src/compiler_configuration.dart:968:23    - Unknown word (hardfp)     -- '--no-sim-use-hardfp',
-pkg/test_runner/lib/src/configuration.dart:328:33    - Unknown word (Hostx)      -- msvcPath.resolve('bin/Hostx64/${targetFolderName
-pkg/test_runner/lib/src/configuration.dart:346:11    - Unknown word (objdump)    -- const objdumpKey = 'DART_HOOK_TESTING
-pkg/test_runner/lib/src/configuration.dart:346:55    - Unknown word (OBJDUMP)    -- TESTING_C_COMPILER__OBJDUMP';
-pkg/test_runner/lib/src/configuration.dart:347:53    - Unknown word (OTOOL)      -- TESTING_C_COMPILER__OTOOL';
-pkg/test_runner/lib/src/configuration.dart:348:11    - Unknown word (readelf)    -- const readelfKey = 'DART_HOOK_TESTING
-pkg/test_runner/lib/src/configuration.dart:348:55    - Unknown word (READELF)    -- TESTING_C_COMPILER__READELF';
+pkg/test_runner/lib/src/configuration.dart:330:33    - Unknown word (Hostx)      -- msvcPath.resolve('bin/Hostx64/${targetFolderName
+pkg/test_runner/lib/src/configuration.dart:348:11    - Unknown word (objdump)    -- const objdumpKey = 'DART_HOOK_TESTING
+pkg/test_runner/lib/src/configuration.dart:348:55    - Unknown word (OBJDUMP)    -- TESTING_C_COMPILER__OBJDUMP';
+pkg/test_runner/lib/src/configuration.dart:349:53    - Unknown word (OTOOL)      -- TESTING_C_COMPILER__OTOOL';
+pkg/test_runner/lib/src/configuration.dart:350:11    - Unknown word (readelf)    -- const readelfKey = 'DART_HOOK_TESTING
+pkg/test_runner/lib/src/configuration.dart:350:55    - Unknown word (READELF)    -- TESTING_C_COMPILER__READELF';
 pkg/test_runner/lib/src/environment.dart:26:4      - Unknown word (jscl)       -- "jscl": _Variable.bool((c
 pkg/test_runner/lib/src/feature.dart:11:5      - Unknown word (configution) -- /// configution, the test runner automaticall
 pkg/test_runner/lib/src/fuchsia.dart:42:8      - Unknown word (enviornment) -- // enviornment setup.
@@ -1466,10 +1506,10 @@ pkg/vm/lib/embedder/writer.dart:52:2      - Unknown word (ifndef)     -- #ifndef
 pkg/vm/lib/embedder/writer.dart:61:11     - Unknown word (cstdio)     -- #include <cstdio>
 pkg/vm/lib/embedder/writer.dart:62:11     - Unknown word (cstdlib)    -- #include <cstdlib>
 pkg/vm/lib/embedder/writer.dart:73:5      - Unknown word (fprintf)    -- fprintf(stderr, "Error %s:
-pkg/vm/lib/kernel_front_end.dart:1069:56   - Unknown word (dilp)       -- outputFileName]-$package.dilp'.
-pkg/vm/lib/kernel_front_end.dart:1220:63   - Unknown word (dilplist)   -- packageManifestFilename.dilplist';
-pkg/vm/lib/kernel_front_end.dart:1233:33   - Unknown word (frameworkversion) -- packageManifestFilename.frameworkversion';
-pkg/vm/lib/kernel_front_end.dart:967:21    - Unknown word (dflag)      -- for (final String dflag in dFlags) {
+pkg/vm/lib/kernel_front_end.dart:1099:56   - Unknown word (dilp)       -- outputFileName]-$package.dilp'.
+pkg/vm/lib/kernel_front_end.dart:1250:63   - Unknown word (dilplist)   -- packageManifestFilename.dilplist';
+pkg/vm/lib/kernel_front_end.dart:1263:33   - Unknown word (frameworkversion) -- packageManifestFilename.frameworkversion';
+pkg/vm/lib/kernel_front_end.dart:997:21    - Unknown word (dflag)      -- for (final String dflag in dFlags) {
 pkg/vm/lib/metadata/unboxing_info.dart:208:17    - Unknown word (regcc)      -- return '[!regcc]';
 pkg/vm/lib/modular/transformations/ffi/definitions.dart:311:36    - Unknown word (implict)    -- Structs and unions gets implict 'vm:deeply-immutable
 pkg/vm/lib/modular/transformations/ffi/definitions.dart:479:23    - Unknown word (Annos)      -- final nativeTypeAnnos = _getNativeTypeAnnotations
@@ -1517,8 +1557,7 @@ pkg/vm_service/example/vm_service_tester.dart:135:25    - Unknown word (reserial
 pkg/vm_service/example/vm_service_tester.dart:72:10     - Unknown word (reserialize) -- // reserialize it back to the same
 pkg/vm_service/example/vm_service_tester.dart:86:13     - Unknown word (reserialized) -- final reserializedJson = (instance as dynamic
 pkg/vm_service/lib/src/snapshot_graph.dart:366:32    - Unknown word (dartheap)   -- const _magicHeader = 'dartheap';
-pkg/vm_service/lib/src/vm_service.dart:3990:31   - Unknown word (Signifcantly) -- events of kind TimerSignifcantlyOverdue, this is a message
-pkg/vm_service/lib/src/vm_service.dart:7619:57   - Unknown word (subarray)     -- of int arrays. Each subarray consists of a
+pkg/vm_service/lib/src/vm_service.dart:4001:31   - Unknown word (Signifcantly) -- events of kind TimerSignifcantlyOverdue, this is a message
 pkg/vm_service/tool/common/src_gen_common.dart:44:15     - Unknown word (derekx)     -- // TODO(derekx): Remove the line handling
 pkg/vm_service/tool/common/src_gen_common.dart:53:34     - Unknown word (strs)       -- joinLast(Iterable<String> strs, String join, [String
 pkg/vm_service/tool/dart/generate_dart_common.dart:626:30    - Unknown word (generatable) -- String? name = field.generatableName;
@@ -1539,22 +1578,22 @@ pkg/vm_snapshot_analysis/README.md:239:4     - Unknown word (Precompiler) -- ## 
 pkg/vm_snapshot_analysis/README.md:7:10      - Unknown word (precompiler) -- `--trace-precompiler-to` VM flags.
 pkg/vm_snapshot_analysis/lib/program_info.dart:289:7     - Unknown word (Rebuckets)  -- /// Rebuckets the histogram given
 pkg/wasm_builder/lib/source_map.dart:14:55     - Unknown word (correstpond) -- generated code that doesn't correstpond to any lines
-pkg/wasm_builder/lib/src/builder/instructions.dart:475:12    - Unknown word (Underflowing) -- "Underflowing base stack of innermost
-pkg/wasm_builder/lib/src/builder/types.dart:74:5      - Unknown word (structually) -- /// structually equivalent.
-pkg/wasm_builder/lib/src/builder/types.dart:84:27     - Unknown word (edgesfor)    -- static Set<ir.DefType> _edgesforType(ir.DefType type
+pkg/wasm_builder/lib/src/builder/instructions.dart:519:10    - Unknown word (Underflowing) -- "Underflowing base stack of innermost
+pkg/wasm_builder/lib/src/builder/types.dart:75:5      - Unknown word (structually) -- /// structually equivalent.
+pkg/wasm_builder/lib/src/builder/types.dart:85:27     - Unknown word (edgesfor)    -- static Set<ir.DefType> _edgesforType(ir.DefType type
 pkg/wasm_builder/lib/src/builder/util.dart:8:14      - Unknown word (Indexables) -- int _finalizeIndexables(int index, Iterable
-pkg/wasm_builder/lib/src/ir/element.dart:168:11    - Unknown word (elemkind)   -- final elemkind = d.readByte();
-pkg/wasm_builder/lib/src/ir/function.dart:40:20     - Unknown word (spure)      -- /// If marked as spure, we'll emit metadata
-pkg/wasm_builder/lib/src/ir/global.dart:70:11     - Unknown word (deindent)   -- p.deindent();
+pkg/wasm_builder/lib/src/ir/element.dart:176:11    - Unknown word (elemkind)   -- final elemkind = d.readByte();
+pkg/wasm_builder/lib/src/ir/function.dart:43:20     - Unknown word (spure)      -- /// If marked as spure, we'll emit metadata
+pkg/wasm_builder/lib/src/ir/global.dart:78:11     - Unknown word (deindent)   -- p.deindent();
 pkg/wasm_builder/lib/src/ir/module.dart:21:42     - Unknown word (constitutents) -- form, then create the constitutents and finally initialize
-pkg/wasm_builder/lib/src/ir/type.dart:1098:13   - Unknown word (deftype)    -- /// A named deftype, i.e. `struct` or `array
-pkg/wasm_builder/lib/src/ir/type.dart:337:12    - Unknown word (noexn)      -- /// The `noexn` heap type.
-pkg/wasm_builder/lib/src/ir/type.dart:674:32    - Unknown word (nullextern) -- get shorthandName => "nullextern";
-pkg/wasm_builder/lib/src/ir/type.dart:703:32    - Unknown word (nullfunc)   -- get shorthandName => "nullfunc";
-pkg/wasm_builder/lib/src/serialize/printer.dart:737:20    - Unknown word (scub)       -- TableNamer(super.scubUris, super.module, super
-pkg/wasm_builder/lib/src/serialize/printer.dart:747:49    - Unknown word (itable)     -- ir.ImportedTable ? 'itable' : 'dtable';
-pkg/wasm_builder/lib/src/serialize/printer.dart:747:60    - Unknown word (dtable)     -- ImportedTable ? 'itable' : 'dtable';
-pkg/wasm_builder/lib/src/serialize/sections.dart:840:38    - Unknown word (substion)   -- writeByte(2); // Local names substion
+pkg/wasm_builder/lib/src/ir/type.dart:1102:13   - Unknown word (deftype)    -- /// A named deftype, i.e. `struct` or `array
+pkg/wasm_builder/lib/src/ir/type.dart:338:12    - Unknown word (noexn)      -- /// The `noexn` heap type.
+pkg/wasm_builder/lib/src/ir/type.dart:675:32    - Unknown word (nullextern) -- get shorthandName => "nullextern";
+pkg/wasm_builder/lib/src/ir/type.dart:704:32    - Unknown word (nullfunc)   -- get shorthandName => "nullfunc";
+pkg/wasm_builder/lib/src/serialize/printer.dart:804:20    - Unknown word (scub)       -- TableNamer(super.scubUris, super.module, super
+pkg/wasm_builder/lib/src/serialize/printer.dart:814:49    - Unknown word (itable)     -- ir.ImportedTable ? 'itable' : 'dtable';
+pkg/wasm_builder/lib/src/serialize/printer.dart:814:60    - Unknown word (dtable)     -- ImportedTable ? 'itable' : 'dtable';
+pkg/wasm_builder/lib/src/serialize/sections.dart:942:38    - Unknown word (substion)   -- writeByte(2); // Local names substion
 runtime/docs/README.md:259:67    - Unknown word (unoptimizing) -- time this is done by *unoptimizing compiler*.
 runtime/docs/README.md:267:51    - Unknown word (retq)         -- Return │      │ retq │
 runtime/docs/README.md:271:1     - Unknown word (Unoptimizing) -- Unoptimizing compiler produces machine
@@ -1801,7 +1840,7 @@ sdk/lib/_http/http.dart:1703:8    - Unknown word (Wireshark)  -- /// [Wireshark]
 sdk/lib/_http/http.dart:1708:29   - Unknown word (keylog)     -- final log = File('keylog.txt');
 sdk/lib/_http/http.dart:97:41     - Unknown word (dartdart)   -- usePrivateKey(key, password: 'dartdart');
 sdk/lib/_http/http_date.dart:13:50     - Unknown word (asctime)    -- date | rfc850-date | asctime-date
-sdk/lib/_http/http_date.dart:148:21    - Unknown word (Asctime)    -- const int formatAsctime = 0;
+sdk/lib/_http/http_date.dart:145:21    - Unknown word (Asctime)    -- const int formatAsctime = 0;
 sdk/lib/_http/http_date.dart:14:21     - Unknown word (wkday)      -- // rfc1123-date = wkday "," SP date1 SP time
 sdk/lib/_http/http_headers.dart:1073:49   - Unknown word (httponly)   -- path-av / secure-av / httponly-av /
 sdk/lib/_http/http_impl.dart:1517:44   - Unknown word (TTFB)       -- requestEvent('Waiting (TTFB)');
@@ -1836,17 +1875,13 @@ sdk/lib/_internal/js_dev_runtime/private/js_number.dart:447:9     - Unknown word
 sdk/lib/_internal/js_dev_runtime/private/string_helper.dart:153:25    - Unknown word (metacharacters) -- escaping all RegExp metacharacters.
 sdk/lib/_internal/js_runtime/lib/developer_patch.dart:57:17     - Unknown word (JSJSON)     -- extension type _JSJSON(JSObject performance
 sdk/lib/_internal/js_runtime/lib/interceptors.dart:319:48    - Unknown word (unintercepted) -- of that name on plain unintercepted classes also use
-sdk/lib/_internal/js_runtime/lib/js_array.dart:636:9     - Unknown word (undefineds) -- int undefineds = 0;
 sdk/lib/_internal/js_runtime/lib/js_helper.dart:1441:45   - Unknown word (thrid)      -- omits the second or thrid argument, `undefined
-sdk/lib/_internal/js_runtime/lib/js_helper.dart:2028:9    - Unknown word (nsme)       -- var nsme = TypeErrorDecoder.noSuchMeth
 sdk/lib/_internal/js_runtime/lib/js_helper.dart:2103:24   - Unknown word (stringifying) -- / potential loop if stringifying crashes.
 sdk/lib/_internal/js_runtime/lib/native_helper.dart:262:14    - Unknown word (rescord)    -- /// dispatch rescord.
 sdk/lib/_internal/js_runtime/lib/native_helper.dart:352:37    - Unknown word (prepatching) -- if not available or prepatching is undesirable.
 sdk/lib/_internal/js_runtime/lib/native_helper.dart:386:34    - Unknown word (polyfil)     -- sra): Update ShadowDOM polyfil to use
 sdk/lib/_internal/js_runtime/lib/native_helper.dart:395:36    - Unknown word (Hookd)       -- defined, dartNativeDispatchHookdTransformer should be
 sdk/lib/_internal/js_runtime/lib/native_helper.dart:498:13    - Unknown word (antonm)      -- // TODO(antonm): remove a reference
-sdk/lib/_internal/js_runtime/lib/native_helper.dart:524:6     - Unknown word (HTMLDD)      -- "HTMLDDElement": "HTMLElement
-sdk/lib/_internal/js_runtime/lib/native_helper.dart:525:6     - Unknown word (HTMLDT)      -- "HTMLDTElement": "HTMLElement
 sdk/lib/_internal/js_shared/lib/convert_utf_patch.dart:93:56     - Unknown word (FFFD)       -- indexOf(#)', result, '\uFFFD') < 0) {
 sdk/lib/_internal/js_shared/lib/rti.dart:1469:5    - Unknown word (interp)     -- /// interp objects), so this method
 sdk/lib/_internal/js_shared/lib/rti.dart:2542:14   - Unknown word (subrecipe)  -- String subrecipe = Rti._getCanonicalRecipe
@@ -1891,7 +1926,7 @@ sdk/lib/_internal/vm/lib/typed_data_patch.dart:3847:42   - Unknown word (cmpgt) 
 sdk/lib/_internal/vm/lib/typed_data_patch.dart:3851:42   - Unknown word (cmpgte)     -- external-name", "Float32x4_cmpgte")
 sdk/lib/_internal/vm/lib/typed_data_patch.dart:3855:42   - Unknown word (cmpequal)   -- external-name", "Float32x4_cmpequal")
 sdk/lib/_internal/vm/lib/typed_data_patch.dart:3859:42   - Unknown word (cmpnequal)  -- external-name", "Float32x4_cmpnequal")
-sdk/lib/_internal/vm/lib/typed_data_patch.dart:5265:6    - Unknown word (conv)       -- _convU32[0] = _byteSwap32
+sdk/lib/_internal/vm/lib/typed_data_patch.dart:5275:6    - Unknown word (conv)       -- _convU32[0] = _byteSwap32
 sdk/lib/_internal/vm_shared/lib/bigint_patch.dart:152:53    - Unknown word (intrinsification) -- trinsified] is still false if intrinsification occurs,
 sdk/lib/_internal/vm_shared/lib/bigint_patch.dart:183:53    - Unknown word (highermost)       -- must ensure that the highermost pair of digits
 sdk/lib/_internal/vm_shared/lib/bigint_patch.dart:2839:9    - Unknown word (rhol)             -- var rhol = args[_rhoDigit] &
@@ -1905,10 +1940,10 @@ sdk/lib/_internal/wasm/lib/convert_patch.dart:1189:31   - Unknown word (likelyho
 sdk/lib/_internal/wasm/lib/convert_patch.dart:1193:12   - Unknown word (popualte)   -- // not popualte it for json keys.
 sdk/lib/_internal/wasm/lib/convert_patch.dart:2395:38   - Unknown word (uninished)  -- chunk that contains an uninished unicode point that requires
 sdk/lib/_internal/wasm/lib/convert_patch.dart:2746:7    - Unknown word (multibyte)  -- multibyte:
-sdk/lib/_internal/wasm/lib/internal_patch.dart:52:22     - Unknown word (Intrinsify) -- // TODO(askesc): Intrinsify for efficient copying
+sdk/lib/_internal/wasm/lib/internal_patch.dart:22:22     - Unknown word (Intrinsify) -- // TODO(askesc): Intrinsify for efficient copying
 sdk/lib/_internal/wasm/lib/js_interop_patch.dart:359:55    - Unknown word (genric)     -- each case to avoid a genric `is` check.
-sdk/lib/_internal/wasm/lib/type.dart:1133:8    - Unknown word (Substitue)  -- // Substitue each argument before
-sdk/lib/_internal/wasm/lib/type.dart:1534:8    - Unknown word (Devirtualize) -- // - Devirtualize the [_checkInstance
+sdk/lib/_internal/wasm/lib/type.dart:1098:8    - Unknown word (Substitue)  -- // Substitue each argument before
+sdk/lib/_internal/wasm/lib/type.dart:1490:8    - Unknown word (Devirtualize) -- // - Devirtualize the [_checkInstance
 sdk/lib/_internal/wasm_js_compatibility/lib/convert_patch.dart:491:9     - Unknown word (practive)   -- * In practive, [index] will be no
 sdk/lib/_internal/wasm_js_compatibility/lib/string_patch.dart:36:29     - Unknown word (effciently) -- array, to be able to effciently get subarrays, to pass
 sdk/lib/_internal/wasm_js_compatibility/lib/string_patch.dart:36:44     - Unknown word (subarrays)  -- able to effciently get subarrays, to pass to
@@ -1930,9 +1965,6 @@ sdk/lib/convert/ascii.dart:240:56    - Unknown word (fffd)       -- toRadixStrin
 sdk/lib/convert/ascii.dart:29:8      - Unknown word (endcoding)  -- /// to endcoding, and any byte &ge;
 sdk/lib/convert/base64.dart:17:44     - Unknown word (Jncs)       -- 4.decode("YmzDpWLDpnJncsO4ZAo=");
 sdk/lib/convert/base64.dart:255:36    - Unknown word (Bpcy)       -- encodedSample); // RGFydCBpcyBvcGVuIHNvdXJjZQ==
-sdk/lib/convert/encoding.dart:57:6      - Unknown word (csisolatin) -- "csisolatin1": latin1,
-sdk/lib/convert/encoding.dart:69:6      - Unknown word (csascii)    -- "csascii": ascii,
-sdk/lib/convert/encoding.dart:72:6      - Unknown word (csutf)      -- "csutf8": utf8,
 sdk/lib/convert/json.dart:1013:29   - Unknown word (piecemeally) -- The result is written piecemeally to the sink.
 sdk/lib/convert/json.dart:78:42     - Unknown word (unencodable) -- calling `.toJson()` on the unencodable object.
 sdk/lib/convert/latin1.dart:71:21     - Unknown word (àáâãäå)     -- /// const sample = 'àáâãäå';
@@ -2196,7 +2228,6 @@ tools/diff_results.dart:112:15    - Unknown word (prettyjson)    -- '--format=pr
 tools/diff_results.dart:114:8     - Unknown word (nouse)         -- '--nouse_legacy_sql',
 tools/dom/src/CanvasImageSource.dart:38:11     - Unknown word (WHATWG)     -- * from WHATWG.
 tools/dom/src/Dimension.dart:82:16     - Unknown word (unitless)   -- /** Return a unitless, numerical value of
-tools/dom/src/EventStreamProvider.dart:244:6     - Unknown word (unlisten)   -- _unlisten();
 tools/dom/src/Html5NodeValidator.dart:10:40     - Unknown word (Caja)       -- validator generated from Caja whitelists.
 tools/dom/src/Html5NodeValidator.dart:130:9     - Unknown word (itemprop)   -- '*::itemprop',
 tools/dom/src/Html5NodeValidator.dart:131:9     - Unknown word (itemref)    -- '*::itemref',
@@ -2239,7 +2270,6 @@ tools/dom/src/KeyName.dart:452:63    - Unknown word (Dialytika)  -- Abode, Umlau
 tools/dom/src/KeyName.dart:473:26    - Unknown word (Ypogegrammeni) -- The Combining Greek Ypogegrammeni (Greek Non-Spacing Iota
 tools/dom/src/NodeValidatorBuilder.dart:435:8     - Unknown word (foreignobject) -- // foreignobject tag as SvgElement. We
 tools/dom/src/ReadyState.dart:18:6      - Unknown word (subresources) -- * subresources.
-tools/dom/src/Validators.dart:218:13    - Unknown word (alanknight) -- // TODO(alanknight): This is a workaround
 tools/dom/src/_chrome/app_window.dart:226:69    - Unknown word (titlebar)   -- window (excluding the titlebar). If
 tools/dom/src/_chrome/app_window.dart:295:11    - Unknown word (sashab)     -- // TODO(sashab, sra): Detect whether
 tools/dom/src/_chrome/app_window.dart:306:7     - Unknown word (Fullscreens) -- /// Fullscreens the window.
