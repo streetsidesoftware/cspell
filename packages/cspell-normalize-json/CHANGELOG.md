@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v10.0.1 (2026-04-29)
+
+- No changes
+
 ## v10.0.0 (2026-04-06)
 
 ### Features
