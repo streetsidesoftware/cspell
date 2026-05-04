@@ -3,9 +3,9 @@ Repository: RustPython/RustPython
 Url: https://github.com/RustPython/RustPython.git
 Args: '["**"]'
 Summary:
-  files: 787
+  files: 788
   filesWithIssues: 91
-  issues: 591
+  issues: 592
   errors: 0
 Errors: []
 
@@ -70,6 +70,7 @@ issues:
   - "build.rs:1:1\tNo issues found"
   - "Cargo.toml:104:62       redoxer     U       to compile/check with redoxer"
   - "Cargo.toml:118:28       nsis        U       package.metadata.packager.nsis]"
+  - "Cargo.toml:173:62       zeroize     U       alloc\", \"oid\", \"pem\", \"zeroize\"] }"
   - "code-of-conduct.md:1:1\tNo issues found"
   - "crates/codegen/Cargo.toml:1:1\tNo issues found"
   - "crates/codegen/src/compile.rs:1:1\tNo issues found"
@@ -667,6 +668,7 @@ issues:
   - "extra_tests/snippets/builtin_bytes.py:668:24        bytess                  U       assert bytes(A()) == b\"bytess\""
   - "extra_tests/snippets/builtin_callable.py:1:1\tNo issues found"
   - "extra_tests/snippets/builtin_chr.py:1:1\tNo issues found"
+  - "extra_tests/snippets/builtin_compile.py:1:1\tNo issues found"
   - "extra_tests/snippets/builtin_complex.py:1:1\tNo issues found"
   - "extra_tests/snippets/builtin_dict_union.py:1:1\tNo issues found"
   - "extra_tests/snippets/builtin_dict.py:1:1\tNo issues found"
@@ -709,15 +711,15 @@ issues:
   - "extra_tests/snippets/builtin_open.py:1:1\tNo issues found"
   - "extra_tests/snippets/builtin_ord.py:1:1\tNo issues found"
   - "extra_tests/snippets/builtin_posixshmem.py:1:1\tNo issues found"
-  - "extra_tests/snippets/builtin_pow.py:64:5        asseq           U       asseq = assert_equal"
-  - "extra_tests/snippets/builtin_pow.py:67:9        asseq           U       asseq = assert_almost_equal"
-  - "extra_tests/snippets/builtin_pow.py:79:21       asseq           U       asseq(pow(type(i), j, k),"
-  - "extra_tests/snippets/builtin_pow.py:136:9       fiveto          U       fiveto = float(5**n)"
-  - "extra_tests/snippets/builtin_pow.py:137:24      fiveto          U       # For small n, fiveto will be odd. Eventually"
-  - "extra_tests/snippets/builtin_pow.py:138:38      thereafer       U       mantissa bits, though, and thereafer fiveto will be even"
-  - "extra_tests/snippets/builtin_pow.py:138:48      fiveto          U       though, and thereafer fiveto will be even."
-  - "extra_tests/snippets/builtin_pow.py:139:20      fiveto          U       expected = fiveto % 2.0 and -1.0 or 1"
-  - "extra_tests/snippets/builtin_pow.py:140:19      fiveto          U       eq(pow(a, fiveto), expected)"
+  - "extra_tests/snippets/builtin_pow.py:101:5       asseq           U       asseq = assert_equal"
+  - "extra_tests/snippets/builtin_pow.py:104:9       asseq           U       asseq = assert_almost_equal"
+  - "extra_tests/snippets/builtin_pow.py:116:21      asseq           U       asseq(pow(type(i), j, k),"
+  - "extra_tests/snippets/builtin_pow.py:173:9       fiveto          U       fiveto = float(5**n)"
+  - "extra_tests/snippets/builtin_pow.py:174:24      fiveto          U       # For small n, fiveto will be odd. Eventually"
+  - "extra_tests/snippets/builtin_pow.py:175:38      thereafer       U       mantissa bits, though, and thereafer fiveto will be even"
+  - "extra_tests/snippets/builtin_pow.py:175:48      fiveto          U       though, and thereafer fiveto will be even."
+  - "extra_tests/snippets/builtin_pow.py:176:20      fiveto          U       expected = fiveto % 2.0 and -1.0 or 1"
+  - "extra_tests/snippets/builtin_pow.py:177:19      fiveto          U       eq(pow(a, fiveto), expected)"
   - "extra_tests/snippets/builtin_print.py:1:1\tNo issues found"
   - "extra_tests/snippets/builtin_property.py:4:7            Fubar       U       class Fubar:"
   - "extra_tests/snippets/builtin_property.py:15:5           Fubar       U       f = Fubar()"
