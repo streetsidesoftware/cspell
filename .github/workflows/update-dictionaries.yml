@@ -171,7 +171,7 @@ jobs:
 
       - name: Cache Build
         id: step-cache-build
-        uses: actions/cache@v5.0.4
+        uses: actions/cache@v5.0.5
         with:
           key: ${{ needs.build.outputs.key }}
           path: ${{ needs.build.outputs.path }}
@@ -199,7 +199,7 @@ jobs:
           echo "repo-info=$(jq -c '.repositories[] | select(.path == "${{ matrix.repo }}")' integration-tests/config/config.json)" >> $GITHUB_OUTPUT
 
       - name: Cache Integration Test Repository Files
-        uses: actions/cache@v5.0.4
+        uses: actions/cache@v5.0.5
         with:
           key: int-repo-temp-files-${{ matrix.repo }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}
           path: |
@@ -339,7 +339,7 @@ jobs:
           title: Update Dictionaries (${{ env.REF_BRANCH }})
 
       - id: generate-token
-        uses: actions/create-github-app-token@f8d387b68d61c58ab83c6c016672934102569859 #v3.0.0
+        uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3 #v3.1.1
         with:
           app-id: ${{ secrets.AUTOMATION_APP_ID }}
           private-key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
