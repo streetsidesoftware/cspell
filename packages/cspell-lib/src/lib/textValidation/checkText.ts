@@ -134,7 +134,7 @@ function genResult(text: string, issues: ValidationIssue[], includeRanges: Match
                 const issue = issues[i];
                 const endPos = issue.offset;
                 const text = span.text.slice(0, endPos - span.startPos);
-                const endPosError = issue.offset + issue.text.length;
+                const endPosError = issue.offset + (issue.length ?? issue.text.length);
                 yield { ...span, text, endPos };
                 yield {
                     ...span,
