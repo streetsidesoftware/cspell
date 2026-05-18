@@ -3,9 +3,9 @@ Repository: MicrosoftDocs/PowerShell-Docs
 Url: https://github.com/MicrosoftDocs/PowerShell-Docs.git
 Args: '["--config=../../../cspell-power-shell-docs.config.yaml","**"]'
 Summary:
-  files: 3125
-  filesWithIssues: 1087
-  issues: 4444
+  files: 3126
+  filesWithIssues: 1088
+  issues: 4446
   errors: 0
 Errors: []
 
@@ -51,7 +51,7 @@ issues:
   - "LICENSE.md:179:71       waivable            U       under any voluntary or waivable"
   - "LICENSE.md:339:2        creativecommons     U       [creativecommons.org/policies][02], Creative"
   - "LICENSE.md:347:39       creativecommons     U       may be contacted at [creativecommons.org][01]."
-  - "README.md:27:4          redir       U       - `redir` - contains redirection"
+  - "README.md:41:13         redir       U       \"🔀 redir - URL redirection mapping"
   - "reference/5.1/CimCmdlets/Get-CimAssociatedInstance.md:9:5           gcai    U       - gcai"
   - "reference/5.1/CimCmdlets/Get-CimAssociatedInstance.md:256:54        DMTF    U       this parameter, the DMTF standard resource URI"
   - "reference/5.1/CimCmdlets/Get-CimAssociatedInstance.md:328:4         gcai    U       - `gcai`"
@@ -4093,6 +4093,8 @@ issues:
   - "reference/docs-conceptual/learn/ps101/10-script-modules.md:3:24         mikefrobbins    U       custom: Contributor-mikefrobbins"
   - "reference/docs-conceptual/learn/ps101/10-script-modules.md:5:14         mirobb          U       ms.reviewer: mirobb"
   - "reference/docs-conceptual/learn/ps101/10-script-modules.md:343:20       mikefrobbins    U       CompanyName = 'mikefrobbins.com'"
+  - "reference/docs-conceptual/learn/ps101/11-appendix.md:3:24           mikefrobbins    U       custom: Contributor-mikefrobbins"
+  - "reference/docs-conceptual/learn/ps101/11-appendix.md:5:14           mirobb          U       ms.reviewer: mirobb"
   - "reference/docs-conceptual/learn/shell/tab-completion.md:56:77       psdf    U       functions. For example, `i-psdf<tab>` returns"
   - "reference/docs-conceptual/learn/shell/using-aliases.md:66:17        cmpo    U       Set-Alias -Name cmpo -Value Compare-Object"
   - "reference/docs-conceptual/learn/shell/using-keyhandlers.md:187:49       eastus      U       eGroupName myRGName -Location eastus -Name myVM`"
@@ -4146,16 +4148,16 @@ issues:
   - "reference/docs-conceptual/samples/Working-with-Registry-Entries.md:186:2        newpath     U       $newpath = $value.Path.SubString"
   - "reference/docs-conceptual/samples/Working-with-Registry-Entries.md:187:38       newpath     U       Environment /v Path /d $newpath /f"
   - "reference/docs-conceptual/samples/Working-with-Registry-Keys.md:104:37      regini      U       including `reg.exe`, `regini.exe`, `regedit.exe`"
-  - "reference/docs-conceptual/security/app-control/how-app-control-works.md:19:41       Wldp                U       legacy App Control `WldpGetLockdownPolicy` API"
-  - "reference/docs-conceptual/security/app-control/how-app-control-works.md:29:26       Wldp                U       PowerShell uses the new `WldpCanExecuteFile` API to"
-  - "reference/docs-conceptual/security/app-control/how-app-control-works.md:36:4        WLDP                U       - `WLDP_CAN_EXECUTE_ALLOWED"
-  - "reference/docs-conceptual/security/app-control/how-app-control-works.md:37:4        WLDP                U       - `WLDP_CAN_EXECUTE_BLOCKED"
-  - "reference/docs-conceptual/security/app-control/how-app-control-works.md:38:4        WLDP                U       - `WLDP_CAN_EXECUTE_REQUIRE"
-  - "reference/docs-conceptual/security/app-control/how-app-control-works.md:55:5        Noninteractive      U       ### Noninteractive mode running under policy"
-  - "reference/docs-conceptual/security/app-control/how-app-control-works.md:60:44       Wldp                U       or higher uses the `WldpCanExecuteFile` API if"
-  - "reference/docs-conceptual/security/app-control/how-app-control-works.md:63:4        WLDP                U       - `WLDP_CAN_EXECUTE_ALLOWED"
-  - "reference/docs-conceptual/security/app-control/how-app-control-works.md:65:4        WLDP                U       - `WLDP_CAN_EXECUTE_BLOCKED"
-  - "reference/docs-conceptual/security/app-control/how-app-control-works.md:70:34       Wldp                U       PowerShell 5.1 or if `WldpCanExecuteFile` API isn"
+  - "reference/docs-conceptual/security/app-control/how-app-control-works.md:21:41       Wldp                U       legacy App Control `WldpGetLockdownPolicy` API"
+  - "reference/docs-conceptual/security/app-control/how-app-control-works.md:31:26       Wldp                U       PowerShell uses the new `WldpCanExecuteFile` API to"
+  - "reference/docs-conceptual/security/app-control/how-app-control-works.md:38:4        WLDP                U       - `WLDP_CAN_EXECUTE_ALLOWED"
+  - "reference/docs-conceptual/security/app-control/how-app-control-works.md:39:4        WLDP                U       - `WLDP_CAN_EXECUTE_BLOCKED"
+  - "reference/docs-conceptual/security/app-control/how-app-control-works.md:40:4        WLDP                U       - `WLDP_CAN_EXECUTE_REQUIRE"
+  - "reference/docs-conceptual/security/app-control/how-app-control-works.md:57:5        Noninteractive      U       ### Noninteractive mode running under policy"
+  - "reference/docs-conceptual/security/app-control/how-app-control-works.md:62:44       Wldp                U       or higher uses the `WldpCanExecuteFile` API if"
+  - "reference/docs-conceptual/security/app-control/how-app-control-works.md:65:4        WLDP                U       - `WLDP_CAN_EXECUTE_ALLOWED"
+  - "reference/docs-conceptual/security/app-control/how-app-control-works.md:67:4        WLDP                U       - `WLDP_CAN_EXECUTE_BLOCKED"
+  - "reference/docs-conceptual/security/app-control/how-app-control-works.md:72:34       Wldp                U       PowerShell 5.1 or if `WldpCanExecuteFile` API isn"
   - "reference/docs-conceptual/security/app-control/how-to-use-app-control.md:129:1          wevtutil    U       wevtutil.exe sl PowerShellCore"
   - "reference/docs-conceptual/security/preventing-script-injection.md:48:36         pwnd    U       rocessById \"$PID; Write-Host 'pwnd!'\""
   - "reference/docs-conceptual/security/preventing-script-injection.md:52:30         pwnd    U       script `Write-Host 'pwnd!'`."
@@ -4209,13 +4211,13 @@ issues:
   - "reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:215:48        sshs                U       usr/local/bin/pwsh -sshs -NoLogo"
   - "reference/docs-conceptual/security/remoting/WinRM-Security.md:53:18         Mandiant    U       Researchers from Mandiant presented a session"
   - "reference/docs-conceptual/security/remoting/WinRM-Security.md:117:8         etype       U       - The `etype` in the TGS ticket determines"
-  - "reference/docs-conceptual/toc.yml:92:37         keyhandlers         U       href: learn/shell/using-keyhandlers.md"
-  - "reference/docs-conceptual/toc.yml:120:57        shouldprocess       U       dives/everything-about-shouldprocess.md"
-  - "reference/docs-conceptual/toc.yml:152:56        ciminstance         U       getting-wmi-objects--get-ciminstance-.md"
-  - "reference/docs-conceptual/toc.yml:162:66        filterhashtable     U       winEvent-queries-with-filterhashtable.md"
-  - "reference/docs-conceptual/toc.yml:386:41        cmdline             U       dev-cross-plat/create-cmdline-predictor.md"
-  - "reference/docs-conceptual/toc.yml:451:46        thon                U       acktoberfest and other hack-a-thon events"
-  - "reference/docs-conceptual/toc.yml:452:38        hackathons          U       community/contributing/hackathons.md"
+  - "reference/docs-conceptual/toc.yml:94:37         keyhandlers         U       href: learn/shell/using-keyhandlers.md"
+  - "reference/docs-conceptual/toc.yml:122:57        shouldprocess       U       dives/everything-about-shouldprocess.md"
+  - "reference/docs-conceptual/toc.yml:154:56        ciminstance         U       getting-wmi-objects--get-ciminstance-.md"
+  - "reference/docs-conceptual/toc.yml:164:66        filterhashtable     U       winEvent-queries-with-filterhashtable.md"
+  - "reference/docs-conceptual/toc.yml:388:41        cmdline             U       dev-cross-plat/create-cmdline-predictor.md"
+  - "reference/docs-conceptual/toc.yml:453:46        thon                U       acktoberfest and other hack-a-thon events"
+  - "reference/docs-conceptual/toc.yml:454:38        hackathons          U       community/contributing/hackathons.md"
   - "reference/docs-conceptual/whats-new/cmdlet-versions.md:530:7        Creds       U       | Get-CredsFromCredentialProvider"
   - "reference/docs-conceptual/whats-new/differences-from-windows-powershell.md:1215:23      CONSOLEHOST     U       DELETE_ME_TO_DISABLE_CONSOLEHOST_TELEMETRY` to disable"
   - "reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-72.md:96:82        Sazonov         U       cmdlets (#14513) (Thanks @iSazonov)"
@@ -4385,7 +4387,7 @@ issues:
   - "reference/media/shared/large-yellow-circle-1f7e1.svg:7:72           evenodd     U       100d43c\" fill-rule=\"evenodd\"></path>"
   - "reference/media/shared/large-yellow-circle-1f7e1.svg:8:72           evenodd     U       100d43c\" fill-rule=\"evenodd\"></path>"
   - "reference/module/index.md:14:36         windowsserver       U       FilterColumn1: powershell-7.4,windowsserver2025-ps"
-  - "reference/module/index.md:15:21         azps                U       quickFilterColumn2: azps-15.5.0,sqlserver-ps"
+  - "reference/module/index.md:15:21         azps                U       quickFilterColumn2: azps-15.6.0,sqlserver-ps"
   - "reference/module/index.md:16:42         systemcenter        U       graph-powershell-1.0,systemcenter-ps-2022"
   - "terminology.md:42:38        backticked      U       should be lowercase and backticked in a paragraph. See"
   - "tests/Pester/Update-Help.Tests.ps1:24:34        PSHOME              U       HelpInstallationPath = \"$PSHOME\\en-US\""
