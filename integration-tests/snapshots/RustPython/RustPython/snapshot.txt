@@ -3,10 +3,12 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 787, Issues found: 591 in 91 files.
+ CSpell: Files checked: 779, Issues found: 604 in 94 files.
  exit code: 1
-Cargo.toml:104:62    - Unknown word (redoxer)    -- to compile/check with redoxer
-Cargo.toml:118:28    - Unknown word (nsis)       -- package.metadata.packager.nsis]
+Cargo.toml:106:62    - Unknown word (redoxer)    -- to compile/check with redoxer
+Cargo.toml:120:28    - Unknown word (nsis)       -- package.metadata.packager.nsis]
+Cargo.toml:176:62    - Unknown word (zeroize)    -- alloc", "oid", "pem", "zeroize"] }
+Cargo.toml:369:1     - Unknown word (uninlined)  -- uninlined_format_args = "warn
 LICENSE-logo:205:34    - Unknown word (waivable)   -- under any voluntary or waivable statutory or compulsory
 README.md:126:8     - Unknown word (wapm)       -- Run by wapm
 README.md:129:3     - Unknown word (wapm)       -- $ wapm install rustpython
@@ -44,6 +46,16 @@ benches/benchmarks/pystone.py:99:19     - Unknown word (DHRYSTONE)  -- String1Lo
 benches/benchmarks/pystone.py:9:29      - Unknown word (Weicker)    -- Reinhold P. Weicker, CACM Vol 27, No 1
 benches/benchmarks/pystone.py:9:39      - Unknown word (CACM)       -- Reinhold P. Weicker,  CACM Vol 27, No 10, 10/8
 benches/test_benchmarks.py:19:18     - Unknown word (nbody)      -- ['benchmarks/nbody.py'],
+crates/capi/Cargo.toml:12:16     - Unknown word (cdylib)     -- crate-type = ["cdylib", "rlib"]
+crates/capi/Cargo.toml:12:26     - Unknown word (rlib)       -- crate-type = ["cdylib", "rlib"]
+crates/compiler-core/generate.py:321:20    - Unknown word (npushed)    -- if npushed := stack_effect.get
+crates/compiler-core/generate.py:323:30    - Unknown word (npushed)    -- pushed = npushed
+crates/compiler-core/generate.py:325:20    - Unknown word (npopped)    -- if npopped := stack_effect.get
+crates/compiler-core/generate.py:327:30    - Unknown word (npopped)    -- popped = npopped
+crates/compiler-core/generate.py:439:24    - Unknown word (otype)      -- oname, otype = oparg["name"], oparg
+crates/compiler-core/generate.py:441:48    - Unknown word (otype)      -- f"{{ {oname}: Arg<{otype}> }}"
+crates/compiler-core/generate.py:518:24    - Unknown word (otype)      -- oname, otype = oparg["name"], oparg
+crates/compiler-core/generate.py:519:20    - Unknown word (otype)      -- if otype != TARGET:
 crates/doc/LICENSE:10:32     - Unknown word (CNRI)         -- Research Initiatives (CNRI, see https://www.cnri
 crates/doc/LICENSE:121:1     - Unknown word (BEOPEN)       -- BEOPEN.COM LICENSE AGREEMENT
 crates/doc/LICENSE:124:1     - Unknown word (BEOPEN)       -- BEOPEN PYTHON OPEN SOURCE LICENSE
@@ -86,7 +98,6 @@ crates/wasm/Lib/browser.py:62:26     - Unknown word (jsstr)      -- return _conf
 crates/wasm/Lib/browser.py:75:9      - Unknown word (jsstr)      -- jsstr(msg), jsstr(default
 crates/wasm/Lib/whlimport.py:106:13    - Unknown word (zname)      -- for zname, z in cls._packages
 crates/wasm/Lib/whlimport.py:110:50    - Unknown word (zname)      -- cls, origin=f"zip:{zname}/{fullpath}", is_package
-crates/wasm/Lib/whlimport.py:161:17    - Unknown word (isbytecode) -- for suffix, isbytecode, ispackage in _zip_searchorde
 example_projects/aheui-rust.md:1:3       - Unknown word (aheui)      -- # aheui-rust
 example_projects/wasm32_without_js/rustpython-without-js/Cargo.toml:7:16      - Unknown word (cdylib)     -- crate-type = ["cdylib"]
 examples/atexit_example.py:5:5       - Unknown word (myexit)     -- def myexit():
@@ -202,38 +213,45 @@ extra_tests/snippets/builtin_object.py:8:17      - Unknown word (myobj)      -- 
 extra_tests/snippets/builtin_object.py:8:8       - Unknown word (myobj)      -- assert myobj == myobj
 extra_tests/snippets/builtin_object.py:9:12      - Unknown word (myobj)      -- assert not myobj != myobj
 extra_tests/snippets/builtin_object.py:9:21      - Unknown word (myobj)      -- assert not myobj != myobj
-extra_tests/snippets/builtin_pow.py:136:9     - Unknown word (fiveto)     -- fiveto = float(5**n)
-extra_tests/snippets/builtin_pow.py:137:24    - Unknown word (fiveto)     -- # For small n, fiveto will be odd.  Eventually
-extra_tests/snippets/builtin_pow.py:138:38    - Unknown word (thereafer)  -- mantissa bits, though, and thereafer fiveto will be even
-extra_tests/snippets/builtin_pow.py:138:48    - Unknown word (fiveto)     -- though, and thereafer fiveto will be even.
-extra_tests/snippets/builtin_pow.py:139:20    - Unknown word (fiveto)     -- expected = fiveto % 2.0 and -1.0 or 1
-extra_tests/snippets/builtin_pow.py:140:19    - Unknown word (fiveto)     -- eq(pow(a, fiveto), expected)
-extra_tests/snippets/builtin_pow.py:64:5      - Unknown word (asseq)      -- asseq = assert_equal
-extra_tests/snippets/builtin_pow.py:67:9      - Unknown word (asseq)      -- asseq = assert_almost_equal
-extra_tests/snippets/builtin_pow.py:79:21     - Unknown word (asseq)      -- asseq(pow(type(i), j, k),
+extra_tests/snippets/builtin_pow.py:101:5     - Unknown word (asseq)      -- asseq = assert_equal
+extra_tests/snippets/builtin_pow.py:104:9     - Unknown word (asseq)      -- asseq = assert_almost_equal
+extra_tests/snippets/builtin_pow.py:116:21    - Unknown word (asseq)      -- asseq(pow(type(i), j, k),
+extra_tests/snippets/builtin_pow.py:173:9     - Unknown word (fiveto)     -- fiveto = float(5**n)
+extra_tests/snippets/builtin_pow.py:174:24    - Unknown word (fiveto)     -- # For small n, fiveto will be odd.  Eventually
+extra_tests/snippets/builtin_pow.py:175:38    - Unknown word (thereafer)  -- mantissa bits, though, and thereafer fiveto will be even
+extra_tests/snippets/builtin_pow.py:175:48    - Unknown word (fiveto)     -- though, and thereafer fiveto will be even.
+extra_tests/snippets/builtin_pow.py:176:20    - Unknown word (fiveto)     -- expected = fiveto % 2.0 and -1.0 or 1
+extra_tests/snippets/builtin_pow.py:177:19    - Unknown word (fiveto)     -- eq(pow(a, fiveto), expected)
 extra_tests/snippets/builtin_property.py:15:5      - Unknown word (Fubar)      -- f = Fubar()
 extra_tests/snippets/builtin_property.py:19:13     - Unknown word (Fubar)      -- assert type(Fubar.foo) is property
 extra_tests/snippets/builtin_property.py:4:7       - Unknown word (Fubar)      -- class Fubar:
 extra_tests/snippets/builtin_set.py:428:27    - Unknown word (aruguments) -- TODO: Assert that empty aruguments raises exception.
-extra_tests/snippets/builtin_str.py:128:10    - Unknown word (koki)       -- assert ["koki".center(i, "|") for
-extra_tests/snippets/builtin_str.py:129:6     - Unknown word (koki)       -- "koki",
-extra_tests/snippets/builtin_str.py:130:6     - Unknown word (koki)       -- "koki",
-extra_tests/snippets/builtin_str.py:131:7     - Unknown word (koki)       -- "|koki",
-extra_tests/snippets/builtin_str.py:132:7     - Unknown word (koki)       -- "|koki|",
-extra_tests/snippets/builtin_str.py:215:39    - Unknown word (dhoho)      -- x0cHallo\x1cHELLO\x1dhoho\x1ehaha\x85another\u
-extra_tests/snippets/builtin_str.py:215:47    - Unknown word (ehaha)      -- cHallo\x1cHELLO\x1dhoho\x1ehaha\x85another\u2028yetanother
-extra_tests/snippets/builtin_str.py:221:10    - Unknown word (hoho)       -- "hoho",
-extra_tests/snippets/builtin_str.py:222:10    - Unknown word (haha)       -- "haha",
-extra_tests/snippets/builtin_str.py:230:39    - Unknown word (dhoho)      -- x0cHallo\x1cHELLO\x1dhoho\x1ehaha\x85another\u
-extra_tests/snippets/builtin_str.py:230:47    - Unknown word (ehaha)      -- cHallo\x1cHELLO\x1dhoho\x1ehaha\x85another\u2028yetanother
-extra_tests/snippets/builtin_str.py:238:10    - Unknown word (hoho)       -- "hoho\x1e",
-extra_tests/snippets/builtin_str.py:239:10    - Unknown word (haha)       -- "haha\x85",
-extra_tests/snippets/builtin_str.py:275:34    - Unknown word (ΊΣΥΦΟΣ)     -- Σίσυφος".swapcase() == "σΊΣΥΦΟΣ"
-extra_tests/snippets/builtin_str.py:275:9     - Unknown word (Σίσυφος)    -- assert "Σίσυφος".swapcase() == "σΊΣΥΦΟΣ
+extra_tests/snippets/builtin_str.py:127:33    - Unknown word (Ssello)     -- ßello".capitalize() == "Ssello"
+extra_tests/snippets/builtin_str.py:127:9     - Unknown word (ßello)      -- assert "ßello".capitalize() == "Ssello
+extra_tests/snippets/builtin_str.py:128:36    - Unknown word (İstanbul)   -- İstanbul".capitalize() == "İstanbul"
+extra_tests/snippets/builtin_str.py:128:9     - Unknown word (İstanbul)   -- assert "İstanbul".capitalize() == "İstanbul
+extra_tests/snippets/builtin_str.py:129:37    - Unknown word (Ábc)       -- bc".capitalize() == "Ábc"
+extra_tests/snippets/builtin_str.py:130:33    - Unknown word (Σιγμα)      -- ΣΙΓΜΑ".capitalize() == "Σιγμα"
+extra_tests/snippets/builtin_str.py:130:9     - Unknown word (ΣΙΓΜΑ)      -- assert "ΣΙΓΜΑ".capitalize() == "Σιγμα
+extra_tests/snippets/builtin_str.py:134:10    - Unknown word (koki)       -- assert ["koki".center(i, "|") for
+extra_tests/snippets/builtin_str.py:135:6     - Unknown word (koki)       -- "koki",
+extra_tests/snippets/builtin_str.py:136:6     - Unknown word (koki)       -- "koki",
+extra_tests/snippets/builtin_str.py:137:7     - Unknown word (koki)       -- "|koki",
+extra_tests/snippets/builtin_str.py:138:7     - Unknown word (koki)       -- "|koki|",
+extra_tests/snippets/builtin_str.py:221:39    - Unknown word (dhoho)      -- x0cHallo\x1cHELLO\x1dhoho\x1ehaha\x85another\u
+extra_tests/snippets/builtin_str.py:221:47    - Unknown word (ehaha)      -- cHallo\x1cHELLO\x1dhoho\x1ehaha\x85another\u2028yetanother
+extra_tests/snippets/builtin_str.py:227:10    - Unknown word (hoho)       -- "hoho",
+extra_tests/snippets/builtin_str.py:228:10    - Unknown word (haha)       -- "haha",
+extra_tests/snippets/builtin_str.py:236:39    - Unknown word (dhoho)      -- x0cHallo\x1cHELLO\x1dhoho\x1ehaha\x85another\u
+extra_tests/snippets/builtin_str.py:236:47    - Unknown word (ehaha)      -- cHallo\x1cHELLO\x1dhoho\x1ehaha\x85another\u2028yetanother
+extra_tests/snippets/builtin_str.py:244:10    - Unknown word (hoho)       -- "hoho\x1e",
+extra_tests/snippets/builtin_str.py:245:10    - Unknown word (haha)       -- "haha\x85",
+extra_tests/snippets/builtin_str.py:281:34    - Unknown word (ΊΣΥΦΟΣ)     -- Σίσυφος".swapcase() == "σΊΣΥΦΟΣ"
+extra_tests/snippets/builtin_str.py:281:9     - Unknown word (Σίσυφος)    -- assert "Σίσυφος".swapcase() == "σΊΣΥΦΟΣ
 extra_tests/snippets/builtin_str.py:42:21     - Unknown word (xyxyxy)     -- assert "xy" * 3 == "xyxyxy"
 extra_tests/snippets/builtin_str.py:46:21     - Unknown word (xyxyxy)     -- assert 3 * "xy" == "xyxyxy"
-extra_tests/snippets/builtin_str.py:778:28    - Unknown word (afoo)       -- assert s.removeprefix("afoo") == s_ref
-extra_tests/snippets/builtin_str.py:825:28    - Unknown word (fooa)       -- assert s.removesuffix("fooa") == s_ref
+extra_tests/snippets/builtin_str.py:784:28    - Unknown word (afoo)       -- assert s.removeprefix("afoo") == s_ref
+extra_tests/snippets/builtin_str.py:831:28    - Unknown word (fooa)       -- assert s.removesuffix("fooa") == s_ref
 extra_tests/snippets/builtin_str_encode.py:11:42     - Unknown word (estás)     -- UnicodeEncodeError, "¿como estás?".encode, "ascii")
 extra_tests/snippets/builtin_str_encode.py:21:25     - Unknown word (𝕐𝕥)       -- round_trip("☢🐣 ᖇ𝓤𝕊тⓟ𝕐𝕥卄σ𝔫 ♬👣")
 extra_tests/snippets/builtin_str_encode.py:22:19     - Unknown word (ק𝔂t)       -- round_trip("💀👌 ק𝔂tℍⓞ𝓷 ３  🔥👤")
@@ -432,6 +450,8 @@ extra_tests/snippets/testutils.py:73:33     - Unknown word (klass)      -- lambd
 extra_tests/snippets/testutils.py:73:43     - Unknown word (isisntance) -- isinstance(obj, klass), ["isisntance(", _typed(obj), ","
 extra_tests/snippets/testutils.py:73:75     - Unknown word (klass)      -- , _typed(obj), ",", klass, ")"]
 extra_tests/test_snippets.py:27:5      - Unknown word (pushd)      -- def pushd(path):
+host_env_proposal.md:217:14    - Unknown word (hchmod)     -- pub fn win32_hchmod(handle: HANDLE, mode
+host_env_proposal.md:29:10     - Unknown word (hchmod)     -- - `win32_hchmod()`, `win32_lchmod()
 installer-config/installer.nsi:108:37    - Unknown word (MANUPRODUCTKEY) -- LANGDLL_REGISTRY_KEY "${MANUPRODUCTKEY}"
 installer-config/installer.nsi:130:25    - Unknown word (installtion)    -- only if a previous installtion was detected
 installer-config/installer.nsi:136:32    - Unknown word (isntallation)   -- installer stores the isntallation info in registry
@@ -489,20 +509,11 @@ scripts/bench.sh:3:75      - Unknown word (pyperf)     -- BENCH}_cpython${CPYTHO
 scripts/bench.sh:9:107     - Unknown word (pyperf)     -- rustpython_${RUSTPYTHON}.pyperf"
 scripts/dis_dump.py:6:23      - Unknown word (reprs)      -- addresses in argument reprs.
 scripts/dis_dump.py:82:42     - Unknown word (reprs)      -- addresses from other reprs
-scripts/generate_opcode_metadata.py:116:5     - Unknown word (deopts)     -- deopts = {}
-scripts/generate_opcode_metadata.py:125:9     - Unknown word (deopts)     -- deopts[key] = value
-scripts/generate_opcode_metadata.py:127:12    - Unknown word (deopts)     -- return deopts
-scripts/generate_opcode_metadata.py:132:1     - Unknown word (deopts)     -- deopts = build_deopts(contents
-scripts/generate_opcode_metadata.py:151:17    - Unknown word (deopts)     -- for key, lst in deopts.items():
-scripts/generate_opcode_metadata.py:63:16     - Unknown word (oprio)      -- sprio, oprio = (
-scripts/generate_opcode_metadata.py:63:9      - Unknown word (sprio)      -- sprio, oprio = (
-scripts/generate_opcode_metadata.py:66:17     - Unknown word (sprio)      -- return (sprio, self.id) < (oprio,
-scripts/generate_opcode_metadata.py:66:36     - Unknown word (oprio)      -- (sprio, self.id) < (oprio, other.id)
-scripts/generate_sre_constants.py:10:16     - Unknown word (fobj)       -- if fobj.read() == content:
+scripts/generate_opcode_metadata.py:61:16     - Unknown word (oprio)      -- sprio, oprio = (
+scripts/generate_opcode_metadata.py:61:9      - Unknown word (sprio)      -- sprio, oprio = (
+scripts/generate_opcode_metadata.py:64:17     - Unknown word (sprio)      -- return (sprio, self.id) < (oprio,
+scripts/generate_opcode_metadata.py:64:36     - Unknown word (oprio)      -- (sprio, self.id) < (oprio, other.id)
 scripts/generate_sre_constants.py:115:17    - Unknown word (CHCODES)    -- ns["CHCODES"],
-scripts/generate_sre_constants.py:14:29     - Unknown word (fobj)       -- with open(file, "w") as fobj:
-scripts/generate_sre_constants.py:15:9      - Unknown word (fobj)       -- fobj.write(content)
-scripts/generate_sre_constants.py:9:33      - Unknown word (fobj)       -- with open(file, "r") as fobj:
 scripts/install-openssl.ps1:1:12      - Unknown word (Actix)      -- # From the Actix Web windows workflow
 scripts/make_ssl_data_rs.py:122:17    - Unknown word (AKID)       -- # [('X509_R_AKID_MISMATCH', 'X509',
 scripts/make_ssl_data_rs.py:122:42    - Unknown word (AKID)       -- MISMATCH', 'X509', 'AKID_MISMATCH', 110), ..
@@ -516,13 +527,15 @@ scripts/update_lib/cmd_quick.py:286:38    - Unknown word (libregrtest) -- -> cpy
 scripts/update_lib/deps.py:258:31    - Unknown word (libregrtest) -- regrtest is in Lib/test/libregrtest/, not Lib/libregrtest
 scripts/update_lib/deps.py:258:53    - Unknown word (libregrtest) -- libregrtest/, not Lib/libregrtest/
 scripts/update_lib/deps.py:260:23    - Unknown word (libregrtest) -- "lib": ["test/libregrtest"],
-scripts/update_lib/deps.py:544:19    - Unknown word (genexps)     -- "test_genexps.py",
-scripts/update_lib/deps.py:553:19    - Unknown word (descrtut)    -- "test_descrtut.py",
-scripts/update_lib/deps.py:573:19    - Unknown word (memoryio)    -- "test_memoryio.py",
+scripts/update_lib/deps.py:327:19    - Unknown word (xpickle)     -- "test_xpickle.py",
+scripts/update_lib/deps.py:328:14    - Unknown word (xpickle)     -- "xpickle_worker.py",
+scripts/update_lib/deps.py:547:19    - Unknown word (genexps)     -- "test_genexps.py",
+scripts/update_lib/deps.py:556:19    - Unknown word (descrtut)    -- "test_descrtut.py",
+scripts/update_lib/deps.py:576:19    - Unknown word (memoryio)    -- "test_memoryio.py",
 scripts/update_lib/deps.py:5:34      - Unknown word (libregrtest) -- library paths (e.g., libregrtest at Lib/test/libregrtest
 scripts/update_lib/deps.py:5:58      - Unknown word (libregrtest) -- libregrtest at Lib/test/libregrtest/)
-scripts/update_lib/deps.py:878:7     - Unknown word (profilee)    -- # profilee is used by test_monitoring
-scripts/update_lib/deps.py:880:24    - Unknown word (profilee)    -- "hard_deps": ["profilee"],
+scripts/update_lib/deps.py:881:7     - Unknown word (profilee)    -- # profilee is used by test_monitoring
+scripts/update_lib/deps.py:883:24    - Unknown word (profilee)    -- "hard_deps": ["profilee"],
 scripts/update_lib/tests/test_deps.py:74:26     - Unknown word (pymymodule) -- (lib_dir / "_pymymodule.py").write_text("#
 scripts/update_lib/tests/test_deps.py:74:57     - Unknown word (pymymodule) -- py").write_text("# _pymymodule")
 scripts/update_lib/tests/test_deps.py:79:46     - Unknown word (pymymodule) -- assertIn(tmpdir / "Lib" / "_pymymodule.py", paths)
