@@ -156,7 +156,7 @@ function checkCapabilityOrThrow(
     name: string,
     url: URL,
 ): asserts fs is VProviderFileSystem {
-    if (!(capabilities & flag)) {
+    if (!(capabilities & flag) || !fs) {
         throw new VFSErrorUnsupportedRequest(name, url);
     }
 }

@@ -3,9 +3,9 @@ Repository: gitbucket/gitbucket
 Url: "https://github.com/gitbucket/gitbucket.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 415, Issues found: 1921 in 399 files.
+ CSpell: Files checked: 417, Issues found: 2118 in 401 files.
  exit code: 1
-README.md:85:88     - Unknown word (MVCC)       -- configuration, remove `;MVCC=true` from `url`.
+README.md:89:88     - Unknown word (MVCC)       -- configuration, remove `;MVCC=true` from `url`.
 build.sbt:21:4      - Unknown word (scalafmt)   -- // scalafmtOnCompile := true
 build.sbt:241:11    - Unknown word (takezoe)       -- <id>takezoe</id>
 build.sbt:242:13    - Unknown word (Naoki)         -- <name>Naoki Takezoe</name>
@@ -124,8 +124,65 @@ doc/licenses.md:92:70     - Unknown word (reactivestreams) -- publicdomain/zero/
 doc/licenses.md:94:92     - Unknown word (scijava)         -- publicdomain/zero/1.0/) | org.scijava # native-lib-loader
 doc/licenses.md:97:86     - Unknown word (jaxb)            -- | javax.xml.bind # jaxb-api # 2.3.0 | <notextile
 doc/release.md:47:27     - Unknown word (Sonatype's) -- upload artifacts to Sonatype's Central Portal with
-doc/release.md:50:7      - Unknown word (sona)       -- $ sbt sonaUpload
+doc/release.md:50:7      - Unknown word (sona)       -- ./sbt sonaUpload
 project/plugins.sbt:9:47      - Unknown word (scoverage)  -- scoverage" % "sbt-scoverage" % "2.4.4")
+sbt.bat:10:11     - Unknown word (enabledelayedexpansion) -- @setlocal enabledelayedexpansion
+sbt.bat:10:2      - Unknown word (setlocal)   -- @setlocal enabledelayedexpansion
+sbt.bat:1134:2    - Unknown word (endlocal)               -- @endlocal
+sbt.bat:156:49    - Unknown word (incase)                 -- debug gets set first incase any argument parsing
+sbt.bat:17:6      - Unknown word (JAVACMD)                -- set _JAVACMD=
+sbt.bat:607:41    - Unknown word (findstr)                -- %%i in ('jps -lv ^| findstr "xsbt.boot.Boot"') do
+sbt.bat:607:50    - Unknown word (xsbt)                   -- jps -lv ^| findstr "xsbt.boot.Boot"') do (
+sbt.bat:608:5     - Unknown word (taskkill)               -- taskkill /F /PID %%i
+sbt.bat:620:7     - Unknown word (checkjava)              -- call :checkjava
+sbt.bat:623:9     - Unknown word (runnative)              -- goto :runnative !SBT_ARGS!
+sbt.bat:635:7     - Unknown word (copyrt)                 -- call :copyrt
+sbt.bat:645:4     - Unknown word (ERRORLEVEL)             -- if ERRORLEVEL 1 goto error
+sbt.bat:743:33    - Unknown word (echolist)               -- defined _JAVA_OPTS ( call :echolist !_JAVA_OPTS! )
+sbt.bat:760:7     - Unknown word (SBTNCMD)                -- set "_SBTNCMD=!SBT_BIN_DIR!sbtn-x
+sbt.bat:778:106   - Unknown word (adoptopenjdk)           -- sbt\0.13\java9-rt-ext-adoptopenjdk_11_0_3"
+sbt.bat:80:26     - Unknown word (usebackq)               -- for /F "tokens=* eol=# usebackq delims=" %%i in ("!SBT
+sbt.bat:88:16     - Unknown word (jenv)                   -- rem poor man's jenv (which is not available
+sbt.bat:9:8       - Unknown word (ZOMG)       -- @REM ZOMG! We need delayed expansion
+sbt:108:1     - Unknown word (echoerr)          -- echoerr () {
+sbt:123:1     - Unknown word (dlog)             -- dlog () {
+sbt:13:12     - Unknown word (shutdownall) -- declare -a shutdownall
+sbt:145:5     - Unknown word (elif)             -- elif command -v wget > /dev
+sbt:196:11    - Unknown word (OSTYPE)           -- if [[ "$OSTYPE" == "linux"* ]]; then
+sbt:209:56    - Unknown word (msys)             -- || [[ "$OSTYPE" == "msys" ]] || [[ "$OSTYPE"
+sbt:20:32     - Unknown word (Dfile)       -- default_java_opts="-Dfile.encoding=UTF-8"
+sbt:247:49    - Unknown word (stty)             -- the ability to re-hook stty if exec is used
+sbt:24:13     - Unknown word (sbtn)        -- declare use_sbtn=
+sbt:268:13    - Unknown word (agentlib)         -- addJava "-agentlib:jdwp=transport=dt_socket
+sbt:268:22    - Unknown word (jdwp)             -- addJava "-agentlib:jdwp=transport=dt_socket
+sbt:277:154   - Unknown word (Metaspace)        -- [ "${i}" == *-XX:MaxMetaspaceSize* ]] && ! [[ "${i
+sbt:27:24     - Unknown word (SBTN)        -- declare sbtn_command="$SBTN_CMD"
+sbt:350:32    - Unknown word (Dsbt)             -- java_args[@]}" == *-Dsbt.script=* ]]; then
+sbt:37:28     - Unknown word (realpath)         -- reimplementation of realpath to return the absolute
+sbt:37:8      - Unknown word (reimplementation) -- # Bash reimplementation of realpath to return
+sbt:38:1      - Unknown word (realpathish)      -- realpathish () {
+sbt:448:87    - Unknown word (Duser)            -- Dsbt.global.base or -Duser.home
+sbt:49:19     - Unknown word (readlink)         -- TARGET_FILE=$(readlink "$TARGET_FILE")
+sbt:532:15    - Unknown word (Dscala)           -- addJava "-Dscala.ext.dirs=${java9_ext
+sbt:550:70    - Unknown word (sbtopts)          -- create ${config_home}/sbtopts with:"
+sbt:574:11    - Unknown word (icanon)           -- stty -icanon min 1 -echo > /dev/null
+sbt:575:15    - Unknown word (Djline)           -- addJava "-Djline.terminal=jline.UnixTerminal
+sbt:575:31    - Unknown word (jline)            -- addJava "-Djline.terminal=jline.UnixTerminal"
+sbt:618:13    - Unknown word (noshare)          -- declare -ra noshare_opts=(-Dsbt.global.base
+sbt:618:54    - Unknown word (sbtboot)          -- global.base=project/.sbtboot -Dsbt.boot.directory
+sbt:628:48    - Unknown word (sbtconfig)        -- file="${sbt_home}/conf/sbtconfig.txt"
+sbt:647:5     - Unknown word (supershell)       -- --supershell=auto|always|true|false
+sbt:64:13     - Unknown word (cygwinpath)       -- echo "$(cygwinpath "$TARGET_FILE")"
+sbt:672:4     - Unknown word (jvmopts)          -- .jvmopts if this file
+sbt:678:4     - Unknown word (Dkey)             -- -Dkey=val pass
+sbt:710:67    - Unknown word (noformat)         -- options[@]}" "-Dsbt.log.noformat=true" ) && shift ;;
+sbt:724:58    - Unknown word (Dxsbt)            -- ( "${options[@]}" "-Dxsbt.inc.debug=true" ) &
+sbt:754:52    - Unknown word (localcache)       -- addJava "-Dsbt.global.localcache=$2" &&
+sbt:772:5     - Unknown word (myargs)           -- myargs=("${residual_args[@
+sbt:77:5      - Unknown word (MSYS)             -- MSYS*) return 0 ;;
+sbt:79:3      - Unknown word (esac)             -- esac
+sbt:85:30     - Unknown word (cygdrive)         -- can fix cygwin style /cygdrive paths so we get the
+sbt:904:1     - Unknown word (miniscript)       -- miniscript=$(map_args "${sbt_options
 src/main/java/JettyLauncher.java:162:36    - Unknown word (KEYSTOREPATH) -- " or GITBUCKET_KEYSTOREPATH environment variable
 src/main/java/JettyLauncher.java:166:36    - Unknown word (KEYSTOREPASSWORD) -- " or GITBUCKET_KEYSTOREPASSWORD environment variable
 src/main/java/JettyLauncher.java:170:36    - Unknown word (KEYMANAGERPASSWORD) -- " or GITBUCKET_KEYMANAGERPASSWORD environment variable
@@ -136,8 +193,8 @@ src/main/scala/gitbucket/core/api/ApiTag.scala:13:3      - Unknown word (zipball
 src/main/scala/gitbucket/core/api/CreateARelease.scala:5:10      - Unknown word (commitish)  -- target_commitish: Option[String],
 src/main/scala/gitbucket/core/controller/AccountController.scala:196:5     - Unknown word (ctype)      -- ctype: WebHookContentType
 src/main/scala/gitbucket/core/controller/AccountController.scala:313:73    - Unknown word (noimage)    -- getResourceAsStream("noimage.png")
-src/main/scala/gitbucket/core/controller/AccountController.scala:699:21    - Unknown word (editgroup)  -- get("/:groupName/_editgroup")(managersOnly {
-src/main/scala/gitbucket/core/controller/AccountController.scala:706:21    - Unknown word (deletegroup) -- get("/:groupName/_deletegroup")(managersOnly {
+src/main/scala/gitbucket/core/controller/AccountController.scala:700:21    - Unknown word (editgroup)  -- get("/:groupName/_editgroup")(managersOnly {
+src/main/scala/gitbucket/core/controller/AccountController.scala:707:21    - Unknown word (deletegroup) -- get("/:groupName/_deletegroup")(managersOnly {
 src/main/scala/gitbucket/core/controller/AccountController.scala:76:58     - Unknown word (maxlength)  -- name", text(required, maxlength(100), identifier, uniqueUserN
 src/main/scala/gitbucket/core/controller/ControllerBase.scala:158:68    - Unknown word (mobilephone) -- smartphone" || category == "mobilephone"
 src/main/scala/gitbucket/core/controller/ControllerBase.scala:241:51    - Unknown word (nosniff)     -- Content-Type-Options", "nosniff")
@@ -151,12 +208,12 @@ src/main/scala/gitbucket/core/controller/PullRequestsController.scala:602:46    
 src/main/scala/gitbucket/core/controller/RepositorySettingsController.scala:179:9     - Unknown word (protecteions) -- val protecteions = getProtectedBranchList
 src/main/scala/gitbucket/core/controller/RepositorySettingsController.scala:472:37    - Unknown word (deploykey)    -- repository/settings/deploykey")(ownerOnly { repository
 src/main/scala/gitbucket/core/controller/RepositoryViewerController.scala:750:16    - Unknown word (commited)   -- "commited" -> blame.commitTime
-src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:252:15    - Unknown word (dbviewer)   -- get("/admin/dbviewer")(adminOnly {
-src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:397:22    - Unknown word (newuser)    -- get("/admin/users/_newuser")(adminOnly {
-src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:416:32    - Unknown word (edituser)   -- admin/users/:userName/_edituser")(adminOnly {
-src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:464:22    - Unknown word (newgroup)   -- get("/admin/users/_newgroup")(adminOnly {
-src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:78:10     - Unknown word (starttls)   -- "starttls" -> trim(label("Enable
-src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:78:42     - Unknown word (STARTTLS)   -- trim(label("Enable STARTTLS", optional(boolean(
+src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:253:15    - Unknown word (dbviewer)   -- get("/admin/dbviewer")(adminOnly {
+src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:398:22    - Unknown word (newuser)    -- get("/admin/users/_newuser")(adminOnly {
+src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:417:32    - Unknown word (edituser)   -- admin/users/:userName/_edituser")(adminOnly {
+src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:465:22    - Unknown word (newgroup)   -- get("/admin/users/_newgroup")(adminOnly {
+src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:79:10     - Unknown word (starttls)   -- "starttls" -> trim(label("Enable
+src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:79:42     - Unknown word (STARTTLS)   -- trim(label("Enable STARTTLS", optional(boolean(
 src/main/scala/gitbucket/core/controller/WikiController.scala:220:22    - Unknown word (Gollum)     -- WebHookGollumPayload("edited", form
 src/main/scala/gitbucket/core/controller/api/ApiGitReferenceControllerBase.scala:40:9      - Unknown word (revstr)     -- val revstr = multiParams("splat
 src/main/scala/gitbucket/core/controller/api/ApiRepositoryCommitControllerBase.scala:49:13     - Unknown word (revfilters) -- val revfilters = new ListBuffer[(RevFilter
@@ -172,7 +229,7 @@ src/main/scala/gitbucket/core/service/PullRequestService.scala:419:9     - Unkno
 src/main/scala/gitbucket/core/service/RepositoryCreationService.scala:118:13    - Unknown word (gitdir)     -- val gitdir = getRepositoryDir(owner
 src/main/scala/gitbucket/core/service/RepositoryCreationService.scala:305:8     - Unknown word (fccd)       -- "fccd29"
 src/main/scala/gitbucket/core/service/RepositoryCreationService.scala:307:76    - Unknown word (acacac)     -- Some("Default."), "acacac")
-src/main/scala/gitbucket/core/service/SystemSettingsService.scala:51:58     - Unknown word (Starttls)   -- props.setProperty(SmtpStarttls, x.toString))
+src/main/scala/gitbucket/core/service/SystemSettingsService.scala:52:58     - Unknown word (Starttls)   -- props.setProperty(SmtpStarttls, x.toString))
 src/main/scala/gitbucket/core/service/WebHookService.scala:289:15    - Unknown word (itcp)         -- val itcp = new org.apache.http
 src/main/scala/gitbucket/core/service/WebHookService.scala:47:23     - Unknown word (informations) -- /** get All WebHook informations of repository */
 src/main/scala/gitbucket/core/ssh/PublicKeyAuthenticator.scala:44:13     - Unknown word (Publickey)  -- extends PublickeyAuthenticator
@@ -263,7 +320,7 @@ src/test/scala/gitbucket/core/model/CommitStateSpec.scala:14:49     - Unknown wo
 src/test/scala/gitbucket/core/service/MergeServiceSpec.scala:53:57     - Unknown word (hoge)       -- master", "test.txt", "hoge")
 src/test/scala/gitbucket/core/service/MergeServiceSpec.scala:58:13     - Unknown word (Confrict)   -- def createConfrict(git: Git): ObjectId
 src/test/scala/gitbucket/core/service/ProtectedBranchServiceSpec.scala:75:80     - Unknown word (fuga)       -- false, false, Seq("fuga"), false, Nil)
-src/test/scala/gitbucket/core/service/ServiceSpecBase.scala:171:49    - Unknown word (baes)       -- baseRepositoryName, baesBranch) = base.split
+src/test/scala/gitbucket/core/service/ServiceSpecBase.scala:172:49    - Unknown word (baes)       -- baseRepositoryName, baesBranch) = base.split
 src/test/scala/gitbucket/core/util/JGitUtilSpec.scala:345:53    - Unknown word (finfo)      -- git, branch, path).map(finfo => (finfo.name, finfo
 src/test/scala/gitbucket/core/util/ValidationsSpec.scala:21:40     - Unknown word (gghhii)     -- validate("color", "#gghhii", messages) == Some
 src/test/scala/gitbucket/core/view/HelpersSpec.scala:45:37     - Unknown word (metacharacters) -- properly escape html metacharacters") {
