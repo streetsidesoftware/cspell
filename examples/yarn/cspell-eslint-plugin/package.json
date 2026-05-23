@@ -10,7 +10,9 @@
     "spell": "cspell .",
     "test": "yarn lint",
     "go": "node ./index.mjs",
-    "update:dep": "yarn add --dev @cspell/dict-medicalterms@latest @cspell/cspell-types@latest @cspell/eslint-plugin@latest cspell"
+    "update:dep": "yarn run update:eslint && yarn run update:cspell",
+    "update:eslint": "yarn up eslint @eslint/js globals",
+    "update:cspell": "yarn add --dev @cspell/dict-medicalterms@latest @cspell/cspell-types@latest @cspell/eslint-plugin@latest cspell"
   },
   "devDependencies": {
     "@cspell/cspell-types": "^10.0.0",
@@ -18,7 +20,7 @@
     "@cspell/eslint-plugin": "^10.0.0",
     "@eslint/js": "^10.0.1",
     "cspell": "^10.0.0",
-    "eslint": "^10.0.1",
-    "globals": "^15.11.0"
+    "eslint": "^10.4.0",
+    "globals": "^17.6.0"
   }
 }
