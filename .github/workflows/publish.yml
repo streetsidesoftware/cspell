@@ -43,9 +43,10 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.PUBLISH_NPM}}
           NPM_CONFIG_PROVENANCE: true
+          DIST_TAG: ${{ steps.dist_tag.outputs.value }}
         # TODO: support --sign-git-tag --sign-git-commit
         run: |
-          pnpm lerna publish from-package --no-push --no-private --yes ${{ steps.dist_tag.outputs.value }}
+          pnpm lerna publish from-package --no-push --no-private --yes $DIST_TAG
 
       - name: Summary
         uses: streetsidesoftware/actions/public/summary@v1

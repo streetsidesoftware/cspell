@@ -54,10 +54,12 @@ jobs:
           echo version=$(jq -r .version .release.json) >> $GITHUB_OUTPUT
 
       - name: Setup Git
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name streetsidesoftware[bot]
           git config user.email streetsidesoftware[bot]@users.noreply.github.com
-          git remote add gh-token "https://${{ secrets.GITHUB_TOKEN }}@github.com/streetsidesoftware/cspell.git"
+          git remote add gh-token "https://${GITHUB_TOKEN}@github.com/streetsidesoftware/cspell.git"
 
       - name: Install and Build
         run: pnpm i
@@ -68,15 +70,18 @@ jobs:
 
       - name: Push Version
         # TODO: support --sign-git-tag --sign-git-commit
-        run: pnpm lerna version ${{ steps.version.outputs.version }} --no-private --sync-workspace-lock --no-changelog --yes ${{ env.DRY_RUN }}
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: pnpm lerna version "$VERSION" --no-private --sync-workspace-lock --no-changelog --yes $DRY_RUN
 
       - name: Convert Draft Release to Published
         if: ${{ !inputs.dry_run }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.version.outputs.version }}
         run: |
-          gh release edit v${{ steps.version.outputs.version }} --draft=false
-          echo "Release v${{ steps.version.outputs.version }} published."
+          gh release edit "v${VERSION}" --draft=false
+          echo "Release v${VERSION} published."
 
       - name: Version Summary
         uses: streetsidesoftware/actions/public/summary@v1
