@@ -48,7 +48,7 @@ jobs:
         node-version:
           - 22.x # Use 24.x for testing when 22.x is EOL
           - 24.x
-          - 25.6.x # https://github.com/nodejs/node/issues/62012
+          - 26.x
 
         os:
           - ubuntu-latest
@@ -78,7 +78,7 @@ jobs:
     strategy:
       matrix:
         node-version:
-          - 22.x
+          - 26.x
 
         os:
           - ubuntu-latest
