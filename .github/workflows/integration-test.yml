@@ -41,7 +41,7 @@ concurrency:
 
 env:
   RUNS_ON: ubuntu-latest
-  NODE_VERSION: 'lts/*'
+  NODE_VERSION: '24.x'
 
 jobs:
   prepare:
@@ -102,7 +102,7 @@ jobs:
     strategy:
       # the integration tests are independent, so we want to run them all.
       fail-fast: false
-      max-parallel: 32
+      max-parallel: 8
       matrix:
         node-version:
           - ${{ needs.prepare.outputs.node_version }}
@@ -154,8 +154,10 @@ jobs:
 
       - name: Repo Info
         id: step-repo-info
+        env:
+          REPO: ${{ matrix.repo }}
         run: |
-          echo "repo-info=$(jq -c '.repositories[] | select(.path == "${{ matrix.repo }}")' integration-tests/config/config.json)" >> $GITHUB_OUTPUT
+          echo "repo-info=$(jq -c --arg repo "$REPO" '.repositories[] | select(.path == $repo)' integration-tests/config/config.json)" >> $GITHUB_OUTPUT
 
       - uses: ./.github/actions/echo
         with:
@@ -197,13 +199,14 @@ jobs:
           path: |
             integration-tests/repositories/temp/${{ matrix.repo }}
 
-      - name: Run Integration Tests ${{ matrix.repo }}
+      - name: Run Integration Tests
         if: ${{ steps.step-cache-run.outputs.cache-hit != 'true' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ matrix.repo }}
         run: >
           cd integration-tests
-          && pnpm run integration-tests -- ${{ matrix.repo }}
+          && pnpm run integration-tests -- "$REPO"
 
       - name: store perf run
         if: ${{ steps.step-cache-run.outputs.cache-hit != 'true' }}

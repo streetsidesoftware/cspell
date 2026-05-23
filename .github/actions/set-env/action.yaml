@@ -14,12 +14,13 @@ outputs:
 runs:
   using: 'composite'
   steps:
-    - name: Set Env ${{ inputs.name }}
+    - name: Set Env
       id: set-env
       shell: bash
       env:
         VALUE: ${{ inputs.value }}
+        ENV_NAME: ${{ inputs.name }}
       run: |
-        echo "${{ inputs.name }}<<_@@_SET_ENV_@@_" >> $GITHUB_ENV
+        echo "${ENV_NAME}<<_@@_SET_ENV_@@_" >> $GITHUB_ENV
         echo $VALUE >> $GITHUB_ENV
         echo "_@@_SET_ENV_@@_" >> $GITHUB_ENV
