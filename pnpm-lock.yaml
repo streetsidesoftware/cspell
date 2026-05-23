@@ -480,8 +480,8 @@ importers:
         specifier: workspace:*
         version: link:../cspell-types
       comment-json:
-        specifier: ^4.6.2
-        version: 4.6.2
+        specifier: ^5.0.0
+        version: 5.0.0
       smol-toml:
         specifier: ^1.6.1
         version: 1.6.1
@@ -851,8 +851,8 @@ importers:
         specifier: ^6.0.2
         version: 6.0.2
       comment-json:
-        specifier: ^4.6.2
-        version: 4.6.2
+        specifier: ^5.0.0
+        version: 5.0.0
       configstore:
         specifier: ^8.0.0
         version: 8.0.0
@@ -6151,6 +6151,10 @@ packages:
 
   comment-json@4.6.2:
     resolution: {integrity: sha512-R2rze/hDX30uul4NZoIZ76ImSJLFxn/1/ZxtKC1L77y2X1k+yYu1joKbAtMA2Fg3hZrTOiw0I5mwVMo0cf250w==}
+    engines: {node: '>= 6'}
+
+  comment-json@5.0.0:
+    resolution: {integrity: sha512-uiqLcOiVDJtBP8WGkZHEP+FZIhTzP1dxvn59EfoYUi9gqupjrBWVQkO2atDrbnKPwLeotFYDsuNb26uBMqB+hw==}
     engines: {node: '>= 6'}
 
   common-ancestor-path@2.0.0:
@@ -17513,6 +17517,11 @@ snapshots:
   commander@9.5.0: {}
 
   comment-json@4.6.2:
+    dependencies:
+      array-timsort: 1.0.3
+      esprima: 4.0.1
+
+  comment-json@5.0.0:
     dependencies:
       array-timsort: 1.0.3
       esprima: 4.0.1
