@@ -3,7 +3,7 @@ Repository: MicrosoftDocs/PowerShell-Docs
 Url: "https://github.com/MicrosoftDocs/PowerShell-Docs.git"
 Args: ["--config=../../../cspell-power-shell-docs.config.yaml","**"]
 Lines:
- CSpell: Files checked: 3125, Issues found: 4444 in 1087 files.
+ CSpell: Files checked: 3126, Issues found: 4446 in 1088 files.
  exit code: 1
 CODE_OF_CONDUCT.md:38:38     - Unknown word (opensource) -- reach out at [aka.ms/opensource/moderation-support]
 LICENSE.md:122:56    - Unknown word (sublicensable)   -- worldwide, royalty-free, non-sublicensable,
@@ -12,7 +12,7 @@ LICENSE.md:31:9      - Unknown word (creativecommons) -- [wiki.creativecommons.o
 LICENSE.md:339:2     - Unknown word (creativecommons) -- [creativecommons.org/policies][02], Creative
 LICENSE.md:347:39    - Unknown word (creativecommons) -- may be contacted at [creativecommons.org][01].
 LICENSE.md:45:9      - Unknown word (creativecommons) -- [wiki.creativecommons.org/Considerations_for
-README.md:27:4      - Unknown word (redir)      -- - `redir` - contains redirection
+README.md:41:13     - Unknown word (redir)      -- "🔀 redir - URL redirection mapping
 build.ps1:103:14    - Unknown word (Maml)       -- $MamlOutputFolder = Join-Path
 build.ps1:104:37    - Unknown word (Maml)       -- Write-Verbose -Verbose "MamlOutputFolder = $MamlOutputFold
 build.ps1:104:57    - Unknown word (Maml)       -- MamlOutputFolder = $MamlOutputFolder"
@@ -4088,6 +4088,8 @@ reference/docs-conceptual/learn/ps101/09-functions.md:834:15    - Unknown word (
 reference/docs-conceptual/learn/ps101/10-script-modules.md:343:20    - Unknown word (mikefrobbins) -- CompanyName = 'mikefrobbins.com'
 reference/docs-conceptual/learn/ps101/10-script-modules.md:3:24      - Unknown word (mikefrobbins) -- custom: Contributor-mikefrobbins
 reference/docs-conceptual/learn/ps101/10-script-modules.md:5:14      - Unknown word (mirobb)       -- ms.reviewer: mirobb
+reference/docs-conceptual/learn/ps101/11-appendix.md:3:24      - Unknown word (mikefrobbins) -- custom: Contributor-mikefrobbins
+reference/docs-conceptual/learn/ps101/11-appendix.md:5:14      - Unknown word (mirobb)       -- ms.reviewer: mirobb
 reference/docs-conceptual/learn/shell/tab-completion.md:56:77     - Unknown word (psdf)       -- functions. For example, `i-psdf<tab>` returns
 reference/docs-conceptual/learn/shell/using-aliases.md:66:17     - Unknown word (cmpo)       -- Set-Alias -Name cmpo -Value Compare-Object
 reference/docs-conceptual/learn/shell/using-keyhandlers.md:187:49    - Unknown word (eastus)     -- eGroupName myRGName -Location eastus -Name myVM`
@@ -4141,16 +4143,16 @@ reference/docs-conceptual/samples/Working-with-Registry-Entries.md:168:61    - U
 reference/docs-conceptual/samples/Working-with-Registry-Entries.md:186:2     - Unknown word (newpath)    -- $newpath = $value.Path.SubString
 reference/docs-conceptual/samples/Working-with-Registry-Entries.md:187:38    - Unknown word (newpath)    -- Environment /v Path /d $newpath /f
 reference/docs-conceptual/samples/Working-with-Registry-Keys.md:104:37    - Unknown word (regini)     -- including `reg.exe`, `regini.exe`, `regedit.exe`
-reference/docs-conceptual/security/app-control/how-app-control-works.md:19:41     - Unknown word (Wldp)       -- legacy App Control `WldpGetLockdownPolicy` API
-reference/docs-conceptual/security/app-control/how-app-control-works.md:29:26     - Unknown word (Wldp)       -- PowerShell uses the new `WldpCanExecuteFile` API to
-reference/docs-conceptual/security/app-control/how-app-control-works.md:36:4      - Unknown word (WLDP)       -- - `WLDP_CAN_EXECUTE_ALLOWED
-reference/docs-conceptual/security/app-control/how-app-control-works.md:37:4      - Unknown word (WLDP)       -- - `WLDP_CAN_EXECUTE_BLOCKED
-reference/docs-conceptual/security/app-control/how-app-control-works.md:38:4      - Unknown word (WLDP)       -- - `WLDP_CAN_EXECUTE_REQUIRE
-reference/docs-conceptual/security/app-control/how-app-control-works.md:55:5      - Unknown word (Noninteractive) -- ### Noninteractive mode running under policy
-reference/docs-conceptual/security/app-control/how-app-control-works.md:60:44     - Unknown word (Wldp)           -- or higher uses the `WldpCanExecuteFile` API if
-reference/docs-conceptual/security/app-control/how-app-control-works.md:63:4      - Unknown word (WLDP)           -- - `WLDP_CAN_EXECUTE_ALLOWED
-reference/docs-conceptual/security/app-control/how-app-control-works.md:65:4      - Unknown word (WLDP)           -- - `WLDP_CAN_EXECUTE_BLOCKED
-reference/docs-conceptual/security/app-control/how-app-control-works.md:70:34     - Unknown word (Wldp)           -- PowerShell 5.1 or if `WldpCanExecuteFile` API isn
+reference/docs-conceptual/security/app-control/how-app-control-works.md:21:41     - Unknown word (Wldp)       -- legacy App Control `WldpGetLockdownPolicy` API
+reference/docs-conceptual/security/app-control/how-app-control-works.md:31:26     - Unknown word (Wldp)       -- PowerShell uses the new `WldpCanExecuteFile` API to
+reference/docs-conceptual/security/app-control/how-app-control-works.md:38:4      - Unknown word (WLDP)       -- - `WLDP_CAN_EXECUTE_ALLOWED
+reference/docs-conceptual/security/app-control/how-app-control-works.md:39:4      - Unknown word (WLDP)       -- - `WLDP_CAN_EXECUTE_BLOCKED
+reference/docs-conceptual/security/app-control/how-app-control-works.md:40:4      - Unknown word (WLDP)       -- - `WLDP_CAN_EXECUTE_REQUIRE
+reference/docs-conceptual/security/app-control/how-app-control-works.md:57:5      - Unknown word (Noninteractive) -- ### Noninteractive mode running under policy
+reference/docs-conceptual/security/app-control/how-app-control-works.md:62:44     - Unknown word (Wldp)           -- or higher uses the `WldpCanExecuteFile` API if
+reference/docs-conceptual/security/app-control/how-app-control-works.md:65:4      - Unknown word (WLDP)           -- - `WLDP_CAN_EXECUTE_ALLOWED
+reference/docs-conceptual/security/app-control/how-app-control-works.md:67:4      - Unknown word (WLDP)           -- - `WLDP_CAN_EXECUTE_BLOCKED
+reference/docs-conceptual/security/app-control/how-app-control-works.md:72:34     - Unknown word (Wldp)           -- PowerShell 5.1 or if `WldpCanExecuteFile` API isn
 reference/docs-conceptual/security/app-control/how-to-use-app-control.md:129:1     - Unknown word (wevtutil)   -- wevtutil.exe sl PowerShellCore
 reference/docs-conceptual/security/preventing-script-injection.md:104:36    - Unknown word (pwnd)       -- rocessById "$PID; Write-Host 'pwnd!'"
 reference/docs-conceptual/security/preventing-script-injection.md:136:36    - Unknown word (pwnd)       -- rocessById "$PID; Write-Host 'pwnd!'"
@@ -4204,13 +4206,13 @@ reference/docs-conceptual/security/remoting/jea/using-jea.md:184:5     - Unknown
 reference/docs-conceptual/security/remoting/jea/using-jea.md:229:63    - Unknown word (Aformy)     -- UserName 'localhost\JEAformyHoster'
 reference/docs-conceptual/security/remoting/jea/using-jea.md:229:69    - Unknown word (Hoster)     -- UserName 'localhost\JEAformyHoster'
 reference/docs-conceptual/security/remoting/powershell-remoting-faq.yml:408:20    - Unknown word (Wsmprovhost) -- process (Wsmprovhost.exe) on the remote computer
-reference/docs-conceptual/toc.yml:120:57    - Unknown word (shouldprocess) -- dives/everything-about-shouldprocess.md
-reference/docs-conceptual/toc.yml:152:56    - Unknown word (ciminstance)   -- getting-wmi-objects--get-ciminstance-.md
-reference/docs-conceptual/toc.yml:162:66    - Unknown word (filterhashtable) -- winEvent-queries-with-filterhashtable.md
-reference/docs-conceptual/toc.yml:386:41    - Unknown word (cmdline)         -- dev-cross-plat/create-cmdline-predictor.md
-reference/docs-conceptual/toc.yml:451:46    - Unknown word (thon)            -- acktoberfest and other hack-a-thon events
-reference/docs-conceptual/toc.yml:452:38    - Unknown word (hackathons)      -- community/contributing/hackathons.md
-reference/docs-conceptual/toc.yml:92:37     - Unknown word (keyhandlers) -- href: learn/shell/using-keyhandlers.md
+reference/docs-conceptual/toc.yml:122:57    - Unknown word (shouldprocess) -- dives/everything-about-shouldprocess.md
+reference/docs-conceptual/toc.yml:154:56    - Unknown word (ciminstance)   -- getting-wmi-objects--get-ciminstance-.md
+reference/docs-conceptual/toc.yml:164:66    - Unknown word (filterhashtable) -- winEvent-queries-with-filterhashtable.md
+reference/docs-conceptual/toc.yml:388:41    - Unknown word (cmdline)         -- dev-cross-plat/create-cmdline-predictor.md
+reference/docs-conceptual/toc.yml:453:46    - Unknown word (thon)            -- acktoberfest and other hack-a-thon events
+reference/docs-conceptual/toc.yml:454:38    - Unknown word (hackathons)      -- community/contributing/hackathons.md
+reference/docs-conceptual/toc.yml:94:37     - Unknown word (keyhandlers) -- href: learn/shell/using-keyhandlers.md
 reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-72.md:129:11    - Unknown word (awakecoding) -- host by awakecoding · Pull Request #146
 reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-72.md:96:82     - Unknown word (Sazonov)    -- cmdlets (#14513) (Thanks @iSazonov)
 reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:105:85    - Unknown word (fflaten)      -- 4][17804]) (Thanks @fflaten!)
@@ -4380,7 +4382,7 @@ reference/media/shared/large-yellow-circle-1f7e1.svg:6:72      - Unknown word (e
 reference/media/shared/large-yellow-circle-1f7e1.svg:7:72      - Unknown word (evenodd)    -- 100d43c" fill-rule="evenodd"></path>
 reference/media/shared/large-yellow-circle-1f7e1.svg:8:72      - Unknown word (evenodd)    -- 100d43c" fill-rule="evenodd"></path>
 reference/module/index.md:14:36     - Unknown word (windowsserver) -- FilterColumn1: powershell-7.4,windowsserver2025-ps
-reference/module/index.md:15:21     - Unknown word (azps)          -- quickFilterColumn2: azps-15.5.0,sqlserver-ps
+reference/module/index.md:15:21     - Unknown word (azps)          -- quickFilterColumn2: azps-15.6.0,sqlserver-ps
 reference/module/index.md:16:42     - Unknown word (systemcenter)  -- graph-powershell-1.0,systemcenter-ps-2022
 terminology.md:42:38     - Unknown word (backticked) -- should be lowercase and backticked in a paragraph. See
 tests/Pester/Update-Help.Tests.ps1:134:89    - Unknown word (updatablehelp) -- $PSScriptRoot\..\..\updatablehelp\5.1\$moduleName"
