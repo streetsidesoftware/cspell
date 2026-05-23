@@ -8,7 +8,7 @@
   "scripts": {
     "lint": "eslint .",
     "spell": "cspell .",
-    "test": "yarn lint",
+    "test": "yarn -v && yarn lint",
     "go": "node ./index.mjs",
     "update:dep": "yarn run update:eslint && yarn run update:cspell",
     "update:eslint": "yarn up eslint @eslint/js globals",
