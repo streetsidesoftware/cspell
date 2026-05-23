@@ -102,7 +102,7 @@ jobs:
     strategy:
       # the integration tests are independent, so we want to run them all.
       fail-fast: false
-      max-parallel: 32
+      max-parallel: 8
       matrix:
         node-version:
           - ${{ needs.prepare.outputs.node_version }}
