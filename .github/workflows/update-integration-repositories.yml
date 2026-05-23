@@ -26,9 +26,11 @@ jobs:
       ref: ${{ github.event.inputs.ref || env.REF_BRANCH_G }}
     steps:
       - name: Ref Branch
+        env:
+          INPUT_REF: ${{ github.event.inputs.ref }}
         run: |
-          echo Ref: "${{ env.REF_BRANCH_G }}"
-          echo Input: "${{ github.event.inputs.ref }}"
+          echo Ref: "$REF_BRANCH_G"
+          echo Input: "$INPUT_REF"
 
   load-integrations:
     needs:
@@ -107,13 +109,14 @@ jobs:
         if: ${{ steps.step-cache-build.outputs.cache-hit != 'true' }}
         run: exit 1
 
-      - name: Run Integration Tests ${{ matrix.repo }}
+      - name: Run Integration Tests
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ matrix.repo }}
         run: >
           cd integration-tests
           && pnpm i
-          && pnpm run update-repositories -- ${{ matrix.repo }}
+          && pnpm run update-repositories -- "$REPO"
 
       - name: Normalize Repo Name
         id: step-normalize-repo-name
@@ -128,9 +131,10 @@ jobs:
         id: step-repo-info
         env:
           REPO: ${{ steps.step-normalize-repo-name.outputs.REPO_NAME }}
+          MATRIX_REPO: ${{ matrix.repo }}
         run: |
           mkdir temp
-          echo "${{ matrix.repo }} =>" $REPO
+          echo "$MATRIX_REPO =>" "$REPO"
           git diff > temp/$REPO.diff
       - name: store diff
         uses: actions/upload-artifact@v7

@@ -195,8 +195,10 @@ jobs:
 
       - name: Repo Info
         id: step-repo-info
+        env:
+          REPO: ${{ matrix.repo }}
         run: |
-          echo "repo-info=$(jq -c '.repositories[] | select(.path == "${{ matrix.repo }}")' integration-tests/config/config.json)" >> $GITHUB_OUTPUT
+          echo "repo-info=$(jq -c --arg repo "$REPO" '.repositories[] | select(.path == $repo)' integration-tests/config/config.json)" >> $GITHUB_OUTPUT
 
       - name: Cache Integration Test Repository Files
         uses: actions/cache@v5.0.5
@@ -205,13 +207,14 @@ jobs:
           path: |
             integration-tests/repositories/temp/${{ matrix.repo }}
 
-      - name: Run Integration Tests ${{ matrix.repo }}
+      - name: Run Integration Tests
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ matrix.repo }}
         run: >
           cd integration-tests
           && pnpm i
-          && pnpm run update-snapshots-only -- ${{ matrix.repo }}
+          && pnpm run update-snapshots-only -- "$REPO"
 
       - name: Normalize Repo Name
         id: step-normalize-repo-name
@@ -225,9 +228,10 @@ jobs:
       - name: Store Repo Diff
         env:
           REPO: ${{ steps.step-normalize-repo-name.outputs.REPO_NAME }}
+          MATRIX_REPO: ${{ matrix.repo }}
         run: |
           mkdir temp || echo temp already exists
-          echo "${{ matrix.repo }} =>" $REPO
+          echo "$MATRIX_REPO =>" "$REPO"
           git diff integration-tests/config integration-tests/repositories integration-tests/snapshots  > temp/$REPO.diff
 
       - name: store diff

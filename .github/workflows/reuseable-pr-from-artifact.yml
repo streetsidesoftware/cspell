@@ -72,8 +72,10 @@ jobs:
       #   run: cat temp/*.diff
 
       - name: apply diff
+        env:
+          PATCH_PATH: ${{ inputs.patch_path }}
         run: |
-          git apply --allow-empty temp/${{ inputs.patch_path }}
+          git apply --allow-empty "temp/$PATCH_PATH"
 
       - name: PR Body
         id: body

@@ -153,8 +153,10 @@ jobs:
 
       - name: Repo Info
         id: step-repo-info
+        env:
+          REPO: ${{ matrix.repo }}
         run: |
-          echo "repo-info=$(jq -c '.repositories[] | select(.path == "${{ matrix.repo }}")' integration-tests/config/config.json)" >> $GITHUB_OUTPUT
+          echo "repo-info=$(jq -c --arg repo "$REPO" '.repositories[] | select(.path == $repo)' integration-tests/config/config.json)" >> $GITHUB_OUTPUT
 
       - uses: ./.github/actions/echo
         with:
@@ -196,13 +198,14 @@ jobs:
           path: |
             integration-tests/repositories/temp/${{ matrix.repo }}
 
-      - name: Run Integration Tests ${{ matrix.repo }}
+      - name: Run Integration Tests
         if: ${{ steps.step-cache-run.outputs.cache-hit != 'true' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ matrix.repo }}
         run: >
           cd integration-tests
-          && pnpm run integration-tests -- ${{ matrix.repo }}
+          && pnpm run integration-tests -- "$REPO"
 
       - name: store perf run
         if: ${{ steps.step-cache-run.outputs.cache-hit != 'true' }}

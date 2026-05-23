@@ -45,8 +45,10 @@ jobs:
 
     steps:
       - name: Start
+        env:
+          EVENT_INPUTS: ${{ toJson(github.event.inputs) }}
         run: |
-          echo "${{ toJson(github.event.inputs) }}"
+          echo "$EVENT_INPUTS"
           echo "Update Snapshots: $UPDATE_SNAPSHOTS"
       - name: Checkout code
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2

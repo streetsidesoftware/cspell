@@ -26,8 +26,10 @@ jobs:
           node-version: '24.x'
 
       - name: Update Contributors
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          pnpm update-contributors ${{ secrets.GITHUB_TOKEN }}
+          pnpm update-contributors "$GITHUB_TOKEN"
 
       - name: Build Readme
         run: |

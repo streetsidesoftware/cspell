@@ -67,12 +67,13 @@ jobs:
       - name: Update Integrations List
         env:
           DIRTY: ${{ env.dirty }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           cd integration-tests
           pnpm i
           pnpm run build
           echo "REPOS<<HEREDOC" >> $GITHUB_ENV
-          ./tester.js list --json $DIRTY -t ${{ secrets.GITHUB_TOKEN }} >> $GITHUB_ENV
+          ./tester.js list --json $DIRTY -t "$GH_TOKEN" >> $GITHUB_ENV
           echo HEREDOC >> $GITHUB_ENV
 
       - name: Show List
