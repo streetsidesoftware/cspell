@@ -3,7 +3,7 @@ export const sampleWords = `
 
 # Medical Terms Test
 
-This file contaains some medical terms to be spell checked.
+This file contains some medical terms to be spell checked.
 
 Sampled full list
 
