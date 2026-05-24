@@ -457,7 +457,15 @@ export function textValidatorFactory(dict: SpellingDictionary, options: TextVali
                 vr;
             const r = mapRangeBackToOriginalPos([offset, offset + text.length], map);
             const range = [r[0] + srcOffset, r[1] + srcOffset] as [number, number];
-            return { text, range, isFlagged, isFound, suggestionsEx, hasPreferredSuggestions, hasSimpleSuggestions };
+            return {
+                text,
+                range,
+                isFlagged,
+                isFound,
+                suggestionsEx,
+                hasPreferredSuggestions,
+                hasSimpleSuggestions,
+            };
         }
         return [...lineValidatorFn(lineSegment)].map(mapBackToOriginSimple);
     }

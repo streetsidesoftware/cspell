@@ -480,8 +480,9 @@ function formatIssue(io: IOChalk, templateStr: string, issue: ReporterIssue, max
         return t.replace(/\s+/, ' ');
     }
     const { uri = '', filename, row, col, text, context = issue.line, offset } = issue;
+    const textLen = issue.length ?? text.length;
     const contextLeft = clean(context.text.slice(0, offset - context.offset));
-    const contextRight = clean(context.text.slice(offset + text.length - context.offset));
+    const contextRight = clean(context.text.slice(offset + textLen - context.offset));
     const contextFull = clean(context.text);
     const padContext = ' '.repeat(Math.max(maxIssueTextWidth - text.length, 0));
     const rowText = row.toString();

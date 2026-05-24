@@ -5,6 +5,9 @@ version: '0.2'
 # The locale to use when spell checking. (e.g., en, en-GB, de-DE
 language: en
 
+words:
+  - Fréchets
+
 substitutionDefinitions:
   - name: html-entities
     entries:
@@ -20,10 +23,14 @@ substitutionDefinitions:
       - ['%C3%B1', 'ñ']
       - ['%C3%BC', 'ü']
       - ['%C3%A7', 'ç']
+  - name: latex-entities
+    entries:
+      - ['\''e', 'é']
 
 substitutions:
   - html-entities
   - uri-encoded
+  - latex-entities
 
 languageSettings:
   - languageId: markdown
