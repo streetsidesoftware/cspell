@@ -172,4 +172,4 @@ interface TransformedText extends Mapped {
   rawText?: string | undefined;
 }
 //#endregion
-export { type DelegateInfo, type MappedText, type ParseResult, type ParsedText, type Parser, type ParserName, type ParserOptions, type Range, type Scope, type ScopeChain, type ScopeString, type SourceMap };
+export type { DelegateInfo, MappedText, ParseResult, ParsedText, Parser, ParserName, ParserOptions, Range, Scope, ScopeChain, ScopeString, SourceMap };
