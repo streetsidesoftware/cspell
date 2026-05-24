@@ -122,13 +122,13 @@ describe('Substitution Assumptions', () => {
     const tToHtml = makeTransformer('html-symbol-entities-rev');
 
     test('assumptions', () => {
-        expect(tFromUri.transform('caf%C3%A9')).toEqual(tm('café', [0, 9], [3, 3, 6, 1]));
-        expect(tToUri.transform("café's")).toEqual(tm("caf%C3%A9's", [0, 6], [3, 3, 1, 6, 2, 2]));
-        expect(tFromHtml.transform('caf&#233;')).toEqual(tm('café', [0, 9], [3, 3, 6, 1]));
-        expect(tToHtml.transform("café's")).toEqual(tm('caf&#233;&apos;s', [0, 6], [3, 3, 1, 6, 1, 6, 1, 1]));
+        expect(tFromUri.transform('caf%C3%A9')).toEqual(tm('café', [0, 9], [3, 3, 6, 1], 'caf%C3%A9'));
+        expect(tToUri.transform("café's")).toEqual(tm("caf%C3%A9's", [0, 6], [3, 3, 1, 6, 2, 2], "café's"));
+        expect(tFromHtml.transform('caf&#233;')).toEqual(tm('café', [0, 9], [3, 3, 6, 1], 'caf&#233;'));
+        expect(tToHtml.transform("café's")).toEqual(tm('caf&#233;&apos;s', [0, 6], [3, 3, 1, 6, 1, 6, 1, 1], "café's"));
 
         expect(tToHtml.transform("café's $")).toEqual(
-            tm('caf&#233;&apos;s &#36;', [0, 8], [3, 3, 1, 6, 1, 6, 2, 2, 1, 5]),
+            tm('caf&#233;&apos;s &#36;', [0, 8], [3, 3, 1, 6, 1, 6, 2, 2, 1, 5], "café's $"),
         );
 
         expect(tFromHtml.transform(tToHtml.transform("café's $").text).text).toEqual("café's $");
@@ -177,8 +177,15 @@ function makeTransformer(subs: SubstitutionInfo['substitutions'] | string, info:
     return r.transformer;
 }
 
-function tm(text: string, range: [number, number], map?: number[]): MappedText {
-    return map ? { text, range, map } : { text, range };
+type Writeable<T> = {
+    -readonly [P in keyof T]: T[P];
+};
+
+function tm(text: string, range: [number, number], map?: number[], rawText?: string): MappedText {
+    const m: Writeable<MappedText> = { text, range };
+    if (map) m.map = map;
+    if (rawText) m.rawText = rawText;
+    return m;
 }
 
 function makeSubDef(name: string, entries: Iterable<[string, string]>): SubstitutionDefinition {

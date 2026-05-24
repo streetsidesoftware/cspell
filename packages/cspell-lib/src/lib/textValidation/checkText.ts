@@ -122,7 +122,7 @@ function genResult(text: string, issues: ValidationIssue[], includeRanges: Match
         flagIE: IncludeExcludeFlag.EXCLUDE,
     });
 
-    function* merge() {
+    function* merge(): Iterable<TextInfoItem> {
         let i = 0;
         for (const r of result) {
             if (i >= issues.length || issues[i].offset >= r.endPos) {
@@ -135,13 +135,14 @@ function genResult(text: string, issues: ValidationIssue[], includeRanges: Match
                 const endPos = issue.offset;
                 const text = span.text.slice(0, endPos - span.startPos);
                 const endPosError = issue.offset + (issue.length ?? issue.text.length);
+                const issueText = span.text.slice(endPos - span.startPos, endPosError - span.startPos);
                 yield { ...span, text, endPos };
                 yield {
                     ...span,
                     isError: true,
                     startPos: issue.offset,
                     endPos: endPosError,
-                    text: issue.text,
+                    text: issueText,
                 };
                 span.text = span.text.slice(endPosError - span.startPos);
                 span.startPos = endPosError;

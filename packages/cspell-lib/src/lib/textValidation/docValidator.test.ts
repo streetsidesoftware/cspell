@@ -148,7 +148,7 @@ describe('docValidator', () => {
         ${tFix('issues/issue-4811/#local/README.md')}    | ${undefined}         | ${[]}                                                                                                                                                                                         | ${undefined}
         ${tFix('issues/issue-4811/#local/version@2.md')} | ${undefined}         | ${['marrkdown']}                                                                                                                                                                              | ${undefined /* cspell:disable-line */}
         ${fixDict('supportNonStrictSearches/test.txt')}  | ${undefined}         | ${['paris']}                                                                                                                                                                                  | ${undefined}
-        ${fixSubs('README.md')}                          | ${undefined}         | ${[]}                                                                                                                                                                                         | ${undefined}
+        ${fixSubs('README.md')}                          | ${undefined}         | ${['Fréchet']}                                                                                                                                                                                | ${["Fr\\'echet"] /* cspell:disable-line */}
     `(
         'checkDocument $filename $maxDuplicateProblems',
         async ({ filename, maxDuplicateProblems, expectedIssues, expectedRawIssues }) => {
