@@ -1,7 +1,17 @@
+import nodePath from 'node:path';
+import nodeUrl from 'node:url';
+
 import { describe, expect, test } from 'vitest';
 
+import { pathPackageFixtures } from '../../test-util/test.locations.js';
 import * as checkText from './checkText.js';
 import { IncludeExcludeFlag } from './checkText.js';
+
+const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
+const ac = (...params: Parameters<typeof expect.arrayContaining>) => expect.arrayContaining(...params);
+
+const fixturesDir = nodePath.resolve(pathPackageFixtures);
+const featuresDir = resolveFixture('features');
 
 // cSpell:ignore brouwn jumpped lazzy wrongg mispelled ctrip nmove mischecked
 
@@ -44,6 +54,28 @@ describe('checkText', () => {
         expect(info.items[0].flagIE).toBe(IncludeExcludeFlag.INCLUDE);
     });
 });
+
+describe('checkTextDocument', () => {
+    test('checkTextDocument', async () => {
+        const url = resolveFeatureFixtureUrl('substitutions/README.md');
+        const result = await checkText.checkTextDocument({ uri: url.href }, {}, {});
+        const errors = result.items.filter((i) => i.isError);
+        // cspell:ignore Fréchet 'echet
+        expect(errors).toEqual(ac([oc({ text: "Fr\\'echet" })]));
+    });
+});
+
+function resolveFixture(...parts: string[]): string {
+    return nodePath.resolve(fixturesDir, ...parts);
+}
+
+function resolveFeatureFixture(...parts: string[]): string {
+    return nodePath.resolve(featuresDir, ...parts);
+}
+
+function resolveFeatureFixtureUrl(...parts: string[]): URL {
+    return nodeUrl.pathToFileURL(resolveFeatureFixture(...parts));
+}
 
 // cspell:ignore lightbrown whiteberry redberry
 const sampleText = `

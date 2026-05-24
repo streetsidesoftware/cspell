@@ -31,11 +31,13 @@ export class SubstitutionTransformer {
         if (!this.#trie) return text;
 
         const transformed = this.transformString(text.text);
+        const rawText = text.rawText ?? text.text;
 
         const result: MappedText = {
             ...text,
             text: transformed.text,
             map: mergeSourceMaps(text.map, transformed.map),
+            rawText,
         };
 
         return result;
@@ -43,7 +45,7 @@ export class SubstitutionTransformer {
 
     transformString(text: string): MappedText {
         if (!this.#trie) {
-            return { text, range: [0, text.length] };
+            return { text, range: [0, text.length], rawText: text };
         }
 
         const map: SourceMap = [0, 0];
@@ -61,7 +63,7 @@ export class SubstitutionTransformer {
         }
 
         if (lastEnd === 0) {
-            return { text, range: [0, text.length] };
+            return { text, range: [0, text.length], rawText: text };
         }
 
         if (lastEnd < text.length) {
@@ -73,6 +75,7 @@ export class SubstitutionTransformer {
             text: repText,
             range: [0, text.length],
             map: mapOffsetPairsToSourceMap(map),
+            rawText: text,
         };
 
         return result;
