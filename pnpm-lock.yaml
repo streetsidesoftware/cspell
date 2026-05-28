@@ -90,7 +90,7 @@ importers:
         version: 4.0.0
       tsdown:
         specifier: ^0.22.0
-        version: 0.22.0(oxc-resolver@11.19.1(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0))(typescript@5.9.3)(unrun@0.2.39(synckit@0.11.12))
+        version: 0.22.0(oxc-resolver@11.19.1(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0))(typescript@5.9.3)(unrun@0.2.39(synckit@0.11.13))
       tslib:
         specifier: ^2.8.1
         version: 2.8.1
@@ -557,8 +557,8 @@ importers:
         specifier: workspace:*
         version: link:../cspell-lib
       synckit:
-        specifier: ^0.11.12
-        version: 0.11.12
+        specifier: ^0.11.13
+        version: 0.11.13
     devDependencies:
       '@eslint/eslintrc':
         specifier: ^3.3.5
@@ -2288,6 +2288,10 @@ packages:
 
   '@babel/runtime@7.29.2':
     resolution: {integrity: sha512-JiDShH45zKHWyGe4ZNVRrCjBz8Nh9TMmZG1kh4QTK8hCBTWBi8Da+i7s1fJw7/lYpM4ccepSNfqzZ/QvABBi5g==}
+    engines: {node: '>=6.9.0'}
+
+  '@babel/runtime@7.29.7':
+    resolution: {integrity: sha512-Nq8OhGWiZIZGV6hLHoyAKLLcJihP/xFeBMGJoUrxTX2psI8dCifzLhZISFb+VWS3wFMRDmCGw5R+dOySCqPLhw==}
     engines: {node: '>=6.9.0'}
 
   '@babel/template@7.28.6':
@@ -4267,9 +4271,9 @@ packages:
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
 
-  '@pkgr/core@0.2.9':
-    resolution: {integrity: sha512-QNqXyfVS2wm9hweSYD2O7F0G06uurj9kZ96TRQE5Y9hU7+tgdZwIkbAKc5Ocy1HxEY2kuDQa6cQ1WRs/O5LFKA==}
-    engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
+  '@pkgr/core@0.3.6':
+    resolution: {integrity: sha512-SEeaJLb3qBNF/OaXnaR1NmmBbFYk1zC0ZH/52fATcRPLFg/p791YrcyFFy44Bo9sLaGuSuLp5Q6axbb/O+v/RA==}
+    engines: {node: ^14.18.0 || >=16.0.0}
 
   '@pnpm/config.env-replace@1.1.0':
     resolution: {integrity: sha512-htyl8TWnKL7K/ESFa1oW2UB5lVDxuF5DpM7tBi6Hu2LNL3mWkIzNLG6N4zoCUP1lCKNxWy/3iu8mS8MvToGd6w==}
@@ -10839,8 +10843,8 @@ packages:
   symbol-tree@3.2.4:
     resolution: {integrity: sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw==}
 
-  synckit@0.11.12:
-    resolution: {integrity: sha512-Bh7QjT8/SuKUIfObSXNHNSK6WHo6J1tHCqJsuaFDP7gP0fkzSfTxI8y85JrppZ0h8l0maIgc2tfuZQ6/t3GtnQ==}
+  synckit@0.11.13:
+    resolution: {integrity: sha512-eNRKgb3z66Yp3D2CixVujOUvXLFUTij/zVnV8KRyvFdQwpz7I5DS8UfRkTeLzb64u+dkzDSdelE24izu+zSSUg==}
     engines: {node: ^14.18.0 || >=16.0.0}
 
   tagged-tag@1.0.0:
@@ -12723,6 +12727,8 @@ snapshots:
       - supports-color
 
   '@babel/runtime@7.29.2': {}
+
+  '@babel/runtime@7.29.7': {}
 
   '@babel/template@7.28.6':
     dependencies:
@@ -15628,7 +15634,7 @@ snapshots:
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
-  '@pkgr/core@0.2.9': {}
+  '@pkgr/core@0.3.6': {}
 
   '@pnpm/config.env-replace@1.1.0': {}
 
@@ -15965,7 +15971,7 @@ snapshots:
 
   '@slorber/react-helmet-async@1.3.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
     dependencies:
-      '@babel/runtime': 7.29.2
+      '@babel/runtime': 7.29.7
       invariant: 2.2.4
       prop-types: 15.8.1
       react: 19.2.6
@@ -18658,7 +18664,7 @@ snapshots:
       remark-mdx: 3.1.1
       remark-parse: 11.0.0
       remark-stringify: 11.0.0
-      synckit: 0.11.12
+      synckit: 0.11.13
       unified: 11.0.5
       unified-engine: 11.2.2
       unist-util-visit: 5.1.0
@@ -18729,7 +18735,7 @@ snapshots:
       eslint-json-compat-utils: 0.2.3(eslint@10.4.0(jiti@1.21.7))(jsonc-eslint-parser@3.1.0)
       jsonc-eslint-parser: 3.1.0
       natural-compare: 1.4.0
-      synckit: 0.11.12
+      synckit: 0.11.13
     transitivePeerDependencies:
       - '@eslint/json'
 
@@ -18743,7 +18749,7 @@ snapshots:
       remark-mdx: 3.1.1
       remark-parse: 11.0.0
       remark-stringify: 11.0.0
-      synckit: 0.11.12
+      synckit: 0.11.13
       unified: 11.0.5
       vfile: 6.0.3
     transitivePeerDependencies:
@@ -19604,7 +19610,7 @@ snapshots:
 
   history@4.10.1:
     dependencies:
-      '@babel/runtime': 7.29.2
+      '@babel/runtime': 7.29.7
       loose-envify: 1.4.0
       resolve-pathname: 3.0.0
       tiny-invariant: 1.3.3
@@ -23313,9 +23319,9 @@ snapshots:
 
   symbol-tree@3.2.4: {}
 
-  synckit@0.11.12:
+  synckit@0.11.13:
     dependencies:
-      '@pkgr/core': 0.2.9
+      '@pkgr/core': 0.3.6
 
   tagged-tag@1.0.0: {}
 
@@ -23478,7 +23484,7 @@ snapshots:
       minimist: 1.2.8
       strip-bom: 3.0.0
 
-  tsdown@0.22.0(oxc-resolver@11.19.1(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0))(typescript@5.9.3)(unrun@0.2.39(synckit@0.11.12)):
+  tsdown@0.22.0(oxc-resolver@11.19.1(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0))(typescript@5.9.3)(unrun@0.2.39(synckit@0.11.13)):
     dependencies:
       ansis: 4.3.0
       cac: 7.0.0
@@ -23497,7 +23503,7 @@ snapshots:
       unconfig-core: 7.5.0
     optionalDependencies:
       typescript: 5.9.3
-      unrun: 0.2.39(synckit@0.11.12)
+      unrun: 0.2.39(synckit@0.11.13)
     transitivePeerDependencies:
       - '@ts-macro/tsc'
       - '@typescript/native-preview'
@@ -23822,11 +23828,11 @@ snapshots:
       '@unrs/resolver-binding-win32-ia32-msvc': 1.12.2
       '@unrs/resolver-binding-win32-x64-msvc': 1.12.2
 
-  unrun@0.2.39(synckit@0.11.12):
+  unrun@0.2.39(synckit@0.11.13):
     dependencies:
       rolldown: 1.0.0-rc.17
     optionalDependencies:
-      synckit: 0.11.12
+      synckit: 0.11.13
     optional: true
 
   update-browserslist-db@1.2.3(browserslist@4.28.2):
