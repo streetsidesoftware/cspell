@@ -12,5 +12,5 @@ export async function* readStdin(): AsyncIterable<string> {
 }
 
 function isReadlineClosedError(e: unknown): boolean {
-    return e instanceof Error && e.message === 'readline was closed';
+    return e instanceof Error && e.message.includes('closed');
 }
