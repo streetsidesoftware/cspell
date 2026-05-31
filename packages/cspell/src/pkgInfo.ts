@@ -9,7 +9,7 @@ export interface PackageJson {
 }
 
 export const name: string = 'cspell';
-export const version: string = '10.0.0';
+export const version: string = '10.0.1';
 export const engines: PackageJson['engines'] = { node: '>=22.18.0' };
 
 export const npmPackage: PackageJson = { name, version, engines };
