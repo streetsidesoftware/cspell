@@ -3,6 +3,133 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v10.0.1 (2026-05-31)
+
+### Fixes
+
+<details>
+<summary>fix(cli): ignore closed readline after stdin (<a href="https://github.com/streetsidesoftware/cspell/pull/8862">#8862</a>)</summary>
+
+### fix(cli): ignore closed readline after stdin ([#8862](https://github.com/streetsidesoftware/cspell/pull/8862))
+
+## What changed
+
+Wrap the stdin readline async iterator so CSpell ignores the terminal `readline was closed` error that can occur after stdin has already yielded its file list.
+
+Other readline errors are still rethrown.
+
+## Why
+
+Fixes #8778. On Node 24, `cspell lint --file-list stdin` can finish processing a large stdin file list and then report `Linter Error: readline was closed` instead of completing cleanly.
+
+## Tests
+
+Added unit coverage for:
+
+- preserving all yielded stdin lines when readline throws `readline was closed` after reading
+- continuing to throw unrelated readline errors
+
+I could not run the package test command locally in this sandbox because the checkout has no `node_modules`, and Corepack is blocked from creating its user cache directory (`EPERM` under `~/.cache/node/corepack`).
+
+---
+
+</details>
+
+<details>
+<summary>fix(docs): replace `.json` with `package.json` in configuration docs (<a href="https://github.com/streetsidesoftware/cspell/pull/8861">#8861</a>)</summary>
+
+### fix(docs): replace `.json` with `package.json` in configuration docs ([#8861](https://github.com/streetsidesoftware/cspell/pull/8861))
+
+## Fix
+
+In the `package.json` configuration section, the sentence referred to
+"the `.json` file" instead of "the `package.json` file".
+
+Before: "CSpell looks for the configuration in the `cspell` field of the `.json` file."
+After:  "CSpell looks for the configuration in the `cspell` field of the `package.json` file."
+
+---
+
+</details>
+
+<details>
+<summary>fix: substitution display and ranges for output checking (<a href="https://github.com/streetsidesoftware/cspell/pull/8838">#8838</a>)</summary>
+
+### fix: substitution display and ranges for output checking ([#8838](https://github.com/streetsidesoftware/cspell/pull/8838))
+
+Added a French dictionary and fixed the positioning logic for error reporting of replacement words.
+
+---
+
+</details>
+
+<details>
+<summary>fix: use env vars for GitHub context expressions in run steps to prevent injection (<a href="https://github.com/streetsidesoftware/cspell/pull/8852">#8852</a>)</summary>
+
+### fix: use env vars for GitHub context expressions in run steps to prevent injection ([#8852](https://github.com/streetsidesoftware/cspell/pull/8852))
+
+## Summary
+
+This PR fixes script injection and secret exposure security issues found in GitHub Actions workflows and composite actions. In each case, a GitHub expression (`${{ ... }}`) was used directly inside a `run:` shell command instead of being passed through an environment variable — the recommended approach per [GitHub's security hardening guide](https://docs.google.com/document/d/1-GkDHLMHHJtibPGvY-KYi-CeTuoaIVJF/edit).
+
+## Issues Fixed
+
+### 🔴 Secrets exposed in process arguments (visible via `ps aux`)
+
+| File                                        | Issue                                                                              |
+| ------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `update-readme.yml`                         | `pnpm update-contributors ${{ secrets.GITHUB_TOKEN }}` — token as CLI arg          |
+| `reuseable-load-integrations-repo-list.yml` | `./tester.js list --json $DIRTY -t ${{ secrets.GITHUB_TOKEN }}` — token as CLI arg |
+| `build-version-release.yml`                 | `"https://${{ secrets.GITHUB_TOKEN }}@github.com/..."` — token inline in URL       |
+
+### 🔴 GITHUB\_ENV injection (allows setting arbitrary environment variables)
+
+| File                  | Issue                                                                          |
+| --------------------- | ------------------------------------------------------------------------------ |
+| `set-env/action.yaml` | `echo "${{ inputs.name }}<<delimiter" >> $GITHUB_ENV` — name injected directly |
+
+### 🟠 Shell script injection via unsanitised expressions in `run:` steps
+
+| File                                  | Expression                                                             |
+| ------------------------------------- | ---------------------------------------------------------------------- |
+| `build-version-release.yml`           | `${{ steps.version.outputs.version }}` in lerna/gh commands            |
+| `publish.yml`                         | `${{ steps.dist_tag.outputs.value }}` in lerna publish command         |
+| `integration-test.yml`                | `${{ matrix.repo }}` in shell run and jq selector                      |
+| `update-dictionaries.yml`             | `${{ matrix.repo }}` in shell run and jq selector                      |
+| `update-integration-repositories.yml` | `${{ matrix.repo }}` and `${{ github.event.inputs.ref }}` in run steps |
+| `reuseable-pr-from-artifact.yml`      | `${{ inputs.patch_path }}` in git apply command                        |
+| `update-dependencies-old.yml`         | `${{ toJson(github.event.inputs) }}` in echo command                   |
+
+## Fix Pattern
+
+For each issue, the expression is moved to an `env:` block and referenced via shell variable:
+
+```yaml
+# Before (unsafe)
+run: some-command ${{ github.event.inputs.ref }}
+
+# After (safe)
+env:
+  REF: ${{ github.event.inputs.ref }}
+run: some-command "$REF"
+```
+
+For jq queries using `matrix.repo`, the injection-safe `--arg` flag is used:
+
+```yaml
+# Before (jq injection risk)
+run: jq '.[] | select(.path == "${{ matrix.repo }}")'
+
+# After (safe)
+env:
+  REPO: ${{ matrix.repo }}
+run: jq --arg repo "$REPO" '.[] | select(.path == $repo)'
+```
+
+---
+
+</details>
+
 ## v10.0.0 (2026-04-06)
 
 ### Features
