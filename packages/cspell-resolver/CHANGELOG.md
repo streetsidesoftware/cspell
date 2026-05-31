@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v10.0.1 (2026-05-31)
+
+### Fixes
+
+- fix(cli): ignore closed readline after stdin (<a href="https://github.com/streetsidesoftware/cspell/pull/8862">#8862</a>)
+- fix(docs): replace `.json` with `package.json` in configuration docs (<a href="https://github.com/streetsidesoftware/cspell/pull/8861">#8861</a>)
+
+- fix: substitution display and ranges for output checking (<a href="https://github.com/streetsidesoftware/cspell/pull/8838">#8838</a>)
+- fix: use env vars for GitHub context expressions in run steps to prevent injection (<a href="https://github.com/streetsidesoftware/cspell/pull/8852">#8852</a>)
+
 ## v10.0.0 (2026-04-06)
 
 ### Features
