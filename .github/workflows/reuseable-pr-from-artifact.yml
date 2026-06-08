@@ -75,7 +75,7 @@ jobs:
         env:
           PATCH_PATH: ${{ inputs.patch_path }}
         run: |
-          git apply --allow-empty "temp/$PATCH_PATH"
+          git apply --allow-empty $(find temp -path "$PATCH_PATH" -maxdepth 1)
 
       - name: PR Body
         id: body
