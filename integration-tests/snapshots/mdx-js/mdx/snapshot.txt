@@ -3,7 +3,7 @@ Repository: mdx-js/mdx
 Url: "https://github.com/mdx-js/mdx"
 Args: ["--config=../../../../config/repositories/mdx-js/mdx/cspell.json","**/*.*"]
 Lines:
- CSpell: Files checked: 140, Issues found: 586 in 71 files.
+ CSpell: Files checked: 139, Issues found: 584 in 70 files.
  exit code: 1
 docs/_asset/editor.jsx:169:15    - Unknown word (recma)      -- const recmaPlugins = []
 docs/_asset/editor.jsx:186:23    - Unknown word (esast)      -- if (show === 'esast') recmaPlugins.push
@@ -284,11 +284,13 @@ docs/docs/extending-mdx.mdx:103:58    - Unknown word (chartjs)      -- charts us
 docs/docs/extending-mdx.mdx:106:5     - Unknown word (goodproblems) -- * [`goodproblems/remark-mdx-math-enhanced
 docs/docs/extending-mdx.mdx:108:5     - Unknown word (ipikuka)      -- * [`ipikuka/remark-mdx-remove-esm
 docs/docs/extending-mdx.mdx:109:45    - Unknown word (mdxjs)        -- or export statements (mdxjsEsm)
-docs/docs/extending-mdx.mdx:135:8     - Unknown word (twoslash)     -- ```tsx twoslash
-docs/docs/extending-mdx.mdx:137:14    - Unknown word (Katex)        -- import rehypeKatex from 'rehype-katex'
-docs/docs/extending-mdx.mdx:157:44    - Unknown word (Katex)        -- rehypePlugins: [rehypeKatex], remarkPlugins: [remarkMath
-docs/docs/extending-mdx.mdx:162:26    - Unknown word (Katex)        -- rehypePlugins: [[rehypeKatex, {strict: true, throwOnError
-docs/docs/extending-mdx.mdx:172:2     - Unknown word (unifiedjs)    -- `unifiedjs.com`][learn].
+docs/docs/extending-mdx.mdx:110:5     - Unknown word (ipikuka)      -- * [`ipikuka/remark-mdx-remove-expressions
+docs/docs/extending-mdx.mdx:111:35    - Unknown word (curlybraces)  -- MDX expressions within curlybraces {} in MDX content
+docs/docs/extending-mdx.mdx:137:8     - Unknown word (twoslash)     -- ```tsx twoslash
+docs/docs/extending-mdx.mdx:139:14    - Unknown word (Katex)        -- import rehypeKatex from 'rehype-katex'
+docs/docs/extending-mdx.mdx:159:44    - Unknown word (Katex)        -- rehypePlugins: [rehypeKatex], remarkPlugins: [remarkMath
+docs/docs/extending-mdx.mdx:164:26    - Unknown word (Katex)        -- rehypePlugins: [[rehypeKatex, {strict: true, throwOnError
+docs/docs/extending-mdx.mdx:174:2     - Unknown word (unifiedjs)    -- `unifiedjs.com`][learn].
 docs/docs/extending-mdx.mdx:35:4      - Unknown word (recma)      -- [recma plugins][recma-plugins
 docs/docs/extending-mdx.mdx:48:11     - Unknown word (Scanlon)    -- * [`PaulieScanlon/mdx-embed`](https:/
 docs/docs/extending-mdx.mdx:48:5      - Unknown word (Paulie)     -- * [`PaulieScanlon/mdx-embed`](https
@@ -542,9 +544,9 @@ packages/remark-mdx/test/index.js:477:10    - Unknown word (onvisit)    -- funct
 packages/remark-mdx/test/index.js:479:21    - Unknown word (mdxjs)      -- (node.type === 'mdxjsEsm' ||
 packages/remark-mdx/test/index.js:498:7     - Unknown word (onvisit)    -- onvisit(child)
 packages/remark-mdx/test/index.js:501:9     - Unknown word (onvisit)    -- onvisit(child.value)
+packages/rollup/lib/index.js:29:37     - Unknown word (pluginutils) -- createFilter} from '@rollup/pluginutils'
 packages/rollup/lib/index.js:4:42      - Unknown word (pluginutils) -- FilterPattern} from '@rollup/pluginutils'
-packages/rollup/lib/index.js:56:37     - Unknown word (pluginutils) -- createFilter} from '@rollup/pluginutils'
-packages/rollup/lib/index.js:97:31     - Unknown word (extnames)    -- formatAwareProcessors.extnames.includes(file.extname
+packages/rollup/lib/index.js:71:31     - Unknown word (extnames)    -- formatAwareProcessors.extnames.includes(file.extname
 packages/rollup/test/index.js:101:32    - Unknown word (jsxs)       -- doesNotMatch(code, /jsxs?\(/)
 packages/rollup/test/index.js:125:25    - Unknown word (jsxs)       -- assert.match(code, /jsxs?\(/)
 packages/rollup/test/index.js:44:10     - Unknown word (AAAO)       -- ';;AAAO,SAAA,OAAA,GAAA;;AAA
@@ -568,26 +570,22 @@ packages/rollup/test/index.js:44:91     - Unknown word (EAAAA)      -- QAAA,EAAA
 packages/rollup/test/index.js:44:97     - Unknown word (GAAA)       -- EAAA,CAAA,SAAA,EAAAA,GAAA,CAAA,OAAA,EAAA,EAAA
 packages/rollup/test/index.js:79:25     - Unknown word (jsxs)       -- assert.match(code, /jsxs?\(/)
 readme.md:11:22     - Unknown word (authorable) -- MDX][website] is an authorable format that lets you
-vercel.json:114:31    - Unknown word (frontmatter)  -- destination": "/guides/frontmatter/",
-vercel.json:30:31     - Unknown word (frontmatter) -- destination": "/guides/frontmatter/",
-vercel.json:42:38     - Unknown word (evaluatefile) -- destination": "/packages/mdx/#evaluatefile-options",
-vercel.json:62:31     - Unknown word (frontmatter)  -- destination": "/guides/frontmatter/",
 website/generate.js:33:31     - Unknown word (ungap)      -- structuredClone from '@ungap/structured-clone'
-website/mdx-loader.js:105:12    - Unknown word (Twoslash)   -- [rehypeTwoslash, {twoslash: {compilerOptions
-website/mdx-loader.js:105:23    - Unknown word (twoslash)   -- [rehypeTwoslash, {twoslash: {compilerOptions: commandLin
-website/mdx-loader.js:111:11    - Unknown word (Gemoji)     -- remarkGemoji,
-website/mdx-loader.js:136:14    - Unknown word (currentcolor) -- fill: 'currentcolor',
-website/mdx-loader.js:191:10    - Unknown word (recma)        -- function recmaInjectMeta(options)
+website/mdx-loader.js:104:12    - Unknown word (Twoslash)   -- [rehypeTwoslash, {twoslash: {compilerOptions
+website/mdx-loader.js:104:23    - Unknown word (twoslash)   -- [rehypeTwoslash, {twoslash: {compilerOptions: commandLin
+website/mdx-loader.js:110:11    - Unknown word (Gemoji)     -- remarkGemoji,
+website/mdx-loader.js:135:14    - Unknown word (currentcolor) -- fill: 'currentcolor',
+website/mdx-loader.js:190:10    - Unknown word (recma)        -- function recmaInjectMeta(options)
 website/mdx-loader.js:21:24     - Unknown word (wooorm)     -- import {common} from '@wooorm/starry-night'
 website/mdx-loader.js:22:25     - Unknown word (wooorm)     -- import sourceMdx from '@wooorm/starry-night/source
 website/mdx-loader.js:23:26     - Unknown word (wooorm)     -- import sourceToml from '@wooorm/starry-night/source
 website/mdx-loader.js:24:25     - Unknown word (wooorm)     -- import sourceTsx from '@wooorm/starry-night/source
-website/mdx-loader.js:319:26    - Unknown word (twoslash)     -- if (metaProperties.twoslash === '') {
-website/mdx-loader.js:320:25    - Unknown word (twoslash)     -- className.push('twoslash')
-website/mdx-loader.js:40:14     - Unknown word (Twoslash)   -- import rehypeTwoslash from 'rehype-twoslash
-website/mdx-loader.js:40:36     - Unknown word (twoslash)   -- rehypeTwoslash from 'rehype-twoslash'
-website/mdx-loader.js:42:14     - Unknown word (Gemoji)     -- import remarkGemoji from 'remark-gemoji
-website/mdx-loader.js:42:34     - Unknown word (gemoji)     -- remarkGemoji from 'remark-gemoji'
-website/mdx-loader.js:77:18     - Unknown word (recma)      -- recmaPlugins: [recmaInjectMeta],
-website/mdx-loader.js:77:3      - Unknown word (recma)      -- recmaPlugins: [recmaInjectMeta
+website/mdx-loader.js:284:26    - Unknown word (twoslash)     -- if (metaProperties.twoslash === '') {
+website/mdx-loader.js:285:25    - Unknown word (twoslash)     -- className.push('twoslash')
+website/mdx-loader.js:38:14     - Unknown word (Twoslash)   -- import rehypeTwoslash from 'rehype-twoslash
+website/mdx-loader.js:38:36     - Unknown word (twoslash)   -- rehypeTwoslash from 'rehype-twoslash'
+website/mdx-loader.js:40:14     - Unknown word (Gemoji)     -- import remarkGemoji from 'remark-gemoji
+website/mdx-loader.js:40:34     - Unknown word (gemoji)     -- remarkGemoji from 'remark-gemoji'
+website/mdx-loader.js:76:18     - Unknown word (recma)      -- recmaPlugins: [recmaInjectMeta],
+website/mdx-loader.js:76:3      - Unknown word (recma)      -- recmaPlugins: [recmaInjectMeta
 website/post.js:24:24     - Unknown word (sparticuz)  -- import chromium from '@sparticuz/chromium'
