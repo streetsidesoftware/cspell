@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: [".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 2072, Issues found: 1505 in 294 files.
+ CSpell: Files checked: 2080, Issues found: 1507 in 295 files.
  exit code: 1
 Makefile.js:1036:18   - Unknown word (Multifiles) -- function downloadMultifilesTestTarget() {
 Makefile.js:128:82    - Unknown word (ined)       -- followed by the string "ined".
@@ -53,7 +53,7 @@ docs/src/assets/js/tabs.js:170:7     - Unknown word (unactivate) -- // unactivat
 docs/src/assets/js/tabs.js:240:7     - Unknown word (incrementcurrent) -- var incrementcurrentIndex = function ()
 docs/src/assets/js/tabs.js:249:7     - Unknown word (decrementcurrent) -- var decrementcurrentIndex = function ()
 docs/src/assets/js/tabs.js:92:7      - Unknown word (tabpanels)  -- var tabpanels = Array.from(el.querySelector
-docs/src/assets/scss/ads.scss:16:2      - Unknown word (carbonads)  -- #carbonads * {
+docs/src/assets/scss/ads.scss:14:2      - Unknown word (carbonads)  -- #carbonads * {
 docs/src/assets/scss/components/docs-navigation.scss:27:3      - Unknown word (flexer)     -- .flexer {
 docs/src/assets/scss/docs.scss:124:210   - Unknown word (Cpath)      -- fill='%23ECFDF3'/%3E%3Cpath d='M30.5 16L19.5 27L
 docs/src/assets/scss/docs.scss:124:333   - Unknown word (Crect)      -- linejoin='round'/%3E%3Crect x='1.5' y='1' width
@@ -69,8 +69,8 @@ docs/src/contribute/governance.md:34:51     - Unknown word (triaging)   -- least
 docs/src/contribute/governance.md:84:35     - Unknown word (committership) -- important to recognize that committership is a privilege, not
 docs/src/contribute/package-json-conventions.md:20:114    - Unknown word (postprepare) -- preprepare" / "prepare" / "postprepare" / "prepack" / "postpack
 docs/src/contribute/package-json-conventions.md:20:142    - Unknown word (postpack)    -- postprepare" / "prepack" / "postpack" / "prepublishOnly"
-docs/src/extend/code-path-analysis.md:533:2     - Unknown word (hoge)       -- hoge();
-docs/src/extend/code-path-analysis.md:582:3     - Unknown word (fuga)       -- fuga();
+docs/src/extend/code-path-analysis.md:539:2     - Unknown word (hoge)       -- hoge();
+docs/src/extend/code-path-analysis.md:588:3     - Unknown word (fuga)       -- fuga();
 docs/src/extend/custom-formatters.md:223:61    - Unknown word (Guake)      -- www.iterm2.com/) or [Guake](http://guake-project
 docs/src/extend/custom-formatters.md:245:9     - Unknown word (eslintformatter) -- - `"eslintformatter"`
 docs/src/extend/custom-parsers.md:124:31    - Unknown word (myparser)   -- packages: ["eslint-parser-myparser"],
@@ -90,15 +90,15 @@ docs/src/rules/brace-style.md:33:26     - Unknown word (Allman)     -- Another s
 docs/src/rules/brace-style.md:57:5      - Unknown word (stroustrup) -- * `"stroustrup"` enforces Stroustrup
 docs/src/rules/brace-style.md:58:5      - Unknown word (allman)     -- * `"allman"` enforces Allman style
 docs/src/rules/capitalized-comments.md:280:84    - Unknown word (blockignore) -- { "ignorePattern": "blockignore" } }] */
-docs/src/rules/complexity.md:177:37    - Unknown word (Cabe)       -- default) - Classic McCabe cyclomatic complexity
+docs/src/rules/complexity.md:176:37    - Unknown word (Cabe)       -- default) - Classic McCabe cyclomatic complexity
 docs/src/rules/function-paren-newline.md:335:5     - Unknown word (barbaz)     -- var barbaz = function(
 docs/src/rules/id-denylist.md:7:102     - Unknown word (Karlton)    -- naming things." — Phil Karlton
-docs/src/rules/id-length.md:91:10     - Unknown word (foobaz)     -- function foobaz({ a: prop }) { }
+docs/src/rules/id-length.md:90:10     - Unknown word (foobaz)     -- function foobaz({ a: prop }) { }
 docs/src/rules/id-match.md:162:9     - Unknown word (categoryid) -- const { categoryid_Default = 1 } = query
 docs/src/rules/indent-legacy.md:24:16     - Unknown word (Crockford)  -- * Four spaces: Crockford
 docs/src/rules/key-spacing.md:191:5     - Unknown word (bcde)       -- bcde: 42,
 docs/src/rules/key-spacing.md:213:5     - Unknown word (ijkl)       -- ijkl: 'Non-consecutive lines
-docs/src/rules/max-lines-per-function.md:31:45     - Unknown word (dbname)     -- return m("tr", {key: db.dbname}, [
+docs/src/rules/max-lines-per-function.md:30:45     - Unknown word (dbname)     -- return m("tr", {key: db.dbname}, [
 docs/src/rules/no-dupe-keys.md:56:5      - Unknown word (quxx)       -- quxx: "qux"
 docs/src/rules/no-empty-character-class.md:40:13     - Unknown word (abcefg)     -- regex.test("abcefg"); // false, the nested
 docs/src/rules/no-eq-null.md:67:41     - Unknown word (eqnull)     -- rule corresponds to `eqnull` rule of JSHint.
@@ -130,7 +130,7 @@ docs/src/rules/no-restricted-modules.md:66:95     - Unknown word (freelist)   --
 docs/src/rules/no-restricted-syntax.md:71:5      - Unknown word (dont)       -- dontMess();
 docs/src/rules/no-return-await.md:12:59     - Unknown word (microtask)  -- not result in an extra microtask.
 docs/src/rules/no-script-url.md:33:41     - Unknown word (scripturl)  -- rule corresponds to `scripturl` rule of JSHint.
-docs/src/rules/no-unexpected-multiline.md:14:78     - Unknown word (Schlueter)  -- once described by Isaac Schlueter, a newline character
+docs/src/rules/no-unexpected-multiline.md:10:78     - Unknown word (Schlueter)  -- once described by Isaac Schlueter, a newline character
 docs/src/rules/no-unused-vars.md:198:67    - Unknown word (gnored)       -- varsIgnorePattern": "[iI]gnored" }` option:
 docs/src/rules/no-unused-vars.md:453:12    - Unknown word (mymethod)     -- static mymethod() {
 docs/src/rules/no-unused-vars.md:58:31     - Unknown word (destructures) -- function definition destructures an array, unused entries
@@ -261,11 +261,10 @@ lib/rules/use-isnan.js:142:13    - Unknown word (Suggestable) -- const isSuggest
 lib/rules/utils/ast-utils.js:440:34    - Unknown word (samely)     -- a.b` and `a?.b` are samely.
 lib/services/processor-service.js:87:5      - Unknown word (Postprocesses) -- * Postprocesses the given messages synchronou
 lib/shared/text-table.js:36:8      - Unknown word (hsep)       -- const hsep = "  ";
-package.json:178:6     - Unknown word (eslump)     -- "eslump": "^3.0.0",
-package.json:192:6     - Unknown word (metascraper) -- "metascraper": "^5.25.7",
-package.json:234:8     - Unknown word (fflate)      -- "fflate": "0.8.2"
+package.json:185:6     - Unknown word (eslump)     -- "eslump": "^3.0.0",
+package.json:199:6     - Unknown word (metascraper) -- "metascraper": "^5.25.7",
 templates/blogpost.md.ejs:18:10     - Unknown word (linkify)    -- function linkify(line) {
-tests/bin/eslint.js:507:36    - Unknown word (eslintsuppressions) -- SUPPRESSIONS_PATH = ".temp-eslintsuppressions";
+tests/bin/eslint.js:620:36    - Unknown word (eslintsuppressions) -- SUPPRESSIONS_PATH = ".temp-eslintsuppressions";
 tests/fixtures/bad-examples.md:115:35    - Unknown word (errorr)     -- restricted-syntax: ["errorr", "ArrayPattern"] *
 tests/fixtures/code-path-analysis/try--try-finally-4.js:45:156    - Unknown word (Expressio)  -- Expression\nIdentifier (bar)\nExpressio
 tests/fixtures/config-hierarchy/file-structure.json:19:10     - Unknown word (subbroken)  -- "subbroken": {
@@ -384,7 +383,7 @@ tests/lib/rules/no-use-before-define.js:2272:21   - Unknown word (Xopenport)  --
 tests/lib/rules/no-warning-comments.js:240:21    - Unknown word (litera)     -- code: "// regex [litera|$]",
 tests/lib/rules/no-warning-comments.js:54:26     - Unknown word (aeiou)      -- options: [{ terms: ["[aeiou]"], location: "anywhere
 tests/lib/rules/object-shorthand.js:242:21    - Unknown word (afoob)      -- code: "var x = { afoob: function() {}  }",
-tests/lib/rules/prefer-arrow-callback.js:238:27    - Unknown word (amet)       -- dolor sit amet. */ {
+tests/lib/rules/prefer-arrow-callback.js:258:27    - Unknown word (amet)       -- dolor sit amet. */ {
 tests/lib/rules/prefer-object-spread.js:201:105   - Unknown word (butwhy)     -- {}, { superNested: 'butwhy' })))",
 tests/lib/rules/prefer-object-spread.js:654:39    - Unknown word (somethingelse) -- import { Something as somethingelse } from 'foo';
 tests/lib/rules/prefer-regex-literals.js:1618:27   - Unknown word (someregular) -- code: "[   new RegExp(`someregular`)]",
@@ -406,7 +405,7 @@ tests/lib/rules/utils/unicode/is-combining-character.js:22:78     - Unknown word
 tests/lib/rules/utils/unicode/is-combining-character.js:23:76     - Unknown word (Etnahta)    -- true); // Hebrew Accent Etnahta
 tests/lib/rules/valid-typeof.js:98:31     - Unknown word (umdefined)  -- if (typeof bar === 'umdefined') {}",
 tests/lib/shared/string-utils.js:40:6      - Unknown word (uppercases) -- it("uppercases the first letter of
-tests/lib/types/types.test.ts:1040:7    - Unknown word (eslinter)   -- const eslinter = new ESLinter();
+tests/lib/types/types.test.mts:1143:7    - Unknown word (eslinter)   -- const eslinter = new ESLinter();
 tests/performance/jshint.js:10346:35  - Unknown word (Ashkenas)                 -- c) 2009-2013 Jeremy Ashkenas, DocumentCloud Inc.
 tests/performance/jshint.js:10490:15  - Unknown word (foldl)                    -- // or `foldl`. Delegates to **ECMAScript
 tests/performance/jshint.js:10532:67  - Unknown word (foldr)                    -- reduce, also known as `foldr`.
@@ -531,5 +530,6 @@ tests/tools/check-rule-examples.js:78:12     - Unknown word (mbad)       -- "\x1
 tests/tools/check-rule-examples.js:79:37     - Unknown word (merror)     -- 1:4\x1B[22m \x1B[31merror\x1B[39m Missing language
 tests/tools/eslint-fuzzer.js:169:23    - Unknown word (foos)       -- message: "no foos allowed",
 tools/check-emfile-handling.js:30:10     - Unknown word (Sonoma)     -- * MacOS Sonoma v14.4 has a limit of
+tools/config-rule.js:416:11    - Unknown word (unioned)    -- * total unioned config count across
 tools/fuzzer-runner.js:50:36     - Unknown word (elapseds)   -- rules [:bar] :percent, :elapseds elapsed, eta :etas,
 tools/update-readme.js:39:31     - Unknown word (Prerendered) -- returns {Promise<string>} Prerendered sponsors markdown.
