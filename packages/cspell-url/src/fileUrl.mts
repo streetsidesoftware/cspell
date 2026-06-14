@@ -67,7 +67,7 @@ export function isWindowsFileUrl(url: URL | string): boolean {
 }
 
 export const uncLongPathPrefix = '\\\\?\\';
-export const uncLongPathPrefixAlt = '\\\\.\\'; // Note this does not work in nodejs. But it is a valid long path prefix in Windows.
+export const uncLongPathPrefixAlt = '\\\\.\\'; // Note this does not work in Node.js, but it is a valid long path prefix in Windows.
 
 const uncWithLongPathPrefix = uncLongPathPrefix + 'UNC\\';
 const uncWithLongPathPrefixAlt = uncLongPathPrefixAlt + 'UNC\\';
