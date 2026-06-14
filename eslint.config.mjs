@@ -287,6 +287,7 @@ export default defineConfig(
             '**/tsdown.config.*',
             '**/tsup.config.*',
             '**/rollup.config.mjs',
+            '**/eslint.config.mjs',
             '**/perf/**',
             '**/*.perf.*',
             '**/test.*',
@@ -297,6 +298,7 @@ export default defineConfig(
             'n/no-extraneous-require': 'off', // Mostly for __mocks__ and test files
             'n/no-extraneous-import': 'off',
             'n/no-unpublished-import': 'off',
+            'n/no-unsupported-features/node-builtins': 'off', // tests may need to import built in modules that aren't supported in all versions of node.
             '@typescript-eslint/no-explicit-any': 'off', // any is allowed in tests
             'unicorn/no-null': 'off', // null is allowed in tests
             'unicorn/prefer-module': 'off', // require.resolve is allowed in tests
