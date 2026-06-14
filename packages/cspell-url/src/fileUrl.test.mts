@@ -198,7 +198,8 @@ describe('url with long paths', async () => {
     `('read long path files with prefix', async ({ filename }) => {
         const absFilename = Path.resolve(absoluteFixtureLongPath, filename);
         const absLongPathFilename = addLongPathPrefix(absFilename);
-        expect(absLongPathFilename.slice(0, uncLongPathPrefix.length)).toBe(uncLongPathPrefix);
+        const expectedAlt = isWindows ? uncLongPathPrefix : absFilename;
+        expect(absLongPathFilename.slice(0, isWindows ? uncLongPathPrefix.length : undefined)).toBe(expectedAlt);
         const contents = await fs.readFile(absLongPathFilename, 'utf8');
         expect(contents).toContain(filename);
 
@@ -213,7 +214,8 @@ describe('url with long paths', async () => {
         const absFilename = Path.resolve(absoluteFixtureLongPath, filename);
 
         const absLongPathFilenameAlt = addLongPathPrefixAlt(absFilename);
-        expect(absLongPathFilenameAlt.slice(0, uncLongPathPrefixAlt.length)).toBe(uncLongPathPrefixAlt);
+        const expectedAlt = isWindows ? uncLongPathPrefixAlt : absFilename;
+        expect(absLongPathFilenameAlt.slice(0, isWindows ? uncLongPathPrefixAlt.length : undefined)).toBe(expectedAlt);
         const absLongPathFilename = addLongPathPrefix(absLongPathFilenameAlt);
         const contents = await fs.readFile(absLongPathFilename, 'utf8');
         expect(contents).toContain(filename);
