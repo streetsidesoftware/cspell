@@ -172,13 +172,14 @@ describe('util', () => {
     });
 });
 
-describe('url with long paths', async () => {
+describe('url with long paths', () => {
     const urlWindowsFilePathFormats = 'https://learn.microsoft.com/en-us/dotnet/standard/io/file-path-formats';
     const absoluteFixtureLongPath = Path.join(packageRoot, fixtureLongPath);
 
-    await ensureLongPathFileExists(longFilename209);
-    await ensureLongPathFileExists(longFilenameIssue4978);
-
+    beforeAll(async () => {
+        await ensureLongPathFileExists(longFilename209);
+        await ensureLongPathFileExists(longFilenameIssue4978);
+    });
     test.each`
         filename
         ${longFilename209}
