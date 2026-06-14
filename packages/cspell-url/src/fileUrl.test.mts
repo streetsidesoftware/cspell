@@ -237,7 +237,7 @@ ${filename}
 
         if (found !== content) {
             await fs.mkdir(Path.dirname(absoluteFixtureLongPathFile), { recursive: true });
-            console.log('Creating fixture file "%s"', absoluteFixtureLongPathFile);
+            // Fixture file created/updated.
             await fs.writeFile(absoluteFixtureLongPathFile, content, 'utf8');
         }
     }
