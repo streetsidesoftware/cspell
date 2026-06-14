@@ -97,7 +97,7 @@ function addLongPathPrefixForce(path: string): string {
 
 /**
  * Add the long path prefix to a path if it is not already present. This is needed to access paths longer than 260 characters on Windows.
- * This function uses the alternative long path prefix (`\\?\UNC\` for UNC paths and `\\?\` for local paths).
+ * This function uses the standard long path prefix (`\\?\UNC\` for UNC paths and `\\?\` for local paths).
  *
  * For non-windows platforms, this function returns the path unchanged.
  * @param path
