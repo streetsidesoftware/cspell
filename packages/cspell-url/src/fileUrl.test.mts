@@ -29,9 +29,10 @@ const cwdURL = pathToFileURL('.');
 const packageRootUrl = new URL('../', import.meta.url);
 const packageRoot = fileURLToPath(packageRootUrl);
 const fixtureLongPath = 'fixtures/unc-long-path/learn.microsoft.com/en-us/dotnet/standard/io/file-path-formats';
+// Note `.log` files are used to keep them out of the .git repository since git has issues with long paths on Windows.
 const longFilename209 = `\
 very-long-filename-to-test-url-handling-in-cspell-io-and-cspell-url-utilities-for-long-paths-on-windows-to-ensure-\
-that-these-tools-can-handle-long-paths-on-windows-without-issues-it-is-209-characters-long.txt\
+that-these-tools-can-handle-long-paths-on-windows-without-issues-it-is-209-characters-long.log\
 `;
 // https://github.com/streetsidesoftware/vscode-spell-checker/issues/4978
 const longFilenameIssue4978 = `\
