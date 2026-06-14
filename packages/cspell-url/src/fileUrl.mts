@@ -65,3 +65,76 @@ const regExpWindowsFileUrl = /^file:\/\/\/[a-zA-Z]:\//;
 export function isWindowsFileUrl(url: URL | string): boolean {
     return regExpWindowsFileUrl.test(url.toString());
 }
+
+export const uncLongPathPrefix = '\\\\?\\';
+export const uncLongPathPrefixAlt = '\\\\.\\'; // Note this does not work in Node.js, but it is a valid long path prefix in Windows.
+
+const uncWithLongPathPrefix = uncLongPathPrefix + 'UNC\\';
+const uncWithLongPathPrefixAlt = uncLongPathPrefixAlt + 'UNC\\';
+
+export function isUncPath(path: string): boolean {
+    return path.startsWith('\\\\');
+}
+
+export function hasLongPathPrefix(path: string): boolean {
+    return path.startsWith(uncLongPathPrefix);
+}
+
+export function hasLongPathPrefixAlt(path: string): boolean {
+    return path.startsWith(uncLongPathPrefixAlt);
+}
+
+function addLongPathPrefixForce(path: string): string {
+    if (hasLongPathPrefix(path)) return path;
+    if (hasLongPathPrefixAlt(path)) {
+        return fixLongPathPrefix(path);
+    }
+    if (isUncPath(path)) {
+        return uncWithLongPathPrefix + path.slice(2);
+    }
+    return uncLongPathPrefix + path;
+}
+
+/**
+ * Add the long path prefix to a path if it is not already present. This is needed to access paths longer than 260 characters on Windows.
+ * This function uses the standard long path prefix (`\\?\UNC\` for UNC paths and `\\?\` for local paths).
+ *
+ * For non-windows platforms, this function returns the path unchanged.
+ * @param path
+ * @returns the path with the long path prefix added if needed.
+ */
+export function addLongPathPrefix(path: string): string {
+    if (!isWindows) return path;
+    return addLongPathPrefixForce(path);
+}
+
+function addLongPathPrefixAltForce(path: string): string {
+    if (hasLongPathPrefix(path) || hasLongPathPrefixAlt(path)) return path;
+    if (isUncPath(path)) {
+        return uncWithLongPathPrefixAlt + path.slice(2);
+    }
+    return uncLongPathPrefixAlt + path;
+}
+
+/**
+ * Add the long path prefix to a path if it is not already present. This is needed to access paths longer than 260 characters on Windows.
+ * This function uses the alternative long path prefix (`\\.\UNC\` for UNC paths and `\\.\` for local paths). Note: Node.js does not support `\\.\` directly; call fixLongPathPrefix(...) before using the path with fs/pathToFileURL.
+ *
+ * For non-windows platforms, this function returns the path unchanged.
+ * @param path
+ * @returns the path with the long path prefix added if needed.
+ */
+export function addLongPathPrefixAlt(path: string): string {
+    if (!isWindows) return path;
+    return addLongPathPrefixAltForce(path);
+}
+
+/**
+ * If the path has the long path unc prefix (`\\.\`), replace it with the standard long path prefix (`\\?\`). This is needed to access paths longer than 260 characters on Windows.
+ * @param path - any path that may or may not have the long path prefix.
+ * @returns the path with the standard long path prefix if needed.
+ */
+export function fixLongPathPrefix(path: string): string {
+    if (!hasLongPathPrefixAlt(path)) return path;
+    return uncLongPathPrefix + path.slice(uncLongPathPrefixAlt.length);
+}

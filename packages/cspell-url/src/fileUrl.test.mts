@@ -1,11 +1,21 @@
-import * as Path from 'node:path';
+import fs from 'node:fs/promises';
+import Path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
-import { describe, expect, test } from 'vitest';
+import { beforeAll, describe, expect, test } from 'vitest';
 
 import { urlBasename } from './dataUrl.mts';
 import { normalizeFilePathForUrl, toFileDirURL, toFileURL } from './defaultFileUrlBuilder.mts';
-import { isWindows, isWindowsFileUrl, pathWindowsDriveLetterToUpper, toFilePathOrHref } from './fileUrl.mts';
+import {
+    addLongPathPrefix,
+    addLongPathPrefixAlt,
+    isWindows,
+    isWindowsFileUrl,
+    pathWindowsDriveLetterToUpper,
+    toFilePathOrHref,
+    uncLongPathPrefix,
+    uncLongPathPrefixAlt,
+} from './fileUrl.mts';
 import { FileUrlBuilder } from './FileUrlBuilder.mts';
 import { isUrlLike, normalizeWindowsUrl, toURL, urlParent } from './url.mts';
 
@@ -15,6 +25,22 @@ const root = Path.join(__dirname, '../..');
 const sm = (m: string | RegExp) => expect.stringMatching(m);
 
 const cwdURL = pathToFileURL('.');
+
+const packageRootUrl = new URL('../', import.meta.url);
+const packageRoot = fileURLToPath(packageRootUrl);
+const fixtureLongPath = 'fixtures/unc-long-path/learn.microsoft.com/en-us/dotnet/standard/io/file-path-formats';
+// Note `.log` files are used to keep them out of the .git repository since git has issues with long paths on Windows.
+const longFilename209 = `\
+very-long-filename-to-test-url-handling-in-cspell-io-and-cspell-url-utilities-for-long-paths-on-windows-to-ensure-\
+that-these-tools-can-handle-long-paths-on-windows-without-issues-it-is-209-characters-long.log\
+`;
+// https://github.com/streetsidesoftware/vscode-spell-checker/issues/4978
+const longFilenameIssue4978 = `\
+Engineering/Programming/Aerials/LCS Y2020/y2020_controller/local_builds/2512/251216/RNE_Aerial_Dev/162221_5cf5637b6_cmorris\
+/23461B-001_ID025_Aux_Control_Platform_Leveling_Y2020_TTC2310/23461B-001_ID025_Aux_Control_Platform_Leveling_Y2020_TTC2310_controller.log\
+`;
+
+// cspell:ignore cmorris
 
 describe('util', () => {
     test.each`
@@ -144,6 +170,87 @@ describe('util', () => {
     `('isWindowsFileUrl $url', ({ url, expected }) => {
         expect(isWindowsFileUrl(url)).toEqual(expected);
     });
+});
+
+describe('url with long paths', () => {
+    const urlWindowsFilePathFormats = 'https://learn.microsoft.com/en-us/dotnet/standard/io/file-path-formats';
+    const absoluteFixtureLongPath = Path.join(packageRoot, fixtureLongPath);
+
+    beforeAll(async () => {
+        await ensureLongPathFileExists(longFilename209);
+        await ensureLongPathFileExists(longFilenameIssue4978);
+    });
+    test.each`
+        filename
+        ${longFilename209}
+        ${longFilenameIssue4978}
+    `('read long path files', async ({ filename }) => {
+        const absFilename = Path.resolve(absoluteFixtureLongPath, filename);
+        const contents = await fs.readFile(absFilename, 'utf8');
+        expect(contents).toContain(filename);
+
+        await expect(fs.readFile(pathToFileURL(absFilename), 'utf8')).resolves.toEqual(contents);
+    });
+
+    test.each`
+        filename
+        ${longFilename209}
+        ${longFilenameIssue4978}
+    `('read long path files with prefix', async ({ filename }) => {
+        const absFilename = Path.resolve(absoluteFixtureLongPath, filename);
+        const absLongPathFilename = addLongPathPrefix(absFilename);
+        const expectedAlt = isWindows ? uncLongPathPrefix : absFilename;
+        expect(absLongPathFilename.slice(0, isWindows ? uncLongPathPrefix.length : undefined)).toBe(expectedAlt);
+        const contents = await fs.readFile(absLongPathFilename, 'utf8');
+        expect(contents).toContain(filename);
+
+        await expect(fs.readFile(pathToFileURL(absLongPathFilename), 'utf8')).resolves.toEqual(contents);
+    });
+
+    test.each`
+        filename
+        ${longFilename209}
+        ${longFilenameIssue4978}
+    `('read long path files with alt prefix', async ({ filename }) => {
+        const absFilename = Path.resolve(absoluteFixtureLongPath, filename);
+
+        const absLongPathFilenameAlt = addLongPathPrefixAlt(absFilename);
+        const expectedAlt = isWindows ? uncLongPathPrefixAlt : absFilename;
+        expect(absLongPathFilenameAlt.slice(0, isWindows ? uncLongPathPrefixAlt.length : undefined)).toBe(expectedAlt);
+        const absLongPathFilename = addLongPathPrefix(absLongPathFilenameAlt);
+        const contents = await fs.readFile(absLongPathFilename, 'utf8');
+        expect(contents).toContain(filename);
+    });
+
+    async function ensureLongPathFileExists(filename: string) {
+        const content = `\
+This is a test file for testing long path handling in cspell-url and cspell-io utilities.
+
+Reference: ${urlWindowsFilePathFormats}
+
+The filename is:
+${filename}
+`;
+        const absoluteFixtureLongPathFile = addLongPathPrefix(Path.join(absoluteFixtureLongPath, filename));
+
+        const found = await readFileIfExists(absoluteFixtureLongPathFile);
+
+        if (found !== content) {
+            await fs.mkdir(Path.dirname(absoluteFixtureLongPathFile), { recursive: true });
+            // Fixture file created/updated.
+            await fs.writeFile(absoluteFixtureLongPathFile, content, 'utf8');
+        }
+    }
+
+    async function readFileIfExists(path: string | URL): Promise<string | undefined> {
+        try {
+            return await fs.readFile(path, 'utf8');
+        } catch (e) {
+            const err = e as NodeJS.ErrnoException;
+            if (err?.code !== 'ENOENT') throw e;
+            return undefined;
+        }
+    }
 });
 
 function u(path: string, relativeURL?: string | URL) {
