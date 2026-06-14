@@ -245,7 +245,9 @@ ${filename}
     async function readFileIfExists(path: string | URL): Promise<string | undefined> {
         try {
             return await fs.readFile(path, 'utf8');
-        } catch {
+        } catch (e) {
+            const err = e as NodeJS.ErrnoException;
+            if (err?.code !== 'ENOENT') throw e;
             return undefined;
         }
     }
