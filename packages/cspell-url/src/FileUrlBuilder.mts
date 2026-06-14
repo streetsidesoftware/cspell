@@ -3,7 +3,9 @@ import Path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 import {
+    fixLongPathPrefix,
     isFileURL,
+    isUncPath,
     isWindows,
     isWindowsFileUrl,
     isWindowsPathnameWithDriveLatter,
@@ -158,6 +160,9 @@ export class FileUrlBuilder {
         if (typeof filenameOrUrl !== 'string') return filenameOrUrl;
         if (isUrlLike(filenameOrUrl)) return normalizeWindowsUrl(new URL(filenameOrUrl));
         relativeTo ??= this.cwd;
+        if (isWindows && isUncPath(filenameOrUrl)) {
+            return pathToFileURL(fixLongPathPrefix(filenameOrUrl));
+        }
         isWindows && (filenameOrUrl = filenameOrUrl.replaceAll('\\', '/'));
         if (this.isAbsolute(filenameOrUrl) && isFileURL(relativeTo)) {
             const pathname = this.normalizeFilePathForUrl(filenameOrUrl);
