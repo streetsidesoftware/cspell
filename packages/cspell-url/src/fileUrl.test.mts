@@ -230,9 +230,9 @@ Reference: ${urlWindowsFilePathFormats}
 The filename is:
 ${filename}
 `;
-        const absoluteFixtureLongPathFile = Path.join(absoluteFixtureLongPath, filename);
+        const absoluteFixtureLongPathFile = addLongPathPrefix(Path.join(absoluteFixtureLongPath, filename));
 
-        const found = await readFileIfExits(absoluteFixtureLongPathFile);
+        const found = await readFileIfExists(absoluteFixtureLongPathFile);
 
         if (found !== content) {
             await fs.mkdir(Path.dirname(absoluteFixtureLongPathFile), { recursive: true });
@@ -241,7 +241,7 @@ ${filename}
         }
     }
 
-    async function readFileIfExits(path: string | URL): Promise<string | undefined> {
+    async function readFileIfExists(path: string | URL): Promise<string | undefined> {
         try {
             return await fs.readFile(path, 'utf8');
         } catch {
