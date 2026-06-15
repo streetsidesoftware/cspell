@@ -3,6 +3,61 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v10.0.2 (2026-06-15)
+
+### Fixes
+
+<details>
+<summary>fix: Handle Windows UNC Long Path Names (<a href="https://github.com/streetsidesoftware/cspell/pull/8914">#8914</a>)</summary>
+
+### fix: Handle Windows UNC Long Path Names ([#8914](https://github.com/streetsidesoftware/cspell/pull/8914))
+
+## Pull request overview
+
+This PR improves `cspell-url`’s handling of Windows long/UNC path formats by adding long-path prefix utilities and ensuring `FileUrlBuilder` can generate correct `file:` URLs for UNC/extended-length paths. It also adds fixtures and tests to exercise long-path behavior.
+
+**Changes:**
+
+- Add Windows long-path/UNC prefix helpers (`\\?\`, `\\?\UNC\`, `\\.\`) and normalization (`fixLongPathPrefix`) in `fileUrl.mts`.
+- Update `FileUrlBuilder` to special-case UNC/extended-length paths when converting to `file:` URLs.
+- Add long-path fixtures and new tests that read and convert long Windows paths/URLs.
+
+Related to:
+
+- <https://github.com/streetsidesoftware/vscode-spell-checker/issues/5260>
+- <https://github.com/streetsidesoftware/vscode-spell-checker/issues/4978>
+
+---
+
+</details>
+
+### Dictionary Updates
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/8881">#8881</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#8881](https://github.com/streetsidesoftware/cspell/pull/8881))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../iluwatar/java-design-patterns/report.yaml      |   5 +-
+ .../iluwatar/java-design-patterns/snapshot.txt     |   5 +-
+ integration-tests/snapshots/mdx-js/mdx/report.yaml |   7 +-
+ .../snapshots/mdx-js/mdx/snapshot.txt              |   7 +-
+ .../snapshots/sveltejs/svelte/report.yaml          |   3 +-
+ .../snapshots/sveltejs/svelte/snapshot.txt         |   3 +-
+ packages/cspell-bundled-dicts/package.json         |  18 ++--
+ pnpm-lock.yaml                                     | 112 ++++++++++++---------
+ 8 files changed, 84 insertions(+), 76 deletions(-)
+```
+
+---
+
+</details>
+
 ## v10.0.1 (2026-05-31)
 
 ### Fixes
