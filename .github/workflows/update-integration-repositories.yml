@@ -76,7 +76,7 @@ jobs:
           echo "path: ${{ needs.build.outputs.path }}"
 
       - name: Checkout
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           ref: ${{ env.REF_BRANCH }}
 
@@ -87,7 +87,7 @@ jobs:
 
       - name: Cache Build
         id: step-cache-build
-        uses: actions/cache@v5.0.5
+        uses: actions/cache@v6.1.0
         with:
           key: ${{ needs.build.outputs.key }}
           path: ${{ needs.build.outputs.path }}
@@ -162,7 +162,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           ref: ${{ env.REF_BRANCH }}
 
