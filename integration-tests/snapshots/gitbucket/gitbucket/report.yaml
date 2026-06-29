@@ -5,7 +5,7 @@ Args: '["**"]'
 Summary:
   files: 417
   filesWithIssues: 401
-  issues: 2122
+  issues: 2123
   errors: 0
 Errors: []
 
@@ -217,12 +217,12 @@ issues:
   - "src/main/scala/gitbucket/core/controller/RepositorySettingsController.scala:179:9       protecteions    U       val protecteions = getProtectedBranchList"
   - "src/main/scala/gitbucket/core/controller/RepositorySettingsController.scala:472:37      deploykey       U       repository/settings/deploykey\")(ownerOnly { repository"
   - "src/main/scala/gitbucket/core/controller/RepositoryViewerController.scala:750:16        commited (committed)    U       \"commited\" -> blame.commitTime"
-  - "src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:79:10       starttls    U       \"starttls\" -> trim(label(\"Enable"
-  - "src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:79:42       STARTTLS    U       trim(label(\"Enable STARTTLS\", optional(boolean("
-  - "src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:253:15      dbviewer    U       get(\"/admin/dbviewer\")(adminOnly {"
-  - "src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:398:22      newuser     U       get(\"/admin/users/_newuser\")(adminOnly {"
-  - "src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:417:32      edituser    U       admin/users/:userName/_edituser\")(adminOnly {"
-  - "src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:465:22      newgroup    U       get(\"/admin/users/_newgroup\")(adminOnly {"
+  - "src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:80:10       starttls    U       \"starttls\" -> trim(label(\"Enable"
+  - "src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:80:42       STARTTLS    U       trim(label(\"Enable STARTTLS\", optional(boolean("
+  - "src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:254:15      dbviewer    U       get(\"/admin/dbviewer\")(adminOnly {"
+  - "src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:399:22      newuser     U       get(\"/admin/users/_newuser\")(adminOnly {"
+  - "src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:418:32      edituser    U       admin/users/:userName/_edituser\")(adminOnly {"
+  - "src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:466:22      newgroup    U       get(\"/admin/users/_newgroup\")(adminOnly {"
   - "src/main/scala/gitbucket/core/controller/WikiController.scala:220:22        Gollum      U       WebHookGollumPayload(\"edited\", form"
   - "src/main/scala/gitbucket/core/model/AccountWebHook.scala:7:55           whct        U       WebHookContentType, String](whct => whct.code, code"
   - "src/main/scala/gitbucket/core/model/AccountWebHook.scala:14:45          CTYPE       U       WebHookContentType](\"CTYPE\")"
@@ -236,7 +236,7 @@ issues:
   - "src/main/scala/gitbucket/core/service/RepositoryCreationService.scala:118:13        gitdir      U       val gitdir = getRepositoryDir(owner"
   - "src/main/scala/gitbucket/core/service/RepositoryCreationService.scala:305:8         fccd        U       \"fccd29\""
   - "src/main/scala/gitbucket/core/service/RepositoryCreationService.scala:307:76        acacac      U       Some(\"Default.\"), \"acacac\")"
-  - "src/main/scala/gitbucket/core/service/SystemSettingsService.scala:52:58         Starttls    U       props.setProperty(SmtpStarttls, x.toString))"
+  - "src/main/scala/gitbucket/core/service/SystemSettingsService.scala:53:58         Starttls    U       props.setProperty(SmtpStarttls, x.toString))"
   - "src/main/scala/gitbucket/core/service/WebHookService.scala:47:23        informations (information)      U       /** get All WebHook informations of repository */"
   - "src/main/scala/gitbucket/core/service/WebHookService.scala:289:15       itcp                            U       val itcp = new org.apache.http"
   - "src/main/scala/gitbucket/core/ssh/PublicKeyAuthenticator.scala:44:13        Publickey       U       extends PublickeyAuthenticator"
@@ -268,6 +268,7 @@ issues:
   - "src/main/twirl/gitbucket/core/admin/dbviewer.scala.html:29:55       autorun     U       id=\"autorun\" name=\"autorun\"/> Auto Run Query"
   - "src/main/twirl/gitbucket/core/admin/dbviewer.scala.html:38:40       vakata      U       helpers.assets(\"/vendors/vakata-jstree-3.3.4/jstree"
   - "src/main/twirl/gitbucket/core/admin/dbviewer.scala.html:53:30       monokai     U       setTheme(\"ace/theme/monokai\");"
+  - "src/main/twirl/gitbucket/core/admin/settings_system.scala.html:235:6        Defalut (Default)       U       <!-- Defalut visibility of new repository"
   - "src/main/twirl/gitbucket/core/dashboard/header.scala.html:10:37         checkicon       U       gitbucket.core.helper.html.checkicon(condition.visibility"
   - "src/main/twirl/gitbucket/core/dashboard/issues.scala.html:14:38         issuesnavi      U       core.dashboard.html.issuesnavi(\"issues\", filter, openCount"
   - "src/main/twirl/gitbucket/core/dashboard/issues.scala.html:15:38         issueslist      U       core.dashboard.html.issueslist(issues, page, openCount"
@@ -327,7 +328,7 @@ issues:
   - "src/test/scala/gitbucket/core/service/MergeServiceSpec.scala:53:57          hoge        U       master\", \"test.txt\", \"hoge\")"
   - "src/test/scala/gitbucket/core/service/MergeServiceSpec.scala:58:13          Confrict    U       def createConfrict(git: Git): ObjectId"
   - "src/test/scala/gitbucket/core/service/ProtectedBranchServiceSpec.scala:75:80        fuga    U       false, false, Seq(\"fuga\"), false, Nil)"
-  - "src/test/scala/gitbucket/core/service/ServiceSpecBase.scala:172:49      baes    U       baseRepositoryName, baesBranch) = base.split"
+  - "src/test/scala/gitbucket/core/service/ServiceSpecBase.scala:173:49      baes    U       baseRepositoryName, baesBranch) = base.split"
   - "src/test/scala/gitbucket/core/util/JGitUtilSpec.scala:345:53        finfo       U       git, branch, path).map(finfo => (finfo.name, finfo"
   - "src/test/scala/gitbucket/core/util/ValidationsSpec.scala:21:40          gghhii      U       validate(\"color\", \"#gghhii\", messages) == Some"
   - "src/test/scala/gitbucket/core/view/HelpersSpec.scala:45:37          metacharacters      U       properly escape html metacharacters\") {"

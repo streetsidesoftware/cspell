@@ -3,9 +3,9 @@ Repository: RustPython/RustPython
 Url: https://github.com/RustPython/RustPython.git
 Args: '["**"]'
 Summary:
-  files: 822
+  files: 824
   filesWithIssues: 102
-  issues: 8274
+  issues: 8275
   errors: 0
 Errors: []
 
@@ -74,10 +74,11 @@ issues:
   - "Cargo.toml:82:13        graviola        U       \"rustls-graviola\","
   - "Cargo.toml:130:62       redoxer         U       to compile/check with redoxer"
   - "Cargo.toml:144:28       nsis            U       package.metadata.packager.nsis]"
-  - "Cargo.toml:200:62       zeroize         U       alloc\", \"oid\", \"pem\", \"zeroize\"] }"
-  - "Cargo.toml:289:8        graviola        U       rustls-graviola = \"0.3\""
-  - "Cargo.toml:376:21       scrutinee       U       significant_drop_in_scrutinee = \"warn\""
-  - "Cargo.toml:413:1        uninlined       U       uninlined_format_args = \"warn"
+  - "Cargo.toml:192:62       zeroize         U       alloc\", \"oid\", \"pem\", \"zeroize\"] }"
+  - "Cargo.toml:281:8        graviola        U       rustls-graviola = \"0.3\""
+  - "Cargo.toml:370:21       scrutinee       U       significant_drop_in_scrutinee = \"warn\""
+  - "Cargo.toml:389:1        elidable        U       elidable_lifetime_names = \"warn"
+  - "Cargo.toml:427:1        uninlined       U       uninlined_format_args = \"warn"
   - "code-of-conduct.md:1:1\tNo issues found"
   - "CONTRIBUTING.md:1:1\tNo issues found"
   - "crates/capi/Cargo.toml:12:16        cdylib      U       crate-type = [\"cdylib\", \"rlib\"]"
@@ -106,6 +107,7 @@ issues:
   - "crates/capi/src/pycapsule.rs:1:1\tNo issues found"
   - "crates/capi/src/pyerrors.rs:1:1\tNo issues found"
   - "crates/capi/src/pylifecycle.rs:1:1\tNo issues found"
+  - "crates/capi/src/pymem.rs:1:1\tNo issues found"
   - "crates/capi/src/pystate.rs:1:1\tNo issues found"
   - "crates/capi/src/refcount.rs:1:1\tNo issues found"
   - "crates/capi/src/setobject.rs:1:1\tNo issues found"
@@ -8173,6 +8175,7 @@ issues:
   - "crates/vm/src/types/zoo.rs:1:1\tNo issues found"
   - "crates/vm/src/utils.rs:1:1\tNo issues found"
   - "crates/vm/src/version.rs:1:1\tNo issues found"
+  - "crates/vm/src/vm/compile_mode.rs:1:1\tNo issues found"
   - "crates/vm/src/vm/compile.rs:1:1\tNo issues found"
   - "crates/vm/src/vm/context.rs:1:1\tNo issues found"
   - "crates/vm/src/vm/interpreter.rs:1:1\tNo issues found"
@@ -8881,8 +8884,8 @@ issues:
   - "scripts/update_lib/deps.py:547:19       genexps         U       \"test_genexps.py\","
   - "scripts/update_lib/deps.py:556:19       descrtut        U       \"test_descrtut.py\","
   - "scripts/update_lib/deps.py:576:19       memoryio        U       \"test_memoryio.py\","
-  - "scripts/update_lib/deps.py:881:7        profilee        U       # profilee is used by test_monitoring"
-  - "scripts/update_lib/deps.py:883:24       profilee        U       \"hard_deps\": [\"profilee\"],"
+  - "scripts/update_lib/deps.py:887:7        profilee        U       # profilee is used by test_monitoring"
+  - "scripts/update_lib/deps.py:889:24       profilee        U       \"hard_deps\": [\"profilee\"],"
   - "scripts/update_lib/file_utils.py:1:1\tNo issues found"
   - "scripts/update_lib/patch_spec.py:1:1\tNo issues found"
   - "scripts/update_lib/tests/__init__.py:1:1\tNo issues found"

@@ -3,7 +3,7 @@ Repository: gitbucket/gitbucket
 Url: "https://github.com/gitbucket/gitbucket.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 417, Issues found: 2122 in 401 files.
+ CSpell: Files checked: 417, Issues found: 2123 in 401 files.
  exit code: 1
 README.md:89:88     - Unknown word (MVCC)       -- configuration, remove `;MVCC=true` from `url`.
 build.sbt:21:4      - Unknown word (scalafmt)   -- // scalafmtOnCompile := true
@@ -209,12 +209,12 @@ src/main/scala/gitbucket/core/controller/PullRequestsController.scala:602:46    
 src/main/scala/gitbucket/core/controller/RepositorySettingsController.scala:179:9     - Unknown word (protecteions) -- val protecteions = getProtectedBranchList
 src/main/scala/gitbucket/core/controller/RepositorySettingsController.scala:472:37    - Unknown word (deploykey)    -- repository/settings/deploykey")(ownerOnly { repository
 src/main/scala/gitbucket/core/controller/RepositoryViewerController.scala:750:16    - Unknown word (commited)   -- "commited" -> blame.commitTime
-src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:253:15    - Unknown word (dbviewer)   -- get("/admin/dbviewer")(adminOnly {
-src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:398:22    - Unknown word (newuser)    -- get("/admin/users/_newuser")(adminOnly {
-src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:417:32    - Unknown word (edituser)   -- admin/users/:userName/_edituser")(adminOnly {
-src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:465:22    - Unknown word (newgroup)   -- get("/admin/users/_newgroup")(adminOnly {
-src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:79:10     - Unknown word (starttls)   -- "starttls" -> trim(label("Enable
-src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:79:42     - Unknown word (STARTTLS)   -- trim(label("Enable STARTTLS", optional(boolean(
+src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:254:15    - Unknown word (dbviewer)   -- get("/admin/dbviewer")(adminOnly {
+src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:399:22    - Unknown word (newuser)    -- get("/admin/users/_newuser")(adminOnly {
+src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:418:32    - Unknown word (edituser)   -- admin/users/:userName/_edituser")(adminOnly {
+src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:466:22    - Unknown word (newgroup)   -- get("/admin/users/_newgroup")(adminOnly {
+src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:80:10     - Unknown word (starttls)   -- "starttls" -> trim(label("Enable
+src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:80:42     - Unknown word (STARTTLS)   -- trim(label("Enable STARTTLS", optional(boolean(
 src/main/scala/gitbucket/core/controller/WikiController.scala:220:22    - Unknown word (Gollum)     -- WebHookGollumPayload("edited", form
 src/main/scala/gitbucket/core/controller/api/ApiGitReferenceControllerBase.scala:40:9      - Unknown word (revstr)     -- val revstr = multiParams("splat
 src/main/scala/gitbucket/core/controller/api/ApiRepositoryCommitControllerBase.scala:49:13     - Unknown word (revfilters) -- val revfilters = new ListBuffer[(RevFilter
@@ -231,7 +231,7 @@ src/main/scala/gitbucket/core/service/PullRequestService.scala:419:9     - Unkno
 src/main/scala/gitbucket/core/service/RepositoryCreationService.scala:118:13    - Unknown word (gitdir)     -- val gitdir = getRepositoryDir(owner
 src/main/scala/gitbucket/core/service/RepositoryCreationService.scala:305:8     - Unknown word (fccd)       -- "fccd29"
 src/main/scala/gitbucket/core/service/RepositoryCreationService.scala:307:76    - Unknown word (acacac)     -- Some("Default."), "acacac")
-src/main/scala/gitbucket/core/service/SystemSettingsService.scala:52:58     - Unknown word (Starttls)   -- props.setProperty(SmtpStarttls, x.toString))
+src/main/scala/gitbucket/core/service/SystemSettingsService.scala:53:58     - Unknown word (Starttls)   -- props.setProperty(SmtpStarttls, x.toString))
 src/main/scala/gitbucket/core/service/WebHookService.scala:289:15    - Unknown word (itcp)         -- val itcp = new org.apache.http
 src/main/scala/gitbucket/core/service/WebHookService.scala:47:23     - Unknown word (informations) -- /** get All WebHook informations of repository */
 src/main/scala/gitbucket/core/ssh/PublicKeyAuthenticator.scala:44:13     - Unknown word (Publickey)  -- extends PublickeyAuthenticator
@@ -263,6 +263,7 @@ src/main/twirl/gitbucket/core/admin/dbviewer.scala.html:10:22     - Unknown word
 src/main/twirl/gitbucket/core/admin/dbviewer.scala.html:29:55     - Unknown word (autorun)    -- id="autorun" name="autorun"/> Auto Run Query
 src/main/twirl/gitbucket/core/admin/dbviewer.scala.html:38:40     - Unknown word (vakata)     -- helpers.assets("/vendors/vakata-jstree-3.3.4/jstree
 src/main/twirl/gitbucket/core/admin/dbviewer.scala.html:53:30     - Unknown word (monokai)    -- setTheme("ace/theme/monokai");
+src/main/twirl/gitbucket/core/admin/settings_system.scala.html:235:6     - Unknown word (Defalut)    -- <!-- Defalut visibility of new repository
 src/main/twirl/gitbucket/core/dashboard/header.scala.html:10:37     - Unknown word (checkicon)  -- gitbucket.core.helper.html.checkicon(condition.visibility
 src/main/twirl/gitbucket/core/dashboard/issues.scala.html:14:38     - Unknown word (issuesnavi) -- core.dashboard.html.issuesnavi("issues", filter, openCount
 src/main/twirl/gitbucket/core/dashboard/issues.scala.html:15:38     - Unknown word (issueslist) -- core.dashboard.html.issueslist(issues, page, openCount
@@ -322,7 +323,7 @@ src/test/scala/gitbucket/core/model/CommitStateSpec.scala:14:49     - Unknown wo
 src/test/scala/gitbucket/core/service/MergeServiceSpec.scala:53:57     - Unknown word (hoge)       -- master", "test.txt", "hoge")
 src/test/scala/gitbucket/core/service/MergeServiceSpec.scala:58:13     - Unknown word (Confrict)   -- def createConfrict(git: Git): ObjectId
 src/test/scala/gitbucket/core/service/ProtectedBranchServiceSpec.scala:75:80     - Unknown word (fuga)       -- false, false, Seq("fuga"), false, Nil)
-src/test/scala/gitbucket/core/service/ServiceSpecBase.scala:172:49    - Unknown word (baes)       -- baseRepositoryName, baesBranch) = base.split
+src/test/scala/gitbucket/core/service/ServiceSpecBase.scala:173:49    - Unknown word (baes)       -- baseRepositoryName, baesBranch) = base.split
 src/test/scala/gitbucket/core/util/JGitUtilSpec.scala:345:53    - Unknown word (finfo)      -- git, branch, path).map(finfo => (finfo.name, finfo
 src/test/scala/gitbucket/core/util/ValidationsSpec.scala:21:40     - Unknown word (gghhii)     -- validate("color", "#gghhii", messages) == Some
 src/test/scala/gitbucket/core/view/HelpersSpec.scala:45:37     - Unknown word (metacharacters) -- properly escape html metacharacters") {
