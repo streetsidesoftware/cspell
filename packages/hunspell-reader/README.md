@@ -44,7 +44,7 @@ Outputs:
 ### Converting Hunspell to word list
 
 To convert a Hunspell dictionary to a word list, you will need both the `.dic` and `.aff` files.
-For example en_US comes with two files: `en_US.dic` and `en_US.aff`.
+For example en\_US comes with two files: `en_US.dic` and `en_US.aff`.
 This tool assumes they are both in the same directory.
 
 Assuming these files are in the current directory, the following command will write the words

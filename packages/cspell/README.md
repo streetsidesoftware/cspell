@@ -25,7 +25,7 @@ A Spell Checker for Code!
 ## Features
 
 - Spell Checks Code -- Able to spell check code by parsing it into words before checking against the dictionaries.
-  - Supports CamelCase, snake_case, and compoundwords naming styles.
+  - Supports CamelCase, snake\_case, and compoundwords naming styles.
 - Self contained -- does not depend upon OS libraries like Hunspell or aspell. Nor does it depend upon online services.
 - Fast -- checks 1000's of lines of code in seconds.
 - Programming Language Specific Dictionaries -- Has dedicated support for:
@@ -345,7 +345,7 @@ CSpell needs Node 18 and above.
 
 ## How it works
 
-The concept is simple, split camelCase and snake_case words before checking them against a list of known words.
+The concept is simple, split camelCase and snake\_case words before checking them against a list of known words.
 
 - `camelCase` -> `camel case`
 - `HTMLInput` -> `html input`
@@ -681,7 +681,7 @@ The spell checker includes a set of default dictionaries.
 
 ### General Dictionaries
 
-- **en_US** - Derived from Hunspell US English words.
+- **en\_US** - Derived from Hunspell US English words.
 - **en-gb** - Derived from Hunspell GB English words.
 - **companies** - List of well known companies
 - **softwareTerms** - Software Terms and concepts like "coroutine", "debounce", "tree", etc.
