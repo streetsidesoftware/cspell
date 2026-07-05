@@ -14,7 +14,7 @@ export function assertIsValidChar(char: string, message?: string): asserts char 
 export function formatCharCodes(char: string): string {
     return (
         char
-            // eslint-disable-next-line unicorn/prefer-spread
+             
             .split('')
             // eslint-disable-next-line unicorn/prefer-code-point
             .map((c) => '0x' + c.charCodeAt(0).toString(16).padStart(4, '0').toUpperCase())

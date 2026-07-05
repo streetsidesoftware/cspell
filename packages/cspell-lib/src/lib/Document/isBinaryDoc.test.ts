@@ -1,4 +1,4 @@
-/* eslint-disable unicorn/no-hex-escape */
+ 
 import { pathToFileURL } from 'node:url';
 
 import { describe, expect, test } from 'vitest';

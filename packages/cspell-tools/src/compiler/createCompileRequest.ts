@@ -100,5 +100,5 @@ function normalizeSource(source: DictionarySource): DictionarySource {
 function normalizeSourcePath(source: string): string {
     const cwd = process.cwd();
     const rel = path.relative(cwd, source);
-    return rel.split('\\').join('/');
+    return rel.replaceAll('\\', '/');
 }

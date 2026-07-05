@@ -76,7 +76,7 @@ describe('Validate suggestCollector', () => {
     });
 
     function s(word: string, cost: number, compoundWord?: string): SuggestionResult {
-        return clean({ word, cost, compoundWord: compoundWord?.replaceAll(/[|]/g, DEFAULT_COMPOUNDED_WORD_SEPARATOR) });
+        return clean({ word, cost, compoundWord: compoundWord?.replaceAll('|', DEFAULT_COMPOUNDED_WORD_SEPARATOR) });
     }
 
     // cspell:ignore joyo woudt
@@ -180,7 +180,7 @@ function sampleSuggestions(): string[] {
         ['run|time', 'coffee|shop', 'run', 'time', 'coffee', 'shop', 'street|wise'],
         [],
     ].flat(1);
-    return words.map((a) => a.replaceAll(/[|]/g, DEFAULT_COMPOUNDED_WORD_SEPARATOR));
+    return words.map((a) => a.replaceAll('|', DEFAULT_COMPOUNDED_WORD_SEPARATOR));
 }
 
 function dictInfo() {

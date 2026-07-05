@@ -233,7 +233,7 @@ export function createParseFileLineMapper(options?: Partial<ParseFileOptions>): 
                 yield* !allowedSplitWords.size ? words : words.flatMap((word) => splitWordIntoWords(word));
                 if (!splitKeepBoth) continue;
             }
-            yield line.replaceAll(/["]/g, '');
+            yield line.replaceAll('"', '');
         }
     }
 

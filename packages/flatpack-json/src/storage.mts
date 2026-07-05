@@ -21,10 +21,7 @@ export function stringify(data: Unpacked, pretty = true, options?: FlatpackOptio
 }
 
 export function normalizeOptions(options?: FlatpackOptions): Required<FlatpackOptions> {
-    let header = dataHeader;
-    if (options?.format === 'V1') {
-        header = dataHeaderV1_0;
-    }
+    let header = options?.format === 'V1' ? dataHeaderV1_0 : dataHeader;
     if (options?.format === 'V2') {
         header = dataHeaderV2_0;
     }
