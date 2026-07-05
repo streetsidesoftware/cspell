@@ -26,12 +26,7 @@ export type NScope = string;
 export type NScopeSource = string;
 
 export type NPattern =
-    | NPatternBeginEnd
-    | NPatternInclude
-    | NPatternMatch
-    | NPatternName
-    | NPatternPatterns
-    | NPatternRepositoryReference;
+    NPatternBeginEnd | NPatternInclude | NPatternMatch | NPatternName | NPatternPatterns | NPatternRepositoryReference;
 
 // export type PatternFn = () => _Pattern;
 

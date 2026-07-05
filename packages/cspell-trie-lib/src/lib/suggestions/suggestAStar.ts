@@ -285,7 +285,7 @@ function delLetters(pNode: PNode, weightMap: WeightMap, letters: string[], store
 
     const len = letters.length;
 
-    for (let nn = trie.n; ii < len && nn; ) {
+    for (let nn = trie.n; ii < len && nn;) {
         const tt = nn[letters[ii]];
         if (!tt) return;
         ++ii;
@@ -315,7 +315,7 @@ function repLetters(pNode: RO<PNode>, weightMap: WeightMap, letters: string[], s
     const trie = weightMap.replace;
     let i = pNode.i;
 
-    for (let n = trie.n; i < len && n; ) {
+    for (let n = trie.n; i < len && n;) {
         const t = n[letters[i]];
         if (!t) return;
         ++i;

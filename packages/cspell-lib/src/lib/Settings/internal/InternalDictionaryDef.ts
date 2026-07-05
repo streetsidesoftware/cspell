@@ -11,9 +11,7 @@ import type { WeightMap } from 'cspell-trie-lib';
 type DictionaryDefinitionCustomUniqueFields = Omit<DictionaryDefinitionCustom, keyof DictionaryDefinitionPreferred>;
 
 export type DictionaryDefinitionInternal =
-    | DictionaryFileDefinitionInternal
-    | DictionaryDefinitionInlineInternal
-    | DictionaryDefinitionSimpleInternal;
+    DictionaryFileDefinitionInternal | DictionaryDefinitionInlineInternal | DictionaryDefinitionSimpleInternal;
 
 export type DictionaryDefinitionInlineInternal = DictionaryDefinitionInline & {
     /** The path to the config file that contains this dictionary definition */

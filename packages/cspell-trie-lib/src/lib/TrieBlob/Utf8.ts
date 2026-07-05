@@ -332,7 +332,7 @@ export function encodeTextToUtf8Into(text: string, into: Array<number> | Uint8Ar
 
     let i = offset;
 
-    for (; t.i < text.length; ) {
+    for (; t.i < text.length;) {
         const code = encodeTextToUtf8_32Rev(t);
         for (let utf8_32Rev = code; utf8_32Rev !== 0; utf8_32Rev >>>= 8) {
             into[i++] = utf8_32Rev & 0xff;

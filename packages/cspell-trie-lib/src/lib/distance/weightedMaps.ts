@@ -236,7 +236,7 @@ function addSetToTrieTrieCost(
 function* searchTrieNodes<T extends { n?: Record<string, T> }>(trie: T, str: string, i: number) {
     const len = str.length;
 
-    for (let n = trie.n; i < len && n; ) {
+    for (let n = trie.n; i < len && n;) {
         const t = n[str[i]];
         if (!t) return;
         ++i;

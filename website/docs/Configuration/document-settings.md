@@ -33,6 +33,7 @@ It is possible to disable / enable the spell checker by adding comments to your 
 - `/* spellchecker: disable */`
 - `// cspell:disable-line` -- disables checking for the current line.
 - `/* cspell:disable-next-line */` -- disables checking till the end of the next line.
+
 <!--- cSpell:enable -->
 
 #### Enable Checking

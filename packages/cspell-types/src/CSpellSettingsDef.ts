@@ -871,9 +871,7 @@ export type ReporterOptions = Serializable;
  * - `["@cspell/cspell-json-reporter", { "outFile": "out.json" }]`
  */
 export type ReporterSettings =
-    | ReporterModuleName
-    | [name: ReporterModuleName]
-    | [name: ReporterModuleName, options: ReporterOptions];
+    ReporterModuleName | [name: ReporterModuleName] | [name: ReporterModuleName, options: ReporterOptions];
 
 /**
  * Experimental Configuration / Options
