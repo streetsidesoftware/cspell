@@ -1,4 +1,5 @@
 import type { ErrorLike, Issue } from '@cspell/cspell-types';
+import { IssueType } from '@cspell/cspell-types';
 
 import { escapeXmlAttribute, escapeXmlText } from './escapeXml.js';
 
@@ -55,7 +56,7 @@ function issueMessage(issue: Issue): string {
 function buildTestCaseForIssue(filename: string, issue: Issue): string {
     const name = escapeXmlAttribute(issueName(issue));
     const classname = escapeXmlAttribute(filename);
-    const failureType = escapeXmlAttribute(issue.issueType === 1 ? 'directive' : 'spelling');
+    const failureType = escapeXmlAttribute(issue.issueType === IssueType.directive ? 'directive' : 'spelling');
     const message = escapeXmlAttribute(issueMessage(issue));
     const body = escapeXmlText(issueMessage(issue));
 
