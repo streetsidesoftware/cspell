@@ -3,16 +3,16 @@ Repository: sveltejs/svelte
 Url: https://github.com/sveltejs/svelte.git
 Args: '["**"]'
 Summary:
-  files: 8900
-  filesWithIssues: 617
-  issues: 4062
+  files: 8913
+  filesWithIssues: 619
+  issues: 4064
   errors: 0
 Errors: []
 
 issues:
   - "benchmarking/benchmarks/reactivity/index.js:5:2         sbench      U       sbench_create_0to1,"
+  - "benchmarking/benchmarks/reactivity/tests/kairo_broad_block.bench.js:5:10        kairo       U       // Like `kairo_broad`, but each derived"
   - "benchmarking/benchmarks/reactivity/tests/kairo_mux.bench.js:9:8         splited (split)     U       const splited = heads"
-  - "benchmarking/run.js:6:21        kairo       U       // e.g. `pnpm bench kairo` to only run the kairo"
   - "benchmarking/utils.js:206:10        hotspot     U       const hotspot_rows = [...included"
   - "benchmarking/utils.js:235:14        hotspots    U       '## Top hotspots',"
   - "benchmarking/utils.js:254:80        Deopt       U       Hit count | Children | Deopt reason |',"
@@ -1694,7 +1694,7 @@ issues:
   - "packages/svelte/src/compiler/phases/3-transform/client/visitors/shared/element.js:46:67         readded     U       it isn't removed and readded on every update"
   - "packages/svelte/src/compiler/phases/3-transform/server/visitors/RegularElement.js:10:51         Optimiser       U       build_template, PromiseOptimiser } from './shared/utils"
   - "packages/svelte/src/compiler/phases/3-transform/server/visitors/RegularElement.js:39:8          optimiser       U       const optimiser = new PromiseOptimiser"
-  - "packages/svelte/src/compiler/phases/3-transform/server/visitors/shared/utils.js:311:18      optimising      U       * A utility for optimising promises in templates"
+  - "packages/svelte/src/compiler/phases/3-transform/server/visitors/shared/utils.js:313:18      optimising      U       * A utility for optimising promises in templates"
   - "packages/svelte/src/compiler/phases/3-transform/server/visitors/VariableDeclaration.js:55:45        deconflict      U       declared separately, deconflict"
   - "packages/svelte/src/compiler/phases/3-transform/utils.js:219:76         spaceand    U       text node with a single spaceand keep whitespace"
   - "packages/svelte/src/compiler/phases/patterns.js:21:43       aeiou       U       starts_with_vowel = /^[aeiou]/;"
@@ -1726,14 +1726,14 @@ issues:
   - "packages/svelte/src/internal/client/reactivity/batch.js:62:14       travelling      U       * When time travelling (i.e. working in one"
   - "packages/svelte/src/internal/client/reactivity/batch.js:199:3       unskipped       U       #unskipped_branches = new Set("
   - "packages/svelte/src/internal/client/reactivity/batch.js:379:77      unskipping      U       rescheduled through unskipping the skipped branches"
-  - "packages/svelte/src/internal/client/reactivity/batch.js:925:85      AFAICT          U       legacy `$:` effects AFAICT — we can remove later"
-  - "packages/svelte/src/internal/client/reactivity/batch.js:1120:82     nullpointers    U       else we could run into nullpointers"
-  - "packages/svelte/src/internal/client/reactivity/batch.js:1430:32     thath           U       they depend on things thath changed"
+  - "packages/svelte/src/internal/client/reactivity/batch.js:931:85      AFAICT          U       legacy `$:` effects AFAICT — we can remove later"
+  - "packages/svelte/src/internal/client/reactivity/batch.js:1126:82     nullpointers    U       else we could run into nullpointers"
+  - "packages/svelte/src/internal/client/reactivity/batch.js:1436:32     thath           U       they depend on things thath changed"
   - "packages/svelte/src/internal/client/reactivity/deriveds.js:129:6        deferreds       U       var deferreds = new Set();"
   - "packages/svelte/src/internal/client/reactivity/effects.js:13:2          untracking      U       untracking,"
   - "packages/svelte/src/internal/client/reactivity/sources.js:269:63        overfiring      U       - this way we avoid overfiring."
-  - "packages/svelte/src/internal/client/runtime.js:133:90       depedencies (dependencies)      U       to avoid duplicating depedencies inside a reaction *"
-  - "packages/svelte/src/internal/client/runtime.js:403:21       reexecuted                      U       // DIRTY so it is reexecuted once someone wants its"
+  - "packages/svelte/src/internal/client/runtime.js:136:90       depedencies (dependencies)      U       to avoid duplicating depedencies inside a reaction *"
+  - "packages/svelte/src/internal/client/runtime.js:406:21       reexecuted                      U       // DIRTY so it is reexecuted once someone wants its"
   - "packages/svelte/src/internal/client/timing.js:12:5          bunder      U       // bunder will eval and remove"
   - "packages/svelte/src/internal/client/types.d.ts:9:8          hydratables     U       /** hydratables */"
   - "packages/svelte/src/internal/server/crypto.js:18:63         analysers       U       directly because static analysers will think we rely on"

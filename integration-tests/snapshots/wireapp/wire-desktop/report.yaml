@@ -3,9 +3,9 @@ Repository: wireapp/wire-desktop
 Url: https://github.com/wireapp/wire-desktop.git
 Args: '["*.md","electron/renderer/**/*.jsx","electron/src/**/*.ts","electron/html/*.html"]'
 Summary:
-  files: 44
-  filesWithIssues: 6
-  issues: 30
+  files: 49
+  filesWithIssues: 12
+  issues: 66
   errors: 0
 Errors: []
 
@@ -29,9 +29,18 @@ issues:
   - "electron/src/locale/index.ts:139:8          Slovenščina     U       sl: 'Slovenščina',"
   - "electron/src/locale/index.ts:141:8          Türkçe          U       tr: 'Türkçe',"
   - "electron/src/locale/index.ts:142:8          Українська      U       uk: 'Українська',"
-  - "electron/src/main.ts:176:51         webrtc      U       disable-features', 'webrtc-hide-local-ips-with"
-  - "electron/src/main.ts:176:78         mdns        U       hide-local-ips-with-mdns');"
+  - "electron/src/main.ts:177:51         webrtc      U       disable-features', 'webrtc-hide-local-ips-with"
+  - "electron/src/main.ts:177:78         mdns        U       hide-local-ips-with-mdns');"
+  - "electron/src/managed/backends/linux.ts:33:28        APPLOCK     U       return managedConfig?.[APPLOCK_OVERRIDE_KEY] !== false"
+  - "electron/src/managed/backends/windows.ts:42:33          subkey      U       enumerateKeys: (hive: number, subkey: string) => string["
+  - "electron/src/managed/backends/windows.ts:65:10          subkeys     U       function subkeysOf(registry: RegistryJs"
+  - "electron/src/managed/ManagedConfig.ts:35:3          applock     U       applockOverride: boolean;"
+  - "electron/src/managed/ManagedConfig.ts:40:16         Applock     U       function detectApplockOverride(): boolean"
   - "electron/src/menu/developer.ts:71:27        Availeble (Available)       U       const environments = getAvailebleEnvironments();"
   - "electron/src/preload/preload-webview.ts:268:37      polyfilling     U       This can be improved by polyfilling getDisplayMedia function"
-  - "electron/src/preload/preload-webview.ts:284:91      Popout          U       VERSION, supportsCallingPopoutWindow: true};"
-  - "electron/src/preload/preload-webview.ts:315:8       SQSERVICES      U       // see SQSERVICES-1882 and SQSERVICES"
+  - "electron/src/preload/preload-webview.ts:294:20      Popout          U       supportsCallingPopoutWindow: true,"
+  - "electron/src/preload/preload-webview.ts:327:8       SQSERVICES      U       // see SQSERVICES-1882 and SQSERVICES"
+  - "README.md:65:50         HKLM        U       SOFTWARE\\Policies\\Wire` (HKLM, HKCU fallback) | `applockOve"
+  - "README.md:65:56         HKCU        U       Policies\\Wire` (HKLM, HKCU fallback) | `applockOverride"
+  - "README.md:81:44         Intune      U       automatically on an Intune/MDM-enrolled or Azure"
+  - "README.md:83:77         zclient     U       production is `com.wearezeta.zclient.mac`; dev/internal differ"

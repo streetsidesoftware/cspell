@@ -3,11 +3,12 @@ Repository: webpack/webpack
 Url: https://github.com/webpack/webpack.git
 Args: '["{.github,benchmark,bin,examples,hot,lib,schemas,setup,tooling}/**/*.{md,yml,yaml,js,json}","*.md"]'
 Summary:
-  files: 1237
+  files: 1247
   filesWithIssues: 1
-  issues: 1
+  issues: 4
   errors: 0
 Errors: []
 
 issues:
-  - ".github/workflows/dependency-review.yml:31:21       strtok      U       pkg:npm/strtok3"
+  - ".github/workflows/benchmarks.yml:61:20          libuv           U       # Single libuv thread → deterministic"
+  - ".github/workflows/benchmarks.yml:63:14          THREADPOOL      U       UV_THREADPOOL_SIZE: 1"
