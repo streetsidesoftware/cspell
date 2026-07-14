@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 322, Issues found: 3640 in 290 files.
+ CSpell: Files checked: 322, Issues found: 3625 in 290 files.
  exit code: 1
 admin.go:1124:20   - Unknown word (Redir)       -- return errInternalRedir
 admin.go:1418:6    - Unknown word (loggable)    -- type loggableURLArray []*url.URL
@@ -1746,11 +1746,7 @@ modules/caddyhttp/metrics.go:187:2     - Unknown word (autoexport)     -- autoex
 modules/caddyhttp/metrics.go:187:63    - Unknown word (sdkmetric)      -- func(context.Context) (sdkmetric.Producer, error) {
 modules/caddyhttp/metrics.go:188:10    - Unknown word (otelprom)       -- return otelprom.NewMetricProducer(otelprom
 modules/caddyhttp/metrics.go:188:37    - Unknown word (otelprom)       -- otelprom.NewMetricProducer(otelprom.WithGatherer(reg)),
-modules/caddyhttp/metrics.go:18:2      - Unknown word (semconv)    -- semconv "go.opentelemetry.io
-modules/caddyhttp/metrics.go:18:36     - Unknown word (semconv)    -- opentelemetry.io/otel/semconv/v1.26.0"
 modules/caddyhttp/metrics.go:191:17    - Unknown word (autoexport)     -- reader, err := autoexport.NewMetricReader(ctx
-modules/caddyhttp/metrics.go:198:3     - Unknown word (semconv)        -- semconv.WebEngineName(ServerHeader
-modules/caddyhttp/metrics.go:199:3     - Unknown word (semconv)        -- semconv.WebEngineVersion(version
 modules/caddyhttp/metrics.go:1:9       - Unknown word (caddyhttp)  -- package caddyhttp
 modules/caddyhttp/metrics.go:205:20    - Unknown word (sdkmetric)      -- m.meterProvider = sdkmetric.NewMeterProvider(
 modules/caddyhttp/metrics.go:206:3     - Unknown word (sdkmetric)      -- sdkmetric.WithResource(res),
@@ -2631,28 +2627,17 @@ modules/caddyhttp/tracing/module.go:9:14      - Unknown word (caddyserver) -- "g
 modules/caddyhttp/tracing/module_test.go:13:38     - Unknown word (tracetest)  -- entelemetry.io/otel/sdk/trace/tracetest"
 modules/caddyhttp/tracing/module_test.go:15:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 modules/caddyhttp/tracing/module_test.go:166:14    - Unknown word (caddyhttp)   -- var handler caddyhttp.HandlerFunc = func(writer
-modules/caddyhttp/tracing/module_test.go:167:3     - Unknown word (traceparent) -- traceparent := request.Header.Get
-modules/caddyhttp/tracing/module_test.go:167:38    - Unknown word (Traceparent) -- request.Header.Get("Traceparent")
-modules/caddyhttp/tracing/module_test.go:168:45    - Unknown word (traceparent) -- | strings.HasPrefix(traceparent, "00-00000000000000
-modules/caddyhttp/tracing/module_test.go:168:6     - Unknown word (traceparent) -- if traceparent == "" || strings.HasPrefix
-modules/caddyhttp/tracing/module_test.go:169:22    - Unknown word (traceparent) -- t.Errorf("Invalid traceparent: %v", traceparent)
-modules/caddyhttp/tracing/module_test.go:169:40    - Unknown word (traceparent) -- Invalid traceparent: %v", traceparent)
 modules/caddyhttp/tracing/module_test.go:16:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/caddyconfig
 modules/caddyhttp/tracing/module_test.go:16:35     - Unknown word (caddyconfig) -- caddyserver/caddy/v2/caddyconfig/caddyfile"
 modules/caddyhttp/tracing/module_test.go:17:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddyhttp
 modules/caddyhttp/tracing/module_test.go:17:43     - Unknown word (caddyhttp)   -- caddyserver/caddy/v2/modules/caddyhttp"
 modules/caddyhttp/tracing/module_test.go:197:14    - Unknown word (caddyhttp)   -- var handler caddyhttp.HandlerFunc = func(writer
-modules/caddyhttp/tracing/module_test.go:198:38    - Unknown word (Traceparent) -- request.Header.Get("Traceparent")
 modules/caddyhttp/tracing/module_test.go:229:14    - Unknown word (caddyhttp)   -- var handler caddyhttp.HandlerFunc = func(writer
 modules/caddyhttp/tracing/module_test.go:288:18    - Unknown word (tracetest)   -- spanRecorder := tracetest.NewSpanRecorder()
 modules/caddyhttp/tracing/module_test.go:313:31    - Unknown word (caddyhttp)   -- context.WithValue(ctx, caddyhttp.VarsCtxKey, make(map
 modules/caddyhttp/tracing/tracer.go:106:3     - Unknown word (caddyhttp)   -- caddyhttp.SetVar(ctx, "trace_id
 modules/caddyhttp/tracing/tracer.go:108:3     - Unknown word (caddyhttp)   -- caddyhttp.SetVar(ctx, "span_id
 modules/caddyhttp/tracing/tracer.go:10:43     - Unknown word (autoprop)   -- contrib/propagators/autoprop"
-modules/caddyhttp/tracing/tracer.go:155:3     - Unknown word (semconv)     -- semconv.WebEngineName(webEngineName
-modules/caddyhttp/tracing/tracer.go:156:3     - Unknown word (semconv)     -- semconv.WebEngineVersion(webEngineVer
-modules/caddyhttp/tracing/tracer.go:15:2      - Unknown word (semconv)    -- semconv "go.opentelemetry.io
-modules/caddyhttp/tracing/tracer.go:15:36     - Unknown word (semconv)    -- opentelemetry.io/otel/semconv/v1.17.0"
 modules/caddyhttp/tracing/tracer.go:19:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 modules/caddyhttp/tracing/tracer.go:20:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddyhttp
 modules/caddyhttp/tracing/tracer.go:20:43     - Unknown word (caddyhttp)   -- caddyserver/caddy/v2/modules/caddyhttp"

@@ -4,8 +4,8 @@ Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
   files: 21123
-  filesWithIssues: 8109
-  issues: 46935
+  filesWithIssues: 8067
+  issues: 46854
   errors: 0
 Errors: []
 
@@ -648,7 +648,6 @@ issues:
   - "google/cloud/internal/detect_gcp_test.cc:43:43          Loogle      U       testing::Values(\"Loogle\", \"Test\", \"Google K"
   - "google/cloud/internal/external_account_token_source_aws_test.cc:936:46      dgst    U       215\" | openssl dgst -sha256 -mac HMAC -macopt"
   - "google/cloud/internal/future_impl.h:182:34      Wmaybe      U       diagnostic ignored \"-Wmaybe-uninitialized\""
-  - "google/cloud/internal/grpc_opentelemetry_test.cc:58:35          semconv     U       sc = ::opentelemetry::semconv;"
   - "google/cloud/internal/http_header_test.cc:145:33        valuelongerthantruncatelength       U       HttpHeader long_value(\"key\", \"valuelongerthantruncatelength\");"
   - "google/cloud/internal/http_header_test.cc:146:50        valuelonge                          U       DebugString(), Eq(\"key: valuelonge\"));"
   - "google/cloud/internal/oauth2_gdch_service_account_credentials_test.cc:336:45        GDCHJWT     U       ceAccountCredentialsTest, MakeGDCHJWTAssertion) {"
@@ -717,7 +716,6 @@ issues:
   - "google/cloud/pubsub/internal/subscription_session_test.cc:177:37        acking      U       Increment the counter before acking, as the ack() may trigger"
   - "google/cloud/pubsub/internal/tracing_helpers.h:37:71        telemetery      U       if compiled with open telemetery"
   - "google/cloud/pubsub/samples/CMakeLists.txt:94:37        TESTDATA    U       GOOGLE_CLOUD_CPP_PUBSUB_TESTDATA=${CMAKE_CURRENT_SOURCE"
-  - "google/cloud/pubsub/samples/samples.cc:1096:67      avsc    U       directory + \"schema.avsc\";"
   - "google/cloud/pubsub/samples/schema_samples.cc:278:19        Rolledback      U       std::cout << \"Rolledback schema. Created a new"
   - "google/cloud/pubsub/samples/topic_admin_samples.cc:834:51       mikeprieto      U       cloud_storage_topic_id, \"mikeprieto-bucket\", \"text\","
   - "google/cloud/rapidmigrationassessment/v1/internal/rapid_migration_assessment_auth_decorator.h:20:39         RAPIDMIGRATIONASSESSMENT    U       CLOUD_CPP_GOOGLE_CLOUD_RAPIDMIGRATIONASSESSMENT_V1_INTERNAL_RAPID_MIGRATION"

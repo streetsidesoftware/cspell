@@ -5,7 +5,7 @@ Args: '["**/*.go"]'
 Summary:
   files: 322
   filesWithIssues: 290
-  issues: 3640
+  issues: 3625
   errors: 0
 Errors: []
 
@@ -1748,8 +1748,6 @@ issues:
   - "modules/caddyhttp/metrics.go:14:2           otelprom            U       otelprom \"go.opentelemetry.io"
   - "modules/caddyhttp/metrics.go:15:41          autoexport          U       io/contrib/exporters/autoexport\""
   - "modules/caddyhttp/metrics.go:16:2           sdkmetric           U       sdkmetric \"go.opentelemetry.io"
-  - "modules/caddyhttp/metrics.go:18:2           semconv             U       semconv \"go.opentelemetry.io"
-  - "modules/caddyhttp/metrics.go:18:36          semconv             U       opentelemetry.io/otel/semconv/v1.26.0\""
   - "modules/caddyhttp/metrics.go:20:14          caddyserver         U       \"github.com/caddyserver/caddy/v2\""
   - "modules/caddyhttp/metrics.go:21:2           caddymetrics        U       caddymetrics \"github.com/caddyserver"
   - "modules/caddyhttp/metrics.go:21:27          caddyserver         U       caddymetrics \"github.com/caddyserver/caddy/v2/internal/metrics"
@@ -1768,8 +1766,6 @@ issues:
   - "modules/caddyhttp/metrics.go:188:10         otelprom            U       return otelprom.NewMetricProducer(otelprom"
   - "modules/caddyhttp/metrics.go:188:37         otelprom            U       otelprom.NewMetricProducer(otelprom.WithGatherer(reg)),"
   - "modules/caddyhttp/metrics.go:191:17         autoexport          U       reader, err := autoexport.NewMetricReader(ctx"
-  - "modules/caddyhttp/metrics.go:198:3          semconv             U       semconv.WebEngineName(ServerHeader"
-  - "modules/caddyhttp/metrics.go:199:3          semconv             U       semconv.WebEngineVersion(version"
   - "modules/caddyhttp/metrics.go:205:20         sdkmetric           U       m.meterProvider = sdkmetric.NewMeterProvider("
   - "modules/caddyhttp/metrics.go:206:3          sdkmetric           U       sdkmetric.WithResource(res),"
   - "modules/caddyhttp/metrics.go:317:12         caddymetrics        U       method := caddymetrics.SanitizeMethod(r.Method"
@@ -2626,14 +2622,7 @@ issues:
   - "modules/caddyhttp/tracing/module_test.go:17:14          caddyserver     U       \"github.com/caddyserver/caddy/v2/modules/caddyhttp"
   - "modules/caddyhttp/tracing/module_test.go:17:43          caddyhttp       U       caddyserver/caddy/v2/modules/caddyhttp\""
   - "modules/caddyhttp/tracing/module_test.go:166:14         caddyhttp       U       var handler caddyhttp.HandlerFunc = func(writer"
-  - "modules/caddyhttp/tracing/module_test.go:167:3          traceparent     U       traceparent := request.Header.Get"
-  - "modules/caddyhttp/tracing/module_test.go:167:38         Traceparent     U       request.Header.Get(\"Traceparent\")"
-  - "modules/caddyhttp/tracing/module_test.go:168:6          traceparent     U       if traceparent == \"\" || strings.HasPrefix"
-  - "modules/caddyhttp/tracing/module_test.go:168:45         traceparent     U       | strings.HasPrefix(traceparent, \"00-00000000000000"
-  - "modules/caddyhttp/tracing/module_test.go:169:22         traceparent     U       t.Errorf(\"Invalid traceparent: %v\", traceparent)"
-  - "modules/caddyhttp/tracing/module_test.go:169:40         traceparent     U       Invalid traceparent: %v\", traceparent)"
   - "modules/caddyhttp/tracing/module_test.go:197:14         caddyhttp       U       var handler caddyhttp.HandlerFunc = func(writer"
-  - "modules/caddyhttp/tracing/module_test.go:198:38         Traceparent     U       request.Header.Get(\"Traceparent\")"
   - "modules/caddyhttp/tracing/module_test.go:229:14         caddyhttp       U       var handler caddyhttp.HandlerFunc = func(writer"
   - "modules/caddyhttp/tracing/module_test.go:288:18         tracetest       U       spanRecorder := tracetest.NewSpanRecorder()"
   - "modules/caddyhttp/tracing/module_test.go:313:31         caddyhttp       U       context.WithValue(ctx, caddyhttp.VarsCtxKey, make(map"
@@ -2655,8 +2644,6 @@ issues:
   - "modules/caddyhttp/tracing/tracer.go:8:41        autoexport      U       io/contrib/exporters/autoexport\""
   - "modules/caddyhttp/tracing/tracer.go:9:56        otelhttp        U       instrumentation/net/http/otelhttp\""
   - "modules/caddyhttp/tracing/tracer.go:10:43       autoprop        U       contrib/propagators/autoprop\""
-  - "modules/caddyhttp/tracing/tracer.go:15:2        semconv         U       semconv \"go.opentelemetry.io"
-  - "modules/caddyhttp/tracing/tracer.go:15:36       semconv         U       opentelemetry.io/otel/semconv/v1.17.0\""
   - "modules/caddyhttp/tracing/tracer.go:19:14       caddyserver     U       \"github.com/caddyserver/caddy/v2\""
   - "modules/caddyhttp/tracing/tracer.go:20:14       caddyserver     U       \"github.com/caddyserver/caddy/v2/modules/caddyhttp"
   - "modules/caddyhttp/tracing/tracer.go:20:43       caddyhttp       U       caddyserver/caddy/v2/modules/caddyhttp\""
@@ -2670,8 +2657,6 @@ issues:
   - "modules/caddyhttp/tracing/tracer.go:91:3        otelhttp        U       otelhttp.WithSpanNameFormatter"
   - "modules/caddyhttp/tracing/tracer.go:106:3       caddyhttp       U       caddyhttp.SetVar(ctx, \"trace_id"
   - "modules/caddyhttp/tracing/tracer.go:108:3       caddyhttp       U       caddyhttp.SetVar(ctx, \"span_id"
-  - "modules/caddyhttp/tracing/tracer.go:155:3       semconv         U       semconv.WebEngineName(webEngineName"
-  - "modules/caddyhttp/tracing/tracer.go:156:3       semconv         U       semconv.WebEngineVersion(webEngineVer"
   - "modules/caddyhttp/urlpatternmatcher_test.go:1:9         caddyhttp       U       package caddyhttp"
   - "modules/caddyhttp/urlpatternmatcher_test.go:10:14       stretchr        U       \"github.com/stretchr/testify/assert\""
   - "modules/caddyhttp/urlpatternmatcher_test.go:11:14       stretchr        U       \"github.com/stretchr/testify/require\""
