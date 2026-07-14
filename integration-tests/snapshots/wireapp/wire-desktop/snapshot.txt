@@ -3,8 +3,12 @@ Repository: wireapp/wire-desktop
 Url: "https://github.com/wireapp/wire-desktop.git"
 Args: ["*.md","electron/renderer/**/*.jsx","electron/src/**/*.ts","electron/html/*.html"]
 Lines:
- CSpell: Files checked: 44, Issues found: 30 in 6 files.
+ CSpell: Files checked: 49, Issues found: 66 in 12 files.
  exit code: 1
+README.md:65:50     - Unknown word (HKLM)       -- SOFTWARE\Policies\Wire` (HKLM, HKCU fallback) | `applockOve
+README.md:65:56     - Unknown word (HKCU)       -- Policies\Wire` (HKLM, HKCU fallback) | `applockOverride
+README.md:81:44     - Unknown word (Intune)     -- automatically on an Intune/MDM-enrolled or Azure
+README.md:83:77     - Unknown word (zclient)    -- production is `com.wearezeta.zclient.mac`; dev/internal differ
 electron/src/locale/index.ts:121:8     - Unknown word (Čeština)    -- cs: 'Čeština',
 electron/src/locale/index.ts:122:8     - Unknown word (Dansk)      -- da: 'Dansk',
 electron/src/locale/index.ts:123:8     - Unknown word (Deutsch)    -- de: 'Deutsch',
@@ -24,9 +28,14 @@ electron/src/locale/index.ts:138:8     - Unknown word (Slovenčina) -- sk: 'Slov
 electron/src/locale/index.ts:139:8     - Unknown word (Slovenščina) -- sl: 'Slovenščina',
 electron/src/locale/index.ts:141:8     - Unknown word (Türkçe)      -- tr: 'Türkçe',
 electron/src/locale/index.ts:142:8     - Unknown word (Українська)  -- uk: 'Українська',
-electron/src/main.ts:176:51    - Unknown word (webrtc)     -- disable-features', 'webrtc-hide-local-ips-with
-electron/src/main.ts:176:78    - Unknown word (mdns)       -- hide-local-ips-with-mdns');
+electron/src/main.ts:177:51    - Unknown word (webrtc)     -- disable-features', 'webrtc-hide-local-ips-with
+electron/src/main.ts:177:78    - Unknown word (mdns)       -- hide-local-ips-with-mdns');
+electron/src/managed/ManagedConfig.ts:35:3      - Unknown word (applock)    -- applockOverride: boolean;
+electron/src/managed/ManagedConfig.ts:40:16     - Unknown word (Applock)    -- function detectApplockOverride(): boolean
+electron/src/managed/backends/linux.ts:33:28     - Unknown word (APPLOCK)    -- return managedConfig?.[APPLOCK_OVERRIDE_KEY] !== false
+electron/src/managed/backends/windows.ts:42:33     - Unknown word (subkey)     -- enumerateKeys: (hive: number, subkey: string) => string[
+electron/src/managed/backends/windows.ts:65:10     - Unknown word (subkeys)    -- function subkeysOf(registry: RegistryJs
 electron/src/menu/developer.ts:71:27     - Unknown word (Availeble)  -- const environments = getAvailebleEnvironments();
 electron/src/preload/preload-webview.ts:268:37    - Unknown word (polyfilling) -- This can be improved by polyfilling getDisplayMedia function
-electron/src/preload/preload-webview.ts:284:91    - Unknown word (Popout)      -- VERSION, supportsCallingPopoutWindow: true};
-electron/src/preload/preload-webview.ts:315:8     - Unknown word (SQSERVICES)  -- // see SQSERVICES-1882 and SQSERVICES
+electron/src/preload/preload-webview.ts:294:20    - Unknown word (Popout)      -- supportsCallingPopoutWindow: true,
+electron/src/preload/preload-webview.ts:327:8     - Unknown word (SQSERVICES)  -- // see SQSERVICES-1882 and SQSERVICES
