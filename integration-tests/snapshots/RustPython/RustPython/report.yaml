@@ -3,7 +3,7 @@ Repository: RustPython/RustPython
 Url: https://github.com/RustPython/RustPython.git
 Args: '["**"]'
 Summary:
-  files: 854
+  files: 857
   filesWithIssues: 106
   issues: 8373
   errors: 0
@@ -92,6 +92,7 @@ issues:
   - "crates/capi/src/bytearrayobject.rs:1:1\tNo issues found"
   - "crates/capi/src/bytesobject.rs:1:1\tNo issues found"
   - "crates/capi/src/ceval.rs:1:1\tNo issues found"
+  - "crates/capi/src/codecs.rs:1:1\tNo issues found"
   - "crates/capi/src/complexobject.rs:1:1\tNo issues found"
   - "crates/capi/src/critical_section.rs:1:1\tNo issues found"
   - "crates/capi/src/descrobject.rs:1:1\tNo issues found"
@@ -115,6 +116,7 @@ issues:
   - "crates/capi/src/pylifecycle.rs:1:1\tNo issues found"
   - "crates/capi/src/pymem.rs:1:1\tNo issues found"
   - "crates/capi/src/pystate.rs:1:1\tNo issues found"
+  - "crates/capi/src/pystrcmp.rs:1:1\tNo issues found"
   - "crates/capi/src/refcount.rs:1:1\tNo issues found"
   - "crates/capi/src/setobject.rs:1:1\tNo issues found"
   - "crates/capi/src/sliceobject.rs:1:1\tNo issues found"
@@ -8306,8 +8308,8 @@ issues:
   - "crates/wasm/Cargo.toml:12:16        cdylib      U       crate-type = [\"cdylib\", \"rlib\"]"
   - "crates/wasm/Cargo.toml:12:26        rlib        U       crate-type = [\"cdylib\", \"rlib\"]"
   - "crates/wasm/Lib/_microdistlib.py:1:1\tNo issues found"
-  - "crates/wasm/Lib/asyncweb.py:204:18      jsclosure       U       @browser.jsclosure_once"
-  - "crates/wasm/Lib/asyncweb.py:209:47      jsfloat         U       cb.detach(), browser.jsfloat(ms))"
+  - "crates/wasm/Lib/asyncweb.py:203:18      jsclosure       U       @browser.jsclosure_once"
+  - "crates/wasm/Lib/asyncweb.py:208:47      jsfloat         U       cb.detach(), browser.jsfloat(ms))"
   - "crates/wasm/Lib/browser.py:14:6         jsstr           U       \"jsstr\","
   - "crates/wasm/Lib/browser.py:15:6         jsclosure       U       \"jsclosure\","
   - "crates/wasm/Lib/browser.py:16:6         jsclosure       U       \"jsclosure_once\","
@@ -8668,7 +8670,7 @@ issues:
   - "extra_tests/snippets/stdlib_csv.py:1:1\tNo issues found"
   - "extra_tests/snippets/stdlib_ctypes_byvalue.py:1:1\tNo issues found"
   - "extra_tests/snippets/stdlib_ctypes_calls.py:1:1\tNo issues found"
-  - "extra_tests/snippets/stdlib_ctypes.py:265:29        RTLD    U       mode |= _os.RTLD_MEMBER | _os.RTLD_NOW"
+  - "extra_tests/snippets/stdlib_ctypes.py:269:29        RTLD    U       mode |= _os.RTLD_MEMBER | _os.RTLD_NOW"
   - "extra_tests/snippets/stdlib_datetime.py:141:3       unsupport (unsupported)         U       # unsupport format in strptime returns"
   - "extra_tests/snippets/stdlib_datetime.py:159:14      ACDT                            U       self.ACDT = timezone(timedelta"
   - "extra_tests/snippets/stdlib_datetime.py:159:53      ACDT                            U       timedelta(hours=9.5), 'ACDT')"
@@ -8776,6 +8778,7 @@ issues:
   - "extra_tests/snippets/stdlib_os.py:119:14        BOYA        U       CONTENT3 = b\"BOYA\""
   - "extra_tests/snippets/stdlib_os.py:518:63        VDISABLE    U       \"PC_MAX_INPUT\", \"PC_VDISABLE\"]:"
   - "extra_tests/snippets/stdlib_pwd.py:1:1\tNo issues found"
+  - "extra_tests/snippets/stdlib_queue_signal.py:1:1\tNo issues found"
   - "extra_tests/snippets/stdlib_random.py:1:1\tNo issues found"
   - "extra_tests/snippets/stdlib_re.py:4:11          ello        U       needle = \"ello\""
   - "extra_tests/snippets/stdlib_re.py:17:17         abcabca     U       s = p.sub(\"x\", \"abcabca\")"
@@ -8842,10 +8845,10 @@ issues:
   - "extra_tests/snippets/syntax_class.py:60:5           fubar       U       Bar.fubar(2)"
   - "extra_tests/snippets/syntax_class.py:62:5           kungfu      U       bar.kungfu(3)"
   - "extra_tests/snippets/syntax_class.py:63:5           kungfu      U       Bar.kungfu(3)"
-  - "extra_tests/snippets/syntax_class.py:229:20         dbca        U       assert D().f() == 'dbca', \"Mro resolution using"
-  - "extra_tests/snippets/syntax_class.py:269:17         mcls        U       def __new__(mcls):"
-  - "extra_tests/snippets/syntax_class.py:270:21         mcls        U       assert type(mcls.__new__).__name__ ="
-  - "extra_tests/snippets/syntax_class.py:271:21         mcls        U       assert type(mcls.mro).__name__ == 'method"
+  - "extra_tests/snippets/syntax_class.py:252:20         dbca        U       assert D().f() == 'dbca', \"Mro resolution using"
+  - "extra_tests/snippets/syntax_class.py:292:17         mcls        U       def __new__(mcls):"
+  - "extra_tests/snippets/syntax_class.py:293:21         mcls        U       assert type(mcls.__new__).__name__ ="
+  - "extra_tests/snippets/syntax_class.py:294:21         mcls        U       assert type(mcls.mro).__name__ == 'method"
   - "extra_tests/snippets/syntax_comma.py:1:1\tNo issues found"
   - "extra_tests/snippets/syntax_comment.py:1:1\tNo issues found"
   - "extra_tests/snippets/syntax_comprehension.py:1:1\tNo issues found"

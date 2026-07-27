@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: [".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 2080, Issues found: 1542 in 295 files.
+ CSpell: Files checked: 2080, Issues found: 1545 in 295 files.
  exit code: 1
 Makefile.js:1036:18   - Unknown word (Multifiles) -- function downloadMultifilesTestTarget() {
 Makefile.js:128:82    - Unknown word (ined)       -- followed by the string "ined".
@@ -32,7 +32,6 @@ README.md:339:86    - Unknown word (Harish's)      -- 5" height="75" alt="Harish
 README.md:340:1     - Unknown word (Harish)        -- Harish
 README.md:349:5     - Unknown word (teamend)       -- <!--teamend-->
 README.md:352:5     - Unknown word (sponsorsstart) -- <!--sponsorsstart-->
-README.md:361:105   - Unknown word (Qlty)          -- d157d/logo.png" alt="Qlty Software" height="9
 README.md:368:5     - Unknown word (sponsorsend)   -- <!--sponsorsend-->
 docs/README.md:44:51     - Unknown word (openjsf)    -- ESLint contributors, [www.openjsf.org](https://www.openjsf
 docs/package.json:30:32     - Unknown word (syntaxhighlight) -- 1ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
@@ -70,7 +69,7 @@ docs/src/contribute/governance.md:84:35     - Unknown word (committership) -- im
 docs/src/contribute/package-json-conventions.md:20:114    - Unknown word (postprepare) -- preprepare" / "prepare" / "postprepare" / "prepack" / "postpack
 docs/src/extend/code-path-analysis.md:539:2     - Unknown word (hoge)       -- hoge();
 docs/src/extend/code-path-analysis.md:588:3     - Unknown word (fuga)       -- fuga();
-docs/src/extend/custom-formatters.md:223:61    - Unknown word (Guake)      -- www.iterm2.com/) or [Guake](http://guake-project
+docs/src/extend/custom-formatters.md:223:61    - Unknown word (Guake)      -- www.iterm2.com/) or [Guake](http://guake.org/)
 docs/src/extend/custom-formatters.md:245:9     - Unknown word (eslintformatter) -- - `"eslintformatter"`
 docs/src/extend/custom-parsers.md:124:31    - Unknown word (myparser)   -- packages: ["eslint-parser-myparser"],
 docs/src/extend/custom-rule-tutorial.md:184:4     - Unknown word (endraw)     -- {% endraw %}
@@ -186,7 +185,8 @@ docs/src/use/getting-started.md:70:238    - Unknown word (npmjs)      -- "eslint
 docs/src/use/integrations.md:21:8      - Unknown word (Syntastic)  -- - [Syntastic](https://github.com
 docs/src/use/integrations.md:23:13     - Unknown word (lspconfig)  -- - [nvim-lspconfig](https://github.com
 docs/src/use/integrations.md:23:8      - Unknown word (nvim)       -- - [nvim-lspconfig](https://github
-docs/src/use/integrations.md:25:11     - Unknown word (Flycheck)   -- - Emacs: [Flycheck](http://www.flycheck
+docs/src/use/integrations.md:25:11     - Unknown word (Flycheck)   -- - Emacs: [Flycheck](https://www.flycheck
+docs/src/use/integrations.md:45:4      - Unknown word (Qlty)       -- - [Qlty CLI](https://github
 docs/src/use/migrate-to-10.0.0.md:12:254    - Unknown word (Codemod)    -- repository and through the [Codemod Registry](https://app
 docs/src/use/migrate-to-10.0.0.md:12:56     - Unknown word (codemods)   -- ESLint provides migration codemods to automate many of
 docs/src/use/migrate-to-10.0.0.md:16:25     - Unknown word (codemod)    -- `@eslint/v9-to-v10` codemod upgrades ESLint projects
@@ -204,8 +204,8 @@ docs/src/use/migrating-from-jscs.md:65:4      - Unknown word (crockford)  -- | `
 docs/src/use/migrating-from-jscs.md:70:4      - Unknown word (mdcs)       -- | `mdcs` | [`eslint
 docs/src/use/migrating-to-3.0.0.md:46:229    - Unknown word (lifed)      -- Explorer 8 was end-of-lifed](https://www.microsoft
 docs/src/use/migrating-to-5.0.0.md:113:68    - Unknown word (lintable)   -- line does not match any lintable files.
-lib/cli-engine/formatters/html.js:247:66    - Unknown word (noopener)   -- target="_blank" rel="noopener noreferrer">${ruleId
-lib/cli-engine/formatters/html.js:247:75    - Unknown word (noreferrer) -- blank" rel="noopener noreferrer">${ruleId ? ruleId
+lib/cli-engine/formatters/html.js:247:66    - Unknown word (noopener)   -- target="_blank" rel="noopener noreferrer">${encodeHTML
+lib/cli-engine/formatters/html.js:247:75    - Unknown word (noreferrer) -- blank" rel="noopener noreferrer">${encodeHTML(ruleId
 lib/cli-engine/formatters/html.js:46:48     - Unknown word (Neue)       -- family: Arial, "Helvetica Neue", Helvetica, sans-serif
 lib/cli-engine/lint-result-cache.js:13:58     - Unknown word (jsonify)    -- stable-stringify-without-jsonify");
 lib/config/config.js:638:47    - Unknown word (inting)     -- configuration rules while inting.
@@ -389,7 +389,7 @@ tests/lib/rules/no-warning-comments.js:54:26     - Unknown word (aeiou)      -- 
 tests/lib/rules/object-shorthand.js:242:21    - Unknown word (afoob)      -- code: "var x = { afoob: function() {}  }",
 tests/lib/rules/prefer-arrow-callback.js:258:27    - Unknown word (amet)       -- dolor sit amet. */ {
 tests/lib/rules/prefer-object-spread.js:201:105   - Unknown word (butwhy)     -- {}, { superNested: 'butwhy' })))",
-tests/lib/rules/prefer-object-spread.js:654:39    - Unknown word (somethingelse) -- import { Something as somethingelse } from 'foo';
+tests/lib/rules/prefer-object-spread.js:726:39    - Unknown word (somethingelse) -- import { Something as somethingelse } from 'foo';
 tests/lib/rules/prefer-regex-literals.js:1618:27   - Unknown word (someregular) -- code: "[   new RegExp(`someregular`)]",
 tests/lib/rules/prefer-regex-literals.js:1646:182  - Unknown word (notregbutstring) -- new RegExp('abc') : 'notregbutstring'",
 tests/lib/rules/prefer-regex-literals.js:2594:53   - Unknown word (avalue)          -- condition2) new RegExp('avalue').test(str);",
@@ -409,16 +409,16 @@ tests/lib/rules/utils/unicode/is-combining-character.js:22:78     - Unknown word
 tests/lib/rules/utils/unicode/is-combining-character.js:23:76     - Unknown word (Etnahta)    -- true); // Hebrew Accent Etnahta
 tests/lib/rules/valid-typeof.js:98:31     - Unknown word (umdefined)  -- if (typeof bar === 'umdefined') {}",
 tests/lib/shared/string-utils.js:40:6      - Unknown word (uppercases) -- it("uppercases the first letter of
-tests/lib/types/types.test.mts:1140:7    - Unknown word (eslinter)   -- const eslinter = new ESLinter();
+tests/lib/types/types.test.mts:1146:7    - Unknown word (eslinter)   -- const eslinter = new ESLinter();
 tests/performance/jshint.js:10346:35  - Unknown word (Ashkenas)                 -- c) 2009-2013 Jeremy Ashkenas, DocumentCloud Inc.
 tests/performance/jshint.js:10490:15  - Unknown word (foldl)                    -- // or `foldl`. Delegates to **ECMAScript
 tests/performance/jshint.js:10532:67  - Unknown word (foldr)                    -- reduce, also known as `foldr`.
 tests/performance/jshint.js:1082:14   - Unknown word (quotmark)      -- var quotmark = linter.getOption(
-tests/performance/jshint.js:11538:29  - Unknown word (egal)                     -- // See the Harmony `egal` proposal: http://wiki
+tests/performance/jshint.js:11538:29  - Unknown word (egal)                     -- // See the Harmony `egal` proposal: https://wiki
 tests/performance/jshint.js:11721:27  - Unknown word (inspectable)              -- // there isn't any inspectable "Arguments" type.
 tests/performance/jshint.js:11787:13  - Unknown word (accum)                    -- var accum = Array(n);
 tests/performance/jshint.js:11907:56  - Unknown word (Resig's)                  -- templating, similar to John Resig's implementation.
-tests/performance/jshint.js:1242:32   - Unknown word (Kovalyov)      -- Copyright 2012 Anton Kovalyov (http://jshint.com)
+tests/performance/jshint.js:1242:32   - Unknown word (Kovalyov)      -- Copyright 2012 Anton Kovalyov (https://jshint.com
 tests/performance/jshint.js:1289:12   - Unknown word (anonname)      -- var anonname, // The guessed name
 tests/performance/jshint.js:1328:10   - Unknown word (funcscope)     -- funcscope: true, // if only function
 tests/performance/jshint.js:1331:10   - Unknown word (immed)         -- immed: true, // if immediate
