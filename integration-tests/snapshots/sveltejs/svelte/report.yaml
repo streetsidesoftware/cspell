@@ -3,9 +3,9 @@ Repository: sveltejs/svelte
 Url: https://github.com/sveltejs/svelte.git
 Args: '["**"]'
 Summary:
-  files: 8913
-  filesWithIssues: 619
-  issues: 4064
+  files: 8935
+  filesWithIssues: 621
+  issues: 4070
   errors: 0
 Errors: []
 
@@ -13,6 +13,7 @@ issues:
   - "benchmarking/benchmarks/reactivity/index.js:5:2         sbench      U       sbench_create_0to1,"
   - "benchmarking/benchmarks/reactivity/tests/kairo_broad_block.bench.js:5:10        kairo       U       // Like `kairo_broad`, but each derived"
   - "benchmarking/benchmarks/reactivity/tests/kairo_mux.bench.js:9:8         splited (split)     U       const splited = heads"
+  - "benchmarking/compare/results.template.html:648:83       uffff       U       stats.winners[0]] : '\\uffff';"
   - "benchmarking/utils.js:206:10        hotspot     U       const hotspot_rows = [...included"
   - "benchmarking/utils.js:235:14        hotspots    U       '## Top hotspots',"
   - "benchmarking/utils.js:254:80        Deopt       U       Hit count | Children | Deopt reason |',"
@@ -1699,7 +1700,7 @@ issues:
   - "packages/svelte/src/compiler/phases/3-transform/utils.js:219:76         spaceand    U       text node with a single spaceand keep whitespace"
   - "packages/svelte/src/compiler/phases/patterns.js:21:43       aeiou       U       starts_with_vowel = /^[aeiou]/;"
   - "packages/svelte/src/compiler/phases/scope.js:867:59         rescanning      U       per name to avoid O(n) rescanning in generate/unique."
-  - "packages/svelte/src/compiler/print/index.js:609:30      esrap's     U       This is duplicated from esrap's handling of VariableDeclarati"
+  - "packages/svelte/src/compiler/print/index.js:612:30      esrap's     U       This is duplicated from esrap's handling of VariableDeclarati"
   - "packages/svelte/src/compiler/types/template.d.ts:26:41          mrow    U       for e.g. `<math>` or `<mrow>`"
   - "packages/svelte/src/compiler/utils/ast.js:563:40        subexpression       U       expression.expressions.some((subexpression) => is_expression_async"
   - "packages/svelte/src/compiler/utils/extract_svelte_ignore.js:16:16       eachblock       U       'invalid-rest-eachblock-binding': 'bind_invalid"
@@ -1714,7 +1715,7 @@ issues:
   - "packages/svelte/src/internal/client/dev/debug.js:478:20         cchild          U       console.group('%cchild branches', 'font-weight"
   - "packages/svelte/src/internal/client/dev/tracing.js:105:28       cran    U       console.log(`${prefix} %cran outside of an effect"
   - "packages/svelte/src/internal/client/dom/blocks/await.js:60:91       treeshaken      U       let` or else it isn't treeshaken out */"
-  - "packages/svelte/src/internal/client/dom/blocks/boundary.js:399:18       oncommit    U       current_batch.oncommit(() => {"
+  - "packages/svelte/src/internal/client/dom/blocks/boundary.js:450:18       oncommit    U       current_batch.oncommit(() => {"
   - "packages/svelte/src/internal/client/dom/blocks/branches.js:214:12       unskip          U       batch.unskip_effect(effect);"
   - "packages/svelte/src/internal/client/dom/blocks/branches.js:229:10       ondiscard       U       batch.ondiscard(this.#discard);"
   - "packages/svelte/src/internal/client/dom/blocks/each.js:86:62        outrogroups     U       EachOutroGroup>} */ (state.outrogroups);"
@@ -1729,11 +1730,12 @@ issues:
   - "packages/svelte/src/internal/client/reactivity/batch.js:931:85      AFAICT          U       legacy `$:` effects AFAICT — we can remove later"
   - "packages/svelte/src/internal/client/reactivity/batch.js:1126:82     nullpointers    U       else we could run into nullpointers"
   - "packages/svelte/src/internal/client/reactivity/batch.js:1436:32     thath           U       they depend on things thath changed"
-  - "packages/svelte/src/internal/client/reactivity/deriveds.js:129:6        deferreds       U       var deferreds = new Set();"
+  - "packages/svelte/src/internal/client/reactivity/deriveds.js:130:6        deferreds       U       var deferreds = new Set();"
   - "packages/svelte/src/internal/client/reactivity/effects.js:13:2          untracking      U       untracking,"
   - "packages/svelte/src/internal/client/reactivity/sources.js:269:63        overfiring      U       - this way we avoid overfiring."
   - "packages/svelte/src/internal/client/runtime.js:136:90       depedencies (dependencies)      U       to avoid duplicating depedencies inside a reaction *"
   - "packages/svelte/src/internal/client/runtime.js:406:21       reexecuted                      U       // DIRTY so it is reexecuted once someone wants its"
+  - "packages/svelte/src/internal/client/runtime.js:411:29       noone's                         U       Call abort controller, noone's listening to this derived"
   - "packages/svelte/src/internal/client/timing.js:12:5          bunder      U       // bunder will eval and remove"
   - "packages/svelte/src/internal/client/types.d.ts:9:8          hydratables     U       /** hydratables */"
   - "packages/svelte/src/internal/server/crypto.js:18:63         analysers       U       directly because static analysers will think we rely on"
@@ -2027,3 +2029,4 @@ issues:
   - "packages/svelte/tests/validator/test.ts:146:16      svefefe     U       namespace: 'svefefe'"
   - "playgrounds/sandbox/demo.css:31:32          nums    U       variant-numeric: tabular-nums;"
   - "playgrounds/sandbox/scripts/download.js:149:43      domcontentloaded    U       href, { waitUntil: 'domcontentloaded', timeout: 20000 })"
+  - "pnpm-workspace.yaml:3:7         sveltejs    U       - '@sveltejs/*'"
