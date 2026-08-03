@@ -3,7 +3,7 @@ Repository: gitbucket/gitbucket
 Url: "https://github.com/gitbucket/gitbucket.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 417, Issues found: 2120 in 401 files.
+ CSpell: Files checked: 418, Issues found: 2152 in 402 files.
  exit code: 1
 README.md:89:88     - Unknown word (MVCC)       -- configuration, remove `;MVCC=true` from `url`.
 build.sbt:21:4      - Unknown word (scalafmt)   -- // scalafmtOnCompile := true
@@ -190,6 +190,7 @@ src/main/java/JettyLauncher.java:170:36    - Unknown word (KEYMANAGERPASSWORD) -
 src/main/java/JettyLauncher.java:194:18    - Unknown word (sess)               -- File sessDir = new File(getGitBucketHom
 src/main/java/JettyLauncher.java:200:34    - Unknown word (fsds)               -- FileSessionDataStore fsds = new FileSessionDataStore
 src/main/java/gitbucket/core/util/PatchUtil.java:89:17     - Unknown word (lhrt)       -- RawText lhrt = new RawText(lastHunk
+src/main/scala/gitbucket/core/GitBucketCoreModule.scala:159:21    - Unknown word (gitdir)     -- val gitdir = getRepositoryDir(owner
 src/main/scala/gitbucket/core/api/ApiTag.scala:13:3      - Unknown word (zipball)    -- zipball_url: ApiPath,
 src/main/scala/gitbucket/core/api/CreateARelease.scala:5:10      - Unknown word (commitish)  -- target_commitish: Option[String],
 src/main/scala/gitbucket/core/controller/AccountController.scala:196:5     - Unknown word (ctype)      -- ctype: WebHookContentType
@@ -228,7 +229,6 @@ src/main/scala/gitbucket/core/service/IssuesService.scala:680:31    - Unknown wo
 src/main/scala/gitbucket/core/service/OpenIDConnectService.scala:217:6     - Unknown word (HMAC)       -- "HMAC" -> Family.HMAC_SHA
 src/main/scala/gitbucket/core/service/ProtectedBranchService.scala:186:15    - Unknown word (Successed)  -- unSuccessedContexts(command.getNewId
 src/main/scala/gitbucket/core/service/PullRequestService.scala:419:9     - Unknown word (patchs)     -- val patchs = positions.map { case
-src/main/scala/gitbucket/core/service/RepositoryCreationService.scala:118:13    - Unknown word (gitdir)     -- val gitdir = getRepositoryDir(owner
 src/main/scala/gitbucket/core/service/RepositoryCreationService.scala:305:8     - Unknown word (fccd)       -- "fccd29"
 src/main/scala/gitbucket/core/service/RepositoryCreationService.scala:307:76    - Unknown word (acacac)     -- Some("Default."), "acacac")
 src/main/scala/gitbucket/core/service/SystemSettingsService.scala:53:58     - Unknown word (Starttls)   -- props.setProperty(SmtpStarttls, x.toString))
@@ -312,12 +312,21 @@ src/main/twirl/gitbucket/core/repo/editor.scala.html:31:35     - Unknown word (a
 src/main/twirl/gitbucket/core/repo/editor.scala.html:76:52     - Unknown word (modelist)   -- assets("/vendors/ace/ext-modelist.js")' type="text/javascript
 src/main/twirl/gitbucket/core/settings/deploykey.scala.html:6:41      - Unknown word (deploykeys) -- settings.html.menu("deploykeys", repository){
 src/main/twirl/gitbucket/core/settings/issues.scala.html:18:41     - Unknown word (issuesfield) -- gitbucket.core.settings.html.issuesfield(customField)
-src/test/scala/gitbucket/core/api/ApiIntegrationTest.scala:298:44    - Unknown word (testref)    -- createRef("refs/heads/testref", sha1)
-src/test/scala/gitbucket/core/api/ApiSpecModels.scala:102:21    - Unknown word (myboss)     -- managers = Seq("myboss")
+src/test/scala/gitbucket/core/GitBucketCoreModuleSpec.scala:258:43    - Unknown word (ccddee)     -- => "ccddee"
+src/test/scala/gitbucket/core/GitBucketCoreModuleSpec.scala:3:18      - Unknown word (Clob)       -- import java.sql.{Clob, Connection, DriverManager
+src/test/scala/gitbucket/core/GitBucketCoreModuleSpec.scala:463:48    - Unknown word (COMMITISH)  -- RELEASE_TAG", Map("TARGET_COMMITISH" -> schemaPreservationDefault
+src/test/scala/gitbucket/core/api/ApiIntegrationTest.scala:379:41    - Unknown word (bpass)      -- createUser("user5b", "user5bpass", "user5b@example.com
+src/test/scala/gitbucket/core/api/ApiIntegrationTest.scala:401:34    - Unknown word (forkorg)    -- createOrganization("forkorg", "root", "root")
+src/test/scala/gitbucket/core/api/ApiIntegrationTest.scala:501:26    - Unknown word (forkuser)   -- server.createUser("forkuser", "forkuserpass", "forkuser
+src/test/scala/gitbucket/core/api/ApiIntegrationTest.scala:501:38    - Unknown word (forkuserpass) -- createUser("forkuser", "forkuserpass", "forkuser@example
+src/test/scala/gitbucket/core/api/ApiIntegrationTest.scala:512:39    - Unknown word (nonmemberpass) -- createUser("nonmember", "nonmemberpass", "nonmember@example
+src/test/scala/gitbucket/core/api/ApiIntegrationTest.scala:523:34    - Unknown word (testorg)       -- createOrganization("testorg", "root", "root")
+src/test/scala/gitbucket/core/api/ApiIntegrationTest.scala:553:44    - Unknown word (testref)       -- createRef("refs/heads/testref", sha1)
+src/test/scala/gitbucket/core/api/ApiIntegrationTest.scala:7:36      - Unknown word (jvalue)     -- json4s.{DefaultFormats, jvalue2extractable}
+src/test/scala/gitbucket/core/api/ApiSpecModels.scala:103:21    - Unknown word (myboss)     -- managers = Seq("myboss")
 src/test/scala/gitbucket/core/api/ApiSpecModels.scala:34:17     - Unknown word (octocat)    -- userName = "octocat",
-src/test/scala/gitbucket/core/api/ApiSpecModels.scala:467:32    - Unknown word (Njpy)       -- id = "MDM6UmVmOTM1MDc0NjpyZWZzL3RhZ3MvMS4w",
-src/test/scala/gitbucket/core/api/ApiSpecModels.scala:782:22    - Unknown word (VBRE)       -- |"content":"UkVBRE1F",
-src/test/scala/gitbucket/core/api/JsonFormatSpec.scala:3:37      - Unknown word (jvalue)     -- s.{Formats, JValue, jvalue2extractable}
+src/test/scala/gitbucket/core/api/ApiSpecModels.scala:468:32    - Unknown word (Njpy)       -- id = "MDM6UmVmOTM1MDc0NjpyZWZzL3RhZ3MvMS4w",
+src/test/scala/gitbucket/core/api/ApiSpecModels.scala:784:22    - Unknown word (VBRE)       -- |"content":"UkVBRE1F",
 src/test/scala/gitbucket/core/model/CommitStateSpec.scala:14:49     - Unknown word (peinding)   -- includes FAILURE must eq peinding") {
 src/test/scala/gitbucket/core/service/MergeServiceSpec.scala:53:57     - Unknown word (hoge)       -- master", "test.txt", "hoge")
 src/test/scala/gitbucket/core/service/MergeServiceSpec.scala:58:13     - Unknown word (Confrict)   -- def createConfrict(git: Git): ObjectId

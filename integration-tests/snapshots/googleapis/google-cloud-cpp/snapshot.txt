@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 21119, skipped: 29, Issues found: 46955 in 8078 files.
+ CSpell: Files checked: 21209, skipped: 29, Issues found: 47150 in 8108 files.
  exit code: 1
 ARCHITECTURE.md:158:48    - Unknown word (googlemock) -- implementation using `googlemock`
 BUILD.bazel:151:20    - Unknown word (ctype)      -- name = "enable-ctype-cord-workaround",
@@ -172,7 +172,7 @@ ci/otel_collector/ARCHITECTURE.md:122:5     - Unknown word (autonumber) -- auton
 ci/otel_collector/ARCHITECTURE.md:165:11    - Unknown word (grpcpp)     -- #include <grpcpp/grpcpp.h>
 ci/showcase/BUILD.bazel.in:36:30     - Unknown word (longrunning) -- @googleapis//google/longrunning:operations_proto",
 ci/showcase/BUILD.bazel.in:81:14     - Unknown word (BINDIR)      -- "-I$(BINDIR)/ci/showcase",
-ci/showcase/rest_pqc_test.cc:207:31    - Unknown word (MLKEM)      -- EQ(tls_group, "X25519MLKEM768");
+ci/showcase/grpc_pqc_test.cc:280:36    - Unknown word (MLKEM)      -- tls_group, Eq("X25519MLKEM768"));
 ci/verify_current_targets/CMakeLists.txt:56:47     - Unknown word (ARGN)       -- "${name}" PRIVATE ${ARGN})
 ci/verify_current_targets/CMakeLists.txt:58:1      - Unknown word (endfunction) -- endfunction ()
 ci/verify_current_targets/CMakeLists.txt:62:1      - Unknown word (endforeach)  -- endforeach ()
@@ -366,10 +366,10 @@ generator/CMakeLists.txt:152:22    - Unknown word (libprotoc)  -- protobuf::libp
 generator/CMakeLists.txt:180:44    - Unknown word (HDRS)       -- cpp(PROTO_SRCS PROTO_HDRS generator_config.proto
 generator/CMakeLists.txt:186:40    - Unknown word (libprotobuf) -- PUBLIC protobuf::libprotobuf)
 generator/CMakeLists.txt:282:26    - Unknown word (everytime)   -- build all the tests everytime they create a new package
-generator/generator_config.textproto:1849:15   - Unknown word (Abac)       -- "SetLegacyAbac(std::string const&,
-generator/generator_config.textproto:2683:7    - Unknown word (Multicloud) -- # GKE Multicloud
-generator/generator_config.textproto:2726:3    - Unknown word (Hypercompute) -- # Hypercompute Cluster
-generator/generator_config.textproto:3918:12   - Unknown word (Hmac)         -- "CreateHmacKey",
+generator/generator_config.textproto:1856:15   - Unknown word (Abac)       -- "SetLegacyAbac(std::string const&,
+generator/generator_config.textproto:2690:7    - Unknown word (Multicloud) -- # GKE Multicloud
+generator/generator_config.textproto:2733:3    - Unknown word (Hypercompute) -- # Hypercompute Cluster
+generator/generator_config.textproto:3945:12   - Unknown word (Hmac)         -- "CreateHmacKey",
 generator/integration_tests/backup.proto:27:40     - Unknown word (genproto)   -- "google.golang.org/genproto/googleapis/test/admin
 generator/integration_tests/golden/doc/options.dox:2:2       - Unknown word (defgroup)   -- @defgroup generator-integration
 generator/integration_tests/golden/v1/golden_kitchen_sink_client.h:288:43    - Unknown word (cloudresourcemanager) -- organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity
@@ -495,7 +495,7 @@ google/cloud/bigquery/v2/minimal/internal/table_response_test.cc:232:25    - Unk
 google/cloud/bigquery/v2/minimal/internal/table_response_test.cc:235:24    - Unknown word (locat)            -- R"( location: "t-locat...<truncated>...")"
 google/cloud/bigquery/v2/minimal/internal/table_response_test.cc:236:33    - Unknown word (defau)            -- default_collation: "t-defau...<truncated>...")"
 google/cloud/bigquery/v2/minimal/testing/table_test_utils.cc:58:28     - Unknown word (hfields)    -- vector<std::string> hfields;
-google/cloud/bigtable/BUILD.bazel:140:22    - Unknown word (readrowsparser) -- name = "internal_readrowsparser_test",
+google/cloud/bigtable/BUILD.bazel:145:22    - Unknown word (readrowsparser) -- name = "internal_readrowsparser_test",
 google/cloud/bigtable/CMakeLists.txt:32:6      - Unknown word (testproxy)  -- "testproxy"
 google/cloud/bigtable/app_profile_config_test.cc:101:51    - Unknown word (xyzzy)      -- ofileUpdateConfig().set_etag("xyzzy").as_proto();
 google/cloud/bigtable/async_read_stream_test.cc:28:11     - Unknown word (btproto)    -- namespace btproto = ::google::bigtable
@@ -800,7 +800,7 @@ google/cloud/storage/benchmarks/async_throughput_benchmark.cc:92:11     - Unknow
 google/cloud/storage/bucket_autoclass.h:49:66     - Unknown word (tscu)       -- system_clock::time_point tscu)
 google/cloud/storage/bucket_encryption.h:139:61    - Unknown word (gmek)       -- edEncryptionEnforcementConfig gmek,
 google/cloud/storage/bucket_metadata.cc:240:14    - Unknown word (subpatch)   -- if (labels_subpatch_dirty_) {
-google/cloud/storage/client.cc:573:67    - Unknown word (iamapi)     -- "/iamapi");
+google/cloud/storage/client.cc:581:67    - Unknown word (iamapi)     -- "/iamapi");
 google/cloud/storage/client_sign_policy_document_test.cc:131:55    - Unknown word (Ymxv)       -- blob = "dGVzdC1zaWduZWQtYmxvYg==";
 google/cloud/storage/client_sign_url_test.cc:182:57    - Unknown word (Fgoog)      -- 1%2Fauto%2Fstorage%2Fgoog4_request"
 google/cloud/storage/client_test.cc:96:38     - Unknown word (TESTBENCH)  -- endpoint_("CLOUD_STORAGE_TESTBENCH_ENDPOINT", {}),
@@ -852,23 +852,23 @@ google/cloud/storage/examples/storage_object_file_transfer_samples.cc:148:11    
 google/cloud/storage/examples/storage_object_file_transfer_samples.cc:148:19    - Unknown word (deserunt)      -- culpa qui officia deserunt mollit anim id est laborum
 google/cloud/storage/examples/storage_object_file_transfer_samples.cc:148:28    - Unknown word (mollit)        -- qui officia deserunt mollit anim id est laborum
 google/cloud/storage/examples/storage_object_file_transfer_samples.cc:148:47    - Unknown word (laborum)       -- deserunt mollit anim id est laborum.
-google/cloud/storage/hashing_options_test.cc:40:19     - Unknown word (Tcrto)      -- EXPECT_EQ("nhB9nTcrtoJr2B01QqQZ1g==", actual
-google/cloud/storage/hashing_options_test.cc:56:16     - Unknown word (IEBA)       -- EXPECT_EQ("ImIEBA==", actual);
-google/cloud/storage/internal/async/connection_impl_appendable_upload_test.cc:127:40    - Unknown word (wopt)       -- grpc::WriteOptions wopt) {
-google/cloud/storage/internal/async/connection_impl_open_test.cc:371:38    - Unknown word (Transien)   -- yncConnectionImplTest, TooManyTransienErrors) {
+google/cloud/storage/hashing_options_test.cc:41:19     - Unknown word (Tcrto)      -- EXPECT_EQ("nhB9nTcrtoJr2B01QqQZ1g==", actual
+google/cloud/storage/hashing_options_test.cc:57:16     - Unknown word (IEBA)       -- EXPECT_EQ("ImIEBA==", actual);
+google/cloud/storage/internal/async/connection_impl_appendable_upload_test.cc:133:40    - Unknown word (wopt)       -- grpc::WriteOptions wopt) {
+google/cloud/storage/internal/async/connection_impl_open_test.cc:372:38    - Unknown word (Transien)   -- yncConnectionImplTest, TooManyTransienErrors) {
 google/cloud/storage/internal/async/connection_impl_read_hash_test.cc:17:11     - Unknown word (pratap)     -- // TODO(v-pratap): Remove this when EnableMD
-google/cloud/storage/internal/async/connection_impl_upload_test.cc:463:42    - Unknown word (eksb)       -- sha256_bytes: "test-eksb"
+google/cloud/storage/internal/async/connection_impl_upload_test.cc:486:42    - Unknown word (eksb)       -- sha256_bytes: "test-eksb"
 google/cloud/storage/internal/async/insert_object.cc:50:21     - Unknown word (Subcord)    -- auto next = data_.Subcord(0, n);
 google/cloud/storage/internal/async/writer_connection_buffered.cc:706:39    - Unknown word (unsatisified) -- call that returns an unsatisified future until the buffer
 google/cloud/storage/internal/grpc/default_options.cc:104:49    - Unknown word (unviverse)  -- already a set endpoint or unviverse domain endpoint.
 google/cloud/storage/internal/grpc/default_options_test.cc:112:29    - Unknown word (testbench)  -- "from-testbench-env");
-google/cloud/storage/internal/grpc/object_request_parser_test.cc:62:33     - Unknown word (Cuakt)      -- md5) : StEvo2V/qoDCuaktZSw3IQ==
-google/cloud/storage/internal/grpc/stub.cc:362:10    - Unknown word (wopts)      -- auto wopts = grpc::WriteOptions
+google/cloud/storage/internal/grpc/object_request_parser_test.cc:63:33     - Unknown word (Cuakt)      -- md5) : StEvo2V/qoDCuaktZSw3IQ==
+google/cloud/storage/internal/grpc/stub.cc:372:10    - Unknown word (wopts)      -- auto wopts = grpc::WriteOptions
 google/cloud/storage/internal/object_requests_test.cc:261:61    - Unknown word (NEFCQ)      -- encryption-key: MTIzNEFCQ0Q="));
 google/cloud/storage/internal/object_requests_test.cc:281:61    - Unknown word (QUJDRD)     -- source-encryption-key: QUJDRDEyMzQ="));
 google/cloud/storage/internal/object_requests_test.cc:606:27    - Unknown word (sdlkj)      -- "&upload_id=xa298sd_sdlkj2";
 google/cloud/storage/internal/object_requests_test.cc:987:32    - Unknown word (preprod)    -- upsert("environment", {"preprod", {}, {}});
-google/cloud/storage/internal/object_write_streambuf_test.cc:367:39    - Unknown word (Putn)       -- ectWriteStreambufTest, MixPutcPutn) {
+google/cloud/storage/internal/object_write_streambuf_test.cc:368:39    - Unknown word (Putn)       -- ectWriteStreambufTest, MixPutcPutn) {
 google/cloud/storage/internal/tuple_filter_test.cc:66:25     - Unknown word (rvalues)    -- Test that forwarding rvalues works.
 google/cloud/storage/policy_document_test.cc:160:8     - Unknown word (asdfasdfasdf) -- "asdfasdfasdf", "asdfasdfasdf"};
 google/cloud/storage/policy_document_test.cc:201:14    - Unknown word (rsaposttest)  -- "rsaposttest, access_id=foo@foo.com
