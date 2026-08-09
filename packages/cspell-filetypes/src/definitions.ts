@@ -277,7 +277,7 @@ export const definitions: FileTypeDefinitions = [
     { id: 'toml', extensions: ['.toml'], filenames: ['Cargo.lock', 'Cargo.toml'] },
     { id: 'typescript', extensions: ['.cts', '.mts', '.ts'] },
     { id: 'typescriptreact', extensions: ['.tsx'] },
-    { id: 'typst', extensions: ['.typst'] },
+    { id: 'typst', extensions: ['.typ', '.typst'] },
     { id: 'vala', extensions: ['.vala'] },
     { id: 'vb', extensions: ['.bas', '.brs', '.vb', '.vba', '.vbs'] },
     { id: 'vue', extensions: ['.vue'] },
