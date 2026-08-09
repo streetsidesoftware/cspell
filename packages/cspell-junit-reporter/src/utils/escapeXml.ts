@@ -1,6 +1,7 @@
-// Control characters that are not valid in XML 1.0 (tab \t, newline \n, and carriage return \r are allowed).
+// Control characters that should not appear literally in XML 1.0 output
+// (tab \t, newline \n, and carriage return \r are allowed).
 // eslint-disable-next-line no-control-regex
-const invalidXmlChars = /[\x00-\x08\x0B\x0C\x0E-\x1F]/g;
+const invalidXmlChars = /[\x00-\x08\x0B\x0C\x0E-\x1F\x7F-\x84\x86-\x9F]/g;
 
 /**
  * Escapes text so it is safe to embed inside an XML element's text content.

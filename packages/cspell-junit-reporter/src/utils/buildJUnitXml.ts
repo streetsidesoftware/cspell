@@ -78,27 +78,27 @@ function buildSkippedTestCase(filename: string, reason: string | undefined): str
     return `    <testcase name="skipped" classname="${classname}">\n      <skipped${message}/>\n    </testcase>\n`;
 }
 
+function fileSuiteCounts(file: FileReport): { tests: number; failures: number } {
+    if (file.processed === false) return { tests: 1, failures: 0 };
+    const issueCount = file.issues.length;
+    return { tests: Math.max(issueCount, 1), failures: issueCount };
+}
+
 function buildTestSuiteForFile(file: FileReport): string {
     const name = escapeXmlAttribute(file.filename);
     const time = formatTime(file.elapsedTimeMs);
 
     let testCases: string;
-    let tests: number;
-    let failures: number;
 
     if (file.processed === false) {
         testCases = buildSkippedTestCase(file.filename, file.skippedReason);
-        tests = 1;
-        failures = 0;
     } else if (file.issues.length) {
         testCases = file.issues.map((issue) => buildTestCaseForIssue(file.filename, issue)).join('');
-        tests = file.issues.length;
-        failures = file.issues.length;
     } else {
         testCases = buildPassingTestCase(file.filename);
-        tests = 1;
-        failures = 0;
     }
+
+    const { tests, failures } = fileSuiteCounts(file);
 
     return (
         `  <testsuite name="${name}" tests="${tests}" failures="${failures}" errors="0" time="${time}">\n` +
@@ -146,8 +146,9 @@ export function buildJUnitXml(files: FileReport[], errors: ErrorReport[], option
     const errorSuite = errors.length ? [buildTestSuiteForErrors(errors)] : [];
     const suites = [...fileSuites, ...errorSuite];
 
-    const totalTests = files.reduce((sum, file) => sum + Math.max(file.issues.length, 1), 0) + errors.length;
-    const totalFailures = files.reduce((sum, file) => sum + file.issues.length, 0);
+    const fileCounts = files.map(fileSuiteCounts);
+    const totalTests = fileCounts.reduce((sum, counts) => sum + counts.tests, errors.length);
+    const totalFailures = fileCounts.reduce((sum, counts) => sum + counts.failures, 0);
     const totalErrors = errors.length;
     const totalTime = files.reduce((sum, file) => sum + (file.elapsedTimeMs ?? 0), 0) / 1000;
 

@@ -118,6 +118,32 @@ describe('buildJUnitXml', () => {
         expect(xml).toContain('<skipped message="is binary file"/>');
     });
 
+    test('ignores collected issues when counting a skipped file', () => {
+        const files: FileReport[] = [
+            {
+                filename: 'skipped.txt',
+                processed: false,
+                skippedReason: 'excluded',
+                issues: [
+                    {
+                        text: 'errrorrrs',
+                        offset: 0,
+                        line: { text: 'errrorrrs', offset: 0 },
+                        row: 1,
+                        col: 1,
+                        uri: 'skipped.txt',
+                    },
+                ],
+            },
+        ];
+        const xml = buildJUnitXml(files, [], { suiteName: 'cspell' });
+
+        expect(xml).toContain('<testsuites name="cspell" tests="1" failures="0" errors="0"');
+        expect(xml).toContain('<testsuite name="skipped.txt" tests="1" failures="0" errors="0"');
+        expect(xml).toContain('<skipped message="excluded"/>');
+        expect(xml).not.toContain('<failure');
+    });
+
     test('reports non-issue processing errors in a dedicated error testsuite', () => {
         const errors: ErrorReport[] = [{ message: 'failed to read config', error: new Error('ENOENT: not found') }];
         const xml = buildJUnitXml([], errors, { suiteName: 'cspell' });

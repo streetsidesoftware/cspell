@@ -12,7 +12,7 @@ describe('escapeXmlText', () => {
     });
 
     test('strips invalid XML control characters', () => {
-        expect(escapeXmlText('bad\x00word\x1F')).toBe('badword');
+        expect(escapeXmlText('bad\x00word\x1F\x7F\x84\x86\x9F')).toBe('badword');
     });
 
     test('leaves tab, newline, and carriage return intact', () => {
