@@ -4,8 +4,8 @@ Url: https://github.com/wireapp/wire-webapp.git
 Args: '["{apps,docs}/**/*.{js,ts,tsx,md,mjs,mts,cjs,cts}"]'
 Summary:
   files: 2476
-  filesWithIssues: 1172
-  issues: 4448
+  filesWithIssues: 1171
+  issues: 4432
   errors: 0
 Errors: []
 
@@ -3105,33 +3105,17 @@ issues:
   - "apps/webapp/src/script/repositories/media/backgroundEffects/pipe/segmenter.ts:160:30        webglcontextrestored    U       canvas.addEventListener('webglcontextrestored', onContextRestored"
   - "apps/webapp/src/script/repositories/media/backgroundEffects/pipe/segmenter.ts:286:33        webglcontextlost        U       removeEventListener('webglcontextlost', onContextLost);"
   - "apps/webapp/src/script/repositories/media/backgroundEffects/pipe/segmenter.ts:288:33        webglcontextrestored    U       removeEventListener('webglcontextrestored', onContextRestored"
-  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/qualityController.test.ts:33:7          COOLDOWN    U       const COOLDOWN_FRAMES = DEFAULT_TUNING"
-  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/qualityController.test.ts:33:40         cooldown    U       FRAMES = DEFAULT_TUNING.cooldownFramesAfterDowngrade"
-  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/qualityController.test.ts:144:57        cooldown    U       after downgrade due to cooldown', () => {"
-  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/qualityController.test.ts:160:8         Cooldown    U       // Cooldown decrements each frame"
-  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/qualityController.test.ts:165:73        cooldown    U       stay on high because cooldown > 0"
-  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/qualityController.test.ts:167:26        cooldown    U       / Enough frames for cooldown"
-  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/qualityController.test.ts:169:22        COOLDOWN    U       while (guard++ < COOLDOWN_FRAMES) {"
-  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/qualityController.ts:54:17          cooldown    U       * - Implements cooldown periods after downgrades"
-  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/qualityController.ts:87:7           EWMA        U       /** EWMA smoothing factor for"
-  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/qualityController.ts:88:20          ewma        U       private readonly ewmaAlpha: number;"
-  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/qualityController.ts:96:11          ewma        U       private ewmaTotalMs: number | null"
-  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/qualityController.ts:98:11          ewma        U       private ewmaSegmentationMs: number"
-  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/qualityController.ts:100:11         ewma        U       private ewmaGpuMs: number | null"
-  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/qualityController.ts:111:7          Cooldown    U       /** Cooldown frames after downgrade"
-  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/qualityController.ts:112:20         cooldown    U       private readonly cooldownFramesAfterDowngrade"
-  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/qualityController.ts:121:7          Cooldown    U       /** Cooldown counter preventing immediate"
-  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/qualityController.ts:122:11         cooldown    U       private cooldownFrames = 0;"
-  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/qualityController.ts:158:10         ewma        U       this.ewmaAlpha = DEFAULT_TUNING"
-  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/qualityController.ts:167:10         cooldown    U       this.cooldownFramesAfterDowngrade"
-  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/qualityController.ts:167:56         cooldown    U       terDowngrade = DEFAULT_TUNING.cooldownFramesAfterDowngrade"
-  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/qualityController.ts:221:16         Ewma        U       this.updateEwma(sample);"
-  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/qualityController.ts:329:11         EWMA        U       * Uses EWMA to smooth transient"
-  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/qualityController.ts:333:17         Ewma        U       private updateEwma(sample: PerformanceSample"
-  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/tuning.ts:27:6          EWMA        U       // EWMA smoothing factor for"
-  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/tuning.ts:28:3          ewma        U       ewmaAlpha: 0.2,"
-  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/tuning.ts:43:6          Cooldown    U       // Cooldown frames after downgrade"
-  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/tuning.ts:44:3          cooldown    U       cooldownFramesAfterDowngrade"
+  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/qualityController.ts:87:7           EWMA    U       /** EWMA smoothing factor for"
+  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/qualityController.ts:88:20          ewma    U       private readonly ewmaAlpha: number;"
+  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/qualityController.ts:96:11          ewma    U       private ewmaTotalMs: number | null"
+  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/qualityController.ts:98:11          ewma    U       private ewmaSegmentationMs: number"
+  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/qualityController.ts:100:11         ewma    U       private ewmaGpuMs: number | null"
+  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/qualityController.ts:158:10         ewma    U       this.ewmaAlpha = DEFAULT_TUNING"
+  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/qualityController.ts:221:16         Ewma    U       this.updateEwma(sample);"
+  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/qualityController.ts:329:11         EWMA    U       * Uses EWMA to smooth transient"
+  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/qualityController.ts:333:17         Ewma    U       private updateEwma(sample: PerformanceSample"
+  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/tuning.ts:27:6          EWMA    U       // EWMA smoothing factor for"
+  - "apps/webapp/src/script/repositories/media/backgroundEffects/quality/tuning.ts:28:3          ewma    U       ewmaAlpha: 0.2,"
   - "apps/webapp/src/script/repositories/media/backgroundEffects/qualityTierMapping.test.ts:20:16        MULTICLASS      U       import {SELFIE_MULTICLASS_MODEL_PATH, SELFIE_SEGMENTER"
   - "apps/webapp/src/script/repositories/media/backgroundEffects/qualityTierMapping.test.ts:24:31        multiclass      U       returns privacy for the multiclass model regardless of"
   - "apps/webapp/src/script/repositories/media/backgroundEffects/qualityTierMapping.test.ts:25:40        MULTICLASS      U       qualityTierFromModel(SELFIE_MULTICLASS_MODEL_PATH, false))"
