@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["--issues-summary-report","**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2930, Issues found: 8820 in 947 files.
+ CSpell: Files checked: 2930, Issues found: 8798 in 946 files.
  exit code: 1
 django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 django/apps/registry.py:134:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -1035,13 +1035,10 @@ django/contrib/staticfiles/storage.py:325:42    - Unknown word (matchobj)   -- =
 django/contrib/staticfiles/storage.py:325:59    - Unknown word (matchobj)   -- position(matchobj.string, matchobj.start())
 django/contrib/staticfiles/storage.py:607:58    - Unknown word (myfont)     -- face hack, like url(myfont.eot?#iefix")
 django/contrib/staticfiles/storage.py:607:70    - Unknown word (iefix)      -- like url(myfont.eot?#iefix")
-django/contrib/syndication/views.py:102:24    - Unknown word (argcount)   -- if code.co_argcount == 2:  # one argument
 django/contrib/syndication/views.py:40:9      - Unknown word (feedgen)    -- feedgen = self.get_feed(obj
 django/contrib/syndication/views.py:41:46     - Unknown word (feedgen)    -- HttpResponse(content_type=feedgen.content_type)
 django/contrib/syndication/views.py:46:17     - Unknown word (feedgen)    -- feedgen.latest_post_date().timestamp
 django/contrib/syndication/views.py:48:9      - Unknown word (feedgen)    -- feedgen.write(response, "utf
-django/contrib/syndication/views.py:84:24     - Unknown word (argcount)   -- # Check co_argcount rather than try/excepting
-django/contrib/syndication/views.py:95:28     - Unknown word (argcount)   -- if not code.co_argcount and not isinstance(
 django/core/cache/backends/base.py:177:15    - Unknown word (atouch)     -- async def atouch(self, key, timeout=DEFAULT
 django/core/cache/backends/base.py:197:9     - Unknown word (pgsql)      -- pgsql) this can be *much*
 django/core/cache/backends/base.py:265:15    - Unknown word (ahas)       -- async def ahas_key(self, key, version
@@ -1602,7 +1599,6 @@ django/db/backends/utils.py:107:10    - Unknown word (executemany) -- def _execu
 django/db/backends/utils.py:114:32    - Unknown word (executemany) -- return self.cursor.executemany(sql, param_list)
 django/db/backends/utils.py:124:9     - Unknown word (executemany) -- def executemany(self, sql, param_list
 django/db/backends/utils.py:22:73     - Unknown word (nextset)    -- fetchmany", "fetchall", "nextset"])
-django/db/backends/utils.py:322:23    - Unknown word (getcontext)  -- context = decimal.getcontext().copy()
 django/db/backends/utils.py:324:17    - Unknown word (prec)        -- context.prec = max_digits
 django/db/backends/utils.py:327:32    - Unknown word (scaleb)      -- decimal.Decimal(1).scaleb(-decimal_places), context
 django/db/backends/utils.py:83:9      - Unknown word (executemany) -- def executemany(self, sql, param_list
@@ -1978,7 +1974,6 @@ django/template/defaultfilters.py:197:17    - Unknown word (tupl)       -- units
 django/template/defaultfilters.py:198:15    - Unknown word (tupl)       -- units += -tupl[2] if m else tupl[2
 django/template/defaultfilters.py:198:33    - Unknown word (tupl)       -- -tupl[2] if m else tupl[2]
 django/template/defaultfilters.py:199:5     - Unknown word (prec)       -- prec = abs(p) + units +
-django/template/defaultfilters.py:200:16    - Unknown word (getcontext) -- prec = max(getcontext().prec, prec)
 django/template/defaultfilters.py:200:29    - Unknown word (prec)       -- prec = max(getcontext().prec, prec)
 django/template/defaultfilters.py:200:35    - Unknown word (prec)       -- max(getcontext().prec, prec)
 django/template/defaultfilters.py:200:5     - Unknown word (prec)       -- prec = max(getcontext().prec
@@ -1990,7 +1985,6 @@ django/template/defaultfilters.py:327:12    - Unknown word (Truncator)  -- retur
 django/template/defaultfilters.py:341:12    - Unknown word (Truncator)  -- return Truncator(value).words(length
 django/template/defaultfilters.py:355:12    - Unknown word (Truncator)  -- return Truncator(value).words(length
 django/template/defaultfilters.py:465:5     - Unknown word (escapeseq)  -- def escapeseq(value):
-django/template/defaultfilters.py:6:72      - Unknown word (getcontext) -- Decimal, InvalidOperation, getcontext
 django/template/defaultfilters.py:962:22    - Unknown word (cand)       -- * If value is 0, cand{{ value|pluralize:"y
 django/template/defaultfilters.py:963:22    - Unknown word (cand)       -- * If value is 1, cand{{ value|pluralize:"y
 django/template/defaultfilters.py:964:22    - Unknown word (cand)       -- * If value is 2, cand{{ value|pluralize:"y
@@ -2232,7 +2226,6 @@ django/utils/html.py:18:74     - Unknown word (SUBDELIMS)  -- _GENDELIMS, RFC398
 django/utils/html.py:243:11    - Unknown word (urlquote)   -- def smart_urlquote(url):
 django/utils/html.py:250:44    - Unknown word (SUBDELIMS)  -- segment, safe=RFC3986_SUBDELIMS + RFC3986_GENDELIMS
 django/utils/html.py:250:64    - Unknown word (GENDELIMS)  -- SUBDELIMS + RFC3986_GENDELIMS + "~")
-django/utils/html.py:258:55    - Unknown word (WHATWG)     -- encoded UTF-8 octets, per WHATWG URL Specification
 django/utils/html.py:328:9     - Unknown word (urlized)    -- urlized_words = []
 django/utils/html.py:330:17    - Unknown word (urlized)    -- if (urlized_word := local_cache
 django/utils/html.py:331:17    - Unknown word (urlized)    -- urlized_word = self.handle_word
@@ -2243,13 +2236,9 @@ django/utils/html.py:365:31    - Unknown word (urlquote)   -- # url = smart_urlq
 django/utils/html.py:380:29    - Unknown word (urlquote)   -- url = smart_urlquote(f"{protocol}://{unescaped
 django/utils/html.py:447:21    - Unknown word (rstripped)  -- rstripped = middle.rstrip(closing
 django/utils/html.py:448:24    - Unknown word (rstripped)  -- if rstripped != middle:
-django/utils/html.py:450:31    - Unknown word (appendleft) -- trail.appendleft(middle[-strip:])
 django/utils/html.py:457:17    - Unknown word (rstripped)  -- rstripped = middle.rstrip(self
 django/utils/html.py:459:17    - Unknown word (rstripped)  -- rstripped = middle.rstrip(self
 django/utils/html.py:460:16    - Unknown word (rstripped)  -- if rstripped != middle:
-django/utils/html.py:461:23    - Unknown word (appendleft) -- trail.appendleft(middle[len(rstripped
-django/utils/html.py:478:31    - Unknown word (appendleft) -- trail.appendleft(middle[middle_semicolon
-django/utils/html.py:481:31    - Unknown word (appendleft) -- trail.appendleft(middle[trail_start:
 django/utils/html.py:516:15    - Unknown word (klass)      -- def html_safe(klass):
 django/utils/html.py:521:22    - Unknown word (klass)      -- if "__html__" in klass.__dict__:
 django/utils/html.py:524:29    - Unknown word (klass)      -- "__html__()." % klass.__name__
@@ -2456,7 +2445,6 @@ django/utils/termcolors.py:2:1       - Unknown word (termcolors) -- termcolors.p
 django/utils/text.py:103:56    - Unknown word (charrefs)   -- replacement, convert_charrefs=True):
 django/utils/text.py:104:34    - Unknown word (charrefs)   -- super().__init__(convert_charrefs=convert_charrefs)
 django/utils/text.py:104:51    - Unknown word (charrefs)   -- convert_charrefs=convert_charrefs)
-django/utils/text.py:124:23    - Unknown word (appendleft) -- self.tags.appendleft(tag)
 django/utils/text.py:133:27    - Unknown word (popleft)    -- self.tags.popleft()
 django/utils/text.py:158:56    - Unknown word (charrefs)   -- replacement, convert_charrefs=True):
 django/utils/text.py:164:21    - Unknown word (charrefs)   -- convert_charrefs=convert_charrefs,
@@ -2525,9 +2513,8 @@ django/views/csrf.py:45:13     - Unknown word (referer)    -- "no_referer3": _(
 django/views/csrf.py:49:28     - Unknown word (Referer)    -- "requires the “Referer” header to do strict
 django/views/csrf.py:49:57     - Unknown word (referer)    -- header to do strict referer checking. If "
 django/views/csrf.py:51:22     - Unknown word (noreferrer) -- '<a rel="noreferrer" …> for links to third
-django/views/debug.py:254:69    - Unknown word (firstlineno) -- {tb_frame.f_code.co_firstlineno}"
-django/views/debug.py:423:16    - Unknown word (lastframe)   -- c["lastframe"] = frames[-1]
-django/views/debug.py:574:62    - Unknown word (lasti)       -- co_positions(), tb.tb_lasti // 2, None
+django/views/debug.py:423:16    - Unknown word (lastframe)  -- c["lastframe"] = frames[-1]
+django/views/debug.py:574:62    - Unknown word (lasti)      -- co_positions(), tb.tb_lasti // 2, None
 django/views/decorators/cache.py:40:27     - Unknown word (viewfunc)   -- def _cache_controller(viewfunc):
 django/views/decorators/cache.py:41:32     - Unknown word (viewfunc)   -- iscoroutinefunction(viewfunc):
 django/views/decorators/cache.py:45:34     - Unknown word (viewfunc)   -- response = await viewfunc(request, *args, **kw
@@ -2538,7 +2525,6 @@ django/views/decorators/clickjacking.py:35:5      - Unknown word (xframe)     --
 django/views/decorators/clickjacking.py:41:6      - Unknown word (xframe)     -- @xframe_options_sameorigin
 django/views/decorators/clickjacking.py:5:5       - Unknown word (xframe)     -- def xframe_options_deny(view_func
 django/views/decorators/clickjacking.py:65:5      - Unknown word (xframe)     -- def xframe_options_exempt(view
-django/views/decorators/debug.py:58:62     - Unknown word (firstlineno) -- wrapped_func.__code__.co_firstlineno
 django/views/generic/base.py:122:13    - Unknown word (markcoroutinefunction) -- markcoroutinefunction(view)
 django/views/generic/base.py:15:37     - Unknown word (classonlymethod)       -- utils.decorators import classonlymethod
 django/views/generic/base.py:2:42      - Unknown word (markcoroutinefunction) -- iscoroutinefunction, markcoroutinefunction
@@ -2593,8 +2579,6 @@ docs/conf.py:152:5     - Unknown word (extlinks)          -- extlinks["cve"] = (
 docs/conf.py:182:12    - Unknown word (sectionauthor)     -- # If true, sectionauthor and moduleauthor directives
 docs/conf.py:182:30    - Unknown word (moduleauthor)      -- true, sectionauthor and moduleauthor directives will be shown
 docs/conf.py:187:19    - Unknown word (trac)              -- pygments_style = "trac"
-docs/conf.py:191:1     - Unknown word (intersphinx)       -- intersphinx_mapping = {
-docs/conf.py:198:1     - Unknown word (intersphinx)       -- intersphinx_cache_limit = 90  #
 docs/conf.py:207:15    - Unknown word (djangodocs)        -- html_theme = "djangodocs"
 docs/conf.py:20:15     - Unknown word (doctree)    -- # pickle.dump(doctree, f, pickle.HIGHEST_PROTOCOL
 docs/conf.py:262:13    - Unknown word (sourcelink)        -- # html_show_sourcelink = True
@@ -2628,7 +2612,6 @@ docs/conf.py:437:33    - Unknown word (includehidden)     -- between 'default' a
 docs/conf.py:438:8     - Unknown word (tocscope)          -- # epub_tocscope = 'default'
 docs/conf.py:48:6      - Unknown word (djangodocs)        -- "djangodocs",
 docs/conf.py:49:17     - Unknown word (extlinks)          -- "sphinx.ext.extlinks",
-docs/conf.py:50:17     - Unknown word (intersphinx)       -- "sphinx.ext.intersphinx",
 docs/conf.py:51:17     - Unknown word (autosectionlabel)  -- "sphinx.ext.autosectionlabel",
 docs/conf.py:55:3      - Unknown word (Autosection)       -- # AutosectionLabel settings.
 docs/conf.py:58:1      - Unknown word (autosectionlabel)  -- autosectionlabel_prefix_document = True
@@ -2638,7 +2621,6 @@ docs/conf.py:62:1      - Unknown word (linkcheck)         -- linkcheck_ignore = 
 docs/conf.py:87:24     - Unknown word (sphinxcontrib)     -- extensions.append("sphinxcontrib.spelling")
 docs/conf.py:93:41     - Unknown word (wordlist)          -- filename = "spelling_wordlist"
 docs/lint.py:121:36    - Unknown word (SIMPLENAME) -- = re.compile(f":py:{SIMPLENAME}:`{_ROLE_BODY}`")
-docs/lint.py:147:32    - Unknown word (intersphinx) -- # Skip absolute or intersphinx refs like "python:using
 docs/lint.py:14:44     - Unknown word (sphinxlint) -- checkers import checker as sphinxlint_checker
 docs/lint.py:14:6      - Unknown word (sphinxlint) -- from sphinxlint.checkers import checker
 docs/lint.py:15:28     - Unknown word (SIMPLENAME) -- sphinxlint.rst import SIMPLENAME
@@ -6327,21 +6309,20 @@ tests/migrations/test_autodetector.py:855:30    - Unknown word (Authi)      -- "
 tests/migrations/test_autodetector.py:985:10    - Unknown word (thirdapp)   -- "thirdapp", "Thing", [("id", models
 tests/migrations/test_commands.py:1013:38   - Unknown word (Tribble)     -- "-- Create model Tribble",
 tests/migrations/test_commands.py:102:47    - Unknown word (tribble)    -- ertTableNotExists("migrations_tribble")
-tests/migrations/test_commands.py:1142:25   - Unknown word (unrepresentable) -- def test_sqlmigrate_unrepresentable(self):
-tests/migrations/test_commands.py:1204:70   - Unknown word (Tribble)         -- foreign key to 'migrations.Tribble',
-tests/migrations/test_commands.py:1213:56   - Unknown word (schemaeditor)    -- deferred_sql_executed_with_schemaeditor(self):
-tests/migrations/test_commands.py:1668:40   - Unknown word (µóðéø)           -- self.assertIn("úñí©óðé µóðéø", content)  # Meta.verbose
-tests/migrations/test_commands.py:1669:40   - Unknown word (µóðéøß)          -- self.assertIn("úñí©óðé µóðéøß", content)  # Meta.verbose
-tests/migrations/test_commands.py:1671:33   - Unknown word (Ðjáñgó)          -- self.assertIn("“Ðjáñgó”", content)  # title
+tests/migrations/test_commands.py:1204:70   - Unknown word (Tribble)     -- foreign key to 'migrations.Tribble',
+tests/migrations/test_commands.py:1213:56   - Unknown word (schemaeditor) -- deferred_sql_executed_with_schemaeditor(self):
+tests/migrations/test_commands.py:1668:40   - Unknown word (µóðéø)        -- self.assertIn("úñí©óðé µóðéø", content)  # Meta.verbose
+tests/migrations/test_commands.py:1669:40   - Unknown word (µóðéøß)       -- self.assertIn("úñí©óðé µóðéøß", content)  # Meta.verbose
+tests/migrations/test_commands.py:1671:33   - Unknown word (Ðjáñgó)       -- self.assertIn("“Ðjáñgó”", content)  # title
 tests/migrations/test_commands.py:199:47    - Unknown word (tribble)    -- ertTableNotExists("migrations_tribble")
-tests/migrations/test_commands.py:2037:42   - Unknown word (sillymodel)      -- silly_int' on model 'sillymodel' not migrated: it is
-tests/migrations/test_commands.py:2200:54   - Unknown word (sillymodel)      -- field silly_field from sillymodel", out.getvalue())
-tests/migrations/test_commands.py:2201:50   - Unknown word (sillymodel)      -- field silly_rename to sillymodel", out.getvalue())
-tests/migrations/test_commands.py:2232:42   - Unknown word (sillymodel)      -- field silly_field on sillymodel to silly_rename",
-tests/migrations/test_commands.py:2261:14   - Unknown word (makemigration)   -- def test_makemigration_merge_dry_run(self)
-tests/migrations/test_commands.py:2287:14   - Unknown word (makemigration)   -- def test_makemigration_merge_dry_run_verbosity
-tests/migrations/test_commands.py:2342:48   - Unknown word (sillymodel)      -- field silly_date to sillymodel", out.getvalue())
-tests/migrations/test_commands.py:2445:61   - Unknown word (doesnt)          -- test_migrations_path_doesnt_exist.foo.bar"
+tests/migrations/test_commands.py:2037:42   - Unknown word (sillymodel)   -- silly_int' on model 'sillymodel' not migrated: it is
+tests/migrations/test_commands.py:2200:54   - Unknown word (sillymodel)   -- field silly_field from sillymodel", out.getvalue())
+tests/migrations/test_commands.py:2201:50   - Unknown word (sillymodel)   -- field silly_rename to sillymodel", out.getvalue())
+tests/migrations/test_commands.py:2232:42   - Unknown word (sillymodel)   -- field silly_field on sillymodel to silly_rename",
+tests/migrations/test_commands.py:2261:14   - Unknown word (makemigration) -- def test_makemigration_merge_dry_run(self)
+tests/migrations/test_commands.py:2287:14   - Unknown word (makemigration) -- def test_makemigration_merge_dry_run_verbosity
+tests/migrations/test_commands.py:2342:48   - Unknown word (sillymodel)    -- field silly_date to sillymodel", out.getvalue())
+tests/migrations/test_commands.py:2445:61   - Unknown word (doesnt)        -- test_migrations_path_doesnt_exist.foo.bar"
 tests/migrations/test_commands.py:2719:37   - Unknown word (getdefaultencoding) -- MagicMock(encoding=sys.getdefaultencoding()),
 tests/migrations/test_commands.py:2883:52   - Unknown word (modelwithcustombase) -- tribble_author_rating_modelwithcustombase_and_more.py",
 tests/migrations/test_commands.py:3691:14   - Unknown word (ambigious)           -- def test_ambigious_prefix(self):
@@ -7924,13 +7905,11 @@ tests/template_tests/filter_tests/test_escapeseq.py:16:54     - Unknown word (es
 tests/template_tests/filter_tests/test_escapeseq.py:22:14     - Unknown word (escapeseq)  -- "escapeseq_basic",
 tests/template_tests/filter_tests/test_escapeseq.py:7:7       - Unknown word (Escapeseq)  -- class EscapeseqTests(SimpleTestCase
 tests/template_tests/filter_tests/test_escapeseq.py:9:10      - Unknown word (escapeseq)  -- The "escapeseq" filter works the same
-tests/template_tests/filter_tests/test_floatformat.py:1:30      - Unknown word (localcontext) -- decimal import Decimal, localcontext
-tests/template_tests/filter_tests/test_floatformat.py:200:20    - Unknown word (dunder)       -- def test_float_dunder_method(self):
-tests/template_tests/filter_tests/test_floatformat.py:214:14    - Unknown word (localcontext) -- with localcontext() as ctx:
-tests/template_tests/filter_tests/test_floatformat.py:215:17    - Unknown word (prec)         -- ctx.prec = 2
-tests/template_tests/filter_tests/test_floatformat.py:90:15     - Unknown word (Cómo)         -- "¿Cómo esta usted?",
-tests/template_tests/filter_tests/test_floatformat.py:90:20     - Unknown word (esta)         -- "¿Cómo esta usted?",
-tests/template_tests/filter_tests/test_floatformat.py:90:25     - Unknown word (usted)        -- "¿Cómo esta usted?",
+tests/template_tests/filter_tests/test_floatformat.py:200:20    - Unknown word (dunder)     -- def test_float_dunder_method(self):
+tests/template_tests/filter_tests/test_floatformat.py:215:17    - Unknown word (prec)       -- ctx.prec = 2
+tests/template_tests/filter_tests/test_floatformat.py:90:15     - Unknown word (Cómo)       -- "¿Cómo esta usted?",
+tests/template_tests/filter_tests/test_floatformat.py:90:20     - Unknown word (esta)       -- "¿Cómo esta usted?",
+tests/template_tests/filter_tests/test_floatformat.py:90:25     - Unknown word (usted)      -- "¿Cómo esta usted?",
 tests/template_tests/filter_tests/test_iriencode.py:44:50     - Unknown word (ndelag)     -- iriencode("S\xf8r-Tr\xf8ndelag"), "S%C3%B8r-Tr%C3%B
 tests/template_tests/filter_tests/test_iriencode.py:44:78     - Unknown word (ndelag)     -- , "S%C3%B8r-Tr%C3%B8ndelag")
 tests/template_tests/filter_tests/test_json_script.py:16:28     - Unknown word (Eescaping)  -- '\\u003Cb\\u003Eescaping\\u003C/b\\u003E"}'
@@ -8508,7 +8487,6 @@ tests/utils_tests/test_html.py:285:44    - Unknown word (Etest)      -- "\\u003C
 tests/utils_tests/test_html.py:297:31    - Unknown word (Cscript)    -- '{"a": "\\u003Cscript\\u003Etest\\u0026ing
 tests/utils_tests/test_html.py:297:44    - Unknown word (Etest)      -- "\\u003Cscript\\u003Etest\\u0026ing\\u003C/script
 tests/utils_tests/test_html.py:321:20    - Unknown word (urlquote)   -- def test_smart_urlquote(self):
-tests/utils_tests/test_html.py:336:31    - Unknown word (WHATWG)     -- # Valid under WHATWG URL Specification but
 tests/utils_tests/test_html.py:370:40    - Unknown word (urlquote)   -- self.assertEqual(smart_urlquote(value), output)
 tests/utils_tests/test_html.py:416:24    - Unknown word (doesnt)     -- def test_html_safe_doesnt_define_str(self):
 tests/utils_tests/test_html.py:445:30    - Unknown word (نامه)       -- "Look on www.نامه‌ای.com.",

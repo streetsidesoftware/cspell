@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 2383, Issues found: 31228 in 1657 files.
+ CSpell: Files checked: 2383, Issues found: 31201 in 1657 files.
  exit code: 1
 CODING_STANDARDS.md:111:23    - Unknown word (intvl)      -- // Could be 'date_intvl_create_from_date_str
 CODING_STANDARDS.md:120:8     - Unknown word (setclientencoding) -- pg_setclientencoding
@@ -16013,9 +16013,7 @@ ext/lexbor/lexbor/url/url.c:702:13    - Unknown word (idna)       -- parser->idn
 ext/lexbor/lexbor/url/url.c:702:32    - Unknown word (idna)       -- >idna = lxb_unicode_idna_destroy(parser->idna
 ext/lexbor/lexbor/url/url.h:170:17    - Unknown word (idna)       -- lxb_unicode_idna_t *idna;
 ext/lexbor/lexbor/url/url.h:170:25    - Unknown word (idna)       -- lxb_unicode_idna_t *idna;
-ext/lexbor/lexbor/url/url.h:286:70    - Unknown word (WHATWG)     -- parsing according to the WHATWG
 ext/lexbor/lexbor/url/url.h:2:33      - Unknown word (Borisov)    -- Copyright (C) 2023 Alexander Borisov
-ext/lexbor/lexbor/url/url.h:303:70    - Unknown word (WHATWG)     -- parsing according to the WHATWG
 ext/lexbor/lexbor/url/url.h:433:19    - Unknown word (idna)       -- lxb_url_serialize_idna(lxb_unicode_idna_t
 ext/lexbor/lexbor/url/url.h:433:36    - Unknown word (idna)       -- serialize_idna(lxb_unicode_idna_t *idna, const lxb_url
 ext/lexbor/lexbor/url/url.h:433:44    - Unknown word (idna)       -- lxb_unicode_idna_t *idna, const lxb_url_t *url
@@ -16196,7 +16194,6 @@ ext/mbstring/libmbfl/filters/mbfilter_cjk.c:5711:12   - Unknown word (wchars)   
 ext/mbstring/libmbfl/filters/mbfilter_cjk.c:57:10     - Unknown word (bisec)      -- int mbfl_bisec_srch2(int w, const unsigned
 ext/mbstring/libmbfl/filters/mbfilter_cjk.c:6018:27   - Unknown word (wchars)     -- * another buffer of wchars */
 ext/mbstring/libmbfl/filters/mbfilter_cjk.c:6392:25   - Unknown word (sjiswin)    -- static void mb_wchar_to_sjiswin(uint32_t *in, size_t
-ext/mbstring/libmbfl/filters/mbfilter_cjk.c:6651:10   - Unknown word (WHATWG)     -- * • The WHATWG specification for "Shift
 ext/mbstring/libmbfl/filters/mbfilter_cjk.c:6663:40   - Unknown word (sjiswin)    -- unsigned char mblen_table_sjiswin[] = { /* 0x81-0x9F,
 ext/mbstring/libmbfl/filters/mbfilter_cjk.c:6683:34   - Unknown word (sjiswin)    -- char *mbfl_encoding_sjiswin_aliases[] = {"SJIS-ms
 ext/mbstring/libmbfl/filters/mbfilter_cjk.c:6690:14   - Unknown word (sjiswin)    -- mblen_table_sjiswin,
@@ -28613,11 +28610,6 @@ ext/tokenizer/tokenizer_data_gen.php:73:32     - Unknown word (PAAMAYIM)    -- r
 ext/tokenizer/tokenizer_data_gen.php:73:41     - Unknown word (NEKUDOTAYIM) -- \t\tcase T_PAAMAYIM_NEKUDOTAYIM: return \"T_DOUBLE_COLON
 ext/uri/php_uri.c:11:15     - Unknown word (Máté)       -- | Authors: Máté Kocsis <kocsismate@php
 ext/uri/php_uri.c:11:20     - Unknown word (Kocsis)     -- | Authors: Máté Kocsis <kocsismate@php.net
-ext/uri/php_uri.c:37:30     - Unknown word (whatwg)     -- class_entry *php_uri_ce_whatwg_url;
-ext/uri/php_uri.c:42:30     - Unknown word (whatwg)     -- class_entry *php_uri_ce_whatwg_url_host_type;
-ext/uri/php_uri.c:43:30     - Unknown word (whatwg)     -- class_entry *php_uri_ce_whatwg_invalid_url_exception
-ext/uri/php_uri.c:44:30     - Unknown word (whatwg)     -- class_entry *php_uri_ce_whatwg_url_validation_error
-ext/uri/php_uri.c:45:30     - Unknown word (whatwg)     -- class_entry *php_uri_ce_whatwg_url_validation_error
 ext/uri/php_uri.h:11:15     - Unknown word (Máté)       -- | Authors: Máté Kocsis <kocsismate@php
 ext/uri/php_uri.h:11:20     - Unknown word (Kocsis)     -- | Authors: Máté Kocsis <kocsismate@php.net
 ext/uri/php_uri.stub.php:186:28    - Unknown word (Soldius)    -- case InvalidReverseSoldius;
@@ -28631,12 +28623,6 @@ ext/uri/php_uri_common.c:11:15     - Unknown word (Máté)       -- | Authors: M
 ext/uri/php_uri_common.c:11:20     - Unknown word (Kocsis)     -- | Authors: Máté Kocsis <kocsismate@php.net
 ext/uri/php_uri_common.h:11:15     - Unknown word (Máté)       -- | Authors: Máté Kocsis <kocsismate@php
 ext/uri/php_uri_common.h:11:20     - Unknown word (Kocsis)     -- | Authors: Máté Kocsis <kocsismate@php.net
-ext/uri/php_uri_common.h:162:24    - Unknown word (WHATWG)     -- define PHP_URI_PARSER_WHATWG "Uri\\WhatWg\\Url"
-ext/uri/php_uri_common.h:24:37     - Unknown word (whatwg)     -- class_entry *php_uri_ce_whatwg_url;
-ext/uri/php_uri_common.h:29:37     - Unknown word (whatwg)     -- class_entry *php_uri_ce_whatwg_invalid_url_exception
-ext/uri/php_uri_common.h:30:37     - Unknown word (whatwg)     -- class_entry *php_uri_ce_whatwg_url_validation_error
-ext/uri/php_uri_common.h:31:37     - Unknown word (whatwg)     -- class_entry *php_uri_ce_whatwg_url_validation_error
-ext/uri/php_uri_common.h:32:37     - Unknown word (whatwg)     -- class_entry *php_uri_ce_whatwg_url_host_type;
 ext/uri/php_uri_decl.h:49:60     - Unknown word (Soldius)    -- dationErrorType_InvalidReverseSoldius = 23,
 ext/uri/uri_parser_php_parse_url.c:11:15     - Unknown word (Máté)       -- | Authors: Máté Kocsis <kocsismate@php
 ext/uri/uri_parser_php_parse_url.c:11:20     - Unknown word (Kocsis)     -- | Authors: Máté Kocsis <kocsismate@php.net
@@ -28651,27 +28637,14 @@ ext/uri/uri_parser_rfc3986.h:11:20     - Unknown word (Kocsis)     -- | Authors:
 ext/uri/uri_parser_whatwg.c:11:15     - Unknown word (Máté)       -- | Authors: Máté Kocsis <kocsismate@php
 ext/uri/uri_parser_whatwg.c:11:20     - Unknown word (Kocsis)     -- | Authors: Máté Kocsis <kocsismate@php.net
 ext/uri/uri_parser_whatwg.c:170:32    - Unknown word (Soldius)    -- str = "InvalidReverseSoldius";
-ext/uri/uri_parser_whatwg.c:201:60    - Unknown word (whatwg)     -- case_cstr(php_uri_ce_whatwg_url_validation_error
-ext/uri/uri_parser_whatwg.c:202:38    - Unknown word (whatwg)     -- property_ex(php_uri_ce_whatwg_url_validation_error
-ext/uri/uri_parser_whatwg.c:204:35    - Unknown word (whatwg)     -- property(php_uri_ce_whatwg_url_validation_error
 ext/uri/uri_parser_whatwg.c:253:49    - Unknown word (SCHEMEL)    -- scheme.type != LXB_URL_SCHEMEL_TYPE__UNDEF);
 ext/uri/uri_parser_whatwg.c:27:22     - Unknown word (idna)       -- ZEND_TLS lxb_unicode_idna_t lexbor_idna = {0}
 ext/uri/uri_parser_whatwg.c:27:36     - Unknown word (idna)       -- unicode_idna_t lexbor_idna = {0};
 ext/uri/uri_parser_whatwg.c:375:44    - Unknown word (idna)       -- host_unicode(&lexbor_idna, &lexbor_uri->host,
 ext/uri/uri_parser_whatwg.c:376:17    - Unknown word (idna)       -- lxb_unicode_idna_clean(&lexbor_idna)
 ext/uri/uri_parser_whatwg.c:376:36    - Unknown word (idna)       -- unicode_idna_clean(&lexbor_idna);
-ext/uri/uri_parser_whatwg.c:676:25    - Unknown word (WHATWG)     -- name = PHP_URI_PARSER_WHATWG,
-ext/uri/uri_parser_whatwg.c:75:37     - Unknown word (whatwg)     -- ex(&error, php_uri_ce_whatwg_url_validation_error
-ext/uri/uri_parser_whatwg.c:76:42     - Unknown word (whatwg)     -- property_string(php_uri_ce_whatwg_url_validation_error
 ext/uri/uri_parser_whatwg.h:11:15     - Unknown word (Máté)       -- | Authors: Máté Kocsis <kocsismate@php
 ext/uri/uri_parser_whatwg.h:11:20     - Unknown word (Kocsis)     -- | Authors: Máté Kocsis <kocsismate@php.net
-ext/uri/uri_parser_whatwg.h:15:24     - Unknown word (WHATWG)     -- ifndef PHP_URI_PARSER_WHATWG_H
-ext/uri/uri_parser_whatwg.h:16:24     - Unknown word (WHATWG)     -- define PHP_URI_PARSER_WHATWG_H
-ext/uri/uri_parser_whatwg.h:21:51     - Unknown word (whatwg)     -- parser php_uri_parser_whatwg;
-ext/uri/uri_parser_whatwg.h:23:44     - Unknown word (whatwg)     -- bool php_uri_parser_whatwg_is_special(const lxb
-ext/uri/uri_parser_whatwg.h:24:44     - Unknown word (whatwg)     -- void php_uri_parser_whatwg_host_type_read(const
-ext/uri/uri_parser_whatwg.h:26:27     - Unknown word (whatwg)     -- url_t *php_uri_parser_whatwg_parse_ex(const char
-ext/uri/uri_parser_whatwg.h:28:31     - Unknown word (whatwg)     -- FUNCTION(uri_parser_whatwg);
 ext/uri/uriparser/include/uriparser/Uri.h:156:52    - Unknown word (distincting) -- Absolute path flag, distincting "a" and "/a"; always
 ext/uri/uriparser/include/uriparser/Uri.h:5:24      - Unknown word (Weijia)     -- Copyright (C) 2007, Weijia Song <songweijia@gmail
 ext/uri/uriparser/include/uriparser/UriBase.h:386:7     - Unknown word (UBSAN)      -- * <c>UBSAN_OPTIONS</c> may need
