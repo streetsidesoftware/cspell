@@ -3,16 +3,16 @@ Repository: RustPython/RustPython
 Url: https://github.com/RustPython/RustPython.git
 Args: '["**"]'
 Summary:
-  files: 857
-  filesWithIssues: 106
-  issues: 8373
+  files: 860
+  filesWithIssues: 107
+  issues: 8377
   errors: 0
 Errors: []
 
 issues:
-  - "AGENTS.md:42:45         prek        U       commit, you MUST run `prek run --all-files` (or"
-  - "AGENTS.md:44:91         prek        U       stage the fixes, re-run `prek` until it reports a"
-  - "AGENTS.md:299:76        zizmor      U       change must pass a [zizmor](https://docs.zizmor"
+  - "AGENTS.md:27:45         prek        U       commit, you MUST run `prek run --all-files` (or"
+  - "AGENTS.md:29:91         prek        U       stage the fixes, re-run `prek` until it reports a"
+  - "AGENTS.md:282:76        zizmor      U       change must pass a [zizmor](https://docs.zizmor"
   - "architecture/architecture.md:1:1\tNo issues found"
   - "benches/_data/pypi_org__simple__psutil.json:1:787724        musllinux       U       psutil-7.2.0-cp36-abi3-musllinux_1_2_aarch64.whl\",\"hashes"
   - "benches/_data/pypi_org__simple__psutil.json:1:788354        musllinux       U       psutil-7.2.0-cp36-abi3-musllinux_1_2_x86_64.whl\",\"hashes"
@@ -75,9 +75,9 @@ issues:
   - "Cargo.toml:143:28       nsis            U       package.metadata.packager.nsis]"
   - "Cargo.toml:192:62       zeroize         U       alloc\", \"oid\", \"pem\", \"zeroize\"] }"
   - "Cargo.toml:282:8        graviola        U       rustls-graviola = \"0.4\""
-  - "Cargo.toml:372:21       scrutinee       U       significant_drop_in_scrutinee = \"warn\""
-  - "Cargo.toml:394:1        elidable        U       elidable_lifetime_names = \"warn"
-  - "Cargo.toml:433:1        uninlined       U       uninlined_format_args = \"warn"
+  - "Cargo.toml:371:21       scrutinee       U       significant_drop_in_scrutinee = \"warn\""
+  - "Cargo.toml:393:1        elidable        U       elidable_lifetime_names = \"warn"
+  - "Cargo.toml:432:1        uninlined       U       uninlined_format_args = \"warn"
   - "code-of-conduct.md:1:1\tNo issues found"
   - "CONTRIBUTING.md:1:1\tNo issues found"
   - "crates/capi/Cargo.toml:12:16        cdylib      U       crate-type = [\"cdylib\", \"rlib\"]"
@@ -8214,6 +8214,7 @@ issues:
   - "crates/vm/src/sequence.rs:1:1\tNo issues found"
   - "crates/vm/src/signal.rs:1:1\tNo issues found"
   - "crates/vm/src/sliceable.rs:1:1\tNo issues found"
+  - "crates/vm/src/sorting.rs:1:1\tNo issues found"
   - "crates/vm/src/stdlib/_abc.rs:1:1\tNo issues found"
   - "crates/vm/src/stdlib/_ast.rs:1:1\tNo issues found"
   - "crates/vm/src/stdlib/_ast/argument.rs:1:1\tNo issues found"
@@ -8507,6 +8508,7 @@ issues:
   - "extra_tests/snippets/builtin_int.py:1:1\tNo issues found"
   - "extra_tests/snippets/builtin_isinstance.py:1:1\tNo issues found"
   - "extra_tests/snippets/builtin_issubclass.py:1:1\tNo issues found"
+  - "extra_tests/snippets/builtin_iter.py:1:1\tNo issues found"
   - "extra_tests/snippets/builtin_len.py:1:1\tNo issues found"
   - "extra_tests/snippets/builtin_list.py:862:26         daedlock    U       Test for list entering daedlock or not (https://github"
   - "extra_tests/snippets/builtin_locals.py:1:1\tNo issues found"
@@ -8667,7 +8669,10 @@ issues:
   - "extra_tests/snippets/stdlib_collections_deque.py:23:17          klass       U       d = klass(deque(s), i)"
   - "extra_tests/snippets/stdlib_collections_deque.py:29:17          klass       U       d = klass(deque(s), i)"
   - "extra_tests/snippets/stdlib_collections.py:1:1\tNo issues found"
-  - "extra_tests/snippets/stdlib_csv.py:1:1\tNo issues found"
+  - "extra_tests/snippets/stdlib_csv.py:211:5        allq    U       allq = io.StringIO()"
+  - "extra_tests/snippets/stdlib_csv.py:212:25       allq    U       writer = csv.writer(allq, lineterminator=\"!@"
+  - "extra_tests/snippets/stdlib_csv.py:215:12       allq    U       assert allq.getvalue() == '\"a\","
+  - "extra_tests/snippets/stdlib_csv.py:215:55       allq    U       ,\"b\"!@#\"c\",\"d\"!@#', allq.getvalue()"
   - "extra_tests/snippets/stdlib_ctypes_byvalue.py:1:1\tNo issues found"
   - "extra_tests/snippets/stdlib_ctypes_calls.py:1:1\tNo issues found"
   - "extra_tests/snippets/stdlib_ctypes.py:269:29        RTLD    U       mode |= _os.RTLD_MEMBER | _os.RTLD_NOW"
@@ -8774,6 +8779,7 @@ issues:
   - "extra_tests/snippets/stdlib_math.py:12:9        Conversible (Convertible)       U       # class Conversible():"
   - "extra_tests/snippets/stdlib_math.py:17:39       Conversible (Convertible)       U       1.1111) == math.log(Conversible())"
   - "extra_tests/snippets/stdlib_math.py:19:3        roundings                       U       # roundings"
+  - "extra_tests/snippets/stdlib_mmap.py:1:1\tNo issues found"
   - "extra_tests/snippets/stdlib_operator.py:1:1\tNo issues found"
   - "extra_tests/snippets/stdlib_os.py:119:14        BOYA        U       CONTENT3 = b\"BOYA\""
   - "extra_tests/snippets/stdlib_os.py:518:63        VDISABLE    U       \"PC_MAX_INPUT\", \"PC_VDISABLE\"]:"
