@@ -25,3 +25,18 @@ packages:
   - scripts
   - website
   - website/_scripts
+
+overrides:
+  'webpackbar@=6.0.1': '^7.0.0'
+  '@isaacs/brace-expansion@=5.0.0': '^5.0.1'
+  'diff@=7.0.0': '^8.0.3'
+
+patchedDependencies: {}
+
+onlyBuiltDependencies:
+  - '@swc/core'
+  - esbuild
+  - oxc-resolver
+
+# cspell:dictionaries npm
+# cspell:ignore webpackbar
