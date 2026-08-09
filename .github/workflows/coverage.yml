@@ -49,7 +49,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Install and Build
         uses: ./.github/actions/install-build
@@ -60,7 +60,7 @@ jobs:
 
       - name: Upload coverage Coveralls
         id: coveralls
-        uses: coverallsapp/github-action@5cbfd81b66ca5d10c19b062c04de0199c215fb6e # 2.3.7
+        uses: coverallsapp/github-action@8d6379e14d29928660c4ba802d8e85393440b329 # 2.3.8
         continue-on-error: true
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
