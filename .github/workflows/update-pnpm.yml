@@ -33,7 +33,7 @@ jobs:
 
       - name: Update PNPM
         run: |
-          corepack up
+          corepack use pnpm@latest
 
       - name: Gen Body
         id: git-body
