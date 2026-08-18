@@ -7,6 +7,7 @@ import { describe, expect, test } from 'vitest';
 import { createCSpellSettingsInternal as csi, finalizeSettings } from '../Settings/index.js';
 import type { SpellingDictionaryOptions } from '../SpellingDictionary/index.js';
 import { createCollection, createSpellingDictionary, getDictionaryInternal } from '../SpellingDictionary/index.js';
+import { createSubstitutionTransformer } from '../Transform/index.js';
 import { FreqCounter } from '../util/FreqCounter.js';
 import * as Text from '../util/text.js';
 import type { ValidationIssue } from '../validator.js';
@@ -187,6 +188,20 @@ describe('Validate textValidator functions', () => {
             [37, 97],
             [100, 142],
             [145, 196],
+        ]);
+    });
+
+    test('tests substitutions override only fully matched exclusions', () => {
+        const { transformer } = createSubstitutionTransformer({
+            substitutionDefinitions: [],
+            substitutions: [['&shy;', '']],
+        });
+        const options = { ignoreRegExpList: [/&[a-z]+;/g] };
+
+        expect(calcTextInclusionRanges('Fu&shy;ture', options, transformer)).toEqual([{ startPos: 0, endPos: 11 }]);
+        expect(calcTextInclusionRanges('Fu&amp;ture', options, transformer)).toEqual([
+            { startPos: 0, endPos: 2 },
+            { startPos: 7, endPos: 11 },
         ]);
     });
 
