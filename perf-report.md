@@ -13,57 +13,57 @@ xychart-beta
     title Files Per Second by Day
     y-axis Files per Second
     x-axis Date [Aug-9, Aug-10, Aug-19]
-    bar [191.27, 191.48, 202.17]
-    line [19.76, 19.87, 30.93]
-    line [94.45, 88.13, 89.83]
-    line [106.66, 99.38, 105.91]
-    line [80.61, 83.15, 87.40]
-    line [239.79, 231.09, 227.14]
-    line [269.81, 270.47, 360.24]
-    line [39.52, 37.52, 37.92]
-    line [268.54, 243.09, 255.05]
-    line [6.78, 6.60, 9.24]
-    line [240.17, 211.99, 210.14]
-    line [125.68, 158.27, 123.28]
-    line [225.24, 214.74, 211.44]
-    line [225.91, 222.58, 276.73]
-    line [145.75, 128.32, 133.46]
-    line [24.65, 23.72, 24.39]
-    line [139.45, 161.93, 122.79]
-    line [25.95, 22.03, 24.99]
-    line [154.75, 150.93, 149.10]
-    line [15.80, 15.53, 21.79]
-    line [196.97, 211.99, 196.83]
-    line [180.75, 223.35, 170.46]
-    line [96.93, 84.41, 87.10]
-    line [77.16, 76.75, 78.74]
-    line [400.74, 385.62, 377.93]
-    line [145.79, 145.58, 151.63]
-    line [249.96, 202.34, 231.21]
-    line [186.27, 165.43, 164.33]
-    line [224.37, 213.27, 220.07]
-    line [47.00, 61.84, 43.58]
-    line [127.47, 149.55, 126.13]
-    line [181.18, 166.12, 220.45]
-    line [57.90, 56.15, 55.63]
-    line [101.07, 123.80, 95.52]
-    line [98.84, 91.76, 96.31]
-    line [162.48, 155.40, 153.35]
-    line [360.76, 347.31, 348.02]
-    line [198.91, 184.05, 190.03]
-    line [242.10, 232.62, 244.56]
-    line [73.60, 96.61, 69.36]
-    line [415.14, 451.69, 523.79]
-    line [283.77, 252.09, 265.24]
+    bar [191.27, 191.48, 204.45]
+    line [19.76, 19.87, 24.78]
+    line [94.45, 88.13, 100.40]
+    line [106.66, 99.38, 104.52]
+    line [80.61, 83.15, 97.15]
+    line [239.79, 231.09, 221.57]
+    line [269.81, 270.47, 306.05]
+    line [39.52, 37.52, 43.48]
+    line [268.54, 243.09, 256.41]
+    line [6.78, 6.60, 8.19]
+    line [240.17, 211.99, 213.85]
+    line [125.68, 158.27, 125.09]
+    line [225.24, 214.74, 213.06]
+    line [225.91, 222.58, 246.55]
+    line [145.75, 128.32, 144.27]
+    line [24.65, 23.72, 23.86]
+    line [139.45, 161.93, 124.06]
+    line [25.95, 22.03, 24.88]
+    line [154.75, 150.93, 149.92]
+    line [15.80, 15.53, 18.04]
+    line [196.97, 211.99, 267.68]
+    line [180.75, 223.35, 173.93]
+    line [96.93, 84.41, 115.72]
+    line [77.16, 76.75, 79.80]
+    line [400.74, 385.62, 372.08]
+    line [145.79, 145.58, 145.29]
+    line [249.96, 202.34, 261.96]
+    line [186.27, 165.43, 184.98]
+    line [224.37, 213.27, 218.26]
+    line [47.00, 61.84, 45.42]
+    line [127.47, 149.55, 128.08]
+    line [181.18, 166.12, 194.34]
+    line [57.90, 56.15, 56.22]
+    line [101.07, 123.80, 104.09]
+    line [98.84, 91.76, 95.12]
+    line [162.48, 155.40, 201.24]
+    line [360.76, 347.31, 404.89]
+    line [198.91, 184.05, 188.64]
+    line [242.10, 232.62, 286.76]
+    line [73.60, 96.61, 68.77]
+    line [415.14, 451.69, 493.10]
+    line [283.77, 252.09, 264.33]
     line [22.84, 20.59, 21.08]
-    line [205.56, 193.98, 220.30]
-    line [126.64, 126.17, 130.66]
-    line [105.46, 100.11, 98.55]
-    line [47.26, 48.66, 46.99]
-    line [268.09, 268.70, 264.40]
-    line [234.76, 198.61, 189.31]
-    line [39.98, 38.63, 39.17]
-    line [192.03, 195.48, 200.49]
+    line [205.56, 193.98, 217.22]
+    line [126.64, 126.17, 129.06]
+    line [105.46, 100.11, 101.89]
+    line [47.26, 48.66, 46.23]
+    line [268.09, 268.70, 300.56]
+    line [234.76, 198.61, 267.74]
+    line [39.98, 38.63, 38.36]
+    line [192.03, 195.48, 194.42]
 ```
 </details>
 
@@ -74,56 +74,56 @@ xychart-beta
 
 | Repository                                      | Elapsed | Min/Avg/Max          |    SD | SD Graph                |
 | ----------------------------------------------- | ------: | :------------------: | ----: | ----------------------- |
-| <sub>AdaDoom3/AdaDoom3</sub>                    |    2.72 | 2.2 /   2.7 /   2.9  |  0.26 | `    ┣━━┻━━╋●━┻━━┫    ` |
-| <sub>alexiosc/megistos</sub>                    |    6.67 | 6.9 /   7.2 /   7.9  |  0.32 | `    ┣●━┻━━╋━━┻━━┫    ` |
-| <sub>apollographql/apollo-server</sub>          |    2.42 | 2.0 /   2.4 /   2.8  |  0.25 | `    ┣━━┻━━●━━┻━━┫    ` |
-| <sub>aspnetboilerplate/aspnetboilerplate</sub>  |    6.35 | 6.7 /   8.5 /   9.1  |  0.72 | ` ●  ┣━━┻━━╋━━┻━━┫    ` |
-| <sub>aws-amplify/docs</sub>                     |   13.34 | 10.8 /  12.8 /  13.6 |  0.98 | `    ┣━━┻━━╋━●┻━━┫    ` |
-| <sub>Azure/azure-rest-api-specs</sub>           |   10.04 | 7.2 /   9.8 /  11.2  |  1.19 | `    ┣━━┻━━╋●━┻━━┫    ` |
-| <sub>bitjson/typescript-starter</sub>           |    0.65 | 0.9 /   1.0 /   1.1  |  0.06 | `●      ┣┻━╋━┻┫       ` |
-| <sub>caddyserver/caddy</sub>                    |    3.71 | 2.8 /   3.5 /   3.9  |  0.33 | `    ┣━━┻━━╋━●┻━━┫    ` |
-| <sub>canada-ca/open-source-logiciel-libre</sub> |    0.76 | 0.8 /   1.0 /   1.3  |  0.11 | `   ● ┣━┻━━╋━━┻━┫     ` |
-| <sub>chef/chef</sub>                            |    4.92 | 3.0 /   4.5 /   5.3  |  0.74 | `    ┣━━┻━━╋━●┻━━┫    ` |
-| <sub>dart-lang/sdk</sub>                        |   59.03 | 54.8 /  58.5 /  64.6 |  2.97 | `   ┣━━┻━━━╋●━━┻━━┫   ` |
-| <sub>django/django</sub>                        |   10.59 | 10.2 /  13.2 /  14.6 |  1.46 | `   ┣●━━┻━━╋━━┻━━━┫   ` |
-| <sub>eslint/eslint</sub>                        |    9.85 | 7.6 /   9.4 /  10.3  |  0.97 | `    ┣━━┻━━╋●━┻━━┫    ` |
-| <sub>exonum/exonum</sub>                        |    3.41 | 2.7 /   3.3 /   3.7  |  0.28 | `    ┣━━┻━━╋●━┻━━┫    ` |
-| <sub>flutter/samples</sub>                      |   12.76 | 8.0 /  12.1 /  13.4  |  1.67 | `   ┣━━━┻━━╋●━┻━━━┫   ` |
-| <sub>gitbucket/gitbucket</sub>                  |    3.40 | 2.5 /   3.0 /   3.4  |  0.34 | `    ┣━━┻━━╋━━┻●━┫    ` |
-| <sub>googleapis/google-cloud-cpp</sub>          |   96.34 | 96.9 / 119.7 / 127.8 | 11.58 | `  ●━━━┻━━━╋━━━┻━━━┫  ` |
-| <sub>graphql/express-graphql</sub>              |    1.07 | 0.8 /   1.1 /   1.2  |  0.10 | `     ┣━┻━━●━━┻━┫     ` |
-| <sub>graphql/graphql-js</sub>                   |    3.70 | 3.0 /   3.6 /   3.9  |  0.23 | `    ┣━━┻━━╋●━┻━━┫    ` |
-| <sub>graphql/graphql-relay-js</sub>             |    1.12 | 0.9 /   1.1 /   1.3  |  0.09 | `     ┣━┻━━●━━┻━┫     ` |
-| <sub>graphql/graphql-spec</sub>                 |    0.87 | 0.8 /   1.2 /   1.3  |  0.15 | `    ●┣━┻━━╋━━┻━┫     ` |
-| <sub>iluwatar/java-design-patterns</sub>        |   12.81 | 8.8 /  11.4 /  12.8  |  1.43 | `    ┣━━┻━━╋━━●━━┫    ` |
-| <sub>ktaranov/sqlserver-kit</sub>               |    5.63 | 3.3 /   5.4 /   6.2  |  0.95 | `    ┣━━┻━━╋●━┻━━┫    ` |
-| <sub>liriliri/licia</sub>                       |    3.82 | 2.9 /   3.7 /   4.1  |  0.39 | `    ┣━━┻━━╋●━┻━━┫    ` |
-| <sub>MartinThoma/LaTeX-examples</sub>           |    6.09 | 4.5 /   5.9 /   7.0  |  0.84 | `    ┣━━┻━━╋●━┻━━┫    ` |
-| <sub>mdx-js/mdx</sub>                           |    1.77 | 1.7 /   1.8 /   1.9  |  0.07 | `     ┣━┻━●╋━━┻━┫     ` |
-| <sub>microsoft/TypeScript-Website</sub>         |    5.05 | 5.0 /   5.3 /   5.6  |  0.19 | `    ┣━━●━━╋━━┻━━┫    ` |
-| <sub>MicrosoftDocs/PowerShell-Docs</sub>        |   24.78 | 20.9 /  24.1 /  25.8 |  1.35 | `   ┣━━━┻━━╋━●┻━━━┫   ` |
-| <sub>neovim/nvim-lspconfig</sub>                |    5.29 | 3.9 /   4.8 /   5.6  |  0.63 | `    ┣━━┻━━╋━●┻━━┫    ` |
-| <sub>pagekit/pagekit</sub>                      |    3.37 | 2.7 /   3.3 /   3.6  |  0.25 | `    ┣━━┻━━●━━┻━━┫    ` |
-| <sub>php/php-src</sub>                          |   25.01 | 19.2 /  23.2 /  25.3 |  2.24 | `   ┣━━━┻━━╋━━●━━━┫   ` |
-| <sub>plasticrake/tplink-smarthome-api</sub>     |    1.42 | 1.0 /   1.3 /   1.4  |  0.12 | `     ┣━┻━━╋━━●━┫     ` |
-| <sub>prettier/prettier</sub>                    |    7.72 | 5.9 /   7.5 /   8.0  |  0.64 | `    ┣━━┻━━╋●━┻━━┫    ` |
-| <sub>pycontribs/jira</sub>                      |    1.44 | 1.1 /   1.4 /   1.5  |  0.10 | `     ┣━┻━━╋●━┻━┫     ` |
-| <sub>RustPython/RustPython</sub>                |    9.07 | 6.6 /   9.0 /  11.1  |  1.32 | `    ┣━━┻━━●━━┻━━┫    ` |
-| <sub>shoelace-style/shoelace</sub>              |    2.87 | 2.1 /   2.7 /   3.0  |  0.24 | `    ┣━━┻━━╋●━┻━━┫    ` |
-| <sub>slint-ui/slint</sub>                       |   15.60 | 14.9 /  15.5 /  16.0 |  0.34 | `    ┣━━┻━━╋●━┻━━┫    ` |
-| <sub>SoftwareBrothers/admin-bro</sub>           |    2.32 | 1.6 /   2.3 /   2.4  |  0.25 | `    ┣━━┻━━╋●━┻━━┫    ` |
-| <sub>sveltejs/svelte</sub>                      |   17.09 | 16.9 /  21.5 /  22.9 |  1.96 | `  ●┣━━━┻━━╋━━┻━━━┫   ` |
-| <sub>TheAlgorithms/Python</sub>                 |    5.32 | 3.0 /   5.3 /   5.9  |  0.87 | `    ┣━━┻━━●━━┻━━┫    ` |
-| <sub>twbs/bootstrap</sub>                       |    1.70 | 1.2 /   1.6 /   1.9  |  0.22 | `     ┣━┻━━╋━●┻━┫     ` |
-| <sub>typescript-cheatsheets/react</sub>         |    1.14 | 0.7 /   1.1 /   1.3  |  0.15 | `     ┣━┻━━╋●━┻━┫     ` |
-| <sub>typescript-eslint/typescript-eslint</sub>  |    3.93 | 3.9 /   4.3 /   4.7  |  0.26 | `    ┣━●┻━━╋━━┻━━┫    ` |
-| <sub>vitest-dev/vitest</sub>                    |   10.47 | 8.7 /  10.3 /  10.8  |  0.63 | `    ┣━━┻━━╋●━┻━━┫    ` |
-| <sub>w3c/aria-practices</sub>                   |    3.19 | 3.1 /   3.3 /   3.5  |  0.14 | `     ┣━┻●━╋━━┻━┫     ` |
-| <sub>w3c/specberus</sub>                        |    1.93 | 1.5 /   1.8 /   2.0  |  0.14 | `     ┣━┻━━╋━●┻━┫     ` |
-| <sub>webdeveric/webpack-assets-manifest</sub>   |    1.17 | 1.0 /   1.2 /   1.3  |  0.07 | `     ┣━┻━━●━━┻━┫     ` |
-| <sub>webpack/webpack</sub>                      |    6.97 | 3.7 /   5.8 /   6.7  |  0.99 | `    ┣━━┻━━╋━━┻●━┫    ` |
-| <sub>wireapp/wire-desktop</sub>                 |    1.30 | 1.1 /   1.3 /   1.5  |  0.15 | `     ┣━┻━━●━━┻━┫     ` |
-| <sub>wireapp/wire-webapp</sub>                  |   12.60 | 12.5 /  12.9 /  13.4 |  0.30 | `    ┣━━●━━╋━━┻━━┫    ` |
+| <sub>AdaDoom3/AdaDoom3</sub>                    |    2.10 | 2.2 /   2.7 /   2.9  |  0.25 | `    ●━━┻━━╋━━┻━━┫    ` |
+| <sub>alexiosc/megistos</sub>                    |    5.45 | 6.7 /   7.2 /   7.9  |  0.35 | `●     ┣━┻━╋━┻━┫      ` |
+| <sub>apollographql/apollo-server</sub>          |    2.48 | 2.0 /   2.4 /   2.8  |  0.23 | `    ┣━━┻━━●━━┻━━┫    ` |
+| <sub>aspnetboilerplate/aspnetboilerplate</sub>  |    9.08 | 6.4 /   8.3 /   9.1  |  0.97 | `    ┣━━┻━━╋━━●━━┫    ` |
+| <sub>aws-amplify/docs</sub>                     |   14.03 | 10.8 /  12.8 /  13.6 |  0.94 | `    ┣━━┻━━╋━━┻●━┫    ` |
+| <sub>Azure/azure-rest-api-specs</sub>           |    9.94 | 7.2 /   9.8 /  11.2  |  1.12 | `    ┣━━┻━━●━━┻━━┫    ` |
+| <sub>bitjson/typescript-starter</sub>           |    1.07 | 0.6 /   1.0 /   1.1  |  0.13 | `     ┣━┻━━╋━●┻━┫     ` |
+| <sub>caddyserver/caddy</sub>                    |    3.00 | 2.8 /   3.5 /   3.9  |  0.32 | `    ┣●━┻━━╋━━┻━━┫    ` |
+| <sub>canada-ca/open-source-logiciel-libre</sub> |    0.98 | 0.8 /   1.0 /   1.3  |  0.14 | `     ┣━┻━●╋━━┻━┫     ` |
+| <sub>chef/chef</sub>                            |    4.75 | 3.0 /   4.6 /   5.3  |  0.70 | `    ┣━━┻━━╋●━┻━━┫    ` |
+| <sub>dart-lang/sdk</sub>                        |   34.32 | 54.8 /  58.6 /  64.6 |  2.81 | `●       ┣┻╋┻┫        ` |
+| <sub>django/django</sub>                        |   13.55 | 10.2 /  12.9 /  14.6 |  1.60 | `   ┣━━━┻━━╋●━┻━━━┫   ` |
+| <sub>eslint/eslint</sub>                        |    9.70 | 7.6 /   9.5 /  10.3  |  0.93 | `    ┣━━┻━━╋●━┻━━┫    ` |
+| <sub>exonum/exonum</sub>                        |    3.32 | 2.7 /   3.3 /   3.7  |  0.27 | `    ┣━━┻━━●━━┻━━┫    ` |
+| <sub>flutter/samples</sub>                      |   10.98 | 8.0 /  12.2 /  13.4  |  1.59 | `   ┣━━━┻●━╋━━┻━━━┫   ` |
+| <sub>gitbucket/gitbucket</sub>                  |    3.34 | 2.5 /   3.0 /   3.4  |  0.35 | `    ┣━━┻━━╋━●┻━━┫    ` |
+| <sub>googleapis/google-cloud-cpp</sub>          |  126.25 | 96.3 / 117.1 / 127.8 | 13.16 | `  ┣━━━┻━━━╋━━●┻━━━┫  ` |
+| <sub>graphql/express-graphql</sub>              |    1.11 | 0.8 /   1.1 /   1.2  |  0.09 | `     ┣━┻━━╋●━┻━┫     ` |
+| <sub>graphql/graphql-js</sub>                   |    3.66 | 3.0 /   3.6 /   3.9  |  0.22 | `    ┣━━┻━━╋●━┻━━┫    ` |
+| <sub>graphql/graphql-relay-js</sub>             |    1.13 | 0.9 /   1.1 /   1.3  |  0.08 | `     ┣━┻━━╋●━┻━┫     ` |
+| <sub>graphql/graphql-spec</sub>                 |    1.33 | 0.8 /   1.2 /   1.3  |  0.18 | `     ┣━┻━━╋━●┻━┫     ` |
+| <sub>iluwatar/java-design-patterns</sub>        |   12.31 | 8.8 /  11.6 /  12.8  |  1.42 | `    ┣━━┻━━╋━●┻━━┫    ` |
+| <sub>ktaranov/sqlserver-kit</sub>               |    3.39 | 3.3 /   5.4 /   6.2  |  0.90 | `   ●┣━━┻━━╋━━┻━━┫    ` |
+| <sub>liriliri/licia</sub>                       |    3.94 | 2.9 /   3.7 /   4.1  |  0.37 | `    ┣━━┻━━╋━●┻━━┫    ` |
+| <sub>MartinThoma/LaTeX-examples</sub>           |    4.81 | 4.5 /   5.9 /   7.0  |  0.79 | `    ┣━●┻━━╋━━┻━━┫    ` |
+| <sub>mdx-js/mdx</sub>                           |    1.72 | 1.7 /   1.8 /   1.9  |  0.07 | `     ┣━●━━╋━━┻━┫     ` |
+| <sub>microsoft/TypeScript-Website</sub>         |    5.51 | 5.0 /   5.2 /   5.6  |  0.19 | `    ┣━━┻━━╋━━┻●━┫    ` |
+| <sub>MicrosoftDocs/PowerShell-Docs</sub>        |   24.04 | 20.9 /  24.2 /  25.8 |  1.29 | `   ┣━━━┻━━●━━┻━━━┫   ` |
+| <sub>neovim/nvim-lspconfig</sub>                |    4.23 | 3.9 /   4.9 /   5.6  |  0.61 | `    ┣━━●━━╋━━┻━━┫    ` |
+| <sub>pagekit/pagekit</sub>                      |    3.42 | 2.7 /   3.3 /   3.6  |  0.24 | `    ┣━━┻━━╋●━┻━━┫    ` |
+| <sub>php/php-src</sub>                          |   21.21 | 19.2 /  23.4 /  25.3 |  2.19 | `   ┣━━━●━━╋━━┻━━━┫   ` |
+| <sub>plasticrake/tplink-smarthome-api</sub>     |    1.31 | 1.0 /   1.3 /   1.4  |  0.12 | `     ┣━┻━━●━━┻━┫     ` |
+| <sub>prettier/prettier</sub>                    |    5.81 | 5.9 /   7.5 /   8.0  |  0.60 | `  ● ┣━━┻━━╋━━┻━━┫    ` |
+| <sub>pycontribs/jira</sub>                      |    1.41 | 1.1 /   1.4 /   1.5  |  0.09 | `     ┣━┻━━●━━┻━┫     ` |
+| <sub>RustPython/RustPython</sub>                |    9.31 | 6.6 /   9.0 /  11.1  |  1.24 | `    ┣━━┻━━╋●━┻━━┫    ` |
+| <sub>shoelace-style/shoelace</sub>              |    1.77 | 2.1 /   2.8 /   3.0  |  0.23 | `●    ┣━━┻━╋━┻━━┫     ` |
+| <sub>slint-ui/slint</sub>                       |   11.60 | 14.9 /  15.5 /  16.0 |  0.32 | `●       ┣┻╋┻┫        ` |
+| <sub>SoftwareBrothers/admin-bro</sub>           |    2.36 | 1.6 /   2.3 /   2.4  |  0.24 | `     ┣━┻━━╋●━┻━┫     ` |
+| <sub>sveltejs/svelte</sub>                      |   19.36 | 16.9 /  21.0 /  22.9 |  2.31 | `   ┣━━━┻●━╋━━┻━━━┫   ` |
+| <sub>TheAlgorithms/Python</sub>                 |    5.36 | 3.0 /   5.3 /   5.9  |  0.82 | `    ┣━━┻━━●━━┻━━┫    ` |
+| <sub>twbs/bootstrap</sub>                       |    1.73 | 1.2 /   1.6 /   1.9  |  0.22 | `     ┣━┻━━╋━●┻━┫     ` |
+| <sub>typescript-cheatsheets/react</sub>         |    1.14 | 0.7 /   1.1 /   1.3  |  0.14 | `     ┣━┻━━╋●━┻━┫     ` |
+| <sub>typescript-eslint/typescript-eslint</sub>  |    4.04 | 3.9 /   4.2 /   4.7  |  0.26 | `    ┣━━┻●━╋━━┻━━┫    ` |
+| <sub>vitest-dev/vitest</sub>                    |    8.22 | 8.7 /  10.3 /  10.8  |  0.60 | `●   ┣━━┻━━╋━━┻━━┫    ` |
+| <sub>w3c/aria-practices</sub>                   |    3.27 | 3.1 /   3.3 /   3.5  |  0.13 | `     ┣━┻━━●━━┻━┫     ` |
+| <sub>w3c/specberus</sub>                        |    1.81 | 1.5 /   1.8 /   2.0  |  0.13 | `     ┣━┻━●╋━━┻━┫     ` |
+| <sub>webdeveric/webpack-assets-manifest</sub>   |    1.21 | 1.0 /   1.2 /   1.3  |  0.06 | `     ┣━┻━━╋━●┻━┫     ` |
+| <sub>webpack/webpack</sub>                      |    3.81 | 3.7 /   6.0 /   7.0  |  1.00 | `   ●┣━━┻━━╋━━┻━━┫    ` |
+| <sub>wireapp/wire-desktop</sub>                 |    1.36 | 1.1 /   1.3 /   1.5  |  0.14 | `     ┣━┻━━╋●━┻━┫     ` |
+| <sub>wireapp/wire-webapp</sub>                  |   13.41 | 12.5 /  12.8 /  13.4 |  0.29 | `    ┣━━┻━━╋━━┻━━●    ` |
 
 Note:
 - Elapsed time is in seconds.
@@ -134,58 +134,58 @@ Note:
 <details>
 <summary>Files per Second over Time</summary>
 
-| Repository                                      | Files |   Sec |    Fps |     Rel | Trend Fps   |    N |
-| ----------------------------------------------- | ----: | ----: | -----: | ------: | ----------- | ---: |
-| <sub>AdaDoom3/AdaDoom3</sub>                    |   103 |  2.72 |  37.92 |  -3.44% | `█▃▄█▂▂▃▃▄` |    8 |
-| <sub>alexiosc/megistos</sub>                    |   583 |  6.67 |  87.40 |   8.00% | `▆▇▅▅▆▃▇▇█` |    8 |
-| <sub>apollographql/apollo-server</sub>          |   256 |  2.42 | 105.91 |   0.15% | `▂▃▄▃▄█▇▃▄` |    8 |
-| <sub>aspnetboilerplate/aspnetboilerplate</sub>  |  2288 |  6.35 | 360.24 |  33.47% | `▂▂▂▃▃▂▇▃█` |    8 |
-| <sub>aws-amplify/docs</sub>                     |  3030 | 13.34 | 227.14 |  -4.84% | `▃▃▄▃▃█▇▃▃` |    8 |
-| <sub>Azure/azure-rest-api-specs</sub>           |  2561 | 10.04 | 255.05 |  -3.88% | `█▃▅▃▃▂▃▂▃` |    8 |
-| <sub>bitjson/typescript-starter</sub>           |    20 |  0.65 |  30.93 |  56.44% | `▄▃▃▂▂▁▂▂█` |    8 |
-| <sub>caddyserver/caddy</sub>                    |   333 |  3.71 |  89.83 |  -4.09% | `▄▄▃▂█▅▂▃▃` |    8 |
-| <sub>canada-ca/open-source-logiciel-libre</sub> |     7 |  0.76 |   9.24 |  36.67% | `▄▃▄▃▇▁▄▃█` |    8 |
-| <sub>chef/chef</sub>                            |  1034 |  4.92 | 210.14 | -11.20% | `▃▁▆▂▂▂█▂▂` |    8 |
-| <sub>dart-lang/sdk</sub>                        | 11618 | 59.03 | 196.83 |  -1.02% | `▆▇▇▃▅▇▆█▆` |    8 |
-| <sub>django/django</sub>                        |  2931 | 10.59 | 276.73 |  22.73% | `▂▃▂▂▆▃█▃▇` |    8 |
-| <sub>eslint/eslint</sub>                        |  2082 |  9.85 | 211.44 |  -5.58% | `▃▇█▂▃▂▃▃▃` |    8 |
-| <sub>exonum/exonum</sub>                        |   421 |  3.41 | 123.28 |  -4.99% | `▂▃▃▅▄▄▄█▃` |    8 |
-| <sub>flutter/samples</sub>                      |  1703 | 12.76 | 133.46 |  -7.04% | `▃▁▂▂█▂▂▂▂` |    8 |
-| <sub>gitbucket/gitbucket</sub>                  |   418 |  3.40 | 122.79 | -13.69% | `▃█▃▂▂▇▃▇▂` |    8 |
-| <sub>googleapis/google-cloud-cpp</sub>          | 21238 | 96.34 | 220.45 |  22.95% | `█▇▂▂▃▃▃▂█` |    8 |
-| <sub>graphql/express-graphql</sub>              |    26 |  1.07 |  24.39 |  -0.58% | `▄█▂▄▃▃▄▃▄` |    8 |
-| <sub>graphql/graphql-js</sub>                   |   551 |  3.70 | 149.10 |  -3.35% | `▄▄▄▃▃█▄▄▃` |    8 |
-| <sub>graphql/graphql-relay-js</sub>             |    28 |  1.12 |  24.99 |  -1.87% | `▅▅▅▅▅█▄▂▄` |    8 |
-| <sub>graphql/graphql-spec</sub>                 |    19 |  0.87 |  21.79 |  38.22% | `▂▂▂█▂▂▂▃▇` |    8 |
-| <sub>iluwatar/java-design-patterns</sub>        |  2183 | 12.81 | 170.46 |  -8.39% | `▃▃▂▃▂▄█▇▂` |    8 |
-| <sub>ktaranov/sqlserver-kit</sub>               |   490 |  5.63 |  87.10 |  -8.67% | `▂▁▂█▁▅▂▂▂` |    8 |
-| <sub>liriliri/licia</sub>                       |  1442 |  3.82 | 377.93 |  -5.25% | `▃▂▃▂█▇▄▃▃` |    8 |
-| <sub>MartinThoma/LaTeX-examples</sub>           |  1409 |  6.09 | 231.21 |  -5.24% | `▂▄█▄▇▃▃▂▃` |    8 |
-| <sub>mdx-js/mdx</sub>                           |   139 |  1.77 |  78.74 |   2.12% | `█▅▄▇▅▇▅▆▇` |    8 |
-| <sub>microsoft/TypeScript-Website</sub>         |   765 |  5.05 | 151.63 |   4.02% | `▆█▇▅▄▆▇▆█` |    8 |
-| <sub>MicrosoftDocs/PowerShell-Docs</sub>        |  3126 | 24.78 | 126.13 |  -3.15% | `▄▄▄▃▄▄▅█▄` |    8 |
-| <sub>neovim/nvim-lspconfig</sub>                |   869 |  5.29 | 164.33 | -10.53% | `▂▂▆█▇▃▅▃▃` |    8 |
-| <sub>pagekit/pagekit</sub>                      |   741 |  3.37 | 220.07 |  -1.31% | `▄▄▃▄▂█▃▃▃` |    8 |
-| <sub>php/php-src</sub>                          |  2389 | 25.01 |  95.52 |  -8.08% | `▃▄▂▃▃█▄█▃` |    8 |
-| <sub>plasticrake/tplink-smarthome-api</sub>     |    62 |  1.42 |  43.58 | -10.80% | `▃▃▄▃▃▂▄█▂` |    8 |
-| <sub>prettier/prettier</sub>                    |  2685 |  7.72 | 348.02 |  -3.08% | `▃▂▃█▃▂▃▃▃` |    8 |
-| <sub>pycontribs/jira</sub>                      |    80 |  1.44 |  55.63 |  -3.54% | `█▃▃▃▃▃▄▃▃` |    8 |
-| <sub>RustPython/RustPython</sub>                |   874 |  9.07 |  96.31 |  -1.68% | `▁▃▃▃▃█▇▃▄` |    8 |
-| <sub>shoelace-style/shoelace</sub>              |   440 |  2.87 | 153.35 |  -5.10% | `▃▂▃▃█▃▂▃▃` |    8 |
-| <sub>slint-ui/slint</sub>                       |  3815 | 15.60 | 244.56 |   1.52% | `█▇▆▅▇▇▆▅▇` |    8 |
-| <sub>SoftwareBrothers/admin-bro</sub>           |   441 |  2.32 | 190.03 |  -3.56% | `█▂▂▂▂▂▂▂▂` |    8 |
-| <sub>sveltejs/svelte</sub>                      |  8954 | 17.09 | 523.79 |  24.80% | `▂▂▂▂▃▃█▅█` |    8 |
-| <sub>TheAlgorithms/Python</sub>                 |  1411 |  5.32 | 265.24 |  -5.21% | `▂▁▁▂▂█▂▂▂` |    8 |
-| <sub>twbs/bootstrap</sub>                       |   118 |  1.70 |  69.36 |  -9.31% | `▃▄▂▆▃▂▆█▃` |    8 |
-| <sub>typescript-cheatsheets/react</sub>         |    24 |  1.14 |  21.08 |  -6.57% | `▂▃█▁▃▂▃▂▂` |    8 |
-| <sub>typescript-eslint/typescript-eslint</sub>  |   866 |  3.93 | 220.30 |   7.93% | `▃█▄▅▆▇▇▄█` |    8 |
-| <sub>vitest-dev/vitest</sub>                    |  2769 | 10.47 | 264.40 |  -1.41% | `▃▄▃▄▃▃█▄▄` |    8 |
-| <sub>w3c/aria-practices</sub>                   |   417 |  3.19 | 130.66 |   3.22% | `█▇▄▆▄▇▇▆▇` |    8 |
-| <sub>w3c/specberus</sub>                        |   190 |  1.93 |  98.55 |  -5.96% | `█▄▃▄▃▂▄▃▃` |    8 |
-| <sub>webdeveric/webpack-assets-manifest</sub>   |    55 |  1.17 |  46.99 |  -0.94% | `▅█▄▅▃▄▇▆▅` |    8 |
-| <sub>webpack/webpack</sub>                      |  1319 |  6.97 | 189.31 | -17.78% | `▄▂▃▁▂█▂▂▁` |    8 |
-| <sub>wireapp/wire-desktop</sub>                 |    51 |  1.30 |  39.17 |  -1.61% | `▃▂█▄▄▃█▄▄` |    8 |
-| <sub>wireapp/wire-webapp</sub>                  |  2526 | 12.60 | 200.49 |   4.17% | `▇▅▆▆▅█▇▇█` |    8 |
+| Repository                                      | Files |    Sec |    Fps |     Rel | Trend Fps    |    N |
+| ----------------------------------------------- | ----: | -----: | -----: | ------: | ------------ | ---: |
+| <sub>AdaDoom3/AdaDoom3</sub>                    |   103 |   2.10 |  49.04 |  25.34% | `▇▃▃▇▂▂▃▃▃█` |    9 |
+| <sub>alexiosc/megistos</sub>                    |   583 |   5.45 | 106.91 |  30.94% | `▃▄▃▃▃▂▄▄▄█` |    9 |
+| <sub>apollographql/apollo-server</sub>          |   256 |   2.48 | 103.13 |  -2.50% | `▂▃▄▃▄█▇▃▄▄` |    9 |
+| <sub>aspnetboilerplate/aspnetboilerplate</sub>  |  2288 |   9.08 | 251.87 | -10.03% | `▂▂▂▃▃▂▇▃█▂` |    9 |
+| <sub>aws-amplify/docs</sub>                     |  3030 |  14.03 | 216.01 |  -9.02% | `▃▃▄▃▃█▇▃▃▂` |    9 |
+| <sub>Azure/azure-rest-api-specs</sub>           |  2561 |   9.94 | 257.77 |  -2.44% | `█▃▅▃▃▂▃▂▃▃` |    9 |
+| <sub>bitjson/typescript-starter</sub>           |    20 |   1.07 |  18.64 | -11.29% | `▄▃▃▂▂▁▂▂█▂` |    9 |
+| <sub>caddyserver/caddy</sub>                    |   333 |   3.00 | 110.96 |  19.01% | `▄▄▃▂█▅▂▃▃▇` |    9 |
+| <sub>canada-ca/open-source-logiciel-libre</sub> |     7 |   0.98 |   7.15 |   1.60% | `▄▃▄▃▇▁▄▃█▄` |    9 |
+| <sub>chef/chef</sub>                            |  1034 |   4.75 | 217.56 |  -6.91% | `▃▁▆▂▂▂█▂▂▂` |    9 |
+| <sub>dart-lang/sdk</sub>                        | 11618 |  34.32 | 338.54 |  70.44% | `▂▂▂▁▂▂▂▃▂█` |    9 |
+| <sub>django/django</sub>                        |  2931 |  13.55 | 216.36 |  -6.41% | `▂▃▂▂▆▃█▃▇▃` |    9 |
+| <sub>eslint/eslint</sub>                        |  2082 |   9.70 | 214.68 |  -3.53% | `▃▇█▂▃▂▃▃▃▃` |    9 |
+| <sub>exonum/exonum</sub>                        |   421 |   3.32 | 126.89 |  -1.66% | `▂▃▃▅▄▄▄█▃▄` |    9 |
+| <sub>flutter/samples</sub>                      |  1703 |  10.98 | 155.08 |   8.87% | `▃▁▂▂█▂▂▂▂▄` |    9 |
+| <sub>gitbucket/gitbucket</sub>                  |   418 |   3.34 | 125.34 | -10.53% | `▃█▃▂▃▇▃▇▂▂` |    9 |
+| <sub>googleapis/google-cloud-cpp</sub>          | 21238 | 126.25 | 168.22 |  -8.51% | `█▇▂▂▃▃▃▂█▃` |    9 |
+| <sub>graphql/express-graphql</sub>              |    26 |   1.11 |  23.33 |  -4.85% | `▄█▂▄▃▃▄▃▄▃` |    9 |
+| <sub>graphql/graphql-js</sub>                   |   551 |   3.66 | 150.73 |  -1.93% | `▄▄▄▃▃█▄▄▃▄` |    9 |
+| <sub>graphql/graphql-relay-js</sub>             |    28 |   1.13 |  24.77 |  -2.54% | `▅▅▅▅▅█▄▂▄▄` |    9 |
+| <sub>graphql/graphql-spec</sub>                 |    19 |   1.33 |  14.29 | -13.06% | `▂▂▂█▂▂▂▃▇▂` |    9 |
+| <sub>iluwatar/java-design-patterns</sub>        |  2183 |  12.31 | 177.40 |  -3.76% | `▃▃▂▃▂▄█▇▂▃` |    9 |
+| <sub>ktaranov/sqlserver-kit</sub>               |   490 |   3.39 | 144.34 |  52.83% | `▂▁▂█▁▅▂▂▂█` |    9 |
+| <sub>liriliri/licia</sub>                       |  1442 |   3.94 | 366.23 |  -7.64% | `▃▂▃▂█▇▄▃▃▃` |    9 |
+| <sub>MartinThoma/LaTeX-examples</sub>           |  1409 |   4.81 | 292.71 |  20.67% | `▂▄█▄▇▃▃▂▃▇` |    9 |
+| <sub>mdx-js/mdx</sub>                           |   139 |   1.72 |  80.85 |   4.61% | `█▅▄▇▅▇▅▆▇█` |    9 |
+| <sub>microsoft/TypeScript-Website</sub>         |   765 |   5.51 | 138.95 |  -5.10% | `▆█▇▅▄▆▇▆█▅` |    9 |
+| <sub>MicrosoftDocs/PowerShell-Docs</sub>        |  3126 |  24.04 | 130.04 |   0.20% | `▄▄▄▃▄▄▅█▄▄` |    9 |
+| <sub>neovim/nvim-lspconfig</sub>                |   869 |   4.23 | 205.64 |  13.29% | `▂▂▆█▇▃▅▃▃▆` |    9 |
+| <sub>pagekit/pagekit</sub>                      |   741 |   3.42 | 216.45 |  -2.79% | `▄▄▃▄▂█▃▃▃▃` |    9 |
+| <sub>php/php-src</sub>                          |  2389 |  21.21 | 112.66 |   9.40% | `▃▄▂▃▃█▄█▃▆` |    9 |
+| <sub>plasticrake/tplink-smarthome-api</sub>     |    62 |   1.31 |  47.26 |  -2.10% | `▃▃▄▃▃▂▄█▂▃` |    9 |
+| <sub>prettier/prettier</sub>                    |  2685 |   5.81 | 461.77 |  29.04% | `▃▂▃█▃▂▃▃▃█` |    9 |
+| <sub>pycontribs/jira</sub>                      |    80 |   1.41 |  56.81 |  -1.11% | `█▃▃▃▃▃▄▃▃▃` |    9 |
+| <sub>RustPython/RustPython</sub>                |   874 |   9.31 |  93.93 |  -3.93% | `▁▃▃▃▃█▇▃▄▄` |    9 |
+| <sub>shoelace-style/shoelace</sub>              |   440 |   1.77 | 249.12 |  55.05% | `▂▁▂▂▅▂▂▂▂█` |    9 |
+| <sub>slint-ui/slint</sub>                       |  3815 |  11.60 | 328.95 |  36.31% | `▃▃▂▂▃▃▂▂▃█` |    9 |
+| <sub>SoftwareBrothers/admin-bro</sub>           |   441 |   2.36 | 187.25 |  -4.59% | `█▂▂▂▂▂▂▂▂▂` |    9 |
+| <sub>sveltejs/svelte</sub>                      |  8954 |  19.36 | 462.41 |   7.22% | `▂▂▂▂▃▃█▅█▅` |    9 |
+| <sub>TheAlgorithms/Python</sub>                 |  1411 |   5.36 | 263.43 |  -5.31% | `▂▁▁▂▂█▂▂▂▂` |    9 |
+| <sub>twbs/bootstrap</sub>                       |   118 |   1.73 |  68.19 |  -9.91% | `▃▄▂▆▃▂▆█▃▃` |    9 |
+| <sub>typescript-cheatsheets/react</sub>         |    24 |   1.14 |  21.09 |  -5.85% | `▂▃█▁▃▂▃▂▂▂` |    9 |
+| <sub>typescript-eslint/typescript-eslint</sub>  |   866 |   4.04 | 214.14 |   4.00% | `▃█▄▅▆▇▇▄█▇` |    9 |
+| <sub>vitest-dev/vitest</sub>                    |  2769 |   8.22 | 336.71 |  25.76% | `▂▃▃▃▂▂▇▃▃█` |    9 |
+| <sub>w3c/aria-practices</sub>                   |   417 |   3.27 | 127.46 |   0.34% | `█▇▄▆▄▇▇▆▇▆` |    9 |
+| <sub>w3c/specberus</sub>                        |   190 |   1.81 | 105.23 |   1.08% | `█▄▃▄▃▂▄▃▃▄` |    9 |
+| <sub>webdeveric/webpack-assets-manifest</sub>   |    55 |   1.21 |  45.46 |  -4.07% | `▅█▄▅▃▄▇▆▅▄` |    9 |
+| <sub>webpack/webpack</sub>                      |  1319 |   3.81 | 346.17 |  53.38% | `▄▂▄▁▂█▂▂▁█` |    9 |
+| <sub>wireapp/wire-desktop</sub>                 |    51 |   1.36 |  37.55 |  -5.53% | `▃▂█▄▄▃█▄▄▄` |    9 |
+| <sub>wireapp/wire-webapp</sub>                  |  2526 |  13.41 | 188.36 |  -2.58% | `▇▅▆▆▅█▇▇█▅` |    9 |
 </details>
 
 
@@ -193,58 +193,58 @@ Note:
 <details>
 <summary>Data Throughput</summary>
 
-| Repository                                      | Files |   Sec |     Kps |     Rel | Trend Kps   |    N |
-| ----------------------------------------------- | ----: | ----: | ------: | ------: | ----------- | ---: |
-| <sub>AdaDoom3/AdaDoom3</sub>                    |   103 |  2.72 |  805.98 |  -3.44% | `█▃▄█▂▂▃▃▄` |    8 |
-| <sub>alexiosc/megistos</sub>                    |   583 |  6.67 |  686.75 |   8.00% | `▆▇▅▅▆▃▇▇█` |    8 |
-| <sub>apollographql/apollo-server</sub>          |   256 |  2.42 |  872.07 |   0.15% | `▂▃▄▃▄█▇▃▄` |    8 |
-| <sub>aspnetboilerplate/aspnetboilerplate</sub>  |  2288 |  6.35 |  880.92 |  33.47% | `▂▂▂▃▃▂▇▃█` |    8 |
-| <sub>aws-amplify/docs</sub>                     |  3030 | 13.34 |  887.96 |  -4.66% | `▃▃▄▃▃█▇▃▃` |    8 |
-| <sub>Azure/azure-rest-api-specs</sub>           |  2561 | 10.04 |  781.39 |  -2.92% | `█▃▅▃▃▂▃▂▃` |    8 |
-| <sub>bitjson/typescript-starter</sub>           |    20 |  0.65 |  123.71 |  56.44% | `▄▃▃▂▂▁▂▂█` |    8 |
-| <sub>caddyserver/caddy</sub>                    |   333 |  3.71 |  818.47 |  -4.31% | `▄▄▃▂█▅▂▃▃` |    8 |
-| <sub>canada-ca/open-source-logiciel-libre</sub> |     7 |  0.76 |   76.53 |  36.67% | `▄▃▄▃▇▁▄▃█` |    8 |
-| <sub>chef/chef</sub>                            |  1034 |  4.92 | 1031.80 | -11.20% | `▃▁▆▂▂▂█▂▂` |    8 |
-| <sub>dart-lang/sdk</sub>                        | 11618 | 59.03 | 1366.99 |  -0.33% | `▆▇▇▃▅▇▆█▆` |    8 |
-| <sub>django/django</sub>                        |  2931 | 10.59 | 1784.85 |  23.05% | `▂▃▂▂▆▃█▃▇` |    8 |
-| <sub>eslint/eslint</sub>                        |  2082 |  9.85 | 1484.38 |  -5.57% | `▃▇█▂▃▂▃▃▃` |    8 |
-| <sub>exonum/exonum</sub>                        |   421 |  3.41 | 1179.23 |  -4.99% | `▂▃▃▅▄▄▄█▃` |    8 |
-| <sub>flutter/samples</sub>                      |  1703 | 12.76 |  795.53 |  -7.39% | `▃▁▂▂█▂▂▂▂` |    8 |
-| <sub>gitbucket/gitbucket</sub>                  |   418 |  3.40 |  607.49 | -12.84% | `▃█▃▂▂▇▃▇▂` |    8 |
-| <sub>googleapis/google-cloud-cpp</sub>          | 21238 | 96.34 | 1915.20 |  23.07% | `█▇▂▂▃▃▃▂█` |    8 |
-| <sub>graphql/express-graphql</sub>              |    26 |  1.07 |  111.63 |  -0.58% | `▄█▂▄▃▃▄▃▄` |    8 |
-| <sub>graphql/graphql-js</sub>                   |   551 |  3.70 | 1111.92 |  -3.35% | `▄▄▄▃▃█▄▄▃` |    8 |
-| <sub>graphql/graphql-relay-js</sub>             |    28 |  1.12 |   98.16 |  -1.87% | `▅▅▅▅▅█▄▂▄` |    8 |
-| <sub>graphql/graphql-spec</sub>                 |    19 |  0.87 |  729.38 |  38.22% | `▂▂▂█▂▂▂▃▇` |    8 |
-| <sub>iluwatar/java-design-patterns</sub>        |  2183 | 12.81 |  526.59 |  -8.17% | `▃▃▂▃▂▄█▇▃` |    8 |
-| <sub>ktaranov/sqlserver-kit</sub>               |   490 |  5.63 | 1319.44 |  -8.67% | `▂▁▂█▁▅▂▂▂` |    8 |
-| <sub>liriliri/licia</sub>                       |  1442 |  3.82 |  453.15 |  -4.79% | `▃▂▃▂█▇▄▃▃` |    8 |
-| <sub>MartinThoma/LaTeX-examples</sub>           |  1409 |  6.09 |  477.51 |  -5.24% | `▂▄█▄▇▃▃▂▃` |    8 |
-| <sub>mdx-js/mdx</sub>                           |   139 |  1.77 |  371.05 |   2.12% | `█▅▄▇▅▇▅▆▇` |    8 |
-| <sub>microsoft/TypeScript-Website</sub>         |   765 |  5.05 | 1045.53 |   4.04% | `▆█▇▅▄▆▇▆█` |    8 |
-| <sub>MicrosoftDocs/PowerShell-Docs</sub>        |  3126 | 24.78 | 1347.07 |  -3.06% | `▄▄▄▃▄▄▅█▄` |    8 |
-| <sub>neovim/nvim-lspconfig</sub>                |   869 |  5.29 |  482.01 | -10.70% | `▂▂▆█▇▃▅▃▃` |    8 |
-| <sub>pagekit/pagekit</sub>                      |   741 |  3.37 |  458.84 |  -1.31% | `▄▄▃▄▂█▃▃▃` |    8 |
-| <sub>php/php-src</sub>                          |  2389 | 25.01 | 1689.91 |  -8.03% | `▃▄▂▃▃█▄█▃` |    8 |
-| <sub>plasticrake/tplink-smarthome-api</sub>     |    62 |  1.42 |  235.49 | -10.80% | `▃▃▄▃▃▂▄█▂` |    8 |
-| <sub>prettier/prettier</sub>                    |  2685 |  7.72 |  491.89 |  -3.61% | `▃▂▃█▃▂▃▃▃` |    8 |
-| <sub>pycontribs/jira</sub>                      |    80 |  1.44 |  392.91 |  -3.54% | `█▃▃▃▃▃▄▃▃` |    8 |
-| <sub>RustPython/RustPython</sub>                |   874 |  9.07 | 2120.79 |  -1.34% | `▁▃▃▃▃█▇▃▄` |    8 |
-| <sub>shoelace-style/shoelace</sub>              |   440 |  2.87 |  740.60 |  -5.10% | `▃▂▃▃█▃▂▃▃` |    8 |
-| <sub>slint-ui/slint</sub>                       |  3815 | 15.60 | 1315.82 |   1.87% | `█▇▆▅▇▇▆▅▇` |    8 |
-| <sub>SoftwareBrothers/admin-bro</sub>           |   441 |  2.32 |  418.85 |  -3.56% | `█▂▂▂▂▂▂▂▂` |    8 |
-| <sub>sveltejs/svelte</sub>                      |  8954 | 17.09 |  359.70 |  24.94% | `▂▂▂▂▃▃█▅█` |    8 |
-| <sub>TheAlgorithms/Python</sub>                 |  1411 |  5.32 |  678.41 |  -5.21% | `▂▁▁▂▂█▂▂▂` |    8 |
-| <sub>twbs/bootstrap</sub>                       |   118 |  1.70 |  568.95 |  -9.31% | `▃▄▂▆▃▂▆█▃` |    8 |
-| <sub>typescript-cheatsheets/react</sub>         |    24 |  1.14 |  190.58 |  -6.57% | `▂▃█▁▃▂▃▂▂` |    8 |
-| <sub>typescript-eslint/typescript-eslint</sub>  |   866 |  3.93 |  740.26 |   7.84% | `▃█▄▅▆▇▇▄█` |    8 |
-| <sub>vitest-dev/vitest</sub>                    |  2769 | 10.47 |  764.16 |   1.07% | `▃▄▃▄▃▃█▄▄` |    8 |
-| <sub>w3c/aria-practices</sub>                   |   417 |  3.19 | 1228.92 |   3.22% | `█▇▄▆▄▇▇▆▇` |    8 |
-| <sub>w3c/specberus</sub>                        |   190 |  1.93 |  322.09 |  -5.81% | `█▄▃▄▃▂▄▃▃` |    8 |
-| <sub>webdeveric/webpack-assets-manifest</sub>   |    55 |  1.17 |  108.51 |  -0.94% | `▅█▄▅▃▄▇▆▅` |    8 |
-| <sub>webpack/webpack</sub>                      |  1319 |  6.97 | 1292.90 |  -7.56% | `▄▂▃▁▂█▂▂▂` |    8 |
-| <sub>wireapp/wire-desktop</sub>                 |    51 |  1.30 |  166.68 |  -1.61% | `▃▂█▄▄▃█▄▄` |    8 |
-| <sub>wireapp/wire-webapp</sub>                  |  2526 | 12.60 |  846.24 |   4.69% | `▇▅▅▆▅▇▇▇█` |    8 |
+| Repository                                      | Files |    Sec |     Kps |     Rel | Trend Kps    |    N |
+| ----------------------------------------------- | ----: | -----: | ------: | ------: | ------------ | ---: |
+| <sub>AdaDoom3/AdaDoom3</sub>                    |   103 |   2.10 | 1042.14 |  25.34% | `▇▃▃▇▂▂▃▃▃█` |    9 |
+| <sub>alexiosc/megistos</sub>                    |   583 |   5.45 |  840.05 |  30.94% | `▃▄▃▃▃▂▄▄▄█` |    9 |
+| <sub>apollographql/apollo-server</sub>          |   256 |   2.48 |  849.18 |  -2.50% | `▂▃▄▃▄█▇▃▄▄` |    9 |
+| <sub>aspnetboilerplate/aspnetboilerplate</sub>  |  2288 |   9.08 |  615.91 | -10.03% | `▂▂▂▃▃▂▇▃█▂` |    9 |
+| <sub>aws-amplify/docs</sub>                     |  3030 |  14.03 |  844.42 |  -8.86% | `▃▃▄▃▃█▇▃▃▂` |    9 |
+| <sub>Azure/azure-rest-api-specs</sub>           |  2561 |   9.94 |  789.72 |  -1.56% | `█▃▅▃▃▂▃▂▃▃` |    9 |
+| <sub>bitjson/typescript-starter</sub>           |    20 |   1.07 |   74.56 | -11.29% | `▄▃▃▂▂▁▂▂█▂` |    9 |
+| <sub>caddyserver/caddy</sub>                    |   333 |   3.00 | 1010.98 |  18.76% | `▄▄▃▂█▅▂▃▃▇` |    9 |
+| <sub>canada-ca/open-source-logiciel-libre</sub> |     7 |   0.98 |   59.21 |   1.60% | `▄▃▄▃▇▁▄▃█▄` |    9 |
+| <sub>chef/chef</sub>                            |  1034 |   4.75 | 1068.24 |  -6.91% | `▃▁▆▂▂▂█▂▂▂` |    9 |
+| <sub>dart-lang/sdk</sub>                        | 11618 |  34.32 | 2351.23 |  71.49% | `▂▂▂▁▂▂▂▃▂█` |    9 |
+| <sub>django/django</sub>                        |  2931 |  13.55 | 1395.43 |  -6.20% | `▂▃▂▂▆▃█▃▇▃` |    9 |
+| <sub>eslint/eslint</sub>                        |  2082 |   9.70 | 1507.10 |  -3.53% | `▃▇█▂▃▂▃▃▃▃` |    9 |
+| <sub>exonum/exonum</sub>                        |   421 |   3.32 | 1213.75 |  -1.66% | `▂▃▃▅▄▄▄█▃▄` |    9 |
+| <sub>flutter/samples</sub>                      |  1703 |  10.98 |  924.37 |   8.49% | `▃▁▂▂█▂▂▂▂▄` |    9 |
+| <sub>gitbucket/gitbucket</sub>                  |   418 |   3.34 |  620.09 |  -9.75% | `▃█▃▂▂▇▃▇▂▂` |    9 |
+| <sub>googleapis/google-cloud-cpp</sub>          | 21238 | 126.25 | 1461.46 |  -8.43% | `█▇▂▂▃▃▃▂█▃` |    9 |
+| <sub>graphql/express-graphql</sub>              |    26 |   1.11 |  106.77 |  -4.85% | `▄█▂▄▃▃▄▃▄▃` |    9 |
+| <sub>graphql/graphql-js</sub>                   |   551 |   3.66 | 1124.05 |  -1.93% | `▄▄▄▃▃█▄▄▃▄` |    9 |
+| <sub>graphql/graphql-relay-js</sub>             |    28 |   1.13 |   97.29 |  -2.54% | `▅▅▅▅▅█▄▂▄▄` |    9 |
+| <sub>graphql/graphql-spec</sub>                 |    19 |   1.33 |  478.26 | -13.06% | `▂▂▂█▂▂▂▃▇▂` |    9 |
+| <sub>iluwatar/java-design-patterns</sub>        |  2183 |  12.31 |  548.06 |  -3.55% | `▃▃▂▃▂▄█▇▃▃` |    9 |
+| <sub>ktaranov/sqlserver-kit</sub>               |   490 |   3.39 | 2186.55 |  52.83% | `▂▁▂█▁▅▂▂▂█` |    9 |
+| <sub>liriliri/licia</sub>                       |  1442 |   3.94 |  439.13 |  -7.25% | `▃▂▃▂█▇▄▃▃▃` |    9 |
+| <sub>MartinThoma/LaTeX-examples</sub>           |  1409 |   4.81 |  604.54 |  20.67% | `▂▄█▄▇▃▃▂▃▇` |    9 |
+| <sub>mdx-js/mdx</sub>                           |   139 |   1.72 |  380.98 |   4.61% | `█▅▄▇▅▇▅▆▇█` |    9 |
+| <sub>microsoft/TypeScript-Website</sub>         |   765 |   5.51 |  958.12 |  -5.08% | `▆█▇▅▄▆▇▆█▅` |    9 |
+| <sub>MicrosoftDocs/PowerShell-Docs</sub>        |  3126 |  24.04 | 1388.84 |   0.28% | `▄▄▄▃▄▄▅█▄▄` |    9 |
+| <sub>neovim/nvim-lspconfig</sub>                |   869 |   4.23 |  603.20 |  13.09% | `▂▂▆█▇▃▅▃▃▆` |    9 |
+| <sub>pagekit/pagekit</sub>                      |   741 |   3.42 |  451.30 |  -2.79% | `▄▄▃▄▂█▃▃▃▃` |    9 |
+| <sub>php/php-src</sub>                          |  2389 |  21.21 | 1993.11 |   9.45% | `▃▄▂▃▃█▄█▃▆` |    9 |
+| <sub>plasticrake/tplink-smarthome-api</sub>     |    62 |   1.31 |  255.36 |  -2.10% | `▃▃▄▃▃▂▄█▂▃` |    9 |
+| <sub>prettier/prettier</sub>                    |  2685 |   5.81 |  652.67 |  28.41% | `▃▂▃█▃▂▃▃▃█` |    9 |
+| <sub>pycontribs/jira</sub>                      |    80 |   1.41 |  401.22 |  -1.11% | `█▃▃▃▃▃▄▃▃▃` |    9 |
+| <sub>RustPython/RustPython</sub>                |   874 |   9.31 | 2068.31 |  -3.64% | `▁▃▃▃▃█▇▃▄▄` |    9 |
+| <sub>shoelace-style/shoelace</sub>              |   440 |   1.77 | 1203.15 |  55.05% | `▂▁▂▂▅▂▂▂▂█` |    9 |
+| <sub>slint-ui/slint</sub>                       |  3815 |  11.60 | 1769.86 |  36.73% | `▃▃▂▂▃▃▂▂▃█` |    9 |
+| <sub>SoftwareBrothers/admin-bro</sub>           |   441 |   2.36 |  412.72 |  -4.59% | `█▂▂▂▂▂▂▂▂▂` |    9 |
+| <sub>sveltejs/svelte</sub>                      |  8954 |  19.36 |  317.55 |   7.32% | `▂▂▂▂▃▃█▅█▅` |    9 |
+| <sub>TheAlgorithms/Python</sub>                 |  1411 |   5.36 |  673.79 |  -5.31% | `▂▁▁▂▂█▂▂▂▂` |    9 |
+| <sub>twbs/bootstrap</sub>                       |   118 |   1.73 |  559.36 |  -9.91% | `▃▄▂▆▃▂▆█▃▃` |    9 |
+| <sub>typescript-cheatsheets/react</sub>         |    24 |   1.14 |  190.66 |  -5.85% | `▂▃█▁▃▂▃▂▂▂` |    9 |
+| <sub>typescript-eslint/typescript-eslint</sub>  |   866 |   4.04 |  719.56 |   3.92% | `▃█▄▅▆▇▇▄█▇` |    9 |
+| <sub>vitest-dev/vitest</sub>                    |  2769 |   8.22 |  973.18 |  28.56% | `▂▃▃▃▂▂▆▃▃█` |    9 |
+| <sub>w3c/aria-practices</sub>                   |   417 |   3.27 | 1198.82 |   0.34% | `█▇▄▆▄▇▇▆▇▆` |    9 |
+| <sub>w3c/specberus</sub>                        |   190 |   1.81 |  343.92 |   1.23% | `█▄▃▄▃▂▄▃▃▄` |    9 |
+| <sub>webdeveric/webpack-assets-manifest</sub>   |    55 |   1.21 |  104.98 |  -4.07% | `▅█▄▅▃▄▇▆▅▄` |    9 |
+| <sub>webpack/webpack</sub>                      |  1319 |   3.81 | 2364.14 |  70.46% | `▃▁▃▁▁▇▂▁▂█` |    9 |
+| <sub>wireapp/wire-desktop</sub>                 |    51 |   1.36 |  159.76 |  -5.53% | `▃▂█▄▄▃█▄▄▄` |    9 |
+| <sub>wireapp/wire-webapp</sub>                  |  2526 |  13.41 |  795.03 |  -2.15% | `▇▅▅▆▅▇▇▇█▅` |    9 |
 </details>
 
 
