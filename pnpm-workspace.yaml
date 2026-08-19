@@ -31,13 +31,12 @@ overrides:
   '@isaacs/brace-expansion@=5.0.0': '^5.0.1'
   'diff@=7.0.0': '^8.0.3'
 
+
+minimumReleaseAge: 2880 # two days
 minimumReleaseAgeExclude:
-  - '@cspell/dict-cpp@7.1.0'
-  - '@cspell/dict-en-common-misspellings@2.2.0'
-  - '@cspell/dict-monkeyc@1.1.0'
-  - '@cspell/dict-npm@5.2.45'
-  - '@cspell/dict-python@4.3.0'
-  - '@cspell/dict-software-terms@5.3.0'
+  - '@cspell/dict-*'
+blockExoticSubdeps: true
+trustPolicy: no-downgrade
 
 allowBuilds:
   '@parcel/watcher': false
