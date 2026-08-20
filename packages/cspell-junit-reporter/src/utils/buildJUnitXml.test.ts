@@ -97,6 +97,7 @@ describe('buildJUnitXml', () => {
         ];
         const xml = buildJUnitXml(files, [], { suiteName: 'cspell' });
 
+        // cspell:dictionaries html-symbol-entities
         // The testsuite/testcase attributes must be attribute-escaped.
         expect(xml).toContain('<testsuite name="src/&lt;weird&gt;&amp;&quot;path&quot;.ts"');
         expect(xml).toContain('classname="src/&lt;weird&gt;&amp;&quot;path&quot;.ts"');
