@@ -44,6 +44,18 @@ describe('docValidator', () => {
         expect(dVal.getCheckedTextRanges()).toEqual([{ startPos: 0, endPos: text.length }]);
     });
 
+    test('substitutions can join words across ignored text', async () => {
+        const doc = td('file:///issue-8962.md', 'Fu&shy;ture', 'markdown'); // cspell:ignore ture
+        const settings: CSpellUserSettings = {
+            substitutionDefinitions: [{ name: 'soft-hyphen', entries: [['&shy;', '']] }],
+            substitutions: ['soft-hyphen'],
+        };
+        const dVal = new DocumentValidator(doc, { generateSuggestions: false, noConfigSearch: true }, settings);
+        await dVal.prepare();
+
+        expect(dVal.checkDocument()).toEqual([]);
+    });
+
     test.each`
         filename
         ${__filename}
