@@ -127,7 +127,7 @@ describe('buildJUnitXml', () => {
                 skippedReason: 'excluded',
                 issues: [
                     {
-                        text: 'errrorrrs',
+                        text: 'errrorrrs', // cspell:ignore errrorrrs
                         offset: 0,
                         line: { text: 'errrorrrs', offset: 0 },
                         row: 1,
