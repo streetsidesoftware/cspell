@@ -200,7 +200,8 @@ export class DocumentValidator {
             this.addPossibleError(`Missing substitutions: ${sub.missing.join(', ')}`);
         }
         const validateOptions = { ...settingsToValidateOptions(finalSettings), transformer: sub.transformer };
-        const includeRanges = calcTextInclusionRanges(this._document.text, validateOptions);
+        const rangeTransformer = finalSettings.substitutions?.length ? sub.transformer : undefined;
+        const includeRanges = calcTextInclusionRanges(this._document.text, validateOptions, rangeTransformer);
         const segmenter = createMappedTextSegmenter(includeRanges);
         const textValidator = textValidatorFactory(dict, validateOptions);
 
@@ -242,7 +243,8 @@ export class DocumentValidator {
             this.addPossibleError(`Missing substitutions: ${sub.missing.join(', ')}`);
         }
         const validateOptions = { ...settingsToValidateOptions(finalSettings), transformer: sub.transformer };
-        const includeRanges = calcTextInclusionRanges(this._document.text, validateOptions);
+        const rangeTransformer = finalSettings.substitutions?.length ? sub.transformer : undefined;
+        const includeRanges = calcTextInclusionRanges(this._document.text, validateOptions, rangeTransformer);
         const segmenter = createMappedTextSegmenter(includeRanges);
         const textValidator = textValidatorFactory(dict, validateOptions);
 
