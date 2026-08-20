@@ -5,7 +5,7 @@ Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGEL
 Summary:
   files: 21238
   filesWithIssues: 8142
-  issues: 47397
+  issues: 47476
   errors: 0
 Errors: []
 
@@ -444,7 +444,6 @@ issues:
   - "google/cloud/asset/doc/environment-variables.dox:13:40          cloudasset      U       (which defaults to \"cloudasset.googleapis.com\")"
   - "google/cloud/asset/v1/asset_client.h:1551:21        ainotebooks     U       /// * constraints/ainotebooks.accessMode"
   - "google/cloud/assuredworkloads/v1/assured_workloads_client.h:19:39       ASSUREDWORKLOADS    U       CLOUD_CPP_GOOGLE_CLOUD_ASSUREDWORKLOADS_V1_ASSURED_WORKLOADS"
-  - "google/cloud/auditmanager/v1/audit_manager_client.h:180:23      FEDRAMP     U       /// generated. Eg: FEDRAMP_MODERATE"
   - "google/cloud/automl/v1/auto_ml_client.h:1283:63     parametrs (parameters)      U       Deploying with different parametrs"
   - "google/cloud/backupdr/v1/backup_dr_client.h:19:39       BACKUPDR    U       CLOUD_CPP_GOOGLE_CLOUD_BACKUPDR_V1_BACKUP_DR_CLIENT"
   - "google/cloud/baremetalsolution/v2/bare_metal_solution_client.h:19:39        BAREMETALSOLUTION               U       CLOUD_CPP_GOOGLE_CLOUD_BAREMETALSOLUTION_V2_BARE_METAL_SOLUTION"
@@ -515,13 +514,13 @@ issues:
   - "google/cloud/bigtable/doc/bigtable-samples-grpc-credentials.dox:57:71       endl                    U       < ex.what() << std::endl;"
   - "google/cloud/bigtable/examples/bigtable_hello_app_profile.cc:146:40         abcdefghilklmnopqrstuvwxyz      U       generator, 8, \"abcdefghilklmnopqrstuvwxyz0123456789\");"
   - "google/cloud/bigtable/examples/howto_mock_data_api.cc:32:11         cbtm    U       namespace cbtm = ::google::cloud::bigtable"
-  - "google/cloud/bigtable/internal/async_row_reader_test.cc:475:37      Doesnt (Doesn't)    U       AsyncRowReaderTest, ParserEofDoesntFailOnUnfinishedRowIfRowLimit"
+  - "google/cloud/bigtable/internal/async_row_reader_test.cc:477:37      Doesnt (Doesn't)    U       AsyncRowReaderTest, ParserEofDoesntFailOnUnfinishedRowIfRowLimit"
   - "google/cloud/bigtable/internal/async_row_reader.cc:81:31        cntr    U       explicit CountFrames(int& cntr) : cntr(++cntr) {}"
   - "google/cloud/bigtable/internal/data_connection_impl.cc:703:24       satisying       U       // sure of that, satisying the `promise<>` is deferred"
   - "google/cloud/bigtable/internal/data_connection_impl.h:44:49         addind      U       this option in favor of addind a member variable to"
   - "google/cloud/bigtable/internal/logging_result_set_reader.cc:35:43       unresumable     U       __func__ << \"() << (unresumable)\";"
-  - "google/cloud/bigtable/internal/metrics_test.cc:1668:53      gfet    U       emplace(\"server-timing\", \"gfet4t7; dur=10.5\");"
-  - "google/cloud/bigtable/internal/partial_result_set_source_test.cc:283:41         AAAAAW      U       resume_token: \"AAAAAWVyZXN1bWVfdG9rZW4=\","
+  - "google/cloud/bigtable/internal/metrics_test.cc:1683:53      gfet    U       emplace(\"server-timing\", \"gfet4t7; dur=10.5\");"
+  - "google/cloud/bigtable/internal/partial_result_set_source_test.cc:285:41         AAAAAW      U       resume_token: \"AAAAAWVyZXN1bWVfdG9rZW4=\","
   - "google/cloud/bigtable/internal/readrowsparser_acceptance_tests.inc:409:19       alue (value)        U       value: \"alue-VAL\""
   - "google/cloud/bigtable/internal/readrowsparser_acceptance_tests.inc:571:24       Multiqualifier      U       TEST_F(AcceptanceTest, MultiqualifierSplits) {"
   - "google/cloud/bigtable/internal/readrowsparser.h:15:57       READROWSPARSER      U       CLOUD_BIGTABLE_INTERNAL_READROWSPARSER_H"
@@ -702,8 +701,9 @@ issues:
   - "google/cloud/optimization/doc/environment-variables.dox:13:40       cloudoptimization       U       (which defaults to \"cloudoptimization.googleapis.com\")"
   - "google/cloud/oracledatabase/doc/main.dox:7:105          Exadata     U       database services, such as Exadata and Autonomous Databases"
   - "google/cloud/oracledatabase/v1/internal/oracle_database_auth_decorator.cc:121:35        Exascale        U       leDatabaseAuth::AsyncConfigureExascaleCloudExadataInfrastructure"
-  - "google/cloud/oracledatabase/v1/internal/oracle_database_auth_decorator.cc:780:49        Exadb           U       oracledatabase::v1::ListExadbVmClustersResponse>"
-  - "google/cloud/oracledatabase/v1/internal/oracle_database_auth_decorator.cc:1129:49       Goldengate      U       oracledatabase::v1::ListGoldengateDeploymentsResponse>"
+  - "google/cloud/oracledatabase/v1/internal/oracle_database_auth_decorator.cc:663:63        Refreshable     U       ::AutonomousDatabaseRefreshableClones>"
+  - "google/cloud/oracledatabase/v1/internal/oracle_database_auth_decorator.cc:822:49        Exadb           U       oracledatabase::v1::ListExadbVmClustersResponse>"
+  - "google/cloud/oracledatabase/v1/internal/oracle_database_auth_decorator.cc:1171:49       Goldengate      U       oracledatabase::v1::ListGoldengateDeploymentsResponse>"
   - "google/cloud/oracledatabase/v1/internal/oracle_database_auth_decorator.h:19:39          ORACLEDATABASE      U       CLOUD_CPP_GOOGLE_CLOUD_ORACLEDATABASE_V1_INTERNAL_ORACLE_DATABASE"
   - "google/cloud/orgpolicy/v2/internal/org_policy_auth_decorator.h:19:39        ORGPOLICY       U       CLOUD_CPP_GOOGLE_CLOUD_ORGPOLICY_V2_INTERNAL_ORG_POLICY"
   - "google/cloud/osconfig/agentendpoint/v1/agent_endpoint_client.h:19:48        AGENTENDPOINT       U       GOOGLE_CLOUD_OSCONFIG_AGENTENDPOINT_V1_AGENT_ENDPOINT_CLIENT"
@@ -730,7 +730,6 @@ issues:
   - "google/cloud/recaptchaenterprise/v1/internal/recaptcha_enterprise_auth_decorator.h:19:39        RECAPTCHAENTERPRISE     U       CLOUD_CPP_GOOGLE_CLOUD_RECAPTCHAENTERPRISE_V1_INTERNAL_RECAPTCHA"
   - "google/cloud/resourcemanager/CMakeLists.txt:32:30       RESOURCEMANAGER     U       GOOGLE_CLOUD_CPP_RESOURCEMANAGER_TEST_FOLDER)"
   - "google/cloud/resourcemanager/v3/folders_client.h:348:37         fanout      U       folder naming, height, or fanout constraints."
-  - "google/cloud/resourcemanager/v3/projects_client.h:771:27        idempotently            U       This method behaves idempotently, such that deleting"
   - "google/cloud/resourcemanager/v3/projects_client.h:1133:11       myownpersonaldomain     U       /// the myownpersonaldomain.com organization, but"
   - "google/cloud/resourcemanager/v3/projects_client.h:1133:61       examplepetstore         U       organization, but not the examplepetstore.com"
   - "google/cloud/securitycentermanagement/v1/internal/security_center_management_auth_decorator.h:20:39         SECURITYCENTERMANAGEMENT    U       CLOUD_CPP_GOOGLE_CLOUD_SECURITYCENTERMANAGEMENT_V1_INTERNAL_SECURITY"
@@ -790,9 +789,9 @@ issues:
   - "google/cloud/sql/doc/environment-variables.dox:13:40        sqladmin    U       (which defaults to \"sqladmin.googleapis.com\")"
   - "google/cloud/sql/v1/internal/sql_instances_rest_connection_impl.cc:657:53       Ssrs    U       :SqlInstancesAcquireSsrsLeaseResponse>"
   - "google/cloud/sql/v1/sql_instances_client.h:1387:71      SSRS    U       Reporting Services (SSRS)."
-  - "google/cloud/storage/async/client_test.cc:452:24        Appendable      U       TEST(AsyncClient, StartAppendableObjectUpload1) {"
-  - "google/cloud/storage/async/client_test.cc:456:7         appendable      U       appendable: true"
-  - "google/cloud/storage/async/client_test.cc:727:59        algorigthm      U       only-invalid-encryption-algorigthm\""
+  - "google/cloud/storage/async/client_test.cc:490:24        Appendable      U       TEST(AsyncClient, StartAppendableObjectUpload1) {"
+  - "google/cloud/storage/async/client_test.cc:494:7         appendable      U       appendable: true"
+  - "google/cloud/storage/async/client_test.cc:765:59        algorigthm      U       only-invalid-encryption-algorigthm\""
   - "google/cloud/storage/async/idempotency_policy_test.cc:51:45         metageneration      U       write_object_spec { if_metageneration_match: 42 })pb\","
   - "google/cloud/storage/benchmarks/aggregate_download_throughput_benchmark.cc:421:18       Gbit    U       << \" Gbit/s=\" << bandwidth <<"
   - "google/cloud/storage/benchmarks/async_throughput_benchmark.cc:92:11         saturage        U       1) Try to saturage the egress path on the"
@@ -864,7 +863,7 @@ issues:
   - "google/cloud/storage/internal/async/connection_impl_read_hash_test.cc:17:11         pratap      U       // TODO(v-pratap): Remove this when EnableMD"
   - "google/cloud/storage/internal/async/connection_impl_upload_test.cc:486:42       eksb    U       sha256_bytes: \"test-eksb\""
   - "google/cloud/storage/internal/async/insert_object.cc:50:21          Subcord     U       auto next = data_.Subcord(0, n);"
-  - "google/cloud/storage/internal/async/writer_connection_buffered.cc:711:39        unsatisified    U       call that returns an unsatisified future until the buffer"
+  - "google/cloud/storage/internal/async/writer_connection_buffered.cc:728:39        unsatisified    U       call that returns an unsatisified future until the buffer"
   - "google/cloud/storage/internal/grpc/default_options_test.cc:112:29       testbench       U       \"from-testbench-env\");"
   - "google/cloud/storage/internal/grpc/default_options.cc:104:49        unviverse       U       already a set endpoint or unviverse domain endpoint."
   - "google/cloud/storage/internal/grpc/object_request_parser_test.cc:63:33          Cuakt       U       md5) : StEvo2V/qoDCuaktZSw3IQ=="
