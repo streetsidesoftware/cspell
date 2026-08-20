@@ -45,7 +45,7 @@ describe('docValidator', () => {
     });
 
     test('substitutions can join words across ignored text', async () => {
-        const doc = td('file:///issue-8962.md', 'Fu&shy;ture', 'markdown');
+        const doc = td('file:///issue-8962.md', 'Fu&shy;ture', 'markdown'); // cspell:ignore ture
         const settings: CSpellUserSettings = {
             substitutionDefinitions: [{ name: 'soft-hyphen', entries: [['&shy;', '']] }],
             substitutions: ['soft-hyphen'],

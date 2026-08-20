@@ -198,7 +198,7 @@ describe('Validate textValidator functions', () => {
         });
         const options = { ignoreRegExpList: [/&[a-z]+;/g] };
 
-        expect(calcTextInclusionRanges('Fu&shy;ture', options, transformer)).toEqual([{ startPos: 0, endPos: 11 }]);
+        expect(calcTextInclusionRanges('Fu&shy;ture', options, transformer)).toEqual([{ startPos: 0, endPos: 11 }]); // cspell:ignore ture
         expect(calcTextInclusionRanges('Fu&amp;ture', options, transformer)).toEqual([
             { startPos: 0, endPos: 2 },
             { startPos: 7, endPos: 11 },
