@@ -1,0 +1,172 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`getReporter > saves xml to console { outFile: 'stderr' } 1`] = `
+"<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="cspell" tests="2" failures="1" errors="1" time="0.349">
+  <testsuite name="text.txt" tests="1" failures="1" errors="0" time="0.349">
+    <testcase name="fulll (1:14)" classname="text.txt">
+      <failure type="spelling" message="Unknown word: &quot;fulll&quot;">Unknown word: "fulll"</failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="cspell-errors" tests="1" failures="0" errors="1" time="0.000">
+    <testcase name="something went wrong" classname="cspell">
+      <error type="error" message="oh geez">oh geez</error>
+    </testcase>
+  </testsuite>
+</testsuites>
+"
+`;
+
+exports[`getReporter > saves xml to console { outFile: 'stderr' } 2`] = `""`;
+
+exports[`getReporter > saves xml to console { outFile: 'stdout' } 1`] = `""`;
+
+exports[`getReporter > saves xml to console { outFile: 'stdout' } 2`] = `
+"<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="cspell" tests="2" failures="1" errors="1" time="0.349">
+  <testsuite name="text.txt" tests="1" failures="1" errors="0" time="0.349">
+    <testcase name="fulll (1:14)" classname="text.txt">
+      <failure type="spelling" message="Unknown word: &quot;fulll&quot;">Unknown word: "fulll"</failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="cspell-errors" tests="1" failures="0" errors="1" time="0.000">
+    <testcase name="something went wrong" classname="cspell">
+      <error type="error" message="oh geez">oh geez</error>
+    </testcase>
+  </testsuite>
+</testsuites>
+"
+`;
+
+exports[`getReporter > saves xml to console { outFile: undefined } 1`] = `""`;
+
+exports[`getReporter > saves xml to console { outFile: undefined } 2`] = `
+"<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="cspell" tests="2" failures="1" errors="1" time="0.349">
+  <testsuite name="text.txt" tests="1" failures="1" errors="0" time="0.349">
+    <testcase name="fulll (1:14)" classname="text.txt">
+      <failure type="spelling" message="Unknown word: &quot;fulll&quot;">Unknown word: "fulll"</failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="cspell-errors" tests="1" failures="0" errors="1" time="0.000">
+    <testcase name="something went wrong" classname="cspell">
+      <error type="error" message="oh geez">oh geez</error>
+    </testcase>
+  </testsuite>
+</testsuites>
+"
+`;
+
+exports[`getReporter > saves xml to console undefined 1`] = `""`;
+
+exports[`getReporter > saves xml to console undefined 2`] = `
+"<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="cspell" tests="2" failures="1" errors="1" time="0.349">
+  <testsuite name="text.txt" tests="1" failures="1" errors="0" time="0.349">
+    <testcase name="fulll (1:14)" classname="text.txt">
+      <failure type="spelling" message="Unknown word: &quot;fulll&quot;">Unknown word: "fulll"</failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="cspell-errors" tests="1" failures="0" errors="1" time="0.000">
+    <testcase name="something went wrong" classname="cspell">
+      <error type="error" message="oh geez">oh geez</error>
+    </testcase>
+  </testsuite>
+</testsuites>
+"
+`;
+
+exports[`getReporter > saves xml to file 1`] = `
+"<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="cspell" tests="2" failures="1" errors="1" time="0.349">
+  <testsuite name="text.txt" tests="1" failures="1" errors="0" time="0.349">
+    <testcase name="fulll (1:14)" classname="text.txt">
+      <failure type="spelling" message="Unknown word: &quot;fulll&quot;">Unknown word: "fulll"</failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="cspell-errors" tests="1" failures="0" errors="1" time="0.000">
+    <testcase name="something went wrong" classname="cspell">
+      <error type="error" message="oh geez">oh geez</error>
+    </testcase>
+  </testsuite>
+</testsuites>
+"
+`;
+
+exports[`getReporter > saves xml to stdout/stderr { outFile: 'stderr' } 1`] = `
+"<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="cspell" tests="2" failures="1" errors="1" time="0.349">
+  <testsuite name="text.txt" tests="1" failures="1" errors="0" time="0.349">
+    <testcase name="fulll (1:14)" classname="text.txt">
+      <failure type="spelling" message="Unknown word: &quot;fulll&quot;">Unknown word: "fulll"</failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="cspell-errors" tests="1" failures="0" errors="1" time="0.000">
+    <testcase name="something went wrong" classname="cspell">
+      <error type="error" message="oh geez">oh geez</error>
+    </testcase>
+  </testsuite>
+</testsuites>
+"
+`;
+
+exports[`getReporter > saves xml to stdout/stderr { outFile: 'stderr' } 2`] = `""`;
+
+exports[`getReporter > saves xml to stdout/stderr { outFile: 'stdout' } 1`] = `""`;
+
+exports[`getReporter > saves xml to stdout/stderr { outFile: 'stdout' } 2`] = `
+"<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="cspell" tests="2" failures="1" errors="1" time="0.349">
+  <testsuite name="text.txt" tests="1" failures="1" errors="0" time="0.349">
+    <testcase name="fulll (1:14)" classname="text.txt">
+      <failure type="spelling" message="Unknown word: &quot;fulll&quot;">Unknown word: "fulll"</failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="cspell-errors" tests="1" failures="0" errors="1" time="0.000">
+    <testcase name="something went wrong" classname="cspell">
+      <error type="error" message="oh geez">oh geez</error>
+    </testcase>
+  </testsuite>
+</testsuites>
+"
+`;
+
+exports[`getReporter > saves xml to stdout/stderr { outFile: undefined } 1`] = `""`;
+
+exports[`getReporter > saves xml to stdout/stderr { outFile: undefined } 2`] = `
+"<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="cspell" tests="2" failures="1" errors="1" time="0.349">
+  <testsuite name="text.txt" tests="1" failures="1" errors="0" time="0.349">
+    <testcase name="fulll (1:14)" classname="text.txt">
+      <failure type="spelling" message="Unknown word: &quot;fulll&quot;">Unknown word: "fulll"</failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="cspell-errors" tests="1" failures="0" errors="1" time="0.000">
+    <testcase name="something went wrong" classname="cspell">
+      <error type="error" message="oh geez">oh geez</error>
+    </testcase>
+  </testsuite>
+</testsuites>
+"
+`;
+
+exports[`getReporter > saves xml to stdout/stderr undefined 1`] = `""`;
+
+exports[`getReporter > saves xml to stdout/stderr undefined 2`] = `
+"<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="cspell" tests="2" failures="1" errors="1" time="0.349">
+  <testsuite name="text.txt" tests="1" failures="1" errors="0" time="0.349">
+    <testcase name="fulll (1:14)" classname="text.txt">
+      <failure type="spelling" message="Unknown word: &quot;fulll&quot;">Unknown word: "fulll"</failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="cspell-errors" tests="1" failures="0" errors="1" time="0.000">
+    <testcase name="something went wrong" classname="cspell">
+      <error type="error" message="oh geez">oh geez</error>
+    </testcase>
+  </testsuite>
+</testsuites>
+"
+`;
+
+exports[`getReporter > throws for invalid config 1`] = `[AssertionError: cspell-junit-reporter settings.outFile must be a string]`;
