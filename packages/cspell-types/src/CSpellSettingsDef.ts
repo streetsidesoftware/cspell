@@ -91,6 +91,7 @@ export interface FileSettings extends ExtendableSettings, CommandLineSettings {
      */
     enableGlobDot?: boolean;
 
+    // cspell:ignore EDITMSG
     /**
      * Glob patterns of files to be ignored.
      *
