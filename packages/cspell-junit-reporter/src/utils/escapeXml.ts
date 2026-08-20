@@ -24,5 +24,5 @@ export function escapeXmlAttribute(value: string): string {
         .replaceAll('<', '&lt;')
         .replaceAll('>', '&gt;')
         .replaceAll('"', '&quot;')
-        .replaceAll("'", '&apos;');
+        .replaceAll("'", '&apos;'); // cspell:ignore apos
 }

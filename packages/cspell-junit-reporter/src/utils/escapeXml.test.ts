@@ -12,7 +12,7 @@ describe('escapeXmlText', () => {
     });
 
     test('strips invalid XML control characters', () => {
-        expect(escapeXmlText('bad\x00word\x1F\x7F\x84\x86\x9F')).toBe('badword');
+        expect(escapeXmlText('bad\x00word\x1F\x7F\x84\x86\x9F')).toBe('bad' + 'word'); 
     });
 
     test('leaves tab, newline, and carriage return intact', () => {
@@ -22,6 +22,7 @@ describe('escapeXmlText', () => {
 
 describe('escapeXmlAttribute', () => {
     test('escapes &, <, >, ", and \'', () => {
+        // cspell:ignore apos
         expect(escapeXmlAttribute(`a & b < c > d "e" 'f'`)).toBe('a &amp; b &lt; c &gt; d &quot;e&quot; &apos;f&apos;');
     });
 
