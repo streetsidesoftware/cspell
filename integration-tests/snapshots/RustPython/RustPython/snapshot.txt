@@ -3,18 +3,17 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 857, Issues found: 8373 in 106 files.
+ CSpell: Files checked: 874, Issues found: 8390 in 111 files.
  exit code: 1
-AGENTS.md:299:76    - Unknown word (zizmor)     -- change must pass a [zizmor](https://docs.zizmor
-AGENTS.md:42:45     - Unknown word (prek)       -- commit, you MUST run `prek run --all-files` (or
-AGENTS.md:44:91     - Unknown word (prek)       -- stage the fixes, re-run `prek` until it reports a
+AGENTS.md:290:76    - Unknown word (zizmor)     -- change must pass a [zizmor](https://docs.zizmor
+AGENTS.md:32:50     - Unknown word (prek)       -- pre-commit hook with `prek install` (or `pre-commit
 Cargo.toml:129:62    - Unknown word (redoxer)    -- to compile/check with redoxer
 Cargo.toml:143:28    - Unknown word (nsis)       -- package.metadata.packager.nsis]
 Cargo.toml:192:62    - Unknown word (zeroize)    -- alloc", "oid", "pem", "zeroize"] }
 Cargo.toml:282:8     - Unknown word (graviola)   -- rustls-graviola = "0.4"
-Cargo.toml:372:21    - Unknown word (scrutinee)  -- significant_drop_in_scrutinee = "warn"
-Cargo.toml:394:1     - Unknown word (elidable)   -- elidable_lifetime_names = "warn
-Cargo.toml:433:1     - Unknown word (uninlined)  -- uninlined_format_args = "warn
+Cargo.toml:371:21    - Unknown word (scrutinee)  -- significant_drop_in_scrutinee = "warn"
+Cargo.toml:393:1     - Unknown word (elidable)   -- elidable_lifetime_names = "warn
+Cargo.toml:432:1     - Unknown word (uninlined)  -- uninlined_format_args = "warn
 Cargo.toml:62:8      - Unknown word (graviola)   -- rustls-graviola = { workspace = true
 LICENSE-logo:205:34    - Unknown word (waivable)   -- under any voluntary or waivable statutory or compulsory
 README.md:105:90    - Unknown word (Embedders)  -- the RustPython binary. Embedders can use `rustpython
@@ -7972,7 +7971,13 @@ extra_tests/snippets/builtin_float.py:278:6     - Unknown word (nfinity)    -- "
 extra_tests/snippets/builtin_float.py:280:6     - Unknown word (iinity)     -- "iinity",
 extra_tests/snippets/builtin_float.py:281:7     - Unknown word (xnan)       -- "0xnan",
 extra_tests/snippets/builtin_float.py:393:21    - Unknown word (xbep)       -- identical(fromHex("0xbep0"), 190.0)
-extra_tests/snippets/builtin_list.py:862:26    - Unknown word (daedlock)   -- Test for list entering daedlock or not (https://github
+extra_tests/snippets/builtin_list.py:891:26    - Unknown word (daedlock)   -- Test for list entering daedlock or not (https://github
+extra_tests/snippets/builtin_memoryview.py:119:14    - Unknown word (aceg)       -- == b"aceg"
+extra_tests/snippets/builtin_memoryview.py:457:33    - Unknown word (WXYZ)       -- return memoryview(b"WXYZ")
+extra_tests/snippets/builtin_memoryview.py:475:33    - Unknown word (WXYZ)       -- return memoryview(b"WXYZ")
+extra_tests/snippets/builtin_memoryview.py:580:29    - Unknown word (cdcd)       -- assert b == bytearray(b"cdcd"), b
+extra_tests/snippets/builtin_memoryview.py:660:41    - Unknown word (aebfcgdh)   -- tobytes(order="F") == b"aebfcgdh"
+extra_tests/snippets/builtin_memoryview.py:663:41    - Unknown word (aecgbfdh)   -- tobytes(order="F") == b"aecgbfdh"
 extra_tests/snippets/builtin_object.py:7:1       - Unknown word (myobj)      -- myobj = MyObject()
 extra_tests/snippets/builtin_object.py:8:17      - Unknown word (myobj)      -- assert myobj == myobj
 extra_tests/snippets/builtin_object.py:8:8       - Unknown word (myobj)      -- assert myobj == myobj
@@ -8003,20 +8008,20 @@ extra_tests/snippets/builtin_str.py:135:6     - Unknown word (koki)       -- "ko
 extra_tests/snippets/builtin_str.py:136:6     - Unknown word (koki)       -- "koki",
 extra_tests/snippets/builtin_str.py:137:7     - Unknown word (koki)       -- "|koki",
 extra_tests/snippets/builtin_str.py:138:7     - Unknown word (koki)       -- "|koki|",
-extra_tests/snippets/builtin_str.py:221:39    - Unknown word (dhoho)      -- x0cHallo\x1cHELLO\x1dhoho\x1ehaha\x85another\u
-extra_tests/snippets/builtin_str.py:221:47    - Unknown word (ehaha)      -- cHallo\x1cHELLO\x1dhoho\x1ehaha\x85another\u2028yetanother
-extra_tests/snippets/builtin_str.py:227:10    - Unknown word (hoho)       -- "hoho",
-extra_tests/snippets/builtin_str.py:228:10    - Unknown word (haha)       -- "haha",
-extra_tests/snippets/builtin_str.py:236:39    - Unknown word (dhoho)      -- x0cHallo\x1cHELLO\x1dhoho\x1ehaha\x85another\u
-extra_tests/snippets/builtin_str.py:236:47    - Unknown word (ehaha)      -- cHallo\x1cHELLO\x1dhoho\x1ehaha\x85another\u2028yetanother
-extra_tests/snippets/builtin_str.py:244:10    - Unknown word (hoho)       -- "hoho\x1e",
-extra_tests/snippets/builtin_str.py:245:10    - Unknown word (haha)       -- "haha\x85",
-extra_tests/snippets/builtin_str.py:281:34    - Unknown word (ΊΣΥΦΟΣ)     -- Σίσυφος".swapcase() == "σΊΣΥΦΟΣ"
-extra_tests/snippets/builtin_str.py:281:9     - Unknown word (Σίσυφος)    -- assert "Σίσυφος".swapcase() == "σΊΣΥΦΟΣ
+extra_tests/snippets/builtin_str.py:230:39    - Unknown word (dhoho)      -- x0cHallo\x1cHELLO\x1dhoho\x1ehaha\x85another\u
+extra_tests/snippets/builtin_str.py:230:47    - Unknown word (ehaha)      -- cHallo\x1cHELLO\x1dhoho\x1ehaha\x85another\u2028yetanother
+extra_tests/snippets/builtin_str.py:236:10    - Unknown word (hoho)       -- "hoho",
+extra_tests/snippets/builtin_str.py:237:10    - Unknown word (haha)       -- "haha",
+extra_tests/snippets/builtin_str.py:245:39    - Unknown word (dhoho)      -- x0cHallo\x1cHELLO\x1dhoho\x1ehaha\x85another\u
+extra_tests/snippets/builtin_str.py:245:47    - Unknown word (ehaha)      -- cHallo\x1cHELLO\x1dhoho\x1ehaha\x85another\u2028yetanother
+extra_tests/snippets/builtin_str.py:253:10    - Unknown word (hoho)       -- "hoho\x1e",
+extra_tests/snippets/builtin_str.py:254:10    - Unknown word (haha)       -- "haha\x85",
+extra_tests/snippets/builtin_str.py:290:34    - Unknown word (ΊΣΥΦΟΣ)     -- Σίσυφος".swapcase() == "σΊΣΥΦΟΣ"
+extra_tests/snippets/builtin_str.py:290:9     - Unknown word (Σίσυφος)    -- assert "Σίσυφος".swapcase() == "σΊΣΥΦΟΣ
 extra_tests/snippets/builtin_str.py:42:21     - Unknown word (xyxyxy)     -- assert "xy" * 3 == "xyxyxy"
 extra_tests/snippets/builtin_str.py:46:21     - Unknown word (xyxyxy)     -- assert 3 * "xy" == "xyxyxy"
-extra_tests/snippets/builtin_str.py:784:28    - Unknown word (afoo)       -- assert s.removeprefix("afoo") == s_ref
-extra_tests/snippets/builtin_str.py:831:28    - Unknown word (fooa)       -- assert s.removesuffix("fooa") == s_ref
+extra_tests/snippets/builtin_str.py:793:28    - Unknown word (afoo)       -- assert s.removeprefix("afoo") == s_ref
+extra_tests/snippets/builtin_str.py:840:28    - Unknown word (fooa)       -- assert s.removesuffix("fooa") == s_ref
 extra_tests/snippets/builtin_str_encode.py:11:42     - Unknown word (estás)     -- UnicodeEncodeError, "¿como estás?".encode, "ascii")
 extra_tests/snippets/builtin_str_encode.py:21:25     - Unknown word (𝕐𝕥)       -- round_trip("☢🐣 ᖇ𝓤𝕊тⓟ𝕐𝕥卄σ𝔫 ♬👣")
 extra_tests/snippets/builtin_str_encode.py:22:19     - Unknown word (ק𝔂t)       -- round_trip("💀👌 ק𝔂tℍⓞ𝓷 ３  🔥👤")
@@ -8049,6 +8054,11 @@ extra_tests/snippets/builtin_type.py:415:3     - Unknown word (Regresesion) -- #
 extra_tests/snippets/builtin_type.py:620:6     - Unknown word (pyproperty)  -- # `#[pyproperty]`
 extra_tests/snippets/builtin_type.py:622:30    - Unknown word (pyproperty)  -- extension without `#[pyproperty]` override
 extra_tests/snippets/intro/3.1.2.5.py:1:9       - Unknown word (unununium)  -- assert "unununium" == 3 * "un" + "ium
+extra_tests/snippets/operator_comparison.py:117:19    - Unknown word (udfff)      -- check("\ud800", "\udfff", LT)
+extra_tests/snippets/operator_comparison.py:126:1     - Unknown word (bsame)      -- bsame = b"abc" * 3
+extra_tests/snippets/operator_comparison.py:127:14    - Unknown word (bsame)      -- check(bsame, bsame, EQ)
+extra_tests/snippets/operator_comparison.py:127:7     - Unknown word (bsame)      -- check(bsame, bsame, EQ)
+extra_tests/snippets/operator_comparison.py:128:7     - Unknown word (bsame)      -- check(bsame, b"abcabcabc", EQ)
 extra_tests/snippets/stdlib_array.py:125:3     - Unknown word (teset)      -- # teset array.__contains__
 extra_tests/snippets/stdlib_binascii.py:18:3      - Unknown word (unhexlify)  -- # unhexlify tests
 extra_tests/snippets/stdlib_binascii.py:19:15     - Unknown word (unhexlify)  -- uh = binascii.unhexlify
@@ -8056,12 +8066,16 @@ extra_tests/snippets/stdlib_binascii.py:47:33     - Unknown word (Ghvbg)      --
 extra_tests/snippets/stdlib_binascii.py:50:18     - Unknown word (𝕐𝕥)       -- "☢🐣 ᖇ𝓤𝕊тⓟ𝕐𝕥卄σ𝔫 ♬👣".encode(),
 extra_tests/snippets/stdlib_binascii.py:5:3       - Unknown word (hexlify)    -- # hexlify tests
 extra_tests/snippets/stdlib_binascii.py:6:14      - Unknown word (hexlify)    -- h = binascii.hexlify
-extra_tests/snippets/stdlib_collections_deque.py:10:9      - Unknown word (klass)      -- d = klass(deque(s))
-extra_tests/snippets/stdlib_collections_deque.py:18:5      - Unknown word (klass)      -- klass = type(iter(deque()
-extra_tests/snippets/stdlib_collections_deque.py:23:17     - Unknown word (klass)      -- d = klass(deque(s), i)
-extra_tests/snippets/stdlib_collections_deque.py:29:17     - Unknown word (klass)      -- d = klass(deque(s), i)
-extra_tests/snippets/stdlib_collections_deque.py:8:5       - Unknown word (klass)      -- klass = type(iter(deque()
-extra_tests/snippets/stdlib_ctypes.py:269:29    - Unknown word (RTLD)       -- mode |= _os.RTLD_MEMBER | _os.RTLD_NOW
+extra_tests/snippets/stdlib_collections_deque.py:11:9      - Unknown word (klass)      -- d = klass(deque(s))
+extra_tests/snippets/stdlib_collections_deque.py:19:5      - Unknown word (klass)      -- klass = type(iter(deque()
+extra_tests/snippets/stdlib_collections_deque.py:24:17     - Unknown word (klass)      -- d = klass(deque(s), i)
+extra_tests/snippets/stdlib_collections_deque.py:30:17     - Unknown word (klass)      -- d = klass(deque(s), i)
+extra_tests/snippets/stdlib_collections_deque.py:9:5       - Unknown word (klass)      -- klass = type(iter(deque()
+extra_tests/snippets/stdlib_csv.py:212:5     - Unknown word (allq)       -- allq = io.StringIO()
+extra_tests/snippets/stdlib_csv.py:213:25    - Unknown word (allq)       -- writer = csv.writer(allq, lineterminator="!@
+extra_tests/snippets/stdlib_csv.py:216:12    - Unknown word (allq)       -- assert allq.getvalue() == '"a",
+extra_tests/snippets/stdlib_csv.py:216:55    - Unknown word (allq)       -- ,"b"!@#"c","d"!@#', allq.getvalue()
+extra_tests/snippets/stdlib_ctypes.py:271:29    - Unknown word (RTLD)       -- mode |= _os.RTLD_MEMBER | _os.RTLD_NOW
 extra_tests/snippets/stdlib_datetime.py:1165:20   - Unknown word (excercise)  -- #at least, excercise them to make sure that
 extra_tests/snippets/stdlib_datetime.py:1219:9    - Unknown word (justasbig)  -- justasbig = timedelta(0, 0, n
 extra_tests/snippets/stdlib_datetime.py:1220:27   - Unknown word (justasbig)  -- assert_equal(big, justasbig)
@@ -8145,7 +8159,9 @@ extra_tests/snippets/stdlib_datetime.py:890:27    - Unknown word (aord)       --
 extra_tests/snippets/stdlib_datetime.py:893:57    - Unknown word (aord)       -- lambda: a.fromordinal(aord - 1))
 extra_tests/snippets/stdlib_datetime.py:896:37    - Unknown word (aord)       -- equal(b.toordinal(), aord + 1)
 extra_tests/snippets/stdlib_datetime.py:897:51    - Unknown word (aord)       -- theclass.fromordinal(aord + 1))
-extra_tests/snippets/stdlib_hashlib.py:41:30     - Unknown word (fubar)      -- hashlib.new("blake2s", b"fubar")
+extra_tests/snippets/stdlib_hashlib.py:45:30     - Unknown word (fubar)      -- hashlib.new("blake2s", b"fubar")
+extra_tests/snippets/stdlib_imp.py:41:7      - Unknown word (ispkg)      -- data, ispkg, origname = _imp.find
+extra_tests/snippets/stdlib_imp.py:42:8      - Unknown word (ispkg)      -- assert ispkg is False
 extra_tests/snippets/stdlib_io.py:39:5      - Unknown word (nres)       -- nres = fio.read(1)
 extra_tests/snippets/stdlib_io.py:40:16     - Unknown word (nres)       -- assert len(nres) == 1
 extra_tests/snippets/stdlib_io.py:41:5      - Unknown word (nres)       -- nres = fio.read(2)
@@ -8155,11 +8171,11 @@ extra_tests/snippets/stdlib_itertools.py:312:82    - Unknown word (ACEF)       -
 extra_tests/snippets/stdlib_json.py:70:33     - Unknown word (jsons)      -- reject non-str keys in jsons
 extra_tests/snippets/stdlib_logging.py:14:9      - Unknown word (WOOT)       -- assert "WOOT" in res
 extra_tests/snippets/stdlib_logging.py:9:16      - Unknown word (WOOT)       -- logging.error("WOOT")
-extra_tests/snippets/stdlib_math.py:12:9      - Unknown word (Conversible) -- # class Conversible():
-extra_tests/snippets/stdlib_math.py:17:39     - Unknown word (Conversible) -- 1.1111) == math.log(Conversible())
-extra_tests/snippets/stdlib_math.py:19:3      - Unknown word (roundings)   -- # roundings
-extra_tests/snippets/stdlib_os.py:119:14    - Unknown word (BOYA)       -- CONTENT3 = b"BOYA"
-extra_tests/snippets/stdlib_os.py:518:63    - Unknown word (VDISABLE)   -- "PC_MAX_INPUT", "PC_VDISABLE"]:
+extra_tests/snippets/stdlib_math.py:13:9      - Unknown word (Conversible) -- # class Conversible():
+extra_tests/snippets/stdlib_math.py:18:39     - Unknown word (Conversible) -- 1.1111) == math.log(Conversible())
+extra_tests/snippets/stdlib_math.py:20:3      - Unknown word (roundings)   -- # roundings
+extra_tests/snippets/stdlib_os.py:120:14    - Unknown word (BOYA)       -- CONTENT3 = b"BOYA"
+extra_tests/snippets/stdlib_os.py:519:63    - Unknown word (VDISABLE)   -- "PC_MAX_INPUT", "PC_VDISABLE"]:
 extra_tests/snippets/stdlib_re.py:17:17     - Unknown word (abcabca)    -- s = p.sub("x", "abcabca")
 extra_tests/snippets/stdlib_re.py:19:14     - Unknown word (xcxca)      -- assert s == "xcxca"
 extra_tests/snippets/stdlib_re.py:41:36     - Unknown word (abce)       -- compile("abcd*e").match("abce").group() == "abce"
@@ -8170,24 +8186,25 @@ extra_tests/snippets/stdlib_re.py:4:11      - Unknown word (ello)       -- needl
 extra_tests/snippets/stdlib_re.py:51:41     - Unknown word (abcdcdcd)   -- a)(b)(cd)*").match("abcdcdcd").group(0, 1, 2, 3)
 extra_tests/snippets/stdlib_re.py:52:6      - Unknown word (abcdcdcd)   -- "abcdcdcd",
 extra_tests/snippets/stdlib_re.py:68:41     - Unknown word (Xtest)      -- ", "X", "test") == "Xtest"
-extra_tests/snippets/stdlib_select.py:28:1      - Unknown word (recvr)      -- recvr = socket.socket()
-extra_tests/snippets/stdlib_select.py:30:1      - Unknown word (recvr)      -- recvr.bind(("127.0.0.1",
-extra_tests/snippets/stdlib_select.py:32:1      - Unknown word (recvr)      -- recvr.listen()
-extra_tests/snippets/stdlib_select.py:34:1      - Unknown word (recvr)      -- recvr.settimeout(10.0)
-extra_tests/snippets/stdlib_select.py:36:1      - Unknown word (sendr)      -- sendr = socket.socket()
-extra_tests/snippets/stdlib_select.py:38:1      - Unknown word (sendr)      -- sendr.connect(("127.0.0.1
-extra_tests/snippets/stdlib_select.py:39:1      - Unknown word (sendr)      -- sendr.send(b"aaaa")
-extra_tests/snippets/stdlib_select.py:41:1      - Unknown word (rres)       -- rres, wres, xres = select
-extra_tests/snippets/stdlib_select.py:41:35     - Unknown word (recvr)      -- xres = select.select([recvr], [sendr], [])
-extra_tests/snippets/stdlib_select.py:41:44     - Unknown word (sendr)      -- select.select([recvr], [sendr], [])
-extra_tests/snippets/stdlib_select.py:44:21     - Unknown word (rres)       -- assert recvr in rres
-extra_tests/snippets/stdlib_select.py:46:8      - Unknown word (sendr)      -- assert sendr in wres
+extra_tests/snippets/stdlib_select.py:29:1      - Unknown word (recvr)      -- recvr = socket.socket()
+extra_tests/snippets/stdlib_select.py:31:1      - Unknown word (recvr)      -- recvr.bind(("127.0.0.1",
+extra_tests/snippets/stdlib_select.py:33:1      - Unknown word (recvr)      -- recvr.listen()
+extra_tests/snippets/stdlib_select.py:35:1      - Unknown word (recvr)      -- recvr.settimeout(10.0)
+extra_tests/snippets/stdlib_select.py:37:1      - Unknown word (sendr)      -- sendr = socket.socket()
+extra_tests/snippets/stdlib_select.py:39:1      - Unknown word (sendr)      -- sendr.connect(("127.0.0.1
+extra_tests/snippets/stdlib_select.py:40:1      - Unknown word (sendr)      -- sendr.send(b"aaaa")
+extra_tests/snippets/stdlib_select.py:42:1      - Unknown word (rres)       -- rres, wres, xres = select
+extra_tests/snippets/stdlib_select.py:42:35     - Unknown word (recvr)      -- xres = select.select([recvr], [sendr], [])
+extra_tests/snippets/stdlib_select.py:42:44     - Unknown word (sendr)      -- select.select([recvr], [sendr], [])
+extra_tests/snippets/stdlib_select.py:45:21     - Unknown word (rres)       -- assert recvr in rres
+extra_tests/snippets/stdlib_select.py:47:8      - Unknown word (sendr)      -- assert sendr in wres
 extra_tests/snippets/stdlib_sqlite.py:33:22     - Unknown word (mysum)      -- cx.create_aggregate("mysum", 1, AggrSum)
 extra_tests/snippets/stdlib_sqlite.py:34:21     - Unknown word (mysum)      -- cur.execute("select mysum(key) from foo")
 extra_tests/snippets/stdlib_ssl_short_recv.py:50:9      - Unknown word (ssock)      -- ssock = server_context.wrap
 extra_tests/snippets/stdlib_ssl_short_recv.py:52:13     - Unknown word (ssock)      -- ssock.sendall(DATA)
 extra_tests/snippets/stdlib_ssl_short_recv.py:54:13     - Unknown word (ssock)      -- ssock.close()
 extra_tests/snippets/stdlib_subprocess.py:22:36     - Unknown word (unixy)      -- make work in a non-unixy environment (something
+extra_tests/snippets/stdlib_traceback.py:38:55     - Unknown word (valu)       -- suggestions(["value"], "valu") == "value"
 extra_tests/snippets/stdlib_unicode_shared.py:41:32     - Unknown word (strasse)    -- Straße".casefold() == "strasse"
 extra_tests/snippets/stdlib_unicode_shared.py:41:9      - Unknown word (Straße)     -- assert "Straße".casefold() == "strasse
 extra_tests/snippets/stdlib_unicode_shared.py:91:23     - Unknown word (straße)     -- assert re.fullmatch(r"straße", "STRAßE", re.IGNORECASE

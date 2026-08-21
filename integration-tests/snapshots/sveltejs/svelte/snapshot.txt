@@ -3,7 +3,7 @@ Repository: sveltejs/svelte
 Url: "https://github.com/sveltejs/svelte.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 8935, Issues found: 4070 in 621 files.
+ CSpell: Files checked: 8954, Issues found: 4084 in 623 files.
  exit code: 1
 CONTRIBUTING.md:22:5      - Unknown word (Triaging)   -- ### Triaging issues and pull requests
 benchmarking/benchmarks/reactivity/index.js:5:2       - Unknown word (sbench)     -- sbench_create_0to1,
@@ -401,7 +401,7 @@ packages/svelte/src/compiler/legacy.js:137:9     - Unknown word (catchblock)   -
 packages/svelte/src/compiler/legacy.js:283:9     - Unknown word (elseblock)    -- let elseblock = undefined;
 packages/svelte/src/compiler/phases/1-parse/read/options.js:234:162   - Unknown word (EFFFF)      -- -\uFFFD\u{10000}-\u{EFFFF}-]';
 packages/svelte/src/compiler/phases/1-parse/read/options.js:3:20      - Unknown word (MATHML)     -- import { NAMESPACE_MATHML, NAMESPACE_SVG } from
-packages/svelte/src/compiler/phases/1-parse/read/style.js:51:43     - Unknown word (Atrule)     -- AST.CSS.Rule | AST.CSS.Atrule>}
+packages/svelte/src/compiler/phases/1-parse/read/style.js:53:43     - Unknown word (Atrule)     -- AST.CSS.Rule | AST.CSS.Atrule>}
 packages/svelte/src/compiler/phases/1-parse/state/element.js:174:40    - Unknown word (shadowroot) -- slot' && !parent_is_shadowroot_template(parser.stack
 packages/svelte/src/compiler/phases/1-parse/state/tag.js:19:14     - Unknown word (bois)       -- const pointy_bois = { '<': '>' };
 packages/svelte/src/compiler/phases/1-parse/utils/entities.js:1000:3    - Unknown word (subsub)     -- 'subsub;': 10965,
@@ -1695,7 +1695,7 @@ packages/svelte/src/compiler/phases/3-transform/server/visitors/shared/utils.js:
 packages/svelte/src/compiler/phases/3-transform/utils.js:219:76    - Unknown word (spaceand)   -- text node with a single spaceand keep whitespace
 packages/svelte/src/compiler/phases/patterns.js:21:43     - Unknown word (aeiou)      -- starts_with_vowel = /^[aeiou]/;
 packages/svelte/src/compiler/phases/scope.js:867:59    - Unknown word (rescanning) -- per name to avoid O(n) rescanning in generate/unique.
-packages/svelte/src/compiler/print/index.js:612:30    - Unknown word (esrap's)    -- This is duplicated from esrap's handling of VariableDeclarati
+packages/svelte/src/compiler/print/index.js:769:30    - Unknown word (esrap's)    -- This is duplicated from esrap's handling of VariableDeclarati
 packages/svelte/src/compiler/types/template.d.ts:26:41     - Unknown word (mrow)       -- for e.g. `<math>` or `<mrow>`
 packages/svelte/src/compiler/utils/ast.js:563:40    - Unknown word (subexpression) -- expression.expressions.some((subexpression) => is_expression_async
 packages/svelte/src/compiler/utils/extract_svelte_ignore.js:16:16     - Unknown word (eachblock)  -- 'invalid-rest-eachblock-binding': 'bind_invalid
@@ -1719,15 +1719,15 @@ packages/svelte/src/internal/client/dom/elements/bindings/input.js:30:14     - U
 packages/svelte/src/internal/client/dom/elements/events.js:163:47    - Unknown word (expando)    -- GCed too early, the expando __root property
 packages/svelte/src/internal/client/proxy.js:41:12     - Unknown word (proxyable)  -- // if non-proxyable, or is already a proxy
 packages/svelte/src/internal/client/proxy.js:91:32     - Unknown word (inspectable) -- /** @type {any} */ (inspectable_array(/** @type {any
-packages/svelte/src/internal/client/reactivity/batch.js:1126:82   - Unknown word (nullpointers) -- else we could run into nullpointers
-packages/svelte/src/internal/client/reactivity/batch.js:1436:32   - Unknown word (thath)        -- they depend on things thath changed
+packages/svelte/src/internal/client/reactivity/batch.js:1127:82   - Unknown word (nullpointers) -- else we could run into nullpointers
+packages/svelte/src/internal/client/reactivity/batch.js:1437:32   - Unknown word (thath)        -- they depend on things thath changed
 packages/svelte/src/internal/client/reactivity/batch.js:199:3     - Unknown word (unskipped)  -- #unskipped_branches = new Set(
 packages/svelte/src/internal/client/reactivity/batch.js:379:77    - Unknown word (unskipping) -- rescheduled through unskipping the skipped branches
 packages/svelte/src/internal/client/reactivity/batch.js:62:14     - Unknown word (travelling) -- * When time travelling (i.e. working in one
-packages/svelte/src/internal/client/reactivity/batch.js:931:85    - Unknown word (AFAICT)     -- legacy `$:` effects AFAICT — we can remove later
+packages/svelte/src/internal/client/reactivity/batch.js:932:85    - Unknown word (AFAICT)     -- legacy `$:` effects AFAICT — we can remove later
 packages/svelte/src/internal/client/reactivity/deriveds.js:130:6     - Unknown word (deferreds)  -- var deferreds = new Set();
 packages/svelte/src/internal/client/reactivity/effects.js:13:2      - Unknown word (untracking) -- untracking,
-packages/svelte/src/internal/client/reactivity/sources.js:269:63    - Unknown word (overfiring) -- - this way we avoid overfiring.
+packages/svelte/src/internal/client/reactivity/sources.js:275:63    - Unknown word (overfiring) -- - this way we avoid overfiring.
 packages/svelte/src/internal/client/runtime.js:136:90    - Unknown word (depedencies) -- to avoid duplicating depedencies inside a reaction *
 packages/svelte/src/internal/client/runtime.js:406:21    - Unknown word (reexecuted)  -- // DIRTY so it is reexecuted once someone wants its
 packages/svelte/src/internal/client/runtime.js:411:29    - Unknown word (noone's)     -- Call abort controller, noone's listening to this derived
@@ -1851,6 +1851,10 @@ packages/svelte/tests/preprocess/samples/style-attributes-modified-longer/expect
 packages/svelte/tests/preprocess/samples/style-attributes/expected_map.json:3:121     - Unknown word (UAAO)       -- GAAG,CAAC,CAAC,IAAI,UAAO,CAAC,CAAC,KAAK",
 packages/svelte/tests/preprocess/samples/style-attributes/expected_map.json:3:36      - Unknown word (IAAI)       -- AAAA,CAAC,KAAK,CAAC,IAAI,CAAC,CAAC,IAAI,CAAC
 packages/svelte/tests/preprocess/samples/style-attributes/expected_map.json:3:86      - Unknown word (GAAG)       -- CAAC,CAAC,IAAI,CAAC,GAAG,CAAC,CAAC,GAAG,CAAC
+packages/svelte/tests/print/samples/element-content-wrapping/input.svelte:1:16      - Unknown word (asdioqwjdoiqwjd) -- <button asdasd asdioqwjdoiqwjd qowdjqwoidjqowijdoiqj
+packages/svelte/tests/print/samples/element-content-wrapping/input.svelte:1:32      - Unknown word (qowdjqwoidjqowijdoiqj) -- asdasd asdioqwjdoiqwjd qowdjqwoidjqowijdoiqj>
+packages/svelte/tests/print/samples/element-content-wrapping/input.svelte:1:9       - Unknown word (asdasd)     -- <button asdasd asdioqwjdoiqwjd qowdjqwoidjqo
+packages/svelte/tests/print/samples/element-content-wrapping/input.svelte:2:21      - Unknown word (liiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiine) -- hello very long liiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiine
 packages/svelte/tests/print/samples/formatting/input.svelte:1:41      - Unknown word (paraglide)  -- setLocale } from '$lib/paraglide/runtime';import { m
 packages/svelte/tests/runtime-browser/samples/component-css-custom-properties-dynamic-svg/_config.js:14:52     - Unknown word (qzlp)       -- "10" class="svelte-1qzlp1k"></circle>
 packages/svelte/tests/runtime-browser/samples/component-event-handler-contenteditable-false/_config.js:13:21     - Unknown word (bcde)       -- component.text = 'bcde';

@@ -2,6 +2,7 @@ import { opConcatMap, opFilter, opTake, pipe } from '@cspell/cspell-pipe/sync';
 import type { SpellingDictionary } from 'cspell-dictionary';
 
 import type { ValidationResult } from '../Models/ValidationResult.js';
+import type { SubstitutionTransformer } from '../Transform/index.js';
 import * as TextRange from '../Transform/index.js';
 import * as Text from '../util/text.js';
 import { defaultMaxDuplicateProblems, defaultMaxNumberOfProblems } from './defaultConstants.js';
@@ -44,17 +45,36 @@ export function validateText(
     return iter;
 }
 
-export function calcTextInclusionRanges(text: string, options: IncludeExcludeOptions): TextRange.MatchRange[] {
+export function calcTextInclusionRanges(
+    text: string,
+    options: IncludeExcludeOptions,
+    transformer?: SubstitutionTransformer,
+): TextRange.MatchRange[] {
     const { ignoreRegExpList = [], includeRegExpList = [] } = options;
 
     const filteredIncludeList = includeRegExpList.filter((a) => !!a);
     const finalIncludeList = filteredIncludeList.length ? filteredIncludeList : [/.*/gim];
+    const excludeRanges = TextRange.findMatchingRangesForPatterns(ignoreRegExpList, text).filter(
+        (range) => !isFullySubstitutedRange(text, range, transformer),
+    );
 
     const includeRanges = TextRange.excludeRanges(
         TextRange.findMatchingRangesForPatterns(finalIncludeList, text),
-        TextRange.findMatchingRangesForPatterns(ignoreRegExpList, text),
+        excludeRanges,
     );
     return includeRanges;
+}
+
+function isFullySubstitutedRange(
+    text: string,
+    range: TextRange.MatchRange,
+    transformer: SubstitutionTransformer | undefined,
+): boolean {
+    if (!transformer) return false;
+    const source = text.slice(range.startPos, range.endPos);
+    const transformed = transformer.transform(source);
+    // One source-map segment means a single substitution consumed the entire ignored range.
+    return transformed.text !== source && transformed.map?.length === 2 && transformed.map[0] === source.length;
 }
 
 function mapLineToLineSegments(includeRanges: TextRange.MatchRange[]): (line: TextOffsetRO) => LineSegment[] {

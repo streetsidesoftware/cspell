@@ -5,7 +5,7 @@ Args: '["--issues-summary-report","**","--exclude=**/Backup/**"]'
 Summary:
   files: 490
   filesWithIssues: 428
-  issues: 10826
+  issues: 10823
   errors: 0
 Errors: []
 
@@ -9057,14 +9057,11 @@ issues:
   - "Stored_Procedure/dbo.sqlg_ParseDiskskpXml.sql:15:90         diskspd     U       contains the XML output of diskspd.exe"
   - "Stored_Procedure/dbo.sqlg_ParseDiskskpXml.sql:35:21         sqlg        U       ALTER PROCEDURE dbo.sqlg_ParseDiskskpXml"
   - "Stored_Procedure/dbo.sqlg_ParseDiskskpXml.sql:35:31         Diskskp     U       PROCEDURE dbo.sqlg_ParseDiskskpXml"
-  - "Stored_Procedure/dbo.sqlg_ParseDiskskpXml.sql:74:34         Cooldown    U       c.value('(./TimeSpan/Cooldown)[1]', 'INT') AS Cooldown"
-  - "Stored_Procedure/dbo.sqlg_ParseDiskskpXml.sql:74:59         Cooldown    U       Cooldown)[1]', 'INT') AS Cooldown"
   - "Stored_Procedure/dbo.sqlg_ParseDiskskpXml.sql:130:36        Stdev       U       value('(./ReadLatencyStdev)[1]', 'DECIMAL(10,2"
   - "Stored_Procedure/dbo.sqlg_ParseDiskskpXml.sql:130:79        Stdev       U       ,2)') AS ReadLatencyStdev"
   - "Stored_Procedure/dbo.sqlg_ParseDiskskpXml.sql:132:37        Stdev       U       value('(./WriteLatencyStdev)[1]', 'DECIMAL(10,2"
   - "Stored_Procedure/dbo.sqlg_ParseDiskskpXml.sql:132:81        Stdev       U       2)') AS WriteLatencyStdev"
   - "Stored_Procedure/dbo.sqlg_ParseDiskskpXml.sql:134:32        Stdev       U       t.c.value('(./LatencyStdev)[1]', 'DECIMAL(10,2"
-  - "Stored_Procedure/dbo.sqlg_ParseDiskskpXml.sql:230:17        Cooldown    U       , p.Cooldown AS [cood down time]"
   - "Stored_Procedure/dbo.sqlg_ParseDiskskpXml.sql:230:30        cood        U       , p.Cooldown AS [cood down time]"
   - "Stored_Procedure/dbo.udp_IntegerListfromRanges.sql:1:48         Listfrom        U       StoredProcedure [dbo].[IntegerListfromRanges] Script Date"
   - "Stored_Procedure/dbo.udp_IntegerListfromRanges.sql:6:38         Listfrom        U       ROUTINE_NAME = 'IntegerListfromRanges')"
@@ -11268,7 +11265,6 @@ issuesSummary:
   - "text: convertto, count: 2, files: 2,"
   - "text: Convertto, count: 1, files: 1,"
   - "text: cood, count: 1, files: 1,"
-  - "text: Cooldown, count: 3, files: 1,"
   - "text: coordition, count: 1, files: 1,"
   - "text: COPYFILE, count: 1, files: 1,"
   - "text: copyonly, count: 2, files: 2,"
