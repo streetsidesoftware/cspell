@@ -38,7 +38,7 @@
     "install:prod": "pnpm install --filter \"!./test-packages/**\" --filter \"!./**/yarn/**\" ",
     "ib": "pnpm install && pnpm run build",
     "ibp": "pnpm install:prod && pnpm run build:prod",
-    "ibt": "pnpm run build:all && pnpm test",
+    "ibt": "pnpm install && pnpm run build:all && pnpm test",
     "install-website": "pnpm run website-install",
     "lint-ci": "eslint . && prettier -c .",
     "lint-docs-ci": "prettier -c \"website/\"",
