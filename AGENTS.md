@@ -13,7 +13,7 @@ pnpm ibt            # install + build + test
 ```
 
 Node >= 22.18. Run the steps separately if you need to iterate — but always build before testing:
-`test:prep` invokes `cspell-tools`, so `pnpm test` fails on an unbuilt tree.
+`test:prep` invokes `cspell-tools`, so `pnpm test` fails on an un-built tree.
 
 ## Do not
 
@@ -27,8 +27,8 @@ Node >= 22.18. Run the steps separately if you need to iterate — but always bu
   and `website/src/**/*.md` (produced by `inject-markdown`).
 - **Do not version or publish anything.** Releases are workflow-driven: a merged
   `chore: Prepare Release ... (auto-deploy)` PR triggers `build-version-release.yml`, which takes the
-  version from `.release.json` and runs `lerna version`, then `publish.yml` runs `lerna publish
-from-package`. Never run `lerna` locally, and never hand-edit `version` fields in `package.json`
+  version from `.release.json` and runs `lerna version`, then `publish.yml` runs `lerna publish from-package`.
+  Never run `lerna` locally, and never hand-edit `version` fields in `package.json`
   or `lerna.json`.
 - **Do not `git add .` to make `git diff --exit-code` pass.** A dirty tree after a build means either
   a tracked artifact was regenerated (stage that file by path) or the build is nondeterministic
@@ -97,7 +97,7 @@ A title matching none of these gets no label, and an unlabelled PR is **left out
 notes entirely** — the config uses an allowlist. Use `chore:` deliberately when that's what you want.
 
 `refactor:` landing under Fixes is intentional: the sections describe what changed for the user, not
-how the work was categorised internally.
+how the work was categorized internally.
 
 Leave the release machinery alone: the `release-draft` branch, `chore: Prepare Release ...` commits,
 and `.release.json` are all bot-generated.
