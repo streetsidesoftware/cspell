@@ -3,16 +3,17 @@ Repository: vitest-dev/vitest
 Url: "https://github.com/vitest-dev/vitest"
 Args: ["--issues-summary-report","--locale=en,en-GB","."]
 Lines:
- CSpell: Files checked: 2764, skipped: 5, Issues found: 1761 in 460 files.
+ CSpell: Files checked: 2785, skipped: 5, Issues found: 1786 in 466 files.
  exit code: 1
-AGENTS.md:144:5     - Unknown word (bumpp)      -- - **bumpp** - Version bumping
-AGENTS.md:145:5     - Unknown word (changelogithub) -- - **changelogithub** - Changelog generation
-AGENTS.md:150:57    - Unknown word (Marko)          -- React, Svelte, Lit, Marko)
+AGENTS.md:133:46    - Unknown word (ivya)       -- do not import from `ivya` outside the files that
+AGENTS.md:153:96    - Unknown word (ovbious)    -- edge case that is not ovbious from the context. In
+AGENTS.md:154:47    - Unknown word (overexplain) -- be BRIEF and do not overexplain. If you wrote a big
+AGENTS.md:187:61    - Unknown word (zizmor)      -- gated by actionlint and zizmor (pedantic persona).
+AGENTS.md:205:85    - Unknown word (rrweb)       -- sinonjs/fake-timers`, `rrweb-snapshot`, istanbul
 LICENSE:3:46      - Unknown word (Vitest)     -- Present VoidZero Inc. and Vitest contributors
 README.md:104:5     - Unknown word (patak)      -- - [@patak-dev](https://github
 SECURITY.md:49:61     - Unknown word (GHSA)       -- crafted HTTP request ([GHSA-8gvc-j273-4wm5](https
 SECURITY.md:51:53     - Unknown word (cppp)       -- XSS [GHSA-2h32-95rg-cppp](https://github.com
-SECURITY.md:52:14     - Unknown word (bypassable) -- - Missing or bypassable origin / host validation
 _typos.toml:12:1      - Unknown word (styl)       -- styl = "styl"
 _typos.toml:23:1      - Unknown word (afte)       -- afte = "afte"
 _typos.toml:24:1      - Unknown word (wrapp)      -- wrapp = "wrapp"
@@ -21,6 +22,8 @@ _typos.toml:29:17     - Unknown word (evalite)    -- # Product name (evalite.dev
 _typos.toml:30:1      - Unknown word (Evalite)    -- Evalite = "Evalite"
 _typos.toml:31:20     - Unknown word (tinyhighlight) -- # Typo in upstream tinyhighlight LICENSE (TODO: fix upstream
 _typos.toml:32:1      - Unknown word (Additionaly)   -- Additionaly = "Additionaly"
+docs/AGENTS.md:13:26     - Unknown word (twoslash)   -- Code blocks tagged `ts twoslash` are type-checked during
+docs/AGENTS.md:21:20     - Unknown word (frontmatter) -- - Config pages use frontmatter `title: <name> | Config
 docs/api/advanced/artifacts.md:149:3     - Unknown word (wcag)             -- wcagLevel: 'A' | 'AA' |
 docs/api/advanced/artifacts.md:28:41     - Unknown word (recordartifact) -- <Experimental /> {#recordartifact}
 docs/api/advanced/artifacts.md:54:43     - Unknown word (testartifactbase) -- <Experimental /> {#testartifactbase}
@@ -82,10 +85,9 @@ docs/api/expect.md:1698:44   - Unknown word (returnedwith)              -- Versi
 docs/api/expect.md:1720:45   - Unknown word (returnedtimes)             -- Version>4.1.0</Version> {#returnedtimes}
 docs/api/expect.md:1784:44   - Unknown word (calledbefore)              -- Version>4.1.0</Version> {#calledbefore}
 docs/api/expect.md:1804:43   - Unknown word (calledafter)               -- Version>4.1.0</Version> {#calledafter}
-docs/api/expect.md:2052:28   - Unknown word (closeto)                   -- expect.closeTo {#expect-closeto}
-docs/api/expect.md:2193:23   - Unknown word (arktype)                   -- import { type } from 'arktype'
-docs/api/expect.md:2286:39   - Unknown word (addequalitytesters)        -- addEqualityTesters {#expect-addequalitytesters}
-docs/api/expect.md:28:7      - Unknown word (twoslash)   -- ```ts twoslash
+docs/api/expect.md:2074:28   - Unknown word (closeto)                   -- expect.closeTo {#expect-closeto}
+docs/api/expect.md:2215:23   - Unknown word (arktype)                   -- import { type } from 'arktype'
+docs/api/expect.md:2308:39   - Unknown word (addequalitytesters)        -- addEqualityTesters {#expect-addequalitytesters}
 docs/api/expect.md:729:11    - Unknown word (applefruits) -- expect('applefruits').toMatch('fruit')
 docs/api/expect.md:989:26    - Unknown word (tomatchfilesnapshot) -- toMatchFileSnapshot {#tomatchfilesnapshot}
 docs/api/hooks.md:366:22    - Unknown word (ontestfinished) -- ## onTestFinished {#ontestfinished}
@@ -120,7 +122,6 @@ docs/config/browser/playwright.md:184:51    - Unknown word (persistentcontext) -
 docs/config/browser/traceview.md:46:32     - Unknown word (traceview)  -- traceView.enabled {#traceview-enabled}
 docs/config/browser/traceview.md:54:47     - Unknown word (inlineimages) -- inlineImages {#traceview-inlineimages}
 docs/config/browser/traceview.md:62:47     - Unknown word (recordcanvas) -- recordCanvas {#traceview-recordcanvas}
-docs/config/browser/traceview.md:68:90     - Unknown word (rrweb)        -- iframe sandbox because rrweb needs scripts to redraw
 docs/config/browser/webdriverio.md:66:4      - Unknown word (Headful)    -- ## Headful Chrome in CI
 docs/config/browser/webdriverio.md:74:55     - Unknown word (headful)    -- xvfb-run` when you need headful Chrome in GitHub
 docs/config/coverage.md:142:40    - Unknown word (reportonfailure) -- reportOnFailure {#coverage-reportonfailure}
@@ -151,6 +152,7 @@ docs/guide/benchmarking.md:412:91    - Unknown word (Maglev)     -- timization t
 docs/guide/benchmarking.md:413:5     - Unknown word (Deoptimization) -- - **Deoptimization**: V8 can "bail out
 docs/guide/benchmarking.md:417:32    - Unknown word (deoptimization) -- mixed shapes cause deoptimization
 docs/guide/browser/component-testing.md:10:131    - Unknown word (Qwik)       -- Svelte, Lit, Preact, Qwik, Solid, Marko, and more
+docs/guide/browser/component-testing.md:10:144    - Unknown word (Marko)      -- Preact, Qwik, Solid, Marko, and more. This guide
 docs/guide/browser/component-testing.md:170:6     - Unknown word (marko)      -- - [`@marko/testing-library`](https
 docs/guide/browser/index.md:217:8     - Unknown word (qwik)       -- ```ts [qwik]
 docs/guide/browser/index.md:32:1      - Unknown word (bunx)       -- bunx vitest init browser
@@ -212,7 +214,6 @@ docs/public/bolt.svg:1:542     - Unknown word (evenodd)    -- "/><path fill-rule
 docs/public/chromatic.svg:1:75      - Unknown word (xlink)      -- org/2000/svg" xmlns:xlink="http://www.w3.org/
 docs/public/vercel.svg:1:18      - Unknown word (Vercel)     -- <svg aria-label="Vercel logotype" height="5
 docs/public/zammad.svg:8:37      - Unknown word (Artboard)   -- logo" sketch:type="MSArtboardGroup">
-eslint.config.js:164:6     - Unknown word (ivya)       -- // ivya should be loaded only
 examples/basic/package.json:17:4      - Unknown word (stackblitz) -- "stackblitz": {
 examples/fastify/mockData.ts:11:10     - Unknown word (Arya)       -- name: 'Arya Stark',
 examples/fastify/mockData.ts:15:10     - Unknown word (Rhaenyra)   -- name: 'Rhaenyra Targaryen',
@@ -226,12 +227,14 @@ netlify.toml:11:75     - Unknown word (keyid)      -- -29T00:00:00.000Z","keyid"
 netlify.toml:2:18      - Unknown word (vitepress)  -- publish = "docs/.vitepress/dist"
 netlify.toml:89:24     - Unknown word (webdriverio) -- from = "/guide/browser/webdriverio"
 package.json:35:6      - Unknown word (typebuild)  -- "typebuild": "tsx ./scripts/explain
+package.json:57:6      - Unknown word (bumpp)      -- "bumpp": "^10.4.1",
+package.json:58:6      - Unknown word (changelogithub) -- "changelogithub": "^14.0.0",
 packages/browser-playwright/package.json:44:15     - Unknown word (premove)    -- "build": "premove dist && pnpm rollup
 packages/browser-playwright/package.json:59:6      - Unknown word (tinyrainbow) -- "tinyrainbow": "catalog:"
 packages/browser-playwright/src/commands/keyboard.ts:53:115    - Unknown word (Backquote)  -- F10', 'F11', 'F12', 'Backquote', '`', '~', 'Digit1
 packages/browser-playwright/src/playwright.ts:596:20    - Unknown word (frameattached) -- page.on('frameattached', (frame) => {
-packages/browser-playwright/src/playwright.ts:625:16    - Unknown word (requestfailed) -- page.on('requestfailed', (request) => {
-packages/browser-playwright/src/playwright.ts:773:6     - Unknown word (PWCDP)         -- type PWCDPSession = Pick<PlaywrightCDPSe
+packages/browser-playwright/src/playwright.ts:633:16    - Unknown word (requestfailed) -- page.on('requestfailed', (request) => {
+packages/browser-playwright/src/playwright.ts:781:6     - Unknown word (PWCDP)         -- type PWCDPSession = Pick<PlaywrightCDPSe
 packages/browser/aria-role.d.ts:15:8      - Unknown word (spinbutton)       -- | "spinbutton"
 packages/browser/aria-role.d.ts:31:8      - Unknown word (treegrid)         -- | "treegrid";
 packages/browser/aria-role.d.ts:76:8      - Unknown word (contentinfo)      -- | "contentinfo"
@@ -241,7 +244,7 @@ packages/browser/context.d.ts:672:60    - Unknown word (contenteditable) -- inpu
 packages/browser/jest-dom.d.ts:479:69    - Unknown word (describedby) -- "Company logo" aria-describedby="t1" />
 packages/browser/package.json:96:6      - Unknown word (birpc)      -- "birpc": "catalog:",
 packages/browser/src/client/client.ts:2:15      - Unknown word (Birpc)      -- import type { BirpcReturn } from 'birpc
-packages/browser/src/client/orchestrator.ts:226:36    - Unknown word (iframeerror) -- event = new CustomEvent('iframeerror', { detail: error }
+packages/browser/src/client/orchestrator.ts:233:36    - Unknown word (iframeerror) -- event = new CustomEvent('iframeerror', { detail: error }
 packages/browser/src/client/public/error-catcher.js:29:17     - Unknown word (Unhandler)  -- function throwUnhandlerError(e) {
 packages/browser/src/client/public/esm-client-injector.js:64:36     - Unknown word (gmix)       -- !/^(?!.*?(.).*?\1)[gmixXsuUAJ]+$/.test(m[3]
 packages/browser/src/client/tester/expect/toHaveAccessibleErrorMessage.ts:19:47     - Unknown word (redent)     -- entFromUserInput, getMessage, redent } from './utils'
@@ -252,7 +255,7 @@ packages/browser/src/client/tester/runner.ts:338:22    - Unknown word (browserv)
 packages/browser/src/client/tester/runner.ts:339:13    - Unknown word (importpath) -- const importpath = `${prefix}${filepath
 packages/browser/src/client/tester/tester-utils.ts:178:21    - Unknown word (coverd)     -- // is not coverd within by this action
 packages/browser/src/node/commands/screenshotMatcher/types.ts:12:6      - Unknown word (Promisable) -- type Promisable<T> = T | Promise<T>
-packages/browser/src/node/index.ts:459:29    - Unknown word (effectful)  -- msw is a large, side-effectful service-worker library
+packages/browser/src/node/index.ts:458:29    - Unknown word (effectful)  -- msw is a large, side-effectful service-worker library
 packages/browser/src/node/projectParent.ts:189:19    - Unknown word (cdps)       -- public readonly cdps: Map<string, BrowserServerCDP
 packages/browser/src/node/rpc.ts:11:28     - Unknown word (Autospied)  -- { AutomockedModule, AutospiedModule, ManualMockedModule
 packages/browser/src/node/serverTester.ts:70:11     - Unknown word (indexhtml)  -- const indexhtml = await browserProject
@@ -268,23 +271,26 @@ packages/expect/src/types.ts:51:3      - Unknown word (dont)       -- dontThrow?
 packages/mocker/src/browser/mocker.ts:1:54      - Unknown word (automocker) -- kInstanceProcedure } from '../automocker'
 packages/mocker/src/node/esmWalker.ts:14:18     - Unknown word (eswalk)     -- import { walk as eswalk } from 'estree-walker
 packages/mocker/src/node/hoistMocksPlugin.ts:69:7      - Unknown word (keeb)       -- // to keeb backwards compat
-packages/snapshot/src/client.ts:323:48    - Unknown word (snaphsot)   -- the error and creating snaphsot full scratch isn't good
-packages/snapshot/src/client.ts:323:8     - Unknown word (Sielently)  -- // Sielently hiding the error and
+packages/snapshot/src/client.ts:331:48    - Unknown word (snaphsot)   -- the error and creating snaphsot full scratch isn't good
+packages/snapshot/src/client.ts:331:8     - Unknown word (Sielently)  -- // Sielently hiding the error and
 packages/snapshot/src/port/inlineSnapshot.ts:128:11    - Unknown word (Oneline)    -- const isOneline = lines.length <= 1
 packages/spy/src/index.ts:486:68    - Unknown word (Klass)      -- with vi.spyOn(obj, 'Klass')
 packages/spy/src/index.ts:80:7      - Unknown word (reparent)   -- reparentMockPrototype(
 packages/ui/client/components/ModuleGraphImportBreakdown.vue:36:11     - Unknown word (raltive)    -- const raltiveModule = duration.external
 packages/ui/client/components/artifacts/visual-regression/SmallTabs.spec.ts:60:13     - Unknown word (labelledby) -- 'aria-labelledby',
 packages/ui/client/components/trace/TraceView.vue:19:38     - Unknown word (rrweb's)    -- replay needs scripts for rrweb's image.onload -> drawImage
-packages/ui/client/components/trace/TraceView.vue:39:72     - Unknown word (replayer)   -- pattern from rrweb replayer:
 packages/ui/client/components/trace/TraceView.vue:4:16      - Unknown word (Splitpanes) -- import { Pane, Splitpanes } from 'splitpanes'
 packages/ui/client/components/trace/TraceView.vue:4:35      - Unknown word (splitpanes) -- Splitpanes } from 'splitpanes'
+packages/ui/client/components/trace/TraceView.vue:68:72     - Unknown word (replayer)   -- pattern from rrweb replayer:
 packages/ui/client/components/views/ViewReportError.vue:25:13     - Unknown word (Showable)   -- const isDiffShowable = computed(() => {
 packages/ui/client/composables/client/static.ts:7:44      - Unknown word (fflate)     -- mpressSync, strFromU8 } from 'fflate'
-packages/ui/client/composables/codemirror.ts:16:33     - Unknown word (simplescrollbars) -- codemirror/addon/scroll/simplescrollbars'
+packages/ui/client/composables/codemirror.ts:17:33     - Unknown word (simplescrollbars) -- codemirror/addon/scroll/simplescrollbars'
 packages/ui/client/composables/explorer/collector.ts:1:15      - Unknown word (Arrayable)  -- import type { Arrayable } from '@vitest/utils
-packages/ui/client/styles/main.css:147:13    - Unknown word (simplescroll) -- .CodeMirror-simplescroll-horizontal,
+packages/ui/client/composables/trace-view.ts:217:4     - Unknown word (Vueuse)     -- // Vueuse URL watcher pauses while
+packages/ui/client/styles/main.css:161:13    - Unknown word (simplescroll) -- .CodeMirror-simplescroll-horizontal,
 packages/ui/client/styles/main.css:4:17      - Unknown word (Readex)     -- font-family: "Readex Pro", sans-serif;
+packages/ui/client/styles/main.css:91:13     - Unknown word (activeline) -- .CodeMirror-activeline-background {
+packages/ui/node/index.ts:66:49     - Unknown word (bypassable) -- would diverge and be bypassable (e.g. /__vitest__/Coverage
 packages/ui/vite.config.ts:6:16      - Unknown word (Attributify) -- import { presetAttributify, presetIcons, presetWind
 packages/ui/vite.config.ts:7:8       - Unknown word (Unocss)      -- import Unocss from 'unocss/vite'
 packages/utils/src/constants.ts:10:4      - Unknown word (pjpeg)      -- 'pjpeg',
@@ -361,7 +367,7 @@ packages/vitest/src/node/environments/fetchModule.ts:507:32    - Unknown word (C
 packages/vitest/src/node/pool.ts:86:22     - Unknown word (Argvs)      -- const projectExecArgvs = new WeakMap<TestProject
 packages/vitest/src/node/pool.ts:8:13      - Unknown word (nodeos)     -- import * as nodeos from 'node:os'
 packages/vitest/src/node/pools/browser.ts:11:10     - Unknown word (statfs)     -- import { statfsSync } from 'node:fs
-packages/vitest/src/node/pools/browser.ts:514:31    - Unknown word (bavail)     -- available = fsStats.bavail * fsStats.bsize
+packages/vitest/src/node/pools/browser.ts:531:31    - Unknown word (bavail)     -- available = fsStats.bavail * fsStats.bsize
 packages/vitest/src/node/pools/rpc.ts:40:5      - Unknown word (tmps)       -- tmps: {},
 packages/vitest/src/node/pools/workers/threadsWorker.ts:62:32     - Unknown word (readables)  -- message port into these readables; keep the pipes attached
 packages/vitest/src/node/pools/workers/utils.ts:4:63      - Unknown word (unpiping)   -- end`/`close` before unpiping ensures
@@ -388,11 +394,11 @@ packages/vitest/src/runtime/runner/run.ts:284:9     - Unknown word (timedout)   
 packages/vitest/src/runtime/runner/utils/tags.ts:77:16     - Unknown word (LPAREN)     -- | { type: 'LPAREN' }
 packages/vitest/src/runtime/runner/utils/tags.ts:78:16     - Unknown word (RPAREN)     -- | { type: 'RPAREN' }
 packages/vitest/src/runtime/utils.ts:52:8      - Unknown word (cnpm)       -- // cnpm
-packages/vitest/src/runtime/vm/esm-executor.ts:199:11    - Unknown word (worklist)   -- const worklist: string[] = [rootIdentifier
+packages/vitest/src/runtime/vm/esm-executor.ts:215:11    - Unknown word (worklist)   -- const worklist: string[] = [rootIdentifier
 packages/vitest/src/runtime/vm/types.ts:45:10     - Unknown word (contextified) -- * The contextified object as returned by
 packages/vitest/src/runtime/vm/utils.ts:26:18     - Unknown word (Kets)       -- const defaultKets = Object.keys(mod.default
-packages/vitest/src/runtime/workers/init.ts:54:11     - Unknown word (acks)       -- // parent acks the previous one. The
-packages/vitest/src/runtime/workers/init.ts:57:62     - Unknown word (acked)      -- buffered chunk has been acked, so awaiting
+packages/vitest/src/runtime/workers/init.ts:59:11     - Unknown word (acks)       -- // parent acks the previous one. The
+packages/vitest/src/runtime/workers/init.ts:62:62     - Unknown word (acked)      -- buffered chunk has been acked, so awaiting
 packages/vitest/src/types/general.ts:52:37     - Unknown word (Tinyrainbow's) -- to be compatible with Tinyrainbow's bg-colors, and CSS's
 packages/vitest/src/types/jsdom-options.ts:15:70     - Unknown word (KHTML)      -- AppleWebKit/537.36 (KHTML, like Gecko) jsdom/
 packages/vitest/src/utils/memory-limit.ts:5:42      - Unknown word (jestjs)     -- the root directory of jestjs/jest GitHub project
@@ -405,6 +411,8 @@ packages/web-worker/src/shared-worker.ts:78:9      - Unknown word (onrtctransfor
 patches/@sinonjs__fake-timers@15.4.0.patch:10:15     - Unknown word (vitest)     -- +if (typeof __vitest_required__ !== 'undefined
 patches/@sinonjs__fake-timers@15.4.0.patch:7:33      - Unknown word (sinonjs)    -- globalObject = require("@sinonjs/commons").global;
 patches/istanbul-lib-instrument.patch:13:8      - Unknown word (istanbuljs) -- "@istanbuljs/schema": "^0.1.3",
+patches/rrweb-snapshot@2.1.1.patch:30:8      - Unknown word (SRCSET)     -- const SRCSET_NOT_SPACES = /^[^ \t
+patches/rrweb-snapshot@2.1.1.patch:32:22     - Unknown word (Srcset)     -- function getAbsoluteSrcsetString(doc, attributeValue
 pnpm-workspace.yaml:100:3     - Unknown word (tinyglobby) -- tinyglobby: ^0.2.17
 pnpm-workspace.yaml:103:3     - Unknown word (tinyspy)    -- tinyspy: ^4.0.4
 pnpm-workspace.yaml:117:3     - Unknown word (edgedriver) -- edgedriver: true
@@ -537,6 +545,7 @@ test/e2e/test/console-color.test.ts:15:36     - Unknown word (mtrue)      -- std
 test/e2e/test/detect-async-leaks.test.ts:233:55    - Unknown word (FSREQCALLBACK's) -- Sometimes readFile fires two FSREQCALLBACK's, sometimes just one
 test/e2e/test/detect-async-leaks.test.ts:235:1     - Unknown word (FSREQCALLBACK)   -- FSREQCALLBACK leaking in packages
 test/e2e/test/location-filters.test.ts:129:36    - Unknown word (doesn)      -- fixturePath}/:a/file/that/doesn-t/exit:10`,
+test/e2e/test/mocker-redirect-traversal.test.ts:82:43     - Unknown word (inroot)     -- sterRedirect(port, 'traversal:inroot.js')
 test/e2e/test/no-unexpected-logging.test.ts:42:26     - Unknown word (stdtout)    -- function normalizeOutput(stdtout: string) {
 test/e2e/test/print-error.test.ts:51:9      - Unknown word (uintarray)  -- uintarray: Uint8Array.from([1
 test/e2e/test/public-api.test.ts:18:25     - Unknown word (Metas)      -- const finishedTestCaseMetas: TaskMeta[] = []
