@@ -2152,11 +2152,11 @@
       "type": "string"
     },
     "ignorePaths": {
-      "description": "Glob patterns of files to be ignored.\n\nGlob patterns are relative to the  {@link  globRoot }  of the configuration file that defines them.",
+      "description": "Glob patterns of files to be ignored.\n\nGlob patterns are relative to the  {@link  globRoot }  of the configuration file that defines them.\n\nThe default is `[\"node_modules/\"]`.\n\nWarning: if you ignore `\".git/\"` then it will also ignore `\".git/COMMIT_EDITMSG\"` which is needed for the `commit-msg` git hook; in that case, rather use `[\".git/{info,lfs,logs,refs,objects}/**\", \".git/{index,*refs,*HEAD}\"]`.",
       "items": {
         "$ref": "#/definitions/Glob"
       },
-      "markdownDescription": "Glob patterns of files to be ignored.\n\nGlob patterns are relative to the  {@link  globRoot }  of the configuration file that defines them.",
+      "markdownDescription": "Glob patterns of files to be ignored.\n\nGlob patterns are relative to the  {@link  globRoot }  of the configuration file that defines them.\n\nThe default is `[\"node_modules/\"]`.\n\nWarning: if you ignore `\".git/\"` then it will also ignore `\".git/COMMIT_EDITMSG\"` which is needed for the `commit-msg` git hook; in that case, rather use `[\".git/{info,lfs,logs,refs,objects}/**\", \".git/{index,*refs,*HEAD}\"]`.",
       "type": "array"
     },
     "ignoreRandomStrings": {

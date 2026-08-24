@@ -91,10 +91,15 @@ export interface FileSettings extends ExtendableSettings, CommandLineSettings {
      */
     enableGlobDot?: boolean;
 
+    // cspell:ignore EDITMSG
     /**
      * Glob patterns of files to be ignored.
      *
      * Glob patterns are relative to the {@link globRoot} of the configuration file that defines them.
+     *
+     * The default is `["node_modules/"]`.
+     *
+     * Warning: if you ignore `".git/"` then it will also ignore `".git/COMMIT_EDITMSG"` which is needed for the `commit-msg` git hook; in that case, rather use `[".git/{info,lfs,logs,refs,objects}/**", ".git/{index,*refs,*HEAD}"]`.
      */
     ignorePaths?: Glob[];
 

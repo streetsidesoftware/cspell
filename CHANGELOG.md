@@ -3,6 +3,297 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v10.1.0 (2026-08-22)
+
+### Features
+
+<details>
+<summary>feat(cspell-junit-reporter): add JUnit XML reporter package (<a href="https://github.com/streetsidesoftware/cspell/pull/8945">#8945</a>)</summary>
+
+### feat(cspell-junit-reporter): add JUnit XML reporter package ([#8945](https://github.com/streetsidesoftware/cspell/pull/8945))
+
+Closes #4570.
+
+Adds `@cspell/cspell-junit-reporter`, a new workspace package modeled on `packages/cspell-json-reporter`, that emits a JUnit-compatible XML report of a cspell run.
+
+The issue asked for a minimal mapping along the lines of:
+
+```xml
+<testsuite tests="3">
+  <testcase classname="File1" name"/>
+  <testcase classname="File2" name="AnotherSuccessfulTest"/>
+  <testcase classname="foo3" name="AFailingTest">
+    <failure type="prohibited word"> zzz </failure>
+  </testcase>
+</testsuite>
+```
+
+This PR follows that shape but wraps it in a `<testsuites>` root and groups by file (one `<testsuite>` per file, suite name = file path), since that is the convention used by other widely-consumed JUnit reporters (for example ESLint's JUnit formatter) and is what most CI JUnit parsers expect. The package README documents the full mapping.
+
+- `package.json`, `tsconfig.json`, test framework, and `files`/`exports`/`publishConfig` shape are copied from `cspell-json-reporter`. Version pinned to 10.0.1 to match the monorepo's locked versioning.
+- No third-party XML library was added. The repo has no existing XML dependency, so a small escaping helper (`src/utils/escapeXml.ts`) and a pure XML-string builder (`src/utils/buildJUnitXml.ts`) were written in-repo, consistent with the monorepo's small-utility-file convention.
+- Unit tests (32) cover: no files, a clean file (single passing testcase), a file with issues, escaping of special characters in paths/words/messages, a skipped file, and non-issue processing errors (`error` emitter routed to a dedicated `cspell-errors` testsuite using `<error>`).
+
+Assumptions the issue thread left ambiguous, called out for review:
+
+1. One `<testsuite>` per file rather than one flat suite for the whole run. Matches common JUnit reporter convention and keeps per-file counts meaningful in CI UIs.
+2. A clean file gets one synthetic passing `<testcase name="no issues found">` so a suite is never reported with `tests="0"`, which some JUnit consumers treat as suspicious.
+3. Settings are intentionally slimmer than `cspell-json-reporter`'s (`outFile`, `suiteName` only). JUnit XML has no natural place for arbitrary debug/progress log dumps.
+4. cspell processing errors are reported as `<error>` elements, distinct from spelling `<failure>` elements, per the JUnit failure-vs-error distinction.
+
+Verified locally: `tsc -b` clean, vitest 32/32, eslint and prettier clean, and the full monorepo `build:prod` succeeds with the package in the workspace. One environment note: the package's CLI smoke-test script wasn't runnable locally (repo requires Node >=22.18.0, local was 22.17.0 — the sibling json-reporter fails identically there), so CI is the first place it will run.
+
+---
+
+</details>
+
+### Fixes
+
+<details>
+<summary>fix: allow substitutions across ignored ranges (<a href="https://github.com/streetsidesoftware/cspell/pull/9017">#9017</a>)</summary>
+
+### fix: allow substitutions across ignored ranges ([#9017](https://github.com/streetsidesoftware/cspell/pull/9017))
+
+## Summary
+
+- let configured substitutions take precedence when they consume an entire ignored range
+- preserve exclusions that are not fully matched by a substitution
+- add range-level and document-level regressions for soft-hyphen entities
+
+## Testing
+
+- `pnpm --filter cspell-lib test -- src/lib/textValidation/docValidator.test.ts src/lib/textValidation/textValidator.test.ts -t substitutions`
+- `pnpm --filter cspell-lib test -- src/lib/textValidation/textValidator.test.ts`
+- `pnpm --filter cspell-lib build`
+- ESLint and Prettier on the changed files
+- `pnpm --filter cspell-lib test` (1571 passed; 16 local environment-dependent tests failed because Yarn PnP/symlink fixtures were unavailable in this Windows clone or network requests timed out)
+
+Closes #8962.
+
+AI assistance: OpenAI Codex was used to investigate, implement, and test this change. I reviewed the diff and test results before submission.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Find the nearest `.git` when a worktree is inside a clone (<a href="https://github.com/streetsidesoftware/cspell/pull/8976">#8976</a>)</summary>
+
+### fix: Find the nearest `.git` when a worktree is inside a clone ([#8976](https://github.com/streetsidesoftware/cspell/pull/8976))
+
+Fixes #8975.
+
+`findRepoRoot` runs two independent `findUp` searches and prefers the directory result, so a clone further up wins over a worktree's own `.git` file:
+
+```ts
+const foundDir = await vfs.findUp('.git', directory, { type: 'directory' });
+const foundFile = await vfs.findUp('.git', directory, { type: 'file' });
+const found = foundDir || foundFile;
+```
+
+With `useGitignore: true` the clone's `.gitignore` is then applied to the worktree's files, so a worktree kept in a gitignored folder inside its own clone — the `.worktrees` layout this repository uses itself — has every file treated as ignored and `cspell` reports `Files checked: 0`.
+
+This searches once for a `.git` of either kind, via a predicate, so the nearest one marks the root. That also drops one full walk up the tree.
+
+Note that omitting `type` is not an alternative: `findUpFromUrl` defaults it to `'file'`, so a plain `findUp('.git', directory)` stops finding normal clones.
+
+The new test builds a clone with a worktree nested inside it under `temp/` and checks both roots resolve to themselves. It fails on `main` with the worktree resolving to the clone.
+
+Verified with the built CLI on a scratch repository, run from a subdirectory of the worktree so that the `findRepoRoot(cwd) || cwd` fallback in `generateGitIgnore` cannot mask the result: before, `Files checked: 0`; after, the misspellings are reported.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Add .typ extension for Typst (<a href="https://github.com/streetsidesoftware/cspell/pull/8961">#8961</a>)</summary>
+
+### fix: Add .typ extension for Typst ([#8961](https://github.com/streetsidesoftware/cspell/pull/8961))
+
+Typst files typically have the `.typ` extension, not `.typst`. This PR adds `.typ` as an alternative filetype extension so that cspell can recognize those files automatically.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Handle Windows UNC Long Path Names (<a href="https://github.com/streetsidesoftware/cspell/pull/8914">#8914</a>)</summary>
+
+### fix: Handle Windows UNC Long Path Names ([#8914](https://github.com/streetsidesoftware/cspell/pull/8914))
+
+## Pull request overview
+
+This PR improves `cspell-url`’s handling of Windows long/UNC path formats by adding long-path prefix utilities and ensuring `FileUrlBuilder` can generate correct `file:` URLs for UNC/extended-length paths. It also adds fixtures and tests to exercise long-path behavior.
+
+**Changes:**
+
+- Add Windows long-path/UNC prefix helpers (`\\?\`, `\\?\UNC\`, `\\.\`) and normalization (`fixLongPathPrefix`) in `fileUrl.mts`.
+- Update `FileUrlBuilder` to special-case UNC/extended-length paths when converting to `file:` URLs.
+- Add long-path fixtures and new tests that read and convert long Windows paths/URLs.
+
+Related to:
+
+- <https://github.com/streetsidesoftware/vscode-spell-checker/issues/5260>
+- <https://github.com/streetsidesoftware/vscode-spell-checker/issues/4978>
+
+---
+
+</details>
+
+### Dictionary Updates
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/9024">#9024</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#9024](https://github.com/streetsidesoftware/cspell/pull/9024))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../snapshots/AdaDoom3/AdaDoom3/report.yaml        |  3 +-
+ .../snapshots/AdaDoom3/AdaDoom3/snapshot.txt       |  3 +-
+ .../snapshots/dart-lang/sdk/report.yaml            |  6 +-
+ .../snapshots/dart-lang/sdk/snapshot.txt           |  4 +-
+ .../snapshots/django/django/report.yaml            |  5 +-
+ .../snapshots/django/django/snapshot.txt           |  4 +-
+ .../googleapis/google-cloud-cpp/report.yaml        |  3 +-
+ .../googleapis/google-cloud-cpp/snapshot.txt       |  3 +-
+ packages/cspell-bundled-dicts/package.json         | 14 ++--
+ packages/cspell/src/__snapshots__/app.test.ts.snap |  8 +++
+ pnpm-lock.yaml                                     | 75 ++++++++++++++++++----
+ 11 files changed, 84 insertions(+), 44 deletions(-)
+```
+
+---
+
+</details>
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/8995">#8995</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#8995](https://github.com/streetsidesoftware/cspell/pull/8995))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../snapshots/caddyserver/caddy/report.yaml        |   3 +-
+ .../snapshots/caddyserver/caddy/snapshot.txt       |   3 +-
+ .../snapshots/dart-lang/sdk/report.yaml            |  10 +-
+ .../snapshots/dart-lang/sdk/snapshot.txt           |   5 +-
+ .../snapshots/django/django/report.yaml            |  44 ++------
+ .../snapshots/django/django/snapshot.txt           |  64 ++++-------
+ .../iluwatar/java-design-patterns/report.yaml      |  13 +--
+ .../iluwatar/java-design-patterns/snapshot.txt     |   3 +-
+ .../snapshots/ktaranov/sqlserver-kit/report.yaml   |   6 +-
+ .../snapshots/ktaranov/sqlserver-kit/snapshot.txt  |   5 +-
+ .../snapshots/neovim/nvim-lspconfig/report.yaml    |   6 +-
+ .../snapshots/neovim/nvim-lspconfig/snapshot.txt   | 122 ++++++++++-----------
+ .../snapshots/php/php-src/report.yaml              |  29 +----
+ .../snapshots/php/php-src/snapshot.txt             |  29 +----
+ .../snapshots/pycontribs/jira/report.yaml          |   3 +-
+ .../snapshots/pycontribs/jira/snapshot.txt         |  13 +--
+ .../snapshots/wireapp/wire-webapp/report.yaml      |  42 +++----
+ .../snapshots/wireapp/wire-webapp/snapshot.txt     |  18 +--
+ packages/cspell-bundled-dicts/package.json         |  12 +-
+ pnpm-lock.yaml                                     |  70 +++++++-----
+ 20 files changed, 174 insertions(+), 326 deletions(-)
+```
+
+---
+
+</details>
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/8990">#8990</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#8990](https://github.com/streetsidesoftware/cspell/pull/8990))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../snapshots/neovim/nvim-lspconfig/report.yaml    |  8 +-------
+ .../snapshots/neovim/nvim-lspconfig/snapshot.txt   | 12 +++--------
+ .../snapshots/vitest-dev/vitest/report.yaml        |  6 ++----
+ .../snapshots/vitest-dev/vitest/snapshot.txt       |  3 +--
+ packages/cspell-bundled-dicts/package.json         |  4 ++--
+ pnpm-lock.yaml                                     | 24 +++++++++++-----------
+ 6 files changed, 21 insertions(+), 36 deletions(-)
+```
+
+---
+
+</details>
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/8956">#8956</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#8956](https://github.com/streetsidesoftware/cspell/pull/8956))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../MicrosoftDocs/PowerShell-Docs/report.yaml      |  42 +-----
+ .../MicrosoftDocs/PowerShell-Docs/snapshot.txt     |  40 +-----
+ .../snapshots/TheAlgorithms/Python/report.yaml     |  11 +-
+ .../snapshots/TheAlgorithms/Python/snapshot.txt    |   7 +-
+ .../snapshots/caddyserver/caddy/report.yaml        |  17 +--
+ .../snapshots/caddyserver/caddy/snapshot.txt       |  17 +--
+ .../snapshots/eslint/eslint/report.yaml            |   4 +-
+ .../snapshots/eslint/eslint/snapshot.txt           |   3 +-
+ .../snapshots/gitbucket/gitbucket/report.yaml      |   3 +-
+ .../snapshots/gitbucket/gitbucket/snapshot.txt     |   3 +-
+ .../googleapis/google-cloud-cpp/report.yaml        |   6 +-
+ .../googleapis/google-cloud-cpp/snapshot.txt       |   4 +-
+ .../snapshots/ktaranov/sqlserver-kit/report.yaml   | 112 +--------------
+ .../snapshots/ktaranov/sqlserver-kit/snapshot.txt  | 155 ++++-----------------
+ .../snapshots/php/php-src/report.yaml              |   3 +-
+ .../snapshots/php/php-src/snapshot.txt             |   3 +-
+ .../snapshots/vitest-dev/vitest/report.yaml        |   6 +-
+ .../snapshots/vitest-dev/vitest/snapshot.txt       |   8 +-
+ .../snapshots/wireapp/wire-webapp/report.yaml      | 117 +---------------
+ .../snapshots/wireapp/wire-webapp/snapshot.txt     | 109 +--------------
+ packages/cspell-bundled-dicts/package.json         |  20 +--
+ pnpm-lock.yaml                                     | 120 +++++++++-------
+ 22 files changed, 133 insertions(+), 677 deletions(-)
+```
+
+---
+
+</details>
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/8881">#8881</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#8881](https://github.com/streetsidesoftware/cspell/pull/8881))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../iluwatar/java-design-patterns/report.yaml      |   5 +-
+ .../iluwatar/java-design-patterns/snapshot.txt     |   5 +-
+ integration-tests/snapshots/mdx-js/mdx/report.yaml |   7 +-
+ .../snapshots/mdx-js/mdx/snapshot.txt              |   7 +-
+ .../snapshots/sveltejs/svelte/report.yaml          |   3 +-
+ .../snapshots/sveltejs/svelte/snapshot.txt         |   3 +-
+ packages/cspell-bundled-dicts/package.json         |  18 ++--
+ pnpm-lock.yaml                                     | 112 ++++++++++++---------
+ 8 files changed, 84 insertions(+), 76 deletions(-)
+```
+
+---
+
+</details>
+
 ## v10.0.1 (2026-05-31)
 
 ### Fixes
