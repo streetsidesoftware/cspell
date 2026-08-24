@@ -181,6 +181,8 @@ export interface IConfigLoader {
     readonly isTrusted: boolean;
 
     setIsTrusted(isTrusted: boolean): void;
+
+    isTrustedUrl(url: URL): boolean;
 }
 
 const defaultExtensions = ['.json', '.yaml', '.yml', '.jsonc', '.toml'];
@@ -361,7 +363,8 @@ export class ConfigLoader implements IConfigLoader {
     protected async resolveDefaultConfig(): Promise<URL> {
         const r = await this.fileResolver.resolveFile(defaultConfigFileModuleRef, srcDirectory);
         const url = toFileURL(r.filename);
-        this.cspellConfigFileReaderWriter.setTrustedUrls([new URL('../..', url)]);
+        const baseUrl = new URL('../..', url); // go up two directories to get out of the node_modules directory.
+        this.cspellConfigFileReaderWriter.setTrustedUrls([baseUrl]);
         return url;
     }
 
@@ -450,7 +453,8 @@ export class ConfigLoader implements IConfigLoader {
         }
     }
 
-    private async setupPnp(cfgFile: CSpellConfigFile, pnpSettings: PnPSettingsOptional | undefined) {
+    private async setupPnp(cfgFile: CSpellConfigFile, pnpSettings: PnPSettingsOptional | undefined): Promise<void> {
+        if (!this.#isTrusted) return;
         if (!pnpSettings?.usePnP || pnpSettings === defaultPnPSettings) return;
         if (cfgFile.url.protocol !== 'file:') return;
 
@@ -653,6 +657,14 @@ export class ConfigLoader implements IConfigLoader {
         this.clearCachedSettingsFiles();
         this.configSearch = new ConfigSearch(searchPlaces, isTrusted ? trustedSearch : unTrustedSearch, this.fs);
         this.cspellConfigFileReaderWriter.setUntrustedExtensions(isTrusted ? [] : defaultJsExtensions);
+    }
+
+    public isTrustedUrl(url: URL): boolean {
+        if (!this.#isTrusted) {
+            const ext = path.extname(url.pathname).toLowerCase();
+            if (defaultJsExtensions.includes(ext)) return false;
+        }
+        return this.cspellConfigFileReaderWriter.isTrusted(url);
     }
 
     async #extractStopSearchAtURLs(options: SearchForConfigOptions | undefined): Promise<URL[] | undefined> {
