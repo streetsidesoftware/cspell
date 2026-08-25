@@ -4,7 +4,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import type { CSpellSettingsWithSourceTrace, CSpellUserSettings, ImportFileRef } from '@cspell/cspell-types';
 import { CSpellConfigFile, CSpellConfigFileInMemory } from 'cspell-config-lib';
 import { createRedirectProvider, createVirtualFS, getDefaultVirtualFs } from 'cspell-io';
-import { assert, beforeEach, describe, expect, test, vi } from 'vitest';
+import { afterEach, assert, beforeEach, describe, expect, test, vi } from 'vitest';
 import { URI } from 'vscode-uri';
 
 import {
@@ -350,6 +350,10 @@ describe('Validate search/load config files', () => {
         clearCachedSettingsFiles();
     });
 
+    afterEach(() => {
+        clearCachedSettingsFiles();
+    });
+
     function resolveError(filename: string, relativeTo = cwdURL()): ImportFileRefWithError {
         return {
             filename,
@@ -370,10 +374,6 @@ describe('Validate search/load config files', () => {
             filename,
             error: new Error(msg),
         };
-    }
-
-    function s(filename: string): string {
-        return rSample(filename);
     }
 
     interface TestSearchFrom {
@@ -887,6 +887,43 @@ describe('Validate assumptions', () => {
     });
 });
 
+describe('Validate PnP zero trust', () => {
+    beforeEach(() => {
+        mockedLogError.mockClear();
+        mockedLogWarning.mockClear();
+    });
+
+    test.each`
+        file             | relativeTo
+        ${'cspell.json'} | ${s('trust/')}
+    `('readConfigFile bad pnp.cjs $file $relativeTo', async ({ file, relativeTo }) => {
+        const loader = createConfigLoader();
+        loader.setIsTrusted(true);
+        const pCfg = loader.readSettingsAsync(file, relativeTo);
+        await expect(pCfg).rejects.toThrow(
+            'Warning: cspell is running in a PnP environment but the configuration file is not trusted. PnP support should be disabled.',
+        );
+
+        const url = toFileUrl(path.resolve(relativeTo, file));
+        expect(loader.isTrustedUrl(url)).toBe(true);
+        expect(loader.isTrustedUrl(new URL('pnp.js', url))).toBe(true);
+    });
+
+    test.each`
+        file             | relativeTo
+        ${'cspell.json'} | ${s('trust/')}
+    `('readConfigFile no-trust $file $relativeTo', async ({ file, relativeTo }) => {
+        const loader = createConfigLoader();
+        loader.setIsTrusted(false);
+        const cfg = await loader.readSettingsAsync(file, relativeTo);
+        expect(cfg).toEqual(oc({ name: 'trust/cspell.json', version: '0.2', usePnP: true }));
+
+        const url = toFileUrl(path.resolve(relativeTo, file));
+        expect(loader.isTrustedUrl(url)).toBe(true);
+        expect(loader.isTrustedUrl(new URL('pnp.js', url))).toBe(false);
+    });
+});
+
 /**
  * Resolve relative to src/lib
  */
@@ -906,6 +943,10 @@ function rp(...parts: string[]): string {
  */
 function rr(...parts: string[]): string {
     return path.resolve(pathRepoRoot, ...parts);
+}
+
+function s(filename: string): string {
+    return rSample(filename);
 }
 
 /**
