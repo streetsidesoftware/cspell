@@ -19,6 +19,7 @@ export interface CSpellConfigFileReaderWriter {
     clearCachedFiles(): void;
     setUntrustedExtensions(ext: readonly string[]): this;
     setTrustedUrls(urls: readonly (URL | string)[]): this;
+    isTrusted(url: URL): boolean;
     toCSpellConfigFile(configFile: ICSpellConfigFile): CSpellConfigFile;
     parse(textFile: TextFile): CSpellConfigFile;
     serialize(configFile: ICSpellConfigFile): string;
@@ -65,7 +66,7 @@ export class CSpellConfigFileReaderWriterImpl implements CSpellConfigFileReaderW
 
     readConfig(uri: URL | string): Promise<CSpellConfigFile> {
         const url = new URL(uri);
-        if (!isTrusted(url, this._trustedUrls, this._untrustedExtensions)) {
+        if (!this.isTrusted(url)) {
             return Promise.reject(new UntrustedUrlError(url));
         }
 
@@ -109,6 +110,10 @@ export class CSpellConfigFileReaderWriterImpl implements CSpellConfigFileReaderW
     setTrustedUrls(urls: readonly (URL | string)[]): this {
         this._trustedUrls = [...new Set(urls.map((url) => new URL(url).href))].sort();
         return this;
+    }
+
+    isTrusted(url: URL): boolean {
+        return isTrusted(url, this._trustedUrls, this._untrustedExtensions);
     }
 
     clearCachedFiles(): void {

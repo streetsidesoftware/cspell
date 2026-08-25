@@ -398,6 +398,7 @@ interface IConfigLoader {
   getStats(): Readonly<Record<string, Readonly<Record<string, number>>>>;
   readonly isTrusted: boolean;
   setIsTrusted(isTrusted: boolean): void;
+  isTrustedUrl(url: URL): boolean;
 }
 declare function loadPnP(pnpSettings: PnPSettingsOptional, searchFrom: URL): Promise<LoaderResult>;
 declare function createConfigLoader(fs?: VFileSystem$1): IConfigLoader;

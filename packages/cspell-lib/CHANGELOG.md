@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v10.1.1 (2026-08-25)
+
+### Fixes
+
+- fix: Do not load .pnp.js files when untrusted (<a href="https://github.com/streetsidesoftware/cspell/pull/9064">#9064</a>)
+
+### Dictionary Updates
+
+- fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/9055">#9055</a>)
+
 ## v10.1.0 (2026-08-22)
 
 ### Features
