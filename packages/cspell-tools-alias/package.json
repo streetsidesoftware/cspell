@@ -11,6 +11,8 @@
   "bin": {
     "cspell-tools": "bin.mjs"
   },
+  "module": "bin.mjs",
+  "exports": "./bin.mjs",
   "scripts": {
     "test": "pnpm test-shasum",
     "test-shasum": "node ./bin.mjs shasum package.json"
@@ -45,6 +47,5 @@
   },
   "engines": {
     "node": ">=22.18.0"
-  },
-  "module": "bin.mjs"
+  }
 }
