@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["--issues-summary-report","**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2932, Issues found: 8832 in 949 files.
+ CSpell: Files checked: 2932, Issues found: 8827 in 949 files.
  exit code: 1
 django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 django/apps/registry.py:134:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -2145,11 +2145,10 @@ django/utils/autoreload.py:104:48    - Unknown word (SIGTTOU)    -- signal.signa
 django/utils/autoreload.py:107:17    - Unknown word (tcsetattr)  -- termios.tcsetattr(sys.stdin, termios.TCSANOW
 django/utils/autoreload.py:107:46    - Unknown word (TCSANOW)    -- tcsetattr(sys.stdin, termios.TCSANOW, attr_list)
 django/utils/autoreload.py:109:34    - Unknown word (SIGTTOU)    -- signal.signal(signal.SIGTTOU, old_handler)
-django/utils/autoreload.py:287:33    - Unknown word (PYTHONUNBUFFERED) -- environ.setdefault("PYTHONUNBUFFERED", "1")
-django/utils/autoreload.py:405:9     - Unknown word (mtimes)           -- mtimes = {}
-django/utils/autoreload.py:408:28    - Unknown word (mtimes)           -- old_time = mtimes.get(filepath)
-django/utils/autoreload.py:409:17    - Unknown word (mtimes)           -- mtimes[filepath] = mtime
-django/utils/autoreload.py:501:14    - Unknown word (dedup)            -- "dedup_results": True,
+django/utils/autoreload.py:405:9     - Unknown word (mtimes)     -- mtimes = {}
+django/utils/autoreload.py:408:28    - Unknown word (mtimes)     -- old_time = mtimes.get(filepath)
+django/utils/autoreload.py:409:17    - Unknown word (mtimes)     -- mtimes[filepath] = mtime
+django/utils/autoreload.py:501:14    - Unknown word (dedup)      -- "dedup_results": True,
 django/utils/cache.py:101:31    - Unknown word (dictvalue)  -- directives.append(dictvalue(directive, values))
 django/utils/cache.py:319:19    - Unknown word (newheader)  -- newheaders = [newheader.strip() for newheader
 django/utils/cache.py:319:41    - Unknown word (newheader)  -- newheader.strip() for newheader in newheaders]
@@ -6376,8 +6375,7 @@ tests/migrations/test_loader.py:217:72    - Unknown word (blarg)      -- migrati
 tests/migrations/test_loader.py:219:69    - Unknown word (blarg)      -- prefix("migrations", "blarg")
 tests/migrations/test_loader.py:579:39    - Unknown word (unsquashes) -- apply a few from app1: unsquashes migration in app1.
 tests/migrations/test_loader.py:592:37    - Unknown word (unsquashes) -- apply one from app2: unsquashes migration in app2 too
-tests/migrations/test_loader.py:705:23    - Unknown word (PYTHONHASHSEED) -- test_environ["PYTHONHASHSEED"] = "1"
-tests/migrations/test_loader.py:743:25    - Unknown word (reraises)       -- MigrationLoader reraises ImportErrors caused
+tests/migrations/test_loader.py:743:25    - Unknown word (reraises)   -- MigrationLoader reraises ImportErrors caused
 tests/migrations/test_migrations/0001_initial.py:19:14     - Unknown word (Tribble)    -- "Tribble",
 tests/migrations/test_migrations/0001_initial.py:26:25     - Unknown word (tribble)    -- model_name="tribble",
 tests/migrations/test_migrations/0002_second.py:10:33     - Unknown word (Tribble)    -- migrations.DeleteModel("Tribble"),
@@ -8443,12 +8441,10 @@ tests/utils_tests/test_autoreload.py:125:75    - Unknown word (zipf)       -- zi
 tests/utils_tests/test_autoreload.py:126:13    - Unknown word (zipf)       -- zipf.writestr("test_zipped
 tests/utils_tests/test_autoreload.py:218:32    - Unknown word (Werror)     -- [sys.executable, "-Werror", __file__, "runserver
 tests/utils_tests/test_autoreload.py:227:32    - Unknown word (Xutf)       -- [sys.executable, "-Xutf8", "-Xa=b", __file_
-tests/utils_tests/test_autoreload.py:568:47    - Unknown word (PYTHONUNBUFFERED) -- assertEqual(env.get("PYTHONUNBUFFERED"), "1")
-tests/utils_tests/test_autoreload.py:572:15    - Unknown word (Xdev)             -- "-Xdev",
-tests/utils_tests/test_autoreload.py:573:15    - Unknown word (Xfaulthandler)    -- "-Xfaulthandler",
-tests/utils_tests/test_autoreload.py:576:15    - Unknown word (Wdefault)         -- "-Wdefault",
-tests/utils_tests/test_autoreload.py:577:15    - Unknown word (Wignore)          -- "-Wignore::UserWarning",
-tests/utils_tests/test_autoreload.py:595:48    - Unknown word (PYTHONUNBUFFERED) -- assertIsNone(env.get("PYTHONUNBUFFERED"))
+tests/utils_tests/test_autoreload.py:572:15    - Unknown word (Xdev)       -- "-Xdev",
+tests/utils_tests/test_autoreload.py:573:15    - Unknown word (Xfaulthandler) -- "-Xfaulthandler",
+tests/utils_tests/test_autoreload.py:576:15    - Unknown word (Wdefault)      -- "-Wdefault",
+tests/utils_tests/test_autoreload.py:577:15    - Unknown word (Wignore)       -- "-Wignore::UserWarning",
 tests/utils_tests/test_autoreload.py:94:30     - Unknown word (Ceci)       -- filename.write_text("Ceci n'est pas du Python
 tests/utils_tests/test_choices.py:368:11    - Unknown word (randomised) -- # randomised order in form fields
 tests/utils_tests/test_crypto.py:103:18    - Unknown word (dklen)      -- "dklen": 20,
@@ -8749,24 +8745,23 @@ tests/view_tests/tests/test_csrf.py:44:9      - Unknown word (Referer)     -- Re
 tests/view_tests/tests/test_csrf.py:45:43     - Unknown word (referer)     -- sending an incorrect referer.
 tests/view_tests/tests/test_csrf.py:51:15     - Unknown word (Referer)     -- "“Referer header” to be sent by
 tests/view_tests/tests/test_csrf.py:57:62     - Unknown word (Referer)     -- browser to disable “Referer” "
-tests/view_tests/tests/test_debug.py:1080:13   - Unknown word (somevar)             -- somevar = b"VAL\xe9VAL"  # NOQA
-tests/view_tests/tests/test_debug.py:1111:13   - Unknown word (oomvalue)            -- oomvalue = OomOutput()  # NOQA
-tests/view_tests/tests/test_debug.py:1129:13   - Unknown word (largevalue)          -- largevalue = LargeOutput()  # NOQA
-tests/view_tests/tests/test_debug.py:1146:39   - Unknown word (mnὀp)                -- safe("abcdefghijkl<p>mnὀp</p>qrstuwxyz").encode
-tests/view_tests/tests/test_debug.py:1146:47   - Unknown word (qrstuwxyz)           -- abcdefghijkl<p>mnὀp</p>qrstuwxyz").encode("ascii")
-tests/view_tests/tests/test_debug.py:1153:41   - Unknown word (mnὀp)                -- assertIn("<strong>&lt;p&gt;mnὀp&lt;/p&gt;</strong>"
-tests/view_tests/tests/test_debug.py:1219:24   - Unknown word (filecontent)         -- fp = StringIO("filecontent")
-tests/view_tests/tests/test_debug.py:1358:9    - Unknown word (templ)               -- templ_path = Path(
-tests/view_tests/tests/test_debug.py:1367:34   - Unknown word (templ)               -- 3 : " % {"path": templ_path},
-tests/view_tests/tests/test_debug.py:1387:24   - Unknown word (filecontent)         -- fp = StringIO("filecontent")
-tests/view_tests/tests/test_debug.py:1989:45   - Unknown word (djangosession)       -- SESSION_COOKIE_NAME="djangosession")
-tests/view_tests/tests/test_debug.py:1991:36   - Unknown word (djangosession)       -- client.cookies.load({"djangosession": "should not be displayed
+tests/view_tests/tests/test_debug.py:1080:13   - Unknown word (somevar)    -- somevar = b"VAL\xe9VAL"  # NOQA
+tests/view_tests/tests/test_debug.py:1111:13   - Unknown word (oomvalue)   -- oomvalue = OomOutput()  # NOQA
+tests/view_tests/tests/test_debug.py:1129:13   - Unknown word (largevalue) -- largevalue = LargeOutput()  # NOQA
+tests/view_tests/tests/test_debug.py:1146:39   - Unknown word (mnὀp)       -- safe("abcdefghijkl<p>mnὀp</p>qrstuwxyz").encode
+tests/view_tests/tests/test_debug.py:1146:47   - Unknown word (qrstuwxyz)  -- abcdefghijkl<p>mnὀp</p>qrstuwxyz").encode("ascii")
+tests/view_tests/tests/test_debug.py:1153:41   - Unknown word (mnὀp)       -- assertIn("<strong>&lt;p&gt;mnὀp&lt;/p&gt;</strong>"
+tests/view_tests/tests/test_debug.py:1219:24   - Unknown word (filecontent) -- fp = StringIO("filecontent")
+tests/view_tests/tests/test_debug.py:1358:9    - Unknown word (templ)       -- templ_path = Path(
+tests/view_tests/tests/test_debug.py:1367:34   - Unknown word (templ)       -- 3 : " % {"path": templ_path},
+tests/view_tests/tests/test_debug.py:1387:24   - Unknown word (filecontent) -- fp = StringIO("filecontent")
+tests/view_tests/tests/test_debug.py:1989:45   - Unknown word (djangosession) -- SESSION_COOKIE_NAME="djangosession")
+tests/view_tests/tests/test_debug.py:1991:36   - Unknown word (djangosession) -- client.cookies.load({"djangosession": "should not be displayed
 tests/view_tests/tests/test_debug.py:633:55    - Unknown word (pasteform)  -- /dpaste.com/" name="pasteform" '
 tests/view_tests/tests/test_debug.py:634:18    - Unknown word (pasteform)  -- 'id="pasteform" method="post">',
 tests/view_tests/tests/test_debug.py:71:8      - Unknown word (Unittests)  -- """Unittests for CallableSettingWrapper
 tests/view_tests/tests/test_debug.py:828:34    - Unknown word (pastebin)   -- one as plain text (for pastebin)
-tests/view_tests/tests/test_debug.py:844:28    - Unknown word (PYTHONNODEBUGRANGES) -- or os.environ.get("PYTHONNODEBUGRANGES", False),
-tests/view_tests/tests/test_debug.py:879:11    - Unknown word (Pastebin)            -- # Pastebin.
+tests/view_tests/tests/test_debug.py:879:11    - Unknown word (Pastebin)   -- # Pastebin.
 tests/view_tests/tests/test_debug.py:93:68     - Unknown word (haha)       -- loadedFile("file_data.txt", b"haha"),
 tests/view_tests/tests/test_debug.py:98:43     - Unknown word (haha)       -- assertNotContains(response, "haha", status_code=500)
 tests/view_tests/tests/test_defaults.py:168:50    - Unknown word (urlarticle) -- objects.get(pk=self.urlarticle.pk)
