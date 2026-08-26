@@ -52,7 +52,7 @@ runs:
       if: env.git_status == 'dirty'
       uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 #v3.2.0
       with:
-        app-id: ${{ inputs.app_id }}
+        client-id: ${{ inputs.app_id }}
         private-key: ${{ inputs.app_private_key }}
 
     - name: Create Pull Request
