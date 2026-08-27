@@ -279,6 +279,14 @@ async function determineFilesToCheck(
 ): Promise<FilesToCheck> {
     let skippedFiles = 0;
 
+    function countSkippedFiles(fn: (file: string) => boolean) {
+        return (file: string) => {
+            const skipped = fn(file);
+            if (skipped) skippedFiles++;
+            return skipped;
+        };
+    }
+
     async function _determineFilesToCheck(): Promise<FileToProcess[] | AsyncIterable<FileToProcess>> {
         const { fileLists } = cfg;
         const hasFileLists = !!fileLists.length;
@@ -309,12 +317,13 @@ async function determineFilesToCheck(
 
         const opFilterExcludedFiles = opFilter(filterOutExcludedFilesFn(globMatcher));
         const includeFilter = createIncludeFileFilterFn(allGlobs, root, enableGlobDot);
-        const rawCliFiles = cfg.files?.map((file) => resolveFilename(file, root)).filter(includeFilter);
+        const includeFilterCountSkipped = countSkippedFiles(includeFilter);
+        const rawCliFiles = cfg.files?.map((file) => resolveFilename(file, root)).filter(includeFilterCountSkipped);
         const cliFiles = cfg.options.mustFindFiles
             ? rawCliFiles
             : rawCliFiles && pipeAsync(rawCliFiles, opFilterAsync(isFile));
         const foundFiles = hasFileLists
-            ? concatAsyncIterables(cliFiles, await useFileLists(fileLists, includeFilter))
+            ? concatAsyncIterables(cliFiles, await useFileLists(fileLists, includeFilterCountSkipped))
             : cliFiles || (await findFiles(fileGlobs, globOptions));
         const filtered = gitIgnore ? await gitIgnore.filterOutIgnored(foundFiles) : foundFiles;
 
@@ -326,7 +335,6 @@ async function determineFilesToCheck(
 
     function isExcluded(filename: string, globMatcherExclude: GlobMatcher): boolean {
         if (cspellIsBinaryFile(toFileURL(filename))) {
-            skippedFiles++;
             return true;
         }
         if (cfg.options.forceCheck) {
@@ -337,7 +345,6 @@ async function determineFilesToCheck(
         const r = globMatcherExclude.matchEx(absFilename);
 
         if (r.matched) {
-            skippedFiles++;
             const { glob, source } = extractGlobSource(r.pattern);
             if (calcVerboseLevel(cfg.options) > 0) {
                 reporter.info(
