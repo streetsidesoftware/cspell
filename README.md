@@ -119,6 +119,7 @@ Contributions are welcome! See our [contribution notes](CONTRIBUTING.md). **Note
 <!--- cspell:disable --->
 
 [<img alt="Contributor Jason3S" src="https://avatars.githubusercontent.com/u/3740137?v=4&size=128" width=64>](https://github.com/Jason3S)
+[<img alt="Contributor webdeveric" src="https://avatars.githubusercontent.com/u/1823514?v=4&size=128" width=64>](https://github.com/webdeveric)
 [<img alt="Contributor liujiayang2026" src="https://avatars.githubusercontent.com/u/265441657?v=4&size=128" width=64>](https://github.com/liujiayang2026)
 [<img alt="Contributor lonix1" src="https://avatars.githubusercontent.com/u/40320097?v=4&size=128" width=64>](https://github.com/lonix1)
 [<img alt="Contributor conorbronsdon" src="https://avatars.githubusercontent.com/u/120674402?v=4&size=128" width=64>](https://github.com/conorbronsdon)
