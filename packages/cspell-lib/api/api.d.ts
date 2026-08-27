@@ -838,6 +838,10 @@ interface DocumentValidatorOptions extends ValidateTextOptions {
    * If not set, the current working directory will be used.
    */
   resolveImportsRelativeTo?: string | URL;
+  /**
+   * If true, the document will be checked even if it would normally be excluded.
+   */
+  forceCheck?: boolean;
 }
 type PerfTimings = Record<string, number>;
 declare class DocumentValidator {

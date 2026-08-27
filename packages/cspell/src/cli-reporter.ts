@@ -288,7 +288,7 @@ export function getReporter(options: ReporterOptions, config?: CSpellReporterCon
     }
 
     const resultEmitter = (result: RunResult) => {
-        if (!fileGlobs.length && !result.files) {
+        if (!fileGlobs.length && !result.files && !result.skippedFiles && !result.errors && !result.issues) {
             return;
         }
         const { files, issues, cachedFiles, filesWithIssues, errors, skippedFiles } = result;

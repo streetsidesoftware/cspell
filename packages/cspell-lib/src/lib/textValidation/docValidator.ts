@@ -77,6 +77,11 @@ export interface DocumentValidatorOptions extends ValidateTextOptions {
      * If not set, the current working directory will be used.
      */
     resolveImportsRelativeTo?: string | URL;
+
+    /**
+     * If true, the document will be checked even if it would normally be excluded.
+     */
+    forceCheck?: boolean;
 }
 
 const ERROR_NOT_PREPARED = 'Validator Must be prepared before calling this function.';
@@ -188,7 +193,7 @@ export class DocumentValidator {
         const recShouldCheckTime = recordPerfTime(this.perfTiming, '_shouldCheck');
 
         // eslint-disable-next-line unicorn/prefer-regexp-test
-        const shouldCheck = !matcher.match(uriToFilePath(uri)) && (docSettings.enabled ?? true);
+        const shouldCheck = options.forceCheck || (!matcher.match(uriToFilePath(uri)) && (docSettings.enabled ?? true));
 
         recShouldCheckTime();
 

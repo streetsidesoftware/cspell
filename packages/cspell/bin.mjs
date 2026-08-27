@@ -6,6 +6,7 @@ import { CommanderError, program } from 'commander';
 import { ApplicationError, CheckFailed, run } from './dist/esm/app.js';
 
 run(program, process.argv).catch((e) => {
+    process.exitCode = process.exitCode || 1;
     if (!(e instanceof CommanderError) && !(e instanceof CheckFailed)) {
         const verbose = process.argv.includes('--verbose') || process.argv.includes('-v');
         const msg = !verbose && e instanceof ApplicationError ? e.message : format(e);

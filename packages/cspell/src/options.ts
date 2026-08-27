@@ -400,6 +400,14 @@ export interface LinterCliOptions extends LinterOptions {
      */
     stopConfigSearchAt?: string[];
 
+    /**
+     * Force the document to be checked even if it would normally be excluded.
+     */
+    forceCheck?: boolean;
+
+    /**
+     * Which issues to report. If not set, all issues are reported.
+     */
     report?: ReportChoices | undefined;
 }
 

@@ -141,7 +141,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
 
         try {
             const cacheSettings = await calcCacheSettings(configInfo.config, { ...cfg.options, version }, root);
-            const files = await determineFilesToCheck(configInfo, cfg, reporter, globInfo);
+            const { files, skippedFiles } = await determineFilesToCheck(configInfo, cfg, reporter, globInfo);
 
             const processFilesOptions: ProcessFilesOptions = {
                 chalk,
@@ -159,6 +159,8 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             if (configErrorCount && cfg.options.exitCode !== false) {
                 result.errors ||= configErrorCount;
             }
+            result.files += skippedFiles;
+            result.skippedFiles = (result.skippedFiles ?? 0) + skippedFiles;
             debugStats && console.error('stats: %o', getDefaultConfigLoader().getStats());
             return result;
         } catch (e) {
@@ -264,12 +266,19 @@ function filesToProcess(files: Iterable<string>): FileToProcess[] {
     return filenames.map((filename, sequence) => ({ filename, sequence, sequenceSize }));
 }
 
+interface FilesToCheck {
+    files: FileToProcess[] | AsyncIterable<FileToProcess>;
+    skippedFiles: number;
+}
+
 async function determineFilesToCheck(
     configInfo: ConfigInfo,
     cfg: LintRequest,
     reporter: FinalizedReporter,
     globInfo: AppGlobInfo,
-): Promise<FileToProcess[] | AsyncIterable<FileToProcess>> {
+): Promise<FilesToCheck> {
+    let skippedFiles = 0;
+
     async function _determineFilesToCheck(): Promise<FileToProcess[] | AsyncIterable<FileToProcess>> {
         const { fileLists } = cfg;
         const hasFileLists = !!fileLists.length;
@@ -317,15 +326,20 @@ async function determineFilesToCheck(
 
     function isExcluded(filename: string, globMatcherExclude: GlobMatcher): boolean {
         if (cspellIsBinaryFile(toFileURL(filename))) {
+            skippedFiles++;
             return true;
+        }
+        if (cfg.options.forceCheck) {
+            return false;
         }
         const { root } = cfg;
         const absFilename = path.resolve(root, filename);
         const r = globMatcherExclude.matchEx(absFilename);
 
         if (r.matched) {
+            skippedFiles++;
             const { glob, source } = extractGlobSource(r.pattern);
-            if (calcVerboseLevel(cfg.options) > 1) {
+            if (calcVerboseLevel(cfg.options) > 0) {
                 reporter.info(
                     `Excluded File: ${path.relative(root, absFilename)}; Excluded by ${glob} from ${source}`,
                     MessageTypes.Info,
@@ -349,7 +363,8 @@ async function determineFilesToCheck(
         return (filename: string): boolean => !isExcluded(filename, globMatcherExclude);
     }
 
-    return _determineFilesToCheck();
+    const files = await _determineFilesToCheck();
+    return { files, skippedFiles };
 }
 
 interface GlobAndSource {

@@ -115,6 +115,10 @@ export function commandLint(prog: Command, opts: CommandOptions): Command {
         )
         .option('--file [file...]', 'Specify files to spell check. They are filtered by the [globs...].', collect)
         .addOption(crOpt('--files [file...]', 'Alias of "--file". Files to spell check.', collect).hideHelp())
+        .option(
+            '--force-check',
+            'Force the --file or --file-list documents to be checked even if it would normally be excluded.',
+        )
         .option('--no-issues', 'Do not show the spelling errors.')
         .option('--no-progress', 'Turn off progress messages')
         .option('--no-summary', 'Turn off summary message in console.')
@@ -213,7 +217,13 @@ async function action(this: Command, fileGlobs: string[], cliOptions: LinterCliC
     if (maxFileSizeErr) {
         this.error(`error: invalid option value for --max-file-size: ${maxFileSizeErr}`);
     }
-    const { mustFindFiles, fileList, files, file } = options;
+    const { mustFindFiles, fileList, files, file, forceCheck } = options;
+    if (forceCheck && !file?.length && !files?.length && !fileList?.length) {
+        this.error('error: --force-check requires --file, --files, or --file-list to be specified');
+    }
+    if (fileGlobs.length && (file?.length || files?.length)) {
+        this.error('error: mixing globs and --file is not supported');
+    }
     const result = await App.lint(fileGlobs, options);
     if (!fileGlobs.length && !result.files && !result.errors && !fileList && !files?.length && !file?.length) {
         this.outputHelp();

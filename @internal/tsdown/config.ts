@@ -6,13 +6,13 @@ export type { UserConfig } from 'tsdown';
 export { defineConfig } from 'tsdown';
 
 export const defaultDeps: DepsConfig = {
-    onlyAllowBundle: [],
+    onlyBundle: [],
 };
 
 export const defaultConfig: UserConfig = {
     outDir: 'dist',
     format: ['esm'],
-    target: 'Node20',
+    target: 'Node22',
     dts: true,
     sourcemap: true,
     clean: true,
@@ -39,7 +39,7 @@ export function createConfig(config: UserConfig | UserConfig[]): UserConfig | Us
  * const config = createConfig({
  *     entry: ['src/index.ts'],
  *     outDir: 'dist',
- *     ...deps({ onlyAllowBundle: ['gensequence'] }),
+ *     ...deps({ onlyBundle: ['gensequence'] }),
  * });
  * ```
  * @param deps - config to merge

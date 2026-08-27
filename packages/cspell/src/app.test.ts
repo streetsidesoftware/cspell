@@ -106,6 +106,14 @@ interface TestCase {
     eInfo: boolean;
 }
 
+interface ArgsTestCase {
+    args: string | string[];
+    errorCheck: ErrorCheck;
+    eError: boolean;
+    eLog: boolean;
+    eInfo: boolean;
+}
+
 class RecordStdStream {
     private static columnWidth = 80;
     private write = process.stdout.write.bind(process.stdout);
@@ -319,6 +327,31 @@ describe('Validate cli', () => {
         expect(logger.normalizedHistory()).toMatchSnapshot();
         expect(normalizeOutput(captureStderr.text)).toMatchSnapshot();
     });
+
+    test.each`
+        args                                        | errorCheck                                                                         | eError   | eLog     | eInfo
+        ${'lint --file package.json --force-check'} | ${undefined}                                                                       | ${true}  | ${false} | ${false}
+        ${'lint README.md --file package.json'}     | ${'error: mixing globs and --file is not supported'}                               | ${false} | ${false} | ${false}
+        ${'lint README.md --force-check'}           | ${'error: --force-check requires --file, --files, or --file-list to be specified'} | ${false} | ${false} | ${false}
+    `(
+        'app --force-check $args Expect Error: $errorCheck',
+        async ({ args: testArgs, errorCheck, eError, eLog, eInfo }: ArgsTestCase) => {
+            testArgs = typeof testArgs === 'string' ? testArgs.split(' ') : testArgs;
+            chalk.level = 1;
+            const commander = getCommander();
+            const args = argv(...testArgs);
+            const result = app.run(commander, args);
+            await (!errorCheck ? expect(result).resolves.toBeUndefined() : expect(result).rejects.toThrow(errorCheck));
+
+            eError ? expect(error).toHaveBeenCalled() : expect(error).not.toHaveBeenCalled();
+            eLog ? expect(log).toHaveBeenCalled() : expect(log).not.toHaveBeenCalled();
+            eInfo ? expect(info).toHaveBeenCalled() : expect(info).not.toHaveBeenCalled();
+
+            expect(captureStdout.text).toMatchSnapshot();
+            expect(logger.normalizedHistory()).toMatchSnapshot();
+            expect(normalizeOutput(captureStderr.text)).toMatchSnapshot();
+        },
+    );
 
     test.each`
         cmdArgs
