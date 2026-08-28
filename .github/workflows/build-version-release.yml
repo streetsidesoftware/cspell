@@ -12,6 +12,10 @@ on:
     secrets:
       PUBLISH_NPM:
         required: true
+      AUTOMATION_APP_ID:
+        required: true
+      AUTOMATION_PRIVATE_KEY:
+        required: true
     inputs:
       dry_run:
         description: 'Dry Run'
@@ -68,10 +72,17 @@ jobs:
       #   run: |
       #     pnpx envinfo --system --npmPackages '@lerna-lite/*' --binaries --browsers
 
+      - id: generate-token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 #v3.2.0
+        with:
+          client-id: ${{ secrets.AUTOMATION_APP_ID }}
+          private-key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
+
       - name: Push Version
         # TODO: support --sign-git-tag --sign-git-commit
         env:
           VERSION: ${{ steps.version.outputs.version }}
+          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
         run: pnpm lerna version "$VERSION" --no-private --sync-workspace-lock --no-changelog --yes $DRY_RUN
 
       - name: Convert Draft Release to Published
