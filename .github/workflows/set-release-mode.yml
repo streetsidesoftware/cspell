@@ -1,0 +1,53 @@
+name: '  👀 Set Prerelease'
+on: # rebuild any PRs and main branch changes
+  workflow_dispatch:
+    inputs:
+      prerelease:
+        type: boolean
+        description: Is prerelease?
+        default: true
+env:
+  BRANCH_NAME: update-prerelease-mode
+  NODE_VERSION: 24.x
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  set-prerelease-mode:
+    if: github.repository_owner == 'streetsidesoftware'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+
+      - name: Install Node.js
+        uses: ./.github/actions/setup-node
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - run: node ./scripts/set-prerelease-mode.mts ${{ inputs.prerelease }}
+
+      - name: Get Mode
+        id: prerelease-mode
+        uses: ./.github/actions/is-prerelease
+
+      - name: Show Args
+        uses: streetsidesoftware/actions/public/summary@v1
+        with:
+          text: |
+            # Prerelease Mode
+            ```
+            ${{ toJSON(steps.prerelease-mode.outputs) }}
+            ```
+
+      - name: PR
+        uses: peter-evans/create-pull-request@v8
+        with:
+          commit-message: 'chore: Set Prerelease Mode to `${{ inputs.prerelease }}`'
+          branch: ${{ env.BRANCH_NAME }}
+          base: main
+          title: 'chore: Set Prerelease Mode to `${{ inputs.prerelease }}`'
+          body: |
+            Set Prerelease Mode to `${{ inputs.prerelease }}`
+          token: ${{ secrets.GITHUB_TOKEN }}
