@@ -43,6 +43,7 @@ async function setReleaseMode(mode: PrereleaseMode): Promise<void> {
     const content = await fs.readFile(releaseDrafterConfigFile, 'utf8');
     const doc = parseDocument(content);
     doc.set('prerelease', mode === 'true');
+    doc.set('prerelease-identifier', mode === 'true' ? 'alpha' : '');
     await fs.writeFile(releaseDrafterConfigFile, doc.toString(), 'utf8');
 }
 
