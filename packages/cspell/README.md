@@ -165,6 +165,8 @@ Options:
                                  line.
   --file [file...]               Specify files to spell check. They are filtered
                                  by the [globs...].
+  --force-check                  Force the --file or --file-list documents to be
+                                 checked even if it would normally be excluded.
   --no-issues                    Do not show the spelling errors.
   --no-progress                  Turn off progress messages
   --no-summary                   Turn off summary message in console.
