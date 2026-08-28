@@ -32,17 +32,13 @@ jobs:
       - name: Set Prerelease Mode
         run: node ./scripts/set-prerelease-mode.mts ${{ inputs.prerelease }}
 
-      - name: Get Mode
-        id: prerelease-mode
-        uses: ./.github/actions/is-prerelease
-
       - name: Show Args
         uses: streetsidesoftware/actions/public/summary@v1
         with:
           text: |
             # Prerelease Mode
-            ```
-            ${{ toJSON(steps.prerelease-mode.outputs) }}
+            ```yaml
+              prerelease: ${{ inputs.prerelease }}
             ```
 
       - name: PR
