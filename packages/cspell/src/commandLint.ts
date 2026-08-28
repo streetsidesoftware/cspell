@@ -215,14 +215,14 @@ async function action(this: Command, fileGlobs: string[], cliOptions: LinterCliC
     options.color ??= canUseColor(options.color);
     const maxFileSizeErr = validateMaxFileSize(options.maxFileSize);
     if (maxFileSizeErr) {
-        this.error(`error: invalid option value for --max-file-size: ${maxFileSizeErr}`);
+        this.error(`error: invalid option value for --max-file-size: ${maxFileSizeErr}`, { exitCode: 1 });
     }
     const { mustFindFiles, fileList, files, file, forceCheck } = options;
     if (forceCheck && !file?.length && !files?.length && !fileList?.length) {
-        this.error('error: --force-check requires --file, --files, or --file-list to be specified');
+        this.error('error: --force-check requires --file, --files, or --file-list to be specified', { exitCode: 1 });
     }
     if (fileGlobs.length && (file?.length || files?.length)) {
-        this.error('error: mixing globs and --file is not supported');
+        this.error('error: mixing globs and --file is not supported', { exitCode: 1 });
     }
     const result = await App.lint(fileGlobs, options);
     if (!fileGlobs.length && !result.files && !result.errors && !fileList && !files?.length && !file?.length) {

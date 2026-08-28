@@ -309,7 +309,7 @@ async function determineFilesToCheck(
     async function determineFilesToCheckFromCliFiles(): Promise<FileToProcess[] | AsyncIterable<FileToProcess>> {
         const { fileLists } = cfg;
         const hasFileLists = !!fileLists.length;
-        const { allGlobs, excludeGlobs, normalizedExcludes } = globInfo;
+        const { gitIgnore, allGlobs, excludeGlobs, normalizedExcludes } = globInfo;
 
         // Get Exclusions from the config files.
         const { root } = cfg;
@@ -346,9 +346,11 @@ async function determineFilesToCheck(
             : cliFiles || [];
 
         const opFilterExcludedFiles = opFilter(filterOutExcludedFilesFn(globMatcher));
-        const files = isAsyncIterable(foundFiles)
-            ? pipeAsync(foundFiles, opFilterExcludedFiles, filesToProcessAsync)
-            : filesToProcess(pipe(foundFiles, opFilterExcludedFiles));
+        const filtered =
+            !cfg.options.forceCheck && gitIgnore ? await gitIgnore.filterOutIgnored(foundFiles) : foundFiles;
+        const files = isAsyncIterable(filtered)
+            ? pipeAsync(filtered, opFilterExcludedFiles, filesToProcessAsync)
+            : filesToProcess(pipe(filtered, opFilterExcludedFiles));
 
         return files;
     }
