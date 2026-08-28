@@ -92,10 +92,11 @@ jobs:
             - **Version**: `${{ steps.version.outputs.version }}`
             - **Dry Run**: `${{ inputs.dry_run }}`
 
-  publish_version:
-    if: github.repository_owner == 'streetsidesoftware' && !inputs.dry_run
-    needs: release_version
-    uses: ./.github/workflows/publish.yml
-    secrets:
-      PUBLISH_NPM: ${{ secrets.PUBLISH_NPM }}
+  # publish_version:
+  #   if: github.repository_owner == 'streetsidesoftware' && !inputs.dry_run
+  #   needs: release_version
+  #   uses: ./.github/workflows/publish.yml
+  #   secrets:
+  #     PUBLISH_NPM: ${{ secrets.PUBLISH_NPM }}
+
 # cspell:ignore pnpx envinfo conventionalcommits
