@@ -12,6 +12,7 @@ import path from 'node:path';
 
 import { parseDocument } from 'yaml';
 
+// eslint-disable-next-line n/no-unsupported-features/node-builtins
 const __dirname = import.meta.dirname;
 
 const releaseDrafterConfigFile = path.join(__dirname, '../.github/release-drafter.yml');
