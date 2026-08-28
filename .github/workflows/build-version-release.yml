@@ -46,6 +46,7 @@ jobs:
         with:
           fetch-depth: 0
           ref: main
+          persist-credentials: false
 
       - name: Setup Node and Pnpm
         uses: ./.github/actions/setup-node
@@ -58,12 +59,9 @@ jobs:
           echo version=$(jq -r .version .release.json) >> $GITHUB_OUTPUT
 
       - name: Setup Git
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name streetsidesoftware[bot]
           git config user.email streetsidesoftware[bot]@users.noreply.github.com
-          git remote add gh-token "https://${GITHUB_TOKEN}@github.com/streetsidesoftware/cspell.git"
 
       - name: Install and Build
         run: pnpm i
@@ -80,10 +78,16 @@ jobs:
 
       - name: Push Version
         # TODO: support --sign-git-tag --sign-git-commit
+        # Use the GitHub App token (not the default GITHUB_TOKEN) to push the
+        # version commit and tag: pushes made with the default GITHUB_TOKEN do
+        # not trigger other workflows, so the tag push would never fire
+        # publish.yml's `push: tags: v*` trigger.
         env:
           VERSION: ${{ steps.version.outputs.version }}
           GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
-        run: pnpm lerna version "$VERSION" --no-private --sync-workspace-lock --no-changelog --yes $DRY_RUN
+        run: |
+          git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/streetsidesoftware/cspell.git"
+          pnpm lerna version "$VERSION" --no-private --sync-workspace-lock --no-changelog --yes $DRY_RUN
 
       - name: Convert Draft Release to Published
         if: ${{ !inputs.dry_run }}
