@@ -21,6 +21,12 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - No changes
 
+## v10.2.0-alpha.2 (2026-08-28)
+
+### Fixes
+
+- fix(ci): push release tag with GitHub App token so publish.yml triggers (<a href="https://github.com/streetsidesoftware/cspell/pull/9097">#9097</a>)
+
 ## v10.1.1 (2026-08-25)
 
 ### Fixes
