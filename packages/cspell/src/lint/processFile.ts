@@ -97,13 +97,19 @@ export async function processFile(
 
     let spellResult: Partial<SpellCheckFileResult> = {};
     try {
-        const { showSuggestions: generateSuggestions, validateDirectives, skipValidation } = cfg.options;
+        const {
+            showSuggestions: generateSuggestions,
+            validateDirectives,
+            skipValidation,
+            forceCheck: force,
+        } = cfg.options;
         const numSuggestions = configInfo.config.numSuggestions ?? 5;
         const validateOptions = util.clean({
             generateSuggestions,
             numSuggestions,
             validateDirectives,
             skipValidation,
+            force,
         });
         const r = await spellCheckDocument(doc, validateOptions, userSettings);
         // console.warn('filename: %o %o', path.relative(process.cwd(), filename), r.perf);

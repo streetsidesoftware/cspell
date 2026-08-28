@@ -226,6 +226,13 @@ function processMaxFileSize(value: number | string | undefined): number | undefi
 }
 
 export function runResult(init: Partial<RunResult> = {}): RunResult {
-    const { files = 0, filesWithIssues = new Set<string>(), issues = 0, errors = 0, cachedFiles = 0 } = init;
-    return { files, filesWithIssues, issues, errors, cachedFiles };
+    const {
+        files = 0,
+        filesWithIssues = new Set<string>(),
+        issues = 0,
+        errors = 0,
+        cachedFiles = 0,
+        skippedFiles = 0,
+    } = init;
+    return { files, filesWithIssues, issues, errors, cachedFiles, skippedFiles };
 }

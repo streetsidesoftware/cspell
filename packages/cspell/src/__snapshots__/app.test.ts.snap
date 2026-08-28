@@ -100,7 +100,7 @@ exports[`Validate cli > app '--fail-fast with config' Expect Error: [Function Ch
 error
 log	first-fail.txt:1:1 - Unknown word (iamtypo)
 log
-error	CSpell: Files checked: 1, Issues found: 1 in 1 file.
+error	CSpell: Files checked: 1, skipped: 1, Issues found: 1 in 1 file.
 error"
 `;
 
@@ -113,7 +113,7 @@ exports[`Validate cli > app '--fail-fast with option' Expect Error: [Function Ch
 error
 log	first-fail.txt:1:1 - Unknown word (iamtypo)
 log
-error	CSpell: Files checked: 1, Issues found: 1 in 1 file.
+error	CSpell: Files checked: 1, skipped: 1, Issues found: 1 in 1 file.
 error"
 `;
 
@@ -1014,6 +1014,8 @@ exports[`Validate cli > app 'no-args' Expect Error: 'outputHelp' 1`] = `
   "                                 line.",
   "  --file [file...]               Specify files to spell check. They are filtered",
   "                                 by the [globs...].",
+  "  --force-check                  Force the --file or --file-list documents to be",
+  "                                 checked even if it would normally be excluded.",
   "  --no-issues                    Do not show the spelling errors.",
   "  --no-progress                  Turn off progress messages",
   "  --no-summary                   Turn off summary message in console.",
@@ -3823,6 +3825,35 @@ error"
 
 exports[`Validate cli > app 'with spelling errors Dutch.txt' Expect Error: [Function CheckFailed] 3`] = `""`;
 
+exports[`Validate cli > app --force-check 'lint --file package.json --force-check' Expect Error: undefined 1`] = `[]`;
+
+exports[`Validate cli > app --force-check 'lint --file package.json --force-check' Expect Error: undefined 2`] = `
+"error	1/1 package.json 0.00ms
+error
+error	CSpell: Files checked: 1, Issues found: 0 in 0 files.
+error"
+`;
+
+exports[`Validate cli > app --force-check 'lint --file package.json --force-check' Expect Error: undefined 3`] = `""`;
+
+exports[`Validate cli > app --force-check 'lint README.md --file package.json' Expect Error: 'error: mixing globs and --file is not supported' 1`] = `[]`;
+
+exports[`Validate cli > app --force-check 'lint README.md --file package.json' Expect Error: 'error: mixing globs and --file is not supported' 2`] = `""`;
+
+exports[`Validate cli > app --force-check 'lint README.md --file package.json' Expect Error: 'error: mixing globs and --file is not supported' 3`] = `
+"error: mixing globs and --file is not supported
+"
+`;
+
+exports[`Validate cli > app --force-check 'lint README.md --force-check' Expect Error: 'error: --force-check requires --file, --files, or --file-list to be specified' 1`] = `[]`;
+
+exports[`Validate cli > app --force-check 'lint README.md --force-check' Expect Error: 'error: --force-check requires --file, --files, or --file-list to be specified' 2`] = `""`;
+
+exports[`Validate cli > app --force-check 'lint README.md --force-check' Expect Error: 'error: --force-check requires --file, --files, or --file-list to be specified' 3`] = `
+"error: --force-check requires --file, --files, or --file-list to be specified
+"
+`;
+
 exports[`Validate cli > app dictionary [ 'dictionaries' ] 1`] = `[]`;
 
 exports[`Validate cli > app dictionary [ 'dictionaries' ] 2`] = `
@@ -4328,6 +4359,8 @@ exports[`Validate cli > app help [ 'lint', '--help' ] 1`] = `
   "                                 line.",
   "  --file [file...]               Specify files to spell check. They are filtered",
   "                                 by the [globs...].",
+  "  --force-check                  Force the --file or --file-list documents to be",
+  "                                 checked even if it would normally be excluded.",
   "  --no-issues                    Do not show the spelling errors.",
   "  --no-progress                  Turn off progress messages",
   "  --no-summary                   Turn off summary message in console.",
@@ -4462,6 +4495,8 @@ exports[`Validate cli > app help [ 'lint', '--help', '--issue-template' ] 1`] = 
   "                                 line.",
   "  --file [file...]               Specify files to spell check. They are filtered",
   "                                 by the [globs...].",
+  "  --force-check                  Force the --file or --file-list documents to be",
+  "                                 checked even if it would normally be excluded.",
   "  --no-issues                    Do not show the spelling errors.",
   "  --no-progress                  Turn off progress messages",
   "  --no-summary                   Turn off summary message in console.",
@@ -4623,6 +4658,8 @@ exports[`Validate cli > app help [ 'lint', '--help', '--verbose' ] 1`] = `
   "                                 line.",
   "  --file [file...]               Specify files to spell check. They are filtered",
   "                                 by the [globs...].",
+  "  --force-check                  Force the --file or --file-list documents to be",
+  "                                 checked even if it would normally be excluded.",
   "  --no-issues                    Do not show the spelling errors.",
   "  --no-progress                  Turn off progress messages",
   "  --no-summary                   Turn off summary message in console.",

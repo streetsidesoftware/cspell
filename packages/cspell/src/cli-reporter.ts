@@ -288,10 +288,10 @@ export function getReporter(options: ReporterOptions, config?: CSpellReporterCon
     }
 
     const resultEmitter = (result: RunResult) => {
-        if (!fileGlobs.length && !result.files) {
+        const { files, issues, cachedFiles, filesWithIssues, errors, skippedFiles } = result;
+        if (!fileGlobs.length && !files && !skippedFiles && !errors && !issues) {
             return;
         }
-        const { files, issues, cachedFiles, filesWithIssues, errors, skippedFiles } = result;
         const numFilesWithIssues = filesWithIssues.size;
         const chalk = stderr.chalk;
 

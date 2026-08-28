@@ -6,7 +6,7 @@ const baseConfig: UserConfig = {
     outDir: 'dist',
     fixedExtension: false,
     platform: 'neutral',
-    ...deps({ onlyAllowBundle: ['gensequence'] }),
+    ...deps({ onlyBundle: ['gensequence'] }),
 };
 
 const config: UserConfig[] = createConfig([baseConfig]);

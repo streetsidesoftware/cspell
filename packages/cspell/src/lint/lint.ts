@@ -141,7 +141,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
 
         try {
             const cacheSettings = await calcCacheSettings(configInfo.config, { ...cfg.options, version }, root);
-            const files = await determineFilesToCheck(configInfo, cfg, reporter, globInfo);
+            const filesToCheck = await determineFilesToCheck(configInfo, cfg, reporter, globInfo);
 
             const processFilesOptions: ProcessFilesOptions = {
                 chalk,
@@ -155,10 +155,13 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
                 cacheSettings,
             };
 
-            const result = await processFiles(files, processFilesOptions);
+            const result = await processFiles(filesToCheck.files, processFilesOptions);
             if (configErrorCount && cfg.options.exitCode !== false) {
                 result.errors ||= configErrorCount;
             }
+            const skippedFiles = Math.max(0, filesToCheck.numFiles - result.files);
+            result.files += skippedFiles;
+            result.skippedFiles = (result.skippedFiles || 0) + skippedFiles;
             debugStats && console.error('stats: %o', getDefaultConfigLoader().getStats());
             return result;
         } catch (e) {
@@ -264,16 +267,96 @@ function filesToProcess(files: Iterable<string>): FileToProcess[] {
     return filenames.map((filename, sequence) => ({ filename, sequence, sequenceSize }));
 }
 
+interface FilesToCheck {
+    files: FileToProcess[] | AsyncIterable<FileToProcess>;
+    /**
+     * The total number of files considered for linting.
+     * This number is ONLY valid after `files` has been consumed.
+     */
+    numFiles: number;
+}
+
 async function determineFilesToCheck(
     configInfo: ConfigInfo,
     cfg: LintRequest,
     reporter: FinalizedReporter,
     globInfo: AppGlobInfo,
-): Promise<FileToProcess[] | AsyncIterable<FileToProcess>> {
+): Promise<FilesToCheck> {
+    const result: FilesToCheck = {
+        files: [],
+        numFiles: 0,
+    };
+
+    function countFiles<T>(fnKeep?: (file: T) => boolean) {
+        if (!fnKeep)
+            return () => {
+                result.numFiles++;
+                return true;
+            };
+        return (file: T) => {
+            // console.warn('Counting file: %o', file);
+            result.numFiles++;
+            return fnKeep(file);
+        };
+    }
+
     async function _determineFilesToCheck(): Promise<FileToProcess[] | AsyncIterable<FileToProcess>> {
+        return !cfg.fileLists?.length && !cfg.files?.length
+            ? determineFilesToCheckFromGlobs()
+            : determineFilesToCheckFromCliFiles();
+    }
+
+    async function determineFilesToCheckFromCliFiles(): Promise<FileToProcess[] | AsyncIterable<FileToProcess>> {
         const { fileLists } = cfg;
         const hasFileLists = !!fileLists.length;
-        const { allGlobs, gitIgnore, fileGlobs, excludeGlobs, normalizedExcludes } = globInfo;
+        const { gitIgnore, allGlobs, excludeGlobs, normalizedExcludes } = globInfo;
+
+        // Get Exclusions from the config files.
+        const { root } = cfg;
+        const globsToExcludeRaw = [...(configInfo.config.ignorePaths || []), ...excludeGlobs];
+        const globsToExclude = globsToExcludeRaw.filter((g) => !globPattern(g).startsWith('!'));
+        if (globsToExclude.length !== globsToExcludeRaw.length) {
+            const globs = globsToExcludeRaw.map((g) => globPattern(g)).filter((g) => g.startsWith('!'));
+            const msg = `Negative glob exclusions are not supported: ${globs.join(', ')}`;
+            reporter.info(msg, MessageTypes.Warning);
+        }
+        const globMatcher = buildGlobMatcher(globsToExclude, root, true);
+        const ignoreGlobs = extractGlobsFromMatcher(globMatcher);
+        // cspell:word nodir
+        const globOptions: GlobOptions = {
+            root,
+            cwd: root,
+            ignore: [...ignoreGlobs, ...normalizedExcludes],
+            nodir: true,
+        };
+        const enableGlobDot = cfg.enableGlobDot ?? configInfo.config.enableGlobDot;
+        if (enableGlobDot !== undefined) {
+            globOptions.dot = enableGlobDot;
+        }
+
+        const includeFilter = createIncludeFileFilterFn(allGlobs, root, enableGlobDot);
+        const includeFilterCountSkipped = countFiles(includeFilter);
+        const rawCliFiles = cfg.files?.map((file) => resolveFilename(file, root)).filter(includeFilterCountSkipped);
+        const cliFiles = cfg.options.mustFindFiles
+            ? rawCliFiles
+            : rawCliFiles && pipeAsync(rawCliFiles, opFilterAsync(isFile));
+
+        const foundFiles = hasFileLists
+            ? concatAsyncIterables(cliFiles, await useFileLists(fileLists, includeFilterCountSkipped))
+            : cliFiles || [];
+
+        const opFilterExcludedFiles = opFilter(filterOutExcludedFilesFn(globMatcher));
+        const filtered =
+            !cfg.options.forceCheck && gitIgnore ? await gitIgnore.filterOutIgnored(foundFiles) : foundFiles;
+        const files = isAsyncIterable(filtered)
+            ? pipeAsync(filtered, opFilterExcludedFiles, filesToProcessAsync)
+            : filesToProcess(pipe(filtered, opFilterExcludedFiles));
+
+        return files;
+    }
+
+    async function determineFilesToCheckFromGlobs(): Promise<FileToProcess[] | AsyncIterable<FileToProcess>> {
+        const { gitIgnore, fileGlobs, excludeGlobs, normalizedExcludes } = globInfo;
 
         // Get Exclusions from the config files.
         const { root } = cfg;
@@ -299,19 +382,13 @@ async function determineFilesToCheck(
         }
 
         const opFilterExcludedFiles = opFilter(filterOutExcludedFilesFn(globMatcher));
-        const includeFilter = createIncludeFileFilterFn(allGlobs, root, enableGlobDot);
-        const rawCliFiles = cfg.files?.map((file) => resolveFilename(file, root)).filter(includeFilter);
-        const cliFiles = cfg.options.mustFindFiles
-            ? rawCliFiles
-            : rawCliFiles && pipeAsync(rawCliFiles, opFilterAsync(isFile));
-        const foundFiles = hasFileLists
-            ? concatAsyncIterables(cliFiles, await useFileLists(fileLists, includeFilter))
-            : cliFiles || (await findFiles(fileGlobs, globOptions));
+        const foundFiles = await findFiles(fileGlobs, globOptions);
         const filtered = gitIgnore ? await gitIgnore.filterOutIgnored(foundFiles) : foundFiles;
 
         const files = isAsyncIterable(filtered)
-            ? pipeAsync(filtered, opFilterExcludedFiles, filesToProcessAsync)
-            : filesToProcess(pipe(filtered, opFilterExcludedFiles));
+            ? pipeAsync(filtered, opFilterExcludedFiles, filesToProcessAsync, opFilter(countFiles()))
+            : filesToProcess(pipe(filtered, opFilterExcludedFiles)).filter(countFiles());
+
         return files;
     }
 
@@ -319,13 +396,16 @@ async function determineFilesToCheck(
         if (cspellIsBinaryFile(toFileURL(filename))) {
             return true;
         }
+        if (cfg.options.forceCheck) {
+            return false;
+        }
         const { root } = cfg;
         const absFilename = path.resolve(root, filename);
         const r = globMatcherExclude.matchEx(absFilename);
 
         if (r.matched) {
             const { glob, source } = extractGlobSource(r.pattern);
-            if (calcVerboseLevel(cfg.options) > 1) {
+            if (calcVerboseLevel(cfg.options) > 0) {
                 reporter.info(
                     `Excluded File: ${path.relative(root, absFilename)}; Excluded by ${glob} from ${source}`,
                     MessageTypes.Info,
@@ -349,7 +429,8 @@ async function determineFilesToCheck(
         return (filename: string): boolean => !isExcluded(filename, globMatcherExclude);
     }
 
-    return _determineFilesToCheck();
+    result.files = await _determineFilesToCheck();
+    return result;
 }
 
 interface GlobAndSource {

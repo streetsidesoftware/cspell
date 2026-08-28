@@ -13,7 +13,7 @@ run(program, process.argv).catch((e) => {
         // It is possible an explicit exit code was set, use it if it was.
         process.exitCode = process.exitCode || 1;
     }
-    if (e instanceof CheckFailed) {
+    if (e instanceof CheckFailed || e instanceof CommanderError) {
         process.exitCode = e.exitCode;
     }
 });

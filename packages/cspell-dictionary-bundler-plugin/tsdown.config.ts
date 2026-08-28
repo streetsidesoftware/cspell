@@ -6,7 +6,7 @@ const baseConfig: UserConfig = {
     outDir: 'dist',
     format: ['esm'],
     deps: {
-        onlyAllowBundle: false,
+        onlyBundle: false,
     },
 };
 
