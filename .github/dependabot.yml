@@ -21,6 +21,11 @@ updates:
         update-types:
           - minor
           - patch
+    allow:
+      - dependency-name: '@types/node'
+        update-types:
+          - version-update:semver-patch
+          - version-update:semver-minor
 
   - package-ecosystem: 'github-actions'
     # Workflow files stored in the
