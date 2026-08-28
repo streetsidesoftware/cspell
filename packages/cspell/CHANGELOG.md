@@ -77,6 +77,10 @@ The `pnpm test` script was failing locally due to my `~/.npmrc` having `ignore-s
 
 </details>
 
+## v10.2.0-alpha.1 (2026-08-28)
+
+- No changes
+
 ## v10.1.1 (2026-08-25)
 
 ### Fixes
