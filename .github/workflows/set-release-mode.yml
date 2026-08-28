@@ -26,7 +26,11 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - run: node ./scripts/set-prerelease-mode.mts ${{ inputs.prerelease }}
+      - name: Install Dependencies
+        run: pnpm ci
+
+      - name: Set Prerelease Mode
+        run: node ./scripts/set-prerelease-mode.mts ${{ inputs.prerelease }}
 
       - name: Get Mode
         id: prerelease-mode
