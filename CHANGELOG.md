@@ -3,6 +3,80 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v10.2.0-alpha.0 (2026-08-28)
+
+### Features
+
+<details>
+<summary>feat: Add `--force-check` cli option (<a href="https://github.com/streetsidesoftware/cspell/pull/9080">#9080</a>)</summary>
+
+### feat: Add `--force-check` cli option ([#9080](https://github.com/streetsidesoftware/cspell/pull/9080))
+
+This pull request introduces a new `--force-check` option to the CLI, allowing users to force specific files to be checked even if they would normally be excluded. It also standardizes dependency configuration naming, improves error handling and reporting for the CLI, and updates TypeScript target versions in config files. The most important changes are grouped below.
+
+**New CLI Feature: Force Check**
+
+- Added a `--force-check` option to the `lint` command, allowing files specified with `--file`, `--files`, or `--file-list` to be checked even if they would normally be excluded. This includes updates to the CLI interface, validation logic, and documentation/help output. [\[1\]](diffhunk://#diff-38a56740ba7522444717e53cdaf593980c2527964b07a05aaab07340e0d015a7R118-R121) [\[2\]](diffhunk://#diff-38a56740ba7522444717e53cdaf593980c2527964b07a05aaab07340e0d015a7L216-R226) [\[3\]](diffhunk://#diff-05d4916cc710922aec6dff5f7d5849852864fd844bda27afd042fabd511615deR80-R84) [\[4\]](diffhunk://#diff-05d4916cc710922aec6dff5f7d5849852864fd844bda27afd042fabd511615deL191-R196) [\[5\]](diffhunk://#diff-a0fc773e2c6532cc5fdf360dc95f2c1d33c6f96b743094a5ab2b1f1d96c11440R403-R410)
+- Implemented logic in the file determination and processing flow to honor the `forceCheck` flag, ensuring excluded files can be checked when requested, and updated reporting of skipped files. [\[1\]](diffhunk://#diff-0f04f6e0be4c776ea5d7956e8118ff955df92084a4dc434a4d5572fde3323f27L144-R144) [\[2\]](diffhunk://#diff-0f04f6e0be4c776ea5d7956e8118ff955df92084a4dc434a4d5572fde3323f27R162-R163) [\[3\]](diffhunk://#diff-0f04f6e0be4c776ea5d7956e8118ff955df92084a4dc434a4d5572fde3323f27R269-R281) [\[4\]](diffhunk://#diff-0f04f6e0be4c776ea5d7956e8118ff955df92084a4dc434a4d5572fde3323f27R329-R342) [\[5\]](diffhunk://#diff-0f04f6e0be4c776ea5d7956e8118ff955df92084a4dc434a4d5572fde3323f27L352-R367) [\[6\]](diffhunk://#diff-02c03bf65428035d02eb6561793ee281bbd609722d831c27c688b0865693a74dL100-R112)
+
+**CLI Error Handling and Testing**
+
+- Improved error handling for invalid combinations of CLI options (e.g., using `--force-check` without specifying files, or mixing globs and `--file`), with corresponding error messages and test cases. [\[1\]](diffhunk://#diff-38a56740ba7522444717e53cdaf593980c2527964b07a05aaab07340e0d015a7L216-R226) [\[2\]](diffhunk://#diff-c382f7d721027eac952154bf67a6dd35b0f86f9cbddefebff13b1ea568e1fcbaR331-R355)
+- Enhanced test coverage for the new `--force-check` option, including snapshot updates for help and error outputs. [\[1\]](diffhunk://#diff-36711bc52fa23cc9a64e178df1fb419ddb4d144953e7c673099ab669725ae8bbR1017-R1018) [\[2\]](diffhunk://#diff-36711bc52fa23cc9a64e178df1fb419ddb4d144953e7c673099ab669725ae8bbR3828-R3856) [\[3\]](diffhunk://#diff-36711bc52fa23cc9a64e178df1fb419ddb4d144953e7c673099ab669725ae8bbR4362-R4363) [\[4\]](diffhunk://#diff-36711bc52fa23cc9a64e178df1fb419ddb4d144953e7c673099ab669725ae8bbR4498-R4499) [\[5\]](diffhunk://#diff-36711bc52fa23cc9a64e178df1fb419ddb4d144953e7c673099ab669725ae8bbR4661-R4662) [\[6\]](diffhunk://#diff-c382f7d721027eac952154bf67a6dd35b0f86f9cbddefebff13b1ea568e1fcbaR109-R116) [\[7\]](diffhunk://#diff-c382f7d721027eac952154bf67a6dd35b0f86f9cbddefebff13b1ea568e1fcbaR331-R355)
+
+**Dependency Configuration Standardization**
+
+- Renamed the dependency configuration property from `onlyAllowBundle` to `onlyBundle` across all relevant config files and documentation for consistency. [\[1\]](diffhunk://#diff-f125c2d9f65791d1be4e2a909fb652b0d2d8a870b7e224948aeb2aa060e9db1fL9-R15) [\[2\]](diffhunk://#diff-f125c2d9f65791d1be4e2a909fb652b0d2d8a870b7e224948aeb2aa060e9db1fL42-R42) [\[3\]](diffhunk://#diff-c83979aa9775219f3f937fa211f5defa27cf2b701766f31ad4f8366a8da86629L9-R9) [\[4\]](diffhunk://#diff-87bc6b738d071bbd2922d5922bfddc365157fd9a038739b4c80466ec7b2624ffL9-R9)
+
+**Other Improvements**
+
+- Updated TypeScript target version in default config from `Node20` to `Node22`.
+- Improved CLI process exit code handling for error scenarios.
+- Minor improvement to CLI reporter logic to avoid emitting empty results.
+- Cleaned up and simplified the coverage collection script in `package.json`.
+
+---
+
+</details>
+
+### Fixes
+
+<details>
+<summary>fix: Updated package.json exports (<a href="https://github.com/streetsidesoftware/cspell/pull/8965">#8965</a>)</summary>
+
+### fix: Updated package.json exports ([#8965](https://github.com/streetsidesoftware/cspell/pull/8965))
+
+This fixes a few package exports that were wrong or inconsistent (e.g. `exports["."]` not the same path as `main`).
+
+The `pnpm test` script was failing locally due to my `~/.npmrc` having `ignore-scripts=true`, which prevented the `preinstall` script from running. I updated `test:prep` to call the `preinstall` script, which should be fast if you already have `yarn` installed.
+
+---
+
+</details>
+
+### Dictionary Updates
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/9067">#9067</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#9067](https://github.com/streetsidesoftware/cspell/pull/9067))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../snapshots/django/django/report.yaml            | 82 ++++++++++------------
+ .../snapshots/django/django/snapshot.txt           | 51 ++++++--------
+ packages/cspell-bundled-dicts/package.json         |  6 +-
+ pnpm-lock.yaml                                     | 30 +++++---
+ 4 files changed, 84 insertions(+), 85 deletions(-)
+```
+
+---
+
+</details>
+
 ## v10.1.1 (2026-08-25)
 
 ### Fixes
