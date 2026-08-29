@@ -27,6 +27,12 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - fix(ci): push release tag with GitHub App token so publish.yml triggers (<a href="https://github.com/streetsidesoftware/cspell/pull/9097">#9097</a>)
 
+## v10.2.0-alpha.3 (2026-08-29)
+
+### Dictionary Updates
+
+- fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/9102">#9102</a>)
+
 ## v10.1.1 (2026-08-25)
 
 ### Fixes
