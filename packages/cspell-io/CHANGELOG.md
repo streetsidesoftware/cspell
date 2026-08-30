@@ -37,6 +37,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - No changes
 
+## v10.2.0-alpha.5 (2026-08-30)
+
+- No changes
+
 ## v10.1.1 (2026-08-25)
 
 ### Fixes
