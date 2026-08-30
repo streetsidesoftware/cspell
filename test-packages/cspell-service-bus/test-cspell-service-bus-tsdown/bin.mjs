@@ -2,6 +2,6 @@
 
 import assert from 'node:assert';
 
-import { smokeTest } from './dist/index.mjs';
+import { smokeTest } from './dist/index.js';
 
 assert(smokeTest());
