@@ -1,12 +1,8 @@
 #!/usr/bin/env node
 
-import assert from 'node:assert';
-import { basename } from 'node:path';
-import { fileURLToPath } from 'node:url';
-
-import { run } from './dist/esm/index.mjs';
-
-const __filename = fileURLToPath(import.meta.url);
+const assert = require('node:assert');
+const { basename } = require('node:path');
+const { run } = require('./dist/tsdown/index.cjs');
 
 const expected = '/' + basename(__filename);
 

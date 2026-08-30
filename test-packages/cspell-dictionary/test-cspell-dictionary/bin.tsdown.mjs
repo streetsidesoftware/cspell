@@ -2,7 +2,7 @@
 
 import assert from 'node:assert';
 
-import { run } from './dist/rollup/esm/index.mjs';
+import { run } from './dist/tsdown/index.js';
 
 async function main() {
     assert(typeof run === 'function');
