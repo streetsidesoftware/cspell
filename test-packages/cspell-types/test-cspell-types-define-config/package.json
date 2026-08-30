@@ -1,0 +1,32 @@
+{
+  "name": "test-cspell-types-define-config",
+  "version": "9.0.2",
+  "description": "Pure testing package to ensure the size of defineConfig when bundled.",
+  "bin": {
+    "test-bin": "test-bin.mjs"
+  },
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
+    "build": "pnpm build:tsdown",
+    "build:tsdown": "tsdown",
+    "clean-build": "pnpm run clean && pnpm run build",
+    "test": "node ./test-bin.mjs"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@cspell/cspell-types": "workspace:*"
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "cspell": {
+    "words": [
+      "outfile",
+      "tsbuild"
+    ]
+  },
+  "keywords": []
+}
