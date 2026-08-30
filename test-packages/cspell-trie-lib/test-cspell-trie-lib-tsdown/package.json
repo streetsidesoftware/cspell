@@ -1,0 +1,28 @@
+{
+  "name": "test-cspell-trie-lib-tsdown",
+  "version": "10.2.0-alpha.7",
+  "description": "Pure testing package for cspell-trie-lib.",
+  "private": true,
+  "bin": {
+    "mjs": "bin.mjs",
+    "csj": "bin.cjs"
+  },
+  "type": "module",
+  "scripts": {
+    "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
+    "build": "tsdown",
+    "clean-build": "pnpm run clean && pnpm run build",
+    "test": "pnpm test:unit && pnpm test:smoke",
+    "test:smoke": "node ./bin.mjs && node ./bin.cjs",
+    "test:unit": "vitest run"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cspell-trie-lib": "workspace:*"
+  },
+  "keywords": [],
+  "engines": {
+    "node": ">=22.18.0"
+  }
+}

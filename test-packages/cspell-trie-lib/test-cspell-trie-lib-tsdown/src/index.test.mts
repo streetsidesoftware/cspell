@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { createDictionary, run } from './index.js';
+import { createDictionary, run } from './index.mjs';
 
 describe('index', () => {
     test('run', () => {
