@@ -1297,6 +1297,12 @@ importers:
         specifier: workspace:*
         version: link:../../../packages/cspell-service-bus
 
+  test-packages/cspell-service-bus/test-cspell-service-bus-tsdown:
+    dependencies:
+      '@cspell/cspell-service-bus':
+        specifier: workspace:*
+        version: link:../../../packages/cspell-service-bus
+
   test-packages/cspell-strong-weak-map/test-cspell-strong-weak-map:
     devDependencies:
       '@cspell/strong-weak-map':
@@ -1341,12 +1347,6 @@ importers:
         version: 0.28.2
 
   test-packages/cspell-types/test-cspell-types-esm:
-    dependencies:
-      '@cspell/cspell-types':
-        specifier: workspace:*
-        version: link:../../../packages/cspell-types
-
-  test-packages/cspell-types/test-cspell-types-rollup:
     dependencies:
       '@cspell/cspell-types':
         specifier: workspace:*
@@ -1437,15 +1437,6 @@ importers:
         version: link:../../../packages/dynamic-import
 
   test-packages/dynamic-import/test-dynamic-import-esm:
-    dependencies:
-      '@cspell/cspell-pipe':
-        specifier: workspace:*
-        version: link:../../../packages/cspell-pipe
-      '@cspell/dynamic-import':
-        specifier: workspace:*
-        version: link:../../../packages/dynamic-import
-
-  test-packages/dynamic-import/test-dynamic-import-rollup:
     dependencies:
       '@cspell/cspell-pipe':
         specifier: workspace:*
