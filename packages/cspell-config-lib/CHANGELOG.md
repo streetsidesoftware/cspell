@@ -47,6 +47,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - fix: Reduce the size of cspell types when bundled (<a href="https://github.com/streetsidesoftware/cspell/pull/9119">#9119</a>)
 
+## v10.2.0-alpha.7 (2026-08-30)
+
+- No changes
+
 ## v10.1.1 (2026-08-25)
 
 ### Fixes
