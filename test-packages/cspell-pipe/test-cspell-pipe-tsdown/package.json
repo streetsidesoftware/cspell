@@ -1,5 +1,5 @@
 {
-  "name": "test-cspell-pipe-rollup",
+  "name": "test-cspell-pipe-tsdown",
   "version": "9.0.2",
   "description": "Pure testing package for @cspell/cspell-pipe. Its purpose is to verify @cspell/cspell-pipe dependencies.",
   "private": true,
@@ -7,13 +7,12 @@
     "mjs": "bin.mjs",
     "csj": "bin.cjs"
   },
-  "browser": "./dist/browser.js",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "type": "module",
   "scripts": {
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
-    "build": "rollup -c rollup.config.mjs",
+    "build": "tsdown",
     "clean-build": "pnpm run clean && pnpm run build",
     "compile": "tsc -p .",
     "test": "pnpm test:unit && pnpm test:smoke",

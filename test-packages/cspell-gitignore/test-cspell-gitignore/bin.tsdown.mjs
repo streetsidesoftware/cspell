@@ -3,7 +3,7 @@
 import assert from 'node:assert';
 import { fileURLToPath } from 'node:url';
 
-import { run } from './dist/esm/index.mjs';
+import { run } from './dist/tsdown/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 

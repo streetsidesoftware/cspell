@@ -1,8 +1,12 @@
 #!/usr/bin/env node
 
-const assert = require('node:assert');
-const { basename } = require('node:path');
-const { run } = require('./dist/rollup/cjs/index.cjs');
+import assert from 'node:assert';
+import { basename } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+import { run } from './dist/tsdown/index.js';
+
+const __filename = fileURLToPath(import.meta.url);
 
 const expected = '/' + basename(__filename);
 
