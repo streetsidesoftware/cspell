@@ -81,16 +81,16 @@ function makeMergeFn<K extends keyof CSpellSettings>(key: K): MergeSettingsFn {
     return (settings) => fn(key, settings);
 }
 
-const mergeIndividualSettingsFns = Object.keys(mergeDefinitionFunctions).map((k) =>
-    makeMergeFn(k as keyof CSpellSettings),
-);
-
 export function mergeConfig(settings: CSpellSettings[]): CSpellSettings;
 export function mergeConfig(...settings: [CSpellSettings, ...CSpellSettings[]]): CSpellSettings;
 export function mergeConfig(...settings: [CSpellSettings[], ...CSpellSettings[]]): CSpellSettings;
 export function mergeConfig(first: CSpellSettings[] | CSpellSettings, ...configs: CSpellSettings[]): CSpellSettings {
     const settings = [first, ...configs].flat();
     if (settings.length === 1) return settings[0];
+
+    const mergeIndividualSettingsFns = Object.keys(mergeDefinitionFunctions).map((k) =>
+        makeMergeFn(k as keyof CSpellSettings),
+    );
 
     const result = Object.assign(Object.create(null), ...settings);
     Object.assign(result, ...mergeIndividualSettingsFns.map((fn) => fn(settings)));
