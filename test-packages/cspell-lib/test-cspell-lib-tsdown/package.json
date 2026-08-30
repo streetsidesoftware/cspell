@@ -1,30 +1,30 @@
 {
-  "name": "test-cspell-lib-tsup",
+  "name": "test-cspell-lib-tsdown",
   "version": "9.0.2",
   "description": "Pure testing package for cspell-lib.",
   "bin": {
-    "test-bin": "test-bin.mjs"
+    "test-bin": "test-bin.mjs",
+    "test-bin-cjs": "test-bin.cjs"
   },
   "type": "module",
   "private": true,
   "scripts": {
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
-    "build": "pnpm build:tsup",
-    "build:tsup": "tsup",
+    "build": "tsdown",
     "clean-build": "pnpm run clean && pnpm run build",
-    "test": "node ./test-bin.mjs"
+    "test": "node ./test-bin.mjs && node ./test-bin.cjs"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "cspell-lib": "workspace:*"
+    "cspell-lib": "workspace:*",
+    "@cspell/cspell-bundled-dicts": "workspace:*"
   },
   "engines": {
     "node": ">=22.18.0"
   },
   "cspell": {
     "words": [
-      "outfile",
       "tsbuild"
     ]
   },
