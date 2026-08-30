@@ -33,6 +33,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/9102">#9102</a>)
 
+## v10.2.0-alpha.4 (2026-08-30)
+
+- No changes
+
 ## v10.1.1 (2026-08-25)
 
 ### Fixes
