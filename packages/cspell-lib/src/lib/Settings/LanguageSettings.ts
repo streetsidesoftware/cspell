@@ -63,11 +63,28 @@ export function normalizeLocale(locale: LocaleId | LocaleId[]): Set<LocaleId> {
 
 export function normalizeLocaleIntl(locale: LocaleId | LocaleId[]): Set<LocaleId> {
     const values = [...normalizeLocale(locale)].map((locale) =>
-        locale.replace(/^([a-z]{2})-?([a-z]{2})$/, (_, lang: string, locale?: string) =>
-            locale ? `${lang}-${locale.toUpperCase()}` : lang,
+        locale.replace(
+            /^([a-z]{2})(?:-?([a-z]{4}))?-?([a-z]{2})$/,
+            (_, lang: string, script?: string, region?: string) => toLocaleIntl(lang, script, region),
         ),
     );
     return new Set(values);
+}
+
+/**
+ * See: https://developer.mozilla.org/en-US/docs/Glossary/BCP_47_language_tag
+ * @returns locale normalized to BCP_47
+ */
+function toLocaleIntl(lang: string, script?: string, region?: string): string {
+    const parts = [lang];
+    if (script) parts.push(firstUpper(script.toLowerCase()));
+    if (region) parts.push(region.toUpperCase());
+    return parts.join('-');
+}
+
+function firstUpper(str: string): string {
+    const [first, ...rest] = [...str];
+    return [first.toUpperCase(), ...rest].join('');
 }
 
 export function isLocaleInSet(locale: LocaleId | LocaleId[], setOfLocals: Set<LocaleId>): boolean {

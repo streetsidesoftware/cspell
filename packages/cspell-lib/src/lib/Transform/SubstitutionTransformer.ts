@@ -1,9 +1,11 @@
 import type { MappedText, SubstitutionDefinition, SubstitutionDefinitions, Substitutions } from '@cspell/cspell-types';
-import type { Range, SourceMap } from '@cspell/cspell-types/Parser';
 import type { GTrieNode } from 'cspell-trie-lib';
 import { GTrie } from 'cspell-trie-lib';
 
-import { mapOffsetPairsToSourceMap, mergeSourceMaps } from './SourceMap.js';
+import { mergeSourceMaps } from './SourceMap.js';
+import { applyEditsToText } from './TextMapEdit.js';
+import type { Edit, TextTransformer } from './Transformer.js';
+import { toMappedText } from './Transformer.js';
 
 type DeepReadonly<T> = T extends object ? { readonly [K in keyof T]: DeepReadonly<T[K]> } : T;
 
@@ -16,7 +18,7 @@ export type ReadonlySubstitutionInfo = DeepReadonly<SubstitutionInfo>;
 
 type SubTrie = GTrie<string, string>;
 
-export class SubstitutionTransformer {
+export class SubstitutionTransformer implements TextTransformer {
     #trie: SubTrie | undefined;
 
     constructor(subMap: Map<string, string> | undefined) {
@@ -43,56 +45,18 @@ export class SubstitutionTransformer {
         return result;
     }
 
+    *transformAll(src: Iterable<string | MappedText>): Iterable<MappedText> {
+        for (const item of src) {
+            yield this.transform(item);
+        }
+    }
+
     transformString(text: string): MappedText {
         if (!this.#trie) {
-            return { text, range: [0, text.length], rawText: text };
+            return toMappedText(text);
         }
-
-        const map: SourceMap = [0, 0];
-        let repText = '';
-        let lastEnd = 0;
-
-        for (const edit of calcEdits(text, this.#trie)) {
-            if (edit.range[0] > lastEnd) {
-                repText += text.slice(lastEnd, edit.range[0]);
-                map.push(edit.range[0], repText.length);
-            }
-            repText += edit.text;
-            map.push(edit.range[1], repText.length);
-            lastEnd = edit.range[1];
-        }
-
-        if (lastEnd === 0) {
-            return { text, range: [0, text.length], rawText: text };
-        }
-
-        if (lastEnd < text.length) {
-            repText += text.slice(lastEnd);
-            map.push(text.length, repText.length);
-        }
-
-        const result: MappedText = {
-            text: repText,
-            range: [0, text.length],
-            map: mapOffsetPairsToSourceMap(map),
-            rawText: text,
-        };
-
-        return result;
+        return applyEditsToText(text, calcEdits(text, this.#trie));
     }
-}
-
-interface Edit {
-    /**
-     * The replacement text for the edit. This is the text that will replace the original text in the string.
-     */
-    text: string;
-    /**
-     * The range of the text to be replaced. This is a tuple of the form `[start, end]`,
-     * where start is the index of the first character to be replaced,
-     * and end is the index of the first character after the last character to be replaced.
-     */
-    range: Range;
 }
 
 function* calcEdits(text: string, subTrie: SubTrie): Iterable<Edit> {
