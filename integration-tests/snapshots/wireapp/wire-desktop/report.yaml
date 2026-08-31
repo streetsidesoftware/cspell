@@ -3,9 +3,9 @@ Repository: wireapp/wire-desktop
 Url: https://github.com/wireapp/wire-desktop.git
 Args: '["*.md","electron/renderer/**/*.jsx","electron/src/**/*.ts","electron/html/*.html"]'
 Summary:
-  files: 51
-  filesWithIssues: 10
-  issues: 64
+  files: 70
+  filesWithIssues: 12
+  issues: 67
   errors: 0
 Errors: []
 
@@ -30,8 +30,9 @@ issues:
   - "electron/src/locale/index.ts:139:8          Slovenščina     U       sl: 'Slovenščina',"
   - "electron/src/locale/index.ts:141:8          Türkçe          U       tr: 'Türkçe',"
   - "electron/src/locale/index.ts:142:8          Українська      U       uk: 'Українська',"
-  - "electron/src/main.ts:178:51         webrtc      U       disable-features', 'webrtc-hide-local-ips-with"
-  - "electron/src/main.ts:178:78         mdns        U       hide-local-ips-with-mdns');"
+  - "electron/src/logging/logCleanupScheduler.ts:20:13       Unrefable       U       export type UnrefableInterval = {"
+  - "electron/src/mainProcess.ts:204:51      webrtc      U       disable-features', 'webrtc-hide-local-ips-with"
+  - "electron/src/mainProcess.ts:204:78      mdns        U       hide-local-ips-with-mdns');"
   - "electron/src/managed/backends/linux.ts:33:28        APPLOCK     U       return managedConfig?.[APPLOCK_OVERRIDE_KEY] !== false"
   - "electron/src/managed/backends/windows.ts:42:33          subkey      U       enumerateKeys: (hive: number, subkey: string) => string["
   - "electron/src/managed/backends/windows.ts:65:10          subkeys     U       function subkeysOf(registry: RegistryJs"

@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["--issues-summary-report","**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2932, Issues found: 8827 in 949 files.
+ CSpell: Files checked: 2932, Issues found: 8828 in 950 files.
  exit code: 1
 django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 django/apps/registry.py:134:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -332,6 +332,7 @@ django/contrib/gis/db/backends/mysql/features.py:8:9       - Unknown word (spati
 django/contrib/gis/db/backends/mysql/operations.py:36:54     - Unknown word (aggr)       -- features.supports_collect_aggr:
 django/contrib/gis/db/backends/mysql/schema.py:10:9      - Unknown word (SQLGIS)     -- class MySQLGISSchemaEditor(DatabaseSchemaEdi
 django/contrib/gis/db/backends/oracle/adapter.py:8:27      - Unknown word (CLOB)       -- input_size = oracledb.CLOB
+django/contrib/gis/db/backends/oracle/features.py:36:36     - Unknown word (geogapp)    -- "gis_tests.geogapp.tests.GeographyTest
 django/contrib/gis/db/backends/oracle/introspection.py:24:30     - Unknown word (DIMINFO)    -- 'SELECT "DIMINFO", "SRID" FROM "USER
 django/contrib/gis/db/backends/oracle/introspection.py:8:23      - Unknown word (OBJECTVAR)  -- # Associating any OBJECTVAR instances with GeometryField
 django/contrib/gis/db/backends/oracle/introspection.py:9:43      - Unknown word (MDSYS)      -- objects that aren't MDSYS.SDO_GEOMETRY, but it
@@ -1794,20 +1795,20 @@ django/db/models/sql/datastructures.py:80:25     - Unknown word (somecol)    -- 
 django/db/models/sql/datastructures.py:80:35     - Unknown word (othertable) -- sometable.somecol = othertable.othercol, params
 django/db/models/sql/datastructures.py:80:46     - Unknown word (othercol)   -- somecol = othertable.othercol, params
 django/db/models/sql/query.py:125:19    - Unknown word (repointing) -- # without repointing to the filtered annotation
-django/db/models/sql/query.py:1519:56   - Unknown word (multijoins) -- of reusable joins for multijoins.
-django/db/models/sql/query.py:1523:28   - Unknown word (unreffing)  -- is responsible for unreffing the joins used.
-django/db/models/sql/query.py:1630:40   - Unknown word (someval)    -- is null, then col != someval will result in SQL
-django/db/models/sql/query.py:1633:42   - Unknown word (someval)    -- col IS NULL OR col != someval)
-django/db/models/sql/query.py:1635:50   - Unknown word (someval)    -- IS NOT NULL AND col = someval).
-django/db/models/sql/query.py:1653:22   - Unknown word (someval)    -- # If someval is a nullable column
-django/db/models/sql/query.py:1653:52   - Unknown word (someval)    -- is a nullable column, someval IS NOT NULL is
-django/db/models/sql/query.py:2144:34   - Unknown word (louter)     -- trimmed_prefix, contains_louter = query.trim_start(names
-django/db/models/sql/query.py:2510:44   - Unknown word (datastructure) -- that we can use a set datastructure. We do the foo__bar
-django/db/models/sql/query.py:2707:42   - Unknown word (outerq)        -- lookup usable for doing outerq.filter(lookup=self)
-django/db/models/sql/query.py:2803:5    - Unknown word (dirn)          -- dirn = ORDER_DIR[default
-django/db/models/sql/query.py:2805:27   - Unknown word (dirn)          -- return field[1:], dirn[1]
-django/db/models/sql/query.py:2806:19   - Unknown word (dirn)          -- return field, dirn[0]
-django/db/models/sql/query.py:2869:61   - Unknown word (rels)          -- 2, if either of the rels produce NULL
+django/db/models/sql/query.py:1526:56   - Unknown word (multijoins) -- of reusable joins for multijoins.
+django/db/models/sql/query.py:1530:28   - Unknown word (unreffing)  -- is responsible for unreffing the joins used.
+django/db/models/sql/query.py:1637:40   - Unknown word (someval)    -- is null, then col != someval will result in SQL
+django/db/models/sql/query.py:1640:42   - Unknown word (someval)    -- col IS NULL OR col != someval)
+django/db/models/sql/query.py:1642:50   - Unknown word (someval)    -- IS NOT NULL AND col = someval).
+django/db/models/sql/query.py:1660:22   - Unknown word (someval)    -- # If someval is a nullable column
+django/db/models/sql/query.py:1660:52   - Unknown word (someval)    -- is a nullable column, someval IS NOT NULL is
+django/db/models/sql/query.py:2151:34   - Unknown word (louter)     -- trimmed_prefix, contains_louter = query.trim_start(names
+django/db/models/sql/query.py:2519:44   - Unknown word (datastructure) -- that we can use a set datastructure. We do the foo__bar
+django/db/models/sql/query.py:2716:42   - Unknown word (outerq)        -- lookup usable for doing outerq.filter(lookup=self)
+django/db/models/sql/query.py:2812:5    - Unknown word (dirn)          -- dirn = ORDER_DIR[default
+django/db/models/sql/query.py:2814:27   - Unknown word (dirn)          -- return field[1:], dirn[1]
+django/db/models/sql/query.py:2815:19   - Unknown word (dirn)          -- return field, dirn[0]
+django/db/models/sql/query.py:2878:61   - Unknown word (rels)          -- 2, if either of the rels produce NULL
 django/db/models/sql/query.py:365:53    - Unknown word (deepcopied) -- work when a Query is deepcopied."""
 django/db/models/sql/query.py:433:21    - Unknown word (klass)      -- def chain(self, klass=None):
 django/db/models/sql/query.py:436:13    - Unknown word (klass)      -- The klass argument changes the
@@ -4997,11 +4998,11 @@ tests/generic_relations/tests.py:477:14    - Unknown word (manualpk)   -- "manua
 tests/generic_relations/tests.py:477:40    - Unknown word (valuabletaggeditem) -- manualpk, object_id, tag, valuabletaggeditem"
 tests/generic_relations/tests.py:523:9     - Unknown word (valuedtag)          -- valuedtag = ValuableTaggedItem
 tests/generic_relations/tests.py:526:26    - Unknown word (valuedtag)          -- self.assertEqual(valuedtag.content_object, quartz
-tests/generic_relations/tests.py:919:9     - Unknown word (newrel)             -- newrel = ConcreteRelatedModel
-tests/generic_relations/tests.py:921:9     - Unknown word (newrel)             -- newrel.bases.set([base])
-tests/generic_relations/tests.py:922:54    - Unknown word (newrel)             -- teRelatedModel.objects.get(pk=newrel.pk)
-tests/generic_relations/tests.py:922:9     - Unknown word (newrel)             -- newrel = ConcreteRelatedModel
-tests/generic_relations/tests.py:923:32    - Unknown word (newrel)             -- self.assertEqual(base, newrel.bases.get())
+tests/generic_relations/tests.py:918:9     - Unknown word (newrel)             -- newrel = ConcreteRelatedModel
+tests/generic_relations/tests.py:920:9     - Unknown word (newrel)             -- newrel.bases.set([base])
+tests/generic_relations/tests.py:921:54    - Unknown word (newrel)             -- teRelatedModel.objects.get(pk=newrel.pk)
+tests/generic_relations/tests.py:921:9     - Unknown word (newrel)             -- newrel = ConcreteRelatedModel
+tests/generic_relations/tests.py:922:32    - Unknown word (newrel)             -- self.assertEqual(base, newrel.bases.get())
 tests/generic_relations_regress/models.py:84:5      - Unknown word (tlinks)     -- tlinks = GenericRelation(TextLink
 tests/generic_relations_regress/tests.py:186:61    - Unknown word (autopk)     -- HasLinkThing so that the autopk value
 tests/generic_relations_regress/tests.py:67:9      - Unknown word (oddrel)     -- oddrel = OddRelation1.objects
@@ -6854,9 +6855,9 @@ tests/model_fields/test_durationfield.py:55:70     - Unknown word (durationmodel
 tests/model_fields/test_integerfield.py:273:51    - Unknown word (intput)     -- raises_error_on_invalid_intput(self):
 tests/model_fields/test_jsonfield.py:1343:9    - Unknown word (jsonnull)          -- jsonnull = JSONNull()
 tests/model_fields/test_jsonfield.py:1344:30   - Unknown word (jsonnull)          -- path, args, kwargs = jsonnull.deconstruct()
-tests/model_fields/test_jsonfield.py:1401:35   - Unknown word (jsonnull)          -- case_expression_with_jsonnull_then(self):
-tests/model_fields/test_jsonfield.py:1411:29   - Unknown word (jsonnull)          -- test_case_expr_with_jsonnull_condition(self):
-tests/model_fields/test_jsonfield.py:1470:21   - Unknown word (jsonnull)          -- def test_custom_jsonnull_encoder(self):
+tests/model_fields/test_jsonfield.py:1400:35   - Unknown word (jsonnull)          -- case_expression_with_jsonnull_then(self):
+tests/model_fields/test_jsonfield.py:1410:29   - Unknown word (jsonnull)          -- test_case_expr_with_jsonnull_condition(self):
+tests/model_fields/test_jsonfield.py:1469:21   - Unknown word (jsonnull)          -- def test_custom_jsonnull_encoder(self):
 tests/model_fields/test_jsonfield.py:190:60    - Unknown word (jsonmodel)  -- model": "model_fields.jsonmodel", "pk": null}]'
 tests/model_fields/test_jsonfield.py:217:42    - Unknown word (nullablejsonmodel) -- model="model_fields.nullablejsonmodel">'
 tests/model_fields/test_jsonfield.py:902:21    - Unknown word (uffff'seq)         -- "escape\uffff'seq'\uffffue\uffff'nce"
@@ -6876,7 +6877,7 @@ tests/model_fields/tests.py:195:34    - Unknown word (Choiceful)  -- empty_choic
 tests/model_fields/tests.py:79:9      - Unknown word (klass)      -- klass = forms.TypedMultipleChoiceFi
 tests/model_fields/tests.py:80:66     - Unknown word (klass)      -- formfield(choices_form_class=klass), klass)
 tests/model_fields/tests.py:80:74     - Unknown word (klass)      -- choices_form_class=klass), klass)
-tests/model_forms/models.py:470:7     - Unknown word (UUIDPK)     -- class UUIDPK(models.Model):
+tests/model_forms/models.py:476:7     - Unknown word (UUIDPK)     -- class UUIDPK(models.Model):
 tests/model_forms/test_modelchoicefield.py:198:14    - Unknown word (deepcopies) -- def test_deepcopies_widget(self):
 tests/model_forms/test_modelchoicefield.py:279:23    - Unknown word (multiplemodelchoicefield) -- def test_disabled_multiplemodelchoicefield(self):
 tests/model_forms/test_uuid.py:10:17     - Unknown word (UUIDPK)     -- model = UUIDPK
@@ -6914,11 +6915,11 @@ tests/model_forms/tests.py:716:14    - Unknown word (orderfields)  -- def test_o
 tests/model_forms/tests.py:731:14    - Unknown word (orderfields)  -- def test_orderfields2_form(self):
 tests/model_forms/tests.py:856:22    - Unknown word (splitdatetime) -- def test_default_splitdatetime_field(self):
 tests/model_forms/tests.py:962:19    - Unknown word (describedby)   -- 'aria-describedby="id_slug_helptext" required
-tests/model_formsets/models.py:226:7     - Unknown word (UUIDPK)     -- class UUIDPKParent(models.Model)
-tests/model_formsets/models.py:231:7     - Unknown word (UUIDPK)     -- class UUIDPKChild(models.Model):
-tests/model_formsets/models.py:234:32    - Unknown word (UUIDPK)     -- = models.ForeignKey(UUIDPKParent, models.CASCADE
-tests/model_formsets/models.py:239:32    - Unknown word (UUIDPK)     -- = models.ForeignKey(UUIDPKParent, models.CASCADE
-tests/model_formsets/models.py:242:20    - Unknown word (UUIDPK)     -- class AutoPKChildOfUUIDPKParent(models.Model)
+tests/model_formsets/models.py:229:7     - Unknown word (UUIDPK)     -- class UUIDPKParent(models.Model)
+tests/model_formsets/models.py:234:7     - Unknown word (UUIDPK)     -- class UUIDPKChild(models.Model):
+tests/model_formsets/models.py:237:32    - Unknown word (UUIDPK)     -- = models.ForeignKey(UUIDPKParent, models.CASCADE
+tests/model_formsets/models.py:242:32    - Unknown word (UUIDPK)     -- = models.ForeignKey(UUIDPKParent, models.CASCADE
+tests/model_formsets/models.py:245:20    - Unknown word (UUIDPK)     -- class AutoPKChildOfUUIDPKParent(models.Model)
 tests/model_formsets/test_uuid.py:107:18    - Unknown word (childrelatedviaak) -- "childrelatedviaak_set-TOTAL_FORMS": 3
 tests/model_formsets/test_uuid.py:108:18    - Unknown word (childrelatedviaak) -- "childrelatedviaak_set-INITIAL_FORMS":
 tests/model_formsets/test_uuid.py:109:18    - Unknown word (childrelatedviaak) -- "childrelatedviaak_set-MAX_NUM_FORMS":
@@ -7190,26 +7191,26 @@ tests/postgres_tests/test_constraints.py:54:46     - Unknown word (indclass)   -
 tests/postgres_tests/test_constraints.py:656:25    - Unknown word (SPGIST)     -- index_type="SPGIST",
 tests/postgres_tests/test_constraints.py:671:32    - Unknown word (SPGIST)     -- "index_type": "SPGIST",
 tests/postgres_tests/test_constraints.py:860:25    - Unknown word (TSTZRANGE)  -- function = "TSTZRANGE"
-tests/postgres_tests/test_hstore.py:303:22    - Unknown word (Трурль)     -- {"все": "Трурль и Клапауций"},
-tests/postgres_tests/test_hstore.py:303:31    - Unknown word (Клапауций)  -- {"все": "Трурль и Клапауций"},
-tests/postgres_tests/test_hstore.py:304:16    - Unknown word (Трурль)     -- [{"Трурль": "Клапауций"}, {"Клапауций
-tests/postgres_tests/test_hstore.py:304:26    - Unknown word (Клапауций)  -- [{"Трурль": "Клапауций"}, {"Клапауций": "Трурль
-tests/postgres_tests/test_hstore.py:304:41    - Unknown word (Клапауций)  -- Трурль": "Клапауций"}, {"Клапауций": "Трурль"}],
-tests/postgres_tests/test_hstore.py:304:54    - Unknown word (Трурль)     -- Клапауций"}, {"Клапауций": "Трурль"}],
-tests/postgres_tests/test_hstore.py:318:40    - Unknown word (hstoremodel) -- model": "postgres_tests.hstoremodel", "pk": None, "fields
-tests/postgres_tests/test_hstore.py:340:15    - Unknown word (Енеїда)      -- {"Енеїда": "Ти знаєш, він який
-tests/postgres_tests/test_hstore.py:340:28    - Unknown word (знаєш)       -- {"Енеїда": "Ти знаєш, він який суціга",
-tests/postgres_tests/test_hstore.py:340:39    - Unknown word (який)        -- Енеїда": "Ти знаєш, він який суціга", "Зефір": None
-tests/postgres_tests/test_hstore.py:340:44    - Unknown word (суціга)      -- "Ти знаєш, він який суціга", "Зефір": None},
-tests/postgres_tests/test_hstore.py:340:54    - Unknown word (Зефір)       -- він який суціга", "Зефір": None},
-tests/postgres_tests/test_hstore.py:430:35    - Unknown word (aira)        -- field.prepare_value({"aira_maplayer": "Αρδευτικό
-tests/postgres_tests/test_hstore.py:430:40    - Unknown word (maplayer)    -- prepare_value({"aira_maplayer": "Αρδευτικό δίκτυο
-tests/postgres_tests/test_hstore.py:430:52    - Unknown word (Αρδευτικό)   -- value({"aira_maplayer": "Αρδευτικό δίκτυο"}),
-tests/postgres_tests/test_hstore.py:430:62    - Unknown word (δίκτυο)      -- maplayer": "Αρδευτικό δίκτυο"}),
-tests/postgres_tests/test_hstore.py:431:16    - Unknown word (aira)        -- '{"aira_maplayer": "Αρδευτικό
-tests/postgres_tests/test_hstore.py:431:21    - Unknown word (maplayer)    -- '{"aira_maplayer": "Αρδευτικό δίκτυο
-tests/postgres_tests/test_hstore.py:431:33    - Unknown word (Αρδευτικό)   -- '{"aira_maplayer": "Αρδευτικό δίκτυο"}',
-tests/postgres_tests/test_hstore.py:431:43    - Unknown word (δίκτυο)      -- maplayer": "Αρδευτικό δίκτυο"}',
+tests/postgres_tests/test_hstore.py:301:22    - Unknown word (Трурль)     -- {"все": "Трурль и Клапауций"},
+tests/postgres_tests/test_hstore.py:301:31    - Unknown word (Клапауций)  -- {"все": "Трурль и Клапауций"},
+tests/postgres_tests/test_hstore.py:302:16    - Unknown word (Трурль)     -- [{"Трурль": "Клапауций"}, {"Клапауций
+tests/postgres_tests/test_hstore.py:302:26    - Unknown word (Клапауций)  -- [{"Трурль": "Клапауций"}, {"Клапауций": "Трурль
+tests/postgres_tests/test_hstore.py:302:41    - Unknown word (Клапауций)  -- Трурль": "Клапауций"}, {"Клапауций": "Трурль"}],
+tests/postgres_tests/test_hstore.py:302:54    - Unknown word (Трурль)     -- Клапауций"}, {"Клапауций": "Трурль"}],
+tests/postgres_tests/test_hstore.py:316:40    - Unknown word (hstoremodel) -- model": "postgres_tests.hstoremodel", "pk": None, "fields
+tests/postgres_tests/test_hstore.py:338:15    - Unknown word (Енеїда)      -- {"Енеїда": "Ти знаєш, він який
+tests/postgres_tests/test_hstore.py:338:28    - Unknown word (знаєш)       -- {"Енеїда": "Ти знаєш, він який суціга",
+tests/postgres_tests/test_hstore.py:338:39    - Unknown word (який)        -- Енеїда": "Ти знаєш, він який суціга", "Зефір": None
+tests/postgres_tests/test_hstore.py:338:44    - Unknown word (суціга)      -- "Ти знаєш, він який суціга", "Зефір": None},
+tests/postgres_tests/test_hstore.py:338:54    - Unknown word (Зефір)       -- він який суціга", "Зефір": None},
+tests/postgres_tests/test_hstore.py:428:35    - Unknown word (aira)        -- field.prepare_value({"aira_maplayer": "Αρδευτικό
+tests/postgres_tests/test_hstore.py:428:40    - Unknown word (maplayer)    -- prepare_value({"aira_maplayer": "Αρδευτικό δίκτυο
+tests/postgres_tests/test_hstore.py:428:52    - Unknown word (Αρδευτικό)   -- value({"aira_maplayer": "Αρδευτικό δίκτυο"}),
+tests/postgres_tests/test_hstore.py:428:62    - Unknown word (δίκτυο)      -- maplayer": "Αρδευτικό δίκτυο"}),
+tests/postgres_tests/test_hstore.py:429:16    - Unknown word (aira)        -- '{"aira_maplayer": "Αρδευτικό
+tests/postgres_tests/test_hstore.py:429:21    - Unknown word (maplayer)    -- '{"aira_maplayer": "Αρδευτικό δίκτυο
+tests/postgres_tests/test_hstore.py:429:33    - Unknown word (Αρδευτικό)   -- '{"aira_maplayer": "Αρδευτικό δίκτυο"}',
+tests/postgres_tests/test_hstore.py:429:43    - Unknown word (δίκτυο)      -- maplayer": "Αρδευτικό δίκτυο"}',
 tests/postgres_tests/test_hstore.py:81:44     - Unknown word (Tigr)       -- HStoreModel(field={"cat": "TigrOu", "breed": "birman
 tests/postgres_tests/test_hstore.py:81:63     - Unknown word (birman)     -- "TigrOu", "breed": "birman"}),
 tests/postgres_tests/test_hstore.py:82:44     - Unknown word (minou)      -- HStoreModel(field={"cat": "minou", "breed": "ragdoll
@@ -8373,12 +8374,12 @@ tests/urlpatterns/path_base64_urls.py:16:14     - Unknown word (subsubpatterns) 
 tests/urlpatterns/path_base64_urls.py:7:1       - Unknown word (subsubpatterns) -- subsubpatterns = [
 tests/urlpatterns/path_base64_urls.py:8:58      - Unknown word (subsubpattern)  -- views.empty_view, name="subsubpattern-base64"),
 tests/urlpatterns/tests.py:182:43    - Unknown word (subsubpattern) -- "instance-ns-base64:subsubpattern-base64", kwargs=kwargs
-tests/urlpatterns/tests.py:237:54    - Unknown word (stest)         -- int:num>/extra/<str:%stest>" % whitespace
-tests/urlpatterns/tests.py:267:23    - Unknown word (abcxyz)        -- ("str", {"abcxyz"}, no_converter),
-tests/urlpatterns/tests.py:269:24    - Unknown word (abcxyz)        -- ("slug", {"abcxyz-ABCXYZ_01234567890"
-tests/urlpatterns/tests.py:269:31    - Unknown word (ABCXYZ)        -- ("slug", {"abcxyz-ABCXYZ_01234567890"}, no_converter
-tests/urlpatterns/tests.py:293:14    - Unknown word (nonmatching)   -- def test_nonmatching_urls(self):
-tests/urlpatterns/tests.py:298:34    - Unknown word (notallowed)    -- "slug", {"", "stars*notallowed"}),
+tests/urlpatterns/tests.py:240:54    - Unknown word (stest)         -- int:num>/extra/<str:%stest>" % whitespace
+tests/urlpatterns/tests.py:270:23    - Unknown word (abcxyz)        -- ("str", {"abcxyz"}, no_converter),
+tests/urlpatterns/tests.py:272:24    - Unknown word (abcxyz)        -- ("slug", {"abcxyz-ABCXYZ_01234567890"
+tests/urlpatterns/tests.py:272:31    - Unknown word (ABCXYZ)        -- ("slug", {"abcxyz-ABCXYZ_01234567890"}, no_converter
+tests/urlpatterns/tests.py:296:14    - Unknown word (nonmatching)   -- def test_nonmatching_urls(self):
+tests/urlpatterns/tests.py:301:34    - Unknown word (notallowed)    -- "slug", {"", "stars*notallowed"}),
 tests/urlpatterns/tests.py:30:11     - Unknown word (subpattern) -- ("subpattern-base64", "", included
 tests/urlpatterns/tests.py:34:11     - Unknown word (subpattern) -- ("subpattern-base64", "namespaced
 tests/urlpatterns_reverse/included_namespace_urls.py:27:29     - Unknown word (testobj)    -- path("test3/", include(*testobj3.urls)),
