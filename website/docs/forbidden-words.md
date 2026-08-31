@@ -39,13 +39,13 @@ There are several ways to mark a word as forbidden:
 
 ## Case Sensitivity
 
-Matching against `flagWords` (and `!`-prefixed forbidden words) is case-sensitive based on how each word
-is written:
+A document word is flagged if it exactly matches a `flagWords` (or `!`-prefixed forbidden word) entry, or if
+its lowercased form exactly matches an entry. In practice this means:
 
 - A word written in **all lowercase** (e.g. `avocado`) is flagged in any casing found in the document —
   `avocado`, `Avocado`, and `AVOCADO` are all flagged.
-- A word containing **any uppercase letter** (e.g. `Avocado`) only flags that exact casing, plus the
-  all-uppercase form of the word (`AVOCADO`) — it does not flag `avocado` or other mixed-case variants.
+- A word containing **any uppercase letter** (e.g. `Avocado`) only flags that exact casing —
+  `avocado` and `AVOCADO` are not flagged.
 
 <!--- cspell:ignore avocado Avocado --->
 
