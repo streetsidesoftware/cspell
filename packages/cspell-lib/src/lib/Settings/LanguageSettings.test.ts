@@ -126,13 +126,18 @@ describe('Validate LanguageSettings', () => {
         expect([...localeSet]).toEqual(expected);
     });
 
+    // cspell:ignore Brai
     test.each`
-        locales                          | expected
-        ${''}                            | ${[]}
-        ${'en, en-GB, fr-fr, nl_NL'}     | ${['en', 'en-GB', 'fr-FR', 'nl-NL']}
-        ${['en, en-GB', 'fr-fr, nl_NL']} | ${['en', 'en-GB', 'fr-FR', 'nl-NL']}
+        locales                                 | expected
+        ${''}                                   | ${[]}
+        ${'en, en-GB, fr-fr, nl_NL'}            | ${['en', 'en-GB', 'fr-FR', 'nl-NL']}
+        ${['en, en-GB', 'fr-fr, nl_NL']}        | ${['en', 'en-GB', 'fr-FR', 'nl-NL']}
+        ${['enGB, ', 'fr-Brai-fr, ru-Cyrl-BY']} | ${['en-GB', 'fr-Brai-FR', 'ru-Cyrl-BY']}
+        ${'ru-cyrl-by'}                         | ${['ru-Cyrl-BY']}
     `('normalizeLocaleIntl $locales', ({ locales, expected }) => {
         const localeSet = LS.normalizeLocaleIntl(locales);
+        const regExValidLocale: RegExp = /^\w{2}(-\w{4})?(-\w{2,3})?$/;
+        expect([...localeSet].every((locale) => regExValidLocale.test(locale))).toBe(true);
         expect([...localeSet]).toEqual(expected);
     });
 

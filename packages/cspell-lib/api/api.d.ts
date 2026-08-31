@@ -6,6 +6,7 @@ import { CachingDictionary, SpellingDictionary, SpellingDictionaryCollection, Su
 import { CompoundWordsMethod, WeightMap } from "cspell-trie-lib";
 import { CSpellConfigFile, CSpellConfigFile as CSpellConfigFile$1, ICSpellConfigFile, ICSpellConfigFile as ICSpellConfigFile$1 } from "cspell-config-lib";
 import "@cspell/cspell-performance-monitor";
+import "@cspell/cspell-types/Parser";
 export * from "@cspell/cspell-types";
 //#endregion
 //#region src/lib/clearCachedFiles.d.ts
@@ -645,11 +646,18 @@ interface MatchRange {
 //#region src/lib/Transform/types.d.ts
 type SimpleRange = Readonly<Range>;
 //#endregion
+//#region src/lib/Transform/Transformer.d.ts
+interface TextTransformer {
+  transform(text: string | MappedText): MappedText;
+  transformAll(src: Iterable<string | MappedText>): Iterable<MappedText>;
+}
+//#endregion
 //#region src/lib/Transform/SubstitutionTransformer.d.ts
-declare class SubstitutionTransformer {
+declare class SubstitutionTransformer implements TextTransformer {
   #private;
   constructor(subMap: Map<string, string> | undefined);
   transform(text: string | MappedText): MappedText;
+  transformAll(src: Iterable<string | MappedText>): Iterable<MappedText>;
   transformString(text: string): MappedText;
 }
 //#endregion
