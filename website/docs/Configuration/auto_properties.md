@@ -69,6 +69,7 @@ format: md
 | [suggestWords](#settings-suggestwords)                         | `string`&ZeroWidthSpace;`[]`                                              | A list of suggested replacements for words.                                                                                                                          |
 | [unknownWords](#settings-unknownwords)                         | [`UnknownWordsChoices`](#unknownwordschoices)                             | Controls how unknown words are handled.                                                                                                                              |
 | [useGitignore](#settings-usegitignore)                         | `boolean`                                                                 | Tells the spell checker to load `.gitignore` files and skip files that match the globs in the `.gitignore` files found.                                              |
+| [useIntlWordSegmentation](#settings-useintlwordsegmentation)   | `boolean`                                                                 | Enables enables locale-sensitive text segmentation to support languages like Japanese, Chinese, Thai, Lao, Khmer, Myanmar, etc.                                      |
 | [usePnP](#settings-usepnp)                                     | `boolean`                                                                 | Packages managers like Yarn 2 use a `.pnp.cjs` file to assist in loading                                                                                             |
 | [userWords](#settings-userwords)                               | `string`&ZeroWidthSpace;`[]`                                              | Words to add to global dictionary -- should only be in the user config file.                                                                                         |
 | [validateDirectives](#settings-validatedirectives)             | `boolean`                                                                 | Verify that the in-document directives are correct.                                                                                                                  |
@@ -1700,6 +1701,36 @@ Tells the spell checker to load `.gitignore` files and skip files that match the
 `boolean`
 
 </dd>
+
+</dl>
+
+
+
+
+---
+
+#### `useIntlWordSegmentation` {#settings-useintlwordsegmentation}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+Enables enables locale-sensitive text segmentation to support languages like Japanese, Chinese, Thai, Lao, Khmer, Myanmar, etc.
+The locale used for the segmentation is based on the  [language](#language)  setting.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
+
+<dt>Since</dt>
+<dd>10.2.0</dd>
 
 </dl>
 
@@ -6395,6 +6426,7 @@ A file type:
 | [substitutions](#languagesetting-substitutions)                     | [`Substitutions`](#substitutions)                                         | The set of substitutions to apply to a document before spell checking.                                                                        |
 | [suggestWords](#languagesetting-suggestwords)                       | `string`&ZeroWidthSpace;`[]`                                              | A list of suggested replacements for words.                                                                                                   |
 | [unknownWords](#languagesetting-unknownwords)                       | [`UnknownWordsChoices`](#unknownwordschoices)                             | Controls how unknown words are handled.                                                                                                       |
+| [useIntlWordSegmentation](#languagesetting-useintlwordsegmentation) | `boolean`                                                                 | Enables enables locale-sensitive text segmentation to support languages like Japanese, Chinese, Thai, Lao, Khmer, Myanmar, etc.               |
 | [words](#languagesetting-words)                                     | `string`&ZeroWidthSpace;`[]`                                              | List of words to be considered correct.                                                                                                       |
 
 
@@ -7067,6 +7099,36 @@ Controls how unknown words are handled.
 
 ---
 
+#### `useIntlWordSegmentation` {#languagesetting-useintlwordsegmentation}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+Enables enables locale-sensitive text segmentation to support languages like Japanese, Chinese, Thai, Lao, Khmer, Myanmar, etc.
+The locale used for the segmentation is based on the  [language](#language)  setting.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
+
+<dt>Since</dt>
+<dd>10.2.0</dd>
+
+</dl>
+
+
+
+
+---
+
 #### `words` {#languagesetting-words}
 
 
@@ -7177,6 +7239,7 @@ This is a written language locale like: `en`, `en-GB`, `fr`, `es`, `de` or `en,f
 | [suggestionsTimeout](#overridesettings-suggestionstimeout)             | `number`                                                                  | The maximum amount of time in milliseconds to generate suggestions for a word.                                                                                       |
 | [suggestWords](#overridesettings-suggestwords)                         | `string`&ZeroWidthSpace;`[]`                                              | A list of suggested replacements for words.                                                                                                                          |
 | [unknownWords](#overridesettings-unknownwords)                         | [`UnknownWordsChoices`](#unknownwordschoices)                             | Controls how unknown words are handled.                                                                                                                              |
+| [useIntlWordSegmentation](#overridesettings-useintlwordsegmentation)   | `boolean`                                                                 | Enables enables locale-sensitive text segmentation to support languages like Japanese, Chinese, Thai, Lao, Khmer, Myanmar, etc.                                      |
 | [usePnP](#overridesettings-usepnp)                                     | `boolean`                                                                 | Packages managers like Yarn 2 use a `.pnp.cjs` file to assist in loading                                                                                             |
 | [words](#overridesettings-words)                                       | `string`&ZeroWidthSpace;`[]`                                              | List of words to be considered correct.                                                                                                                              |
 
@@ -8297,6 +8360,36 @@ Controls how unknown words are handled.
 
 <dt>Since</dt>
 <dd>9.1.0</dd>
+
+</dl>
+
+
+
+
+---
+
+#### `useIntlWordSegmentation` {#overridesettings-useintlwordsegmentation}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+Enables enables locale-sensitive text segmentation to support languages like Japanese, Chinese, Thai, Lao, Khmer, Myanmar, etc.
+The locale used for the segmentation is based on the  [language](#language)  setting.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
+
+<dt>Since</dt>
+<dd>10.2.0</dd>
 
 </dl>
 
