@@ -39,8 +39,13 @@ import type { SpellingDictionaryCollection, SuggestionResult } from '../Spelling
 import { getDictionaryInternal } from '../SpellingDictionary/index.js';
 import type { WordSuggestion } from '../suggestions.js';
 import { calcSuggestionAdjustedToToMatchCase } from '../suggestions.js';
-import type { MatchRange, SimpleRange, SubstitutionTransformer } from '../Transform/index.js';
-import { createMappedTextSegmenter, createSubstitutionTransformer } from '../Transform/index.js';
+import type { MatchRange, SimpleRange, TextTransformer } from '../Transform/index.js';
+import {
+    chainTransformers,
+    createIntlSegmentTextTransformer,
+    createMappedTextSegmenter,
+    createSubstitutionTransformer,
+} from '../Transform/index.js';
 import { catchPromiseError, toError } from '../util/errors.js';
 import { AutoCache } from '../util/simpleCache.js';
 import { uriToFilePath } from '../util/Uri.js';
@@ -200,15 +205,10 @@ export class DocumentValidator {
         const recFinalizeTime = recordPerfTime(this.perfTiming, '_finalizeSettings');
 
         const finalSettings = finalizeSettings(docSettings);
-        const sub = createSubstitutionTransformer(finalSettings);
-        if (sub.missing) {
-            this.addPossibleError(`Missing substitutions: ${sub.missing.join(', ')}`);
-        }
-        const validateOptions = { ...settingsToValidateOptions(finalSettings), transformer: sub.transformer };
-        const rangeTransformer = finalSettings.substitutions?.length ? sub.transformer : undefined;
-        const includeRanges = calcTextInclusionRanges(this._document.text, validateOptions, rangeTransformer);
-        const segmenter = createMappedTextSegmenter(includeRanges);
-        const textValidator = textValidatorFactory(dict, validateOptions);
+        const { transformer, validateOptions, includeRanges, segmenter, textValidator } = this.#calcSharedPrep(
+            finalSettings,
+            dict,
+        );
 
         recFinalizeTime();
 
@@ -224,7 +224,7 @@ export class DocumentValidator {
             textValidator,
             localConfig,
             localConfigFilepath: localConfig?.__importRef?.filename,
-            subTransformer: sub.transformer,
+            transformer,
         };
 
         this._ready = true;
@@ -243,28 +243,43 @@ export class DocumentValidator {
         const stopMeasure = measurePerf('DocumentValidator._updatePrep');
         const shouldCheck = docSettings.enabled ?? true;
         const finalSettings = finalizeSettings(docSettings);
-        const sub = createSubstitutionTransformer(finalSettings);
-        if (sub.missing) {
-            this.addPossibleError(`Missing substitutions: ${sub.missing.join(', ')}`);
-        }
-        const validateOptions = { ...settingsToValidateOptions(finalSettings), transformer: sub.transformer };
-        const rangeTransformer = finalSettings.substitutions?.length ? sub.transformer : undefined;
-        const includeRanges = calcTextInclusionRanges(this._document.text, validateOptions, rangeTransformer);
-        const segmenter = createMappedTextSegmenter(includeRanges);
-        const textValidator = textValidatorFactory(dict, validateOptions);
+        const { transformer, validateOptions, includeRanges, segmenter, textValidator } = this.#calcSharedPrep(
+            finalSettings,
+            dict,
+        );
 
         this._preparations = {
             ...prep,
             dictionary: dict,
             docSettings,
+            finalSettings,
             shouldCheck,
             validateOptions,
             includeRanges,
             segmenter,
             textValidator,
+            transformer,
         };
         this._preparationTime = timer.elapsed;
         stopMeasure();
+    }
+
+    #calcSharedPrep(finalSettings: CSpellSettingsInternalFinalized, dict: SpellingDictionaryCollection) {
+        const sub = createSubstitutionTransformer(finalSettings);
+        if (sub.missing) {
+            this.addPossibleError(`Missing substitutions: ${sub.missing.join(', ')}`);
+        }
+        const transformer = finalSettings.useIntlWordSegmentation
+            ? chainTransformers(sub.transformer, createIntlSegmentTextTransformer(finalSettings.language || ''))
+            : sub.transformer;
+        const validateOptions = { ...settingsToValidateOptions(finalSettings), transformer };
+        // Avoid excluding text ranges that have a full substitution applied.
+        const rangeTransformer = finalSettings.substitutions?.length ? sub.transformer : undefined;
+        const includeRanges = calcTextInclusionRanges(this._document.text, validateOptions, rangeTransformer);
+        const segmenter = createMappedTextSegmenter(includeRanges);
+        const textValidator = textValidatorFactory(dict, validateOptions);
+
+        return { segmenter, textValidator, includeRanges, validateOptions, transformer };
     }
 
     /**
@@ -577,7 +592,7 @@ interface Preparations {
     validateOptions: TextValidationFactoryOptions;
     localConfig: CSpellUserSettings | undefined;
     localConfigFilepath: string | undefined;
-    subTransformer: SubstitutionTransformer;
+    transformer: TextTransformer;
 }
 
 async function searchForDocumentConfig(

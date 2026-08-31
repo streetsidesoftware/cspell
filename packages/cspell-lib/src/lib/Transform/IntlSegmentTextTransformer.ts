@@ -44,3 +44,7 @@ function segmentText(mText: MappedText, segmenter: Intl.Segmenter): MappedText {
 
     return applyEditsToMappedText(mText, edits);
 }
+
+export function createIntlSegmentTextTransformer(locale: string | string[]): IntlSegmentTextTransformer {
+    return new IntlSegmentTextTransformer(locale);
+}

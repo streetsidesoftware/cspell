@@ -63,6 +63,7 @@ const mergeDefinitionFunctions: SetOfMergeFunctions = {
     suggestWords: (key, settings) => recKV(key, mArr(exKV(key, settings))),
     unknownWords: (key, settings) => recKV(key, lastValue(exKV(key, settings))),
     useGitignore: (key, settings) => recKV(key, lastValue(exKV(key, settings))),
+    useIntlWordSegmentation: (key, settings) => recKV(key, lastValue(exKV(key, settings))),
     usePnP: (key, settings) => recKV(key, lastValue(exKV(key, settings))),
     userWords: (key, settings) => recKV(key, mArr(exKV(key, settings))),
     validateDirectives: (key, settings) => recKV(key, lastValue(exKV(key, settings))),

@@ -14,7 +14,7 @@ import { createCachingDictionary } from 'cspell-dictionary';
 
 import type { ValidationIssue } from '../Models/ValidationIssue.js';
 import * as RxPat from '../Settings/RegExpPatterns.js';
-import type { SubstitutionTransformer } from '../Transform/index.js';
+import type { TextTransformer } from '../Transform/index.js';
 import { mapRangeBackToOriginalPos } from '../Transform/index.js';
 import { autoResolve } from '../util/AutoResolve.js';
 import {
@@ -438,7 +438,7 @@ export interface TextValidator {
 }
 
 export interface TextValidationFactoryOptions extends ValidationOptions {
-    transformer: SubstitutionTransformer | undefined;
+    transformer: TextTransformer | undefined;
 }
 
 export function textValidatorFactory(dict: SpellingDictionary, options: TextValidationFactoryOptions): TextValidator {

@@ -1346,6 +1346,12 @@
           "markdownDescription": "Controls how unknown words are handled.\n\n- `report-all` - Report all unknown words (default behavior)\n- `report-simple` - Report unknown words that have simple spelling errors, typos, and flagged words.\n- `report-common-typos` - Report unknown words that are common typos and flagged words.\n- `report-flagged` - Report unknown words that are flagged.",
           "since": "9.1.0"
         },
+        "useIntlWordSegmentation": {
+          "description": "Enables enables locale-sensitive text segmentation to support languages like Japanese, Chinese, Thai, Lao, Khmer, Myanmar, etc. The locale used for the segmentation is based on the  {@link  language  }  setting.",
+          "markdownDescription": "Enables enables locale-sensitive text segmentation to support languages like Japanese, Chinese, Thai, Lao, Khmer, Myanmar, etc.\nThe locale used for the segmentation is based on the  {@link  language  }  setting.",
+          "since": "10.2.0",
+          "type": "boolean"
+        },
         "words": {
           "description": "List of words to be considered correct.",
           "items": {
@@ -1637,6 +1643,12 @@
           "description": "Controls how unknown words are handled.\n\n- `report-all` - Report all unknown words (default behavior)\n- `report-simple` - Report unknown words that have simple spelling errors, typos, and flagged words.\n- `report-common-typos` - Report unknown words that are common typos and flagged words.\n- `report-flagged` - Report unknown words that are flagged.",
           "markdownDescription": "Controls how unknown words are handled.\n\n- `report-all` - Report all unknown words (default behavior)\n- `report-simple` - Report unknown words that have simple spelling errors, typos, and flagged words.\n- `report-common-typos` - Report unknown words that are common typos and flagged words.\n- `report-flagged` - Report unknown words that are flagged.",
           "since": "9.1.0"
+        },
+        "useIntlWordSegmentation": {
+          "description": "Enables enables locale-sensitive text segmentation to support languages like Japanese, Chinese, Thai, Lao, Khmer, Myanmar, etc. The locale used for the segmentation is based on the  {@link  language  }  setting.",
+          "markdownDescription": "Enables enables locale-sensitive text segmentation to support languages like Japanese, Chinese, Thai, Lao, Khmer, Myanmar, etc.\nThe locale used for the segmentation is based on the  {@link  language  }  setting.",
+          "since": "10.2.0",
+          "type": "boolean"
         },
         "usePnP": {
           "default": false,
@@ -2381,6 +2393,12 @@
       "default": false,
       "description": "Tells the spell checker to load `.gitignore` files and skip files that match the globs in the `.gitignore` files found.",
       "markdownDescription": "Tells the spell checker to load `.gitignore` files and skip files that match the globs in the `.gitignore` files found.",
+      "type": "boolean"
+    },
+    "useIntlWordSegmentation": {
+      "description": "Enables enables locale-sensitive text segmentation to support languages like Japanese, Chinese, Thai, Lao, Khmer, Myanmar, etc. The locale used for the segmentation is based on the  {@link  language  }  setting.",
+      "markdownDescription": "Enables enables locale-sensitive text segmentation to support languages like Japanese, Chinese, Thai, Lao, Khmer, Myanmar, etc.\nThe locale used for the segmentation is based on the  {@link  language  }  setting.",
+      "since": "10.2.0",
       "type": "boolean"
     },
     "usePnP": {

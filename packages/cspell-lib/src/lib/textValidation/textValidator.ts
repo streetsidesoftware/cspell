@@ -2,7 +2,7 @@ import { opConcatMap, opFilter, opTake, pipe } from '@cspell/cspell-pipe/sync';
 import type { SpellingDictionary } from 'cspell-dictionary';
 
 import type { ValidationResult } from '../Models/ValidationResult.js';
-import type { SubstitutionTransformer } from '../Transform/index.js';
+import type { TextTransformer } from '../Transform/index.js';
 import * as TextRange from '../Transform/index.js';
 import * as Text from '../util/text.js';
 import { defaultMaxDuplicateProblems, defaultMaxNumberOfProblems } from './defaultConstants.js';
@@ -48,7 +48,7 @@ export function validateText(
 export function calcTextInclusionRanges(
     text: string,
     options: IncludeExcludeOptions,
-    transformer?: SubstitutionTransformer,
+    transformer?: TextTransformer,
 ): TextRange.MatchRange[] {
     const { ignoreRegExpList = [], includeRegExpList = [] } = options;
 
@@ -68,7 +68,7 @@ export function calcTextInclusionRanges(
 function isFullySubstitutedRange(
     text: string,
     range: TextRange.MatchRange,
-    transformer: SubstitutionTransformer | undefined,
+    transformer: TextTransformer | undefined,
 ): boolean {
     if (!transformer) return false;
     const source = text.slice(range.startPos, range.endPos);

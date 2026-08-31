@@ -98,6 +98,26 @@ describe('docValidator', () => {
     );
 
     test.each`
+        filename                             | expected
+        ${fix('IntlSegmentText/example.md')} | ${[oc({ text: 'สม่ำเสมอ', offset: 152, length: 'สม่ำเสมอ'.length /* cspell:ignore สม่ำเสมอ */ })]}
+    `(
+        'checkText async $filename "$startText"',
+        async ({ filename, expected }) => {
+            const doc = await loadDoc(filename);
+            const dVal = new DocumentValidator(doc, {}, {});
+            await dVal.prepare();
+            const startOffset = 0;
+            const endOffset = doc.text.length;
+            assert(startOffset >= 0);
+            const range = [startOffset, endOffset] as const;
+            const text = doc.text.slice(startOffset, endOffset);
+            expect(dVal.checkText(range, text, [])).toEqual(expected);
+            expect(dVal.prepTime).toBeGreaterThan(0);
+        },
+        timeout,
+    );
+
+    test.each`
         filename                                   | text            | configFile            | expected
         ${__filename}                              | ${'__filename'} | ${undefined}          | ${[]}
         ${fix('sample-with-errors.ts')}            | ${'Helllo'}     | ${undefined}          | ${[oc({ text: 'Helllo' })]}
