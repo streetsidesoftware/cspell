@@ -625,6 +625,14 @@ export interface BaseSetting extends InlineDictionary, ExperimentalBaseSettings,
      * @since 9.7.0
      */
     substitutions?: Substitutions;
+
+    /**
+     * Enables enables locale-sensitive text segmentation to support languages like Japanese, Chinese, Thai, Lao, Khmer, Myanmar, etc.
+     * The locale used for the segmentation is based on the {@link language} setting.
+     *
+     * @since 10.2.0
+     */
+    useIntlWordSegmentation?: boolean;
 }
 
 export interface LanguageSetting extends LanguageSettingFilterFields, BaseSetting {}

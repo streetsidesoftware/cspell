@@ -91,6 +91,7 @@ const handlers: CSpellSettingsHandlers = {
     suggestWords: copy1,
     unknownWords: copy1,
     useGitignore: copy1,
+    useIntlWordSegmentation: copy1,
     usePnP: skip,
     userWords: copy1,
     validateDirectives: copy1,
@@ -245,6 +246,7 @@ const LanguageSettingsHandlers: Handlers<LanguageSetting> = {
     substitutions: copy1,
     suggestWords: copy1,
     unknownWords: copy1,
+    useIntlWordSegmentation: copy1,
     words: copy1,
 
     // Experimental
@@ -316,6 +318,7 @@ const OverridesHandlers: Handlers<OverrideSettings> = {
     suggestionsTimeout: copy1,
     suggestWords: copy1,
     unknownWords: copy1,
+    useIntlWordSegmentation: copy1,
     usePnP: skip,
     words: copy1,
 

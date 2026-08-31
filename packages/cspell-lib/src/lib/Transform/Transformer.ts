@@ -25,3 +25,28 @@ export function toMappedText(text: string | MappedText): MappedText {
     }
     return text;
 }
+
+export function chainTransformers(...transformers: TextTransformer[]): TextTransformer {
+    return {
+        transform(text: string | MappedText): MappedText {
+            return transformers.reduce((acc, transformer) => transformer.transform(acc), toMappedText(text));
+        },
+        transformAll(src: Iterable<string | MappedText>): Iterable<MappedText> {
+            return Array.from(src, (text) =>
+                transformers.reduce((acc, transformer) => transformer.transform(acc), toMappedText(text)),
+            );
+        },
+    };
+}
+
+export class IdentityTextTransformer implements TextTransformer {
+    transform(text: string | MappedText): MappedText {
+        return toMappedText(text);
+    }
+
+    *transformAll(src: Iterable<string | MappedText>): Iterable<MappedText> {
+        for (const item of src) {
+            yield this.transform(item);
+        }
+    }
+}

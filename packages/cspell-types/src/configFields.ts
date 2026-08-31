@@ -58,6 +58,7 @@ export const ConfigFields: CSpellUserSettingsFields = {
     suggestWords: 'suggestWords',
     unknownWords: 'unknownWords',
     useGitignore: 'useGitignore',
+    useIntlWordSegmentation: 'useIntlWordSegmentation',
     usePnP: 'usePnP',
     userWords: 'userWords',
     validateDirectives: 'validateDirectives',

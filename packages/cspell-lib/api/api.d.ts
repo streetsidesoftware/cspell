@@ -633,6 +633,12 @@ interface ValidationIssueRPC extends ValidationResultRPC {
   suggestionsEx?: ExtendedSuggestion[] | undefined;
 }
 //#endregion
+//#region src/lib/Transform/Transformer.d.ts
+interface TextTransformer {
+  transform(text: string | MappedText): MappedText;
+  transformAll(src: Iterable<string | MappedText>): Iterable<MappedText>;
+}
+//#endregion
 //#region src/lib/Transform/TextRange.d.ts
 /**
  * A range of text in a document.
@@ -645,21 +651,6 @@ interface MatchRange {
 //#endregion
 //#region src/lib/Transform/types.d.ts
 type SimpleRange = Readonly<Range>;
-//#endregion
-//#region src/lib/Transform/Transformer.d.ts
-interface TextTransformer {
-  transform(text: string | MappedText): MappedText;
-  transformAll(src: Iterable<string | MappedText>): Iterable<MappedText>;
-}
-//#endregion
-//#region src/lib/Transform/SubstitutionTransformer.d.ts
-declare class SubstitutionTransformer implements TextTransformer {
-  #private;
-  constructor(subMap: Map<string, string> | undefined);
-  transform(text: string | MappedText): MappedText;
-  transformAll(src: Iterable<string | MappedText>): Iterable<MappedText>;
-  transformString(text: string): MappedText;
-}
 //#endregion
 //#region src/lib/suggestions.d.ts
 interface WordSuggestion extends SuggestionResult {
@@ -770,7 +761,7 @@ interface TextValidator {
   lineValidator: LineValidator;
 }
 interface TextValidationFactoryOptions extends ValidationOptions {
-  transformer: SubstitutionTransformer | undefined;
+  transformer: TextTransformer | undefined;
 }
 //#endregion
 //#region src/lib/textValidation/traceWord.d.ts
@@ -853,6 +844,7 @@ interface DocumentValidatorOptions extends ValidateTextOptions {
 }
 type PerfTimings = Record<string, number>;
 declare class DocumentValidator {
+  #private;
   readonly settings: CSpellUserSettings;
   private _document;
   private _ready;
@@ -948,7 +940,7 @@ interface Preparations {
   validateOptions: TextValidationFactoryOptions;
   localConfig: CSpellUserSettings | undefined;
   localConfigFilepath: string | undefined;
-  subTransformer: SubstitutionTransformer;
+  transformer: TextTransformer;
 }
 interface ShouldCheckDocumentResult {
   /** possible errors found while loading configuration. */
