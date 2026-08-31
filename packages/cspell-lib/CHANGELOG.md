@@ -51,6 +51,27 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - No changes
 
+## v10.2.0 (2026-08-31)
+
+### Features
+
+- feat: Support languages without word breaks (Part 2) (<a href="https://github.com/streetsidesoftware/cspell/pull/9133">#9133</a>)
+- feat: Support languages without word breaks (Part 1) (<a href="https://github.com/streetsidesoftware/cspell/pull/9131">#9131</a>)
+
+- feat: Add `--force-check` cli option (<a href="https://github.com/streetsidesoftware/cspell/pull/9080">#9080</a>)
+
+### Fixes
+
+- fix: Reduce the size of cspell types when bundled (<a href="https://github.com/streetsidesoftware/cspell/pull/9119">#9119</a>)
+- fix(ci): push release tag with GitHub App token so publish.yml triggers (<a href="https://github.com/streetsidesoftware/cspell/pull/9097">#9097</a>)
+
+- fix: Updated package.json exports (<a href="https://github.com/streetsidesoftware/cspell/pull/8965">#8965</a>)
+
+### Dictionary Updates
+
+- fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/9102">#9102</a>)
+- fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/9067">#9067</a>)
+
 ## v10.1.1 (2026-08-25)
 
 ### Fixes
