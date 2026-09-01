@@ -3,11 +3,9 @@ import type { TextOffset } from '@cspell/cspell-types';
 import { PairingHeap } from '../PairingHeap.js';
 import { regExNumericLiteral, regExWordsAndDigits } from '../textRegex.js';
 import type { BreakPairs, LineSegment, SortedBreaks, WordBreakOptions } from './generateWordBreaks.js';
-import { generateWordBreaks } from './generateWordBreaks.js';
+import { generateWordBreaks, softHyphen } from './generateWordBreaks.js';
 
 const ignoreBreak: BreakPairs = Object.freeze([]) as unknown as BreakPairs;
-
-export const softHyphen = '\u00AD';
 
 export type IsValidWordFn = (word: TextOffset) => boolean;
 

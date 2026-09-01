@@ -10,6 +10,8 @@ import {
     regExTrailingEndings,
 } from '../textRegex.js';
 
+export const softHyphen = '\u00AD';
+
 const ignoreBreak: BreakPairs = Object.freeze([]) as unknown as BreakPairs;
 
 export interface LineSegment {
@@ -89,6 +91,27 @@ function genWordBreakCamel(line: LineSegment): SortedBreaks[] {
     return [breaksCamel1, breaksCamel2];
 }
 
+function calcBreaksForSubString(
+    line: LineSegment,
+    subStr: string,
+    calcBreak: (start: number, end: number) => PossibleWordBreak | undefined,
+): SortedBreaks {
+    const sb: SortedBreaks = [];
+    let text = line.line.text;
+    if (text.length > line.relEnd + 128) {
+        text = text.slice(0, line.relEnd);
+    }
+    const inc = subStr.length;
+
+    for (let pos = text.indexOf(subStr, line.relStart); pos >= 0; pos = text.indexOf(subStr, pos + inc)) {
+        const b = calcBreak(pos, pos + inc);
+        if (b) {
+            sb.push(b);
+        }
+    }
+    return sb;
+}
+
 function calcBreaksForRegEx(
     line: LineSegment,
     reg: RegExp,
@@ -105,22 +128,26 @@ function calcBreaksForRegEx(
     return sb;
 }
 
+function calcOptionalWordBreak(i: number, j: number): PossibleWordBreak {
+    return {
+        offset: i,
+        breaks: [
+            [i, j], // Remove the characters
+            ignoreBreak,
+        ],
+    };
+}
+
 function genOptionalWordBreaks(line: LineSegment, optionalBreakCharacters: string | undefined): SortedBreaks[] {
     function calcBreaks(m: RegExpMatchArray): PossibleWordBreak | undefined {
         const i = m.index;
         if (i === undefined) return;
         const j = i + m[0].length;
-
-        return {
-            offset: i,
-            breaks: [
-                [i, j], // Remove the characters
-                ignoreBreak,
-            ],
-        };
+        return calcOptionalWordBreak(i, j);
     }
 
     const breaks: SortedBreaks[] = [
+        calcBreaksForSubString(line, softHyphen, calcOptionalWordBreak),
         calcBreaksForRegEx(line, regExDanglingQuote, calcBreaks),
         calcBreaksForRegEx(line, regExTrailingEndings, calcBreaks),
     ];

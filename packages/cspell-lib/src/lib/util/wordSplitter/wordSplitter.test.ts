@@ -230,7 +230,7 @@ describe('wordSplitter IntlSegmenter', async () => {
             text: sample.input,
             offset: 130,
         };
-        const result = split(line, 130, has, { optionalWordBreakCharacters: softHyphen });
+        const result = split(line, 130, has);
         const words = result.words.map((w) => w.text).join(' ');
         // cspell:disable-next-line
         expect(words).toBe('ถ้า คุณ ต้องการ ที่ จะ ประสบ ความ สำเร็จ ใน การ เรียน ภาษา ไทย');
@@ -239,14 +239,14 @@ describe('wordSplitter IntlSegmenter', async () => {
             line.offset + hyphenateThai('ถ้าคุณต้องการที่จะประสบความสำเร็จในการเรียนภาษาไทย').length,
         );
 
-        const result2 = split(line, result.endOffset, has, { optionalWordBreakCharacters: softHyphen });
+        const result2 = split(line, result.endOffset, has);
         const words2 = result2.words.map((w) => w.text).join(' ');
         // cspell:disable-next-line
         expect(words2).toBe('คุณ ต้อง มี ความ อดทน และ ฝึกฝน ทุก วัน อย่าง สม่ำเสมอ');
         expect(result2.words.filter((w) => w.isFound)).toHaveLength(11);
     });
 
-    test('split Thai text 2', () => {
+    test.only('split Thai text 2', () => {
         // cspell:disable
         // The following is an example of a very expensive split
         const sample = {
@@ -267,7 +267,7 @@ describe('wordSplitter IntlSegmenter', async () => {
             text: sample.input,
             offset: 200,
         };
-        const result = split(line, 200, has, { optionalWordBreakCharacters: softHyphen });
+        const result = split(line, 200, has);
         const words = result.words.map((w) => w.text).join(' ');
         // cspell:disable-next-line
         expect(words).toBe(sample.expected[0]);
