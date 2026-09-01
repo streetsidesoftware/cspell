@@ -113,6 +113,8 @@ describe('Validate wordSplitter', () => {
         calls: number;
     }
 
+    // cspell:ignore MOVSX
+
     test.each`
         text                                | expectedWords                                 | calls
         ${'hello'}                          | ${[tov({ text: 'hello', offset: 142 })]}      | ${1}
@@ -126,7 +128,7 @@ describe('Validate wordSplitter', () => {
         ${'CVTPD2PS_x_xm'}                  | ${splitTov('CVTPD2PS|x|xm')}                  | ${6}
         ${'CVTSI2SD_x_rm'}                  | ${splitTov('CVTSI|SD|x|rm')}                  | ${10}
         ${'errCVTTSD2SI_r_xm'}              | ${splitTov('err|CVTTSD|SI|r|xm')}             | ${12}
-        ${"words'separated'by_singleQuote"} | ${splitTov('words|separated|by|singleQuote')} | ${6}
+        ${"words'separated'by_singleQuote"} | ${splitTov('words|separated|by|singleQuote')} | ${8}
         ${"Tom's_hardware"}                 | ${splitTov("Tom's|hardware")}                 | ${5}
     `('split edge cases `$text`', ({ text, expectedWords, calls }: TestSplitWithCalls) => {
         const line = {
@@ -166,19 +168,19 @@ describe('Validate wordSplitter', () => {
         ${`îphoneStatic`}     | ${'îphone|Static'} | ${2}
         ${`êphoneStatic`}     | ${'êphone|Static'} | ${2}
         ${`geschäft`}         | ${'geschäft'}      | ${1}
-        ${`n'log`}            | ${'log'}           | ${8}
+        ${`n'log`}            | ${'log'}           | ${7}
         ${'64-bit'}           | ${'bit'}           | ${1}
         ${'128-bit'}          | ${'bit'}           | ${1}
         ${'256-sha'}          | ${'256-sha'}       | ${3}
         ${'64bit'}            | ${'bit'}           | ${1}
-        ${`REFACTOR'd`}       | ${'REFACTOR'}      | ${3}
+        ${`REFACTOR'd`}       | ${'REFACTOR|d'}    | ${4}
         ${`dogs'`}            | ${`dogs'`}         | ${2}
         ${`planets’`}         | ${`planets’`}      | ${2}
         ${'0.7e1-count+56'}   | ${`e|count`}       | ${1}
         ${'+flow.tensor'}     | ${`flow|.tensor`}  | ${8}
-        ${'-torch.tensor+64'} | ${'torch|.tensor'} | ${6}
+        ${'-torch.tensor+64'} | ${'torch|.tensor'} | ${5}
         ${"'twas the night"}  | ${"'twas"}         | ${2}
-        ${'begin+end29'}      | ${'begin|+end'}    | ${5}
+        ${'begin+end29'}      | ${'begin|+end'}    | ${4}
     `('split `$text` in doc', ({ text, expectedWords, calls }: TestSplit2) => {
         const expectedWordSegments = splitTov(expectedWords);
         const doc = sampleText();
@@ -246,7 +248,7 @@ describe('wordSplitter IntlSegmenter', async () => {
         expect(result2.words.filter((w) => w.isFound)).toHaveLength(11);
     });
 
-    test.only('split Thai text 2', () => {
+    test('split Thai text 2', () => {
         // cspell:disable
         // The following is an example of a very expensive split
         const sample = {

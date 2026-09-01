@@ -5,10 +5,10 @@ Map {
   "flow" => 1,
   "flow." => 1,
   "tensor" => 1,
-  ".tensor" => 1,
-  "flow.tensor" => 1,
   "+flow" => 1,
   "+flow." => 1,
+  ".tensor" => 1,
+  "flow.tensor" => 1,
   "+flow.tensor" => 1,
 }
 `;
@@ -26,7 +26,6 @@ Map {
   "tensor" => 1,
   "tensor+" => 1,
   "tensor+64" => 1,
-  "torch." => 1,
   ".tensor" => 1,
 }
 `;
@@ -67,6 +66,7 @@ exports[`Validate wordSplitter > split \`'REFACTOR\\'d'\` in doc 1`] = `
 Map {
   "REFACTOR" => 1,
   "REFACTOR'" => 1,
+  "d" => 1,
   "REFACTOR'd" => 1,
 }
 `;
@@ -76,7 +76,6 @@ Map {
   "begin" => 1,
   "end" => 1,
   "end29" => 1,
-  "begin+" => 1,
   "+end" => 1,
 }
 `;
@@ -118,10 +117,9 @@ exports[`Validate wordSplitter > split \`'n\\'log'\` in doc 1`] = `
 Map {
   "log" => 1,
   "log'" => 1,
+  "n" => 1,
   "'log" => 1,
   "'log'" => 1,
-  "n" => 1,
-  "n'" => 1,
   "n'log" => 1,
   "n'log'" => 1,
 }
