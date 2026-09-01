@@ -230,7 +230,24 @@ function splitIntoWords(
     const maxAttempts = 1000;
 
     const knownPathsByIndex = new Map<number, PathNode>();
-    knownPathsByIndex.set(maxIndex, { n: undefined, i: maxIndex, j: maxIndex, c: 0, nc: 0, text: undefined });
+    const terminalNode: PathNode = { n: undefined, i: maxIndex, j: maxIndex, c: 0, nc: 0, text: undefined };
+    knownPathsByIndex.set(maxIndex, terminalNode);
+
+    // Seed the search with the whole word treated as a single candidate. This guarantees a
+    // correct fallback result (e.g. a whole word matched via ignoreWords/the dictionary, or
+    // reporting the word as a single misspelling) even when the segmented search below never
+    // finds a strictly cheaper split.
+    const wholeWordText = checkTextRange(lineSeg.relStart, maxIndex);
+    const wholeWordCost = wholeWordText.isFound ? 0 : wholeWordText.length;
+    const wholeWordNode: PathNode = {
+        n: terminalNode,
+        i: lineSeg.relStart,
+        j: maxIndex,
+        c: wholeWordCost,
+        nc: wholeWordCost,
+        text: wholeWordText,
+    };
+    knownPathsByIndex.set(lineSeg.relStart, wholeWordNode);
 
     function findNearestBreakIndex(offset: number, bi: number): number | undefined {
         while (bi < breaks.length && breaks[bi].offset < offset) {
@@ -328,11 +345,21 @@ function splitIntoWords(
         return path;
     }
 
-    let maxCost = lineSeg.relEnd - lineSeg.relStart + 1;
+    // A candidate that only ties the whole-word fallback is still preferred over it, since it
+    // represents a more granular split; ties between two genuine split candidates keep whichever
+    // was found first. Allow the search to explore up to (and including) a tying cost by giving
+    // maxCost one extra unit of slack above the seeded whole-word cost.
+    function preferCandidate(candidate: PathNode, current: PathNode): boolean {
+        if (candidate.c < current.c) return true;
+        if (candidate.c > current.c) return false;
+        return current === wholeWordNode && candidate !== wholeWordNode;
+    }
+
+    let maxCost = wholeWordCost + 1;
     const candidates = new PairingHeap<Candidate>(compare);
     candidates.append(makeCandidates(undefined, lineSeg.relStart, 0, 0, 0));
     let attempts = 0;
-    let bestPath: PathNode | undefined;
+    let bestPath: PathNode = wholeWordNode;
 
     while (maxCost && candidates.length && attempts++ < maxAttempts) {
         /** Best Candidate Index */
@@ -364,7 +391,7 @@ function splitIntoWords(
             if (parentPath) {
                 // We found a known apply to candidate
                 const f = addToKnownPaths(best);
-                bestPath = !bestPath || (f && f.c < bestPath.c) ? f : bestPath;
+                bestPath = f && preferCandidate(f, bestPath) ? f : bestPath;
             }
             const c = makeCandidates(t ? best : best.p, j, best.bi + 1, best.bs, best.c);
             candidates.append(c);
@@ -386,11 +413,16 @@ function splitIntoWords(
                 const can: Candidate = t ? { ...best, text: segText } : { ...best, ...best.p, text: segText };
                 can.j = j;
                 const f = addToKnownPaths(can);
-                bestPath = !bestPath || (f && f.c < bestPath.c) ? f : bestPath;
+                bestPath = f && preferCandidate(f, bestPath) ? f : bestPath;
             }
         }
-        if (bestPath && bestPath.c < maxCost) {
-            maxCost = bestPath.c;
+        // While the whole-word fallback is still the best known answer, keep one unit of
+        // slack above its cost so a genuine split that only ties it can still be explored
+        // to completion and preferred by preferCandidate. Once a real split has taken over,
+        // tighten exactly like before.
+        const slack = bestPath === wholeWordNode ? 1 : 0;
+        if (bestPath.c + slack < maxCost) {
+            maxCost = bestPath.c + slack;
         }
     }
 

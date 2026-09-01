@@ -120,16 +120,16 @@ describe('Validate wordSplitter', () => {
         ${'hello'}                          | ${[tov({ text: 'hello', offset: 142 })]}      | ${1}
         ${''}                               | ${[]}                                         | ${0}
         ${'#@()&*'}                         | ${[]}                                         | ${0}
-        ${'well-educated'}                  | ${[tov('well'), tov('educated')]}             | ${2}
-        ${'MOVSX_r_rm16'}                   | ${splitTov('MOVSX_r_rm16')}                   | ${8}
-        ${'32bit-checksum'}                 | ${splitTov('bit|checksum')}                   | ${2}
-        ${'ERRORCodesTwo'}                  | ${splitTov('ERROR|Codes|Two')}                | ${4}
-        ${'camelCase'}                      | ${splitTov('camel|Case')}                     | ${2}
-        ${'CVTPD2PS_x_xm'}                  | ${splitTov('CVTPD2PS|x|xm')}                  | ${6}
+        ${'well-educated'}                  | ${[tov('well'), tov('educated')]}             | ${3}
+        ${'MOVSX_r_rm16'}                   | ${splitTov('MOVSX_r_rm16')}                   | ${6}
+        ${'32bit-checksum'}                 | ${splitTov('bit|checksum')}                   | ${3}
+        ${'ERRORCodesTwo'}                  | ${splitTov('ERROR|Codes|Two')}                | ${5}
+        ${'camelCase'}                      | ${splitTov('camel|Case')}                     | ${3}
+        ${'CVTPD2PS_x_xm'}                  | ${splitTov('CVTPD2PS|x|xm')}                  | ${7}
         ${'CVTSI2SD_x_rm'}                  | ${splitTov('CVTSI|SD|x|rm')}                  | ${10}
         ${'errCVTTSD2SI_r_xm'}              | ${splitTov('err|CVTTSD|SI|r|xm')}             | ${12}
-        ${"words'separated'by_singleQuote"} | ${splitTov('words|separated|by|singleQuote')} | ${8}
-        ${"Tom's_hardware"}                 | ${splitTov("Tom's|hardware")}                 | ${5}
+        ${"words'separated'by_singleQuote"} | ${splitTov('words|separated|by|singleQuote')} | ${9}
+        ${"Tom's_hardware"}                 | ${splitTov("Tom's|hardware")}                 | ${6}
     `('split edge cases `$text`', ({ text, expectedWords, calls }: TestSplitWithCalls) => {
         const line = {
             text,
@@ -161,26 +161,26 @@ describe('Validate wordSplitter', () => {
     test.each`
         text                  | expectedWords      | calls
         ${'static'}           | ${'static'}        | ${1}
-        ${'nstatic'}          | ${'static'}        | ${1}
-        ${'techo'}            | ${'echo'}          | ${1}
-        ${`n'cpp`}            | ${'cpp'}           | ${1}
-        ${`î'cpp`}            | ${'î|cpp'}         | ${2}
-        ${`îphoneStatic`}     | ${'îphone|Static'} | ${2}
-        ${`êphoneStatic`}     | ${'êphone|Static'} | ${2}
+        ${'nstatic'}          | ${'static'}        | ${2}
+        ${'techo'}            | ${'echo'}          | ${2}
+        ${`n'cpp`}            | ${'cpp'}           | ${2}
+        ${`î'cpp`}            | ${'î|cpp'}         | ${3}
+        ${`îphoneStatic`}     | ${'îphone|Static'} | ${3}
+        ${`êphoneStatic`}     | ${'êphone|Static'} | ${3}
         ${`geschäft`}         | ${'geschäft'}      | ${1}
         ${`n'log`}            | ${'log'}           | ${7}
-        ${'64-bit'}           | ${'bit'}           | ${1}
-        ${'128-bit'}          | ${'bit'}           | ${1}
-        ${'256-sha'}          | ${'256-sha'}       | ${3}
-        ${'64bit'}            | ${'bit'}           | ${1}
+        ${'64-bit'}           | ${'bit'}           | ${2}
+        ${'128-bit'}          | ${'bit'}           | ${2}
+        ${'256-sha'}          | ${'256-sha'}       | ${2}
+        ${'64bit'}            | ${'bit'}           | ${2}
         ${`REFACTOR'd`}       | ${'REFACTOR|d'}    | ${4}
         ${`dogs'`}            | ${`dogs'`}         | ${2}
         ${`planets’`}         | ${`planets’`}      | ${2}
-        ${'0.7e1-count+56'}   | ${`e|count`}       | ${1}
+        ${'0.7e1-count+56'}   | ${`e|count`}       | ${2}
         ${'+flow.tensor'}     | ${`flow|.tensor`}  | ${8}
-        ${'-torch.tensor+64'} | ${'torch|.tensor'} | ${5}
+        ${'-torch.tensor+64'} | ${'torch|.tensor'} | ${6}
         ${"'twas the night"}  | ${"'twas"}         | ${2}
-        ${'begin+end29'}      | ${'begin|+end'}    | ${4}
+        ${'begin+end29'}      | ${'begin|+end'}    | ${5}
     `('split `$text` in doc', ({ text, expectedWords, calls }: TestSplit2) => {
         const expectedWordSegments = splitTov(expectedWords);
         const doc = sampleText();
@@ -296,7 +296,11 @@ describe('wordSplitter IntlSegmenter', async () => {
 });
 
 describe('wordSplitter against dictionary', async () => {
-    const settings = calcSettingsForLanguageId(finalizeSettings(await getDefaultSettings()), 'en');
+    const s = await getDefaultSettings();
+    s.ignoreWords = s.ignoreWords || [];
+    // cspell:ignore 5IAGEAcABwAHkAIABOAGUAdwAgAFkAZQBhAHIA
+    s.ignoreWords.push('5IAGEAcABwAHkAIABOAGUAdwAgAFkAZQBhAHIA');
+    const settings = calcSettingsForLanguageId(finalizeSettings(s), 'en,en-gb');
     const dict = await getDictionary(settings);
 
     function has(t: TextOffset): boolean {
@@ -304,11 +308,13 @@ describe('wordSplitter against dictionary', async () => {
     }
 
     test.each`
-        text                                         | expected
-        ${'hello'}                                   | ${'hello'}
-        ${'VkResul'}                                 | ${'<Vk>|<Resul>' /* cspell:disable-line */}
-        ${'VkSwapchainKHR'}                          | ${'<Vk>|<Swapchain>|<KHR>' /* cspell:disable-line */}
-        ${'AbpBootstrapper.PlugInSources.AddFolder'} | ${'<Abp>|<Bootstrapper>|Plug|In|Sources|Add|Folder' /* cspell:disable-line */}
+        text                                          | expected
+        ${'hello'}                                    | ${'hello'}
+        ${'VkResul'}                                  | ${'<Vk>|<Resul>' /* cspell:disable-line */}
+        ${'VkSwapchainKHR'}                           | ${'<Vk>|<Swapchain>|<KHR>' /* cspell:disable-line */}
+        ${'AbpBootstrapper.PlugInSources.AddFolder'}  | ${'<Abp>|<Bootstrapper>|Plug|In|Sources|Add|Folder' /* cspell:disable-line */}
+        ${"r'getMaxNumPictureInPictureActions"}       | ${'r|get|Max|<Num>|Picture|In|Picture|Actions' /* cspell:disable-line */}
+        ${'//5IAGEAcABwAHkAIABOAGUAdwAgAFkAZQBhAHIA'} | ${'5IAGEAcABwAHkAIABOAGUAdwAgAFkAZQBhAHIA' /* cspell:disable-line */}
     `('validate against dictionary', ({ text, expected }) => {
         expected = typeof expected === 'string' ? expected.split('|') : expected;
         const line = {
