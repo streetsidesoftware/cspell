@@ -844,6 +844,9 @@ importers:
       '@cspell/dict-python':
         specifier: ^4.5.0
         version: 4.5.0
+      '@cspell/dict-th-th':
+        specifier: ^1.0.0
+        version: 1.0.0
       '@cspell/dictionary-bundler-plugin':
         specifier: workspace:*
         version: link:../cspell-dictionary-bundler-plugin
@@ -2461,6 +2464,9 @@ packages:
 
   '@cspell/dict-terraform@1.1.4':
     resolution: {integrity: sha512-Ere42ilvMFvQA4GlcN0OKlruMPR6EsvaB+iTHzj2xc+NJGRK64V7yApUcWrOrSgTiM/vhWXPIsK3OMfiAiNdmA==}
+
+  '@cspell/dict-th-th@1.0.0':
+    resolution: {integrity: sha512-A0y1e/rdGWGG6pvryip7yxQAVQsQXNSyCeGi6ODvtkk4tgoOPJwzlV9sZ+BzgAkEL0Xi9XcQcWUvH3VQgZEcnA==}
 
   '@cspell/dict-typescript@3.2.3':
     resolution: {integrity: sha512-zXh1wYsNljQZfWWdSPYwQhpwiuW0KPW1dSd8idjMRvSD0aSvWWHoWlrMsmZeRl4qM4QCEAjua8+cjflm41cQBg==}
@@ -10697,11 +10703,6 @@ packages:
       uglify-js:
         optional: true
 
-  terser@5.51.1:
-    resolution: {integrity: sha512-jxJxk3OtMbMeoDTtrSezoFRPDFleMDzBl+mFj4gB04HGQUfKnIMllFV1TVhWdsj9o54AlaTvLuNP9yWHzGD1BA==}
-    engines: {node: '>=10'}
-    hasBin: true
-
   terser@5.51.2:
     resolution: {integrity: sha512-bWnjSNscmuI+GJze6ZupnHP8G/cTcsJF+bXCeQknk2SHQsgbNJnLrqiH9jZ2W4STPVXH2mDKKRX3iwPhc9Cn/Q==}
     engines: {node: '>=10'}
@@ -12777,6 +12778,8 @@ snapshots:
   '@cspell/dict-swift@2.0.6': {}
 
   '@cspell/dict-terraform@1.1.4': {}
+
+  '@cspell/dict-th-th@1.0.0': {}
 
   '@cspell/dict-typescript@3.2.3': {}
 
@@ -19362,7 +19365,7 @@ snapshots:
       entities: 4.5.0
       param-case: 3.0.4
       relateurl: 0.2.7
-      terser: 5.51.1
+      terser: 5.51.2
 
   html-tags@3.3.1: {}
 
@@ -20867,7 +20870,7 @@ snapshots:
       '@jridgewell/trace-mapping': 0.3.31
       jest-worker: 27.5.1
       schema-utils: 4.3.3
-      terser: 5.51.1
+      terser: 5.51.2
       webpack: 5.110.1(@swc/core@1.16.1)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.26))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)(uglify-js@3.19.3)(webpack-cli@7.2.2)
     optionalDependencies:
       '@swc/core': 1.16.1
@@ -23090,13 +23093,6 @@ snapshots:
       postcss: 8.5.26
       uglify-js: 3.19.3
 
-  terser@5.51.1:
-    dependencies:
-      '@jridgewell/source-map': 0.3.11
-      acorn: 8.18.0
-      commander: 2.20.3
-      source-map-support: 0.5.21
-
   terser@5.51.2:
     dependencies:
       '@jridgewell/source-map': 0.3.11
@@ -23756,7 +23752,7 @@ snapshots:
       js-yaml: 4.3.2
       json5: 2.2.3
       webpack-bundle-analyzer: 4.10.2
-      webpack-dev-server: 5.2.6(debug@4.4.3(supports-color@9.4.0))(supports-color@9.4.0)(webpack-cli@7.2.2)(webpack@5.110.1)
+      webpack-dev-server: 5.2.6(supports-color@9.4.0)(webpack-cli@7.2.2)(webpack@5.110.1)
     optional: true
 
   webpack-dev-middleware@7.4.5(webpack@5.110.1):
@@ -23809,7 +23805,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  webpack-dev-server@5.2.6(debug@4.4.3(supports-color@9.4.0))(supports-color@9.4.0)(webpack-cli@7.2.2)(webpack@5.110.1):
+  webpack-dev-server@5.2.6(supports-color@9.4.0)(webpack-cli@7.2.2)(webpack@5.110.1):
     dependencies:
       '@types/bonjour': 3.5.13
       '@types/connect-history-api-fallback': 1.5.4

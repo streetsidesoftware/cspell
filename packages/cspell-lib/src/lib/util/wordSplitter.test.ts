@@ -1,6 +1,8 @@
 import type { TextOffset } from '@cspell/cspell-types';
 import { describe, expect, test, vi } from 'vitest';
 
+import { getDictionary } from '../getDictionary.js';
+import { getDefaultConfigLoader } from '../Settings/index.js';
 import { autoResolve } from './AutoResolve.js';
 import type { SortedBreaks } from './wordSplitter.js';
 import { __testing__, split } from './wordSplitter.js';
@@ -9,6 +11,8 @@ const { generateWordBreaks, findNextWordText } = __testing__;
 
 const words = sampleWordSet();
 const regHasLetters = /\p{L}/u;
+
+const softHyphen = '\u00AD';
 
 describe('Validate wordSplitter', () => {
     interface TestApplyWordBreaks {
@@ -252,6 +256,98 @@ describe('Validate wordSplitter', () => {
         expect(h).toHaveBeenCalledTimes(calls);
         expect(hasCalls).toMatchSnapshot();
     });
+});
+
+describe.only('wordSplitter IntlSegmenter', async () => {
+    const loader = getDefaultConfigLoader();
+    const settings = await loader.resolveSettingsImports(
+        { import: ['@cspell/dict-th-th'], dictionaries: ['th-th'] },
+        import.meta.url,
+    );
+    const dict = await getDictionary(settings);
+
+    function has(t: TextOffset): boolean {
+        return dict.has(t.text);
+    }
+
+    test('split Thai text 1', () => {
+        // cspell:disable
+        // The following is an example of a very expensive split
+        const sample = {
+            locale: 'th-TH',
+            input: hyphenateThai(
+                'ถ้าคุณต้องการที่จะประสบความสำเร็จในการเรียนภาษาไทย คุณต้องมีความอดทนและฝึกฝนทุกวันอย่างสม่ำเสมอ',
+            ),
+            expected:
+                'ถ้า คุณ ต้องการ ที่ จะ ประสบ ความ สำเร็จ ใน การ เรียน ภาษา ไทย คุณ ต้อง มี ความ อดทน และ ฝึกฝน ทุก วัน อย่าง สม่ำเสมอ',
+        };
+        // cspell:enable
+
+        const line = {
+            text: sample.input,
+            offset: 130,
+        };
+        const result = split(line, 130, has, { optionalWordBreakCharacters: softHyphen });
+        const words = result.words.map((w) => w.text).join(' ');
+        // cspell:disable-next-line
+        expect(words).toBe('ถ้า คุณ ต้องการ ที่ จะ ประสบ ความ สำเร็จ ใน การ เรียน ภาษา ไทย');
+        expect(result.words.filter((w) => w.isFound)).toHaveLength(13);
+        expect(result.endOffset).toBe(
+            line.offset + hyphenateThai('ถ้าคุณต้องการที่จะประสบความสำเร็จในการเรียนภาษาไทย').length,
+        );
+
+        const result2 = split(line, result.endOffset, has, { optionalWordBreakCharacters: softHyphen });
+        const words2 = result2.words.map((w) => w.text).join(' ');
+        // cspell:disable-next-line
+        expect(words2).toBe('คุณ ต้อง มี ความ อดทน และ ฝึกฝน ทุก วัน อย่าง สม่ำเสมอ');
+        expect(result2.words.filter((w) => w.isFound)).toHaveLength(11);
+    });
+
+    test.only('split Thai text 2', () => {
+        // cspell:disable
+        // The following is an example of a very expensive split
+        const sample = {
+            locale: 'th-TH',
+            input: hyphenateThai(
+                'ซีแอตเทิลตั้งอยู่บนคอคอดระหว่างพิวเจ็ตซาวนด์ในมหาสมุทรแปซิฟิกและทะเลสาบวอชิงตัน ' +
+                    'เป็นเมืองใหญ่ที่อยู่ทางทิศเหนือสุดของสหรัฐ ซึ่งอยู่ห่างจากชายแดนแคนาดาไปทางทิศใต้ประมาณ 100 ' +
+                    'ไมล์ (160 กิโลเมตร) ซีแอตเทิลนับเป็นประตูการค้าหลักสู่เอเชีย โดยเป็นเมืองท่าที่ใหญ่เป็นอันดับที่ 4 ' +
+                    'ในอเมริกาเหนือในแง่ของการรองรับตู้บรรจุสินค้าของปี ค.ศ. 2015',
+            ),
+            expected: [
+                'ซีแอตเทิล ตั้ง อยู่ บน คอคอด ระ หว่าง พิว เจ็ต ซา วนด์ ใน มหาสมุทร แปซิฟิก และ ทะเลสาบ วอชิงตัน',
+            ],
+        };
+        // cspell:enable
+
+        const line = {
+            text: sample.input,
+            offset: 200,
+        };
+        const result = split(line, 200, has);
+        const words = result.words.map((w) => w.text).join(' ');
+        // cspell:disable-next-line
+        expect(words).toBe(sample.expected[0]);
+        expect(result.words.filter((w) => w.isFound)).toHaveLength(15);
+        // cspell:ignore วนด์
+        // Note this might break if Puget Sound is added to the Thai dictionary.
+        expect(result.words.filter((w) => !w.isFound).map((w) => w.text)).toEqual(['พิว', 'วนด์']);
+        expect(result.endOffset).toBe(
+            line.offset +
+                hyphenateThai('ซีแอตเทิลตั้งอยู่บนคอคอดระหว่างพิวเจ็ตซาวนด์ในมหาสมุทรแปซิฟิกและทะเลสาบวอชิงตัน').length,
+        );
+    });
+
+    function hyphenateThai(text: string, hyphen: string = softHyphen): string {
+        const parts: string[] = [];
+
+        const segments = new Intl.Segmenter('th-TH', { granularity: 'word' }).segment(text);
+        for (const seg of segments) {
+            parts.push(seg.isWordLike ? hyphen + seg.segment : seg.segment);
+        }
+        // Implement Thai hyphenation logic here if needed
+        return parts.join('');
+    }
 });
 
 function has({ text }: TextOffset): boolean {

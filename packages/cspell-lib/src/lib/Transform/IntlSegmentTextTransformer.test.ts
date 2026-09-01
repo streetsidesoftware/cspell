@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { IntlSegmentTextTransformer } from './IntlSegmentTextTransformer.js';
+import { IntlSegmentTextTransformer, softHyphen } from './IntlSegmentTextTransformer.js';
 
 describe('IntlSegmentTextTransformer', () => {
     test.each`
@@ -9,7 +9,7 @@ describe('IntlSegmentTextTransformer', () => {
         ${'en-US'}                        | ${'Block(s) of text, 1234, sym $%.[]'} | ${'Block(s) of text, 1234, sym $%.[]'}
         ${'en-US'}                        | ${'one.two.three-four_five'}           | ${'one.two.three-four_five'}
         ${'fr-FR'}                        | ${'Bonjour le monde'}                  | ${'Bonjour le monde'}
-        ${'th-TH'}                        | ${'สวัสดีโลก'}                         | ${'สวัสดี โลก' /* cspell:disable-line */}
+        ${'th-TH'}                        | ${'สวัสดีโลก'}                         | ${'สวัสดี\u00ADโลก' /* cspell:disable-line */}
         ${getSample('sampleThai').locale} | ${getSample('sampleThai').input}       | ${getSample('sampleThai').expected}
     `('should segment text correctly $locale $input', ({ locale, input, expected }) => {
         const t = new IntlSegmentTextTransformer(locale);
@@ -31,7 +31,10 @@ const samples = {
         locale: 'th-TH',
         input: 'ถ้าคุณต้องการที่จะประสบความสำเร็จในการเรียนภาษาไทย คุณต้องมีความอดทนและฝึกฝนทุกวันอย่างสม่ำเสมอ',
         expected:
-            'ถ้า คุณ ต้องการ ที่ จะ ประสบ ความ สำเร็จ ใน การ เรียน ภาษา ไทย คุณ ต้อง มี ความ อดทน และ ฝึกฝน ทุก วัน อย่าง สม่ำเสมอ',
+            'ถ้า|คุณ|ต้องการ|ที่|จะ|ประสบ|ความ|สำเร็จ|ใน|การ|เรียน|ภาษา|ไทย คุณ|ต้อง|มี|ความ|อดทน|และ|ฝึกฝน|ทุก|วัน|อย่าง|สม่ำเสมอ'.replaceAll(
+                '|',
+                softHyphen,
+            ),
     },
 } as const;
 

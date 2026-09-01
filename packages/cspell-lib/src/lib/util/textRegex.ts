@@ -11,12 +11,14 @@ export const regExpAllPossibleWordBreaks_NOT_USED: RegExp =
     /(?<=\p{Ll}\p{M}?)(?=\p{Lu})|(?<=\p{Lu}\p{M}?)(?=\p{Lu}\p{M}?\p{Ll})|(?<=\p{Lu}\p{M}?\p{Lu}\p{M}?)(?=\p{Ll})|(?<=\p{L}\p{M}?)(?=\P{L})|(?<=\P{L})(?=\p{L})/gu;
 export const regExWords: RegExp = /\p{L}\p{M}?(?:(?:\\?['’])?\p{L}\p{M}?)*/gu;
 // Words can be made of letters, numbers, period, underscore, dash, plus, and single quote
-export const regExWordsAndDigits: RegExp = /[\p{L}\w'’`.+-](?:(?:\\(?=[']))?[\p{L}\p{M}\w'’`.+-])*/gu;
+export const regExSoftHyphen: RegExp = /\u00AD/g;
+export const regExWordsAndDigits: RegExp =
+    /[\p{L}\w'’`.+\p{Pd}\u00AD](?:(?:\\(?=[']))?[\p{L}\p{M}\w'’`.+\p{Pd}\u00AD])*/gu;
 export const regExIgnoreCharacters: RegExp = /[\p{sc=Hiragana}\p{sc=Han}\p{sc=Katakana}\u30A0-\u30FF\p{sc=Hangul}]/gu;
 export const regExFirstUpper: RegExp = /^\p{Lu}\p{M}?\p{Ll}+$/u;
 export const regExAllUpper: RegExp = /^(?:\p{Lu}\p{M}?)+$/u;
 export const regExAllLower: RegExp = /^(?:\p{Ll}\p{M}?)+$/u;
-export const regExPossibleWordBreaks: RegExp = /[-+_’'`.\s]/g;
+export const regExPossibleWordBreaks: RegExp = /[-+_’'`.\s\u00AD]/g;
 export const regExMatchRegExParts: RegExp = /^\s*\/([\s\S]*?)\/([gimuxy]*)\s*$/;
 export const regExAccents: RegExp = /\p{M}/gu;
 export const regExEscapeCharacters: RegExp = /(?<=\\)[anrvtbf]/gi;
