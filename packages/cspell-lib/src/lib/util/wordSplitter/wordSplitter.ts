@@ -328,7 +328,7 @@ function splitIntoWords(
         return path;
     }
 
-    let maxCost = lineSeg.relEnd - lineSeg.relStart;
+    let maxCost = lineSeg.relEnd - lineSeg.relStart + 1;
     const candidates = new PairingHeap<Candidate>(compare);
     candidates.append(makeCandidates(undefined, lineSeg.relStart, 0, 0, 0));
     let attempts = 0;

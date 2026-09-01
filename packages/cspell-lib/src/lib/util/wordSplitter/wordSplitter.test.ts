@@ -2,7 +2,8 @@ import type { TextOffset } from '@cspell/cspell-types';
 import { describe, expect, test, vi } from 'vitest';
 
 import { getDictionary } from '../../getDictionary.js';
-import { getDefaultConfigLoader } from '../../Settings/index.js';
+import { finalizeSettings, getDefaultConfigLoader, getDefaultSettings } from '../../Settings/index.js';
+import { calcSettingsForLanguageId } from '../../Settings/LanguageSettings.js';
 import { autoResolve } from '../AutoResolve.js';
 import { __testing__, split } from './wordSplitter.js';
 
@@ -293,6 +294,32 @@ describe('wordSplitter IntlSegmenter', async () => {
         // Implement Thai hyphenation logic here if needed
         return parts.join('');
     }
+});
+
+describe('wordSplitter against dictionary', async () => {
+    const settings = calcSettingsForLanguageId(finalizeSettings(await getDefaultSettings()), 'en');
+    const dict = await getDictionary(settings);
+
+    function has(t: TextOffset): boolean {
+        return dict.has(t.text);
+    }
+
+    test.each`
+        text                                         | expected
+        ${'hello'}                                   | ${'hello'}
+        ${'VkResul'}                                 | ${'<Vk>|<Resul>' /* cspell:disable-line */}
+        ${'VkSwapchainKHR'}                          | ${'<Vk>|<Swapchain>|<KHR>' /* cspell:disable-line */}
+        ${'AbpBootstrapper.PlugInSources.AddFolder'} | ${'<Abp>|<Bootstrapper>|Plug|In|Sources|Add|Folder' /* cspell:disable-line */}
+    `('validate against dictionary', ({ text, expected }) => {
+        expected = typeof expected === 'string' ? expected.split('|') : expected;
+        const line = {
+            text,
+            offset: 0,
+        };
+        const result = split(line, 0, has);
+        const words = result.words.map((w) => (w.isFound ? w.text : `<${w.text}>`));
+        expect(words).toEqual(expected);
+    });
 });
 
 function has({ text }: TextOffset): boolean {
