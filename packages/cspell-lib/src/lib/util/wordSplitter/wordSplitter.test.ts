@@ -5,14 +5,13 @@ import { getDictionary } from '../../getDictionary.js';
 import { finalizeSettings, getDefaultConfigLoader, getDefaultSettings } from '../../Settings/index.js';
 import { calcSettingsForLanguageId } from '../../Settings/LanguageSettings.js';
 import { autoResolve } from '../AutoResolve.js';
+import { softHyphen } from './generateWordBreaks.js';
 import { __testing__, split } from './wordSplitter.js';
 
 const { findNextWordText } = __testing__;
 
 const words = sampleWordSet();
 const regHasLetters = /\p{L}/u;
-
-const softHyphen = '\u00AD';
 
 describe('Validate wordSplitter', () => {
     interface TestApplyWordBreaks {
