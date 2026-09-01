@@ -18,7 +18,7 @@ export const regExIgnoreCharacters: RegExp = /[\p{sc=Hiragana}\p{sc=Han}\p{sc=Ka
 export const regExFirstUpper: RegExp = /^\p{Lu}\p{M}?\p{Ll}+$/u;
 export const regExAllUpper: RegExp = /^(?:\p{Lu}\p{M}?)+$/u;
 export const regExAllLower: RegExp = /^(?:\p{Ll}\p{M}?)+$/u;
-export const regExPossibleWordBreaks: RegExp = /[-+_’'`.\s\u00AD]/g;
+export const regExPossibleWordBreaks: RegExp = /[-+_’'`.\s]/g;
 export const regExMatchRegExParts: RegExp = /^\s*\/([\s\S]*?)\/([gimuxy]*)\s*$/;
 export const regExAccents: RegExp = /\p{M}/gu;
 export const regExEscapeCharacters: RegExp = /(?<=\\)[anrvtbf]/gi;

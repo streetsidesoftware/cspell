@@ -1,13 +1,12 @@
 import type { TextOffset } from '@cspell/cspell-types';
 import { describe, expect, test, vi } from 'vitest';
 
-import { getDictionary } from '../getDictionary.js';
-import { getDefaultConfigLoader } from '../Settings/index.js';
-import { autoResolve } from './AutoResolve.js';
-import type { SortedBreaks } from './wordSplitter.js';
+import { getDictionary } from '../../getDictionary.js';
+import { getDefaultConfigLoader } from '../../Settings/index.js';
+import { autoResolve } from '../AutoResolve.js';
 import { __testing__, split } from './wordSplitter.js';
 
-const { generateWordBreaks, findNextWordText } = __testing__;
+const { findNextWordText } = __testing__;
 
 const words = sampleWordSet();
 const regHasLetters = /\p{L}/u;
@@ -37,34 +36,6 @@ describe('Validate wordSplitter', () => {
         expect(result.words.filter((w) => !w.isFound).length).toBe(7);
     });
 
-    // cspell:ignore MOVSX UI
-    test.each`
-        text                | expected
-        ${'hello'}          | ${['hello']}
-        ${'hello'}          | ${['hello']}
-        ${'well-educated'}  | ${['well', 'educated']}
-        ${'ERRORCode'}      | ${['ERROR', 'Code']}
-        ${'MOVSX_r_rm16'}   | ${['MOVSX', 'r', 'rm']}
-        ${'32bit-checksum'} | ${['bit', 'checksum']}
-        ${'camelCase'}      | ${['camel', 'Case']}
-        ${'markUIAsReady'}  | ${['mark', 'UI', 'As', '', 'Ready']}
-    `('Extract word breaks to $text', ({ text, expected }: TestApplyWordBreaks) => {
-        const line = {
-            text,
-            offset: 42,
-        };
-        const lineSeg = {
-            line: line,
-            relStart: 0,
-            relEnd: text.length,
-        };
-        const posBreaks = generateWordBreaks(lineSeg, {});
-
-        const breaks = extractBreaks(posBreaks);
-        const r = applyWordBreaks(line, breaks);
-        expect(r.map((t) => t.text)).toEqual(expected);
-    });
-
     test.each`
         text                 | expected
         ${'hello'}           | ${{ text: 'hello', offset: 0 }}
@@ -78,34 +49,6 @@ describe('Validate wordSplitter', () => {
     `('findNextWordText $text', ({ text, expected }: TestApplyWordBreaks) => {
         const r = findNextWordText({ text, offset: 0 });
         expect(r).toEqual(expected);
-    });
-
-    test.each`
-        text                | expected
-        ${'hello'}          | ${['hello']}
-        ${'well-educated'}  | ${['well|educated', 'well|-educated', 'well-|educated', 'well-educated']}
-        ${'MOVSX_r_rm16'}   | ${['MOVSX|r|rm']}
-        ${'32bit-checksum'} | ${['bit|checksum']}
-        ${'ERRORCode'}      | ${['ERROR|Code']}
-        ${'camelCase'}      | ${['camel|Case', 'camelCase']}
-        ${'markUIAsReady'}  | ${['mark|UI|As|Ready']}
-    `('Extract all possible word breaks to $text', ({ text, expected }: TestApplyWordBreaks) => {
-        const line = {
-            text,
-            offset: 42,
-        };
-        const lineSeg = {
-            line: line,
-            relStart: 0,
-            relEnd: text.length,
-        };
-
-        const posBreaks = generateWordBreaks(lineSeg, {});
-        const r = genAllPossibleResults(text, posBreaks);
-        expect(r[0]).toEqual(expected[0]); // Expect the first candidate to be the one with the shortest words.
-        expect(r).toEqual(expect.arrayContaining(expected));
-        expect(r).toEqual(expect.arrayContaining([text])); // this assumes the original text is a candidate
-        expect(r).toMatchSnapshot(); // Use snapshots to ensure all possible options are generated.
     });
 
     interface PartialTextOffsetWithIsFound {
@@ -258,7 +201,7 @@ describe('Validate wordSplitter', () => {
     });
 });
 
-describe.only('wordSplitter IntlSegmenter', async () => {
+describe('wordSplitter IntlSegmenter', async () => {
     const loader = getDefaultConfigLoader();
     const settings = await loader.resolveSettingsImports(
         { import: ['@cspell/dict-th-th'], dictionaries: ['th-th'] },
@@ -303,7 +246,7 @@ describe.only('wordSplitter IntlSegmenter', async () => {
         expect(result2.words.filter((w) => w.isFound)).toHaveLength(11);
     });
 
-    test.only('split Thai text 2', () => {
+    test('split Thai text 2', () => {
         // cspell:disable
         // The following is an example of a very expensive split
         const sample = {
@@ -324,7 +267,7 @@ describe.only('wordSplitter IntlSegmenter', async () => {
             text: sample.input,
             offset: 200,
         };
-        const result = split(line, 200, has);
+        const result = split(line, 200, has, { optionalWordBreakCharacters: softHyphen });
         const words = result.words.map((w) => w.text).join(' ');
         // cspell:disable-next-line
         expect(words).toBe(sample.expected[0]);
@@ -353,77 +296,6 @@ describe.only('wordSplitter IntlSegmenter', async () => {
 function has({ text }: TextOffset): boolean {
     const nfcText = text.normalize('NFC');
     return text.length < 3 || !regHasLetters.test(text) || words.has(nfcText) || words.has(nfcText.toLowerCase());
-}
-
-function applyWordBreaks(text: TextOffset, breaks: number[]): TextOffset[] {
-    const a = text.offset;
-    const t = text.text;
-    const words: TextOffset[] = [];
-    let i = 0;
-    for (let p = 0; p < breaks.length; p += 2) {
-        const start = breaks[p];
-        const end = breaks[p + 1];
-        if (i !== start) {
-            words.push({
-                text: t.slice(i, start),
-                offset: a + i,
-            });
-        }
-        i = end;
-    }
-
-    if (i < t.length) {
-        words.push({
-            text: t.slice(i),
-            offset: a + i,
-        });
-    }
-
-    return words;
-}
-
-function extractBreaks(pwb: SortedBreaks): number[] {
-    const r: number[] = [];
-    for (const b of pwb) {
-        const br = b.breaks[0];
-        if (br) {
-            r.splice(r.length, 0, ...br);
-        }
-    }
-    return r;
-}
-
-function genAllPossibleResults(text: string, breaks: SortedBreaks): string[] {
-    function* genResults(i: number, bi: number): Iterable<string> {
-        const br = breaks[bi];
-        if (!br) {
-            yield text.slice(i);
-            return;
-        }
-
-        const emitted = new Set<string>();
-        for (const b of br.breaks) {
-            const parts: string[] = [];
-            let p = i;
-            for (let x = 0; x < b.length; x += 2) {
-                const s = b[x];
-                const e = b[x + 1];
-                parts.push(text.slice(p, s));
-                p = e;
-            }
-            const prefix = parts.join('|');
-            const prefix2 = prefix + (prefix ? '|' : '');
-            for (const r of genResults(p, bi + 1)) {
-                const t = r ? prefix2 + r : prefix;
-                if (!emitted.has(t)) {
-                    emitted.add(t);
-                    yield t;
-                }
-            }
-        }
-    }
-
-    return [...genResults(0, 0)];
 }
 
 function findLine(doc: string, text: string): TextOffset {

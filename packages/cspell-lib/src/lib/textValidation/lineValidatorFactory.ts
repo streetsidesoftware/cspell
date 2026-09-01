@@ -24,7 +24,7 @@ import {
     splitWordWithOffset,
 } from '../util/text.js';
 import { regExpCamelCaseWordBreaksWithEnglishSuffix } from '../util/textRegex.js';
-import { split } from '../util/wordSplitter.js';
+import { split } from '../util/wordSplitter/index.js';
 import { defaultMinWordLength } from './defaultConstants.js';
 import { extractHexSequences, isRandomString } from './isRandomString.js';
 import { isWordValidWithEscapeRetry } from './isWordValid.js';

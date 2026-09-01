@@ -15,7 +15,7 @@ import {
 } from '../SpellingDictionary/index.js';
 import { toFileUrl } from '../util/url.js';
 import { uniqueFn } from '../util/util.js';
-import { split } from '../util/wordSplitter.js';
+import { split } from '../util/wordSplitter/index.js';
 import type { TextOffsetRO } from './ValidationTypes.js';
 
 type Href = string;
