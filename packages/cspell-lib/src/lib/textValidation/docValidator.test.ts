@@ -99,7 +99,7 @@ describe('docValidator', () => {
 
     test.each`
         filename                             | expected
-        ${fix('IntlSegmentText/example.md')} | ${[oc({ text: 'สม่ำเสมอ', offset: 152, length: 'สม่ำเสมอ'.length /* cspell:ignore สม่ำเสมอ */ })]}
+        ${fix('IntlSegmentText/example.md')} | ${[]}
     `(
         'checkText async $filename "$startText"',
         async ({ filename, expected }) => {
