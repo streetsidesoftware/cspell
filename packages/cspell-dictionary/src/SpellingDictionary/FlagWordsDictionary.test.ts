@@ -8,13 +8,20 @@ import { createTyposDictionary } from './TyposDictionary.js';
 // const oc = <T>(obj: T) => expect.objectContaining(obj);
 
 describe('ForbiddenWordsDictionary', () => {
-    const dictWords = ['  english', '!English', 'grumpy', 'Avocado', 'avocadoS', '!avocado'];
+    const dictWords = ['  english', '!English', 'grumpy', 'Avocado', 'avocadoS', '!avocado', 'Apple', 'orange'];
     const dict = createFlagWordsDictionary(dictWords, 'flag_words', 'test');
 
     test('flag dictionary entries', () => {
-        expect(dict.isForbidden('english')).toBe(true);
-        expect(dict.isForbidden('English')).toBe(false);
-        expect(dict.isForbidden('grumpy')).toBe(true);
+        expect(dict.isForbidden('english'), 'english should be forbidden').toBe(true);
+        expect(dict.isForbidden('English'), 'English should not be forbidden').toBe(false);
+        expect(dict.isForbidden('grumpy'), 'grumpy should be forbidden').toBe(true);
+        expect(dict.isForbidden('Apple'), 'Apple should be forbidden').toBe(true);
+        expect(dict.isForbidden('APPLE'), 'APPLE should not be forbidden').toBe(false);
+        expect(dict.isForbidden('apple'), 'apple should not be forbidden').toBe(false);
+        expect(dict.isForbidden('orange'), 'orange should be forbidden').toBe(true);
+        expect(dict.isForbidden('Orange'), 'Orange should be forbidden').toBe(true);
+        expect(dict.isForbidden('ORANGE'), 'ORANGE should be forbidden').toBe(true);
+        expect(dict.isForbidden('OraNge'), 'OraNge should be forbidden').toBe(true);
         expect(dict.has('English')).toBe(false);
     });
 

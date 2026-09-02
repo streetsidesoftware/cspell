@@ -4,7 +4,7 @@ export interface InlineDictionary {
      */
     words?: string[];
 
-    // cspell:ignore colour color canot incase
+    // cspell:ignore colour color canot incase avocado Avocado
     /**
      * List of words to always be considered incorrect. Words found in `flagWords` override `words`.
      *
@@ -21,6 +21,15 @@ export interface InlineDictionary {
      *   "cancelled->canceled"
      * ]
      * ```
+     *
+     * Case Sensitivity:
+     *
+     * A word is flagged if it exactly matches an entry, or if its lowercased form exactly matches an entry.
+     * In practice this means:
+     * - An entry written in **all lowercase** (e.g. `avocado`) flags that word in any casing found in the
+     *   document — `avocado`, `Avocado`, and `AVOCADO` are all flagged.
+     * - An entry containing **any uppercase letter** (e.g. `Avocado`) only flags that exact casing —
+     *   `avocado` and `AVOCADO` are not flagged.
      */
     flagWords?: string[];
 

@@ -37,6 +37,18 @@ There are several ways to mark a word as forbidden:
    "flagWords": ["forbiddenWord"]
    ```
 
+## Case Sensitivity
+
+A document word is flagged if it exactly matches a `flagWords` (or `!`-prefixed forbidden word) entry, or if
+its lowercased form exactly matches an entry. In practice this means:
+
+- A word written in **all lowercase** (e.g. `avocado`) is flagged in any casing found in the document —
+  `avocado`, `Avocado`, and `AVOCADO` are all flagged.
+- A word containing **any uppercase letter** (e.g. `Avocado`) only flags that exact casing —
+  `avocado` and `AVOCADO` are not flagged.
+
+<!--- cspell:ignore avocado Avocado --->
+
 ## Overriding Forbidden words
 
 Sometimes it is necessary to allow a word even if it is forbidden.
