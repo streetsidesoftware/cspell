@@ -178,7 +178,7 @@ describe('Validate wordSplitter', () => {
         ${`planets’`}         | ${`planets’`}      | ${2}
         ${'0.7e1-count+56'}   | ${`e|count`}       | ${2}
         ${'+flow.tensor'}     | ${`flow|.tensor`}  | ${8}
-        ${'-torch.tensor+64'} | ${'torch|.tensor'} | ${6}
+        ${'-torch.tensor+64'} | ${'torch|.tensor'} | ${7}
         ${"'twas the night"}  | ${"'twas"}         | ${2}
         ${'begin+end29'}      | ${'begin|+end'}    | ${5}
     `('split `$text` in doc', ({ text, expectedWords, calls }: TestSplit2) => {
@@ -298,8 +298,8 @@ describe('wordSplitter IntlSegmenter', async () => {
 describe('wordSplitter against dictionary', async () => {
     const s = await getDefaultSettings();
     s.ignoreWords = s.ignoreWords || [];
-    // cspell:ignore 5IAGEAcABwAHkAIABOAGUAdwAgAFkAZQBhAHIA
-    s.ignoreWords.push('5IAGEAcABwAHkAIABOAGUAdwAgAFkAZQBhAHIA');
+    // cspell:ignore 5IAGEAcABwAHkAIABOAGUAdwAgAFkAZQBhAHIA NSURL
+    s.ignoreWords.push('5IAGEAcABwAHkAIABOAGUAdwAgAFkAZQBhAHIA', 'bool', 'NSURL');
     const settings = calcSettingsForLanguageId(finalizeSettings(s), 'en,en-gb');
     const dict = await getDictionary(settings);
 
@@ -308,13 +308,14 @@ describe('wordSplitter against dictionary', async () => {
     }
 
     test.each`
-        text                                          | expected
-        ${'hello'}                                    | ${'hello'}
-        ${'VkResul'}                                  | ${'<Vk>|<Resul>' /* cspell:disable-line */}
-        ${'VkSwapchainKHR'}                           | ${'<Vk>|<Swapchain>|<KHR>' /* cspell:disable-line */}
-        ${'AbpBootstrapper.PlugInSources.AddFolder'}  | ${'<Abp>|<Bootstrapper>|Plug|In|Sources|Add|Folder' /* cspell:disable-line */}
-        ${"r'getMaxNumPictureInPictureActions"}       | ${'r|get|Max|<Num>|Picture|In|Picture|Actions' /* cspell:disable-line */}
-        ${'//5IAGEAcABwAHkAIABOAGUAdwAgAFkAZQBhAHIA'} | ${'5IAGEAcABwAHkAIABOAGUAdwAgAFkAZQBhAHIA' /* cspell:disable-line */}
+        text                                                    | expected
+        ${'hello'}                                              | ${'hello'}
+        ${'VkResul'}                                            | ${'<Vk>|<Resul>' /* cspell:disable-line */}
+        ${'VkSwapchainKHR'}                                     | ${'<Vk>|<Swapchain>|<KHR>' /* cspell:disable-line */}
+        ${'AbpBootstrapper.PlugInSources.AddFolder'}            | ${'<Abp>|<Bootstrapper>|Plug|In|Sources|Add|Folder' /* cspell:disable-line */}
+        ${"r'getMaxNumPictureInPictureActions"}                 | ${'r|get|Max|<Num>|Picture|In|Picture|Actions' /* cspell:disable-line */}
+        ${'//5IAGEAcABwAHkAIABOAGUAdwAgAFkAZQBhAHIA'}           | ${'5IAGEAcABwAHkAIABOAGUAdwAgAFkAZQBhAHIA' /* cspell:disable-line */}
+        ${'NSProgress_ffiVoidNSURLboolNSError_fnPtrTrampoline'} | ${'NS|Progress|<ffi>|Void|NSURL|bool|NS|Error|<fn>|<Ptr>|Trampoline' /* cspell:disable-line */}
     `('validate against dictionary', ({ text, expected }) => {
         expected = typeof expected === 'string' ? expected.split('|') : expected;
         const line = {

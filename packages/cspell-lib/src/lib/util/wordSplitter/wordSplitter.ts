@@ -258,12 +258,6 @@ function splitIntoWords(
         }
     }
 
-    // cspell:ignore 5IAGEAcABw
-    if (lineSeg.line.text.includes('5IAGEAcABw')) {
-        console.log('Found special string 5IAGEAcABw in line:', lineSeg.line.text);
-        console.log('%o', { wholeWordText, wholeWordIsFound });
-    }
-
     const wholeWordCost = wholeWordIsFound ? 0 : wholeWordText.length;
     const wholeWordNode: PathNode = {
         n: terminalNode,
