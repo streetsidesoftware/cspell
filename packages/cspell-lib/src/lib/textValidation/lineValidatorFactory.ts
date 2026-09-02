@@ -399,7 +399,7 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
                     nonMatching
                         .map((w) => ({ ...w, line: lineSegment.line }))
                         .map(annotateIsFlagged)
-                        .filter(isFlaggedOrMinLength),
+                        .filter((w) => w.isFlagged || w.text.length > 2),
                     hexSequences,
                 );
 

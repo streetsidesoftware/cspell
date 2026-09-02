@@ -1,7 +1,7 @@
 import type { TextOffset } from '@cspell/cspell-types';
 
 import { PairingHeap } from '../PairingHeap.js';
-import { regExNumericLiteral, regExWordsAndDigits } from '../textRegex.js';
+import { regExFirstUpper, regExNumericLiteral, regExWordsAndDigits } from '../textRegex.js';
 import type { BreakPairs, LineSegment, SortedBreaks, WordBreakOptions } from './generateWordBreaks.js';
 import { generateWordBreaks, softHyphen } from './generateWordBreaks.js';
 
@@ -242,9 +242,8 @@ function splitIntoWords(
     // correct fallback result (e.g. a whole word matched via ignoreWords/the dictionary, or
     // reporting the word as a single misspelling) even when the segmented search below never
     // finds a strictly cheaper split.
-    const wholeWordText = checkTextRange(lineSeg.relStart, maxIndex);
-    let wholeWordIsFound = wholeWordText.isFound;
-    if (!wholeWordIsFound) {
+    let wholeWord = checkTextRange(lineSeg.relStart, maxIndex);
+    if (!wholeWord.isFound) {
         // `regExWordsAndDigits` treats quote/backtick characters as word characters so that
         // things like `Tom's` or `n'cpp` are scanned as a single word; but it also means a
         // quoted/templated string literal in source code (e.g. `'ignoredWord'`) is scanned
@@ -254,18 +253,18 @@ function splitIntoWords(
         const lead = raw.match(regExLeadingTrimCharacters)?.[0].length ?? 0;
         const tail = raw.slice(lead).match(regExTrailingTrimCharacters)?.[0].length ?? 0;
         if ((lead || tail) && lead + tail < raw.length) {
-            wholeWordIsFound = checkTextRange(lineSeg.relStart + lead, maxIndex - tail).isFound;
+            wholeWord = checkTextRange(lineSeg.relStart + lead, maxIndex - tail);
         }
     }
 
-    const wholeWordCost = wholeWordIsFound ? 0 : wholeWordText.length;
+    const wholeWordCost = wholeWord.isFound ? 0 : wholeWord.text.length;
     const wholeWordNode: PathNode = {
         n: terminalNode,
         i: lineSeg.relStart,
         j: maxIndex,
         c: wholeWordCost,
         nc: wholeWordCost,
-        text: wholeWordIsFound ? { ...wholeWordText, isFound: true } : wholeWordText,
+        text: wholeWord,
     };
     knownPathsByIndex.set(lineSeg.relStart, wholeWordNode);
 
@@ -446,7 +445,11 @@ function splitIntoWords(
         }
     }
 
-    return pathToWords(bestPath);
+    const result = pathToWords(bestPath);
+    if (result.length === 2 && result.every((r) => !r.isFound) && regExFirstUpper.test(wholeWord.text)) {
+        return [wholeWord];
+    }
+    return result;
 }
 
 export const __testing__: {
