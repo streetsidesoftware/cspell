@@ -396,7 +396,10 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
                         return v.isFlagged || !v.isFound;
                     });
                 const filtered = filterExcludedTextOffsets(
-                    nonMatching.map((w) => ({ ...w, line: lineSegment.line })).map(annotateIsFlagged),
+                    nonMatching
+                        .map((w) => ({ ...w, line: lineSegment.line }))
+                        .map(annotateIsFlagged)
+                        .filter(isFlaggedOrMinLength),
                     hexSequences,
                 );
 
