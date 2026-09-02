@@ -11,8 +11,8 @@ const maxSkippedBreaks = 8; // Maximum number of breaks that can be skipped duri
 
 // Quote/backtick characters that `regExWordsAndDigits` treats as word characters, so a quoted
 // or templated string literal in source code gets scanned with its delimiters attached.
-const regExLeadingQuoteFraming = /^['’`]+/;
-const regExTrailingQuoteFraming = /['’`]+$/;
+const regExLeadingTrimCharacters = /^['’`\\-]+/;
+const regExTrailingTrimCharacters = /['’`\\-]+$/;
 
 export type IsValidWordFn = (word: TextOffset) => boolean;
 
@@ -251,8 +251,8 @@ function splitIntoWords(
         // including its delimiters. Retry against the span with that framing peeled off so a
         // whole word that is otherwise valid/ignored is still recognized as such.
         const raw = lineSeg.line.text.slice(lineSeg.relStart, maxIndex);
-        const lead = raw.match(regExLeadingQuoteFraming)?.[0].length ?? 0;
-        const tail = raw.slice(lead).match(regExTrailingQuoteFraming)?.[0].length ?? 0;
+        const lead = raw.match(regExLeadingTrimCharacters)?.[0].length ?? 0;
+        const tail = raw.slice(lead).match(regExTrailingTrimCharacters)?.[0].length ?? 0;
         if ((lead || tail) && lead + tail < raw.length) {
             wholeWordIsFound = checkTextRange(lineSeg.relStart + lead, maxIndex - tail).isFound;
         }
