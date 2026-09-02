@@ -7,7 +7,12 @@ import { generateWordBreaks, softHyphen } from './generateWordBreaks.js';
 
 const ignoreBreak: BreakPairs = Object.freeze([]) as unknown as BreakPairs;
 
-const maxSkippedBreaks = 4;
+const maxSkippedBreaks = 8; // Maximum number of breaks that can be skipped during word splitting.
+
+// Quote/backtick characters that `regExWordsAndDigits` treats as word characters, so a quoted
+// or templated string literal in source code gets scanned with its delimiters attached.
+const regExLeadingQuoteFraming = /^['’`]+/;
+const regExTrailingQuoteFraming = /['’`]+$/;
 
 export type IsValidWordFn = (word: TextOffset) => boolean;
 
@@ -238,14 +243,35 @@ function splitIntoWords(
     // reporting the word as a single misspelling) even when the segmented search below never
     // finds a strictly cheaper split.
     const wholeWordText = checkTextRange(lineSeg.relStart, maxIndex);
-    const wholeWordCost = wholeWordText.isFound ? 0 : wholeWordText.length;
+    let wholeWordIsFound = wholeWordText.isFound;
+    if (!wholeWordIsFound) {
+        // `regExWordsAndDigits` treats quote/backtick characters as word characters so that
+        // things like `Tom's` or `n'cpp` are scanned as a single word; but it also means a
+        // quoted/templated string literal in source code (e.g. `'ignoredWord'`) is scanned
+        // including its delimiters. Retry against the span with that framing peeled off so a
+        // whole word that is otherwise valid/ignored is still recognized as such.
+        const raw = lineSeg.line.text.slice(lineSeg.relStart, maxIndex);
+        const lead = raw.match(regExLeadingQuoteFraming)?.[0].length ?? 0;
+        const tail = raw.slice(lead).match(regExTrailingQuoteFraming)?.[0].length ?? 0;
+        if ((lead || tail) && lead + tail < raw.length) {
+            wholeWordIsFound = checkTextRange(lineSeg.relStart + lead, maxIndex - tail).isFound;
+        }
+    }
+
+    // cspell:ignore 5IAGEAcABw
+    if (lineSeg.line.text.includes('5IAGEAcABw')) {
+        console.log('Found special string 5IAGEAcABw in line:', lineSeg.line.text);
+        console.log('%o', { wholeWordText, wholeWordIsFound });
+    }
+
+    const wholeWordCost = wholeWordIsFound ? 0 : wholeWordText.length;
     const wholeWordNode: PathNode = {
         n: terminalNode,
         i: lineSeg.relStart,
         j: maxIndex,
         c: wholeWordCost,
         nc: wholeWordCost,
-        text: wholeWordText,
+        text: wholeWordIsFound ? { ...wholeWordText, isFound: true } : wholeWordText,
     };
     knownPathsByIndex.set(lineSeg.relStart, wholeWordNode);
 

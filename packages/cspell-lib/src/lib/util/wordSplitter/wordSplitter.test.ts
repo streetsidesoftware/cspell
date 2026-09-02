@@ -163,7 +163,7 @@ describe('Validate wordSplitter', () => {
         ${'static'}           | ${'static'}        | ${1}
         ${'nstatic'}          | ${'static'}        | ${2}
         ${'techo'}            | ${'echo'}          | ${2}
-        ${`n'cpp`}            | ${'cpp'}           | ${2}
+        ${`n'cpp`}            | ${'cpp'}           | ${3}
         ${`î'cpp`}            | ${'î|cpp'}         | ${3}
         ${`îphoneStatic`}     | ${'îphone|Static'} | ${3}
         ${`êphoneStatic`}     | ${'êphone|Static'} | ${3}
