@@ -5,7 +5,7 @@ Args: '["--issues-summary-report","**/*.{md,py}"]'
 Summary:
   files: 2932
   filesWithIssues: 950
-  issues: 8828
+  issues: 8823
   errors: 0
 Errors: []
 
@@ -4945,8 +4945,7 @@ issues:
   - "tests/forms_tests/widget_tests/test_radioselect.py:31:46        beatle              U       input type=\"radio\" name=\"beatle\" value=\"G\">George</label"
   - "tests/forms_tests/widget_tests/test_radioselect.py:34:46        beatle              U       input type=\"radio\" name=\"beatle\" value=\"R\">Ringo</label"
   - "tests/forms_tests/widget_tests/test_radioselect.py:294:39       Žćžšđ               U       widget(choices=[(\"ŠĐĆŽćžšđ\", \"ŠĐabcĆŽćžšđ\"), ("
-  - "tests/forms_tests/widget_tests/test_radioselect.py:294:49       Đabc                U       choices=[(\"ŠĐĆŽćžšđ\", \"ŠĐabcĆŽćžšđ\"), (\"ćžšđ\", \"abcćžšđ"
-  - "tests/forms_tests/widget_tests/test_radioselect.py:294:54       Žćžšđ               U       (\"ŠĐĆŽćžšđ\", \"ŠĐabcĆŽćžšđ\"), (\"ćžšđ\", \"abcćžšđ"
+  - "tests/forms_tests/widget_tests/test_radioselect.py:294:55       ćžšđ                U       \"ŠĐĆŽćžšđ\", \"ŠĐabcĆŽćžšđ\"), (\"ćžšđ\", \"abcćžšđ"
   - "tests/forms_tests/widget_tests/test_radioselect.py:294:65       ćžšđ                U       , \"ŠĐabcĆŽćžšđ\"), (\"ćžšđ\", \"abcćžšđ\")]),"
   - "tests/forms_tests/widget_tests/test_radioselect.py:294:73       abcćžšđ             U       ŠĐabcĆŽćžšđ\"), (\"ćžšđ\", \"abcćžšđ\")]),"
   - "tests/forms_tests/widget_tests/test_radioselect.py:296:17       Žćžšđ               U       \"ŠĐĆŽćžšđ\","
@@ -4958,8 +4957,7 @@ issues:
   - "tests/forms_tests/widget_tests/test_select.py:34:36         beatle              U       html=(\"\"\"<select name=\"beatle\">"
   - "tests/forms_tests/widget_tests/test_select.py:49:14         beatle              U       \"beatle\","
   - "tests/forms_tests/widget_tests/test_select.py:195:39        Žćžšđ               U       widget(choices=[(\"ŠĐĆŽćžšđ\", \"ŠĐabcĆŽćžšđ\"), ("
-  - "tests/forms_tests/widget_tests/test_select.py:195:49        Đabc                U       choices=[(\"ŠĐĆŽćžšđ\", \"ŠĐabcĆŽćžšđ\"), (\"ćžšđ\", \"abcćžšđ"
-  - "tests/forms_tests/widget_tests/test_select.py:195:54        Žćžšđ               U       (\"ŠĐĆŽćžšđ\", \"ŠĐabcĆŽćžšđ\"), (\"ćžšđ\", \"abcćžšđ"
+  - "tests/forms_tests/widget_tests/test_select.py:195:55        ćžšđ                U       \"ŠĐĆŽćžšđ\", \"ŠĐabcĆŽćžšđ\"), (\"ćžšđ\", \"abcćžšđ"
   - "tests/forms_tests/widget_tests/test_select.py:195:65        ćžšđ                U       , \"ŠĐabcĆŽćžšđ\"), (\"ćžšđ\", \"abcćžšđ\")]),"
   - "tests/forms_tests/widget_tests/test_select.py:195:73        abcćžšđ             U       ŠĐabcĆŽćžšđ\"), (\"ćžšđ\", \"abcćžšđ\")]),"
   - "tests/forms_tests/widget_tests/test_select.py:197:17        Žćžšđ               U       \"ŠĐĆŽćžšđ\","
@@ -8104,7 +8102,6 @@ issues:
   - "tests/template_tests/syntax_tests/test_autoescape.py:132:25         stringiterations    U       @setup({\"autoescape-stringiterations01\": \"{% for l in var"
   - "tests/template_tests/syntax_tests/test_autoescape.py:133:25         stringiterations    U       def test_autoescape_stringiterations01(self):"
   - "tests/template_tests/syntax_tests/test_autoescape.py:138:25         stringiterations    U       \"autoescape-stringiterations01\", {\"var\": \"K&R\"}"
-  - "tests/template_tests/syntax_tests/test_basic.py:53:41       INVALI          U       assertEqual(output, \"asINVALIDdf\")"
   - "tests/template_tests/syntax_tests/test_basic.py:93:39       otherclass      U       basic-syntax10\": \"{{ var.otherclass.method }}\"})"
   - "tests/template_tests/syntax_tests/test_basic.py:101:39      blech           U       basic-syntax11\": \"{{ var.blech }}\"})"
   - "tests/template_tests/syntax_tests/test_basic.py:405:42      doubledot       U       {\"template\": \"{{ doubledot..lookup }}\"},"
@@ -8483,8 +8480,6 @@ issues:
   - "tests/utils_tests/test_encoding.py:127:23       xfctest         U       data = b\"test\\xfctest\\xfctest\\xfc\""
   - "tests/utils_tests/test_encoding.py:127:31       xfctest         U       data = b\"test\\xfctest\\xfctest\\xfc\""
   - "tests/utils_tests/test_encoding.py:131:47       repercent       U       frame is the call to repercent_broken_unicode()."
-  - "tests/utils_tests/test_encoding.py:136:70       Ctest           U       unicode(data), b\"test%FCtest%FCtest%FC\")"
-  - "tests/utils_tests/test_encoding.py:136:77       Ctest           U       data), b\"test%FCtest%FCtest%FC\")"
   - "tests/utils_tests/test_encoding.py:141:21       xfctest         U       [b\"test\\xfctest\\xfctest\\xfc\", b\"test"
   - "tests/utils_tests/test_encoding.py:141:29       xfctest         U       [b\"test\\xfctest\\xfctest\\xfc\", b\"test\\xfctest"
   - "tests/utils_tests/test_encoding.py:141:50       xfctest         U       xfctest\\xfc\", b\"test\\xfctest\\xfc\", b\"test\\xfc\"],"
@@ -9438,7 +9433,6 @@ issuesSummary:
   - "text: Csometag, count: 1, files: 1,"
   - "text: Cspam, count: 1, files: 1,"
   - "text: cspviolation, count: 2, files: 1,"
-  - "text: Ctest, count: 2, files: 1,"
   - "text: ctex, count: 1, files: 1,"
   - "text: ctxt, count: 9, files: 2,"
   - "text: cume, count: 4, files: 1,"
@@ -9464,8 +9458,7 @@ issuesSummary:
   - "text: cyclictwo, count: 1, files: 1,"
   - "text: Cymraeg, count: 1, files: 1,"
   - "text: cytkownika, count: 1, files: 1,"
-  - "text: ćžšđ, count: 2, files: 2,"
-  - "text: Đabc, count: 2, files: 2,"
+  - "text: ćžšđ, count: 4, files: 2,"
   - "text: dalnet, count: 3, files: 1,"
   - "text: dansk, count: 1, files: 1,"
   - "text: dashinpunytld, count: 1, files: 1,"
@@ -10071,7 +10064,6 @@ issuesSummary:
   - "text: intput, count: 1, files: 1,"
   - "text: intring, count: 3, files: 3,"
   - "text: INVALD, count: 1, files: 1,"
-  - "text: INVALI, count: 1, files: 1,"
   - "text: invalidint, count: 4, files: 2,"
   - "text: invalidstr, count: 5, files: 1,"
   - "text: invaliduuid, count: 1, files: 1,"
@@ -11811,7 +11803,7 @@ issuesSummary:
   - "text: yfac, count: 5, files: 1,"
   - "text: Zathras, count: 2, files: 1,"
   - "text: Zbse, count: 1, files: 1,"
-  - "text: Žćžšđ, count: 19, files: 8,"
+  - "text: Žćžšđ, count: 17, files: 8,"
   - "text: zerowidth, count: 1, files: 1,"
   - "text: zfile, count: 5, files: 1,"
   - "text: Zimple, count: 3, files: 2,"

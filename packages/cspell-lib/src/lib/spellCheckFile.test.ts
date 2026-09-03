@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import * as Path from 'node:path';
 import { posix } from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { pathToFileURL } from 'node:url';
 
 import type { CSpellSettingsWithSourceTrace, CSpellUserSettings } from '@cspell/cspell-types';
 import type { ICSpellConfigFile } from 'cspell-config-lib';
@@ -15,8 +15,9 @@ import type { CSpellSettingsInternal } from './Settings/index.js';
 import type { SpellCheckFileOptions, SpellCheckFileResult } from './spellCheckFile.js';
 import { determineFinalDocumentSettings, spellCheckDocument, spellCheckFile } from './spellCheckFile.js';
 import * as Uri from './util/Uri.js';
+import type { ValidationIssue } from './validator.js';
 
-const __filename = fileURLToPath(import.meta.url);
+const __filename = import.meta.filename;
 
 const samples = pathPackageSamples;
 const testFixtures = pathRepoTestFixtures;
@@ -166,6 +167,7 @@ describe('Validate Spell Checking Documents', async () => {
         uri                                                 | text  | settings            | options                     | expected
         ${f(tf('issues/issue-1775/hunspell/utf_info.hxx'))} | ${''} | ${{}}               | ${{}}                       | ${{ checked: true, errors: undefined }}
         ${f(__filename)}                                    | ${''} | ${sampleConfigFile} | ${{ noConfigSearch: true }} | ${{ checked: true, localConfigFilepath: undefined, errors: undefined }}
+        ${f(rpS('thai/seattle.md'))}                        | ${''} | ${{}}               | ${{}}                       | ${{ checked: true, errors: undefined, issues: [] }}
     `(
         'spellCheckFile fixtures $uri $settings $options',
         async ({ uri, text, settings, options, expected }: TestSpellCheckFile) => {
@@ -301,6 +303,19 @@ function sanitizeSpellCheckFileResult(
     if (result.document) {
         result.document = filterKeys(result.document, ['uri', 'languageId', 'locale']);
     }
+
+    result.issues = result.issues?.map(
+        (issue) =>
+            filterKeys(issue, [
+                'text',
+                'offset',
+                'length',
+                'hasPreferredSuggestions',
+                'hasSimpleSuggestions',
+                'isFlagged',
+                'isFound',
+            ]) as ValidationIssue,
+    );
 
     return result;
 }

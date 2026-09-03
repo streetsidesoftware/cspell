@@ -1,5 +1,7 @@
 import type { TextOffset } from '@cspell/cspell-types';
 
+import { softHyphen } from '../util/wordSplitter/index.js';
+
 const maxRadio = 0.5;
 
 /**
@@ -8,6 +10,8 @@ const maxRadio = 0.5;
  * @returns true if the string is considered random;
  */
 export function isRandomString(s: string, maxNoiseToLengthRatio: number = maxRadio): boolean {
+    // Soft hyphen indicates a word break, so it's likely not a random string.
+    if (s.includes(softHyphen)) return false;
     return scoreRandomString(s) >= maxNoiseToLengthRatio;
 }
 
@@ -32,10 +36,6 @@ function sumWordLengths(s: string): number {
         total += w[0].length;
     }
     return total;
-}
-
-function _nonLetterRatio(s: string): number {
-    return s.replaceAll(/\p{L}/gu, '').length / s.length;
 }
 
 export function categorizeString(s: string): string {

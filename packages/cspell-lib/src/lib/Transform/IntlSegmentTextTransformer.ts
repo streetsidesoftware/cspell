@@ -5,6 +5,8 @@ import { applyEditsToMappedText } from './TextMapEdit.js';
 import type { Edit, TextTransformer } from './Transformer.js';
 import { toMappedText } from './Transformer.js';
 
+export const softHyphen = '\u00AD';
+
 const regExSplitWordCharacters: RegExp = /(?<=[\p{L}\p{M}])[\p{L}\p{M}]/uy;
 
 export class IntlSegmentTextTransformer implements TextTransformer {
@@ -32,11 +34,11 @@ function segmentText(mText: MappedText, segmenter: Intl.Segmenter): MappedText {
     let lastIndex = -1;
     const reg = new RegExp(regExSplitWordCharacters);
     const text = mText.text;
-    for (const { segment, index } of segmenter.segment(mText.text)) {
+    for (const { segment, index, isWordLike } of segmenter.segment(mText.text)) {
         const endIndex = index + segment.length;
         reg.lastIndex = index;
-        if (index === lastIndex && reg.test(text)) {
-            const edit: Edit = { text: ' ' + segment, range: [index, endIndex] };
+        if (isWordLike && index === lastIndex && reg.test(text)) {
+            const edit: Edit = { text: softHyphen + segment, range: [index, endIndex] };
             edits.push(edit);
         }
         lastIndex = endIndex;

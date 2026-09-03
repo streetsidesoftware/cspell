@@ -11,8 +11,8 @@ import {
     matchStringToTextOffset,
     splitCamelCaseWordWithOffset,
     textOffset,
-} from './text.js';
-import { regExWordsAndDigits } from './textRegex.js';
+} from '../text.js';
+import { regExWordsAndDigits } from '../textRegex.js';
 
 const regExpWord = /\b[\w\p{L}\p{M}]+\b/gu;
 

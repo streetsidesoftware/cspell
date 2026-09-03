@@ -24,7 +24,7 @@ import {
     splitWordWithOffset,
 } from '../util/text.js';
 import { regExpCamelCaseWordBreaksWithEnglishSuffix } from '../util/textRegex.js';
-import { split } from '../util/wordSplitter.js';
+import { split } from '../util/wordSplitter/index.js';
 import { defaultMinWordLength } from './defaultConstants.js';
 import { extractHexSequences, isRandomString } from './isRandomString.js';
 import { isWordValidWithEscapeRetry } from './isWordValid.js';
@@ -395,8 +395,13 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
                         const v = checkWord({ ...w, text: m[1], line: lineSegment.line });
                         return v.isFlagged || !v.isFound;
                     });
+                // Ignore 1 or 2 letter segments.
+                const minWordLen = Math.min(3, minWordLength);
                 const filtered = filterExcludedTextOffsets(
-                    nonMatching.map((w) => ({ ...w, line: lineSegment.line })).map(annotateIsFlagged),
+                    nonMatching
+                        .map((w) => ({ ...w, line: lineSegment.line }))
+                        .map(annotateIsFlagged)
+                        .filter((w) => w.isFlagged || w.text.length >= minWordLen),
                     hexSequences,
                 );
 
