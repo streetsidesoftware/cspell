@@ -167,7 +167,7 @@ describe('Validate Spell Checking Documents', async () => {
         uri                                                 | text  | settings            | options                     | expected
         ${f(tf('issues/issue-1775/hunspell/utf_info.hxx'))} | ${''} | ${{}}               | ${{}}                       | ${{ checked: true, errors: undefined }}
         ${f(__filename)}                                    | ${''} | ${sampleConfigFile} | ${{ noConfigSearch: true }} | ${{ checked: true, localConfigFilepath: undefined, errors: undefined }}
-        ${f(rpS('thai/Seattle.md'))}                        | ${''} | ${{}}               | ${{}}                       | ${{ checked: true, errors: undefined, issues: [] }}
+        ${f(rpS('thai/seattle.md'))}                        | ${''} | ${{}}               | ${{}}                       | ${{ checked: true, errors: undefined, issues: [] }}
     `(
         'spellCheckFile fixtures $uri $settings $options',
         async ({ uri, text, settings, options, expected }: TestSpellCheckFile) => {
