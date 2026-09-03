@@ -51,6 +51,16 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - No changes
 
+## v10.2.1 (2026-09-03)
+
+### Fixes
+
+- fix: support soft hyphens in the word splitter (<a href="https://github.com/streetsidesoftware/cspell/pull/9144">#9144</a>)
+
+### Dictionary Updates
+
+- fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/9143">#9143</a>)
+
 ## v10.2.0 (2026-08-31)
 
 ### Features
