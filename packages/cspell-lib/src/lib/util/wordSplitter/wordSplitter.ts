@@ -233,6 +233,10 @@ function splitIntoWords(
     const maxIndex = lineSeg.relEnd;
     const maxAttempts = 1000;
 
+    /**
+     * Map of known paths by their starting index in the text.
+     * This helps in quickly finding previously computed paths to avoid redundant calculations.
+     */
     const knownPathsByIndex = new Map<number, PathNode>();
     const terminalNode: PathNode = { n: undefined, i: maxIndex, j: maxIndex, c: 0, nc: 0, text: undefined };
     knownPathsByIndex.set(maxIndex, terminalNode);
@@ -301,24 +305,23 @@ function splitIntoWords(
         }
 
         const br = breaks[bi];
-        function c(bp: BreakPairs): Candidate {
-            const j = bp[1] ?? len;
-            const cost = (bp.length > 2 ? knownPathsByIndex.get(j)?.c : undefined) ?? len - j;
-            const d = bp.length < 2 ? len - i : (bp[0] - i) * 0.5 + cost;
+        function calcBreakCost(bp: BreakPairs): Candidate {
+            if (bp.length < 2) {
+                // We are skipping this break pair.
+                return { p, i, j: len, bi, bs, bp, c: currentCost, ec: currentCost + len - i, text: undefined };
+            }
+            const startOfBreak = bp[0];
+            const endOfBreak = bp[1];
+            // cost from the end of the segment to the end of the text
+            // const costToEnd = knownPathsByIndex.get(endOfBreak)?.c ?? len - endOfBreak;
+            const costToEnd = len - endOfBreak;
+            // Guess the cost of the word.
+            const costOfWord = (startOfBreak - i) * 0.5;
+            const d = costOfWord + costToEnd;
             const ec = currentCost + d;
-            return {
-                p,
-                i,
-                j,
-                bi,
-                bs,
-                bp,
-                c: currentCost,
-                ec,
-                text: undefined,
-            };
+            return { p, i, j: endOfBreak, bi, bs, bp, c: currentCost, ec, text: undefined };
         }
-        return br.breaks.map(c);
+        return br.breaks.map(calcBreakCost);
     }
 
     function compare(a: Candidate, b: Candidate): number {

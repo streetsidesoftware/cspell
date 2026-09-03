@@ -283,7 +283,7 @@ describe('wordSplitter IntlSegmenter', async () => {
         );
     });
 
-    test.only('split Thai text 3', () => {
+    test('split Thai text 3', () => {
         // cspell:disable
         // The following is an example of a very expensive split
         const sample = {
@@ -344,6 +344,7 @@ describe('wordSplitter against dictionary', async () => {
         ${"r'getMaxNumPictureInPictureActions"}                 | ${'r|get|Max|<Num>|Picture|In|Picture|Actions' /* cspell:disable-line */}
         ${'//5IAGEAcABwAHkAIABOAGUAdwAgAFkAZQBhAHIA'}           | ${'5IAGEAcABwAHkAIABOAGUAdwAgAFkAZQBhAHIA' /* cspell:disable-line */}
         ${'NSProgress_ffiVoidNSURLboolNSError_fnPtrTrampoline'} | ${'NS|Progress|<ffi>|Void|NSURL|bool|NS|Error|<fn>|<Ptr>|Trampoline' /* cspell:disable-line */}
+        ${'To_EntityDto_And_To_DrivedEntityDto'}                | ${'To|Entity|<Dto>|And|To|<Drived>|Entity|<Dto>' /* cspell:disable-line */}
     `('validate against dictionary', ({ text, expected }) => {
         expected = typeof expected === 'string' ? expected.split('|') : expected;
         const line = {
