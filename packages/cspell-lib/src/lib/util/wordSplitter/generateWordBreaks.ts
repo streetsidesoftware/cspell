@@ -97,13 +97,14 @@ function calcBreaksForSubString(
     calcBreak: (start: number, end: number) => PossibleWordBreak | undefined,
 ): SortedBreaks {
     const sb: SortedBreaks = [];
-    let text = line.line.text;
-    if (text.length > line.relEnd + 128) {
-        text = text.slice(0, line.relEnd);
-    }
+    const text = line.line.text;
     const inc = subStr.length;
 
-    for (let pos = text.indexOf(subStr, line.relStart); pos >= 0; pos = text.indexOf(subStr, pos + inc)) {
+    for (
+        let pos = text.indexOf(subStr, line.relStart);
+        pos >= 0 && pos < line.relEnd;
+        pos = text.indexOf(subStr, pos + inc)
+    ) {
         const b = calcBreak(pos, pos + inc);
         if (b) {
             sb.push(b);

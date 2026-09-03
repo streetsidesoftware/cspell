@@ -110,16 +110,17 @@ export function split(
         return word;
     }
 
-    function checkTextRange(start: number, end: number): TextOffsetWithValid {
+    function calcKey(start: number, end: number): number {
         const i = start;
         const j = end - start;
-        let v = i + (j << 20);
-        if (i < 1 << 20 && j < 1 << 11) {
-            const b = requested.get(v);
-            if (b !== undefined) return b;
-        } else {
-            v = -1;
-        }
+        const v = i + (j << 20);
+        return i < 1 << 20 && j < 1 << 11 ? v : -1;
+    }
+
+    function checkTextRange(start: number, end: number): TextOffsetWithValid {
+        const v = calcKey(start, end);
+        const f = v >= 0 ? requested.get(v) : undefined;
+        if (f) return f;
         const validated = createTextOffsetWithValid(start, end, false);
         if (regExpIgnoreSegment.test(validated.text)) {
             validated.isFound = true;
@@ -173,10 +174,8 @@ function findNextWordText({ text, offset }: TextOffset): TextOffset {
     reg.lastIndex = offset;
     const m = reg.exec(text);
     if (!m) {
-        return {
-            text: '',
-            offset: offset + text.length,
-        };
+        // No more words found, return an empty text with offset at the end of the string within the document.
+        return { text: '', offset: offset + text.length };
     }
 
     // Skip numeric literals.

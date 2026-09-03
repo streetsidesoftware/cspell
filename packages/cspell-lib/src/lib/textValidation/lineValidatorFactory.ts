@@ -395,11 +395,13 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
                         const v = checkWord({ ...w, text: m[1], line: lineSegment.line });
                         return v.isFlagged || !v.isFound;
                     });
+                // Ignore 1 or 2 letter segments.
+                const minWordLen = Math.min(3, minWordLength);
                 const filtered = filterExcludedTextOffsets(
                     nonMatching
                         .map((w) => ({ ...w, line: lineSegment.line }))
                         .map(annotateIsFlagged)
-                        .filter((w) => w.isFlagged || w.text.length > 2),
+                        .filter((w) => w.isFlagged || w.text.length >= minWordLen),
                     hexSequences,
                 );
 

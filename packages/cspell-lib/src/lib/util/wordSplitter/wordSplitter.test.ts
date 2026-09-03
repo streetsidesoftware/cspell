@@ -283,12 +283,40 @@ describe('wordSplitter IntlSegmenter', async () => {
         );
     });
 
+    test.only('split Thai text 3', () => {
+        // cspell:disable
+        // The following is an example of a very expensive split
+        const sample = {
+            locale: 'th-TH',
+            input: hyphenateThai('ซีแอตเทิลเป็นหนึ่งในเมืองใหญ่ที่เติบโตเร็วที่สุดของสหรัฐ'),
+            expected: 'ซีแอตเทิล เป็น หนึ่ง ใน เมือง ใหญ่ ที่ เติบโต เร็ว ที่สุด ของ สหรัฐ',
+        };
+        // cspell:enable
+
+        const line = {
+            text: sample.input,
+            offset: 200,
+        };
+        const result = split(line, 200, has);
+        const words = result.words.map((w) => w.text).join(' ');
+        const found = result.words.filter((w) => w.isFound);
+        expect(words).toBe(sample.expected);
+        expect(found.map((w) => w.text).join(' ')).toBe(sample.expected);
+        expect(found).toHaveLength(12);
+        // cspell:ignore วนด์
+        // Note this might break if Puget Sound is added to the Thai dictionary.
+        expect(result.words.filter((w) => !w.isFound).map((w) => w.text)).toEqual([]);
+        expect(result.endOffset).toBe(line.offset + hyphenateThai(sample.input).length);
+    });
+
     function hyphenateThai(text: string, hyphen: string = softHyphen): string {
         const parts: string[] = [];
 
         const segments = new Intl.Segmenter('th-TH', { granularity: 'word' }).segment(text);
+        let lastWordEndIndex = -1;
         for (const seg of segments) {
-            parts.push(seg.isWordLike ? hyphen + seg.segment : seg.segment);
+            parts.push(seg.isWordLike && seg.index === lastWordEndIndex ? hyphen + seg.segment : seg.segment);
+            lastWordEndIndex = seg.isWordLike ? seg.index + seg.segment.length : lastWordEndIndex;
         }
         // Implement Thai hyphenation logic here if needed
         return parts.join('');
