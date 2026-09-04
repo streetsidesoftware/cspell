@@ -164,6 +164,7 @@ describe('Validate Spell Checking Documents', async () => {
     );
 
     const issuesThaiSeattleMd =
+        // cspell:disable-next-line
         'แอต|เทิ|ลมี|แอต|เทิ|ลมี|พิว|วนด์|แอต|เทิ|ลนับ|ยอาร์|อร์|นี|นี|กรัฐอิล|เอล|มิช|ซู|มิช|แอต|เทิ|ลมี'
             .split('|')
             .map((text) => ({ text }))
