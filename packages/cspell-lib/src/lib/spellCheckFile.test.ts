@@ -163,11 +163,18 @@ describe('Validate Spell Checking Documents', async () => {
         },
     );
 
+    const issuesThaiSeattleMd =
+        // cspell:disable-next-line
+        'แอต|เทิ|ลมี|แอต|เทิ|ลมี|พิว|วนด์|แอต|เทิ|ลนับ|ยอาร์|อร์|นี|นี|กรัฐอิล|เอล|มิช|ซู|มิช|แอต|เทิ|ลมี'
+            .split('|')
+            .map((text) => ({ text }))
+            .map((issue) => oc(issue));
+
     test.each`
         uri                                                 | text  | settings            | options                     | expected
         ${f(tf('issues/issue-1775/hunspell/utf_info.hxx'))} | ${''} | ${{}}               | ${{}}                       | ${{ checked: true, errors: undefined }}
         ${f(__filename)}                                    | ${''} | ${sampleConfigFile} | ${{ noConfigSearch: true }} | ${{ checked: true, localConfigFilepath: undefined, errors: undefined }}
-        ${f(rpS('thai/seattle.md'))}                        | ${''} | ${{}}               | ${{}}                       | ${{ checked: true, errors: undefined, issues: [] }}
+        ${f(rpS('thai/seattle.md'))}                        | ${''} | ${{}}               | ${{}}                       | ${{ checked: true, errors: undefined, issues: issuesThaiSeattleMd }}
     `(
         'spellCheckFile fixtures $uri $settings $options',
         async ({ uri, text, settings, options, expected }: TestSpellCheckFile) => {

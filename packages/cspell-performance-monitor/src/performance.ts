@@ -1,12 +1,4 @@
-const symbolCSpell = Symbol.for('cspell');
-
-interface CSpellGlobalSettings {
-    enablePerformanceMeasurements?: boolean;
-}
-
-type GlobalCSpell = typeof globalThis & { [symbolCSpell]?: CSpellGlobalSettings };
-
-const globalThisCSpell: GlobalCSpell = globalThis;
+import { getGlobalCSpellSettings } from './global.ts';
 
 export function measurePerfStart(name: string): void {
     _measurePerfStart(name, isEnabledPerformanceMeasurements());
@@ -55,10 +47,9 @@ function makeDisposableFunction(fn: () => void): DisposableFunction {
  * @param enable - true to enable, false to disable. Default is true.
  */
 export function enablePerformanceMeasurements(enable = true): void {
-    globalThisCSpell[symbolCSpell] ??= {};
-    globalThisCSpell[symbolCSpell].enablePerformanceMeasurements = enable;
+    getGlobalCSpellSettings().enablePerformanceMeasurements = enable;
 }
 
 export function isEnabledPerformanceMeasurements(): boolean {
-    return !!globalThisCSpell[symbolCSpell]?.enablePerformanceMeasurements;
+    return !!getGlobalCSpellSettings().enablePerformanceMeasurements;
 }
