@@ -3142,6 +3142,7 @@ Specifies the scope of a dictionary.
 | [name](#dictionarydefinitionalternate-name) <sup>_req_</sup>                        | [`DictionaryId`](#dictionaryid)               | This is the name of a dictionary.                                                    |
 | [description](#dictionarydefinitionalternate-description)                           | `string`                                      | Optional description of the contents / purpose of the dictionary.                    |
 | [ignoreForbiddenWords](#dictionarydefinitionalternate-ignoreforbiddenwords)         | `boolean`                                     | Some dictionaries may contain forbidden words to prevent compounding from generating |
+| [kind](#dictionarydefinitionalternate-kind)                                         | [`DictionaryKind`](#dictionarykind)           | Used to specify the type of dictionary being referenced.                             |
 | [noSuggest](#dictionarydefinitionalternate-nosuggest)                               | `boolean`                                     | Indicate that suggestions should not come from this dictionary.                      |
 | [repMap](#dictionarydefinitionalternate-repmap)                                     | [`ReplaceMap`](#replacemap)                   | Replacement pairs.                                                                   |
 | [supportNonStrictSearches](#dictionarydefinitionalternate-supportnonstrictsearches) | `boolean`                                     | Strip case and accents to allow for case insensitive searches and                    |
@@ -3261,6 +3262,40 @@ The effect is similar to the word not being in the dictionary.
 `boolean`
 
 </dd>
+
+</dl>
+
+
+
+
+---
+
+#### `kind` {#dictionarydefinitionalternate-kind}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+Used to specify the type of dictionary being referenced.
+Values:
+- `words` - (default) A dictionary containing words.
+- `flag-words` - A dictionary containing flag words. Words found in the dictionary will be treated like `flagWords`.
+- `ignore-words` - A dictionary containing words to ignore.
+   This is the same as setting `noSuggest` to `true`.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryKind`](#dictionarykind)
+
+</dd>
+
+<dt>Since</dt>
+<dd>10.3.0</dd>
 
 </dl>
 
@@ -3425,6 +3460,7 @@ Use Compounds.
 | [description](#dictionarydefinitionaugmented-description)                           | `string`                                          | Optional description of the contents / purpose of the dictionary.                    |
 | [dictionaryInformation](#dictionarydefinitionaugmented-dictionaryinformation)       | [`DictionaryInformation`](#dictionaryinformation) |                                                                                      |
 | [ignoreForbiddenWords](#dictionarydefinitionaugmented-ignoreforbiddenwords)         | `boolean`                                         | Some dictionaries may contain forbidden words to prevent compounding from generating |
+| [kind](#dictionarydefinitionaugmented-kind)                                         | [`DictionaryKind`](#dictionarykind)               | Used to specify the type of dictionary being referenced.                             |
 | [noSuggest](#dictionarydefinitionaugmented-nosuggest)                               | `boolean`                                         | Indicate that suggestions should not come from this dictionary.                      |
 | [repMap](#dictionarydefinitionaugmented-repmap)                                     | [`ReplaceMap`](#replacemap)                       | Replacement pairs.                                                                   |
 | [supportNonStrictSearches](#dictionarydefinitionaugmented-supportnonstrictsearches) | `boolean`                                         | Strip case and accents to allow for case insensitive searches and                    |
@@ -3602,6 +3638,40 @@ The effect is similar to the word not being in the dictionary.
 
 ---
 
+#### `kind` {#dictionarydefinitionaugmented-kind}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+Used to specify the type of dictionary being referenced.
+Values:
+- `words` - (default) A dictionary containing words.
+- `flag-words` - A dictionary containing flag words. Words found in the dictionary will be treated like `flagWords`.
+- `ignore-words` - A dictionary containing words to ignore.
+   This is the same as setting `noSuggest` to `true`.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryKind`](#dictionarykind)
+
+</dd>
+
+<dt>Since</dt>
+<dd>10.3.0</dd>
+
+</dl>
+
+
+
+
+---
+
 #### `noSuggest` {#dictionarydefinitionaugmented-nosuggest}
 
 
@@ -3758,6 +3828,7 @@ Use Compounds.
 | [btrie](#dictionarydefinitioncustom-btrie)                                       | [`DictionaryPathToBTrie`](#dictionarypathtobtrie)                                                                            | An alternative path to a bTrie dictionary file.                                       |
 | [description](#dictionarydefinitioncustom-description)                           | `string`                                                                                                                     | Optional description of the contents / purpose of the dictionary.                     |
 | [ignoreForbiddenWords](#dictionarydefinitioncustom-ignoreforbiddenwords)         | `boolean`                                                                                                                    | Some dictionaries may contain forbidden words to prevent compounding from generating  |
+| [kind](#dictionarydefinitioncustom-kind)                                         | [`DictionaryKind`](#dictionarykind)                                                                                          | Used to specify the type of dictionary being referenced.                              |
 | [noSuggest](#dictionarydefinitioncustom-nosuggest)                               | `boolean`                                                                                                                    | Indicate that suggestions should not come from this dictionary.                       |
 | [repMap](#dictionarydefinitioncustom-repmap)                                     | [`ReplaceMap`](#replacemap)                                                                                                  | Replacement pairs.                                                                    |
 | [scope](#dictionarydefinitioncustom-scope)                                       | [`CustomDictionaryScope`](#customdictionaryscope)<br />[`CustomDictionaryScope`](#customdictionaryscope)&ZeroWidthSpace;`[]` | Defines the scope for when words will be added to the dictionary.                     |
@@ -3935,6 +4006,40 @@ The effect is similar to the word not being in the dictionary.
 `boolean`
 
 </dd>
+
+</dl>
+
+
+
+
+---
+
+#### `kind` {#dictionarydefinitioncustom-kind}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+Used to specify the type of dictionary being referenced.
+Values:
+- `words` - (default) A dictionary containing words.
+- `flag-words` - A dictionary containing flag words. Words found in the dictionary will be treated like `flagWords`.
+- `ignore-words` - A dictionary containing words to ignore.
+   This is the same as setting `noSuggest` to `true`.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryKind`](#dictionarykind)
+
+</dd>
+
+<dt>Since</dt>
+<dd>10.3.0</dd>
 
 </dl>
 
@@ -5124,6 +5229,7 @@ dictionaries.
 | [btrie](#dictionarydefinitionpreferred-btrie)                                       | [`DictionaryPathToBTrie`](#dictionarypathtobtrie) | An alternative path to a bTrie dictionary file.                                      |
 | [description](#dictionarydefinitionpreferred-description)                           | `string`                                          | Optional description of the contents / purpose of the dictionary.                    |
 | [ignoreForbiddenWords](#dictionarydefinitionpreferred-ignoreforbiddenwords)         | `boolean`                                         | Some dictionaries may contain forbidden words to prevent compounding from generating |
+| [kind](#dictionarydefinitionpreferred-kind)                                         | [`DictionaryKind`](#dictionarykind)               | Used to specify the type of dictionary being referenced.                             |
 | [noSuggest](#dictionarydefinitionpreferred-nosuggest)                               | `boolean`                                         | Indicate that suggestions should not come from this dictionary.                      |
 | [repMap](#dictionarydefinitionpreferred-repmap)                                     | [`ReplaceMap`](#replacemap)                       | Replacement pairs.                                                                   |
 | [supportNonStrictSearches](#dictionarydefinitionpreferred-supportnonstrictsearches) | `boolean`                                         | Strip case and accents to allow for case insensitive searches and                    |
@@ -5274,6 +5380,40 @@ The effect is similar to the word not being in the dictionary.
 `boolean`
 
 </dd>
+
+</dl>
+
+
+
+
+---
+
+#### `kind` {#dictionarydefinitionpreferred-kind}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+Used to specify the type of dictionary being referenced.
+Values:
+- `words` - (default) A dictionary containing words.
+- `flag-words` - A dictionary containing flag words. Words found in the dictionary will be treated like `flagWords`.
+- `ignore-words` - A dictionary containing words to ignore.
+   This is the same as setting `noSuggest` to `true`.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryKind`](#dictionarykind)
+
+</dd>
+
+<dt>Since</dt>
+<dd>10.3.0</dd>
 
 </dl>
 
@@ -5809,6 +5949,100 @@ will be near the top of the suggestion list.
 <dd>
 
 [`SuggestionCostsDefs`](#suggestioncostsdefs)
+
+</dd>
+
+</dl>
+
+
+
+
+
+---
+
+## DictionaryKind {#dictionarykind}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+The kind of dictionary.
+
+Used to specify the type of dictionary being referenced.
+
+Values:
+- `words` - A dictionary containing words.
+- `flag-words` - A dictionary containing flag words.
+- `ignore-words` - A dictionary containing words to ignore.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryKindWords`](#dictionarykindwords)<br />[`DictionaryKindFlagWords`](#dictionarykindflagwords)<br />[`DictionaryKindIgnoreWords`](#dictionarykindignorewords)
+
+</dd>
+
+</dl>
+
+
+
+
+
+---
+
+## DictionaryKindFlagWords {#dictionarykindflagwords}
+
+
+<dl>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
+
+</dl>
+
+
+
+
+
+---
+
+## DictionaryKindIgnoreWords {#dictionarykindignorewords}
+
+
+<dl>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
+
+</dl>
+
+
+
+
+
+---
+
+## DictionaryKindWords {#dictionarykindwords}
+
+
+<dl>
+
+<dt>Type</dt>
+<dd>
+
+`string`
 
 </dd>
 

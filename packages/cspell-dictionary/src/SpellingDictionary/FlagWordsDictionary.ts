@@ -1,5 +1,5 @@
 import type { CompoundWordsMethod, ITrie, SuggestionResult } from 'cspell-trie-lib';
-import { parseDictionary, parseDictionaryLines } from 'cspell-trie-lib';
+import { decodeTrie, parseDictionary, parseDictionaryLines } from 'cspell-trie-lib';
 
 import { createAutoResolveWeakCache } from '../util/AutoResolve.js';
 import * as Defaults from './defaults.js';
@@ -169,6 +169,22 @@ export function createFlagWordsDictionary(
         if (!specialWords.size) return typosDict;
         return new FlagWordsDictionary(name, source, typosDict, trieDict);
     });
+}
+
+/**
+ * Create a dictionary where all words are to be forbidden from the contents of a trie file.
+ * @param data - contents of a trie file.
+ * @param name - name of dictionary
+ * @param source - filename or uri
+ * @returns SpellingDictionary
+ */
+export function createFlagWordsDictionaryFromTrieFile(
+    data: string | Uint8Array<ArrayBuffer>,
+    name: string,
+    source: string,
+): SpellingDictionary {
+    const trie = decodeTrie(data);
+    return createFlagWordsDictionary([...trie.words()], name, source);
 }
 
 function bisect<T>(values: Set<T> | Iterable<T>, predicate: (v: T) => boolean): { t: Set<T>; f: Set<T> } {

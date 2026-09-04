@@ -1,8 +1,13 @@
 import { opMap, pipe } from '@cspell/cspell-pipe/sync';
-import { buildITrieFromWords, parseDictionaryLines } from 'cspell-trie-lib';
+import { buildITrieFromWords, createTrieRootFromList, parseDictionaryLines, serializeTrie } from 'cspell-trie-lib';
 import { describe, expect, test } from 'vitest';
 
-import { createFlagWordsDictionary, FlagWordsDictionary, FlagWordsDictionaryTrie } from './FlagWordsDictionary.js';
+import {
+    createFlagWordsDictionary,
+    createFlagWordsDictionaryFromTrieFile,
+    FlagWordsDictionary,
+    FlagWordsDictionaryTrie,
+} from './FlagWordsDictionary.js';
 import { createTyposDictionary } from './TyposDictionary.js';
 
 // const oc = <T>(obj: T) => expect.objectContaining(obj);
@@ -241,6 +246,22 @@ describe('ForbiddenWordsDictionaryTrie', () => {
             // 'avocado',
             // 'notfound',
         ]);
+    });
+});
+
+describe('createFlagWordsDictionaryFromTrieFile', () => {
+    test('flags all words found in the trie file', async () => {
+        const words = ['whilst', 'grumpy', 'apple'];
+        const trie = createTrieRootFromList(words);
+        const data = [...serializeTrie(trie, { version: 4, base: 10 })].join('\n');
+        const dict = createFlagWordsDictionaryFromTrieFile(data, 'flag_words_trie', 'test');
+
+        expect(dict.has('whilst')).toBe(false);
+        expect(dict.isForbidden('whilst')).toBe(true);
+        expect(dict.isForbidden('WHILST')).toBe(true);
+        expect(dict.isForbidden('grumpy')).toBe(true);
+        expect(dict.isForbidden('apple')).toBe(true);
+        expect(dict.isForbidden('orange')).toBe(false);
     });
 });
 

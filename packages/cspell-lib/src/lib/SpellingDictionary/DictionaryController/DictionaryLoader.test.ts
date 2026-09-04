@@ -177,11 +177,50 @@ describe('Validate DictionaryLoader', () => {
         expect(d.has(word)).toBe(hasWord);
     });
 
+    describe('kind', () => {
+        test('kind: ignore-words behaves like noSuggest', async () => {
+            const def = dDef({ name: 'words', path: sample('words.txt'), kind: 'ignore-words' });
+            const d = await dictionaryLoader.loadDictionary(def);
+            expect(d.has('apple')).toBe(true);
+            expect(d.isForbidden('apple')).toBe(false);
+            expect(d.find('apple')).toEqual(oc({ found: 'apple', forbidden: false, noSuggest: true }));
+        });
+
+        test('kind: flag-words $type uses FlagWordsDictionary', async () => {
+            const def = dDef({ name: 'flag-words', path: sample('flag-words.txt'), kind: 'flag-words' });
+            const d = await dictionaryLoader.loadDictionary(def);
+            expect(d.isForbidden('whilst')).toBe(true);
+            expect(d.isForbidden('Whilst')).toBe(true);
+            expect(d.isForbidden('grumpy')).toBe(true);
+            expect(d.isForbidden('english')).toBe(true);
+            expect(d.isForbidden('English')).toBe(false);
+            expect(d.isForbidden('cSpell')).toBe(true);
+            expect(d.isForbidden('cspell')).toBe(false);
+            expect(d.getPreferredSuggestions?.('english')?.map((p) => p.word)).toEqual(['English']);
+            expect(d.has('whilst')).toBe(false);
+            expect(d.has('apple')).toBe(false);
+            expect(d.has('English')).toBe(false);
+        });
+
+        test('kind: flag-words $type uses FlagWordsDictionary trie', async () => {
+            const def = dDef({ name: 'flag-cities', path: dict('cities.trie.gz'), kind: 'flag-words' });
+            const d = await dictionaryLoader.loadDictionary(def);
+            expect(d.isForbidden('London')).toBe(true);
+            expect(d.isForbidden('Paris')).toBe(true);
+            expect(d.isForbidden('Berlin')).toBe(false);
+        });
+    });
+
     // cspell:ignore Geschäft geschaft
 });
 
 function sample(file: string): string {
     return path.join(samples, file);
+}
+
+function dict(file: string): string {
+    const dictDir = path.join(root, '../../fixtures/Samples/dicts');
+    return path.resolve(dictDir, file);
 }
 
 interface DDefFile extends Partial<DictionaryFileDefinitionInternal> {
