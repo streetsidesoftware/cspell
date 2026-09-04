@@ -326,8 +326,14 @@ describe('wordSplitter IntlSegmenter', async () => {
 describe('wordSplitter against dictionary', async () => {
     const s = await getDefaultSettings();
     s.ignoreWords = s.ignoreWords || [];
-    // cspell:ignore 5IAGEAcABwAHkAIABOAGUAdwAgAFkAZQBhAHIA NSURL
-    s.ignoreWords.push('5IAGEAcABwAHkAIABOAGUAdwAgAFkAZQBhAHIA', 'bool', 'NSURL');
+    // cspell:disable
+    s.ignoreWords.push(
+        '5IAGEAcABwAHkAIABOAGUAdwAgAFkAZQBhAHIA',
+        'QmFzZTY0IHN0cmluZyBvZiB0ZXh0IGhlcmU',
+        'bool',
+        'NSURL',
+    );
+    // cspell:enable
     const settings = calcSettingsForLanguageId(finalizeSettings(s), 'en,en-gb');
     const dict = await getDictionary(settings);
 
@@ -345,6 +351,7 @@ describe('wordSplitter against dictionary', async () => {
         ${'//5IAGEAcABwAHkAIABOAGUAdwAgAFkAZQBhAHIA'}           | ${'5IAGEAcABwAHkAIABOAGUAdwAgAFkAZQBhAHIA' /* cspell:disable-line */}
         ${'NSProgress_ffiVoidNSURLboolNSError_fnPtrTrampoline'} | ${'NS|Progress|<ffi>|Void|NSURL|bool|NS|Error|<fn>|<Ptr>|Trampoline' /* cspell:disable-line */}
         ${'To_EntityDto_And_To_DrivedEntityDto'}                | ${'To|Entity|<Dto>|And|To|<Drived>|Entity|<Dto>' /* cspell:disable-line */}
+        ${'QmFzZTY0IHN0cmluZyBvZiB0ZXh0IGhlcmU.access'}         | ${'QmFzZTY0IHN0cmluZyBvZiB0ZXh0IGhlcmU|access' /* cspell:disable-line */}
     `('validate against dictionary', ({ text, expected }) => {
         expected = typeof expected === 'string' ? expected.split('|') : expected;
         const line = {
