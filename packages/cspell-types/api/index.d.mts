@@ -784,6 +784,16 @@ interface DictionaryDefinitionBase {
    */
   noSuggest?: boolean | undefined;
   /**
+   * Used to specify the type of dictionary being referenced.
+   * Values:
+   * - `words` - (default) A dictionary containing words.
+   * - `flag-words` - A dictionary containing flag words. Words found in the dictionary will be treated like `flagWords`.
+   * - `ignore-words` - A dictionary containing words to ignore.
+   *    This is the same as setting `noSuggest` to `true`.
+   * @since 10.3.0
+   */
+  kind?: DictionaryKind | undefined;
+  /**
    * Some dictionaries may contain forbidden words to prevent compounding from generating
    * words that are not valid in the language. These are often
    * words that are used in other languages or might be generated through compounding.
@@ -871,6 +881,10 @@ interface DictionaryDefinitionSimple extends DictionaryDefinitionBaseWithPathsHi
   /**
    * @hide
    */
+  kind?: DictionaryKind | undefined;
+  /**
+   * @hide
+   */
   ignoreForbiddenWords?: boolean | undefined;
   /**
    * @hide
@@ -909,6 +923,10 @@ interface HiddenFields {
    * @hide
    */
   noSuggest?: undefined;
+  /**
+   * @hide
+   */
+  kind?: DictionaryKind | undefined;
   /**
    * Not used
    * @hide
@@ -1086,6 +1104,20 @@ type DictionaryRef = DictionaryId;
  * @pattern ^(?=!+[^!*,;{}[\]~\n]+$)(?=(.*\w)).+$
  */
 type DictionaryNegRef = string;
+type DictionaryKindWords = "words";
+type DictionaryKindFlagWords = "flag-words";
+type DictionaryKindIgnoreWords = "ignore-words";
+/**
+ * The kind of dictionary.
+ *
+ * Used to specify the type of dictionary being referenced.
+ *
+ * Values:
+ * - `words` - A dictionary containing words.
+ * - `flag-words` - A dictionary containing flag words.
+ * - `ignore-words` - A dictionary containing words to ignore.
+ */
+type DictionaryKind = DictionaryKindWords | DictionaryKindFlagWords | DictionaryKindIgnoreWords;
 //#endregion
 //#region src/features.d.ts
 /**

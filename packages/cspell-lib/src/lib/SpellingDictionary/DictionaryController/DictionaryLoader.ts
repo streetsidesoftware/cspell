@@ -248,7 +248,13 @@ function toReader(fs: VFileSystem): Reader {
     };
 }
 
-const importantOptionKeys: (keyof DictionaryDefinitionInternal)[] = ['name', 'noSuggest', 'useCompounds', 'type'];
+const importantOptionKeys: (keyof DictionaryDefinitionInternal)[] = [
+    'name',
+    'noSuggest',
+    'kind',
+    'useCompounds',
+    'type',
+];
 
 type StatsOrError = Stats | Error;
 
