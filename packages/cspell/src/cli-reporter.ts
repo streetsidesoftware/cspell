@@ -1,6 +1,7 @@
 import assert from 'node:assert';
 import { formatWithOptions } from 'node:util';
 
+import { getCounters } from '@cspell/cspell-performance-monitor';
 import type {
     Issue,
     MessageType,
@@ -360,7 +361,11 @@ export function getReporter(options: ReporterOptions, config?: CSpellReporterCon
     function verbosePerfReport() {
         const perfMeasurements = getPerfMeasurements();
         if (!perfMeasurements.length) return;
+        dispVerbosePerfReport(perfMeasurements);
+        counterReport();
+    }
 
+    function dispVerbosePerfReport(perfMeasurements: PerfMeasurement[]) {
         const notable = extractNotableBySelfTimeInGroup(perfMeasurements);
 
         const chalk = stderr.chalk;
@@ -384,6 +389,28 @@ export function getReporter(options: ReporterOptions, config?: CSpellReporterCon
             header: ['Name', 'Total Time (ms)', 'Self (ms)', 'Count', 'Min (ms)', 'Max (ms)', 'Avg (ms)'],
             rows,
             columnAlignments: ['L', 'R', 'R', 'R', 'R', 'R', 'R'],
+            indent: 2,
+        });
+
+        consoleError('\n-------------------------------------------\n');
+        for (const line of table) {
+            consoleError(line);
+        }
+    }
+
+    function counterReport() {
+        const counters = [...getCounters()];
+        if (!counters.length) return;
+
+        counters.sort((a, b) => a.count - b.count);
+
+        const chalk = stderr.chalk;
+        const rows: TableRow[] = counters.map((m) => ({ Name: m.name, Count: m.count.toString() }));
+        const table = tableToLines({
+            title: chalk.bold('Counter Measurements:'),
+            header: ['Name', 'Count'],
+            rows,
+            columnAlignments: ['L', 'R'],
             indent: 2,
         });
 
