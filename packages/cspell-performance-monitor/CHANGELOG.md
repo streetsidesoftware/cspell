@@ -51,6 +51,12 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - No changes
 
+## v10.2.2 (2026-09-04)
+
+### Fixes
+
+- fix: Workaround for #9164 (<a href="https://github.com/streetsidesoftware/cspell/pull/9168">#9168</a>)
+
 ## v10.2.1 (2026-09-03)
 
 ### Fixes
