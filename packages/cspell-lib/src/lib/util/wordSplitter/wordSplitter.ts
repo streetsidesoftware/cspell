@@ -8,7 +8,8 @@ import { generateWordBreaks, softHyphen } from './generateWordBreaks.js';
 
 const ignoreBreak: BreakPairs = Object.freeze([]) as unknown as BreakPairs;
 
-const maxSkippedBreaks = 8; // Maximum number of breaks that can be skipped during word splitting.
+const maxSkippedBreaks = 16; // Maximum number of breaks that can be skipped during word splitting.
+const maxAttempts = 64_000; // Maximum number of attempts to split words.
 
 // Quote/backtick characters that `regExWordsAndDigits` treats as word characters, so a quoted
 // or templated string literal in source code gets scanned with its delimiters attached.
@@ -234,7 +235,6 @@ function splitIntoWords(
     checkTextRange: (start: number, end: number) => TextOffsetWithValid,
 ): TextOffsetWithValid[] {
     const maxIndex = lineSeg.relEnd;
-    const maxAttempts = 1000;
 
     /**
      * Map of known paths by their starting index in the text.
