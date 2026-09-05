@@ -308,6 +308,10 @@ These changes collectively provide more flexible and explicit dictionary configu
 
 </details>
 
+## v10.3.0-alpha.1 (2026-09-05)
+
+- No changes
+
 ## v10.2.2 (2026-09-04)
 
 ### Fixes
