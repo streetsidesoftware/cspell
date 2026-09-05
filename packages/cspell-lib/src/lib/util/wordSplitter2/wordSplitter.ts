@@ -1,4 +1,3 @@
-import { counter, measurePerf } from '@cspell/cspell-performance-monitor';
 import type { TextOffset } from '@cspell/cspell-types';
 
 import { PairingHeap } from '../PairingHeap.js';
@@ -54,8 +53,6 @@ export function split(
     isValidWord: IsValidWordFn,
     options: SplitOptions = {},
 ): SplitResult {
-    using _x = measurePerf('wordSplitter.split');
-    counter('wordSplitter.split').inc();
     const relWordToSplit = findNextWordText({ text: line.text, offset: offset - line.offset });
     const hasSoftHyphen = relWordToSplit.text.includes(softHyphen);
     const lineOffset = line.offset;
@@ -293,7 +290,6 @@ function splitIntoWords(
         bs: number,
         currentCost: number,
     ): Candidate[] {
-        counter('wordSplitter.makeCandidates').inc();
         const len = maxIndex;
         const nBi = findNearestBreakIndex(i, bi);
         const nBs = findNearestBreakIndex(i, bs);
@@ -308,7 +304,6 @@ function splitIntoWords(
 
         const br = breaks[bi];
         function calcBreakCost(bp: BreakPairs): Candidate {
-            counter('wordSplitter.calcBreakCost').inc();
             if (bp === ignoreBreak) {
                 // We are skipping this break pair.
                 return { p, i, j: len, bi, bs, bp, c: currentCost, ec: currentCost + len - i, text: undefined };
