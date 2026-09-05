@@ -354,6 +354,12 @@
           "markdownDescription": "Some dictionaries may contain forbidden words to prevent compounding from generating\nwords that are not valid in the language. These are often\nwords that are used in other languages or might be generated through compounding.\nThis setting allows flagged words to be ignored when checking the dictionary.\nThe effect is similar to the word not being in the dictionary.",
           "type": "boolean"
         },
+        "kind": {
+          "$ref": "#/definitions/DictionaryKind",
+          "description": "Used to specify the type of dictionary being referenced. Values:\n- `words` - (default) A dictionary containing words.\n- `flag-words` - A dictionary containing flag words. Words found in the dictionary will be treated like `flagWords`.\n- `ignore-words` - A dictionary containing words to ignore.    This is the same as setting `noSuggest` to `true`.",
+          "markdownDescription": "Used to specify the type of dictionary being referenced.\nValues:\n- `words` - (default) A dictionary containing words.\n- `flag-words` - A dictionary containing flag words. Words found in the dictionary will be treated like `flagWords`.\n- `ignore-words` - A dictionary containing words to ignore.\n   This is the same as setting `noSuggest` to `true`.",
+          "since": "10.3.0"
+        },
         "name": {
           "$ref": "#/definitions/DictionaryId",
           "description": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- Spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive.\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.",
@@ -416,6 +422,12 @@
           "description": "Some dictionaries may contain forbidden words to prevent compounding from generating words that are not valid in the language. These are often words that are used in other languages or might be generated through compounding. This setting allows flagged words to be ignored when checking the dictionary. The effect is similar to the word not being in the dictionary.",
           "markdownDescription": "Some dictionaries may contain forbidden words to prevent compounding from generating\nwords that are not valid in the language. These are often\nwords that are used in other languages or might be generated through compounding.\nThis setting allows flagged words to be ignored when checking the dictionary.\nThe effect is similar to the word not being in the dictionary.",
           "type": "boolean"
+        },
+        "kind": {
+          "$ref": "#/definitions/DictionaryKind",
+          "description": "Used to specify the type of dictionary being referenced. Values:\n- `words` - (default) A dictionary containing words.\n- `flag-words` - A dictionary containing flag words. Words found in the dictionary will be treated like `flagWords`.\n- `ignore-words` - A dictionary containing words to ignore.    This is the same as setting `noSuggest` to `true`.",
+          "markdownDescription": "Used to specify the type of dictionary being referenced.\nValues:\n- `words` - (default) A dictionary containing words.\n- `flag-words` - A dictionary containing flag words. Words found in the dictionary will be treated like `flagWords`.\n- `ignore-words` - A dictionary containing words to ignore.\n   This is the same as setting `noSuggest` to `true`.",
+          "since": "10.3.0"
         },
         "name": {
           "$ref": "#/definitions/DictionaryId",
@@ -486,6 +498,12 @@
           "description": "Some dictionaries may contain forbidden words to prevent compounding from generating words that are not valid in the language. These are often words that are used in other languages or might be generated through compounding. This setting allows flagged words to be ignored when checking the dictionary. The effect is similar to the word not being in the dictionary.",
           "markdownDescription": "Some dictionaries may contain forbidden words to prevent compounding from generating\nwords that are not valid in the language. These are often\nwords that are used in other languages or might be generated through compounding.\nThis setting allows flagged words to be ignored when checking the dictionary.\nThe effect is similar to the word not being in the dictionary.",
           "type": "boolean"
+        },
+        "kind": {
+          "$ref": "#/definitions/DictionaryKind",
+          "description": "Used to specify the type of dictionary being referenced. Values:\n- `words` - (default) A dictionary containing words.\n- `flag-words` - A dictionary containing flag words. Words found in the dictionary will be treated like `flagWords`.\n- `ignore-words` - A dictionary containing words to ignore.    This is the same as setting `noSuggest` to `true`.",
+          "markdownDescription": "Used to specify the type of dictionary being referenced.\nValues:\n- `words` - (default) A dictionary containing words.\n- `flag-words` - A dictionary containing flag words. Words found in the dictionary will be treated like `flagWords`.\n- `ignore-words` - A dictionary containing words to ignore.\n   This is the same as setting `noSuggest` to `true`.",
+          "since": "10.3.0"
         },
         "name": {
           "$ref": "#/definitions/DictionaryId",
@@ -817,6 +835,12 @@
           "markdownDescription": "Some dictionaries may contain forbidden words to prevent compounding from generating\nwords that are not valid in the language. These are often\nwords that are used in other languages or might be generated through compounding.\nThis setting allows flagged words to be ignored when checking the dictionary.\nThe effect is similar to the word not being in the dictionary.",
           "type": "boolean"
         },
+        "kind": {
+          "$ref": "#/definitions/DictionaryKind",
+          "description": "Used to specify the type of dictionary being referenced. Values:\n- `words` - (default) A dictionary containing words.\n- `flag-words` - A dictionary containing flag words. Words found in the dictionary will be treated like `flagWords`.\n- `ignore-words` - A dictionary containing words to ignore.    This is the same as setting `noSuggest` to `true`.",
+          "markdownDescription": "Used to specify the type of dictionary being referenced.\nValues:\n- `words` - (default) A dictionary containing words.\n- `flag-words` - A dictionary containing flag words. Words found in the dictionary will be treated like `flagWords`.\n- `ignore-words` - A dictionary containing words to ignore.\n   This is the same as setting `noSuggest` to `true`.",
+          "since": "10.3.0"
+        },
         "name": {
           "$ref": "#/definitions/DictionaryId",
           "description": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- Spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive.\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.",
@@ -974,6 +998,33 @@
         }
       },
       "type": "object"
+    },
+    "DictionaryKind": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/DictionaryKindWords"
+        },
+        {
+          "$ref": "#/definitions/DictionaryKindFlagWords"
+        },
+        {
+          "$ref": "#/definitions/DictionaryKindIgnoreWords"
+        }
+      ],
+      "description": "The kind of dictionary.\n\nUsed to specify the type of dictionary being referenced.\n\nValues:\n- `words` - A dictionary containing words.\n- `flag-words` - A dictionary containing flag words.\n- `ignore-words` - A dictionary containing words to ignore.",
+      "markdownDescription": "The kind of dictionary.\n\nUsed to specify the type of dictionary being referenced.\n\nValues:\n- `words` - A dictionary containing words.\n- `flag-words` - A dictionary containing flag words.\n- `ignore-words` - A dictionary containing words to ignore."
+    },
+    "DictionaryKindFlagWords": {
+      "const": "flag-words",
+      "type": "string"
+    },
+    "DictionaryKindIgnoreWords": {
+      "const": "ignore-words",
+      "type": "string"
+    },
+    "DictionaryKindWords": {
+      "const": "words",
+      "type": "string"
     },
     "DictionaryNegRef": {
       "description": "This a negative reference to a named dictionary.\n\nIt is used to exclude or include a dictionary by name.\n\nThe reference starts with 1 or more `!`.\n- `!<dictionary_name>` - Used to exclude the dictionary matching `<dictionary_name>`.\n- `!!<dictionary_name>` - Used to re-include a dictionary matching `<dictionary_name>`.    Overrides `!<dictionary_name>`.\n- `!!!<dictionary_name>` - Used to exclude a dictionary matching `<dictionary_name>`.    Overrides `!!<dictionary_name>`.",

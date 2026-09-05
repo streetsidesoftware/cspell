@@ -23,6 +23,7 @@ export {
     createCollection,
     createFailedToLoadDictionary,
     createFlagWordsDictionary,
+    createFlagWordsDictionaryFromTrieFile,
     createForbiddenWordsDictionary,
     createIgnoreWordsDictionary,
     createInlineSpellingDictionary,

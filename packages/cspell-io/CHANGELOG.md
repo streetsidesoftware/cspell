@@ -51,6 +51,26 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - No changes
 
+## v10.3.0-alpha.0 (2026-09-04)
+
+### Features
+
+- feat: Add an option to set the kind of dictionary file (<a href="https://github.com/streetsidesoftware/cspell/pull/9178">#9178</a>)
+
+### Fixes
+
+- fix: Only hide code-like partial words (<a href="https://github.com/streetsidesoftware/cspell/pull/9163">#9163</a>)
+
+### Documentation
+
+- feat: Add an option to set the kind of dictionary file (<a href="https://github.com/streetsidesoftware/cspell/pull/9178">#9178</a>)
+
+## v10.2.2 (2026-09-04)
+
+### Fixes
+
+- fix: Workaround for #9164 (<a href="https://github.com/streetsidesoftware/cspell/pull/9168">#9168</a>)
+
 ## v10.2.1 (2026-09-03)
 
 ### Fixes

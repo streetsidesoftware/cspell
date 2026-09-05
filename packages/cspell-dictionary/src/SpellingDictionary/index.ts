@@ -3,6 +3,7 @@ export { createInlineSpellingDictionary } from './createInlineSpellingDictionary
 export { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary.js';
 export {
     createFlagWordsDictionary,
+    createFlagWordsDictionaryFromTrieFile,
     createFlagWordsDictionary as createForbiddenWordsDictionary,
 } from './FlagWordsDictionary.js';
 export { createIgnoreWordsDictionary } from './IgnoreWordsDictionary.js';

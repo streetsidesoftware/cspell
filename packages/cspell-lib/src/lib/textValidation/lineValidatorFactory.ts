@@ -397,11 +397,18 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
                     });
                 // Ignore 1 or 2 letter segments.
                 const minWordLen = Math.min(3, minWordLength);
+                const keepIssue = (w: ValidationIssue) =>
+                    w.isFlagged ||
+                    w.text.length >= minWordLen ||
+                    // eslint-disable-next-line unicorn/prefer-code-point
+                    (w.text.charCodeAt(0) & 0xff80) !== 0 || // Keep if Non-ASCII
+                    // eslint-disable-next-line unicorn/prefer-code-point
+                    (w.text.charCodeAt(1) & 0xff80) !== 0; // Keep if Non-ASCII
                 const filtered = filterExcludedTextOffsets(
                     nonMatching
                         .map((w) => ({ ...w, line: lineSegment.line }))
                         .map(annotateIsFlagged)
-                        .filter((w) => w.isFlagged || w.text.length >= minWordLen),
+                        .filter(keepIssue),
                     hexSequences,
                 );
 
