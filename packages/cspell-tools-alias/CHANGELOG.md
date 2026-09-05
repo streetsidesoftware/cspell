@@ -65,6 +65,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - feat: Add an option to set the kind of dictionary file (<a href="https://github.com/streetsidesoftware/cspell/pull/9178">#9178</a>)
 
+## v10.3.0-alpha.1 (2026-09-05)
+
+- No changes
+
 ## v10.2.2 (2026-09-04)
 
 ### Fixes
