@@ -9,6 +9,8 @@ import {
     createInlineSpellingDictionary,
     createSpellingDictionary,
     createSpellingDictionaryFromTrieFile,
+    createSuggestDictionary,
+    createSuggestDictionaryFromTrieFile,
 } from 'cspell-dictionary';
 import type { Stats, TextFileResource, VFileSystem } from 'cspell-io';
 import { compareStats, toFileURL, urlBasename } from 'cspell-io';
@@ -293,6 +295,9 @@ async function legacyWordList(reader: Reader, filename: URL, options: LoadOption
     if (options.kind === 'flag-words') {
         return createFlagWordsDictionary([...words], options.name, filename.toString());
     }
+    if (options.kind === 'suggest-words') {
+        return createSuggestDictionary([...words], options.name, filename.toString());
+    }
     return createSpellingDictionary(words, options.name, filename.toString(), applyKind(options), true);
 }
 
@@ -310,6 +315,9 @@ async function wordsPerLineWordList(reader: Reader, filename: URL, options: Load
     if (options.kind === 'flag-words') {
         return createFlagWordsDictionary([...words], options.name, filename.href);
     }
+    if (options.kind === 'suggest-words') {
+        return createSuggestDictionary([...words], options.name, filename.href);
+    }
     return createSpellingDictionary(words, options.name, filename.href, applyKind(options), true);
 }
 
@@ -318,6 +326,9 @@ async function loadSimpleWordList(reader: Reader, filename: URL, options: LoadOp
     using _ = measurePerf('loadSimpleWordList');
     if (options.kind === 'flag-words') {
         return createFlagWordsDictionary(lines, options.name, filename.href);
+    }
+    if (options.kind === 'suggest-words') {
+        return createSuggestDictionary(lines, options.name, filename.href);
     }
     return createSpellingDictionary(lines, options.name, filename.href, applyKind(options));
 }
@@ -328,12 +339,16 @@ async function loadTrie(reader: Reader, filename: URL, options: LoadOptions) {
     if (options.kind === 'flag-words') {
         return createFlagWordsDictionaryFromTrieFile(content, options.name, filename.href);
     }
+    if (options.kind === 'suggest-words') {
+        return createSuggestDictionaryFromTrieFile(content, options.name, filename.href);
+    }
     return createSpellingDictionaryFromTrieFile(content, options.name, filename.href, applyKind(options));
 }
 
 /**
  * Apply the effect of `kind` on the options passed to a normal `words` dictionary loader.
- * `flag-words` is handled by the callers directly since it uses a different dictionary implementation.
+ * `flag-words` and `suggest-words` are handled by the callers directly since they use a different
+ * dictionary implementation.
  */
 function applyKind(options: LoadOptions): LoadOptions {
     return options.kind === 'ignore-words' && !options.noSuggest ? { ...options, noSuggest: true } : options;

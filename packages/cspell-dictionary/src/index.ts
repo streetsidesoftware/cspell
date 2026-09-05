@@ -30,5 +30,6 @@ export {
     createSpellingDictionary,
     createSpellingDictionaryFromTrieFile,
     createSuggestDictionary,
+    createSuggestDictionaryFromTrieFile,
     createSuggestOptions,
 } from './SpellingDictionary/index.js';

@@ -20,7 +20,7 @@ export type {
 } from './SpellingDictionary.js';
 export { createCollection, SpellingDictionaryCollection } from './SpellingDictionaryCollection.js';
 export { createSpellingDictionaryFromTrieFile } from './SpellingDictionaryFromTrie.js';
-export { createSuggestDictionary } from './SuggestDictionary.js';
+export { createSuggestDictionary, createSuggestDictionaryFromTrieFile } from './SuggestDictionary.js';
 export type { SuggestOptions } from './SuggestOptions.js';
 export { createSuggestOptions } from './SuggestOptions.js';
 export { createTyposDictionary } from './TyposDictionary.js';
