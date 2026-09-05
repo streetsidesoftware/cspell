@@ -1,5 +1,6 @@
 import { pipe } from '@cspell/cspell-pipe/sync';
 import type { CompoundWordsMethod, SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';
+import { decodeTrie } from 'cspell-trie-lib';
 
 import { createAutoResolveWeakCache } from '../util/AutoResolve.js';
 import { mapperRemoveCaseAndAccents } from '../util/textMappers.js';
@@ -146,4 +147,20 @@ export function createSuggestDictionary(
         const def = processEntriesToTyposDef(entries);
         return new SuggestDictionaryImpl(name, source, def);
     });
+}
+
+/**
+ * Create a suggestion dictionary from the contents of a trie file.
+ * @param data - contents of a trie file.
+ * @param name - name of dictionary
+ * @param source - filename or uri
+ * @returns SuggestDictionary
+ */
+export function createSuggestDictionaryFromTrieFile(
+    data: string | Uint8Array<ArrayBuffer>,
+    name: string,
+    source: string,
+): SuggestDictionary {
+    const trie = decodeTrie(data);
+    return createSuggestDictionary([...trie.words()], name, source);
 }

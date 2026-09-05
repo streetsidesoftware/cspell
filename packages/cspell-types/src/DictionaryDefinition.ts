@@ -54,6 +54,8 @@ export interface DictionaryDefinitionBase {
      * - `flag-words` - A dictionary containing flag words. Words found in the dictionary will be treated like `flagWords`.
      * - `ignore-words` - A dictionary containing words to ignore.
      *    This is the same as setting `noSuggest` to `true`.
+     * - `suggest-words` - A dictionary containing suggested word corrections. Words found in the
+     *    dictionary will be treated like `suggestWords`.
      * @since 10.3.0
      */
     kind?: DictionaryKind | undefined;
@@ -426,6 +428,7 @@ export type DictionaryNegRef = string;
 export type DictionaryKindWords = 'words';
 export type DictionaryKindFlagWords = 'flag-words';
 export type DictionaryKindIgnoreWords = 'ignore-words';
+export type DictionaryKindSuggestWords = 'suggest-words';
 
 /**
  * The kind of dictionary.
@@ -436,5 +439,7 @@ export type DictionaryKindIgnoreWords = 'ignore-words';
  * - `words` - A dictionary containing words.
  * - `flag-words` - A dictionary containing flag words.
  * - `ignore-words` - A dictionary containing words to ignore.
+ * - `suggest-words` - A dictionary containing suggested word corrections.
  */
-export type DictionaryKind = DictionaryKindWords | DictionaryKindFlagWords | DictionaryKindIgnoreWords;
+export type DictionaryKind =
+    DictionaryKindWords | DictionaryKindFlagWords | DictionaryKindIgnoreWords | DictionaryKindSuggestWords;

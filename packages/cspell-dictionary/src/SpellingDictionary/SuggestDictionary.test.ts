@@ -1,6 +1,7 @@
+import { createTrieRootFromList, serializeTrie } from 'cspell-trie-lib';
 import { describe, expect, test } from 'vitest';
 
-import { createSuggestDictionary } from './SuggestDictionary.js';
+import { createSuggestDictionary, createSuggestDictionaryFromTrieFile } from './SuggestDictionary.js';
 
 // const oc = <T>(obj: T) => expect.objectContaining(obj);
 const isPreferred = true;
@@ -155,5 +156,23 @@ describe('SuggestDictionary 2', () => {
     `('mapWord "$word"', async ({ word, expected }) => {
         expect(dict.mapWord).toBe(undefined);
         expect(dict.mapWord?.(word)).toEqual(expected);
+    });
+});
+
+describe('createSuggestDictionaryFromTrieFile', () => {
+    test('provides no suggestions for words found in the trie file', async () => {
+        const words = ['english:English', 'red->green', 'blue:purple', 'yellow->white', 'apple:Apple', 'apple:Fruit'];
+
+        const trie = createTrieRootFromList(words);
+        const data = [...serializeTrie(trie)].join('\n');
+        const dict = createSuggestDictionaryFromTrieFile(data, 'suggest_words_trie', 'test');
+
+        expect(dict.has('english')).toBe(false);
+        expect(dict.isForbidden('english')).toBe(false);
+        expect(dict.getPreferredSuggestions('english')).toEqual([{ word: 'English', cost: 1, isPreferred: true }]);
+        expect(dict.getPreferredSuggestions('apple')).toEqual([
+            { word: 'Apple', cost: 1, isPreferred: true },
+            { word: 'Fruit', cost: 2, isPreferred: true },
+        ]);
     });
 });

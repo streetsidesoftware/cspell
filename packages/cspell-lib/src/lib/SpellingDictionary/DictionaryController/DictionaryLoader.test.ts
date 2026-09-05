@@ -186,6 +186,34 @@ describe('Validate DictionaryLoader', () => {
             expect(d.find('apple')).toEqual(oc({ found: 'apple', forbidden: false, noSuggest: true }));
         });
 
+        test('kind: words with suggestions.', async () => {
+            const def = dDef({ name: 'words', path: sample('words.txt'), kind: 'words', ignoreForbiddenWords: true });
+            const d = await dictionaryLoader.loadDictionary(def);
+            expect(d.has('apple')).toBe(true);
+            expect(d.isForbidden('apple')).toBe(false);
+            expect(d.find('apple')).toEqual(oc({ found: 'apple', forbidden: false, noSuggest: false }));
+            expect(d.isForbidden('colour')).toBe(false);
+            expect(d.getPreferredSuggestions?.('colour')).toEqual([{ cost: 1, isPreferred: true, word: 'color' }]);
+            expect(d.find('colour')).toEqual(undefined);
+        });
+
+        test('kind: ignore-words will suggest fixes', async () => {
+            const def = dDef({ name: 'ignore-words', path: sample('ignore-words.txt'), kind: 'ignore-words' });
+            const d = await dictionaryLoader.loadDictionary(def);
+            // cspell:ignore colour:color
+            expect(d.getPreferredSuggestions?.('colour')).toEqual([{ cost: 1, isPreferred: true, word: 'color' }]);
+        });
+
+        test('kind: suggest-words provides suggestions without adding words', async () => {
+            const def = dDef({ name: 'suggest-words', path: sample('ignore-words.txt'), kind: 'suggest-words' });
+            const d = await dictionaryLoader.loadDictionary(def);
+            expect(d.has('colour')).toBe(false);
+            expect(d.isForbidden('colour')).toBe(false);
+            expect(d.find('colour')).toEqual(undefined);
+            // cspell:ignore colour:color
+            expect(d.getPreferredSuggestions?.('colour')).toEqual([{ cost: 1, isPreferred: true, word: 'color' }]);
+        });
+
         test('kind: flag-words $type uses FlagWordsDictionary', async () => {
             const def = dDef({ name: 'flag-words', path: sample('flag-words.txt'), kind: 'flag-words' });
             const d = await dictionaryLoader.loadDictionary(def);
@@ -202,12 +230,31 @@ describe('Validate DictionaryLoader', () => {
             expect(d.has('English')).toBe(false);
         });
 
+        test('kind: flag-words $type uses FlagWordsDictionary ignoreForbiddenWords', async () => {
+            const def = dDef({
+                name: 'flag-words',
+                path: sample('flag-words.txt'),
+                kind: 'flag-words',
+                ignoreForbiddenWords: true,
+            });
+            const d = await dictionaryLoader.loadDictionary(def);
+            expect(d.isForbidden('english')).toBe(true);
+            expect(d.getPreferredSuggestions?.('english')?.map((p) => p.word)).toEqual(['English']);
+        });
+
         test('kind: flag-words $type uses FlagWordsDictionary trie', async () => {
             const def = dDef({ name: 'flag-cities', path: dict('cities.trie.gz'), kind: 'flag-words' });
             const d = await dictionaryLoader.loadDictionary(def);
             expect(d.isForbidden('London')).toBe(true);
             expect(d.isForbidden('Paris')).toBe(true);
             expect(d.isForbidden('Berlin')).toBe(false);
+        });
+
+        test('kind: suggest-words $type uses SuggestDictionary trie', async () => {
+            const def = dDef({ name: 'suggest-cities', path: dict('cities.trie.gz'), kind: 'suggest-words' });
+            const d = await dictionaryLoader.loadDictionary(def);
+            expect(d.has('London')).toBe(false);
+            expect(d.isForbidden('London')).toBe(false);
         });
     });
 
