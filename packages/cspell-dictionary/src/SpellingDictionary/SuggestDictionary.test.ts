@@ -164,7 +164,7 @@ describe('createSuggestDictionaryFromTrieFile', () => {
         const words = ['english:English', 'red->green', 'blue:purple', 'yellow->white', 'apple:Apple', 'apple:Fruit'];
 
         const trie = createTrieRootFromList(words);
-        const data = [...serializeTrie(trie, { version: 4, base: 10 })].join('\n');
+        const data = [...serializeTrie(trie)].join('\n');
         const dict = createSuggestDictionaryFromTrieFile(data, 'suggest_words_trie', 'test');
 
         expect(dict.has('english')).toBe(false);
