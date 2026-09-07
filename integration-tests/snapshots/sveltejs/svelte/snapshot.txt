@@ -3,15 +3,22 @@ Repository: sveltejs/svelte
 Url: "https://github.com/sveltejs/svelte.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 9081, Issues found: 4112 in 630 files.
+ CSpell: Files checked: 9086, Issues found: 4150 in 633 files.
  exit code: 1
 CONTRIBUTING.md:22:5      - Unknown word (Triaging)   -- ### Triaging issues and pull requests
+benchmarking/analyze-compiler-profile.js:10:19     - Unknown word (callees)    -- * Samples retain callees outside the compiler
+benchmarking/analyze-compiler-profile.js:132:8     - Unknown word (speedscope) -- const speedscope = {
+benchmarking/analyze-compiler-profile.js:152:23    - Unknown word (flamegraph) -- path.join(run_dir, 'flamegraph.speedscope.json'),
+benchmarking/analyze-compiler-profile.js:277:42    - Unknown word (Speedscope) -- speedscope.json` in [Speedscope](https://www.speedscope
+benchmarking/analyze-compiler-profile.js:291:16    - Unknown word (Hotspots)   -- '## Top Self Hotspots',
+benchmarking/analyze-compiler-profile.js:30:25     - Unknown word (Hotspot)    -- @type {Map<string, Hotspot>} */
+benchmarking/analyze-compiler-profile.js:31:8      - Unknown word (hotspots)   -- const hotspots = new Map();
+benchmarking/analyze-compiler-profile.js:9:77      - Unknown word (hotspot)    -- only flame graph and hotspot summary.
 benchmarking/benchmarks/reactivity/index.js:5:2       - Unknown word (sbench)     -- sbench_create_0to1,
 benchmarking/benchmarks/reactivity/tests/kairo_broad_block.bench.js:5:10      - Unknown word (kairo)      -- // Like `kairo_broad`, but each derived
 benchmarking/benchmarks/reactivity/tests/kairo_mux.bench.js:9:8       - Unknown word (splited)    -- const splited = heads
 benchmarking/compare/results.template.html:648:83    - Unknown word (uffff)      -- stats.winners[0]] : '\uffff';
-benchmarking/utils.js:206:10    - Unknown word (hotspot)    -- const hotspot_rows = [...included
-benchmarking/utils.js:235:14    - Unknown word (hotspots)   -- '## Top hotspots',
+benchmarking/compiler-profiling.md:21:10     - Unknown word (cpuprofile) -- - `raw/*.cpuprofile`: the original V8 profile
 benchmarking/utils.js:254:80    - Unknown word (Deopt)      -- Hit count | Children | Deopt reason |',
 benchmarking/utils.js:288:10    - Unknown word (deopt)      -- const deoptReason = typeof node
 documentation/docs/01-introduction/02-getting-started.md:8:15      - Unknown word (myapp)      -- npx sv create myapp
@@ -1676,8 +1683,10 @@ packages/svelte/src/compiler/phases/2-analyze/css/utils.js:34:29     - Unknown w
 packages/svelte/src/compiler/phases/2-analyze/index.js:1053:14   - Unknown word (optimise)   -- // TODO optimise this better
 packages/svelte/src/compiler/phases/2-analyze/index.js:737:18    - Unknown word (nonstate)   -- // warn on any nonstate declarations that are
 packages/svelte/src/compiler/phases/2-analyze/visitors/RegularElement.js:44:72     - Unknown word (qirk)       -- stripped because of a qirk:
-packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/constants.js:251:3     - Unknown word (impp)       -- 'impp'
-packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/constants.js:36:19     - Unknown word (labelable)  -- export const a11y_labelable = [
+packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/constants.js:251:3     - Unknown word (impp)                   -- 'impp'
+packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/constants.js:36:19     - Unknown word (labelable)              -- export const a11y_labelable = [
+packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/constants.js:7:40      - Unknown word (braillelabel) -- atomic autocomplete braillelabel brailleroledescription
+packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/constants.js:7:53      - Unknown word (brailleroledescription) -- autocomplete braillelabel brailleroledescription busy checked colcount
 packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/index.js:129:12    - Unknown word (proptypes)  -- // aria-proptypes
 packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/index.js:718:21    - Unknown word (webauthn)   -- if (tokens[0] === 'webauthn') {
 packages/svelte/src/compiler/phases/2-analyze/visitors/shared/utils.js:131:41    - Unknown word (inbetween)  -- whitespace is allowed inbetween. TODO remove once legacy
@@ -1732,8 +1741,8 @@ packages/svelte/src/internal/client/reactivity/batch.js:932:85    - Unknown word
 packages/svelte/src/internal/client/reactivity/deriveds.js:130:6     - Unknown word (deferreds)  -- var deferreds = new Set();
 packages/svelte/src/internal/client/reactivity/effects.js:13:2      - Unknown word (untracking) -- untracking,
 packages/svelte/src/internal/client/reactivity/sources.js:275:63    - Unknown word (overfiring) -- - this way we avoid overfiring.
-packages/svelte/src/internal/client/runtime.js:418:21    - Unknown word (reexecuted) -- // DIRTY so it is reexecuted once someone wants its
-packages/svelte/src/internal/client/runtime.js:423:29    - Unknown word (noone's)    -- Call abort controller, noone's listening to this derived
+packages/svelte/src/internal/client/runtime.js:422:21    - Unknown word (reexecuted) -- // DIRTY so it is reexecuted once someone wants its
+packages/svelte/src/internal/client/runtime.js:427:29    - Unknown word (noone's)    -- Call abort controller, noone's listening to this derived
 packages/svelte/src/internal/client/timing.js:12:5      - Unknown word (bunder)     -- // bunder will eval and remove
 packages/svelte/src/internal/client/types.d.ts:9:8       - Unknown word (hydratables) -- /** hydratables */
 packages/svelte/src/internal/server/crypto.js:18:63     - Unknown word (analysers)  -- directly because static analysers will think we rely on
