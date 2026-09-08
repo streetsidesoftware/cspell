@@ -3,19 +3,26 @@ Repository: sveltejs/svelte
 Url: https://github.com/sveltejs/svelte.git
 Args: '["**"]'
 Summary:
-  files: 9081
-  filesWithIssues: 630
-  issues: 4112
+  files: 9086
+  filesWithIssues: 633
+  issues: 4150
   errors: 0
 Errors: []
 
 issues:
+  - "benchmarking/analyze-compiler-profile.js:9:77           hotspot         U       only flame graph and hotspot summary."
+  - "benchmarking/analyze-compiler-profile.js:10:19          callees         U       * Samples retain callees outside the compiler"
+  - "benchmarking/analyze-compiler-profile.js:30:25          Hotspot         U       @type {Map<string, Hotspot>} */"
+  - "benchmarking/analyze-compiler-profile.js:31:8           hotspots        U       const hotspots = new Map();"
+  - "benchmarking/analyze-compiler-profile.js:132:8          speedscope      U       const speedscope = {"
+  - "benchmarking/analyze-compiler-profile.js:152:23         flamegraph      U       path.join(run_dir, 'flamegraph.speedscope.json'),"
+  - "benchmarking/analyze-compiler-profile.js:277:42         Speedscope      U       speedscope.json` in [Speedscope](https://www.speedscope"
+  - "benchmarking/analyze-compiler-profile.js:291:16         Hotspots        U       '## Top Self Hotspots',"
   - "benchmarking/benchmarks/reactivity/index.js:5:2         sbench      U       sbench_create_0to1,"
   - "benchmarking/benchmarks/reactivity/tests/kairo_broad_block.bench.js:5:10        kairo       U       // Like `kairo_broad`, but each derived"
   - "benchmarking/benchmarks/reactivity/tests/kairo_mux.bench.js:9:8         splited (split)     U       const splited = heads"
   - "benchmarking/compare/results.template.html:648:83       uffff       U       stats.winners[0]] : '\\uffff';"
-  - "benchmarking/utils.js:206:10        hotspot     U       const hotspot_rows = [...included"
-  - "benchmarking/utils.js:235:14        hotspots    U       '## Top hotspots',"
+  - "benchmarking/compiler-profiling.md:21:10        cpuprofile      U       - `raw/*.cpuprofile`: the original V8 profile"
   - "benchmarking/utils.js:254:80        Deopt       U       Hit count | Children | Deopt reason |',"
   - "benchmarking/utils.js:288:10        deopt       U       const deoptReason = typeof node"
   - "CONTRIBUTING.md:22:5        Triaging    U       ### Triaging issues and pull requests"
@@ -1681,8 +1688,10 @@ issues:
   - "packages/svelte/src/compiler/phases/2-analyze/index.js:737:18       nonstate    U       // warn on any nonstate declarations that are"
   - "packages/svelte/src/compiler/phases/2-analyze/index.js:1053:14      optimise    U       // TODO optimise this better"
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/RegularElement.js:44:72          qirk    U       stripped because of a qirk:"
-  - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/constants.js:36:19       labelable       U       export const a11y_labelable = ["
-  - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/constants.js:251:3       impp            U       'impp'"
+  - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/constants.js:7:40        braillelabel                U       atomic autocomplete braillelabel brailleroledescription"
+  - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/constants.js:7:53        brailleroledescription      U       autocomplete braillelabel brailleroledescription busy checked colcount"
+  - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/constants.js:36:19       labelable                   U       export const a11y_labelable = ["
+  - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/constants.js:251:3       impp                        U       'impp'"
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/index.js:129:12      proptypes       U       // aria-proptypes"
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/index.js:718:21      webauthn        U       if (tokens[0] === 'webauthn') {"
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/utils.js:131:41       inbetween (between)     U       whitespace is allowed inbetween. TODO remove once legacy"
@@ -1737,8 +1746,8 @@ issues:
   - "packages/svelte/src/internal/client/reactivity/deriveds.js:130:6        deferreds       U       var deferreds = new Set();"
   - "packages/svelte/src/internal/client/reactivity/effects.js:13:2          untracking      U       untracking,"
   - "packages/svelte/src/internal/client/reactivity/sources.js:275:63        overfiring      U       - this way we avoid overfiring."
-  - "packages/svelte/src/internal/client/runtime.js:418:21       reexecuted      U       // DIRTY so it is reexecuted once someone wants its"
-  - "packages/svelte/src/internal/client/runtime.js:423:29       noone's         U       Call abort controller, noone's listening to this derived"
+  - "packages/svelte/src/internal/client/runtime.js:422:21       reexecuted      U       // DIRTY so it is reexecuted once someone wants its"
+  - "packages/svelte/src/internal/client/runtime.js:427:29       noone's         U       Call abort controller, noone's listening to this derived"
   - "packages/svelte/src/internal/client/timing.js:12:5          bunder      U       // bunder will eval and remove"
   - "packages/svelte/src/internal/client/types.d.ts:9:8          hydratables     U       /** hydratables */"
   - "packages/svelte/src/internal/server/crypto.js:18:63         analysers       U       directly because static analysers will think we rely on"
