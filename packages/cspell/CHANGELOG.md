@@ -308,6 +308,213 @@ These changes collectively provide more flexible and explicit dictionary configu
 
 </details>
 
+## v10.3.0 (2026-09-08)
+
+### Features
+
+<details>
+<summary>feat: Add an option to set the kind of dictionary file (<a href="https://github.com/streetsidesoftware/cspell/pull/9178">#9178</a>)</summary>
+
+### feat: Add an option to set the kind of dictionary file ([#9178](https://github.com/streetsidesoftware/cspell/pull/9178))
+
+This pull request introduces support for the new `kind` property in dictionary definitions, enabling explicit specification of dictionary types such as `words`, `flag-words`, and `ignore-words`.
+
+```jsonc
+{
+  "version": "0.2",
+  "language": "en-US",
+  "caseSensitive": false,
+  "dictionaryDefinitions": [
+    {
+      "name": "forbidden-spelling",
+      "path": "./forbidden-spelling.txt",
+      "kind": "flag-words"
+    }
+  ],
+  "dictionaries": ["forbidden-spelling"]
+}
+```
+
+`forbidden-spelling.txt`
+
+```
+# Add forbidden words below.
+# Words starting with `!` are exceptions.
+# cspell:disable
+english:English # Do not allow `english` and suggest `English`
+!English # needed to allow `English`
+!ENGLISH # needed to allow `ENGLISH`
+
+forbidden_word # All variants of `forbidden_word` are not allowed.
+
+# Mixed case words:
+cSpell # only `cSpell` is flagged. `cspell` will not be.
+```
+
+It updates the JSON schema, dictionary loading logic, and adds new APIs and tests to handle these kinds, including support for loading forbidden (flag) words from trie files.
+
+**Schema and API Enhancements:**
+
+- Added a `kind` property to dictionary definitions in the `cspell.schema.json` schema, allowing configuration of dictionary type as `words`, `flag-words`, or `ignore-words` [\[1\]](diffhunk://#diff-ad9ad04ccf6ebafd4ec4d6b18ad6b3338e9262d9c29b0d780e27ac73e84c9f4cR357-R362) [\[2\]](diffhunk://#diff-ad9ad04ccf6ebafd4ec4d6b18ad6b3338e9262d9c29b0d780e27ac73e84c9f4cR426-R431) [\[3\]](diffhunk://#diff-ad9ad04ccf6ebafd4ec4d6b18ad6b3338e9262d9c29b0d780e27ac73e84c9f4cR502-R507) [\[4\]](diffhunk://#diff-ad9ad04ccf6ebafd4ec4d6b18ad6b3338e9262d9c29b0d780e27ac73e84c9f4cR838-R843) [\[5\]](diffhunk://#diff-ad9ad04ccf6ebafd4ec4d6b18ad6b3338e9262d9c29b0d780e27ac73e84c9f4cR1002-R1028).
+- Updated the internal dictionary settings and loader logic to recognize and handle the new `kind` property, ensuring correct dictionary instantiation based on its value [\[1\]](diffhunk://#diff-f02fad169c5857d97fd6add642623e889d3f2900ef6a4b39845f02be39d95366R193) [\[2\]](diffhunk://#diff-f02fad169c5857d97fd6add642623e889d3f2900ef6a4b39845f02be39d95366R218) [\[3\]](diffhunk://#diff-c6ea5963a21891d1145b0febf601f1d09d67ffd8e9a95e993493960d677293e0L251-R259) [\[4\]](diffhunk://#diff-c6ea5963a21891d1145b0febf601f1d09d67ffd8e9a95e993493960d677293e0L285-R296).
+
+**Flag Words Dictionary Support:**
+
+- Introduced `createFlagWordsDictionaryFromTrieFile` to allow creating forbidden words dictionaries directly from trie files, and exposed this function in the public API [\[1\]](diffhunk://#diff-209c43823378da2ca4c4bac833fae779c2a009f252f6b43ec626ad5e07c400d5R174-R189) [\[2\]](diffhunk://#diff-3c748c962ce2a5c78dcb8194b342d04689da8ccd7714f27a2ce4ba939eabf62eL2-R10) [\[3\]](diffhunk://#diff-88ab425aebdb40b0de4f3d847e37602f47fd5ef2ad71b0c07ded58634a82b0b9R6) [\[4\]](diffhunk://#diff-7d72bee0f62b6e247b5a59aa6add20496cac0d3007fd4370c8324f9f8d2e81f1R26) [\[5\]](diffhunk://#diff-3c53de7765d44a629523ad4f0ca1a25ee56961c7e6b1cf07ca348387fc0a6715R9).
+- Added comprehensive tests for the new `kind` behaviors and for loading flag words from trie files, ensuring correct forbidden word detection and suggestion handling [\[1\]](diffhunk://#diff-3c748c962ce2a5c78dcb8194b342d04689da8ccd7714f27a2ce4ba939eabf62eR252-R267) [\[2\]](diffhunk://#diff-c29257264530048b2c751d506584bbf8a5324bbca6095e8307bc7cc547983ff0R180-R225).
+
+**Sample and Fixture Updates:**
+
+- Added a new sample file `flag-words.txt` to demonstrate and test the flag words functionality.
+
+These changes collectively provide more flexible and explicit dictionary configuration, improve forbidden word handling, and ensure robust support for new and existing dictionary formats.
+
+---
+
+</details>
+
+### Fixes
+
+<details>
+<summary>fix: Add dictionary kind: suggest-words (<a href="https://github.com/streetsidesoftware/cspell/pull/9189">#9189</a>)</summary>
+
+### fix: Add dictionary kind: suggest-words ([#9189](https://github.com/streetsidesoftware/cspell/pull/9189))
+
+This pull request adds support for a new dictionary kind, `suggest-words`, which allows dictionaries to provide suggested word corrections without treating the words as valid or forbidden. The changes include updates to the JSON schema, implementation of the `SuggestDictionary` for this new kind (including support for loading from trie files), and comprehensive tests to ensure correct behavior. Additionally, the API is extended to expose the new functionality.
+
+**Support for "suggest-words" dictionary kind**
+
+- [`cspell.schema.json`](diffhunk://#diff-ad9ad04ccf6ebafd4ec4d6b18ad6b3338e9262d9c29b0d780e27ac73e84c9f4cL359-R360): Added the `suggest-words` type to the `DictionaryKind` definition and updated descriptions/documentation throughout the schema to reflect this new kind. [\[1\]](diffhunk://#diff-ad9ad04ccf6ebafd4ec4d6b18ad6b3338e9262d9c29b0d780e27ac73e84c9f4cL359-R360) [\[2\]](diffhunk://#diff-ad9ad04ccf6ebafd4ec4d6b18ad6b3338e9262d9c29b0d780e27ac73e84c9f4cL428-R429) [\[3\]](diffhunk://#diff-ad9ad04ccf6ebafd4ec4d6b18ad6b3338e9262d9c29b0d780e27ac73e84c9f4cL504-R505) [\[4\]](diffhunk://#diff-ad9ad04ccf6ebafd4ec4d6b18ad6b3338e9262d9c29b0d780e27ac73e84c9f4cL840-R841) [\[5\]](diffhunk://#diff-ad9ad04ccf6ebafd4ec4d6b18ad6b3338e9262d9c29b0d780e27ac73e84c9f4cR1012-R1018) [\[6\]](diffhunk://#diff-ad9ad04ccf6ebafd4ec4d6b18ad6b3338e9262d9c29b0d780e27ac73e84c9f4cR1028-R1031)
+
+**Implementation of SuggestDictionary for "suggest-words"**
+
+- [`packages/cspell-dictionary/src/SpellingDictionary/SuggestDictionary.ts`](diffhunk://#diff-0ef0e8042a78662ed7798a839e2acaaaba36f84f43cee47691cf0da5527512f7R3): Added `createSuggestDictionaryFromTrieFile`, enabling creation of suggestion dictionaries from trie file contents. [\[1\]](diffhunk://#diff-0ef0e8042a78662ed7798a839e2acaaaba36f84f43cee47691cf0da5527512f7R3) [\[2\]](diffhunk://#diff-0ef0e8042a78662ed7798a839e2acaaaba36f84f43cee47691cf0da5527512f7R151-R166)
+- `packages/cspell-dictionary/src/SpellingDictionary/index.ts`, `packages/cspell-dictionary/src/index.ts`: Exported the new `createSuggestDictionaryFromTrieFile` function from the package API. [\[1\]](diffhunk://#diff-88ab425aebdb40b0de4f3d847e37602f47fd5ef2ad71b0c07ded58634a82b0b9L23-R23) [\[2\]](diffhunk://#diff-7d72bee0f62b6e247b5a59aa6add20496cac0d3007fd4370c8324f9f8d2e81f1R33)
+- [`packages/cspell-dictionary/src/__snapshots__/index.test.ts.snap`](diffhunk://#diff-3c53de7765d44a629523ad4f0ca1a25ee56961c7e6b1cf07ca348387fc0a6715R16): Updated API snapshot to include the new export.
+
+**Dictionary loading and integration**
+
+- [`packages/cspell-lib/src/lib/SpellingDictionary/DictionaryController/DictionaryLoader.ts`](diffhunk://#diff-c6ea5963a21891d1145b0febf601f1d09d67ffd8e9a95e993493960d677293e0R12-R13): Updated loader to handle `suggest-words` kind for both legacy and words-per-line formats, using the appropriate factory. [\[1\]](diffhunk://#diff-c6ea5963a21891d1145b0febf601f1d09d67ffd8e9a95e993493960d677293e0R12-R13) [\[2\]](diffhunk://#diff-c6ea5963a21891d1145b0febf601f1d09d67ffd8e9a95e993493960d677293e0R298-R300) [\[3\]](diffhunk://#diff-c6ea5963a21891d1145b0febf601f1d09d67ffd8e9a95e993493960d677293e0R318-R320)
+
+**Testing and validation**
+
+- [`packages/cspell-dictionary/src/SpellingDictionary/SuggestDictionary.test.ts`](diffhunk://#diff-6ed6ff78b238680cd5b120ad98774b1181aa261b26700367d7f9a8b30caffc63R1-R4): Added tests for `createSuggestDictionaryFromTrieFile` to ensure suggestions are provided as expected. [\[1\]](diffhunk://#diff-6ed6ff78b238680cd5b120ad98774b1181aa261b26700367d7f9a8b30caffc63R1-R4) [\[2\]](diffhunk://#diff-6ed6ff78b238680cd5b120ad98774b1181aa261b26700367d7f9a8b30caffc63R161-R178)
+- [`packages/cspell-lib/src/lib/SpellingDictionary/DictionaryController/DictionaryLoader.test.ts`](diffhunk://#diff-c29257264530048b2c751d506584bbf8a5324bbca6095e8307bc7cc547983ff0R189-R216): Added tests for the new `suggest-words` kind, including loading from both text and trie files, and verifying correct suggestion and lookup behavior. [\[1\]](diffhunk://#diff-c29257264530048b2c751d506584bbf8a5324bbca6095e8307bc7cc547983ff0R189-R216) [\[2\]](diffhunk://#diff-c29257264530048b2c751d506584bbf8a5324bbca6095e8307bc7cc547983ff0R233-R258)
+
+**Sample data updates**
+
+- `packages/cspell-lib/samples/ignore-words.txt`, `packages/cspell-lib/samples/words.txt`: Updated sample dictionary files to include entries relevant for testing the new kind and its suggestion behavior. [\[1\]](diffhunk://#diff-7d31a455a84dc5891ebe79c10dde43ff8a534a9495119be21c1d06413cde00a9R1-R4) [\[2\]](diffhunk://#diff-0e49e6682b2ab85e823f9ced3b6da4029a7c9093c6bcc1290a119ee2824b1ac0R1) [\[3\]](diffhunk://#diff-0e49e6682b2ab85e823f9ced3b6da4029a7c9093c6bcc1290a119ee2824b1ac0R13-R14)
+
+---
+
+</details>
+
+<details>
+<summary>fix: Only hide code-like partial words (<a href="https://github.com/streetsidesoftware/cspell/pull/9163">#9163</a>)</summary>
+
+### fix: Only hide code-like partial words ([#9163](https://github.com/streetsidesoftware/cspell/pull/9163))
+
+---
+
+</details>
+
+### Documentation
+
+<details>
+<summary>fix: Add dictionary kind: suggest-words (<a href="https://github.com/streetsidesoftware/cspell/pull/9189">#9189</a>)</summary>
+
+### fix: Add dictionary kind: suggest-words ([#9189](https://github.com/streetsidesoftware/cspell/pull/9189))
+
+This pull request adds support for a new dictionary kind, `suggest-words`, which allows dictionaries to provide suggested word corrections without treating the words as valid or forbidden. The changes include updates to the JSON schema, implementation of the `SuggestDictionary` for this new kind (including support for loading from trie files), and comprehensive tests to ensure correct behavior. Additionally, the API is extended to expose the new functionality.
+
+**Support for "suggest-words" dictionary kind**
+
+- [`cspell.schema.json`](diffhunk://#diff-ad9ad04ccf6ebafd4ec4d6b18ad6b3338e9262d9c29b0d780e27ac73e84c9f4cL359-R360): Added the `suggest-words` type to the `DictionaryKind` definition and updated descriptions/documentation throughout the schema to reflect this new kind. [\[1\]](diffhunk://#diff-ad9ad04ccf6ebafd4ec4d6b18ad6b3338e9262d9c29b0d780e27ac73e84c9f4cL359-R360) [\[2\]](diffhunk://#diff-ad9ad04ccf6ebafd4ec4d6b18ad6b3338e9262d9c29b0d780e27ac73e84c9f4cL428-R429) [\[3\]](diffhunk://#diff-ad9ad04ccf6ebafd4ec4d6b18ad6b3338e9262d9c29b0d780e27ac73e84c9f4cL504-R505) [\[4\]](diffhunk://#diff-ad9ad04ccf6ebafd4ec4d6b18ad6b3338e9262d9c29b0d780e27ac73e84c9f4cL840-R841) [\[5\]](diffhunk://#diff-ad9ad04ccf6ebafd4ec4d6b18ad6b3338e9262d9c29b0d780e27ac73e84c9f4cR1012-R1018) [\[6\]](diffhunk://#diff-ad9ad04ccf6ebafd4ec4d6b18ad6b3338e9262d9c29b0d780e27ac73e84c9f4cR1028-R1031)
+
+**Implementation of SuggestDictionary for "suggest-words"**
+
+- [`packages/cspell-dictionary/src/SpellingDictionary/SuggestDictionary.ts`](diffhunk://#diff-0ef0e8042a78662ed7798a839e2acaaaba36f84f43cee47691cf0da5527512f7R3): Added `createSuggestDictionaryFromTrieFile`, enabling creation of suggestion dictionaries from trie file contents. [\[1\]](diffhunk://#diff-0ef0e8042a78662ed7798a839e2acaaaba36f84f43cee47691cf0da5527512f7R3) [\[2\]](diffhunk://#diff-0ef0e8042a78662ed7798a839e2acaaaba36f84f43cee47691cf0da5527512f7R151-R166)
+- `packages/cspell-dictionary/src/SpellingDictionary/index.ts`, `packages/cspell-dictionary/src/index.ts`: Exported the new `createSuggestDictionaryFromTrieFile` function from the package API. [\[1\]](diffhunk://#diff-88ab425aebdb40b0de4f3d847e37602f47fd5ef2ad71b0c07ded58634a82b0b9L23-R23) [\[2\]](diffhunk://#diff-7d72bee0f62b6e247b5a59aa6add20496cac0d3007fd4370c8324f9f8d2e81f1R33)
+- [`packages/cspell-dictionary/src/__snapshots__/index.test.ts.snap`](diffhunk://#diff-3c53de7765d44a629523ad4f0ca1a25ee56961c7e6b1cf07ca348387fc0a6715R16): Updated API snapshot to include the new export.
+
+**Dictionary loading and integration**
+
+- [`packages/cspell-lib/src/lib/SpellingDictionary/DictionaryController/DictionaryLoader.ts`](diffhunk://#diff-c6ea5963a21891d1145b0febf601f1d09d67ffd8e9a95e993493960d677293e0R12-R13): Updated loader to handle `suggest-words` kind for both legacy and words-per-line formats, using the appropriate factory. [\[1\]](diffhunk://#diff-c6ea5963a21891d1145b0febf601f1d09d67ffd8e9a95e993493960d677293e0R12-R13) [\[2\]](diffhunk://#diff-c6ea5963a21891d1145b0febf601f1d09d67ffd8e9a95e993493960d677293e0R298-R300) [\[3\]](diffhunk://#diff-c6ea5963a21891d1145b0febf601f1d09d67ffd8e9a95e993493960d677293e0R318-R320)
+
+**Testing and validation**
+
+- [`packages/cspell-dictionary/src/SpellingDictionary/SuggestDictionary.test.ts`](diffhunk://#diff-6ed6ff78b238680cd5b120ad98774b1181aa261b26700367d7f9a8b30caffc63R1-R4): Added tests for `createSuggestDictionaryFromTrieFile` to ensure suggestions are provided as expected. [\[1\]](diffhunk://#diff-6ed6ff78b238680cd5b120ad98774b1181aa261b26700367d7f9a8b30caffc63R1-R4) [\[2\]](diffhunk://#diff-6ed6ff78b238680cd5b120ad98774b1181aa261b26700367d7f9a8b30caffc63R161-R178)
+- [`packages/cspell-lib/src/lib/SpellingDictionary/DictionaryController/DictionaryLoader.test.ts`](diffhunk://#diff-c29257264530048b2c751d506584bbf8a5324bbca6095e8307bc7cc547983ff0R189-R216): Added tests for the new `suggest-words` kind, including loading from both text and trie files, and verifying correct suggestion and lookup behavior. [\[1\]](diffhunk://#diff-c29257264530048b2c751d506584bbf8a5324bbca6095e8307bc7cc547983ff0R189-R216) [\[2\]](diffhunk://#diff-c29257264530048b2c751d506584bbf8a5324bbca6095e8307bc7cc547983ff0R233-R258)
+
+**Sample data updates**
+
+- `packages/cspell-lib/samples/ignore-words.txt`, `packages/cspell-lib/samples/words.txt`: Updated sample dictionary files to include entries relevant for testing the new kind and its suggestion behavior. [\[1\]](diffhunk://#diff-7d31a455a84dc5891ebe79c10dde43ff8a534a9495119be21c1d06413cde00a9R1-R4) [\[2\]](diffhunk://#diff-0e49e6682b2ab85e823f9ced3b6da4029a7c9093c6bcc1290a119ee2824b1ac0R1) [\[3\]](diffhunk://#diff-0e49e6682b2ab85e823f9ced3b6da4029a7c9093c6bcc1290a119ee2824b1ac0R13-R14)
+
+---
+
+</details>
+
+<details>
+<summary>feat: Add an option to set the kind of dictionary file (<a href="https://github.com/streetsidesoftware/cspell/pull/9178">#9178</a>)</summary>
+
+### feat: Add an option to set the kind of dictionary file ([#9178](https://github.com/streetsidesoftware/cspell/pull/9178))
+
+This pull request introduces support for the new `kind` property in dictionary definitions, enabling explicit specification of dictionary types such as `words`, `flag-words`, and `ignore-words`.
+
+```jsonc
+{
+  "version": "0.2",
+  "language": "en-US",
+  "caseSensitive": false,
+  "dictionaryDefinitions": [
+    {
+      "name": "forbidden-spelling",
+      "path": "./forbidden-spelling.txt",
+      "kind": "flag-words"
+    }
+  ],
+  "dictionaries": ["forbidden-spelling"]
+}
+```
+
+`forbidden-spelling.txt`
+
+```
+# Add forbidden words below.
+# Words starting with `!` are exceptions.
+# cspell:disable
+english:English # Do not allow `english` and suggest `English`
+!English # needed to allow `English`
+!ENGLISH # needed to allow `ENGLISH`
+
+forbidden_word # All variants of `forbidden_word` are not allowed.
+
+# Mixed case words:
+cSpell # only `cSpell` is flagged. `cspell` will not be.
+```
+
+It updates the JSON schema, dictionary loading logic, and adds new APIs and tests to handle these kinds, including support for loading forbidden (flag) words from trie files.
+
+**Schema and API Enhancements:**
+
+- Added a `kind` property to dictionary definitions in the `cspell.schema.json` schema, allowing configuration of dictionary type as `words`, `flag-words`, or `ignore-words` [\[1\]](diffhunk://#diff-ad9ad04ccf6ebafd4ec4d6b18ad6b3338e9262d9c29b0d780e27ac73e84c9f4cR357-R362) [\[2\]](diffhunk://#diff-ad9ad04ccf6ebafd4ec4d6b18ad6b3338e9262d9c29b0d780e27ac73e84c9f4cR426-R431) [\[3\]](diffhunk://#diff-ad9ad04ccf6ebafd4ec4d6b18ad6b3338e9262d9c29b0d780e27ac73e84c9f4cR502-R507) [\[4\]](diffhunk://#diff-ad9ad04ccf6ebafd4ec4d6b18ad6b3338e9262d9c29b0d780e27ac73e84c9f4cR838-R843) [\[5\]](diffhunk://#diff-ad9ad04ccf6ebafd4ec4d6b18ad6b3338e9262d9c29b0d780e27ac73e84c9f4cR1002-R1028).
+- Updated the internal dictionary settings and loader logic to recognize and handle the new `kind` property, ensuring correct dictionary instantiation based on its value [\[1\]](diffhunk://#diff-f02fad169c5857d97fd6add642623e889d3f2900ef6a4b39845f02be39d95366R193) [\[2\]](diffhunk://#diff-f02fad169c5857d97fd6add642623e889d3f2900ef6a4b39845f02be39d95366R218) [\[3\]](diffhunk://#diff-c6ea5963a21891d1145b0febf601f1d09d67ffd8e9a95e993493960d677293e0L251-R259) [\[4\]](diffhunk://#diff-c6ea5963a21891d1145b0febf601f1d09d67ffd8e9a95e993493960d677293e0L285-R296).
+
+**Flag Words Dictionary Support:**
+
+- Introduced `createFlagWordsDictionaryFromTrieFile` to allow creating forbidden words dictionaries directly from trie files, and exposed this function in the public API [\[1\]](diffhunk://#diff-209c43823378da2ca4c4bac833fae779c2a009f252f6b43ec626ad5e07c400d5R174-R189) [\[2\]](diffhunk://#diff-3c748c962ce2a5c78dcb8194b342d04689da8ccd7714f27a2ce4ba939eabf62eL2-R10) [\[3\]](diffhunk://#diff-88ab425aebdb40b0de4f3d847e37602f47fd5ef2ad71b0c07ded58634a82b0b9R6) [\[4\]](diffhunk://#diff-7d72bee0f62b6e247b5a59aa6add20496cac0d3007fd4370c8324f9f8d2e81f1R26) [\[5\]](diffhunk://#diff-3c53de7765d44a629523ad4f0ca1a25ee56961c7e6b1cf07ca348387fc0a6715R9).
+- Added comprehensive tests for the new `kind` behaviors and for loading flag words from trie files, ensuring correct forbidden word detection and suggestion handling [\[1\]](diffhunk://#diff-3c748c962ce2a5c78dcb8194b342d04689da8ccd7714f27a2ce4ba939eabf62eR252-R267) [\[2\]](diffhunk://#diff-c29257264530048b2c751d506584bbf8a5324bbca6095e8307bc7cc547983ff0R180-R225).
+
+**Sample and Fixture Updates:**
+
+- Added a new sample file `flag-words.txt` to demonstrate and test the flag words functionality.
+
+These changes collectively provide more flexible and explicit dictionary configuration, improve forbidden word handling, and ensure robust support for new and existing dictionary formats.
+
+---
+
+</details>
+
 ## v10.2.2 (2026-09-04)
 
 ### Fixes
