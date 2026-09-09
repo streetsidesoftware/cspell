@@ -54,7 +54,7 @@ export function split(
     isValidWord: IsValidWordFn,
     options: SplitOptions = {},
 ): SplitResult {
-    using _x = measurePerf('wordSplitter.split');
+    using _perf = measurePerf('wordSplitter.split');
     counter('wordSplitter.split').inc();
     const relWordToSplit = findNextWordText({ text: line.text, offset: offset - line.offset });
     const hasSoftHyphen = relWordToSplit.text.includes(softHyphen);
