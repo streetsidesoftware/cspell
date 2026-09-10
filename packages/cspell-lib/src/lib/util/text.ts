@@ -40,7 +40,7 @@ export function splitWordWithOffset(wo: TextOffset, regExpWordBreaks: RegExp): T
     for (const m of wText.matchAll(r)) {
         const text = wText.slice(lastRelOffset, m.index);
         const offset = absOffset + lastRelOffset;
-        lastRelOffset = m.index! + m[0].length;
+        lastRelOffset = m.index + m[0].length;
         words.push({ text, offset });
     }
 
