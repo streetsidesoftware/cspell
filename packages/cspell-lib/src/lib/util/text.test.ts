@@ -9,7 +9,12 @@ import { describe, expect, test } from 'vitest';
 
 import * as Text from './text.js';
 import { splitCamelCaseWord } from './text.js';
-import { regExSplitWords, regExSplitWords2, regExUpperSOrIng } from './textRegex.js';
+import {
+    regExpCamelCaseWordBreaksWithEnglishSuffix,
+    regExSplitWords,
+    regExSplitWords2,
+    regExUpperSOrIng,
+} from './textRegex.js';
 
 // cSpell:ignore Ápple DBAs ctrip γάμμα
 
@@ -30,15 +35,16 @@ describe('Util Text', () => {
     });
 
     test.each`
-        word                | expected
-        ${'hello'}          | ${'hello'.split('|')}
-        ${'helloThere'}     | ${['hello', 'There']}
-        ${'HelloThere'}     | ${['Hello', 'There']}
-        ${'BigÁpple'}       | ${['Big', 'Ápple']}
-        ${'ASCIIToUTF16'}   | ${['ASCII', 'To', 'UTF16']}
-        ${'URLsAndDBAs'}    | ${['URLs', 'And', 'DBAs']}
-        ${'WALKingRUNning'} | ${['WALKing', 'RUNning']}
-        ${'c0de'}           | ${['c0de']}
+        word                  | expected
+        ${'hello'}            | ${'hello'.split('|')}
+        ${'helloThere'}       | ${['hello', 'There']}
+        ${'HelloThere'}       | ${['Hello', 'There']}
+        ${'hello\u00ADthere'} | ${['hello', 'there']}
+        ${'BigÁpple'}         | ${['Big', 'Ápple']}
+        ${'ASCIIToUTF16'}     | ${['ASCII', 'To', 'UTF16']}
+        ${'URLsAndDBAs'}      | ${['URLs', 'And', 'DBAs']}
+        ${'WALKingRUNning'}   | ${['WALKing', 'RUNning']}
+        ${'c0de'}             | ${['c0de']}
     `('splitCamelCaseWord $word', ({ word, expected }) => {
         expect(splitCamelCaseWord(word)).toEqual(expected);
     });
@@ -334,6 +340,42 @@ describe('Test the text matching functions', () => {
         expect(Text.camelToSnake('first_name')).toBe('first_name');
         expect(Text.camelToSnake('FIRSTName')).toBe('first_name');
         expect(Text.camelToSnake('FIRSTNAME')).toBe('firstname');
+    });
+});
+
+describe('splitCamelCaseWordWithOffset', () => {
+    test.each`
+        word                  | expected
+        ${'hello'}            | ${[{ text: 'hello', offset: 0 }]}
+        ${'helloThere'}       | ${[{ text: 'hello', offset: 0 }, { text: 'There', offset: 5 }]}
+        ${'HelloThere'}       | ${[{ text: 'Hello', offset: 0 }, { text: 'There', offset: 5 }]}
+        ${'hello\u00ADthere'} | ${[{ text: 'hello', offset: 0 }, { text: 'there', offset: 6 }]}
+        ${'BigÁpple'}         | ${[{ text: 'Big', offset: 0 }, { text: 'Ápple', offset: 3 }]}
+        ${'ASCIIToUTF16'}     | ${[{ text: 'ASCII', offset: 0 }, { text: 'To', offset: 5 }, { text: 'UTF16', offset: 7 }]}
+        ${'URLsAndDBAs'}      | ${[{ text: 'URLs', offset: 0 }, { text: 'And', offset: 4 }, { text: 'DBAs', offset: 7 }]}
+        ${'WALKingRUNning'}   | ${[{ text: 'WALKing', offset: 0 }, { text: 'RUNning', offset: 7 }]}
+        ${'c0de'}             | ${[{ text: 'c0de', offset: 0 }]}
+    `('splitCamelCaseWordWithOffset `$word`', ({ word, expected }) => {
+        const result = Text.splitCamelCaseWordWithOffset({ text: word, offset: 0 });
+        expect(result).toEqual(expected);
+    });
+});
+
+describe('splitWordWithOffset', () => {
+    test.each`
+        word                  | expected
+        ${'hello'}            | ${[{ text: 'hello', offset: 0 }]}
+        ${'helloThere'}       | ${[{ text: 'hello', offset: 0 }, { text: 'There', offset: 5 }]}
+        ${'HelloThere'}       | ${[{ text: 'Hello', offset: 0 }, { text: 'There', offset: 5 }]}
+        ${'hello\u00ADthere'} | ${[{ text: 'hello', offset: 0 }, { text: 'there', offset: 6 }]}
+        ${'BigÁpple'}         | ${[{ text: 'Big', offset: 0 }, { text: 'Ápple', offset: 3 }]}
+        ${'ASCIIToUTF16'}     | ${[{ text: 'ASCII', offset: 0 }, { text: 'To', offset: 5 }, { text: 'UTF16', offset: 7 }]}
+        ${'URLsAndDBAs'}      | ${[{ text: 'URLs', offset: 0 }, { text: 'And', offset: 4 }, { text: 'DBAs', offset: 7 }]}
+        ${'WALKingRUNning'}   | ${[{ text: 'WALKing', offset: 0 }, { text: 'RUNning', offset: 7 }]}
+        ${'c0de'}             | ${[{ text: 'c0de', offset: 0 }]}
+    `('splitWordWithOffset `$word`', ({ word, expected }) => {
+        const result = Text.splitWordWithOffset({ text: word, offset: 0 }, regExpCamelCaseWordBreaksWithEnglishSuffix);
+        expect(result).toEqual(expected);
     });
 });
 

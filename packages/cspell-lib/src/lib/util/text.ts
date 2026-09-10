@@ -14,19 +14,13 @@ import {
     regExWordsAndDigits,
 } from './textRegex.js';
 import { toUri } from './Uri.js';
-import { scanMap } from './util.js';
 
 export { stringToRegExp } from './textRegex.js';
 
 // CSpell:ignore ings ning gimuy tsmerge
 
 export function splitCamelCaseWordWithOffset(wo: TextOffset): TextOffset[] {
-    return splitCamelCaseWord(wo.text).map(
-        scanMap<string, TextOffset>((last, text) => ({ text, offset: last.offset + last.text.length }), {
-            text: '',
-            offset: wo.offset,
-        }),
-    );
+    return splitWordWithOffset(wo, regExpCamelCaseWordBreaksWithEnglishSuffix);
 }
 
 /**
@@ -37,12 +31,25 @@ export function splitCamelCaseWord(word: string): string[] {
 }
 
 export function splitWordWithOffset(wo: TextOffset, regExpWordBreaks: RegExp): TextOffset[] {
-    return splitWord(wo.text, regExpWordBreaks).map(
-        scanMap<string, TextOffset>((last, text) => ({ text, offset: last.offset + last.text.length }), {
-            text: '',
-            offset: wo.offset,
-        }),
-    );
+    const wText = wo.text;
+    const absOffset = wo.offset;
+    const words: TextOffset[] = [];
+    let lastRelOffset = 0;
+    const r = new RegExp(regExpWordBreaks);
+
+    for (const m of wText.matchAll(r)) {
+        const text = wText.slice(lastRelOffset, m.index);
+        const offset = absOffset + lastRelOffset;
+        lastRelOffset = m.index + m[0].length;
+        words.push({ text, offset });
+    }
+
+    if (lastRelOffset < wText.length) {
+        const text = wText.slice(lastRelOffset);
+        const offset = absOffset + lastRelOffset;
+        words.push({ text, offset });
+    }
+    return words;
 }
 
 /**
