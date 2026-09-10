@@ -1,10 +1,10 @@
 // cspell:ignore ings ning gimuy anrvtbf gimuxy
 
 export const regExUpperSOrIng: RegExp = /([\p{Lu}\p{M}]+(?:\\?['’])?(?:s|ing|ies|es|ings|ed|ning))(?!\p{Ll})/gu;
-export const regExSplitWords: RegExp = /(\p{Ll}\p{M}?)(\p{Lu})/gu;
-export const regExSplitWords2: RegExp = /(\p{Lu}\p{M}?)((\p{Lu}\p{M}?)\p{Ll})/gu;
+export const regExSplitWords: RegExp = /(\p{Ll}\p{M}?)(\p{Lu})/dgu;
+export const regExSplitWords2: RegExp = /(\p{Lu}\p{M}?)((\p{Lu}\p{M}?)\p{Ll})/dgu;
 export const regExpCamelCaseWordBreaksWithEnglishSuffix: RegExp =
-    /(?<=\p{Ll}\p{M}?)(?=\p{Lu})|(?<=\p{Lu}\p{M}?)(?=\p{Lu}\p{M}?\p{Ll})(?!\p{Lu}\p{M}?(?:s|ing|ies|es|ings|ed|ning)(?!\p{Ll}))/gu;
+    /(?<=\p{Ll}\p{M}?)(?=\p{Lu})|(?<=\p{Lu}\p{M}?)(?=\p{Lu}\p{M}?\p{Ll})(?!\p{Lu}\p{M}?(?:s|ing|ies|es|ings|ed|ning)(?!\p{Ll}))|\u00AD/gu;
 export const regExpCamelCaseWordBreaks_NOT_USED: RegExp =
     /(?<=\p{Ll}\p{M}?)(?=\p{Lu})|(?<=\p{Lu}\p{M}?)(?=\p{Lu}\p{M}?\p{Ll})/gu;
 export const regExpAllPossibleWordBreaks_NOT_USED: RegExp =
