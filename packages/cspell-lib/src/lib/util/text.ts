@@ -14,19 +14,13 @@ import {
     regExWordsAndDigits,
 } from './textRegex.js';
 import { toUri } from './Uri.js';
-import { scanMap } from './util.js';
 
 export { stringToRegExp } from './textRegex.js';
 
 // CSpell:ignore ings ning gimuy tsmerge
 
 export function splitCamelCaseWordWithOffset(wo: TextOffset): TextOffset[] {
-    return splitCamelCaseWord(wo.text).map(
-        scanMap<string, TextOffset>((last, text) => ({ text, offset: last.offset + last.text.length }), {
-            text: '',
-            offset: wo.offset,
-        }),
-    );
+    return splitWordWithOffset(wo, regExpCamelCaseWordBreaksWithEnglishSuffix);
 }
 
 /**
