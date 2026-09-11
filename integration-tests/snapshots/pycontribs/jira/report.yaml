@@ -5,7 +5,7 @@ Args: '["**/*.*"]'
 Summary:
   files: 80
   filesWithIssues: 40
-  issues: 437
+  issues: 432
   errors: 0
 Errors: []
 
@@ -74,18 +74,16 @@ issues:
   - "docs/examples.rst:296:18        worklog             U       issue.fields.worklog.worklogs"
   - "docs/examples.rst:296:77        Worklog             U       # list of Worklog objects"
   - "docs/examples.rst:309:18        timetracking        U       issue.fields.timetracking.remainingEstimate"
-  - "docs/examples.rst:363:5         pngs                U       pngs_used_in_comment = regex"
   - "docs/examples.rst:363:42        findall             U       comment = regex_for_png.findall(issue.fields.comment"
   - "docs/index.rst:5:4          toctree     U       .. toctree::"
   - "docs/index.rst:20:27        Fjira       U       feed://https%3A%2F%2Fjira.readthedocs.io%2Fen"
   - "docs/index.rst:20:54        Flatest     U       readthedocs.io%2Fen%2Flatest%2Fjira.xml>`_ format"
   - "docs/index.rst:29:9         genindex    U       * :ref:`genindex`"
-  - "docs/installation.rst:11:78         virtualenv          U       strongly recommend using a `virtualenv <https://virtualenv"
-  - "docs/installation.rst:15:15         venv                U       python -m venv jira_python"
-  - "docs/installation.rst:40:12         ipython             U       - :py:mod:`ipython` - The `IPython enhanced"
-  - "docs/installation.rst:41:12         filemagic           U       - :py:mod:`filemagic` - This library handles"
-  - "docs/installation.rst:41:59         autodetection       U       handles content-type autodetection for things like image"
-  - "docs/installation.rst:41:150        libmagic            U       system that provides libmagic; Mac and Unix will almost"
+  - "docs/installation.rst:11:78         virtualenv      U       strongly recommend using a `virtualenv <https://virtualenv"
+  - "docs/installation.rst:15:15         venv            U       python -m venv jira_python"
+  - "docs/installation.rst:40:12         ipython         U       - :py:mod:`ipython` - The `IPython enhanced"
+  - "docs/installation.rst:41:12         filemagic       U       - :py:mod:`filemagic` - This library handles"
+  - "docs/installation.rst:41:150        libmagic        U       system that provides libmagic; Mac and Unix will almost"
   - "docs/jirashell.rst:44:18        aggregateprogress                   U       issue.fields.aggregateprogress issue.fields"
   - "docs/jirashell.rst:44:62        customfield                         U       issue.fields.customfield_11531"
   - "docs/jirashell.rst:45:18        aggregatetimeestimate               U       issue.fields.aggregatetimeestimate issue.fields"
@@ -137,7 +135,6 @@ issues:
   - "jira/resilientsession.py:185:65         behaviour       U       should preserve old behaviour"
   - "jira/resources.py:784:18        duedate                     U       self.duedate: str | None = None"
   - "jira/resources.py:794:18        statuscategorychangedate    U       self.statuscategorychangedate: str | None = None"
-  - "jira/resources.py:916:42        browsable                   U       URL of the issue, the browsable one not the REST one"
   - "jira/resources.py:1069:32       issuesecuritylevelscheme    U       self, \"project/{0}/issuesecuritylevelscheme?expand=user\", options"
   - "jira/resources.py:1325:14       categorised                 U       \"categorisedActors\": {"
   - "MANIFEST.in:14:23       pycache     U       recursive-exclude * __pycache__"
@@ -208,7 +205,6 @@ issues:
   - "tox.ini:113:15      isdir                   U       os.path.isdir(dist_dir) or sys.exit"
   - "tox.ini:115:14      rmtree                  U       shutil.rmtree(dist_dir)'"
   - "tox.ini:132:5       DYLD                    U       DYLD_FALLBACK_LIBRARY_PATH"
-  - "tox.ini:140:9       nitpicky                U       --nitpicky --fail-on-warning \\"
   - "tox.ini:142:12      toxworkdir              U       -d \"{toxworkdir}/docs_doctree\" \\"
   - "tox.ini:142:29      doctree                 U       d \"{toxworkdir}/docs_doctree\" \\"
   - "tox.ini:145:15      pathlib                 U       'import pathlib; ' \\"
