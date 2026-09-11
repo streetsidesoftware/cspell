@@ -61,6 +61,8 @@ format: md
 | [readonly](#settings-readonly)                                 | `boolean`                                                                 | Indicate that the configuration file should not be modified.                                                                                                         |
 | [reporters](#settings-reporters)                               | [`ReporterSettings`](#reportersettings)&ZeroWidthSpace;`[]`               | Define which reports to use.                                                                                                                                         |
 | [showStatus](#settings-showstatus)                             | `boolean`                                                                 | Show status.                                                                                                                                                         |
+| [softWordBreakDefinitions](#settings-softwordbreakdefinitions) | [`SoftWordBreakDefinitions`](#softwordbreakdefinitions)                   | Defines a set of word break rules that can be used for text segmentation.                                                                                            |
+| [softWordBreaks](#settings-softwordbreaks)                     | [`SoftWordBreaks`](#softwordbreaks)                                       | Allows enabling or disabling soft word break rules by name.                                                                                                          |
 | [spellCheckDelayMs](#settings-spellcheckdelayms)               | `number`                                                                  | Delay in ms after a document has changed before checking it for spelling errors.                                                                                     |
 | [substitutionDefinitions](#settings-substitutiondefinitions)   | [`SubstitutionDefinitions`](#substitutiondefinitions)                     | The set of available substitutions. This is a collection of substitution definitions that can be applied to a document before spell checking.                        |
 | [substitutions](#settings-substitutions)                       | [`Substitutions`](#substitutions)                                         | The set of substitutions to apply to a document before spell checking.                                                                                               |
@@ -1474,6 +1476,74 @@ Show status.
 `boolean`
 
 </dd>
+
+</dl>
+
+
+
+
+---
+
+#### `softWordBreakDefinitions` {#settings-softwordbreakdefinitions}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+Defines a set of word break rules that can be used for text segmentation.
+
+Soft word breaks are done through injecting soft-hyphens at the appropriate positions in the text before spell checking.
+
+This allows for word breaks that might not be captured by the camel case detection.
+
+Note: soft-hyphens are removed before checking the word against the dictionaries.
+
+For example, if there is a soft-hyphen (represented by a `|`) injected between `error` and `code`
+`error|code`, the following words would be checked against
+the dictionaries: `errorcode`, `error`, and `code`.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`SoftWordBreakDefinitions`](#softwordbreakdefinitions)
+
+</dd>
+
+<dt>Since</dt>
+<dd>10.3.1</dd>
+
+</dl>
+
+
+
+
+---
+
+#### `softWordBreaks` {#settings-softwordbreaks}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+Allows enabling or disabling soft word break rules by name.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`SoftWordBreaks`](#softwordbreaks)
+
+</dd>
+
+<dt>Since</dt>
+<dd>10.3.1</dd>
 
 </dl>
 
@@ -6711,31 +6781,33 @@ A file type:
 
 ## LanguageSetting
 
-| Field                                                               | Type                                                                      | Description                                                                                                                                   |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| [languageId](#languagesetting-languageid) <sup>_req_</sup>          | [`MatchingFileType`](#matchingfiletype)                                   | The language id.  Ex: `typescript`, `html`, or `php`.  `*` -- will match all languages.                                                       |
-| [allowCompoundWords](#languagesetting-allowcompoundwords)           | `boolean`                                                                 | True to enable compound word checking.                                                                                                        |
-| [caseSensitive](#languagesetting-casesensitive)                     | `boolean`                                                                 | Determines if words must match case and accent rules.                                                                                         |
-| [description](#languagesetting-description)                         | `string`                                                                  | Optional description of configuration.                                                                                                        |
-| [dictionaries](#languagesetting-dictionaries)                       | [`DictionaryReference`](#dictionaryreference)&ZeroWidthSpace;`[]`         | Optional list of dictionaries to use. Each entry should match the name of the dictionary.                                                     |
-| [dictionaryDefinitions](#languagesetting-dictionarydefinitions)     | [`DictionaryDefinition`](#dictionarydefinition)&ZeroWidthSpace;`[]`       | Define additional available dictionaries.                                                                                                     |
-| [enabled](#languagesetting-enabled)                                 | `boolean`                                                                 | Is the spell checker enabled.                                                                                                                 |
-| [flagWords](#languagesetting-flagwords)                             | `string`&ZeroWidthSpace;`[]`                                              | List of words to always be considered incorrect. Words found in `flagWords` override `words`.                                                 |
-| [id](#languagesetting-id)                                           | `string`                                                                  | Optional identifier.                                                                                                                          |
-| [ignoreRegExpList](#languagesetting-ignoreregexplist)               | [`RegExpPatternList`](#regexppatternlist)                                 | List of regular expression patterns or pattern names to exclude from spell checking.                                                          |
-| [ignoreWords](#languagesetting-ignorewords)                         | `string`&ZeroWidthSpace;`[]`                                              | List of words to be ignored. An ignored word will not show up as an error, even if it is                                                      |
-| [includeRegExpList](#languagesetting-includeregexplist)             | [`RegExpPatternList`](#regexppatternlist)                                 | List of regular expression patterns or defined pattern names to match for spell checking.                                                     |
-| [local](#languagesetting-local)                                     | [`LocaleId`](#localeid)<br />[`LocaleId`](#localeid)&ZeroWidthSpace;`[]`  | Deprecated - The locale filter, matches against the language. This can be a comma separated list. `*` will match all locales.                 |
-| [locale](#languagesetting-locale)                                   | [`LocaleId`](#localeid)<br />[`LocaleId`](#localeid)&ZeroWidthSpace;`[]`  | The locale filter, matches against the language. This can be a comma separated list. `*` will match all locales.                              |
-| [name](#languagesetting-name)                                       | `string`                                                                  | Optional name of configuration.                                                                                                               |
-| [noSuggestDictionaries](#languagesetting-nosuggestdictionaries)     | [`DictionaryReference`](#dictionaryreference)&ZeroWidthSpace;`[]`         | Optional list of dictionaries that will not be used for suggestions.                                                                          |
-| [patterns](#languagesetting-patterns)                               | [`RegExpPatternDefinition`](#regexppatterndefinition)&ZeroWidthSpace;`[]` | Defines a list of patterns that can be used with the  [ignoreRegExpList](#ignoreregexplist)  and                                              |
-| [substitutionDefinitions](#languagesetting-substitutiondefinitions) | [`SubstitutionDefinitions`](#substitutiondefinitions)                     | The set of available substitutions. This is a collection of substitution definitions that can be applied to a document before spell checking. |
-| [substitutions](#languagesetting-substitutions)                     | [`Substitutions`](#substitutions)                                         | The set of substitutions to apply to a document before spell checking.                                                                        |
-| [suggestWords](#languagesetting-suggestwords)                       | `string`&ZeroWidthSpace;`[]`                                              | A list of suggested replacements for words.                                                                                                   |
-| [unknownWords](#languagesetting-unknownwords)                       | [`UnknownWordsChoices`](#unknownwordschoices)                             | Controls how unknown words are handled.                                                                                                       |
-| [useIntlWordSegmentation](#languagesetting-useintlwordsegmentation) | `boolean`                                                                 | Enables enables locale-sensitive text segmentation to support languages like Japanese, Chinese, Thai, Lao, Khmer, Myanmar, etc.               |
-| [words](#languagesetting-words)                                     | `string`&ZeroWidthSpace;`[]`                                              | List of words to be considered correct.                                                                                                       |
+| Field                                                                 | Type                                                                      | Description                                                                                                                                   |
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| [languageId](#languagesetting-languageid) <sup>_req_</sup>            | [`MatchingFileType`](#matchingfiletype)                                   | The language id.  Ex: `typescript`, `html`, or `php`.  `*` -- will match all languages.                                                       |
+| [allowCompoundWords](#languagesetting-allowcompoundwords)             | `boolean`                                                                 | True to enable compound word checking.                                                                                                        |
+| [caseSensitive](#languagesetting-casesensitive)                       | `boolean`                                                                 | Determines if words must match case and accent rules.                                                                                         |
+| [description](#languagesetting-description)                           | `string`                                                                  | Optional description of configuration.                                                                                                        |
+| [dictionaries](#languagesetting-dictionaries)                         | [`DictionaryReference`](#dictionaryreference)&ZeroWidthSpace;`[]`         | Optional list of dictionaries to use. Each entry should match the name of the dictionary.                                                     |
+| [dictionaryDefinitions](#languagesetting-dictionarydefinitions)       | [`DictionaryDefinition`](#dictionarydefinition)&ZeroWidthSpace;`[]`       | Define additional available dictionaries.                                                                                                     |
+| [enabled](#languagesetting-enabled)                                   | `boolean`                                                                 | Is the spell checker enabled.                                                                                                                 |
+| [flagWords](#languagesetting-flagwords)                               | `string`&ZeroWidthSpace;`[]`                                              | List of words to always be considered incorrect. Words found in `flagWords` override `words`.                                                 |
+| [id](#languagesetting-id)                                             | `string`                                                                  | Optional identifier.                                                                                                                          |
+| [ignoreRegExpList](#languagesetting-ignoreregexplist)                 | [`RegExpPatternList`](#regexppatternlist)                                 | List of regular expression patterns or pattern names to exclude from spell checking.                                                          |
+| [ignoreWords](#languagesetting-ignorewords)                           | `string`&ZeroWidthSpace;`[]`                                              | List of words to be ignored. An ignored word will not show up as an error, even if it is                                                      |
+| [includeRegExpList](#languagesetting-includeregexplist)               | [`RegExpPatternList`](#regexppatternlist)                                 | List of regular expression patterns or defined pattern names to match for spell checking.                                                     |
+| [local](#languagesetting-local)                                       | [`LocaleId`](#localeid)<br />[`LocaleId`](#localeid)&ZeroWidthSpace;`[]`  | Deprecated - The locale filter, matches against the language. This can be a comma separated list. `*` will match all locales.                 |
+| [locale](#languagesetting-locale)                                     | [`LocaleId`](#localeid)<br />[`LocaleId`](#localeid)&ZeroWidthSpace;`[]`  | The locale filter, matches against the language. This can be a comma separated list. `*` will match all locales.                              |
+| [name](#languagesetting-name)                                         | `string`                                                                  | Optional name of configuration.                                                                                                               |
+| [noSuggestDictionaries](#languagesetting-nosuggestdictionaries)       | [`DictionaryReference`](#dictionaryreference)&ZeroWidthSpace;`[]`         | Optional list of dictionaries that will not be used for suggestions.                                                                          |
+| [patterns](#languagesetting-patterns)                                 | [`RegExpPatternDefinition`](#regexppatterndefinition)&ZeroWidthSpace;`[]` | Defines a list of patterns that can be used with the  [ignoreRegExpList](#ignoreregexplist)  and                                              |
+| [softWordBreakDefinitions](#languagesetting-softwordbreakdefinitions) | [`SoftWordBreakDefinitions`](#softwordbreakdefinitions)                   | Defines a set of word break rules that can be used for text segmentation.                                                                     |
+| [softWordBreaks](#languagesetting-softwordbreaks)                     | [`SoftWordBreaks`](#softwordbreaks)                                       | Allows enabling or disabling soft word break rules by name.                                                                                   |
+| [substitutionDefinitions](#languagesetting-substitutiondefinitions)   | [`SubstitutionDefinitions`](#substitutiondefinitions)                     | The set of available substitutions. This is a collection of substitution definitions that can be applied to a document before spell checking. |
+| [substitutions](#languagesetting-substitutions)                       | [`Substitutions`](#substitutions)                                         | The set of substitutions to apply to a document before spell checking.                                                                        |
+| [suggestWords](#languagesetting-suggestwords)                         | `string`&ZeroWidthSpace;`[]`                                              | A list of suggested replacements for words.                                                                                                   |
+| [unknownWords](#languagesetting-unknownwords)                         | [`UnknownWordsChoices`](#unknownwordschoices)                             | Controls how unknown words are handled.                                                                                                       |
+| [useIntlWordSegmentation](#languagesetting-useintlwordsegmentation)   | `boolean`                                                                 | Enables enables locale-sensitive text segmentation to support languages like Japanese, Chinese, Thai, Lao, Khmer, Myanmar, etc.               |
+| [words](#languagesetting-words)                                       | `string`&ZeroWidthSpace;`[]`                                              | List of words to be considered correct.                                                                                                       |
 
 
 ### LanguageSetting Fields
@@ -7288,6 +7360,74 @@ For example:
 
 ---
 
+#### `softWordBreakDefinitions` {#languagesetting-softwordbreakdefinitions}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+Defines a set of word break rules that can be used for text segmentation.
+
+Soft word breaks are done through injecting soft-hyphens at the appropriate positions in the text before spell checking.
+
+This allows for word breaks that might not be captured by the camel case detection.
+
+Note: soft-hyphens are removed before checking the word against the dictionaries.
+
+For example, if there is a soft-hyphen (represented by a `|`) injected between `error` and `code`
+`error|code`, the following words would be checked against
+the dictionaries: `errorcode`, `error`, and `code`.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`SoftWordBreakDefinitions`](#softwordbreakdefinitions)
+
+</dd>
+
+<dt>Since</dt>
+<dd>10.3.1</dd>
+
+</dl>
+
+
+
+
+---
+
+#### `softWordBreaks` {#languagesetting-softwordbreaks}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+Allows enabling or disabling soft word break rules by name.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`SoftWordBreaks`](#softwordbreaks)
+
+</dd>
+
+<dt>Since</dt>
+<dd>10.3.1</dd>
+
+</dl>
+
+
+
+
+---
+
 #### `substitutionDefinitions` {#languagesetting-substitutiondefinitions}
 
 
@@ -7550,6 +7690,8 @@ This is a written language locale like: `en`, `en-GB`, `fr`, `es`, `de` or `en,f
 | [numSuggestions](#overridesettings-numsuggestions)                     | `number`                                                                  | Number of suggestions to make.                                                                                                                                       |
 | [patterns](#overridesettings-patterns)                                 | [`RegExpPatternDefinition`](#regexppatterndefinition)&ZeroWidthSpace;`[]` | Defines a list of patterns that can be used with the  [ignoreRegExpList](#ignoreregexplist)  and                                                                     |
 | [pnpFiles](#overridesettings-pnpfiles)                                 | `string`&ZeroWidthSpace;`[]`                                              | The PnP files to search for. Note: `.mjs` files are not currently supported.                                                                                         |
+| [softWordBreakDefinitions](#overridesettings-softwordbreakdefinitions) | [`SoftWordBreakDefinitions`](#softwordbreakdefinitions)                   | Defines a set of word break rules that can be used for text segmentation.                                                                                            |
+| [softWordBreaks](#overridesettings-softwordbreaks)                     | [`SoftWordBreaks`](#softwordbreaks)                                       | Allows enabling or disabling soft word break rules by name.                                                                                                          |
 | [substitutionDefinitions](#overridesettings-substitutiondefinitions)   | [`SubstitutionDefinitions`](#substitutiondefinitions)                     | The set of available substitutions. This is a collection of substitution definitions that can be applied to a document before spell checking.                        |
 | [substitutions](#overridesettings-substitutions)                       | [`Substitutions`](#substitutions)                                         | The set of substitutions to apply to a document before spell checking.                                                                                               |
 | [suggestionNumChanges](#overridesettings-suggestionnumchanges)         | `number`                                                                  | The maximum number of changes allowed on a word to be considered a suggestions.                                                                                      |
@@ -8510,6 +8652,74 @@ The PnP files to search for. Note: `.mjs` files are not currently supported.
 
 ---
 
+#### `softWordBreakDefinitions` {#overridesettings-softwordbreakdefinitions}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+Defines a set of word break rules that can be used for text segmentation.
+
+Soft word breaks are done through injecting soft-hyphens at the appropriate positions in the text before spell checking.
+
+This allows for word breaks that might not be captured by the camel case detection.
+
+Note: soft-hyphens are removed before checking the word against the dictionaries.
+
+For example, if there is a soft-hyphen (represented by a `|`) injected between `error` and `code`
+`error|code`, the following words would be checked against
+the dictionaries: `errorcode`, `error`, and `code`.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`SoftWordBreakDefinitions`](#softwordbreakdefinitions)
+
+</dd>
+
+<dt>Since</dt>
+<dd>10.3.1</dd>
+
+</dl>
+
+
+
+
+---
+
+#### `softWordBreaks` {#overridesettings-softwordbreaks}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+Allows enabling or disabling soft word break rules by name.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`SoftWordBreaks`](#softwordbreaks)
+
+</dd>
+
+<dt>Since</dt>
+<dd>10.3.1</dd>
+
+</dl>
+
+
+
+
+---
+
 #### `substitutionDefinitions` {#overridesettings-substitutiondefinitions}
 
 
@@ -9281,6 +9491,154 @@ Simple Glob string, the root will be globRoot.
 </dl>
 
 
+
+
+
+---
+
+## SoftWordBreak {#softwordbreak}
+
+
+<dl>
+
+<dt>Type</dt>
+<dd>
+
+[`SoftWordBreakRegExpString`](#softwordbreakregexpstring)<br />[`SoftWordBreakPattern`](#softwordbreakpattern)
+
+</dd>
+
+</dl>
+
+
+
+## SoftWordBreakDefinitions
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+
+
+### SoftWordBreakDefinitions Fields
+
+
+
+---
+
+## SoftWordBreakPattern {#softwordbreakpattern}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+Defines a word break rule based on a string.
+
+Format:
+- `"before|after"` -- Matches a word break between `before` and `after`
+- `"before|after$"` -- Matches a word break between `before` and `after` at the end of a word
+- `"^before|after"` -- Matches a word break between `before` at the start of a word and `after`
+- `"^before|after$"` -- Matches a word break between `before` at the start of a word and `after` at the end of a word
+- `"before|"` -- Matches a word break after `before`
+- `"^before|"` -- Matches a word break after `before` at the start of a word
+- `"|after"` -- Matches a word break before `after`
+- `"|after$"` -- Matches a word break before `after` at the end of a word
+
+
+Where `before` is the text before the word break and `after` is the text after the word break.
+
+Special characters like `|`, `^`, and `$` have specific meanings.
+- `|` -- Represents the position of the word break
+- `^` -- Indicates the start of a word
+- `$` -- Indicates the end of a word
+
+For more complicated word break rules, consider using regular expressions with the  [SoftWordBreakRegExp](#softwordbreakregexp)  type.
+
+Examples:
+- `"^ptr|"` -- Would help with pointer definitions starting with `ptr`, such as `ptrvalue`.
+- `"^I|"` -- Would help with interface definitions starting with `I`, such as `IERROR`.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
+
+<dt>Since</dt>
+<dd>10.3.1</dd>
+
+</dl>
+
+
+
+
+
+---
+
+## SoftWordBreakRegExpString {#softwordbreakregexpstring}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+Represents a regular expression used for word break rules.
+
+The matching string will be prefixed and suffixed with a soft-hyphen.
+If the matching string is zero length, only a single soft-hyphen will be inserted.
+It is best to use lookahead and lookbehind assertions to ensure correct word break positions.
+
+Examples:
+- `"/(?<=\\bptr)/"` -- The break would occur after the `ptr`, helping with pointer definitions starting with `ptr`, such as `ptrvalue`.
+- `"/(?<=\\bI)(?=[A-Z])/"` -- The break would occur before an uppercase letter following an `I` at a word boundary, helping with interface definitions like `IError`.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
+
+<dt>Since</dt>
+<dd>10.3.1</dd>
+
+</dl>
+
+
+
+
+
+---
+
+## SoftWordBreakRule {#softwordbreakrule}
+
+
+<dl>
+
+<dt>Type</dt>
+<dd>
+
+[`SoftWordBreak`](#softwordbreak)<br />[`SoftWordBreak`](#softwordbreak)&ZeroWidthSpace;`[]`
+
+</dd>
+
+</dl>
+
+
+
+## SoftWordBreaks
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+
+
+### SoftWordBreaks Fields
 
 ## SubstitutionDefinition
 
