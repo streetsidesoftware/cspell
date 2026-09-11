@@ -4,8 +4,11 @@ type SetOfMergeFunctions = {
     [K in keyof CSpellSettings]-?: (key: K, settings: CSpellSettings[]) => Pick<CSpellSettings, K> | undefined;
 };
 
+/** Merge Append Arrays */
 const mArr = mergeAppendArrays;
+/** Merge Records */
 const mRec = mergeRecords;
+/** Extract Key Values */
 const exKV = extractKeyValues;
 
 const mergeDefinitionFunctions: SetOfMergeFunctions = {
@@ -56,6 +59,8 @@ const mergeDefinitionFunctions: SetOfMergeFunctions = {
     reporters: (key, settings) => recKV(key, mArr(exKV(key, settings))),
     showStatus: (key, settings) => recKV(key, lastValue(exKV(key, settings))),
     spellCheckDelayMs: (key, settings) => recKV(key, lastValue(exKV(key, settings))),
+    softWordBreaks: (key, settings) => recKV(key, mRec(exKV(key, settings))),
+    softWordBreakDefinitions: (key, settings) => recKV(key, mRec(exKV(key, settings))),
     substitutionDefinitions: (key, settings) => recKV(key, mArr(exKV(key, settings))),
     substitutions: (key, settings) => recKV(key, mArr(exKV(key, settings))),
     suggestionNumChanges: (key, settings) => recKV(key, lastValue(exKV(key, settings))),

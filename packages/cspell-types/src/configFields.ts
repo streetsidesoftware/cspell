@@ -50,6 +50,8 @@ export const ConfigFields: CSpellUserSettingsFields = {
     readonly: 'readonly',
     reporters: 'reporters',
     showStatus: 'showStatus',
+    softWordBreaks: 'softWordBreaks',
+    softWordBreakDefinitions: 'softWordBreakDefinitions',
     spellCheckDelayMs: 'spellCheckDelayMs',
     substitutionDefinitions: 'substitutionDefinitions',
     substitutions: 'substitutions',
