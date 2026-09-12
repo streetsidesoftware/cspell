@@ -17,7 +17,7 @@ export interface RunConfig extends Partial<Omit<CompileRequest, 'targets'>> {
     rootDir?: string | undefined;
 }
 
-export interface CompileRequest extends CompileTargetOptions, CompileSourceOptions {
+export interface CompileRequest extends Omit<CompileTargetOptions, 'replacements'>, CompileSourceOptions {
     /**
      * Specify the directory where all relative paths will resolved against.
      * By default, all relative paths are relative to the current directory.
@@ -92,7 +92,19 @@ export interface CompileTargetOptions {
      * @default false
      */
     removeDuplicates?: boolean | undefined;
+
+    /**
+     * Replacement rules to apply to the words in the dictionary.
+     * The key is the pattern to match, and the value is the replacement string.
+     */
+    replacements: Replacements | undefined;
 }
+
+/**
+ * Replacement rules to apply to the words in the dictionary.
+ * The key is the pattern to match, and the value is the replacement string.
+ */
+export type Replacements = Record<string, string>;
 
 export interface Target extends CompileTargetOptions {
     /**

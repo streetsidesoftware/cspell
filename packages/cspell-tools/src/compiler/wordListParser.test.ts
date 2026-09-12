@@ -21,7 +21,7 @@ describe('Validate the wordListCompiler', () => {
         ${'hello'}                                  | ${true}  | ${['hello']}
         ${'!Hello'}                                 | ${true}  | ${'!Hello'}
     `('createSortAndFilterOperation $lines $sort', ({ lines, expectedResult, sort }) => {
-        const normalizer = normalizeTargetWords({ sort, generateNonStrict: false });
+        const normalizer = normalizeTargetWords({ sort, generateNonStrict: false, replacements: undefined });
         const r = toArray(normalizer(s(lines)));
         expect(r).toEqual(s(expectedResult));
     });
@@ -31,9 +31,10 @@ describe('Validate the wordListCompiler', () => {
         ${'banana|Apple|Apple|apple'}        | ${true}  | ${'Apple|apple|banana|~apple'}
         ${'banana|Apple|Apple|apple|banana'} | ${false} | ${'banana|Apple|~apple|apple'}
         ${'hello'}                           | ${true}  | ${'hello'}
+        ${'recovery’s'}                      | ${true}  | ${"recovery's"}
         ${'!Hello'}                          | ${true}  | ${'!Hello|~!hello'}
     `('createSortAndFilterOperation $lines $sort', ({ lines, expectedResult, sort }) => {
-        const normalizer = normalizeTargetWords({ sort, generateNonStrict: true });
+        const normalizer = normalizeTargetWords({ sort, generateNonStrict: true, replacements: { '’': "'" } });
         const r = toArray(normalizer(s(lines)));
         expect(r).toEqual(s(expectedResult));
     });

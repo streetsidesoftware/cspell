@@ -9,6 +9,7 @@ import { importTrie, isCircular, iteratorTrieWords, serializeTrie } from 'cspell
 import { uniqueFilter } from 'hunspell-reader';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 
+import type { Replacements } from '../config/index.ts';
 import { spyOnConsole } from '../test/console.ts';
 import { createTestHelper } from '../test/TestHelper.ts';
 import type { CompileOptions } from './CompileOptions.ts';
@@ -264,8 +265,9 @@ function compileOpt(
     generateNonStrict = true,
     dictionaryDirectives: string[] | undefined = undefined,
     removeDuplicates = false,
+    replacements: Replacements | undefined = undefined,
 ): CompileOptions {
-    return { sort, generateNonStrict, dictionaryDirectives, removeDuplicates };
+    return { sort, generateNonStrict, dictionaryDirectives, removeDuplicates, replacements };
 }
 
 // const cities = `\

@@ -56,6 +56,44 @@ describe('compile', () => {
                 generateNonStrict,
                 trieBase: 10,
                 sort: true,
+                replacements: undefined,
+            };
+            const req: CompileRequest = {
+                targets: [target],
+            };
+
+            await compile(req);
+
+            const ext = (format === 'plaintext' ? '.txt' : '.trie') + ((compress && '.gz') || '');
+            const content = await readTextFile(`${targetDirectory}/myDictionary${ext}`);
+            expect(content).toMatchSnapshot();
+        },
+    );
+
+    test.each`
+        file                         | format         | compress | generateNonStrict
+        ${'dicts/cities.txt'}        | ${'plaintext'} | ${false} | ${true}
+        ${'dicts/cities.txt'}        | ${'plaintext'} | ${true}  | ${true}
+        ${'dicts/cities.txt'}        | ${'plaintext'} | ${false} | ${undefined}
+        ${'dicts/cities.txt'}        | ${'plaintext'} | ${true}  | ${undefined}
+        ${'dicts/cities.txt'}        | ${'trie3'}     | ${false} | ${undefined}
+        ${'dicts/sampleCodeDic.txt'} | ${'plaintext'} | ${false} | ${undefined}
+        ${'dicts/sampleCodeDic.txt'} | ${'plaintext'} | ${false} | ${true}
+        ${'dicts/rep-words.txt'}     | ${'plaintext'} | ${false} | ${undefined}
+    `(
+        'compile fixture $file fmt: $format gz: $compress alt: $generateNonStrict',
+        async ({ format, file, generateNonStrict, compress }) => {
+            const targetDirectory = t(`.`);
+            const target: Target = {
+                name: 'myDictionary',
+                targetDirectory,
+                format,
+                sources: [fix(file)],
+                compress,
+                generateNonStrict,
+                trieBase: 10,
+                sort: true,
+                replacements: { '’': "'" },
             };
             const req: CompileRequest = {
                 targets: [target],
@@ -91,6 +129,7 @@ describe('compile', () => {
                 generateNonStrict,
                 trieBase: 10,
                 sort: true,
+                replacements: undefined,
             };
             const req: CompileRequest = {
                 targets: [target],
@@ -127,6 +166,7 @@ describe('compile', () => {
             trieBase: 10,
             sort: true,
             excludeWordsFrom: excludeWordsFrom.map((f: string) => fix(f)),
+            replacements: undefined,
         };
         const req: CompileRequest = {
             targets: [target],
@@ -164,6 +204,7 @@ describe('compile', () => {
                 trieBase: 10,
                 sort: true,
                 excludeWordsNotFoundIn: excludeWordsNotFoundIn.map((f: string) => fix(f)),
+                replacements: undefined,
             };
             const req: CompileRequest = {
                 targets: [target],
@@ -203,6 +244,7 @@ describe('compile', () => {
                 trieBase: 10,
                 sort: true,
                 excludeWordsMatchingRegex,
+                replacements: undefined,
             };
             const req: CompileRequest = {
                 targets: [target],
