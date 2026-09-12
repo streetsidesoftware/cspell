@@ -308,6 +308,216 @@ These changes collectively provide more flexible and explicit dictionary configu
 
 </details>
 
+## v10.3.1-alpha.0 (2026-09-12)
+
+### Fixes
+
+<details>
+<summary>fix: CSpell-Tools support replacements (<a href="https://github.com/streetsidesoftware/cspell/pull/9205">#9205</a>)</summary>
+
+### fix: CSpell-Tools support replacements ([#9205](https://github.com/streetsidesoftware/cspell/pull/9205))
+
+Support replacing word fragments before adding the word to the dictionary.
+
+## **TL;DR**
+
+Be able to replace `’` with `'`.
+
+## Details
+
+This pull request adds support for applying word replacement rules during dictionary compilation in `cspell-tools`. The main change is the introduction of a `replacements` option, allowing users to specify patterns and their replacements, which are then applied to all words in the dictionary. The changes include updates to the configuration schema, TypeScript interfaces, core compilation logic, and tests to support and verify this new feature.
+
+**Add support for word replacements in dictionary compilation:**
+
+- **Configuration and Schema Updates:**
+  - Added a `Replacements` definition and a `replacements` property to the JSON schema and TypeScript interfaces, allowing users to specify replacement rules in config files and programmatic interfaces. [\[1\]](diffhunk://#diff-461485728e7d7363d70fa003d157b2fee76ebe81d66639fafbeef7aa6ee58b7cR158-R164) [\[2\]](diffhunk://#diff-461485728e7d7363d70fa003d157b2fee76ebe81d66639fafbeef7aa6ee58b7cR248-R251) [\[3\]](diffhunk://#diff-a5d02ba854b88e2e8b83197c4a15e410e10b931ebc8bbda6b777780c4448bb77R95-R108) [\[4\]](diffhunk://#diff-10cc7cfa8dee170e380d597cc6f37d0fe78a1b8b53bab0b9980d74e8f1dd8b99R10)
+
+- **Compiler Logic Enhancements:**
+  - Updated the core compilation pipeline (`compile.ts`, `wordListParser.ts`) to accept and apply the `replacements` option, mapping specified patterns to their replacements during normalization of dictionary words. [\[1\]](diffhunk://#diff-abbcc701a68b0b884bc77813c1be1e438f830466ead1b838f0dff1dd75eb5becR194) [\[2\]](diffhunk://#diff-1fa6211a0e9f939021351f0ed3cfdffe9b4c3209c92b369c328811c986e1140fR25) [\[3\]](diffhunk://#diff-1fa6211a0e9f939021351f0ed3cfdffe9b4c3209c92b369c328811c986e1140fR280-R289)
+
+- **Testing and Fixtures:**
+  - Extended and added tests to verify that replacements are correctly applied, including new test cases and fixtures (such as `rep-words.txt`) and snapshot updates. [\[1\]](diffhunk://#diff-a09bfea2415f93e38ba5d6b778e9e0204e4db8ac19ea06a019390e06587fed42R1-R12) [\[2\]](diffhunk://#diff-643cf9dbc1c82e07338902ef990406fabc2a4fd22da5d2694f5ab5f6115c2e08R59-R96) [\[3\]](diffhunk://#diff-643cf9dbc1c82e07338902ef990406fabc2a4fd22da5d2694f5ab5f6115c2e08R132) [\[4\]](diffhunk://#diff-643cf9dbc1c82e07338902ef990406fabc2a4fd22da5d2694f5ab5f6115c2e08R169) [\[5\]](diffhunk://#diff-643cf9dbc1c82e07338902ef990406fabc2a4fd22da5d2694f5ab5f6115c2e08R207) [\[6\]](diffhunk://#diff-643cf9dbc1c82e07338902ef990406fabc2a4fd22da5d2694f5ab5f6115c2e08R247) [\[7\]](diffhunk://#diff-a7f698e8f0adcfceb8260e1236de114c5fcbbd051b4e5f50837ae50f3b039954R34-R37)
+
+- **Type and Interface Adjustments:**
+  - Refactored relevant interfaces (`CompileOptions`, `CompileRequest`, etc.) to include or omit the new `replacements` property as appropriate, ensuring type safety and clarity throughout the codebase. [\[1\]](diffhunk://#diff-035305fe90cbce5bf3bd1ff6b32c44c4093b00bf9acfc08733671afbc9b1a05aL1-R3) [\[2\]](diffhunk://#diff-a5d02ba854b88e2e8b83197c4a15e410e10b931ebc8bbda6b777780c4448bb77L20-R20)
+
+These changes collectively enable more flexible and accurate dictionary generation by allowing systematic normalization or correction of word forms via configurable replacement rules.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Revert #9198 (<a href="https://github.com/streetsidesoftware/cspell/pull/9202">#9202</a>)</summary>
+
+### fix: Revert #9198 ([#9202](https://github.com/streetsidesoftware/cspell/pull/9202))
+
+---
+
+</details>
+
+<details>
+<summary>fix: Add definitions for custom word breaks (<a href="https://github.com/streetsidesoftware/cspell/pull/9199">#9199</a>)</summary>
+
+### fix: Add definitions for custom word breaks ([#9199](https://github.com/streetsidesoftware/cspell/pull/9199))
+
+This pull request introduces support for customizable "soft word break" rules in both the JSON schema (`cspell.schema.json`) and the TypeScript types (`packages/cspell-types/api/index.d.mts`). These changes allow users to define and enable/disable advanced word segmentation behaviors, improving spell checking for languages and naming patterns that aren't well handled by default camel case detection.
+
+The most important changes are:
+
+**Schema and Configuration Enhancements:**
+
+- Added new properties `softWordBreakDefinitions` and `softWordBreaks` to the JSON schema, allowing users to define and control custom soft word break rules for text segmentation. These rules help split words at specific positions (like between "error" and "code" in "errorcode") and support advanced language scenarios. [\[1\]](diffhunk://#diff-ad9ad04ccf6ebafd4ec4d6b18ad6b3338e9262d9c29b0d780e27ac73e84c9f4cR1380-R1391) [\[2\]](diffhunk://#diff-ad9ad04ccf6ebafd4ec4d6b18ad6b3338e9262d9c29b0d780e27ac73e84c9f4cR1678-R1689) [\[3\]](diffhunk://#diff-ad9ad04ccf6ebafd4ec4d6b18ad6b3338e9262d9c29b0d780e27ac73e84c9f4cR2483-R2494)
+- Defined new schema types: `SoftWordBreak`, `SoftWordBreakDefinitions`, `SoftWordBreakPattern`, `SoftWordBreakRegExpString`, `SoftWordBreakRule`, and `SoftWordBreaks`, with detailed descriptions and usage examples for each.
+
+**TypeScript API Updates:**
+
+- Introduced the `WordSegmentationSettings` interface, which includes `softWordBreakDefinitions`, `softWordBreaks`, and `useIntlWordSegmentation` options, providing a type-safe way to configure segmentation rules in code.
+- Integrated `WordSegmentationSettings` into the main `BaseSetting` interface, ensuring all configuration objects can use the new word break features.
+- Cleaned up the `BaseSetting` interface by removing the now redundant `useIntlWordSegmentation` property (since it's included in `WordSegmentationSettings`).
+
+These changes make the spell checker more flexible and powerful, especially for users working with languages or code styles that require custom word splitting logic.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Split words on soft hyphens (<a href="https://github.com/streetsidesoftware/cspell/pull/9196">#9196</a>)</summary>
+
+### fix: Split words on soft hyphens ([#9196](https://github.com/streetsidesoftware/cspell/pull/9196))
+
+This pull request enhances the word splitting utilities in the `cspell-lib` package, particularly improving how camelCase and compound words are split, especially when soft hyphens are present. It also introduces and tests new utility functions that return word segments along with their offsets, and refactors the implementation for better accuracy and maintainability.
+
+**Key changes:**
+
+### Feature enhancements and bug fixes
+
+- Improved the regular expression `regExpCamelCaseWordBreaksWithEnglishSuffix` to handle soft hyphens (`\u00AD`), ensuring words like `'hello\u00ADthere'` are split correctly.
+- Refactored `splitWordWithOffset` to compute word splits and their offsets more accurately, replacing the previous use of `scanMap` with a custom implementation.
+- Updated `splitCamelCaseWordWithOffset` to use the new `splitWordWithOffset` implementation, improving consistency and correctness.
+
+### Testing improvements
+
+- Added comprehensive tests for both `splitCamelCaseWordWithOffset` and `splitWordWithOffset`, covering a variety of word forms, including those with soft hyphens and mixed casing.
+- Expanded test cases for word splitting to include words with soft hyphens, ensuring the new logic is properly validated.
+
+### Dependency and import updates
+
+- Updated imports in `text.test.ts` to include the new or modified regular expressions used for word splitting.
+
+---
+
+</details>
+
+### Dictionary Updates
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/9208">#9208</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#9208](https://github.com/streetsidesoftware/cspell/pull/9208))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ packages/cspell-bundled-dicts/package.json |  30 ++--
+ pnpm-lock.yaml                             | 274 +++++++++++++++--------------
+ 2 files changed, 159 insertions(+), 145 deletions(-)
+```
+
+---
+
+</details>
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/9198">#9198</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#9198](https://github.com/streetsidesoftware/cspell/pull/9198))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../snapshots/AdaDoom3/AdaDoom3/report.yaml        |  238 +---
+ .../snapshots/AdaDoom3/AdaDoom3/snapshot.txt       |  246 +---
+ .../Azure/azure-rest-api-specs/report.yaml         |   54 +-
+ .../Azure/azure-rest-api-specs/snapshot.txt        |   82 +-
+ .../MartinThoma/LaTeX-examples/report.yaml         |  120 +-
+ .../MartinThoma/LaTeX-examples/snapshot.txt        |  104 +-
+ .../MicrosoftDocs/PowerShell-Docs/report.yaml      |  335 +----
+ .../MicrosoftDocs/PowerShell-Docs/snapshot.txt     |  329 +----
+ .../snapshots/RustPython/RustPython/report.yaml    |   70 +-
+ .../snapshots/RustPython/RustPython/snapshot.txt   |  212 ++--
+ .../SoftwareBrothers/admin-bro/report.yaml         |    7 +-
+ .../SoftwareBrothers/admin-bro/snapshot.txt        |    5 +-
+ .../snapshots/TheAlgorithms/Python/report.yaml     |  256 +---
+ .../snapshots/TheAlgorithms/Python/snapshot.txt    |  240 +---
+ .../snapshots/alexiosc/megistos/report.yaml        |   65 +-
+ .../snapshots/alexiosc/megistos/snapshot.txt       |   75 +-
+ .../aspnetboilerplate/report.yaml                  |   36 +-
+ .../aspnetboilerplate/snapshot.txt                 |   32 +-
+ .../snapshots/aws-amplify/docs/report.yaml         |    5 +-
+ .../snapshots/aws-amplify/docs/snapshot.txt        |    5 +-
+ .../snapshots/caddyserver/caddy/report.yaml        |  320 ++---
+ .../snapshots/caddyserver/caddy/snapshot.txt       |  184 +--
+ .../snapshots/dart-lang/sdk/report.yaml            |   96 +-
+ .../snapshots/dart-lang/sdk/snapshot.txt           |   55 +-
+ .../snapshots/django/django/report.yaml            | 1096 ++++------------
+ .../snapshots/django/django/snapshot.txt           |  615 +--------
+ .../snapshots/eslint/eslint/report.yaml            |   54 +-
+ .../snapshots/eslint/eslint/snapshot.txt           |   26 +-
+ .../snapshots/flutter/samples/report.yaml          |  398 +-----
+ .../snapshots/flutter/samples/snapshot.txt         |  660 +++-------
+ .../snapshots/gitbucket/gitbucket/report.yaml      |   90 +-
+ .../snapshots/gitbucket/gitbucket/snapshot.txt     |   86 +-
+ .../googleapis/google-cloud-cpp/report.yaml        |  103 +-
+ .../googleapis/google-cloud-cpp/snapshot.txt       |  111 +-
+ .../snapshots/graphql/graphql-spec/report.yaml     |   46 +-
+ .../snapshots/graphql/graphql-spec/snapshot.txt    |   24 +-
+ .../iluwatar/java-design-patterns/report.yaml      |  135 +-
+ .../iluwatar/java-design-patterns/snapshot.txt     |  201 +--
+ .../snapshots/ktaranov/sqlserver-kit/report.yaml   | 1227 +++---------------
+ .../snapshots/ktaranov/sqlserver-kit/snapshot.txt  | 1303 +++++---------------
+ .../snapshots/liriliri/licia/report.yaml           |   45 +-
+ .../snapshots/liriliri/licia/snapshot.txt          |   33 +-
+ integration-tests/snapshots/mdx-js/mdx/report.yaml |   42 +-
+ .../snapshots/mdx-js/mdx/snapshot.txt              |   31 +-
+ .../microsoft/TypeScript-Website/report.yaml       |   65 +-
+ .../microsoft/TypeScript-Website/snapshot.txt      |   42 +-
+ .../snapshots/neovim/nvim-lspconfig/report.yaml    |   50 +-
+ .../snapshots/neovim/nvim-lspconfig/snapshot.txt   |   72 +-
+ .../snapshots/pagekit/pagekit/report.yaml          |   16 +-
+ .../snapshots/pagekit/pagekit/snapshot.txt         |   14 +-
+ .../snapshots/php/php-src/report.yaml              | 1011 ++-------------
+ .../snapshots/php/php-src/snapshot.txt             | 1247 ++++---------------
+ .../snapshots/pycontribs/jira/report.yaml          |   16 +-
+ .../snapshots/pycontribs/jira/snapshot.txt         |    8 +-
+ .../snapshots/shoelace-style/shoelace/report.yaml  |    6 +-
+ .../snapshots/shoelace-style/shoelace/snapshot.txt |    4 +-
+ .../snapshots/sveltejs/svelte/report.yaml          |   75 +-
+ .../snapshots/sveltejs/svelte/snapshot.txt         |   87 +-
+ .../typescript-cheatsheets/react/report.yaml       |    8 +-
+ .../typescript-cheatsheets/react/snapshot.txt      |   10 +-
+ .../snapshots/vitest-dev/vitest/report.yaml        |   10 +-
+ .../snapshots/vitest-dev/vitest/snapshot.txt       |    6 +-
+ .../snapshots/wireapp/wire-desktop/report.yaml     |   10 +-
+ .../snapshots/wireapp/wire-desktop/snapshot.txt    |    6 +-
+ .../snapshots/wireapp/wire-webapp/report.yaml      |  203 +--
+ .../snapshots/wireapp/wire-webapp/snapshot.txt     |  237 +---
+ packages/cspell-bundled-dicts/package.json         |   30 +-
+ .../__snapshots__/docValidator.test.ts.snap        |    8 +-
+ .../__snapshots__/validator.test.ts.snap           |   22 +-
+ pnpm-lock.yaml                                     |  274 ++--
+ 70 files changed, 2258 insertions(+), 10776 deletions(-)
+```
+
+---
+
+</details>
+
 ## v10.3.0 (2026-09-08)
 
 ### Features
