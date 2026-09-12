@@ -586,6 +586,25 @@ _cspell_'s behavior can be controlled through a config file. By default it looks
 
 Or you can specify a path to a config file with the `--config <path>` argument on the command line.
 
+### How Configuration Is Determined
+
+CSpell resolves settings in three stages:
+
+1. **Choose which files to check** -- mostly command line globs, `--file`, `--exclude`, `--gitignore`, plus the
+   configuration's `files` and `ignorePaths`.
+2. **Load and merge configuration** -- the built-in defaults, the project's configuration file (found searching
+   upward from the current directory, or `--config`), a few CLI flags (`--dictionary`, `--disable-dictionary`,
+   `--report`), and then the configuration file nearest to each individual document, which overrides all of the
+   above.
+3. **Finalize settings for the document** -- apply `overrides` and `languageSettings` that match the document,
+   then any in-document directives (`cspell:ignore`, `cspell:words`, etc.), which always take precedence.
+
+Most other CLI flags (`--no-progress`, `--show-suggestions`, `-v`/`--verbose`, `--color`, ...) only control what
+the CLI reports and are not part of this configuration.
+
+See [Configuration Resolution & Overrides](https://cspell.org/configuration/overrides/) and
+[In-Document Settings](https://cspell.org/configuration/document-settings/) for details.
+
 ### `cspell.json`
 
 #### Example `cspell.json` file

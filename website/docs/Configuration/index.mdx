@@ -16,6 +16,13 @@ By default it looks for any of the following files:
 
 Or you can specify a path to a config file with the `--config <path>` argument on the command line.
 
+## How Configuration Is Resolved
+
+CSpell determines the settings for a document in three stages: it decides which files to check, loads and
+merges configuration (the default configuration, configuration file(s), and a few CLI flags), then finalizes
+the settings for each document by applying `overrides`, `languageSettings`, and any in-document directives, in
+that order. See [Configuration Resolution & Overrides](./overrides.md) for the full precedence order.
+
 ## `cspell.json`
 
 #### Example `cspell.json` file

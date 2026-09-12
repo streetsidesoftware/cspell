@@ -4,23 +4,39 @@ sidebar_position: 8
 sidebar_label: Overrides
 ---
 
-# Overrides
+# Configuration Resolution & Overrides
 
-The configuration used for a file is calculated by applying the configuration in two phases.
-The first phase is to gather all the relevant configuration files and merge the settings.
-The second phase is to finalize the configuration based upon the resulting **`overrides`** and **`languageSettings`**
-that match the path name, `languageId`, and `locale`.
+CSpell determines the settings to use for a document in three stages:
 
-## Configuration Gathering
+1. **Choose which files to check** -- driven mostly by the command line (file globs, `--file`, `--exclude`,
+   `--gitignore`, `--dot`, `--max-file-size`, ...) together with the configuration's `files` and `ignorePaths`.
+   See [Understanding CSpell Globs](../globs.md).
+1. **Load and merge configuration** -- gather the default configuration, configuration file(s), and a small
+   number of CLI flags into one merged settings object. See [Loading Configuration](#stage-2-loading-configuration) below.
+1. **Finalize settings for the document** -- apply **`overrides`** and **`languageSettings`** that match the
+   document, then apply any in-document directives. See [Finalizing Settings](#stage-3-finalizing-settings) below.
 
-The spell checker gathers all the relevant configuration files and merges the settings from each file.
+Most command line flags belong to stage 1 (deciding which files to check) or control the CLI's own reporting
+(`--no-progress`, `--show-suggestions`, `-v`/`--verbose`, `--color`, `--reporter`, ...). Those always take effect
+and never participate in the settings merge described on this page.
 
-**Settings Gathering Order**
+## Stage 2: Loading Configuration
 
-1. Default Configuration - the settings included in `cspell`.
-1. Command line settings - the settings given on the command line.
-1. Imports found in the configuration file. - any imports found in the configuration file loaded.
-1. Configuration file - the settings found in the configuration file.
+CSpell merges settings from the following sources, in order. Later sources override earlier ones for individual
+settings (see [Merge Rules](#merge-rules) below for how array-like settings are combined instead of overwritten).
+
+1. **Default Configuration** -- the settings built into `cspell` (disable with `--no-default-configuration`).
+1. **The project configuration file** -- found by searching upward from the current directory (or `--root`), or
+   given explicitly with `--config <path>`. Any files it `import`s are merged in first, with the file's own
+   settings merged in last so it always wins over what it imports.
+1. **A few CLI flags that adjust settings directly** -- `--dictionary <name>` / `--disable-dictionary <name>`
+   (enable/disable dictionaries) and `--report <level>` (which categories of unknown words to report).
+1. **The document's own configuration file** -- a second, independent search that starts at each document's own
+   directory and walks upward. It overrides everything above it. (Skipped when `--no-config-search` is used, or
+   when `--config` is given explicitly.)
+
+This means a `cspell.json` placed next to (or above) an individual file always wins over the configuration file
+found from the current working directory.
 
 ### Merge Rules
 
@@ -37,12 +53,16 @@ Most Array like settings are joined as a union. In most cases order is preserved
 - `patterns`, `includeRegExpList`, and `ignoreRegExpList` are collected in order so that patterns of the same name can be replaced.
 - `dictionaryDefinitions` and `dictionaries` are collected in order so that dictionaries can be replaced by other dictionaries with the same name.
 
-## Configuration Finalization
+## Stage 3: Finalizing Settings
 
-**Order**
+Once the merged configuration is loaded, CSpell finalizes the settings for each specific document, in order:
 
-1. **`overrides`** - the settings from the matching `filename` globs are applied.
-1. **`languageSettings`** - the settings from the matching `languageId` or `locale` are applied.
+1. **`overrides`** -- settings from entries whose `filename` glob matches the document's path are applied.
+1. **`languageSettings`** -- settings from entries whose `languageId` and/or `locale` match the document are
+   applied. `--language-id` and `--locale` on the command line can force what a document is treated as for this
+   matching step.
+1. **In-document directives** -- comments like `cspell:ignore` or `cspell:words` in the document itself. These
+   always win, and are applied last. See [In-Document Settings](./document-settings.md).
 
 ## Override Configuration Field: `overrides`
 
