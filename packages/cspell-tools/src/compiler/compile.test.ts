@@ -93,7 +93,7 @@ describe('compile', () => {
                 generateNonStrict,
                 trieBase: 10,
                 sort: true,
-                replacements: { '’': "'" },
+                replacements: { '’|`': "'" },
             };
             const req: CompileRequest = {
                 targets: [target],
