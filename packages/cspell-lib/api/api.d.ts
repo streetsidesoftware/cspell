@@ -166,7 +166,6 @@ declare function generateExclusionFunctionForUri(globs: Glob[], root: string, al
  * @todo Support multi root globs.
  * @param globs - glob patterns
  * @param root - root directory
- * @param allowedSchemes - allowed schemas
  */
 declare function generateExclusionFunctionForFiles(globs: Glob[], root: string): FileExclusionFunction;
 //#endregion
@@ -859,7 +858,8 @@ declare class DocumentValidator {
   static create(doc: TextDocument, options: DocumentValidatorOptions, settingsOrConfigFile: CSpellUserSettings | ICSpellConfigFile$1): Promise<DocumentValidator>;
   /**
    * @param doc - Document to validate
-   * @param config - configuration to use (not finalized).
+   * @param options - options controlling how the document is validated.
+   * @param settings - configuration to use (not finalized).
    */
   constructor(doc: TextDocument, options: DocumentValidatorOptions, settings: CSpellUserSettings);
   get ready(): boolean;
@@ -1078,21 +1078,21 @@ interface SpellCheckFileResultRPC {
  * Spell Check a file
  * @param file - absolute path to file to read and check.
  * @param options - options to control checking
- * @param settings - default settings to use.
+ * @param settingsOrConfigFile - default settings to use.
  */
 declare function spellCheckFile(file: string | Uri | URL, options: SpellCheckFileOptions, settingsOrConfigFile: CSpellUserSettings | ICSpellConfigFile$1): Promise<SpellCheckFileResult>;
 /**
  * Spell Check a Document.
  * @param document - document to be checked. If `document.text` is `undefined` the file will be loaded
  * @param options - options to control checking
- * @param settings - default settings to use.
+ * @param settingsOrConfigFile - default settings to use.
  */
 declare function spellCheckDocument(document: Document | DocumentWithText, options: SpellCheckFileOptions, settingsOrConfigFile: CSpellUserSettings | ICSpellConfigFile$1): Promise<SpellCheckFileResult>;
 /**
  * Spell Check a Document.
  * @param document - document to be checked. If `document.text` is `undefined` the file will be loaded
  * @param options - options to control checking
- * @param settings - default settings to use.
+ * @param settingsOrConfigFile - default settings to use.
  */
 declare function spellCheckDocumentRPC(document: Document | DocumentWithText, options: SpellCheckFileOptionsRPC, settingsOrConfigFile: CSpellUserSettings | ICSpellConfigFile$1): Promise<SpellCheckFileResultRPC>;
 interface DetermineFinalDocumentSettingsResult {
@@ -1134,11 +1134,10 @@ declare function traceWords(words: string[], settings: CSpellSettings | ICSpellC
 declare function traceWordsAsync(words: Iterable<string> | AsyncIterable<string>, settingsOrConfig: CSpellSettings | ICSpellConfigFile$1, options: TraceOptions | undefined): AsyncIterableIterator<TraceWordResult>;
 //#endregion
 //#region src/lib/util/logger.d.ts
-type Console = typeof console;
 interface Logger {
-  log: Console["log"];
-  warn: Console["warn"];
-  error: Console["error"];
+  log: (...args: unknown[]) => void;
+  warn: (...args: unknown[]) => void;
+  error: (...args: unknown[]) => void;
 }
 /**
  * Set the global cspell-lib logger

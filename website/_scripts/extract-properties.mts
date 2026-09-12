@@ -13,11 +13,85 @@ interface Definition extends JSONSchema7 {
 }
 
 /**
+ * Registry of every heading id this generator will produce, used to resolve `{@link X}`
+ * references found in schema descriptions to the correct anchor - properties of the same
+ * name can exist in more than one section (e.g. `ignoreRegExpList` on `Settings`,
+ * `LanguageSetting`, and `OverrideSettings`), each with its own section-prefixed id.
+ */
+interface LinkRegistry {
+    /** lowercase top-level definition name -> heading id */
+    topLevel: Map<string, string>;
+    /** lowercase section name -> (lowercase property name -> heading id) */
+    sections: Map<string, Map<string, string>>;
+}
+
+let linkRegistry: LinkRegistry = { topLevel: new Map(), sections: new Map() };
+/** The section currently being rendered, used to resolve sibling `{@link}` references. Empty outside of a section. */
+let currentSectionName = '';
+
+function buildLinkRegistry(schema: Definition): LinkRegistry {
+    const topLevel = new Map<string, string>();
+    const sections = new Map<string, Map<string, string>>();
+
+    function registerTopLevel(name: string): void {
+        topLevel.set(name.toLowerCase(), toId('', name));
+    }
+
+    function registerSection(name: string, properties: Record<string, JSONSchema7Definition> | undefined): void {
+        const propMap = new Map<string, string>();
+        for (const key of Object.keys(properties || {})) {
+            propMap.set(key.toLowerCase(), toId(name, key));
+        }
+        sections.set(name.toLowerCase(), propMap);
+    }
+
+    registerTopLevel('Settings');
+    if (schema.type === 'object') {
+        registerSection('Settings', schema.properties);
+    }
+
+    for (const [key, entry] of Object.entries(schema.definitions || {})) {
+        if (!entryIsJSONSchema7(entry)) continue;
+        registerTopLevel(key);
+        if (entry.type === 'object') {
+            registerSection(key, entry.properties);
+        }
+    }
+
+    return { topLevel, sections };
+}
+
+/**
+ * Resolve a `{@link X}` reference to a heading id, preferring (in order): an explicit
+ * `Section.property` reference, a sibling property in the current section, a property of
+ * the root `Settings` section (most cross-references from `LanguageSetting`/`OverrideSettings`
+ * describe the global setting), then a top-level definition. Returns `undefined` if nothing matches.
+ */
+function resolveLinkTarget(name: string): string | undefined {
+    const dot = name.indexOf('.');
+    if (dot > 0) {
+        const section = name.slice(0, dot).toLowerCase();
+        const prop = name.slice(dot + 1).toLowerCase();
+        const sectionProps = linkRegistry.sections.get(section);
+        if (sectionProps?.has(prop)) return sectionProps.get(prop);
+    }
+
+    const lower = name.toLowerCase();
+    const currentSectionProps = linkRegistry.sections.get(currentSectionName.toLowerCase());
+    if (currentSectionProps?.has(lower)) return currentSectionProps.get(lower);
+    const settingsProps = linkRegistry.sections.get('settings');
+    if (settingsProps?.has(lower)) return settingsProps.get(lower);
+    if (linkRegistry.topLevel.has(lower)) return linkRegistry.topLevel.get(lower);
+    return undefined;
+}
+
+/**
  * Extracts the properties from the cspell schema and writes them to a markdown file.
  */
 export async function run(): Promise<void> {
     console.log(`Generating config properties at ${relativeToSite(generatedTargetUrl)}`);
     const schema = await loadSchema();
+    linkRegistry = buildLinkRegistry(schema);
 
     const header = inject`\
         ---
@@ -50,6 +124,7 @@ function schemaEntry(entry: JSONSchema7, name: string): string {
 }
 
 function schemaObjectEntry(schemaTypeObject: JSONSchema7, nameOfType: string): string {
+    currentSectionName = nameOfType;
     const properties = schemaTypeObject.properties || {};
     const required = new Set(schemaTypeObject.required || []);
     // console.error('Object Type %s\n%o', 'Properties:', properties);
@@ -127,6 +202,7 @@ function formatPropertyToDisplay(
 }
 
 function formatTopLevelType(key: string, entry: JSONSchema7): string {
+    currentSectionName = '';
     return inject`
 
         ---
@@ -264,8 +340,17 @@ const regExpMatchLink = /\{@link (.*?)\}/g;
 function replaceLinks(markdown: string): string {
     markdown = markdown.replaceAll(regExpMatchLink, (_match, p1) => {
         p1 = p1.trim();
-        const link = (p1 && linkToHeader(p1, '')) || '';
-        return link;
+        if (!p1) return '';
+        const id = resolveLinkTarget(p1);
+        if (!id) {
+            // No matching heading exists on this page (e.g. a TS-only type not represented
+            // in the JSON schema) - fall back to plain text instead of a dead anchor.
+            console.warn(
+                `extract-properties: unable to resolve {@link ${p1}} referenced in section "${currentSectionName || '(top-level)'}"; rendering as plain text.`,
+            );
+            return `\`${p1}\``;
+        }
+        return `[${p1}](#${id})`;
     });
     return markdown;
 }

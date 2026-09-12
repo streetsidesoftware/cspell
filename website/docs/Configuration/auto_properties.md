@@ -56,7 +56,7 @@ format: md
 | [noSuggestDictionaries](#settings-nosuggestdictionaries)       | [`DictionaryReference`](#dictionaryreference)&ZeroWidthSpace;`[]`         | Optional list of dictionaries that will not be used for suggestions.                                                                                                 |
 | [numSuggestions](#settings-numsuggestions)                     | `number`                                                                  | Number of suggestions to make.                                                                                                                                       |
 | [overrides](#settings-overrides)                               | [`OverrideSettings`](#overridesettings)&ZeroWidthSpace;`[]`               | Overrides are used to apply settings for specific files in your project.                                                                                             |
-| [patterns](#settings-patterns)                                 | [`RegExpPatternDefinition`](#regexppatterndefinition)&ZeroWidthSpace;`[]` | Defines a list of patterns that can be used with the  [ignoreRegExpList](#ignoreregexplist)  and                                                                     |
+| [patterns](#settings-patterns)                                 | [`RegExpPatternDefinition`](#regexppatterndefinition)&ZeroWidthSpace;`[]` | Defines a list of patterns that can be used with the  [ignoreRegExpList](#settings-ignoreregexplist)  and                                                            |
 | [pnpFiles](#settings-pnpfiles)                                 | `string`&ZeroWidthSpace;`[]`                                              | The PnP files to search for. Note: `.mjs` files are not currently supported.                                                                                         |
 | [readonly](#settings-readonly)                                 | `boolean`                                                                 | Indicate that the configuration file should not be modified.                                                                                                         |
 | [reporters](#settings-reporters)                               | [`ReporterSettings`](#reportersettings)&ZeroWidthSpace;`[]`               | Define which reports to use.                                                                                                                                         |
@@ -722,7 +722,7 @@ Optional identifier.
 
 Glob patterns of files to be ignored.
 
-Glob patterns are relative to the  [globRoot](#globroot)  of the configuration file that defines them.
+Glob patterns are relative to the  [globRoot](#settings-globroot)  of the configuration file that defines them.
 
 The default is `["node_modules/"]`.
 
@@ -1331,8 +1331,8 @@ For example:
 <dt>Description</dt>
 <dd>
 
-Defines a list of patterns that can be used with the  [ignoreRegExpList](#ignoreregexplist)  and
- [includeRegExpList](#includeregexplist)  options.
+Defines a list of patterns that can be used with the  [ignoreRegExpList](#settings-ignoreregexplist)  and
+ [includeRegExpList](#settings-includeregexplist)  options.
 
 For example:
 
@@ -1797,7 +1797,7 @@ Tells the spell checker to load `.gitignore` files and skip files that match the
 <dd>
 
 Enables locale-sensitive text segmentation to support languages like Japanese, Chinese, Thai, Lao, Khmer, Myanmar, etc.
-The locale used for the segmentation is based on the  [language](#language)  setting.
+The locale used for the segmentation is based on the  [language](#settings-language)  setting.
 
 </dd>
 
@@ -6799,7 +6799,7 @@ A file type:
 | [locale](#languagesetting-locale)                                     | [`LocaleId`](#localeid)<br />[`LocaleId`](#localeid)&ZeroWidthSpace;`[]`  | The locale filter, matches against the language. This can be a comma separated list. `*` will match all locales.                              |
 | [name](#languagesetting-name)                                         | `string`                                                                  | Optional name of configuration.                                                                                                               |
 | [noSuggestDictionaries](#languagesetting-nosuggestdictionaries)       | [`DictionaryReference`](#dictionaryreference)&ZeroWidthSpace;`[]`         | Optional list of dictionaries that will not be used for suggestions.                                                                          |
-| [patterns](#languagesetting-patterns)                                 | [`RegExpPatternDefinition`](#regexppatterndefinition)&ZeroWidthSpace;`[]` | Defines a list of patterns that can be used with the  [ignoreRegExpList](#ignoreregexplist)  and                                              |
+| [patterns](#languagesetting-patterns)                                 | [`RegExpPatternDefinition`](#regexppatterndefinition)&ZeroWidthSpace;`[]` | Defines a list of patterns that can be used with the  [ignoreRegExpList](#languagesetting-ignoreregexplist)  and                              |
 | [softWordBreakDefinitions](#languagesetting-softwordbreakdefinitions) | [`SoftWordBreakDefinitions`](#softwordbreakdefinitions)                   | Defines a set of word break rules that can be used for text segmentation.                                                                     |
 | [softWordBreaks](#languagesetting-softwordbreaks)                     | [`SoftWordBreaks`](#softwordbreaks)                                       | Allows enabling or disabling soft word break rules by name.                                                                                   |
 | [substitutionDefinitions](#languagesetting-substitutiondefinitions)   | [`SubstitutionDefinitions`](#substitutiondefinitions)                     | The set of available substitutions. This is a collection of substitution definitions that can be applied to a document before spell checking. |
@@ -7320,8 +7320,8 @@ possible suggestions.
 <dt>Description</dt>
 <dd>
 
-Defines a list of patterns that can be used with the  [ignoreRegExpList](#ignoreregexplist)  and
- [includeRegExpList](#includeregexplist)  options.
+Defines a list of patterns that can be used with the  [ignoreRegExpList](#languagesetting-ignoreregexplist)  and
+ [includeRegExpList](#languagesetting-includeregexplist)  options.
 
 For example:
 
@@ -7565,7 +7565,7 @@ Controls how unknown words are handled.
 <dd>
 
 Enables locale-sensitive text segmentation to support languages like Japanese, Chinese, Thai, Lao, Khmer, Myanmar, etc.
-The locale used for the segmentation is based on the  [language](#language)  setting.
+The locale used for the segmentation is based on the  [language](#settings-language)  setting.
 
 </dd>
 
@@ -7688,7 +7688,7 @@ This is a written language locale like: `en`, `en-GB`, `fr`, `es`, `de` or `en,f
 | [name](#overridesettings-name)                                         | `string`                                                                  | Optional name of configuration.                                                                                                                                      |
 | [noSuggestDictionaries](#overridesettings-nosuggestdictionaries)       | [`DictionaryReference`](#dictionaryreference)&ZeroWidthSpace;`[]`         | Optional list of dictionaries that will not be used for suggestions.                                                                                                 |
 | [numSuggestions](#overridesettings-numsuggestions)                     | `number`                                                                  | Number of suggestions to make.                                                                                                                                       |
-| [patterns](#overridesettings-patterns)                                 | [`RegExpPatternDefinition`](#regexppatterndefinition)&ZeroWidthSpace;`[]` | Defines a list of patterns that can be used with the  [ignoreRegExpList](#ignoreregexplist)  and                                                                     |
+| [patterns](#overridesettings-patterns)                                 | [`RegExpPatternDefinition`](#regexppatterndefinition)&ZeroWidthSpace;`[]` | Defines a list of patterns that can be used with the  [ignoreRegExpList](#overridesettings-ignoreregexplist)  and                                                    |
 | [pnpFiles](#overridesettings-pnpfiles)                                 | `string`&ZeroWidthSpace;`[]`                                              | The PnP files to search for. Note: `.mjs` files are not currently supported.                                                                                         |
 | [softWordBreakDefinitions](#overridesettings-softwordbreakdefinitions) | [`SoftWordBreakDefinitions`](#softwordbreakdefinitions)                   | Defines a set of word break rules that can be used for text segmentation.                                                                                            |
 | [softWordBreaks](#overridesettings-softwordbreaks)                     | [`SoftWordBreaks`](#softwordbreaks)                                       | Allows enabling or disabling soft word break rules by name.                                                                                                          |
@@ -8586,8 +8586,8 @@ Number of suggestions to make.
 <dt>Description</dt>
 <dd>
 
-Defines a list of patterns that can be used with the  [ignoreRegExpList](#ignoreregexplist)  and
- [includeRegExpList](#includeregexplist)  options.
+Defines a list of patterns that can be used with the  [ignoreRegExpList](#overridesettings-ignoreregexplist)  and
+ [includeRegExpList](#overridesettings-includeregexplist)  options.
 
 For example:
 
@@ -8913,7 +8913,7 @@ Controls how unknown words are handled.
 <dd>
 
 Enables locale-sensitive text segmentation to support languages like Japanese, Chinese, Thai, Lao, Khmer, Myanmar, etc.
-The locale used for the segmentation is based on the  [language](#language)  setting.
+The locale used for the segmentation is based on the  [language](#overridesettings-language)  setting.
 
 </dd>
 
@@ -9552,7 +9552,7 @@ Special characters like `|`, `^`, and `$` have specific meanings.
 - `^` -- Indicates the start of a word
 - `$` -- Indicates the end of a word
 
-For more complicated word break rules, consider using regular expressions with the  [SoftWordBreakRegExp](#softwordbreakregexp)  type.
+For more complicated word break rules, consider using regular expressions with the  `SoftWordBreakRegExp`  type.
 
 Examples:
 - `"^ptr|"` -- Would help with pointer definitions starting with `ptr`, such as `ptrvalue`.

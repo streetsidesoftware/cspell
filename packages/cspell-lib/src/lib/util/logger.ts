@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-type Console = typeof console;
 export interface Logger {
-    log: Console['log'];
-    warn: Console['warn'];
-    error: Console['error'];
+    log: (...args: unknown[]) => void;
+    warn: (...args: unknown[]) => void;
+    error: (...args: unknown[]) => void;
 }
 
 let _logger: Logger = console;

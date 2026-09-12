@@ -90,7 +90,7 @@ export interface SpellCheckFileResultRPC {
  * Spell Check a file
  * @param file - absolute path to file to read and check.
  * @param options - options to control checking
- * @param settings - default settings to use.
+ * @param settingsOrConfigFile - default settings to use.
  */
 export function spellCheckFile(
     file: string | Uri | URL,
@@ -107,7 +107,7 @@ export function spellCheckFile(
  * Spell Check a Document.
  * @param document - document to be checked. If `document.text` is `undefined` the file will be loaded
  * @param options - options to control checking
- * @param settings - default settings to use.
+ * @param settingsOrConfigFile - default settings to use.
  */
 export async function spellCheckDocument(
     document: Document | DocumentWithText,
@@ -165,7 +165,7 @@ export async function spellCheckDocument(
  * Spell Check a Document.
  * @param document - document to be checked. If `document.text` is `undefined` the file will be loaded
  * @param options - options to control checking
- * @param settings - default settings to use.
+ * @param settingsOrConfigFile - default settings to use.
  */
 export async function spellCheckDocumentRPC(
     document: Document | DocumentWithText,

@@ -671,7 +671,7 @@ export default defineConfig({
 
 - `allowCompoundWords` - defaults to **_false_**; set to **true** to allow compound words by default.
 
-- `dictionaries` - list of the names of the dictionaries to use. See [Dictionaries](#Dictionaries) below.
+- `dictionaries` - list of the names of the dictionaries to use. See [Dictionaries](#dictionaries) below.
 
 - `dictionaryDefinitions` - this list defines any custom dictionaries to use. This is how you can include other languages like Spanish.
 
@@ -698,7 +698,7 @@ export default defineConfig({
 - `patterns` - this allows you to define named patterns to be used with
   `ignoreRegExpList` and `includeRegExpList`.
 
-- `languageSettings` - this allows for per programming language configuration settings. See [LanguageSettings](#LanguageSettings)
+- `languageSettings` - this allows for per programming language configuration settings. See [LanguageSettings](#languagesettings)
 
 - `overrides` - this allows for settings to be based upon the file name or path. It is useful for setting the language for localization.
 
