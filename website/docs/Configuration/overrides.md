@@ -6,34 +6,45 @@ sidebar_label: Overrides
 
 # Configuration Resolution & Overrides
 
-CSpell determines the settings to use for a document in three stages:
+Checking a file is a two step process:
 
-1. **Choose which files to check** -- driven mostly by the command line (file globs, `--file`, `--exclude`,
-   `--gitignore`, `--dot`, `--max-file-size`, ...) together with the configuration's `files` and `ignorePaths`.
-   See [Understanding CSpell Globs](../globs.md).
-1. **Load and merge configuration** -- gather the default configuration, configuration file(s), and a small
-   number of CLI flags into one merged settings object. See [Loading Configuration](#stage-2-loading-configuration) below.
-1. **Finalize settings for the document** -- apply **`overrides`** and **`languageSettings`** that match the
-   document, then apply any in-document directives. See [Finalizing Settings](#stage-3-finalizing-settings) below.
+1. [**Determine which files to check.**](#step-1-determine-which-files-to-check)
+1. [**Determine the settings, and check the document.**](#step-2-determine-the-settings-and-check-the-document)
 
-Most command line flags belong to stage 1 (deciding which files to check) or control the CLI's own reporting
-(`--no-progress`, `--show-suggestions`, `-v`/`--verbose`, `--color`, `--reporter`, ...). Those always take effect
-and never participate in the settings merge described on this page.
+## Step 1: Determine Which Files to Check
 
-## Stage 2: Loading Configuration
+This is based on the command line together with the configuration file loaded at start up (the file nearest
+the current directory, or the one given with `--config`).
+
+- If globs are given on the command line, they are used to search for matching files. (If none are given, the
+  configuration's `files` setting is used as the globs instead.) The results are filtered against the
+  configuration's `ignorePaths` (plus any `--exclude` globs) and against `.gitignore` (unless `--no-gitignore`
+  is used).
+- If `--file`, `--files`, or `--file-list` is used, those are treated as exact file names instead of globs. They
+  are still filtered against `ignorePaths`/`--exclude` and `.gitignore` by default -- unless `--force-check` is
+  given, which checks them anyway. (When globs are also given on the command line, `--file`/`--file-list`
+  entries must additionally match one of those globs.)
+
+See [Understanding CSpell Globs](../globs.md) for glob syntax.
+
+## Step 2: Determine the Settings and Check the Document
+
+Once a file has been selected, CSpell determines its settings and checks it.
+
+### Loading Configuration
 
 CSpell merges settings from the following sources, in order. Later sources override earlier ones for individual
 settings (see [Merge Rules](#merge-rules) below for how array-like settings are combined instead of overwritten).
 
 1. **Default Configuration** -- the settings built into `cspell` (disable with `--no-default-configuration`).
-1. **The project configuration file** -- found by searching upward from the current directory (or `--root`), or
-   given explicitly with `--config <path>`. Any files it `import`s are merged in first, with the file's own
-   settings merged in last so it always wins over what it imports.
-1. **A few CLI flags that adjust settings directly** -- `--dictionary <name>` / `--disable-dictionary <name>`
+1. **The configuration loaded at start up** -- the same configuration file used in Step 1, found by searching
+   upward from the current directory (or `--root`), or given explicitly with `--config <path>`. Any files it
+   `import`s are merged in first, with the file's own settings merged in last so it always wins over what it
+   imports. A few CLI flags adjust these settings directly: `--dictionary <name>` / `--disable-dictionary <name>`
    (enable/disable dictionaries) and `--report <level>` (which categories of unknown words to report).
-1. **The document's own configuration file** -- a second, independent search that starts at each document's own
-   directory and walks upward. It overrides everything above it. (Skipped when `--no-config-search` is used, or
-   when `--config` is given explicitly.)
+1. **The configuration nearest the document** -- found by a second, independent search that starts at the
+   document's own directory and walks upward. It overrides everything above it. (Skipped when
+   `--no-config-search` is used, or when `--config` is given explicitly.)
 
 This means a `cspell.json` placed next to (or above) an individual file always wins over the configuration file
 found from the current working directory.
@@ -53,9 +64,9 @@ Most Array like settings are joined as a union. In most cases order is preserved
 - `patterns`, `includeRegExpList`, and `ignoreRegExpList` are collected in order so that patterns of the same name can be replaced.
 - `dictionaryDefinitions` and `dictionaries` are collected in order so that dictionaries can be replaced by other dictionaries with the same name.
 
-## Stage 3: Finalizing Settings
+### Finalizing Settings
 
-Once the merged configuration is loaded, CSpell finalizes the settings for each specific document, in order:
+Once the configuration is merged, CSpell finalizes the settings for the document, in order:
 
 1. **`overrides`** -- settings from entries whose `filename` glob matches the document's path are applied.
 1. **`languageSettings`** -- settings from entries whose `languageId` and/or `locale` match the document are

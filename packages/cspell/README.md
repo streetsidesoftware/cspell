@@ -588,19 +588,20 @@ Or you can specify a path to a config file with the `--config <path>` argument o
 
 ### How Configuration Is Determined
 
-CSpell resolves settings in three stages:
+Checking a file is a two step process:
 
-1. **Choose which files to check** -- mostly command line globs, `--file`, `--exclude`, `--gitignore`, plus the
-   configuration's `files` and `ignorePaths`.
-2. **Load and merge configuration** -- the built-in defaults, the project's configuration file (found searching
-   upward from the current directory, or `--config`), a few CLI flags (`--dictionary`, `--disable-dictionary`,
-   `--report`), and then the configuration file nearest to each individual document, which overrides all of the
-   above.
-3. **Finalize settings for the document** -- apply `overrides` and `languageSettings` that match the document,
-   then any in-document directives (`cspell:ignore`, `cspell:words`, etc.), which always take precedence.
+1. **Determine which files to check** -- from command line globs (or the configuration's `files` setting if no
+   globs are given), or from `--file`/`--files`/`--file-list`, filtered against `ignorePaths`, `--exclude`, and
+   `.gitignore`.
+2. **Determine the settings, and check the document** -- merge the built-in defaults, the configuration loaded
+   at start up (the project's configuration file, found searching upward from the current directory or given
+   with `--config`, plus a few CLI flags like `--dictionary`, `--disable-dictionary`, and `--report`), and the
+   configuration file nearest the document, which overrides all of the above. Then apply `overrides` and
+   `languageSettings` that match the document, then any in-document directives (`cspell:ignore`, `cspell:words`,
+   etc.), which always take precedence.
 
 Most other CLI flags (`--no-progress`, `--show-suggestions`, `-v`/`--verbose`, `--color`, ...) only control what
-the CLI reports and are not part of this configuration.
+the CLI reports and are not part of this process.
 
 See [Configuration Resolution & Overrides](https://cspell.org/configuration/overrides/) and
 [In-Document Settings](https://cspell.org/configuration/document-settings/) for details.
