@@ -155,6 +155,13 @@
       ],
       "type": "object"
     },
+    "Replacements": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Replacement rules to apply to the words in the dictionary. The key is the pattern to match, and the value is the replacement string.",
+      "type": "object"
+    },
     "Target": {
       "additionalProperties": false,
       "properties": {
@@ -237,6 +244,10 @@
           "default": false,
           "description": "Remove duplicate words, favor lower case words over mixed case words. Combine compound prefixes where possible.",
           "type": "boolean"
+        },
+        "replacements": {
+          "$ref": "#/definitions/Replacements",
+          "description": "Replacement rules to apply to the words in the dictionary. The key is the pattern to match, and the value is the replacement string."
         },
         "sort": {
           "default": true,

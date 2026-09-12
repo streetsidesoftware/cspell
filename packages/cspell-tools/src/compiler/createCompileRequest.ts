@@ -47,6 +47,7 @@ function calcTargets(sources: DictionarySource[], options: CompileCommonAppOptio
             sort,
             trieBase: parseNumber(options.trieBase),
             generateNonStrict,
+            replacements: undefined,
         };
         return [target];
     }
@@ -62,6 +63,7 @@ function calcTargets(sources: DictionarySource[], options: CompileCommonAppOptio
             sort: options.sort,
             trieBase: parseNumber(options.trieBase),
             generateNonStrict,
+            replacements: undefined,
         };
         return target;
     });

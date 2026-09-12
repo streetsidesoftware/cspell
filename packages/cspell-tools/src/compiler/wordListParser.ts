@@ -4,6 +4,7 @@ import { createDictionaryLineParser } from 'cspell-trie-lib';
 import { uniqueFilter } from 'hunspell-reader';
 
 import { defaultCompileSourceOptions } from '../config/configDefaults.ts';
+import type { Replacements } from '../config/index.ts';
 import type { CompileOptions } from './CompileOptions.ts';
 import { legacyLineToWords } from './legacyLineToWords.ts';
 import { splitCamelCaseIfAllowed } from './splitCamelCaseIfAllowed.ts';
@@ -21,6 +22,7 @@ export function normalizeTargetWords(options: CompileOptions): Operator<string> 
         options.sort ? createInlineBufferedSort(10_000) : undefined,
         opFilter<string>(uniqueFilter(10_000)),
         options.filter ? opFilter<string>(options.filter) : undefined,
+        replacementsToMapOperator(options.replacements),
     ].filter(isDefined);
     return opCombine(...operations);
 }
@@ -274,4 +276,14 @@ export function createParseFileLineMapper(options?: Partial<ParseFileOptions>): 
  */
 export function parseFileLines(lines: Iterable<string> | string, options: ParseFileOptions): Iterable<string> {
     return createParseFileLineMapper(options)(typeof lines === 'string' ? [lines] : lines);
+}
+
+function replacementsToMapOperator(replacements: Replacements | undefined): Operator<string, string> | undefined {
+    if (!replacements) return undefined;
+    return opMap((word) => {
+        for (const [pattern, replacement] of Object.entries(replacements)) {
+            word = word.replaceAll(pattern, replacement);
+        }
+        return word;
+    });
 }

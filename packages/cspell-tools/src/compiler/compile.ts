@@ -54,6 +54,7 @@ export async function compile(request: CompileRequest, options?: CompileOptions)
         sort: request.sort,
         generateNonStrict: request.generateNonStrict,
         removeDuplicates: request.removeDuplicates,
+        replacements: undefined,
     };
     const conditional = options?.conditionalBuild || false;
     const checksumFile = resolveChecksumFile(request.checksumFile || conditional, rootDir);
@@ -190,6 +191,7 @@ async function buildTargetDictionary(
         excludeWordsFrom = [],
         excludeWordsNotFoundIn = [],
         excludeWordsMatchingRegex,
+        replacements,
     } = target;
     const { filename, useTrie, generateOnlyCompressedDictionary, checksumRoot } = buildOptions;
     const dictionaryDirectives = target.dictionaryDirectives ?? compileOptions.dictionaryDirectives;
@@ -217,6 +219,7 @@ async function buildTargetDictionary(
         filter: excludeFilter,
         dictionaryDirectives,
         // removeDuplicates, // Add this in if we use it.
+        replacements,
     });
 
     const deps = [
@@ -248,6 +251,7 @@ async function buildTargetDictionary(
                   generateNonStrict,
                   dictionaryDirectives,
                   removeDuplicates,
+                  replacements,
               });
         const data = iterableToString(pipe(words, normalizer, compiler));
 

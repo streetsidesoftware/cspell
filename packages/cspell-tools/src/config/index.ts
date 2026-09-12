@@ -7,6 +7,7 @@ export type {
     FileListSource,
     FilePath,
     FileSource,
+    Replacements,
     RunConfig,
     Target,
 } from './config.ts';
