@@ -12,7 +12,7 @@ JavaScript [WeakMap](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Ref
 npm install -S @cspell/strong-weak-map
 ```
 
-# Usage
+## Usage
 
 TypeScript Example: Simple text file reader.
 
@@ -36,7 +36,7 @@ export function readTextFile(filename: string, encoding: BufferEncoding = 'utf8'
 
 The above example will reuse the promise as long as it has not been cleaned up by the Garbage Collector.
 
-# API
+## API
 
 See: [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)
 

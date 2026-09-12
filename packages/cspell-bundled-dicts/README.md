@@ -2,7 +2,7 @@
 
 This package contains all the dictionaries bundled with cspell.
 
-It has been pull into its own package to make it easier to Webpack cspell.
+It has been pulled into its own package to make it easier to Webpack cspell.
 
 ## Webpack
 
@@ -16,12 +16,12 @@ Example `webpack.config.js` modification:
 
 Example: `package.json`:
 
-```js
+```json
   "devDependencies": {
-    "cspell": "^5",
+    "cspell": "^10"
   },
   "dependencies": {
-    "@cspell/cspell-bundled-dicts": "^5"
+    "@cspell/cspell-bundled-dicts": "^10"
   }
 ```
 

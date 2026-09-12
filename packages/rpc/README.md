@@ -82,7 +82,7 @@ sequenceDiagram
 
 ### Cancel Request
 
-A cancellation request is used to cancel or abort a request. The server accepts the request and acknowledges that it was received. It does not wait
+A cancellation request is used to cancel or abort a request. The server accepts the request and acknowledges that it was received. Depending on the mode, the server either responds immediately without waiting for the worker to confirm the cancellation, or waits for that confirmation before responding:
 
 #### Cancel Request: no wait
 

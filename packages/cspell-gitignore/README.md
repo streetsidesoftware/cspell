@@ -37,13 +37,13 @@ To prevent searching higher in the directory hierarchy, specify roots:
 const gitIgnore = new GitIgnore([process.cwd()]);
 ```
 
-# `cspell-gitignore` CLI
+## `cspell-gitignore` CLI
 
 `cspell-gitignore` provides a simple cli for debugging .gitignore issues.
 
 In most cases it should provide the same output as `git check-ignore`.
 
-## Usage
+### Usage
 
 ```text
 Usage cspell-gitignore [options] <files>
@@ -62,7 +62,7 @@ Example:
 
 ```
 
-## Example:
+### Example:
 
 ```sh
 $ cspell-gitignore -r . node_modules

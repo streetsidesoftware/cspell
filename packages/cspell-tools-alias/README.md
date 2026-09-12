@@ -34,7 +34,7 @@ cspell-tools compile-trie english.dic
 
 This will read and expand the `english.dic` file based upon the rules in `english.aff` into a new file called `english.trie.gz`
 
-For large files, this process can take a long time and us a lot of memory.
+For large files, this process can take a long time and use a lot of memory.
 
 The tool `cspell-trie` can be used to read the contents of a `.trie` or `.trie.gz` file.
 
