@@ -84,7 +84,7 @@ async function run(): Promise<void> {
     schema.allowTrailingCommas = true;
     removeHidden(schema);
     const stringify = config.sortProps ? safeStableStringify : JSON.stringify;
-    const schemaString = stringify(schema, undefined, 2)?.replaceAll('​', '') || '';
+    const schemaString = stringify(schema, undefined, 2)?.replaceAll('\u200B', '') || '';
 
     await writeFile(path.join(typesDir, outFile), schemaString);
     await writeFile(new URL(outFile, rootUrl), schemaString);
