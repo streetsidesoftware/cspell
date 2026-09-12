@@ -12,7 +12,7 @@ import {
     regExSplitWords2,
     regExTrailingEndings,
     regExWordsAndDigits,
-    stringToRegExp,
+    stringToRegExpOrUndefined,
 } from './textRegex.js';
 
 describe('Validate textRegex', () => {
@@ -192,7 +192,7 @@ describe('Validate textRegex', () => {
         ${' /\npat # the pattern\n/gm\n'}  | ${/\npat # the pattern\n/gm}
         ${examplePattern}                  | ${/^https?:\/\/([^?#\n]*?)(\?[^#\n]*?)?(#.*?)?$/gm}
     `('stringToRegExp "$pattern"', ({ pattern, expected }) => {
-        const r = stringToRegExp(pattern);
+        const r = stringToRegExpOrUndefined(pattern);
         expect(r).toEqual(expected);
     });
 

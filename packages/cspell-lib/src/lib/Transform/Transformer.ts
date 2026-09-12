@@ -1,6 +1,8 @@
 import type { MappedText } from '@cspell/cspell-types';
 import type { Range } from '@cspell/cspell-types/Parser';
 
+export const softHyphen = '\u00AD';
+
 export interface TextTransformer {
     transform(text: string | MappedText): MappedText;
     transformAll(src: Iterable<string | MappedText>): Iterable<MappedText>;

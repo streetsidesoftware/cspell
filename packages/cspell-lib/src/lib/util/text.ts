@@ -15,7 +15,7 @@ import {
 } from './textRegex.js';
 import { toUri } from './Uri.js';
 
-export { stringToRegExp } from './textRegex.js';
+export { stringToRegExpOrUndefined as stringToRegExp } from './textRegex.js';
 
 // CSpell:ignore ings ning gimuy tsmerge
 
