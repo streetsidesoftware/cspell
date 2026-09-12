@@ -3,7 +3,7 @@ Repository: aspnetboilerplate/aspnetboilerplate
 Url: "https://github.com/aspnetboilerplate/aspnetboilerplate"
 Args: ["**/*.{md,cs,cshtml}","--exclude=wwwroot","--exclude=**/*SampleApp.Tests/Web*"]
 Lines:
- CSpell: Files checked: 2288, Issues found: 2169 in 621 files.
+ CSpell: Files checked: 2288, Issues found: 2356 in 659 files.
  exit code: 1
 CONTRIBUTING.md:28:30     - Unknown word (aspnetboilerplate) -- Documents are located in [/aspnetboilerplate/doc](https://github
 LICENSE.md:3:25      - Unknown word (Volosoft)   -- Copyright (c) 2013-2021 Volosoft (https://volosoft.com
@@ -50,6 +50,7 @@ doc/WebSite/Dynamic-Web-API.md:228:61    - Unknown word (angularjs)  -- api cont
 doc/WebSite/Dynamic-Web-API.md:263:13    - Unknown word (minifed)    -- be returned minifed, by setting the *minify
 doc/WebSite/Dynamic-Web-API.md:76:39     - Unknown word (overide)    -- given assembly. We then overide the configuration for
 doc/WebSite/EF-Core-MySql-Integration.md:10:83     - Unknown word (Micrososft) -- are mentioned in the Micrososft Docs. One of them is
+doc/WebSite/EF-Core-MySql-Integration.md:28:34     - Unknown word (Configurer) -- YourProjectNameDbContextConfigurer.cs` with the following
 doc/WebSite/EF-Core-MySql-Integration.md:56:61     - Unknown word (mysqldemodb) -- root;pwd=1234;database=mysqldemodb"
 doc/WebSite/EF-Core-PostgreSql-Integration.md:9:15      - Unknown word (Npgsql)     -- Install the [`Npgsql.EntityFrameworkCore
 doc/WebSite/EF-MySql-Integration.md:39:79     - Unknown word (sampledb)   -- localhost;port=3306;database=sampledb;uid=root;password=*
@@ -57,6 +58,9 @@ doc/WebSite/Embedded-Resource-Files.md:116:26    - Unknown word (Owin)       -- 
 doc/WebSite/Embedded-Resource-Files.md:148:8     - Unknown word (wwwroot)    -- in the wwwroot folder as the root path
 doc/WebSite/Embedded-Resource-Files.md:14:6      - Unknown word (xproj)      -- #### xproj/project.json Format
 doc/WebSite/Embedded-Resource-Files.md:37:64     - Unknown word (shorcut)    -- the properties window (shorcut is F4)
+doc/WebSite/Entities.md:179:15    - Unknown word (Deleter)    -- long? DeleterUserId { get; set; }
+doc/WebSite/Entities.md:209:16    - Unknown word (undelete)   -- If you wish to undelete a soft-deleted entity
+doc/WebSite/Entities.md:209:201   - Unknown word (Undelete)   -- Entities.EntityExtensions.Undelete(entity)**.
 doc/WebSite/Entities.md:231:4     - Unknown word (Passivable) -- **IPassivable** interface that has
 doc/WebSite/Entity-Framework-Core.md:210:28    - Unknown word (Assisgned)  -- conditions and include the AssisgnedPerson property, pre
 doc/WebSite/Entity-Framework-Core.md:265:1     - Unknown word (overidden)  -- overidden Delete method in your
@@ -138,6 +142,7 @@ doc/WebSite/Zero/User-Management.md:176:17    - Unknown word (authenciation) -- 
 src/Abp.AspNetCore.OData/Properties/AssemblyInfo.cs:21:44     - Unknown word (typelib)    -- is for the ID of the typelib if this project is exposed
 src/Abp.AspNetCore.OpenIddict/AspNetCore/OpenIddict/Controllers/AuthorizeController.cs:77:52     - Unknown word (promptless) -- application requested promptless authentication,
 src/Abp.AspNetCore.OpenIddict/AspNetCore/OpenIddict/Controllers/TokenController.Password.cs:25:17     - Unknown word (OIDDICT)    -- // TODO@OIDDICT: Should we use session
+src/Abp.AspNetCore/AspNetCore/Configuration/AbpControllerAssemblySettingBuilder.cs:21:97     - Unknown word (configurer) -- Action<ControllerModel> configurer)
 src/Abp.AspNetCore/AspNetCore/EntityHistory/HttpRequestEntityChangeSetReasonProvider.cs:17:38     - Unknown word (Overrided)  -- override string Reason => OverridedValue != null
 src/Abp.AspNetCore/AspNetCore/MultiTenancy/DomainTenantResolveContributor.cs:9:43      - Unknown word (Extracter)  -- FormattedStringValueExtracter;
 src/Abp.AspNetCore/AspNetCore/Security/AbpSecurityHeadersMiddleware.cs:18:70     - Unknown word (nosniff)    -- Content-Type-Options", "nosniff");
@@ -164,6 +169,7 @@ src/Abp.Dapper/Dapper-Extensions/DapperImplementor.cs:666:31    - Unknown word (
 src/Abp.Dapper/Dapper-Extensions/Mapper/ClassMapper.cs:188:23    - Unknown word (propertymap) -- /// Removes a propertymap entry
 src/Abp.Dapper/Dapper-Extensions/Mapper/MemberMap.cs:324:32    - Unknown word (integery)   -- The property is an integery-based identity generated
 src/Abp.Dapper/Dapper-Extensions/Mapper/PluralizedAutoClassMapper.cs:21:51     - Unknown word (Unpluralizables) -- readonly IList<string> Unpluralizables = new List<string>
+src/Abp.Dapper/Dapper-Extensions/Mapper/PluralizedAutoClassMapper.cs:22:65     - Unknown word (Pluralizations)  -- IDictionary<string, string> Pluralizations = new Dictionary<string
 src/Abp.Dapper/Dapper-Extensions/Mapper/PluralizedAutoClassMapper.cs:34:97     - Unknown word (aeiou)           -- { "(.+[aeiou]y)$", "$1s" },
 src/Abp.Dapper/Dapper-Extensions/Mapper/PluralizedAutoClassMapper.cs:39:94     - Unknown word (octop)           -- { "(octop|vir)us$", "$1i"},
 src/Abp.Dapper/Dapper-Extensions/Mapper/ReferenceMap.cs:99:70     - Unknown word (Relacional) -- ExtensionsReflectionHelper.GetRelacionalComparator(binary.NodeType
@@ -196,6 +202,9 @@ src/Abp.EntityFramework.Common/DbContextTypeMatcher.cs:43:66     - Unknown word 
 src/Abp.EntityFramework.Common/IShouldInitializeDcontext.cs:3:39      - Unknown word (Dcontext)   -- interface IShouldInitializeDcontext
 src/Abp.EntityFramework/EntityFramework/Extensions/QueryableExtensions.cs:61:13     - Unknown word (Nolockings) -- /// Nolockings the specified queryable
 src/Abp.EntityFramework/EntityFramework/Extensions/QueryableExtensions.cs:68:31     - Unknown word (Nolocking)  -- public static TResult Nolocking<TEntity, TResult>(this
+src/Abp.EntityFrameworkCore/EntityFrameworkCore/AbpDbContext.cs:622:37    - Unknown word (navigations) -- parent's principal-side navigations and loads them on demand
+src/Abp.EntityFrameworkCore/EntityFrameworkCore/AbpDbContext.cs:629:53    - Unknown word (Navigations) -- avigationEntry in parentEntry.Navigations)
+src/Abp.EntityFrameworkCore/EntityFrameworkCore/Extensions/QueryableExtensions.cs:51:30     - Unknown word (Includable) -- Func<IQueryable<T>, IIncludableQueryable<T, object>
 src/Abp.HangFire/Hangfire/Configuration/IAbpHangfireConfiguration.cs:13:30     - Unknown word (Hanfgire's) -- // Gets or sets the Hanfgire's <see cref="BackgroundJobServe
 src/Abp.HtmlSanitizer/HtmlSanitizer/AbpHtmlSanitizerModule.cs:5:7       - Unknown word (Ganss)      -- using Ganss.Xss;
 src/Abp.NHibernate/NHibernate/EntityMappings/NhMappingExtensions.cs:8:55      - Unknown word (standart)   -- make mapping easier for standart columns.
@@ -213,6 +222,8 @@ src/Abp.Web.Common/Web/Models/DefaultErrorInfoConverter.cs:15:76     - Unknown w
 src/Abp.Web.Common/Web/Mvc/Alerts/PageAlertMessageRenderer.cs:18:142    - Unknown word (dismisable) -- Dismissible ? "alert-dismisable" : "")} role=\"alert
 src/Abp.Zero.Common/Application/Editions/EditionfeatureCacheItem.cs:7:18      - Unknown word (Editionfeature) -- public class EditionfeatureCacheItem
 src/Abp.Zero.Common/Auditing/AuditLog.cs:128:47    - Unknown word (occured)    -- object, if an exception occured during execution of
+src/Abp.Zero.Common/Auditing/AuditingStore.cs:8:66      - Unknown word (informations) -- /> to save auditing informations to database.
+src/Abp.Zero.Common/MultiTenancy/AbpTenant.cs:32:30     - Unknown word (deleter)    -- // Reference to the deleter user of this entity
 src/Abp.Zero.Common/Zero/Configuration/AbpZeroSettingProvider.cs:72:56     - Unknown word (Maxumum)    -- FixedLocalizableString("Maxumum Failed access attempt
 src/Abp.ZeroCore.EntityFrameworkCore/EntityHistory/EntityHistoryHelper.cs:135:43    - Unknown word (Unproxied)  -- typeOfEntity = ProxyHelper.GetUnproxiedType(entityEntry.Entity
 src/Abp.ZeroCore.NHibernate/EntityHistory/EventExtensions.cs:20:61     - Unknown word (Metamodel)  -- event.Persister.EntityMetamodel.Type.GetProperties(
@@ -261,6 +272,7 @@ src/Abp/MimeTypes/MimeTypeMap.cs:133:39    - Unknown word (pkix)           -- .c
 src/Abp/MimeTypes/MimeTypeMap.cs:136:20    - Unknown word (csdproj)        -- {".csdproj", "text/plain"},
 src/Abp/MimeTypes/MimeTypeMap.cs:146:20    - Unknown word (dbproj)         -- {".dbproj", "text/plain"},
 src/Abp/MimeTypes/MimeTypeMap.cs:151:20    - Unknown word (dgml)           -- {".dgml", "application/xml"
+src/Abp/MimeTypes/MimeTypeMap.cs:156:20    - Unknown word (divx)           -- {".divx", "video/divx"},
 src/Abp/MimeTypes/MimeTypeMap.cs:157:41    - Unknown word (msdownload)     -- dll", "application/x-msdownload"},
 src/Abp/MimeTypes/MimeTypeMap.cs:160:39    - Unknown word (msword)         -- .doc", "application/msword"},
 src/Abp/MimeTypes/MimeTypeMap.cs:162:44    - Unknown word (openxmlformats) -- docx", "application/vnd.openxmlformats-officedocument.wordprocessing
@@ -270,6 +282,7 @@ src/Abp/MimeTypes/MimeTypeMap.cs:164:20    - Unknown word (dotm)             -- 
 src/Abp/MimeTypes/MimeTypeMap.cs:173:39    - Unknown word (acad)             -- .dwg", "application/acad"},
 src/Abp/MimeTypes/MimeTypeMap.cs:180:46    - Unknown word (fontobject)       -- "application/vnd.ms-fontobject"},
 src/Abp/MimeTypes/MimeTypeMap.cs:184:34    - Unknown word (setext)           -- {".etx", "text/x-setext"},
+src/Abp/MimeTypes/MimeTypeMap.cs:194:37    - Unknown word (vrml)             -- {".flr", "x-world/x-vrml"},
 src/Abp/MimeTypes/MimeTypeMap.cs:198:20    - Unknown word (generictest)      -- {".generictest", "application/xml"
 src/Abp/MimeTypes/MimeTypeMap.cs:203:20    - Unknown word (gtar)             -- {".gtar", "application/x-gtar
 src/Abp/MimeTypes/MimeTypeMap.cs:207:20    - Unknown word (hdml)             -- {".hdml", "text/x-hdml"},
@@ -298,10 +311,14 @@ src/Abp/MimeTypes/MimeTypeMap.cs:294:35    - Unknown word (mpegurl)          -- 
 src/Abp/MimeTypes/MimeTypeMap.cs:301:35    - Unknown word (macpaint)         -- {".mac", "image/x-macpaint"},
 src/Abp/MimeTypes/MimeTypeMap.cs:303:41    - Unknown word (troff)            -- man", "application/x-troff-man"},
 src/Abp/MimeTypes/MimeTypeMap.cs:315:20    - Unknown word (mhtml)            -- {".mhtml", "message/rfc822"}
+src/Abp/MimeTypes/MimeTypeMap.cs:320:36    - Unknown word (matroska)         -- {".mk3d", "video/x-matroska-3d"},
 src/Abp/MimeTypes/MimeTypeMap.cs:323:41    - Unknown word (smaf)             -- mmf", "application/x-smaf"},
 src/Abp/MimeTypes/MimeTypeMap.cs:325:41    - Unknown word (msmoney)          -- mny", "application/x-msmoney"},
+src/Abp/MimeTypes/MimeTypeMap.cs:327:33    - Unknown word (quicktime)        -- {".mov", "video/quicktime"},
 src/Abp/MimeTypes/MimeTypeMap.cs:349:41    - Unknown word (miva)             -- mvc", "application/x-miva-compiled"},
 src/Abp/MimeTypes/MimeTypeMap.cs:351:41    - Unknown word (mmxp)             -- mxp", "application/x-mmxp"},
+src/Abp/MimeTypes/MimeTypeMap.cs:357:49    - Unknown word (opendocument)     -- application/vnd.oasis.opendocument.database"},
+src/Abp/MimeTypes/MimeTypeMap.cs:372:39    - Unknown word (onenote)          -- .one", "application/onenote"},
 src/Abp/MimeTypes/MimeTypeMap.cs:373:20    - Unknown word (onea)             -- {".onea", "application/onenote
 src/Abp/MimeTypes/MimeTypeMap.cs:374:20    - Unknown word (onepkg)           -- {".onepkg", "application/onenote
 src/Abp/MimeTypes/MimeTypeMap.cs:375:20    - Unknown word (onetmp)           -- {".onetmp", "application/onenote
@@ -323,6 +340,7 @@ src/Abp/MimeTypes/MimeTypeMap.cs:412:41    - Unknown word (perfmon)             
 src/Abp/MimeTypes/MimeTypeMap.cs:418:44    - Unknown word (anymap)                -- , "image/x-portable-anymap"},
 src/Abp/MimeTypes/MimeTypeMap.cs:420:20    - Unknown word (pntg)                  -- {".pntg", "image/x-macpaint
 src/Abp/MimeTypes/MimeTypeMap.cs:424:74    - Unknown word (presentationml)        -- openxmlformats-officedocument.presentationml.template"},
+src/Abp/MimeTypes/MimeTypeMap.cs:427:44    - Unknown word (pixmap)                -- , "image/x-portable-pixmap"},
 src/Abp/MimeTypes/MimeTypeMap.cs:440:20    - Unknown word (psess)                 -- {".psess", "application/xml"
 src/Abp/MimeTypes/MimeTypeMap.cs:444:41    - Unknown word (mspublisher)           -- pub", "application/x-mspublisher"},
 src/Abp/MimeTypes/MimeTypeMap.cs:447:20    - Unknown word (qhtm)                  -- {".qhtm", "text/x-html-insertion
@@ -357,7 +375,7 @@ src/Abp/MimeTypes/MimeTypeMap.cs:555:32    - Unknown word (iuls)                
 src/Abp/MimeTypes/MimeTypeMap.cs:557:20    - Unknown word (ustar)                 -- {".ustar", "application/x-ustar
 src/Abp/MimeTypes/MimeTypeMap.cs:559:20    - Unknown word (vbdproj)               -- {".vbdproj", "text/plain"},
 src/Abp/MimeTypes/MimeTypeMap.cs:563:34    - Unknown word (vcard)                 -- {".vcf", "text/x-vcard"},
-src/Abp/MimeTypes/MimeTypeMap.cs:564:20    - Unknown word (vcproj)                -- {".vcproj", "application/xml"
+src/Abp/MimeTypes/MimeTypeMap.cs:564:20    - Unknown word (vcproj)               -- {".vcproj", "application/xml"
 src/Abp/MimeTypes/MimeTypeMap.cs:567:20    - Unknown word (vddproj)              -- {".vddproj", "text/plain"},
 src/Abp/MimeTypes/MimeTypeMap.cs:569:20    - Unknown word (vdproj)               -- {".vdproj", "text/plain"},
 src/Abp/MimeTypes/MimeTypeMap.cs:56:20     - Unknown word (accda)      -- {".accda", "application/msaccess
@@ -392,6 +410,8 @@ src/Abp/MimeTypes/MimeTypeMap.cs:618:49    - Unknown word (wmlscriptc)          
 src/Abp/MimeTypes/MimeTypeMap.cs:627:41    - Unknown word (mswrite)              -- wri", "application/x-mswrite"},
 src/Abp/MimeTypes/MimeTypeMap.cs:62:20     - Unknown word (accdw)      -- {".accdw", "application/msaccess
 src/Abp/MimeTypes/MimeTypeMap.cs:62:50     - Unknown word (webapplication) -- application/msaccess.webapplication"},
+src/Abp/MimeTypes/MimeTypeMap.cs:633:37    - Unknown word (directx)              -- {".x", "application/directx"},
+src/Abp/MimeTypes/MimeTypeMap.cs:636:41    - Unknown word (silverlight)          -- xap", "application/x-silverlight-app"},
 src/Abp/MimeTypes/MimeTypeMap.cs:637:20    - Unknown word (xbap)                 -- {".xbap", "application/x-ms
 src/Abp/MimeTypes/MimeTypeMap.cs:638:35    - Unknown word (xbitmap)              -- {".xbm", "image/x-xbitmap"},
 src/Abp/MimeTypes/MimeTypeMap.cs:63:20     - Unknown word (accft)          -- {".accft", "application/msaccess
@@ -470,6 +490,7 @@ test/Abp.Tests/Configuration/SettingManager_Tests.cs:455:33    - Unknown word (A
 test/Abp.Tests/Configuration/SettingManager_Tests.cs:457:40    - Unknown word (Gext)       -- "f1dilIUWtfL7DhGextUFKw=="), // encrypted
 test/Abp.Tests/Dependency/ScopedIocResolver_Tests.cs:116:78    - Unknown word (Resolvings)    -- Should_Work_With_OtherResolvings()
 test/Abp.Tests/Dependency/ScopedIocResolver_Tests.cs:88:50     - Unknown word (Dependendcies) -- ISimpleDependency> simpleDependendcies;
+test/Abp.Tests/Domain/Entities/Test_Entities.cs:12:57     - Unknown word (ibrahim)    -- Id = 5, Name = "Halil ibrahim Kalkan" };
 test/Abp.Tests/Domain/Values/ValueObject_Simple_Tests.cs:27:92     - Unknown word (Streettt)   -- FAAB5AF"), "Baris Manco Streettt", 42).ValueEquals(
 test/Abp.Tests/Extensions/StringExtensions_Tests.cs:23:52     - Unknown word (Turke)      -- EnsureEndsWith('y').ShouldBe("TurkeYy");
 test/Abp.Tests/Extensions/StringExtensions_Tests.cs:27:14     - Unknown word (TAKSİ)      -- "TAKSİ".EnsureEndsWith('i'
@@ -484,6 +505,7 @@ test/Abp.Tests/Localization/HumanizerOfUndefinedLocalizationSource_Tests.cs:29:5
 test/Abp.Tests/Localization/HumanizerOfUndefinedLocalizationSource_Tests.cs:34:47     - Unknown word (Amet)       -- GetString("LoremIpsumDolorSitAmet", new CultureInfo("en
 test/Abp.Tests/Localization/Json/JsonAndXmlSourceMixing_Tests.cs:33:17     - Unknown word (mananger)   -- var mananger = LocalIocManager.Resolve
 test/Abp.Tests/Localization/ResourceFileLocalizationSource_Tests.cs:39:108    - Unknown word (Merhaba)    -- tCultureInfo("tr")).ShouldBe("Merhaba!");
+test/Abp.Tests/Localization/TestResourceFiles/MyTestResource.Designer.cs:37:46     - Unknown word (Browsable)  -- ComponentModel.EditorBrowsableAttribute(global::System
 test/Abp.Tests/Localization/Test_DictionaryBasedLocalizationSource.cs:107:28    - Unknown word (Dünya)      -- {"world", "Dünya"}
 test/Abp.Tests/Localization/Test_DictionaryBasedLocalizationSource.cs:29:27     - Unknown word (Yeryüzü)    -- Assert.Equal("Yeryüzü", _localizationSource
 test/Abp.Tests/Localization/Test_DictionaryBasedLocalizationSource.cs:41:27     - Unknown word (Fourty)     -- Assert.Equal("Fourty Two (42)", _localizationSourc
@@ -497,11 +519,16 @@ test/Abp.Tests/Runtime/Security/SimpleStringCipher_Tests.cs:25:37     - Unknown 
 test/Abp.Tests/Runtime/Security/SimpleStringCipher_Tests.cs:33:17     - Unknown word (enrypted)   -- var enryptedText = cipher.Encrypt
 test/Abp.Tests/Specifications/Specification_Tests.cs:20:31     - Unknown word (Tuana)      -- new Customer("Tuana", 2, 500, "Turkey")
 test/Abp.Tests/Specifications/Specification_Tests.cs:26:31     - Unknown word (Daan)       -- new Customer("Daan", 39, 6000, "Netherlands
+test/Abp.Tests/Specifications/Specification_Tests.cs:27:31     - Unknown word (Alessandro) -- new Customer("Alessandro", 22, 8271, "Italy"
 test/Abp.Tests/Startup/AbpBootstraper_Tester.cs:7:21      - Unknown word (Bootstraper) -- public class AbpBootstraper_Tester : TestBaseWithLocalIoc
 test/Abp.Tests/Text/Formatting/FormattedStringValueExtracter_Tests.cs:19:23     - Unknown word (halil)      -- "User halil does not exist.",
 test/Abp.Tests/Timing/TimezoneHelper_Tests.cs:159:111   - Unknown word (Offsests)    -- Return_Correct_DateTimeOffsests_With_No_DaylightSavings
+test/Abp.Tests/Timing/TimezoneHelper_Tests.cs:175:84    - Unknown word (timespan)    -- should be the same timespan as previous date
+test/Abp.Tests/Timing/TimezoneHelper_Tests.cs:25:60     - Unknown word (Kuala)      -- Standard Time", "Asia/Kuala_Lumpur")]
+test/Abp.Tests/Timing/TimezoneHelper_Tests.cs:25:66     - Unknown word (Lumpur)     -- Standard Time", "Asia/Kuala_Lumpur")]
 test/Abp.Tests/Timing/TimezoneHelper_Tests.cs:26:22     - Unknown word (Qyzylorda)  -- [InlineData("Qyzylorda Standard Time", "Asia
 test/Abp.Tests/Timing/TimezoneHelper_Tests.cs:48:27     - Unknown word (Choibalsan) -- [InlineData("Asia/Choibalsan", "Ulaanbaatar Standard
+test/Abp.Tests/Timing/TimezoneHelper_Tests.cs:48:41     - Unknown word (Ulaanbaatar) -- "Asia/Choibalsan", "Ulaanbaatar Standard Time")]
 test/Abp.Tests/Timing/TimezoneHelper_Tests.cs:79:53     - Unknown word (Convertable) -- Timezones_Should_Be_Convertable_To_Iana()
 test/Abp.Web.Common.Tests/Configuration/AbpUserConfigurationBuilder_Tests.cs:52:96     - Unknown word (Authanticated) -- RequiresAuthentication_For_Authanticated_User()
 test/Abp.ZeroCore.SampleApp/AbpZeroCoreSampleAppModule.cs:53:30     - Unknown word (Registarar) -- var genericRepositoryRegistarar = IocManager.Resolve
@@ -522,3 +549,4 @@ test/aspnet-core-demo/AbpAspNetCoreDemo.Tests/Tests/SanitizerControllerTests.cs:
 test/aspnet-core-demo/AbpAspNetCoreDemo/Views/Home/Index.cshtml:59:22     - Unknown word (glyphicon)  -- <span class="glyphicon glyphicon-chevron-left
 test/aspnet-core-demo/AbpAspNetCoreDemo/Views/Home/Index.cshtml:81:80     - Unknown word (appsetting) -- LinkID=699562">Add an appsetting in config and access
 test/aspnet-core-demo/AbpAspNetCoreDemo/Views/Shared/Error.cshtml:13:265    - Unknown word (ASPNETCORE) -- setting the <strong>ASPNETCORE_ENVIRONMENT</strong
+test/aspnet-core-demo/AbpAspNetCoreDemo/Views/Shared/_Layout.cshtml:56:28     - Unknown word (jquery)     -- <script src="~/lib/jquery/dist/jquery.js"></script

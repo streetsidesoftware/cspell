@@ -5,7 +5,7 @@ Args: '["--issues-summary-report","--locale=en,en-GB","."]'
 Summary:
   files: 2805
   filesWithIssues: 469
-  issues: 1778
+  issues: 1790
   errors: 0
 Errors: []
 
@@ -53,6 +53,7 @@ issues:
   - "docs/api/assert.md:1145:59      Dont        U       baz: 3 }, ['foo', 'iDontExist', 'baz'])"
   - "docs/api/browser/assertions.md:17:293       retriable               U       purpose, Vitest provides retriable assertions out of the"
   - "docs/api/browser/assertions.md:303:46       tobeinviewport          U       Version>4.0.0</Version> {#tobeinviewport}"
+  - "docs/api/browser/assertions.md:855:46       Luca                    U       input-example\" value=\"Luca\" />"
   - "docs/api/browser/assertions.md:864:18       ananas                  U       <option value=\"ananas\">Ananas</option>"
   - "docs/api/browser/assertions.md:864:26       Ananas                  U       option value=\"ananas\">Ananas</option>"
   - "docs/api/browser/assertions.md:1090:63      ected                   U       )).toHaveSelection('ected')"
@@ -90,6 +91,7 @@ issues:
   - "docs/api/expect.md:2215:23      arktype                         U       import { type } from 'arktype'"
   - "docs/api/expect.md:2308:39      addequalitytesters              U       addEqualityTesters {#expect-addequalitytesters}"
   - "docs/api/hooks.md:366:22        ontestfinished      U       ## onTestFinished {#ontestfinished}"
+  - "docs/api/mock.md:159:7          Nellies             U       const NelliesBucket = mockFn(0)"
   - "docs/api/mock.md:425:41         mockthrow           U       Version>4.1.0</Version> {#mockthrow}"
   - "docs/api/mock.md:439:45         mockthrowonce       U       Version>4.1.0</Version> {#mockthrowonce}"
   - "docs/api/test.md:663:52         aroundeach      U       .0</Version> {#test-aroundeach}"
@@ -264,6 +266,7 @@ issues:
   - "packages/coverage-istanbul/package.json:58:6        obug            U       \"obug\": \"catalog:\","
   - "packages/coverage-istanbul/src/provider.ts:3:15         Proxified       U       import type { ProxifiedModule } from 'magicast"
   - "packages/coverage-v8/package.json:57:7          bcoe    U       \"@bcoe/v8-coverage\": \"^1.0"
+  - "packages/coverage-v8/src/provider.ts:8:21           Covs    U       import { mergeScriptCovs } from '@bcoe/v8-coverage"
   - "packages/expect/rollup.config.js:36:5           onwarn      U       onwarn,"
   - "packages/expect/src/jest-expect.ts:90:72        ssfi    U       error, utils.flag(this, 'ssfi'))"
   - "packages/expect/src/types.ts:51:3           dont    U       dontThrow?: () => void"
@@ -415,6 +418,7 @@ issues:
   - "pnpm-workspace.yaml:15:7        trickfilm       U       - '@trickfilm400/rollup-plugin-off"
   - "pnpm-workspace.yaml:43:3        mlly            U       mlly: ^1.8.2"
   - "pnpm-workspace.yaml:44:3        rollup          U       rollup: 'catalog:'"
+  - "pnpm-workspace.yaml:45:3        vite            U       vite: 'catalog:'"
   - "pnpm-workspace.yaml:63:11       estree          U       '@types/estree': ^1.0.9"
   - "pnpm-workspace.yaml:67:11       yauzl           U       '@types/yauzl': ^3.4.0"
   - "pnpm-workspace.yaml:69:5        vitejs          U       '@vitejs/plugin-vue': ^6.0.8"
@@ -691,6 +695,7 @@ issuesSummary:
   - "text: contextification, count: 1, files: 1,"
   - "text: contextified, count: 1, files: 1,"
   - "text: coverd, count: 1, files: 1,"
+  - "text: Covs, count: 2, files: 1,"
   - "text: cppp, count: 1, files: 1,"
   - "text: cpuprofile, count: 3, files: 1,"
   - "text: crashcontent, count: 2, files: 2,"
@@ -839,6 +844,7 @@ issuesSummary:
   - "text: LOCALAPPDATA, count: 2, files: 2,"
   - "text: Losert, count: 1, files: 1,"
   - "text: LPAREN, count: 4, files: 1,"
+  - "text: Luca, count: 6, files: 3,"
   - "text: Luer, count: 2, files: 1,"
   - "text: lukeed, count: 3, files: 2,"
   - "text: lydell, count: 1, files: 1,"
@@ -878,6 +884,7 @@ issuesSummary:
   - "text: mtrue, count: 5, files: 1,"
   - "text: myproject, count: 5, files: 1,"
   - "text: mzhubail, count: 1, files: 1,"
+  - "text: Nellies, count: 2, files: 1,"
   - "text: neque, count: 2, files: 1,"
   - "text: nesciunt, count: 1, files: 1,"
   - "text: nessage, count: 1, files: 1,"
@@ -1123,6 +1130,7 @@ issuesSummary:
   - "text: veetest, count: 1, files: 1,"
   - "text: velit, count: 2, files: 1,"
   - "text: Vercel, count: 1, files: 1,"
+  - "text: vite, count: 2, files: 1,"
   - "text: viteenvironment, count: 1, files: 1,"
   - "text: vitejs, count: 1, files: 1,"
   - "text: vitemodulerunner, count: 1, files: 1,"

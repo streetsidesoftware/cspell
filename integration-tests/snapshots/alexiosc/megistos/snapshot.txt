@@ -3,13 +3,14 @@ Repository: alexiosc/megistos
 Url: "https://github.com/alexiosc/megistos.git"
 Args: ["--config=../../../../config/repositories/alexiosc/megistos/cspell.json","**/*.{md,c,h,html}"]
 Lines:
- CSpell: Files checked: 583, Issues found: 30527 in 574 files.
+ CSpell: Files checked: 583, Issues found: 33051 in 577 files.
  exit code: 1
 ATTIC/doc/examples/mod_dialog.c:18:5      - Unknown word (sameas)     -- if (sameas (margv [6], "OK") |
 ATTIC/doc/examples/mod_dialog.c:9:29      - Unknown word (FOOVT)      -- dialog_run ("foo", FOOVT, FOOLT, inp_buffer)
 ATTIC/doc/examples/mod_dialog.c:9:36      - Unknown word (FOOLT)      -- dialog_run ("foo", FOOVT, FOOLT, inp_buffer);
 ATTIC/doc/examples/mod_main.c:3:12      - Unknown word (rcsinfo)    -- const char rcsinfo[]="$Id$";
 ATTIC/doc/examples/mod_main.c:8:11      - Unknown word (Chouchoulas) -- "Alexios Chouchoulas <alexios@bedroomlan
+ATTIC/doc/examples/mod_main.c:8:3       - Unknown word (Alexios)    -- "Alexios Chouchoulas <alexios
 ATTIC/doc/examples/out_subst.c:13:6      - Unknown word (addsubstvar) -- out_addsubstvar (table [i].varname,
 ATTIC/doc/examples/out_subst.c:2:18      - Unknown word (bbstitle)   -- {"BBS", sv_bbstitle, NULL},
 ATTIC/intl/bindtextdom.c:211:26    - Unknown word (cntr)       -- binding->codeset_cntr++;
@@ -31,8 +32,10 @@ ATTIC/intl/eval-plural.h:51:29     - Unknown word (lnot)       -- pexp->operatio
 ATTIC/intl/finddomain.c:91:24     - Unknown word (nflist)     -- retval = _nl_make_l10nflist (&_nl_loaded_domains
 ATTIC/intl/gmo.h:138:16    - Unknown word (sysdepref)  -- nls_uint32 sysdepref;
 ATTIC/intl/hash-string.h:33:27     - Unknown word (hashpjw)    -- Defines the so called `hashpjw' function by P.J. Weinberger
+ATTIC/intl/hash-string.h:33:53     - Unknown word (Weinberger) -- hashpjw' function by P.J. Weinberger
 ATTIC/intl/hash-string.h:34:13     - Unknown word (Sethi)      -- [see Aho/Sethi/Ullman, COMPILERS: Principles
 ATTIC/intl/hash-string.h:34:19     - Unknown word (Ullman)     -- [see Aho/Sethi/Ullman, COMPILERS: Principles
+ATTIC/intl/intl-compat.c:32:12     - Unknown word (redirections) -- has the redirections primarily in the <libintl
 ATTIC/intl/l10nflist.c:272:45    - Unknown word (syntaces)   -- can be part of both syntaces but has different
 ATTIC/intl/l10nflist.c:32:35     - Unknown word (ARGZ)       -- LIBC || defined HAVE_ARGZ_H
 ATTIC/intl/l10nflist.c:33:12     - Unknown word (argz)       -- # include <argz.h>
@@ -52,15 +55,20 @@ ATTIC/intl/localcharset.c:229:6     - Unknown word (DECKOREAN)  -- "DECKOREAN" "
 ATTIC/intl/localcharset.c:326:9     - Unknown word (cplen)      -- ULONG cplen;
 ATTIC/intl/localealias.c:225:21    - Unknown word (aliasfile)  -- static const char aliasfile[] = "/locale.alias"
 ATTIC/intl/localename.c:107:15    - Unknown word (KONKANI)    -- # ifndef LANG_KONKANI
+ATTIC/intl/localename.c:20:30     - Unknown word (Lillqvist)  -- code written by Tor Lillqvist <tml@iki.fi>.  */
+ATTIC/intl/localename.c:302:32    - Unknown word (RICA)       -- SUBLANG_SPANISH_COSTA_RICA
 ATTIC/intl/localename.c:444:12    - Unknown word (LANGIDFROMLCID) -- langid = LANGIDFROMLCID (lcid);
 ATTIC/intl/localename.c:447:13    - Unknown word (PRIMARYLANGID)  -- primary = PRIMARYLANGID (langid);
+ATTIC/intl/localename.c:509:31    - Unknown word (Serbo)          -- What used to be called Serbo-Croatian
 ATTIC/intl/localename.c:530:42    - Unknown word (VLAAMS)         -- BELGIAN: /* FLEMISH, VLAAMS */ return "nl_BE";
 ATTIC/intl/localename.c:572:19    - Unknown word (FULFULDE)       -- case 0x67: /* FULFULDE */ return "ful_NG";
 ATTIC/intl/localename.c:603:19    - Unknown word (IBIBIO)         -- case 0x69: /* IBIBIO */ return "nic_NG";
 ATTIC/intl/localename.c:617:19    - Unknown word (KANURI)         -- case 0x71: /* KANURI */ return "kau_NG";
+ATTIC/intl/localename.c:661:25    - Unknown word (BOKMAL)         -- case SUBLANG_NORWEGIAN_BOKMAL: return "no_NO";
 ATTIC/intl/localename.c:666:19    - Unknown word (OROMO)          -- case 0x72: /* OROMO */ return "om_ET";
 ATTIC/intl/localename.c:667:19    - Unknown word (PAPIAMENTU)     -- case 0x79: /* PAPIAMENTU */ return "pap_AN";
 ATTIC/intl/localename.c:681:19    - Unknown word (RHAETO)         -- case 0x17: /* RHAETO-ROMANCE */ return "rm
+ATTIC/intl/localename.c:685:19    - Unknown word (SAMI)           -- case 0x3b: /* SAMI */ return "se_NO";
 ATTIC/intl/localename.c:68:15     - Unknown word (DIVEHI)     -- # ifndef LANG_DIVEHI
 ATTIC/intl/localename.c:721:19    - Unknown word (SUTU)           -- case 0x30: /* SUTU */ return "bnt_TZ";
 ATTIC/intl/localename.c:733:19    - Unknown word (TAMAZIGHT)      -- case 0x5f: /* TAMAZIGHT */ return "ber_MA";
@@ -107,6 +115,7 @@ ATTIC/intl/plural.c:298:9     - Unknown word (YYLAST)       -- #define YYLAST 53
 ATTIC/intl/plural.c:301:20    - Unknown word (yytable)      -- static const short yytable[] =
 ATTIC/intl/plural.c:311:20    - Unknown word (yycheck)      -- static const short yycheck[] =
 ATTIC/intl/plural.c:320:9     - Unknown word (YYPURE)       -- #define YYPURE 1
+ATTIC/intl/plural.c:352:30    - Unknown word (Stallman)     -- was written by Richard Stallman by simplifying the hairy
 ATTIC/intl/plural.c:362:16    - Unknown word (yyoverflow)   -- #if ! defined (yyoverflow) || defined (YYERROR
 ATTIC/intl/plural.c:366:6     - Unknown word (YYSTACK)      -- # if YYSTACK_USE_ALLOCA
 ATTIC/intl/plural.c:386:12    - Unknown word (YYSIZE)       -- # define YYSIZE_T size_t
@@ -268,6 +277,7 @@ ATTIC/mbk/mbk_account.h:73:9      - Unknown word (BADPSW)     -- #define BADPSW1
 ATTIC/mbk/mbk_account.h:78:9      - Unknown word (PSWEPI)     -- #define PSWEPI 71
 ATTIC/mbk/mbk_account.h:79:9      - Unknown word (PSWKO)      -- #define PSWKO 72
 ATTIC/mbk/mbk_account.h:80:9      - Unknown word (PRFVT)      -- #define PRFVT 73
+ATTIC/mbk/mbk_account.h:81:9      - Unknown word (ANSON)      -- #define ANSON 74
 ATTIC/mbk/mbk_account.h:82:9      - Unknown word (ANSOFF)     -- #define ANSOFF 75
 ATTIC/mbk/mbk_account.h:83:9      - Unknown word (ANSDEF)     -- #define ANSDEF 76
 ATTIC/mbk/mbk_account.h:84:9      - Unknown word (ANSASK)     -- #define ANSASK 77
@@ -282,6 +292,7 @@ ATTIC/mbk/mbk_adventure.h:30:9      - Unknown word (TOPLIN)     -- #define TOPLI
 ATTIC/mbk/mbk_adventure.h:31:9      - Unknown word (TOPFTR)     -- #define TOPFTR 24
 ATTIC/mbk/mbk_adventure.h:34:9      - Unknown word (LISTGAM)    -- #define LISTGAM 27
 ATTIC/mbk/mbk_adventure.h:35:9      - Unknown word (LISTFTR)    -- #define LISTFTR 28
+ATTIC/mbk/mbk_archivers.h:7:11      - Unknown word (ARCHIVERS)  -- #ifndef __ARCHIVERS_UNAMBIGUOUS__
 ATTIC/mbk/mbk_bbsdialog.h:10:9      - Unknown word (FHBUTN)     -- #define FHBUTN 3
 ATTIC/mbk/mbk_bbsdialog.h:11:9      - Unknown word (FHFTR)      -- #define FHFTR 4
 ATTIC/mbk/mbk_bbsdialog.h:21:9      - Unknown word (CLSLSTHDR)  -- #define CLSLSTHDR 14
@@ -875,6 +886,7 @@ ATTIC/mbk/mbk_emailclubs.h:570:9     - Unknown word (COPOK)      -- #define COPO
 ATTIC/mbk/mbk_emailclubs.h:576:9     - Unknown word (COPIAMNU)   -- #define COPIAMNU 569
 ATTIC/mbk/mbk_emailclubs.h:577:9     - Unknown word (COPIASMNU)  -- #define COPIASMNU 570
 ATTIC/mbk/mbk_emailclubs.h:578:9     - Unknown word (COPIARS)    -- #define COPIARS 571
+ATTIC/mbk/mbk_emailclubs.h:579:9     - Unknown word (COPIAH)     -- #define COPIAH 572
 ATTIC/mbk/mbk_emailclubs.h:57:9      - Unknown word (TLCPAG)     -- #define TLCPAG 50
 ATTIC/mbk/mbk_emailclubs.h:580:9     - Unknown word (COPIAO)     -- #define COPIAO 573
 ATTIC/mbk/mbk_emailclubs.h:581:9     - Unknown word (COPIAA)     -- #define COPIAA 574
@@ -1295,6 +1307,7 @@ ATTIC/mbk/mbk_gstat.h:14:9      - Unknown word (TEMGT)      -- #define TEMGT_SO 
 ATTIC/mbk/mbk_gstat.h:15:9      - Unknown word (TEMGF)      -- #define TEMGF_SO 8
 ATTIC/mbk/mbk_gstat.h:37:9      - Unknown word (TEMS)       -- #define TEMS_CO 30
 ATTIC/mbk/mbk_gstat.h:41:9      - Unknown word (TEMGS)      -- #define TEMGS_CO 34
+ATTIC/mbk/mbk_gstat.h:58:14     - Unknown word (COSA)       -- #define TEMH_COSA 51
 ATTIC/mbk/mbk_gstat.h:7:11      - Unknown word (GSTAT)      -- #ifndef __GSTAT_UNAMBIGUOUS__
 ATTIC/mbk/mbk_lined.h:10:9      - Unknown word (EDTMNU)     -- #define EDTMNU 3
 ATTIC/mbk/mbk_lined.h:11:9      - Unknown word (EDTMNUS)    -- #define EDTMNUS 4
@@ -2321,6 +2334,7 @@ ATTIC/src/modules/account/account.c:209:55    - Unknown word (MAXINPLEN)    -- A
 ATTIC/src/modules/account/account.c:236:11    - Unknown word (thisuseronl)  -- audit (thisuseronl.channel, AUDIT (ACCEDT
 ATTIC/src/modules/account/account.c:269:1     - Unknown word (makeapass)    -- makeapass ()
 ATTIC/src/modules/account/account.c:276:22    - Unknown word (FLETTRWORDS)  -- if ((words = fopen (FLETTRWORDS, "r")) != NULL) {
+ATTIC/src/modules/account/account.c:28:45     - Unknown word (alexios)    -- 2004/09/13 19:55:34 alexios Exp $
 ATTIC/src/modules/account/account.c:312:1     - Unknown word (stupidpass)   -- stupidpass (char *pass)
 ATTIC/src/modules/account/account.c:319:19    - Unknown word (mkfname)      -- if ((fp = fopen (mkfname (BADPASSFILE), "r")
 ATTIC/src/modules/account/account.c:361:17    - Unknown word (reprompt)     -- } while (inp_reprompt ());
@@ -2453,6 +2467,7 @@ ATTIC/src/modules/adventure/infoint/osdepend.c:135:45    - Unknown word (Neptho)
 ATTIC/src/modules/adventure/infoint/osdepend.c:249:12    - Unknown word (PLABACK)    -- * GAME_PLABACK - Keystroke record file
 ATTIC/src/modules/adventure/infoint/osdepend.c:3:16      - Unknown word (osdepend)   -- ** FILE:     osdepend.c
 ATTIC/src/modules/adventure/infoint/osdepend.c:452:35    - Unknown word (ztypes)     -- by MAX_TEXT_SIZE in ztypes.h. The replacement text
+ATTIC/src/modules/adventure/infoint/osdepend.c:65:9      - Unknown word (Barthel)    -- * Olaf Barthel 28-Jul-1992
 ATTIC/src/modules/adventure/infoint/text.c:158:12    - Unknown word (zchar)      -- write_zchar ((char) (ascii | code
 ATTIC/src/modules/adventure/infoint/text.c:497:10    - Unknown word (xlat)       -- char xlat_buffer[MAX_TEXT_SIZE
 ATTIC/src/modules/adventure/infoint/text.c:548:23    - Unknown word (aeoeue)     -- char xlat[] = "aeoeueAeOeUess>><<";
@@ -2463,7 +2478,10 @@ ATTIC/src/modules/adventure/infoint/unixio.c:318:8     - Unknown word (gawds)   
 ATTIC/src/modules/adventure/infoint/unixio.c:319:19    - Unknown word (Bletcherous) -- Megistos one. Bletcherous, but necessary as the
 ATTIC/src/modules/adventure/infoint/unixio.c:400:23    - Unknown word (REPROMPT)    -- inp_clearflags (INF_REPROMPT);
 ATTIC/src/modules/adventure/infoint/zip.c:78:49     - Unknown word (favourite)  -- this program on your favourite operating system.
+ATTIC/src/modules/adventure/infoint/zip.c:81:28     - Unknown word (Doherty)    -- Special thanks to David Doherty and Olaf Barthel for
 ATTIC/src/modules/adventure/infoint/ztypes.h:128:16    - Unknown word (zheader)    -- typedef struct zheader {
+ATTIC/src/modules/adventure/infoint/ztypes.h:168:16    - Unknown word (TANDY)      -- #define CONFIG_TANDY 0x08	/* Tandy
+ATTIC/src/modules/adventure/infoint/ztypes.h:168:37    - Unknown word (Tandy)      -- TANDY 0x08	/* Tandy licensed game
 ATTIC/src/modules/adventure/infoint/ztypes.h:207:22    - Unknown word (IIGS)       -- define INTERP_APPLE_IIGS 10
 ATTIC/src/modules/adventure/infoint/ztypes.h:236:16    - Unknown word (zobjectv)   -- typedef struct zobjectv3 {
 ATTIC/src/modules/adventure/infoint/ztypes.h:65:16     - Unknown word (ZTYPES)     -- #if !defined(__ZTYPES_INCLUDED)
@@ -2484,6 +2502,7 @@ ATTIC/src/modules/bulletins/autoins.c:220:20    - Unknown word (BLTINS)      -- 
 ATTIC/src/modules/bulletins/autoins.c:91:10     - Unknown word (insclub)    -- char insclub[64], dir[256];
 ATTIC/src/modules/bulletins/bltcnv.c:181:9     - Unknown word (findclub)    -- if (!findclub (lastclub)) {
 ATTIC/src/modules/bulletins/bltcnv.c:3:16      - Unknown word (bltcnv)     -- ** FILE:     bltcnv.c
+ATTIC/src/modules/bulletins/bltcnv.c:5:24      - Unknown word (MBBS)       -- PURPOSE: Convert MBBS 5.31 bulletin database
 ATTIC/src/modules/bulletins/bltcnv.c:6:28      - Unknown word (guarranteed) -- NOTES: This is NOT guarranteed to work on anything
 ATTIC/src/modules/bulletins/bltcnv.c:75:9      - Unknown word (BLTLEN)      -- #define BLTLEN 110
 ATTIC/src/modules/bulletins/bltidx.h:16:8      - Unknown word (numc)       -- struct numc {			/* size 20 */
@@ -2851,6 +2870,7 @@ ATTIC/src/modules/emailclubs/funcs.c:317:31    - Unknown word (tdmonth)    -- s4
 ATTIC/src/modules/emailclubs/funcs.c:562:35    - Unknown word (decompressmsged) -- fatalsys ("Unable to move decompressmsged message.");
 ATTIC/src/modules/emailclubs/ihavedb.h:15:8      - Unknown word (clubqueryc) -- struct clubqueryc {  /* size 24 */
 ATTIC/src/modules/emailclubs/ihavedb.h:38:9      - Unknown word (CLUBQUERYC) -- #define CLUBQUERYC 0
+ATTIC/src/modules/emailclubs/mailcleanup.c:11:23     - Unknown word (repost)     -- * repost periodic messages
 ATTIC/src/modules/emailclubs/mailcleanup.c:142:1     - Unknown word (emailcleanup) -- emailcleanup ()
 ATTIC/src/modules/emailclubs/mailcleanup.c:150:10    - Unknown word (emldel)       -- int emldel = 0, emldelb = 0;
 ATTIC/src/modules/emailclubs/mailcleanup.c:150:22    - Unknown word (emldelb)      -- int emldel = 0, emldelb = 0;
@@ -3070,6 +3090,7 @@ ATTIC/src/modules/files/cleanup.c:100:9     - Unknown word (masterfilefp) -- FIL
 ATTIC/src/modules/files/cleanup.c:105:1     - Unknown word (delfilelst)   -- delfilelst (struct libidx *l)
 ATTIC/src/modules/files/cleanup.c:110:19    - Unknown word (filelst)      -- strcpy (f.fname, filelst);
 ATTIC/src/modules/files/cleanup.c:122:16    - Unknown word (MEGISTOS)     -- fprintf (fp, "MEGISTOS FILE LIBRARY\nFILE DIRECTORY
+ATTIC/src/modules/files/cleanup.c:229:18    - Unknown word (Kbytes)       -- fprintf (fp, "  Kbytes . . . . . . . . %7d
 ATTIC/src/modules/files/cleanup.c:248:4     - Unknown word (descrlen)     -- f.descrlen = 1;
 ATTIC/src/modules/files/cleanup.c:252:21    - Unknown word (filelstd)     -- strcpy (f.summary, filelstd);
 ATTIC/src/modules/files/cleanup.c:371:21    - Unknown word (topfild)      -- strcpy (f.summary, topfild);
@@ -3181,11 +3202,13 @@ ATTIC/src/modules/files/misc.c:251:6     - Unknown word (xfertime)   -- int xfer
 ATTIC/src/modules/files/misc.c:322:10    - Unknown word (sizestg)    -- char sizestg[256], timestg[256],
 ATTIC/src/modules/files/misc.c:322:24    - Unknown word (timestg)    -- char sizestg[256], timestg[256], chargestg[256
 ATTIC/src/modules/files/misc.c:322:38    - Unknown word (chargestg)  -- 256], timestg[256], chargestg[256];
+ATTIC/src/modules/files/misc.c:331:52    - Unknown word (kbytes)     -- suitable unit (bytes, kbytes, Mbytes) */
 ATTIC/src/modules/files/mklib.c:85:1      - Unknown word (discoverdevice) -- discoverdevice (struct libidx *lib
 ATTIC/src/modules/files/opaccess.c:54:55     - Unknown word (sublibrs)   -- wouldn't update for the sublibrs.
 ATTIC/src/modules/files/opapprove.c:70:12     - Unknown word (filesapproved) -- static int filesapproved = 0;
 ATTIC/src/modules/files/opcopy.c:219:1     - Unknown word (docopy)     -- docopy (struct fileidx *f,
 ATTIC/src/modules/files/opdel.c:103:1     - Unknown word (dodelete)   -- dodelete (struct fileidx *f,
+ATTIC/src/modules/files/opdeltree.c:177:28    - Unknown word (pusing)     -- child will be deleted, pusing the second one up.
 ATTIC/src/modules/files/opdisapp.c:100:1     - Unknown word (disapprovefile)     -- disapprovefile (struct libidx *l, char
 ATTIC/src/modules/files/opdisapp.c:71:1      - Unknown word (disapprovekeywords) -- disapprovekeywords (struct libidx *l, struct
 ATTIC/src/modules/files/operations.c:113:4     - Unknown word (DISAPP)      -- {"DISAPP", 0, op_disapprove}
@@ -3245,6 +3268,7 @@ ATTIC/src/modules/files/substvars.c:435:6     - Unknown word (LIBCHDNL)       --
 ATTIC/src/modules/files/substvars.c:436:6     - Unknown word (LIBREBATE)      -- {"@LIBREBATE@", sv_librebate, NULL
 ATTIC/src/modules/files/upload.c:121:1     - Unknown word (checkfname)       -- checkfname (char *s)
 ATTIC/src/modules/files/upload.c:230:1     - Unknown word (confirmcan)       -- confirmcan ()
+ATTIC/src/modules/files/upload.c:305:23    - Unknown word (archivers)        -- static promptblock_t *archivers = NULL;
 ATTIC/src/modules/files/upload.c:321:18    - Unknown word (MAXARCHIVERS)     -- for (n = 0; n < MAXARCHIVERS; n++) {
 ATTIC/src/modules/files/upload.c:452:12    - Unknown word (dupl)             -- int dupl = 0;
 ATTIC/src/modules/files/upload.c:755:1     - Unknown word (getuploadfname)   -- getuploadfname (int *multiple)
@@ -3280,16 +3304,16 @@ ATTIC/src/modules/gallups/crc.c:4:26      - Unknown word (Rokas)      -- AUTHORS
 ATTIC/src/modules/gallups/crc.c:5:23      - Unknown word (checkcum)   -- * PURPOSE:   CRC32 checkcum computing function
 ATTIC/src/modules/gallups/crc.c:60:28     - Unknown word (crctab)     -- unsigned long const crctab[256] = {
 ATTIC/src/modules/gallups/gallups.c:1037:27   - Unknown word (gtset)              -- sprintf (tempstr, "%li", gtset (ginfo));
-ATTIC/src/modules/gallups/gallups.c:106:15    - Unknown word (gallupinfo) -- struct gallup gallupinfo, *ginfo = &gallupinfo
-ATTIC/src/modules/gallups/gallups.c:106:28    - Unknown word (ginfo)      -- gallup gallupinfo, *ginfo = &gallupinfo;
+ATTIC/src/modules/gallups/gallups.c:106:15    - Unknown word (gallupinfo)      -- struct gallup gallupinfo, *ginfo = &gallupinfo
+ATTIC/src/modules/gallups/gallups.c:106:28    - Unknown word (ginfo)           -- gallup gallupinfo, *ginfo = &gallupinfo;
 ATTIC/src/modules/gallups/gallups.c:1109:21   - Unknown word (oldgi)              -- struct gallup gi, *oldgi;
 ATTIC/src/modules/gallups/gallups.c:1115:11   - Unknown word (NOGSC)              -- prompt (NOGSC);
 ATTIC/src/modules/gallups/gallups.c:1126:11   - Unknown word (ERRORGSC)           -- prompt (ERRORGSC);
 ATTIC/src/modules/gallups/gallups.c:1137:10   - Unknown word (COMPILERVER)        -- prompt (COMPILERVER, v);
-ATTIC/src/modules/gallups/gallups.c:114:9     - Unknown word (gscpath)    -- char *gscpath = NULL;
+ATTIC/src/modules/gallups/gallups.c:114:9     - Unknown word (gscpath)         -- char *gscpath = NULL;
 ATTIC/src/modules/gallups/gallups.c:1157:26   - Unknown word (NEWGVT)             -- dialog_run ("gallups", NEWGVT, NEWGLT, inp_buffer
 ATTIC/src/modules/gallups/gallups.c:1157:34   - Unknown word (NEWGLT)             -- ("gallups", NEWGVT, NEWGLT, inp_buffer, MAXINPLEN
-ATTIC/src/modules/gallups/gallups.c:115:9     - Unknown word (galnew)     -- int galnew_days;
+ATTIC/src/modules/gallups/gallups.c:115:9     - Unknown word (galnew)          -- int galnew_days;
 ATTIC/src/modules/gallups/gallups.c:1235:11   - Unknown word (QUIZHEAD)           -- prompt (QUIZHEAD);
 ATTIC/src/modules/gallups/gallups.c:1237:23   - Unknown word (TIMEQUIZ)           -- if (!get_bool (&t1, TIMEQUIZ, SELERR, ENTERNO, 0
 ATTIC/src/modules/gallups/gallups.c:1237:41   - Unknown word (ENTERNO)            -- , TIMEQUIZ, SELERR, ENTERNO, 0))
@@ -3325,8 +3349,8 @@ ATTIC/src/modules/gallups/gallups.c:1539:21   - Unknown word (gstat)            
 ATTIC/src/modules/gallups/gallups.c:1570:46   - Unknown word (GALREPDESC)         -- TRANSIENT, out, msg_get (GALREPDESC), 0, -1)) {
 ATTIC/src/modules/gallups/gallups.c:1594:13   - Unknown word (OPERMNU)            -- prompt (OPERMNU, NULL);
 ATTIC/src/modules/gallups/gallups.c:1595:13   - Unknown word (SHOPERHEAD)         -- prompt (SHOPERHEAD);
-ATTIC/src/modules/gallups/gallups.c:159:24    - Unknown word (GSCPATH)    -- gscpath = msg_string (GSCPATH);
-ATTIC/src/modules/gallups/gallups.c:160:25    - Unknown word (NEWGALDAYS) -- galnew_days = msg_int (NEWGALDAYS, 0, 999);
+ATTIC/src/modules/gallups/gallups.c:159:24    - Unknown word (GSCPATH)         -- gscpath = msg_string (GSCPATH);
+ATTIC/src/modules/gallups/gallups.c:160:25    - Unknown word (NEWGALDAYS)      -- galnew_days = msg_int (NEWGALDAYS, 0, 999);
 ATTIC/src/modules/gallups/gallups.c:1612:14   - Unknown word (SHOPERMENU)         -- prompt (SHOPERMENU);
 ATTIC/src/modules/gallups/gallups.c:1637:13   - Unknown word (LEAVEOPER)          -- prompt (LEAVEOPER, NULL);
 ATTIC/src/modules/gallups/gallups.c:165:1     - Unknown word (listandselectgallup) -- listandselectgallup (void)
@@ -3372,6 +3396,7 @@ ATTIC/src/modules/gallups/gallups.c:55:52     - Unknown word (QUESTSAME)  -- inh
 ATTIC/src/modules/gallups/gallups.c:572:31    - Unknown word (qans)                -- anumdt (a) == anumdt (qans (q)))
 ATTIC/src/modules/gallups/gallups.c:573:16    - Unknown word (qcrd)                -- points += qcrd0 (q);
 ATTIC/src/modules/gallups/gallups.c:584:14    - Unknown word (qtxtln)              -- inp_get (qtxtln (q));
+ATTIC/src/modules/gallups/gallups.c:59:11     - Unknown word (beautifications) -- * source beautifications
 ATTIC/src/modules/gallups/gallups.c:621:11    - Unknown word (qflg)                -- if (!(qflg (q) & QF_SELECTNOMENU
 ATTIC/src/modules/gallups/gallups.c:621:25    - Unknown word (SELECTNOMENU)        -- if (!(qflg (q) & QF_SELECTNOMENU))
 ATTIC/src/modules/gallups/gallups.c:622:22    - Unknown word (qseldatacnt)         -- for (n = 0; n < qseldatacnt (q); n++)
@@ -3382,7 +3407,7 @@ ATTIC/src/modules/gallups/gallups.c:670:15    - Unknown word (MCHEADERASK)      
 ATTIC/src/modules/gallups/gallups.c:675:17    - Unknown word (qcomch)              -- phonetic (qcomch (q));
 ATTIC/src/modules/gallups/gallups.c:678:16    - Unknown word (qcompromcnt)         -- m < qcompromcnt (q);
 ATTIC/src/modules/gallups/gallups.c:681:15    - Unknown word (qcompromidx)         -- qcompromidx (q)
-ATTIC/src/modules/gallups/gallups.c:71:28     - Unknown word (Gallups)    -- improved version of Gallups Module
+ATTIC/src/modules/gallups/gallups.c:71:28     - Unknown word (Gallups)         -- improved version of Gallups Module
 ATTIC/src/modules/gallups/gallups.c:764:25    - Unknown word (selsum)              -- unsigned int i, j, n, *selsum = NULL, **comsum = NULL
 ATTIC/src/modules/gallups/gallups.c:790:12    - Unknown word (RESQUIZTHEAD)        -- prompt (RESQUIZTHEAD);
 ATTIC/src/modules/gallups/gallups.c:792:12    - Unknown word (RESQUIZHEAD)         -- prompt (RESQUIZHEAD);
@@ -3492,6 +3517,7 @@ ATTIC/src/modules/mailer/download.c:161:24    - Unknown word (MAILERFILESDIR) --
 ATTIC/src/modules/mailer/download.c:231:24    - Unknown word (QWKDNL)         -- strcpy (audit[0], AUS_QWKDNL);
 ATTIC/src/modules/mailer/download.c:238:41    - Unknown word (chgdnl)         -- TRANSIENT, fname, descr, chgdnl, -1);
 ATTIC/src/modules/mailer/download.c:262:11    - Unknown word (stpncnf)        -- prompt (stpncnf ? NOTCFG2 : NOTCFG)
+ATTIC/src/modules/mailer/download.c:65:26     - Unknown word (archiver)   -- Switched to using the archiver file instead of locally
 ATTIC/src/modules/mailer/mailer.c:101:9     - Unknown word (auddnl)     -- int auddnl;
 ATTIC/src/modules/mailer/mailer.c:102:9     - Unknown word (audupl)     -- int audupl;
 ATTIC/src/modules/mailer/mailer.c:103:9     - Unknown word (uplkey)     -- int uplkey;
@@ -3598,6 +3624,8 @@ ATTIC/src/modules/remsys/miscfuncs.c:3:16      - Unknown word (miscfuncs)  -- **
 ATTIC/src/modules/remsys/miscfuncs.c:66:4      - Unknown word (ording)     -- * ording to their severity. Implemente
 ATTIC/src/modules/remsys/miscfuncs.c:69:40     - Unknown word (FILTAUD)    -- trail. Added a command FILTAUD to work as an
 ATTIC/src/modules/remsys/miscfuncs.c:705:6     - Unknown word (filtaud)    -- rsys_filtaud ()
+ATTIC/src/modules/remsys/miscfuncs.c:70:55     - Unknown word (SIGNUPS)    -- Commands SECURITY and SIGNUPS
+ATTIC/src/modules/remsys/miscfuncs.c:763:6     - Unknown word (signups)    -- rsys_signups ()
 ATTIC/src/modules/remsys/remsys.c:103:9     - Unknown word (keychu)     -- int keychu;
 ATTIC/src/modules/remsys/remsys.c:104:9     - Unknown word (kydnam)     -- int kydnam;
 ATTIC/src/modules/remsys/remsys.c:105:9     - Unknown word (kydcom)     -- int kydcom;
@@ -3626,6 +3654,7 @@ ATTIC/src/modules/remsys/statistics.c:433:39    - Unknown word (BCDMT)      -- 1
 ATTIC/src/modules/remsys/statistics.c:443:39    - Unknown word (DMYE)       -- 1, 0, RSGENST4, 0, "DMYE", 0, 0))
 ATTIC/src/modules/remsys/statistics.c:61:39     - Unknown word (Rsys)       -- disk space decreases. Rsys_linstats() now
 ATTIC/src/modules/remsys/users.c:144:29    - Unknown word (RSMUDEL)    -- AUDIT (RSMDEL), AUDIT (RSMUDEL)));
+ATTIC/src/modules/remsys/users.c:146:30    - Unknown word (undeleting) -- this anyway. If we're undeleting, we know the user isn
 ATTIC/src/modules/remsys/users.c:161:25    - Unknown word (RSXMPT)     -- RSEXEMPTERR, AUDIT (RSXMPT), AUDIT (RSUXMPT));
 ATTIC/src/modules/remsys/users.c:161:41    - Unknown word (RSUXMPT)    -- AUDIT (RSXMPT), AUDIT (RSUXMPT));
 ATTIC/src/modules/remsys/users.c:261:25    - Unknown word (getunitl)   -- amount, msg_getunitl (CRDSING,
@@ -3681,6 +3710,7 @@ ATTIC/src/modules/telecon/actions.c:327:20    - Unknown word (stgsec)       -- i
 ATTIC/src/modules/telecon/actions.c:331:22    - Unknown word (stgall)       -- if (sameas (fx_tmp, stgall1) || sameas (fx_tmp
 ATTIC/src/modules/telecon/actions.c:339:8     - Unknown word (tlcuidxref)   -- if (!tlcuidxref (fx_target, 0)) {
 ATTIC/src/modules/telecon/actions.c:37:34     - Unknown word (teleactions) -- action list (via mbk_teleactions.h) by hardwiring indices
+ATTIC/src/modules/telecon/actions.c:37:52     - Unknown word (hardwiring)  -- mbk_teleactions.h) by hardwiring indices for
 ATTIC/src/modules/telecon/actions.c:389:1     - Unknown word (actionax)     -- actionax (int pr)
 ATTIC/src/modules/telecon/actions.c:413:1     - Unknown word (bsrch)        -- bsrch (char *key, int left
 ATTIC/src/modules/telecon/actions.c:510:1     - Unknown word (actionctl)    -- actionctl (char *s)
@@ -4273,6 +4303,8 @@ ATTIC/src/system/signup/signup.c:646:1     - Unknown word (getscnsize)          
 ATTIC/src/system/signup/signup.c:82:26     - Unknown word (passowrd)   -- Added code to reflect passowrd policy changes, as seen
 ATTIC/src/system/signup/signup.c:997:1     - Unknown word (flagstuff)           -- flagstuff ()
 ATTIC/src/tools/README.md:5:220     - Unknown word (serialised) -- screen display, you get a serialised flow of questions.
+ATTIC/src/tools/README.md:7:76      - Unknown word (EDLIN)      -- the spirit of `ed` or `EDLIN.COM`, but easier to
+ATTIC/src/tools/README.md:9:83      - Unknown word (pico)       -- spirit of µEmacs or pico. It can be used to compose
 ATTIC/src/tools/bbsdialog/bbsdialog.c:100:9     - Unknown word (dfname)     -- char *dfname = NULL;
 ATTIC/src/tools/bbsdialog/bbsdialog.c:102:16    - Unknown word (oldtermios) -- struct termios oldtermios;
 ATTIC/src/tools/bbsdialog/bbsdialog.c:153:19    - Unknown word (BBSDIALOGBIN) -- execl (mkfname (BBSDIALOGBIN), "bbsdialog", mbkname
@@ -4288,6 +4320,7 @@ ATTIC/src/tools/bbsdialog/blessed.c:712:1     - Unknown word (gettogglefield)  -
 ATTIC/src/tools/bbsdialog/cursed.c:458:1     - Unknown word (handletogglefield) -- handletogglefield (int n, chtype c)
 ATTIC/src/tools/bbsdialog/cursed.c:46:18     - Unknown word (resetinactivity) -- * Added call to resetinactivity() to handle slightly
 ATTIC/src/tools/bbsdialog/cursed.c:46:55     - Unknown word (borken)          -- to handle slightly borken (sic)
+ATTIC/src/tools/bbsdialog/cursed.c:510:1     - Unknown word (defocus)           -- defocus (int n)
 ATTIC/src/tools/bbsdialog/cursed.c:55:4      - Unknown word (slcurses)        -- * slcurses (doesn't work yet).
 ATTIC/src/tools/bbsdialog/cursed.c:65:43     - Unknown word (xlgetmsg)        -- msg_get() instead of xlgetmsg() since emud()
 ATTIC/src/tools/bbsdialog/help.c:281:17    - Unknown word (newtermios) -- struct termios newtermios;
@@ -4403,6 +4436,8 @@ README.md:51:234    - Unknown word (Djeheuti)             -- god Tehuti (or mayb
 README.md:51:62     - Unknown word (Trismegistos)         -- derived from ‘Hermes Trismegistos’ (latinised as [Hermes
 README.md:51:77     - Unknown word (latinised)            -- Hermes Trismegistos’ (latinised as [Hermes Trismegistus
 README.md:51:98     - Unknown word (Trismegistus)         -- latinised as [Hermes Trismegistus](https://en.wikipedia
+README.md:53:117    - Unknown word (Maximus)              -- superlative names (to wit: *Maximus* and *Major BBS*). Megistos
+README.md:94:9      - Unknown word (kludgy)               -- * A few kludgy, hard-wired Greek-specific
 README.md:96:41     - Unknown word (kludgery)             -- reinvent-the-wheel kludgery.
 TODO.md:18:8      - Unknown word (libexpect)       -- (and libexpect for the client).
 TODO.md:1:31      - Unknown word (rationalisation) -- list for Megistos BBS rationalisation and modernisation
@@ -4410,6 +4445,7 @@ TODO.md:1:51      - Unknown word (modernisation)   -- rationalisation and modern
 TODO.md:41:3      - Unknown word (Modernise)       -- * Modernise `/#`
 TODO.md:52:13     - Unknown word (modernise)       -- * bbslogin: modernise and rationalise (remove
 TODO.md:52:27     - Unknown word (rationalise)     -- bbslogin: modernise and rationalise (remove calls to `sh
+TODO.md:63:16     - Unknown word (autodetection)   -- * Add terminal autodetection code.
 TODO.md:67:11     - Unknown word (msgidx)          -- * Modify `msgidx` to store parsed message
 TODO.md:77:3      - Unknown word (Debianise)       -- * Debianise library
 TODO.md:92:26     - Unknown word (libclubhdr)      -- built). DONE, but used libclubhdr instead.
@@ -4440,9 +4476,9 @@ src/libmegistos/audit.h:98:2      - Unknown word (endverbatim) -- @endverbatim
 src/libmegistos/bbsinclude.h:3:15      - Unknown word (bbsinclude) -- ** FILE:    bbsinclude.h
 src/libmegistos/bbsinclude.h:40:33     - Unknown word (libltdl)    -- to handle libtool's libltdl and to display a deprecation
 src/libmegistos/bbsinclude.h:47:36     - Unknown word (overwitten) -- a minor fix that got overwitten by CVS, and fixed another
-src/libmegistos/bbsmod.c:157:23    - Unknown word (chatmsg)    -- static promptblock_t *chatmsg;
-src/libmegistos/bbsmod.c:166:9     - Unknown word (catchsig)   -- void catchsig ();
-src/libmegistos/bbsmod.c:274:11    - Unknown word (Incorrent)  -- ("Incorrent magic number in sysvar
+src/libmegistos/bbsmod.c:157:23    - Unknown word (chatmsg)         -- static promptblock_t *chatmsg;
+src/libmegistos/bbsmod.c:166:9     - Unknown word (catchsig)        -- void catchsig ();
+src/libmegistos/bbsmod.c:274:11    - Unknown word (Incorrent)       -- ("Incorrent magic number in sysvar
 src/libmegistos/bbsmod.c:3:16      - Unknown word (bbsmod)     -- ** FILE:     bbsmod.c
 src/libmegistos/bbsmod.c:479:6     - Unknown word (setxlationtable) -- /* setxlationtable(getpxlation(thisuseracc
 src/libmegistos/bbsmod.c:501:12    - Unknown word (saveonlrec)      -- if (!usr_saveonlrec (&thisuseronl)) {
@@ -4450,7 +4486,8 @@ src/libmegistos/bbsmod.c:555:32    - Unknown word (AFTERINP)        -- thisusero
 src/libmegistos/bbsmod.c:634:1     - Unknown word (endchat)         -- endchat ()
 src/libmegistos/bbsmod.c:636:10    - Unknown word (sigchat)         -- void sigchat ();
 src/libmegistos/bbsmod.c:774:48    - Unknown word (BBSMODULEDIR)    -- 0 %s/%s;\n",mkfname(BBSMODULEDIR),#x); \ */ \
-src/libmegistos/bbsmod.c:89:25     - Unknown word (syschat)    -- Minor corrections to syschat() and loaduser().
+src/libmegistos/bbsmod.c:88:55     - Unknown word (Beautifications) -- fatal() and fatalsys(). Beautifications.
+src/libmegistos/bbsmod.c:89:25     - Unknown word (syschat)         -- Minor corrections to syschat() and loaduser().
 src/libmegistos/bbsmod.h:182:44    - Unknown word (capitalised) -- module's full name, capitalised etc */
 src/libmegistos/channels.c:214:19    - Unknown word (TCGETS)     -- (void) ioctl (0, TCGETS, &termio);
 src/libmegistos/channels.c:217:19    - Unknown word (TCSETSF)    -- (void) ioctl (0, TCSETSF, &termio);
@@ -4460,6 +4497,7 @@ src/libmegistos/config.h:209:9     - Unknown word (BBSMODULERCDIR) -- #define BB
 src/libmegistos/config.h:238:9     - Unknown word (MBKINCLUDEDIR)  -- #define MBKINCLUDEDIR __INCLUDEDIR"/mbk"
 src/libmegistos/config.h:379:30    - Unknown word (emsgn)          -- NEMESSAGELOCK "LCK..emsgn"
 src/libmegistos/dialog.h:266:26    - Unknown word (selcting)   -- X is equivalent to selcting the cancel button. The
+src/libmegistos/dialog.h:355:16    - Unknown word (heartedly)  -- whole-heartedly recommend using ::inp
 src/libmegistos/dialog.h:413:26    - Unknown word (customisation) -- depending on sysop customisation and internationalisation
 src/libmegistos/dialog.h:81:59     - Unknown word (minimise)   -- to be entered. Try to minimise the
 src/libmegistos/errorprompts.h:118:5     - Unknown word (customise)   -- customise them at will to fit
@@ -4515,11 +4553,13 @@ src/libmegistos/input.c:49:32     - Unknown word (Maneos)     -- was provided by
 src/libmegistos/input.c:71:4      - Unknown word (miscfx)     -- * miscfx.c to input.c. Same for
 src/libmegistos/input.c:78:21     - Unknown word (injothfile) -- * Removed obsolete injothfile variable. Fixed very
 src/libmegistos/input.c:93:4      - Unknown word (Acceptinjoth) -- * Acceptinjoth() now uses an IPC message
-src/libmegistos/input.h:198:8     - Unknown word (injothbuf)  -- struct injothbuf {
-src/libmegistos/input.h:563:7     - Unknown word (almsot)     -- almsot all of the work.
-src/libmegistos/input.h:732:19    - Unknown word (hilevel)    -- /** @defgroup inp_hilevel High-Level user-interacting
-src/libmegistos/input.h:750:52    - Unknown word (specialised) -- examples to code your own, specialised functions in
-src/libmegistos/input.h:768:7     - Unknown word (Reprompting) -- - Reprompting after injected messages
+src/libmegistos/input.h:120:67    - Unknown word (redisplaying) -- version of a menu or redisplaying a
+src/libmegistos/input.h:198:8     - Unknown word (injothbuf)    -- struct injothbuf {
+src/libmegistos/input.h:563:7     - Unknown word (almsot)       -- almsot all of the work.
+src/libmegistos/input.h:732:19    - Unknown word (hilevel)      -- /** @defgroup inp_hilevel High-Level user-interacting
+src/libmegistos/input.h:750:52    - Unknown word (specialised)  -- examples to code your own, specialised functions in
+src/libmegistos/input.h:768:7     - Unknown word (Reprompting)  -- - Reprompting after injected messages
+src/libmegistos/input.h:772:12    - Unknown word (redisplays)   -- help redisplays the long version of
 src/libmegistos/lock.c:163:25    - Unknown word (syntantically) -- ("bbslockd issued syntantically incorrect response
 src/libmegistos/lock.c:91:1      - Unknown word (lockdcmd)   -- lockdcmd (char *cmd, const char
 src/libmegistos/lock.h:78:41     - Unknown word (Serialisation) -- Resource Locking and Serialisation
@@ -4606,6 +4646,7 @@ src/libmegistos/timedate.c:243:23    - Unknown word (ydays)      -- int year, mo
 src/libmegistos/timedate.c:243:37    - Unknown word (thisyr)     -- month, ydays, mdays, thisyr, ytm;
 src/libmegistos/timedate.c:91:12     - Unknown word (daymon)     -- static int daymon[] =
 src/libmegistos/timedate.h:113:5     - Unknown word (bletcherous) -- bletcherous. Thankfully, they can
+src/libmegistos/ttynum.h:220:34    - Unknown word (Signups)    -- SIGNUPS 0x0010	/**< Signups are allowed here */
 src/libmegistos/useracc.c:202:31    - Unknown word (usronl)     -- saveonlrec (onlinerec_t * usronl)
 src/libmegistos/useracc.c:305:33    - Unknown word (checkinvis) -- insystem (char *userid, int checkinvis, struct shmuserrec
 src/libmegistos/useracc.h:1412:64   - Unknown word (ackowledgement) -- sends back delivery ackowledgement

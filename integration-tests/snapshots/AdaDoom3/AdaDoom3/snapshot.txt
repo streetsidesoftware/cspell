@@ -3,7 +3,7 @@ Repository: AdaDoom3/AdaDoom3
 Url: "https://github.com/AdaDoom3/AdaDoom3.git"
 Args: ["**/*.*"]
 Lines:
- CSpell: Files checked: 103, Issues found: 2513 in 98 files.
+ CSpell: Files checked: 103, Issues found: 2675 in 98 files.
  exit code: 1
 Engine/Assembly/PPC/neo-engine-cpu.adb:5:78      - Unknown word (Squirek)    -- Copyright (C) 2016 Justin Squirek
 Engine/Assembly/x86-64/neo-engine-cpu.adb:100:111   - Unknown word (POPCNT)     -- ECX_Register, 23); -- POPCNT
@@ -60,7 +60,12 @@ Engine/Assembly/x86-64/neo-engine-cpu.adb:5:89      - Unknown word (Squirek)    
 Engine/Assembly/x86-64/neo-engine-cpu.adb:62:27     - Unknown word (cpuid)      -- Template => "cpuid",
 Engine/Assembly/x86-64/neo-engine-cpu.adb:77:27     - Unknown word (cpuid)      -- Template => "cpuid",
 Engine/Assembly/x86-64/neo-engine-cpu.adb:99:111    - Unknown word (OSXSAVE)    -- ECX_Register, 27); -- OSXSAVE
+Engine/Runtime/a-comutr.adb:1507:29   - Unknown word (multiway)     -- Implement Vet for multiway trees???
 Engine/Runtime/a-comutr.adb:1731:7    - Unknown word (Prepent)      -- -- Prepent_Child --
+Engine/Runtime/a-comutr.adb:2016:29   - Unknown word (multiway)     -- Implement Vet for multiway tree???
+Engine/Runtime/a-comutr.adb:2679:20   - Unknown word (Multiway)     -- end Ada.Containers.Multiway_Trees;
+Engine/Runtime/a-comutr.adb:35:29     - Unknown word (Multiway)   -- body Ada.Containers.Multiway_Trees is
+Engine/Runtime/a-comutr.adb:462:29    - Unknown word (multiway)   -- Implement Vet for multiway tree???
 Engine/Runtime/a-comutr.adb:761:19    - Unknown word (represention) -- -- Restore represention invariants before attempting
 Engine/Runtime/a-comutr.adb:960:7     - Unknown word (Unbusy)       -- Unbusy (Object.Container.TC
 Engine/Settings/Debugging-No/is_debugging.adb:5:78      - Unknown word (Squirek)    -- Copyright (C) 2016 Justin Squirek
@@ -141,6 +146,7 @@ Engine/Systems/Win32/neo-engine-system.adb:350:71    - Unknown word (CXHTHUMB)  
 Engine/Systems/Win32/neo-engine-system.adb:360:66    - Unknown word (GCLP)            -- SetClassLongW (Game_Window, GCLP_HCURSOR, Int_Unsigned
 Engine/Systems/Win32/neo-engine-system.adb:361:51    - Unknown word (GCLP)            -- etClassLongPtrW (Game_Window, GCLP_HCURSOR, To_Int_Ptr
 Engine/Systems/Win32/neo-engine-system.adb:377:40    - Unknown word (SHOWNORMAL)      -- ShowWindow (Window, SW_SHOWNORMAL) = 0);
+Engine/Systems/Win32/neo-engine-system.adb:401:10    - Unknown word (Unclip)          -- -- Unclip cursor
 Engine/Systems/Win32/neo-engine-system.adb:424:66    - Unknown word (SCREENSAVE)      -- KEYMENU or wParam = SC_SCREENSAVE then return 0; end if
 Engine/Systems/Win32/neo-engine-system.adb:430:64    - Unknown word (CLICKACTIVE)     -- 16#0000_FFFF#) = WA_CLICKACTIVE then Click_Activated
 Engine/Systems/Win32/neo-engine-system.adb:444:62    - Unknown word (WMSZ)            -- when WMSZ_LEFT => Left
@@ -175,12 +181,15 @@ Engine/Systems/Win32/neo-engine-system.adb:610:43    - Unknown word (SHOWNORMAL)
 Engine/Systems/Win32/neo-engine-system.adb:633:24    - Unknown word (Junja)           -- Null_Key, Junja_Key, Final
 Engine/Systems/Win32/neo-engine-system.adb:633:64    - Unknown word (Hanja)           -- Final_Key, Hanja_Key, Kanji_Key
 Engine/Systems/Win32/neo-engine-system.adb:665:45    - Unknown word (Exsel)           -- Clear_Selection_Key, Exsel_Key, Erase_EOF
+Engine/Systems/Win32/neo-engine-system.adb:669:3     - Unknown word (Gamepads)        -- Gamepads : aliased array (0.
 Engine/Systems/Win32/neo-engine-system.adb:697:49    - Unknown word (RIDI)            -- tRawInputDeviceInfoW (Device, RIDI_DEVICENAME, Device_Name
 Engine/Systems/Win32/neo-engine-system.adb:705:79    - Unknown word (RAWINPUTDEVICELIST) -- Count'Unchecked_Access, RAWINPUTDEVICELIST'Object_Size / Byte'Object
 Engine/Systems/Win32/neo-engine-system.adb:708:55    - Unknown word (RAWINPUTDEVICELIST) -- Int (Device_Count)) of RAWINPUTDEVICELIST := (others => (others
 Engine/Systems/Win32/neo-engine-system.adb:710:85    - Unknown word (RAWINPUTDEVICELIST) -- Count'Unchecked_Access, RAWINPUTDEVICELIST'Object_Size / Byte'Object
 Engine/Systems/Win32/neo-engine-system.adb:716:24    - Unknown word (TYPEKEYBOARD)       -- when RIM_TYPEKEYBOARD => Add_Device (To_Int
 Engine/Systems/Win32/neo-engine-system.adb:717:24    - Unknown word (TYPEMOUSE)          -- when RIM_TYPEMOUSE =>
+Engine/Systems/Win32/neo-engine-system.adb:719:66    - Unknown word (ACPI)               -- List (I).hDevice), "ACPI") = 0 then -- Avoid
+Engine/Systems/Win32/neo-engine-system.adb:750:18    - Unknown word (Gamepads)           -- for I in Gamepads'Range loop
 Engine/Systems/Win32/neo-engine-system.adb:763:22    - Unknown word (RAWINPUTHEADER)     -- Header : aliased RAWINPUTHEADER := (others => <>);
 Engine/Systems/Win32/neo-engine-system.adb:767:17    - Unknown word (DEVICECHANGE)       -- when WM_DEVICECHANGE => Update_Devices;
 Engine/Systems/Win32/neo-engine-system.adb:771:20    - Unknown word (RAWINPUTHEADER)     -- Bytes := RAWINPUTHEADER'Object_Size / Byte'Object
@@ -207,6 +216,9 @@ Engine/Systems/Win32/neo-engine-system.adb:886:95    - Unknown word (RIDEV)     
 Engine/Systems/Win32/neo-engine-system.adb:888:77    - Unknown word (RAWINPUTDEVICE)     -- Address, Setups'Length, RAWINPUTDEVICE'Object_Size / Byte'Object
 Engine/Systems/Win32/neo-engine-system.adb:895:26    - Unknown word (RAWINPUTDEVICE)     -- Null_Setup : aliased RAWINPUTDEVICE := (GENERIC_DESKTOP
 Engine/Systems/Win32/neo-engine-system.adb:897:63    - Unknown word (RAWINPUTDEVICE)     -- Null_Setup'Address, 1, RAWINPUTDEVICE'Object_Size / Byte'Object
+Engine/Systems/Win32/neo-engine-system.adb:910:49    - Unknown word (Gamepads)           -- wButtons and Raw) /= (Gamepads (Player).wButtons and
+Engine/Systems/Win32/neo-engine-system.adb:934:22    - Unknown word (Gamepads)           -- begin for I in Gamepads'Range loop
+Engine/Systems/Win32/neo-engine-system.adb:937:20    - Unknown word (Gamepads)           -- and then Gamepads (I) /= State.Gamepad
 Engine/Systems/Win32/neo-engine-system.adb:954:14    - Unknown word (Thumbsticks)        -- -- Thumbsticks
 Engine/main.adb:5:76      - Unknown word (Squirek)    -- Copyright (C) 2020 Justin Squirek
 Engine/neo-api-openal.ads:1004:13   - Unknown word (Rolloff)                -- flRoomRolloffFactor : Real_32_C
@@ -385,10 +397,14 @@ Engine/neo-api-openal.ads:1613:85   - Unknown word (LPALFOLDBACKCALLBACK)      -
 Engine/neo-api-openal.ads:1614:18   - Unknown word (APIENTRY)                  -- typedef void (AL_APIENTRY*LPALREQUESTFOLDBACKSTOP
 Engine/neo-api-openal.ads:1614:27   - Unknown word (LPALREQUESTFOLDBACKSTOP)   -- typedef void (AL_APIENTRY*LPALREQUESTFOLDBACKSTOP)(void);
 Engine/neo-api-openal.ads:1616:102  - Unknown word (LPALFOLDBACKCALLBACK)      -- length,ALfloat *mem,LPALFOLDBACKCALLBACK callback);
+Engine/neo-api-openal.ads:1616:34   - Unknown word (Foldback)                  -- AL_APIENTRY alRequestFoldbackStart(ALenum mode,ALsizei
+Engine/neo-api-openal.ads:1617:34   - Unknown word (Foldback)                  -- AL_APIENTRY alRequestFoldbackStop(void);
 Engine/neo-api-openal.ads:1618:27   - Unknown word (LPALFOLDBACKCALLBACK)      -- typedef void (AL_APIENTRY*LPALFOLDBACKCALLBACK)(ALenum,ALsizei);
 Engine/neo-api-openal.ads:1619:27   - Unknown word (LPALREQUESTFOLDBACKSTART)  -- typedef void (AL_APIENTRY*LPALREQUESTFOLDBACKSTART)(ALenum,ALsizei,ALsizei
 Engine/neo-api-openal.ads:1619:85   - Unknown word (LPALFOLDBACKCALLBACK)      -- ALsizei,ALsizei,ALfloat*,LPALFOLDBACKCALLBACK);
 Engine/neo-api-openal.ads:1620:27   - Unknown word (LPALREQUESTFOLDBACKSTOP)   -- typedef void (AL_APIENTRY*LPALREQUESTFOLDBACKSTOP)(void);
+Engine/neo-api-openal.ads:1622:34   - Unknown word (Foldback)                  -- AL_APIENTRY alRequestFoldbackStart(ALenum mode,ALsizei
+Engine/neo-api-openal.ads:1623:34   - Unknown word (Foldback)                  -- AL_APIENTRY alRequestFoldbackStop(void);
 Engine/neo-api-openal.ads:1624:27   - Unknown word (LPALBUFFERSAMPLESSOFT)     -- typedef void (AL_APIENTRY*LPALBUFFERSAMPLESSOFT)(ALuint,ALuint,ALenum
 Engine/neo-api-openal.ads:1625:27   - Unknown word (LPALBUFFERSUBSAMPLESSOFT)  -- typedef void (AL_APIENTRY*LPALBUFFERSUBSAMPLESSOFT)(ALuint,ALsizei,ALsizei
 Engine/neo-api-openal.ads:1626:27   - Unknown word (LPALGETBUFFERSAMPLESSOFT)  -- typedef void (AL_APIENTRY*LPALGETBUFFERSAMPLESSOFT)(ALuint,ALsizei,ALsizei
@@ -481,10 +497,15 @@ Engine/neo-api-openal.ads:1732:47   - Unknown word (Slotf)                      
 Engine/neo-api-openal.ads:1733:47   - Unknown word (Slotfv)                        -- alGetAuxiliaryEffectSlotfv(ALuint effectslot, ALenum
 Engine/neo-api-openal.ads:173:17    - Unknown word (ADPCM)      -- AL_FORMAT_IMA_ADPCM_MONO16_EXT : constant
 Engine/neo-api-openal.ads:174:17    - Unknown word (ADPCM)      -- AL_FORMAT_IMA_ADPCM_STEREO16_EXT : constant
+Engine/neo-api-openal.ads:181:10    - Unknown word (vorbis)     -- AL_EXT_vorbis 1
+Engine/neo-api-openal.ads:182:13    - Unknown word (VORBIS)     -- AL_FORMAT_VORBIS_EXT
 Engine/neo-api-openal.ads:185:11    - Unknown word (quadriphonic) -- AL_LOKI_quadriphonic 1
 Engine/neo-api-openal.ads:200:10    - Unknown word (MULAW)        -- AL_EXT_MULAW 1
 Engine/neo-api-openal.ads:201:18    - Unknown word (MULAW)        -- AL_FORMAT_MONO_MULAW_EXT : constant Int
 Engine/neo-api-openal.ads:202:20    - Unknown word (MULAW)        -- AL_FORMAT_STEREO_MULAW_EXT : constant Int_Unsigned
+Engine/neo-api-openal.ads:205:10    - Unknown word (ALAW)         -- AL_EXT_ALAW : constant Int_Unsigned
+Engine/neo-api-openal.ads:206:18    - Unknown word (ALAW)         -- AL_FORMAT_MONO_ALAW_EXT : constant Int
+Engine/neo-api-openal.ads:207:20    - Unknown word (ALAW)         -- AL_FORMAT_STEREO_ALAW_EXT : constant Int_Unsigned
 Engine/neo-api-openal.ads:216:10    - Unknown word (MCFORMATS)    -- AL_EXT_MCFORMATS : constant Int_Unsigned
 Engine/neo-api-openal.ads:234:10    - Unknown word (MULAW)        -- AL_EXT_MULAW_MCFORMATS : constant
 Engine/neo-api-openal.ads:234:16    - Unknown word (MCFORMATS)    -- AL_EXT_MULAW_MCFORMATS : constant Int_Unsigned
@@ -547,15 +568,22 @@ Engine/neo-api-openal.ads:485:6     - Unknown word (Highpass)      -- -- Highpas
 Engine/neo-api-openal.ads:486:6     - Unknown word (HIGHPASS)      -- AL_HIGHPASS_GAIN
 Engine/neo-api-openal.ads:487:15    - Unknown word (GAINLF)        -- AL_HIGHPASS_GAINLF
 Engine/neo-api-openal.ads:487:6     - Unknown word (HIGHPASS)      -- AL_HIGHPASS_GAINLF
+Engine/neo-api-openal.ads:489:6     - Unknown word (Bandpass)      -- -- Bandpass filter parameters
+Engine/neo-api-openal.ads:490:6     - Unknown word (BANDPASS)      -- AL_BANDPASS_GAIN
 Engine/neo-api-openal.ads:491:15    - Unknown word (GAINLF)        -- AL_BANDPASS_GAINLF
+Engine/neo-api-openal.ads:491:6     - Unknown word (BANDPASS)      -- AL_BANDPASS_GAINLF
+Engine/neo-api-openal.ads:492:6     - Unknown word (BANDPASS)      -- AL_BANDPASS_GAINHF
 Engine/neo-api-openal.ads:501:13    - Unknown word (LOWPASS)       -- AL_FILTER_LOWPASS
 Engine/neo-api-openal.ads:502:13    - Unknown word (HIGHPASS)      -- AL_FILTER_HIGHPASS :
+Engine/neo-api-openal.ads:503:13    - Unknown word (BANDPASS)      -- AL_FILTER_BANDPASS :
 Engine/neo-api-openal.ads:507:6     - Unknown word (Lowpass)       -- -- Lowpass filter
 Engine/neo-api-openal.ads:508:6     - Unknown word (LOWPASS)       -- AL_LOWPASS_MIN_GAIN
 Engine/neo-api-openal.ads:516:6     - Unknown word (Highpass)      -- -- Highpass filter
 Engine/neo-api-openal.ads:517:6     - Unknown word (HIGHPASS)      -- AL_HIGHPASS_MIN_GAIN
 Engine/neo-api-openal.ads:521:19    - Unknown word (GAINLF)        -- AL_HIGHPASS_MIN_GAINLF (
 Engine/neo-api-openal.ads:522:19    - Unknown word (GAINLF)        -- AL_HIGHPASS_MAX_GAINLF (
+Engine/neo-api-openal.ads:525:6     - Unknown word (Bandpass)      -- -- Bandpass filter
+Engine/neo-api-openal.ads:526:6     - Unknown word (BANDPASS)      -- AL_BANDPASS_MIN_GAIN
 Engine/neo-api-openal.ads:562:23    - Unknown word (HFRATIO)       -- AL_REVERB_MIN_DECAY_HFRATIO (0.1f)
 Engine/neo-api-openal.ads:563:23    - Unknown word (HFRATIO)       -- AL_REVERB_MAX_DECAY_HFRATIO (2.0)
 Engine/neo-api-openal.ads:564:27    - Unknown word (HFRATIO)       -- REVERB_DEFAULT_DECAY_HFRATIO (0.83f)
@@ -662,14 +690,18 @@ Engine/neo-api-physx.ads:34:102    - Unknown word (physx)         -- exitcode0\D
 Engine/neo-api-physx.ads:34:74     - Unknown word (exitcode)      -- PxFlags; -- C:\Users\exitcode0\Desktop\PhysX-4.1\physx
 Engine/neo-api-physx.ads:351:73    - Unknown word (ERKNS)         -- physx11PxTransformC1ERKNS_7PxMat44E");
 Engine/neo-api-physx.ads:356:44    - Unknown word (Transformeq)   -- Name => "_ZNK5physx11PxTransformeqERKS0_";
+Engine/neo-api-physx.ads:356:55    - Unknown word (ERKS)          -- physx11PxTransformeqERKS0_";
 Engine/neo-api-physx.ads:361:44    - Unknown word (Transformml)   -- Name => "_ZNK5physx11PxTransformmlERKS0_";
+Engine/neo-api-physx.ads:361:55    - Unknown word (ERKS)          -- physx11PxTransformmlERKS0_";
 Engine/neo-api-physx.ads:366:43    - Unknown word (Transformm)    -- Name => "_ZN5physx11PxTransformmLERS0_";
 Engine/neo-api-physx.ads:366:53    - Unknown word (LERS)          -- ZN5physx11PxTransformmLERS0_";
 Engine/neo-api-physx.ads:373:124   - Unknown word (pxvec)         -- PxVec3.PxVec3) return pxvec3_h.Class_PxVec3.PxVec
 Engine/neo-api-physx.ads:373:87    - Unknown word (pxvec)         -- input : access constant pxvec3_h.Class_PxVec3.PxVec
 Engine/neo-api-physx.ads:37:125    - Unknown word (physx)         -- exitcode0\Desktop\PhysX-4.1\physx\include\PxActor.h:1
 Engine/neo-api-physx.ads:37:97     - Unknown word (exitcode)      -- PxFlags -- C:\Users\exitcode0\Desktop\PhysX-4.1\physx
+Engine/neo-api-physx.ads:396:63    - Unknown word (ERKS)          -- PxTransform9transformERKS0_";
 Engine/neo-api-physx.ads:40:31     - Unknown word (physxan)       -- External_Name => "_ZN5physxanENS_11PxActorFlag4EnumES
+Engine/neo-api-physx.ads:416:67    - Unknown word (ERKS)          -- PxTransform12transformInvERKS0_";
 Engine/neo-api-physx.ads:418:127   - Unknown word (pxplane)       -- PxPlane.PxPlane) return pxplane_h.Class_PxPlane.PxPlane
 Engine/neo-api-physx.ads:418:87    - Unknown word (pxplane)       -- plane : access constant pxplane_h.Class_PxPlane.PxPlane
 Engine/neo-api-physx.ads:423:134   - Unknown word (pxplane)       -- PxPlane.PxPlane) return pxplane_h.Class_PxPlane.PxPlane
@@ -680,6 +712,7 @@ Engine/neo-api-physx.ads:441:118   - Unknown word (pxplane)       -- physx\inclu
 Engine/neo-api-physx.ads:455:64    - Unknown word (Effff)         -- "_ZN5physx7PxPlaneC1Effff");
 Engine/neo-api-physx.ads:45:31     - Unknown word (physxco)       -- External_Name => "_ZN5physxcoENS_11PxActorFlag4EnumE
 Engine/neo-api-physx.ads:472:43    - Unknown word (Planeeq)       -- Name => "_ZNK5physx7PxPlaneeqERKS0_";
+Engine/neo-api-physx.ads:472:50    - Unknown word (ERKS)          -- _ZNK5physx7PxPlaneeqERKS0_";
 Engine/neo-api-physx.ads:50:31     - Unknown word (physxor)       -- External_Name => "_ZN5physxorENS_11PxActorFlag4EnumES
 Engine/neo-api-physx.ads:526:31    - Unknown word (physxan)       -- External_Name => "_ZN5physxanENS_11PxShapeFlag4EnumES
 Engine/neo-api-physx.ads:531:31    - Unknown word (physxco)       -- External_Name => "_ZN5physxcoENS_11PxShapeFlag4EnumE
@@ -705,6 +738,7 @@ Engine/neo-api-physx.ads:775:126   - Unknown word (pxspheregeometry)       -- ph
 Engine/neo-api-physx.ads:778:156   - Unknown word (pxspheregeometry)       -- physx\include\geometry\pxspheregeometry.h:53
 Engine/neo-api-physx.ads:781:153   - Unknown word (pxspheregeometry)       -- physx\include\geometry\pxspheregeometry.h:76
 Engine/neo-api-physx.ads:794:116   - Unknown word (pxconvexmesh)           -- physx\include\geometry\pxconvexmesh.h:53
+Engine/neo-api-physx.ads:795:10    - Unknown word (Verts)                  -- mNbVerts : aliased pxsimpletypes
 Engine/neo-api-physx.ads:795:113   - Unknown word (pxconvexmesh)           -- physx\include\geometry\pxconvexmesh.h:54
 Engine/neo-api-physx.ads:796:115   - Unknown word (pxconvexmesh)           -- physx\include\geometry\pxconvexmesh.h:55
 Engine/neo-api-physx.ads:798:103   - Unknown word (pxconvexmesh)           -- physx\include\geometry\pxconvexmesh.h:51
@@ -725,8 +759,10 @@ Engine/neo-api-physx.ads:929:26    - Unknown word (pxmeshscale)            -- sc
 Engine/neo-api-physx.ads:931:37    - Unknown word (pxcoreutilitytypes)     -- paddingFromFlags : aliased pxcoreutilitytypes_h.Class_PxPadding.PxPadding
 Engine/neo-api-physx.ads:942:36    - Unknown word (pxmeshscale)            -- scaling : access constant pxmeshscale_h.Class_PxMeshScale
 Engine/neo-api-physx.ads:944:95    - Unknown word (EPNS)                   -- PxTriangleMeshGeometryC1EPNS_14PxTriangleMeshERKNS
+Engine/neo-api-physx.ads:964:60    - Unknown word (verts)                  -- CreateConvexMesh(const Point* verts, udword vertCount, PxConvexFl
 Engine/neo-api-physx.ads:964:67    - Unknown word (udword)                 -- const Point* verts, udword vertCount, PxConvexFlags
 Engine/neo-api-physx.ads:985:68    - Unknown word (CONVEXMESH)             -- geomType==PxGeometryType::eCONVEXMESH)
+Engine/neo-api-physx.ads:988:62    - Unknown word (verts)                  -- CreateConvexMesh(const Point* verts, udword vertCount, PxConvexFl
 Engine/neo-api-physx.ads:988:69    - Unknown word (udword)                 -- const Point* verts, udword vertCount, PxConvexFlags
 Engine/neo-api-physx.ads:995:88    - Unknown word (TWOPI)                  -- jc.mMaxLimitAngle, TWOPI));
 Engine/neo-api-sdl.ads:5:78      - Unknown word (Squirek)    -- Copyright (C) 2016 Justin Squirek
@@ -758,11 +794,11 @@ Engine/neo-api-vulkan.ads:1216:21   - Unknown word (BPTC)           -- GL_COMPRE
 Engine/neo-api-vulkan.ads:1217:21   - Unknown word (BPTC)           -- GL_COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT
 Engine/neo-api-vulkan.ads:1218:22   - Unknown word (BPTC)           -- GL_COMPRESSED_RGBA_BPTC_UNORM
 Engine/neo-api-vulkan.ads:1219:28   - Unknown word (BPTC)           -- COMPRESSED_SRGB_ALPHA_BPTC_UNORM : constant
-Engine/neo-api-vulkan.ads:1222:22   - Unknown word (PUNCHTHROUGH)   -- GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2 : constant
-Engine/neo-api-vulkan.ads:1225:23   - Unknown word (PUNCHTHROUGH)   -- GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2 : constant
-Engine/neo-api-vulkan.ads:1231:28   - Unknown word (BPPV)           -- COMPRESSED_RGB_PVRTC_2BPPV1_IMG : constant
-Engine/neo-api-vulkan.ads:1232:28   - Unknown word (BPPV)           -- COMPRESSED_RGB_PVRTC_4BPPV1_IMG : constant
-Engine/neo-api-vulkan.ads:1233:29   - Unknown word (BPPV)           -- COMPRESSED_RGBA_PVRTC_2BPPV1_IMG : constant
+Engine/neo-api-vulkan.ads:1222:22   - Unknown word (PUNCHTHROUGH)  -- GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2 : constant
+Engine/neo-api-vulkan.ads:1225:23   - Unknown word (PUNCHTHROUGH)  -- GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2 : constant
+Engine/neo-api-vulkan.ads:1231:28   - Unknown word (BPPV)          -- COMPRESSED_RGB_PVRTC_2BPPV1_IMG : constant
+Engine/neo-api-vulkan.ads:1232:28   - Unknown word (BPPV)          -- COMPRESSED_RGB_PVRTC_4BPPV1_IMG : constant
+Engine/neo-api-vulkan.ads:1233:29   - Unknown word (BPPV)          -- COMPRESSED_RGBA_PVRTC_2BPPV1_IMG : constant
 Engine/neo-api-vulkan.ads:1234:29   - Unknown word (BPPV)          -- COMPRESSED_RGBA_PVRTC_4BPPV1_IMG : constant
 Engine/neo-api-vulkan.ads:1235:29   - Unknown word (BPPV)          -- COMPRESSED_RGBA_PVRTC_2BPPV2_IMG : constant
 Engine/neo-api-vulkan.ads:124:8     - Unknown word (Swapchain)   -- -- VkSwapchainKHR
@@ -782,6 +818,8 @@ Engine/neo-api-vulkan.ads:1693:25   - Unknown word (Multisample)   -- shaderStor
 Engine/neo-api-vulkan.ads:1716:15   - Unknown word (Multisample)   -- variableMultisampleRate
 Engine/neo-api-vulkan.ads:1731:10   - Unknown word (Texel)         -- maxTexelBufferElements
 Engine/neo-api-vulkan.ads:1782:10   - Unknown word (Texel)         -- subTexelPrecisionBits
+Engine/neo-api-vulkan.ads:1788:10   - Unknown word (Viewports)     -- maxViewports
+Engine/neo-api-vulkan.ads:178:18    - Unknown word (SRGB)        -- VK_COLOR_SPACE_SRGB_NONLINEAR_KHR : constant
 Engine/neo-api-vulkan.ads:1793:10   - Unknown word (Texel)         -- minTexelBufferOffsetAlignment
 Engine/neo-api-vulkan.ads:1796:10   - Unknown word (Texel)         -- minTexelOffset
 Engine/neo-api-vulkan.ads:1797:10   - Unknown word (Texel)         -- maxTexelOffset
@@ -791,6 +829,8 @@ Engine/neo-api-vulkan.ads:209:26    - Unknown word (DONT)        -- ATTACHMENT_S
 Engine/neo-api-vulkan.ads:2153:7    - Unknown word (swapchain)     -- swapchainCount : Int_Unsigned
 Engine/neo-api-vulkan.ads:2154:8    - Unknown word (Swapchains)    -- pSwapchains : Ptr_Ptr
 Engine/neo-api-vulkan.ads:219:25    - Unknown word (DONT)        -- VK_ATTACHMENT_LOAD_OP_DONT_CARE : constant Int
+Engine/neo-api-vulkan.ads:2354:8    - Unknown word (Viewports)     -- pViewports : Ptr_VkViewport
+Engine/neo-api-vulkan.ads:2367:7    - Unknown word (rasterizer)    -- rasterizerDiscardEnable : Int_Unsigned
 Engine/neo-api-vulkan.ads:2379:18   - Unknown word (Multisample)   -- type VkPipelineMultisampleStateCreateInfo;
 Engine/neo-api-vulkan.ads:2382:77   - Unknown word (MULTISAMPLE)   -- STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO;
 Engine/neo-api-vulkan.ads:246:6     - Unknown word (SUBPASS)     -- VK_SUBPASS_CONTENTS_INLINE
@@ -819,6 +859,7 @@ Engine/neo-api-vulkan.ads:3024:31   - Unknown word (RGTC)          -- when GL_CO
 Engine/neo-api-vulkan.ads:3028:31   - Unknown word (BPTC)          -- when GL_COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT
 Engine/neo-api-vulkan.ads:3036:32   - Unknown word (PUNCHTHROUGH)  -- when GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2 => VK
 Engine/neo-api-vulkan.ads:3039:33   - Unknown word (PUNCHTHROUGH)  -- GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2 => VK
+Engine/neo-api-vulkan.ads:3115:11   - Unknown word (Palletized)    -- -- Palletized
 Engine/neo-api-vulkan.ads:3233:50   - Unknown word (raygen)        -- raygenShaderBindingTableBuffer
 Engine/neo-api-vulkan.ads:3234:50   - Unknown word (raygen)        -- raygenShaderBindingOffset
 Engine/neo-api-vulkan.ads:335:27    - Unknown word (TEXEL)       -- BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT : constant
@@ -843,6 +884,7 @@ Engine/neo-api-vulkan.ads:462:19    - Unknown word (PREINITIALIZED) -- VK_IMAGE_
 Engine/neo-api-vulkan.ads:553:29    - Unknown word (TEXEL)          -- FORMAT_FEATURE_UNIFORM_TEXEL_BUFFER_BIT
 Engine/neo-api-vulkan.ads:560:21    - Unknown word (BLIT)           -- VK_FORMAT_FEATURE_BLIT_SRC_BIT
 Engine/neo-api-vulkan.ads:561:21    - Unknown word (BLIT)           -- VK_FORMAT_FEATURE_BLIT_DST_BIT
+Engine/neo-api-vulkan.ads:579:15    - Unknown word (NAND)           -- VK_LOGIC_OP_NAND : constant
 Engine/neo-api-vulkan.ads:5:76      - Unknown word (Squirek)    -- Copyright (C) 2020 Justin Squirek
 Engine/neo-api-vulkan.ads:60:8      - Unknown word (Swapchain)  -- -- VkSwapchainCreateFlagsKHR
 Engine/neo-api-vulkan.ads:641:74    - Unknown word (FFFE)           -- Unsigned_C := 16#FFFF_FFFE#; -- To_Int_32_Unsigned
@@ -863,15 +905,19 @@ Engine/neo-api-vulkan.ads:730:20    - Unknown word (UNORM)          -- VK_FORMAT
 Engine/neo-api-vulkan.ads:735:16    - Unknown word (SNORM)          -- VK_FORMAT_R8_SNORM
 Engine/neo-api-vulkan.ads:736:16    - Unknown word (USCALED)        -- VK_FORMAT_R8_USCALED
 Engine/neo-api-vulkan.ads:737:16    - Unknown word (SSCALED)        -- VK_FORMAT_R8_SSCALED
+Engine/neo-api-vulkan.ads:740:16    - Unknown word (SRGB)           -- VK_FORMAT_R8_SRGB
 Engine/neo-api-vulkan.ads:742:18    - Unknown word (SNORM)          -- VK_FORMAT_R8G8_SNORM
 Engine/neo-api-vulkan.ads:743:18    - Unknown word (USCALED)        -- VK_FORMAT_R8G8_USCALED
 Engine/neo-api-vulkan.ads:744:18    - Unknown word (SSCALED)        -- VK_FORMAT_R8G8_SSCALED
+Engine/neo-api-vulkan.ads:747:18    - Unknown word (SRGB)           -- VK_FORMAT_R8G8_SRGB
 Engine/neo-api-vulkan.ads:749:20    - Unknown word (SNORM)          -- VK_FORMAT_R8G8B8_SNORM
 Engine/neo-api-vulkan.ads:750:20    - Unknown word (USCALED)        -- VK_FORMAT_R8G8B8_USCALED
 Engine/neo-api-vulkan.ads:751:20    - Unknown word (SSCALED)        -- VK_FORMAT_R8G8B8_SSCALED
+Engine/neo-api-vulkan.ads:754:20    - Unknown word (SRGB)           -- VK_FORMAT_R8G8B8_SRGB
 Engine/neo-api-vulkan.ads:756:20    - Unknown word (SNORM)          -- VK_FORMAT_B8G8R8_SNORM
 Engine/neo-api-vulkan.ads:757:20    - Unknown word (USCALED)        -- VK_FORMAT_B8G8R8_USCALED
 Engine/neo-api-vulkan.ads:758:20    - Unknown word (SSCALED)        -- VK_FORMAT_B8G8R8_SSCALED
+Engine/neo-api-vulkan.ads:761:20    - Unknown word (SRGB)           -- VK_FORMAT_B8G8R8_SRGB
 Engine/neo-api-vulkan.ads:763:22    - Unknown word (SNORM)          -- VK_FORMAT_R8G8B8A8_SNORM
 Engine/neo-api-vulkan.ads:764:22    - Unknown word (USCALED)        -- VK_FORMAT_R8G8B8A8_USCALED
 Engine/neo-api-vulkan.ads:765:22    - Unknown word (SSCALED)        -- VK_FORMAT_R8G8B8A8_SSCALED
@@ -1157,12 +1203,15 @@ Engine/neo-core-ordered.ads:5:76      - Unknown word (Squirek)    -- Copyright (
 Engine/neo-core-strings.adb:5:76      - Unknown word (Squirek)    -- Copyright (C) 2020 Justin Squirek
 Engine/neo-core-strings.ads:5:76      - Unknown word (Squirek)    -- Copyright (C) 2020 Justin Squirek
 Engine/neo-core-trees.adb:5:76      - Unknown word (Squirek)    -- Copyright (C) 2020 Justin Squirek
+Engine/neo-core-trees.ads:16:21     - Unknown word (Multiway)   -- with Ada.Containers.Multiway_Trees;
+Engine/neo-core-trees.ads:23:40     - Unknown word (Multiway)   -- is new Ada.Containers.Multiway_Trees (Tree_T, "=")
 Engine/neo-core-trees.ads:5:76      - Unknown word (Squirek)    -- Copyright (C) 2020 Justin Squirek
 Engine/neo-core-vectors.adb:5:76      - Unknown word (Squirek)    -- Copyright (C) 2020 Justin Squirek
 Engine/neo-core-vectors.ads:5:76      - Unknown word (Squirek)    -- Copyright (C) 2020 Justin Squirek
 Engine/neo-core.ads:16:72     - Unknown word (independant) -- system and data format independant functionality
 Engine/neo-core.ads:5:76      - Unknown word (Squirek)    -- Copyright (C) 2020 Justin Squirek
 Engine/neo-data-audio.adb:5:76      - Unknown word (Squirek)    -- Copyright (C) 2020 Justin Squirek
+Engine/neo-data-audio.ads:47:11     - Unknown word (Subwoofer)  -- Use_Subwoofer : Bool := True;
 Engine/neo-data-audio.ads:5:76      - Unknown word (Squirek)    -- Copyright (C) 2020 Justin Squirek
 Engine/neo-data-game.adb:116:23    - Unknown word (Atten)      -- LightObject => (Atten => Zero_Or_More,   Param
 Engine/neo-data-game.adb:118:3     - Unknown word (Atten)      -- Atten => (Param
@@ -1188,10 +1237,14 @@ Engine/neo-data-game.adb:5:76      - Unknown word (Squirek)    -- Copyright (C) 
 Engine/neo-data-game.adb:616:25    - Unknown word (indicies)   -- -- Mesh indicies
 Engine/neo-data-game.adb:625:25    - Unknown word (verticies)  -- -- Mesh verticies
 Engine/neo-data-game.adb:66:6      - Unknown word (Exclusivly) -- -- Exclusivly top-level
+Engine/neo-data-game.adb:676:12    - Unknown word (Forcefield) -- when Forcefield_Entity => Item := new
+Engine/neo-data-game.adb:676:60    - Unknown word (Forcefield) -- = new Entity_State'(Forcefield_Entity, others =>
 Engine/neo-data-game.ads:119:90    - Unknown word (acending)    -- Count); -- Must be in acending order
 Engine/neo-data-game.ads:138:46    - Unknown word (Indicies)    -- Positive; -- Index into the Indicies array for each segment
 Engine/neo-data-game.ads:150:12    - Unknown word (Indicies)    -- Bone_Indicies : Array_Bone_Index
+Engine/neo-data-game.ads:184:24    - Unknown word (Forcefield)  -- Forcefield_Entity,
 Engine/neo-data-game.ads:214:15    - Unknown word (Bouncyness)  -- Bouncyness : Integer
+Engine/neo-data-game.ads:225:19    - Unknown word (Pushable)    -- Non_Pushable : Bool
 Engine/neo-data-game.ads:235:19    - Unknown word (Respawn)     -- Respawn_Sound : Str_Unbound
 Engine/neo-data-game.ads:239:22    - Unknown word (Carrable)    -- Is_Carrable : Bool
 Engine/neo-data-game.ads:45:59     - Unknown word (archtoolbox) -- Percent := 0.0; -- www.archtoolbox.com/representation/architectu
@@ -1243,6 +1296,7 @@ Engine/neo-data.adb:780:41    - Unknown word (nsigned)     -- => Parse_Rest ("ns
 Engine/neo-data.adb:781:41    - Unknown word (loat)        -- => Parse_Rest ("loat", Type_x16_Kind
 Engine/neo-data.adb:781:97    - Unknown word (Disble)      -- Test_Bitsize => True, Disble_8_Bit => True); -- Hack
 Engine/neo-data.adb:784:41    - Unknown word (ouble)       -- => Parse_Rest ("ouble", Float64_Kind
+Engine/neo-data.adb:785:41    - Unknown word (tring)       -- => Parse_Rest ("tring", String_Kind
 Engine/neo-data.adb:919:24    - Unknown word (dimensionals) -- -- Multi-dimensionals are wrapped in curlies
 Engine/neo-data.adb:919:52    - Unknown word (curlies)      -- dimensionals are wrapped in curlies
 Engine/neo-data.adb:962:37    - Unknown word (rendevous)    -- Set the locals via a rendevous
@@ -1267,6 +1321,7 @@ Engine/neo-engine.adb:258:88    - Unknown word (LZCNT)          -- then Put_Into
 Engine/neo-engine.adb:379:61    - Unknown word (outter)         -- make it passable to outter scopes...
 Engine/neo-engine.adb:445:20    - Unknown word (descriminate)   -- -- Setters for descriminate unions
 Engine/neo-engine.adb:527:100   - Unknown word (recieve)        -- as such it will never recieve an up, so force it
+Engine/neo-engine.adb:533:24    - Unknown word (gamepads)       -- -- Combine gamepads
 Engine/neo-engine.adb:568:32    - Unknown word (Dont)           -- Args.Clear; -- Dont register clicks or cursor
 Engine/neo-engine.adb:5:76      - Unknown word (Squirek)    -- Copyright (C) 2020 Justin Squirek
 Engine/neo-engine.ads:219:25    - Unknown word (Junja)      -- Junja_Key, Final
@@ -1286,6 +1341,7 @@ Engine/neo-engine.ads:82:24     - Unknown word (spawnable)  -- - Package to crea
 Engine/neo-world-animation.adb:5:78      - Unknown word (Squirek)    -- Copyright (C) 2016 Justin Squirek
 Engine/neo-world-animation.ads:5:78      - Unknown word (Squirek)    -- Copyright (C) 2016 Justin Squirek
 Engine/neo-world-audio.adb:5:78      - Unknown word (Squirek)    -- Copyright (C) 2016 Justin Squirek
+Engine/neo-world-audio.ads:40:11     - Unknown word (Subwoofer)  -- Use_Subwoofer : Bool        :=
 Engine/neo-world-audio.ads:5:78      - Unknown word (Squirek)    -- Copyright (C) 2016 Justin Squirek
 Engine/neo-world-commands.adb:100:49    - Unknown word (levelname)  -- was started with "map <levelname>", then
 Engine/neo-world-commands.adb:101:59    - Unknown word (devmap)     -- allowed. If started with "devmap <levelname>"
@@ -1374,8 +1430,19 @@ Engine/neo-world-geometry.adb:205:5     - Unknown word (Rotatef)    -- glRotatef
 Engine/neo-world-geometry.adb:252:52    - Unknown word (halfcircle) -- color, r, true);	//halfcircle -- flipped
 Engine/neo-world-geometry.adb:25:17     - Unknown word (VERTICIES)  -- CYLINDER_MESH_VERTICIES : constant := (1.0,
 Engine/neo-world-geometry.adb:264:51    - Unknown word (halfcircle) -- MM, color, r, true);//halfcircle -- good
+Engine/neo-world-geometry.adb:289:51    - Unknown word (verts)      -- CreateConvexHull(udword nb_verts, const Point* verts
+Engine/neo-world-geometry.adb:289:71    - Unknown word (verts)      -- verts, const Point* verts)
 Engine/neo-world-geometry.adb:294:6     - Unknown word (CONVEXHULLCREATE) -- -- CONVEXHULLCREATE Create;
+Engine/neo-world-geometry.adb:295:15    - Unknown word (Verts)            -- -- Create.NbVerts = nb_verts;
+Engine/neo-world-geometry.adb:295:27    - Unknown word (verts)            -- Create.NbVerts = nb_verts;
+Engine/neo-world-geometry.adb:296:25    - Unknown word (verts)            -- Create.Vertices = verts;
 Engine/neo-world-geometry.adb:304:7     - Unknown word (DELETESINGLE)     -- -- DELETESINGLE(CH);
+Engine/neo-world-geometry.adb:312:25    - Unknown word (Verts)            -- const Point* ConvexVerts = hull.GetVerts();
+Engine/neo-world-geometry.adb:312:41    - Unknown word (Verts)            -- ConvexVerts = hull.GetVerts();
+Engine/neo-world-geometry.adb:321:22    - Unknown word (Verts)            -- - const udword NbVertsInPoly = PolygonData
+Engine/neo-world-geometry.adb:321:51    - Unknown word (Verts)            -- bVertsInPoly = PolygonData.mNbVerts;
+Engine/neo-world-geometry.adb:322:22    - Unknown word (Tris)             -- - const udword NbTris = NbVertsInPoly - 2
+Engine/neo-world-geometry.adb:327:27    - Unknown word (Tris)             -- for(udword i=0;i<NbTris;i++)
 Engine/neo-world-geometry.adb:39:25     - Unknown word (VERTICIES)  -- CYLINDER_TOP_CAP_MESH_VERTICIES : constant := (B,
 Engine/neo-world-geometry.adb:400:17    - Unknown word (glmat)            -- -- float glmat[16]; //4x4 column major
 Engine/neo-world-geometry.adb:401:11    - Unknown word (glmat)            -- -- glmat[0] = M.m[0][0];
@@ -1393,6 +1460,7 @@ Engine/neo-world-geometry.adb:454:20    - Unknown word (Coeff)            -- -- 
 Engine/neo-world-geometry.adb:455:26    - Unknown word (Coeff)            -- glColor3f(color.x*Coeff, color.y*Coeff, color
 Engine/neo-world-geometry.adb:455:41    - Unknown word (Coeff)            -- color.x*Coeff, color.y*Coeff, color.z*Coeff);
 Engine/neo-world-geometry.adb:455:56    - Unknown word (Coeff)            -- color.y*Coeff, color.z*Coeff);
+Engine/neo-world-geometry.adb:520:41    - Unknown word (verts)            -- ConvexShapeRenderer(udword nb_verts, const Point* verts
 Engine/neo-world-geometry.adb:528:8     - Unknown word (DELETESINGLE)     -- -- DELETESINGLE(CHull);
 Engine/neo-world-geometry.adb:5:76      - Unknown word (Squirek)    -- Copyright (C) 2020 Justin Squirek
 Engine/neo-world-geometry.adb:76:28     - Unknown word (VERTICIES)  -- CYLINDER_BOTTOM_CAP_MESH_VERTICIES : constant := (1.0,
@@ -1513,8 +1581,13 @@ Engine/neo-world-graphics.adb:1667:79   - Unknown word (SPIR)           -- each 
 Engine/neo-world-graphics.adb:1683:31   - Unknown word (SPIR)           -- -- Load the stage's SPIR-V data
 Engine/neo-world-graphics.adb:1804:27   - Unknown word (reponsible)     -- Main drawing routine reponsible for managing pipelines
 Engine/neo-world-graphics.adb:1816:15   - Unknown word (meterial)       -- -- Flag a meterial texture and setup a
+Engine/neo-world-graphics.adb:1866:24   - Unknown word (Gotos)          -- goto Have_Pipeline; -- Gotos to keep the nesting
+Engine/neo-world-graphics.adb:1889:80   - Unknown word (Viewports)      -- pViewports => Viewport'Unchecked
 Engine/neo-world-graphics.adb:1894:11   - Unknown word (Multisample)    -- Multisample_Info : aliased VkPipelineM
 Engine/neo-world-graphics.adb:1894:51   - Unknown word (Multisample)    -- : aliased VkPipelineMultisampleStateCreateInfo := (sampleShad
+Engine/neo-world-graphics.adb:1910:11   - Unknown word (Rasterizer)     -- Rasterizer_Info : aliased VkPipelineRast
+Engine/neo-world-graphics.adb:1912:14   - Unknown word (rasterizer)     -- rasterizerDiscardEnable => VK_FALSE
+Engine/neo-world-graphics.adb:1992:91   - Unknown word (Rasterizer)     -- pRasterizationState => Rasterizer_Info'Unchecked_Access
 Engine/neo-world-graphics.adb:1993:69   - Unknown word (Multisample)    -- pMultisampleState => Multisample
 Engine/neo-world-graphics.adb:1993:91   - Unknown word (Multisample)    -- pMultisampleState => Multisample_Info'Unchecked_Access
 Engine/neo-world-graphics.adb:1997:68   - Unknown word (subpass)        -- subpass => 0,
@@ -1543,6 +1616,7 @@ Engine/neo-world-graphics.adb:860:112   - Unknown word (SFLOAT)      -- VK_FORMA
 Engine/neo-world-graphics.adb:884:26    - Unknown word (sepcial)     -- -- Fetch our sepcial "handle" used to Id
 Engine/neo-world-graphics.adb:941:61    - Unknown word (subresource) -- subresourceRange => (aspectMask
 Engine/neo-world-graphics.ads:287:24    - Unknown word (accessable) -- - Global parameters accessable to shaders
+Engine/neo-world-graphics.ads:35:111    - Unknown word (SRGB)       -- VK_COLOR_SPACE_SRGB_NONLINEAR_KHR);
 Engine/neo-world-graphics.ads:35:13     - Unknown word (SWAPCHAIN)  -- SUPPORTED_SWAPCHAIN_FORMAT : constant VkSurfaceFo
 Engine/neo-world-graphics.ads:35:85     - Unknown word (UNORM)      -- (VK_FORMAT_B8G8R8A8_UNORM, VK_COLOR_SPACE
 Engine/neo-world-graphics.ads:36:110    - Unknown word (UNORM)      -- UINT, VK_FORMAT_D24_UNORM_S8_UINT);
@@ -1637,6 +1711,7 @@ Engine/neo-world-network.adb:45:11     - Unknown word (playerstate) -- -- <playe
 Engine/neo-world-network.adb:462:20    - Unknown word (numglobalservers)     -- cls.numglobalservers = count;
 Engine/neo-world-network.adb:465:20    - Unknown word (nummplayerservers)    -- cls.nummplayerservers = count;
 Engine/neo-world-network.adb:46:11     - Unknown word (packetentities) -- -- <packetentities>
+Engine/neo-world-network.adb:470:32    - Unknown word (connectionless)       -- Com_DPrintf ("Unknown connectionless packet command.\n")
 Engine/neo-world-network.adb:476:16    - Unknown word (cursize)              -- if msg->cursize < 4 then
 Engine/neo-world-network.adb:477:51    - Unknown word (Stringfrom)           -- Runt packet\n",NET_AdrToStringfrom ));
 Engine/neo-world-network.adb:481:23    - Unknown word (Adrfrom)              -- if !NET_CompareAdrfrom, clc.netchan.remoteAddress
@@ -1648,7 +1723,7 @@ Engine/neo-world-network.adb:490:27    - Unknown word (readcount)            -- 
 Engine/neo-world-network.adb:493:11    - Unknown word (gamestate)            -- -- gamestate
 Engine/neo-world-network.adb:496:22    - Unknown word (Messagemsg)           -- CL_ParseServerMessagemsg;
 Engine/neo-world-network.adb:499:15    - Unknown word (demorecording)        -- if clc.demorecording && !clc.demowaiting
-Engine/neo-world-network.adb:499:37    - Unknown word (demowaiting)          -- demorecording && !clc.demowaiting then
+Engine/neo-world-network.adb:499:37    - Unknown word (demowaiting)         -- demorecording && !clc.demowaiting then
 Engine/neo-world-network.adb:503:10    - Unknown word (swlen)               -- swlen = LittleLong( len )
 Engine/neo-world-network.adb:504:21    - Unknown word (swlen)               -- FS_Write (&swlen, 4, clc.demofile);
 Engine/neo-world-network.adb:504:35    - Unknown word (demofile)            -- Write (&swlen, 4, clc.demofile);
@@ -1721,6 +1796,8 @@ Engine/neo-world-physics.adb:413:8     - Unknown word (PHYSX)            -- #ifd
 Engine/neo-world-physics.adb:415:16    - Unknown word (Depenetration)    -- RD.setMaxDepenetrationVelocity(MAX_FLOAT);
 Engine/neo-world-physics.adb:421:8     - Unknown word (PHYSX)            -- #ifdef PHYSX_SUPPORT_STABILIZATION
 Engine/neo-world-physics.adb:423:16    - Unknown word (Depenetration)    -- RD.setMaxDepenetrationVelocity(MAX_FLOAT);
+Engine/neo-world-physics.adb:446:64    - Unknown word (Dyna)             -- mParams.mUseRaycastCCD_DynaDyna);
+Engine/neo-world-physics.adb:446:68    - Unknown word (Dyna)             -- mParams.mUseRaycastCCD_DynaDyna);
 Engine/neo-world-physics.adb:49:14     - Unknown word (midphase)   -- Params.midphaseDesc.setToDefault(mParams
 Engine/neo-world-physics.adb:5:78      - Unknown word (Squirek)    -- Copyright (C) 2016 Justin Squirek
 Engine/neo-world-physics.adb:92:52     - Unknown word (ACTIVETRANSFORMS) -- PxSceneFlag::eENABLE_ACTIVETRANSFORMS, mParams.mEnableActiveTransf
@@ -1744,6 +1821,8 @@ Engine/neo-world-physics.ads:183:31    - Unknown word (Terdiman)   -- Copyright 
 Engine/neo-world-physics.ads:1841:29   - Unknown word (Subdiv)       -- udword mMBPSubdivLevel;
 Engine/neo-world-physics.ads:1845:8    - Unknown word (PHYSX)        -- #ifdef PHYSX_SUPPORT_ANGULAR_CCD
 Engine/neo-world-physics.ads:1848:8    - Unknown word (PHYSX)        -- #ifdef PHYSX_SUPPORT_RAYCAST_CCD
+Engine/neo-world-physics.ads:1850:38   - Unknown word (Dyna)         -- mUseRaycastCCD_DynaDyna;
+Engine/neo-world-physics.ads:1850:42   - Unknown word (Dyna)         -- mUseRaycastCCD_DynaDyna;
 Engine/neo-world-physics.ads:1854:8    - Unknown word (PHYSX)        -- #ifdef PHYSX_SUPPORT_TIGHT_CONVEX
 Engine/neo-world-physics.ads:1873:22   - Unknown word (SUBSTEPS)     -- ifdef PHYSX_SUPPORT_SUBSTEPS
 Engine/neo-world-physics.ads:1874:28   - Unknown word (Substeps)     -- udword mNbSubsteps;
@@ -1761,8 +1840,18 @@ Engine/neo-world-physics.ads:292:41    - Unknown word (Allocateable) -- MATERIAL
 Engine/neo-world-physics.ads:306:37    - Unknown word (Allocateable) -- SHAPE_CREATE : public Allocateable
 Engine/neo-world-physics.ads:372:43    - Unknown word (Allocateable) -- DATA_CREATE : public Allocateable
 Engine/neo-world-physics.ads:374:43    - Unknown word (udword)       -- PINT_CONVEX_DATA_CREATE(udword nb_verts=0, const Point
+Engine/neo-world-physics.ads:374:53    - Unknown word (verts)        -- DATA_CREATE(udword nb_verts=0, const Point* verts
+Engine/neo-world-physics.ads:374:75    - Unknown word (verts)        -- verts=0, const Point* verts=null) :
+Engine/neo-world-physics.ads:375:24    - Unknown word (Verts)        -- mNbVerts (nb_verts),
+Engine/neo-world-physics.ads:375:35    - Unknown word (verts)        -- mNbVerts (nb_verts),
+Engine/neo-world-physics.ads:376:22    - Unknown word (Verts)        -- mVerts (verts),
+Engine/neo-world-physics.ads:376:32    - Unknown word (verts)        -- mVerts (verts),
+Engine/neo-world-physics.ads:381:26    - Unknown word (Verts)        -- udword mNbVerts;
 Engine/neo-world-physics.ads:381:5     - Unknown word (udword)       -- udword mNbVerts
+Engine/neo-world-physics.ads:382:26    - Unknown word (Verts)        -- const Point*        mVerts;
 Engine/neo-world-physics.ads:388:38    - Unknown word (udword)       -- PINT_CONVEX_CREATE(udword nb_verts=0, const Point
+Engine/neo-world-physics.ads:388:48    - Unknown word (verts)        -- CONVEX_CREATE(udword nb_verts=0, const Point* verts
+Engine/neo-world-physics.ads:389:24    - Unknown word (Verts)        -- mNbVerts (nb_verts),
 Engine/neo-world-physics.ads:395:5     - Unknown word (udword)       -- udword mNbVerts
 Engine/neo-world-physics.ads:5:78      - Unknown word (Squirek)    -- Copyright (C) 2016 Justin Squirek
 Engine/neo-world-physics.ads:648:21    - Unknown word (FRONTWD)      -- DIFFERENTIAL_LS_FRONTWD, // limited slip differentia
@@ -1840,6 +1929,7 @@ Games/DOOM/Logs/Squirek.txt:8:68      - Unknown word (PCLMULQDQ)  -- SSSE3, SSE4
 Games/DOOM/Logs/Squirek.txt:8:89      - Unknown word (FXSR)       -- PCLMULQDQ, AVX, AES, FXSR, FMA3, HTT, F16C, OSXSAVE
 Games/DOOM/Resource/locale.csv:2:105     - Unknown word (vous)       -- est survenue, voudriez-vous voir plus d'informations
 Games/DOOM/Resource/locale.csv:2:110     - Unknown word (voir)       -- survenue, voudriez-vous voir plus d'informations
+Games/DOOM/Resource/locale.csv:2:120     - Unknown word (d'informations) -- voudriez-vous voir plus d'informations?",OK,asdf,,,,,,,,,
 Games/DOOM/Resource/locale.csv:2:75      - Unknown word (erreur)     -- more information?","Une erreur est survenue, voudriez
 Games/DOOM/Resource/locale.csv:2:86      - Unknown word (survenue)   -- information?","Une erreur est survenue, voudriez-vous voir
 Games/DOOM/Resource/locale.csv:2:96      - Unknown word (voudriez)   -- erreur est survenue, voudriez-vous voir plus d'informations
@@ -1869,18 +1959,25 @@ Tools/compile-idmap.py:284:24    - Unknown word (ikclip)       -- if re.search(r
 Tools/compile-idmap.py:306:25    - Unknown word (groupend)     -- if next_line_is_groupend (next_line):
 Tools/compile-idmap.py:327:4     - Unknown word (Dewm)         -- ## DewmAAS "1.07"
 Tools/compile-idmap.py:333:6     - Unknown word (bboxes)       -- ## bboxes
-Tools/compile-idmap.py:439:6     - Unknown word (indicies)     -- in_indicies = False
-Tools/compile-idmap.py:451:44    - Unknown word (lfwall)       -- "textures/base_wall/lfwall27d" /* numVerts = *
-Tools/compile-idmap.py:457:44    - Unknown word (lfwall)       -- "textures/base_wall/lfwall27b" /* numVerts = *
-Tools/compile-idmap.py:490:33    - Unknown word (prelight)     -- shadowModel { /* name = */ "_prelight_nkd_light_163"
-Tools/compile-idmap.py:504:13    - Unknown word (indicies)     -- global in_indicies
-Tools/compile-idmap.py:534:29    - Unknown word (sanatize)     -- Get the material and sanatize it
-Tools/compile-idmap.py:545:8     - Unknown word (indicies)     -- in_indicies = False
-Tools/compile-idmap.py:585:35    - Unknown word (verticies)    -- comma separation for verticies
-Tools/compile-idmap.py:586:17    - Unknown word (indicies)     -- if not in_indicies:
-Tools/compile-idmap.py:651:10    - Unknown word (Verticies)    -- ## Verticies
-Tools/compile-idmap.py:667:10    - Unknown word (Indicies)     -- ## Indicies
-Tools/compile-idmap.py:705:19    - Unknown word (worldspawn)   -- ## "classname" "worldspawn"
+Tools/compile-idmap.py:340:15    - Unknown word (Reachabilities) -- ## allowSwimReachabilities = 0
+Tools/compile-idmap.py:341:14    - Unknown word (Reachabilities) -- ## allowFlyReachabilities = 0
+Tools/compile-idmap.py:439:6     - Unknown word (indicies)       -- in_indicies = False
+Tools/compile-idmap.py:451:44    - Unknown word (lfwall)         -- "textures/base_wall/lfwall27d" /* numVerts = *
+Tools/compile-idmap.py:451:61    - Unknown word (Verts)          -- wall/lfwall27d" /* numVerts = */ 4 /* numIndexes
+Tools/compile-idmap.py:457:44    - Unknown word (lfwall)         -- "textures/base_wall/lfwall27b" /* numVerts = *
+Tools/compile-idmap.py:457:61    - Unknown word (Verts)          -- wall/lfwall27b" /* numVerts = */ 4 /* numIndexes
+Tools/compile-idmap.py:463:62    - Unknown word (Verts)          -- wall/lfwall13f3" /* numVerts = */ 16 /* numIndexes
+Tools/compile-idmap.py:490:33    - Unknown word (prelight)       -- shadowModel { /* name = */ "_prelight_nkd_light_163"
+Tools/compile-idmap.py:492:12    - Unknown word (Verts)          -- ## /* numVerts = */ 148 /* noCaps
+Tools/compile-idmap.py:504:13    - Unknown word (indicies)       -- global in_indicies
+Tools/compile-idmap.py:534:29    - Unknown word (sanatize)       -- Get the material and sanatize it
+Tools/compile-idmap.py:545:8     - Unknown word (indicies)       -- in_indicies = False
+Tools/compile-idmap.py:585:35    - Unknown word (verticies)      -- comma separation for verticies
+Tools/compile-idmap.py:586:17    - Unknown word (indicies)       -- if not in_indicies:
+Tools/compile-idmap.py:643:33    - Unknown word (Verts)          -- line = re.sub (r'/\* numVerts = \*/ ', '   VertexCount
+Tools/compile-idmap.py:651:10    - Unknown word (Verticies)      -- ## Verticies
+Tools/compile-idmap.py:667:10    - Unknown word (Indicies)       -- ## Indicies
+Tools/compile-idmap.py:705:19    - Unknown word (worldspawn)     -- ## "classname" "worldspawn"
 Tools/compile-idmap.py:706:19    - Unknown word (locationseparator) -- ## "name" "info_locationseparator_4"
 Tools/compile-idmap.py:713:80    - Unknown word (nodraw)            -- ) "textures/common/nodraw" 0 0 0
 Tools/compile-idmap.py:714:77    - Unknown word (nodraw)            -- ) "textures/common/nodraw" 0 0 0
@@ -1924,6 +2021,8 @@ Tools/spm_export.py:43:64     - Unknown word (bmesh)      -- string, mathutils, 
 Tools/spm_export.py:50:19     - Unknown word (mathutils)  -- axis_conversion = mathutils.Matrix([[1,0,0,0],[
 Tools/spm_export.py:540:27    - Unknown word (mathutils)  -- mesh_matrix = mathutils.Matrix()
 Tools/spm_export.py:551:14    - Unknown word (bmesh)      -- bm = bmesh.new()
+Tools/spm_export.py:553:59    - Unknown word (verts)      -- matrix = exported_matrix, verts = bm.verts)
+Tools/spm_export.py:553:70    - Unknown word (verts)      -- exported_matrix, verts = bm.verts)
 Tools/spm_export.py:553:9     - Unknown word (bmesh)      -- bmesh.ops.transform(bm, matrix
 Tools/spm_export.py:555:13    - Unknown word (bmesh)      -- bmesh.ops.triangulate(bm,
 Tools/spm_export.py:557:9     - Unknown word (bmesh)      -- bmesh.ops.reverse_faces(bm
@@ -1959,9 +2058,14 @@ Tools/spm_export.py:914:32    - Unknown word (fileselect)     -- context.window_
 Tools/spm_export.py:922:50    - Unknown word (localsp)        -- local-space" ] = self.localsp
 Tools/spm_export.py:923:50    - Unknown word (applymodifiers) -- apply-modifiers"] = self.applymodifiers
 Tools/spm_export.py:961:49    - Unknown word (idname)         -- SPM_Export_Operator.bl_idname, text="SPM (.spm)")
+Tools/spm_import.py:106:12    - Unknown word (verts)      -- bm.verts.new((x, z, y))
 Tools/spm_import.py:110:17    - Unknown word (vcolor)     -- if read_vcolor:
+Tools/spm_import.py:147:8     - Unknown word (verts)      -- bm.verts.ensure_lookup_table
+Tools/spm_import.py:149:8     - Unknown word (verts)      -- bm.verts.index_update()
+Tools/spm_import.py:152:29    - Unknown word (verts)      -- bm.faces.new(bm.verts[j] for j in reversed
 Tools/spm_import.py:157:13    - Unknown word (vcolor)     -- if read_vcolor:
 Tools/spm_import.py:172:21    - Unknown word (vcolor)     -- if read_vcolor:
+Tools/spm_import.py:181:34    - Unknown word (verts)      -- ops.remove_doubles(bm, verts = bm.verts)
 Tools/spm_import.py:181:5     - Unknown word (bmesh)      -- bmesh.ops.remove_doubles(bm
 Tools/spm_import.py:227:19    - Unknown word (SPMS)       -- header = "SPMS"
 Tools/spm_import.py:229:19    - Unknown word (SPMA)       -- header = "SPMA"
@@ -1978,14 +2082,18 @@ Tools/spm_import.py:43:8      - Unknown word (bmesh)      -- import bmesh, bpy, 
 Tools/spm_import.py:84:42     - Unknown word (vcolor)     -- read_normal, read_vcolor, read_tangent,
 Tools/spm_import.py:93:10     - Unknown word (bmesh)      -- bm = bmesh.new()
 Tools/stk_kart.py:109:32    - Unknown word (striaght)     -- print("Missing striaght frame for saving straight
+Tools/stk_kart.py:12:17     - Unknown word (Joerg)      -- __author__ = ["Joerg Henrichs (hiker), Marianne
 Tools/stk_kart.py:12:23     - Unknown word (Henrichs)   -- author__ = ["Joerg Henrichs (hiker), Marianne Gagnon
+Tools/stk_kart.py:12:50     - Unknown word (Gagnon)     -- Henrichs (hiker), Marianne Gagnon (Auria), xapantu"]
 Tools/stk_kart.py:12:58     - Unknown word (Auria)      -- hiker), Marianne Gagnon (Auria), xapantu"]
 Tools/stk_kart.py:12:66     - Unknown word (xapantu)    -- Marianne Gagnon (Auria), xapantu"]
 Tools/stk_kart.py:133:39    - Unknown word (localsp)      -- ops.screen.spm_export(localsp=True, filepath=path
 Tools/stk_kart.py:13:17     - Unknown word (supertuxkart) -- __url__ = ["supertuxkart.sourceforge.net"]
 Tools/stk_kart.py:158:32    - Unknown word (striaght)     -- print("Missing striaght frame for saving straight
 Tools/stk_kart.py:15:3      - Unknown word (bpydoc)       -- __bpydoc__ = """\
+Tools/stk_kart.py:18:27     - Unknown word (Joerg)        -- Copyright (C) 2009-2011 Joerg Henrichs, Marianne Gagnon
 Tools/stk_kart.py:18:33     - Unknown word (Henrichs)     -- (C) 2009-2011 Joerg Henrichs, Marianne Gagnon, Xapantu
+Tools/stk_kart.py:18:52     - Unknown word (Gagnon)       -- Joerg Henrichs, Marianne Gagnon, Xapantu
 Tools/stk_kart.py:18:60     - Unknown word (Xapantu)      -- Henrichs, Marianne Gagnon, Xapantu
 Tools/stk_kart.py:193:39    - Unknown word (localsp)      -- ops.screen.spm_export(localsp=True, filepath=path
 Tools/stk_kart.py:221:18    - Unknown word (stylen)       -- # If old stylen names are given, use
@@ -1993,7 +2101,9 @@ Tools/stk_kart.py:223:20    - Unknown word (WHEELFRONT)   -- #if name=="WHEELFRO
 Tools/stk_kart.py:225:22    - Unknown word (WHEELFRONT)   -- #elif name=="WHEELFRONT.L":
 Tools/stk_kart.py:227:22    - Unknown word (WHEELREAR)    -- #elif name=="WHEELREAR.R":
 Tools/stk_kart.py:229:22    - Unknown word (WHEELREAR)    -- #elif name=="WHEELREAR.L":
+Tools/stk_kart.py:23:16     - Unknown word (Joerg)        -- "author": "Joerg Henrichs, Marianne Gagnon
 Tools/stk_kart.py:23:22     - Unknown word (Henrichs)     -- "author": "Joerg Henrichs, Marianne Gagnon, Xapantu
+Tools/stk_kart.py:23:41     - Unknown word (Gagnon)       -- Joerg Henrichs, Marianne Gagnon, Xapantu",
 Tools/stk_kart.py:23:49     - Unknown word (Xapantu)      -- Henrichs, Marianne Gagnon, Xapantu",
 Tools/stk_kart.py:251:35    - Unknown word (localsp)      -- ops.screen.spm_export(localsp=False, filepath=path
 Tools/stk_kart.py:270:6     - Unknown word (Anims)        -- lAnims = []
@@ -2044,7 +2154,9 @@ Tools/stk_material_export.py:143:5     - Unknown word (blendfile)    -- blendfil
 Tools/stk_material_export.py:144:14    - Unknown word (limage)       -- for i in limage:
 Tools/stk_material_export.py:152:53    - Unknown word (blendfile)    -- subdir(abs_texture_path, blendfile_dir):
 Tools/stk_material_export.py:160:12    - Unknown word (Soundeffect)  -- hasSoundeffect = (convertTextToYN(getIdPrope
+Tools/stk_material_export.py:16:16     - Unknown word (Joerg)        -- "author": "Joerg Henrichs, Marianne Gagnon
 Tools/stk_material_export.py:16:22     - Unknown word (Henrichs)     -- "author": "Joerg Henrichs, Marianne Gagnon",
+Tools/stk_material_export.py:16:41     - Unknown word (Gagnon)       -- Joerg Henrichs, Marianne Gagnon",
 Tools/stk_material_export.py:185:41    - Unknown word (soundeffects) -- items pertain to the soundeffects (starting with sfx_
 Tools/stk_material_export.py:189:50    - Unknown word (rolloff)      -- strippedName in ['filename', 'rolloff', 'min_speed', 'max
 Tools/stk_material_export.py:227:43    - Unknown word (proeprties)   -- # In blender, proeprties use '_', but STK still
@@ -2055,7 +2167,9 @@ Tools/stk_material_export.py:244:23    - Unknown word (Soundeffect)  -- if not h
 Tools/stk_material_export.py:254:12    - Unknown word (bsys)         -- #print bsys.time()-start_time,"seconds
 Tools/stk_material_export.py:258:8     - Unknown word (idname)       -- bl_idname = ("screen.stk_material
 Tools/stk_material_export.py:79:5      - Unknown word (limage)       -- limage = bpy.data.images
+Tools/stk_material_export.py:7:16      - Unknown word (Joerg)      -- __author__ = ["Joerg Henrichs (hiker), Marianne
 Tools/stk_material_export.py:7:22      - Unknown word (Henrichs)   -- _author__ = ["Joerg Henrichs (hiker), Marianne Gagnon
+Tools/stk_material_export.py:7:49      - Unknown word (Gagnon)     -- Henrichs (hiker), Marianne Gagnon (Auria)"]
 Tools/stk_material_export.py:7:57      - Unknown word (Auria)      -- hiker), Marianne Gagnon (Auria)"]
 Tools/stk_material_export.py:81:5      - Unknown word (materfound)   -- materfound = False
 Tools/stk_material_export.py:82:14     - Unknown word (limage)       -- for i in limage:
@@ -2076,6 +2190,10 @@ Tools/stk_panel.py:1286:34   - Unknown word (Lightmap)      -- register_class(ST
 Tools/stk_panel.py:1354:19   - Unknown word (Supertuxkart)  -- name="Supertuxkart assets (data) folder
 Tools/stk_panel.py:1371:8    - Unknown word (stkpanel)      -- #class stkpanel_set_user_preferences
 Tools/stk_panel.py:1372:26   - Unknown word (stkpanel)      -- bl_idname = "object.stkpanel_set_user_preferences
+Tools/stk_panel.py:1378:16   - Unknown word (prefs)         -- # addon_prefs = user_preferences.addons
+Tools/stk_panel.py:1381:25   - Unknown word (prefs)         -- (addon_prefs.filepath, addon_prefs
+Tools/stk_panel.py:1381:47   - Unknown word (prefs)         -- prefs.filepath, addon_prefs.number, addon_prefs
+Tools/stk_panel.py:1381:67   - Unknown word (prefs)         -- prefs.number, addon_prefs.boolean))
 Tools/stk_panel.py:1391:31   - Unknown word (stkpanel)      -- utils.register_class(stkpanel_set_user_preferences
 Tools/stk_panel.py:164:43    - Unknown word (rops)          -- ui_dict["soft_min"] = rops[p].min
 Tools/stk_panel.py:179:69    - Unknown word (subproperties) -- p].values[object[p]].subproperties)
@@ -2099,7 +2217,9 @@ Tools/stk_panel.py:533:52    - Unknown word (tglbool)       -- generateOpName("s
 Tools/stk_panel.py:560:17    - Unknown word (propobject)    -- propobject = getObject(context
 Tools/stk_panel.py:561:20    - Unknown word (propobject)    -- if propobject is None:
 Tools/stk_panel.py:566:38    - Unknown word (propobject)    -- createProperties(propobject, self.m_super_self.subpropert
+Tools/stk_panel.py:5:16      - Unknown word (Joerg)      -- "author": "Joerg Henrichs, Marianne Gagnon
 Tools/stk_panel.py:5:22      - Unknown word (Henrichs)   -- "author": "Joerg Henrichs, Marianne Gagnon, Asciimonste
+Tools/stk_panel.py:5:41      - Unknown word (Gagnon)     -- Joerg Henrichs, Marianne Gagnon, Asciimonster",
 Tools/stk_panel.py:5:49      - Unknown word (Asciimonster) -- Henrichs, Marianne Gagnon, Asciimonster",
 Tools/stk_panel.py:606:52    - Unknown word (tglbool)       -- generateOpName("screen.stk_tglbool_", fullid, id)
 Tools/stk_panel.py:682:17    - Unknown word (currcol)       -- currcol = [1.0, 1.0, 1.0]
@@ -2133,7 +2253,12 @@ Tools/stk_panel.py:983:25    - Unknown word (TRIA)          -- icon = 'TRIA_DOWN
 Tools/stk_panel.py:987:33    - Unknown word (TRIA)          -- icon = 'TRIA_DOWN'
 Tools/stk_panel.py:989:33    - Unknown word (TRIA)          -- icon = 'TRIA_RIGHT'
 Tools/stk_panel.py:991:57    - Unknown word (tglbool)       -- generateOpName("screen.stk_tglbool_", curr.fullid, curr
+Tools/stk_track.py:1001:22   - Unknown word (Drivelines)       -- if len(self.lDrivelines) == 0:
 Tools/stk_track.py:101:32    - Unknown word (fcurves)      -- ipo = anim_data.action.fcurves
+Tools/stk_track.py:1035:62   - Unknown word (drivelines)       -- distance between p and the drivelines start
+Tools/stk_track.py:1036:71   - Unknown word (drivelines)       -- index of the closest drivelines.
+Tools/stk_track.py:1050:69   - Unknown word (drivelines)       -- closest to any of the drivelines
+Tools/stk_track.py:1065:22   - Unknown word (drivelines)       -- # Converts a new drivelines. New drivelines have
 Tools/stk_track.py:106:7     - Unknown word (fcurves)      -- # fcurves[0].data_path
 Tools/stk_track.py:108:7     - Unknown word (fcurves)      -- # fcurves[0].extrapolation
 Tools/stk_track.py:109:20    - Unknown word (LINEART)      -- # CONSTANT, LINEART
@@ -2188,25 +2313,30 @@ Tools/stk_track.py:1769:42   - Unknown word (nextco)           -- (i, nextco[0],
 Tools/stk_track.py:1769:53   - Unknown word (nextco)           -- nextco[0], nextco[1], nextco[2]))
 Tools/stk_track.py:1771:24   - Unknown word (rcoord)           -- print (rcoord[0],rcoord[1],rcoord
 Tools/stk_track.py:1771:34   - Unknown word (rcoord)           -- print (rcoord[0],rcoord[1],rcoord[2])
-Tools/stk_track.py:1771:44   - Unknown word (rcoord)           -- rcoord[0],rcoord[1],rcoord[2])
-Tools/stk_track.py:1785:13   - Unknown word (neighb)           -- neighb = self.dNext[self.lRight
-Tools/stk_track.py:1788:22   - Unknown word (neighb)           -- for i in neighb:
-Tools/stk_track.py:1796:17   - Unknown word (lcoord)           -- lcoord = self.mesh.vertices
-Tools/stk_track.py:1797:17   - Unknown word (rcoord)           -- rcoord = self.mesh.vertices
+Tools/stk_track.py:1771:44   - Unknown word (rcoord)          -- rcoord[0],rcoord[1],rcoord[2])
+Tools/stk_track.py:1785:13   - Unknown word (neighb)          -- neighb = self.dNext[self.lRight
+Tools/stk_track.py:1788:22   - Unknown word (neighb)          -- for i in neighb:
+Tools/stk_track.py:1796:17   - Unknown word (lcoord)          -- lcoord = self.mesh.vertices
+Tools/stk_track.py:1797:17   - Unknown word (rcoord)          -- rcoord = self.mesh.vertices
+Tools/stk_track.py:17:22     - Unknown word (Joerg)        -- Copyright (C) 2010 Joerg Henrichs
 Tools/stk_track.py:17:28     - Unknown word (Henrichs)     -- Copyright (C) 2010 Joerg Henrichs
-Tools/stk_track.py:1814:58   - Unknown word (succesor)         -- More than one potential succesor found for right driveline
-Tools/stk_track.py:2005:48   - Unknown word (applymodifiers)   -- self, obj, sPath, name, applymodifiers=True):
-Tools/stk_track.py:2025:39   - Unknown word (localsp)          -- ops.screen.spm_export(localsp=True, filepath=sPath
-Tools/stk_track.py:2027:70   - Unknown word (applymodifiers)   -- without_asking=True, applymodifiers=applymodifiers)
-Tools/stk_track.py:2027:85   - Unknown word (applymodifiers)   -- True, applymodifiers=applymodifiers)
-Tools/stk_track.py:2047:24   - Unknown word (bsys)             -- #start_time = bsys.time()
-Tools/stk_track.py:2081:48   - Unknown word (autorescue)       -- getSceneProperty(scene, "autorescue", "true"       )
-Tools/stk_track.py:2102:54   - Unknown word (sunlensflare)     -- getSceneProperty(scene, "sunlensflare", "false") == "true
-Tools/stk_track.py:2105:52   - Unknown word (duringday)        -- getSceneProperty(scene, "duringday", "day")
-Tools/stk_track.py:2107:14   - Unknown word (colorlevel)       -- #has_colorlevel = (getSceneProperty
-Tools/stk_track.py:2107:54   - Unknown word (colorlevel)       -- getSceneProperty(scene, "colorlevel", "false") == "true
-Tools/stk_track.py:2108:10   - Unknown word (colorlevel)       -- #colorlevel_inblack = getSceneProperty
-Tools/stk_track.py:2108:21   - Unknown word (inblack)          -- #colorlevel_inblack = getSceneProperty(scene
+Tools/stk_track.py:1814:58   - Unknown word (succesor)        -- More than one potential succesor found for right driveline
+Tools/stk_track.py:18:31     - Unknown word (Gagnon)       -- Copyright (C) 2012 Marianne Gagnon
+Tools/stk_track.py:2005:48   - Unknown word (applymodifiers)  -- self, obj, sPath, name, applymodifiers=True):
+Tools/stk_track.py:2025:39   - Unknown word (localsp)         -- ops.screen.spm_export(localsp=True, filepath=sPath
+Tools/stk_track.py:2027:70   - Unknown word (applymodifiers)  -- without_asking=True, applymodifiers=applymodifiers)
+Tools/stk_track.py:2027:85   - Unknown word (applymodifiers)  -- True, applymodifiers=applymodifiers)
+Tools/stk_track.py:2047:24   - Unknown word (bsys)            -- #start_time = bsys.time()
+Tools/stk_track.py:2072:12   - Unknown word (cutscene)        -- is_cutscene = getSceneProperty(scene
+Tools/stk_track.py:2072:48   - Unknown word (cutscene)        -- getSceneProperty(scene, "cutscene", "false") == "true
+Tools/stk_track.py:2078:48   - Unknown word (pushback)        -- getSceneProperty(scene, "pushback", "true"
+Tools/stk_track.py:2081:48   - Unknown word (autorescue)      -- getSceneProperty(scene, "autorescue", "true"       )
+Tools/stk_track.py:2102:54   - Unknown word (sunlensflare)    -- getSceneProperty(scene, "sunlensflare", "false") == "true
+Tools/stk_track.py:2105:52   - Unknown word (duringday)       -- getSceneProperty(scene, "duringday", "day")
+Tools/stk_track.py:2107:14   - Unknown word (colorlevel)      -- #has_colorlevel = (getSceneProperty
+Tools/stk_track.py:2107:54   - Unknown word (colorlevel)      -- getSceneProperty(scene, "colorlevel", "false") == "true
+Tools/stk_track.py:2108:10   - Unknown word (colorlevel)      -- #colorlevel_inblack = getSceneProperty
+Tools/stk_track.py:2108:21   - Unknown word (inblack)         -- #colorlevel_inblack = getSceneProperty(scene
 Tools/stk_track.py:2108:56   - Unknown word (colorlevel)      -- getSceneProperty(scene, "colorlevel_inblack", "0.0")
 Tools/stk_track.py:2108:67   - Unknown word (inblack)         -- neProperty(scene, "colorlevel_inblack", "0.0")
 Tools/stk_track.py:2109:10   - Unknown word (colorlevel)      -- #colorlevel_ingamma = getSceneProperty
@@ -2257,8 +2387,8 @@ Tools/stk_track.py:264:62    - Unknown word (xmlcharrefreplace) -- ").encode('as
 Tools/stk_track.py:2665:40   - Unknown word (forcedbloom)     -- getObjectProperty(obj, "forcedbloom", "false") == "true
 Tools/stk_track.py:2667:42   - Unknown word (shadowpass)      -- getObjectProperty(obj, "shadowpass", "true") == "false
 Tools/stk_track.py:2673:43   - Unknown word (skyboxobject)    -- getObjectProperty(obj, "skyboxobject", "false") == "true
-Tools/stk_track.py:2706:17   - Unknown word (loddistance)     -- loddistance = getObjectProperty
-Tools/stk_track.py:2708:100  - Unknown word (loddistance)     -- group_name, 'distance': loddistance, 'filename': lod_model
+Tools/stk_track.py:2706:17   - Unknown word (loddistance)    -- loddistance = getObjectProperty
+Tools/stk_track.py:2708:100  - Unknown word (loddistance)    -- group_name, 'distance': loddistance, 'filename': lod_model
 Tools/stk_track.py:2718:44   - Unknown word (nomodifierautolod) -- getObjectProperty(obj, "nomodifierautolod", "false") == "true
 Tools/stk_track.py:2719:21   - Unknown word (loddistance)       -- loddistance = getObjectProperty
 Tools/stk_track.py:2719:59   - Unknown word (nomodierlod)       -- getObjectProperty(obj, "nomodierlod_distance", 30.0)
@@ -2281,6 +2411,7 @@ Tools/stk_track.py:2953:65   - Unknown word (blendfile)         -- , abs_texture
 Tools/stk_track.py:2954:61   - Unknown word (blendfile)         -- subdir(abs_texture_path, blendfile_dir):
 Tools/stk_track.py:2977:30   - Unknown word (supertuxkart)      -- # Try to get the supertuxkart type field. If it's
 Tools/stk_track.py:2993:26   - Unknown word (EASTEREGG)         -- if stktype=="EASTEREGG":
+Tools/stk_track.py:3008:53   - Unknown word (CUTSCENE)          -- CAMERA" and stktype == 'CUTSCENE_CAMERA':
 Tools/stk_track.py:3017:28   - Unknown word (CANNONEND)         -- elif stktype=="CANNONEND":
 Tools/stk_track.py:303:11    - Unknown word (XYZH)              -- def getNewXYZHString(obj):
 Tools/stk_track.py:3069:39   - Unknown word (localsp)           -- ops.screen.spm_export(localsp=False, filepath=sPath
@@ -2301,6 +2432,8 @@ Tools/stk_track.py:3214:9    - Unknown word (savescene)         -- savescene_cal
 Tools/stk_track.py:3219:8    - Unknown word (idname)            -- bl_idname = ("screen.stk_track
 Tools/stk_track.py:3228:8    - Unknown word (idname)            -- bl_idname = ("screen.stk_track
 Tools/stk_track.py:3238:8    - Unknown word (idname)            -- bl_idname = "screen.stk_pick_assets
+Tools/stk_track.py:3251:15   - Unknown word (prefs)             -- addon_prefs = user_preferences.addons
+Tools/stk_track.py:3252:15   - Unknown word (prefs)             -- addon_prefs.stk_assets_path = os
 Tools/stk_track.py:3253:25   - Unknown word (userpref)          -- bpy.ops.wm.save_userpref()
 Tools/stk_track.py:3257:32   - Unknown word (fileselect)        -- context.window_manager.fileselect_add(self)
 Tools/stk_track.py:3293:59   - Unknown word (FILESEL)           -- assets_path', icon='FILESEL', text='')
@@ -2338,7 +2471,9 @@ Tools/stk_track.py:513:138   - Unknown word (dupli)             -- systems[0].se
 Tools/stk_track.py:513:53    - Unknown word (dupli)             -- systems[0].settings.dupli_group is not None):
 Tools/stk_track.py:531:66    - Unknown word (dupli)             -- particleSystem.settings.dupli_object
 Tools/stk_track.py:534:64    - Unknown word (dupli)             -- particleSystem.settings.dupli_group.objects
+Tools/stk_track.py:53:16     - Unknown word (Joerg)        -- "author": "Joerg Henrichs, Marianne Gagnon
 Tools/stk_track.py:53:22     - Unknown word (Henrichs)     -- "author": "Joerg Henrichs, Marianne Gagnon",
+Tools/stk_track.py:53:41     - Unknown word (Gagnon)       -- Joerg Henrichs, Marianne Gagnon",
 Tools/stk_track.py:582:32    - Unknown word (XYZHPR)            -- originXYZ = getXYZHPRString(obj)
 Tools/stk_track.py:594:76    - Unknown word (rolloff)           -- id=\"%s\" sound="%s" rolloff="%.3f" volume="%s" max
 Tools/stk_track.py:597:54    - Unknown word (rolloff)           -- getObjectProperty(obj, "sfx_rolloff", 0.05),
@@ -2370,21 +2505,36 @@ Tools/stk_track.py:911:17    - Unknown word (navmeshfile)       -- navmeshfile.w
 Tools/stk_track.py:912:17    - Unknown word (navmeshfile)       -- navmeshfile.write('<navmesh>\n'
 Tools/stk_track.py:915:17    - Unknown word (navmeshfile)       -- navmeshfile.write('<height-testing
 Tools/stk_track.py:916:17    - Unknown word (navmeshfile)       -- navmeshfile.write('<MaxVertsPerPoly
+Tools/stk_track.py:916:40    - Unknown word (Verts)             -- navmeshfile.write('<MaxVertsPerPoly nvp="4" />\n
+Tools/stk_track.py:919:32    - Unknown word (verts)             -- for vert in bm.verts:
+Tools/stk_track.py:927:33    - Unknown word (verts)             -- if len(face.verts) != 4:
 Tools/stk_track.py:92:26     - Unknown word (Interp)       -- dInterp = {IpoCurve.InterpTypes.BEZIER:
 Tools/stk_track.py:92:7      - Unknown word (Interp)       -- #dInterp = {IpoCurve.InterpTypes
 Tools/stk_track.py:931:43    - Unknown word (bmesh)             -- log_error('import bmesh')
-Tools/stk_track.py:932:41    - Unknown word (bmesh)             -- log_error('bm = bmesh.from_edit_mesh(me)'
-Tools/stk_track.py:934:36    - Unknown word (bmesh)             -- log_error('bmesh.update_edit_mesh(me
+Tools/stk_track.py:932:41    - Unknown word (bmesh)            -- log_error('bm = bmesh.from_edit_mesh(me)'
+Tools/stk_track.py:934:36    - Unknown word (bmesh)            -- log_error('bmesh.update_edit_mesh(me
+Tools/stk_track.py:936:38    - Unknown word (verts)            -- for vert in face.verts:
 Tools/stk_track.py:93:26     - Unknown word (Interp)       -- IpoCurve.InterpTypes.LINEAR:
+Tools/stk_track.py:948:42    - Unknown word (adjacents)        -- navmeshfile.write('" adjacents="')
 Tools/stk_track.py:94:26     - Unknown word (Interp)       -- IpoCurve.InterpTypes.CONST:
+Tools/stk_track.py:962:15    - Unknown word (Drivelines)       -- self.lDrivelines = []
 Tools/stk_track.py:96:38     - Unknown word (EXTRAP)       -- IpoCurve.ExtendTypes.EXTRAP: "extrap",
 Tools/stk_track.py:96:54     - Unknown word (extrap)       -- ExtendTypes.EXTRAP: "extrap",
-Tools/stk_track.py:971:22    - Unknown word (CANNONSTART)       -- if stktype=="CANNONSTART":
+Tools/stk_track.py:971:22    - Unknown word (CANNONSTART)      -- if stktype=="CANNONSTART":
+Tools/stk_track.py:974:25    - Unknown word (drivelines)       -- # Check for new drivelines
 Tools/stk_track.py:976:27    - Unknown word (MAINDRIVELINE)    -- stktype=="MAINDRIVELINE" or \
 Tools/stk_track.py:977:27    - Unknown word (MAINDL)           -- stktype=="MAINDL":
+Tools/stk_track.py:979:19    - Unknown word (Drivelines)       -- self.lDrivelines.insert(0, Driveline
 Tools/stk_track.py:97:45     - Unknown word (EXTRAP)       -- IpoCurve.ExtendTypes.CYCLIC_EXTRAP: "cyclic_extrap",
 Tools/stk_track.py:97:61     - Unknown word (extrap)       -- CYCLIC_EXTRAP: "cyclic_extrap",
+Tools/stk_track.py:983:19    - Unknown word (Drivelines)       -- self.lDrivelines.append(Driveline(obj
+Tools/stk_track.py:994:12    - Unknown word (cutscene)         -- is_cutscene = getSceneProperty(bpy
+Tools/stk_track.py:994:61    - Unknown word (cutscene)         -- bpy.data.scenes[0], "cutscene", "false") == "true
+Tools/stk_track.py:995:88    - Unknown word (cutscene)         -- is_soccer and not is_cutscene:
+Tools/stk_track.py:996:26    - Unknown word (Drivelines)       -- if len(self.lDrivelines) > 0:
+Tools/stk_track.py:9:16      - Unknown word (Joerg)      -- __author__ = ["Joerg Henrichs (hiker), Marianne
 Tools/stk_track.py:9:22      - Unknown word (Henrichs)   -- _author__ = ["Joerg Henrichs (hiker), Marianne Gagnon
+Tools/stk_track.py:9:49      - Unknown word (Gagnon)     -- Henrichs (hiker), Marianne Gagnon (Auria)"]
 Tools/stk_track.py:9:57      - Unknown word (Auria)      -- hiker), Marianne Gagnon (Auria)"]
 Tools/stkdata/stk_material_parameters.xml:102:20    - Unknown word (propgroup)   -- <PropGroup id="propgroup_interaction" name="Interactio
 Tools/stkdata/stk_material_parameters.xml:120:50    - Unknown word (Slowdow)     -- slowdown" name="Enable Slowdow" default="false"
@@ -2419,6 +2569,7 @@ Tools/stkdata/stk_object_parameters.xml:139:32    - Unknown word (nomodierlod)  
 Tools/stkdata/stk_object_parameters.xml:174:85    - Unknown word (resetted)          -- "The player will be resetted when touching this object
 Tools/stkdata/stk_object_parameters.xml:218:27    - Unknown word (forcedbloom)       -- <BoolProp id="forcedbloom" name="Glow (bloom)
 Tools/stkdata/stk_object_parameters.xml:220:27    - Unknown word (shadowpass)        -- <BoolProp id="shadowpass" name="Casts shadows
+Tools/stkdata/stk_object_parameters.xml:224:57    - Unknown word (animatable)        -- label="Object" doc="An (animatable) object that is exported
 Tools/stkdata/stk_object_parameters.xml:258:85    - Unknown word (resetted)          -- "The player will be resetted when touching this object
 Tools/stkdata/stk_object_parameters.xml:300:33    - Unknown word (physicsonly)       -- <EnumChoice id="physicsonly" label="Physics only
 Tools/stkdata/stk_object_parameters.xml:303:27    - Unknown word (driveable)         -- <BoolProp id="driveable" name="Driveable (STK
@@ -2439,6 +2590,10 @@ Tools/stkdata/stk_object_parameters.xml:361:27    - Unknown word (easteregg)    
 Tools/stkdata/stk_object_parameters.xml:362:27    - Unknown word (easteregg)         -- <BoolProp id="easteregg_hard" name="Hard" default
 Tools/stkdata/stk_object_parameters.xml:367:27    - Unknown word (dropitem)          -- <BoolProp id="dropitem" name="Drop to ground
 Tools/stkdata/stk_object_parameters.xml:372:27    - Unknown word (dropitem)          -- <BoolProp id="dropitem" name="Drop to ground
+Tools/stkdata/stk_object_parameters.xml:386:14    - Unknown word (Cutscene)          -- <!-- Cutscene camera -->
+Tools/stkdata/stk_object_parameters.xml:387:25    - Unknown word (cutscene)          -- <EnumChoice id="cutscene_camera" label="Cutscene
+Tools/stkdata/stk_object_parameters.xml:387:49    - Unknown word (Cutscene)          -- cutscene_camera" label="Cutscene camera" doc="Use only
+Tools/stkdata/stk_object_parameters.xml:387:83    - Unknown word (cutscenes)         -- camera" doc="Use only in cutscenes" >
 Tools/stkdata/stk_object_parameters.xml:427:32    - Unknown word (rolloff)           -- <FloatProp id="sfx_rolloff" name="Rolloff rate
 Tools/stkdata/stk_object_parameters.xml:427:47    - Unknown word (Rolloff)           -- "sfx_rolloff" name="Rolloff rate" default="0.1"
 Tools/stkdata/stk_object_parameters.xml:449:49    - Unknown word (triggerable)       -- to make it always re-triggerable, 999999.9 to make it
@@ -2448,6 +2603,7 @@ Tools/stkdata/stk_object_parameters.xml:461:80    - Unknown word (cannonend)    
 Tools/stkdata/stk_object_parameters.xml:463:29    - Unknown word (cannonpath)        -- <ObjRefProp id="cannonpath" name="Path" default
 Tools/stkdata/stk_object_parameters.xml:466:28    - Unknown word (cannonspeed)       -- <FloatProp id="cannonspeed" name="Speed" default
 Tools/stkdata/stk_object_parameters.xml:469:25    - Unknown word (cannonend)         -- <EnumChoice id="cannonend" label="Cannon End"
+Tools/stkdata/stk_object_parameters.xml:472:14    - Unknown word (Drivelines)        -- <!-- Drivelines and checklines -->
 Tools/stkdata/stk_object_parameters.xml:472:29    - Unknown word (checklines)        -- <!-- Drivelines and checklines -->
 Tools/stkdata/stk_object_parameters.xml:473:39    - Unknown word (Checkline)         -- EnumChoice id="check" label="Checkline" doc="A checkline that
 Tools/stkdata/stk_object_parameters.xml:473:57    - Unknown word (checkline)         -- label="Checkline" doc="A checkline that the player must
@@ -2478,9 +2634,14 @@ Tools/stkdata/stk_panel_parameters.xml:26:78     - Unknown word (genericskybox) 
 Tools/stkdata/stk_panel_parameters.xml:27:76     - Unknown word (genericskybox) -- Texture East" default="genericskybox_east.jpg"/>
 Tools/stkdata/stk_panel_parameters.xml:28:76     - Unknown word (genericskybox) -- Texture West" default="genericskybox_west.jpg"/>
 Tools/stkdata/stk_panel_parameters.xml:29:77     - Unknown word (genericskybox) -- Texture North" default="genericskybox_north.jpg"/>
+Tools/stkdata/stk_panel_parameters.xml:54:133    - Unknown word (cutscene)      -- file is a SuperTuxKart cutscene"/>
+Tools/stkdata/stk_panel_parameters.xml:54:19     - Unknown word (cutscene)      -- <BoolProp id="cutscene" name="Is a cutscene
+Tools/stkdata/stk_panel_parameters.xml:54:40     - Unknown word (cutscene)      -- cutscene" name="Is a cutscene" default="false" box
 Tools/stkdata/stk_panel_parameters.xml:61:20     - Unknown word (propgroup)     -- <PropGroup id="propgroup_driving" name="Driving
 Tools/stkdata/stk_panel_parameters.xml:66:20     - Unknown word (propgroup)     -- <PropGroup id="propgroup_kartstart" name="Start
 Tools/stkdata/stk_panel_parameters.xml:66:30     - Unknown word (kartstart)     -- PropGroup id="propgroup_kartstart" name="Start line positions
+Tools/stkdata/stk_panel_parameters.xml:70:107    - Unknown word (drivelines)    -- 1.1" doc="Sometimes drivelines are too low and will
+Tools/stkdata/stk_panel_parameters.xml:70:312    - Unknown word (drivelines)    -- under it). Generally the drivelines should be fixed, but
 Tools/stkdata/stk_panel_parameters.xml:87:20     - Unknown word (propgroup)     -- <PropGroup id="propgroup_postpro" name="Graphical
 Tools/stkdata/stk_panel_parameters.xml:87:30     - Unknown word (postpro)       -- PropGroup id="propgroup_postpro" name="Graphical effects
 Tools/stkdata/stk_panel_parameters.xml:88:23     - Unknown word (ambientmap)    -- <BoolProp id="ambientmap" name="Ambient light
@@ -2505,6 +2666,7 @@ neo.gpr:92:98     - Unknown word (senario)    -- the source access to senario va
 neo.gpr:99:25     - Unknown word (Xlinker)    -- Switch_Linker := ("-Xlinker", -- Setup
 readme.md:27:2      - Unknown word (gprbuild)   -- `gprbuild -p -P neo.gpr `
 runsdk.hta:168:37    - Unknown word (HKLM)       -- ARCHITECTURE_REG_KEY = 'HKLM\\SYSTEM\\CurrentControlSet
+runsdk.hta:16:52     - Unknown word (scriptable) -- tools or performing scriptable actions necessary for
 runsdk.hta:182:17    - Unknown word (GNATMAKE)   -- var CMD_GNATMAKE = 'gnatmake -P .\\neo
 runsdk.hta:182:29    - Unknown word (gnatmake)   -- var CMD_GNATMAKE = 'gnatmake -P .\\neo.gpr';
 runsdk.hta:189:31    - Unknown word (arraybuffer) -- xhr.responseType = 'arraybuffer';
