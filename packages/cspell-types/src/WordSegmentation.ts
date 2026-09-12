@@ -1,6 +1,6 @@
 export interface WordSegmentationSettings {
     /**
-     * Enables enables locale-sensitive text segmentation to support languages like Japanese, Chinese, Thai, Lao, Khmer, Myanmar, etc.
+     * Enables locale-sensitive text segmentation to support languages like Japanese, Chinese, Thai, Lao, Khmer, Myanmar, etc.
      * The locale used for the segmentation is based on the {@link language} setting.
      *
      * @since 10.2.0

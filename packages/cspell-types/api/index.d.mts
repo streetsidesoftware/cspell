@@ -1402,7 +1402,7 @@ type Serializable = number | string | boolean | null | object;
 //#region src/WordSegmentation.d.ts
 interface WordSegmentationSettings {
   /**
-   * Enables enables locale-sensitive text segmentation to support languages like Japanese, Chinese, Thai, Lao, Khmer, Myanmar, etc.
+   * Enables locale-sensitive text segmentation to support languages like Japanese, Chinese, Thai, Lao, Khmer, Myanmar, etc.
    * The locale used for the segmentation is based on the {@link language} setting.
    *
    * @since 10.2.0
@@ -1565,12 +1565,12 @@ interface FileSettings extends ExtendableSettings, CommandLineSettings {
   /**
    * The root to use for glob patterns found in this configuration.
    * Default: location of the configuration file.
-   *   For compatibility reasons, config files with version 0.1, the glob root will
+   *   For compatibility reasons, for config files with version 0.1, the glob root will
    *   default to be `${cwd}`.
    *
    * Use `globRoot` to define a different location.
    * `globRoot` can be relative to the location of this configuration file.
-   * Defining globRoot, does not impact imported configurations.
+   * Defining globRoot does not impact imported configurations.
    *
    * Special Values:
    * - `${cwd}` - will be replaced with the current working directory.
@@ -1711,8 +1711,8 @@ interface SpellCheckerExtensionSettings {
   /**
    * Enable / Disable checking file types (languageIds).
    *
-   * These are in additional to the file types specified by {@link Settings.enabledLanguageIds}.
-   * To disable a language, prefix with `!` as in `!json`,
+   * These are in addition to the file types specified by {@link Settings.enabledLanguageIds}.
+   * To disable a language, prefix with `!` as in `!json`.
    *
    *
    * **Example: individual file types**
@@ -1777,7 +1777,7 @@ interface Settings extends ReportingConfiguration, BaseSetting, PnPSettings, Spe
    *
    */
   languageSettings?: LanguageSetting[];
-  /** Forces the spell checker to assume a give language id. Used mainly as an Override. */
+  /** Forces the spell checker to assume a given language id. Used mainly as an Override. */
   languageId?: MatchingFileType;
   /**
    * By default, the bundled dictionary configurations are loaded. Explicitly setting this to `false`
@@ -1855,8 +1855,8 @@ interface CacheSettings {
    */
   cacheLocation?: FSPathResolvable;
   /**
-   * Strategy to use for detecting changed files, default: metadata
-   * @default 'metadata'
+   * Strategy to use for detecting changed files, default: content
+   * @default 'content'
    */
   cacheStrategy?: CacheStrategy;
   /**
