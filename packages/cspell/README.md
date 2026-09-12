@@ -588,7 +588,7 @@ Or you can specify a path to a config file with the `--config <path>` argument o
 
 ### How Configuration Is Determined
 
-Checking a file is a two step process:
+Spell checking is a two step process:
 
 1. **Determine which files to check** -- from command line globs (or the configuration's `files` setting if no
    globs are given), or from `--file`/`--files`/`--file-list`, filtered against `ignorePaths`, `--exclude`, and

@@ -6,7 +6,7 @@ sidebar_label: Overrides
 
 # Configuration Resolution & Overrides
 
-Checking a file is a two step process:
+Spell checking is a two step process:
 
 1. [**Determine which files to check.**](#step-1-determine-which-files-to-check)
 1. [**Determine the settings, and check the document.**](#step-2-determine-the-settings-and-check-the-document)
@@ -26,6 +26,9 @@ the current directory, or the one given with `--config`).
   entries must additionally match one of those globs.)
 
 See [Understanding CSpell Globs](../globs.md) for glob syntax.
+
+A file is also skipped -- regardless of `overrides` or other settings -- if CSpell determines it to be binary,
+or of a known binary / generated file type.
 
 ## Step 2: Determine the Settings and Check the Document
 
@@ -68,7 +71,8 @@ Most Array like settings are joined as a union. In most cases order is preserved
 
 Once the configuration is merged, CSpell finalizes the settings for the document, in order:
 
-1. **`overrides`** -- settings from entries whose `filename` glob matches the document's path are applied.
+1. **`overrides`** -- settings from entries whose `filename` glob matches the document's path are applied. If
+   the resulting `enabled` setting is `false`, the document is skipped and not spell checked.
 1. **`languageSettings`** -- settings from entries whose `languageId` and/or `locale` match the document are
    applied. `--language-id` and `--locale` on the command line can force what a document is treated as for this
    matching step.

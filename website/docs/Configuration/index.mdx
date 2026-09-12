@@ -18,7 +18,7 @@ Or you can specify a path to a config file with the `--config <path>` argument o
 
 ## How Configuration Is Resolved
 
-Checking a file is a two step process. CSpell first decides which files to check, from command line globs (or
+Spell checking is a two step process. CSpell first decides which files to check, from command line globs (or
 `--file`/`--files`/`--file-list`), filtered against `ignorePaths` and `.gitignore`. It then determines the
 settings for each document by merging the default configuration, the configuration loaded at start up, and the
 configuration nearest the document, before applying `overrides`, `languageSettings`, and any in-document
