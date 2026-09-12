@@ -43,7 +43,7 @@ format: md
 | [import](#settings-import)                                     | [`FsPath`](#fspath)<br />[`FsPath`](#fspath)&ZeroWidthSpace;`[]`          | Allows this configuration to inherit configuration for one or more other files.                                                                                      |
 | [includeRegExpList](#settings-includeregexplist)               | [`RegExpPatternList`](#regexppatternlist)                                 | List of regular expression patterns or defined pattern names to match for spell checking.                                                                            |
 | [language](#settings-language)                                 | [`LocaleId`](#localeid)                                                   | Current active spelling language. This specifies the language locale to use in choosing the                                                                          |
-| [languageId](#settings-languageid)                             | [`MatchingFileType`](#matchingfiletype)                                   | Forces the spell checker to assume a give language id. Used mainly as an Override.                                                                                   |
+| [languageId](#settings-languageid)                             | [`MatchingFileType`](#matchingfiletype)                                   | Forces the spell checker to assume a given language id. Used mainly as an Override.                                                                                  |
 | [languageSettings](#settings-languagesettings)                 | [`LanguageSetting`](#languagesetting)&ZeroWidthSpace;`[]`                 | Additional settings for individual languages.                                                                                                                        |
 | [loadDefaultConfiguration](#settings-loaddefaultconfiguration) | `boolean`                                                                 | By default, the bundled dictionary configurations are loaded. Explicitly setting this to `false`                                                                     |
 | [maxDuplicateProblems](#settings-maxduplicateproblems)         | `number`                                                                  | The maximum number of times the same word can be flagged as an error in a file.                                                                                      |
@@ -71,7 +71,7 @@ format: md
 | [suggestWords](#settings-suggestwords)                         | `string`&ZeroWidthSpace;`[]`                                              | A list of suggested replacements for words.                                                                                                                          |
 | [unknownWords](#settings-unknownwords)                         | [`UnknownWordsChoices`](#unknownwordschoices)                             | Controls how unknown words are handled.                                                                                                                              |
 | [useGitignore](#settings-usegitignore)                         | `boolean`                                                                 | Tells the spell checker to load `.gitignore` files and skip files that match the globs in the `.gitignore` files found.                                              |
-| [useIntlWordSegmentation](#settings-useintlwordsegmentation)   | `boolean`                                                                 | Enables enables locale-sensitive text segmentation to support languages like Japanese, Chinese, Thai, Lao, Khmer, Myanmar, etc.                                      |
+| [useIntlWordSegmentation](#settings-useintlwordsegmentation)   | `boolean`                                                                 | Enables locale-sensitive text segmentation to support languages like Japanese, Chinese, Thai, Lao, Khmer, Myanmar, etc.                                              |
 | [usePnP](#settings-usepnp)                                     | `boolean`                                                                 | Packages managers like Yarn 2 use a `.pnp.cjs` file to assist in loading                                                                                             |
 | [userWords](#settings-userwords)                               | `string`&ZeroWidthSpace;`[]`                                              | Words to add to global dictionary -- should only be in the user config file.                                                                                         |
 | [validateDirectives](#settings-validatedirectives)             | `boolean`                                                                 | Verify that the in-document directives are correct.                                                                                                                  |
@@ -395,8 +395,8 @@ Specify a list of file types to spell check. It is better to use  [Settings.enab
 
 Enable / Disable checking file types (languageIds).
 
-These are in additional to the file types specified by  [Settings.enabledLanguageIds](#settings-enabledlanguageids) .
-To disable a language, prefix with `!` as in `!json`,
+These are in addition to the file types specified by  [Settings.enabledLanguageIds](#settings-enabledlanguageids) .
+To disable a language, prefix with `!` as in `!json`.
 
 
 **Example: individual file types**
@@ -659,12 +659,12 @@ Tells the spell checker to stop searching for `.gitignore` files when it reaches
 
 The root to use for glob patterns found in this configuration.
 Default: location of the configuration file.
-  For compatibility reasons, config files with version 0.1, the glob root will
+  For compatibility reasons, for config files with version 0.1, the glob root will
   default to be `${cwd}`.
 
 Use `globRoot` to define a different location.
 `globRoot` can be relative to the location of this configuration file.
-Defining globRoot, does not impact imported configurations.
+Defining globRoot does not impact imported configurations.
 
 Special Values:
 - `${cwd}` - will be replaced with the current working directory.
@@ -946,7 +946,7 @@ For example:
 <dt>Description</dt>
 <dd>
 
-Forces the spell checker to assume a give language id. Used mainly as an Override.
+Forces the spell checker to assume a given language id. Used mainly as an Override.
 
 </dd>
 
@@ -1796,7 +1796,7 @@ Tells the spell checker to load `.gitignore` files and skip files that match the
 <dt>Description</dt>
 <dd>
 
-Enables enables locale-sensitive text segmentation to support languages like Japanese, Chinese, Thai, Lao, Khmer, Myanmar, etc.
+Enables locale-sensitive text segmentation to support languages like Japanese, Chinese, Thai, Lao, Khmer, Myanmar, etc.
 The locale used for the segmentation is based on the  [language](#language)  setting.
 
 </dd>
@@ -2199,7 +2199,7 @@ It is often encoded (e.g. base64) binary data.
 | --------------------------------------------- | --------------------------------------- | ---------------------------------------------------------------------------------- |
 | [cacheFormat](#cachesettings-cacheformat)     | [`CacheFormat`](#cacheformat)           | Format of the cache file.                                                          |
 | [cacheLocation](#cachesettings-cachelocation) | [`FSPathResolvable`](#fspathresolvable) | Path to the cache location. Can be a file or a directory.                          |
-| [cacheStrategy](#cachesettings-cachestrategy) | [`CacheStrategy`](#cachestrategy)       | Strategy to use for detecting changed files, default: metadata                     |
+| [cacheStrategy](#cachesettings-cachestrategy) | [`CacheStrategy`](#cachestrategy)       | Strategy to use for detecting changed files, default: content                      |
 | [useCache](#cachesettings-usecache)           | `boolean`                               | Store the results of processed files in order to only operate on the changed ones. |
 
 
@@ -2275,7 +2275,7 @@ A prefix of `${cwd}` is replaced with the current working directory.
 <dt>Description</dt>
 <dd>
 
-Strategy to use for detecting changed files, default: metadata
+Strategy to use for detecting changed files, default: content
 
 </dd>
 
@@ -6806,7 +6806,7 @@ A file type:
 | [substitutions](#languagesetting-substitutions)                       | [`Substitutions`](#substitutions)                                         | The set of substitutions to apply to a document before spell checking.                                                                        |
 | [suggestWords](#languagesetting-suggestwords)                         | `string`&ZeroWidthSpace;`[]`                                              | A list of suggested replacements for words.                                                                                                   |
 | [unknownWords](#languagesetting-unknownwords)                         | [`UnknownWordsChoices`](#unknownwordschoices)                             | Controls how unknown words are handled.                                                                                                       |
-| [useIntlWordSegmentation](#languagesetting-useintlwordsegmentation)   | `boolean`                                                                 | Enables enables locale-sensitive text segmentation to support languages like Japanese, Chinese, Thai, Lao, Khmer, Myanmar, etc.               |
+| [useIntlWordSegmentation](#languagesetting-useintlwordsegmentation)   | `boolean`                                                                 | Enables locale-sensitive text segmentation to support languages like Japanese, Chinese, Thai, Lao, Khmer, Myanmar, etc.                       |
 | [words](#languagesetting-words)                                       | `string`&ZeroWidthSpace;`[]`                                              | List of words to be considered correct.                                                                                                       |
 
 
@@ -7564,7 +7564,7 @@ Controls how unknown words are handled.
 <dt>Description</dt>
 <dd>
 
-Enables enables locale-sensitive text segmentation to support languages like Japanese, Chinese, Thai, Lao, Khmer, Myanmar, etc.
+Enables locale-sensitive text segmentation to support languages like Japanese, Chinese, Thai, Lao, Khmer, Myanmar, etc.
 The locale used for the segmentation is based on the  [language](#language)  setting.
 
 </dd>
@@ -7698,7 +7698,7 @@ This is a written language locale like: `en`, `en-GB`, `fr`, `es`, `de` or `en,f
 | [suggestionsTimeout](#overridesettings-suggestionstimeout)             | `number`                                                                  | The maximum amount of time in milliseconds to generate suggestions for a word.                                                                                       |
 | [suggestWords](#overridesettings-suggestwords)                         | `string`&ZeroWidthSpace;`[]`                                              | A list of suggested replacements for words.                                                                                                                          |
 | [unknownWords](#overridesettings-unknownwords)                         | [`UnknownWordsChoices`](#unknownwordschoices)                             | Controls how unknown words are handled.                                                                                                                              |
-| [useIntlWordSegmentation](#overridesettings-useintlwordsegmentation)   | `boolean`                                                                 | Enables enables locale-sensitive text segmentation to support languages like Japanese, Chinese, Thai, Lao, Khmer, Myanmar, etc.                                      |
+| [useIntlWordSegmentation](#overridesettings-useintlwordsegmentation)   | `boolean`                                                                 | Enables locale-sensitive text segmentation to support languages like Japanese, Chinese, Thai, Lao, Khmer, Myanmar, etc.                                              |
 | [usePnP](#overridesettings-usepnp)                                     | `boolean`                                                                 | Packages managers like Yarn 2 use a `.pnp.cjs` file to assist in loading                                                                                             |
 | [words](#overridesettings-words)                                       | `string`&ZeroWidthSpace;`[]`                                              | List of words to be considered correct.                                                                                                                              |
 
@@ -7992,8 +7992,8 @@ Specify a list of file types to spell check. It is better to use  [Settings.enab
 
 Enable / Disable checking file types (languageIds).
 
-These are in additional to the file types specified by  [Settings.enabledLanguageIds](#settings-enabledlanguageids) .
-To disable a language, prefix with `!` as in `!json`,
+These are in addition to the file types specified by  [Settings.enabledLanguageIds](#settings-enabledlanguageids) .
+To disable a language, prefix with `!` as in `!json`.
 
 
 **Example: individual file types**
@@ -8912,7 +8912,7 @@ Controls how unknown words are handled.
 <dt>Description</dt>
 <dd>
 
-Enables enables locale-sensitive text segmentation to support languages like Japanese, Chinese, Thai, Lao, Khmer, Myanmar, etc.
+Enables locale-sensitive text segmentation to support languages like Japanese, Chinese, Thai, Lao, Khmer, Myanmar, etc.
 The locale used for the segmentation is based on the  [language](#language)  setting.
 
 </dd>
