@@ -7,14 +7,17 @@
       "properties": {
         "compress": {
           "description": "compress the resulting file",
+          "markdownDescription": "compress the resulting file",
           "type": "boolean"
         },
         "optimize": {
           "description": "optimize the trie into a DAWG",
+          "markdownDescription": "optimize the trie into a DAWG",
           "type": "boolean"
         },
         "useStringTable": {
           "description": "use a string table to reduce size",
+          "markdownDescription": "use a string table to reduce size",
           "type": "boolean"
         }
       },
@@ -47,11 +50,13 @@
       "properties": {
         "allowedSplitWords": {
           "$ref": "#/definitions/FilePathOrFilePathArray",
-          "description": "Words in the `allowedSplitWords` are considered correct and can be used as a basis for splitting compound words.\n\nIf entries can be split so that all the words in the entry are allowed, then only the individual words are added, otherwise the entire entry is added. This is to prevent misspellings in CamelCase words from being introduced into the dictionary."
+          "description": "Words in the `allowedSplitWords` are considered correct and can be used as a basis for splitting compound words.\n\nIf entries can be split so that all the words in the entry are allowed, then only the individual words are added, otherwise the entire entry is added. This is to prevent misspellings in CamelCase words from being introduced into the dictionary.",
+          "markdownDescription": "Words in the `allowedSplitWords` are considered correct and can be used\nas a basis for splitting compound words.\n\nIf entries can be split so that all the words in the entry are allowed,\nthen only the individual words are added, otherwise the entire entry is added.\nThis is to prevent misspellings in CamelCase words from being introduced into the\ndictionary."
         },
         "keepRawCase": {
           "default": false,
           "description": "Do not generate lower case / accent free versions of words.",
+          "markdownDescription": "Do not generate lower case / accent free versions of words.",
           "type": "boolean"
         },
         "listFile": {
@@ -59,11 +64,13 @@
         },
         "maxDepth": {
           "description": "Maximum number of nested Hunspell Rules to apply. This is needed for recursive dictionaries like Hebrew.",
+          "markdownDescription": "Maximum number of nested Hunspell Rules to apply.\nThis is needed for recursive dictionaries like Hebrew.",
           "type": "number"
         },
         "minCompoundLength": {
           "default": 4,
           "description": "Controls the minimum length of a compound word when storing words using `storeSplitWordsAsCompounds`. The compound words are prefixed / suffixed with `*`, to allow them to be combined with other compound words. If the length is too low, then the dictionary will consider many misspelled words as correct.",
+          "markdownDescription": "Controls the minimum length of a compound word when storing words using `storeSplitWordsAsCompounds`.\nThe compound words are prefixed / suffixed with `*`, to allow them to be combined with other compound words.\nIf the length is too low, then the dictionary will consider many misspelled words as correct.",
           "type": "number"
         },
         "split": {
@@ -77,11 +84,13 @@
             }
           ],
           "default": false,
-          "description": "Split lines into words."
+          "description": "Split lines into words.",
+          "markdownDescription": "Split lines into words."
         },
         "storeSplitWordsAsCompounds": {
           "default": false,
           "description": "Camel case words that have been split using the `allowedSplitWords` are added to the dictionary as compoundable words. These words are prefixed / suffixed with `*`.",
+          "markdownDescription": "Camel case words that have been split using the `allowedSplitWords` are added to the dictionary as compoundable words.\nThese words are prefixed / suffixed with `*`.",
           "type": "boolean"
         }
       },
@@ -92,6 +101,7 @@
     },
     "FilePath": {
       "description": "Note: All relative paths are relative to the config file location.",
+      "markdownDescription": "Note: All relative paths are relative to the config file location.",
       "type": "string"
     },
     "FilePathOrFilePathArray": {
@@ -112,7 +122,8 @@
       "properties": {
         "allowedSplitWords": {
           "$ref": "#/definitions/FilePathOrFilePathArray",
-          "description": "Words in the `allowedSplitWords` are considered correct and can be used as a basis for splitting compound words.\n\nIf entries can be split so that all the words in the entry are allowed, then only the individual words are added, otherwise the entire entry is added. This is to prevent misspellings in CamelCase words from being introduced into the dictionary."
+          "description": "Words in the `allowedSplitWords` are considered correct and can be used as a basis for splitting compound words.\n\nIf entries can be split so that all the words in the entry are allowed, then only the individual words are added, otherwise the entire entry is added. This is to prevent misspellings in CamelCase words from being introduced into the dictionary.",
+          "markdownDescription": "Words in the `allowedSplitWords` are considered correct and can be used\nas a basis for splitting compound words.\n\nIf entries can be split so that all the words in the entry are allowed,\nthen only the individual words are added, otherwise the entire entry is added.\nThis is to prevent misspellings in CamelCase words from being introduced into the\ndictionary."
         },
         "filename": {
           "$ref": "#/definitions/FilePath"
@@ -120,15 +131,18 @@
         "keepRawCase": {
           "default": false,
           "description": "Do not generate lower case / accent free versions of words.",
+          "markdownDescription": "Do not generate lower case / accent free versions of words.",
           "type": "boolean"
         },
         "maxDepth": {
           "description": "Maximum number of nested Hunspell Rules to apply. This is needed for recursive dictionaries like Hebrew.",
+          "markdownDescription": "Maximum number of nested Hunspell Rules to apply.\nThis is needed for recursive dictionaries like Hebrew.",
           "type": "number"
         },
         "minCompoundLength": {
           "default": 4,
           "description": "Controls the minimum length of a compound word when storing words using `storeSplitWordsAsCompounds`. The compound words are prefixed / suffixed with `*`, to allow them to be combined with other compound words. If the length is too low, then the dictionary will consider many misspelled words as correct.",
+          "markdownDescription": "Controls the minimum length of a compound word when storing words using `storeSplitWordsAsCompounds`.\nThe compound words are prefixed / suffixed with `*`, to allow them to be combined with other compound words.\nIf the length is too low, then the dictionary will consider many misspelled words as correct.",
           "type": "number"
         },
         "split": {
@@ -142,11 +156,13 @@
             }
           ],
           "default": false,
-          "description": "Split lines into words."
+          "description": "Split lines into words.",
+          "markdownDescription": "Split lines into words."
         },
         "storeSplitWordsAsCompounds": {
           "default": false,
           "description": "Camel case words that have been split using the `allowedSplitWords` are added to the dictionary as compoundable words. These words are prefixed / suffixed with `*`.",
+          "markdownDescription": "Camel case words that have been split using the `allowedSplitWords` are added to the dictionary as compoundable words.\nThese words are prefixed / suffixed with `*`.",
           "type": "boolean"
         }
       },
@@ -155,11 +171,19 @@
       ],
       "type": "object"
     },
+    "ReplaceWith": {
+      "type": "string"
+    },
     "Replacements": {
       "additionalProperties": {
-        "type": "string"
+        "$ref": "#/definitions/ReplaceWith"
       },
-      "description": "Replacement rules to apply to the words in the dictionary. The key is the pattern to match, and the value is the replacement string.",
+      "description": "Replacement rules to apply to the words in the dictionary. The key is the pattern to match, and the value is the replacement string. Note: Multiple patterns can be separated by the `|` character.\n\n- ``'|‘|`|’`` - with match all the single quotes.\n\nNote: the pattern is treated like a regular expression using the JavaScript `RegExp` constructor with the `g` and `v` flags.\n\nNote: replacements are applied in the order they are defined.",
+      "markdownDescription": "Replacement rules to apply to the words in the dictionary.\nThe key is the pattern to match, and the value is the replacement string.\nNote: Multiple patterns can be separated by the `|` character.\n\n- ``'|‘|`|’`` - with match all the single quotes.\n\nNote: the pattern is treated like a regular expression using the JavaScript `RegExp` constructor with the `g` and `v` flags.\n\nNote: replacements are applied in the order they are defined.",
+      "propertyNames": {
+        "description": "Pattern to match in the replacement rules. Multiple patterns can be separated by the `|` character.\n\n- ``'|‘|`|’`` - with match all the single quotes.",
+        "markdownDescription": "Pattern to match in the replacement rules. Multiple patterns can be separated by the `|` character.\n\n- ``'|‘|`|’`` - with match all the single quotes."
+      },
       "type": "object"
     },
     "Target": {
@@ -177,7 +201,8 @@
               "type": "array"
             }
           ],
-          "description": "Words in the `allowedSplitWords` are considered correct and can be used as a basis for splitting compound words.\n\nIf entries can be split so that all the words in the entry are allowed, then only the individual words are added, otherwise the entire entry is added. This is to prevent misspellings in CamelCase words from being introduced into the dictionary."
+          "description": "Words in the `allowedSplitWords` are considered correct and can be used as a basis for splitting compound words.\n\nIf entries can be split so that all the words in the entry are allowed, then only the individual words are added, otherwise the entire entry is added. This is to prevent misspellings in CamelCase words from being introduced into the dictionary.",
+          "markdownDescription": "Words in the `allowedSplitWords` are considered correct and can be used\nas a basis for splitting compound words.\n\nIf entries can be split so that all the words in the entry are allowed,\nthen only the individual words are added, otherwise the entire entry is added.\nThis is to prevent misspellings in CamelCase words from being introduced into the\ndictionary."
         },
         "bTrie": {
           "anyOf": [
@@ -188,11 +213,13 @@
               "$ref": "#/definitions/BTrieOptions"
             }
           ],
-          "description": "Generate a `.btrie.gz` for the target."
+          "description": "Generate a `.btrie.gz` for the target.",
+          "markdownDescription": "Generate a `.btrie.gz` for the target."
         },
         "compress": {
           "default": false,
           "description": "Setting this value to true will create a `.gz` dictionary file. Use `keepUncompressed` to also keep an uncompressed version.",
+          "markdownDescription": "Setting this value to true will create a `.gz` dictionary file.\nUse `keepUncompressed` to also keep an uncompressed version.",
           "type": "boolean"
         },
         "dictionaryDirectives": {
@@ -200,6 +227,7 @@
           "items": {
             "type": "string"
           },
+          "markdownDescription": "Injects `cspell-dictionary` directives into the dictionary header.\n\nExample:\n\n```ini\n# cspell-dictionary: no-generate-alternatives\n```\n\nKnown Directives:\n```yaml\n- split # Tell the dictionary loader to split words\n- no-split # Tell the dictionary loader to not split words (default)\n- generate-alternatives # Tell the dictionary loader to generate alternate spellings (default)\n- no-generate-alternatives # Tell the dictionary loader to not generate alternate spellings\n```",
           "type": "array"
         },
         "excludeWordsFrom": {
@@ -207,6 +235,7 @@
           "items": {
             "$ref": "#/definitions/FilePath"
           },
+          "markdownDescription": "Words from the sources that are found in `excludeWordsFrom` files\nwill NOT be added to the dictionary.",
           "type": "array"
         },
         "excludeWordsMatchingRegex": {
@@ -214,6 +243,7 @@
           "items": {
             "type": "string"
           },
+          "markdownDescription": "Words from the sources that match the regex in `excludeWordsMatchingRegex`\nwill NOT be added to the dictionary.\n\nNote: The regex must be a valid JavaScript literal regex expression including the `/` delimiters.",
           "type": "array"
         },
         "excludeWordsNotFoundIn": {
@@ -221,37 +251,45 @@
           "items": {
             "$ref": "#/definitions/FilePath"
           },
+          "markdownDescription": "Words from the sources that are NOT found in `excludeWordsNotFoundIn` files\nwill NOT be added to the dictionary.",
           "type": "array"
         },
         "format": {
           "$ref": "#/definitions/DictionaryFormats",
-          "description": "Format of the dictionary."
+          "description": "Format of the dictionary.",
+          "markdownDescription": "Format of the dictionary."
         },
         "generateNonStrict": {
           "default": false,
           "description": "Generate lower case / accent free versions of words.",
+          "markdownDescription": "Generate lower case / accent free versions of words.",
           "type": "boolean"
         },
         "keepUncompressed": {
           "description": "If `compress` is true, setting this value to true will also keep an uncompressed version of the dictionary.",
+          "markdownDescription": "If `compress` is true, setting this value to true will also keep an uncompressed version of the dictionary.",
           "type": "boolean"
         },
         "name": {
           "description": "Name of target, used as the basis of target file name.",
+          "markdownDescription": "Name of target, used as the basis of target file name.",
           "type": "string"
         },
         "removeDuplicates": {
           "default": false,
           "description": "Remove duplicate words, favor lower case words over mixed case words. Combine compound prefixes where possible.",
+          "markdownDescription": "Remove duplicate words, favor lower case words over mixed case words.\nCombine compound prefixes where possible.",
           "type": "boolean"
         },
         "replacements": {
           "$ref": "#/definitions/Replacements",
-          "description": "Replacement rules to apply to the words in the dictionary. The key is the pattern to match, and the value is the replacement string."
+          "description": "Replacement rules to apply to the words in the dictionary. The key is the pattern to match, and the value is the replacement string.",
+          "markdownDescription": "Replacement rules to apply to the words in the dictionary.\nThe key is the pattern to match, and the value is the replacement string."
         },
         "sort": {
           "default": true,
           "description": "Sort the words in the resulting dictionary. Does not apply to `trie` based formats.",
+          "markdownDescription": "Sort the words in the resulting dictionary.\nDoes not apply to `trie` based formats.",
           "type": "boolean"
         },
         "sources": {
@@ -259,15 +297,18 @@
           "items": {
             "$ref": "#/definitions/DictionarySource"
           },
+          "markdownDescription": "File sources used to build the dictionary.",
           "type": "array"
         },
         "targetDirectory": {
           "$ref": "#/definitions/FilePath",
           "default": "current directory",
-          "description": "The target directory"
+          "description": "The target directory",
+          "markdownDescription": "The target directory"
         },
         "trieBase": {
           "description": "Advanced: Set the trie base number. A value between 10 and 36 Set numeric base to use. 10 is the easiest to read. 16 is common hex format. 36 is the most compact.",
+          "markdownDescription": "Advanced: Set the trie base number. A value between 10 and 36\nSet numeric base to use.\n10 is the easiest to read.\n16 is common hex format.\n36 is the most compact.",
           "type": "number"
         }
       },
@@ -283,6 +324,7 @@
     "$schema": {
       "default": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/packages/cspell-tools/cspell-tools.config.schema.json",
       "description": "Url to JSON Schema",
+      "markdownDescription": "Url to JSON Schema",
       "type": "string"
     },
     "allowedSplitWords": {
@@ -297,10 +339,12 @@
           "type": "array"
         }
       ],
-      "description": "Words in the `allowedSplitWords` are considered correct and can be used as a basis for splitting compound words.\n\nIf entries can be split so that all the words in the entry are allowed, then only the individual words are added, otherwise the entire entry is added. This is to prevent misspellings in CamelCase words from being introduced into the dictionary."
+      "description": "Words in the `allowedSplitWords` are considered correct and can be used as a basis for splitting compound words.\n\nIf entries can be split so that all the words in the entry are allowed, then only the individual words are added, otherwise the entire entry is added. This is to prevent misspellings in CamelCase words from being introduced into the dictionary.",
+      "markdownDescription": "Words in the `allowedSplitWords` are considered correct and can be used\nas a basis for splitting compound words.\n\nIf entries can be split so that all the words in the entry are allowed,\nthen only the individual words are added, otherwise the entire entry is added.\nThis is to prevent misspellings in CamelCase words from being introduced into the\ndictionary."
     },
     "checksumFile": {
       "description": "Path to checksum file. `true` - defaults to `./checksum.txt`.",
+      "markdownDescription": "Path to checksum file. `true` - defaults to `./checksum.txt`.",
       "type": [
         "string",
         "boolean"
@@ -311,39 +355,47 @@
       "items": {
         "type": "string"
       },
+      "markdownDescription": "Injects `cspell-dictionary` directives into the dictionary header.\n\nExample:\n\n```ini\n# cspell-dictionary: no-generate-alternatives\n```\n\nKnown Directives:\n```yaml\n- split # Tell the dictionary loader to split words\n- no-split # Tell the dictionary loader to not split words (default)\n- generate-alternatives # Tell the dictionary loader to generate alternate spellings (default)\n- no-generate-alternatives # Tell the dictionary loader to not generate alternate spellings\n```",
       "type": "array"
     },
     "generateNonStrict": {
       "default": false,
       "description": "Generate lower case / accent free versions of words.",
+      "markdownDescription": "Generate lower case / accent free versions of words.",
       "type": "boolean"
     },
     "keepRawCase": {
       "default": false,
       "description": "Do not generate lower case / accent free versions of words.",
+      "markdownDescription": "Do not generate lower case / accent free versions of words.",
       "type": "boolean"
     },
     "maxDepth": {
       "description": "Maximum number of nested Hunspell Rules to apply. This is needed for recursive dictionaries like Hebrew.",
+      "markdownDescription": "Maximum number of nested Hunspell Rules to apply.\nThis is needed for recursive dictionaries like Hebrew.",
       "type": "number"
     },
     "minCompoundLength": {
       "default": 4,
       "description": "Controls the minimum length of a compound word when storing words using `storeSplitWordsAsCompounds`. The compound words are prefixed / suffixed with `*`, to allow them to be combined with other compound words. If the length is too low, then the dictionary will consider many misspelled words as correct.",
+      "markdownDescription": "Controls the minimum length of a compound word when storing words using `storeSplitWordsAsCompounds`.\nThe compound words are prefixed / suffixed with `*`, to allow them to be combined with other compound words.\nIf the length is too low, then the dictionary will consider many misspelled words as correct.",
       "type": "number"
     },
     "removeDuplicates": {
       "default": false,
       "description": "Remove duplicate words, favor lower case words over mixed case words. Combine compound prefixes where possible.",
+      "markdownDescription": "Remove duplicate words, favor lower case words over mixed case words.\nCombine compound prefixes where possible.",
       "type": "boolean"
     },
     "rootDir": {
       "description": "Specify the directory where all relative paths will resolved against. By default, all relative paths are relative to the location of the config file.",
+      "markdownDescription": "Specify the directory where all relative paths will resolved against.\nBy default, all relative paths are relative to the location of the\nconfig file.",
       "type": "string"
     },
     "sort": {
       "default": true,
       "description": "Sort the words in the resulting dictionary. Does not apply to `trie` based formats.",
+      "markdownDescription": "Sort the words in the resulting dictionary.\nDoes not apply to `trie` based formats.",
       "type": "boolean"
     },
     "split": {
@@ -357,11 +409,13 @@
         }
       ],
       "default": false,
-      "description": "Split lines into words."
+      "description": "Split lines into words.",
+      "markdownDescription": "Split lines into words."
     },
     "storeSplitWordsAsCompounds": {
       "default": false,
       "description": "Camel case words that have been split using the `allowedSplitWords` are added to the dictionary as compoundable words. These words are prefixed / suffixed with `*`.",
+      "markdownDescription": "Camel case words that have been split using the `allowedSplitWords` are added to the dictionary as compoundable words.\nThese words are prefixed / suffixed with `*`.",
       "type": "boolean"
     },
     "targets": {
@@ -369,6 +423,7 @@
       "items": {
         "$ref": "#/definitions/Target"
       },
+      "markdownDescription": "Optional Target Dictionaries to create.",
       "type": "array"
     }
   },

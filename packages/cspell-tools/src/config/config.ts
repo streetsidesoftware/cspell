@@ -101,10 +101,29 @@ export interface CompileTargetOptions {
 }
 
 /**
+ * Pattern to match in the replacement rules. Multiple patterns can be separated by the `|` character.
+ *
+ * - ``'|‘|`|’`` - with match all the single quotes.
+ */
+export type ReplacementPattern = string;
+
+/**
+ *
+ */
+export type ReplaceWith = string;
+
+/**
  * Replacement rules to apply to the words in the dictionary.
  * The key is the pattern to match, and the value is the replacement string.
+ * Note: Multiple patterns can be separated by the `|` character.
+ *
+ * - ``'|‘|`|’`` - with match all the single quotes.
+ *
+ * Note: the pattern is treated like a regular expression using the JavaScript `RegExp` constructor with the `g` and `v` flags.
+ *
+ * Note: replacements are applied in the order they are defined.
  */
-export type Replacements = Record<string, string>;
+export type Replacements = Record<ReplacementPattern, ReplaceWith>;
 
 export interface Target extends CompileTargetOptions {
     /**
