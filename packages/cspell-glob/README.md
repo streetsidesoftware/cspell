@@ -10,10 +10,27 @@ This library doesn't do any file i/o. It uses [micromatch](https://github.com/mi
 
 ## Usage
 
-```
-const cspellGlob = require('cspell-glob');
+```ts
+import { GlobMatcher } from 'cspell-glob';
 
-// TODO: DEMONSTRATE API
+// Patterns behave like the contents of a `.gitignore` file.
+const patterns = ['*.test.js', '!important.test.js'];
+
+const matcher = new GlobMatcher(patterns, process.cwd());
+
+matcher.match('src/app.test.js'); // true -- matches `*.test.js`
+matcher.match('src/important.test.js'); // false -- excluded by the negated pattern
+matcher.match('src/app.js'); // false -- does not match any pattern
+```
+
+By default, `GlobMatcher` runs in `exclude` mode (like `.gitignore`). Use `include` mode when searching for
+files to check, where patterns must be more explicit to match:
+
+```ts
+const matcher = new GlobMatcher(['src/**/*.ts'], { root: process.cwd(), mode: 'include' });
+
+matcher.match('src/app.ts'); // true
+matcher.match('node_modules/lib/index.ts'); // false
 ```
 
 ## CSpell for Enterprise

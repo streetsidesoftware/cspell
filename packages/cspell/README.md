@@ -22,7 +22,7 @@ A Spell Checker for Code!
 
 - Spell Checks Code -- Parses code into words before checking them against the dictionaries.
   - Supports CamelCase, snake\_case, and compoundwords naming styles.
-- Self contained -- does not depend upon OS libraries like Hunspell or aspell. Nor does it depend upon online services.
+- Self contained -- does not depend upon OS libraries like Hunspell or Aspell. Nor does it depend upon online services.
 - Fast -- checks 1000's of lines of code in seconds.
 - Programming Language Specific Dictionaries -- Has dedicated support for:
   - JavaScript, TypeScript, Python, PHP, C#, C++, LaTeX, Go, HTML, CSS, etc.
@@ -310,14 +310,14 @@ Options:
 
 ### Mega-Linter
 
-[Mega-Linter](https://nvuillam.github.io/mega-linter/) aggregates 70 linters ready to use out of the box, including [cspell](https://nvuillam.github.io/mega-linter/descriptors/spell_cspell/)
+[Mega-Linter](https://megalinter.io/latest/) aggregates 70 linters ready to use out of the box, including [cspell](https://megalinter.io/latest/descriptors/spell_cspell/)
 
 - Can run as a GitHub Action, on other CI tools and locally
 - Provides an updated `.cspell.json` file with new unknown words
 
 **Setup**
 
-Quick setup following installation guide in [Mega-Linter documentation](https://nvuillam.github.io/mega-linter/)
+Quick setup following installation guide in [Mega-Linter documentation](https://megalinter.io/latest/)
 
 ### Git commit-hooks
 
@@ -364,7 +364,7 @@ The concept is simple: split camelCase and snake\_case words before checking the
 ### Things to note
 
 - By default, case and accent checking is off for English, so it will not catch errors like `english` which should be `English`.
-  This is controlled by the `caseSensitive` setting -- see [Case and Accent Sensitivity](https://cspell.org/docs/case-sensitive/).
+  This is controlled by the `caseSensitive` setting -- see [Case and Accent Sensitivity](https://cspell.org/docs/case-sensitive).
   Some language dictionaries (like German, French, and Spanish) turn on case sensitivity by default.
 - The spellchecker uses dictionaries stored locally. It does not send anything outside your machine.
 - The words in the dictionaries can and do contain errors.

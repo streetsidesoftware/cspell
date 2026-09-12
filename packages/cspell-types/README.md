@@ -26,7 +26,7 @@ npm i -S @cspell/cspell-types
 
 ## Usage
 
-Can be use to make writing `cspell.config.js` files easier.
+Can be used to make writing `cspell.config.js` files easier.
 
 ```js
 'use strict';
@@ -61,7 +61,7 @@ module.exports = cspell;
 
 ## API
 
-`CSpellSettings` alias `CSpellUserSettings` is the formal definition of the configuration that controls the spell checker.
+`CSpellSettings` (aliased as `CSpellUserSettings`) is the formal definition of the configuration that controls the spell checker.
 
 ## CSpell for Enterprise
 

@@ -88,7 +88,7 @@ console.log('%o', words);
 
 ## Reference
 
-- [Hunspell Docs](https://github.com/hunspell/hunspell/blob/master/docs/hunspell.5.md)
+- [Hunspell Docs](https://github.com/hunspell/hunspell/blob/master/man/hunspell.5)
 
 ## CSpell for Enterprise
 

@@ -1,4 +1,4 @@
-# cspell-trie
+# cspell-trie-lib
 
 Trie library for use with cspell
 
@@ -6,7 +6,7 @@ This library allows easily building of a [Trie](https://en.wikipedia.org/wiki/Tr
 from a word list.
 
 The resulting trie can then be compressed into a
-[DAFSA|DAWG](https://en.wikipedia.org/wiki/Deterministic_acyclic_finite_state_automaton).
+[DAFSA (also known as a DAWG)](https://en.wikipedia.org/wiki/Deterministic_acyclic_finite_state_automaton).
 
 ### Installation
 
@@ -28,8 +28,8 @@ __DATA__
 The header has two parts.
 
 - `TrieXv3` -- the format identifier.
-- base -- references are stored using the base (10, 16, 32) are common.
-  higher the base, the smaller the file. Max is 36
+- base -- references are stored using a base; 10, 16, and 32 are common values.
+  The higher the base, the smaller the file. Max is 36
 
 ### Data
 
@@ -97,7 +97,7 @@ j─o┬u─s─t┬$
 | op    | Meaning                                                                                                   |
 | ----- | --------------------------------------------------------------------------------------------------------- |
 | `<`   | remove 1 character                                                                                        |
-| `<n`  | remove n characters where `n` is `[2-9]` to remove 12 characters use `<9<3`                               |
+| `<n`  | remove n characters, where `n` is `[2-9]`; to remove 12 characters, use `<9<3`                            |
 | `$`   | end of word                                                                                               |
 | `\`   | escape next character. All characters can be escaped. <br/> `\\` -> `\` <br/>`\#` -> `#` <br/>`\a` -> `a` |
 | `#n;` | reference to an already imported trie node where `n` is the node number                                   |
@@ -135,9 +135,9 @@ base=10
 
 The header has two parts.
 
-- TrieXv1 -- the identifiers
-- base -- offsets are stored using the base (10, 16, 32) are common.
-  higher the base, the smaller the file. Max is 36
+- `TrieXv1` -- the format identifier.
+- base -- offsets are stored using a base; 10, 16, and 32 are common values.
+  The higher the base, the smaller the file. Max is 36
 
 ### Data
 

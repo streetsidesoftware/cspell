@@ -6,7 +6,7 @@ This library allows easily building of a [Trie](https://en.wikipedia.org/wiki/Tr
 from a word list.
 
 The resulting trie can then be compressed into a
-[DAFSA|DAWG](https://en.wikipedia.org/wiki/Deterministic_acyclic_finite_state_automaton).
+[DAFSA (also known as a DAWG)](https://en.wikipedia.org/wiki/Deterministic_acyclic_finite_state_automaton).
 
 ## Tool
 
@@ -49,9 +49,9 @@ base=10
 
 The header has two parts.
 
-- TrieXv1 -- the identifiers
-- base -- offsets are stored using the base (10, 16, 32) are common.
-  higher the base, the smaller the file. Max is 36
+- `TrieXv1` -- the format identifier.
+- base -- offsets are stored using a base; 10, 16, and 32 are common values.
+  The higher the base, the smaller the file. Max is 36
 
 ### Data
 

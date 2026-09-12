@@ -1,6 +1,6 @@
 # `@cspell/dynamic-import`
 
-A small library to assist with dynamically loading CommonJS and ESM Modules from either CommonJS or ESM Modules.
+A small library to assist with dynamically loading CommonJS and ESM modules from either CommonJS or ESM modules.
 
 ## Install
 
@@ -12,9 +12,9 @@ npm install -S @cspell/dynamic-import
 
 ### Example ESM Package
 
-Example loading [chalk v5](https://www.npmjs.com/package/chalk) which is an ESM only module.
+Example loading [chalk v5](https://www.npmjs.com/package/chalk), which is an ESM-only module.
 
-**TypeScript Common JS**
+**TypeScript CommonJS**
 
 ```ts
 import { dynamicImport } from '@cspell/dynamic-import';
@@ -32,7 +32,7 @@ const pChalk = dynamicImport<typeof import('chalk')>('chalk', import.meta.url);
 
 ### Example ESM files
 
-**TypeScript Common JS**
+**TypeScript CommonJS**
 
 ```ts
 import { dynamicImport } from '@cspell/dynamic-import';

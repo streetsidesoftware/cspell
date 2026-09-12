@@ -40,7 +40,7 @@ or `cspell.json`
 
 - `issues` - found spelling issues
 - `result` - CSpell linting results
-- `error` - CSell error messages
+- `error` - CSpell error messages
 - `progress` - file linting progress messages if `settings.progress` is enabled
 - `info` - CSpell execution logs if `settings.verbose` is enabled
 - `debug` - CSpell debug logs if `settings.debug` is enabled
@@ -98,6 +98,7 @@ Possible settings:
 
 - `outFile` (default: stdout) - path for JSON file to emit
 - `verbose` (default: false) - enable saving of execution logs
+- `verboseLevel` - level of verbosity (higher number = more verbose)
 - `debug` (default: false) - enable saving of debug logs
 - `progress` (default: false) - enable saving of file progress logs
 

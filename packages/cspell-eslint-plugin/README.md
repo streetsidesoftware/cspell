@@ -382,10 +382,10 @@ The `checkScope` setting is used to enable / disable checking AST Nodes. ESLint 
 ```js
 rules: {
   '@cspell/spellchecker': ['warn', { checkScope: [
-    ['JSONLiteral': true],  // will match AST Nodes of type `JSONLiteral` and spell check the value.
-    ['JSONProperty[key] JSONLiteral', false]  // will turn off checking the JSON Property keys.
-    ['JSONProperty JSONLiteral', false]  // will turn off checking the JSON Property keys and values.
-    ['JSONProperty[value] JSONLiteral', true]  // will turn on checking the JSON Property values.
+    ['JSONLiteral', true],  // will match AST Nodes of type `JSONLiteral` and spell check the value.
+    ['JSONProperty[key] JSONLiteral', false],  // will turn off checking the JSON Property keys.
+    ['JSONProperty JSONLiteral', false],  // will turn off checking the JSON Property keys and values.
+    ['JSONProperty[value] JSONLiteral', true],  // will turn on checking the JSON Property values.
     ['YAMLPair[key] YAMLScalar', true],
     ['YAMLPair[value] YAMLScalar', true],
     ['YAMLSequence YAMLScalar', true],
