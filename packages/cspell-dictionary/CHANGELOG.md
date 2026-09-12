@@ -80,6 +80,12 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/9208">#9208</a>)
 - fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/9198">#9198</a>)
 
+## v10.3.1-alpha.1 (2026-09-12)
+
+### Fixes
+
+- fix(cspell-tools): Support multiple replacements in a single entry (<a href="https://github.com/streetsidesoftware/cspell/pull/9212">#9212</a>)
+
 ## v10.3.0 (2026-09-08)
 
 ### Features
