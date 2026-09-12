@@ -1,6 +1,6 @@
 import type { Pattern, RegExpPatternDefinition } from '@cspell/cspell-types';
 
-import { stringToRegExp } from '../util/textRegex.js';
+import { stringToRegExpOrUndefined } from '../util/textRegex.js';
 import { isDefined } from '../util/util.js';
 import { CalcLeftRightResultWeakCache } from './mergeCache.js';
 
@@ -49,5 +49,5 @@ function _resolvePatterns(regExpList: (string | RegExp)[], patternDefinitions: R
 }
 
 function toRegExp(pattern: RegExp | string): RegExp | undefined {
-    return pattern instanceof RegExp ? new RegExp(pattern) : stringToRegExp(pattern, 'gim', 'g');
+    return pattern instanceof RegExp ? new RegExp(pattern) : stringToRegExpOrUndefined(pattern, 'gim', 'g');
 }

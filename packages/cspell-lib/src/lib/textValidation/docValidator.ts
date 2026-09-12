@@ -44,6 +44,7 @@ import {
     chainTransformers,
     createIntlSegmentTextTransformer,
     createMappedTextSegmenter,
+    createSoftWordBreakTextTransformer,
     createSubstitutionTransformer,
 } from '../Transform/index.js';
 import { catchPromiseError, toError } from '../util/errors.js';
@@ -269,9 +270,16 @@ export class DocumentValidator {
         if (sub.missing) {
             this.addPossibleError(`Missing substitutions: ${sub.missing.join(', ')}`);
         }
-        const transformer = finalSettings.useIntlWordSegmentation
-            ? chainTransformers(sub.transformer, createIntlSegmentTextTransformer(finalSettings.language || ''))
-            : sub.transformer;
+        let transformer: TextTransformer = sub.transformer;
+        if (finalSettings.useIntlWordSegmentation) {
+            transformer = chainTransformers(
+                transformer,
+                createIntlSegmentTextTransformer(finalSettings.language || ''),
+            );
+        }
+        if (finalSettings.softWordBreaks) {
+            transformer = chainTransformers(transformer, createSoftWordBreakTextTransformer(finalSettings));
+        }
         const validateOptions = { ...settingsToValidateOptions(finalSettings), transformer };
         // Avoid excluding text ranges that have a full substitution applied.
         const rangeTransformer = finalSettings.substitutions?.length ? sub.transformer : undefined;

@@ -9,3 +9,4 @@ export { excludeRanges, extractRangeText, findMatchingRanges, findMatchingRanges
 export type { TextTransformer } from './Transformer.js';
 export { chainTransformers } from './Transformer.js';
 export type { Offset, SimpleRange } from './types.js';
+export { createSoftWordBreakTextTransformer } from './WordBreakTextTransformer.js';

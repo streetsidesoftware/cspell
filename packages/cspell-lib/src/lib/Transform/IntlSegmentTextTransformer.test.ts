@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
-import { IntlSegmentTextTransformer, softHyphen } from './IntlSegmentTextTransformer.js';
+import { IntlSegmentTextTransformer } from './IntlSegmentTextTransformer.js';
+import { softHyphen } from './Transformer.js';
 
 describe('IntlSegmentTextTransformer', () => {
     test.each`

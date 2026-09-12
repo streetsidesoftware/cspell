@@ -3,9 +3,7 @@ import type { MappedText } from '@cspell/cspell-types';
 import { normalizeLocaleIntl } from '../Settings/LanguageSettings.js';
 import { applyEditsToMappedText } from './TextMapEdit.js';
 import type { Edit, TextTransformer } from './Transformer.js';
-import { toMappedText } from './Transformer.js';
-
-export const softHyphen = '\u00AD';
+import { softHyphen, toMappedText } from './Transformer.js';
 
 const regExSplitWordCharacters: RegExp = /(?<=[\p{L}\p{M}])[\p{L}\p{M}]/uy;
 

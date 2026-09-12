@@ -143,3 +143,13 @@ export type {
 export type { SuggestionCostMapDef, SuggestionCostsDefs } from './suggestionCostsDef.js';
 export type { SuggestionsConfiguration } from './SuggestionsConfiguration.js';
 export type { TextDocumentOffset, TextOffset } from './TextOffset.js';
+export type {
+    SoftWordBreak,
+    SoftWordBreakDefinitions,
+    SoftWordBreakPattern,
+    SoftWordBreakRegExp,
+    SoftWordBreakRegExpString,
+    SoftWordBreakRule,
+    SoftWordBreaks,
+    WordSegmentationSettings,
+} from './WordSegmentation.js';

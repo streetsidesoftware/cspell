@@ -27,26 +27,32 @@ export const regExTrailingEndings: RegExp =
     /(?<=(?:\p{Lu}\p{M}?){2})['’]?(?:s|d|ings?|ies|e[ds]?|ning|th|nth)(?!\p{Ll})/gu;
 export const regExNumericLiteral: RegExp = /^[-+]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][-+]?\d+)?$/;
 
-export function stringToRegExp(pattern: string | RegExp, defaultFlags = 'gimu', forceFlags = 'g'): RegExp | undefined {
-    if (pattern instanceof RegExp) {
-        return pattern;
-    }
+export function stringToRegExpOrUndefined(
+    pattern: string | RegExp,
+    defaultFlags = 'gimu',
+    forceFlags = 'g',
+): RegExp | undefined {
     try {
-        const [, pat, flag] = [
-            ...(pattern.match(regExMatchRegExParts) || ['', pattern.trim(), defaultFlags]),
-            forceFlags,
-        ];
-        if (pat) {
-            const regPattern = flag.includes('x') ? removeVerboseFromRegExp(pat) : pat;
-            // Make sure the flags are unique.
-            const flags = [...new Set(forceFlags + flag)].join('').replaceAll(/[^gimuy]/g, '');
-            const regex = new RegExp(regPattern, flags);
-            return regex;
-        }
+        return stringToRegExp(pattern, defaultFlags, forceFlags);
     } catch {
         /* empty */
     }
     return undefined;
+}
+
+export function stringToRegExp(pattern: string | RegExp, defaultFlags = 'gimu', forceFlags = 'g'): RegExp {
+    if (pattern instanceof RegExp) {
+        return pattern;
+    }
+    const [, pat, flag] = [...(pattern.match(regExMatchRegExParts) || ['', pattern.trim(), defaultFlags]), forceFlags];
+    if (!pat) {
+        throw new Error(`Invalid regular expression: "${pattern}"`);
+    }
+    const regPattern = flag.includes('x') ? removeVerboseFromRegExp(pat) : pat;
+    // Make sure the flags are unique.
+    const flags = [...new Set(forceFlags + flag)].join('').replaceAll(/[^gimuy]/g, '');
+    const regex = new RegExp(regPattern, flags);
+    return regex;
 }
 
 interface ReduceResults {
