@@ -641,7 +641,7 @@ export default defineConfig({
 
   will cause cspell to ignore anything in the `node_modules` directory.
 
-- `maxNumberOfProblems` - defaults to **_100_** per file.
+- `maxNumberOfProblems` - defaults to **_10,000_** per file.
 
 - `minWordLength` - defaults to **_4_** - the minimum length of a word before it is checked.
 
