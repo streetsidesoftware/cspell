@@ -3,7 +3,7 @@ Repository: MicrosoftDocs/PowerShell-Docs
 Url: "https://github.com/MicrosoftDocs/PowerShell-Docs.git"
 Args: ["--config=../../../cspell-power-shell-docs.config.yaml","**"]
 Lines:
- CSpell: Files checked: 3127, Issues found: 4217 in 1036 files.
+ CSpell: Files checked: 3127, Issues found: 4472 in 1078 files.
  exit code: 1
 CODE_OF_CONDUCT.md:38:38     - Unknown word (opensource) -- reach out at [aka.ms/opensource/moderation-support]
 LICENSE.md:122:56    - Unknown word (sublicensable)   -- worldwide, royalty-free, non-sublicensable,
@@ -98,10 +98,14 @@ reference/5.1/Microsoft.PowerShell.Core/About/about_Case-Sensitivity.md:201:7   
 reference/5.1/Microsoft.PowerShell.Core/About/about_Case-Sensitivity.md:204:12    - Unknown word (csplit)     -- 'Bar' -csplit 'A', 0
 reference/5.1/Microsoft.PowerShell.Core/About/about_Case-Sensitivity.md:207:12    - Unknown word (csplit)     -- 'Bar' -csplit 'A', 0, 'IgnoreCase
 reference/5.1/Microsoft.PowerShell.Core/About/about_Character_Encoding.md:161:4     - Unknown word (bigendianutf) -- - `bigendianutf32`: Encodes in UTF-
+reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:128:20    - Unknown word (Secker)      -- Publisher = 'Secker & Warburg'
+reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:128:29    - Unknown word (Warburg)     -- Publisher = 'Secker & Warburg'
 reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:225:35    - Unknown word (Unwin)       -- = 'George Allen & Unwin'
 reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:236:32    - Unknown word (nwhich)      -- Time to read $Book,`nwhich was published $Age years
 reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:377:35    - Unknown word (Unwin)       -- = 'George Allen & Unwin'
 reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:74:9      - Unknown word (convertable) -- > The `<convertable-value-type>` syntax
+reference/5.1/Microsoft.PowerShell.Core/About/about_Classes_Inheritance.md:429:14    - Unknown word (Pinkney)    -- 'Jerry Pinkney',
+reference/5.1/Microsoft.PowerShell.Core/About/about_Classes_Properties.md:124:24    - Unknown word (Mikey)      -- DisplayName = 'Mikey Lombardi'
 reference/5.1/Microsoft.PowerShell.Core/About/about_Classes_Properties.md:125:24    - Unknown word (michaeltlombardi) -- UserName = 'michaeltlombardi'
 reference/5.1/Microsoft.PowerShell.Core/About/about_Command_Precedence.md:210:16    - Unknown word (Progra)     -- //localhost/c$/Progra~1/PowerShell/7-preview
 reference/5.1/Microsoft.PowerShell.Core/About/about_Command_Precedence.md:219:2     - Unknown word (Progra)     -- /Progra~1/PowerShell/7-preview
@@ -110,6 +114,7 @@ reference/5.1/Microsoft.PowerShell.Core/About/about_Command_Syntax.md:172:27    
 reference/5.1/Microsoft.PowerShell.Core/About/about_Command_Syntax.md:185:34    - Unknown word (mycommand)  -- Name MyAlias -Value mycommand.exe
 reference/5.1/Microsoft.PowerShell.Core/About/about_Command_Syntax.md:236:21    - Unknown word (mycommand)  -- New-Alias MyAlias mycommand.exe
 reference/5.1/Microsoft.PowerShell.Core/About/about_Comments.md:141:28    - Unknown word (Netcore)    -- Requires -Modules AzureRM.Netcore
+reference/5.1/Microsoft.PowerShell.Core/About/about_CommonParameters.md:135:1     - Unknown word (catchable)  -- catchable by `try/catch`. For
 reference/5.1/Microsoft.PowerShell.Core/About/about_CommonParameters.md:48:22     - Unknown word (proga)      -- `ProgressAction` (`proga`)
 reference/5.1/Microsoft.PowerShell.Core/About/about_CommonParameters.md:565:10    - Unknown word (proga)      -- Aliases: proga
 reference/5.1/Microsoft.PowerShell.Core/About/about_CommonParameters.md:820:72    - Unknown word (defau)      -- Suspend [?] Help (defau
@@ -136,6 +141,11 @@ reference/5.1/Microsoft.PowerShell.Core/About/about_Debuggers.md:582:10    - Unk
 reference/5.1/Microsoft.PowerShell.Core/About/about_Debuggers.md:585:35    - Unknown word (scriptname) -- breakpoint on the `$scriptname` variable.
 reference/5.1/Microsoft.PowerShell.Core/About/about_Debuggers.md:588:43    - Unknown word (scriptname) -- PSBreakpoint -Variable scriptname -Script test.ps1
 reference/5.1/Microsoft.PowerShell.Core/About/about_Debuggers.md:594:23    - Unknown word (scriptname) -- PS C:\ps-test> sbp -V scriptname -S test.ps1
+reference/5.1/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:278:27    - Unknown word (logfiles)   -- command creates the `logfiles` directory on the `C
+reference/5.1/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:281:26    - Unknown word (logfiles)   -- Item -Path C:\ -Name logfiles -Type Directory
+reference/5.1/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:289:53    - Unknown word (logfiles)   -- txt` file in the `C:\logfiles` directory and
+reference/5.1/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:293:19    - Unknown word (logfiles)   -- New-Item -Path C:\logfiles -Name log2.txt -Type
+reference/5.1/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:298:45    - Unknown word (logfiles)   -- log2.txt` in the `C:\logfiles` directory and adds
 reference/5.1/Microsoft.PowerShell.Core/About/about_Functions_Advanced_Parameters.md:645:6     - Unknown word (Dont)       -- #### DontShow argument
 reference/5.1/Microsoft.PowerShell.Core/About/about_Functions_Advanced_Parameters.md:647:6     - Unknown word (Dont)       -- The `DontShow` value is typically
 reference/5.1/Microsoft.PowerShell.Core/About/about_Functions_Advanced_Parameters.md:648:65    - Unknown word (Dont)       -- be removed. Setting `DontShow` to
@@ -156,13 +166,18 @@ reference/5.1/Microsoft.PowerShell.Core/About/about_Language_Modes.md:279:5     
 reference/5.1/Microsoft.PowerShell.Core/About/about_Language_Modes.md:283:5     - Unknown word (securestring)          -- - `[securestring]`
 reference/5.1/Microsoft.PowerShell.Core/About/about_Language_Modes.md:308:5     - Unknown word (wmiclass)              -- - `[wmiclass]`
 reference/5.1/Microsoft.PowerShell.Core/About/about_Language_Modes.md:309:5     - Unknown word (wmisearcher)           -- - `[wmisearcher]`
+reference/5.1/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:31:12     - Unknown word (kibibyte)   -- | `kb`   | kibibyte (1024<sup>1</sup>) multiplier
+reference/5.1/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:32:12     - Unknown word (mebibyte)   -- | `mb`   | mebibyte (1024<sup>2</sup>) multiplier
 reference/5.1/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:33:12     - Unknown word (gigibyte)   -- | `gb`   | gigibyte (1024<sup>3</sup>) multiplier
 reference/5.1/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:34:12     - Unknown word (teribyte)   -- | `tb`   | teribyte (1024<sup>4</sup>) multiplier
 reference/5.1/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:35:12     - Unknown word (petibyte)   -- | `pb`   | petibyte (1024<sup>5</sup>) multiplier
+reference/5.1/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:73:12     - Unknown word (kibibyte)   -- | `kb`   | kibibyte (1024<sup>1</sup>) multiplier
+reference/5.1/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:74:12     - Unknown word (mebibyte)   -- | `mb`   | mebibyte (1024<sup>2</sup>) multiplier
 reference/5.1/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:75:12     - Unknown word (gigibyte)   -- | `gb`   | gigibyte (1024<sup>3</sup>) multiplier
 reference/5.1/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:76:12     - Unknown word (teribyte)   -- | `tb`   | teribyte (1024<sup>4</sup>) multiplier
 reference/5.1/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:77:12     - Unknown word (petibyte)   -- | `pb`   | petibyte (1024<sup>5</sup>) multiplier
 reference/5.1/Microsoft.PowerShell.Core/About/about_Operators.md:131:28    - Unknown word (Nosuch)     -- example, `(Get-Item /Nosuch); $?` unexpectedly yields
+reference/5.1/Microsoft.PowerShell.Core/About/about_PSItem.md:112:60    - Unknown word (uppercases) -- the **ForEach** method uppercases the
 reference/5.1/Microsoft.PowerShell.Core/About/about_Parsing.md:130:62    - Unknown word (metacharacters) -- expandable string, except metacharacters
 reference/5.1/Microsoft.PowerShell.Core/About/about_Parsing.md:132:23    - Unknown word (metacharacters) -- - The argument-mode metacharacters (characters with special
 reference/5.1/Microsoft.PowerShell.Core/About/about_Parsing.md:182:9     - Unknown word (CECHO)          -- | `CMD /CECHO A,B`      | argument
@@ -372,6 +387,8 @@ reference/5.1/Microsoft.PowerShell.Diagnostics/Get-Counter.md:428:2     - Unknow
 reference/5.1/Microsoft.PowerShell.Diagnostics/Get-Counter.md:429:2     - Unknown word (Procs)      -- $Procs.CounterSamples | Sort
 reference/5.1/Microsoft.PowerShell.Diagnostics/Get-Counter.md:447:76    - Unknown word (Procs)      -- result is stored in the `$Procs` variable. The
 reference/5.1/Microsoft.PowerShell.Diagnostics/Get-Counter.md:448:3     - Unknown word (Procs)      -- `$Procs` variable with the
+reference/5.1/Microsoft.PowerShell.Diagnostics/Get-WinEvent.md:530:2     - Unknown word (logfiles)   -- $logfiles = 'C:\Tracing\TraceLog
+reference/5.1/Microsoft.PowerShell.Diagnostics/Get-WinEvent.md:531:21    - Unknown word (logfiles)   -- Get-WinEvent -Path $logfiles -Oldest |
 reference/5.1/Microsoft.PowerShell.Diagnostics/Get-WinEvent.md:569:21    - Unknown word (timediff)   -- TimeCreated[timediff(@SystemTime) <= 864
 reference/5.1/Microsoft.PowerShell.Diagnostics/Get-WinEvent.md:576:44    - Unknown word (timediff)   -- Level=3 and TimeCreated[timediff(@SystemTime) <= 864
 reference/5.1/Microsoft.PowerShell.Diagnostics/Import-Counter.md:109:60    - Unknown word (Ctrs)           -- rocessorData.blg -Counter $intCtrs
@@ -398,7 +415,13 @@ reference/5.1/Microsoft.PowerShell.Management/Convert-Path.md:151:40    - Unknow
 reference/5.1/Microsoft.PowerShell.Management/Copy-Item.md:186:32    - Unknown word (scriptingexample) -- Item` cmdlet copies `scriptingexample.ps1` from the `D:\Folder
 reference/5.1/Microsoft.PowerShell.Management/Copy-Item.md:193:33    - Unknown word (scriptingexample) -- = "D:\Folder004\scriptingexample.ps1"
 reference/5.1/Microsoft.PowerShell.Management/Copy-Item.md:194:38    - Unknown word (scriptingexample) -- "C:\Folder004_Copy\scriptingexample_copy.ps1"
+reference/5.1/Microsoft.PowerShell.Management/Copy-Item.md:80:22     - Unknown word (Logfiles)   -- Copy-Item "C:\Wabash\Logfiles\mar1604.log.txt" -Destination
+reference/5.1/Microsoft.PowerShell.Management/Copy-Item.md:85:45     - Unknown word (Logfiles)   -- contents of the `C:\Logfiles` directory into the
+reference/5.1/Microsoft.PowerShell.Management/Copy-Item.md:86:17     - Unknown word (Logfiles)   -- directory. The `Logfiles` directory isn't copied
+reference/5.1/Microsoft.PowerShell.Management/Copy-Item.md:88:9      - Unknown word (Logfiles)   -- If the `Logfiles` directory has files
+reference/5.1/Microsoft.PowerShell.Management/Copy-Item.md:93:21     - Unknown word (Logfiles)   -- Copy-Item -Path "C:\Logfiles\*" -Destination "C:
 reference/5.1/Microsoft.PowerShell.Management/Get-ChildItem.md:160:66    - Unknown word (hiddenfile) -- hidden files such as `hiddenfile.txt` that have a mode
+reference/5.1/Microsoft.PowerShell.Management/Get-Process.md:123:61    - Unknown word (mebibyte)   -- PowerShell, `MB` represents a mebibyte (MiB) multiplier. `
 reference/5.1/Microsoft.PowerShell.Management/Get-Service.md:76:4      - Unknown word (xmlprov)    -- as xmlprov, the Network Provisioning
 reference/5.1/Microsoft.PowerShell.Management/Get-WmiObject.md:313:69    - Unknown word (ntlmdomain) -- authority setting to `ntlmdomain:<DomainName>`, where
 reference/5.1/Microsoft.PowerShell.Management/Get-WmiObject.md:626:4     - Unknown word (gwmi)       -- - `gwmi`
@@ -409,6 +432,8 @@ reference/5.1/Microsoft.PowerShell.Management/Invoke-WmiMethod.md:556:4     - Un
 reference/5.1/Microsoft.PowerShell.Management/Invoke-WmiMethod.md:9:5       - Unknown word (iwmi)       -- - iwmi
 reference/5.1/Microsoft.PowerShell.Management/Join-Path.md:242:14    - Unknown word (Realpath)   -- `Normpath`, `Realpath`, `Join`, or other path
 reference/5.1/Microsoft.PowerShell.Management/Join-Path.md:242:2     - Unknown word (Normpath)   -- `Normpath`, `Realpath`, `Join
+reference/5.1/Microsoft.PowerShell.Management/New-Item.md:100:29    - Unknown word (logfiles)   -- Item -Path "C:\" -Name "logfiles" -ItemType "Directory
+reference/5.1/Microsoft.PowerShell.Management/New-Item.md:96:41     - Unknown word (Logfiles)   -- creates a directory named "Logfiles" in the `C:` drive.
 reference/5.1/Microsoft.PowerShell.Management/New-Service.md:62:57     - Unknown word (testservice) -- Service -Filter "Name='testservice'"
 reference/5.1/Microsoft.PowerShell.Management/Register-WmiEvent.md:74:28     - Unknown word (instancecreationevent) -- Query = "select * from __instancecreationevent within 5 where targetinstance
 reference/5.1/Microsoft.PowerShell.Management/Register-WmiEvent.md:74:65     - Unknown word (targetinstance)        -- ecreationevent within 5 where targetinstance isa 'Win32_Process'
@@ -418,6 +443,7 @@ reference/5.1/Microsoft.PowerShell.Management/Remove-EventLog.md:132:45    - Unk
 reference/5.1/Microsoft.PowerShell.Management/Remove-WmiObject.md:185:68    - Unknown word (ntlmdomain) -- authority setting to ntlmdomain:\<DomainName\>, where
 reference/5.1/Microsoft.PowerShell.Management/Remove-WmiObject.md:447:4     - Unknown word (rwmi)       -- - `rwmi`
 reference/5.1/Microsoft.PowerShell.Management/Remove-WmiObject.md:9:5       - Unknown word (rwmi)       -- - rwmi
+reference/5.1/Microsoft.PowerShell.Management/Rename-Item.md:56:23     - Unknown word (logfiles)   -- Rename-Item -Path "C:\logfiles\daily_file.txt" -NewName
 reference/5.1/Microsoft.PowerShell.Management/Rename-ItemProperty.md:48:54     - Unknown word (oldconfig)  -- SmpApplication` key to "oldconfig".
 reference/5.1/Microsoft.PowerShell.Management/Rename-ItemProperty.md:51:79     - Unknown word (oldconfig)  -- Name config -NewName oldconfig
 reference/5.1/Microsoft.PowerShell.Management/Resolve-Path.md:234:4     - Unknown word (rvpa)       -- - `rvpa`
@@ -495,6 +521,7 @@ reference/5.1/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:164:59    - Unkn
 reference/5.1/Microsoft.PowerShell.Utility/Measure-Object.md:128:20    - Unknown word (serviceyrs) -- Import-Csv D:\test\serviceyrs.csv | Measure-Object
 reference/5.1/Microsoft.PowerShell.Utility/Out-File.md:100:39    - Unknown word (Procs)      -- stored in the variable, `$Procs`. `Out-File` uses the
 reference/5.1/Microsoft.PowerShell.Utility/Out-File.md:102:26    - Unknown word (Procs)      -- process objects in `$Procs` to the file **Process
+reference/5.1/Microsoft.PowerShell.Utility/Out-File.md:152:26    - Unknown word (logfile)    -- $logFile = "$PWD\logfile.txt"
 reference/5.1/Microsoft.PowerShell.Utility/Out-File.md:95:2      - Unknown word (Procs)      -- $Procs = Get-Process
 reference/5.1/Microsoft.PowerShell.Utility/Out-File.md:96:48     - Unknown word (Procs)      -- Process.txt -InputObject $Procs -Encoding ascii -Width
 reference/5.1/Microsoft.PowerShell.Utility/Out-GridView.md:378:4     - Unknown word (displayname) -- `displayname:net`
@@ -545,6 +572,7 @@ reference/5.1/PSReadLine/About/about_PSReadLine.md:170:4     - Unknown word (api
 reference/5.1/PSReadLine/About/about_PSReadLine.md:207:79    - Unknown word (ysdfayf)     -- AsPlainText) -Secret2 sdv87ysdfayf798hfasd8f7ha # '-Secret
 reference/5.1/PSReadLine/About/about_PSReadLine.md:207:89    - Unknown word (hfasd)       -- Secret2 sdv87ysdfayf798hfasd8f7ha # '-Secret2' has
 reference/5.1/PSReadLine/About/about_PSReadLine.md:248:6     - Unknown word (PGPASS)      -- $Env:PGPASS = gcloud auth print
+reference/5.1/PSReadLine/About/about_PSReadLine_Functions.md:338:13    - Unknown word (Rubout)     -- ### UnixWordRubout
 reference/5.1/PSReadLine/About/about_PSReadLine_Functions.md:431:15    - Unknown word (Begining)   -- ### ViInsertAtBegining
 reference/5.1/PSReadLine/About/about_PSReadLine_Release_Notes.md:101:5     - Unknown word (Autoadjusts) -- - Autoadjusts the size based on the
 reference/5.1/PSReadLine/About/about_PSReadLine_Release_Notes.md:191:61    - Unknown word (apikey)      -- by changing `key` to `apikey` to reduce
@@ -615,6 +643,7 @@ reference/7.4/Microsoft.PowerShell.Archive/Compress-Archive.md:71:43     - Unkno
 reference/7.4/Microsoft.PowerShell.Archive/Compress-Archive.md:94:24     - Unknown word (Draftdoc)   -- Path = "C:\Reference\Draftdoc.docx", "C:\Reference
 reference/7.4/Microsoft.PowerShell.Archive/Expand-Archive.md:42:43     - Unknown word (PKWARE)     -- format specification by PKWARE Inc. For more information
 reference/7.4/Microsoft.PowerShell.Archive/Expand-Archive.md:65:22     - Unknown word (Draftv)     -- Expand-Archive -Path Draftv2.zip -DestinationPath
+reference/7.4/Microsoft.PowerShell.Core/About/about_ANSI_Terminals.md:188:42    - Unknown word (predefines)    -- *Extension** member predefines colors for archive and
 reference/7.4/Microsoft.PowerShell.Core/About/about_ANSI_Terminals.md:57:5      - Unknown word (Strikethrough) -- - **Strikethrough** - Turns strike through
 reference/7.4/Microsoft.PowerShell.Core/About/about_ANSI_Terminals.md:58:5      - Unknown word (Strikethrough) -- - **StrikethroughOff** - Turns strike
 reference/7.4/Microsoft.PowerShell.Core/About/about_Alias_Provider.md:142:27    - Unknown word (serv)       -- command creates the `serv` alias for the `Get
@@ -633,10 +662,14 @@ reference/7.4/Microsoft.PowerShell.Core/About/about_Case-Sensitivity.md:201:7   
 reference/7.4/Microsoft.PowerShell.Core/About/about_Case-Sensitivity.md:204:12    - Unknown word (csplit)     -- 'Bar' -csplit 'A', 0
 reference/7.4/Microsoft.PowerShell.Core/About/about_Case-Sensitivity.md:207:12    - Unknown word (csplit)     -- 'Bar' -csplit 'A', 0, 'IgnoreCase
 reference/7.4/Microsoft.PowerShell.Core/About/about_Character_Encoding.md:163:4     - Unknown word (bigendianutf) -- - `bigendianutf32`: Encodes in UTF-
+reference/7.4/Microsoft.PowerShell.Core/About/about_Classes.md:128:20    - Unknown word (Secker)      -- Publisher = 'Secker & Warburg'
+reference/7.4/Microsoft.PowerShell.Core/About/about_Classes.md:128:29    - Unknown word (Warburg)     -- Publisher = 'Secker & Warburg'
 reference/7.4/Microsoft.PowerShell.Core/About/about_Classes.md:225:35    - Unknown word (Unwin)       -- = 'George Allen & Unwin'
 reference/7.4/Microsoft.PowerShell.Core/About/about_Classes.md:236:32    - Unknown word (nwhich)      -- Time to read $Book,`nwhich was published $Age years
 reference/7.4/Microsoft.PowerShell.Core/About/about_Classes.md:377:35    - Unknown word (Unwin)       -- = 'George Allen & Unwin'
 reference/7.4/Microsoft.PowerShell.Core/About/about_Classes.md:74:9      - Unknown word (convertable) -- > The `<convertable-value-type>` syntax
+reference/7.4/Microsoft.PowerShell.Core/About/about_Classes_Inheritance.md:429:14    - Unknown word (Pinkney)    -- 'Jerry Pinkney',
+reference/7.4/Microsoft.PowerShell.Core/About/about_Classes_Properties.md:124:24    - Unknown word (Mikey)      -- DisplayName = 'Mikey Lombardi'
 reference/7.4/Microsoft.PowerShell.Core/About/about_Classes_Properties.md:125:24    - Unknown word (michaeltlombardi) -- UserName = 'michaeltlombardi'
 reference/7.4/Microsoft.PowerShell.Core/About/about_Command_Precedence.md:210:16    - Unknown word (Progra)     -- //localhost/c$/Progra~1/PowerShell/7-preview
 reference/7.4/Microsoft.PowerShell.Core/About/about_Command_Precedence.md:219:2     - Unknown word (Progra)     -- /Progra~1/PowerShell/7-preview
@@ -645,6 +678,7 @@ reference/7.4/Microsoft.PowerShell.Core/About/about_Command_Syntax.md:172:27    
 reference/7.4/Microsoft.PowerShell.Core/About/about_Command_Syntax.md:185:34    - Unknown word (mycommand)  -- Name MyAlias -Value mycommand.exe
 reference/7.4/Microsoft.PowerShell.Core/About/about_Command_Syntax.md:236:21    - Unknown word (mycommand)  -- New-Alias MyAlias mycommand.exe
 reference/7.4/Microsoft.PowerShell.Core/About/about_Comments.md:141:28    - Unknown word (Netcore)    -- Requires -Modules AzureRM.Netcore
+reference/7.4/Microsoft.PowerShell.Core/About/about_CommonParameters.md:131:1     - Unknown word (catchable)  -- catchable by `try/catch`. For
 reference/7.4/Microsoft.PowerShell.Core/About/about_CommonParameters.md:48:22     - Unknown word (proga)      -- `ProgressAction` (`proga`)
 reference/7.4/Microsoft.PowerShell.Core/About/about_CommonParameters.md:559:10    - Unknown word (proga)      -- Aliases: proga
 reference/7.4/Microsoft.PowerShell.Core/About/about_CommonParameters.md:812:72    - Unknown word (defau)      -- Suspend [?] Help (defau
@@ -674,6 +708,11 @@ reference/7.4/Microsoft.PowerShell.Core/About/about_Debuggers.md:509:23    - Unk
 reference/7.4/Microsoft.PowerShell.Core/About/about_Experimental_Features.md:45:16     - Unknown word (experimentname) -- `<modulename>.<experimentname>`. The `ExperimentAction
 reference/7.4/Microsoft.PowerShell.Core/About/about_Experimental_Features.md:45:3      - Unknown word (modulename) -- `<modulename>.<experimentname>`.
 reference/7.4/Microsoft.PowerShell.Core/About/about_Experimental_Features.md:69:31     - Unknown word (PSSSH)          -- Experimental("MyRemoting.PSSSHRemoting", "Show")]
+reference/7.4/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:284:27    - Unknown word (logfiles)   -- command creates the `logfiles` directory on the `C
+reference/7.4/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:287:26    - Unknown word (logfiles)   -- Item -Path C:\ -Name logfiles -Type Directory
+reference/7.4/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:295:53    - Unknown word (logfiles)   -- txt` file in the `C:\logfiles` directory and
+reference/7.4/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:299:19    - Unknown word (logfiles)   -- New-Item -Path C:\logfiles -Name log2.txt -Type
+reference/7.4/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:304:45    - Unknown word (logfiles)   -- log2.txt` in the `C:\logfiles` directory and adds
 reference/7.4/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:418:4     - Unknown word (bigendianutf) -- - `bigendianutf32`: Encodes in UTF-
 reference/7.4/Microsoft.PowerShell.Core/About/about_Functions_Advanced_Parameters.md:669:6     - Unknown word (Dont)       -- #### DontShow argument
 reference/7.4/Microsoft.PowerShell.Core/About/about_Functions_Advanced_Parameters.md:671:6     - Unknown word (Dont)       -- The `DontShow` value is typically
@@ -712,12 +751,18 @@ reference/7.4/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:259:6   
 reference/7.4/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:261:4     - Unknown word (usgb)       -- + 1usgb
 reference/7.4/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:263:23    - Unknown word (usgb)       -- The numeric constant 1usgb is not valid.
 reference/7.4/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:268:56    - Unknown word (gbus)       -- invalid syntax like `1gbus` will be
+reference/7.4/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:39:12     - Unknown word (kibibyte)   -- | `kb`   | kibibyte (1024<sup>1</sup>) multiplier
+reference/7.4/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:40:12     - Unknown word (mebibyte)   -- | `mb`   | mebibyte (1024<sup>2</sup>) multiplier
 reference/7.4/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:41:12     - Unknown word (gigibyte)   -- | `gb`   | gigibyte (1024<sup>3</sup>) multiplier
 reference/7.4/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:42:12     - Unknown word (teribyte)   -- | `tb`   | teribyte (1024<sup>4</sup>) multiplier
 reference/7.4/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:43:12     - Unknown word (petibyte)   -- | `pb`   | petibyte (1024<sup>5</sup>) multiplier
+reference/7.4/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:81:12     - Unknown word (kibibyte)   -- | `kb`   | kibibyte (1024<sup>1</sup>) multiplier
+reference/7.4/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:82:12     - Unknown word (mebibyte)   -- | `mb`   | mebibyte (1024<sup>2</sup>) multiplier
 reference/7.4/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:83:12     - Unknown word (gigibyte)   -- | `gb`   | gigibyte (1024<sup>3</sup>) multiplier
 reference/7.4/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:84:12     - Unknown word (teribyte)   -- | `tb`   | teribyte (1024<sup>4</sup>) multiplier
 reference/7.4/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:85:12     - Unknown word (petibyte)   -- | `pb`   | petibyte (1024<sup>5</sup>) multiplier
+reference/7.4/Microsoft.PowerShell.Core/About/about_Operators.md:323:46    - Unknown word (subshell)   -- it asynchronously in subshell as a job.
+reference/7.4/Microsoft.PowerShell.Core/About/about_PSItem.md:113:60    - Unknown word (uppercases) -- the **ForEach** method uppercases the
 reference/7.4/Microsoft.PowerShell.Core/About/about_PSModulePath.md:162:63    - Unknown word (PSMODULEPATH) -- items() if k.upper() != "PSMODULEPATH"}
 reference/7.4/Microsoft.PowerShell.Core/About/about_Parsing.md:130:62    - Unknown word (metacharacters) -- expandable string, except metacharacters
 reference/7.4/Microsoft.PowerShell.Core/About/about_Parsing.md:132:23    - Unknown word (metacharacters) -- - The argument-mode metacharacters (characters with special
@@ -749,8 +794,10 @@ reference/7.4/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:929:
 reference/7.4/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:946:23    - Unknown word (hexdump)    -- café' | pwsh -File ./hexdump.ps1
 reference/7.4/Microsoft.PowerShell.Core/About/about_Pwsh.md:332:12    - Unknown word (chsh)       -- - Use the [chsh][04] utility to set
 reference/7.4/Microsoft.PowerShell.Core/About/about_Pwsh.md:336:3     - Unknown word (chsh)       -- chsh -s /usr/bin/pwsh
+reference/7.4/Microsoft.PowerShell.Core/About/about_Pwsh.md:360:24    - Unknown word (noni)       -- -NonInteractive | -noni
 reference/7.4/Microsoft.PowerShell.Core/About/about_Pwsh.md:396:33    - Unknown word (myproject)  -- pwsh -SettingsFile C:\myproject\powershell.config.json
 reference/7.4/Microsoft.PowerShell.Core/About/about_Pwsh.md:398:23    - Unknown word (sshs)       -- # -SSHServerMode | -sshs
+reference/7.4/Microsoft.PowerShell.Core/About/about_Pwsh.md:5:268     - Unknown word (noni)       -- nol, -NonInteractive, -noni, -NoProfile, -nop,
 reference/7.4/Microsoft.PowerShell.Core/About/about_Pwsh.md:5:359     - Unknown word (sshs)       -- settings, -SSHServerMode, -sshs, -STA, -Version, -v
 reference/7.4/Microsoft.PowerShell.Core/About/about_Redirection.md:238:24    - Unknown word (xzvf)       -- curl -s -L $uri | tar -xzvf - -C .
 reference/7.4/Microsoft.PowerShell.Core/About/about_Redirection.md:247:41    - Unknown word (xzvf)       -- uri).Content | tar -xzvf - -C .
@@ -810,6 +857,7 @@ reference/7.4/Microsoft.PowerShell.Core/About/about_Split.md:98:2      - Unknown
 reference/7.4/Microsoft.PowerShell.Core/About/about_Split.md:99:1      - Unknown word (Lastname)   -- Lastname
 reference/7.4/Microsoft.PowerShell.Core/About/about_Tab_Expansion.md:60:30     - Unknown word (psdf)       -- functions. For example, `i-psdf<tab>` returns `Import
 reference/7.4/Microsoft.PowerShell.Core/About/about_Tab_Expansion.md:89:28     - Unknown word (actsetup)   -- Get-Content C:\windows\actsetup.log
+reference/7.4/Microsoft.PowerShell.Core/About/about_Telemetry.md:42:4      - Unknown word (Geolocation) -- > [Geolocation and IP address handling
 reference/7.4/Microsoft.PowerShell.Core/About/about_Type_Accelerators.md:107:3     - Unknown word (mailaddress)         -- | mailaddress |
 reference/7.4/Microsoft.PowerShell.Core/About/about_Type_Accelerators.md:116:3     - Unknown word (psaliasproperty)     -- | psaliasproperty | [System
 reference/7.4/Microsoft.PowerShell.Core/About/about_Type_Accelerators.md:120:3     - Unknown word (pslistmodifier)      -- | pslistmodifier | [System
@@ -926,20 +974,30 @@ reference/7.4/Microsoft.PowerShell.Diagnostics/Get-WinEvent.md:571:44    - Unkno
 reference/7.4/Microsoft.PowerShell.Diagnostics/Get-WinEvent.md:604:3     - Unknown word (Logname)    -- Logname='Application'
 reference/7.4/Microsoft.PowerShell.Diagnostics/New-WinEvent.md:92:16     - Unknown word (Elasped)    -- to the **PolicyElaspedTimeInSeconds** field
 reference/7.4/Microsoft.PowerShell.Management/Add-Content.md:228:4     - Unknown word (bigendianutf) -- - `bigendianutf32`: Encodes in UTF-
+reference/7.4/Microsoft.PowerShell.Management/Clear-RecycleBin.md:32:17     - Unknown word (readded)    -- This cmdlet was readded in PowerShell 7.
 reference/7.4/Microsoft.PowerShell.Management/Convert-Path.md:135:26    - Unknown word (Normpath)   -- would use **Dirname**, **Normpath**, **Realpath**, **Join
 reference/7.4/Microsoft.PowerShell.Management/Convert-Path.md:135:40    - Unknown word (Realpath)   -- Dirname**, **Normpath**, **Realpath**, **Join**, or other
 reference/7.4/Microsoft.PowerShell.Management/Copy-Item.md:185:32    - Unknown word (scriptingexample) -- Item` cmdlet copies `scriptingexample.ps1` from the `D:\Folder
 reference/7.4/Microsoft.PowerShell.Management/Copy-Item.md:192:33    - Unknown word (scriptingexample) -- = "D:\Folder004\scriptingexample.ps1"
 reference/7.4/Microsoft.PowerShell.Management/Copy-Item.md:193:38    - Unknown word (scriptingexample) -- "C:\Folder004_Copy\scriptingexample_copy.ps1"
+reference/7.4/Microsoft.PowerShell.Management/Copy-Item.md:79:22     - Unknown word (Logfiles)   -- Copy-Item "C:\Wabash\Logfiles\mar1604.log.txt" -Destination
+reference/7.4/Microsoft.PowerShell.Management/Copy-Item.md:84:45     - Unknown word (Logfiles)   -- contents of the `C:\Logfiles` directory into the
+reference/7.4/Microsoft.PowerShell.Management/Copy-Item.md:85:17     - Unknown word (Logfiles)   -- directory. The `Logfiles` directory isn't copied
+reference/7.4/Microsoft.PowerShell.Management/Copy-Item.md:87:9      - Unknown word (Logfiles)   -- If the `Logfiles` directory has files
+reference/7.4/Microsoft.PowerShell.Management/Copy-Item.md:92:21     - Unknown word (Logfiles)   -- Copy-Item -Path "C:\Logfiles\*" -Destination "C:
 reference/7.4/Microsoft.PowerShell.Management/Get-ChildItem.md:159:66    - Unknown word (hiddenfile) -- hidden files such as `hiddenfile.txt` that have a mode
 reference/7.4/Microsoft.PowerShell.Management/Get-Content.md:369:4     - Unknown word (bigendianutf) -- - `bigendianutf32`: Encodes in UTF-
+reference/7.4/Microsoft.PowerShell.Management/Get-Process.md:120:61    - Unknown word (mebibyte)   -- PowerShell, `MB` represents a mebibyte (MiB) multiplier. `
 reference/7.4/Microsoft.PowerShell.Management/Get-Service.md:77:4      - Unknown word (xmlprov)    -- as xmlprov, the Network Provisioning
 reference/7.4/Microsoft.PowerShell.Management/Join-Path.md:258:14    - Unknown word (Realpath)   -- `Normpath`, `Realpath`, `Join`, or other path
 reference/7.4/Microsoft.PowerShell.Management/Join-Path.md:258:2     - Unknown word (Normpath)   -- `Normpath`, `Realpath`, `Join
+reference/7.4/Microsoft.PowerShell.Management/New-Item.md:93:41     - Unknown word (Logfiles)   -- creates a directory named "Logfiles" in the `C:` drive.
+reference/7.4/Microsoft.PowerShell.Management/New-Item.md:97:29     - Unknown word (Logfiles)   -- Item -Path "C:\" -Name "Logfiles" -ItemType "Directory
 reference/7.4/Microsoft.PowerShell.Management/New-Service.md:65:57     - Unknown word (testservice) -- Service -Filter "Name='testservice'"
 reference/7.4/Microsoft.PowerShell.Management/New-Service.md:85:16     - Unknown word (CCLCSWRPWPDTLOCRRC) -- $SDDL = "D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSD
 reference/7.4/Microsoft.PowerShell.Management/New-Service.md:85:44     - Unknown word (CCDCLCSWRPWPDTLOCRSDRCWDWO) -- CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC
 reference/7.4/Microsoft.PowerShell.Management/New-Service.md:85:80     - Unknown word (CCLCSWLOCRRC)               -- SWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC;;;SU)"
+reference/7.4/Microsoft.PowerShell.Management/Rename-Item.md:53:23     - Unknown word (logfiles)   -- Rename-Item -Path "C:\logfiles\daily_file.txt" -NewName
 reference/7.4/Microsoft.PowerShell.Management/Rename-ItemProperty.md:47:54     - Unknown word (oldconfig)  -- SmpApplication` key to "oldconfig".
 reference/7.4/Microsoft.PowerShell.Management/Rename-ItemProperty.md:50:79     - Unknown word (oldconfig)  -- Name config -NewName oldconfig
 reference/7.4/Microsoft.PowerShell.Management/Resolve-Path.md:260:6     - Unknown word (rvpa)       -- - `rvpa`
@@ -1015,15 +1073,22 @@ reference/7.4/Microsoft.PowerShell.Utility/Import-PSSession.md:9:5       - Unkno
 reference/7.4/Microsoft.PowerShell.Utility/Invoke-Expression.md:80:40     - Unknown word (testscript) -- Command "C:\ps-test\testscript.ps1"
 reference/7.4/Microsoft.PowerShell.Utility/Invoke-Expression.md:81:13     - Unknown word (testscript) -- "C:\ps-test\testscript.ps1" | Invoke-Expression
 reference/7.4/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:174:74    - Unknown word (sourcetype) -- table index,host,source,sourcetype,_raw"
+reference/7.4/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:926:75    - Unknown word (redirections) -- resolved URI after any redirections. When you
+reference/7.4/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:965:87    - Unknown word (redirections) -- when present, across redirections.
+reference/7.4/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:987:71    - Unknown word (redirections) -- of the request across redirections.
+reference/7.4/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:1019:71   - Unknown word (redirections) -- of the request across redirections.
 reference/7.4/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:161:21    - Unknown word (jdoe)       -- User = 'jdoe'
 reference/7.4/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:195:44    - Unknown word (docspage)   -- StreamWriter]::new('.\docspage.html', $false, $Response
 reference/7.4/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:266:26    - Unknown word (jdoe)       -- the image data for `jdoe.png` is submitted.
 reference/7.4/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:280:59    - Unknown word (unkownhost) -- Uri "www.microsoft.com/unkownhost"
+reference/7.4/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:958:79    - Unknown word (redirections) -- resolved URI after any redirections. When
+reference/7.4/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:997:87    - Unknown word (redirections) -- when present, across redirections.
 reference/7.4/Microsoft.PowerShell.Utility/Join-String.md:162:2     - Unknown word (parms)      -- $parms = @{
 reference/7.4/Microsoft.PowerShell.Utility/Join-String.md:169:41    - Unknown word (parms)      -- Properties | Join-String @parms
 reference/7.4/Microsoft.PowerShell.Utility/Measure-Object.md:129:20    - Unknown word (serviceyrs) -- Import-Csv D:\test\serviceyrs.csv | Measure-Object
 reference/7.4/Microsoft.PowerShell.Utility/Out-File.md:103:39    - Unknown word (Procs)      -- stored in the variable, `$Procs`. `Out-File` uses the
 reference/7.4/Microsoft.PowerShell.Utility/Out-File.md:105:26    - Unknown word (Procs)      -- process objects in `$Procs` to the file **Process
+reference/7.4/Microsoft.PowerShell.Utility/Out-File.md:155:26    - Unknown word (logfile)    -- $logFile = "$PWD\logfile.txt"
 reference/7.4/Microsoft.PowerShell.Utility/Out-File.md:204:4     - Unknown word (bigendianutf) -- - `bigendianutf32`: Encodes in UTF-
 reference/7.4/Microsoft.PowerShell.Utility/Out-File.md:98:2      - Unknown word (Procs)      -- $Procs = Get-Process
 reference/7.4/Microsoft.PowerShell.Utility/Out-File.md:99:48     - Unknown word (Procs)      -- Process.txt -InputObject $Procs -Encoding ascii -Width
@@ -1076,6 +1141,7 @@ reference/7.4/PSReadLine/About/about_PSReadLine.md:174:4     - Unknown word (api
 reference/7.4/PSReadLine/About/about_PSReadLine.md:211:79    - Unknown word (ysdfayf)     -- AsPlainText) -Secret2 sdv87ysdfayf798hfasd8f7ha # '-Secret
 reference/7.4/PSReadLine/About/about_PSReadLine.md:211:89    - Unknown word (hfasd)       -- Secret2 sdv87ysdfayf798hfasd8f7ha # '-Secret2' has
 reference/7.4/PSReadLine/About/about_PSReadLine.md:252:6     - Unknown word (PGPASS)      -- $Env:PGPASS = gcloud auth print
+reference/7.4/PSReadLine/About/about_PSReadLine_Functions.md:433:13    - Unknown word (Rubout)     -- ### UnixWordRubout
 reference/7.4/PSReadLine/About/about_PSReadLine_Functions.md:560:15    - Unknown word (Begining)   -- ### ViInsertAtBegining
 reference/7.4/PSReadLine/About/about_PSReadLine_Release_Notes.md:101:5     - Unknown word (Autoadjusts) -- - Autoadjusts the size based on the
 reference/7.4/PSReadLine/About/about_PSReadLine_Release_Notes.md:191:61    - Unknown word (apikey)      -- by changing `key` to `apikey` to reduce
@@ -1127,6 +1193,7 @@ reference/7.5/Microsoft.PowerShell.Archive/Compress-Archive.md:225:45    - Unkno
 reference/7.5/Microsoft.PowerShell.Archive/Compress-Archive.md:93:24     - Unknown word (Draftdoc)   -- Path = "C:\Reference\Draftdoc.docx", "C:\Reference
 reference/7.5/Microsoft.PowerShell.Archive/Expand-Archive.md:42:43     - Unknown word (PKWARE)     -- format specification by PKWARE Inc. For more information
 reference/7.5/Microsoft.PowerShell.Archive/Expand-Archive.md:65:22     - Unknown word (Draftv)     -- Expand-Archive -Path Draftv2.zip -DestinationPath
+reference/7.5/Microsoft.PowerShell.Core/About/about_ANSI_Terminals.md:188:42    - Unknown word (predefines)    -- *Extension** member predefines colors for archive and
 reference/7.5/Microsoft.PowerShell.Core/About/about_ANSI_Terminals.md:57:5      - Unknown word (Strikethrough) -- - **Strikethrough** - Turns strike through
 reference/7.5/Microsoft.PowerShell.Core/About/about_ANSI_Terminals.md:58:5      - Unknown word (Strikethrough) -- - **StrikethroughOff** - Turns strike
 reference/7.5/Microsoft.PowerShell.Core/About/about_Alias_Provider.md:142:27    - Unknown word (serv)       -- command creates the `serv` alias for the `Get
@@ -1145,10 +1212,14 @@ reference/7.5/Microsoft.PowerShell.Core/About/about_Case-Sensitivity.md:201:7   
 reference/7.5/Microsoft.PowerShell.Core/About/about_Case-Sensitivity.md:204:12    - Unknown word (csplit)     -- 'Bar' -csplit 'A', 0
 reference/7.5/Microsoft.PowerShell.Core/About/about_Case-Sensitivity.md:207:12    - Unknown word (csplit)     -- 'Bar' -csplit 'A', 0, 'IgnoreCase
 reference/7.5/Microsoft.PowerShell.Core/About/about_Character_Encoding.md:163:4     - Unknown word (bigendianutf) -- - `bigendianutf32`: Encodes in UTF-
+reference/7.5/Microsoft.PowerShell.Core/About/about_Classes.md:128:20    - Unknown word (Secker)      -- Publisher = 'Secker & Warburg'
+reference/7.5/Microsoft.PowerShell.Core/About/about_Classes.md:128:29    - Unknown word (Warburg)     -- Publisher = 'Secker & Warburg'
 reference/7.5/Microsoft.PowerShell.Core/About/about_Classes.md:225:35    - Unknown word (Unwin)       -- = 'George Allen & Unwin'
 reference/7.5/Microsoft.PowerShell.Core/About/about_Classes.md:236:32    - Unknown word (nwhich)      -- Time to read $Book,`nwhich was published $Age years
 reference/7.5/Microsoft.PowerShell.Core/About/about_Classes.md:377:35    - Unknown word (Unwin)       -- = 'George Allen & Unwin'
 reference/7.5/Microsoft.PowerShell.Core/About/about_Classes.md:74:9      - Unknown word (convertable) -- > The `<convertable-value-type>` syntax
+reference/7.5/Microsoft.PowerShell.Core/About/about_Classes_Inheritance.md:429:14    - Unknown word (Pinkney)    -- 'Jerry Pinkney',
+reference/7.5/Microsoft.PowerShell.Core/About/about_Classes_Properties.md:124:24    - Unknown word (Mikey)      -- DisplayName = 'Mikey Lombardi'
 reference/7.5/Microsoft.PowerShell.Core/About/about_Classes_Properties.md:125:24    - Unknown word (michaeltlombardi) -- UserName = 'michaeltlombardi'
 reference/7.5/Microsoft.PowerShell.Core/About/about_Command_Precedence.md:210:16    - Unknown word (Progra)     -- //localhost/c$/Progra~1/PowerShell/7-preview
 reference/7.5/Microsoft.PowerShell.Core/About/about_Command_Precedence.md:219:2     - Unknown word (Progra)     -- /Progra~1/PowerShell/7-preview
@@ -1157,6 +1228,7 @@ reference/7.5/Microsoft.PowerShell.Core/About/about_Command_Syntax.md:172:27    
 reference/7.5/Microsoft.PowerShell.Core/About/about_Command_Syntax.md:185:34    - Unknown word (mycommand)  -- Name MyAlias -Value mycommand.exe
 reference/7.5/Microsoft.PowerShell.Core/About/about_Command_Syntax.md:236:21    - Unknown word (mycommand)  -- New-Alias MyAlias mycommand.exe
 reference/7.5/Microsoft.PowerShell.Core/About/about_Comments.md:141:28    - Unknown word (Netcore)    -- Requires -Modules AzureRM.Netcore
+reference/7.5/Microsoft.PowerShell.Core/About/about_CommonParameters.md:131:1     - Unknown word (catchable)  -- catchable by `try/catch`. For
 reference/7.5/Microsoft.PowerShell.Core/About/about_CommonParameters.md:48:22     - Unknown word (proga)      -- `ProgressAction` (`proga`)
 reference/7.5/Microsoft.PowerShell.Core/About/about_CommonParameters.md:559:10    - Unknown word (proga)      -- Aliases: proga
 reference/7.5/Microsoft.PowerShell.Core/About/about_CommonParameters.md:812:72    - Unknown word (defau)      -- Suspend [?] Help (defau
@@ -1186,6 +1258,11 @@ reference/7.5/Microsoft.PowerShell.Core/About/about_Debuggers.md:509:23    - Unk
 reference/7.5/Microsoft.PowerShell.Core/About/about_Experimental_Features.md:45:16     - Unknown word (experimentname) -- `<modulename>.<experimentname>`. The `ExperimentAction
 reference/7.5/Microsoft.PowerShell.Core/About/about_Experimental_Features.md:45:3      - Unknown word (modulename) -- `<modulename>.<experimentname>`.
 reference/7.5/Microsoft.PowerShell.Core/About/about_Experimental_Features.md:69:31     - Unknown word (PSSSH)          -- Experimental("MyRemoting.PSSSHRemoting", "Show")]
+reference/7.5/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:284:27    - Unknown word (logfiles)   -- command creates the `logfiles` directory on the `C
+reference/7.5/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:287:26    - Unknown word (logfiles)   -- Item -Path C:\ -Name logfiles -Type Directory
+reference/7.5/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:295:53    - Unknown word (logfiles)   -- txt` file in the `C:\logfiles` directory and
+reference/7.5/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:299:19    - Unknown word (logfiles)   -- New-Item -Path C:\logfiles -Name log2.txt -Type
+reference/7.5/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:304:45    - Unknown word (logfiles)   -- log2.txt` in the `C:\logfiles` directory and adds
 reference/7.5/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:418:4     - Unknown word (bigendianutf) -- - `bigendianutf32`: Encodes in UTF-
 reference/7.5/Microsoft.PowerShell.Core/About/about_Functions_Advanced_Parameters.md:669:6     - Unknown word (Dont)       -- #### DontShow argument
 reference/7.5/Microsoft.PowerShell.Core/About/about_Functions_Advanced_Parameters.md:671:6     - Unknown word (Dont)       -- The `DontShow` value is typically
@@ -1224,12 +1301,18 @@ reference/7.5/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:259:6   
 reference/7.5/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:261:4     - Unknown word (usgb)       -- + 1usgb
 reference/7.5/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:263:23    - Unknown word (usgb)       -- The numeric constant 1usgb is not valid.
 reference/7.5/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:268:56    - Unknown word (gbus)       -- invalid syntax like `1gbus` will be
+reference/7.5/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:39:12     - Unknown word (kibibyte)   -- | `kb`   | kibibyte (1024<sup>1</sup>) multiplier
+reference/7.5/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:40:12     - Unknown word (mebibyte)   -- | `mb`   | mebibyte (1024<sup>2</sup>) multiplier
 reference/7.5/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:41:12     - Unknown word (gigibyte)   -- | `gb`   | gigibyte (1024<sup>3</sup>) multiplier
 reference/7.5/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:42:12     - Unknown word (teribyte)   -- | `tb`   | teribyte (1024<sup>4</sup>) multiplier
 reference/7.5/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:43:12     - Unknown word (petibyte)   -- | `pb`   | petibyte (1024<sup>5</sup>) multiplier
+reference/7.5/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:81:12     - Unknown word (kibibyte)   -- | `kb`   | kibibyte (1024<sup>1</sup>) multiplier
+reference/7.5/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:82:12     - Unknown word (mebibyte)   -- | `mb`   | mebibyte (1024<sup>2</sup>) multiplier
 reference/7.5/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:83:12     - Unknown word (gigibyte)   -- | `gb`   | gigibyte (1024<sup>3</sup>) multiplier
 reference/7.5/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:84:12     - Unknown word (teribyte)   -- | `tb`   | teribyte (1024<sup>4</sup>) multiplier
 reference/7.5/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:85:12     - Unknown word (petibyte)   -- | `pb`   | petibyte (1024<sup>5</sup>) multiplier
+reference/7.5/Microsoft.PowerShell.Core/About/about_Operators.md:323:46    - Unknown word (subshell)   -- it asynchronously in subshell as a job.
+reference/7.5/Microsoft.PowerShell.Core/About/about_PSItem.md:113:60    - Unknown word (uppercases) -- the **ForEach** method uppercases the
 reference/7.5/Microsoft.PowerShell.Core/About/about_PSModulePath.md:162:63    - Unknown word (PSMODULEPATH) -- items() if k.upper() != "PSMODULEPATH"}
 reference/7.5/Microsoft.PowerShell.Core/About/about_Parsing.md:130:62    - Unknown word (metacharacters) -- expandable string, except metacharacters
 reference/7.5/Microsoft.PowerShell.Core/About/about_Parsing.md:132:23    - Unknown word (metacharacters) -- - The argument-mode metacharacters (characters with special
@@ -1260,8 +1343,10 @@ reference/7.5/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:929:
 reference/7.5/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:946:23    - Unknown word (hexdump)    -- café' | pwsh -File ./hexdump.ps1
 reference/7.5/Microsoft.PowerShell.Core/About/about_Pwsh.md:333:12    - Unknown word (chsh)       -- - Use the [chsh][04] utility to set
 reference/7.5/Microsoft.PowerShell.Core/About/about_Pwsh.md:337:3     - Unknown word (chsh)       -- chsh -s /usr/bin/pwsh
+reference/7.5/Microsoft.PowerShell.Core/About/about_Pwsh.md:361:24    - Unknown word (noni)       -- -NonInteractive | -noni
 reference/7.5/Microsoft.PowerShell.Core/About/about_Pwsh.md:397:33    - Unknown word (myproject)  -- pwsh -SettingsFile C:\myproject\powershell.config.json
 reference/7.5/Microsoft.PowerShell.Core/About/about_Pwsh.md:399:23    - Unknown word (sshs)       -- # -SSHServerMode | -sshs
+reference/7.5/Microsoft.PowerShell.Core/About/about_Pwsh.md:5:268     - Unknown word (noni)       -- nol, -NonInteractive, -noni, -NoProfile, -nop,
 reference/7.5/Microsoft.PowerShell.Core/About/about_Pwsh.md:5:359     - Unknown word (sshs)       -- settings, -SSHServerMode, -sshs, -STA, -Version, -v
 reference/7.5/Microsoft.PowerShell.Core/About/about_Redirection.md:238:24    - Unknown word (xzvf)       -- curl -s -L $uri | tar -xzvf - -C .
 reference/7.5/Microsoft.PowerShell.Core/About/about_Redirection.md:247:41    - Unknown word (xzvf)       -- uri).Content | tar -xzvf - -C .
@@ -1321,6 +1406,7 @@ reference/7.5/Microsoft.PowerShell.Core/About/about_Split.md:98:2      - Unknown
 reference/7.5/Microsoft.PowerShell.Core/About/about_Split.md:99:1      - Unknown word (Lastname)   -- Lastname
 reference/7.5/Microsoft.PowerShell.Core/About/about_Tab_Expansion.md:67:30     - Unknown word (psdf)       -- functions. For example, `i-psdf<tab>` returns `Import
 reference/7.5/Microsoft.PowerShell.Core/About/about_Tab_Expansion.md:96:28     - Unknown word (actsetup)   -- Get-Content C:\windows\actsetup.log
+reference/7.5/Microsoft.PowerShell.Core/About/about_Telemetry.md:42:4      - Unknown word (Geolocation) -- > [Geolocation and IP address handling
 reference/7.5/Microsoft.PowerShell.Core/About/about_Type_Accelerators.md:107:3     - Unknown word (mailaddress)         -- | mailaddress |
 reference/7.5/Microsoft.PowerShell.Core/About/about_Type_Accelerators.md:116:3     - Unknown word (psaliasproperty)     -- | psaliasproperty | [System
 reference/7.5/Microsoft.PowerShell.Core/About/about_Type_Accelerators.md:120:3     - Unknown word (pslistmodifier)      -- | pslistmodifier | [System
@@ -1434,20 +1520,30 @@ reference/7.5/Microsoft.PowerShell.Diagnostics/Get-WinEvent.md:571:44    - Unkno
 reference/7.5/Microsoft.PowerShell.Diagnostics/Get-WinEvent.md:604:3     - Unknown word (Logname)    -- Logname='Application'
 reference/7.5/Microsoft.PowerShell.Diagnostics/New-WinEvent.md:92:16     - Unknown word (Elasped)    -- to the **PolicyElaspedTimeInSeconds** field
 reference/7.5/Microsoft.PowerShell.Management/Add-Content.md:228:4     - Unknown word (bigendianutf) -- - `bigendianutf32`: Encodes in UTF-
+reference/7.5/Microsoft.PowerShell.Management/Clear-RecycleBin.md:32:17     - Unknown word (readded)    -- This cmdlet was readded in PowerShell 7.
 reference/7.5/Microsoft.PowerShell.Management/Convert-Path.md:184:26    - Unknown word (Normpath)   -- would use **Dirname**, **Normpath**, **Realpath**, **Join
 reference/7.5/Microsoft.PowerShell.Management/Convert-Path.md:184:40    - Unknown word (Realpath)   -- Dirname**, **Normpath**, **Realpath**, **Join**, or other
 reference/7.5/Microsoft.PowerShell.Management/Copy-Item.md:185:32    - Unknown word (scriptingexample) -- Item` cmdlet copies `scriptingexample.ps1` from the `D:\Folder
 reference/7.5/Microsoft.PowerShell.Management/Copy-Item.md:192:33    - Unknown word (scriptingexample) -- = "D:\Folder004\scriptingexample.ps1"
 reference/7.5/Microsoft.PowerShell.Management/Copy-Item.md:193:38    - Unknown word (scriptingexample) -- "C:\Folder004_Copy\scriptingexample_copy.ps1"
+reference/7.5/Microsoft.PowerShell.Management/Copy-Item.md:79:22     - Unknown word (Logfiles)   -- Copy-Item "C:\Wabash\Logfiles\mar1604.log.txt" -Destination
+reference/7.5/Microsoft.PowerShell.Management/Copy-Item.md:84:45     - Unknown word (Logfiles)   -- contents of the `C:\Logfiles` directory into the
+reference/7.5/Microsoft.PowerShell.Management/Copy-Item.md:85:17     - Unknown word (Logfiles)   -- directory. The `Logfiles` directory isn't copied
+reference/7.5/Microsoft.PowerShell.Management/Copy-Item.md:87:9      - Unknown word (Logfiles)   -- If the `Logfiles` directory has files
+reference/7.5/Microsoft.PowerShell.Management/Copy-Item.md:92:21     - Unknown word (Logfiles)   -- Copy-Item -Path "C:\Logfiles\*" -Destination "C:
 reference/7.5/Microsoft.PowerShell.Management/Get-ChildItem.md:159:66    - Unknown word (hiddenfile) -- hidden files such as `hiddenfile.txt` that have a mode
 reference/7.5/Microsoft.PowerShell.Management/Get-Content.md:369:4     - Unknown word (bigendianutf) -- - `bigendianutf32`: Encodes in UTF-
+reference/7.5/Microsoft.PowerShell.Management/Get-Process.md:120:61    - Unknown word (mebibyte)   -- PowerShell, `MB` represents a mebibyte (MiB) multiplier. `
 reference/7.5/Microsoft.PowerShell.Management/Get-Service.md:77:4      - Unknown word (xmlprov)    -- as xmlprov, the Network Provisioning
 reference/7.5/Microsoft.PowerShell.Management/Join-Path.md:258:14    - Unknown word (Realpath)   -- `Normpath`, `Realpath`, `Join`, or other path
 reference/7.5/Microsoft.PowerShell.Management/Join-Path.md:258:2     - Unknown word (Normpath)   -- `Normpath`, `Realpath`, `Join
+reference/7.5/Microsoft.PowerShell.Management/New-Item.md:93:41     - Unknown word (Logfiles)   -- creates a directory named "Logfiles" in the `C:` drive.
+reference/7.5/Microsoft.PowerShell.Management/New-Item.md:97:29     - Unknown word (Logfiles)   -- Item -Path "C:\" -Name "Logfiles" -ItemType "Directory
 reference/7.5/Microsoft.PowerShell.Management/New-Service.md:65:57     - Unknown word (testservice) -- Service -Filter "Name='testservice'"
 reference/7.5/Microsoft.PowerShell.Management/New-Service.md:85:16     - Unknown word (CCLCSWRPWPDTLOCRRC) -- $SDDL = "D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSD
 reference/7.5/Microsoft.PowerShell.Management/New-Service.md:85:44     - Unknown word (CCDCLCSWRPWPDTLOCRSDRCWDWO) -- CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC
 reference/7.5/Microsoft.PowerShell.Management/New-Service.md:85:80     - Unknown word (CCLCSWLOCRRC)               -- SWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC;;;SU)"
+reference/7.5/Microsoft.PowerShell.Management/Rename-Item.md:53:23     - Unknown word (logfiles)   -- Rename-Item -Path "C:\logfiles\daily_file.txt" -NewName
 reference/7.5/Microsoft.PowerShell.Management/Rename-ItemProperty.md:47:54     - Unknown word (oldconfig)  -- SmpApplication` key to "oldconfig".
 reference/7.5/Microsoft.PowerShell.Management/Rename-ItemProperty.md:50:79     - Unknown word (oldconfig)  -- Name config -NewName oldconfig
 reference/7.5/Microsoft.PowerShell.Management/Resolve-Path.md:315:6     - Unknown word (rvpa)       -- - `rvpa`
@@ -1525,15 +1621,22 @@ reference/7.5/Microsoft.PowerShell.Utility/Import-PSSession.md:9:5       - Unkno
 reference/7.5/Microsoft.PowerShell.Utility/Invoke-Expression.md:80:40     - Unknown word (testscript) -- Command "C:\ps-test\testscript.ps1"
 reference/7.5/Microsoft.PowerShell.Utility/Invoke-Expression.md:81:13     - Unknown word (testscript) -- "C:\ps-test\testscript.ps1" | Invoke-Expression
 reference/7.5/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:171:74    - Unknown word (sourcetype) -- table index,host,source,sourcetype,_raw"
+reference/7.5/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:923:75    - Unknown word (redirections) -- resolved URI after any redirections. When you
+reference/7.5/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:957:87    - Unknown word (redirections) -- when present, across redirections.
+reference/7.5/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:979:71    - Unknown word (redirections) -- of the request across redirections.
+reference/7.5/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:1014:71   - Unknown word (redirections) -- of the request across redirections.
 reference/7.5/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:161:21    - Unknown word (jdoe)       -- User = 'jdoe'
 reference/7.5/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:195:44    - Unknown word (docspage)   -- StreamWriter]::new('.\docspage.html', $false, $Response
 reference/7.5/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:266:26    - Unknown word (jdoe)       -- the image data for `jdoe.png` is submitted.
 reference/7.5/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:280:59    - Unknown word (unkownhost) -- Uri "www.microsoft.com/unkownhost"
+reference/7.5/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:958:79    - Unknown word (redirections) -- resolved URI after any redirections. When
+reference/7.5/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:992:87    - Unknown word (redirections) -- when present, across redirections.
 reference/7.5/Microsoft.PowerShell.Utility/Join-String.md:162:2     - Unknown word (parms)      -- $parms = @{
 reference/7.5/Microsoft.PowerShell.Utility/Join-String.md:169:41    - Unknown word (parms)      -- Properties | Join-String @parms
 reference/7.5/Microsoft.PowerShell.Utility/Measure-Object.md:129:20    - Unknown word (serviceyrs) -- Import-Csv D:\test\serviceyrs.csv | Measure-Object
 reference/7.5/Microsoft.PowerShell.Utility/Out-File.md:103:39    - Unknown word (Procs)      -- stored in the variable, `$Procs`. `Out-File` uses the
 reference/7.5/Microsoft.PowerShell.Utility/Out-File.md:105:26    - Unknown word (Procs)      -- process objects in `$Procs` to the file **Process
+reference/7.5/Microsoft.PowerShell.Utility/Out-File.md:155:26    - Unknown word (logfile)    -- $logFile = "$PWD\logfile.txt"
 reference/7.5/Microsoft.PowerShell.Utility/Out-File.md:204:4     - Unknown word (bigendianutf) -- - `bigendianutf32`: Encodes in UTF-
 reference/7.5/Microsoft.PowerShell.Utility/Out-File.md:98:2      - Unknown word (Procs)      -- $Procs = Get-Process
 reference/7.5/Microsoft.PowerShell.Utility/Out-File.md:99:48     - Unknown word (Procs)      -- Process.txt -InputObject $Procs -Encoding ascii -Width
@@ -1586,6 +1689,7 @@ reference/7.5/PSReadLine/About/about_PSReadLine.md:174:4     - Unknown word (api
 reference/7.5/PSReadLine/About/about_PSReadLine.md:211:79    - Unknown word (ysdfayf)     -- AsPlainText) -Secret2 sdv87ysdfayf798hfasd8f7ha # '-Secret
 reference/7.5/PSReadLine/About/about_PSReadLine.md:211:89    - Unknown word (hfasd)       -- Secret2 sdv87ysdfayf798hfasd8f7ha # '-Secret2' has
 reference/7.5/PSReadLine/About/about_PSReadLine.md:252:6     - Unknown word (PGPASS)      -- $Env:PGPASS = gcloud auth print
+reference/7.5/PSReadLine/About/about_PSReadLine_Functions.md:433:13    - Unknown word (Rubout)     -- ### UnixWordRubout
 reference/7.5/PSReadLine/About/about_PSReadLine_Functions.md:560:15    - Unknown word (Begining)   -- ### ViInsertAtBegining
 reference/7.5/PSReadLine/About/about_PSReadLine_Release_Notes.md:101:5     - Unknown word (Autoadjusts) -- - Autoadjusts the size based on the
 reference/7.5/PSReadLine/About/about_PSReadLine_Release_Notes.md:191:61    - Unknown word (apikey)      -- by changing `key` to `apikey` to reduce
@@ -1637,6 +1741,7 @@ reference/7.6/Microsoft.PowerShell.Archive/Compress-Archive.md:225:45    - Unkno
 reference/7.6/Microsoft.PowerShell.Archive/Compress-Archive.md:93:24     - Unknown word (Draftdoc)   -- Path = "C:\Reference\Draftdoc.docx", "C:\Reference
 reference/7.6/Microsoft.PowerShell.Archive/Expand-Archive.md:42:43     - Unknown word (PKWARE)     -- format specification by PKWARE Inc. For more information
 reference/7.6/Microsoft.PowerShell.Archive/Expand-Archive.md:65:22     - Unknown word (Draftv)     -- Expand-Archive -Path Draftv2.zip -DestinationPath
+reference/7.6/Microsoft.PowerShell.Core/About/about_ANSI_Terminals.md:188:42    - Unknown word (predefines)    -- *Extension** member predefines colors for archive and
 reference/7.6/Microsoft.PowerShell.Core/About/about_ANSI_Terminals.md:57:5      - Unknown word (Strikethrough) -- - **Strikethrough** - Turns strike through
 reference/7.6/Microsoft.PowerShell.Core/About/about_ANSI_Terminals.md:58:5      - Unknown word (Strikethrough) -- - **StrikethroughOff** - Turns strike
 reference/7.6/Microsoft.PowerShell.Core/About/about_Alias_Provider.md:142:27    - Unknown word (serv)       -- command creates the `serv` alias for the `Get
@@ -1655,10 +1760,14 @@ reference/7.6/Microsoft.PowerShell.Core/About/about_Case-Sensitivity.md:201:7   
 reference/7.6/Microsoft.PowerShell.Core/About/about_Case-Sensitivity.md:204:12    - Unknown word (csplit)     -- 'Bar' -csplit 'A', 0
 reference/7.6/Microsoft.PowerShell.Core/About/about_Case-Sensitivity.md:207:12    - Unknown word (csplit)     -- 'Bar' -csplit 'A', 0, 'IgnoreCase
 reference/7.6/Microsoft.PowerShell.Core/About/about_Character_Encoding.md:163:4     - Unknown word (bigendianutf) -- - `bigendianutf32`: Encodes in UTF-
+reference/7.6/Microsoft.PowerShell.Core/About/about_Classes.md:128:20    - Unknown word (Secker)      -- Publisher = 'Secker & Warburg'
+reference/7.6/Microsoft.PowerShell.Core/About/about_Classes.md:128:29    - Unknown word (Warburg)     -- Publisher = 'Secker & Warburg'
 reference/7.6/Microsoft.PowerShell.Core/About/about_Classes.md:225:35    - Unknown word (Unwin)       -- = 'George Allen & Unwin'
 reference/7.6/Microsoft.PowerShell.Core/About/about_Classes.md:236:32    - Unknown word (nwhich)      -- Time to read $Book,`nwhich was published $Age years
 reference/7.6/Microsoft.PowerShell.Core/About/about_Classes.md:377:35    - Unknown word (Unwin)       -- = 'George Allen & Unwin'
 reference/7.6/Microsoft.PowerShell.Core/About/about_Classes.md:74:9      - Unknown word (convertable) -- > The `<convertable-value-type>` syntax
+reference/7.6/Microsoft.PowerShell.Core/About/about_Classes_Inheritance.md:429:14    - Unknown word (Pinkney)    -- 'Jerry Pinkney',
+reference/7.6/Microsoft.PowerShell.Core/About/about_Classes_Properties.md:124:24    - Unknown word (Mikey)      -- DisplayName = 'Mikey Lombardi'
 reference/7.6/Microsoft.PowerShell.Core/About/about_Classes_Properties.md:125:24    - Unknown word (michaeltlombardi) -- UserName = 'michaeltlombardi'
 reference/7.6/Microsoft.PowerShell.Core/About/about_Command_Precedence.md:210:16    - Unknown word (Progra)     -- //localhost/c$/Progra~1/PowerShell/7-preview
 reference/7.6/Microsoft.PowerShell.Core/About/about_Command_Precedence.md:219:2     - Unknown word (Progra)     -- /Progra~1/PowerShell/7-preview
@@ -1667,6 +1776,7 @@ reference/7.6/Microsoft.PowerShell.Core/About/about_Command_Syntax.md:172:27    
 reference/7.6/Microsoft.PowerShell.Core/About/about_Command_Syntax.md:185:34    - Unknown word (mycommand)  -- Name MyAlias -Value mycommand.exe
 reference/7.6/Microsoft.PowerShell.Core/About/about_Command_Syntax.md:236:21    - Unknown word (mycommand)  -- New-Alias MyAlias mycommand.exe
 reference/7.6/Microsoft.PowerShell.Core/About/about_Comments.md:141:28    - Unknown word (Netcore)    -- Requires -Modules AzureRM.Netcore
+reference/7.6/Microsoft.PowerShell.Core/About/about_CommonParameters.md:131:1     - Unknown word (catchable)  -- catchable by `try/catch`. For
 reference/7.6/Microsoft.PowerShell.Core/About/about_CommonParameters.md:48:22     - Unknown word (proga)      -- `ProgressAction` (`proga`)
 reference/7.6/Microsoft.PowerShell.Core/About/about_CommonParameters.md:559:10    - Unknown word (proga)      -- Aliases: proga
 reference/7.6/Microsoft.PowerShell.Core/About/about_CommonParameters.md:812:72    - Unknown word (defau)      -- Suspend [?] Help (defau
@@ -1695,10 +1805,16 @@ reference/7.6/Microsoft.PowerShell.Core/About/about_Debuggers.md:503:43    - Unk
 reference/7.6/Microsoft.PowerShell.Core/About/about_Debuggers.md:509:23    - Unknown word (scriptname) -- PS C:\ps-test> sbp -V scriptname -S test.ps1
 reference/7.6/Microsoft.PowerShell.Core/About/about_Environment_Variables.md:23:27     - Unknown word (OPTOUT)     -- POWERSHELL_DIAGNOSTICS_OPTOUT`
 reference/7.6/Microsoft.PowerShell.Core/About/about_Environment_Variables.md:417:27    - Unknown word (OPTOUT)     -- POWERSHELL_DIAGNOSTICS_OPTOUT`
-reference/7.6/Microsoft.PowerShell.Core/About/about_Environment_Variables.md:428:56    - Unknown word (OPTOUT)     -- POWERSHELL_DIAGNOSTICS_OPTOUT` is set to
+reference/7.6/Microsoft.PowerShell.Core/About/about_Environment_Variables.md:420:52    - Unknown word (Interprocess) -- pipe that is uses for Interprocess Communication
+reference/7.6/Microsoft.PowerShell.Core/About/about_Environment_Variables.md:428:56    - Unknown word (OPTOUT)       -- POWERSHELL_DIAGNOSTICS_OPTOUT` is set to
 reference/7.6/Microsoft.PowerShell.Core/About/about_Experimental_Features.md:45:16     - Unknown word (experimentname) -- `<modulename>.<experimentname>`. The `ExperimentAction
 reference/7.6/Microsoft.PowerShell.Core/About/about_Experimental_Features.md:45:3      - Unknown word (modulename) -- `<modulename>.<experimentname>`.
 reference/7.6/Microsoft.PowerShell.Core/About/about_Experimental_Features.md:69:31     - Unknown word (PSSSH)          -- Experimental("MyRemoting.PSSSHRemoting", "Show")]
+reference/7.6/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:284:27    - Unknown word (logfiles)   -- command creates the `logfiles` directory on the `C
+reference/7.6/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:287:26    - Unknown word (logfiles)   -- Item -Path C:\ -Name logfiles -Type Directory
+reference/7.6/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:295:53    - Unknown word (logfiles)   -- txt` file in the `C:\logfiles` directory and
+reference/7.6/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:299:19    - Unknown word (logfiles)   -- New-Item -Path C:\logfiles -Name log2.txt -Type
+reference/7.6/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:304:45    - Unknown word (logfiles)   -- log2.txt` in the `C:\logfiles` directory and adds
 reference/7.6/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:418:4     - Unknown word (bigendianutf) -- - `bigendianutf32`: Encodes in UTF-
 reference/7.6/Microsoft.PowerShell.Core/About/about_Functions_Advanced.md:72:4      - Unknown word (PIPELINESTOPTOKEN) -- ## PIPELINESTOPTOKEN
 reference/7.6/Microsoft.PowerShell.Core/About/about_Functions_Advanced_Parameters.md:669:6     - Unknown word (Dont)       -- #### DontShow argument
@@ -1738,12 +1854,18 @@ reference/7.6/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:259:6   
 reference/7.6/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:261:4     - Unknown word (usgb)       -- + 1usgb
 reference/7.6/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:263:23    - Unknown word (usgb)       -- The numeric constant 1usgb is not valid.
 reference/7.6/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:268:56    - Unknown word (gbus)       -- invalid syntax like `1gbus` will be
+reference/7.6/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:39:12     - Unknown word (kibibyte)   -- | `kb`   | kibibyte (1024<sup>1</sup>) multiplier
+reference/7.6/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:40:12     - Unknown word (mebibyte)   -- | `mb`   | mebibyte (1024<sup>2</sup>) multiplier
 reference/7.6/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:41:12     - Unknown word (gigibyte)   -- | `gb`   | gigibyte (1024<sup>3</sup>) multiplier
 reference/7.6/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:42:12     - Unknown word (teribyte)   -- | `tb`   | teribyte (1024<sup>4</sup>) multiplier
 reference/7.6/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:43:12     - Unknown word (petibyte)   -- | `pb`   | petibyte (1024<sup>5</sup>) multiplier
+reference/7.6/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:81:12     - Unknown word (kibibyte)   -- | `kb`   | kibibyte (1024<sup>1</sup>) multiplier
+reference/7.6/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:82:12     - Unknown word (mebibyte)   -- | `mb`   | mebibyte (1024<sup>2</sup>) multiplier
 reference/7.6/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:83:12     - Unknown word (gigibyte)   -- | `gb`   | gigibyte (1024<sup>3</sup>) multiplier
 reference/7.6/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:84:12     - Unknown word (teribyte)   -- | `tb`   | teribyte (1024<sup>4</sup>) multiplier
 reference/7.6/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:85:12     - Unknown word (petibyte)   -- | `pb`   | petibyte (1024<sup>5</sup>) multiplier
+reference/7.6/Microsoft.PowerShell.Core/About/about_Operators.md:323:46    - Unknown word (subshell)   -- it asynchronously in subshell as a job.
+reference/7.6/Microsoft.PowerShell.Core/About/about_PSItem.md:113:60    - Unknown word (uppercases) -- the **ForEach** method uppercases the
 reference/7.6/Microsoft.PowerShell.Core/About/about_PSModulePath.md:162:63    - Unknown word (PSMODULEPATH) -- items() if k.upper() != "PSMODULEPATH"}
 reference/7.6/Microsoft.PowerShell.Core/About/about_Parsing.md:130:62    - Unknown word (metacharacters) -- expandable string, except metacharacters
 reference/7.6/Microsoft.PowerShell.Core/About/about_Parsing.md:132:23    - Unknown word (metacharacters) -- - The argument-mode metacharacters (characters with special
@@ -1774,8 +1896,10 @@ reference/7.6/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:929:
 reference/7.6/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:946:23    - Unknown word (hexdump)    -- café' | pwsh -File ./hexdump.ps1
 reference/7.6/Microsoft.PowerShell.Core/About/about_Pwsh.md:333:12    - Unknown word (chsh)       -- - Use the [chsh][04] utility to set
 reference/7.6/Microsoft.PowerShell.Core/About/about_Pwsh.md:337:3     - Unknown word (chsh)       -- chsh -s /usr/bin/pwsh
+reference/7.6/Microsoft.PowerShell.Core/About/about_Pwsh.md:361:24    - Unknown word (noni)       -- -NonInteractive | -noni
 reference/7.6/Microsoft.PowerShell.Core/About/about_Pwsh.md:397:33    - Unknown word (myproject)  -- pwsh -SettingsFile C:\myproject\powershell.config.json
 reference/7.6/Microsoft.PowerShell.Core/About/about_Pwsh.md:399:23    - Unknown word (sshs)       -- # -SSHServerMode | -sshs
+reference/7.6/Microsoft.PowerShell.Core/About/about_Pwsh.md:5:268     - Unknown word (noni)       -- nol, -NonInteractive, -noni, -NoProfile, -nop,
 reference/7.6/Microsoft.PowerShell.Core/About/about_Pwsh.md:5:359     - Unknown word (sshs)       -- settings, -SSHServerMode, -sshs, -STA, -Version, -v
 reference/7.6/Microsoft.PowerShell.Core/About/about_Redirection.md:238:24    - Unknown word (xzvf)       -- curl -s -L $uri | tar -xzvf - -C .
 reference/7.6/Microsoft.PowerShell.Core/About/about_Redirection.md:247:41    - Unknown word (xzvf)       -- uri).Content | tar -xzvf - -C .
@@ -1835,6 +1959,7 @@ reference/7.6/Microsoft.PowerShell.Core/About/about_Split.md:98:2      - Unknown
 reference/7.6/Microsoft.PowerShell.Core/About/about_Split.md:99:1      - Unknown word (Lastname)   -- Lastname
 reference/7.6/Microsoft.PowerShell.Core/About/about_Tab_Expansion.md:67:30     - Unknown word (psdf)       -- functions. For example, `i-psdf<tab>` returns `Import
 reference/7.6/Microsoft.PowerShell.Core/About/about_Tab_Expansion.md:96:28     - Unknown word (actsetup)   -- Get-Content C:\windows\actsetup.log
+reference/7.6/Microsoft.PowerShell.Core/About/about_Telemetry.md:43:4      - Unknown word (Geolocation) -- > [Geolocation and IP address handling
 reference/7.6/Microsoft.PowerShell.Core/About/about_Type_Accelerators.md:107:3     - Unknown word (mailaddress)         -- | mailaddress |
 reference/7.6/Microsoft.PowerShell.Core/About/about_Type_Accelerators.md:116:3     - Unknown word (psaliasproperty)     -- | psaliasproperty | [System
 reference/7.6/Microsoft.PowerShell.Core/About/about_Type_Accelerators.md:120:3     - Unknown word (pslistmodifier)      -- | pslistmodifier | [System
@@ -1948,20 +2073,30 @@ reference/7.6/Microsoft.PowerShell.Diagnostics/Get-WinEvent.md:571:44    - Unkno
 reference/7.6/Microsoft.PowerShell.Diagnostics/Get-WinEvent.md:604:3     - Unknown word (Logname)    -- Logname='Application'
 reference/7.6/Microsoft.PowerShell.Diagnostics/New-WinEvent.md:92:16     - Unknown word (Elasped)    -- to the **PolicyElaspedTimeInSeconds** field
 reference/7.6/Microsoft.PowerShell.Management/Add-Content.md:228:4     - Unknown word (bigendianutf) -- - `bigendianutf32`: Encodes in UTF-
+reference/7.6/Microsoft.PowerShell.Management/Clear-RecycleBin.md:32:17     - Unknown word (readded)    -- This cmdlet was readded in PowerShell 7.
 reference/7.6/Microsoft.PowerShell.Management/Convert-Path.md:184:26    - Unknown word (Normpath)   -- would use **Dirname**, **Normpath**, **Realpath**, **Join
 reference/7.6/Microsoft.PowerShell.Management/Convert-Path.md:184:40    - Unknown word (Realpath)   -- Dirname**, **Normpath**, **Realpath**, **Join**, or other
 reference/7.6/Microsoft.PowerShell.Management/Copy-Item.md:185:32    - Unknown word (scriptingexample) -- Item` cmdlet copies `scriptingexample.ps1` from the `D:\Folder
 reference/7.6/Microsoft.PowerShell.Management/Copy-Item.md:192:33    - Unknown word (scriptingexample) -- = "D:\Folder004\scriptingexample.ps1"
 reference/7.6/Microsoft.PowerShell.Management/Copy-Item.md:193:38    - Unknown word (scriptingexample) -- "C:\Folder004_Copy\scriptingexample_copy.ps1"
+reference/7.6/Microsoft.PowerShell.Management/Copy-Item.md:79:22     - Unknown word (Logfiles)   -- Copy-Item "C:\Wabash\Logfiles\mar1604.log.txt" -Destination
+reference/7.6/Microsoft.PowerShell.Management/Copy-Item.md:84:45     - Unknown word (Logfiles)   -- contents of the `C:\Logfiles` directory into the
+reference/7.6/Microsoft.PowerShell.Management/Copy-Item.md:85:17     - Unknown word (Logfiles)   -- directory. The `Logfiles` directory isn't copied
+reference/7.6/Microsoft.PowerShell.Management/Copy-Item.md:87:9      - Unknown word (Logfiles)   -- If the `Logfiles` directory has files
+reference/7.6/Microsoft.PowerShell.Management/Copy-Item.md:92:21     - Unknown word (Logfiles)   -- Copy-Item -Path "C:\Logfiles\*" -Destination "C:
 reference/7.6/Microsoft.PowerShell.Management/Get-ChildItem.md:159:66    - Unknown word (hiddenfile) -- hidden files such as `hiddenfile.txt` that have a mode
 reference/7.6/Microsoft.PowerShell.Management/Get-Content.md:369:4     - Unknown word (bigendianutf) -- - `bigendianutf32`: Encodes in UTF-
+reference/7.6/Microsoft.PowerShell.Management/Get-Process.md:120:61    - Unknown word (mebibyte)   -- PowerShell, `MB` represents a mebibyte (MiB) multiplier. `
 reference/7.6/Microsoft.PowerShell.Management/Get-Service.md:77:4      - Unknown word (xmlprov)    -- as xmlprov, the Network Provisioning
 reference/7.6/Microsoft.PowerShell.Management/Join-Path.md:274:14    - Unknown word (Realpath)   -- `Normpath`, `Realpath`, `Join`, or other path
 reference/7.6/Microsoft.PowerShell.Management/Join-Path.md:274:2     - Unknown word (Normpath)   -- `Normpath`, `Realpath`, `Join
+reference/7.6/Microsoft.PowerShell.Management/New-Item.md:93:41     - Unknown word (Logfiles)   -- creates a directory named "Logfiles" in the `C:` drive.
+reference/7.6/Microsoft.PowerShell.Management/New-Item.md:97:29     - Unknown word (Logfiles)   -- Item -Path "C:\" -Name "Logfiles" -ItemType "Directory
 reference/7.6/Microsoft.PowerShell.Management/New-Service.md:65:57     - Unknown word (testservice) -- Service -Filter "Name='testservice'"
 reference/7.6/Microsoft.PowerShell.Management/New-Service.md:85:16     - Unknown word (CCLCSWRPWPDTLOCRRC) -- $SDDL = "D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSD
 reference/7.6/Microsoft.PowerShell.Management/New-Service.md:85:44     - Unknown word (CCDCLCSWRPWPDTLOCRSDRCWDWO) -- CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC
 reference/7.6/Microsoft.PowerShell.Management/New-Service.md:85:80     - Unknown word (CCLCSWLOCRRC)               -- SWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC;;;SU)"
+reference/7.6/Microsoft.PowerShell.Management/Rename-Item.md:53:23     - Unknown word (logfiles)   -- Rename-Item -Path "C:\logfiles\daily_file.txt" -NewName
 reference/7.6/Microsoft.PowerShell.Management/Rename-ItemProperty.md:47:54     - Unknown word (oldconfig)  -- SmpApplication` key to "oldconfig".
 reference/7.6/Microsoft.PowerShell.Management/Rename-ItemProperty.md:50:79     - Unknown word (oldconfig)  -- Name config -NewName oldconfig
 reference/7.6/Microsoft.PowerShell.Management/Resolve-Path.md:315:6     - Unknown word (rvpa)       -- - `rvpa`
@@ -2038,15 +2173,22 @@ reference/7.6/Microsoft.PowerShell.Utility/Import-PSSession.md:9:5       - Unkno
 reference/7.6/Microsoft.PowerShell.Utility/Invoke-Expression.md:80:40     - Unknown word (testscript) -- Command "C:\ps-test\testscript.ps1"
 reference/7.6/Microsoft.PowerShell.Utility/Invoke-Expression.md:81:13     - Unknown word (testscript) -- "C:\ps-test\testscript.ps1" | Invoke-Expression
 reference/7.6/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:174:74    - Unknown word (sourcetype) -- table index,host,source,sourcetype,_raw"
+reference/7.6/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:926:75    - Unknown word (redirections) -- resolved URI after any redirections. When you
+reference/7.6/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:960:87    - Unknown word (redirections) -- when present, across redirections.
+reference/7.6/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:982:71    - Unknown word (redirections) -- of the request across redirections.
+reference/7.6/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:1014:71   - Unknown word (redirections) -- of the request across redirections.
 reference/7.6/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:161:21    - Unknown word (jdoe)       -- User = 'jdoe'
 reference/7.6/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:195:44    - Unknown word (docspage)   -- StreamWriter]::new('.\docspage.html', $false, $Response
 reference/7.6/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:266:26    - Unknown word (jdoe)       -- the image data for `jdoe.png` is submitted.
 reference/7.6/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:280:59    - Unknown word (unkownhost) -- Uri "www.microsoft.com/unkownhost"
+reference/7.6/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:958:79    - Unknown word (redirections) -- resolved URI after any redirections. When
+reference/7.6/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:992:87    - Unknown word (redirections) -- when present, across redirections.
 reference/7.6/Microsoft.PowerShell.Utility/Join-String.md:162:2     - Unknown word (parms)      -- $parms = @{
 reference/7.6/Microsoft.PowerShell.Utility/Join-String.md:169:41    - Unknown word (parms)      -- Properties | Join-String @parms
 reference/7.6/Microsoft.PowerShell.Utility/Measure-Object.md:129:20    - Unknown word (serviceyrs) -- Import-Csv D:\test\serviceyrs.csv | Measure-Object
 reference/7.6/Microsoft.PowerShell.Utility/Out-File.md:103:39    - Unknown word (Procs)      -- stored in the variable, `$Procs`. `Out-File` uses the
 reference/7.6/Microsoft.PowerShell.Utility/Out-File.md:105:26    - Unknown word (Procs)      -- process objects in `$Procs` to the file **Process
+reference/7.6/Microsoft.PowerShell.Utility/Out-File.md:155:26    - Unknown word (logfile)    -- $logFile = "$PWD\logfile.txt"
 reference/7.6/Microsoft.PowerShell.Utility/Out-File.md:204:4     - Unknown word (bigendianutf) -- - `bigendianutf32`: Encodes in UTF-
 reference/7.6/Microsoft.PowerShell.Utility/Out-File.md:98:2      - Unknown word (Procs)      -- $Procs = Get-Process
 reference/7.6/Microsoft.PowerShell.Utility/Out-File.md:99:48     - Unknown word (Procs)      -- Process.txt -InputObject $Procs -Encoding ascii -Width
@@ -2099,6 +2241,7 @@ reference/7.6/PSReadLine/About/about_PSReadLine.md:174:4     - Unknown word (api
 reference/7.6/PSReadLine/About/about_PSReadLine.md:211:79    - Unknown word (ysdfayf)     -- AsPlainText) -Secret2 sdv87ysdfayf798hfasd8f7ha # '-Secret
 reference/7.6/PSReadLine/About/about_PSReadLine.md:211:89    - Unknown word (hfasd)       -- Secret2 sdv87ysdfayf798hfasd8f7ha # '-Secret2' has
 reference/7.6/PSReadLine/About/about_PSReadLine.md:252:6     - Unknown word (PGPASS)      -- $Env:PGPASS = gcloud auth print
+reference/7.6/PSReadLine/About/about_PSReadLine_Functions.md:433:13    - Unknown word (Rubout)     -- ### UnixWordRubout
 reference/7.6/PSReadLine/About/about_PSReadLine_Functions.md:560:15    - Unknown word (Begining)   -- ### ViInsertAtBegining
 reference/7.6/PSReadLine/About/about_PSReadLine_Release_Notes.md:108:5     - Unknown word (Autoadjusts) -- - Autoadjusts the size based on the
 reference/7.6/PSReadLine/About/about_PSReadLine_Release_Notes.md:198:61    - Unknown word (apikey)      -- by changing `key` to `apikey` to reduce
@@ -2151,6 +2294,7 @@ reference/7.7/Microsoft.PowerShell.Archive/Compress-Archive.md:225:45    - Unkno
 reference/7.7/Microsoft.PowerShell.Archive/Compress-Archive.md:93:24     - Unknown word (Draftdoc)   -- Path = "C:\Reference\Draftdoc.docx", "C:\Reference
 reference/7.7/Microsoft.PowerShell.Archive/Expand-Archive.md:42:43     - Unknown word (PKWARE)     -- format specification by PKWARE Inc. For more information
 reference/7.7/Microsoft.PowerShell.Archive/Expand-Archive.md:65:22     - Unknown word (Draftv)     -- Expand-Archive -Path Draftv2.zip -DestinationPath
+reference/7.7/Microsoft.PowerShell.Core/About/about_ANSI_Terminals.md:188:42    - Unknown word (predefines)    -- *Extension** member predefines colors for archive and
 reference/7.7/Microsoft.PowerShell.Core/About/about_ANSI_Terminals.md:57:5      - Unknown word (Strikethrough) -- - **Strikethrough** - Turns strike through
 reference/7.7/Microsoft.PowerShell.Core/About/about_ANSI_Terminals.md:58:5      - Unknown word (Strikethrough) -- - **StrikethroughOff** - Turns strike
 reference/7.7/Microsoft.PowerShell.Core/About/about_Alias_Provider.md:142:27    - Unknown word (serv)       -- command creates the `serv` alias for the `Get
@@ -2169,10 +2313,14 @@ reference/7.7/Microsoft.PowerShell.Core/About/about_Case-Sensitivity.md:201:7   
 reference/7.7/Microsoft.PowerShell.Core/About/about_Case-Sensitivity.md:204:12    - Unknown word (csplit)     -- 'Bar' -csplit 'A', 0
 reference/7.7/Microsoft.PowerShell.Core/About/about_Case-Sensitivity.md:207:12    - Unknown word (csplit)     -- 'Bar' -csplit 'A', 0, 'IgnoreCase
 reference/7.7/Microsoft.PowerShell.Core/About/about_Character_Encoding.md:163:4     - Unknown word (bigendianutf) -- - `bigendianutf32`: Encodes in UTF-
+reference/7.7/Microsoft.PowerShell.Core/About/about_Classes.md:128:20    - Unknown word (Secker)      -- Publisher = 'Secker & Warburg'
+reference/7.7/Microsoft.PowerShell.Core/About/about_Classes.md:128:29    - Unknown word (Warburg)     -- Publisher = 'Secker & Warburg'
 reference/7.7/Microsoft.PowerShell.Core/About/about_Classes.md:225:35    - Unknown word (Unwin)       -- = 'George Allen & Unwin'
 reference/7.7/Microsoft.PowerShell.Core/About/about_Classes.md:236:32    - Unknown word (nwhich)      -- Time to read $Book,`nwhich was published $Age years
 reference/7.7/Microsoft.PowerShell.Core/About/about_Classes.md:377:35    - Unknown word (Unwin)       -- = 'George Allen & Unwin'
 reference/7.7/Microsoft.PowerShell.Core/About/about_Classes.md:74:9      - Unknown word (convertable) -- > The `<convertable-value-type>` syntax
+reference/7.7/Microsoft.PowerShell.Core/About/about_Classes_Inheritance.md:429:14    - Unknown word (Pinkney)    -- 'Jerry Pinkney',
+reference/7.7/Microsoft.PowerShell.Core/About/about_Classes_Properties.md:124:24    - Unknown word (Mikey)      -- DisplayName = 'Mikey Lombardi'
 reference/7.7/Microsoft.PowerShell.Core/About/about_Classes_Properties.md:125:24    - Unknown word (michaeltlombardi) -- UserName = 'michaeltlombardi'
 reference/7.7/Microsoft.PowerShell.Core/About/about_Command_Precedence.md:210:16    - Unknown word (Progra)     -- //localhost/c$/Progra~1/PowerShell/7-preview
 reference/7.7/Microsoft.PowerShell.Core/About/about_Command_Precedence.md:219:2     - Unknown word (Progra)     -- /Progra~1/PowerShell/7-preview
@@ -2181,6 +2329,7 @@ reference/7.7/Microsoft.PowerShell.Core/About/about_Command_Syntax.md:172:27    
 reference/7.7/Microsoft.PowerShell.Core/About/about_Command_Syntax.md:185:34    - Unknown word (mycommand)  -- Name MyAlias -Value mycommand.exe
 reference/7.7/Microsoft.PowerShell.Core/About/about_Command_Syntax.md:237:21    - Unknown word (mycommand)  -- New-Alias MyAlias mycommand.exe
 reference/7.7/Microsoft.PowerShell.Core/About/about_Comments.md:141:28    - Unknown word (Netcore)    -- Requires -Modules AzureRM.Netcore
+reference/7.7/Microsoft.PowerShell.Core/About/about_CommonParameters.md:131:1     - Unknown word (catchable)  -- catchable by `try/catch`. For
 reference/7.7/Microsoft.PowerShell.Core/About/about_CommonParameters.md:48:22     - Unknown word (proga)      -- `ProgressAction` (`proga`)
 reference/7.7/Microsoft.PowerShell.Core/About/about_CommonParameters.md:559:10    - Unknown word (proga)      -- Aliases: proga
 reference/7.7/Microsoft.PowerShell.Core/About/about_CommonParameters.md:812:72    - Unknown word (defau)      -- Suspend [?] Help (defau
@@ -2209,10 +2358,16 @@ reference/7.7/Microsoft.PowerShell.Core/About/about_Debuggers.md:503:43    - Unk
 reference/7.7/Microsoft.PowerShell.Core/About/about_Debuggers.md:509:23    - Unknown word (scriptname) -- PS C:\ps-test> sbp -V scriptname -S test.ps1
 reference/7.7/Microsoft.PowerShell.Core/About/about_Environment_Variables.md:23:27     - Unknown word (OPTOUT)     -- POWERSHELL_DIAGNOSTICS_OPTOUT`
 reference/7.7/Microsoft.PowerShell.Core/About/about_Environment_Variables.md:417:27    - Unknown word (OPTOUT)     -- POWERSHELL_DIAGNOSTICS_OPTOUT`
-reference/7.7/Microsoft.PowerShell.Core/About/about_Environment_Variables.md:428:56    - Unknown word (OPTOUT)     -- POWERSHELL_DIAGNOSTICS_OPTOUT` is set to
+reference/7.7/Microsoft.PowerShell.Core/About/about_Environment_Variables.md:420:52    - Unknown word (Interprocess) -- pipe that is uses for Interprocess Communication
+reference/7.7/Microsoft.PowerShell.Core/About/about_Environment_Variables.md:428:56    - Unknown word (OPTOUT)       -- POWERSHELL_DIAGNOSTICS_OPTOUT` is set to
 reference/7.7/Microsoft.PowerShell.Core/About/about_Experimental_Features.md:45:16     - Unknown word (experimentname) -- `<modulename>.<experimentname>`. The `ExperimentAction
 reference/7.7/Microsoft.PowerShell.Core/About/about_Experimental_Features.md:45:3      - Unknown word (modulename) -- `<modulename>.<experimentname>`.
 reference/7.7/Microsoft.PowerShell.Core/About/about_Experimental_Features.md:69:31     - Unknown word (PSSSH)          -- Experimental("MyRemoting.PSSSHRemoting", "Show")]
+reference/7.7/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:284:27    - Unknown word (logfiles)   -- command creates the `logfiles` directory on the `C
+reference/7.7/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:287:26    - Unknown word (logfiles)   -- Item -Path C:\ -Name logfiles -Type Directory
+reference/7.7/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:295:53    - Unknown word (logfiles)   -- txt` file in the `C:\logfiles` directory and
+reference/7.7/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:299:19    - Unknown word (logfiles)   -- New-Item -Path C:\logfiles -Name log2.txt -Type
+reference/7.7/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:304:45    - Unknown word (logfiles)   -- log2.txt` in the `C:\logfiles` directory and adds
 reference/7.7/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:418:4     - Unknown word (bigendianutf) -- - `bigendianutf32`: Encodes in UTF-
 reference/7.7/Microsoft.PowerShell.Core/About/about_Functions_Advanced.md:72:4      - Unknown word (PIPELINESTOPTOKEN) -- ## PIPELINESTOPTOKEN
 reference/7.7/Microsoft.PowerShell.Core/About/about_Functions_Advanced_Parameters.md:669:6     - Unknown word (Dont)       -- #### DontShow argument
@@ -2252,12 +2407,18 @@ reference/7.7/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:259:6   
 reference/7.7/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:261:4     - Unknown word (usgb)       -- + 1usgb
 reference/7.7/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:263:23    - Unknown word (usgb)       -- The numeric constant 1usgb is not valid.
 reference/7.7/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:268:56    - Unknown word (gbus)       -- invalid syntax like `1gbus` will be
+reference/7.7/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:39:12     - Unknown word (kibibyte)   -- | `kb`   | kibibyte (1024<sup>1</sup>) multiplier
+reference/7.7/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:40:12     - Unknown word (mebibyte)   -- | `mb`   | mebibyte (1024<sup>2</sup>) multiplier
 reference/7.7/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:41:12     - Unknown word (gigibyte)   -- | `gb`   | gigibyte (1024<sup>3</sup>) multiplier
 reference/7.7/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:42:12     - Unknown word (teribyte)   -- | `tb`   | teribyte (1024<sup>4</sup>) multiplier
 reference/7.7/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:43:12     - Unknown word (petibyte)   -- | `pb`   | petibyte (1024<sup>5</sup>) multiplier
+reference/7.7/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:81:12     - Unknown word (kibibyte)   -- | `kb`   | kibibyte (1024<sup>1</sup>) multiplier
+reference/7.7/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:82:12     - Unknown word (mebibyte)   -- | `mb`   | mebibyte (1024<sup>2</sup>) multiplier
 reference/7.7/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:83:12     - Unknown word (gigibyte)   -- | `gb`   | gigibyte (1024<sup>3</sup>) multiplier
 reference/7.7/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:84:12     - Unknown word (teribyte)   -- | `tb`   | teribyte (1024<sup>4</sup>) multiplier
 reference/7.7/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:85:12     - Unknown word (petibyte)   -- | `pb`   | petibyte (1024<sup>5</sup>) multiplier
+reference/7.7/Microsoft.PowerShell.Core/About/about_Operators.md:323:46    - Unknown word (subshell)   -- it asynchronously in subshell as a job.
+reference/7.7/Microsoft.PowerShell.Core/About/about_PSItem.md:113:60    - Unknown word (uppercases) -- the **ForEach** method uppercases the
 reference/7.7/Microsoft.PowerShell.Core/About/about_PSModulePath.md:162:63    - Unknown word (PSMODULEPATH) -- items() if k.upper() != "PSMODULEPATH"}
 reference/7.7/Microsoft.PowerShell.Core/About/about_Parsing.md:130:62    - Unknown word (metacharacters) -- expandable string, except metacharacters
 reference/7.7/Microsoft.PowerShell.Core/About/about_Parsing.md:132:23    - Unknown word (metacharacters) -- - The argument-mode metacharacters (characters with special
@@ -2288,8 +2449,10 @@ reference/7.7/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:932:
 reference/7.7/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:949:23    - Unknown word (hexdump)    -- café' | pwsh -File ./hexdump.ps1
 reference/7.7/Microsoft.PowerShell.Core/About/about_Pwsh.md:333:12    - Unknown word (chsh)       -- - Use the [chsh][04] utility to set
 reference/7.7/Microsoft.PowerShell.Core/About/about_Pwsh.md:337:3     - Unknown word (chsh)       -- chsh -s /usr/bin/pwsh
+reference/7.7/Microsoft.PowerShell.Core/About/about_Pwsh.md:361:24    - Unknown word (noni)       -- -NonInteractive | -noni
 reference/7.7/Microsoft.PowerShell.Core/About/about_Pwsh.md:397:33    - Unknown word (myproject)  -- pwsh -SettingsFile C:\myproject\powershell.config.json
 reference/7.7/Microsoft.PowerShell.Core/About/about_Pwsh.md:399:23    - Unknown word (sshs)       -- # -SSHServerMode | -sshs
+reference/7.7/Microsoft.PowerShell.Core/About/about_Pwsh.md:5:268     - Unknown word (noni)       -- nol, -NonInteractive, -noni, -NoProfile, -nop,
 reference/7.7/Microsoft.PowerShell.Core/About/about_Pwsh.md:5:359     - Unknown word (sshs)       -- settings, -SSHServerMode, -sshs, -STA, -Version, -v
 reference/7.7/Microsoft.PowerShell.Core/About/about_Redirection.md:238:24    - Unknown word (xzvf)       -- curl -s -L $uri | tar -xzvf - -C .
 reference/7.7/Microsoft.PowerShell.Core/About/about_Redirection.md:247:41    - Unknown word (xzvf)       -- uri).Content | tar -xzvf - -C .
@@ -2349,6 +2512,7 @@ reference/7.7/Microsoft.PowerShell.Core/About/about_Split.md:98:2      - Unknown
 reference/7.7/Microsoft.PowerShell.Core/About/about_Split.md:99:1      - Unknown word (Lastname)   -- Lastname
 reference/7.7/Microsoft.PowerShell.Core/About/about_Tab_Expansion.md:67:30     - Unknown word (psdf)       -- functions. For example, `i-psdf<tab>` returns `Import
 reference/7.7/Microsoft.PowerShell.Core/About/about_Tab_Expansion.md:96:28     - Unknown word (actsetup)   -- Get-Content C:\windows\actsetup.log
+reference/7.7/Microsoft.PowerShell.Core/About/about_Telemetry.md:42:4      - Unknown word (Geolocation) -- > [Geolocation and IP address handling
 reference/7.7/Microsoft.PowerShell.Core/About/about_Type_Accelerators.md:107:3     - Unknown word (mailaddress)         -- | mailaddress |
 reference/7.7/Microsoft.PowerShell.Core/About/about_Type_Accelerators.md:116:3     - Unknown word (psaliasproperty)     -- | psaliasproperty | [System
 reference/7.7/Microsoft.PowerShell.Core/About/about_Type_Accelerators.md:120:3     - Unknown word (pslistmodifier)      -- | pslistmodifier | [System
@@ -2462,20 +2626,30 @@ reference/7.7/Microsoft.PowerShell.Diagnostics/Get-WinEvent.md:571:44    - Unkno
 reference/7.7/Microsoft.PowerShell.Diagnostics/Get-WinEvent.md:604:3     - Unknown word (Logname)    -- Logname='Application'
 reference/7.7/Microsoft.PowerShell.Diagnostics/New-WinEvent.md:92:16     - Unknown word (Elasped)    -- to the **PolicyElaspedTimeInSeconds** field
 reference/7.7/Microsoft.PowerShell.Management/Add-Content.md:228:4     - Unknown word (bigendianutf) -- - `bigendianutf32`: Encodes in UTF-
+reference/7.7/Microsoft.PowerShell.Management/Clear-RecycleBin.md:32:17     - Unknown word (readded)    -- This cmdlet was readded in PowerShell 7.
 reference/7.7/Microsoft.PowerShell.Management/Convert-Path.md:184:26    - Unknown word (Normpath)   -- would use **Dirname**, **Normpath**, **Realpath**, **Join
 reference/7.7/Microsoft.PowerShell.Management/Convert-Path.md:184:40    - Unknown word (Realpath)   -- Dirname**, **Normpath**, **Realpath**, **Join**, or other
 reference/7.7/Microsoft.PowerShell.Management/Copy-Item.md:185:32    - Unknown word (scriptingexample) -- Item` cmdlet copies `scriptingexample.ps1` from the `D:\Folder
 reference/7.7/Microsoft.PowerShell.Management/Copy-Item.md:192:33    - Unknown word (scriptingexample) -- = "D:\Folder004\scriptingexample.ps1"
 reference/7.7/Microsoft.PowerShell.Management/Copy-Item.md:193:38    - Unknown word (scriptingexample) -- "C:\Folder004_Copy\scriptingexample_copy.ps1"
+reference/7.7/Microsoft.PowerShell.Management/Copy-Item.md:79:22     - Unknown word (Logfiles)   -- Copy-Item "C:\Wabash\Logfiles\mar1604.log.txt" -Destination
+reference/7.7/Microsoft.PowerShell.Management/Copy-Item.md:84:45     - Unknown word (Logfiles)   -- contents of the `C:\Logfiles` directory into the
+reference/7.7/Microsoft.PowerShell.Management/Copy-Item.md:85:17     - Unknown word (Logfiles)   -- directory. The `Logfiles` directory isn't copied
+reference/7.7/Microsoft.PowerShell.Management/Copy-Item.md:87:9      - Unknown word (Logfiles)   -- If the `Logfiles` directory has files
+reference/7.7/Microsoft.PowerShell.Management/Copy-Item.md:92:21     - Unknown word (Logfiles)   -- Copy-Item -Path "C:\Logfiles\*" -Destination "C:
 reference/7.7/Microsoft.PowerShell.Management/Get-ChildItem.md:159:66    - Unknown word (hiddenfile) -- hidden files such as `hiddenfile.txt` that have a mode
 reference/7.7/Microsoft.PowerShell.Management/Get-Content.md:369:4     - Unknown word (bigendianutf) -- - `bigendianutf32`: Encodes in UTF-
+reference/7.7/Microsoft.PowerShell.Management/Get-Process.md:120:61    - Unknown word (mebibyte)   -- PowerShell, `MB` represents a mebibyte (MiB) multiplier. `
 reference/7.7/Microsoft.PowerShell.Management/Get-Service.md:77:4      - Unknown word (xmlprov)    -- as xmlprov, the Network Provisioning
 reference/7.7/Microsoft.PowerShell.Management/Join-Path.md:336:14    - Unknown word (Realpath)   -- `Normpath`, `Realpath`, `Join`, or other path
 reference/7.7/Microsoft.PowerShell.Management/Join-Path.md:336:2     - Unknown word (Normpath)   -- `Normpath`, `Realpath`, `Join
+reference/7.7/Microsoft.PowerShell.Management/New-Item.md:93:41     - Unknown word (Logfiles)   -- creates a directory named "Logfiles" in the `C:` drive.
+reference/7.7/Microsoft.PowerShell.Management/New-Item.md:97:29     - Unknown word (Logfiles)   -- Item -Path "C:\" -Name "Logfiles" -ItemType "Directory
 reference/7.7/Microsoft.PowerShell.Management/New-Service.md:65:57     - Unknown word (testservice) -- Service -Filter "Name='testservice'"
 reference/7.7/Microsoft.PowerShell.Management/New-Service.md:85:16     - Unknown word (CCLCSWRPWPDTLOCRRC) -- $SDDL = "D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSD
 reference/7.7/Microsoft.PowerShell.Management/New-Service.md:85:44     - Unknown word (CCDCLCSWRPWPDTLOCRSDRCWDWO) -- CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC
 reference/7.7/Microsoft.PowerShell.Management/New-Service.md:85:80     - Unknown word (CCLCSWLOCRRC)               -- SWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC;;;SU)"
+reference/7.7/Microsoft.PowerShell.Management/Rename-Item.md:53:23     - Unknown word (logfiles)   -- Rename-Item -Path "C:\logfiles\daily_file.txt" -NewName
 reference/7.7/Microsoft.PowerShell.Management/Rename-ItemProperty.md:47:54     - Unknown word (oldconfig)  -- SmpApplication` key to "oldconfig".
 reference/7.7/Microsoft.PowerShell.Management/Rename-ItemProperty.md:50:79     - Unknown word (oldconfig)  -- Name config -NewName oldconfig
 reference/7.7/Microsoft.PowerShell.Management/Resolve-Path.md:315:6     - Unknown word (rvpa)       -- - `rvpa`
@@ -2553,10 +2727,16 @@ reference/7.7/Microsoft.PowerShell.Utility/Import-PSSession.md:9:5       - Unkno
 reference/7.7/Microsoft.PowerShell.Utility/Invoke-Expression.md:80:40     - Unknown word (testscript) -- Command "C:\ps-test\testscript.ps1"
 reference/7.7/Microsoft.PowerShell.Utility/Invoke-Expression.md:81:13     - Unknown word (testscript) -- "C:\ps-test\testscript.ps1" | Invoke-Expression
 reference/7.7/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:174:74    - Unknown word (sourcetype) -- table index,host,source,sourcetype,_raw"
+reference/7.7/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:926:75    - Unknown word (redirections) -- resolved URI after any redirections. When you
+reference/7.7/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:960:87    - Unknown word (redirections) -- when present, across redirections.
+reference/7.7/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:982:71    - Unknown word (redirections) -- of the request across redirections.
+reference/7.7/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:1014:71   - Unknown word (redirections) -- of the request across redirections.
 reference/7.7/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:161:21    - Unknown word (jdoe)       -- User = 'jdoe'
 reference/7.7/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:195:44    - Unknown word (docspage)   -- StreamWriter]::new('.\docspage.html', $false, $Response
 reference/7.7/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:266:26    - Unknown word (jdoe)       -- the image data for `jdoe.png` is submitted.
 reference/7.7/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:280:59    - Unknown word (unkownhost) -- Uri "www.microsoft.com/unkownhost"
+reference/7.7/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:958:79    - Unknown word (redirections) -- resolved URI after any redirections. When
+reference/7.7/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:992:87    - Unknown word (redirections) -- when present, across redirections.
 reference/7.7/Microsoft.PowerShell.Utility/Join-String.md:162:2     - Unknown word (parms)      -- $parms = @{
 reference/7.7/Microsoft.PowerShell.Utility/Join-String.md:169:41    - Unknown word (parms)      -- Properties | Join-String @parms
 reference/7.7/Microsoft.PowerShell.Utility/Measure-Object.md:129:20    - Unknown word (serviceyrs) -- Import-Csv D:\test\serviceyrs.csv | Measure-Object
@@ -2565,6 +2745,7 @@ reference/7.7/Microsoft.PowerShell.Utility/New-TemporaryDirectory.md:68:1      -
 reference/7.7/Microsoft.PowerShell.Utility/New-TemporaryDirectory.md:90:1      - Unknown word (Dont)       -- DontShow: false
 reference/7.7/Microsoft.PowerShell.Utility/Out-File.md:103:39    - Unknown word (Procs)      -- stored in the variable, `$Procs`. `Out-File` uses the
 reference/7.7/Microsoft.PowerShell.Utility/Out-File.md:105:26    - Unknown word (Procs)      -- process objects in `$Procs` to the file **Process
+reference/7.7/Microsoft.PowerShell.Utility/Out-File.md:155:26    - Unknown word (logfile)    -- $logFile = "$PWD\logfile.txt"
 reference/7.7/Microsoft.PowerShell.Utility/Out-File.md:204:4     - Unknown word (bigendianutf) -- - `bigendianutf32`: Encodes in UTF-
 reference/7.7/Microsoft.PowerShell.Utility/Out-File.md:98:2      - Unknown word (Procs)      -- $Procs = Get-Process
 reference/7.7/Microsoft.PowerShell.Utility/Out-File.md:99:48     - Unknown word (Procs)      -- Process.txt -InputObject $Procs -Encoding ascii -Width
@@ -2617,6 +2798,7 @@ reference/7.7/PSReadLine/About/about_PSReadLine.md:174:4     - Unknown word (api
 reference/7.7/PSReadLine/About/about_PSReadLine.md:211:79    - Unknown word (ysdfayf)     -- AsPlainText) -Secret2 sdv87ysdfayf798hfasd8f7ha # '-Secret
 reference/7.7/PSReadLine/About/about_PSReadLine.md:211:89    - Unknown word (hfasd)       -- Secret2 sdv87ysdfayf798hfasd8f7ha # '-Secret2' has
 reference/7.7/PSReadLine/About/about_PSReadLine.md:252:6     - Unknown word (PGPASS)      -- $Env:PGPASS = gcloud auth print
+reference/7.7/PSReadLine/About/about_PSReadLine_Functions.md:433:13    - Unknown word (Rubout)     -- ### UnixWordRubout
 reference/7.7/PSReadLine/About/about_PSReadLine_Functions.md:560:15    - Unknown word (Begining)   -- ### ViInsertAtBegining
 reference/7.7/PSReadLine/About/about_PSReadLine_Release_Notes.md:108:5     - Unknown word (Autoadjusts) -- - Autoadjusts the size based on the
 reference/7.7/PSReadLine/About/about_PSReadLine_Release_Notes.md:198:61    - Unknown word (apikey)      -- by changing `key` to `apikey` to reduce
@@ -2662,6 +2844,7 @@ reference/docs-conceptual/community/2020-updates.md:227:3     - Unknown word (xt
 reference/docs-conceptual/community/2020-updates.md:228:3     - Unknown word (mklement)         -- | mklement0 |
 reference/docs-conceptual/community/2020-updates.md:229:3     - Unknown word (Allexxann)        -- | Allexxann |            |
 reference/docs-conceptual/community/2020-updates.md:230:3     - Unknown word (sharpninja)       -- | sharpninja |            |
+reference/docs-conceptual/community/2020-updates.md:231:5     - Unknown word (Heng)             -- | XuHeng1021 |
 reference/docs-conceptual/community/2020-updates.md:259:3     - Unknown word (doctordns)        -- | doctordns |     3      |
 reference/docs-conceptual/community/2020-updates.md:260:3     - Unknown word (gabrielmccoll)    -- | gabrielmccoll |     2      |
 reference/docs-conceptual/community/2020-updates.md:261:3     - Unknown word (adrianhale)       -- | adrianhale |     1      |
@@ -2706,7 +2889,7 @@ reference/docs-conceptual/community/2020-updates.md:39:3      - Unknown word (ch
 reference/docs-conceptual/community/2020-updates.md:40:3      - Unknown word (dawedawe)    -- | dawedawe |     1
 reference/docs-conceptual/community/2020-updates.md:412:5     - Unknown word (takai)            -- - k-takai - 7 PRs
 reference/docs-conceptual/community/2020-updates.md:414:3     - Unknown word (juvtib)           -- - juvtib - 4 issues
-reference/docs-conceptual/community/2020-updates.md:415:4     - Unknown word (Sazonov)          -- - iSazonov - 3 issue
+reference/docs-conceptual/community/2020-updates.md:415:4     - Unknown word (Sazonov)         -- - iSazonov - 3 issue
 reference/docs-conceptual/community/2020-updates.md:417:3     - Unknown word (mdorantesm)      -- - mdorantesm - 2 issues
 reference/docs-conceptual/community/2020-updates.md:418:12    - Unknown word (najc)            -- - qt3m45su0najc7 - 2 issues
 reference/docs-conceptual/community/2020-updates.md:41:3      - Unknown word (dumpvn)      -- | dumpvn |
@@ -2738,6 +2921,7 @@ reference/docs-conceptual/community/2021-updates.md:108:3     - Unknown word (do
 reference/docs-conceptual/community/2021-updates.md:109:3     - Unknown word (diecknet)        -- | diecknet |     1
 reference/docs-conceptual/community/2021-updates.md:110:3     - Unknown word (Kagre)           -- | Kagre |     1
 reference/docs-conceptual/community/2021-updates.md:111:3     - Unknown word (Kexy)            -- | KexyBiscuit |     1
+reference/docs-conceptual/community/2021-updates.md:112:7     - Unknown word (Roos)            -- | JohnRoos |     1
 reference/docs-conceptual/community/2021-updates.md:114:3     - Unknown word (philanderson)    -- | philanderson888 |     1      |
 reference/docs-conceptual/community/2021-updates.md:116:3     - Unknown word (milaandahiya)    -- | milaandahiya |     1      |
 reference/docs-conceptual/community/2021-updates.md:117:3     - Unknown word (mklement)        -- | mklement0 |
@@ -2747,6 +2931,7 @@ reference/docs-conceptual/community/2021-updates.md:172:3     - Unknown word (ju
 reference/docs-conceptual/community/2021-updates.md:173:3     - Unknown word (przmv)           -- | przmv |     1
 reference/docs-conceptual/community/2021-updates.md:174:3     - Unknown word (mklement)        -- | mklement0 |            |
 reference/docs-conceptual/community/2021-updates.md:200:3     - Unknown word (Avrum)           -- | AvrumFeldman |     1
+reference/docs-conceptual/community/2021-updates.md:200:8     - Unknown word (Feldman)         -- | AvrumFeldman |     1      |
 reference/docs-conceptual/community/2021-updates.md:201:3     - Unknown word (benmccallum)     -- | benmccallum |     1      |
 reference/docs-conceptual/community/2021-updates.md:202:3     - Unknown word (bitdeft)         -- | bitdeft |
 reference/docs-conceptual/community/2021-updates.md:204:3     - Unknown word (diddledani)      -- | diddledani |     1      |
@@ -2802,6 +2987,7 @@ reference/docs-conceptual/community/2021-updates.md:429:3     - Unknown word (mi
 reference/docs-conceptual/community/2021-updates.md:429:9     - Unknown word (ajmera)          -- | mihir-ajmera |     1      |
 reference/docs-conceptual/community/2021-updates.md:432:3     - Unknown word (springcomp)      -- | springcomp |     1      |
 reference/docs-conceptual/community/2021-updates.md:433:3     - Unknown word (Ayanmullick)     -- | Ayanmullick |            |
+reference/docs-conceptual/community/2021-updates.md:454:3     - Unknown word (Andrey)          -- | AndreyMatrosov |     4
 reference/docs-conceptual/community/2021-updates.md:454:9     - Unknown word (Matrosov)        -- | AndreyMatrosov |     4      |
 reference/docs-conceptual/community/2021-updates.md:456:3     - Unknown word (cconrad)         -- | cconrad |     1
 reference/docs-conceptual/community/2021-updates.md:457:3     - Unknown word (Hrxn)            -- | Hrxn |     1
@@ -2835,6 +3021,7 @@ reference/docs-conceptual/community/2022-updates.md:130:3     - Unknown word (ad
 reference/docs-conceptual/community/2022-updates.md:131:3     - Unknown word (manuelcarriernunes) -- | manuelcarriernunes |     1      |
 reference/docs-conceptual/community/2022-updates.md:132:3     - Unknown word (michelangelobottura) -- | michelangelobottura |     1      |
 reference/docs-conceptual/community/2022-updates.md:133:3     - Unknown word (dmpe)                -- | dmpe |
+reference/docs-conceptual/community/2022-updates.md:134:3     - Unknown word (Kamil)               -- | KamilPacanek |
 reference/docs-conceptual/community/2022-updates.md:134:8     - Unknown word (Pacanek)             -- | KamilPacanek |     1
 reference/docs-conceptual/community/2022-updates.md:158:3     - Unknown word (emerconghaile)       -- | emerconghaile |     1      |
 reference/docs-conceptual/community/2022-updates.md:159:3     - Unknown word (floojah)             -- | floojah |     1
@@ -2846,6 +3033,7 @@ reference/docs-conceptual/community/2022-updates.md:205:3     - Unknown word (se
 reference/docs-conceptual/community/2022-updates.md:206:3     - Unknown word (BEEDELLROKEJULIANLOCKHART) -- | BEEDELLROKEJULIANLOCKHART |     1      |
 reference/docs-conceptual/community/2022-updates.md:207:3     - Unknown word (Chemerevsky)               -- | Chemerevsky |
 reference/docs-conceptual/community/2022-updates.md:209:3     - Unknown word (davidhaymond)              -- | davidhaymond |
+reference/docs-conceptual/community/2022-updates.md:210:8     - Unknown word (Metcalfe)                  -- | DavidMetcalfe |     1
 reference/docs-conceptual/community/2022-updates.md:211:3     - Unknown word (dharmatech)                -- | dharmatech |
 reference/docs-conceptual/community/2022-updates.md:212:3     - Unknown word (kozhemyak)                 -- | kozhemyak |
 reference/docs-conceptual/community/2022-updates.md:213:3     - Unknown word (mcawai)                    -- | mcawai
@@ -2855,6 +3043,7 @@ reference/docs-conceptual/community/2022-updates.md:216:3     - Unknown word (sd
 reference/docs-conceptual/community/2022-updates.md:217:3     - Unknown word (seansaleh)                 -- | seansaleh |
 reference/docs-conceptual/community/2022-updates.md:250:3     - Unknown word (Alvynskio)                 -- | Alvynskio |     1      |
 reference/docs-conceptual/community/2022-updates.md:251:3     - Unknown word (bergmeister)               -- | bergmeister |     1      |
+reference/docs-conceptual/community/2022-updates.md:253:9     - Unknown word (yeung)                     -- | lewis-yeung |     1      |
 reference/docs-conceptual/community/2022-updates.md:254:3     - Unknown word (sethvs)                    -- | sethvs |     1
 reference/docs-conceptual/community/2022-updates.md:255:3     - Unknown word (tommymaynard)              -- | tommymaynard |     1      |
 reference/docs-conceptual/community/2022-updates.md:27:58     - Unknown word (ehmiiz)     -- cmdlet articles (Thanks @ehmiiz!)
@@ -2870,28 +3059,32 @@ reference/docs-conceptual/community/2022-updates.md:337:3     - Unknown word (to
 reference/docs-conceptual/community/2022-updates.md:338:3     - Unknown word (naveensrinivasan)          -- | naveensrinivasan |     2      |
 reference/docs-conceptual/community/2022-updates.md:339:3     - Unknown word (rikurauhala)               -- | rikurauhala |     1      |
 reference/docs-conceptual/community/2022-updates.md:341:3     - Unknown word (rhorber)                   -- | rhorber |     1
+reference/docs-conceptual/community/2022-updates.md:342:3     - Unknown word (Raton)                     -- | Raton-Laveur |     1
 reference/docs-conceptual/community/2022-updates.md:342:9     - Unknown word (Laveur)                    -- | Raton-Laveur |     1      |
 reference/docs-conceptual/community/2022-updates.md:343:10    - Unknown word (Roille)                    -- | StephenRoille |     1      |
 reference/docs-conceptual/community/2022-updates.md:344:3     - Unknown word (krlinus)                   -- | krlinus |
 reference/docs-conceptual/community/2022-updates.md:378:3     - Unknown word (Hrxn)                      -- | Hrxn |     1
 reference/docs-conceptual/community/2022-updates.md:379:3     - Unknown word (kevinholtkamp)             -- | kevinholtkamp |     1      |
+reference/docs-conceptual/community/2022-updates.md:380:3     - Unknown word (Mikey)                     -- | MikeyBronowski |     1
 reference/docs-conceptual/community/2022-updates.md:380:8     - Unknown word (Bronowski)                 -- | MikeyBronowski |     1      |
 reference/docs-conceptual/community/2022-updates.md:381:3     - Unknown word (tommymaynard)              -- | tommymaynard |            |
 reference/docs-conceptual/community/2022-updates.md:412:31    - Unknown word (PSAMSI)                    -- experimental feature `PSAMSIMethodInvocationLogging
 reference/docs-conceptual/community/2022-updates.md:41:3      - Unknown word (ehmiiz)     -- | ehmiiz |     8      |
+reference/docs-conceptual/community/2022-updates.md:422:12    - Unknown word (Mikey)                     -- - Welcome [Mikey Lombardi](https://github
 reference/docs-conceptual/community/2022-updates.md:42:3      - Unknown word (changeworld) -- | changeworld |     3      |
 reference/docs-conceptual/community/2022-updates.md:438:3     - Unknown word (codaamok)                  -- | codaamok |     1
 reference/docs-conceptual/community/2022-updates.md:439:8     - Unknown word (Kuzmenko)                  -- | DianaKuzmenko |     1      |
 reference/docs-conceptual/community/2022-updates.md:43:3      - Unknown word (szabolevo)   -- | szabolevo |     1      |
-reference/docs-conceptual/community/2022-updates.md:440:8     - Unknown word (Bronowski)                 -- | MikeyBronowski |     1      |
-reference/docs-conceptual/community/2022-updates.md:441:3     - Unknown word (poshdude)                  -- | poshdude |     1
-reference/docs-conceptual/community/2022-updates.md:442:3     - Unknown word (robcmo)                    -- | robcmo |     1
-reference/docs-conceptual/community/2022-updates.md:443:3     - Unknown word (sertdfyguhi)               -- | sertdfyguhi |     1      |
-reference/docs-conceptual/community/2022-updates.md:444:3     - Unknown word (stampycode)                -- | stampycode |     1      |
+reference/docs-conceptual/community/2022-updates.md:440:3     - Unknown word (Mikey)                     -- | MikeyBronowski |     1
+reference/docs-conceptual/community/2022-updates.md:440:8     - Unknown word (Bronowski)                -- | MikeyBronowski |     1      |
+reference/docs-conceptual/community/2022-updates.md:441:3     - Unknown word (poshdude)                 -- | poshdude |     1
+reference/docs-conceptual/community/2022-updates.md:442:3     - Unknown word (robcmo)                   -- | robcmo |     1
+reference/docs-conceptual/community/2022-updates.md:443:3     - Unknown word (sertdfyguhi)              -- | sertdfyguhi |     1      |
+reference/docs-conceptual/community/2022-updates.md:444:3     - Unknown word (stampycode)               -- | stampycode |     1      |
 reference/docs-conceptual/community/2022-updates.md:44:3      - Unknown word (amkhrjee)    -- | amkhrjee |     1      |
 reference/docs-conceptual/community/2022-updates.md:45:3      - Unknown word (xtqqczze)    -- | xtqqczze |     1      |
 reference/docs-conceptual/community/2022-updates.md:46:4      - Unknown word (Liwoto)      -- | ALiwoto |     1      |
-reference/docs-conceptual/community/2022-updates.md:470:3     - Unknown word (sethvs)                    -- | sethvs |     2
+reference/docs-conceptual/community/2022-updates.md:470:3     - Unknown word (sethvs)                   -- | sethvs |     2
 reference/docs-conceptual/community/2022-updates.md:471:3     - Unknown word (guilhermgonzaga)          -- | guilhermgonzaga |     1      |
 reference/docs-conceptual/community/2022-updates.md:47:3      - Unknown word (mklement)    -- | mklement0 |            |
 reference/docs-conceptual/community/2022-updates.md:498:3     - Unknown word (sethvs)                   -- | sethvs |     3
@@ -2970,6 +3163,7 @@ reference/docs-conceptual/community/2023-updates.md:370:8     - Unknown word (Ce
 reference/docs-conceptual/community/2023-updates.md:371:27    - Unknown word (Derickson)      -- robderickson | Rob Derickson |            4 |
 reference/docs-conceptual/community/2023-updates.md:371:3     - Unknown word (robderickson)   -- | robderickson | Rob Derickson
 reference/docs-conceptual/community/2023-updates.md:372:3     - Unknown word (Snozzberries)   -- | Snozzberries | Michael Soule
+reference/docs-conceptual/community/2023-updates.md:372:31    - Unknown word (Soule)          -- Snozzberries | Michael Soule |           13 |
 reference/docs-conceptual/community/2023-updates.md:373:3     - Unknown word (Spoonsk)        -- | Spoonsk | Joseph Gast
 reference/docs-conceptual/community/2023-updates.md:373:30    - Unknown word (Gast)           -- Spoonsk | Joseph Gast |            1
 reference/docs-conceptual/community/2023-updates.md:374:3     - Unknown word (thedavecarroll) -- | thedavecarroll | Dave Carroll
@@ -3007,6 +3201,7 @@ reference/docs-conceptual/community/2023-updates.md:527:3     - Unknown word (tu
 reference/docs-conceptual/community/2023-updates.md:529:3     - Unknown word (cobrabr)        -- | cobrabr |     1      |
 reference/docs-conceptual/community/2023-updates.md:531:3     - Unknown word (tompazourek)    -- | tompazourek |     1      |
 reference/docs-conceptual/community/2023-updates.md:533:3     - Unknown word (cjvandyk)       -- | cjvandyk |     1      |
+reference/docs-conceptual/community/2023-updates.md:534:5     - Unknown word (Brinkmann)      -- | JTBrinkmann |     1      |
 reference/docs-conceptual/community/2023-updates.md:536:8     - Unknown word (Toso)           -- | CarloToso |            |
 reference/docs-conceptual/community/2023-updates.md:73:3      - Unknown word (jmiller)      -- | jmiller76 |     2      |
 reference/docs-conceptual/community/2023-updates.md:74:4      - Unknown word (Shrubowich)   -- | VShrubowich |     1      |
@@ -3017,11 +3212,14 @@ reference/docs-conceptual/community/2023-updates.md:79:3      - Unknown word (ta
 reference/docs-conceptual/community/2023-updates.md:80:3      - Unknown word (mklement)     -- | mklement0 |            |
 reference/docs-conceptual/community/2023-updates.md:81:3      - Unknown word (radkedan)     -- | radkedan |            |
 reference/docs-conceptual/community/2024-updates.md:108:3     - Unknown word (jhribal)            -- | jhribal |     4
+reference/docs-conceptual/community/2024-updates.md:109:3     - Unknown word (Arie)               -- | ArieHein |
+reference/docs-conceptual/community/2024-updates.md:109:7     - Unknown word (Hein)               -- | ArieHein |     2
 reference/docs-conceptual/community/2024-updates.md:110:3     - Unknown word (Bergbok)            -- | Bergbok |     1
 reference/docs-conceptual/community/2024-updates.md:111:3     - Unknown word (colinwebster)       -- | colinwebster-hc |     1
 reference/docs-conceptual/community/2024-updates.md:113:3     - Unknown word (pmsjt)              -- | pmsjt |
 reference/docs-conceptual/community/2024-updates.md:115:3     - Unknown word (FARICJH)            -- | FARICJH59 |
 reference/docs-conceptual/community/2024-updates.md:139:3     - Unknown word (jikuja)             -- | jikuja |            |
+reference/docs-conceptual/community/2024-updates.md:161:13    - Unknown word (Lockhart)           -- | RokeJulianLockhart |     1      |
 reference/docs-conceptual/community/2024-updates.md:161:3     - Unknown word (Roke)               -- | RokeJulianLockhart |
 reference/docs-conceptual/community/2024-updates.md:162:3     - Unknown word (mohit)              -- | mohitNarang |
 reference/docs-conceptual/community/2024-updates.md:162:8     - Unknown word (Narang)             -- | mohitNarang |     1
@@ -3051,6 +3249,7 @@ reference/docs-conceptual/community/2024-updates.md:291:9     - Unknown word (sl
 reference/docs-conceptual/community/2024-updates.md:292:3     - Unknown word (darthwalsh)         -- | darthwalsh |     1
 reference/docs-conceptual/community/2024-updates.md:294:3     - Unknown word (joshooaj)           -- | joshooaj |     1
 reference/docs-conceptual/community/2024-updates.md:295:3     - Unknown word (mklement)           -- | mklement0 |
+reference/docs-conceptual/community/2024-updates.md:296:13    - Unknown word (Lockhart)           -- | RokeJulianLockhart |            |
 reference/docs-conceptual/community/2024-updates.md:296:3     - Unknown word (Roke)               -- | RokeJulianLockhart |
 reference/docs-conceptual/community/2024-updates.md:322:3     - Unknown word (Hrxn)               -- | Hrxn |     3
 reference/docs-conceptual/community/2024-updates.md:323:3     - Unknown word (muzimuzhi)          -- | muzimuzhi |     1      |
@@ -3060,12 +3259,12 @@ reference/docs-conceptual/community/2024-updates.md:351:3     - Unknown word (se
 reference/docs-conceptual/community/2024-updates.md:352:3     - Unknown word (chrisdent)          -- | chrisdent-de |     1      |
 reference/docs-conceptual/community/2024-updates.md:353:3     - Unknown word (jborean)            -- | jborean93 |     1      |
 reference/docs-conceptual/community/2024-updates.md:354:3     - Unknown word (brucificus)         -- | brucificus |     1      |
-reference/docs-conceptual/community/2024-updates.md:355:4     - Unknown word (Plantefeve)         -- | XPlantefeve |     1      |
-reference/docs-conceptual/community/2024-updates.md:356:3     - Unknown word (mklement)           -- | mklement0 |            |
-reference/docs-conceptual/community/2024-updates.md:379:3     - Unknown word (flcdrg)             -- | flcdrg |     1
-reference/docs-conceptual/community/2024-updates.md:380:3     - Unknown word (holtkampjs)         -- | holtkampjs |     1
-reference/docs-conceptual/community/2024-updates.md:382:11    - Unknown word (Nurillaew)          -- | MuzaffarNurillaew |     1      |
-reference/docs-conceptual/community/2024-updates.md:382:3     - Unknown word (Muzaffar)           -- | MuzaffarNurillaew |     1
+reference/docs-conceptual/community/2024-updates.md:355:4     - Unknown word (Plantefeve)        -- | XPlantefeve |     1      |
+reference/docs-conceptual/community/2024-updates.md:356:3     - Unknown word (mklement)          -- | mklement0 |            |
+reference/docs-conceptual/community/2024-updates.md:379:3     - Unknown word (flcdrg)            -- | flcdrg |     1
+reference/docs-conceptual/community/2024-updates.md:380:3     - Unknown word (holtkampjs)        -- | holtkampjs |     1
+reference/docs-conceptual/community/2024-updates.md:382:11    - Unknown word (Nurillaew)         -- | MuzaffarNurillaew |     1      |
+reference/docs-conceptual/community/2024-updates.md:382:3     - Unknown word (Muzaffar)          -- | MuzaffarNurillaew |     1
 reference/docs-conceptual/community/2024-updates.md:383:3     - Unknown word (ybeltrikov)        -- | ybeltrikov |     1
 reference/docs-conceptual/community/2024-updates.md:384:3     - Unknown word (Armaan)            -- | ArmaanMcleod |
 reference/docs-conceptual/community/2024-updates.md:385:3     - Unknown word (mklement)          -- | mklement0 |
@@ -3073,6 +3272,8 @@ reference/docs-conceptual/community/2024-updates.md:386:3     - Unknown word (de
 reference/docs-conceptual/community/2024-updates.md:388:3     - Unknown word (tabad)             -- | tabad |
 reference/docs-conceptual/community/2024-updates.md:389:3     - Unknown word (wwilliams)         -- | wwilliams69 |
 reference/docs-conceptual/community/2024-updates.md:47:3      - Unknown word (sethvs)     -- | sethvs |     3
+reference/docs-conceptual/community/2024-updates.md:48:3      - Unknown word (Arie)       -- | ArieHein |
+reference/docs-conceptual/community/2024-updates.md:48:7      - Unknown word (Hein)       -- | ArieHein |     1
 reference/docs-conceptual/community/2024-updates.md:49:3      - Unknown word (bharathalleni) -- | bharathalleni |     1      |
 reference/docs-conceptual/community/2024-updates.md:50:3      - Unknown word (jhribal)       -- | jhribal |     1
 reference/docs-conceptual/community/2024-updates.md:51:3      - Unknown word (Saibamen)      -- | Saibamen |     1
@@ -3080,6 +3281,8 @@ reference/docs-conceptual/community/2024-updates.md:52:3      - Unknown word (sk
 reference/docs-conceptual/community/2024-updates.md:53:3      - Unknown word (surfingoldelephant) -- | surfingoldelephant |            |
 reference/docs-conceptual/community/2024-updates.md:54:3      - Unknown word (Armaan)             -- | ArmaanMcleod |
 reference/docs-conceptual/community/2024-updates.md:55:3      - Unknown word (dpareit)            -- | dpareit |
+reference/docs-conceptual/community/2024-updates.md:78:3      - Unknown word (Arie)               -- | ArieHein |     5
+reference/docs-conceptual/community/2024-updates.md:78:7      - Unknown word (Hein)               -- | ArieHein |     5      |
 reference/docs-conceptual/community/2024-updates.md:79:3      - Unknown word (abeu)               -- | abeu1 |     1
 reference/docs-conceptual/community/2024-updates.md:80:3      - Unknown word (alexandair)         -- | alexandair |     1      |
 reference/docs-conceptual/community/2024-updates.md:81:3      - Unknown word (igoragoli)          -- | igoragoli |     1      |
@@ -3123,8 +3326,16 @@ reference/docs-conceptual/community/2025-updates.md:308:3     - Unknown word (su
 reference/docs-conceptual/community/2025-updates.md:309:3     - Unknown word (Allyyyyy)           -- | Allyyyyy |     1
 reference/docs-conceptual/community/2025-updates.md:310:3     - Unknown word (jborean)            -- | jborean93 |     1
 reference/docs-conceptual/community/2025-updates.md:319:5     - Unknown word (surfingoldelephant) -- - surfingoldelephant - 13 PRs on 497 files
+reference/docs-conceptual/community/2025-updates.md:320:5     - Unknown word (Arie)               -- - ArieHein - 10 PRs on 140
+reference/docs-conceptual/community/2025-updates.md:320:9     - Unknown word (Hein)               -- - ArieHein - 10 PRs on 140 files
+reference/docs-conceptual/community/2025-updates.md:336:3     - Unknown word (Arie)               -- | ArieHein |
+reference/docs-conceptual/community/2025-updates.md:336:7     - Unknown word (Hein)               -- | ArieHein |     10
 reference/docs-conceptual/community/2025-updates.md:338:3     - Unknown word (deadlydog)          -- | deadlydog |     2
 reference/docs-conceptual/community/2025-updates.md:339:3     - Unknown word (piedquance)         -- | piedquance |
+reference/docs-conceptual/community/2025-updates.md:355:22    - Unknown word (Arie)               -- Special thanks to @ArieHein for his contributions
+reference/docs-conceptual/community/2025-updates.md:355:26    - Unknown word (Hein)               -- Special thanks to @ArieHein for his contributions
+reference/docs-conceptual/community/2025-updates.md:371:3     - Unknown word (Arie)               -- | ArieHein |
+reference/docs-conceptual/community/2025-updates.md:371:7     - Unknown word (Hein)               -- | ArieHein |     15
 reference/docs-conceptual/community/2025-updates.md:374:3     - Unknown word (cnotin)             -- | cnotin |     1
 reference/docs-conceptual/community/2025-updates.md:46:3      - Unknown word (surfingoldelephant) -- | surfingoldelephant |     3      |
 reference/docs-conceptual/community/2025-updates.md:47:3      - Unknown word (kborowinski)        -- | kborowinski |     1
@@ -3150,9 +3361,20 @@ reference/docs-conceptual/community/2026-updates.md:225:7     - Unknown word (Ka
 reference/docs-conceptual/community/2026-updates.md:252:3     - Unknown word (surfingoldelephant) -- | surfingoldelephant |     5      |
 reference/docs-conceptual/community/2026-updates.md:253:3     - Unknown word (taku)               -- | taku-nm |
 reference/docs-conceptual/community/2026-updates.md:254:3     - Unknown word (alexvy)             -- | alexvy86 |     1
+reference/docs-conceptual/community/2026-updates.md:38:20     - Unknown word (Arie)       -- Special thanks to @ArieHein for another large
+reference/docs-conceptual/community/2026-updates.md:38:24     - Unknown word (Hein)       -- Special thanks to @ArieHein for another large PR
 reference/docs-conceptual/community/2026-updates.md:42:3      - Unknown word (Meterel)    -- | Meterel |
+reference/docs-conceptual/community/2026-updates.md:43:3      - Unknown word (Arie)       -- | ArieHein |
+reference/docs-conceptual/community/2026-updates.md:43:7      - Unknown word (Hein)       -- | ArieHein |
 reference/docs-conceptual/community/2026-updates.md:44:11     - Unknown word (hollingsworth) -- | michael-hollingsworth |     1      |
+reference/docs-conceptual/community/2026-updates.md:45:3      - Unknown word (Sylvain)       -- | Sylvain13bdr |
+reference/docs-conceptual/community/2026-updates.md:66:20     - Unknown word (Arie)          -- Special thanks to @ArieHein for another large
+reference/docs-conceptual/community/2026-updates.md:66:24     - Unknown word (Hein)          -- Special thanks to @ArieHein for another large PR
 reference/docs-conceptual/community/2026-updates.md:70:3      - Unknown word (janv)          -- | janv8000 |     1
+reference/docs-conceptual/community/2026-updates.md:94:20     - Unknown word (Arie)          -- Special thanks to @ArieHein for another large
+reference/docs-conceptual/community/2026-updates.md:94:24     - Unknown word (Hein)          -- Special thanks to @ArieHein for another large PR
+reference/docs-conceptual/community/2026-updates.md:98:3      - Unknown word (Arie)          -- | ArieHein |
+reference/docs-conceptual/community/2026-updates.md:98:7      - Unknown word (Hein)          -- | ArieHein |
 reference/docs-conceptual/community/2026-updates.md:99:3      - Unknown word (baardhermansen) -- | baardhermansen |     4
 reference/docs-conceptual/community/community-support.md:4:26      - Unknown word (Spiceworks) -- loc: [Discord, Slack, Spiceworks, "Stack Overflow" ]
 reference/docs-conceptual/community/community-update.yml:54:21     - Unknown word (Helmick's)  -- - text: Jason Helmick's - The Show
@@ -3176,6 +3398,7 @@ reference/docs-conceptual/community/contributing/labelling-in-github.md:60:9    
 reference/docs-conceptual/community/contributing/labelling-in-github.md:65:9      - Unknown word (threadjob)         -- | `area-threadjob` | The [ThreadJob
 reference/docs-conceptual/community/contributing/managing-pull-requests.md:92:41     - Unknown word (modulepath) -- name for `<version>/<modulepath>/About/About.md`
 reference/docs-conceptual/community/contributing/powershell-style-guide.md:239:32    - Unknown word (DXGI)       -- GameDVR_DXGIHonorFSEWindowsCompatible
+reference/docs-conceptual/community/digital-art.md:15:15     - Unknown word (Infographics) -- ## PowerShell Infographics
 reference/docs-conceptual/community/hall-of-fame.md:22:8      - Unknown word (ucci)       -- | matt9ucci |      |
 reference/docs-conceptual/community/hall-of-fame.md:23:3      - Unknown word (nschonni)   -- | nschonni |      |
 reference/docs-conceptual/community/hall-of-fame.md:24:3      - Unknown word (kiazhi)     -- | kiazhi |
@@ -3183,6 +3406,8 @@ reference/docs-conceptual/community/hall-of-fame.md:25:3      - Unknown word (al
 reference/docs-conceptual/community/hall-of-fame.md:26:3      - Unknown word (sethvs)     -- | sethvs |
 reference/docs-conceptual/community/hall-of-fame.md:27:3      - Unknown word (doctordns)  -- | doctordns |      |
 reference/docs-conceptual/community/hall-of-fame.md:28:3      - Unknown word (surfingoldelephant) -- | surfingoldelephant |      |      |
+reference/docs-conceptual/community/hall-of-fame.md:29:3      - Unknown word (Arie)               -- | ArieHein |
+reference/docs-conceptual/community/hall-of-fame.md:29:7      - Unknown word (Hein)               -- | ArieHein |      |
 reference/docs-conceptual/community/hall-of-fame.md:30:3      - Unknown word (ehmiiz)             -- | ehmiiz |
 reference/docs-conceptual/community/hall-of-fame.md:31:3      - Unknown word (yecril)             -- | yecril71pl |
 reference/docs-conceptual/community/hall-of-fame.md:32:3      - Unknown word (changeworld)        -- | changeworld |      |
@@ -3213,6 +3438,7 @@ reference/docs-conceptual/community/hall-of-fame.md:69:3      - Unknown word (al
 reference/docs-conceptual/community/hall-of-fame.md:70:3      - Unknown word (clamb)              -- | clamb123 |
 reference/docs-conceptual/community/hall-of-fame.md:71:3      - Unknown word (tabad)              -- | tabad |
 reference/docs-conceptual/community/hall-of-fame.md:72:3      - Unknown word (trollyanov)         -- | trollyanov |      |
+reference/docs-conceptual/community/hall-of-fame.md:73:10     - Unknown word (Dardenne)           -- | LaurentDardenne |      |      |
 reference/docs-conceptual/community/hall-of-fame.md:75:3      - Unknown word (jsilverm)           -- | jsilverm |      |
 reference/docs-conceptual/community/hall-of-fame.md:76:8      - Unknown word (Toso)               -- | CarloToso |      |
 reference/docs-conceptual/community/hall-of-fame.md:77:3      - Unknown word (vors)               -- | vors |
@@ -3265,9 +3491,11 @@ reference/docs-conceptual/dev-cross-plat/vscode/understanding-file-encoding.md:2
 reference/docs-conceptual/dev-cross-plat/vscode/understanding-file-encoding.md:318:4     - Unknown word (mklement)     -- - @mklement0's [summary of PowerShell
 reference/docs-conceptual/dev-cross-plat/vscode/using-vscode-for-debugging-compiled-cmdlets.md:63:15     - Unknown word (consoleloggerparameters) -- "/consoleloggerparameters:NoSummary",
 reference/docs-conceptual/developer/cmdlet/adding-aliases-wildcard-expansion-and-help-to-cmdlet-parameters.md:249:47    - Unknown word (ONENOTEM)   -- Stop-Proc" on Target "ONENOTEM (3712)".
+reference/docs-conceptual/developer/cmdlet/adding-aliases-wildcard-expansion-and-help-to-cmdlet-parameters.md:258:47    - Unknown word (ONENOTE)    -- Stop-Proc" on Target "ONENOTE (3592)".
 reference/docs-conceptual/developer/cmdlet/adding-aliases-wildcard-expansion-and-help-to-cmdlet-parameters.md:75:57     - Unknown word (Filenam)    -- could enter `Filename`, `Filenam`, `File`, `Fi`, or
 reference/docs-conceptual/developer/cmdlet/adding-parameters-that-process-pipeline-input.md:73:53     - Unknown word (samplesgetproc) -- reference [!CODE [Msh_samplesgetproc03#GetProc03VBNameParameter
 reference/docs-conceptual/developer/cmdlet/adding-user-messages-to-your-cmdlet.md:156:387   - Unknown word (Progressrecord) -- Management.Automation.Progressrecord](/dotnet/api/System
+reference/docs-conceptual/developer/cmdlet/advisory-development-guidelines.md:129:10    - Unknown word (rehydratable) -- Built-in rehydratable types:
 reference/docs-conceptual/developer/cmdlet/common-parameter-names.md:107:17    - Unknown word (varname)    -- variable, use +_varname_ rather than clearing
 reference/docs-conceptual/developer/cmdlet/common-parameter-names.md:40:22     - Unknown word (varname)    -- this variable, use +_varname_ rather than clearing
 reference/docs-conceptual/developer/cmdlet/common-parameter-names.md:55:43     - Unknown word (varname)    -- this variable, use +_varname_ rather than clearing
@@ -3466,6 +3694,7 @@ reference/docs-conceptual/developer/hosting/host06-sample.md:280:19    - Unknown
 reference/docs-conceptual/developer/hosting/runspace01-sample.md:43:9      - Unknown word (handlecount) -- /// handlecount are then extracted from
 reference/docs-conceptual/developer/hosting/runspace03-sample.md:72:19     - Unknown word (nosuchprocess) -- "lsass", "nosuchprocess", "services", "nosuchprocess
 reference/docs-conceptual/developer/hosting/runspace03-sample.md:72:48     - Unknown word (nosuchprocess) -- nosuchprocess", "services", "nosuchprocess2"
+reference/docs-conceptual/developer/hosting/runspace09-sample.md:73:66     - Unknown word (Milli)      -- foreach {$_ ; Start-Sleep -Milli 500}");
 reference/docs-conceptual/developer/hosting/runspace10-sample.md:103:31    - Unknown word (ssce)       -- SessionStateCmdletEntry ssce = new SessionStateCmdletEntry
 reference/docs-conceptual/developer/hosting/runspace10-sample.md:104:24    - Unknown word (ssce)       -- iss.Commands.Add(ssce);
 reference/docs-conceptual/developer/hosting/windows-powershell01-sample.md:53:49     - Unknown word (paramref)   -- index of the entry in <paramref name="entries"/>
@@ -3769,6 +3998,7 @@ reference/docs-conceptual/lang-spec/chapter-07.md:1902:21   - Unknown word (subm
 reference/docs-conceptual/lang-spec/chapter-07.md:1908:64   - Unknown word (submatches)    -- text can access the submatches via names of the form
 reference/docs-conceptual/lang-spec/chapter-07.md:2107:2    - Unknown word (hypot)         -- $hypot = [Math]::Sqrt(3*3
 reference/docs-conceptual/lang-spec/chapter-07.md:2167:57   - Unknown word (abababab)      -- replicate ab 4 times giving abababab
+reference/docs-conceptual/lang-spec/chapter-07.md:317:15    - Unknown word (Zabc)       -- $b = "abc#$%XYZabc"
 reference/docs-conceptual/lang-spec/chapter-08.md:1219:16   - Unknown word (Guten)      -- Greeting = Guten Tag
 reference/docs-conceptual/lang-spec/chapter-08.md:1221:10   - Unknown word (nein)       -- No = nein
 reference/docs-conceptual/lang-spec/chapter-08.md:1227:23   - Unknown word (días)       -- Greeting = Buenos días
@@ -3793,7 +4023,10 @@ reference/docs-conceptual/learn/deep-dives/add-credentials-to-powershell-functio
 reference/docs-conceptual/learn/deep-dives/add-credentials-to-powershell-functions.md:6:21      - Unknown word (Duffney)    -- - contributor-JoshDuffney
 reference/docs-conceptual/learn/deep-dives/add-credentials-to-powershell-functions.md:7:15      - Unknown word (nochange)   -- - sfi-image-nochange
 reference/docs-conceptual/learn/deep-dives/everything-about-arrays.md:1002:2    - Unknown word (mylist)     -- $mylist = [System.Collections
+reference/docs-conceptual/learn/deep-dives/everything-about-arrays.md:1072:7    - Unknown word (Kraus)      -- [Mark Kraus][07] put together.
 reference/docs-conceptual/learn/deep-dives/everything-about-arrays.md:288:5     - Unknown word (Dailey)     -- Lee Dailey also pointed out to
+reference/docs-conceptual/learn/deep-dives/everything-about-arrays.md:418:10    - Unknown word (Tock)       -- 'Tock'
+reference/docs-conceptual/learn/deep-dives/everything-about-arrays.md:422:10    - Unknown word (Tock)       -- 'Tock'
 reference/docs-conceptual/learn/deep-dives/everything-about-arrays.md:638:33    - Unknown word (Dailey)     -- clever trick that Lee Dailey pointed out to me. If
 reference/docs-conceptual/learn/deep-dives/everything-about-arrays.md:964:2     - Unknown word (myarray)    -- $myarray = [System.Collections
 reference/docs-conceptual/learn/deep-dives/everything-about-arrays.md:990:2     - Unknown word (mylist)     -- $mylist = [System.Collections
@@ -3805,12 +4038,16 @@ reference/docs-conceptual/learn/deep-dives/everything-about-exceptions.md:236:36
 reference/docs-conceptual/learn/deep-dives/everything-about-exceptions.md:240:33    - Unknown word (throwerror) -- CommandPath : C:\blog\throwerror.ps1
 reference/docs-conceptual/learn/deep-dives/everything-about-exceptions.md:254:26    - Unknown word (throwerror) -- Get-Resource, C:\blog\throwerror.ps1: line 13
 reference/docs-conceptual/learn/deep-dives/everything-about-exceptions.md:255:29    - Unknown word (throwerror) -- Start-Something, C:\blog\throwerror.ps1: line 5
+reference/docs-conceptual/learn/deep-dives/everything-about-exceptions.md:367:11    - Unknown word (Redditor)   -- Thank you Redditor `u/Sheppard_Ra` for
 reference/docs-conceptual/learn/deep-dives/everything-about-exceptions.md:524:8     - Unknown word (Dhami)      -- Dexter Dhami pointed out that I can
-reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:479:143   - Unknown word (testlab)    -- Description 'Network for testlab A' -LeaseDuration (New
-reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:492:34    - Unknown word (testlab)    -- Description = 'Network for testlab A'
-reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:550:32    - Unknown word (testlab)    -- Description = 'Network for testlab A'
-reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:553:9     - Unknown word (Serverv)    -- Add-DhcpServerv4Scope @DHCPScope @Common
-reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:941:10    - Unknown word (Sorens)     -- [Michael Sorens][Michael Sorens].
+reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:145:6     - Unknown word (Multiselection) -- #### Multiselection
+reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:222:35    - Unknown word (Kraus)          -- Thank you to [Mark Kraus](https://get-PowerShellblog
+reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:479:143   - Unknown word (testlab)        -- Description 'Network for testlab A' -LeaseDuration (New
+reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:492:34    - Unknown word (testlab)        -- Description = 'Network for testlab A'
+reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:550:32    - Unknown word (testlab)        -- Description = 'Network for testlab A'
+reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:553:9     - Unknown word (Serverv)        -- Add-DhcpServerv4Scope @DHCPScope @Common
+reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:563:20    - Unknown word (logfile)        -- $log = @{Path = '.\logfile.log'}
+reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:941:10    - Unknown word (Sorens)         -- [Michael Sorens][Michael Sorens].
 reference/docs-conceptual/learn/deep-dives/everything-about-if.md:316:5     - Unknown word (inotin)     -- - `-inotin` case-insensitive not
 reference/docs-conceptual/learn/deep-dives/everything-about-if.md:317:5     - Unknown word (cnotin)     -- - `-cnotin` case-sensitive not
 reference/docs-conceptual/learn/deep-dives/everything-about-if.md:452:40    - Unknown word (Prasoon)    -- add this one until [Prasoon Karunan V][Prasoon Karunan
@@ -3824,11 +4061,16 @@ reference/docs-conceptual/learn/deep-dives/everything-about-pscustomobject.md:12
 reference/docs-conceptual/learn/deep-dives/everything-about-pscustomobject.md:166:24    - Unknown word (myobject)   -- foreach( $property in $myobject.psobject.Properties
 reference/docs-conceptual/learn/deep-dives/everything-about-pscustomobject.md:184:6     - Unknown word (myobject)   -- if( $myobject.psobject.Properties
 reference/docs-conceptual/learn/deep-dives/everything-about-pscustomobject.md:209:20    - Unknown word (myobject)   -- InputObject = $myobject
+reference/docs-conceptual/learn/deep-dives/everything-about-pscustomobject.md:273:51    - Unknown word (Redditor)   -- way to do this from Redditor `u/markekraus`. He talks
 reference/docs-conceptual/learn/deep-dives/everything-about-pscustomobject.md:273:63    - Unknown word (markekraus) -- this from Redditor `u/markekraus`. He talks about this
 reference/docs-conceptual/learn/deep-dives/everything-about-shouldprocess.md:38:51     - Unknown word (importantfile) -- 9 AM              0 importantfile.txt
 reference/docs-conceptual/learn/deep-dives/everything-about-shouldprocess.md:53:68     - Unknown word (importantfile) -- on target "C:\Temp\importantfile.txt".
 reference/docs-conceptual/learn/deep-dives/everything-about-shouldprocess.md:548:33    - Unknown word (Shoud)         -- specifies `-Confirm` then `ShoudProcess()` honors the
+reference/docs-conceptual/learn/deep-dives/everything-about-string-substitutions.md:237:11    - Unknown word (Redditor)   -- Thank you Redditor `u/real_parbold` for
+reference/docs-conceptual/learn/deep-dives/everything-about-string-substitutions.md:237:28    - Unknown word (parbold)    -- you Redditor `u/real_parbold` for that one.
+reference/docs-conceptual/learn/deep-dives/everything-about-string-substitutions.md:308:19    - Unknown word (Kraus)      -- $nameList = 'Mark Kraus','Kevin Marquette',
 reference/docs-conceptual/learn/deep-dives/everything-about-string-substitutions.md:308:49    - Unknown word (Dailey)     -- Kevin Marquette','Lee Dailey'
+reference/docs-conceptual/learn/deep-dives/everything-about-string-substitutions.md:315:29    - Unknown word (Kraus)      -- have to thank [Mark Kraus][02] for this suggestion
 reference/docs-conceptual/learn/deep-dives/everything-about-switch.md:430:2     - Unknown word (filelist)   -- :filelist foreach($path in $logs
 reference/docs-conceptual/learn/deep-dives/everything-about-switch.md:437:19    - Unknown word (filelist)   -- break filelist
 reference/docs-conceptual/learn/deep-dives/everything-about-switch.md:649:5     - Unknown word (Dailey)     -- Lee Dailey pointed out that we
@@ -3858,9 +4100,10 @@ reference/docs-conceptual/learn/ps101/07-working-with-wmi.md:73:32     - Unknown
 reference/docs-conceptual/learn/ps101/07-working-with-wmi.md:83:47     - Unknown word (SMBIOSBIOS)   -- Version: " & objBIOS.SMBIOSBIOSVersion
 reference/docs-conceptual/learn/ps101/08-powershell-remoting.md:3:24      - Unknown word (mikefrobbins) -- custom: Contributor-mikefrobbins
 reference/docs-conceptual/learn/ps101/08-powershell-remoting.md:5:14      - Unknown word (mirobb)       -- ms.reviewer: mirobb
+reference/docs-conceptual/learn/ps101/09-functions.md:21:7      - Unknown word (overcomplicate) -- Don't overcomplicate things. Keep it simple
 reference/docs-conceptual/learn/ps101/09-functions.md:3:24      - Unknown word (mikefrobbins) -- custom: Contributor-mikefrobbins
 reference/docs-conceptual/learn/ps101/09-functions.md:5:14      - Unknown word (mirobb)       -- ms.reviewer: mirobb
-reference/docs-conceptual/learn/ps101/09-functions.md:834:15    - Unknown word (mikefrobbins) -- Twitter: @mikefrobbins
+reference/docs-conceptual/learn/ps101/09-functions.md:834:15    - Unknown word (mikefrobbins)   -- Twitter: @mikefrobbins
 reference/docs-conceptual/learn/ps101/10-script-modules.md:343:20    - Unknown word (mikefrobbins) -- CompanyName = 'mikefrobbins.com'
 reference/docs-conceptual/learn/ps101/10-script-modules.md:3:24      - Unknown word (mikefrobbins) -- custom: Contributor-mikefrobbins
 reference/docs-conceptual/learn/ps101/10-script-modules.md:5:14      - Unknown word (mirobb)       -- ms.reviewer: mirobb
@@ -3884,6 +4127,10 @@ reference/docs-conceptual/samples/Managing-Services.md:159:61    - Unknown word 
 reference/docs-conceptual/samples/Managing-Services.md:26:10     - Unknown word (seclogon)   -- Running seclogon Secondary
 reference/docs-conceptual/samples/Managing-Services.md:42:10     - Unknown word (seclogon)   -- Running seclogon Secondary
 reference/docs-conceptual/samples/Managing-Services.md:44:10     - Unknown word (wscsvc)     -- Running wscsvc Security
+reference/docs-conceptual/samples/Managing-Services.md:88:41     - Unknown word (Redirector) -- SMB 2.0 MiniRedirector
+reference/docs-conceptual/samples/Managing-Services.md:89:10     - Unknown word (bowser)     -- Running bowser Bowser
+reference/docs-conceptual/samples/Managing-Services.md:89:29     - Unknown word (Bowser)     -- bowser Bowser
+reference/docs-conceptual/samples/Managing-Services.md:90:41     - Unknown word (Redirector) -- SMB 1.x MiniRedirector
 reference/docs-conceptual/samples/Managing-Windows-PowerShell-Drives.md:152:19    - Unknown word (cvkey)      -- New-PSDrive -Name cvkey -PSProvider Registry
 reference/docs-conceptual/samples/Managing-Windows-PowerShell-Drives.md:161:39    - Unknown word (cvkey)      -- change location to the **cvkey:** drive as you would
 reference/docs-conceptual/samples/Managing-Windows-PowerShell-Drives.md:164:4     - Unknown word (cvkey)      -- cd cvkey:
@@ -3937,11 +4184,12 @@ reference/docs-conceptual/security/remoting/PS-remoting-second-hop.md:190:5     
 reference/docs-conceptual/security/remoting/PS-remoting-second-hop.md:240:57    - Unknown word (alpineskihouse) -- ServerB -Server dc1.alpineskihouse.com
 reference/docs-conceptual/security/remoting/PS-remoting-second-hop.md:324:48    - Unknown word (creds)          -- delegation, passing fresh creds
 reference/docs-conceptual/security/remoting/PS-remoting-second-hop.md:84:20     - Unknown word (Analysing)  -- > [Security Focus: Analysing 'Account is sensitive
-reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:172:42    - Unknown word (sshs)       -- powershell /usr/bin/pwsh -sshs -NoLogo
-reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:215:48    - Unknown word (sshs)       -- usr/local/bin/pwsh -sshs -NoLogo
-reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:82:30     - Unknown word (progra)     -- Subsystem powershell C:/progra~1/powershell/7/pwsh
-reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:82:62     - Unknown word (sshs)       -- powershell/7/pwsh.exe -sshs
-reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:96:33     - Unknown word (progra)     -- Program Files` should be `progra~1`. You can use the
+reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:12:59     - Unknown word (multiplatform) -- platforms and allows true multiplatform PowerShell remoting
+reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:172:42    - Unknown word (sshs)          -- powershell /usr/bin/pwsh -sshs -NoLogo
+reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:215:48    - Unknown word (sshs)          -- usr/local/bin/pwsh -sshs -NoLogo
+reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:82:30     - Unknown word (progra)        -- Subsystem powershell C:/progra~1/powershell/7/pwsh
+reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:82:62     - Unknown word (sshs)          -- powershell/7/pwsh.exe -sshs
+reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:96:33     - Unknown word (progra)        -- Program Files` should be `progra~1`. You can use the
 reference/docs-conceptual/security/remoting/WinRM-Security.md:117:8     - Unknown word (etype)      -- - The `etype` in the TGS ticket determines
 reference/docs-conceptual/security/remoting/WinRM-Security.md:53:18     - Unknown word (Mandiant)   -- Researchers from Mandiant presented a session
 reference/docs-conceptual/security/remoting/jea/audit-and-report.md:62:10     - Unknown word (psrcpath)   -- $psrcpath = Join-Path -Path $
@@ -3960,6 +4208,7 @@ reference/docs-conceptual/security/remoting/jea/security-considerations.md:62:32
 reference/docs-conceptual/security/remoting/jea/session-configurations.md:102:37    - Unknown word (GMSA)       -- sessions to use the GMSA in the local computer
 reference/docs-conceptual/security/remoting/jea/session-configurations.md:103:33    - Unknown word (JEAGMSA)    -- sAMAccountName of 'MyJEAGMSA'
 reference/docs-conceptual/security/remoting/jea/session-configurations.md:104:40    - Unknown word (JEAGMSA)    -- gedServiceAccount = 'Domain\MyJEAGMSA'
+reference/docs-conceptual/security/remoting/jea/session-configurations.md:107:1     - Unknown word (GMSAs)      -- GMSAs should only be used
 reference/docs-conceptual/security/remoting/jea/session-configurations.md:109:63    - Unknown word (GMSA)       -- a user when using a GMSA. Every user shares the
 reference/docs-conceptual/security/remoting/jea/session-configurations.md:226:82    - Unknown word (smartcard)  -- management solution, smartcard
 reference/docs-conceptual/security/remoting/jea/session-configurations.md:227:26    - Unknown word (multifactor) -- authentication, or other multifactor authentication solution
@@ -3970,6 +4219,7 @@ reference/docs-conceptual/security/remoting/jea/session-configurations.md:284:44
 reference/docs-conceptual/security/remoting/jea/session-configurations.md:41:22     - Unknown word (exsn)       -- `Exit-PSSession` (`exsn`, `exit`)
 reference/docs-conceptual/security/remoting/jea/session-configurations.md:95:34     - Unknown word (GMSA)       -- managed service account (GMSA) is the appropriate
 reference/docs-conceptual/security/remoting/jea/session-configurations.md:96:192    - Unknown word (GMSA)       -- domain. The rights that a GMSA
+reference/docs-conceptual/security/remoting/jea/session-configurations.md:96:64     - Unknown word (GMSAs)      -- shares and web services. GMSAs give you a domain identity
 reference/docs-conceptual/security/remoting/jea/session-configurations.md:99:8      - Unknown word (GMSA)       -- to the GMSA.
 reference/docs-conceptual/security/remoting/jea/using-jea.md:171:5     - Unknown word (creds)      -- var creds = // create a
 reference/docs-conceptual/security/remoting/jea/using-jea.md:184:5     - Unknown word (creds)      -- creds //
@@ -3981,20 +4231,23 @@ reference/docs-conceptual/toc.yml:154:56    - Unknown word (ciminstance)   -- ge
 reference/docs-conceptual/toc.yml:164:66    - Unknown word (filterhashtable) -- winEvent-queries-with-filterhashtable.md
 reference/docs-conceptual/toc.yml:388:41    - Unknown word (cmdline)         -- dev-cross-plat/create-cmdline-predictor.md
 reference/docs-conceptual/toc.yml:453:46    - Unknown word (thon)            -- acktoberfest and other hack-a-thon events
+reference/docs-conceptual/toc.yml:454:38    - Unknown word (hackathons)      -- community/contributing/hackathons.md
 reference/docs-conceptual/toc.yml:94:37     - Unknown word (keyhandlers) -- href: learn/shell/using-keyhandlers.md
 reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-72.md:129:11    - Unknown word (awakecoding) -- host by awakecoding · Pull Request #146
 reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-72.md:96:82     - Unknown word (Sazonov)    -- cmdlets (#14513) (Thanks @iSazonov)
-reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:105:85    - Unknown word (fflaten)    -- 4][17804]) (Thanks @fflaten!)
-reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:107:70    - Unknown word (rkeithhill) -- 5][17535]) (Thanks @rkeithhill!)
-reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:119:4     - Unknown word (PSAMSI)     -- - `PSAMSIMethodInvocationLogging
+reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:105:85    - Unknown word (fflaten)      -- 4][17804]) (Thanks @fflaten!)
+reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:107:70    - Unknown word (rkeithhill)   -- 5][17535]) (Thanks @rkeithhill!)
+reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:119:4     - Unknown word (PSAMSI)       -- - `PSAMSIMethodInvocationLogging
 reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:26:68     - Unknown word (Sazonov)    -- ][16355]) (Thanks @iSazonov!)
-reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:73:30     - Unknown word (rkeithhill) -- 8][16108]) (Thanks @rkeithhill!)
-reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:78:30     - Unknown word (Brannen)    -- 2][12802]) (Thanks @BrannenGH!)
-reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:85:74     - Unknown word (hayhay)     -- 3][15853]) (Thanks @hayhay27!)
-reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:86:83     - Unknown word (farmerau)   -- 3][16193]) (Thanks @farmerau!)
-reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:89:30     - Unknown word (dwtaber)    -- 3][16113]) (Thanks @dwtaber!)
-reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:94:78     - Unknown word (Sazonov)    -- ][17477]) (Thanks @iSazonov)
-reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:99:12     - Unknown word (eugenesmlv) -- (Thanks @eugenesmlv!)
+reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:69:50     - Unknown word (redirections) -- command expression with redirections ([#16046][16046])
+reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:73:30     - Unknown word (rkeithhill)   -- 8][16108]) (Thanks @rkeithhill!)
+reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:78:30     - Unknown word (Brannen)      -- 2][12802]) (Thanks @BrannenGH!)
+reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:85:74     - Unknown word (hayhay)       -- 3][15853]) (Thanks @hayhay27!)
+reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:86:83     - Unknown word (farmerau)     -- 3][16193]) (Thanks @farmerau!)
+reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:87:85     - Unknown word (Ritchie)      -- 16197]) (Thanks @KevRitchie!)
+reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:89:30     - Unknown word (dwtaber)      -- 3][16113]) (Thanks @dwtaber!)
+reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:94:78     - Unknown word (Sazonov)      -- ][17477]) (Thanks @iSazonov)
+reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-73.md:99:12     - Unknown word (eugenesmlv)   -- (Thanks @eugenesmlv!)
 reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:107:26    - Unknown word (webcmdlets)  -- Fix using xml -Body in webcmdlets without an encoding
 reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:112:3     - Unknown word (Webcmdlets)  -- - Webcmdlets display an error on
 reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-74.md:117:32    - Unknown word (Webcmdlets)  -- previous response in Webcmdlets ([#19117][19117])
@@ -4095,6 +4348,7 @@ reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-77.md:60:45     - U
 reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-77.md:61:43     - Unknown word (logiclrd)    -- 0][26140]) (Thanks @logiclrd!)
 reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-77.md:74:70     - Unknown word (jborean)     -- 8][25788]) (Thanks @jborean93!)
 reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-77.md:75:74     - Unknown word (jborean)     -- 9][21219]) (Thanks @jborean93!)
+reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-77.md:80:19     - Unknown word (Magnus)      -- (Thanks @MathiasMagnus!)
 reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-77.md:85:65     - Unknown word (xtqqczze)    -- 6][25896]) (Thanks @xtqqczze!)
 reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-77.md:92:12     - Unknown word (mikkas)      -- (Thanks @mikkas456!)
 reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-77.md:94:12     - Unknown word (jorgeasaurus) -- (Thanks @jorgeasaurus!)
@@ -4104,6 +4358,7 @@ reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-77.md:99:4      - U
 reference/docs-conceptual/whats-new/cmdlet-versions.md:532:7     - Unknown word (Creds)      -- | Get-CredsFromCredentialProvider
 reference/docs-conceptual/whats-new/differences-from-windows-powershell.md:1218:23   - Unknown word (CONSOLEHOST) -- DELETE_ME_TO_DISABLE_CONSOLEHOST_TELEMETRY` to disable
 reference/docs-conceptual/windows-powershell/update-notification-message.yml:76:39     - Unknown word (nologo)     -- running `powershell.exe -nologo`.
+reference/includes/macos-support.md:15:13     - Unknown word (Sonoma)     -- - macOS 14 (Sonoma) x64 and Arm64
 reference/index.yml:113:34    - Unknown word (powershellsdk)    -- url: /dotnet/api/?view=powershellsdk-7.4.0
 reference/index.yml:14:28     - Unknown word (Spiceworks) -- loc: [Discord, Slack, Spiceworks, "Stack Overflow" ]
 reference/index.yml:152:45    - Unknown word (stackoverflow)    -- hubs/powershell/logo_stackoverflow.svg
