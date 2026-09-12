@@ -67,7 +67,6 @@ export function generateExclusionFunctionForUri(
  * @todo Support multi root globs.
  * @param globs - glob patterns
  * @param root - root directory
- * @param allowedSchemes - allowed schemas
  */
 export function generateExclusionFunctionForFiles(globs: Glob[], root: string): FileExclusionFunction {
     const matcher = new GlobMatcher(globs, { root, dot: true });

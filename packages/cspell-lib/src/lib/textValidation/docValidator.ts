@@ -121,7 +121,8 @@ export class DocumentValidator {
 
     /**
      * @param doc - Document to validate
-     * @param config - configuration to use (not finalized).
+     * @param options - options controlling how the document is validated.
+     * @param settings - configuration to use (not finalized).
      */
     constructor(
         doc: TextDocument,

@@ -3,6 +3,75 @@ import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 import npm2yarn from '@docusaurus/remark-plugin-npm2yarn';
 
+// TypeDoc's own default `blockTags` (as of typedoc@0.28). Setting the `blockTags` option
+// replaces this list rather than extending it, so it must be repeated here in full.
+const typedocDefaultBlockTags = [
+    '@defaultValue',
+    '@deprecated',
+    '@example',
+    '@jsx',
+    '@param',
+    '@privateRemarks',
+    '@remarks',
+    '@returns',
+    '@see',
+    '@throws',
+    '@typeParam',
+    '@author',
+    '@callback',
+    '@category',
+    '@categoryDescription',
+    '@default',
+    '@document',
+    '@extends',
+    '@augments',
+    '@yields',
+    '@group',
+    '@groupDescription',
+    '@import',
+    '@inheritDoc',
+    '@license',
+    '@module',
+    '@mergeModuleWith',
+    '@prop',
+    '@property',
+    '@return',
+    '@satisfies',
+    '@since',
+    '@sortStrategy',
+    '@template',
+    '@this',
+    '@type',
+    '@typedef',
+    '@summary',
+    '@preventInline',
+    '@inlineType',
+    '@preventExpand',
+    '@expandType',
+];
+
+// Tags used by `cspell-types` (and elsewhere) to drive JSON-schema generation.
+// They are not standard TSDoc/TypeDoc tags, so TypeDoc must be told about them
+// to avoid "Encountered an unknown block tag" warnings during `docusaurus build`.
+const schemaOnlyBlockTags = [
+    '@deprecationMessage',
+    '@hide',
+    '@note',
+    '@pattern',
+    '@scope',
+    '@stability',
+    '@title',
+    '@uniqueItems',
+];
+
+const typedocSharedOptions = {
+    // Recognize the schema-only tags plus `@todo`, in addition to TypeDoc's defaults.
+    blockTags: [...typedocDefaultBlockTags, ...schemaOnlyBlockTags, '@todo'],
+    // The schema-only tags carry no useful information for API docs readers, so drop
+    // them from the rendered output once TypeDoc has parsed (and stopped warning about) them.
+    excludeTags: schemaOnlyBlockTags,
+};
+
 const config: Config = {
     title: 'CSpell',
     tagline: 'A spell checker for code!',
@@ -36,6 +105,7 @@ const config: Config = {
                 tsconfig: '../packages/cspell-types/tsconfig.json',
                 // outputFileStrategy: 'modules',
                 fileExtension: '.md',
+                ...typedocSharedOptions,
             },
         ],
         [
@@ -47,6 +117,7 @@ const config: Config = {
                 tsconfig: '../packages/cspell-lib/tsconfig.json',
                 // outputFileStrategy: 'modules',
                 fileExtension: '.md',
+                ...typedocSharedOptions,
             },
         ],
         [
@@ -58,6 +129,7 @@ const config: Config = {
                 tsconfig: '../packages/cspell/tsconfig.json',
                 // outputFileStrategy: 'modules',
                 fileExtension: '.md',
+                ...typedocSharedOptions,
             },
         ],
         // [
