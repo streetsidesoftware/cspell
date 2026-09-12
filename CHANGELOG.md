@@ -518,6 +518,33 @@ This pull request enhances the word splitting utilities in the `cspell-lib` pack
 
 </details>
 
+## v10.3.1-alpha.1 (2026-09-12)
+
+### Fixes
+
+<details>
+<summary>fix(cspell-tools): Support multiple replacements in a single entry (<a href="https://github.com/streetsidesoftware/cspell/pull/9212">#9212</a>)</summary>
+
+### fix(cspell-tools): Support multiple replacements in a single entry ([#9212](https://github.com/streetsidesoftware/cspell/pull/9212))
+
+This pull request enhances the `cspell-tools.config.schema.json` schema file by adding `markdownDescription` fields alongside existing `description` fields throughout the schema. This improves support for tools and editors that render markdown-formatted descriptions, making configuration options clearer and more readable. Additionally, the schema for replacements has been refactored for clarity and extensibility.
+
+The most important changes are:
+
+**Documentation Improvements:**
+
+- Added `markdownDescription` fields to nearly all properties and definitions, providing markdown-formatted explanations for better editor and tool integration. [\[1\]](diffhunk://#diff-461485728e7d7363d70fa003d157b2fee76ebe81d66639fafbeef7aa6ee58b7cR10-R20) [\[2\]](diffhunk://#diff-461485728e7d7363d70fa003d157b2fee76ebe81d66639fafbeef7aa6ee58b7cL50-R73) [\[3\]](diffhunk://#diff-461485728e7d7363d70fa003d157b2fee76ebe81d66639fafbeef7aa6ee58b7cL80-R93) [\[4\]](diffhunk://#diff-461485728e7d7363d70fa003d157b2fee76ebe81d66639fafbeef7aa6ee58b7cR104) [\[5\]](diffhunk://#diff-461485728e7d7363d70fa003d157b2fee76ebe81d66639fafbeef7aa6ee58b7cL115-R145) [\[6\]](diffhunk://#diff-461485728e7d7363d70fa003d157b2fee76ebe81d66639fafbeef7aa6ee58b7cL145-R165) [\[7\]](diffhunk://#diff-461485728e7d7363d70fa003d157b2fee76ebe81d66639fafbeef7aa6ee58b7cL180-R205) [\[8\]](diffhunk://#diff-461485728e7d7363d70fa003d157b2fee76ebe81d66639fafbeef7aa6ee58b7cL191-R311) [\[9\]](diffhunk://#diff-461485728e7d7363d70fa003d157b2fee76ebe81d66639fafbeef7aa6ee58b7cR327) [\[10\]](diffhunk://#diff-461485728e7d7363d70fa003d157b2fee76ebe81d66639fafbeef7aa6ee58b7cL300-R347)
+
+**Schema Structure Improvements:**
+
+- Refactored the `Replacements` definition: introduced a `ReplaceWith` type, added `propertyNames` with descriptions, and enhanced the overall documentation and structure for replacement rules.
+
+These changes collectively improve the developer experience when working with the schema in modern editors and tooling.
+
+---
+
+</details>
+
 ## v10.3.0 (2026-09-08)
 
 ### Features
