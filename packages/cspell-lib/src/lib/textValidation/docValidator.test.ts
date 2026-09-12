@@ -56,6 +56,44 @@ describe('docValidator', () => {
         expect(dVal.checkDocument()).toEqual([]);
     });
 
+    // cspell:ignore fnptrvalue fnptr
+    describe('softWordBreaks', () => {
+        test('an unknown compound word is flagged by default', async () => {
+            const doc = td('file:///soft-word-break.txt', 'const fnptrvalue = null');
+            const settings: CSpellUserSettings = { words: ['fnptr'] };
+            const dVal = new DocumentValidator(doc, { generateSuggestions: false, noConfigSearch: true }, settings);
+            await dVal.prepare();
+
+            expect(extractRawText(doc.text, dVal.checkDocument())).toEqual(['fnptrvalue']);
+        });
+
+        test('an enabled soft word break rule splits a compound word so both halves are checked', async () => {
+            const doc = td('file:///soft-word-break.txt', 'const fnptrvalue = null');
+            const settings: CSpellUserSettings = {
+                words: ['fnptr'],
+                softWordBreakDefinitions: { fnPtr: '^fnptr|' },
+                softWordBreaks: { fnPtr: true },
+            };
+            const dVal = new DocumentValidator(doc, { generateSuggestions: false, noConfigSearch: true }, settings);
+            await dVal.prepare();
+
+            expect(dVal.checkDocument()).toEqual([]);
+        });
+
+        test('a defined but disabled soft word break rule has no effect', async () => {
+            const doc = td('file:///soft-word-break.txt', 'const fnptrvalue = null');
+            const settings: CSpellUserSettings = {
+                words: ['fnptr'],
+                softWordBreakDefinitions: { ptr: '^fnptr|' },
+                softWordBreaks: { ptr: false },
+            };
+            const dVal = new DocumentValidator(doc, { generateSuggestions: false, noConfigSearch: true }, settings);
+            await dVal.prepare();
+
+            expect(extractRawText(doc.text, dVal.checkDocument())).toEqual(['fnptrvalue']);
+        });
+    });
+
     test.each`
         filename
         ${__filename}
