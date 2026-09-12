@@ -282,9 +282,8 @@ function replacementsToMapOperator(replacements: Replacements | undefined): Oper
     if (!replacements) return undefined;
     return opMap((word) => {
         for (const [pattern, replacement] of Object.entries(replacements)) {
-            for (const p of pattern.split('|')) {
-                word = word.replaceAll(p, replacement);
-            }
+            const r = new RegExp(pattern, 'gv');
+            word = word.replaceAll(r, replacement);
         }
         return word;
     });

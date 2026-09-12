@@ -178,8 +178,8 @@
       "additionalProperties": {
         "$ref": "#/definitions/ReplaceWith"
       },
-      "description": "Replacement rules to apply to the words in the dictionary. The key is the pattern to match, and the value is the replacement string. Note: Multiple patterns can be separated by the `|` character.\n- ``'|‘|`|’`` - with match all the single quotes.",
-      "markdownDescription": "Replacement rules to apply to the words in the dictionary.\nThe key is the pattern to match, and the value is the replacement string.\nNote: Multiple patterns can be separated by the `|` character.\n- ``'|‘|`|’`` - with match all the single quotes.",
+      "description": "Replacement rules to apply to the words in the dictionary. The key is the pattern to match, and the value is the replacement string. Note: Multiple patterns can be separated by the `|` character.\n\n- ``'|‘|`|’`` - with match all the single quotes.\n\nNote: the pattern is treated like a regular expression using the JavaScript `RegExp` constructor with the `g` and `v` flags.\n\nNote: replacements are applied in the order they are defined.",
+      "markdownDescription": "Replacement rules to apply to the words in the dictionary.\nThe key is the pattern to match, and the value is the replacement string.\nNote: Multiple patterns can be separated by the `|` character.\n\n- ``'|‘|`|’`` - with match all the single quotes.\n\nNote: the pattern is treated like a regular expression using the JavaScript `RegExp` constructor with the `g` and `v` flags.\n\nNote: replacements are applied in the order they are defined.",
       "propertyNames": {
         "description": "Pattern to match in the replacement rules. Multiple patterns can be separated by the `|` character.\n\n- ``'|‘|`|’`` - with match all the single quotes.",
         "markdownDescription": "Pattern to match in the replacement rules. Multiple patterns can be separated by the `|` character.\n\n- ``'|‘|`|’`` - with match all the single quotes."
