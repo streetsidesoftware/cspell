@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 
-// @ts-check
 import { writeFile } from 'node:fs/promises';
 import * as path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import type { JSONSchema7, JSONSchema7Definition } from 'json-schema';
 import safeStableStringify from 'safe-stable-stringify';
+import type { Config } from 'ts-json-schema-generator';
 import { createGenerator } from 'ts-json-schema-generator';
 
 const importDir = new URL('.', import.meta.url);
@@ -14,8 +15,7 @@ const typesDirUrl = new URL('packages/cspell-types', rootUrl);
 const outFile = 'cspell.schema.json';
 const typesDir = fileURLToPath(typesDirUrl);
 
-/** @type {import('ts-json-schema-generator').Config} */
-const defaultConfig = {
+const defaultConfig: Config = {
     expose: 'export',
     topRef: true,
     jsDoc: 'extended',
@@ -30,11 +30,7 @@ const defaultConfig = {
     discriminatorType: 'json-schema',
 };
 
-/**
- *
- * @param {import('json-schema').JSONSchema7['properties']} properties
- */
-function removeHiddenProperties(properties) {
+function removeHiddenProperties(properties: JSONSchema7['properties']): void {
     if (!properties) return;
 
     for (const [key, prop] of Object.entries(properties)) {
@@ -45,7 +41,7 @@ function removeHiddenProperties(properties) {
     }
 }
 
-function removeHiddenPropertiesFromDefinitions(definitions) {
+function removeHiddenPropertiesFromDefinitions(definitions: Record<string, JSONSchema7Definition> | undefined): void {
     if (!definitions) return;
 
     for (const def of Object.values(definitions)) {
@@ -54,10 +50,7 @@ function removeHiddenPropertiesFromDefinitions(definitions) {
     }
 }
 
-/**
- * @param {import('json-schema').JSONSchema7} schema
- */
-function removeHidden(schema) {
+function removeHidden(schema: JSONSchema7): void {
     removeHiddenProperties(schema.properties);
     removeHiddenPropertiesFromDefinitions(schema.definitions);
 }
@@ -76,9 +69,8 @@ function removeHidden(schema) {
  *   -o  ./cspell.schema.json
  * ```
  */
-async function run() {
-    /** @type {import('ts-json-schema-generator').Config} */
-    const config = {
+async function run(): Promise<void> {
+    const config: Config = {
         ...defaultConfig,
         path: path.join(typesDir, 'src/CSpellSettingsDef.ts'),
         tsconfig: path.join(typesDir, './tsconfig.json'),
@@ -88,8 +80,7 @@ async function run() {
         skipTypeCheck: true,
     };
 
-    const schema = createGenerator(config).createSchema(config.type);
-    // @ts-expect-error allowTrailingCommas is a new feature
+    const schema = createGenerator(config).createSchema(config.type) as JSONSchema7 & { allowTrailingCommas?: boolean };
     schema.allowTrailingCommas = true;
     removeHidden(schema);
     const stringify = config.sortProps ? safeStableStringify : JSON.stringify;
@@ -99,4 +90,4 @@ async function run() {
     await writeFile(new URL(outFile, rootUrl), schemaString);
 }
 
-run();
+await run();
