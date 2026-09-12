@@ -1,9 +1,5 @@
 # cspell
 
-[![](https://github.com/streetsidesoftware/cspell/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/streetsidesoftware/cspell/actions)
-[![Coverage Status](https://coveralls.io/repos/github/streetsidesoftware/cspell/badge.svg?branch=main)](https://coveralls.io/github/streetsidesoftware/cspell?branch=main)
-[![codecov](https://codecov.io/gh/streetsidesoftware/cspell/branch/main/graph/badge.svg?token=Dr4fi2Sy08)](https://codecov.io/gh/streetsidesoftware/cspell)
-
 A Spell Checker for Code!
 
 `cspell` is a command line tool and library for spell checking code.
@@ -24,12 +20,12 @@ A Spell Checker for Code!
 
 ## Features
 
-- Spell Checks Code -- Able to spell check code by parsing it into words before checking against the dictionaries.
+- Spell Checks Code -- Parses code into words before checking them against the dictionaries.
   - Supports CamelCase, snake\_case, and compoundwords naming styles.
 - Self contained -- does not depend upon OS libraries like Hunspell or aspell. Nor does it depend upon online services.
 - Fast -- checks 1000's of lines of code in seconds.
 - Programming Language Specific Dictionaries -- Has dedicated support for:
-  - JavaScript, TypeScript, Python, PHP, C#, C++, LaTex, Go, HTML, CSS, etc.
+  - JavaScript, TypeScript, Python, PHP, C#, C++, LaTeX, Go, HTML, CSS, etc.
 - Customizable -- supports custom dictionaries and word lists.
 - Continuous Integration Support -- Can easily be added as a linter to Travis-CI.
 
@@ -265,7 +261,7 @@ cspell check <filename> --color | less -r
 
 ## Command: `trace` - See which dictionaries contain a word
 
-Trace shows a the list of known dictionaries and a `*` next to the ones that contain the word.
+Trace shows the list of known dictionaries and a `*` next to the ones that contain the word.
 
 A `!` will appear next to the ones where the word is forbidden.
 
@@ -310,7 +306,7 @@ Options:
 
 <!--- @@inject-end: static/help-trace.txt --->
 
-## CI/CD Continuous Integration support
+## CI/CD Support
 
 ### Mega-Linter
 
@@ -347,7 +343,7 @@ CSpell needs Node 22 and above.
 
 ## How it works
 
-The concept is simple, split camelCase and snake\_case words before checking them against a list of known words.
+The concept is simple: split camelCase and snake\_case words before checking them against a list of known words.
 
 - `camelCase` -> `camel case`
 - `HTMLInput` -> `html input`
@@ -358,14 +354,18 @@ The concept is simple, split camelCase and snake\_case words before checking the
 
 ### Special cases
 
-- Escape characters like `\n`, `\t` are removed if the word does not match:
-  - `\narrow` -> `narrow` - because `narrow` is a word
-  - `\ncode` -> `code` - because `ncode` is not a word.
-  - `\network` -> `network` - but it might be hiding a spelling error, if `\n` was an escape character.
+- Escape sequences like `\n` and `\t` are stripped from words one character at a time: the backslash is
+  always removed, and the letter (`n`, `t`, etc.) is kept only if doing so still produces a known word.
+  - `\narrow` -> `narrow` -- the `n` is kept because `narrow` is a word.
+  - `\ncode` -> `code` -- the `n` is dropped too, because `ncode` is not a word.
+  - `\network` -> `network` -- the `n` is kept because `network` is a word, but this might hide a real
+    typo if `\n` was actually meant as a newline followed by a misspelling.
 
 ### Things to note
 
-- This spellchecker is case insensitive. It will not catch errors like `english` which should be `English`.
+- By default, case and accent checking is off for English, so it will not catch errors like `english` which should be `English`.
+  This is controlled by the `caseSensitive` setting -- see [Case and Accent Sensitivity](https://cspell.org/docs/case-sensitive/).
+  Some language dictionaries (like German, French, and Spanish) turn on case sensitivity by default.
 - The spellchecker uses dictionaries stored locally. It does not send anything outside your machine.
 - The words in the dictionaries can and do contain errors.
 - There are missing words.
@@ -375,9 +375,9 @@ The concept is simple, split camelCase and snake\_case words before checking the
 ## In Document Settings
 
 It is possible to add spell check settings into your source code.
-This is to help with file specific issues that may not be applicable to the entire project.
+This is to help with file-specific issues that may not be applicable to the entire project.
 
-All settings are prefixed with `cspell:` or `spell-checker:`.
+All settings are prefixed with `cspell:`, `spell-checker:`, or `spellchecker:` (the prefix is case insensitive, and the hyphen in `spell-checker:` is optional).
 
 - `disable` -- turn off the spell checker for a section of code.
 - `enable` -- turn the spell checker back on after it has been turned off.
@@ -513,7 +513,8 @@ var email1 = 'emailaddress@myfancynewcompany.com';
 var email2 = '<emailaddress@myfancynewcompany.com>';
 ```
 
-**Note:** ignoreRegExp and includeRegExp are applied to the entire file. They do not start and stop.
+**Note:** `ignoreRegExp` and `includeRegExp` apply to the entire file, unlike `cspell:disable`/`cspell:enable`,
+which only affect the section of code between them.
 
 #### Include Example
 
@@ -654,10 +655,10 @@ export default defineConfig({
 
   ```javascript
   "language": "en",
-  // Dictionaries "spanish", "ruby", and "corp-term" will always be checked.
+  // Dictionaries "spanish", "ruby", and "company-terms" will always be checked.
   // Including "spanish" in the list of dictionaries means both Spanish and English
   // words will be considered correct.
-  "dictionaries": ["spanish", "ruby", "corp-terms", "fonts"],
+  "dictionaries": ["spanish", "ruby", "company-terms", "fonts"],
   // Define each dictionary. Relative paths are relative to the config file.
   "dictionaryDefinitions": [
       { "name": "spanish", "path": "./spanish-words.txt"},
@@ -673,7 +674,7 @@ export default defineConfig({
 - `patterns` - this allows you to define named patterns to be used with
   `ignoreRegExpList` and `includeRegExpList`.
 
-- `languageSettings` - this allow for per programming language configuration settings. See [LanguageSettings](#LanguageSettings)
+- `languageSettings` - this allows for per programming language configuration settings. See [LanguageSettings](#LanguageSettings)
 
 - `overrides` - this allows for settings to be based upon the file name or path. It is useful for setting the language for localization.
 
@@ -701,7 +702,7 @@ The spell checker includes a set of default dictionaries.
 - **css** - _css_, _less_, and _scss_ related keywords
 - **cpp** - _C++_ related keywords
 - **csharp** - _C#_ related keywords
-- **latex** - LaTex related words
+- **latex** - LaTeX related words
 - **bash** - Bash/shell script keywords
 
 ### Miscellaneous Dictionaries
@@ -716,13 +717,12 @@ The spell checker includes a set of default dictionaries.
 - **description** - Optional description
 - **path** - Path to the file, can be relative or absolute. Relative path is relative to the
   current `cspell.json` file.
-- **repMap** - Optional replacement map use to replace character prior to searching the dictionary.
+- **repMap** - Optional replacement map used to replace characters prior to searching the dictionary.
   Example:
   ```javascript
       // Replace various tick marks with a single '
       "repMap": [["'|`|’", "'"]]
   ```
-  // Use Compounds
 - **useCompounds** - allow compound words
 
 ```javascript
@@ -767,7 +767,7 @@ There are two selector fields `locale` and `languageId`.
   use `"*"`.
 - `locale` defines which spoken languages to match against. A value of `"en-GB,nl"` will match against British English or Dutch.
   A value of `"*"` will match all spoken languages.
-- Most configuration values allowed in a `cspell.json` file can be define or redefine within the `languageSettings`.
+- Most configuration values allowed in a `cspell.json` file can be defined or redefined within the `languageSettings`.
 
 ```javascript
     "languageSettings": [
