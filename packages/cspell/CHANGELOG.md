@@ -545,6 +545,35 @@ These changes collectively improve the developer experience when working with th
 
 </details>
 
+## v10.3.2-alpha.0 (2026-09-13)
+
+### Fixes
+
+<details>
+<summary>fix: Add tags to ParsedText (<a href="https://github.com/streetsidesoftware/cspell/pull/9237">#9237</a>)</summary>
+
+### fix: Add tags to ParsedText ([#9237](https://github.com/streetsidesoftware/cspell/pull/9237))
+
+This pull request introduces the concept of "tags" for parsed text segments in the CSpell types, allowing each segment of text to be annotated with a set of named tags. These tags can hold boolean, string, or undefined values, supporting richer metadata for parsers and downstream consumers. The changes affect both the TypeScript source and the type definitions.
+
+The most important changes are:
+
+### Tagging Support for Parsed Text
+
+- Added a new optional `tags` property to the `ParsedText` interface, allowing each parsed text segment to carry a set of tags as metadata. (`ParsedText` in `parser.ts`, `index.d.mts`, `index.d.mts`) [\[1\]](diffhunk://#diff-d4bedbf21c899fa1f9dc91855211fc8dd4ed7d1b54a6433514b0ca86974bbea4R39-R42) [\[2\]](diffhunk://#diff-8e581864afed8f70400dbe392449ab40296a78133cee216ab4ad6ef2a38981f6R108-R111) [\[3\]](diffhunk://#diff-14f40e062c024a63c555a8565984f3d45268e79b41d2dbea8960eab1473be840R1275-R1278)
+- Introduced the `ParsedTag` type (boolean | string | undefined) and the `ParsedTags` interface (a map of tag names to `ParsedTag` values) to define the structure of tags. (`parser.ts`, `index.d.mts`, `index.d.mts`) [\[1\]](diffhunk://#diff-d4bedbf21c899fa1f9dc91855211fc8dd4ed7d1b54a6433514b0ca86974bbea4R100-R112) [\[2\]](diffhunk://#diff-8e581864afed8f70400dbe392449ab40296a78133cee216ab4ad6ef2a38981f6R165-R175) [\[3\]](diffhunk://#diff-14f40e062c024a63c555a8565984f3d45268e79b41d2dbea8960eab1473be840R1332-R1342)
+
+### Type Exports and API Surface
+
+- Updated exports throughout the codebase to include `ParsedTag` and `ParsedTags`, making these types available to consumers. (`src/Parser/index.ts`, `src/index.ts`, `index.d.mts`, `index.d.mts`) [\[1\]](diffhunk://#diff-b71809898342d9c1f1a1caf095f9aea7e4b6ec8d4c1dc17caf71dc6337c44db8R3-R4) [\[2\]](diffhunk://#diff-7f7f37af8b6440a510f8d18217f859f88481fb728d873d1af2943032e57c9f0eR128-R129) [\[3\]](diffhunk://#diff-8e581864afed8f70400dbe392449ab40296a78133cee216ab4ad6ef2a38981f6L175-R190) [\[4\]](diffhunk://#diff-14f40e062c024a63c555a8565984f3d45268e79b41d2dbea8960eab1473be840L2349-R2364)
+- Changed the export style in `src/Parser/index.mts` from `export *` to `export type *`, ensuring only types are exported.
+
+These changes lay the groundwork for parsers and other tools to annotate text with structured metadata, improving extensibility and downstream processing.
+
+---
+
+</details>
+
 ## v10.3.1 (2026-09-13)
 
 ### Fixes
