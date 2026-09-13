@@ -125,6 +125,8 @@ export type { Feature, Features } from './features.js';
 export { mergeConfig } from './merge.js';
 export type {
     MappedText,
+    ParsedTag,
+    ParsedTags,
     ParsedText,
     Parser,
     ParseResult,
