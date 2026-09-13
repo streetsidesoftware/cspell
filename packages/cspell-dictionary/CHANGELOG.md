@@ -86,6 +86,12 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - fix(cspell-tools): Support multiple replacements in a single entry (<a href="https://github.com/streetsidesoftware/cspell/pull/9212">#9212</a>)
 
+## v10.3.2-alpha.0 (2026-09-13)
+
+### Fixes
+
+- fix: Add tags to ParsedText (<a href="https://github.com/streetsidesoftware/cspell/pull/9237">#9237</a>)
+
 ## v10.3.1 (2026-09-13)
 
 ### Fixes
