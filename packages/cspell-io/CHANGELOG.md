@@ -86,6 +86,28 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - fix(cspell-tools): Support multiple replacements in a single entry (<a href="https://github.com/streetsidesoftware/cspell/pull/9212">#9212</a>)
 
+## v10.3.1 (2026-09-13)
+
+### Fixes
+
+- fix: Update documentation and schema for recent improvements (<a href="https://github.com/streetsidesoftware/cspell/pull/9222">#9222</a>)
+- fix: Add support for soft word breaks (<a href="https://github.com/streetsidesoftware/cspell/pull/9215">#9215</a>)
+
+- fix(cspell-tools): Support multiple replacements in a single entry (<a href="https://github.com/streetsidesoftware/cspell/pull/9212">#9212</a>)
+- fix: CSpell-Tools support replacements (<a href="https://github.com/streetsidesoftware/cspell/pull/9205">#9205</a>)
+
+- fix: Revert #9198 (<a href="https://github.com/streetsidesoftware/cspell/pull/9202">#9202</a>)
+- fix: Add definitions for custom word breaks (<a href="https://github.com/streetsidesoftware/cspell/pull/9199">#9199</a>)
+
+- fix: Split words on soft hyphens (<a href="https://github.com/streetsidesoftware/cspell/pull/9196">#9196</a>)
+
+### Dictionary Updates
+
+- fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/9218">#9218</a>)
+- fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/9208">#9208</a>)
+
+- fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/9198">#9198</a>)
+
 ## v10.3.0 (2026-09-08)
 
 ### Features
