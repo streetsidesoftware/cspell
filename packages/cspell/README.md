@@ -319,8 +319,6 @@ Quick setup following installation guide in [Mega-Linter documentation](https://
 
 ### Git commit-hooks
 
-#### pre-commit
-
 **Setup**
 
 ```
@@ -329,11 +327,15 @@ npm install -SD cspell
 
 **`.git/hooks/pre-commit`**
 
-```
+```sh
 #!/bin/sh
 
 exec git diff --cached --name-only | npx cspell --no-summary --no-progress --no-must-find-files --file-list stdin
 ```
+
+### Using [pre-commit.com](https://pre-commit.com) Hook
+
+Use: [`cspell-cli`](https://github.com/streetsidesoftware/cspell-cli#setup-pre-commit-hook)
 
 ## Requirements
 
