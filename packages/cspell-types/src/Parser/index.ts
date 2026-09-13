@@ -1,5 +1,7 @@
 export type {
     DelegateInfo,
+    ParsedTag,
+    ParsedTags,
     ParsedText,
     Parser,
     ParseResult,

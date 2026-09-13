@@ -37,6 +37,10 @@ export interface ParsedText extends Readonly<Mapped> {
      */
     readonly scope?: Scope | undefined;
     /**
+     * The tags associated with this segment of text.
+     */
+    readonly tags?: ParsedTags | undefined;
+    /**
      * Used to delegate parsing the contents of `text` to another parser.
      *
      */
@@ -93,3 +97,16 @@ export interface ScopeChain {
 export type ScopeString = string;
 
 export type Scope = ScopeChain | ScopeString;
+
+export type ParsedTag = boolean | string | undefined;
+
+/**
+ * ParsedTags represents a collection of tags associated with a segment of text. Each tag can have a boolean, string, or undefined value.
+ *
+ * - `undefined` represents a tag that is not set.
+ * - `boolean` represents a tag that is either true or false.
+ * - `string` represents a tag with a string value.
+ */
+export interface ParsedTags {
+    readonly [tag: string]: ParsedTag;
+}

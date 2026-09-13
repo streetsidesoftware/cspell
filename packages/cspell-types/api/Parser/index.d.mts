@@ -106,6 +106,10 @@ interface ParsedText extends Readonly<Mapped> {
    */
   readonly scope?: Scope | undefined;
   /**
+   * The tags associated with this segment of text.
+   */
+  readonly tags?: ParsedTags | undefined;
+  /**
    * Used to delegate parsing the contents of `text` to another parser.
    *
    */
@@ -158,6 +162,17 @@ interface ScopeChain {
  */
 type ScopeString = string;
 type Scope = ScopeChain | ScopeString;
+type ParsedTag = boolean | string | undefined;
+/**
+ * ParsedTags represents a collection of tags associated with a segment of text. Each tag can have a boolean, string, or undefined value.
+ *
+ * - `undefined` represents a tag that is not set.
+ * - `boolean` represents a tag that is either true or false.
+ * - `string` represents a tag with a string value.
+ */
+interface ParsedTags {
+  readonly [tag: string]: ParsedTag;
+}
 //#endregion
 //#region src/Parser/TextMap.d.ts
 type MappedText = Readonly<TransformedText>;
@@ -172,4 +187,4 @@ interface TransformedText extends Mapped {
   rawText?: string | undefined;
 }
 //#endregion
-export type { DelegateInfo, MappedText, ParseResult, ParsedText, Parser, ParserName, ParserOptions, Range, Scope, ScopeChain, ScopeString, SourceMap };
+export type { DelegateInfo, MappedText, ParseResult, ParsedTag, ParsedTags, ParsedText, Parser, ParserName, ParserOptions, Range, Scope, ScopeChain, ScopeString, SourceMap };
