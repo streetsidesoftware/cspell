@@ -1,4 +1,4 @@
-If CSpell saves you time, please consider supporting its development.
+If you are using our spell checker, please consider supporting its development.
 
 <p align="left">
   <a href="https://github.com/sponsors/streetsidesoftware" title="GitHub Sponsor"><picture><source media="(prefers-color-scheme: dark)" srcset="https://cspell.org/img/sponsor/github-sponsor-dark.png" /><img alt="GitHub Sponsor" src="https://cspell.org/img/sponsor/github-sponsor.png" width="180" /></picture></a>
