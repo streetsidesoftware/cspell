@@ -4,11 +4,10 @@ import type { CSpellUserSettings } from '@cspell/cspell-types';
 
 import type { Document } from '../Document/index.js';
 import { resolveDocumentToTextDocument } from '../Document/resolveDocument.js';
-import type { TextDocument } from '../Models/TextDocument.js';
+import type { SimpleRange, TextDocument } from '../Models/TextDocument.js';
 import { isTextDocument } from '../Models/TextDocument.js';
 import type { ValidationIssue } from '../Models/ValidationIssue.js';
 import * as Settings from '../Settings/index.js';
-import type { MatchRange } from '../Transform/index.js';
 import { clean } from '../util/util.js';
 import type { DocumentValidatorOptions } from './docValidator.js';
 import { DocumentValidator } from './docValidator.js';
@@ -43,7 +42,9 @@ export async function checkText(text: string, settings: CSpellUserSettings): Pro
 export async function checkTextOld(text: string, settings: CSpellUserSettings): Promise<CheckTextInfo> {
     const validationResult = validateText(text, settings);
     const finalSettings = Settings.finalizeSettings(settings);
-    const includeRanges = calcTextInclusionRanges(text, finalSettings);
+    const includeRanges = calcTextInclusionRanges(text, finalSettings).map(
+        ({ startPos, endPos }) => [startPos, endPos] as const,
+    );
     const issues = await validationResult;
     return genResult(text, issues, includeRanges);
 }
@@ -88,31 +89,40 @@ export async function checkTextDocument(
 }
 
 export async function genCheckText(docValidator: DocumentValidator): Promise<CheckTextInfo> {
+    docValidator.recordCheckedRanges = true;
     await docValidator.prepare();
     const issues = docValidator.checkDocument(true);
     const preparations = docValidator._getPreparations();
     assert(preparations);
-    return genResult(docValidator.document.text, issues, preparations.includeRanges);
+    return genResult(docValidator.document.text, issues, docValidator.getRangesChecked());
 }
 
-function genResult(text: string, issues: ValidationIssue[], includeRanges: MatchRange[]) {
+function genResult(text: string, issues: ValidationIssue[], includeRanges: Iterable<Readonly<SimpleRange>>) {
     const result: TextInfoItem[] = [];
     let lastPos = 0;
-    for (const { startPos, endPos } of includeRanges) {
-        result.push(
-            {
+    for (const [startPos, endPos] of includeRanges) {
+        if (lastPos < startPos) {
+            result.push({
                 text: text.slice(lastPos, startPos),
                 startPos: lastPos,
                 endPos: startPos,
                 flagIE: IncludeExcludeFlag.EXCLUDE,
-            },
-            {
-                text: text.slice(startPos, endPos),
-                startPos,
-                endPos,
-                flagIE: IncludeExcludeFlag.INCLUDE,
-            },
-        );
+            });
+        } else {
+            const prev = result.at(-1);
+            if (prev && prev.flagIE === IncludeExcludeFlag.INCLUDE && prev.endPos === startPos) {
+                prev.endPos = endPos;
+                prev.text = text.slice(prev.startPos, endPos);
+                lastPos = endPos;
+                continue;
+            }
+        }
+        result.push({
+            text: text.slice(startPos, endPos),
+            startPos,
+            endPos,
+            flagIE: IncludeExcludeFlag.INCLUDE,
+        });
         lastPos = endPos;
     }
     result.push({
