@@ -5,6 +5,7 @@ import type {
     CSpellSettings,
     CSpellSettingsWithSourceTrace,
     CSpellUserSettings,
+    DocumentParser,
     ImportFileRef,
     Parser,
     Plugin,
@@ -47,8 +48,11 @@ const mergeCache = new AutoResolveWeakCache<
 
 const cacheInternalSettings = new AutoResolveWeakCache<CSpellSettingsI | CSpellSettingsWSTO, CSpellSettingsI>();
 
-const parserCache = new AutoResolveWeakCache<Exclude<CSpellSettingsI['plugins'], undefined>, Map<string, Parser>>();
-const emptyParserMap = new Map<string, Parser>();
+const parserCache = new AutoResolveWeakCache<
+    Exclude<CSpellSettingsI['plugins'], undefined>,
+    Map<string, Parser | DocumentParser>
+>();
+const emptyParserMap = new Map<string, DocumentParser>();
 
 const cwdResolver = new CwdUrlResolver();
 let envCSpellGlobRoot = process.env[ENV_CSPELL_GLOB_ROOT];
@@ -391,7 +395,7 @@ function resolveCwd(): URL {
     return cwdResolver.resolveUrl(envCSpellGlobRoot);
 }
 
-function resolveParser(settings: CSpellSettingsI): Parser | undefined {
+function resolveParser(settings: CSpellSettingsI): DocumentParser | Parser | undefined {
     if (!settings.parser) return undefined;
     if (typeof settings.parser === 'function') return settings.parser;
 
@@ -404,7 +408,7 @@ function resolveParser(settings: CSpellSettingsI): Parser | undefined {
     return parser;
 }
 
-function* parsers(plugins: Plugin[]) {
+function* parsers(plugins: Plugin[]): Iterable<[string, Parser | DocumentParser]> {
     for (const plugin of plugins) {
         if (!plugin.parsers) continue;
         for (const parser of plugin.parsers) {
@@ -413,11 +417,11 @@ function* parsers(plugins: Plugin[]) {
     }
 }
 
-function mapPlugins(plugins: Exclude<CSpellSettingsI['plugins'], undefined>): Map<string, Parser> {
+function mapPlugins(plugins: Exclude<CSpellSettingsI['plugins'], undefined>): Map<string, Parser | DocumentParser> {
     return new Map(parsers(plugins));
 }
 
-function extractParsers(plugins: CSpellSettingsI['plugins']): Map<string, Parser> {
+function extractParsers(plugins: CSpellSettingsI['plugins']): Map<string, Parser | DocumentParser> {
     if (!plugins || !plugins.length) return emptyParserMap;
 
     return parserCache.get(plugins, mapPlugins);

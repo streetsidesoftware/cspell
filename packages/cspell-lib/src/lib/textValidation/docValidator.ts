@@ -4,8 +4,11 @@ import { opConcatMap, opMap, pipeSync } from '@cspell/cspell-pipe/sync';
 import type {
     CSpellSettingsWithSourceTrace,
     CSpellUserSettings,
+    DocumentParser,
     MappedText,
     ParsedText,
+    Parser,
+    ParseResult,
     PnPSettings,
 } from '@cspell/cspell-types';
 import { IssueType } from '@cspell/cspell-types';
@@ -516,7 +519,7 @@ export class DocumentValidator {
         assert(this._preparations, ERROR_NOT_PREPARED);
         const parser = this._preparations.finalSettings.parserFn;
         if (typeof parser !== 'object') return this.defaultParser();
-        return parser.parse(this.document.text, toFilePathOrHref(documentUriToURL(this.document.uri))).parsedTexts;
+        return parseDocumentWithParser(parser, this.document).parsedTexts;
     }
 
     private getSuggestions(text: string): ExtendedSuggestion[] {
@@ -669,6 +672,17 @@ async function searchForDocumentConfig(
         if (url.protocol !== 'file:') return defaultConfig;
         throw e;
     }
+}
+
+function parseDocumentWithParser(parser: DocumentParser | Parser, document: TextDocument): ParseResult {
+    if (isDocumentParser(parser)) {
+        return parser.parseDocument({ text: document.text, url: documentUriToURL(document.uri) });
+    }
+    return parser.parse(document.text, toFilePathOrHref(documentUriToURL(document.uri)));
+}
+
+function isDocumentParser(parser: DocumentParser | Parser): parser is DocumentParser {
+    return (parser as DocumentParser).parseDocument !== undefined;
 }
 
 function mapSug(sug: ExtendedSuggestion | SuggestionResult): SuggestionResult {

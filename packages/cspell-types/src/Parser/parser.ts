@@ -1,4 +1,5 @@
 import type { Mapped } from './Mapped.js';
+import type { TextDocument } from './types.js';
 
 export type ParserOptions = Record<string, unknown>;
 
@@ -7,6 +8,7 @@ export type ParserName = string;
 export interface Parser {
     /** Name of parser */
     readonly name: ParserName;
+
     /**
      * Parse Method
      * @param content - full content of the file
@@ -15,9 +17,22 @@ export interface Parser {
     parse(content: string, filename: string): ParseResult;
 }
 
+export type ParseDocument = (document: TextDocument) => ParseResult;
+// | ((document: TextDocument) => Promise<ParseResult>)
+// | ((document: TextDocument) => ParseResult | Promise<ParseResult>);
+
+export interface DocumentParser {
+    /** Name of parser */
+    readonly name: ParserName;
+
+    /**
+     * Parse Method
+     * @param document - the text document to parse
+     */
+    parseDocument: ParseDocument;
+}
+
 export interface ParseResult {
-    readonly content: string;
-    readonly filename: string;
     readonly parsedTexts: Iterable<ParsedText>;
 }
 

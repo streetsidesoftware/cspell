@@ -3,7 +3,8 @@ import type { ReportingConfiguration, UnknownWordsConfiguration } from './CSpell
 import type { DictionaryDefinition, DictionaryReference } from './DictionaryDefinition.js';
 import type { Features } from './features.js';
 import type { InlineDictionary } from './InlineDictionary.js';
-import type { Parser, ParserName } from './Parser/index.js';
+import type { ParserName } from './Parser/index.js';
+import type { CSpellPlugin } from './Plugin/index.js';
 import type { SubstitutionDefinitions, Substitutions } from './Substitutions.js';
 import type { Serializable } from './types.js';
 import type { WordSegmentationSettings } from './WordSegmentation.js';
@@ -893,7 +894,7 @@ export interface ExperimentalFileSettings {
      * @experimental
      * @since 6.2.0
      */
-    plugins?: Plugin[];
+    plugins?: CSpellPlugin[];
 }
 
 /**
@@ -917,15 +918,6 @@ export interface ExperimentalBaseSettings {
      * @since 6.2.0
      */
     parser?: ParserName;
-}
-
-/**
- * Plugin API
- * @experimental
- * @since 6.2.0
- */
-export interface Plugin {
-    parsers?: Parser[];
 }
 
 /**

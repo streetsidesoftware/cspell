@@ -46,9 +46,9 @@ function mapTokenizedLines(itl: Iterable<TokenizedLine>): ParseResult['parsedTex
 }
 
 export function createParser(grammar: Grammar, name: string, transform = mapTokenizedLines): Parser {
-    function parse(content: string, filename: string): ParseResult {
+    function parse(content: string, _filename: string): ParseResult {
         const parsedTexts: ParseResult['parsedTexts'] = pipe(tokenizeTextIterable(content, grammar), transform);
-        return { content, filename, parsedTexts };
+        return { parsedTexts };
     }
 
     return { name, parse };

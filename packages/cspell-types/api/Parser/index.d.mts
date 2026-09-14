@@ -49,6 +49,44 @@ type SourceMap = number[];
  * The range is inclusive of the start and exclusive of the end.
  */
 type Range = readonly [start: number, end: number];
+/**
+ * A simple text document. Not to be implemented. The document keeps the content
+ * as string.
+ */
+interface TextDocument {
+  /**
+   * The associated URL for this document. Most documents have the `file:` protocol, indicating that they
+   * represent files on disk. However, some documents may have other protocols indicating that they are not
+   * available on disk.
+   */
+  readonly url: URL;
+  /**
+   * The identifier of the file type(s) associated with this document.
+   */
+  readonly languageId?: string | string[];
+  /**
+   * the raw Document Text
+   */
+  readonly text: string;
+  /**
+   * The natural language locale.
+   */
+  readonly locale?: string | undefined;
+}
+interface TextDocumentFragment extends TextDocument {
+  /**
+   * the raw text fragment contained in this document fragment.
+   */
+  readonly text: string;
+  /**
+   * The range of the text fragment within the full text of the document.
+   */
+  readonly range: Range;
+  /**
+   * Optional full text of the document containing this fragment.
+   */
+  readonly fullText?: string;
+}
 //#endregion
 //#region src/Parser/Mapped.d.ts
 interface Mapped {
@@ -85,9 +123,17 @@ interface Parser {
    */
   parse(content: string, filename: string): ParseResult;
 }
+type ParseDocument = (document: TextDocument) => ParseResult;
+interface DocumentParser {
+  /** Name of parser */
+  readonly name: ParserName;
+  /**
+   * Parse Method
+   * @param document - the text document to parse
+   */
+  parseDocument: ParseDocument;
+}
 interface ParseResult {
-  readonly content: string;
-  readonly filename: string;
   readonly parsedTexts: Iterable<ParsedText>;
 }
 interface ParsedText extends Readonly<Mapped> {
@@ -187,4 +233,4 @@ interface TransformedText extends Mapped {
   rawText?: string | undefined;
 }
 //#endregion
-export type { DelegateInfo, MappedText, ParseResult, ParsedTag, ParsedTags, ParsedText, Parser, ParserName, ParserOptions, Range, Scope, ScopeChain, ScopeString, SourceMap };
+export type { DelegateInfo, DocumentParser, MappedText, ParseResult, ParsedTag, ParsedTags, ParsedText, Parser, ParserName, ParserOptions, Range, Scope, ScopeChain, ScopeString, SourceMap, TextDocument, TextDocumentFragment };

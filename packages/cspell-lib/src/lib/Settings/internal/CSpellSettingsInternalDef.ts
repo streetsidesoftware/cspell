@@ -1,6 +1,7 @@
 import type {
     AdvancedCSpellSettingsWithSourceTrace,
     CSpellSettingsWithSourceTrace,
+    DocumentParser,
     Parser,
 } from '@cspell/cspell-types';
 
@@ -16,7 +17,7 @@ export interface CSpellSettingsInternal extends Omit<AdvancedCSpellSettingsWithS
 }
 
 export interface CSpellSettingsInternalFinalized extends CSpellSettingsInternal {
-    parserFn: Parser | undefined;
+    parserFn: Parser | DocumentParser | undefined;
     finalized: true;
     ignoreRegExpList: RegExp[];
     includeRegExpList: RegExp[];

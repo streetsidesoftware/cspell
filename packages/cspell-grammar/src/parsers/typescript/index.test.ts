@@ -20,7 +20,7 @@ describe('TypeScript Parser', () => {
     `('parse $filename', async ({ filename }) => {
         const content = await readSample(filename);
         const p = parser.parse(content, filename);
-        expect(stringifyResult(p)).toMatchSnapshot();
+        expect(stringifyResult(filename, p)).toMatchSnapshot();
     });
 });
 
@@ -28,13 +28,13 @@ function readSample(filename: string): Promise<string> {
     return fs.readFile(path.resolve(fixtures, filename), 'utf8');
 }
 
-function stringifyResult(result: ParseResult): string {
+function stringifyResult(filename: string, result: ParseResult): string {
     function mapParsedTexts(t: ParseResult['parsedTexts']): string[] {
         return [...t].map((p) => `${p.range[0]}-${p.range[1]} ${JSON.stringify(p.text)} ${p.scope?.toString() ?? ''}`);
     }
 
     return `\
-filename: ${result.filename}
+filename: ${filename}
 parsed:
 ${mapParsedTexts(result.parsedTexts).join('\n')}
 `;

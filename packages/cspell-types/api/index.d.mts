@@ -1216,6 +1216,44 @@ type SourceMap = number[];
  * The range is inclusive of the start and exclusive of the end.
  */
 type Range = readonly [start: number, end: number];
+/**
+ * A simple text document. Not to be implemented. The document keeps the content
+ * as string.
+ */
+interface TextDocument {
+  /**
+   * The associated URL for this document. Most documents have the `file:` protocol, indicating that they
+   * represent files on disk. However, some documents may have other protocols indicating that they are not
+   * available on disk.
+   */
+  readonly url: URL;
+  /**
+   * The identifier of the file type(s) associated with this document.
+   */
+  readonly languageId?: string | string[];
+  /**
+   * the raw Document Text
+   */
+  readonly text: string;
+  /**
+   * The natural language locale.
+   */
+  readonly locale?: string | undefined;
+}
+interface TextDocumentFragment extends TextDocument {
+  /**
+   * the raw text fragment contained in this document fragment.
+   */
+  readonly text: string;
+  /**
+   * The range of the text fragment within the full text of the document.
+   */
+  readonly range: Range;
+  /**
+   * Optional full text of the document containing this fragment.
+   */
+  readonly fullText?: string;
+}
 //#endregion
 //#region src/Parser/Mapped.d.ts
 interface Mapped {
@@ -1252,9 +1290,17 @@ interface Parser {
    */
   parse(content: string, filename: string): ParseResult;
 }
+type ParseDocument = (document: TextDocument) => ParseResult;
+interface DocumentParser {
+  /** Name of parser */
+  readonly name: ParserName;
+  /**
+   * Parse Method
+   * @param document - the text document to parse
+   */
+  parseDocument: ParseDocument;
+}
 interface ParseResult {
-  readonly content: string;
-  readonly filename: string;
   readonly parsedTexts: Iterable<ParsedText>;
 }
 interface ParsedText extends Readonly<Mapped> {
@@ -1352,6 +1398,50 @@ interface TransformedText extends Mapped {
    * The original text
    */
   rawText?: string | undefined;
+}
+//#endregion
+//#region src/Plugin/index.d.ts
+type CreateParser<Options = unknown> = (name: string, options?: Options) => Promise<DocumentParser> | DocumentParser;
+/**
+ * @since 10.4.0
+ */
+interface AvailableParsers<Options> {
+  /**
+   * The value can be a `DocumentParser` instance, a `Parser` instance, a string, or a boolean.
+   * If the value is a string or boolean,
+   */
+  [name: string]: DocumentParser | Parser | CreateParser<Options>;
+}
+/**
+ * @since 10.4.0
+ */
+type Parsers = (DocumentParser | Parser)[];
+/**
+ * Plugin API
+ * @experimental
+ * @since 6.2.0
+ */
+interface CSpellPlugin<Options = unknown> {
+  /**
+   * Ask the plugin to create a parser.
+   * @param name The name of the parser to create.
+   * @param options
+   * @returns A parser instance or undefined if
+   * @since 10.4.0
+   */
+  createParser?: (name: string, options?: Options) => Promise<DocumentParser> | DocumentParser | undefined;
+  /**
+   * A collection of available parsers provided by the plugin.
+   * Each key is the name of the parser, and the value can be a `DocumentParser` instance, a `Parser` instance, or a `CreateParser` function.
+   * @since 10.4.0
+   */
+  availableParsers?: AvailableParsers<Options>;
+  /**
+   * List of parsers provided by the plugin.
+   * Each entry can be either a `DocumentParser` instance or a `Parser` definition.
+   * @since 6.2.0
+   */
+  parsers?: Parsers;
 }
 //#endregion
 //#region src/Substitutions.d.ts
@@ -2280,7 +2370,7 @@ interface ExperimentalFileSettings {
    * @experimental
    * @since 6.2.0
    */
-  plugins?: Plugin[];
+  plugins?: CSpellPlugin[];
 }
 /**
  * Extends CSpellSettings with {@link ExperimentalFileSettings}
@@ -2302,14 +2392,6 @@ interface ExperimentalBaseSettings {
    * @since 6.2.0
    */
   parser?: ParserName;
-}
-/**
- * Plugin API
- * @experimental
- * @since 6.2.0
- */
-interface Plugin {
-  parsers?: Parser[];
 }
 /**
  * Semantic Version Predicate
@@ -2361,4 +2443,4 @@ declare function mergeConfig(settings: CSpellSettings[]): CSpellSettings;
 declare function mergeConfig(...settings: [CSpellSettings, ...CSpellSettings[]]): CSpellSettings;
 declare function mergeConfig(...settings: [CSpellSettings[], ...CSpellSettings[]]): CSpellSettings;
 //#endregion
-export { type AdvancedCSpellSettings, type AdvancedCSpellSettingsWithSourceTrace, type BaseSetting, type CSpellPackageSettings, type CSpellReporter, type CSpellReporterEmitters, type CSpellReporterModule, type CSpellSettings, type CSpellSettingsWithSourceTrace, type CSpellUserSettings, type CSpellUserSettingsFields, type CSpellUserSettingsWithComments, type CSpellVFS, type CSpellVFSBinaryData, type CSpellVFSData, type CSpellVFSFile, type CSpellVFSFileEntry, type CSpellVFSFileUrl, type CSpellVFSTextData, type CacheFormat, type CacheSettings, type CacheStrategy, type CharacterSet, type CharacterSetCosts, type CommandLineSettings, ConfigFields, type CustomDictionaryPath, type CustomDictionaryScope, type DebugEmitter, type DictionaryDefinition, type DictionaryDefinitionAlternate, type DictionaryDefinitionAugmented, type DictionaryDefinitionBase, type DictionaryDefinitionCustom, type DictionaryDefinitionInline, type DictionaryDefinitionInlineFlagWords, type DictionaryDefinitionInlineIgnoreWords, type DictionaryDefinitionInlineWords, type DictionaryDefinitionLegacy, type DictionaryDefinitionPreferred, type DictionaryDefinitionSimple, type DictionaryFileTypes, type DictionaryId, type DictionaryInformation, type DictionaryNegRef, type DictionaryPath, type DictionaryRef, type DictionaryReference, type EditCosts, type ErrorEmitter, type ErrorLike, type ExperimentalBaseSettings, type ExperimentalFileSettings, type ExtendableSettings, type FSPathResolvable, type Feature, type Features, type FeaturesSupportedByReporter, type FileSettings, type FileSource, type FsPath, type Glob, type GlobDef, type ImportFileRef, type InMemorySource, type Issue, IssueType, type LanguageId, type LanguageIdMultiple, type LanguageIdMultipleNeg, type LanguageIdSingle, type LanguageSetting, type LanguageSettingFilterFields, type LanguageSettingFilterFieldsDeprecated, type LanguageSettingFilterFieldsPreferred, type LegacySettings, type LocalId, type LocaleId, type MappedText, type MatchingFileType, type MergeSource, type MessageEmitter, type MessageType, type MessageTypeLookup, MessageTypes, type OverrideFilterFields, type OverrideSettings, type ParseResult, type ParsedTag, type ParsedTags, type ParsedText, type Parser, type ParserName, type ParserOptions, type Pattern, type PatternId, type PatternRef, type Plugin, type PnPSettings, type PredefinedPatterns, type ProgressBase, type ProgressEmitter, type ProgressFileBase, type ProgressFileBegin, type ProgressFileComplete, type ProgressItem, type ProgressTypes, type Range, type RegExpPatternDefinition, type RegExpPatternList, type ReplaceEntry, type ReplaceMap, type ReportIssueOptions, type ReporterConfiguration, type ReporterSettings, type ReportingConfiguration, type ResultEmitter, type RunResult, type Settings, type SimpleGlob, type SoftWordBreak, type SoftWordBreakDefinitions, type SoftWordBreakPattern, type SoftWordBreakRegExp, type SoftWordBreakRegExpString, type SoftWordBreakRule, type SoftWordBreaks, type Source, type SourceMap, type SpellingErrorEmitter, type SubstitutionDefinition, type SubstitutionDefinitions, type SubstitutionEntry, type SubstitutionID, type Substitutions, type SuggestionCostMapDef, type SuggestionCostsDefs, type SuggestionsConfiguration, type TextDocumentOffset, type TextOffset, type TrustLevel, type UnknownWordsChoices, type UnknownWordsConfiguration, type Version, type VersionLatest, type VersionLegacy, type WordSegmentationSettings, type WorkspaceTrustSettings, defaultCSpellSettings, defineConfig, mergeConfig, unknownWordsChoices };
+export { type AdvancedCSpellSettings, type AdvancedCSpellSettingsWithSourceTrace, type AvailableParsers, type BaseSetting, type CSpellPackageSettings, type CSpellPlugin, type CSpellPlugin as Plugin, type CSpellReporter, type CSpellReporterEmitters, type CSpellReporterModule, type CSpellSettings, type CSpellSettingsWithSourceTrace, type CSpellUserSettings, type CSpellUserSettingsFields, type CSpellUserSettingsWithComments, type CSpellVFS, type CSpellVFSBinaryData, type CSpellVFSData, type CSpellVFSFile, type CSpellVFSFileEntry, type CSpellVFSFileUrl, type CSpellVFSTextData, type CacheFormat, type CacheSettings, type CacheStrategy, type CharacterSet, type CharacterSetCosts, type CommandLineSettings, ConfigFields, type CreateParser, type CustomDictionaryPath, type CustomDictionaryScope, type DebugEmitter, type DictionaryDefinition, type DictionaryDefinitionAlternate, type DictionaryDefinitionAugmented, type DictionaryDefinitionBase, type DictionaryDefinitionCustom, type DictionaryDefinitionInline, type DictionaryDefinitionInlineFlagWords, type DictionaryDefinitionInlineIgnoreWords, type DictionaryDefinitionInlineWords, type DictionaryDefinitionLegacy, type DictionaryDefinitionPreferred, type DictionaryDefinitionSimple, type DictionaryFileTypes, type DictionaryId, type DictionaryInformation, type DictionaryNegRef, type DictionaryPath, type DictionaryRef, type DictionaryReference, type DocumentParser, type EditCosts, type ErrorEmitter, type ErrorLike, type ExperimentalBaseSettings, type ExperimentalFileSettings, type ExtendableSettings, type FSPathResolvable, type Feature, type Features, type FeaturesSupportedByReporter, type FileSettings, type FileSource, type FsPath, type Glob, type GlobDef, type ImportFileRef, type InMemorySource, type Issue, IssueType, type LanguageId, type LanguageIdMultiple, type LanguageIdMultipleNeg, type LanguageIdSingle, type LanguageSetting, type LanguageSettingFilterFields, type LanguageSettingFilterFieldsDeprecated, type LanguageSettingFilterFieldsPreferred, type LegacySettings, type LocalId, type LocaleId, type MappedText, type MatchingFileType, type MergeSource, type MessageEmitter, type MessageType, type MessageTypeLookup, MessageTypes, type OverrideFilterFields, type OverrideSettings, type ParseResult, type ParsedTag, type ParsedTags, type ParsedText, type Parser, type ParserName, type ParserOptions, type Parsers, type Pattern, type PatternId, type PatternRef, type PnPSettings, type PredefinedPatterns, type ProgressBase, type ProgressEmitter, type ProgressFileBase, type ProgressFileBegin, type ProgressFileComplete, type ProgressItem, type ProgressTypes, type Range, type RegExpPatternDefinition, type RegExpPatternList, type ReplaceEntry, type ReplaceMap, type ReportIssueOptions, type ReporterConfiguration, type ReporterSettings, type ReportingConfiguration, type ResultEmitter, type RunResult, type Settings, type SimpleGlob, type SoftWordBreak, type SoftWordBreakDefinitions, type SoftWordBreakPattern, type SoftWordBreakRegExp, type SoftWordBreakRegExpString, type SoftWordBreakRule, type SoftWordBreaks, type Source, type SourceMap, type SpellingErrorEmitter, type SubstitutionDefinition, type SubstitutionDefinitions, type SubstitutionEntry, type SubstitutionID, type Substitutions, type SuggestionCostMapDef, type SuggestionCostsDefs, type SuggestionsConfiguration, type TextDocument, type TextDocumentFragment, type TextDocumentOffset, type TextOffset, type TrustLevel, type UnknownWordsChoices, type UnknownWordsConfiguration, type Version, type VersionLatest, type VersionLegacy, type WordSegmentationSettings, type WorkspaceTrustSettings, defaultCSpellSettings, defineConfig, mergeConfig, unknownWordsChoices };
