@@ -840,6 +840,10 @@ interface DocumentValidatorOptions extends ValidateTextOptions {
    * If true, the document will be checked even if it would normally be excluded.
    */
   forceCheck?: boolean;
+  /**
+   * If true, the ranges of text that have been checked will be recorded and available for later using the `getCheckedRanges` method.
+   */
+  recordCheckedRanges?: boolean;
 }
 type PerfTimings = Record<string, number>;
 declare class DocumentValidator {
@@ -855,6 +859,7 @@ declare class DocumentValidator {
   readonly options: DocumentValidatorOptions;
   readonly perfTiming: PerfTimings;
   skipValidation: boolean;
+  private rangesChecked;
   static create(doc: TextDocument, options: DocumentValidatorOptions, settingsOrConfigFile: CSpellUserSettings | ICSpellConfigFile$1): Promise<DocumentValidator>;
   /**
    * @param doc - Document to validate
@@ -897,11 +902,6 @@ declare class DocumentValidator {
   checkDocumentDirectives(forceCheck?: boolean): ValidationIssue[];
   get document(): TextDocument;
   updateDocumentText(text: string): Promise<void>;
-  /**
-   * Get the calculated ranges of text that should be included in the spell checking.
-   * @returns MatchRanges of text to include.
-   */
-  getCheckedTextRanges(): MatchRange[];
   traceWord(word: string): TraceResult$1;
   private defaultParser;
   private _checkParsedText;
@@ -925,6 +925,17 @@ declare class DocumentValidator {
    * Internal `cspell-lib` use.
    */
   _getPreparations(): Preparations | undefined;
+  /**
+   * Get the calculated ranges of text that should be included in the spell checking.
+   *
+   * Use {@link getRangesChecked} to retrieve the ranges of text that have been checked.
+   *
+   * @returns MatchRanges of text to include.
+   */
+  getCheckedTextRanges(): MatchRange[];
+  getRangesChecked(): Iterable<SimpleRange>;
+  get recordCheckedRanges(): boolean;
+  set recordCheckedRanges(value: boolean);
 }
 interface Preparations {
   /** loaded config */

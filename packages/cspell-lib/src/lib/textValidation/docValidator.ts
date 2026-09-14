@@ -88,11 +88,21 @@ export interface DocumentValidatorOptions extends ValidateTextOptions {
      * If true, the document will be checked even if it would normally be excluded.
      */
     forceCheck?: boolean;
+
+    /**
+     * If true, the ranges of text that have been checked will be recorded and available for later using the `getCheckedRanges` method.
+     */
+    recordCheckedRanges?: boolean;
 }
 
 const ERROR_NOT_PREPARED = 'Validator Must be prepared before calling this function.';
 
 type PerfTimings = Record<string, number>;
+
+/**
+ * Represents a list of ranges in a flattened format, where each pair of numbers corresponds to the start and end of a range.
+ */
+type FlattenedRanges = number[];
 
 export class DocumentValidator {
     private _document: TextDocument;
@@ -105,6 +115,11 @@ export class DocumentValidator {
     readonly options: DocumentValidatorOptions;
     readonly perfTiming: PerfTimings = {};
     public skipValidation: boolean;
+    private rangesChecked: FlattenedRanges = [];
+    /**
+     * If true, the ranges of text that have been checked will be recorded and available for later using the `getCheckedRanges` method.
+     */
+    #recordCheckedRanges: boolean;
 
     static async create(
         doc: TextDocument,
@@ -136,6 +151,7 @@ export class DocumentValidator {
             this.options.numSuggestions = numSuggestions;
         }
         this.skipValidation = !!options.skipValidation;
+        this.#recordCheckedRanges = !!options.recordCheckedRanges;
         // console.error(`DocumentValidator: ${doc.uri}`);
     }
 
@@ -345,7 +361,22 @@ export class DocumentValidator {
                 hasSimpleSuggestions,
             };
         }
-        const issues = [...pipeSync(segmenter(parsedText), opConcatMap(textValidator.validate), opMap(mapToIssue))];
+
+        const skipRecordRanges = (iter: Iterable<MappedText>) => iter;
+        const recordRanges = opMap<MappedText, MappedText>((m) => {
+            this.rangesChecked.push(m.range[0], m.range[1]);
+            return m;
+        });
+        const recordRangesIfNeeded = this.recordCheckedRanges ? recordRanges : skipRecordRanges;
+
+        const issues = [
+            ...pipeSync(
+                segmenter(parsedText),
+                recordRangesIfNeeded,
+                opConcatMap(textValidator.validate),
+                opMap(mapToIssue),
+            ),
+        ];
 
         if (!this.options.generateSuggestions) {
             return issues.map((issue) => {
@@ -431,17 +462,9 @@ export class DocumentValidator {
     }
 
     public async updateDocumentText(text: string): Promise<void> {
+        this.rangesChecked.length = 0;
         updateTextDocument(this._document, [{ text }]);
         await this._updatePrep();
-    }
-
-    /**
-     * Get the calculated ranges of text that should be included in the spell checking.
-     * @returns MatchRanges of text to include.
-     */
-    public getCheckedTextRanges(): MatchRange[] {
-        assert(this._preparations, ERROR_NOT_PREPARED);
-        return this._preparations.includeRanges;
     }
 
     public traceWord(word: string): TraceResult {
@@ -576,6 +599,36 @@ export class DocumentValidator {
      */
     public _getPreparations(): Preparations | undefined {
         return this._preparations;
+    }
+
+    /**
+     * Get the calculated ranges of text that should be included in the spell checking.
+     *
+     * Use {@link getRangesChecked} to retrieve the ranges of text that have been checked.
+     *
+     * @returns MatchRanges of text to include.
+     */
+    public getCheckedTextRanges(): MatchRange[] {
+        assert(this._preparations, ERROR_NOT_PREPARED);
+        return this._preparations.includeRanges;
+    }
+
+    public *getRangesChecked(): Iterable<SimpleRange> {
+        const ranges = this.rangesChecked;
+        for (let i = 0; i < ranges.length - 1; i += 2) {
+            const start = ranges[i];
+            const end = ranges[i + 1];
+            yield [start, end];
+        }
+    }
+
+    public get recordCheckedRanges(): boolean {
+        return this.#recordCheckedRanges;
+    }
+
+    public set recordCheckedRanges(value: boolean) {
+        this.rangesChecked.length = 0;
+        this.#recordCheckedRanges = value;
     }
 }
 
