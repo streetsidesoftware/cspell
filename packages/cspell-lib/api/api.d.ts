@@ -902,11 +902,6 @@ declare class DocumentValidator {
   checkDocumentDirectives(forceCheck?: boolean): ValidationIssue[];
   get document(): TextDocument;
   updateDocumentText(text: string): Promise<void>;
-  /**
-   * Get the calculated ranges of text that should be included in the spell checking.
-   * @returns MatchRanges of text to include.
-   */
-  getCheckedTextRanges(): MatchRange[];
   traceWord(word: string): TraceResult$1;
   private defaultParser;
   private _checkParsedText;
@@ -930,6 +925,14 @@ declare class DocumentValidator {
    * Internal `cspell-lib` use.
    */
   _getPreparations(): Preparations | undefined;
+  /**
+   * Get the calculated ranges of text that should be included in the spell checking.
+   *
+   * Use {@link getRangesChecked} to retrieve the ranges of text that have been checked.
+   *
+   * @returns MatchRanges of text to include.
+   */
+  getCheckedTextRanges(): MatchRange[];
   getRangesChecked(): Iterable<SimpleRange>;
   get recordCheckedRanges(): boolean;
   set recordCheckedRanges(value: boolean);
