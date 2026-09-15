@@ -1,5 +1,5 @@
-import type { CSpellSettings } from './CSpellSettingsDef';
+import type { AdvancedCSpellSettings, CSpellSettings } from './CSpellSettingsDef';
 
-export function defineConfig(config: CSpellSettings): CSpellSettings {
+export function defineConfig(config: AdvancedCSpellSettings): CSpellSettings {
     return config;
 }

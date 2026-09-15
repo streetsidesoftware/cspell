@@ -75,3 +75,12 @@ export interface CSpellPluginEx<Options = unknown> extends CSpellPlugin {
      */
     availableParsers?: AvailableParsers<Options>;
 }
+
+export interface CSpellSettingsPlugins {
+    /**
+     * Future Plugin support
+     * @experimental
+     * @since 6.2.0
+     */
+    plugins?: CSpellPlugin[];
+}
