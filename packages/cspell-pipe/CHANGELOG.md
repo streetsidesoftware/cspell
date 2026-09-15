@@ -92,6 +92,18 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - fix: Add tags to ParsedText (<a href="https://github.com/streetsidesoftware/cspell/pull/9237">#9237</a>)
 
+## v10.3.2 (2026-09-15)
+
+### Fixes
+
+- fix: Add Experimental Validation setting. (<a href="https://github.com/streetsidesoftware/cspell/pull/9250">#9250</a>)
+- fix: Plugin (<a href="https://github.com/streetsidesoftware/cspell/pull/9244">#9244</a>)
+
+- fix: remove unused dependency `fast-json-stable-stringify` (<a href="https://github.com/streetsidesoftware/cspell/pull/9243">#9243</a>)
+- fix: Adjust check text to show only the text that was actually checked. (<a href="https://github.com/streetsidesoftware/cspell/pull/9241">#9241</a>)
+
+- fix: Add tags to ParsedText (<a href="https://github.com/streetsidesoftware/cspell/pull/9237">#9237</a>)
+
 ## v10.3.1 (2026-09-13)
 
 ### Fixes
