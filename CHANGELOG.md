@@ -574,6 +574,42 @@ These changes lay the groundwork for parsers and other tools to annotate text wi
 
 </details>
 
+## v10.3.3 (2026-09-15)
+
+### Fixes
+
+<details>
+<summary>fix: Mark ParsedTags as read only. (<a href="https://github.com/streetsidesoftware/cspell/pull/9253">#9253</a>)</summary>
+
+### fix: Mark ParsedTags as read only. ([#9253](https://github.com/streetsidesoftware/cspell/pull/9253))
+
+This pull request makes a small but important change to the `ParsedText` interface in several files, improving type safety by marking the `tags` property as a read-only type. This ensures that the `tags` associated with a parsed text segment cannot be modified after creation.
+
+- Updated the `tags` property in the `ParsedText` interface to use `Readonly<ParsedTags>` instead of `ParsedTags`, making the tags immutable in the following files:
+  - `packages/cspell-types/api/Parser/index.d.mts`
+  - `packages/cspell-types/api/index.d.mts`
+  - `packages/cspell-types/src/Parser/parser.ts`
+
+---
+
+</details>
+
+<details>
+<summary>fix: Make sure Parser and DocumentParser can be used together. (<a href="https://github.com/streetsidesoftware/cspell/pull/9252">#9252</a>)</summary>
+
+### fix: Make sure Parser and DocumentParser can be used together. ([#9252](https://github.com/streetsidesoftware/cspell/pull/9252))
+
+This pull request enhances the parser interface definitions in the `cspell-types` package to provide better flexibility and clarity for parser implementations. The main changes introduce optional `parseDocument` and `parse` methods to both the `Parser` and `DocumentParser` interfaces, across both type declaration and source files.
+
+**Parser interface enhancements:**
+
+- Added an optional `parseDocument` method to the `Parser` interface, allowing parsers to optionally implement document-based parsing. (`packages/cspell-types/api/Parser/index.d.mts` [\[1\]](diffhunk://#diff-8e581864afed8f70400dbe392449ab40296a78133cee216ab4ad6ef2a38981f6R115-R119) `packages/cspell-types/api/index.d.mts` [\[2\]](diffhunk://#diff-14f40e062c024a63c555a8565984f3d45268e79b41d2dbea8960eab1473be840R1342-R1346) `packages/cspell-types/src/Parser/parser.ts` [\[3\]](diffhunk://#diff-d4bedbf21c899fa1f9dc91855211fc8dd4ed7d1b54a6433514b0ca86974bbea4R12-R17)
+- Added an optional `parse` method to the `DocumentParser` interface, enabling parsers to optionally implement content-and-filename-based parsing. (`packages/cspell-types/api/Parser/index.d.mts` [\[1\]](diffhunk://#diff-8e581864afed8f70400dbe392449ab40296a78133cee216ab4ad6ef2a38981f6R136-R141) `packages/cspell-types/api/index.d.mts` [\[2\]](diffhunk://#diff-14f40e062c024a63c555a8565984f3d45268e79b41d2dbea8960eab1473be840R1363-R1368) `packages/cspell-types/src/Parser/parser.ts` [\[3\]](diffhunk://#diff-d4bedbf21c899fa1f9dc91855211fc8dd4ed7d1b54a6433514b0ca86974bbea4R39-R45)
+
+---
+
+</details>
+
 ## v10.3.2 (2026-09-15)
 
 ### Fixes
