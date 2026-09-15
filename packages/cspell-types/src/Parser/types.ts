@@ -49,3 +49,42 @@ export type SourceMap = number[];
  * The range is inclusive of the start and exclusive of the end.
  */
 export type Range = readonly [start: number, end: number];
+
+/**
+ * Interface used to pass documents to the parser.
+ * @since 10.4.0
+ */
+export interface TextDocument {
+    /**
+     * The associated URL for this document. Most documents have the `file:` protocol, indicating that they
+     * represent files on disk. However, some documents may have other protocols indicating that they are not
+     * available on disk.
+     */
+    readonly url: URL | string;
+
+    /**
+     * the raw Document Text
+     */
+    readonly text: string;
+}
+
+/**
+ * A fragment of a text document, representing a subset of the full document.
+ * @since 10.4.0
+ */
+export interface TextDocumentFragment extends TextDocument {
+    /**
+     * the raw text fragment contained in this document fragment.
+     */
+    readonly text: string;
+
+    /**
+     * The range of the text fragment within the full text of the document.
+     */
+    readonly range: Range;
+
+    /**
+     * Optional full text of the document containing this fragment.
+     */
+    readonly fullText?: string;
+}

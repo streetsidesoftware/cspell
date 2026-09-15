@@ -1,5 +1,6 @@
 export type {
     DelegateInfo,
+    DocumentParser,
     ParsedTag,
     ParsedTags,
     ParsedText,
@@ -12,4 +13,4 @@ export type {
     ScopeString,
 } from './parser.js';
 export type { MappedText } from './TextMap.js';
-export type { Range, SourceMap } from './types.js';
+export type { Range, SourceMap, TextDocument, TextDocumentFragment } from './types.js';

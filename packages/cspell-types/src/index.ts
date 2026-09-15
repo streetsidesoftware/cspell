@@ -79,7 +79,6 @@ export type {
     Pattern,
     PatternId,
     PatternRef,
-    Plugin,
     PnPSettings,
     PredefinedPatterns,
     RegExpPatternDefinition,
@@ -124,6 +123,7 @@ export type { CharacterSet, CharacterSetCosts, DictionaryInformation, EditCosts 
 export type { Feature, Features } from './features.js';
 export { mergeConfig } from './merge.js';
 export type {
+    DocumentParser,
     MappedText,
     ParsedTag,
     ParsedTags,
@@ -134,7 +134,10 @@ export type {
     ParserOptions,
     Range,
     SourceMap,
+    TextDocument,
+    TextDocumentFragment,
 } from './Parser/index.js';
+export type { AvailableParsers, CreateParser, CSpellPlugin, Parsers, CSpellPlugin as Plugin } from './Plugin/index.js';
 export type {
     SubstitutionDefinition,
     SubstitutionDefinitions,
