@@ -1341,6 +1341,11 @@ interface Parser {
   readonly name: ParserName;
   /**
    * Parse Method
+   * @param document - the text document to parse
+   */
+  parseDocument?: ParseDocument;
+  /**
+   * Parse Method
    * @param content - full content of the file
    * @param filename - filename
    */
@@ -1355,6 +1360,12 @@ interface DocumentParser {
    * @param document - the text document to parse
    */
   parseDocument: ParseDocument;
+  /**
+   * Parse Method
+   * @param content - full content of the file
+   * @param filename - filename
+   */
+  parse?: (content: string, filename: string) => ParseResult;
 }
 interface ParseResult {
   /**
