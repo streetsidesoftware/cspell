@@ -1421,21 +1421,11 @@ type Parsers = (DocumentParser | Parser)[];
  * @experimental
  * @since 6.2.0
  */
-interface CSpellPlugin<Options = unknown> {
+interface CSpellPlugin {
   /**
-   * Ask the plugin to create a parser.
-   * @param name The name of the parser to create.
-   * @param options
-   * @returns A parser instance or undefined if
-   * @since 10.4.0
+   * This is the name of the plugin.
    */
-  createParser?: (name: string, options?: Options) => Promise<DocumentParser> | DocumentParser | undefined;
-  /**
-   * A collection of available parsers provided by the plugin.
-   * Each key is the name of the parser, and the value can be a `DocumentParser` instance, a `Parser` instance, or a `CreateParser` function.
-   * @since 10.4.0
-   */
-  availableParsers?: AvailableParsers<Options>;
+  name?: string;
   /**
    * List of parsers provided by the plugin.
    * Each entry can be either a `DocumentParser` instance or a `Parser` definition.
