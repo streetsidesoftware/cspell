@@ -1408,14 +1408,14 @@ interface TransformedText extends Mapped {
 }
 //#endregion
 //#region src/Plugin/index.d.ts
-type CreateParser<Options = unknown> = (name: string, options?: Options) => Promise<DocumentParser> | DocumentParser;
+type CreateParser<Options = unknown> = (name: string, options?: Options) => Promise<DocumentParser | undefined> | DocumentParser | undefined;
 /**
  * @since 10.4.0
  */
 interface AvailableParsers<Options> {
   /**
-   * The value can be a `DocumentParser` instance, a `Parser` instance, a string, or a boolean.
-   * If the value is a string or boolean,
+   * A collection of available parsers keyed by name.
+   * Each entry can be a `DocumentParser` instance, a `Parser` instance, or a `CreateParser` function.
    */
   [name: string]: DocumentParser | Parser | CreateParser<Options>;
 }
