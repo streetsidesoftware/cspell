@@ -33,6 +33,17 @@ export interface DocumentParser {
 }
 
 export interface ParseResult {
+    /**
+     * The full content of the file being parsed.
+     * Optionally returned by the parser.
+     * For performance reasons, the parser may choose not to return the full content.
+     */
+    readonly content?: string | undefined;
+    /**
+     * The name of the file being parsed.
+     * Optionally returned by the parser.
+     */
+    readonly filename?: string | undefined;
     readonly parsedTexts: Iterable<ParsedText>;
 }
 
