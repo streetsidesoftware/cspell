@@ -682,7 +682,7 @@ function parseDocumentWithParser(parser: DocumentParser | Parser, document: Text
 }
 
 function isDocumentParser(parser: DocumentParser | Parser): parser is DocumentParser {
-    return (parser as DocumentParser).parseDocument !== undefined;
+    return typeof (parser as DocumentParser).parseDocument === 'function';
 }
 
 function mapSug(sug: ExtendedSuggestion | SuggestionResult): SuggestionResult {

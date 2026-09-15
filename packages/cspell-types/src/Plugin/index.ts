@@ -10,15 +10,15 @@ export type CreateParser<Options = unknown> = (
      * These options are defined by the Plugin.
      */
     options?: Options,
-) => Promise<DocumentParser> | DocumentParser;
+) => Promise<DocumentParser | undefined> | DocumentParser | undefined;
 
 /**
  * @since 10.4.0
  */
 export interface AvailableParsers<Options> {
     /**
-     * The value can be a `DocumentParser` instance, a `Parser` instance, a string, or a boolean.
-     * If the value is a string or boolean,
+     * A collection of available parsers keyed by name.
+     * Each entry can be a `DocumentParser` instance, a `Parser` instance, or a `CreateParser` function.
      */
     [name: string]: DocumentParser | Parser | CreateParser<Options>;
 }
