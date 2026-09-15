@@ -574,6 +574,110 @@ These changes lay the groundwork for parsers and other tools to annotate text wi
 
 </details>
 
+## v10.3.2 (2026-09-15)
+
+### Fixes
+
+<details>
+<summary>fix: Add Experimental Validation setting. (<a href="https://github.com/streetsidesoftware/cspell/pull/9250">#9250</a>)</summary>
+
+### fix: Add Experimental Validation setting. ([#9250](https://github.com/streetsidesoftware/cspell/pull/9250))
+
+This pull request introduces new experimental support for fine-grained validation control and refactors plugin support in the CSpell types package. The main changes add the ability to specify which segments of parsed text should be spell-checked using tag-based validation, and reorganize plugin configuration for future extensibility. The changes also update type definitions and exports to support these new features.
+
+**Validation Tag Support:**
+
+- Introduced the `CSpellSettingsValidation` interface, allowing configuration of which tagged segments of text are spell-checked via the new `validate` property. This uses the new `ValidationTags` and `TagPattern` types to enable hierarchical and wildcard matching of tags. [\[1\]](diffhunk://#diff-14f40e062c024a63c555a8565984f3d45268e79b41d2dbea8960eab1473be840R398-R457) [\[2\]](diffhunk://#diff-3605d81907fcde30506786453f36feee1c508db40428fc284dbaaf5e46f53018R1-R61)
+- Updated exports to include `TagPattern` and `ValidationTags` for external usage.
+
+**Plugin Configuration Refactor:**
+
+- Added the `CSpellSettingsPlugins` interface to encapsulate plugin-related settings, including an experimental `plugins` array. [\[1\]](diffhunk://#diff-14f40e062c024a63c555a8565984f3d45268e79b41d2dbea8960eab1473be840R1503-R1510) [\[2\]](diffhunk://#diff-57a9576432ab7ab5a6bbc5aef158a517d2e4a48a7210fd2fd309d13a3ad3927aR78-R86)
+- Refactored `ExperimentalFileSettings` to extend both `CSpellSettingsPlugins` and `CSpellSettingsValidation`, consolidating experimental settings. [\[1\]](diffhunk://#diff-14f40e062c024a63c555a8565984f3d45268e79b41d2dbea8960eab1473be840L2364-R2432) [\[2\]](diffhunk://#diff-41935efb918069d62bfc4f3ca69b275ee0acf75785e3fda671f68a95c485d1e9L891-R892)
+
+**API and Type Definition Updates:**
+
+- Changed the `defineConfig` function and its type definition to accept `AdvancedCSpellSettings` instead of `CSpellSettings`, reflecting the expanded configuration options. [\[1\]](diffhunk://#diff-14f40e062c024a63c555a8565984f3d45268e79b41d2dbea8960eab1473be840L2436-R2504) [\[2\]](diffhunk://#diff-46b5a5d0dc45c4b85df4756c8c8f41b5885b5cd3693d73696aef5ea72782a6b6L1-R3)
+- Updated imports and type usage throughout the codebase to align with the new structure for plugins and validation settings.
+
+These changes lay the groundwork for more flexible and precise spell-checking configuration and future plugin extensibility.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Plugin (<a href="https://github.com/streetsidesoftware/cspell/pull/9244">#9244</a>)</summary>
+
+### fix: Plugin ([#9244](https://github.com/streetsidesoftware/cspell/pull/9244))
+
+This pull request introduces support for a new `DocumentParser` interface alongside the existing `Parser` interface, modernizing the way documents are parsed throughout the codebase. It updates type definitions, internal APIs, and logic to handle both parser types, and refactors related code for improved clarity and flexibility.
+
+Key changes include:
+
+**API and Type Definition Updates:**
+
+- Added `DocumentParser`, `TextDocument`, and related types to `@cspell/cspell-types`, and updated the `ParseResult` interface to remove `content` and `filename` fields, making it compatible with both parser interfaces.
+- Deprecated the old `Plugin` interface in favor of the new `CSpellPlugin` interface, which now supports both `Parser` and `DocumentParser` instances.
+
+**Core Library Refactoring:**
+
+- Updated parser handling in `CSpellSettingsServer.ts` to support both `Parser` and `DocumentParser`, including changes to caches, type signatures, and plugin mapping functions.
+- Refactored `DocumentValidator` in `docValidator.ts` to use a new `parseDocumentWithParser` helper, which abstracts over the two parser interfaces.
+
+**Parser Implementation and Test Updates:**
+
+- Modified the TypeScript parser and its tests to align with the new `ParseResult` structure, removing direct dependencies on `content` and `filename` in the result.
+
+These changes make the system more flexible and future-proof by supporting richer document parsing scenarios and decoupling the parsing logic from file-based assumptions.
+
+---
+
+</details>
+
+<details>
+<summary>fix: remove unused dependency `fast-json-stable-stringify` (<a href="https://github.com/streetsidesoftware/cspell/pull/9243">#9243</a>)</summary>
+
+### fix: remove unused dependency `fast-json-stable-stringify` ([#9243](https://github.com/streetsidesoftware/cspell/pull/9243))
+
+---
+
+</details>
+
+<details>
+<summary>fix: Adjust check text to show only the text that was actually checked. (<a href="https://github.com/streetsidesoftware/cspell/pull/9241">#9241</a>)</summary>
+
+### fix: Adjust check text to show only the text that was actually checked. ([#9241](https://github.com/streetsidesoftware/cspell/pull/9241))
+
+---
+
+</details>
+
+<details>
+<summary>fix: Add tags to ParsedText (<a href="https://github.com/streetsidesoftware/cspell/pull/9237">#9237</a>)</summary>
+
+### fix: Add tags to ParsedText ([#9237](https://github.com/streetsidesoftware/cspell/pull/9237))
+
+This pull request introduces the concept of "tags" for parsed text segments in the CSpell types, allowing each segment of text to be annotated with a set of named tags. These tags can hold boolean, string, or undefined values, supporting richer metadata for parsers and downstream consumers. The changes affect both the TypeScript source and the type definitions.
+
+The most important changes are:
+
+### Tagging Support for Parsed Text
+
+- Added a new optional `tags` property to the `ParsedText` interface, allowing each parsed text segment to carry a set of tags as metadata. (`ParsedText` in `parser.ts`, `index.d.mts`, `index.d.mts`) [\[1\]](diffhunk://#diff-d4bedbf21c899fa1f9dc91855211fc8dd4ed7d1b54a6433514b0ca86974bbea4R39-R42) [\[2\]](diffhunk://#diff-8e581864afed8f70400dbe392449ab40296a78133cee216ab4ad6ef2a38981f6R108-R111) [\[3\]](diffhunk://#diff-14f40e062c024a63c555a8565984f3d45268e79b41d2dbea8960eab1473be840R1275-R1278)
+- Introduced the `ParsedTag` type (boolean | string | undefined) and the `ParsedTags` interface (a map of tag names to `ParsedTag` values) to define the structure of tags. (`parser.ts`, `index.d.mts`, `index.d.mts`) [\[1\]](diffhunk://#diff-d4bedbf21c899fa1f9dc91855211fc8dd4ed7d1b54a6433514b0ca86974bbea4R100-R112) [\[2\]](diffhunk://#diff-8e581864afed8f70400dbe392449ab40296a78133cee216ab4ad6ef2a38981f6R165-R175) [\[3\]](diffhunk://#diff-14f40e062c024a63c555a8565984f3d45268e79b41d2dbea8960eab1473be840R1332-R1342)
+
+### Type Exports and API Surface
+
+- Updated exports throughout the codebase to include `ParsedTag` and `ParsedTags`, making these types available to consumers. (`src/Parser/index.ts`, `src/index.ts`, `index.d.mts`, `index.d.mts`) [\[1\]](diffhunk://#diff-b71809898342d9c1f1a1caf095f9aea7e4b6ec8d4c1dc17caf71dc6337c44db8R3-R4) [\[2\]](diffhunk://#diff-7f7f37af8b6440a510f8d18217f859f88481fb728d873d1af2943032e57c9f0eR128-R129) [\[3\]](diffhunk://#diff-8e581864afed8f70400dbe392449ab40296a78133cee216ab4ad6ef2a38981f6L175-R190) [\[4\]](diffhunk://#diff-14f40e062c024a63c555a8565984f3d45268e79b41d2dbea8960eab1473be840L2349-R2364)
+- Changed the export style in `src/Parser/index.mts` from `export *` to `export type *`, ensuring only types are exported.
+
+These changes lay the groundwork for parsers and other tools to annotate text with structured metadata, improving extensibility and downstream processing.
+
+---
+
+</details>
+
 ## v10.3.1 (2026-09-13)
 
 ### Fixes
