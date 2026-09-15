@@ -78,7 +78,7 @@ export interface ParsedText extends Readonly<Mapped> {
     /**
      * The tags associated with this segment of text.
      */
-    readonly tags?: ParsedTags | undefined;
+    readonly tags?: Readonly<ParsedTags> | undefined;
     /**
      * Used to delegate parsing the contents of `text` to another parser.
      *
