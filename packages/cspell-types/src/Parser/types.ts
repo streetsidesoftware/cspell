@@ -51,8 +51,8 @@ export type SourceMap = number[];
 export type Range = readonly [start: number, end: number];
 
 /**
- * A simple text document. Not to be implemented. The document keeps the content
- * as string.
+ * Interface used to pass documents to the parser.
+ * @since 10.4.0
  */
 export interface TextDocument {
     /**
@@ -60,24 +60,18 @@ export interface TextDocument {
      * represent files on disk. However, some documents may have other protocols indicating that they are not
      * available on disk.
      */
-    readonly url: URL;
-
-    /**
-     * The identifier of the file type(s) associated with this document.
-     */
-    readonly languageId?: string | string[];
+    readonly url: URL | string;
 
     /**
      * the raw Document Text
      */
     readonly text: string;
-
-    /**
-     * The natural language locale.
-     */
-    readonly locale?: string | undefined;
 }
 
+/**
+ * A fragment of a text document, representing a subset of the full document.
+ * @since 10.4.0
+ */
 export interface TextDocumentFragment extends TextDocument {
     /**
      * the raw text fragment contained in this document fragment.
