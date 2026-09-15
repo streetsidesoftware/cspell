@@ -52,8 +52,7 @@ const parserCache = new AutoResolveWeakCache<
     Exclude<CSpellSettingsI['plugins'], undefined>,
     Map<string, Parser | DocumentParser>
 >();
-const emptyParserMap = new Map<string, DocumentParser>();
-
+const emptyParserMap = new Map<string, Parser | DocumentParser>();
 const cwdResolver = new CwdUrlResolver();
 let envCSpellGlobRoot = process.env[ENV_CSPELL_GLOB_ROOT];
 
