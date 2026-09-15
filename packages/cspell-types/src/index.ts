@@ -93,6 +93,7 @@ export type {
     VersionLegacy,
     WorkspaceTrustSettings,
 } from './CSpellSettingsDef.js';
+export type { TagPattern, ValidationTags } from './CSpellValidation.js';
 export { defaultCSpellSettings } from './defaultConfigSettings.js';
 export { defineConfig } from './defineConfig.js';
 export type {

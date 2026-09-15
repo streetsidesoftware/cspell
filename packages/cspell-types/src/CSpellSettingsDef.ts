@@ -1,10 +1,11 @@
 import type { CSpellVFS } from './cspell-vfs.js';
 import type { ReportingConfiguration, UnknownWordsConfiguration } from './CSpellReporter.js';
+import type { CSpellSettingsValidation } from './CSpellValidation.js';
 import type { DictionaryDefinition, DictionaryReference } from './DictionaryDefinition.js';
 import type { Features } from './features.js';
 import type { InlineDictionary } from './InlineDictionary.js';
 import type { ParserName } from './Parser/index.js';
-import type { CSpellPlugin } from './Plugin/index.js';
+import type { CSpellSettingsPlugins } from './Plugin/index.js';
 import type { SubstitutionDefinitions, Substitutions } from './Substitutions.js';
 import type { Serializable } from './types.js';
 import type { WordSegmentationSettings } from './WordSegmentation.js';
@@ -888,14 +889,7 @@ export type ReporterSettings =
  * @experimental
  * @hidden
  */
-export interface ExperimentalFileSettings {
-    /**
-     * Future Plugin support
-     * @experimental
-     * @since 6.2.0
-     */
-    plugins?: CSpellPlugin[];
-}
+export interface ExperimentalFileSettings extends CSpellSettingsPlugins, CSpellSettingsValidation {}
 
 /**
  * Extends CSpellSettings with {@link ExperimentalFileSettings}
