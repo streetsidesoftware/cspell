@@ -92,6 +92,15 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - fix: Add tags to ParsedText (<a href="https://github.com/streetsidesoftware/cspell/pull/9237">#9237</a>)
 
+## v10.3.3 (2026-09-16)
+
+### Fixes
+
+- fix: Add `--json` option to check text for use with AI (<a href="https://github.com/streetsidesoftware/cspell/pull/9254">#9254</a>)
+- fix: Mark ParsedTags as read only. (<a href="https://github.com/streetsidesoftware/cspell/pull/9253">#9253</a>)
+
+- fix: Make sure Parser and DocumentParser can be used together. (<a href="https://github.com/streetsidesoftware/cspell/pull/9252">#9252</a>)
+
 ## v10.3.2 (2026-09-15)
 
 ### Fixes
