@@ -68,9 +68,10 @@ async function processRequestAnsi(files: string[], options: CheckCommandOptions)
                 issueCount += item.isError ? 1 : 0;
             }
             console.log();
-        } catch {
-            console.error(`File not found "${filename}"`);
-            throw new CheckFailed('File not found', 1);
+        } catch (e) {
+            const message = isErrNoEnt(e) ? 'File not found' : String(e);
+            console.error(`${message} "${filename}"`);
+            throw new CheckFailed(message, 1);
         }
         console.log();
     }
