@@ -223,6 +223,11 @@ describe('Validate cli', () => {
         ${'check LICENSE'}                             | ${['check', pathRoot('LICENSE')]}                                                            | ${undefined}                | ${false} | ${true}  | ${false}
         ${'check missing'}                             | ${['check', pathRoot('missing-file.txt')]}                                                   | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
         ${'check with spelling errors'}                | ${['check', pathSamples('Dutch.txt')]}                                                       | ${app.CheckFailed}          | ${false} | ${true}  | ${false}
+        ${'check --json LICENSE'}                      | ${['check', '--json', pathRoot('LICENSE')]}                                                  | ${undefined}                | ${false} | ${true}  | ${false}
+        ${'check --json with spelling errors'}         | ${['check', '--json', pathSamples('Dutch.txt')]}                                             | ${app.CheckFailed}          | ${false} | ${true}  | ${false}
+        ${'check --json missing'}                      | ${['check', '--json', pathRoot('missing-file.txt')]}                                         | ${app.CheckFailed}          | ${false} | ${true}  | ${false}
+        ${'check --json missing among valid files'}    | ${['check', '--json', pathRoot('LICENSE'), pathRoot('missing-file.txt')]}                    | ${app.CheckFailed}          | ${false} | ${true}  | ${false}
+        ${'check --json --no-exit-code with errors'}   | ${['check', '--json', '--no-exit-code', pathSamples('Dutch.txt')]}                           | ${app.CheckFailed}          | ${false} | ${true}  | ${false}
         ${'LICENSE'}                                   | ${[pathRoot('LICENSE')]}                                                                     | ${undefined}                | ${true}  | ${false} | ${false}
         ${'samples/Dutch.txt'}                         | ${[pathSamples('Dutch.txt')]}                                                                | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
         ${'with forbidden words'}                      | ${[pathSamples('src/sample-with-forbidden-words.md')]}                                       | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
@@ -277,6 +282,60 @@ describe('Validate cli', () => {
         expect(captureStdout.text).toMatchSnapshot();
         expect(logger.normalizedHistory()).toMatchSnapshot();
         expect(normalizeOutput(captureStderr.text)).toMatchSnapshot();
+    });
+
+    interface CheckJsonFileResult {
+        filename: string;
+        items?: { text: string; startPos: number; endPos: number; flagIE: string; isError?: boolean }[];
+        error?: string;
+    }
+
+    function parseCheckJsonOutput(): CheckJsonFileResult[] {
+        const jsonText = logger.history
+            .filter((line) => line.startsWith('log\t'))
+            .map((line) => line.slice('log\t'.length))
+            .join('\n');
+        return JSON.parse(jsonText);
+    }
+
+    test('check --json emits well-formed JSON with results per file', async () => {
+        chalk.level = 1;
+        const commander = getCommander();
+        const args = argv('check', '--json', pathSamples('Dutch.txt'));
+        const result = app.run(commander, args);
+        await expect(result).rejects.toThrow(app.CheckFailed);
+
+        const parsed = parseCheckJsonOutput();
+        expect(parsed).toHaveLength(1);
+        expect(parsed[0].filename).toBe(pathSamples('Dutch.txt'));
+        expect(parsed[0].error).toBeUndefined();
+        expect(parsed[0].items?.some((item) => item.isError)).toBe(true);
+    });
+
+    test('check --json still emits valid JSON when a file is missing', async () => {
+        chalk.level = 1;
+        const commander = getCommander();
+        const args = argv('check', '--json', pathRoot('LICENSE'), pathRoot('missing-file.txt'));
+        const result = app.run(commander, args);
+        await expect(result).rejects.toThrow(app.CheckFailed);
+
+        const parsed = parseCheckJsonOutput();
+        expect(parsed).toHaveLength(2);
+        expect(parsed[0].filename).toBe(pathRoot('LICENSE'));
+        expect(parsed[0].error).toBeUndefined();
+        expect(parsed[1]).toEqual({ filename: pathRoot('missing-file.txt'), error: 'File not found' });
+    });
+
+    test('check --json --no-exit-code sets exitCode 0 while still emitting JSON', async () => {
+        chalk.level = 1;
+        const commander = getCommander();
+        const args = argv('check', '--json', '--no-exit-code', pathSamples('Dutch.txt'));
+        const result = app.run(commander, args);
+        await expect(result).rejects.toThrow(app.CheckFailed);
+        await expect(result).rejects.toMatchObject({ exitCode: 0 });
+
+        const parsed = parseCheckJsonOutput();
+        expect(parsed[0].items?.some((item) => item.isError)).toBe(true);
     });
 
     test.each`
