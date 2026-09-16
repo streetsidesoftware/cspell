@@ -280,6 +280,89 @@ describe('Validate cli', () => {
     });
 
     test.each`
+        msg                                          | testArgs                                                                  | errorCheck         | eError   | eLog    | eInfo
+        ${'check --json LICENSE'}                    | ${['check', '--json', pathRoot('LICENSE')]}                               | ${undefined}       | ${false} | ${true} | ${false}
+        ${'check --json with spelling errors'}       | ${['check', '--json', pathSamples('Dutch.txt')]}                          | ${app.CheckFailed} | ${false} | ${true} | ${false}
+        ${'check --json missing'}                    | ${['check', '--json', pathRoot('missing-file.txt')]}                      | ${app.CheckFailed} | ${false} | ${true} | ${false}
+        ${'check --json missing among valid files'}  | ${['check', '--json', pathRoot('LICENSE'), pathRoot('missing-file.txt')]} | ${app.CheckFailed} | ${false} | ${true} | ${false}
+        ${'check --json --no-exit-code with errors'} | ${['check', '--json', '--no-exit-code', pathSamples('Dutch.txt')]}        | ${app.CheckFailed} | ${false} | ${true} | ${false}
+    `('app $msg Expect Error: $errorCheck', async ({ testArgs, errorCheck, eError, eLog, eInfo }: TestCase) => {
+        chalk.level = 1;
+        const commander = getCommander();
+        const args = argv(...testArgs);
+        const result = app.run(commander, args);
+        await (!errorCheck ? expect(result).resolves.toBeUndefined() : expect(result).rejects.toThrow(errorCheck));
+
+        eError ? expect(error).toHaveBeenCalled() : expect(error).not.toHaveBeenCalled();
+        eLog ? expect(log).toHaveBeenCalled() : expect(log).not.toHaveBeenCalled();
+        eInfo ? expect(info).toHaveBeenCalled() : expect(info).not.toHaveBeenCalled();
+
+        expect(captureStdout.text).toMatchSnapshot();
+
+        const jsonData = parseCheckJsonOutput().map((r) => ({
+            ...r,
+            filename: Path.relative('.', r.filename).replaceAll('\\', '/'),
+        }));
+
+        expect(jsonData).toMatchSnapshot();
+        expect(normalizeOutput(captureStderr.text)).toMatchSnapshot();
+    });
+
+    interface CheckJsonFileResult {
+        filename: string;
+        items?: { text: string; startPos: number; endPos: number; flagIE: string; isError?: boolean }[];
+        error?: string;
+    }
+
+    function parseCheckJsonOutput(): CheckJsonFileResult[] {
+        const jsonText = logger.history
+            .filter((line) => line.startsWith('log\t'))
+            .map((line) => line.slice('log\t'.length))
+            .join('\n');
+        return JSON.parse(jsonText);
+    }
+
+    test('check --json emits well-formed JSON with results per file', async () => {
+        chalk.level = 1;
+        const commander = getCommander();
+        const args = argv('check', '--json', pathSamples('Dutch.txt'));
+        const result = app.run(commander, args);
+        await expect(result).rejects.toThrow(app.CheckFailed);
+
+        const parsed = parseCheckJsonOutput();
+        expect(parsed).toHaveLength(1);
+        expect(parsed[0].filename).toBe(pathSamples('Dutch.txt'));
+        expect(parsed[0].error).toBeUndefined();
+        expect(parsed[0].items?.some((item) => item.isError)).toBe(true);
+    });
+
+    test('check --json still emits valid JSON when a file is missing', async () => {
+        chalk.level = 1;
+        const commander = getCommander();
+        const args = argv('check', '--json', pathRoot('LICENSE'), pathRoot('missing-file.txt'));
+        const result = app.run(commander, args);
+        await expect(result).rejects.toThrow(app.CheckFailed);
+
+        const parsed = parseCheckJsonOutput();
+        expect(parsed).toHaveLength(2);
+        expect(parsed[0].filename).toBe(pathRoot('LICENSE'));
+        expect(parsed[0].error).toBeUndefined();
+        expect(parsed[1]).toEqual({ filename: pathRoot('missing-file.txt'), error: 'File not found' });
+    });
+
+    test('check --json --no-exit-code sets exitCode 0 while still emitting JSON', async () => {
+        chalk.level = 1;
+        const commander = getCommander();
+        const args = argv('check', '--json', '--no-exit-code', pathSamples('Dutch.txt'));
+        const result = app.run(commander, args);
+        await expect(result).rejects.toThrow(app.CheckFailed);
+        await expect(result).rejects.toMatchObject({ exitCode: 0 });
+
+        const parsed = parseCheckJsonOutput();
+        expect(parsed[0].items?.some((item) => item.isError)).toBe(true);
+    });
+
+    test.each`
         msg                           | testArgs                                                                   | errorCheck         | eError  | eLog     | eInfo
         ${'issue-2998 --language-id'} | ${[rpFix('issue-2998'), '-v', '-v', '--language-id=fix', 'fix-words.txt']} | ${undefined}       | ${true} | ${false} | ${true}
         ${'issue-4811 **/README.md'}  | ${['-r', pIssues('issue-4811'), '--no-progress', '**/README.md']}          | ${undefined}       | ${true} | ${false} | ${false}
