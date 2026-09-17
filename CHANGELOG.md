@@ -574,6 +574,19 @@ These changes lay the groundwork for parsers and other tools to annotate text wi
 
 </details>
 
+## v10.3.4-alpha.0 (2026-09-17)
+
+### Fixes
+
+<details>
+<summary>fix: Fix Sponsor cards on npmjs (<a href="https://github.com/streetsidesoftware/cspell/pull/9260">#9260</a>)</summary>
+
+### fix: Fix Sponsor cards on npmjs ([#9260](https://github.com/streetsidesoftware/cspell/pull/9260))
+
+---
+
+</details>
+
 ## v10.3.3 (2026-09-16)
 
 ### Fixes
