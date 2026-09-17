@@ -27,6 +27,13 @@ jobs:
       - name: Setup and Build
         uses: ./.github/actions/install-build
 
+      - name: Update Sponsor for NPM
+        # https://npmjs.com does not support image links the same way GitHub does.
+        # This step updates the sponsor information for the NPM package so the sponsor cards
+        # will show correctly on the NPM package page.
+        run: |
+          pnpm run publish:fix:sponsor
+
       - name: Version
         id: version
         run: |
