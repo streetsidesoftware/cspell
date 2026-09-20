@@ -137,7 +137,7 @@ export type ScopeString = string;
 
 export type Scope = ScopeChain | ScopeString;
 
-export type ParsedTag = boolean | string | undefined;
+export type ParsedTag = boolean | undefined;
 
 /**
  * ParsedTags represents a collection of tags associated with a segment of text. Each tag can have a boolean, string, or undefined value.
