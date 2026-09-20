@@ -403,7 +403,7 @@ function resolveParser(settings: CSpellSettingsI): DocumentParser | Parser | und
 
     const parsers = extractParsers(settings.plugins);
     const parser = parsers.get(parserName);
-    assert(parser, `Parser "${parserName}" not found.`);
+    assert(parser, `Parser "${parserName}" not found among available parsers: ${[...parsers.keys()].join(', ')}`);
     return parser;
 }
 
