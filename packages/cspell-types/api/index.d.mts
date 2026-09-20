@@ -1453,7 +1453,7 @@ interface ScopeChain {
  */
 type ScopeString = string;
 type Scope = ScopeChain | ScopeString;
-type ParsedTag = boolean | string | undefined;
+type ParsedTag = boolean | undefined;
 /**
  * ParsedTags represents a collection of tags associated with a segment of text. Each tag can have a boolean, string, or undefined value.
  *
