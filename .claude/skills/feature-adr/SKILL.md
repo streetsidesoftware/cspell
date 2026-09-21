@@ -14,7 +14,7 @@ obvious from a feature request alone — inheritance order, `overrides` vs.
 schema generation. A request that sounds simple ("add a flag to skip X") usually
 has two or three genuinely reasonable answers hiding in it. This skill's job is to
 surface those choices explicitly, get the user to pick one deliberately, and leave
-a written record of *why* — so an implementer (human or agent) can build the
+a written record of _why_ — so an implementer (human or agent) can build the
 feature later without re-deriving decisions or silently picking the wrong default.
 
 This skill produces design artifacts only. Don't write implementation code as
@@ -79,7 +79,7 @@ Ask a single open question, wait for the answer, and let the answer shape the
 next question — don't front-load a checklist onto the user. A wall of questions
 gets shallow, rushed answers; a conversation gets considered ones.
 
-Use `references/cspell-considerations.md` for the *categories* of question worth
+Use `references/cspell-considerations.md` for the _categories_ of question worth
 probing (config surface, naming, glob interaction, dictionaries, CLI surface,
 backward compatibility, cross-platform, performance, precedent). It's a checklist
 for you, not a script to recite — most features only implicate two or three of
@@ -93,7 +93,7 @@ ADR for a non-decision. If you're weighing whether something clears that bar,
 lean toward writing it down: a one-paragraph ADR that turns out unnecessary costs
 little, while a real decision left unrecorded costs the next person real time.
 
-Also watch for decisions the user makes *implicitly* by answering a different
+Also watch for decisions the user makes _implicitly_ by answering a different
 question — e.g. if they specify a config key name, that also settles "is this
 config-only or does it need a CLI flag" if they didn't mention a flag. Surface
 that as an explicit question rather than assuming silence means "no."
@@ -101,7 +101,7 @@ that as an explicit question rather than assuming silence means "no."
 ## Step 3: Write an ADR per decision, as it lands
 
 Naming: `docs/ADRs/<feature-slug>/NNNN-kebab-case-title.md`, numbered
-sequentially starting at `0001` *within that feature's directory* (numbering
+sequentially starting at `0001` _within that feature's directory_ (numbering
 doesn't need to be unique across features).
 
 Use `references/adr-template.md` verbatim as the structure: Status, Context,
