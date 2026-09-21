@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 22007, skipped: 29, Issues found: 49586 in 8305 files.
+ CSpell: Files checked: 22009, skipped: 29, Issues found: 49595 in 8309 files.
  exit code: 1
 ARCHITECTURE.md:158:48    - Unknown word (googlemock) -- implementation using `googlemock`
 BUILD.bazel:151:20    - Unknown word (ctype)      -- name = "enable-ctype-cord-workaround",
@@ -226,8 +226,8 @@ doc/contributor/howto-guide-setup-development-workstation.md:71:6      - Unknown
 doc/cpp-style-guide.md:54:18     - Unknown word (blorg)      -- #include <grpcpp/blorg.h>
 doc/cpp-style-guide.md:58:11     - Unknown word (unistd)     -- #include <unistd.h>
 doc/ctype-cord-workarounds.md:32:26     - Unknown word (CTYPE)      -- GOOGLE_CLOUD_CPP_ENABLE_CTYPE_CORD_WORKAROUND` CMake
-doc/packaging.md:1307:21   - Unknown word (epel)           -- sudo dnf install -y epel-release && \
-doc/packaging.md:1312:35   - Unknown word (binutils)       -- autoconf automake libtool binutils dnf-utils
+doc/packaging.md:1128:21   - Unknown word (epel)           -- sudo dnf install -y epel-release && \
+doc/packaging.md:1133:35   - Unknown word (binutils)       -- autoconf automake libtool binutils dnf-utils
 doc/packaging.md:198:10    - Unknown word (DWITH)       -- -DWITH_EXAMPLES=OFF \
 doc/packaging.md:201:10    - Unknown word (DOPENTELEMETRY) -- -DOPENTELEMETRY_INSTALL=ON \
 doc/packaging.md:236:10    - Unknown word (makecache)      -- sudo dnf makecache && \
@@ -417,7 +417,7 @@ generator/internal/scaffold_generator_test.cc:424:38    - Unknown word (CXXLD)  
 generator/internal/scaffold_generator_test.cc:459:37    - Unknown word (Bazelrc)    -- ScaffoldGenerator, QuickstartBazelrc) {
 generator/internal/service_code_generator.h:209:46    - Unknown word (autopopulated) -- of the methods has an autopopulated `request_id`-like
 generator/templates/WORKSPACE.bazel:19:21     - Unknown word (Starlark)   -- # Add the necessary Starlark functions to fetch google
-google/cloud/BUILD.bazel:242:26    - Unknown word (ncrypt)     -- "-DEFAULTLIB:ncrypt.lib",
+google/cloud/BUILD.bazel:244:26    - Unknown word (ncrypt)     -- "-DEFAULTLIB:ncrypt.lib",
 google/cloud/BUILD.bazel:59:15     - Unknown word (DEFAULTLIB) -- "-DEFAULTLIB:bcrypt.lib",
 google/cloud/accessapproval/doc/main.dox:3:2       - Unknown word (mainpage)   -- @mainpage Access Approval API
 google/cloud/accessapproval/v1/access_approval_client.h:19:39     - Unknown word (ACCESSAPPROVAL) -- CLOUD_CPP_GOOGLE_CLOUD_ACCESSAPPROVAL_V1_ACCESS_APPROVAL_CLIENT
@@ -487,13 +487,13 @@ google/cloud/bigquery/v2/minimal/internal/job_logging_test.cc:237:22    - Unknow
 google/cloud/bigquery/v2/minimal/internal/job_query_stats_test.cc:207:28    - Unknown word (stateme)    -- R"( statement_type: "stateme...<truncated>...")"
 google/cloud/bigquery/v2/minimal/internal/job_query_stats_test.cc:226:34    - Unknown word (BIGQUER)    -- compute_mode { value: "BIGQUER...<truncated>..." }
 google/cloud/bigquery/v2/minimal/internal/job_query_stats_test.cc:261:35    - Unknown word (EXCEEDE)    -- unused_reason { value: "EXCEEDE...<truncated>..." }
-google/cloud/bigquery/v2/minimal/internal/job_request_test.cc:1040:61   - Unknown word (paramet)    -- ." parameter_mode: "paramet...<truncated>...")"
+google/cloud/bigquery/v2/minimal/internal/job_request_test.cc:1041:61   - Unknown word (paramet)    -- ." parameter_mode: "paramet...<truncated>...")"
 google/cloud/bigquery/v2/minimal/internal/job_request_test.cc:426:62    - Unknown word (defe)       -- quota_deferments: "quota-defe...<truncated>...")"
 google/cloud/bigquery/v2/minimal/internal/job_request_test.cc:430:28    - Unknown word (reservatio) -- R"( reservation_id: "reservatio...<truncated>..." )
 google/cloud/bigquery/v2/minimal/internal/job_request_test.cc:433:48    - Unknown word (fram)       -- proc-id" text: "stack-fram...<truncated>..." }
 google/cloud/bigquery/v2/minimal/internal/job_request_test.cc:441:41    - Unknown word (operat)     -- operation_performed: "ddl_operat...<truncated>...")"
 google/cloud/bigquery/v2/minimal/internal/job_request_test.cc:443:52    - Unknown word (expla)      -- query_plan { name: "test-expla...<truncated>...")"
-google/cloud/bigquery/v2/minimal/internal/job_response_test.cc:1965:17   - Unknown word (equery)     -- auto expected_equery_results = MakePostQueryResult
+google/cloud/bigquery/v2/minimal/internal/job_response_test.cc:1976:17   - Unknown word (equery)     -- auto expected_equery_results = MakePostQueryResult
 google/cloud/bigquery/v2/minimal/internal/job_stats_test.cc:190:28    - Unknown word (transac)    -- R"( transaction_id: "transac...<truncated>...")"
 google/cloud/bigquery/v2/minimal/internal/job_stats_test.cc:191:28    - Unknown word (reserva)    -- R"( reservation_id: "reserva...<truncated>..." script
 google/cloud/bigquery/v2/minimal/internal/job_stats_test.cc:195:19    - Unknown word (STATEME)    -- R"( value: "STATEME...<truncated>..." }
@@ -796,8 +796,8 @@ google/cloud/spanner/samples/postgresql_samples.cc:197:56    - Unknown word (Tre
 google/cloud/spanner/samples/postgresql_samples.cc:317:44    - Unknown word (singerid)   -- SingerId will be folded to "singerid"
 google/cloud/spanner/samples/postgresql_samples.cc:438:40    - Unknown word (TIMESTAMPTZ) -- 11-03T09:35:01UTC'::TIMESTAMPTZ as timestamp
 google/cloud/spanner/samples/samples.cc:1323:20   - Unknown word (MRCMEK)     -- void CopyBackupWithMRCMEK(
-google/cloud/spanner/samples/samples.cc:4159:8    - Unknown word (songinfo)   -- auto songinfo = SongInfo(
-google/cloud/spanner/samples/samples.cc:4940:28   - Unknown word (partitionable) -- For a SQL query to be partitionable, it has to satisfy some
+google/cloud/spanner/samples/samples.cc:4178:8    - Unknown word (songinfo)   -- auto songinfo = SongInfo(
+google/cloud/spanner/samples/samples.cc:4959:28   - Unknown word (partitionable) -- For a SQL query to be partitionable, it has to satisfy some
 google/cloud/spanner/value.h:129:9     - Unknown word (Nullness)   -- * @par Nullness
 google/cloud/sql/doc/environment-variables.dox:13:40     - Unknown word (sqladmin)   -- (which defaults to "sqladmin.googleapis.com")
 google/cloud/sql/v1/internal/sql_instances_rest_connection_impl.cc:657:53    - Unknown word (Ssrs)       -- :SqlInstancesAcquireSsrsLeaseResponse>
@@ -878,12 +878,11 @@ google/cloud/storage/internal/async/connection_impl_open_test.cc:372:38    - Unk
 google/cloud/storage/internal/async/connection_impl_read_hash_test.cc:17:11     - Unknown word (pratap)     -- // TODO(v-pratap): Remove this when EnableMD
 google/cloud/storage/internal/async/connection_impl_upload_test.cc:487:42    - Unknown word (eksb)       -- sha256_bytes: "test-eksb"
 google/cloud/storage/internal/async/insert_object.cc:50:21     - Unknown word (Subcord)    -- auto next = data_.Subcord(0, n);
-google/cloud/storage/internal/async/writer_connection_buffered.cc:727:39    - Unknown word (unsatisified) -- call that returns an unsatisified future until the buffer
-google/cloud/storage/internal/grpc/default_options.cc:104:49    - Unknown word (unviverse)  -- already a set endpoint or unviverse domain endpoint.
-google/cloud/storage/internal/grpc/default_options_test.cc:112:29    - Unknown word (testbench)  -- "from-testbench-env");
+google/cloud/storage/internal/async/writer_connection_buffered.cc:735:39    - Unknown word (unsatisified) -- call that returns an unsatisified future until the buffer
+google/cloud/storage/internal/grpc/default_options_test.cc:178:5     - Unknown word (testbench)  -- /// testbench and private-endpoint
 google/cloud/storage/internal/grpc/object_request_parser_test.cc:63:33     - Unknown word (Cuakt)      -- md5) : StEvo2V/qoDCuaktZSw3IQ==
 google/cloud/storage/internal/grpc/stub.cc:372:10    - Unknown word (wopts)      -- auto wopts = grpc::WriteOptions
-google/cloud/storage/internal/hedged_object_read_source_test.cc:311:15    - Unknown word (unblocker)  -- std::thread unblocker([unblock_primary] {
+google/cloud/storage/internal/hedged_object_read_source_test.cc:364:15    - Unknown word (unblocker)  -- std::thread unblocker([unblock_primary] {
 google/cloud/storage/internal/object_requests_test.cc:261:61    - Unknown word (NEFCQ)      -- encryption-key: MTIzNEFCQ0Q="));
 google/cloud/storage/internal/object_requests_test.cc:281:61    - Unknown word (QUJDRD)     -- source-encryption-key: QUJDRDEyMzQ="));
 google/cloud/storage/internal/object_requests_test.cc:606:27    - Unknown word (sdlkj)      -- "&upload_id=xa298sd_sdlkj2";
@@ -893,6 +892,7 @@ google/cloud/storage/internal/tuple_filter_test.cc:66:25     - Unknown word (rva
 google/cloud/storage/policy_document_test.cc:160:8     - Unknown word (asdfasdfasdf) -- "asdfasdfasdf", "asdfasdfasdf"};
 google/cloud/storage/policy_document_test.cc:201:14    - Unknown word (rsaposttest)  -- "rsaposttest, access_id=foo@foo.com
 google/cloud/storage/quickstart/README.md:109:20    - Unknown word (Tbits)      -- workloads (several Tbits/s of upload and/or download
+google/cloud/storage/testing/detect_sanitizers.h:21:25     - Unknown word (Gunicorn)   -- blocks GCS emulator (Gunicorn) workers, triggering
 google/cloud/storage/testing/mock_generic_stub.h:30:17     - Unknown word (Googlemock) -- * Implements a Googlemock for the (generated)
 google/cloud/storage/tests/object_read_large_integration_test.cc:42:39     - Unknown word (statm)      -- ifstream("/proc/self/statm");
 google/cloud/storage/tests/signed_url_conformance_test.cc:156:41    - Unknown word (bucketboundhostname) -- cketBoundHostname(test_params.bucketboundhostname());
