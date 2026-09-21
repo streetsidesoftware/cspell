@@ -3,5 +3,9 @@ Repository: webpack/webpack
 Url: "https://github.com/webpack/webpack.git"
 Args: ["{.github,benchmark,bin,examples,hot,lib,schemas,setup,tooling}/**/*.{md,yml,yaml,js,json}","*.md"]
 Lines:
- CSpell: Files checked: 1428, Issues found: 0 in 0 files.
- exit code: 0
+ CSpell: Files checked: 1466, Issues found: 7 in 3 files.
+ exit code: 1
+lib/css/syntax-parser.js:12610:69  - Unknown word (sublayers)  -- declarations outrank its sublayers
+lib/css/syntax-parser.js:4633:7    - Unknown word (UNKEYED)    -- const UNKEYED = "";
+lib/html/syntax-parser.js:2683:47   - Unknown word (rescans)    -- memoized, so neither rescans per character.
+lib/javascript/syntax-printer.js:43:31     - Unknown word (rescanning) -- once, rather than by rescanning its enclosed definitions

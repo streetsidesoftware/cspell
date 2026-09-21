@@ -3,9 +3,9 @@ Repository: googleapis/google-cloud-cpp
 Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
-  files: 22036
-  filesWithIssues: 8305
-  issues: 49586
+  files: 22038
+  filesWithIssues: 8309
+  issues: 49595
   errors: 0
 Errors: []
 
@@ -250,8 +250,8 @@ issues:
   - "doc/packaging.md:564:24         noninteractive      U       export DEBIAN_FRONTEND=noninteractive"
   - "doc/packaging.md:578:9          libsystemd          U       libsystemd-dev"
   - "doc/packaging.md:874:8          DJSON               U       -DJSON_BuildTests=OFF \\"
-  - "doc/packaging.md:1307:21        epel                U       sudo dnf install -y epel-release && \\"
-  - "doc/packaging.md:1312:35        binutils            U       autoconf automake libtool binutils dnf-utils"
+  - "doc/packaging.md:1128:21        epel                U       sudo dnf install -y epel-release && \\"
+  - "doc/packaging.md:1133:35        binutils            U       autoconf automake libtool binutils dnf-utils"
   - "doc/product-neutral-guides/core-concepts.md:38:10       cerr    U       std::cerr << \"RPC failed: \" <"
   - "doc/product-neutral-guides/core-concepts.md:42:8        cout    U       std::cout << \"Success: \" << *response"
   - "doc/public-api.md:163:20        lgoogle     U       e.g., by using `-lgoogle_cloud_cpp_bigtable`"
@@ -494,8 +494,8 @@ issues:
   - "google/cloud/bigquery/v2/minimal/internal/job_request_test.cc:433:48        fram (frame)    U       proc-id\" text: \"stack-fram...<truncated>...\" }"
   - "google/cloud/bigquery/v2/minimal/internal/job_request_test.cc:441:41        operat          U       operation_performed: \"ddl_operat...<truncated>...\")\""
   - "google/cloud/bigquery/v2/minimal/internal/job_request_test.cc:443:52        expla           U       query_plan { name: \"test-expla...<truncated>...\")\""
-  - "google/cloud/bigquery/v2/minimal/internal/job_request_test.cc:1040:61       paramet         U       .\" parameter_mode: \"paramet...<truncated>...\")\""
-  - "google/cloud/bigquery/v2/minimal/internal/job_response_test.cc:1965:17      equery      U       auto expected_equery_results = MakePostQueryResult"
+  - "google/cloud/bigquery/v2/minimal/internal/job_request_test.cc:1041:61       paramet         U       .\" parameter_mode: \"paramet...<truncated>...\")\""
+  - "google/cloud/bigquery/v2/minimal/internal/job_response_test.cc:1976:17      equery      U       auto expected_equery_results = MakePostQueryResult"
   - "google/cloud/bigquery/v2/minimal/internal/job_stats_test.cc:190:28      transac     U       R\"( transaction_id: \"transac...<truncated>...\")\""
   - "google/cloud/bigquery/v2/minimal/internal/job_stats_test.cc:191:28      reserva     U       R\"( reservation_id: \"reserva...<truncated>...\" script"
   - "google/cloud/bigquery/v2/minimal/internal/job_stats_test.cc:195:19      STATEME     U       R\"( value: \"STATEME...<truncated>...\" }"
@@ -557,7 +557,7 @@ issues:
   - "google/cloud/binaryauthorization/doc/override-authentication.dox:12:10          binauthz    U       @snippet binauthz_management_service_v"
   - "google/cloud/binaryauthorization/v1/binauthz_management_service_v1_client.h:19:39       BINARYAUTHORIZATION     U       CLOUD_CPP_GOOGLE_CLOUD_BINARYAUTHORIZATION_V1_BINAUTHZ_MANAGEMENT"
   - "google/cloud/BUILD.bazel:59:15          DEFAULTLIB      U       \"-DEFAULTLIB:bcrypt.lib\","
-  - "google/cloud/BUILD.bazel:242:26         ncrypt          U       \"-DEFAULTLIB:ncrypt.lib\","
+  - "google/cloud/BUILD.bazel:244:26         ncrypt          U       \"-DEFAULTLIB:ncrypt.lib\","
   - "google/cloud/capture_build_info.bzl:51:48       cxxopts         U       = ctx.fragments.cpp.cxxopts + ctx.fragments.cpp"
   - "google/cloud/capture_build_info.bzl:51:76       conlyopts       U       + ctx.fragments.cpp.conlyopts,"
   - "google/cloud/capture_build_info.bzl:64:57       fastbuild       U       COMPILATION_MODE\", \"fastbuild\")"
@@ -800,8 +800,8 @@ issues:
   - "google/cloud/spanner/samples/postgresql_samples.cc:438:40       TIMESTAMPTZ     U       11-03T09:35:01UTC'::TIMESTAMPTZ as timestamp"
   - "google/cloud/spanner/samples/README.md:22:2         bazelbuild      U       [bazelbuild/bazel#10621](https:"
   - "google/cloud/spanner/samples/samples.cc:1323:20     MRCMEK              U       void CopyBackupWithMRCMEK("
-  - "google/cloud/spanner/samples/samples.cc:4159:8      songinfo            U       auto songinfo = SongInfo("
-  - "google/cloud/spanner/samples/samples.cc:4940:28     partitionable       U       For a SQL query to be partitionable, it has to satisfy some"
+  - "google/cloud/spanner/samples/samples.cc:4178:8      songinfo            U       auto songinfo = SongInfo("
+  - "google/cloud/spanner/samples/samples.cc:4959:28     partitionable       U       For a SQL query to be partitionable, it has to satisfy some"
   - "google/cloud/spanner/value.h:129:9          Nullness    U       * @par Nullness"
   - "google/cloud/sql/doc/environment-variables.dox:13:40        sqladmin    U       (which defaults to \"sqladmin.googleapis.com\")"
   - "google/cloud/sql/v1/internal/sql_instances_rest_connection_impl.cc:657:53       Ssrs    U       :SqlInstancesAcquireSsrsLeaseResponse>"
@@ -880,12 +880,11 @@ issues:
   - "google/cloud/storage/internal/async/connection_impl_read_hash_test.cc:17:11         pratap      U       // TODO(v-pratap): Remove this when EnableMD"
   - "google/cloud/storage/internal/async/connection_impl_upload_test.cc:487:42       eksb    U       sha256_bytes: \"test-eksb\""
   - "google/cloud/storage/internal/async/insert_object.cc:50:21          Subcord     U       auto next = data_.Subcord(0, n);"
-  - "google/cloud/storage/internal/async/writer_connection_buffered.cc:727:39        unsatisified    U       call that returns an unsatisified future until the buffer"
-  - "google/cloud/storage/internal/grpc/default_options_test.cc:112:29       testbench       U       \"from-testbench-env\");"
-  - "google/cloud/storage/internal/grpc/default_options.cc:104:49        unviverse       U       already a set endpoint or unviverse domain endpoint."
+  - "google/cloud/storage/internal/async/writer_connection_buffered.cc:735:39        unsatisified    U       call that returns an unsatisified future until the buffer"
+  - "google/cloud/storage/internal/grpc/default_options_test.cc:178:5        testbench       U       /// testbench and private-endpoint"
   - "google/cloud/storage/internal/grpc/object_request_parser_test.cc:63:33          Cuakt       U       md5) : StEvo2V/qoDCuaktZSw3IQ=="
   - "google/cloud/storage/internal/grpc/stub.cc:372:10       wopts       U       auto wopts = grpc::WriteOptions"
-  - "google/cloud/storage/internal/hedged_object_read_source_test.cc:311:15      unblocker       U       std::thread unblocker([unblock_primary] {"
+  - "google/cloud/storage/internal/hedged_object_read_source_test.cc:364:15      unblocker       U       std::thread unblocker([unblock_primary] {"
   - "google/cloud/storage/internal/object_requests_test.cc:261:61        NEFCQ       U       encryption-key: MTIzNEFCQ0Q=\"));"
   - "google/cloud/storage/internal/object_requests_test.cc:281:61        QUJDRD      U       source-encryption-key: QUJDRDEyMzQ=\"));"
   - "google/cloud/storage/internal/object_requests_test.cc:606:27        sdlkj       U       \"&upload_id=xa298sd_sdlkj2\";"
@@ -897,6 +896,7 @@ issues:
   - "google/cloud/storage/quickstart/README.md:109:20        Tbits       U       workloads (several Tbits/s of upload and/or download"
   - "google/cloud/storage/README.md:26:11        cstdlib     U       #include <cstdlib>"
   - "google/cloud/storage/README.md:46:20        nullptr     U       if (ca_bundle != nullptr) {"
+  - "google/cloud/storage/testing/detect_sanitizers.h:21:25          Gunicorn    U       blocks GCS emulator (Gunicorn) workers, triggering"
   - "google/cloud/storage/testing/mock_generic_stub.h:30:17          Googlemock      U       * Implements a Googlemock for the (generated)"
   - "google/cloud/storage/tests/object_read_large_integration_test.cc:42:39          statm       U       ifstream(\"/proc/self/statm\");"
   - "google/cloud/storage/tests/signed_url_conformance_test.cc:156:41        bucketboundhostname         U       cketBoundHostname(test_params.bucketboundhostname());"
