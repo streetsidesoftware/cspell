@@ -248,6 +248,24 @@ describe('Tests .gitignore file contents', () => {
     });
 });
 
+describe('Rule ordering', () => {
+    test.each`
+        patterns                                                                       | filename                                    | expected
+        ${['*ignored/', '!un-ignored/', 'node_modules/']}                              | ${'/test/un-ignored/node_modules/test.txt'} | ${true}
+        ${['*ignored/', '!un-ignored/', 'node_modules/', '!un-ignored/node_modules/']} | ${'/test/un-ignored/node_modules/test.txt'} | ${false}
+    `('honors the final matching ignore rule', ({ patterns, filename, expected }) => {
+        const matcher = new GlobMatcher(patterns, { root: '/test' });
+
+        expect(matcher.match(filename)).toBe(expected);
+    });
+
+    test('reports the first matching generated variant from one source rule', () => {
+        const matcher = new GlobMatcher('*.js', { root: '/test' });
+
+        expect(matcher.matchEx('/test/file.js')).toEqual(expect.objectContaining({ glob: '**/*.js', index: 0, isNeg: false, matched: true }));
+    });
+});
+
 describe('Tests .gitignore like file contents', () => {
     const pattern = `
         # This is a comment
