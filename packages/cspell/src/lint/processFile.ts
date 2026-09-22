@@ -114,6 +114,9 @@ export async function processFile(
         const r = await spellCheckDocument(doc, validateOptions, userSettings);
         // console.warn('filename: %o %o', path.relative(process.cwd(), filename), r.perf);
         spellResult = r;
+        if (r.errors?.length) {
+            throw r.errors[0];
+        }
         result.processed = r.checked;
         result.perf = r.perf ? { ...r.perf } : undefined;
         result.issues = cspellText.calculateTextDocumentOffsets(doc.uri, text, r.issues).map(mapIssue);
