@@ -98,6 +98,19 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - fix: Fix Sponsor cards on npmjs (<a href="https://github.com/streetsidesoftware/cspell/pull/9260">#9260</a>)
 
+## v10.3.4 (2026-09-24)
+
+### Fixes
+
+- fix: Report errors (<a href="https://github.com/streetsidesoftware/cspell/pull/9267">#9267</a>)
+- fix: ParsedTag can only be boolean values for now. (<a href="https://github.com/streetsidesoftware/cspell/pull/9268">#9268</a>)
+
+- fix: Fix Sponsor cards on npmjs (<a href="https://github.com/streetsidesoftware/cspell/pull/9260">#9260</a>)
+
+### Dictionary Updates
+
+- fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/9266">#9266</a>)
+
 ## v10.3.3 (2026-09-16)
 
 ### Fixes

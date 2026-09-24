@@ -587,6 +587,82 @@ These changes lay the groundwork for parsers and other tools to annotate text wi
 
 </details>
 
+## v10.3.4 (2026-09-24)
+
+### Fixes
+
+<details>
+<summary>fix: Report errors (<a href="https://github.com/streetsidesoftware/cspell/pull/9267">#9267</a>)</summary>
+
+### fix: Report errors ([#9267](https://github.com/streetsidesoftware/cspell/pull/9267))
+
+This pull request introduces improvements to error handling and debugging information in the spell-checking workflow. The main changes focus on providing more informative error messages and ensuring that errors encountered during document processing are surfaced promptly.
+
+Error handling improvements:
+
+- In `processFile` (`packages/cspell/src/lint/processFile.ts`), the function now throws the first error from `r.errors` if any are present, ensuring that errors encountered during spell checking are not silently ignored.
+
+Debugging and diagnostics:
+
+- In `resolveParser` (`packages/cspell-lib/src/lib/Settings/CSpellSettingsServer.ts`), the assertion message has been enhanced to include a list of available parsers when a requested parser is not found, making it easier to diagnose configuration issues.
+
+---
+
+</details>
+
+<details>
+<summary>fix: ParsedTag can only be boolean values for now. (<a href="https://github.com/streetsidesoftware/cspell/pull/9268">#9268</a>)</summary>
+
+### fix: ParsedTag can only be boolean values for now. ([#9268](https://github.com/streetsidesoftware/cspell/pull/9268))
+
+This pull request updates the `ParsedTag` type throughout the codebase to remove the possibility of a `string` value, restricting it to only `boolean` or `undefined`. This change is applied consistently across type definitions and source files.
+
+Note: The is possible because it has only been an experimental feature and isn't used.
+
+**Type definition changes:**
+
+- Updated the `ParsedTag` type in `packages/cspell-types/api/Parser/index.d.mts` to only allow `boolean` or `undefined`, removing support for `string`.
+- Updated the `ParsedTag` type in `packages/cspell-types/api/index.d.mts` to only allow `boolean` or `undefined`, removing support for `string`.
+- Updated the `ParsedTag` type in `packages/cspell-types/src/Parser/parser.ts` to only allow `boolean` or `undefined`, removing support for `string`.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Fix Sponsor cards on npmjs (<a href="https://github.com/streetsidesoftware/cspell/pull/9260">#9260</a>)</summary>
+
+### fix: Fix Sponsor cards on npmjs ([#9260](https://github.com/streetsidesoftware/cspell/pull/9260))
+
+---
+
+</details>
+
+### Dictionary Updates
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/9266">#9266</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#9266](https://github.com/streetsidesoftware/cspell/pull/9266))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../snapshots/dart-lang/sdk/report.yaml            |  6 +----
+ .../snapshots/dart-lang/sdk/snapshot.txt           |  4 +--
+ .../snapshots/gitbucket/gitbucket/report.yaml      |  3 +--
+ .../snapshots/gitbucket/gitbucket/snapshot.txt     |  3 +--
+ packages/cspell-bundled-dicts/package.json         |  6 ++---
+ pnpm-lock.yaml                                     | 29 +++++++++++++---------
+ 6 files changed, 24 insertions(+), 27 deletions(-)
+```
+
+---
+
+</details>
+
 ## v10.3.3 (2026-09-16)
 
 ### Fixes
