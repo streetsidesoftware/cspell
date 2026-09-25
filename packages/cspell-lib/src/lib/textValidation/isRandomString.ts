@@ -12,7 +12,13 @@ const maxRadio = 0.5;
 export function isRandomString(s: string, maxNoiseToLengthRatio: number = maxRadio): boolean {
     // Soft hyphen indicates a word break, so it's likely not a random string.
     if (s.includes(softHyphen)) return false;
-    return scoreRandomString(s) >= maxNoiseToLengthRatio;
+    if (scoreRandomString(s) >= maxNoiseToLengthRatio) return true;
+    // `categorizeString` collapses an unbroken run of one letter-case (no digits, no
+    // case changes) into a single token, so a purely alphabetic random token - e.g. a
+    // lowercase-only slug/session id - scores near 0 no matter how random it is. Catch
+    // that case separately by looking for a run of consonants too long to plausibly be
+    // a real word.
+    return hasImplausibleConsonantRun(s);
 }
 
 /**
@@ -49,6 +55,42 @@ export function categorizeString(s: string): string {
         .replaceAll('_', '')
         .replaceAll(/[-_.']+/g, '3');
     return n;
+}
+
+const vowelsLower = new Set(['a', 'e', 'i', 'o', 'u', 'y']);
+const wordRunRegex = /[A-Z]?[a-z]+|[A-Z]+/g;
+const MIN_RUN_LENGTH_TO_CHECK = 8;
+const CONSONANT_RUN_THRESHOLD = 7;
+
+/**
+ * Detect a single-case alphabetic run (the same word-like tokens `categorizeString`
+ * collapses to one token) that contains a longer run of consecutive consonants than
+ * real words plausibly have. Calibrated against `/usr/share/dict/words`: at this
+ * threshold essentially no real English word triggers it, while most random
+ * alphabetic strings of secret-length (20+ chars) do.
+ */
+export function hasImplausibleConsonantRun(s: string): boolean {
+    for (const m of s.matchAll(wordRunRegex)) {
+        const run = m[0];
+        if (run.length >= MIN_RUN_LENGTH_TO_CHECK && maxConsonantRun(run) >= CONSONANT_RUN_THRESHOLD) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function maxConsonantRun(word: string): number {
+    let maxRun = 0;
+    let run = 0;
+    for (const ch of word.toLowerCase()) {
+        if (vowelsLower.has(ch)) {
+            run = 0;
+            continue;
+        }
+        run += 1;
+        if (run > maxRun) maxRun = run;
+    }
+    return maxRun;
 }
 
 const hexLowerRegex = /^[0-9a-f]+$/;
