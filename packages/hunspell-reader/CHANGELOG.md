@@ -98,6 +98,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - fix: Fix Sponsor cards on npmjs (<a href="https://github.com/streetsidesoftware/cspell/pull/9260">#9260</a>)
 
+## v10.3.5 (2026-09-26)
+
+- No changes
+
 ## v10.3.4 (2026-09-24)
 
 ### Fixes

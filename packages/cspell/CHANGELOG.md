@@ -587,6 +587,10 @@ These changes lay the groundwork for parsers and other tools to annotate text wi
 
 </details>
 
+## v10.3.5 (2026-09-26)
+
+- No changes
+
 ## v10.3.4 (2026-09-24)
 
 ### Fixes
