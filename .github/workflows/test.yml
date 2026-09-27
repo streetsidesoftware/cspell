@@ -65,8 +65,14 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Test Yarn projects
+        # Also installs the Yarn projects that the `CSPELL_TEST_YARN` tests need.
+        run: pnpm run test:yarn
+
       - name: Test
         run: pnpm test
+        env:
+          CSPELL_TEST_YARN: 'true'
 
       # Ensure the repository is clean after build & test
       - run: git --no-pager diff --exit-code

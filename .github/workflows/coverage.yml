@@ -56,7 +56,11 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
+      - run: pnpm run setup-yarn
+
       - run: pnpm run coverage
+        env:
+          CSPELL_TEST_YARN: 'true'
 
       - name: Upload coverage Coveralls
         id: coveralls

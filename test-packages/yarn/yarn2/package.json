@@ -5,12 +5,10 @@
   "description": "Tests for dictionaries included by a Yarn 2 repository",
   "main": "index.js",
   "scripts": {
-    "preinstall": "corepack enable && pnpm setup-yarn",
     "setup-yarn": "pnpm run setup-yarn-med && pnpm run setup-yarn-sci && pnpm run setup-eslint-plugin",
     "setup-eslint-plugin": "cd test-eslint-plugin && corepack yarn",
     "setup-yarn-med": "cd test-yarn-med && corepack yarn",
     "setup-yarn-sci": "cd test-yarn-sci && corepack yarn",
-    "test": "pnpm run test-yarn ",
     "test-yarn": "pnpm run test-yarn-med && pnpm run test-yarn-sci && pnpm run test-eslint-plugin",
     "test-eslint-plugin": "cd test-eslint-plugin && corepack yarn test",
     "test-yarn-med": "cd test-yarn-med && corepack yarn test",
