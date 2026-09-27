@@ -7,6 +7,8 @@ on:
       - '.github/release-drafter.yml'
       - '.github/workflows/check-release-drafter.yml'
       - 'scripts/check-release-drafter.mts'
+      - 'scripts/check-clean-release-body.mts'
+      - 'scripts/lib/clean-release-body.mts'
 
 permissions:
   contents: read
@@ -29,3 +31,6 @@ jobs:
 
       - name: Check labels and replacers
         run: node ./scripts/check-release-drafter.mts
+
+      - name: Check how PR bodies are cleaned
+        run: node ./scripts/check-clean-release-body.mts

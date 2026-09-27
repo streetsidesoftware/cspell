@@ -89,6 +89,14 @@ jobs:
           git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/streetsidesoftware/cspell.git"
           pnpm lerna version "$VERSION" --no-private --sync-workspace-lock --no-changelog --yes $DRY_RUN
 
+      # release-drafter rewrites the draft on every push, so clean it again right before it goes public.
+      - name: Clean Release Notes
+        if: ${{ !inputs.dry_run }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.version.outputs.version }}
+        run: node ./scripts/clean-release-body.mts --tag "v${VERSION}" --update > /dev/null
+
       - name: Convert Draft Release to Published
         if: ${{ !inputs.dry_run }}
         env:
