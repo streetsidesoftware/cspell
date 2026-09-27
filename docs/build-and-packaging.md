@@ -28,8 +28,7 @@ This is a pnpm workspace (`pnpm-workspace.yaml`). The main directories:
   they're two days old (`minimumReleaseAge`), except `@cspell/dict-*`.
 - **Builds** use tsdown for bundles and type declarations, and `tsc`.
 - **Tests** use vitest, next to the source (`foo.test.ts` next to `foo.ts`). It's the only test runner.
-  - The root `test` also runs `test:prep` first, which needs a built tree, and `test-schema` last, which validates
-    `cspell.schema.json`.
+  - The root `test` also runs `test-schema` last, which validates `cspell.schema.json`.
   - The Yarn test projects (`test-packages/yarn/yarn2` and `examples/yarn`) aren't installed by `pnpm install`.
     `pnpm run test:yarn` installs them with Yarn and runs their tests. The `cspell-lib` tests that load them run only
     when `CSPELL_TEST_YARN` is set; run `pnpm run setup-yarn` first. CI does both.

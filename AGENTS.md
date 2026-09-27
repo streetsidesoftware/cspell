@@ -10,7 +10,7 @@ If a command here disagrees with `package.json`, `package.json` wins. Say so rat
 ```sh
 corepack enable                            # once; pnpm is pinned by packageManager
 pnpm ibt                                   # install, build, test
-pnpm run build                             # always before pnpm test: test:prep needs a built tree
+pnpm run build                             # always before pnpm test: the tests need a built tree
 pnpm test
 pnpm --filter cspell test                  # one package
 pnpm --filter cspell exec vitest run src/options.test.ts   # one test file
