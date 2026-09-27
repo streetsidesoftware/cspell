@@ -159,8 +159,10 @@ export default defineConfig(
     },
     {
         ignores: [
+            '.claude/worktrees/**',
             '.github/**/*.yaml',
             '.github/**/*.yml',
+            '.worktrees/**',
             '**/__snapshots__/**',
             '**/.docusaurus/**',
             '**/.temp/**',
