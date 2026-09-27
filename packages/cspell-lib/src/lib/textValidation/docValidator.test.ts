@@ -136,8 +136,9 @@ describe('docValidator', () => {
     );
 
     test.each`
-        filename                             | expected
-        ${fix('IntlSegmentText/example.md')} | ${[]}
+        filename                                       | expected
+        ${fix('IntlSegmentText/example.md')}           | ${[]}
+        ${fix('IntlSegmentText/thai-soft-hyphen.txt')} | ${[]}
     `(
         'checkText async $filename "$startText"',
         async ({ filename, expected }) => {
@@ -150,6 +151,7 @@ describe('docValidator', () => {
             const range = [startOffset, endOffset] as const;
             const text = doc.text.slice(startOffset, endOffset);
             expect(dVal.checkText(range, text, [])).toEqual(expected);
+            expect(dVal.errors).toEqual([]);
             expect(dVal.prepTime).toBeGreaterThan(0);
         },
         timeout,

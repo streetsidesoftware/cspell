@@ -7,7 +7,7 @@ import { textValidatorFactory } from './lineValidatorFactory.js';
 const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
 
 describe('lineValidatorFactory', () => {
-    // cspell:ignore 𐀀𐃘 izfrNTmQLnfsLzi2Wb9x izfr Lnfs Drived
+    // cspell:ignore 𐀀𐃘 izfrNTmQLnfsLzi2Wb9x izfr Lnfs Drived xxfour
 
     test.each`
         text                                              | expected
@@ -23,6 +23,7 @@ describe('lineValidatorFactory', () => {
         ${'one two three etc'}                            | ${[oc({ text: 'etc' })]}
         ${'three four five one'}                          | ${[oc({ text: 'five' })]}
         ${'lion'}                                         | ${[oc({ text: 'lion', suggestionsEx: [oc({ word: 'tiger', isPreferred: true })] })]}
+        ${'one_q\u00ADz_xxfour'}                          | ${[oc({ text: 'xxfour' })]}
     `('textValidatorFactory $text', ({ text, expected }) => {
         const dict = getDict();
         const tv = textValidatorFactory(dict, {
