@@ -389,6 +389,9 @@ describe('shouldCheckDocument', () => {
         ${'src/code.ts'}                | ${opts()}                         | ${s({ loadDefaultConfiguration: false })} | ${{ shouldCheck: true }}
         ${'src/code.ts'}                | ${opts({ noConfigSearch: true })} | ${s({ loadDefaultConfiguration: false })} | ${{ shouldCheck: true }}
         ${'node_modules/mod/index.js'}  | ${opts()}                         | ${s()}                                    | ${{ shouldCheck: false, reason: 'Excluded by ignorePaths.' }}
+        ${'node_modules/mod/index.js'}  | ${opts({ forceCheck: true })}     | ${s()}                                    | ${{ shouldCheck: true }}
+        ${'src/code.ts'}                | ${opts()}                         | ${s({ enabled: false })}                  | ${{ shouldCheck: false, reason: 'Excluded by overrides or languageSettings.' }}
+        ${'src/code.ts'}                | ${opts({ forceCheck: true })}     | ${s({ enabled: false })}                  | ${{ shouldCheck: true }}
         ${'node_modules/mod/index.js'}  | ${opts({ noConfigSearch: true })} | ${s()}                                    | ${{ shouldCheck: true }}
         ${'node_modules/mod/index.js'}  | ${opts()}                         | ${s({ noConfigSearch: true })}            | ${{ shouldCheck: true }}
         ${'node_modules/mod/index.js'}  | ${opts()}                         | ${s({ loadDefaultConfiguration: false })} | ${{ shouldCheck: false, reason: 'Excluded by ignorePaths.' }}
