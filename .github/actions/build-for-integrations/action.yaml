@@ -86,8 +86,10 @@ runs:
 
     - name: Install Dependencies
       # Install production (non-test) dependencies only
+      # verify-deps-before-run=false: otherwise pnpm does a full, unfiltered install
+      # before running the script, which triggers the Yarn preinstall scripts.
       run: |
-        pnpm install:prod --filter \!./website
+        pnpm --config.verify-deps-before-run=false install:prod --filter \!./website
       shell: bash
 
     - name: Has Pnpm has failed?
