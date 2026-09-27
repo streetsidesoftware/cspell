@@ -24,6 +24,8 @@ describe('lineValidatorFactory', () => {
         ${'three four five one'}                          | ${[oc({ text: 'five' })]}
         ${'lion'}                                         | ${[oc({ text: 'lion', suggestionsEx: [oc({ word: 'tiger', isPreferred: true })] })]}
         ${'one_q\u00ADz_xxfour'}                          | ${[oc({ text: 'xxfour' })]}
+        ${'one_A\u00ADBs_xxfour'}                         | ${[oc({ text: 'xxfour' })]}
+        ${'one_ABi\u00ADng_xxfour'}                       | ${[oc({ text: 'xxfour' })]}
     `('textValidatorFactory $text', ({ text, expected }) => {
         const dict = getDict();
         const tv = textValidatorFactory(dict, {

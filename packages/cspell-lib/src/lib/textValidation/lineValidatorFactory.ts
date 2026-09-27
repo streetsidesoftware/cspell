@@ -1,5 +1,3 @@
-import assert from 'node:assert';
-
 import { opConcatMap, opFilter, pipe } from '@cspell/cspell-pipe/sync';
 import type { ParsedText } from '@cspell/cspell-types';
 import { defaultCSpellSettings, unknownWordsChoices } from '@cspell/cspell-types';
@@ -24,7 +22,7 @@ import {
     splitWordWithOffset,
 } from '../util/text.js';
 import { regExpCamelCaseWordBreaksWithEnglishSuffix } from '../util/textRegex.js';
-import { softHyphen, split } from '../util/wordSplitter/index.js';
+import { split } from '../util/wordSplitter/index.js';
 import { defaultMinWordLength } from './defaultConstants.js';
 import { extractHexSequences, isRandomString } from './isRandomString.js';
 import { isWordValidWithEscapeRetry } from './isWordValid.js';
@@ -206,16 +204,20 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
     const fn: LineValidatorFn = (lineSegment: LineSegment) => {
         const line = lineSegment.line;
 
+        /**
+         * A short word is ok if it stands alone in the line, i.e. it is not next to other letters.
+         */
         function isWordTooShort(word: TextOffsetRO, ignoreSuffix = false): boolean {
-            if (word.text.length >= minWordLength * 2 || [...word.text].length >= minWordLength) return false;
+            const tLen = word.text.length;
+            if (tLen >= minWordLength * 2 || [...word.text].length >= minWordLength) return false;
+            // A word joined across soft hyphens does not stand alone in the line.
+            if (word.length !== undefined && word.length !== tLen) return false;
             const offset = word.offset - line.offset;
-            const end = findEndOfWordInText(line.text, offset, word.text);
-            assert.equal(removeSoftHyphens(line.text.slice(offset, end)), removeSoftHyphens(word.text));
             const prefix = [...line.text.slice(Math.max(0, offset - 2), offset)];
             const hasLetterPrefix = !!prefix.length && regExpIsLetter.test(prefix[prefix.length - 1]);
             if (hasLetterPrefix) return false;
             if (ignoreSuffix) return true;
-            const suffix = [...line.text.slice(end, end + 2)];
+            const suffix = [...line.text.slice(offset + tLen, offset + tLen + 2)];
             const hasLetterSuffix = !!suffix.length && regExpIsLetter.test(suffix[0]);
             return !hasLetterSuffix;
         }
@@ -237,6 +239,8 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
             const check = checkWord(v);
             if (check.isFlagged) return false;
             if (check.isFound) return true;
+            // A word joined across soft hyphens does not stand alone in the line.
+            if (tWord.length !== undefined && tWord.length !== tWord.text.length) return false;
             if (isWordTooShort(v, true)) return true;
             return false;
         }
@@ -487,30 +491,6 @@ export function textValidatorFactory(dict: SpellingDictionary, options: TextVali
         validate,
         lineValidator,
     };
-}
-
-/**
- * Find where `word` ends in `text`, starting at `offset`.
- * The word splitter removes soft hyphens from a word, so `word` can be shorter than its span in `text`.
- * @param text - the text containing the word.
- * @param offset - the offset of the start of the word in `text`.
- * @param word - the word, possibly with soft hyphens removed.
- * @returns the offset just past the end of the word in `text`.
- */
-function findEndOfWordInText(text: string, offset: number, word: string): number {
-    let i = offset;
-    for (let j = 0; j < word.length && i < text.length; ++i) {
-        if (text[i] === word[j]) {
-            ++j;
-        } else if (text[i] !== softHyphen) {
-            break;
-        }
-    }
-    return i;
-}
-
-function removeSoftHyphens(text: string): string {
-    return text.replaceAll(softHyphen, '');
 }
 
 function filterExcludedTextOffsets(issues: ValidationIssue[], excluded: TextOffsetRO[] | undefined): ValidationIssue[] {
