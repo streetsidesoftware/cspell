@@ -144,10 +144,8 @@ export interface CreateSubstitutionTransformerResult {
  * @returns
  */
 export function createSubstitutionTransformer(info: ReadonlySubstitutionInfo): CreateSubstitutionTransformerResult {
-    const { subMap, missing } =
-        info.substitutions && info.substitutionDefinitions
-            ? calcSubMap(info.substitutions, info.substitutionDefinitions)
-            : {};
+    const { substitutions, substitutionDefinitions } = info;
+    const { subMap, missing } = substitutions ? calcSubMap(substitutions, substitutionDefinitions ?? []) : {};
     return {
         transformer: new SubstitutionTransformer(subMap),
         missing: missing && missing.length > 0 ? missing : undefined,
