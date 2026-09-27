@@ -66,9 +66,12 @@ exclude-labels:
   - dependencies
   - test
   - refactor
+  - documentation
+  - Documentation
+  - website
+  - Website
 include-labels:
   - breaking
-  - documentation
   - feat
   - feature
   - fix
@@ -86,15 +89,16 @@ autolabeler:
       - '/^ci[:](?! Workflow Bot)/i'
       - '/^ci[:(]?/i'
   - label: 'documentation'
-    files:
-      - '/website/**/*.md'
     title:
       - '/^docs?/i'
+  - label: 'Website'
+    title:
+      - '/^website/i'
   - label: 'fix'
     title:
       - '/^fix/i'
       # A revert is published only if the change it undoes was.
-      - '/^revert(?::\s*|\s+")(feat|fix|docs?)(\([^)]*\))?!?:/i'
+      - '/^revert(?::\s*|\s+")(feat|fix)(\([^)]*\))?!?:/i'
   - label: 'refactor'
     title:
       # Not `!:`: a breaking refactor is published.

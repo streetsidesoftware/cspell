@@ -16,6 +16,7 @@ const releaseDrafterConfigFile = path.join(__dirname, '../.github/release-drafte
 interface AutoLabel {
     label: string;
     title?: string[];
+    files?: string[];
 }
 
 interface Replacer {
@@ -47,14 +48,17 @@ const titleCases: [title: string, labels: string[], published: boolean][] = [
     ['Revert "fix: Report errors"', ['fix'], true],
     ['Revert "feat: Add an option"', ['fix'], true],
     ['Revert "fix(cspell)!: Change a default"', ['fix'], true],
-    ['Revert "docs: Clarify imports"', ['fix'], true],
+    ['Revert "docs: Clarify imports"', [], false],
     ['Revert "chore: Update the agent setup"', [], false],
     ['Revert "refactor: Clean up the worker"', [], false],
     ['Revert "ci: Workflow Bot -- Update ALL Dependencies (main)"', [], false],
     ['refactor: Clean up the worker', ['refactor'], false],
     ['refactor(cspell-lib): Clean up', ['refactor'], false],
     ['dev: Add a debug flag', ['refactor'], false],
-    ['docs: Clarify imports', ['documentation'], true],
+    ['docs: Clarify imports', ['documentation'], false],
+    ['docs(cspell): Improve the README', ['documentation'], false],
+    ['docs!: Remove a page', ['documentation', 'breaking'], false],
+    ['website: Update the home page', ['Website'], false],
     ['chore: Update the agent setup', ['chore'], false],
     ['ci: Update a workflow', ['chore'], false],
     ['ci: Workflow Bot -- Update ALL Dependencies (main)', ['dependencies', 'chore'], false],
@@ -138,6 +142,13 @@ function applyReplacers(config: ReleaseDrafterConfig, body: string): string {
 async function run() {
     const config = parse(await fs.readFile(releaseDrafterConfigFile, 'utf8')) as ReleaseDrafterConfig;
     const failures: string[] = [];
+
+    // A file rule could add an excluded label to a published PR, such as `feat:` with website changes.
+    for (const rule of config.autolabeler) {
+        if (rule.files?.length) {
+            failures.push(`autolabeler "${rule.label}": labels must come from the title only, not from files`);
+        }
+    }
 
     for (const [title, expectedLabels, expectedPublished] of titleCases) {
         const labels = labelsForTitle(config, title);
