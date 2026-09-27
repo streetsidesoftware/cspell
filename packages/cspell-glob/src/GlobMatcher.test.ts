@@ -28,6 +28,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 const gitRoot = path.join(__dirname, '../../../');
+const gitRelFile = path.relative(gitRoot, __filename);
 
 const pathNames = new Map([
     [pathWin32, 'Win32'],
@@ -109,8 +110,8 @@ describe('Validate Micromatch assumptions', () => {
         ${'src/*.(test|spec).ts'}        | ${'src/code.spec.ts'}         | ${true}
         ${'src/*.(test|spec).ts'}        | ${'src/deep.code.test.ts'}    | ${true}
         ${'src/*.(test|spec).ts'}        | ${'src/test.ts'}              | ${false}
-        ${filenameToGlob(__filename, 1)} | ${__filename}                 | ${true}
-        ${filenameToGlob(__filename, 2)} | ${__filename}                 | ${true}
+        ${filenameToGlob(gitRelFile, 1)} | ${gitRelFile}                 | ${true}
+        ${filenameToGlob(gitRelFile, 2)} | ${gitRelFile}                 | ${true}
         ${'temp'}                        | ${'src/temp'}                 | ${false}
         ${'temp'}                        | ${'temp'}                     | ${true}
     `(`Micromatch glob: '$glob', filename: '$filename' expected: $expectedToMatch`, ({ glob, filename, expectedToMatch }) => {
