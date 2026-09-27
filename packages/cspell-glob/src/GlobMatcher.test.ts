@@ -307,6 +307,7 @@ describe('Validate Options', () => {
         root: string | undefined;
         expected: Partial<GlobMatch> | boolean;
     }
+    const dotRoot = '/Users/code/.hidden/project/';
     test.each`
         pattern                    | file                                     | root             | options                | expected
         ${'*.yaml'}                | ${'.github/workflows/test.yaml'}         | ${undefined}     | ${{}}                  | ${{ matched: true }}
@@ -348,6 +349,11 @@ describe('Validate Options', () => {
         ${'i18/nl_NL'}             | ${'i18/nl_NL/file.txt'}                  | ${undefined}     | ${{ mode: 'exclude' }} | ${{ matched: true }}
         ${'i18/nl_NL'}             | ${'code/i18/nl_NL/file.txt'}             | ${undefined}     | ${{ mode: 'exclude' }} | ${{ matched: false }}
         ${'${cwd}/**/i18/nl_NL'}   | ${'code/i18/nl_NL/file.txt'}             | ${process.cwd()} | ${{ mode: 'exclude' }} | ${{ matched: true }}
+        ${'**/*.json'}             | ${'package.json'}                        | ${dotRoot}       | ${{ mode: 'include' }} | ${true}
+        ${'**/src/*.json'}         | ${'x/src/config.json'}                   | ${dotRoot}       | ${{ mode: 'include' }} | ${true}
+        ${'**/*.json'}             | ${'.git/package.json'}                   | ${dotRoot}       | ${{ mode: 'include' }} | ${false}
+        ${'**/*.json'}             | ${'../other/package.json'}               | ${dotRoot}       | ${{ mode: 'include' }} | ${false}
+        ${'**/*.json'}             | ${'.git/package.json'}                   | ${dotRoot}       | ${{ mode: 'exclude' }} | ${true}
     `('options: $pattern, $file, $options, root', ({ pattern, file, options, root, expected }: TestCase) => {
         root = root || '/Users/code/project/cspell/';
         const filename = path.join(root, file);
