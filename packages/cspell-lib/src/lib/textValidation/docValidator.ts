@@ -745,11 +745,11 @@ export async function shouldCheckDocument(
         const config = mergeSettings(settings, localConfig);
         const matcher = getGlobMatcherForExcluding(localConfig?.ignorePaths);
         // eslint-disable-next-line unicorn/prefer-regexp-test
-        if (matcher.match(uriToFilePath(doc.uri))) {
+        if (!options.forceCheck && matcher.match(uriToFilePath(doc.uri))) {
             return { errors, shouldCheck: false, settings: localConfig, reason: 'Excluded by ignorePaths.' };
         }
         const docSettings = await determineTextDocumentSettings(doc, config);
-        const shouldCheck = docSettings.enabled ?? true;
+        const shouldCheck = options.forceCheck || (docSettings.enabled ?? true);
         const reason = shouldCheck ? undefined : 'Excluded by overrides or languageSettings.';
         return { errors, shouldCheck, settings: docSettings, reason };
     }

@@ -38,6 +38,10 @@ export interface SpellCheckFileOptions extends ValidateTextOptions, Pick<CSpellU
      * @defaultValue undefined
      */
     noConfigSearch?: boolean;
+    /**
+     * If true, the document will be checked even if it would normally be excluded.
+     */
+    forceCheck?: boolean;
 }
 
 export interface SpellCheckFileOptionsRPC extends SpellCheckFileOptions {

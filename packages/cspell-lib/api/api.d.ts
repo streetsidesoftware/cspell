@@ -1043,6 +1043,10 @@ interface SpellCheckFileOptions extends ValidateTextOptions, Pick<CSpellUserSett
    * @defaultValue undefined
    */
   noConfigSearch?: boolean;
+  /**
+   * If true, the document will be checked even if it would normally be excluded.
+   */
+  forceCheck?: boolean;
 }
 interface SpellCheckFileOptionsRPC extends SpellCheckFileOptions {
   measurePerf?: boolean;
