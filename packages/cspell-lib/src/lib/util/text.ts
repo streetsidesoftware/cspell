@@ -265,6 +265,22 @@ export function removeAccents(text: string): string {
     return text.normalize('NFD').replace(regExAccents, '');
 }
 
+/**
+ * Count the number of characters (Unicode code points) in a string.
+ * Surrogate pairs count as one character. Same result as `[...text].length`, without creating an array.
+ * @param text - the string to count.
+ * @returns the number of characters.
+ */
+export function numCharacters(text: string): number {
+    const len = text.length;
+    let n = 0;
+    for (let i = 0; i < len; ++i, ++n) {
+        // A code point above 0xFFFF is a surrogate pair, skip the second half.
+        if ((text.codePointAt(i) || 0) > 0xffff) ++i;
+    }
+    return n;
+}
+
 export const __testing__: {
     regExWords: RegExp;
     regExWordsAndDigits: RegExp;

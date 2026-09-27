@@ -19,6 +19,7 @@ import {
     extractPossibleWordsFromTextOffset,
     extractText,
     extractWordsFromTextOffset,
+    numCharacters,
     splitWordWithOffset,
 } from '../util/text.js';
 import { regExpCamelCaseWordBreaksWithEnglishSuffix } from '../util/textRegex.js';
@@ -199,7 +200,11 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
 
     const regExUpperCaseWithTrailingCommonEnglishSuffix =
         /^([\p{Lu}\p{M}]{2,})['’]?(?:s|ing|ies|es|ings|ize|ed|ning)$/u; // cspell:disable-line
-    const regExpIsLetter = /\p{L}/u;
+    // Sticky: test the text at `lastIndex` without creating substrings.
+    /** Is the character before `lastIndex` a letter. */
+    const regExpIsLetterBefore = /(?<=\p{L})/uy;
+    /** Is the character at `lastIndex` a letter. */
+    const regExpIsLetterAt = /\p{L}/uy;
 
     const fn: LineValidatorFn = (lineSegment: LineSegment) => {
         const line = lineSegment.line;
@@ -210,16 +215,16 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
         function isWordTooShort(word: TextOffsetRO, ignoreSuffix = false): boolean {
             const tLen = word.text.length;
             const wLen = word.length ?? tLen;
-            if (tLen >= minWordLength * 2 || [...word.text].length >= minWordLength) return false;
+            if (tLen >= minWordLength * 2 || numCharacters(word.text) >= minWordLength) return false;
             // A word joined across soft hyphens does not stand alone in the line.
             if (wLen !== tLen) return false;
             const offset = word.offset - line.offset;
-            const prefix = [...line.text.slice(Math.max(0, offset - 2), offset)];
-            const hasLetterPrefix = !!prefix.length && regExpIsLetter.test(prefix[prefix.length - 1]);
+            regExpIsLetterBefore.lastIndex = offset;
+            const hasLetterPrefix = regExpIsLetterBefore.test(line.text);
             if (hasLetterPrefix) return false;
             if (ignoreSuffix) return true;
-            const suffix = [...line.text.slice(offset + wLen, offset + wLen + 2)];
-            const hasLetterSuffix = !!suffix.length && regExpIsLetter.test(suffix[0]);
+            regExpIsLetterAt.lastIndex = offset + wLen;
+            const hasLetterSuffix = regExpIsLetterAt.test(line.text);
             return !hasLetterSuffix;
         }
 
