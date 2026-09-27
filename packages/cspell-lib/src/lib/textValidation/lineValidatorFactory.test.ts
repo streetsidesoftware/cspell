@@ -1,13 +1,18 @@
+import type { ParsedText } from '@cspell/cspell-types';
 import type { SpellingDictionary } from 'cspell-dictionary';
 import { createCollection, createSpellingDictionary, createSuggestDictionary } from 'cspell-dictionary';
 import { describe, expect, test } from 'vitest';
 
+import type { SubstitutionInfo } from '../Transform/index.js';
+import { createSubstitutionTransformer } from '../Transform/index.js';
+import { mapRangeBackToOriginalPos } from '../Transform/parsedText.js';
+import { softHyphen } from '../Transform/Transformer.js';
 import { textValidatorFactory } from './lineValidatorFactory.js';
 
 const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
 
 describe('lineValidatorFactory', () => {
-    // cspell:ignore 𐀀𐃘 izfrNTmQLnfsLzi2Wb9x izfr Lnfs Drived
+    // cspell:ignore 𐀀𐃘 izfrNTmQLnfsLzi2Wb9x izfr Lnfs Drived xxfour
 
     test.each`
         text                                              | expected
@@ -23,6 +28,9 @@ describe('lineValidatorFactory', () => {
         ${'one two three etc'}                            | ${[oc({ text: 'etc' })]}
         ${'three four five one'}                          | ${[oc({ text: 'five' })]}
         ${'lion'}                                         | ${[oc({ text: 'lion', suggestionsEx: [oc({ word: 'tiger', isPreferred: true })] })]}
+        ${'one_q\u00ADz_xxfour'}                          | ${[oc({ text: 'xxfour' })]}
+        ${'one_A\u00ADBs_xxfour'}                         | ${[oc({ text: 'xxfour' })]}
+        ${'one_ABi\u00ADng_xxfour'}                       | ${[oc({ text: 'xxfour' })]}
     `('textValidatorFactory $text', ({ text, expected }) => {
         const dict = getDict();
         const tv = textValidatorFactory(dict, {
@@ -60,7 +68,136 @@ describe('lineValidatorFactory', () => {
     });
 });
 
+describe('lineValidatorFactory with transformer', () => {
+    // cspell:ignore aint apos couldn
+    const { transformer } = createSubstitutionTransformer({
+        substitutionDefinitions: [],
+        substitutions: [
+            ['&shy;', ''],
+            ["\\'", "'"],
+        ],
+    });
+
+    test('transformer should replace &shy; and escaped single quote', () => {
+        const dict = getDict();
+        const tv = textValidatorFactory(dict, {
+            ignoreCase: true,
+            minWordLength: 3,
+            minRandomLength: 20,
+            transformer,
+        });
+        const text = "This is a test constr&shy;aint that string does\\'nt have an issue with single quote.";
+        const transformed = { text: text, range: [0, text.length] } as const;
+        const r = [...tv.validate(transformed)];
+        const rWords = r.map((a) => a.text);
+        const rSrcText = r.map((a) => extractRange(transformed, a.range));
+        expect(rWords).toEqual([
+            'This',
+            'test',
+            'that',
+            'string',
+            "does'nt",
+            'have',
+            'issue',
+            'with',
+            'single',
+            'quote',
+        ]);
+        expect(rSrcText).toEqual([
+            'This',
+            'test',
+            'that',
+            'string',
+            "does\\'nt",
+            'have',
+            'issue',
+            'with',
+            'single',
+            'quote',
+        ]);
+    });
+
+    test('pre-transformed text', () => {
+        const substitutionDefinitions: SubstitutionInfo['substitutionDefinitions'] = [
+            {
+                name: 'html-symbol-entities',
+                entries: [
+                    ['    ', ''],
+                    ['&apos;', "'"],
+                    ['e&#769;', 'é'],
+                    ['&shy;', softHyphen],
+                ],
+            },
+            {
+                name: 'escapes',
+                entries: [["\\'", "'"]],
+            },
+        ];
+
+        const { transformer: transformerShy } = createSubstitutionTransformer({
+            substitutions: ['html-symbol-entities'],
+            substitutionDefinitions,
+        });
+
+        const { transformer: transformerEscape } = createSubstitutionTransformer({
+            substitutions: ['escapes'],
+            substitutionDefinitions,
+        });
+
+        const dict = getDict();
+        const srcText =
+            "    This is a test constr&shy;aint a break&shy;point  that  string does\\'nt couldn&apos;t have an issue with single quote.";
+        const transformed = transformerShy.transform(srcText);
+        const tv = textValidatorFactory(dict, {
+            ignoreCase: true,
+            minWordLength: 3,
+            minRandomLength: 20,
+            transformer: transformerEscape,
+        });
+        const r = [...tv.validate(transformed)];
+        const rWords = r.map((a) => a.text);
+        const rSrcText = r.map((a) => extractRange(transformed, a.range));
+        expect(rWords).toEqual([
+            'This',
+            'test',
+            'break',
+            'point',
+            'that',
+            'string',
+            "does'nt",
+            "couldn't",
+            'have',
+            'issue',
+            'with',
+            'single',
+            'quote',
+        ]);
+        expect(rSrcText).toEqual([
+            'This',
+            'test',
+            'break',
+            'point',
+            'that',
+            'string',
+            "does\\'nt",
+            'couldn&apos;t',
+            'have',
+            'issue',
+            'with',
+            'single',
+            'quote',
+        ]);
+    });
+});
+
 let dict: SpellingDictionary | undefined;
+
+function extractRange(transformed: ParsedText, range: readonly [number, number]) {
+    const [start, end] = mapRangeBackToOriginalPos(range, undefined);
+
+    const rawText = transformed.rawText ?? transformed.text;
+    return rawText.slice(start, end);
+}
 
 function getDict(): SpellingDictionary {
     if (dict) return dict;

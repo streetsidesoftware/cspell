@@ -1,5 +1,3 @@
-import assert from 'node:assert';
-
 import { opConcatMap, opFilter, pipe } from '@cspell/cspell-pipe/sync';
 import type { ParsedText } from '@cspell/cspell-types';
 import { defaultCSpellSettings, unknownWordsChoices } from '@cspell/cspell-types';
@@ -206,15 +204,21 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
     const fn: LineValidatorFn = (lineSegment: LineSegment) => {
         const line = lineSegment.line;
 
+        /**
+         * A short word is ok if it stands alone in the line, i.e. it is not next to other letters.
+         */
         function isWordTooShort(word: TextOffsetRO, ignoreSuffix = false): boolean {
-            if (word.text.length >= minWordLength * 2 || [...word.text].length >= minWordLength) return false;
+            const tLen = word.text.length;
+            const wLen = word.length ?? tLen;
+            if (tLen >= minWordLength * 2 || [...word.text].length >= minWordLength) return false;
+            // A word joined across soft hyphens does not stand alone in the line.
+            if (wLen !== tLen) return false;
             const offset = word.offset - line.offset;
-            assert.equal(line.text.slice(offset, offset + word.text.length), word.text);
             const prefix = [...line.text.slice(Math.max(0, offset - 2), offset)];
             const hasLetterPrefix = !!prefix.length && regExpIsLetter.test(prefix[prefix.length - 1]);
             if (hasLetterPrefix) return false;
             if (ignoreSuffix) return true;
-            const suffix = [...line.text.slice(offset + word.text.length, offset + word.text.length + 2)];
+            const suffix = [...line.text.slice(offset + wLen, offset + wLen + 2)];
             const hasLetterSuffix = !!suffix.length && regExpIsLetter.test(suffix[0]);
             return !hasLetterSuffix;
         }
@@ -236,6 +240,8 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
             const check = checkWord(v);
             if (check.isFlagged) return false;
             if (check.isFound) return true;
+            // A word joined across soft hyphens does not stand alone in the line.
+            if (tWord.length !== undefined && tWord.length !== tWord.text.length) return false;
             if (isWordTooShort(v, true)) return true;
             return false;
         }
@@ -465,9 +471,18 @@ export function textValidatorFactory(dict: SpellingDictionary, options: TextVali
         const segment = { text, offset: 0 };
         const lineSegment: LineSegment = { line: segment, segment };
         function mapBackToOriginSimple(vr: ValidationIssue): MappedTextValidationResult {
-            const { text, offset, isFlagged, isFound, suggestionsEx, hasPreferredSuggestions, hasSimpleSuggestions } =
-                vr;
-            const r = mapRangeBackToOriginalPos([offset, offset + text.length], map);
+            const {
+                text,
+                length,
+                offset,
+                isFlagged,
+                isFound,
+                suggestionsEx,
+                hasPreferredSuggestions,
+                hasSimpleSuggestions,
+            } = vr;
+            const wLen = length ?? text.length;
+            const r = mapRangeBackToOriginalPos([offset, offset + wLen], map);
             const range = [r[0] + srcOffset, r[1] + srcOffset] as [number, number];
             return {
                 text,
