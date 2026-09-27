@@ -587,6 +587,90 @@ These changes lay the groundwork for parsers and other tools to annotate text wi
 
 </details>
 
+## v10.3.5 (2026-09-27)
+
+### Fixes
+
+<details>
+<summary>fix(cspell-lib): `shouldCheckDocument` honors the `forceCheck` option (<a href="https://github.com/streetsidesoftware/cspell/pull/9303">#9303</a>)</summary>
+
+### fix(cspell-lib): `shouldCheckDocument` honors the `forceCheck` option ([#9303](https://github.com/streetsidesoftware/cspell/pull/9303))
+
+## Summary
+
+For users of the `cspell-lib` API:
+
+- `shouldCheckDocument` now honors `forceCheck`. It returns `shouldCheck: true` for a document excluded by `ignorePaths`, or disabled by `overrides` or `languageSettings`. Before, the option was accepted but ignored. `DocumentValidator` already worked this way.
+- `SpellCheckFileOptions` now declares `forceCheck`, so it can be passed to `spellCheckDocument` and `spellCheckFile` with type checking.
+
+---
+
+</details>
+
+<details>
+<summary>fix: `--force-check` checks the listed files even when `ignorePaths` or `files` would skip them (<a href="https://github.com/streetsidesoftware/cspell/pull/9300">#9300</a>)</summary>
+
+### fix: `--force-check` checks the listed files even when `ignorePaths` or `files` would skip them ([#9300](https://github.com/streetsidesoftware/cspell/pull/9300))
+
+## Summary
+
+`--force-check` now checks every file given with `--file` or `--file-list`, as its help says. Before, some of those files were still skipped:
+
+- files matched by `ignorePaths` in the config;
+- files that don't match the `files` setting in the config.
+
+Using globs on the command line together with `--force-check` is now an error, the same as globs with `--file`:
+
+```text
+error: mixing globs and --force-check is not supported
+```
+
+Before, `cspell lint --file-list list.txt "**/*.md" --force-check` was accepted. To filter a file list by glob, leave out `--force-check`.
+
+---
+
+</details>
+
+<details>
+<summary>fix: `files` globs starting with `**` no longer skip `--file` and `--file-list` files in a project under a dot folder (<a href="https://github.com/streetsidesoftware/cspell/pull/9299">#9299</a>)</summary>
+
+### fix: `files` globs starting with `**` no longer skip `--file` and `--file-list` files in a project under a dot folder ([#9299](https://github.com/streetsidesoftware/cspell/pull/9299))
+
+## Summary
+
+When a project was under a folder whose name starts with a dot, such as `~/.local/src/my-project` or a git worktree in `.claude/worktrees/`, files given with `--file` or `--file-list` could be skipped without any warning. CSpell then reported `Files checked: 0` and exited with success.
+
+This happened when the listed files were filtered by a glob starting with `**`:
+
+- from the `files` setting in the config, for `--file` and `--file-list`;
+- from globs on the command line, for `--file-list`, for example `cspell lint --file-list changed-files.txt "**/*.md"`.
+
+These files are now checked.
+
+- Files and folders inside the project whose names start with a dot are still left out unless `--dot` or `enableGlobDot` is set, as before.
+- Checking with globs alone (`cspell lint "**/*.md"`) was not affected.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Thai text and substitutions are checked and reported correctly (<a href="https://github.com/streetsidesoftware/cspell/pull/9289">#9289</a>)</summary>
+
+### fix: Thai text and substitutions are checked and reported correctly ([#9289](https://github.com/streetsidesoftware/cspell/pull/9289))
+
+Fixes problems with checking text that cspell changes before spell checking, such as Thai text split into words with `useIntlWordSegmentation`, or text changed by `substitutions` (for example HTML entities or escaped quotes).
+
+- **Thai text no longer stops the check with an error.** Checking Thai text, or any text with `useIntlWordSegmentation` turned on, could stop with an internal error (`AssertionError [ERR_ASSERTION]`) on certain words. In cspell 10.3.3 and earlier, the file was reported as skipped and not checked. Starting with 10.3.4, the whole run failed. These files are now checked normally. The problem was found with the Thai word `กระดูกสฟีนอยด์`.
+- **Issues are reported at the right place.** When text was changed more than once before checking, for example by two sets of substitutions, issues after the first change could be reported at the wrong position in the file. They are now reported where the word actually is.
+- **Substitutions without definitions are applied.** Substitutions given directly as `[find, replacement]` pairs were ignored unless `substitutionDefinitions` was also set. They are now always applied.
+
+Fixes #9281
+
+---
+
+</details>
+
 ## v10.3.4 (2026-09-24)
 
 ### Fixes
