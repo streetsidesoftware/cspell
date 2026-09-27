@@ -95,7 +95,8 @@ requests", and `docs/config-and-cli.md`'s "The PR".
 - **Title:** `feat:` for a new option, `fix:` for a changed default, a rename, or a deprecation. Add `!` when a config
   that works today would break. Say what changed for users.
 - **Description:** a `## Summary`, and for `feat:` a `## Feature` section with a config example and the design answers
-  from step 2 that shape how to use it. No tool attribution.
+  from step 2 that shape how to use it. End with a light `For maintainers` block, as in `CONTRIBUTING.md`: why, what
+  changed in the code, links. No tool attribution and no hidden comments.
 
 Show the drafts to the user. Don't commit, push, or open a PR until they say so.
 

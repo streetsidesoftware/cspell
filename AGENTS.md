@@ -92,7 +92,9 @@ The PR title and body are published verbatim in the release notes. Follow
 
 - Pick the type by whether someone using cspell would notice. Tooling and the coding-agent setup are `chore:`.
   Docs and READMEs are `docs:`, and website content is `website:`. None of these are published.
-- Never put tool attribution, such as "Generated with ...", in a PR body.
+- Never put tool attribution, such as "Generated with ...", or hidden HTML comments in a PR body.
+- For a PR in the release notes, put what reviewers need in a `For maintainers` block, not in the published text. See
+  [For maintainers](CONTRIBUTING.md#for-maintainers).
 - After pushing more commits to an open PR, check that its description still matches.
 - If a merged PR has the wrong title, label, or body, use the `release-notes` skill.
 

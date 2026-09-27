@@ -105,6 +105,7 @@ commit the regenerated file by path. If the output changes on every build, stop 
 | A package's public API                        | `pnpm run build`, and commit its `api/` file if it has one. Add doc comments (see [`CONTRIBUTING.md`](../CONTRIBUTING.md#comments)). |
 | Bundled dictionaries                          | See [Bundled dictionaries](#bundled-dictionaries).                                                                                   |
 | `.github/release-drafter.yml`                 | `node ./scripts/check-release-drafter.mts`. See [Releasing](./releasing.md#changing-the-rules).                                      |
+| `scripts/lib/clean-release-body.mts`          | `node ./scripts/check-clean-release-body.mts`. See [Releasing](./releasing.md#cleaning-pr-bodies).                                   |
 
 ## Bundled dictionaries
 
@@ -148,6 +149,8 @@ The main workflows in `.github/workflows/`:
 - `website-*.yml`, `lint-docs.yml`, `test-build-docs.yml`: the website.
 - Bots that open PRs: `update-dictionaries.yml`, `update-dependencies.yml`, `update-pnpm.yml`, `update-readme.yml`,
   `update-docs.yml`, `update-integration-repositories.yml`.
+- `pr-title.yml`: fails a PR whose title doesn't start with a known prefix.
+- `check-release-drafter.yml`: checks the release notes rules and the PR body cleaning when they change.
 - Releases: see [Releasing](./releasing.md).
 
 When adding or changing a workflow:

@@ -36,7 +36,8 @@ title, decides the section and the version bump. The rules are the `autolabeler`
 
 - Labels come from the title only. A PR is left out if any of its labels is excluded, so a rule based on changed files
   could hide a `feat:` PR that also updates the website.
-- A PR with no label is left out: `include-labels` is an allowlist.
+- A PR with no label is left out: `include-labels` is an allowlist. The PR Title workflow (`pr-title.yml`) fails a PR
+  whose title doesn't start with a known prefix, so this doesn't happen by accident.
 - A revert is published only when it undoes a published type: `feat` or `fix`. Any other revert gets no label.
 - A breaking change is always published, except `chore!:`, `ci!:`, `test!:`, `docs!:`, and `website!:`: their own labels are
   excluded. An
@@ -56,6 +57,36 @@ The `replacers` in `.github/release-drafter.yml` remove tool attribution from th
 - a bare Claude Code session link, `https://claude.ai/code/session_…`
 
 Leave them out of PR bodies anyway.
+
+### Cleaning PR bodies
+
+`scripts/clean-release-body.mts` removes from each PR body what must not be published:
+
+- hidden HTML comments. An unclosed `<!--` is turned into visible text, so it can't hide the entries after it.
+- `<details>` blocks whose summary is "For maintainers", including anything nested in them. See
+  [Pull requests](../CONTRIBUTING.md#for-maintainers).
+
+Code blocks and inline code are left as they are.
+
+The release body joins every PR's entry together, and a PR body can contain the same markup as the entry template. So
+the script doesn't split the release body: it fetches each PR's body, cleans it on its own, and replaces the exact
+original text. If a body that needs cleaning isn't found verbatim, for example because the PR was edited after the draft
+was built, the step fails rather than publishing half-cleaned notes.
+
+It runs twice:
+
+1. In the Release Drafter workflow's `create-pr` job, before `gen-release.mts`. It updates the draft release, and the
+   changelogs and the Prepare Release PR get the cleaned text.
+1. In `build-version-release.yml`, right before the draft is published. release-drafter rewrites the draft on every
+   push, including the one that merges the Prepare Release PR.
+
+To see what it would change without writing anything:
+
+```sh
+node ./scripts/clean-release-body.mts --tag v10.3.5
+```
+
+After changing the cleaning rules, run `node ./scripts/check-clean-release-body.mts`.
 
 ### Changing the rules
 

@@ -68,7 +68,8 @@ affects them. Anything only maintainers care about stays out.
 
 ### Title
 
-Use a [Conventional Commits](https://www.conventionalcommits.org/) prefix. The prefix sets the label, and the label
+Use a [Conventional Commits](https://www.conventionalcommits.org/) prefix. The PR Title check fails a PR whose title
+doesn't start with one of the prefixes below. The prefix sets the label, and the label
 decides whether the PR is in the release notes, under which section, and the version bump. Pick it by whether someone
 using cspell would notice the change.
 
@@ -108,15 +109,37 @@ it into a list.
   them.
   - Say which option, flag, command, or behavior changed, in their terms.
   - For `feat:`, add a `## Feature` section: what users can now do, with a config or command-line example.
-  - Leave out internal details, and anything else only maintainers need.
+  - Put what maintainers and reviewers need in a `For maintainers` block (below), not in the published text.
 - For a PR left out of the release notes, write for reviewers. Group the changes by theme, not by file, and say why each
   matters.
 - Put extra detail in collapsed `<details>` blocks, as bullet points.
 - No test plan section: CI covers that.
 - No tool attribution, such as "Generated with ...". The release notes strip it, but leave it out anyway.
+- No hidden HTML comments (`<!-- -->`). Everything in the body should be visible to reviewers. The release notes remove
+  them.
 - After pushing more commits, check that the description still matches.
 
 Don't restate the diff, narrate how you got to the change, or write a section per commit.
+
+#### For maintainers
+
+For a PR in the release notes, add a light block for maintainers, reviewers, and anyone who later needs to know why the
+change was made. The PR template includes it.
+
+```markdown
+<details>
+<summary>For maintainers</summary>
+
+- Why: the problem and its cause.
+- What changed in the code.
+- Links: issues, ADRs, related PRs.
+
+</details>
+```
+
+- A few bullets. Add a design choice or risk only when a reviewer would otherwise ask about it.
+- It can go anywhere in the body. Keep the blank line after `</summary>`, or GitHub shows the Markdown as plain text.
+- The release notes and changelogs leave it out. See [Releasing](./docs/releasing.md#cleaning-pr-bodies).
 
 If a PR merged with the wrong title, label, or body, see
 [Fixing a release notes entry](./docs/releasing.md#fixing-a-release-notes-entry).

@@ -1,0 +1,31 @@
+name: PR Title
+
+# The title's prefix decides whether a PR is in the release notes. A title with an unknown or malformed prefix gets no
+# label and is silently left out, so fail it here instead. See CONTRIBUTING.md, "Pull requests".
+
+on:
+  workflow_call:
+  pull_request:
+    types: [opened, edited, reopened, synchronize]
+
+permissions:
+  contents: read
+
+jobs:
+  check-title:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check the PR title
+        env:
+          TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          # Patterns in variables: bash parses parentheses written inside [[ =~ ]] differently across versions.
+          prefix='^(feat|fix|docs?|website|refactor|dev|chore|ci|test|perf|revert)(\([^)[:space:]]+\))?!?: [^[:space:]]'
+          revert='^Revert ".+"'
+          if [[ $TITLE =~ $prefix || $TITLE =~ $revert ]]; then
+            echo "OK: $TITLE"
+            exit 0
+          fi
+          echo "::error title=PR title::The title needs a known prefix, such as 'feat: ', 'fix: ', or 'chore: '. See CONTRIBUTING.md, \"Pull requests\"."
+          echo "Title: $TITLE"
+          exit 1

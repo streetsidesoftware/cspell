@@ -48,6 +48,10 @@ For each entry:
 - **Is it in the right section?** A Features entry must be a new capability. A change to existing behavior is `fix:`.
   A breaking change needs `!` and the `breaking` label.
 - **Is the body written for users?** Flag bodies written for reviewers, test plans, and tool attribution lines.
+  Reviewer detail belongs in a `For maintainers` block, which the release notes leave out.
+- **Anything hidden?** Hidden comments and `For maintainers` blocks are removed automatically when the release is
+  built (`docs/releasing.md`, "Cleaning PR bodies"). Run `node ./scripts/clean-release-body.mts --tag <tag>` to see
+  what will be removed, and flag anything the cleaning didn't catch.
 - **Bot PRs** (`Workflow Bot -- ...`) keep the type they were opened with. Never propose a lower one.
 
 Present the flagged entries with your reasoning and PR numbers, and get the user's confirmation on which to correct
@@ -62,6 +66,7 @@ For each PR, decide what changes, using the table in `docs/releasing.md`:
 - **Labels:** the label the new title would get, replacing the old one. For example, `refactor:` gets `refactor`
   instead of `fix`, and a breaking change also gets `breaking`.
 - **Body:** only if it's wrong for its reader. Keep the author's content; remove or rewrite only what doesn't belong.
+  Move reviewer detail into a `For maintainers` block rather than deleting it.
 
 ### 4. Edit the PR
 
