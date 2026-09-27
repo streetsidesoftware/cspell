@@ -65,13 +65,13 @@ exclude-labels:
   - chore
   - dependencies
   - test
+  - refactor
 include-labels:
   - breaking
   - documentation
   - feat
   - feature
   - fix
-  - refactor
   - Update Dictionaries
 autolabeler:
   - label: 'Update Dictionaries'
@@ -93,6 +93,9 @@ autolabeler:
   - label: 'fix'
     title:
       - '/^fix/i'
+      - '/^revert/i'
+  - label: 'refactor'
+    title:
       - '/^dev:/i'
       - '/^refactor/i'
   - label: 'feature'
@@ -103,13 +106,20 @@ autolabeler:
       - '/^test/i'
   - label: 'breaking'
     title:
-      - '/^fix[!]/i'
-      - '/^feat[!]/i'
+      - '/^(feat|fix)(\([^)]*\))?!:/i'
   - label: cspell5
     branch:
       - '/cspell5/i'
 
 template: |
   $CHANGES
+
+# Applied to the whole release body, which also feeds the CHANGELOG.md files.
+# Tested by scripts/check-release-drafter.mts.
+replacers:
+  # Tool attribution lines, such as "Generated with [Claude Code](https://claude.com/claude-code)", on a line of their own.
+  - search: |-
+      /^[ \t]*(?:\p{Extended_Pictographic}\uFE0F?[ \t]*)?Generated with \[[^\]\n]+\]\([^)\s]+\)[ \t]*(?:\r?\n|$)/gimu
+    replace: ''
 
 # cspell:ignore autolabeler commitish
