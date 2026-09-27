@@ -86,7 +86,7 @@ To see what it would change without writing anything:
 node ./scripts/clean-release-body.mts --tag v10.3.5
 ```
 
-After changing the cleaning rules, run `node ./scripts/check-clean-release-body.mts`.
+Its tests are in `scripts/lib/clean-release-body.test.mts`. Run them with `pnpm --filter @internal/scripts test`.
 
 ### Changing the rules
 
