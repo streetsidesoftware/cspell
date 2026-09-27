@@ -108,7 +108,7 @@ each other's files, and those are deleted together.
 ## Branches
 
 Work on a design in an `adr/<feature>` branch, and on archiving in an `adr-archive/<feature>` branch. A design is merged
-with a `chore:` PR, so it stays out of the release notes. The feature itself ships in a later `feat:` or `fix:` PR.
+with a `docs:` PR, so it stays out of the release notes. The feature itself ships in a later `feat:` or `fix:` PR.
 
 ## With Claude Code
 

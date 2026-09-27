@@ -69,7 +69,12 @@ pnpm run build
 
 ### 4. Verify
 
+While iterating, `pnpm --filter <package>... run build` and `pnpm --filter <package> test` are enough. Before
+finishing, build the whole repo and update all snapshots:
+
 ```sh
+pnpm run build
+pnpm run test:update-snapshots
 pnpm test
 pnpm run lint
 pnpm run check-spelling

@@ -46,10 +46,20 @@ output format or a change to exit codes. Offer to run the `feature-adr` skill, a
 
 ### 4. Verify
 
+While iterating, build and test only the CLI:
+
 ```sh
 pnpm --filter cspell... run build
 pnpm --filter cspell test
+pnpm --filter cspell run test:update-snapshot
+```
+
+Before finishing, build the whole repo and update all snapshots:
+
+```sh
+pnpm run build
 pnpm run test:update-snapshots
+pnpm test
 pnpm run lint
 pnpm run check-spelling
 ```
@@ -57,7 +67,6 @@ pnpm run check-spelling
 - Review the snapshot diff: the `--help` output should change only by this flag.
 - The Update README workflow regenerates `packages/cspell/README.md`'s help after merge. Running
   `pnpm run build:readme` previews it; commit only the files this change affects.
-- Before finishing, run the full `pnpm run build` and `pnpm test`.
 
 ### 5. Draft the PR title and description
 

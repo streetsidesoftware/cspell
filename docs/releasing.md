@@ -20,24 +20,26 @@ So both are written for that reader. See [`CONTRIBUTING.md`](../CONTRIBUTING.md#
 The Release Drafter Labeler workflow (`release-drafter-labeler.yml`) labels a PR from its title. The label, not the
 title, decides the section and the version bump. The rules are the `autolabeler` in `.github/release-drafter.yml`.
 
-| Title                                 | Label                                                                 | Section                                                             | Bump  |
-| ------------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------- | ----- |
-| `feat:`                               | `feature`                                                             | Features                                                            | minor |
-| `fix:`                                | `fix`                                                                 | Fixes                                                               | patch |
-| `revert: feat:`, `Revert "fix: …"`, … | `fix`                                                                 | Fixes                                                               | patch |
-| any `type!:` or `type(<scope>)!:`     | `breaking`, plus `feature`, `fix`, or `documentation` for those types | **BREAKING**, and Features, Fixes, or Documentation for those types | major |
-| `docs:`                               | `documentation`                                                       | Documentation                                                       | patch |
-| `refactor:`, `dev:`                   | `refactor`                                                            | not in the release notes                                            | none  |
-| `chore:`, `ci:`                       | `chore`                                                               | not in the release notes                                            | none  |
-| `test:`                               | `test`                                                                | not in the release notes                                            | none  |
-| title contains `Update Dictionaries`  | `Update Dictionaries`                                                 | Dictionary Updates                                                  | patch |
-| anything else, such as `perf:`        | none                                                                  | not in the release notes                                            | none  |
+| Title                                 | Label                                               | Section                                             | Bump  |
+| ------------------------------------- | --------------------------------------------------- | --------------------------------------------------- | ----- |
+| `feat:`                               | `feature`                                           | Features                                            | minor |
+| `fix:`                                | `fix`                                               | Fixes                                               | patch |
+| `revert: feat:`, `Revert "fix: …"`, … | `fix`                                               | Fixes                                               | patch |
+| any `type!:` or `type(<scope>)!:`     | `breaking`, plus `feature` or `fix` for those types | **BREAKING**, and Features or Fixes for those types | major |
+| `docs:`                               | `documentation`                                     | not in the release notes                            | none  |
+| `website:`                            | `Website`                                           | not in the release notes                            | none  |
+| `refactor:`, `dev:`                   | `refactor`                                          | not in the release notes                            | none  |
+| `chore:`, `ci:`                       | `chore`                                             | not in the release notes                            | none  |
+| `test:`                               | `test`                                              | not in the release notes                            | none  |
+| title contains `Update Dictionaries`  | `Update Dictionaries`                               | Dictionary Updates                                  | patch |
+| anything else, such as `perf:`        | none                                                | not in the release notes                            | none  |
 
-- A PR that changes `website/**/*.md` also gets `documentation`. An excluded label still wins, so a `chore:` PR that
-  touches the website stays out.
+- Labels come from the title only. A PR is left out if any of its labels is excluded, so a rule based on changed files
+  could hide a `feat:` PR that also updates the website.
 - A PR with no label is left out: `include-labels` is an allowlist.
-- A revert is published only when it undoes a published type: `feat`, `fix`, or `docs`. Any other revert gets no label.
-- A breaking change is always published, except `chore!:`, `ci!:`, and `test!:`: their own labels are excluded. An
+- A revert is published only when it undoes a published type: `feat` or `fix`. Any other revert gets no label.
+- A breaking change is always published, except `chore!:`, `ci!:`, `test!:`, `docs!:`, and `website!:`: their own labels are
+  excluded. An
   excluded PR doesn't count toward the version bump either.
 - `perf:` is for adding performance tests. A change users would notice as faster goes out as `feat:` or `fix:`.
 - The labeler runs when a PR is opened, reopened, or gets a new commit. Renaming a PR doesn't change its label: fix the
@@ -97,8 +99,8 @@ regenerates them.
 ## Prerelease mode
 
 The Set Prerelease workflow (`set-release-mode.yml`) sets `prerelease` and `prerelease-identifier` in
-`.github/release-drafter.yml`. It opens a `chore: Set Prerelease Mode to \`true\``(or`false`) PR from the
-`update-prerelease-mode`branch. While it's on, versions look like`10.3.4-alpha.0`.
+`.github/release-drafter.yml`. It opens a `` chore: Set Prerelease Mode to `true` `` PR (or `false`) from the
+`update-prerelease-mode` branch. While it's on, versions look like `10.3.4-alpha.0`.
 
 ## Fixing a release notes entry
 

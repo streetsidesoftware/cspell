@@ -90,8 +90,8 @@ that's only here, move it into `docs/` and link to it from both.
 The PR title and body are published verbatim in the release notes. Follow
 [Pull requests](CONTRIBUTING.md#pull-requests).
 
-- Pick the type by whether someone using cspell would notice. Work on this repo's tooling, `docs/`, or the
-  coding-agent setup is `chore:`.
+- Pick the type by whether someone using cspell would notice. Tooling and the coding-agent setup are `chore:`.
+  Docs and READMEs are `docs:`, and website content is `website:`. None of these are published.
 - Never put tool attribution, such as "Generated with ...", in a PR body.
 - After pushing more commits to an open PR, check that its description still matches.
 - If a merged PR has the wrong title, label, or body, use the `release-notes` skill.

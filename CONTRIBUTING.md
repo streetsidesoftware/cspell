@@ -77,18 +77,18 @@ In the release notes:
 - `feat:`: something users can do that they couldn't before, such as a new option, flag, or file type.
 - `fix:`: any other change users would notice: a bug fix, a changed behavior, a speed-up, a removal.
 - `feat!:` / `fix!:`: either of the above, when it breaks existing setups. A scope works too: `fix(cspell-lib)!:`. Any
-  type with `!` is listed under **BREAKING**, except `chore!:`, `ci!:`, and `test!:`.
-- `docs:`: user documentation: the website and package READMEs.
-- `revert:` or GitHub's `Revert "…"`: undoes a merged `feat:`, `fix:`, or `docs:` change. Listed under Fixes. A revert of
-  anything else is left out.
+  type with `!` is listed under **BREAKING**, except `chore!:`, `ci!:`, `test!:`, `docs!:`, and `website!:`.
+- `revert:` or GitHub's `Revert "…"`: undoes a merged `feat:` or `fix:` change. Listed under Fixes. A revert of anything
+  else is left out.
 
 Left out of the release notes:
 
+- `docs:`: README files and this repo's docs, including `docs/` and `CONTRIBUTING.md`.
+- `website:`: changes to the content of the website. Website dependency and tooling updates are `chore:`.
 - `refactor:`: internal restructuring with no change users would notice.
 - `test:`: tests only, and `perf:`: performance tests.
 - `ci:`: GitHub Actions and workflows.
-- `chore:`: everything else: tooling, dev dependencies, this repo's own docs in `docs/` and `CONTRIBUTING.md`, and the
-  coding-agent setup.
+- `chore:`: everything else: tooling, dev dependencies, and the coding-agent setup.
 
 A title with any other prefix gets no label, and is left out. The full table, with sections and version bumps, is in
 [Releasing](./docs/releasing.md#titles-labels-and-sections).
@@ -104,7 +104,7 @@ Keep it short. Prefer bullet points to prose. A sentence with more than one or t
 it into a list.
 
 - `## Summary`: one or two sentences that stand on their own: what changed and why.
-- For a PR in the release notes (`feat:`, `fix:`, `docs:`, `revert:`), write for users deciding whether it affects
+- For a PR in the release notes (`feat:`, `fix:`, `revert:`), write for users deciding whether it affects
   them.
   - Say which option, flag, command, or behavior changed, in their terms.
   - For `feat:`, add a `## Feature` section: what users can now do, with a config or command-line example.

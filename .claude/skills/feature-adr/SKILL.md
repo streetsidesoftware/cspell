@@ -75,7 +75,7 @@ decisions while they're still cheap to change.
 
 6. **Write and commit each ADR as it's decided,** following the README's layout and statuses. Commit it together with
    its row in the feature's `README.md`, one commit per ADR change, for example
-   `chore: ignore-regex-per-language ADR 0002, overrides replace the list`. Check the existing files first, in case
+   `docs: ignore-regex-per-language ADR 0002, overrides replace the list`. Check the existing files first, in case
    this resumes an earlier session.
 
 7. **Keep the glossaries current as terms come up,** by the README's rules. Link entries to the feature's `README.md`,
@@ -91,7 +91,7 @@ decisions while they're still cheap to change.
    - Don't write implementation code as part of this skill. The ADRs are the handoff.
 
 9. **Finalize** when the user says the design is final: squash the ADRs as the README's "Finalize before merge"
-   describes, update the index and glossary links, and commit on the same branch. The design PR's title is `chore:`,
+   describes, update the index and glossary links, and commit on the same branch. The design PR's title is `docs:`,
    so it stays out of the release notes.
 
 10. **Amend or archive** when asked, or when step 1 finds a feature due:
