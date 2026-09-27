@@ -387,9 +387,10 @@ function advanceCursors(cursor1: SourceMapMergeCursor, cursor2: SourceMapMergeCu
     assert(cursor1.p1 === cursor2.p0, 'The shared edge must match between the two cursors.');
     if (cursor1.linear && cursor2.linear) {
         const p = Math.min(cursor1.end1, cursor2.end0);
+        // Both segments are linear, so all three positions advance by the same amount from the current position.
         const dB = p - cursor1.p1;
-        const pA = cursor1.begin0 + dB;
-        const pC = cursor2.begin1 + dB;
+        const pA = cursor1.p0 + dB;
+        const pC = cursor2.p1 + dB;
         const dA = pA - cursor1.p0;
         const dC = pC - cursor2.p1;
         cursor1.p0 = pA;
