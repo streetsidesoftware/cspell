@@ -224,6 +224,9 @@ async function action(this: Command, fileGlobs: string[], cliOptions: LinterCliC
     if (fileGlobs.length && (file?.length || files?.length)) {
         this.error('error: mixing globs and --file is not supported');
     }
+    if (fileGlobs.length && forceCheck) {
+        this.error('error: mixing globs and --force-check is not supported');
+    }
     const result = await App.lint(fileGlobs, options);
     if (!fileGlobs.length && !result.files && !result.errors && !fileList && !files?.length && !file?.length) {
         this.outputHelp();

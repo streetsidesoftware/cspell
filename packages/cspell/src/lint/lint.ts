@@ -334,7 +334,11 @@ async function determineFilesToCheck(
             globOptions.dot = enableGlobDot;
         }
 
-        const includeFilter = createIncludeFileFilterFn(allGlobs, root, enableGlobDot);
+        // `--force-check` wins over the `files` setting, but not over globs on the command line.
+        const includeFilter =
+            cfg.options.forceCheck && !cfg.fileGlobs.length
+                ? () => true
+                : createIncludeFileFilterFn(allGlobs, root, enableGlobDot);
         const includeFilterCountSkipped = countFiles(includeFilter);
         const rawCliFiles = cfg.files?.map((file) => resolveFilename(file, root)).filter(includeFilterCountSkipped);
         const cliFiles = cfg.options.mustFindFiles
