@@ -471,9 +471,18 @@ export function textValidatorFactory(dict: SpellingDictionary, options: TextVali
         const segment = { text, offset: 0 };
         const lineSegment: LineSegment = { line: segment, segment };
         function mapBackToOriginSimple(vr: ValidationIssue): MappedTextValidationResult {
-            const { text, offset, isFlagged, isFound, suggestionsEx, hasPreferredSuggestions, hasSimpleSuggestions } =
-                vr;
-            const r = mapRangeBackToOriginalPos([offset, offset + text.length], map);
+            const {
+                text,
+                length,
+                offset,
+                isFlagged,
+                isFound,
+                suggestionsEx,
+                hasPreferredSuggestions,
+                hasSimpleSuggestions,
+            } = vr;
+            const wLen = length ?? text.length;
+            const r = mapRangeBackToOriginalPos([offset, offset + wLen], map);
             const range = [r[0] + srcOffset, r[1] + srcOffset] as [number, number];
             return {
                 text,
