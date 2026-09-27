@@ -201,9 +201,7 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
     const regExUpperCaseWithTrailingCommonEnglishSuffix =
         /^([\p{Lu}\p{M}]{2,})['’]?(?:s|ing|ies|es|ings|ize|ed|ning)$/u; // cspell:disable-line
     // Sticky: test the text at `lastIndex` without creating substrings.
-    /** Is the character before `lastIndex` a letter. */
     const regExpIsLetterBefore = /(?<=\p{L})/uy;
-    /** Is the character at `lastIndex` a letter. */
     const regExpIsLetterAt = /\p{L}/uy;
 
     const fn: LineValidatorFn = (lineSegment: LineSegment) => {
