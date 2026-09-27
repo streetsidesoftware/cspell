@@ -209,15 +209,16 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
          */
         function isWordTooShort(word: TextOffsetRO, ignoreSuffix = false): boolean {
             const tLen = word.text.length;
+            const wLen = word.length ?? tLen;
             if (tLen >= minWordLength * 2 || [...word.text].length >= minWordLength) return false;
             // A word joined across soft hyphens does not stand alone in the line.
-            if (word.length !== undefined && word.length !== tLen) return false;
+            if (wLen !== tLen) return false;
             const offset = word.offset - line.offset;
             const prefix = [...line.text.slice(Math.max(0, offset - 2), offset)];
             const hasLetterPrefix = !!prefix.length && regExpIsLetter.test(prefix[prefix.length - 1]);
             if (hasLetterPrefix) return false;
             if (ignoreSuffix) return true;
-            const suffix = [...line.text.slice(offset + tLen, offset + tLen + 2)];
+            const suffix = [...line.text.slice(offset + wLen, offset + wLen + 2)];
             const hasLetterSuffix = !!suffix.length && regExpIsLetter.test(suffix[0]);
             return !hasLetterSuffix;
         }
