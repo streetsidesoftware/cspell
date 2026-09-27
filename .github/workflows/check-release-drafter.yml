@@ -1,0 +1,31 @@
+name: Check Release Drafter Config
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - '.github/release-drafter.yml'
+      - '.github/workflows/check-release-drafter.yml'
+      - 'scripts/check-release-drafter.mts'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Setup Node and Pnpm
+        uses: ./.github/actions/setup-node
+
+      - name: Install
+        run: pnpm install --frozen-lockfile --filter @internal/scripts
+
+      - name: Check labels and replacers
+        run: node ./scripts/check-release-drafter.mts
