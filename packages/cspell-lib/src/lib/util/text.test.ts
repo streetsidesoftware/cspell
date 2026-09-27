@@ -409,6 +409,24 @@ describe('Validate individual regexp', () => {
     });
 });
 
+describe('numCharacters', () => {
+    // cspell:ignore กระดูกสฟีนอยด์
+    test.each`
+        text                | expected
+        ${''}               | ${0}
+        ${'a'}              | ${1}
+        ${'hello'}          | ${5}
+        ${'café'}           | ${4}
+        ${'café'}           | ${5}
+        ${'𐀀𐃘'}             | ${2}
+        ${'a𐀀b'}            | ${3}
+        ${'กระดูกสฟีนอยด์'} | ${14}
+    `('numCharacters $text', ({ text, expected }) => {
+        expect(Text.numCharacters(text)).toBe(expected);
+        expect(Text.numCharacters(text)).toBe([...text].length);
+    });
+});
+
 describe('Validates offset conversions', () => {
     function* getOffsets(haystack: string, needle: string) {
         let offset = -1;
