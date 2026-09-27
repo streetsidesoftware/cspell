@@ -299,7 +299,13 @@ function buildMatcherFn(
                     }
                     fname = relPathToFile;
                 }
-                if (rule.fn(fname)) {
+                let isMatch = rule.fn(fname);
+                if (!isMatch && !isRelPat && !dot) {
+                    // A dot folder above the root blocks `**` from matching the absolute path.
+                    const relPathToFile = relativeToRoot(rootURL);
+                    isMatch = isRelativeValueNested(relPathToFile) && rule.fn(relPathToFile);
+                }
+                if (isMatch) {
                     return {
                         matched,
                         glob: pattern.glob,
