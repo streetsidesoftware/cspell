@@ -9475,6 +9475,15 @@ exports[`Validate cli > app --force-check 'lint README.md --file package.json' E
 "
 `;
 
+exports[`Validate cli > app --force-check 'lint README.md --file-list files.txt --force-check' Expect Error: 'error: mixing globs and --force-check is not supported' 1`] = `[]`;
+
+exports[`Validate cli > app --force-check 'lint README.md --file-list files.txt --force-check' Expect Error: 'error: mixing globs and --force-check is not supported' 2`] = `""`;
+
+exports[`Validate cli > app --force-check 'lint README.md --file-list files.txt --force-check' Expect Error: 'error: mixing globs and --force-check is not supported' 3`] = `
+"error: mixing globs and --force-check is not supported
+"
+`;
+
 exports[`Validate cli > app --force-check 'lint README.md --force-check' Expect Error: 'error: --force-check requires --file, --files, or --file-list to be specified' 1`] = `[]`;
 
 exports[`Validate cli > app --force-check 'lint README.md --force-check' Expect Error: 'error: --force-check requires --file, --files, or --file-list to be specified' 2`] = `""`;

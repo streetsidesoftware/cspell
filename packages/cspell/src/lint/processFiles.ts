@@ -33,6 +33,7 @@ const BATCH_PROCESS_SIZE = 1;
 interface PrefetchConfig {
     readonly root: LintRequest['root'];
     readonly maxFileSize: LintRequest['maxFileSize'];
+    readonly forceCheck: boolean | undefined;
     readonly config: CSpellSettings;
     readonly cache: CSpellLintResultCache;
 }
@@ -56,7 +57,7 @@ function prefetch(fileToProcess: FileToProcess, cfg: PrefetchConfig): PrefetchFi
         }
         const uri = filenameToUri(filename, cfg.root).href;
         const checkResult = await shouldCheckDocument({ uri }, {}, cfg.config);
-        if (!checkResult.shouldCheck) {
+        if (!checkResult.shouldCheck && !cfg.forceCheck) {
             return { skip: true, skipReason: checkResult.reason || 'Ignored by configuration.' } as const;
         }
         const maxFileSize = processMaxFileSize(cfg.maxFileSize ?? checkResult.settings.maxFileSize);
@@ -100,6 +101,7 @@ export async function processFiles(
     const prefetchConfig: PrefetchConfig = {
         root: options.cfg.root,
         maxFileSize: options.cfg.maxFileSize,
+        forceCheck: options.cfg.options.forceCheck,
         config: options.configInfo.config,
         cache,
     };

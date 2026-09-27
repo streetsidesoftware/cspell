@@ -22,6 +22,9 @@ const filesToCheck = path.resolve(features, 'file-list/files-to-check.txt');
 const pUnknownWords = path.resolve(features, 'unknown-words');
 const filesToCheckWithMissing = path.resolve(root, 'fixtures/features/file-list/files-to-check-missing.txt');
 const configSamples = path.resolve(samples, 'config');
+const forceCheck = path.resolve(features, 'force-check');
+
+// cspell:ignore mispeled
 
 const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
 const j = path.join;
@@ -114,6 +117,11 @@ describe('Linter Validation Tests', () => {
         ${[]}               | ${{ files: ['../../README.md'], dot: true, ...optionsRootCSpellJson }}                                 | ${oc({ errors: 0, files: 1, skippedFiles: 0 })} | ${oc({ errorCount: 0, errors: [], issues: [] })}
         ${[]}               | ${{ files: ['../../resources/patreon.png' /* skip binary */], dot: true, ...optionsRootCSpellJson }}   | ${oc({ errors: 0, files: 1, skippedFiles: 1 })} | ${oc({ errorCount: 0, errors: [], issues: [] })}
         ${['**/*.md']}      | ${{ root: './fixtures/issue-6025', config: './fixtures/issue-6025/nested/cspell.config.yaml' }}        | ${oc({ errors: 0, files: 2, skippedFiles: 0 })} | ${oc({ errorCount: 0, errors: [], issues: [] })}
+        ${[]}               | ${{ root: forceCheck, files: ['not-in-files.md'] }}                                                    | ${oc({ errors: 0, files: 1, skippedFiles: 1 })} | ${oc({ errorCount: 0, errors: [], issues: [] })}
+        ${[]}               | ${{ root: forceCheck, files: ['not-in-files.md'], forceCheck: true }}                                  | ${oc({ errors: 0, files: 1, skippedFiles: 0 })} | ${oc({ errorCount: 0, errors: [], issues: [oc({ text: 'mispeled' })] })}
+        ${[]}               | ${{ root: forceCheck, files: ['ignored/ignored.txt'] }}                                                | ${oc({ errors: 0, files: 1, skippedFiles: 1 })} | ${oc({ errorCount: 0, errors: [], issues: [] })}
+        ${[]}               | ${{ root: forceCheck, files: ['ignored/ignored.txt'], forceCheck: true }}                              | ${oc({ errors: 0, files: 1, skippedFiles: 0 })} | ${oc({ errorCount: 0, errors: [], issues: [oc({ text: 'mispeled' })] })}
+        ${['**/*.txt']}     | ${{ root: forceCheck, fileLists: [j(forceCheck, 'file-list.txt')], forceCheck: true }}                 | ${oc({ errors: 0, files: 2, skippedFiles: 1 })} | ${oc({ errorCount: 0, errors: [], issues: [oc({ text: 'mispeled' })] })}
     `('runLint $files $options', async ({ files, options, expectedRunResult, expectedReport }) => {
         const reporter = new InMemoryReporter();
         const runResult = await runLint(new LintRequest(files, options, reporter));

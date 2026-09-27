@@ -412,10 +412,11 @@ describe('Validate cli', () => {
     });
 
     test.each`
-        args                                        | errorCheck                                                                         | eError   | eLog     | eInfo
-        ${'lint --file package.json --force-check'} | ${undefined}                                                                       | ${true}  | ${false} | ${false}
-        ${'lint README.md --file package.json'}     | ${'error: mixing globs and --file is not supported'}                               | ${false} | ${false} | ${false}
-        ${'lint README.md --force-check'}           | ${'error: --force-check requires --file, --files, or --file-list to be specified'} | ${false} | ${false} | ${false}
+        args                                                    | errorCheck                                                                         | eError   | eLog     | eInfo
+        ${'lint --file package.json --force-check'}             | ${undefined}                                                                       | ${true}  | ${false} | ${false}
+        ${'lint README.md --file package.json'}                 | ${'error: mixing globs and --file is not supported'}                               | ${false} | ${false} | ${false}
+        ${'lint README.md --force-check'}                       | ${'error: --force-check requires --file, --files, or --file-list to be specified'} | ${false} | ${false} | ${false}
+        ${'lint README.md --file-list files.txt --force-check'} | ${'error: mixing globs and --force-check is not supported'}                        | ${false} | ${false} | ${false}
     `(
         'app --force-check $args Expect Error: $errorCheck',
         async ({ args: testArgs, errorCheck, eError, eLog, eInfo }: ArgsTestCase) => {
