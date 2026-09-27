@@ -92,9 +92,7 @@ Never edit these by hand. Change the source and regenerate, or let the workflow 
 | `pnpm-lock.yaml`                                                                          | `package.json` files                        | `pnpm install`                                                                            |
 | `perf-report.md`, integration test snapshots                                              | integration test runs                       | Workflow bots                                                                             |
 
-`website/docs/api/` is also generated, by `pnpm run build-cspell-types-docs`, but it's git-ignored. Prettier doesn't
-read `website/.gitignore`, so `pnpm run lint-ci` fails locally after a docs build. Delete `website/docs/api/*/` to fix
-it.
+`website/docs/api/` is also generated, by `pnpm run build-cspell-types-docs`, but it's ignored by git and Prettier.
 
 `pnpm run build` should leave `git status` clean unless you changed a source of one of these files. If it doesn't,
 commit the regenerated file by path. If the output changes on every build, stop and report it.
