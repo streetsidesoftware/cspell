@@ -30,6 +30,9 @@ This is a pnpm workspace (`pnpm-workspace.yaml`). The main directories:
 - **Tests** use vitest, next to the source (`foo.test.ts` next to `foo.ts`). It's the only test runner.
   - The root `test` also runs `test:prep` first, which needs a built tree, and `test-schema` last, which validates
     `cspell.schema.json`.
+  - The Yarn test projects (`test-packages/yarn/yarn2` and `examples/yarn`) aren't installed by `pnpm install`.
+    `pnpm run test:yarn` installs them with Yarn and runs their tests. The `cspell-lib` tests that load them run only
+    when `CSPELL_TEST_YARN` is set; run `pnpm run setup-yarn` first. CI does both.
 - **Lint** is ESLint plus Prettier.
   - `pnpm run lint` fixes what it can and writes the fixes.
   - `pnpm run lint-ci` only checks.
@@ -65,6 +68,7 @@ pnpm --filter cspell... run build          # a package and its dependencies
 pnpm run build:prod                        # skip test-packages
 node ./bin.mjs lint <files>                # run the CLI from the repo
 pnpm run test:update-snapshots             # update snapshots, after a build
+pnpm run test:yarn                         # install and test the Yarn projects (needs network)
 ```
 
 `pnpm run test-integrations` clones real repositories and needs network. CI runs it; run it locally only when you need

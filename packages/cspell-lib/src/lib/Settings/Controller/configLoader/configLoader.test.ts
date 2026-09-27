@@ -602,7 +602,8 @@ describe('Validate search/load config files', () => {
         await expect(loadPnP({ usePnP: true }, urlSrcDir)).resolves.toBeUndefined();
     });
 
-    test('config needing PnP', async () => {
+    // Needs the Yarn test projects to be installed first: `pnpm run setup-yarn`.
+    test.runIf(process.env['CSPELL_TEST_YARN'])('config needing PnP', async () => {
         const uriTestPackages = path.join(root, 'test-packages/yarn');
         const uriYarn2TestMedCspell = path.join(uriTestPackages, 'yarn2/test-yarn-med/cspell.json');
         const result = await loadConfig(uriYarn2TestMedCspell, {});
