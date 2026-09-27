@@ -1,200 +1,111 @@
 ---
 name: feature-adr
-description: 'Design a new cspell feature (a directive, an option, a CLI flag, a behavior change) through a structured interview, recording each decision as an ADR under docs/ADRs/<feature-slug>/ and keeping docs/glossary.md in sync. Use this whenever the user wants to design, spec out, or plan a feature before writing code — proposes a new cspell configuration setting, wants to add a CLI flag, is unsure how an edge case should behave, or explicitly asks for an ADR, a design doc, or to "figure out the details" of something. Trigger even if the user doesn''t say "ADR" or "skill" by name — any request to add new behavior to this tool that has more than one reasonable interpretation is a candidate. Do not use this for pure bug fixes, refactors, or requests where the behavior is already fully specified.'
+description: 'Design a cspell feature (a new or changed config option, CLI flag or command, public API, or checking behavior) through a structured interview, recording each decision as an ADR under docs/ADRs/<feature>/ and keeping the glossaries in sync. Use this whenever the user wants to design, spec out, or plan a feature before writing code, is unsure how an edge case should behave, or asks for an ADR, a design doc, or to "figure out the details" of something. Trigger even if the user does not say "ADR" by name: any request to add behavior to cspell that has more than one reasonable interpretation is a candidate. Also use it to amend a merged ADR, or to archive a shipped feature''s ADRs into a short summary. Do not use it for pure bug fixes, refactors, dependency updates, or changes whose behavior is already fully specified.'
 ---
 
-# Feature ADR
+# feature-adr
 
-## Why this exists
+Runs the ADR process in `docs/ADRs/README.md` as an interview. Read that README and `docs/ADRs/template.md` first: they
+define the layout, statuses, finalizing, amending, archiving, the relationship to `rfc/`, and the link rules. This
+skill adds how to run the interview and when to commit.
 
-The cheapest time to catch a bad design decision is before any code exists to
-defend it. cspell's configuration system has a lot of surface area that isn't
-obvious from a feature request alone — inheritance order, `overrides` vs.
-`languageSettings`, CLI-flag precedence, glob interaction, dictionary loading,
-schema generation. A request that sounds simple ("add a flag to skip X") usually
-has two or three genuinely reasonable answers hiding in it. This skill's job is to
-surface those choices explicitly, get the user to pick one deliberately, and leave
-a written record of _why_ — so an implementer (human or agent) can build the
-feature later without re-deriving decisions or silently picking the wrong default.
+Much of what a feature decides becomes public the moment it ships, and is hard to take back: option and flag names,
+defaults, how an option merges across config files, what gets flagged, and public API. The interview surfaces those
+decisions while they're still cheap to change.
 
-This skill produces design artifacts only. Don't write implementation code as
-part of it, even if the answer to a question seems obvious enough to just build.
-If the user wants to jump straight to code mid-interview, that's their call to
-make explicitly — don't make it for them by drifting into implementation.
+## Workflow
 
-## Process overview
+1. **Check for features due for archiving.** Read the Features table in `docs/ADRs/README.md`. If a feature shipped
+   three or more months ago and isn't archived, tell the user and offer to archive it (step 10). Then continue with what
+   they asked for.
 
-1. Scope the feature, pick a `feature-slug`, and set up an isolated worktree
-   for it.
-2. Interview the user one question at a time, using cspell-specific angles to
-   find the real open questions.
-3. Write an ADR the moment a genuine decision lands, and commit it immediately
-   — don't batch writing or committing to the end.
-4. Keep `docs/glossary.md` in sync with any new terms.
-5. Write the feature's index and hand off.
+2. **Establish the feature slug.** Ask for a short kebab-case name if the user hasn't given one (for example
+   `ignore-regex-per-language`). It names the folder and the branch. Confirm it before creating files.
 
-## Step 1: Scope the feature, pick a slug, and set up a worktree
+3. **Set up a branch and worktree before writing anything,** so the design never sits as uncommitted changes in the
+   user's checkout. Check for existing ones first, in case this continues an earlier session:
 
-Before asking design questions, get a one-sentence statement of what the feature
-is and a `kebab-case` slug for it (e.g. `ignore-regex-per-language`). Check
-whether `docs/ADRs/<feature-slug>/` already exists — if it does, this is a
-continuation of earlier work, not a fresh start: read the existing ADRs and the
-index `README.md` first so you don't re-ask settled questions or contradict a
-prior decision without flagging it.
+   ```sh
+   git worktree list
+   git branch --list adr/<feature>
+   ```
 
-If `docs/ADRs/` doesn't exist yet in the repo, that's expected — create it fresh.
+   If neither exists, create both from an up-to-date `origin/main`:
 
-Do the ADR work in its own git worktree, on its own branch, so an in-progress
-design discussion never sits as uncommitted or half-finished changes on
-whatever branch the user happened to be on, and so it can be dropped or resumed
-without disturbing other work. Check for an existing one first (continuation
-case):
+   ```sh
+   git fetch origin main
+   git worktree add -b adr/<feature> .claude/worktrees/adr-<feature> origin/main
+   ```
 
-```bash
-git worktree list
-git branch --list adr/<feature-slug>
-```
+   - If the branch exists without a worktree, attach it (without `-b`).
+   - If the session was given a branch to work on (a cloud session, for example), use that branch and skip the
+     worktree.
+   - Creating the worktree is local and reversible, so no need to ask first. Don't push or open a PR unless asked.
 
-If neither exists, create both together:
+4. **Prepare.**
+   - Add the feature's row to the Features table, and create its `README.md` from `docs/ADRs/template.md`.
+   - Read `docs/design-principles.md`, `docs/glossary.md`, and `docs/ADRs/glossary.md`. Weigh every option against
+     the principles, and reuse existing terms.
+   - Check `rfc/` and closed issues for earlier proposals on the same idea. Link a matching RFC from the feature's
+     `README.md`, and cite what's relevant in the first ADR's Context.
 
-```bash
-git worktree add ../cspell-worktrees/adr-<feature-slug> -b adr/<feature-slug>
-```
+5. **Interview, starting with why.** Before any option, ask:
+   - What problem prompted this, and why now? Offer the five whys: ask "why?" of each answer until the underlying
+     reason is clear.
+   - Who are the stakeholders, and how is each affected?
+   - What does success look like, and what's out of scope?
 
-If the branch exists but isn't attached to a worktree (e.g. a resumed session
-on a fresh checkout), attach without `-b`:
+   Write the answers in the feature's `README.md`. Then take the decisions one at a time. Read
+   `references/interview-guide.md` before the first question: it's a menu of this repo's real decision points; skip
+   what doesn't apply.
 
-```bash
-git worktree add ../cspell-worktrees/adr-<feature-slug> adr/<feature-slug>
-```
+   How to ask:
+   - **One question at a time.** Don't front-load a questionnaire. Move on only when the current one is resolved. If
+     an answer covers only part of the question, ask about the rest. "You decide" is an answer: propose a default and
+     state it as the decision.
+   - **Options labelled (a), (b), …, each with what the user writes or sees.** Show the config snippet or the command
+     line, and what cspell reports. Put your recommendation first and say why.
+   - **Check facts before asking.** If an option depends on how cspell or the code behaves, find out first and bring
+     the result to the question.
+   - **Let the user defer.** Record the question under Open questions, and come back to it before closing the loop.
+   - **Capture side remarks as rules.** A remark made in passing is often a standing rule. Confirm it, then record it
+     where it applies: `docs/design-principles.md`, `CONTRIBUTING.md`, or another doc in `docs/`.
 
-Do the rest of this skill's file writes inside that worktree. This is local,
-uncommitted-to-main, and reversible — no need to ask before creating it. Do not
-push the branch or open a PR as part of this skill; that's a separate step the
-user asks for explicitly once the design is ready.
+   A question with only one reasonable answer once you look at the code isn't an ADR. Note it and move on.
 
-## Step 2: Interview, one question at a time
+6. **Write and commit each ADR as it's decided,** following the README's layout and statuses. Commit it together with
+   its row in the feature's `README.md`, one commit per ADR change, for example
+   `chore: ignore-regex-per-language ADR 0002, overrides replace the list`. Check the existing files first, in case
+   this resumes an earlier session.
 
-Ask a single open question, wait for the answer, and let the answer shape the
-next question — don't front-load a checklist onto the user. A wall of questions
-gets shallow, rushed answers; a conversation gets considered ones.
+7. **Keep the glossaries current as terms come up,** by the README's rules. Link entries to the feature's `README.md`,
+   never to a single ADR. Commit glossary edits as they happen.
 
-Use `references/cspell-considerations.md` for the _categories_ of question worth
-probing (config surface, naming, glob interaction, dictionaries, CLI surface,
-backward compatibility, cross-platform, performance, precedent). It's a checklist
-for you, not a script to recite — most features only implicate two or three of
-those categories. Skip the rest without asking the user to confirm they don't
-apply.
+8. **Close the loop** once the open questions are exhausted:
+   - Summarize what was decided, one line per ADR, and point at the feature's `README.md`.
+   - Say plainly what was left open.
+   - List names still marked provisional. Each needs a decision, or a tracking issue that says when it must be decided.
+   - Say what implementing it will require: for a config option or CLI flag, `docs/config-and-cli.md` and the
+     `config-option` or `cli-option` skill.
+   - Tell the user where the work lives: the branch, and the worktree path if there is one.
+   - Don't write implementation code as part of this skill. The ADRs are the handoff.
 
-Not every question needs an ADR. The bar: **did more than one reasonable answer
-exist, and did the user pick one?** If the user's first instinct was the only
-sane option, note it in the feature's index and move on — don't manufacture an
-ADR for a non-decision. If you're weighing whether something clears that bar,
-lean toward writing it down: a one-paragraph ADR that turns out unnecessary costs
-little, while a real decision left unrecorded costs the next person real time.
+9. **Finalize** when the user says the design is final: squash the ADRs as the README's "Finalize before merge"
+   describes, update the index and glossary links, and commit on the same branch. The design PR's title is `chore:`,
+   so it stays out of the release notes.
 
-Also watch for decisions the user makes _implicitly_ by answering a different
-question — e.g. if they specify a config key name, that also settles "is this
-config-only or does it need a CLI flag" if they didn't mention a flag. Surface
-that as an explicit question rather than assuming silence means "no."
+10. **Amend or archive** when asked, or when step 1 finds a feature due:
+    - **Amend:** follow the README's "Amending". Never rewrite or squash a merged ADR.
+    - **Archive:** work on an `adr-archive/<feature>` branch, as in step 3. Follow the README's "Archiving".
+      - Note the last commit on `main` that has the full ADRs, for the permalink.
+      - Search the repo for links into the feature's folder (docs, code comments, other ADRs). Links should already
+        point to the feature's `README.md`. Fix any that point at a single ADR.
+      - Move anything still in force to its long-term home before deleting a file.
+      - Open a PR, so the user reviews the summary before the detail leaves the tree.
 
-## Step 3: Write an ADR per decision, as it lands
+## Notes
 
-Naming: `docs/ADRs/<feature-slug>/NNNN-kebab-case-title.md`, numbered
-sequentially starting at `0001` _within that feature's directory_ (numbering
-doesn't need to be unique across features).
-
-Use `references/adr-template.md` verbatim as the structure: Status, Context,
-Decision, Consequences, Alternatives considered. A few things worth getting
-right:
-
-- **Context** should be legible to someone who wasn't in the conversation — name
-  the specific cspell mechanism that made this non-obvious (e.g. "`overrides` are
-  applied in file order, last one wins"), not just "we discussed this."
-- **Alternatives considered** is the section most tempting to skip. Skip it only
-  when there really was one reasonable option — otherwise it's the part that
-  saves the next person from re-litigating a choice you already made.
-- Status starts as `Proposed`. Only mark `Accepted` once the user has confirmed
-  the decision, not just discussed it — an interview can wander before it
-  settles.
-- If a later ADR in the same feature reverses an earlier one, mark the earlier
-  one `Superseded by NNNN` rather than deleting it. The point of an ADR is that
-  it's a record, including of decisions that changed.
-
-Write the file as soon as a decision is confirmed, not at the end of the
-interview — if the session ends early, partial progress should still be usable.
-
-Commit right after writing or editing an ADR file, in the worktree from Step 1
-— one commit per ADR change, not one big commit at the end. The point is the
-same as writing the file immediately: if the discussion is interrupted, the
-git history should show exactly how far the design got and in what order
-decisions were made, not just a final snapshot. A short message is enough,
-e.g.:
-
-```bash
-git add docs/ADRs/<feature-slug>/0002-*.md
-git commit -m "docs(adr): <feature-slug> — <one-line summary of this decision>"
-```
-
-Commit `docs/glossary.md` and the index `README.md` updates the same way, as
-their own commits, when you touch them — don't fold unrelated files into an
-ADR commit.
-
-## Step 4: Keep `docs/glossary.md` in sync
-
-Check whether `docs/glossary.md` exists yet.
-
-- **If it exists:** read it and follow its existing format exactly — heading
-  level, alphabetization, whether entries link back to ADRs. Don't impose a new
-  structure on an established file.
-- **If it doesn't exist:** create it with this format, alphabetized by term:
-
-  ```markdown
-  # Glossary
-
-  Terms introduced or given a specific meaning by cspell's configuration and ADRs.
-
-  ### <Term>
-
-  One or two sentence definition, written for someone who hasn't read the ADR.
-
-  See: [`docs/ADRs/<feature-slug>/NNNN-...md`](ADRs/<feature-slug>/NNNN-...md)
-  ```
-
-Add an entry for any new config key, CLI flag, or concept introduced by the
-feature that a reader wouldn't already understand from general cspell usage —
-not for internal implementation terms that never surface to a user. If a term
-already exists in the glossary but this feature changes its meaning, update the
-entry in place and note the change, rather than adding a conflicting second
-definition.
-
-## Step 5: Wrap up and hand off
-
-Write or update `docs/ADRs/<feature-slug>/README.md` as an index: the
-one-sentence feature summary from Step 1, and a list of the ADRs with their
-one-line titles and status. This is the file an implementer opens first.
-
-Commit the index `README.md` too.
-
-Before ending, tell the user explicitly:
-
-- Where the ADRs and glossary updates live — the `adr/<feature-slug>` branch in
-  the `../cspell-worktrees/adr-<feature-slug>` worktree — so they can review the
-  commits, keep discussing, or merge it themselves.
-- Whether anything decided here will trigger obligations from `AGENTS.md` once
-  implemented — most commonly: a new/changed config option means
-  `pnpm run update-schema` and a `website/docs` update; new or changed CLI output
-  means snapshot updates and `pnpm run build:readme`. This skill doesn't run
-  those — it's a heads-up for whoever implements the feature.
-- That the feature is ready to hand off. Don't start implementing unless the
-  user explicitly asks you to switch modes.
-
-## A note on `rfc/`
-
-This repo already has an `rfc/rfc-NNNN <title>/README.md` process for larger,
-narrative feature proposals (background/problem/benefits prose, not discrete
-decisions). ADRs under `docs/ADRs/` are a finer-grained, complementary artifact —
-one per decision, not one per feature narrative. If the feature being designed
-already has or clearly warrants a full RFC, mention that to the user rather than
-silently choosing one process over the other; the two aren't mutually exclusive
-(an RFC can motivate a feature, ADRs can record how it was actually decided).
+- If the interview shows the request is really a bug fix or a fully specified change, say so and stop.
+- If the feature is large enough for public discussion with users, suggest an RFC in `rfc/` first. ADRs record the
+  decisions either way.
+- ADRs are for people. They never point to `AGENTS.md` or `CLAUDE.md`.

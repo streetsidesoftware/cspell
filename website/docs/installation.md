@@ -68,7 +68,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-          persist-credentials: false
+          persist-credentials: false
       - uses: streetsidesoftware/cspell-action@v8
 ```
 
