@@ -10,6 +10,7 @@ on:
       - 'package.json'
       - '*-lock.yaml'
       - '.github/workflows/integration-test.yml'
+      - '.github/actions/build-for-integrations/**'
       - '!website/**'
   push:
     branches:
@@ -24,6 +25,7 @@ on:
       - 'package.json'
       - '*-lock.yaml'
       - '.github/workflows/integration-test.yml'
+      - '.github/actions/build-for-integrations/**'
       - '!website/**'
   # Run on demand
   workflow_dispatch:
@@ -136,6 +138,7 @@ jobs:
           value: >-
             ${{ hashFiles(
               '.github/workflows/integration-test.yml',
+              '.github/actions/build-for-integrations/**',
               'integration-tests/tsconfig.json',
               'integration-tests/config/repositories/${{matrix.repo}}/**',
               'integration-tests/snapshots/${{ matrix.repo }}/*',
