@@ -363,16 +363,19 @@ describe('Validate cli', () => {
     });
 
     test.each`
-        msg                           | testArgs                                                                   | errorCheck         | eError  | eLog     | eInfo
-        ${'issue-2998 --language-id'} | ${[rpFix('issue-2998'), '-v', '-v', '--language-id=fix', 'fix-words.txt']} | ${undefined}       | ${true} | ${false} | ${true}
-        ${'issue-4811 **/README.md'}  | ${['-r', pIssues('issue-4811'), '--no-progress', '**/README.md']}          | ${undefined}       | ${true} | ${false} | ${false}
-        ${'issue-4811'}               | ${['-r', pIssues('issue-4811'), '--no-progress', '.']}                     | ${app.CheckFailed} | ${true} | ${true}  | ${false}
-        ${'issue-6373 .'}             | ${[rpFix('issue-6373'), '--no-progress', '.']}                             | ${app.CheckFailed} | ${true} | ${true}  | ${false}
-        ${'issue-6373'}               | ${[rpFix('issue-6373'), '--no-progress']}                                  | ${undefined}       | ${true} | ${false} | ${false}
-        ${'issue-6353'}               | ${[rpFix('issue-6353'), '--no-progress']}                                  | ${undefined}       | ${true} | ${false} | ${true}
-        ${'issue-7837'}               | ${[rpFix('issue-7837'), '.']}                                              | ${app.CheckFailed} | ${true} | ${false} | ${false}
-        ${'issue-7902'}               | ${[rpFix('issue-7902'), '.']}                                              | ${app.CheckFailed} | ${true} | ${true}  | ${false}
-        ${'issue-8200'}               | ${[rpFix('issue-8200'), '-vv', '.']}                                       | ${undefined}       | ${true} | ${false} | ${true}
+        msg                           | testArgs                                                                           | errorCheck         | eError  | eLog     | eInfo
+        ${'issue-2998 --language-id'} | ${[rpFix('issue-2998'), '-v', '-v', '--language-id=fix', 'fix-words.txt']}         | ${undefined}       | ${true} | ${false} | ${true}
+        ${'issue-4811 **/README.md'}  | ${['-r', pIssues('issue-4811'), '--no-progress', '**/README.md']}                  | ${undefined}       | ${true} | ${false} | ${false}
+        ${'issue-4811'}               | ${['-r', pIssues('issue-4811'), '--no-progress', '.']}                             | ${app.CheckFailed} | ${true} | ${true}  | ${false}
+        ${'issue-6373 .'}             | ${[rpFix('issue-6373'), '--no-progress', '.']}                                     | ${app.CheckFailed} | ${true} | ${true}  | ${false}
+        ${'issue-6373'}               | ${[rpFix('issue-6373'), '--no-progress']}                                          | ${undefined}       | ${true} | ${false} | ${false}
+        ${'issue-6353'}               | ${[rpFix('issue-6353'), '--no-progress']}                                          | ${undefined}       | ${true} | ${false} | ${true}
+        ${'issue-7837'}               | ${[rpFix('issue-7837'), '.']}                                                      | ${app.CheckFailed} | ${true} | ${false} | ${false}
+        ${'issue-7902'}               | ${[rpFix('issue-7902'), '.']}                                                      | ${app.CheckFailed} | ${true} | ${true}  | ${false}
+        ${'issue-8200'}               | ${[rpFix('issue-8200'), '-vv', '.']}                                               | ${undefined}       | ${true} | ${false} | ${true}
+        ${'language-id disabled'}     | ${[rpFeat('language-id'), '--no-progress', 'notes.txt']}                           | ${undefined}       | ${true} | ${false} | ${false}
+        ${'language-id markdown'}     | ${[rpFeat('language-id'), '--no-progress', '--language-id=markdown', 'notes.txt']} | ${app.CheckFailed} | ${true} | ${true}  | ${false}
+        ${'language-id locale fr'}    | ${[rpFeat('language-id'), '--no-progress', '--locale=fr', 'notes.txt']}            | ${app.CheckFailed} | ${true} | ${true}  | ${false}
     `('app $msg Expect Error: $errorCheck', async ({ testArgs, errorCheck, eError, eLog, eInfo }: TestCase) => {
         chalk.level = 1;
         const commander = getCommander();
