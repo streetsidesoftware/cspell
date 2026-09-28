@@ -12,15 +12,14 @@ on:
         description: PR number
         required: true
         type: string
-  workflow_call:
-    inputs:
-      pr:
-        description: PR number
-        required: true
-        type: string
 
 permissions:
   pull-requests: write
+
+# One run at a time per PR. Each run reads the PR's current body and labels, so the last run decides.
+concurrency:
+  group: label-hidden-comments-${{ github.event.pull_request.number || inputs.pr }}
+  cancel-in-progress: false
 
 jobs:
   label:
