@@ -30,12 +30,14 @@ jobs:
     name: Detect
     if: github.event.pull_request.user.type != 'Bot'
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     permissions:
       contents: read
       pull-requests: read
     outputs:
       skip: ${{ steps.detect.outputs.skip }}
       found: ${{ steps.detect.outputs.found }}
+      error: ${{ steps.detect.outputs.error }}
       labelled: ${{ steps.detect.outputs.labelled }}
       report: ${{ steps.detect.outputs.report }}
     steps:
@@ -44,11 +46,10 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Setup Node and Pnpm
-        uses: ./.github/actions/setup-node
-
-      - name: Install
-        run: pnpm install --frozen-lockfile --filter @internal/scripts
+      # The detection script uses only Node's built-in modules, so there's nothing to install and no cache.
+      - uses: actions/setup-node@v7.0.0
+        with:
+          node-version: 22.x
 
       - name: Look for HTML comments in the PR description
         id: detect
@@ -56,28 +57,42 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
           PR: ${{ github.event.pull_request.number || inputs.pr }}
+        # Fails closed: if the description can't be read or checked, it's treated as having hidden comments.
+        # detect-html-comments.mts exits 0 for none, 2 for found, and 1 (or anything else) for an error.
         run: |
-          info=$(gh pr view "$PR" --json body,labels,author)
-          if [[ $(jq -r '.author.is_bot' <<< "$info") == true ]]; then
+          error=false
+          if ! info=$(gh pr view "$PR" --json body,labels,author); then
+            error=true
+          elif [[ $(jq -r '.author.is_bot' <<< "$info") == true ]]; then
             echo "#$PR is from a bot: skipped."
             echo "skip=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          set -o pipefail
-          status=0
-          report=$(jq -r '.body // ""' <<< "$info" | node ./scripts/detect-html-comments.mts) || status=$?
-          case $status in
-            0) found=false ;;
-            1) found=true ;;
-            *) echo "$report"; exit "$status" ;;
-          esac
-          labelled=$(jq --arg label "$LABEL" '[.labels[].name] | index($label) != null' <<< "$info")
+          report=''
+          if [[ $error == false ]] && body=$(jq -r '.body // ""' <<< "$info"); then
+            status=0
+            report=$(node ./scripts/detect-html-comments.mts <<< "$body") || status=$?
+            case $status in
+              0) found=false ;;
+              2) found=true ;;
+              *) error=true ;;
+            esac
+          else
+            error=true
+          fi
+          if [[ $error == true ]]; then
+            found=true
+            echo "::warning::Could not check the PR description (see the log above)."
+          fi
+          labelled=$(jq --arg label "$LABEL" '[.labels[].name] | index($label) != null' <<< "$info" 2> /dev/null) || true
+          [[ $labelled == true ]] || labelled=false
           echo "$report"
-          echo "#$PR: hidden comments=$found, labelled=$labelled"
+          echo "#$PR: hidden comments=$found, error=$error, labelled=$labelled"
           delimiter="REPORT_$(openssl rand -hex 16)"
           {
             echo "skip=false"
             echo "found=$found"
+            echo "error=$error"
             echo "labelled=$labelled"
             echo "report<<$delimiter"
             echo "$report"
@@ -92,6 +107,7 @@ jobs:
       needs.detect.outputs.skip != 'true' &&
       needs.detect.outputs.found != needs.detect.outputs.labelled
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     permissions:
       pull-requests: write
     steps:
@@ -113,12 +129,18 @@ jobs:
     needs: detect
     if: needs.detect.outputs.skip != 'true'
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - name: Fail if the PR description has hidden comments
         env:
           FOUND: ${{ needs.detect.outputs.found }}
+          ERROR: ${{ needs.detect.outputs.error }}
           REPORT: ${{ needs.detect.outputs.report }}
         run: |
+          if [[ $ERROR == true ]]; then
+            echo "::error title=Hidden comments::The hidden comment detector failed, so a maintainer must review the PR description."
+            exit 1
+          fi
           if [[ $FOUND != true ]]; then
             echo "No hidden comments."
             exit 0

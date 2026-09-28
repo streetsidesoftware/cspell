@@ -3,7 +3,7 @@
  * Usage: node ./scripts/detect-html-comments.mts [--show] [file ...]
  *   With no files, or `-`, reads stdin.
  *   --show  Also print each comment's text, escaped. Not for CI logs: that's the hidden text.
- * Exit codes: 0 none found, 1 comments found, 2 error.
+ * Exit codes: 0 none found, 2 comments found, 1 error. Node's own failures also exit 1, and Node never uses 2.
  */
 
 import fs from 'node:fs/promises';
@@ -34,12 +34,12 @@ async function main(): Promise<number> {
         }
     }
     if (!found) console.log('No HTML comments found.');
-    return found ? 1 : 0;
+    return found ? 2 : 0;
 }
 
 try {
     process.exitCode = await main();
 } catch (error) {
     console.error(error instanceof Error ? error.message : error);
-    process.exitCode = 2;
+    process.exitCode = 1;
 }
