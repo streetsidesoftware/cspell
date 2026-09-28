@@ -1,8 +1,9 @@
 name: Detect Hidden Comments
 
-# Detect an HTML comment (`<!--`) in a PR description, label the PR, and fail the check, so reviewers and agents
-# treat the hidden text as untrusted and it doesn't reach the release notes. Bot PRs are skipped.
-# The PR's code is never checked out, so pull_request_target is safe here.
+# Detect an HTML comment in a PR description, label the PR, and fail the check, so reviewers and agents treat the
+# hidden text as untrusted and it doesn't reach the release notes. Bot PRs are skipped.
+# Detection is scripts/detect-html-comments.mts, run from the base branch: the PR's code is never checked out, so
+# pull_request_target is safe here.
 
 on:
   pull_request_target:
@@ -30,12 +31,25 @@ jobs:
     if: github.event.pull_request.user.type != 'Bot'
     runs-on: ubuntu-latest
     permissions:
+      contents: read
       pull-requests: read
     outputs:
       skip: ${{ steps.detect.outputs.skip }}
       found: ${{ steps.detect.outputs.found }}
       labelled: ${{ steps.detect.outputs.labelled }}
+      report: ${{ steps.detect.outputs.report }}
     steps:
+      # The base branch, not the PR: pull_request_target checks out the base by default.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Setup Node and Pnpm
+        uses: ./.github/actions/setup-node
+
+      - name: Install
+        run: pnpm install --frozen-lockfile --filter @internal/scripts
+
       - name: Look for HTML comments in the PR description
         id: detect
         env:
@@ -49,14 +63,25 @@ jobs:
             echo "skip=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          found=false
-          jq -r '.body' <<< "$info" | grep -qF '<!--' && found=true
+          jq -r '.body // ""' <<< "$info" > pr-description.md
+          status=0
+          report=$(node ./scripts/detect-html-comments.mts pr-description.md) || status=$?
+          case $status in
+            0) found=false ;;
+            1) found=true ;;
+            *) echo "$report"; exit "$status" ;;
+          esac
           labelled=$(jq --arg label "$LABEL" '[.labels[].name] | index($label) != null' <<< "$info")
+          echo "$report"
           echo "#$PR: hidden comments=$found, labelled=$labelled"
+          delimiter="REPORT_$(openssl rand -hex 16)"
           {
             echo "skip=false"
             echo "found=$found"
             echo "labelled=$labelled"
+            echo "report<<$delimiter"
+            echo "$report"
+            echo "$delimiter"
           } >> "$GITHUB_OUTPUT"
 
   label:
@@ -92,6 +117,7 @@ jobs:
       - name: Fail if the PR description has hidden comments
         env:
           FOUND: ${{ needs.detect.outputs.found }}
+          REPORT: ${{ needs.detect.outputs.report }}
         run: |
           if [[ $FOUND != true ]]; then
             echo "No hidden comments."
@@ -101,6 +127,7 @@ jobs:
           msg+=' published in the release notes and can mislead reviewers. Remove it, or show it as code in a fenced'
           msg+=' block, and this check reruns when you edit the description.'
           echo "::error title=Hidden comments::$msg"
+          echo "$REPORT"
           exit 1
 
 # cspell:dictionaries shellscript

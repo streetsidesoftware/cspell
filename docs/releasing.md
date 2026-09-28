@@ -41,6 +41,8 @@ title, decides the section and the version bump. The rules are the `autolabeler`
   (`detect-hidden-comments.yml`) labels it `Warning: Hidden Comments` and fails its check. The comment would be
   published with the description, so remove it; the check reruns when the description is edited. It only looks for
   HTML comments, so a passing check doesn't mean the description has no hidden text.
+- To check text yourself, run `node ./scripts/detect-html-comments.mts <file>`, or pipe it in. It reports each comment's
+  location, ignores comments in code, and exits 1 if it finds any. `--show` also prints the hidden text.
 - A revert is published only when it undoes a published type: `feat` or `fix`. Any other revert gets no label.
 - A breaking change is always published, except `chore!:`, `ci!:`, `test!:`, `docs!:`, and `website!:`: their own labels are
   excluded. An
