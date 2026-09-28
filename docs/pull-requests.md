@@ -95,7 +95,8 @@ Write for reviewers. Group the changes by theme, not by file, and say why each m
 - No tool attribution, such as "Generated with ...". The release notes strip it, but leave it out anyway.
 - No HTML comments (`<!-- -->`). They are hidden on GitHub but published with the body. A PR whose body has one is
   labelled `Warning: Hidden Comments`, and its check fails until the comment is removed. To check a body before you
-  post it, run `node ./scripts/detect-html-comments.mts <file>`. A comment inside a fenced code block is fine.
+  post it, run `node ./scripts/detect-html-comments.mts <file>`. A comment inside a fenced code block is fine; one in
+  inline code is still reported.
 - After pushing more commits, check that the description still matches.
 
 Don't restate the diff, narrate how you got to the change, or write a section per commit.
