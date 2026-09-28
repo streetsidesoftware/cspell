@@ -139,6 +139,15 @@ Copy the shape of a recent small package, such as `packages/cspell-performance-m
 `packages/*` is already in `pnpm-workspace.yaml` and `lerna.json`. Set `version` to the current version in
 `lerna.json`, and `private: true` if it shouldn't be published.
 
+For a published package, give it its issue label and `bugs` link. The label is the package's directory name.
+
+```sh
+node ./scripts/package-labels.mts --fix            # sets bugs.url to the package's open issues
+node ./scripts/package-labels.mts --create-labels  # creates the label on GitHub
+```
+
+The Lint workflow runs `node ./scripts/package-labels.mts --check`, and fails if a `bugs` link is out of date.
+
 ## CI
 
 The main workflows in `.github/workflows/`:

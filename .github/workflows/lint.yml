@@ -43,3 +43,7 @@ jobs:
             ci: Fix Lint -- Workflow Bot
           app_id: ${{ secrets.AUTOMATION_APP_ID }}
           app_private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
+
+      # Runs last, so a failure here does not block the auto-fix PR above.
+      - name: Check package bugs links
+        run: node ./scripts/package-labels.mts --check
