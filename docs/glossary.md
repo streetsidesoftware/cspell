@@ -36,7 +36,7 @@ enables them for the right file types. [Bundled dictionaries](#bundled-dictionar
 ## cspell-tools
 
 The `@cspell/cspell-tools` package, which compiles word lists into [trie](#trie) files. The dictionaries in
-cspell-dicts are built with it, and the root `test:prep` script uses it.
+cspell-dicts are built with it.
 
 ## Dictionary definition
 
