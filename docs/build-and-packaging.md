@@ -107,14 +107,14 @@ The `api/` files are committed so that changes to a package's public API show up
 
 ## If you change X, also do Y
 
-| Change                                        | Also required                                                                                                                        |
-| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| A config option in `cspell-types`             | Follow [Config options](./config-and-cli.md#config-options). `pnpm test` fails until the schema is rebuilt.                          |
-| A CLI flag or CLI output in `packages/cspell` | Follow [CLI flags](./config-and-cli.md#cli-flags). Update snapshots.                                                                 |
-| How `cspell-lib` checks text                  | Expect snapshot changes across packages. Update them with `pnpm run test:update-snapshots`, and review the diff.                     |
-| A package's public API                        | `pnpm run build`, then review and commit its [`api/` file](#the-api-files), if any. Add [doc comments](../CONTRIBUTING.md#comments). |
-| Bundled dictionaries                          | See [Bundled dictionaries](#bundled-dictionaries).                                                                                   |
-| `.github/release-drafter.yml`                 | `node ./scripts/check-release-drafter.mts`. See [Releasing](./releasing.md#changing-the-rules).                                      |
+| Change                                        | Also required                                                                                                                     |
+| --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| A config option in `cspell-types`             | Follow [Config options](./config-and-cli.md#config-options). `pnpm test` fails until the schema is rebuilt.                       |
+| A CLI flag or CLI output in `packages/cspell` | Follow [CLI flags](./config-and-cli.md#cli-flags). Update snapshots.                                                              |
+| How `cspell-lib` checks text                  | Expect snapshot changes across packages. Update them with `pnpm run test:update-snapshots`, and review the diff.                  |
+| A package's public API                        | `pnpm run build`, then review and commit its [`api/` file](#the-api-files), if any. Add [doc comments](./code-style.md#comments). |
+| Bundled dictionaries                          | See [Bundled dictionaries](#bundled-dictionaries).                                                                                |
+| `.github/release-drafter.yml`                 | `node ./scripts/check-release-drafter.mts`. See [Releasing](./releasing.md#changing-the-rules).                                   |
 
 ## Bundled dictionaries
 

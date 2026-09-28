@@ -27,7 +27,7 @@ The interface you add the property to decides where users can set it:
 
 Add the property with a doc comment. The doc comment is user documentation: it becomes the description in
 `cspell.schema.json`, the editor hover, and the Properties page. Follow
-[Writing for users](../CONTRIBUTING.md#writing-for-users).
+[Writing for users](./writing-for-users.md).
 
 - Say what the option does and when to change it. Show an example if it helps.
 - Tags used in this file:
@@ -36,7 +36,7 @@ Add the property with a doc comment. The doc comment is user documentation: it b
   - `@deprecated true` and `@deprecationMessage` when replacing it
   - `@experimental` while it may still change
 - A glob or `/* */` in a doc comment needs a zero-width space between `*` and `/`. See
-  [Invisible characters](../CONTRIBUTING.md#invisible-characters).
+  [Invisible characters](./code-style.md#invisible-characters).
 
 ### 3. Register it
 

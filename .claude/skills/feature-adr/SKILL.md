@@ -69,7 +69,7 @@ decisions while they're still cheap to change.
      the result to the question.
    - **Let the user defer.** Record the question under Open questions, and come back to it before closing the loop.
    - **Capture side remarks as rules.** A remark made in passing is often a standing rule. Confirm it, then record it
-     where it applies: `docs/design-principles.md`, `CONTRIBUTING.md`, or another doc in `docs/`.
+     where it applies: `docs/design-principles.md`, or another doc in `docs/`.
 
    A question with only one reasonable answer once you look at the code isn't an ADR. Note it and move on.
 
