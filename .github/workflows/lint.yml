@@ -32,7 +32,7 @@ jobs:
         run: pnpm run lint
 
       - name: PR Auto Fix Lint
-        if: github.event.ref == 'refs/heads/main'
+        if: github.repository_owner == 'streetsidesoftware' && github.event.ref == 'refs/heads/main'
         uses: ./.github/actions/pr
         with:
           body: |
