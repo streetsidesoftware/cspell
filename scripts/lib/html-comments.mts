@@ -65,7 +65,8 @@ const blankLine = /^[ \t]*$/;
 /**
  * Well-formed fenced code blocks: a backtick fence at column 1, right after a blank line (or at the start), closed by a
  * backtick fence at least as long, indented by up to 3 spaces. An indented opening fence may belong to a list item,
- * which an unindented line ends, so it doesn't count. None count if any line is {@link unreliable}.
+ * which an unindented line ends, so it doesn't count. None count if any line is {@link unreliable}, or if a backtick
+ * fence line lies outside them, since GitHub may pair the fences differently.
  */
 function findCodeBlocks(markdown: string): Range[] {
     const lines = splitLines(markdown);
@@ -80,6 +81,9 @@ function findCodeBlocks(markdown: string): Range[] {
         blocks.push([lines[i].start, lines[close].end]);
         i = close;
     }
+
+    const inBlock = (l: Line) => blocks.some(([s, e]) => l.start >= s && l.start < e);
+    if (lines.some((l) => /^ {0,3}`{3,}/.test(l.text) && !inBlock(l))) return [];
     return blocks;
 }
 
