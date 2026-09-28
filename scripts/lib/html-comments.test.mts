@@ -27,26 +27,33 @@ describe('findHtmlComments', () => {
         name                                     | markdown
         ${'a fenced code block'}                 | ${`Example:\n\n${fence}md\n<!-- cspell:ignore word -->\n${fence}\n`}
         ${'a code block at the start'}           | ${`${fence}\n<!-- x -->\n${fence}\nAfter.`}
-        ${'a tilde fence'}                       | ${'Example:\n\n~~~\n<!-- x -->\n~~~\n'}
         ${'HTML shown in a code block'}          | ${`${fence}html\n<div>\n<!-- x -->\n</div>\n${fence}`}
         ${'a longer closing fence'}              | ${`${fence}\n<!-- x -->\n${fence}${fence}`}
         ${'a shorter fence inside a longer one'} | ${`\`${fence}\n<!-- a -->\n${fence}\n<!-- b -->\n\`${fence}`}
         ${'a code block after HTML and a blank'} | ${`<div>\n\n${fence}\n<!-- x -->\n${fence}\n\n</div>`}
+        ${'a code block after a list'}           | ${`- item\n\n${fence}\n<!-- cspell:ignore x -->\n${fence}\n`}
+        ${'CRLF line endings'}                   | ${`Use:\r\n\r\n${fence}md\r\n<!-- cspell:ignore w -->\r\n${fence}\r\n`}
     `('ignores a comment in a code block: $name', ({ markdown }) => {
         expect(locations(markdown)).toEqual([]);
     });
 
     test.each`
-        name                                           | markdown                                               | expected
-        ${'inline code'}                               | ${'Use `<!-- cspell:ignore word -->` to ignore it.'}   | ${['1:6:closed']}
-        ${'a fence without a blank line before it'}    | ${`Text\n${fence}\n<!-- x -->\n${fence}`}              | ${['3:1:closed']}
-        ${'a fence right after an HTML tag'}           | ${`<div>\n${fence}\n<!-- x -->\n${fence}\n</div>`}     | ${['3:1:closed']}
-        ${'an unclosed fence'}                         | ${`Text\n\n${fence}\n<!-- x -->`}                      | ${['4:1:closed']}
-        ${'a fence inside a quote'}                    | ${`> ${fence}\n> <!-- x -->\n> ${fence}`}              | ${['2:3:closed']}
-        ${'an indented code block'}                    | ${'Example:\n\n    <!-- x -->\n'}                      | ${['3:5:closed']}
-        ${'a backtick fence with a backtick in info'}  | ${`${fence}a\`b\n<!-- x -->\n${fence}`}                | ${['2:1:closed']}
-        ${'a <pre> block across blank lines'}          | ${`<pre>\n\n${fence}\n<!-- x -->\n${fence}\n\n</pre>`} | ${['4:1:closed']}
-        ${'a comment after a block with an open <!--'} | ${`${fence}\n<!-- a\n${fence}\n\n<!-- b -->`}          | ${['5:1:closed']}
+        name                                           | markdown                                                          | expected
+        ${'inline code'}                               | ${'Use `<!-- cspell:ignore word -->` to ignore it.'}              | ${['1:6:closed']}
+        ${'a fence without a blank line before it'}    | ${`Text\n${fence}\n<!-- x -->\n${fence}`}                         | ${['3:1:closed']}
+        ${'a fence right after an HTML tag'}           | ${`<div>\n${fence}\n<!-- x -->\n${fence}\n</div>`}                | ${['3:1:closed']}
+        ${'an unclosed fence'}                         | ${`Text\n\n${fence}\n<!-- x -->`}                                 | ${['4:1:closed']}
+        ${'a fence inside a quote'}                    | ${`> ${fence}\n> <!-- x -->\n> ${fence}`}                         | ${['2:3:closed']}
+        ${'an indented code block'}                    | ${'Example:\n\n    <!-- x -->\n'}                                 | ${['3:5:closed']}
+        ${'a backtick fence with a backtick in info'}  | ${`${fence}a\`b\n<!-- x -->\n${fence}`}                           | ${['2:1:closed']}
+        ${'a <pre> block across blank lines'}          | ${`<pre>\n\n${fence}\n<!-- x -->\n${fence}\n\n</pre>`}            | ${['4:1:closed']}
+        ${'a comment after a block with an open <!--'} | ${`${fence}\n<!-- a\n${fence}\n\n<!-- b -->`}                     | ${['5:1:closed']}
+        ${'an indented fence in a list item'}          | ${`- item\n\n  ${fence}\n<!-- HIDDEN -->\n  ${fence}\n`}          | ${['4:1:closed']}
+        ${'a <?php block across blank lines'}          | ${`<?php\n\n${fence}\n<!-- HIDDEN -->\n${fence}\n?>\n`}           | ${['4:1:closed']}
+        ${'a lone CR closing the fence'}               | ${`text\n\n${fence}\nx\r${fence}\r\n<!-- HIDDEN -->\n${fence}\n`} | ${['5:1:closed']}
+        ${'an indented closing fence'}                 | ${`text\n\n${fence}\nx\n  ${fence}\n<!-- HIDDEN -->\n${fence}\n`} | ${['6:1:closed']}
+        ${'a tilde fence'}                             | ${'Example:\n\n~~~\n<!-- x -->\n~~~\n'}                           | ${['4:1:closed']}
+        ${'a tilde fence around a backtick fence'}     | ${`~~~\n\n${fence}\n~~~\n<!-- HIDDEN -->\n${fence}`}              | ${['5:1:closed']}
     `('reports a comment that is not in a code block: $name', ({ markdown, expected }) => {
         expect(locations(markdown)).toEqual(expected);
     });

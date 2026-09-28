@@ -53,17 +53,23 @@ export function findHtmlComments(markdown: string): HtmlComment[] {
     return comments;
 }
 
-/** These HTML blocks continue across blank lines, so a fence inside one isn't code. */
-const htmlBlockAcrossBlankLines = /^ {0,3}<(?:pre|script|style|textarea)(?:[\s>]|$)/i;
-const blankLine = /^[ \t]*\r?$/;
+/**
+ * Lines that make code blocks unreliable, so none count:
+ * - HTML blocks that continue across blank lines, so a fence inside one isn't code. Not `<!--`, which is how a cspell
+ *   directive in a code block starts.
+ * - A `~~~` fence, which can close or contain a backtick fence.
+ */
+const unreliable = /^ {0,3}(?:<(?:(?:pre|script|style|textarea)(?:[\s>]|$)|\?|![A-Za-z]|!\[CDATA\[)|~~~)/i;
+const blankLine = /^[ \t]*$/;
 
 /**
- * Well-formed fenced code blocks: an opening fence right after a blank line (or at the start), closed by a fence of the
- * same character that is at least as long. None, if the text has a `<pre>`, `<script>`, `<style>`, or `<textarea>`.
+ * Well-formed fenced code blocks: a backtick fence at column 1, right after a blank line (or at the start), closed by a
+ * backtick fence at least as long, indented by up to 3 spaces. An indented opening fence may belong to a list item,
+ * which an unindented line ends, so it doesn't count. None count if any line is {@link unreliable}.
  */
 function findCodeBlocks(markdown: string): Range[] {
     const lines = splitLines(markdown);
-    if (lines.some((l) => htmlBlockAcrossBlankLines.test(l.text))) return [];
+    if (lines.some((l) => unreliable.test(l.text))) return [];
 
     const blocks: Range[] = [];
     for (let i = 0; i < lines.length; ++i) {
@@ -78,26 +84,27 @@ function findCodeBlocks(markdown: string): Range[] {
 }
 
 function openingFence(line: string): string | undefined {
-    const m = /^ {0,3}(`{3,}|~{3,})(.*)$/.exec(line);
+    const m = /^(`{3,})(.*)$/.exec(line);
     // GitHub doesn't treat a backtick fence with another backtick on its line as a fence.
-    if (!m || (m[1][0] === '`' && m[2].includes('`'))) return undefined;
+    if (!m || m[2].includes('`')) return undefined;
     return m[1];
 }
 
 function isClosingFence(line: string, fence: string): boolean {
-    const m = /^ {0,3}(`{3,}|~{3,})[ \t]*\r?$/.exec(line);
-    return !!m && m[1][0] === fence[0] && m[1].length >= fence.length;
+    const m = /^ {0,3}(`{3,})[ \t]*$/.exec(line);
+    return !!m && m[1].length >= fence.length;
 }
 
+/** Lines ending at `\r\n`, `\r`, or `\n`, as in Markdown. `text` excludes the line ending. */
 function splitLines(text: string): Line[] {
     const lines: Line[] = [];
-    for (let start = 0; ;) {
-        const newline = text.indexOf('\n', start);
-        const end = newline < 0 ? text.length : newline + 1;
-        lines.push({ start, end, text: text.slice(start, newline < 0 ? end : newline) });
-        if (newline < 0) return lines;
-        start = end;
+    let start = 0;
+    for (const m of text.matchAll(/\r\n|\r|\n/g)) {
+        lines.push({ start, end: m.index + m[0].length, text: text.slice(start, m.index) });
+        start = m.index + m[0].length;
     }
+    lines.push({ start, end: text.length, text: text.slice(start) });
+    return lines;
 }
 
 function lineAndColumn(text: string, offset: number): { line: number; column: number } {

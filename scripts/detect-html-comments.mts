@@ -1,5 +1,6 @@
 /*
- * Report HTML comments in Markdown: text that GitHub doesn't show. Comments in code blocks and inline code are ignored.
+ * Report HTML comments in Markdown: text that GitHub doesn't show. Comments in a well-formed fenced code block are the
+ * only exception, so a cspell directive shown in one isn't reported.
  * Usage: node ./scripts/detect-html-comments.mts [--show] [file ...]
  *   With no files, or `-`, reads stdin.
  *   --show  Also print each comment's text, escaped. Not for CI logs: that's the hidden text.
