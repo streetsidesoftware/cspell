@@ -13,12 +13,13 @@ word lists live there, not in this repo.
 - **Generated files** are regenerated, never edited. See [Generated files](./docs/build-and-packaging.md#generated-files).
 - **Before a PR:** `pnpm run build`, `pnpm test`, `pnpm run lint-ci`, and `pnpm run check-spelling`.
 - **PR titles and bodies are published verbatim** in the release notes, for people who use cspell. See
-  [Pull requests](#pull-requests).
+  [Pull requests](./docs/pull-requests.md).
 
 ## More docs
 
 - [Build and packaging](./docs/build-and-packaging.md): workspace layout, tooling, commands, generated files, CI
 - [Config options and CLI flags](./docs/config-and-cli.md): adding or changing one
+- [Pull requests](./docs/pull-requests.md): the title's type, the body, and what goes in the release notes
 - [Releasing](./docs/releasing.md): release-drafter, the Prepare Release PR, prerelease mode, fixing an entry
 - [Design principles](./docs/design-principles.md)
 - [Glossary](./docs/glossary.md)
@@ -62,64 +63,11 @@ This repo is spell checked with cspell itself.
 
 ## Pull requests
 
-Release notes are built from merged PRs. Each entry is the PR **title**, followed by the PR **body**, verbatim. They
-are read by people who use the cspell command-line tool, its config, and its packages. They want to know how a change
-affects them. Anything only maintainers care about stays out.
+The title and body of a PR that users would notice are published verbatim in the release notes. Write them like a press
+release for people who use cspell: what changed, and why it matters to them. Details only reviewers need go in a PR
+comment.
 
-### Title
-
-Use a [Conventional Commits](https://www.conventionalcommits.org/) prefix. The prefix sets the label, and the label
-decides whether the PR is in the release notes, under which section, and the version bump. Pick it by whether someone
-using cspell would notice the change.
-
-In the release notes:
-
-- `feat:`: something users can do that they couldn't before, such as a new option, flag, or file type.
-- `fix:`: any other change users would notice: a bug fix, a changed behavior, a speed-up, a removal.
-- `feat!:` / `fix!:`: either of the above, when it breaks existing setups. A scope works too: `fix(cspell-lib)!:`. Any
-  type with `!` is listed under **BREAKING**, except `chore!:`, `ci!:`, `test!:`, `docs!:`, and `website!:`.
-- `revert:` or GitHub's `Revert "…"`: undoes a merged `feat:` or `fix:` change. Listed under Fixes. A revert of anything
-  else is left out.
-
-Left out of the release notes:
-
-- `docs:`: README files and this repo's docs, including `docs/` and `CONTRIBUTING.md`.
-- `website:`: changes to the content of the website. Website dependency and tooling updates are `chore:`.
-- `refactor:`: internal restructuring with no change users would notice.
-- `test:`: tests only, and `perf:`: performance tests.
-- `ci:`: GitHub Actions and workflows.
-- `chore:`: everything else: tooling, dev dependencies, and the coding-agent setup.
-
-A title with any other prefix gets no label, and is left out. The full table, with sections and version bumps, is in
-[Releasing](./docs/releasing.md#titles-labels-and-sections).
-
-Bot PRs pick their own type, for example `fix: Workflow Bot -- Update Dictionaries (main)`. Don't lower it: new
-dictionaries change what users see.
-
-Write the rest of a published title for users: what changed for them, not how the code changed.
-
-### Description
-
-Keep it short. Prefer bullet points to prose. A sentence with more than one or two `code` spans is hard to read: break
-it into a list.
-
-- `## Summary`: one or two sentences that stand on their own: what changed and why.
-- For a PR in the release notes (`feat:`, `fix:`, `revert:`), write for users deciding whether it affects
-  them.
-  - Say which option, flag, command, or behavior changed, in their terms.
-  - For `feat:`, add a `## Feature` section: what users can now do, with a config or command-line example.
-  - Leave out internal details, and anything else only maintainers need.
-- For a PR left out of the release notes, write for reviewers. Group the changes by theme, not by file, and say why each
-  matters.
-- Put extra detail in collapsed `<details>` blocks, as bullet points.
-- No test plan section: CI covers that.
-- No tool attribution, such as "Generated with ...". The release notes strip it, but leave it out anyway.
-- After pushing more commits, check that the description still matches.
-
-Don't restate the diff, narrate how you got to the change, or write a section per commit.
-
-If a PR merged with the wrong title, label, or body, see
-[Fixing a release notes entry](./docs/releasing.md#fixing-a-release-notes-entry).
+How to pick the title's type and write the body is in [Pull requests](./docs/pull-requests.md).
 
 ## Code style
 
@@ -173,10 +121,9 @@ These rules apply to everything people who use cspell read:
 - `packages/*/README.md`, which are the npm pages, and the root `README.md`
 - the website, `website/docs/`
 - doc comments on config options and on public APIs
-- the titles and bodies of PRs that go into the release notes
+- the titles and bodies of PRs that go into the release notes: see [Pull requests](./docs/pull-requests.md)
 
-Those readers are people running the cspell command-line tool, people writing cspell config, and projects that use
-`cspell-lib` and the other packages.
+Those readers are [users](./docs/glossary.md#users): people who run cspell, write its config, or build on its packages.
 
 `website/docs/` is for people who use cspell. `docs/` is for maintainers and contributors. Don't mix them.
 

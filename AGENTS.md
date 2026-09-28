@@ -55,10 +55,11 @@ Read the doc before changing that area. These are written for people.
 - [`docs/build-and-packaging.md`](docs/build-and-packaging.md): layout, tooling, compiler settings, generated files,
   "if you change X, also do Y", bundled dictionaries, adding a package, CI.
 - [`docs/config-and-cli.md`](docs/config-and-cli.md): adding or changing a config option or a CLI flag.
+- [`docs/pull-requests.md`](docs/pull-requests.md): PR titles and descriptions, and what goes in the release notes.
 - [`docs/releasing.md`](docs/releasing.md): release-drafter, labels, the Prepare Release PR, prerelease mode.
 - [`docs/design-principles.md`](docs/design-principles.md): weigh every behavior change against these.
 - [`docs/glossary.md`](docs/glossary.md): config resolution, dictionaries, and other terms.
-- [`CONTRIBUTING.md`](CONTRIBUTING.md): PR titles and descriptions, code style, writing for users.
+- [`CONTRIBUTING.md`](CONTRIBUTING.md): code style, writing for users.
 
 ## Rules
 
@@ -103,11 +104,13 @@ that's only here, move it into `docs/` and link to it from both.
 ### Commits and pull requests
 
 The PR title and body are published verbatim in the release notes. Follow
-[Pull requests](CONTRIBUTING.md#pull-requests).
+[Pull requests](docs/pull-requests.md).
 
 - Pick the type by whether someone using cspell would notice. Tooling and the coding-agent setup are `chore:`.
   Docs and READMEs are `docs:`, and website content is `website:`. None of these are published.
-- Never put tool attribution, such as "Generated with ...", in a PR body.
+- In a published PR's body, leave out internal method, class, and variable names. How the change works can go in an
+  optional closing `Technical Details` block, written for people who use cspell.
+- Never put tool attribution, such as "Generated with ...", or HTML comments in a PR body.
 - After pushing more commits to an open PR, check that its description still matches.
 - If a merged PR has the wrong title, label, or body, use the `release-notes` skill.
 
