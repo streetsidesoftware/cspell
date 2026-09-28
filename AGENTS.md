@@ -52,6 +52,7 @@ git status --porcelain    # only intended changes
 
 Read the doc before changing that area. These are written for people.
 
+- [`docs/development.md`](docs/development.md): setting up, checks before a PR, spelling.
 - [`docs/build-and-packaging.md`](docs/build-and-packaging.md): layout, tooling, compiler settings, generated files,
   "if you change X, also do Y", bundled dictionaries, adding a package, CI.
 - [`docs/config-and-cli.md`](docs/config-and-cli.md): adding or changing a config option or a CLI flag.
@@ -59,7 +60,8 @@ Read the doc before changing that area. These are written for people.
 - [`docs/releasing.md`](docs/releasing.md): release-drafter, labels, the Prepare Release PR, prerelease mode.
 - [`docs/design-principles.md`](docs/design-principles.md): weigh every behavior change against these.
 - [`docs/glossary.md`](docs/glossary.md): config resolution, dictionaries, and other terms.
-- [`CONTRIBUTING.md`](CONTRIBUTING.md): code style, writing for users.
+- [`docs/code-style.md`](docs/code-style.md): comments, doc comments, invisible characters.
+- [`docs/writing-for-users.md`](docs/writing-for-users.md): READMEs, the website, doc comments, and published PRs.
 
 ## Rules
 
@@ -70,13 +72,13 @@ Each rule is written for people in the linked section. Read it before working in
   [Compiler settings](docs/build-and-packaging.md#compiler-settings-that-catch-people-out).
 - **Tests** use vitest, next to the source. Paths use `node:path`: CI runs on Windows.
 - **Comments:** few, short, and accurate. Leave existing comments alone unless you are changing that function. See
-  [Comments](CONTRIBUTING.md#comments).
+  [Comments](docs/code-style.md#comments).
 - **Doc comments** on published packages' public API, and on config options, are user documentation. See
-  [Comments](CONTRIBUTING.md#comments).
+  [Comments](docs/code-style.md#comments).
 - **Invisible characters:** write them as escape sequences. The one exception is in doc comments. See
-  [Invisible characters](CONTRIBUTING.md#invisible-characters).
+  [Invisible characters](docs/code-style.md#invisible-characters).
 - **Writing for users:** READMEs, the website, doc comments, and published PRs. See
-  [Writing for users](CONTRIBUTING.md#writing-for-users).
+  [Writing for users](docs/writing-for-users.md).
 - **Workflows:** give a new or changed workflow `workflow_dispatch` when possible. Add `workflow_call` only to a new
   workflow without a `concurrency` section. See
   [CI](docs/build-and-packaging.md#ci).

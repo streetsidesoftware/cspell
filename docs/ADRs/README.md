@@ -95,7 +95,7 @@ by a short summary. Archive a feature when it's due, or earlier when a maintaine
 - The [Features](#features) table records when each feature shipped. Fill in the cspell version and date when the first
   release containing it is published.
 - Before deleting anything, move what is still in force to its long-term home: principles to
-  [`../design-principles.md`](../design-principles.md), and rules to `CONTRIBUTING.md` or the relevant doc in `docs/`.
+  [`../design-principles.md`](../design-principles.md), and rules to the relevant doc in `docs/`.
 - Rewrite the feature's `README.md` as the archive summary, with a permalink to the full ADRs in git history.
 - Delete the individual ADR files, and mark the feature archived in the table below.
 

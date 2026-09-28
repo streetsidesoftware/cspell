@@ -53,7 +53,7 @@ Record the answers. They go into the PR description in step 5.
 Follow the doc's steps. Don't skip one:
 
 - Define or change the property and its doc comment in `CSpellSettingsDef.ts`. The doc comment is user documentation:
-  follow `CONTRIBUTING.md`'s "Writing for users". Add `@since` with the next version, and `@default` if it has one.
+  follow `docs/writing-for-users.md`. Add `@since` with the next version, and `@default` if it has one.
   For a glob or `/* */` in the comment, follow "Invisible characters".
 - Register it in `configFields.ts`, `merge.ts`, and `sanitizeSettings.ts`. The build fails until all three have it.
 - If it's an array or object that should combine across config files, add it to `_merge` in
