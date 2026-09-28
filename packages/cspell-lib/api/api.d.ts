@@ -765,55 +765,23 @@ interface TextValidationFactoryOptions extends ValidationOptions {
 //#endregion
 //#region src/lib/textValidation/docValidatorPreparations.d.ts
 /**
- * The preparations that depend on the document's settings. They are replaced when the document changes.
- */
-interface DocumentSettingsPreparations {
-  dictionary: SpellingDictionaryCollection;
-  /** configuration after applying in-doc settings */
-  docSettings: CSpellSettingsInternal;
-  finalSettings: CSpellSettingsInternalFinalized;
-  shouldCheck: boolean;
-  validateOptions: TextValidationFactoryOptions;
-  textValidator: TextValidator;
-  transformer: TextTransformer;
-  /**
-   * Runs every ignore pattern over the whole document, so it is only called once the include ranges are needed.
-   */
-  calcIncludeRanges: () => MatchRange[];
-}
-/**
  * What a `DocumentValidator` needs to spell check its document.
- *
- * The include ranges, and the segmenter built from them, are calculated on first use. A document that
- * is never checked never pays for them.
  */
-declare class DocumentValidatorPreparations {
-  #private;
-  readonly config: CSpellSettingsInternal;
-  readonly localConfig: CSpellUserSettings | undefined;
-  readonly localConfigFilepath: string | undefined;
+interface Preparations {
+  /** loaded config */
+  config: CSpellSettingsInternal;
   dictionary: SpellingDictionaryCollection;
   /** configuration after applying in-doc settings */
   docSettings: CSpellSettingsInternal;
   finalSettings: CSpellSettingsInternalFinalized;
+  includeRanges: MatchRange[];
+  textValidator: TextValidator;
+  segmenter: (texts: MappedText) => Iterable<MappedText>;
   shouldCheck: boolean;
   validateOptions: TextValidationFactoryOptions;
-  textValidator: TextValidator;
+  localConfig: CSpellUserSettings | undefined;
+  localConfigFilepath: string | undefined;
   transformer: TextTransformer;
-  /**
-   * @param config - loaded config
-   * @param localConfig - the config file found for the document, if any.
-   * @param localConfigFilepath - the path of `localConfig`.
-   * @param prep - the preparations that depend on the document's settings.
-   */
-  constructor(config: CSpellSettingsInternal, localConfig: CSpellUserSettings | undefined, localConfigFilepath: string | undefined, prep: DocumentSettingsPreparations);
-  /**
-   * Replace the preparations that depend on the document's settings. The include ranges are
-   * calculated again on next use.
-   */
-  update(prep: DocumentSettingsPreparations): void;
-  get includeRanges(): MatchRange[];
-  get segmenter(): (texts: MappedText) => Iterable<MappedText>;
 }
 //#endregion
 //#region src/lib/textValidation/traceWord.d.ts
@@ -979,7 +947,7 @@ declare class DocumentValidator {
    * @deprecated Will be removed in a future major version. Use {@link _getLocalConfig} and
    * {@link _getLocalConfigFilepath} instead.
    */
-  _getPreparations(): DocumentValidatorPreparations | undefined;
+  _getPreparations(): Preparations | undefined;
   /**
    * Internal `cspell-lib` use.
    * @returns the config file found for the document, if any.

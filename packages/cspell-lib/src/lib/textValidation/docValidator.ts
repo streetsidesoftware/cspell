@@ -55,6 +55,7 @@ import { uriToFilePath } from '../util/Uri.js';
 import { cleanValidationIssue } from './cleanValidationIssue.js';
 import { defaultMaxDuplicateProblems, defaultMaxNumberOfProblems } from './defaultConstants.js';
 import { determineTextDocumentSettings } from './determineTextDocumentSettings.js';
+import type { Preparations } from './docValidatorPreparations.js';
 import { DocumentValidatorPreparations } from './docValidatorPreparations.js';
 import { textValidatorFactory } from './lineValidatorFactory.js';
 import { settingsToValidateOptions } from './settingsToValidateOptions.js';
@@ -600,7 +601,7 @@ export class DocumentValidator {
      * @deprecated Will be removed in a future major version. Use {@link _getLocalConfig} and
      * {@link _getLocalConfigFilepath} instead.
      */
-    public _getPreparations(): DocumentValidatorPreparations | undefined {
+    public _getPreparations(): Preparations | undefined {
         return this._preparations;
     }
 

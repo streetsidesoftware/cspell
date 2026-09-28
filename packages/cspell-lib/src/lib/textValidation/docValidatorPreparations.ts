@@ -7,6 +7,26 @@ import { createMappedTextSegmenter } from '../Transform/index.js';
 import type { TextValidationFactoryOptions, TextValidator } from './lineValidatorFactory.js';
 
 /**
+ * What a `DocumentValidator` needs to spell check its document.
+ */
+export interface Preparations {
+    /** loaded config */
+    config: CSpellSettingsInternal;
+    dictionary: SpellingDictionaryCollection;
+    /** configuration after applying in-doc settings */
+    docSettings: CSpellSettingsInternal;
+    finalSettings: CSpellSettingsInternalFinalized;
+    includeRanges: MatchRange[];
+    textValidator: TextValidator;
+    segmenter: (texts: MappedText) => Iterable<MappedText>;
+    shouldCheck: boolean;
+    validateOptions: TextValidationFactoryOptions;
+    localConfig: CSpellUserSettings | undefined;
+    localConfigFilepath: string | undefined;
+    transformer: TextTransformer;
+}
+
+/**
  * The preparations that depend on the document's settings. They are replaced when the document changes.
  */
 export interface DocumentSettingsPreparations {
@@ -25,12 +45,10 @@ export interface DocumentSettingsPreparations {
 }
 
 /**
- * What a `DocumentValidator` needs to spell check its document.
- *
  * The include ranges, and the segmenter built from them, are calculated on first use. A document that
  * is never checked never pays for them.
  */
-export class DocumentValidatorPreparations {
+export class DocumentValidatorPreparations implements Preparations {
     dictionary: SpellingDictionaryCollection;
     /** configuration after applying in-doc settings */
     docSettings: CSpellSettingsInternal;
