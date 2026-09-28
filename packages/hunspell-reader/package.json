@@ -1,21 +1,35 @@
 {
   "name": "hunspell-reader",
+  "version": "10.3.5",
+  "description": "A library for reading Hunspell Dictionary Files",
   "publishConfig": {
     "access": "public",
     "provenance": true
   },
-  "version": "10.3.5",
-  "description": "A library for reading Hunspell Dictionary Files",
-  "bin": "bin.js",
-  "type": "module",
+  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/hunspell-reader#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetsidesoftware/cspell.git",
+    "directory": "packages/hunspell-reader"
+  },
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/cspell/issues?q=is%3Aissue%20state%3Aopen%20label%3Ahunspell-reader"
+  },
+  "keywords": [
+    "Hunspell"
+  ],
+  "license": "MIT",
+  "author": "Jason Dent",
   "sideEffects": false,
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "type": "module",
   "exports": {
     ".": {
       "import": "./dist/index.js"
     }
   },
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": "bin.js",
   "files": [
     "dist",
     "bin.js",
@@ -24,29 +38,15 @@
     "!**/*.test.*"
   ],
   "scripts": {
-    "test-unit": "vitest run",
-    "test-spelling": "cspell \"src/**/*.ts\" \"*.md\"",
-    "smoke-test": "./bin.js words ./dictionaries/nl -n 100",
-    "test": "pnpm run test-unit",
     "build": "tsc -p .",
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "coverage": "vitest run --coverage",
+    "smoke-test": "./bin.js words ./dictionaries/nl -n 100",
+    "test": "pnpm run test-unit",
+    "test-spelling": "cspell \"src/**/*.ts\" \"*.md\"",
+    "test-unit": "vitest run",
     "watch": "tsc -w"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/streetsidesoftware/cspell.git",
-    "directory": "packages/hunspell-reader"
-  },
-  "keywords": [
-    "Hunspell"
-  ],
-  "author": "Jason Dent",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/streetsidesoftware/cspell/issues"
-  },
-  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/hunspell-reader#readme",
   "dependencies": {
     "@cspell/cspell-pipe": "workspace:^",
     "@cspell/cspell-types": "workspace:^",

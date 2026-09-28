@@ -6,31 +6,14 @@
     "access": "public",
     "provenance": true
   },
-  "type": "module",
-  "sideEffects": false,
-  "files": [
-    "cspell-default.json",
-    "cspell-default.config.js",
-    "dist/cspell-bundled.mjs"
-  ],
-  "exports": {
-    ".": "./cspell-default.config.js",
-    "./cspell-bundled.js": "./dist/cspell-bundled.mjs",
-    "./cspell-default.config.js": "./cspell-default.config.js",
-    "./cspell-default.json": "./cspell-default.json"
-  },
-  "scripts": {
-    "build": "tsc -p . && tsdown",
-    "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
-    "clean-build": "pnpm run clean && pnpm run build",
-    "watch": "pnpm run build --watch",
-    "test": "node ../../bin.mjs \"**/*.{txt,md,ts}\"",
-    "update-dictionaries": "pnpm update --latest \"@cspell/dict-*\" --depth 1 --filter-prod ."
-  },
+  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-bundled-dicts#readme",
   "repository": {
     "type": "git",
     "url": "https://github.com/streetsidesoftware/cspell.git",
     "directory": "packages/cspell-bundled-dicts"
+  },
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/cspell/issues?q=is%3Aissue%20state%3Aopen%20label%3Acspell-bundled-dicts"
   },
   "keywords": [
     "spell",
@@ -38,12 +21,29 @@
     "cspell",
     "dictionaries"
   ],
-  "author": "Jason Dent",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/streetsidesoftware/cspell/labels/cspell-bundled-dicts"
+  "author": "Jason Dent",
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": "./cspell-default.config.js",
+    "./cspell-bundled.js": "./dist/cspell-bundled.mjs",
+    "./cspell-default.config.js": "./cspell-default.config.js",
+    "./cspell-default.json": "./cspell-default.json"
   },
-  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-bundled-dicts#readme",
+  "files": [
+    "cspell-default.json",
+    "cspell-default.config.js",
+    "dist/cspell-bundled.mjs"
+  ],
+  "scripts": {
+    "build": "tsc -p . && tsdown",
+    "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
+    "clean-build": "pnpm run clean && pnpm run build",
+    "test": "node ../../bin.mjs \"**/*.{txt,md,ts}\"",
+    "update-dictionaries": "pnpm update --latest \"@cspell/dict-*\" --depth 1 --filter-prod .",
+    "watch": "pnpm run build --watch"
+  },
   "dependencies": {
     "@cspell/dict-ada": "^4.1.1",
     "@cspell/dict-al": "^1.1.1",
@@ -105,12 +105,12 @@
     "@cspell/dict-vue": "^3.0.5",
     "@cspell/dict-zig": "^1.0.0"
   },
-  "engines": {
-    "node": ">=22.18.0"
-  },
   "devDependencies": {
     "@cspell/cspell-tools": "workspace:*",
     "@cspell/cspell-types": "workspace:*",
     "@cspell/dictionary-bundler-plugin": "workspace:*"
+  },
+  "engines": {
+    "node": ">=22.18.0"
   }
 }
