@@ -139,14 +139,16 @@ Copy the shape of a recent small package, such as `packages/cspell-performance-m
 `packages/*` is already in `pnpm-workspace.yaml` and `lerna.json`. Set `version` to the current version in
 `lerna.json`, and `private: true` if it shouldn't be published.
 
-For a published package, give it its issue label and `bugs` link. The label is the package's directory name.
+Then fill in the fields the repo manages, and create the package's issue label. The label is the package's directory
+name, and `bugs` links to its open issues.
 
 ```sh
-node ./scripts/package-labels.mts --fix            # sets bugs.url to the package's open issues
-node ./scripts/package-labels.mts --create-labels  # creates the label on GitHub
+node ./scripts/fix-package-json.mts      # sets repository, homepage, and (if published) bugs
+node ./scripts/create-package-labels.mts # creates missing package labels on GitHub
 ```
 
-The Lint workflow runs `node ./scripts/package-labels.mts --check`, and fails if a `bugs` link is out of date.
+The Lint workflow runs `node ./scripts/fix-package-json.mts --dry-run`, and fails if a `package.json` needs fixing. It
+doesn't check GitHub, so it can't tell whether the label exists: run `create-package-labels.mts` for every new package.
 
 ## CI
 
