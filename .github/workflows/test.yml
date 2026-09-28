@@ -24,6 +24,9 @@ on:
       - 'test-packages/**/package.json'
       - 'test-packages/**/tsconfig.json'
       - 'test-fixtures/**'
+      - 'scripts/**/*.mjs'
+      - 'scripts/**/*.mts'
+      - 'scripts/package.json'
       - 'tsconfig*.json'
       - '!website/**'
   push:
