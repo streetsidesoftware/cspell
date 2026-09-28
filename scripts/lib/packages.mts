@@ -20,6 +20,8 @@ export interface PackageInfo {
     /** The package's directory under packages/, for example `cspell-lib`. */
     dir: string;
     file: string;
+    /** The file's text, as read. */
+    text: string;
     json: PackageJson;
     /** The GitHub issue label: the directory name, or the package it's an alias of. */
     label: string;
@@ -47,7 +49,7 @@ export async function readPackages(): Promise<PackageInfo[]> {
                 cause: error,
             });
         }
-        packages.push({ dir, file, json, label: labelAliases[dir] ?? dir });
+        packages.push({ dir, file, text, json, label: labelAliases[dir] ?? dir });
     }
     return packages.sort((a, b) => a.dir.localeCompare(b.dir));
 }

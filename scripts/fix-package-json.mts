@@ -1,6 +1,6 @@
 /*
  * Fix up packages/<dir>/package.json: `repository` and `homepage`, and for published packages `bugs`,
- * which lists the package's open issues by its label (see create-package-labels.mts).
+ * which lists the package's open issues by its label (see create-package-labels.mts). Fields are then sorted.
  * Usage: node ./scripts/fix-package-json.mts [--dry-run]
  *   --dry-run  Report which files need fixing without writing them; exit 1 if any do.
  */
@@ -9,8 +9,28 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { parseArgs } from 'node:util';
 
+import { sortOrder as defaultSortOrder, sortPackageJson } from 'sort-package-json';
+
 import type { PackageInfo, PackageJson } from './lib/packages.mts';
 import { readPackages, repoUrl, rootDir } from './lib/packages.mts';
+
+/** The same leading order as cspell-dicts, then the project links; sort-package-json's default order after that. */
+const sortOrder = [
+    ...new Set([
+        '$schema',
+        'name',
+        'displayName',
+        'version',
+        'private',
+        'description',
+        'publishConfig',
+        'homepage',
+        'repository',
+        'bugs',
+        'funding',
+        ...defaultSortOrder,
+    ]),
+];
 
 const homepages: Record<string, string> = {
     cspell: 'https://cspell.org/',
@@ -57,15 +77,15 @@ async function main(): Promise<void> {
     const packages = await readPackages();
     let needsFix = 0;
     for (const pkg of packages) {
-        const fixed = fixPackage(pkg);
-        if (JSON.stringify(fixed) === JSON.stringify(pkg.json)) continue;
+        const text = JSON.stringify(sortPackageJson(fixPackage(pkg), { sortOrder }), undefined, 2) + '\n';
+        if (text === pkg.text) continue;
         ++needsFix;
         const rel = path.relative(rootDir, pkg.file);
         if (dryRun) {
             console.error(`${rel} needs fixing.`);
             continue;
         }
-        await fs.writeFile(pkg.file, JSON.stringify(fixed, undefined, 2) + '\n');
+        await fs.writeFile(pkg.file, text);
         console.log(`Fixed ${rel}`);
     }
 

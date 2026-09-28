@@ -143,7 +143,7 @@ Then fill in the fields the repo manages, and create the package's issue label. 
 name, and `bugs` links to its open issues.
 
 ```sh
-node ./scripts/fix-package-json.mts      # sets repository, homepage, and (if published) bugs
+node ./scripts/fix-package-json.mts      # sets repository, homepage, and (if published) bugs; sorts fields
 node ./scripts/create-package-labels.mts # creates missing package labels on GitHub
 ```
 
