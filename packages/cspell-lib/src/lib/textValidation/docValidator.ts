@@ -226,27 +226,28 @@ export class DocumentValidator {
         const recFinalizeTime = recordPerfTime(this.perfTiming, '_finalizeSettings');
 
         const finalSettings = finalizeSettings(docSettings);
-        const { transformer, validateOptions, includeRanges, segmenter, textValidator } = this.#calcSharedPrep(
+        const { transformer, validateOptions, calcIncludeRanges, textValidator } = this.#calcSharedPrep(
             finalSettings,
             dict,
         );
 
         recFinalizeTime();
 
-        this._preparations = {
-            config,
-            dictionary: dict,
-            docSettings,
-            finalSettings,
-            shouldCheck,
-            validateOptions,
-            includeRanges,
-            segmenter,
-            textValidator,
-            localConfig,
-            localConfigFilepath: localConfig?.__importRef?.filename,
-            transformer,
-        };
+        this._preparations = withLazyIncludeRanges(
+            {
+                config,
+                dictionary: dict,
+                docSettings,
+                finalSettings,
+                shouldCheck,
+                validateOptions,
+                textValidator,
+                localConfig,
+                localConfigFilepath: localConfig?.__importRef?.filename,
+                transformer,
+            },
+            calcIncludeRanges,
+        );
 
         this._ready = true;
         this._preparationTime = timer.elapsed;
@@ -264,23 +265,27 @@ export class DocumentValidator {
         const stopMeasure = measurePerf('DocumentValidator._updatePrep');
         const shouldCheck = docSettings.enabled ?? true;
         const finalSettings = finalizeSettings(docSettings);
-        const { transformer, validateOptions, includeRanges, segmenter, textValidator } = this.#calcSharedPrep(
+        const { transformer, validateOptions, calcIncludeRanges, textValidator } = this.#calcSharedPrep(
             finalSettings,
             dict,
         );
 
-        this._preparations = {
-            ...prep,
-            dictionary: dict,
-            docSettings,
-            finalSettings,
-            shouldCheck,
-            validateOptions,
-            includeRanges,
-            segmenter,
-            textValidator,
-            transformer,
-        };
+        // Copy the fields by name: spreading `prep` would compute its lazy include ranges.
+        this._preparations = withLazyIncludeRanges(
+            {
+                config: prep.config,
+                dictionary: dict,
+                docSettings,
+                finalSettings,
+                shouldCheck,
+                validateOptions,
+                textValidator,
+                localConfig: prep.localConfig,
+                localConfigFilepath: prep.localConfigFilepath,
+                transformer,
+            },
+            calcIncludeRanges,
+        );
         this._preparationTime = timer.elapsed;
         stopMeasure();
     }
@@ -303,11 +308,11 @@ export class DocumentValidator {
         const validateOptions = { ...settingsToValidateOptions(finalSettings), transformer };
         // Avoid excluding text ranges that have a full substitution applied.
         const rangeTransformer = finalSettings.substitutions?.length ? sub.transformer : undefined;
-        const includeRanges = calcTextInclusionRanges(this._document.text, validateOptions, rangeTransformer);
-        const segmenter = createMappedTextSegmenter(includeRanges);
+        const text = this._document.text;
+        const calcIncludeRanges = () => calcTextInclusionRanges(text, validateOptions, rangeTransformer);
         const textValidator = textValidatorFactory(dict, validateOptions);
 
-        return { segmenter, textValidator, includeRanges, validateOptions, transformer };
+        return { textValidator, calcIncludeRanges, validateOptions, transformer };
     }
 
     /**
@@ -658,6 +663,27 @@ interface Preparations {
     localConfig: CSpellUserSettings | undefined;
     localConfigFilepath: string | undefined;
     transformer: TextTransformer;
+}
+
+/**
+ * The include ranges run every ignore pattern over the whole document, so they are only
+ * calculated when the document is checked.
+ */
+function withLazyIncludeRanges(
+    prep: Omit<Preparations, 'includeRanges' | 'segmenter'>,
+    calcIncludeRanges: () => MatchRange[],
+): Preparations {
+    let includeRanges: MatchRange[] | undefined;
+    let segmenter: Preparations['segmenter'] | undefined;
+    return {
+        ...prep,
+        get includeRanges() {
+            return (includeRanges ??= calcIncludeRanges());
+        },
+        get segmenter() {
+            return (segmenter ??= createMappedTextSegmenter(this.includeRanges));
+        },
+    };
 }
 
 async function searchForDocumentConfig(
