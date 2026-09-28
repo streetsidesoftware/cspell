@@ -763,6 +763,27 @@ interface TextValidationFactoryOptions extends ValidationOptions {
   transformer: TextTransformer | undefined;
 }
 //#endregion
+//#region src/lib/textValidation/docValidatorPreparations.d.ts
+/**
+ * What a `DocumentValidator` needs to spell check its document.
+ */
+interface Preparations {
+  /** loaded config */
+  config: CSpellSettingsInternal;
+  dictionary: SpellingDictionaryCollection;
+  /** configuration after applying in-doc settings */
+  docSettings: CSpellSettingsInternal;
+  finalSettings: CSpellSettingsInternalFinalized;
+  includeRanges: MatchRange[];
+  textValidator: TextValidator;
+  segmenter: (texts: MappedText) => Iterable<MappedText>;
+  shouldCheck: boolean;
+  validateOptions: TextValidationFactoryOptions;
+  localConfig: CSpellUserSettings | undefined;
+  localConfigFilepath: string | undefined;
+  transformer: TextTransformer;
+}
+//#endregion
 //#region src/lib/textValidation/traceWord.d.ts
 type Href = string;
 interface DictionaryTraceResult {
@@ -923,8 +944,20 @@ declare class DocumentValidator {
   shouldCheckDocument(): boolean;
   /**
    * Internal `cspell-lib` use.
+   * @deprecated Will be removed in a future major version. Use {@link _getLocalConfig} and
+   * {@link _getLocalConfigFilepath} instead.
    */
   _getPreparations(): Preparations | undefined;
+  /**
+   * Internal `cspell-lib` use.
+   * @returns the config file found for the document, if any.
+   */
+  _getLocalConfig(): CSpellUserSettings | undefined;
+  /**
+   * Internal `cspell-lib` use.
+   * @returns the path of the config file found for the document, if any.
+   */
+  _getLocalConfigFilepath(): string | undefined;
   /**
    * Get the calculated ranges of text that should be included in the spell checking.
    *
@@ -936,22 +969,6 @@ declare class DocumentValidator {
   getRangesChecked(): Iterable<SimpleRange>;
   get recordCheckedRanges(): boolean;
   set recordCheckedRanges(value: boolean);
-}
-interface Preparations {
-  /** loaded config */
-  config: CSpellSettingsInternal;
-  dictionary: SpellingDictionaryCollection;
-  /** configuration after applying in-doc settings */
-  docSettings: CSpellSettingsInternal;
-  finalSettings: CSpellSettingsInternalFinalized;
-  includeRanges: MatchRange[];
-  textValidator: TextValidator;
-  segmenter: (texts: MappedText) => Iterable<MappedText>;
-  shouldCheck: boolean;
-  validateOptions: TextValidationFactoryOptions;
-  localConfig: CSpellUserSettings | undefined;
-  localConfigFilepath: string | undefined;
-  transformer: TextTransformer;
 }
 interface ShouldCheckDocumentResult {
   /** possible errors found while loading configuration. */

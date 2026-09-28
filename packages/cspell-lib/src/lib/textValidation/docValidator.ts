@@ -46,7 +46,6 @@ import type { MatchRange, SimpleRange, TextTransformer } from '../Transform/inde
 import {
     chainTransformers,
     createIntlSegmentTextTransformer,
-    createMappedTextSegmenter,
     createSoftWordBreakTextTransformer,
     createSubstitutionTransformer,
 } from '../Transform/index.js';
@@ -56,7 +55,8 @@ import { uriToFilePath } from '../util/Uri.js';
 import { cleanValidationIssue } from './cleanValidationIssue.js';
 import { defaultMaxDuplicateProblems, defaultMaxNumberOfProblems } from './defaultConstants.js';
 import { determineTextDocumentSettings } from './determineTextDocumentSettings.js';
-import type { TextValidationFactoryOptions, TextValidator } from './lineValidatorFactory.js';
+import type { Preparations } from './docValidatorPreparations.js';
+import { DocumentValidatorPreparations } from './docValidatorPreparations.js';
 import { textValidatorFactory } from './lineValidatorFactory.js';
 import { settingsToValidateOptions } from './settingsToValidateOptions.js';
 import { calcTextInclusionRanges } from './textValidator.js';
@@ -112,7 +112,7 @@ export class DocumentValidator {
     private _ready = false;
     readonly errors: Error[] = [];
     private _prepared: Promise<void> | undefined;
-    private _preparations: Preparations | undefined;
+    private _preparations: DocumentValidatorPreparations | undefined;
     private _preparationTime = -1;
     private _suggestions = new AutoCache((text: string) => this.genSuggestions(text), 1000);
     readonly options: DocumentValidatorOptions;
@@ -226,27 +226,28 @@ export class DocumentValidator {
         const recFinalizeTime = recordPerfTime(this.perfTiming, '_finalizeSettings');
 
         const finalSettings = finalizeSettings(docSettings);
-        const { transformer, validateOptions, includeRanges, segmenter, textValidator } = this.#calcSharedPrep(
+        const { transformer, validateOptions, calcIncludeRanges, textValidator } = this.#calcSharedPrep(
             finalSettings,
             dict,
         );
 
         recFinalizeTime();
 
-        this._preparations = {
+        this._preparations = new DocumentValidatorPreparations(
             config,
-            dictionary: dict,
-            docSettings,
-            finalSettings,
-            shouldCheck,
-            validateOptions,
-            includeRanges,
-            segmenter,
-            textValidator,
             localConfig,
-            localConfigFilepath: localConfig?.__importRef?.filename,
-            transformer,
-        };
+            localConfig?.__importRef?.filename,
+            {
+                dictionary: dict,
+                docSettings,
+                finalSettings,
+                shouldCheck,
+                validateOptions,
+                textValidator,
+                transformer,
+                calcIncludeRanges,
+            },
+        );
 
         this._ready = true;
         this._preparationTime = timer.elapsed;
@@ -264,23 +265,21 @@ export class DocumentValidator {
         const stopMeasure = measurePerf('DocumentValidator._updatePrep');
         const shouldCheck = docSettings.enabled ?? true;
         const finalSettings = finalizeSettings(docSettings);
-        const { transformer, validateOptions, includeRanges, segmenter, textValidator } = this.#calcSharedPrep(
+        const { transformer, validateOptions, calcIncludeRanges, textValidator } = this.#calcSharedPrep(
             finalSettings,
             dict,
         );
 
-        this._preparations = {
-            ...prep,
+        prep.update({
             dictionary: dict,
             docSettings,
             finalSettings,
             shouldCheck,
             validateOptions,
-            includeRanges,
-            segmenter,
             textValidator,
             transformer,
-        };
+            calcIncludeRanges,
+        });
         this._preparationTime = timer.elapsed;
         stopMeasure();
     }
@@ -303,11 +302,11 @@ export class DocumentValidator {
         const validateOptions = { ...settingsToValidateOptions(finalSettings), transformer };
         // Avoid excluding text ranges that have a full substitution applied.
         const rangeTransformer = finalSettings.substitutions?.length ? sub.transformer : undefined;
-        const includeRanges = calcTextInclusionRanges(this._document.text, validateOptions, rangeTransformer);
-        const segmenter = createMappedTextSegmenter(includeRanges);
+        const text = this._document.text;
+        const calcIncludeRanges = () => calcTextInclusionRanges(text, validateOptions, rangeTransformer);
         const textValidator = textValidatorFactory(dict, validateOptions);
 
-        return { segmenter, textValidator, includeRanges, validateOptions, transformer };
+        return { textValidator, calcIncludeRanges, validateOptions, transformer };
     }
 
     /**
@@ -599,9 +598,27 @@ export class DocumentValidator {
 
     /**
      * Internal `cspell-lib` use.
+     * @deprecated Will be removed in a future major version. Use {@link _getLocalConfig} and
+     * {@link _getLocalConfigFilepath} instead.
      */
     public _getPreparations(): Preparations | undefined {
         return this._preparations;
+    }
+
+    /**
+     * Internal `cspell-lib` use.
+     * @returns the config file found for the document, if any.
+     */
+    public _getLocalConfig(): CSpellUserSettings | undefined {
+        return this._preparations?.localConfig;
+    }
+
+    /**
+     * Internal `cspell-lib` use.
+     * @returns the path of the config file found for the document, if any.
+     */
+    public _getLocalConfigFilepath(): string | undefined {
+        return this._preparations?.localConfigFilepath;
     }
 
     /**
@@ -641,23 +658,6 @@ function sanitizeSuggestion(sug: WordSuggestion): ExtendedSuggestion {
     if (isPreferred) return { word, isPreferred };
     if (wordAdjustedToMatchCase) return { word, wordAdjustedToMatchCase };
     return { word };
-}
-
-interface Preparations {
-    /** loaded config */
-    config: CSpellSettingsInternal;
-    dictionary: SpellingDictionaryCollection;
-    /** configuration after applying in-doc settings */
-    docSettings: CSpellSettingsInternal;
-    finalSettings: CSpellSettingsInternalFinalized;
-    includeRanges: MatchRange[];
-    textValidator: TextValidator;
-    segmenter: (texts: MappedText) => Iterable<MappedText>;
-    shouldCheck: boolean;
-    validateOptions: TextValidationFactoryOptions;
-    localConfig: CSpellUserSettings | undefined;
-    localConfigFilepath: string | undefined;
-    transformer: TextTransformer;
 }
 
 async function searchForDocumentConfig(

@@ -238,18 +238,16 @@ async function spellCheckFullDocument(
     );
     Object.assign(perf, Object.fromEntries(Object.entries(docValidator.perfTiming).map(([k, v]) => ['_' + k, v])));
 
-    const prep = docValidator._getPreparations();
-
     if (docValidator.errors.length) {
         const settingsUsed =
-            prep?.localConfig ||
+            docValidator._getLocalConfig() ||
             (satisfiesCSpellConfigFile(settingsOrConfigFile) ? settingsOrConfigFile.settings : settingsOrConfigFile);
 
         return {
             document,
             options,
             settingsUsed,
-            localConfigFilepath: prep?.localConfigFilepath,
+            localConfigFilepath: docValidator._getLocalConfigFilepath(),
             issues: [],
             checked: false,
             errors: docValidator.errors,
@@ -269,7 +267,7 @@ async function spellCheckFullDocument(
         document,
         options,
         settingsUsed: docValidator.getFinalizedDocSettings(),
-        localConfigFilepath: prep?.localConfigFilepath,
+        localConfigFilepath: docValidator._getLocalConfigFilepath(),
         issues,
         checked: docValidator.shouldCheckDocument(),
         errors: undefined,

@@ -4,7 +4,7 @@ import * as path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import type { CSpellUserSettings } from '@cspell/cspell-types';
-import { describe, expect, test } from 'vitest';
+import { afterEach, describe, expect, test, vi } from 'vitest';
 
 import { pathPackageFixtures, pathPackageRoot, pathRepoTestFixtures } from '../../test-util/test.locations.js';
 import type { TextDocument } from '../Models/TextDocument.js';
@@ -15,6 +15,12 @@ import { AutoCache } from '../util/simpleCache.js';
 import { toUri } from '../util/Uri.js';
 import type { DocumentValidatorOptions } from './docValidator.js';
 import { __testing__, DocumentValidator, shouldCheckDocument } from './docValidator.js';
+import { calcTextInclusionRanges } from './textValidator.js';
+
+vi.mock('./textValidator.js', async (importOriginal) => {
+    const actual = await importOriginal<typeof import('./textValidator.js')>();
+    return { ...actual, calcTextInclusionRanges: vi.fn(actual.calcTextInclusionRanges) };
+});
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -54,6 +60,48 @@ describe('docValidator', () => {
         await dVal.prepare();
 
         expect(dVal.checkDocument()).toEqual([]);
+    });
+
+    describe('include ranges for a document that is not checked', () => {
+        // cspell:ignore wrngwrd
+        const text = 'This has a wrngwrd.';
+        const settings: CSpellUserSettings = { enabled: false };
+        const options: DocumentValidatorOptions = { generateSuggestions: false, noConfigSearch: true };
+
+        afterEach(() => {
+            vi.mocked(calcTextInclusionRanges).mockClear();
+        });
+
+        test('are not calculated', async () => {
+            vi.mocked(calcTextInclusionRanges).mockClear();
+            const dVal = new DocumentValidator(td('file:///not-checked.txt', text), options, settings);
+            await dVal.prepare();
+
+            expect(dVal.shouldCheckDocument()).toBe(false);
+            expect(dVal.checkDocument()).toEqual([]);
+            expect(calcTextInclusionRanges).not.toHaveBeenCalled();
+        });
+
+        test('are calculated once when the check is forced', async () => {
+            const dVal = new DocumentValidator(td('file:///not-checked.txt', text), options, settings);
+            await dVal.prepare();
+            vi.mocked(calcTextInclusionRanges).mockClear();
+
+            expect(dVal.checkDocument(true)).toEqual([oc({ text: 'wrngwrd' })]);
+            expect(dVal.getCheckedTextRanges()).toEqual([{ startPos: 0, endPos: text.length }]);
+            expect(calcTextInclusionRanges).toHaveBeenCalledTimes(1);
+        });
+
+        test('are not calculated when the text is updated', async () => {
+            const dVal = new DocumentValidator(td('file:///not-checked.txt', text), options, settings);
+            await dVal.prepare();
+            vi.mocked(calcTextInclusionRanges).mockClear();
+
+            await dVal.updateDocumentText('This has another wrngwrd.');
+
+            expect(dVal.checkDocument()).toEqual([]);
+            expect(calcTextInclusionRanges).not.toHaveBeenCalled();
+        });
     });
 
     // cspell:ignore fnptrvalue fnptr
