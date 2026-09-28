@@ -10,7 +10,8 @@ word lists live there, not in this repo.
 - **Set up:** `corepack enable`, then `pnpm ibt` (install, build, test). Always build before testing.
 - **Principles:** keep false positives low, and existing configs keep working. See
   [Design principles](./docs/design-principles.md).
-- **Generated files** are regenerated, never edited. See [Generated files](./docs/build-and-packaging.md#generated-files).
+- **Generated files** are regenerated, never edited. See
+  [Generated files](./docs/build-and-packaging.md#generated-files).
 - **Before a PR:** `pnpm run build`, `pnpm test`, `pnpm run lint-ci`, and `pnpm run check-spelling`.
 - **PR titles and bodies are published verbatim** in the release notes, for people who use cspell. See
   [Pull requests](./docs/pull-requests.md).

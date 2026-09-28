@@ -49,9 +49,8 @@ Which type to pick is in [Pull requests](./pull-requests.md#title).
 - The check fails closed: if the description can't be read or checked, the PR is labelled and the check fails, asking a
   maintainer to review the description.
 - A revert is published only when it undoes a published type: `feat` or `fix`. Any other revert gets no label.
-- A breaking change is always published, except `chore!:`, `ci!:`, `test!:`, `docs!:`, and `website!:`: their own labels are
-  excluded. An
-  excluded PR doesn't count toward the version bump either.
+- A breaking change is always published, except `chore!:`, `ci!:`, `test!:`, `docs!:`, and `website!:`: their own
+  labels are excluded. An excluded PR doesn't count toward the version bump either.
 - The labeler runs when a PR is opened, reopened, or gets a new commit. Renaming a PR doesn't change its label: fix the
   label by hand.
 - The `labels.yml` workflow removes `fix` from a PR labelled `Update Dictionaries`, so dictionary updates appear once.
