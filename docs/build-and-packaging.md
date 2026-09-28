@@ -96,6 +96,15 @@ Never edit these by hand. Change the source and regenerate, or let the workflow 
 `pnpm run build` should leave `git status` clean unless you changed a source of one of these files. If it doesn't,
 commit the regenerated file by path. If the output changes on every build, stop and report it.
 
+### The `api/` files
+
+The `api/` files are committed so that changes to a package's public API show up in review.
+
+- After a build, read the diff of the `api/` file. Every new or changed type, class, or member should be one you meant
+  to change. Internal types can leak in through the parameters or return type of a public method.
+- Don't expose a class when an interface would do, whether through `index.ts` or through a public signature. Keep the
+  class internal and have it implement the interface.
+
 ## If you change X, also do Y
 
 | Change                                        | Also required                                                                                                                        |
@@ -103,7 +112,7 @@ commit the regenerated file by path. If the output changes on every build, stop 
 | A config option in `cspell-types`             | Follow [Config options](./config-and-cli.md#config-options). `pnpm test` fails until the schema is rebuilt.                          |
 | A CLI flag or CLI output in `packages/cspell` | Follow [CLI flags](./config-and-cli.md#cli-flags). Update snapshots.                                                                 |
 | How `cspell-lib` checks text                  | Expect snapshot changes across packages. Update them with `pnpm run test:update-snapshots`, and review the diff.                     |
-| A package's public API                        | `pnpm run build`, and commit its `api/` file if it has one. Add doc comments (see [`CONTRIBUTING.md`](../CONTRIBUTING.md#comments)). |
+| A package's public API                        | `pnpm run build`, then review and commit its [`api/` file](#the-api-files), if any. Add [doc comments](../CONTRIBUTING.md#comments). |
 | Bundled dictionaries                          | See [Bundled dictionaries](#bundled-dictionaries).                                                                                   |
 | `.github/release-drafter.yml`                 | `node ./scripts/check-release-drafter.mts`. See [Releasing](./releasing.md#changing-the-rules).                                      |
 
