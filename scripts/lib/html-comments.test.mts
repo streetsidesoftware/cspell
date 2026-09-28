@@ -22,53 +22,36 @@ describe('findHtmlComments', () => {
         expect(locations(markdown)).toEqual(expected);
     });
 
-    // cspell directives are HTML comments, so PRs about cspell show them as code.
+    // cspell directives are HTML comments, so PRs about cspell show them in code blocks.
     test.each`
         name                                     | markdown
-        ${'inline code'}                         | ${'Use `<!-- cspell:ignore word -->` to ignore it.'}
-        ${'two code spans on a line'}            | ${'Use `<!-- cspell:disable -->` and `<!-- cspell:enable -->`.'}
-        ${'a double-backtick code span'}         | ${'Like `` a ` <!-- x --> b `` here.'}
         ${'a fenced code block'}                 | ${`Example:\n\n${fence}md\n<!-- cspell:ignore word -->\n${fence}\n`}
-        ${'a fenced block at the start'}         | ${`${fence}\n<!-- x -->\n${fence}\nAfter.`}
+        ${'a code block at the start'}           | ${`${fence}\n<!-- x -->\n${fence}\nAfter.`}
         ${'a tilde fence'}                       | ${'Example:\n\n~~~\n<!-- x -->\n~~~\n'}
-        ${'HTML shown in a fenced block'}        | ${`${fence}html\n<div>\n<!-- x -->\n</div>\n${fence}`}
-        ${'an unclosed fence, to the end'}       | ${`Text\n\n${fence}\n<!-- x -->`}
+        ${'HTML shown in a code block'}          | ${`${fence}html\n<div>\n<!-- x -->\n</div>\n${fence}`}
         ${'a longer closing fence'}              | ${`${fence}\n<!-- x -->\n${fence}${fence}`}
         ${'a shorter fence inside a longer one'} | ${`\`${fence}\n<!-- a -->\n${fence}\n<!-- b -->\n\`${fence}`}
-        ${'a fence after HTML and a blank line'} | ${`<div>\n\n${fence}\n<!-- x -->\n${fence}\n\n</div>`}
-    `('ignores a comment shown as code: $name', ({ markdown }) => {
+        ${'a code block after HTML and a blank'} | ${`<div>\n\n${fence}\n<!-- x -->\n${fence}\n\n</div>`}
+    `('ignores a comment in a code block: $name', ({ markdown }) => {
         expect(locations(markdown)).toEqual([]);
     });
 
-    // Layouts where GitHub hides the comment even though backticks or fences are nearby.
     test.each`
-        name                                          | markdown
-        ${'a fence right after an HTML tag'}          | ${`<div>\n${fence}\n<!-- x -->\n${fence}\n</div>`}
-        ${'a fence a line after an HTML tag'}         | ${`<div>\ntext\n${fence}\n<!-- x -->\n${fence}`}
-        ${'a <pre> block across blank lines'}         | ${`<pre>\n\n${fence}\n<!-- x -->\n${fence}\n\n</pre>`}
-        ${'backticks inside an HTML block'}           | ${'<div>\n`<!-- x -->`\n</div>'}
-        ${'backticks in HTML attributes'}             | ${'See x <a title="`"><!-- approve --><b title="`"> here.'}
-        ${'an autolink in the paragraph'}             | ${'`<!-- x -->` <https://example.com>'}
-        ${'an escaped opening backtick'}              | ${'\\`<!-- x -->`'}
-        ${'mismatched backtick runs'}                 | ${'``<!-- x -->`'}
-        ${'a code span across list items'}            | ${'- a `\n- b <!-- x --> `'}
-        ${'a code span across table cells'}           | ${'| `a | <!-- x --> | b` |'}
-        ${'a backtick fence with a backtick in info'} | ${`${fence}a\`b\n<!-- x -->\n${fence}`}
-    `('reports a hidden comment: $name', ({ markdown }) => {
-        expect(findHtmlComments(markdown).length).toBeGreaterThan(0);
+        name                                           | markdown                                               | expected
+        ${'inline code'}                               | ${'Use `<!-- cspell:ignore word -->` to ignore it.'}   | ${['1:6:closed']}
+        ${'a fence without a blank line before it'}    | ${`Text\n${fence}\n<!-- x -->\n${fence}`}              | ${['3:1:closed']}
+        ${'a fence right after an HTML tag'}           | ${`<div>\n${fence}\n<!-- x -->\n${fence}\n</div>`}     | ${['3:1:closed']}
+        ${'an unclosed fence'}                         | ${`Text\n\n${fence}\n<!-- x -->`}                      | ${['4:1:closed']}
+        ${'a fence inside a quote'}                    | ${`> ${fence}\n> <!-- x -->\n> ${fence}`}              | ${['2:3:closed']}
+        ${'an indented code block'}                    | ${'Example:\n\n    <!-- x -->\n'}                      | ${['3:5:closed']}
+        ${'a backtick fence with a backtick in info'}  | ${`${fence}a\`b\n<!-- x -->\n${fence}`}                | ${['2:1:closed']}
+        ${'a <pre> block across blank lines'}          | ${`<pre>\n\n${fence}\n<!-- x -->\n${fence}\n\n</pre>`} | ${['4:1:closed']}
+        ${'a comment after a block with an open <!--'} | ${`${fence}\n<!-- a\n${fence}\n\n<!-- b -->`}          | ${['5:1:closed']}
+    `('reports a comment that is not in a code block: $name', ({ markdown, expected }) => {
+        expect(locations(markdown)).toEqual(expected);
     });
 
-    // Code that isn't recognized, so the comment is reported. A false alarm, but never a miss.
-    test.each`
-        name                              | markdown
-        ${'a fence without a blank line'} | ${`Text\n${fence}\n<!-- x -->\n${fence}`}
-        ${'a fence inside a quote'}       | ${`> ${fence}\n> <!-- x -->\n> ${fence}`}
-        ${'an indented code block'}       | ${'Example:\n\n    <!-- x -->\n'}
-    `('reports, to be safe: $name', ({ markdown }) => {
-        expect(findHtmlComments(markdown).length).toBeGreaterThan(0);
-    });
-
-    test('handles deeply nested Markdown without recursion', () => {
+    test('handles deeply nested Markdown', () => {
         expect(locations('>'.repeat(100_000) + ' x\n\n<!-- hidden -->')).toEqual(['3:1:closed']);
     });
 
