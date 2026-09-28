@@ -89,13 +89,14 @@ pnpm run check-spelling
 
 ### 5. Draft the PR title and description
 
-An option change is read by people who use cspell, so it goes in the release notes. Follow `CONTRIBUTING.md`'s "Pull
-requests", and `docs/config-and-cli.md`'s "The PR".
+An option change is read by people who use cspell, so it goes in the release notes. Follow `docs/pull-requests.md`,
+and `docs/config-and-cli.md`'s "The PR".
 
 - **Title:** `feat:` for a new option, `fix:` for a changed default, a rename, or a deprecation. Add `!` when a config
   that works today would break. Say what changed for users.
 - **Description:** a `## Summary`, and for `feat:` a `## Feature` section with a config example and the design answers
-  from step 2 that shape how to use it. No tool attribution.
+  from step 2 that shape how to use it. The option is the API change, so name it in the main text. How it works can go
+  in an optional closing `Technical Details` block. No tool attribution or HTML comments.
 
 Show the drafts to the user. Don't commit, push, or open a PR until they say so.
 

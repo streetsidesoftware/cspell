@@ -13,12 +13,13 @@ The release notes are built from merged PRs:
 - each entry is the **PR title**,
 - followed by the **PR body**, verbatim, in a collapsed `<details>` block.
 
-So both are written for that reader. See [`CONTRIBUTING.md`](../CONTRIBUTING.md#pull-requests) for how to write them.
+So both are written for that reader. See [Pull requests](./pull-requests.md) for how to write them.
 
 ## Titles, labels, and sections
 
 The Release Drafter Labeler workflow (`release-drafter-labeler.yml`) labels a PR from its title. The label, not the
 title, decides the section and the version bump. The rules are the `autolabeler` in `.github/release-drafter.yml`.
+Which type to pick is in [Pull requests](./pull-requests.md#title).
 
 | Title                                 | Label                                               | Section                                             | Bump  |
 | ------------------------------------- | --------------------------------------------------- | --------------------------------------------------- | ----- |
@@ -38,20 +39,18 @@ title, decides the section and the version bump. The rules are the `autolabeler`
   could hide a `feat:` PR that also updates the website.
 - A PR with no label is left out: `include-labels` is an allowlist.
 - When a PR's description contains an HTML comment (`<!--`), the Detect Hidden Comments workflow
-  (`detect-hidden-comments.yml`) labels it `Warning: Hidden Comments` and fails its check. The comment would be
-  published with the description, so remove it; the check reruns when the description is edited. It only looks for
-  HTML comments, so a passing check doesn't mean the description has no hidden text.
-- To check text yourself, run `node ./scripts/detect-html-comments.mts <file>`, or pipe it in. It reports each comment's
-  location. The only exception is a well-formed fenced code block, so a cspell directive shown in one isn't reported;
-  a comment in inline code is. It exits 0 if there are none, 2 if it finds any, and 1 on an error. `--show` also prints
-  the hidden text.
+  (`detect-hidden-comments.yml`) labels it `Warning: Hidden Comments` and fails its check. The check reruns when the
+  description is edited. It only looks for HTML comments, so a passing check doesn't mean the description has no hidden
+  text. What PR authors need to know is in [Pull requests](./pull-requests.md#every-pr).
+- The workflow runs `scripts/detect-html-comments.mts`, which reads a file or stdin and reports each comment's location.
+  The only exception is a well-formed fenced code block, so a cspell directive shown in one isn't reported; a comment in
+  inline code is. It exits 0 if there are none, 2 if it finds any, and 1 on an error. `--show` also prints the hidden
+  text.
 - The check fails closed: if the description can't be read or checked, the PR is labelled and the check fails, asking a
   maintainer to review the description.
 - A revert is published only when it undoes a published type: `feat` or `fix`. Any other revert gets no label.
-- A breaking change is always published, except `chore!:`, `ci!:`, `test!:`, `docs!:`, and `website!:`: their own labels are
-  excluded. An
-  excluded PR doesn't count toward the version bump either.
-- `perf:` is for adding performance tests. A change users would notice as faster goes out as `feat:` or `fix:`.
+- A breaking change is always published, except `chore!:`, `ci!:`, `test!:`, `docs!:`, and `website!:`: their own
+  labels are excluded. An excluded PR doesn't count toward the version bump either.
 - The labeler runs when a PR is opened, reopened, or gets a new commit. Renaming a PR doesn't change its label: fix the
   label by hand.
 - The `labels.yml` workflow removes `fix` from a PR labelled `Update Dictionaries`, so dictionary updates appear once.

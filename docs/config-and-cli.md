@@ -126,4 +126,4 @@ The flag wins over the config file:
   - `fix:` for a changed default, a rename, or a deprecation
   - add `!` if a setup that works today would break
 - **Body:** a `## Summary` for users, and for `feat:` a `## Feature` section with a config or command-line example. See
-  [Pull requests](../CONTRIBUTING.md#pull-requests).
+  [Pull requests](./pull-requests.md).

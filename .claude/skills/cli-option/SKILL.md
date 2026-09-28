@@ -72,8 +72,9 @@ pnpm run check-spelling
 
 - **Title:** `feat:` for a new flag, `fix:` for changed behavior or a rename. Add `!` when a command line that works
   today would break.
-- **Description:** a `## Summary`, and for `feat:` a `## Feature` section with an example command line. No tool
-  attribution.
+- **Description:** a `## Summary`, and for `feat:` a `## Feature` section with an example command line. Name the flag
+  in the main text. How it works can go in an optional closing `Technical Details` block. No tool attribution or HTML
+  comments. Follow `docs/pull-requests.md`.
 - Remind the user: after merge, run the Build Docs workflow (`gh workflow run update-docs.yml`) so the website's
   `cspell lint --help` page updates. It only runs on its own for `cspell-types` changes.
 
