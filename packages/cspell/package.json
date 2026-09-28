@@ -2,16 +2,35 @@
   "name": "cspell",
   "version": "10.3.5",
   "description": "A Spelling Checker for Code!",
-  "funding": "https://github.com/streetsidesoftware/cspell?sponsor=1",
-  "bin": {
-    "cspell": "bin.mjs",
-    "cspell-esm": "bin.mjs"
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   },
-  "type": "module",
+  "homepage": "https://cspell.org/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetsidesoftware/cspell.git",
+    "directory": "packages/cspell"
+  },
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/cspell/issues?q=is%3Aissue%20state%3Aopen%20label%3Acspell"
+  },
+  "funding": "https://github.com/streetsidesoftware/cspell?sponsor=1",
+  "keywords": [
+    "spell",
+    "checker",
+    "code",
+    "camel",
+    "case",
+    "spelling",
+    "spell checker",
+    "spelling checker",
+    "lint"
+  ],
+  "license": "MIT",
+  "author": "Jason Dent",
   "sideEffects": false,
-  "types": "dist/cjs/commonJsApi.d.cts",
-  "main": "dist/cjs/commonJsApi.cjs",
-  "module": "dist/esm/index.js",
+  "type": "module",
   "exports": {
     ".": {
       "import": "./dist/esm/index.js",
@@ -30,6 +49,13 @@
       "import": "./dist/esm/application.js"
     }
   },
+  "main": "dist/cjs/commonJsApi.cjs",
+  "module": "dist/esm/index.js",
+  "types": "dist/cjs/commonJsApi.d.cts",
+  "bin": {
+    "cspell": "bin.mjs",
+    "cspell-esm": "bin.mjs"
+  },
   "files": [
     "bin.mjs",
     "dist",
@@ -44,51 +70,25 @@
     "!dist/tsc"
   ],
   "scripts": {
-    "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "build": "tsdown && pnpm build:tsc",
-    "build:tsc": "tsc -p .",
     "build:readme": "pnpm build:readme:help",
     "build:readme:help": "pnpm build:readme:help:lint && pnpm build:readme:help:trace && inject-markdown README.md && prettier -w README.md",
     "build:readme:help:lint": "./bin.mjs lint --help > static/help-lint.txt",
     "build:readme:help:trace": "./bin.mjs trace --help > static/help-trace.txt",
+    "build:tsc": "tsc -p .",
+    "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm run clean && pnpm run build",
-    "coverage": "vitest run --coverage",
-    "test:watch": "vitest",
-    "test": "vitest run",
-    "watch": "tsdown -w",
-    "watch:tsc": "tsc -p . -w",
     "compile": "tsc -p .",
+    "coverage": "vitest run --coverage",
+    "prepublishOnly": "pnpm run clean-build",
+    "test": "vitest run",
+    "test:update-snapshot": "vitest run --update",
+    "test:watch": "vitest",
     "test-watch": "vitest",
     "version": "node ./tools/patch-version.mjs && git add .",
-    "prepublishOnly": "pnpm run clean-build",
-    "test:update-snapshot": "vitest run --update"
+    "watch": "tsdown -w",
+    "watch:tsc": "tsc -p . -w"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/streetsidesoftware/cspell.git",
-    "directory": "packages/cspell"
-  },
-  "keywords": [
-    "spell",
-    "checker",
-    "code",
-    "camel",
-    "case",
-    "spelling",
-    "spell checker",
-    "spelling checker",
-    "lint"
-  ],
-  "author": "Jason Dent",
-  "license": "MIT",
-  "publishConfig": {
-    "access": "public",
-    "provenance": true
-  },
-  "bugs": {
-    "url": "https://github.com/streetsidesoftware/cspell/issues"
-  },
-  "homepage": "https://cspell.org/",
   "dependencies": {
     "@cspell/cspell-json-reporter": "workspace:*",
     "@cspell/cspell-performance-monitor": "workspace:*",
@@ -111,13 +111,13 @@
     "semver": "^7.8.5",
     "tinyglobby": "^0.2.17"
   },
-  "engines": {
-    "node": ">=22.18.0"
-  },
   "devDependencies": {
     "@types/micromatch": "^4.0.10",
     "@types/semver": "^7.8.0",
     "micromatch": "^4.0.8",
     "minimatch": "^9.0.9"
+  },
+  "engines": {
+    "node": ">=22.18.0"
   }
 }

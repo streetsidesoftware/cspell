@@ -32,7 +32,7 @@ jobs:
         run: pnpm run lint
 
       - name: PR Auto Fix Lint
-        if: github.event.ref == 'refs/heads/main'
+        if: github.repository_owner == 'streetsidesoftware' && github.event.ref == 'refs/heads/main'
         uses: ./.github/actions/pr
         with:
           body: |
@@ -43,3 +43,7 @@ jobs:
             ci: Fix Lint -- Workflow Bot
           app_id: ${{ secrets.AUTOMATION_APP_ID }}
           app_private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
+
+      # Runs last, so a failure here does not block the auto-fix PR above.
+      - name: Check package.json files
+        run: node ./scripts/fix-package-json.mts --dry-run

@@ -36,7 +36,7 @@ enables them for the right file types. [Bundled dictionaries](#bundled-dictionar
 ## cspell-tools
 
 The `@cspell/cspell-tools` package, which compiles word lists into [trie](#trie) files. The dictionaries in
-cspell-dicts are built with it, and the root `test:prep` script uses it.
+cspell-dicts are built with it.
 
 ## Dictionary definition
 
@@ -68,6 +68,11 @@ A config option that loads other config files, and merges them in before this on
 [`cspell-ext.json`](#cspell-extjson) files are loaded this way. See
 [Importing / Extending Configuration](https://cspell.org/configuration/imports/).
 
+## Maintainers and contributors
+
+People who work on this repo: writing code, reviewing PRs, and releasing. `docs/` and `CONTRIBUTING.md` are written for
+them. Compare [users](#users).
+
 ## Parser and plugin
 
 A parser splits a document into pieces of text to check, with context, before checking. A plugin provides parsers.
@@ -89,6 +94,12 @@ branch, that the Release Drafter workflow rebuilds after every merge to `main`. 
 
 The data structure cspell uses for dictionaries: `packages/cspell-trie-lib`. Dictionaries are shipped as compiled
 `.trie` files, often gzipped, built by [cspell-tools](#cspell-tools).
+
+## Users
+
+People who use cspell: people running the cspell command-line tool, people writing cspell config, and projects that
+use `cspell-lib` and the other published packages. The website, READMEs, doc comments on public APIs, and the release
+notes are written for them. Compare [maintainers and contributors](#maintainers-and-contributors).
 
 ## Workflow Bot
 

@@ -24,7 +24,7 @@ tell the user, and stop.
 ## Who the release notes are for
 
 People who use the cspell command-line tool, its config, and its packages. They skim for changes that affect them.
-Judge every entry by that reader. The rules are in `CONTRIBUTING.md` under "Pull requests".
+Judge every entry by that reader. The rules are in `docs/pull-requests.md`.
 
 ## Workflow
 
@@ -47,7 +47,12 @@ For each entry:
   `refactor:`. Reclassifying removes it from the release notes; it doesn't just move it.
 - **Is it in the right section?** A Features entry must be a new capability. A change to existing behavior is `fix:`.
   A breaking change needs `!` and the `breaking` label.
-- **Is the body written for users?** Flag bodies written for reviewers, test plans, and tool attribution lines.
+- **Is the body written for users?** Flag bodies written for reviewers, test plans, tool attribution lines, HTML
+  comments, and tables of measurements. Flag names of internal methods, classes, and variables anywhere in the body,
+  unless they are part of an API change.
+- **Is a `Technical Details` block readable by someone who uses cspell?** A closing block with that summary is allowed.
+  Flag one that reads like a code review rather than "How It's Made", or that uses terms not found in cspell's user
+  documentation without explaining them.
 - **Bot PRs** (`Workflow Bot -- ...`) keep the type they were opened with. Never propose a lower one.
 
 Present the flagged entries with your reasoning and PR numbers, and get the user's confirmation on which to correct
@@ -95,4 +100,5 @@ Point the user at the run, and once it finishes, check that the Prepare Release 
 - Never edit the `release-draft` branch, the Prepare Release PR, the `CHANGELOG.md` files, or `.release.json`: every
   run regenerates them.
 - If the same mistake keeps happening, the fix may belong in the rules: `.github/release-drafter.yml` (see
-  `docs/releasing.md`, "Changing the rules") or `CONTRIBUTING.md`. Suggest it; don't change it as part of this skill.
+  `docs/releasing.md`, "Changing the rules") or `docs/pull-requests.md`. Suggest it; don't change it as part of this
+  skill.

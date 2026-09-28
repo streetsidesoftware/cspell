@@ -7,7 +7,6 @@ import { describe, expect, test } from 'vitest';
 import { pathPackageSamples } from '../../test-util/test.locations.js';
 import * as cspell from '../index.js';
 import * as util from '../util/util.js';
-import { makeBTrieForDictionary } from './makeBTrieForDictionary.js';
 
 const sampleFilename = path.join(pathPackageSamples, 'Dutch.txt');
 const text = fs.readFileSync(sampleFilename, 'utf8').toString();
@@ -18,9 +17,7 @@ const dutchConfig = importResolveModuleName(moduleName, [import.meta.url]);
 
 const timeout = 10_000;
 
-describe('Validate that Dutch text is correctly checked.', async () => {
-    await makeBTrieForDictionary(moduleName);
-
+describe('Validate that Dutch text is correctly checked.', () => {
     test('Tests the default configuration', { timeout }, async () => {
         expect(Object.keys(text)).not.toHaveLength(0);
         const ext = path.extname(sampleFilename);

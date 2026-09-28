@@ -1,28 +1,36 @@
 {
   "name": "@cspell/strong-weak-map",
+  "version": "10.3.5",
+  "description": "A Map with weakly referenced values.",
   "publishConfig": {
     "access": "public",
     "provenance": true
   },
-  "version": "10.3.5",
-  "description": "A Map with weakly referenced values.",
+  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-strong-weak-map#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetsidesoftware/cspell.git",
+    "directory": "packages/cspell-strong-weak-map"
+  },
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/cspell/issues?q=is%3Aissue%20state%3Aopen%20label%3Acspell-strong-weak-map"
+  },
   "keywords": [
     "Map",
     "WeakMap",
     "Weak",
     "Values"
   ],
-  "author": "Jason Dent <jason@streetsidesoftware.nl>",
-  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-strong-weak-map#readme",
   "license": "MIT",
-  "type": "module",
+  "author": "Jason Dent <jason@streetsidesoftware.nl>",
   "sideEffects": false,
-  "module": "dist/esm/index.js",
+  "type": "module",
   "exports": {
     ".": {
       "import": "./dist/esm/index.js"
     }
   },
+  "module": "dist/esm/index.js",
   "typings": "dist/esm/index.d.ts",
   "files": [
     "dist",
@@ -37,21 +45,13 @@
   "scripts": {
     "build": "tsc -b . -f",
     "build:esm": "tsc -p tsconfig.esm.json",
-    "watch": "tsc -b . -w -f",
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "pnpm run vitest run --coverage",
-    "test-watch": "pnpm vitest",
     "test": "pnpm vitest run",
-    "vitest": "node --expose-gc ../../node_modules/vitest/vitest.mjs --pool threads"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/streetsidesoftware/cspell.git",
-    "directory": "packages/cspell-strong-weak-map"
-  },
-  "bugs": {
-    "url": "https://github.com/streetsidesoftware/cspell"
+    "test-watch": "pnpm vitest",
+    "vitest": "node --expose-gc ../../node_modules/vitest/vitest.mjs --pool threads",
+    "watch": "tsc -b . -w -f"
   },
   "engines": {
     "node": ">=22.18.0"

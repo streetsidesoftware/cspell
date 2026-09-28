@@ -1,27 +1,35 @@
 {
   "name": "cspell-glob",
+  "version": "10.3.5",
+  "description": "Glob matcher for cspell",
   "publishConfig": {
     "access": "public",
     "provenance": true
   },
-  "version": "10.3.5",
-  "description": "Glob matcher for cspell",
+  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-glob#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetsidesoftware/cspell.git",
+    "directory": "packages/cspell-glob"
+  },
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/cspell/issues?q=is%3Aissue%20state%3Aopen%20label%3Acspell-glob"
+  },
   "keywords": [
     "cspell",
     "glob"
   ],
-  "author": "Jason Dent <jason@streetsidesoftware.nl>",
-  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-glob#readme",
   "license": "MIT",
-  "type": "module",
+  "author": "Jason Dent <jason@streetsidesoftware.nl>",
   "sideEffects": false,
-  "types": "dist/index.d.ts",
-  "module": "dist/index.js",
+  "type": "module",
   "exports": {
     ".": {
       "import": "./dist/index.js"
     }
   },
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "bin.mjs",
     "dist",
@@ -35,27 +43,16 @@
     "!**/*.map"
   ],
   "scripts": {
-    "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "build": "tsdown",
     "build:check": "tsc -p .",
+    "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "vitest run --coverage",
+    "test": "pnpm build:check && vitest run",
     "test:perf": "insight --file \"src/perf/**/*.perf.{mts,ts}\" -t 1000",
     "test:perf:prof": "NODE_ENV=production node --cpu-prof ../../node_modules/perf-insight/bin.mjs --file \"dist/perf/**/*.perf.{mjs,js}\" -t 1000",
     "test:watch": "vitest",
-    "test": "pnpm build:check && vitest run",
     "watch": "tsdown -w"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/streetsidesoftware/cspell.git",
-    "directory": "packages/cspell-glob"
-  },
-  "bugs": {
-    "url": "https://github.com/streetsidesoftware/cspell/labels/cspell-glob"
-  },
-  "engines": {
-    "node": ">=22.18.0"
   },
   "dependencies": {
     "@cspell/url": "workspace:*",
@@ -65,5 +62,8 @@
     "@types/micromatch": "^4.0.10",
     "@types/picomatch": "^4.0.3",
     "micromatch": "^4.0.8"
+  },
+  "engines": {
+    "node": ">=22.18.0"
   }
 }

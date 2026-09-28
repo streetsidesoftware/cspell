@@ -200,6 +200,9 @@ export function getReporter(options: ReporterOptions, config?: CSpellReporterCon
         filesCached: 0,
         accumulatedTimeMs: 0,
         startTime: performance.now(),
+        firstFileStartTime: 0,
+        lastFileEndTime: 0,
+        betweenFilesTimeMs: 0,
         perf: Object.create(null) as SpellCheckFilePerf,
     };
     const noColor = options.color === false;
@@ -327,14 +330,20 @@ export function getReporter(options: ReporterOptions, config?: CSpellReporterCon
         }
 
         if (options.showPerfSummary) {
-            const elapsedTotal = performance.now() - perfStats.startTime;
+            const now = performance.now();
+            const elapsedTotal = now - perfStats.startTime;
+            const setupTime = (perfStats.firstFileStartTime || now) - perfStats.startTime;
+            const otherTime = elapsedTotal - setupTime - perfStats.accumulatedTimeMs - perfStats.betweenFilesTimeMs;
 
             consoleError('-------------------------------------------');
             consoleError('Performance Summary:');
             consoleError(`  Files Processed : ${perfStats.filesProcessed.toString().padStart(11)}`);
             consoleError(`  Files Skipped   : ${perfStats.filesSkipped.toString().padStart(11)}`);
             consoleError(`  Files Cached    : ${perfStats.filesCached.toString().padStart(11)}`);
+            consoleError(`  Setup Time      : ${setupTime.toFixed(2).padStart(9)}ms`);
             consoleError(`  Processing Time : ${perfStats.accumulatedTimeMs.toFixed(2).padStart(9)}ms`);
+            consoleError(`  Between Files   : ${perfStats.betweenFilesTimeMs.toFixed(2).padStart(9)}ms`);
+            consoleError(`  Other Time      : ${otherTime.toFixed(2).padStart(9)}ms`);
             consoleError(`  Total Time      : ${elapsedTotal.toFixed(2).padStart(9)}ms`);
 
             const tableStats: Table = {
@@ -456,7 +465,15 @@ export function getReporter(options: ReporterOptions, config?: CSpellReporterCon
         if (!silent && showProgress) {
             reportProgress(stderr, p, rootURL, options);
         }
+        if (p.type === 'ProgressFileBegin') {
+            const now = performance.now();
+            perfStats.firstFileStartTime ||= now;
+            if (perfStats.lastFileEndTime) {
+                perfStats.betweenFilesTimeMs += now - perfStats.lastFileEndTime;
+            }
+        }
         if (p.type === 'ProgressFileComplete') {
+            perfStats.lastFileEndTime = performance.now();
             collectPerfStats(p);
         }
     }

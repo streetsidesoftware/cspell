@@ -1,15 +1,35 @@
 {
   "name": "cspell-lib",
+  "version": "10.3.5",
+  "description": "A library of useful functions used across various cspell tools.",
   "publishConfig": {
     "access": "public",
     "provenance": true
   },
-  "version": "10.3.5",
-  "description": "A library of useful functions used across various cspell tools.",
-  "type": "module",
+  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-lib#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetsidesoftware/cspell.git",
+    "directory": "packages/cspell-lib"
+  },
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/cspell/issues?q=is%3Aissue%20state%3Aopen%20label%3Acspell-lib"
+  },
+  "keywords": [
+    "spell",
+    "checker",
+    "code",
+    "camel",
+    "case",
+    "spelling",
+    "spell checker",
+    "spelling checker",
+    "lint"
+  ],
+  "license": "MIT",
+  "author": "Jason Dent",
   "sideEffects": false,
-  "types": "dist/index.d.ts",
-  "module": "dist/index.js",
+  "type": "module",
   "exports": {
     ".": {
       "import": "./dist/index.js"
@@ -27,6 +47,8 @@
       "import": "./dist/cspell-rpc/client.js"
     }
   },
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist",
     "!**/*.tsbuildInfo",
@@ -38,42 +60,20 @@
     "!**/*.map"
   ],
   "scripts": {
-    "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
-    "clean-build": "pnpm clean && pnpm build",
     "build": "tsc -p . && pnpm run build:api",
     "build:api": "tsdown",
-    "watch": "tsc -p . --watch",
+    "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
+    "clean-build": "pnpm clean && pnpm build",
     "coverage": "vitest run --coverage --pool=forks",
-    "test-watch": "vitest",
     "prepublishOnly": "pnpm run clean-build",
     "test": "vitest run --pool=forks",
-    "test:update-snapshot": "vitest run -u",
     "test:perf": "NODE_ENV=production insight --file \"**/*.perf.{mjs,js}\"",
+    "test:perf:prof": "NODE_ENV=production node --cpu-prof ../../node_modules/perf-insight/bin.mjs --file \"dist/**/*.perf.{mjs,js}\" -t 1000",
     "test:perf:ts": "NODE_ENV=production insight --file \"**/*.perf.{mts,ts}\" ",
-    "test:perf:prof": "NODE_ENV=production node --cpu-prof ../../node_modules/perf-insight/bin.mjs --file \"dist/**/*.perf.{mjs,js}\" -t 1000"
+    "test:update-snapshot": "vitest run -u",
+    "test-watch": "vitest",
+    "watch": "tsc -p . --watch"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/streetsidesoftware/cspell.git",
-    "directory": "packages/cspell-lib"
-  },
-  "keywords": [
-    "spell",
-    "checker",
-    "code",
-    "camel",
-    "case",
-    "spelling",
-    "spell checker",
-    "spelling checker",
-    "lint"
-  ],
-  "author": "Jason Dent",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/streetsidesoftware/cspell/labels/cspell-lib"
-  },
-  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-lib#readme",
   "dependencies": {
     "@cspell/cspell-bundled-dicts": "workspace:*",
     "@cspell/cspell-performance-monitor": "workspace:*",
@@ -99,11 +99,7 @@
     "vscode-uri": "^3.2.0",
     "xdg-basedir": "^5.1.0"
   },
-  "engines": {
-    "node": ">=22.18.0"
-  },
   "devDependencies": {
-    "@cspell/cspell-tools": "workspace:*",
     "@cspell/dict-cpp": "^7.1.0",
     "@cspell/dict-csharp": "^4.0.8",
     "@cspell/dict-css": "^4.1.2",
@@ -122,5 +118,8 @@
     "leaked-handles": "^5.2.0",
     "lorem-ipsum": "^3.0.0",
     "perf-insight": "^2.0.1"
+  },
+  "engines": {
+    "node": ">=22.18.0"
   }
 }

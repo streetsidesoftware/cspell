@@ -28,8 +28,7 @@ This is a pnpm workspace (`pnpm-workspace.yaml`). The main directories:
   they're two days old (`minimumReleaseAge`), except `@cspell/dict-*`.
 - **Builds** use tsdown for bundles and type declarations, and `tsc`.
 - **Tests** use vitest, next to the source (`foo.test.ts` next to `foo.ts`). It's the only test runner.
-  - The root `test` also runs `test:prep` first, which needs a built tree, and `test-schema` last, which validates
-    `cspell.schema.json`.
+  - The root `test` also runs `test-schema` last, which validates `cspell.schema.json`.
   - The Yarn test projects (`test-packages/yarn/yarn2` and `examples/yarn`) aren't installed by `pnpm install`.
     `pnpm run test:yarn` installs them with Yarn and runs their tests. The `cspell-lib` tests that load them run only
     when `CSPELL_TEST_YARN` is set; run `pnpm run setup-yarn` first. CI does both.
@@ -138,6 +137,17 @@ Copy the shape of a recent small package, such as `packages/cspell-performance-m
 
 `packages/*` is already in `pnpm-workspace.yaml` and `lerna.json`. Set `version` to the current version in
 `lerna.json`, and `private: true` if it shouldn't be published.
+
+Then fill in the fields the repo manages, and create the package's issue label. The label is the package's directory
+name, and `bugs` links to its open issues.
+
+```sh
+node ./scripts/fix-package-json.mts      # sets repository, homepage, and (if published) bugs; sorts fields
+node ./scripts/create-package-labels.mts # creates missing package labels on GitHub
+```
+
+The Lint workflow runs `node ./scripts/fix-package-json.mts --dry-run`, and fails if a `package.json` needs fixing. It
+doesn't check GitHub, so it can't tell whether the label exists: run `create-package-labels.mts` for every new package.
 
 ## CI
 

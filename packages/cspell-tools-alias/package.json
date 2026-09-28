@@ -6,21 +6,14 @@
     "access": "public",
     "provenance": true
   },
-  "type": "module",
-  "sideEffects": false,
-  "bin": {
-    "cspell-tools": "bin.mjs"
-  },
-  "module": "bin.mjs",
-  "exports": "./bin.mjs",
-  "scripts": {
-    "test": "pnpm test-shasum",
-    "test-shasum": "node ./bin.mjs shasum package.json"
-  },
+  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-tools-alias#readme",
   "repository": {
     "type": "git",
     "url": "https://github.com/streetsidesoftware/cspell.git",
     "directory": "packages/cspell-tools-alias"
+  },
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/cspell/issues?q=is%3Aissue%20state%3Aopen%20label%3Acspell-tools"
   },
   "keywords": [
     "cSpell",
@@ -28,6 +21,15 @@
     "List",
     "Compiler"
   ],
+  "license": "MIT",
+  "author": "Jason Dent",
+  "sideEffects": false,
+  "type": "module",
+  "exports": "./bin.mjs",
+  "module": "bin.mjs",
+  "bin": {
+    "cspell-tools": "bin.mjs"
+  },
   "files": [
     "bin.mjs",
     "!**/*.tsbuildInfo",
@@ -36,12 +38,10 @@
     "!**/*.spec.*",
     "!**/*.map"
   ],
-  "author": "Jason Dent",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/streetsidesoftware/cspell/labels/cspell-tools"
+  "scripts": {
+    "test": "pnpm test-shasum",
+    "test-shasum": "node ./bin.mjs shasum package.json"
   },
-  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-tools-alias#readme",
   "dependencies": {
     "@cspell/cspell-tools": "workspace:*"
   },
