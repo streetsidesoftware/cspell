@@ -63,9 +63,9 @@ jobs:
             echo "skip=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          jq -r '.body // ""' <<< "$info" > pr-description.md
+          set -o pipefail
           status=0
-          report=$(node ./scripts/detect-html-comments.mts pr-description.md) || status=$?
+          report=$(jq -r '.body // ""' <<< "$info" | node ./scripts/detect-html-comments.mts) || status=$?
           case $status in
             0) found=false ;;
             1) found=true ;;
