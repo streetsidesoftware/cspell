@@ -37,9 +37,10 @@ title, decides the section and the version bump. The rules are the `autolabeler`
 - Labels come from the title only. A PR is left out if any of its labels is excluded, so a rule based on changed files
   could hide a `feat:` PR that also updates the website.
 - A PR with no label is left out: `include-labels` is an allowlist.
-- A PR whose body contains an HTML comment (`<!--`) gets the `Warning: Hidden Comments` label from the Label Hidden
-  Comments workflow (`label-hidden-comments.yml`). The comment is published with the body, so remove it before
-  merging. The label only covers HTML comments, so no label doesn't mean the body has no hidden text.
+- When a PR's description contains an HTML comment (`<!--`), the Detect Hidden Comments workflow
+  (`detect-hidden-comments.yml`) labels it `Warning: Hidden Comments` and fails its check. The comment would be
+  published with the description, so remove it; the check reruns when the description is edited. It only looks for
+  HTML comments, so a passing check doesn't mean the description has no hidden text.
 - A revert is published only when it undoes a published type: `feat` or `fix`. Any other revert gets no label.
 - A breaking change is always published, except `chore!:`, `ci!:`, `test!:`, `docs!:`, and `website!:`: their own labels are
   excluded. An

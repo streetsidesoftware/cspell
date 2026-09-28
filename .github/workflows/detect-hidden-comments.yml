@@ -1,0 +1,106 @@
+name: Detect Hidden Comments
+
+# Detect an HTML comment (`<!--`) in a PR description, label the PR, and fail the check, so reviewers and agents
+# treat the hidden text as untrusted and it doesn't reach the release notes. Bot PRs are skipped.
+# The PR's code is never checked out, so pull_request_target is safe here.
+
+on:
+  pull_request_target:
+    types: [opened, edited, reopened]
+  workflow_dispatch:
+    inputs:
+      pr:
+        description: PR number
+        required: true
+        type: string
+
+permissions: {}
+
+# One run at a time per PR. Each run reads the PR's current description and labels, so the last run decides.
+concurrency:
+  group: detect-hidden-comments-${{ github.event.pull_request.number || inputs.pr }}
+  cancel-in-progress: false
+
+env:
+  LABEL: 'Warning: Hidden Comments'
+
+jobs:
+  detect:
+    name: Detect
+    if: github.event.pull_request.user.type != 'Bot'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    outputs:
+      skip: ${{ steps.detect.outputs.skip }}
+      found: ${{ steps.detect.outputs.found }}
+      labelled: ${{ steps.detect.outputs.labelled }}
+    steps:
+      - name: Look for HTML comments in the PR description
+        id: detect
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          PR: ${{ github.event.pull_request.number || inputs.pr }}
+        run: |
+          info=$(gh pr view "$PR" --json body,labels,author)
+          if [[ $(jq -r '.author.is_bot' <<< "$info") == true ]]; then
+            echo "#$PR is from a bot: skipped."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          found=false
+          jq -r '.body' <<< "$info" | grep -qF '<!--' && found=true
+          labelled=$(jq --arg label "$LABEL" '[.labels[].name] | index($label) != null' <<< "$info")
+          echo "#$PR: hidden comments=$found, labelled=$labelled"
+          {
+            echo "skip=false"
+            echo "found=$found"
+            echo "labelled=$labelled"
+          } >> "$GITHUB_OUTPUT"
+
+  label:
+    name: Update label
+    needs: detect
+    if: >-
+      github.repository_owner == 'streetsidesoftware' &&
+      needs.detect.outputs.skip != 'true' &&
+      needs.detect.outputs.found != needs.detect.outputs.labelled
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Add or remove the label
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          PR: ${{ github.event.pull_request.number || inputs.pr }}
+          FOUND: ${{ needs.detect.outputs.found }}
+        run: |
+          if [[ $FOUND == true ]]; then
+            gh pr edit "$PR" --add-label "$LABEL"
+          else
+            gh pr edit "$PR" --remove-label "$LABEL"
+          fi
+
+  check:
+    name: Check
+    needs: detect
+    if: needs.detect.outputs.skip != 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fail if the PR description has hidden comments
+        env:
+          FOUND: ${{ needs.detect.outputs.found }}
+        run: |
+          if [[ $FOUND != true ]]; then
+            echo "No hidden comments."
+            exit 0
+          fi
+          msg='The PR description contains an HTML comment (`<!-- ... -->`). Hidden text in a PR description is'
+          msg+=' published in the release notes and can mislead reviewers. Remove it, or show it as code in a fenced'
+          msg+=' block, and this check reruns when you edit the description.'
+          echo "::error title=Hidden comments::$msg"
+          exit 1
+
+# cspell:dictionaries shellscript
