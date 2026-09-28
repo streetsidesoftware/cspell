@@ -37,6 +37,16 @@ title, decides the section and the version bump. The rules are the `autolabeler`
 - Labels come from the title only. A PR is left out if any of its labels is excluded, so a rule based on changed files
   could hide a `feat:` PR that also updates the website.
 - A PR with no label is left out: `include-labels` is an allowlist.
+- When a PR's description contains an HTML comment (`<!--`), the Detect Hidden Comments workflow
+  (`detect-hidden-comments.yml`) labels it `Warning: Hidden Comments` and fails its check. The comment would be
+  published with the description, so remove it; the check reruns when the description is edited. It only looks for
+  HTML comments, so a passing check doesn't mean the description has no hidden text.
+- To check text yourself, run `node ./scripts/detect-html-comments.mts <file>`, or pipe it in. It reports each comment's
+  location. The only exception is a well-formed fenced code block, so a cspell directive shown in one isn't reported;
+  a comment in inline code is. It exits 0 if there are none, 2 if it finds any, and 1 on an error. `--show` also prints
+  the hidden text.
+- The check fails closed: if the description can't be read or checked, the PR is labelled and the check fails, asking a
+  maintainer to review the description.
 - A revert is published only when it undoes a published type: `feat` or `fix`. Any other revert gets no label.
 - A breaking change is always published, except `chore!:`, `ci!:`, `test!:`, `docs!:`, and `website!:`: their own labels are
   excluded. An
