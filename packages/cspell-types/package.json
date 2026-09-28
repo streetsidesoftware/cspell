@@ -1,15 +1,28 @@
 {
   "name": "@cspell/cspell-types",
+  "version": "10.3.5",
+  "description": "Types for cspell and cspell-lib",
   "publishConfig": {
     "access": "public",
     "provenance": true
   },
-  "version": "10.3.5",
-  "description": "Types for cspell and cspell-lib",
-  "type": "commonjs",
+  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-types#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetsidesoftware/cspell.git",
+    "directory": "packages/cspell-types"
+  },
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/cspell/issues?q=is%3Aissue%20state%3Aopen%20label%3Acspell-types"
+  },
+  "keywords": [
+    "cspell",
+    "types"
+  ],
+  "license": "MIT",
+  "author": "Jason Dent",
   "sideEffects": false,
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "type": "commonjs",
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
@@ -24,6 +37,8 @@
       "require": "./cspell.schema.json"
     }
   },
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "typesVersions": {
     "*": {
@@ -48,24 +63,6 @@
       ]
     }
   },
-  "scripts": {
-    "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
-    "build": "pnpm build:tsc && pnpm build:tsdown && pnpm run build-schema",
-    "build:tsc": "tsc -p tsconfig.json",
-    "build:tsdown": "tsdown",
-    "build-schema": "pnpm build-cspell-schema",
-    "clean-build": "pnpm run clean && pnpm run build",
-    "coverage": "vitest run --coverage",
-    "test": "vitest run"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/streetsidesoftware/cspell.git",
-    "directory": "packages/cspell-types"
-  },
-  "bugs": {
-    "url": "https://github.com/streetsidesoftware/cspell/issues?q=is%3Aissue%20state%3Aopen%20label%3Acspell-types"
-  },
   "files": [
     "dist",
     "ajv.config.js",
@@ -78,14 +75,17 @@
     "!**/*.spec.*",
     "!**/*.map"
   ],
-  "keywords": [
-    "cspell",
-    "types"
-  ],
-  "author": "Jason Dent",
-  "license": "MIT",
+  "scripts": {
+    "build": "pnpm build:tsc && pnpm build:tsdown && pnpm run build-schema",
+    "build:tsc": "tsc -p tsconfig.json",
+    "build:tsdown": "tsdown",
+    "build-schema": "pnpm build-cspell-schema",
+    "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
+    "clean-build": "pnpm run clean && pnpm run build",
+    "coverage": "vitest run --coverage",
+    "test": "vitest run"
+  },
   "engines": {
     "node": ">=22.18.0"
-  },
-  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-types#readme"
+  }
 }

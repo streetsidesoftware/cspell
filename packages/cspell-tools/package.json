@@ -6,29 +6,14 @@
     "access": "public",
     "provenance": true
   },
-  "type": "module",
-  "sideEffects": false,
-  "bin": {
-    "cspell-tools": "bin.mjs",
-    "cspell-tools-cli": "bin.mjs"
-  },
-  "scripts": {
-    "build": "pnpm run build-schema && pnpm run compile && pnpm build:check",
-    "build-schema": "ts-json-schema-generator --no-top-ref --path src/config/config.ts --type RunConfig --validation-keywords deprecated --markdown-description  -o  ./cspell-tools.config.schema.json",
-    "compile": "tsdown",
-    "build:check": "tsc -p .",
-    "watch": "tsdown -w",
-    "clean-build": "pnpm run clean && pnpm run build",
-    "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
-    "coverage": "vitest run --coverage",
-    "test:watch": "vitest",
-    "test": "vitest run",
-    "update-snapshot": "vitest run -u"
-  },
+  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-tools#readme",
   "repository": {
     "type": "git",
     "url": "https://github.com/streetsidesoftware/cspell.git",
     "directory": "packages/cspell-tools"
+  },
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/cspell/issues?q=is%3Aissue%20state%3Aopen%20label%3Acspell-tools"
   },
   "keywords": [
     "cSpell",
@@ -36,7 +21,10 @@
     "List",
     "Compiler"
   ],
-  "module": "./dist/index.mjs",
+  "license": "MIT",
+  "author": "Jason Dent",
+  "sideEffects": false,
+  "type": "module",
   "exports": {
     ".": {
       "import": "./dist/index.mjs"
@@ -48,6 +36,11 @@
       "import": "./bin.mjs"
     }
   },
+  "module": "./dist/index.mjs",
+  "bin": {
+    "cspell-tools": "bin.mjs",
+    "cspell-tools-cli": "bin.mjs"
+  },
   "files": [
     "bin.mjs",
     "dist",
@@ -58,12 +51,19 @@
     "!**/*.spec.*",
     "!**/*.map"
   ],
-  "author": "Jason Dent",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/streetsidesoftware/cspell/issues?q=is%3Aissue%20state%3Aopen%20label%3Acspell-tools"
+  "scripts": {
+    "build": "pnpm run build-schema && pnpm run compile && pnpm build:check",
+    "build:check": "tsc -p .",
+    "build-schema": "ts-json-schema-generator --no-top-ref --path src/config/config.ts --type RunConfig --validation-keywords deprecated --markdown-description  -o  ./cspell-tools.config.schema.json",
+    "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
+    "clean-build": "pnpm run clean && pnpm run build",
+    "compile": "tsdown",
+    "coverage": "vitest run --coverage",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "update-snapshot": "vitest run -u",
+    "watch": "tsdown -w"
   },
-  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-tools#readme",
   "dependencies": {
     "@cspell/cspell-pipe": "workspace:*",
     "commander": "^15.0.0",
@@ -73,11 +73,11 @@
     "hunspell-reader": "workspace:*",
     "yaml": "^2.9.0"
   },
-  "engines": {
-    "node": ">=22.18.0"
-  },
   "devDependencies": {
     "lorem-ipsum": "^3.0.0",
     "ts-json-schema-generator": "2.9.0"
+  },
+  "engines": {
+    "node": ">=22.18.0"
   }
 }

@@ -1,27 +1,35 @@
 {
   "name": "@cspell/url",
+  "version": "10.3.5",
+  "description": "URL parsing and manipulation utilities for cspell",
   "publishConfig": {
     "access": "public",
     "provenance": true
   },
-  "version": "10.3.5",
-  "description": "URL parsing and manipulation utilities for cspell",
+  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-url#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetsidesoftware/cspell.git",
+    "directory": "packages/cspell-url"
+  },
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/cspell/issues?q=is%3Aissue%20state%3Aopen%20label%3Acspell-url"
+  },
   "keywords": [
     "cspell",
     "url"
   ],
-  "author": "Jason Dent <jason@streetsidesoftware.nl>",
-  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-url#readme",
   "license": "MIT",
-  "type": "module",
+  "author": "Jason Dent <jason@streetsidesoftware.nl>",
   "sideEffects": false,
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "type": "module",
   "exports": {
     ".": {
       "import": "./dist/index.js"
     }
   },
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist",
     "!**/*.tsbuildInfo",
@@ -39,20 +47,12 @@
     "clean": "shx rm -rf dist coverage",
     "clean-build": "pnpm build:clean",
     "coverage": "vitest run --coverage",
-    "test-watch": "vitest",
-    "test:build": "tsc -p .",
     "test": "pnpm test:build && vitest run",
+    "test:build": "tsc -p .",
     "test:perf": "insight --file \"src/perf/**/*.perf.{mts,ts}\" -t 1000",
     "test:perf:prof": "NODE_ENV=production node --cpu-prof ../../node_modules/perf-insight/bin.mjs --file \"dist/perf/**/*.perf.{mjs,js}\" -t 1000",
+    "test-watch": "vitest",
     "watch": "tsc -p . --watch"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/streetsidesoftware/cspell.git",
-    "directory": "packages/cspell-url"
-  },
-  "bugs": {
-    "url": "https://github.com/streetsidesoftware/cspell/issues?q=is%3Aissue%20state%3Aopen%20label%3Acspell-url"
   },
   "engines": {
     "node": ">=22.18.0"

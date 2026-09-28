@@ -1,19 +1,33 @@
 {
   "name": "cspell-io",
+  "version": "10.3.5",
+  "description": "A library of useful I/O functions used across various cspell tools.",
   "publishConfig": {
     "access": "public",
     "provenance": true
   },
-  "version": "10.3.5",
-  "description": "A library of useful I/O functions used across various cspell tools.",
-  "type": "module",
+  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-io#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetsidesoftware/cspell.git",
+    "directory": "packages/cspell-io"
+  },
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/cspell/issues?q=is%3Aissue%20state%3Aopen%20label%3Acspell-io"
+  },
+  "keywords": [
+    "cspell"
+  ],
+  "license": "MIT",
+  "author": "Jason Dent",
   "sideEffects": false,
-  "module": "dist/index.js",
+  "type": "module",
   "exports": {
     ".": {
       "import": "./dist/index.js"
     }
   },
+  "module": "dist/index.js",
   "files": [
     "dist",
     "!**/*.tsbuildInfo",
@@ -26,37 +40,23 @@
     "build": "tsdown && pnpm build:tsc",
     "build:tsc": "tsc -p .",
     "build:watch": "tsdown --watch",
-    "watch": "pnpm build:watch",
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "vitest run --coverage --pool=forks",
+    "test": "vitest run --pool=forks",
     "test-watch": "vitest",
-    "test": "vitest run --pool=forks"
+    "watch": "pnpm build:watch"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/streetsidesoftware/cspell.git",
-    "directory": "packages/cspell-io"
-  },
-  "keywords": [
-    "cspell"
-  ],
-  "author": "Jason Dent",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/streetsidesoftware/cspell/issues?q=is%3Aissue%20state%3Aopen%20label%3Acspell-io"
-  },
-  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-io#readme",
-  "engines": {
-    "node": ">=22.18.0"
+  "dependencies": {
+    "@cspell/cspell-service-bus": "workspace:*",
+    "@cspell/url": "workspace:*"
   },
   "devDependencies": {
     "lorem-ipsum": "^3.0.0",
     "typescript": "~6.0.3",
     "vitest-fetch-mock": "^0.4.5"
   },
-  "dependencies": {
-    "@cspell/cspell-service-bus": "workspace:*",
-    "@cspell/url": "workspace:*"
+  "engines": {
+    "node": ">=22.18.0"
   }
 }

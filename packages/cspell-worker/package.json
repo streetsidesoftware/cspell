@@ -1,28 +1,36 @@
 {
   "name": "@cspell/cspell-worker",
+  "version": "10.3.5",
+  "description": "Client Server RPC worker for CSpell.",
   "publishConfig": {
     "access": "public",
     "provenance": true
   },
-  "version": "10.3.5",
-  "description": "Client Server RPC worker for CSpell.",
+  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-worker#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetsidesoftware/cspell.git",
+    "directory": "packages/cspell-worker"
+  },
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/cspell/issues?q=is%3Aissue%20state%3Aopen%20label%3Acspell-worker"
+  },
   "keywords": [
     "cspell",
     "rpc",
     "worker"
   ],
-  "author": "Jason Dent <jason@streetsidesoftware.nl>",
-  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-worker#readme",
   "license": "MIT",
-  "type": "module",
+  "author": "Jason Dent <jason@streetsidesoftware.nl>",
   "sideEffects": true,
+  "type": "module",
   "exports": {
     ".": "./dist/index.js"
   },
+  "typings": "dist/index.d.ts",
   "directories": {
     "dist": "dist"
   },
-  "typings": "dist/index.d.ts",
   "files": [
     "dist",
     "!**/*.tsbuildInfo",
@@ -33,24 +41,16 @@
   ],
   "scripts": {
     "build": "tsdown && tsc -p .",
-    "watch": "tsdown --watch",
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "vitest run --coverage --pool=forks",
-    "test": "vitest run --pool=forks"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/streetsidesoftware/cspell.git",
-    "directory": "packages/cspell-worker"
-  },
-  "bugs": {
-    "url": "https://github.com/streetsidesoftware/cspell/issues?q=is%3Aissue%20state%3Aopen%20label%3Acspell-worker"
-  },
-  "engines": {
-    "node": ">=22.18.0"
+    "test": "vitest run --pool=forks",
+    "watch": "tsdown --watch"
   },
   "dependencies": {
     "cspell-lib": "workspace:*"
+  },
+  "engines": {
+    "node": ">=22.18.0"
   }
 }

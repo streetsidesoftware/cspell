@@ -1,27 +1,35 @@
 {
   "name": "cspell-config-lib",
+  "version": "10.3.5",
+  "description": "CSpell Config library",
   "publishConfig": {
     "access": "public",
     "provenance": true
   },
-  "version": "10.3.5",
-  "description": "CSpell Config library",
+  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-config-lib#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetsidesoftware/cspell.git",
+    "directory": "packages/cspell-config-lib"
+  },
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/cspell/issues?q=is%3Aissue%20state%3Aopen%20label%3Acspell-config-lib"
+  },
   "keywords": [
     "cspell",
     "config"
   ],
-  "author": "Jason Dent <jason@streetsidesoftware.nl>",
-  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-config-lib#readme",
   "license": "MIT",
-  "type": "module",
+  "author": "Jason Dent <jason@streetsidesoftware.nl>",
   "sideEffects": false,
+  "type": "module",
   "exports": {
     ".": "./dist/index.js"
   },
+  "typings": "dist/index.d.ts",
   "directories": {
     "dist": "dist"
   },
-  "typings": "dist/index.d.ts",
   "files": [
     "dist",
     "!**/*.tsbuildInfo",
@@ -32,28 +40,20 @@
   ],
   "scripts": {
     "build": "tsc -p .",
-    "watch": "tsc -p . -w",
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "vitest run --coverage --pool=forks",
+    "test": "vitest run --pool=forks",
     "test-watch": "vitest",
-    "test": "vitest run --pool=forks"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/streetsidesoftware/cspell.git",
-    "directory": "packages/cspell-config-lib"
-  },
-  "bugs": {
-    "url": "https://github.com/streetsidesoftware/cspell/issues?q=is%3Aissue%20state%3Aopen%20label%3Acspell-config-lib"
-  },
-  "engines": {
-    "node": ">=22.18.0"
+    "watch": "tsc -p . -w"
   },
   "dependencies": {
     "@cspell/cspell-types": "workspace:*",
     "comment-json": "^5.0.0",
     "smol-toml": "^1.8.0",
     "yaml": "^2.9.0"
+  },
+  "engines": {
+    "node": ">=22.18.0"
   }
 }

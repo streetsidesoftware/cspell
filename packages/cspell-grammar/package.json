@@ -1,25 +1,28 @@
 {
   "name": "cspell-grammar",
+  "version": "10.3.5",
+  "description": "Grammar parsing support for cspell",
   "publishConfig": {
     "access": "public",
     "provenance": true
   },
-  "version": "10.3.5",
-  "description": "Grammar parsing support for cspell",
+  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-grammar#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetsidesoftware/cspell.git",
+    "directory": "packages/cspell-grammar"
+  },
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/cspell/issues?q=is%3Aissue%20state%3Aopen%20label%3Acspell-grammar"
+  },
   "keywords": [
     "cspell",
     "grammar"
   ],
-  "author": "Jason Dent <jason@streetsidesoftware.nl>",
-  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-grammar#readme",
   "license": "MIT",
-  "bin": {
-    "cspell-grammar": "bin.mjs"
-  },
-  "type": "module",
+  "author": "Jason Dent <jason@streetsidesoftware.nl>",
   "sideEffects": false,
-  "types": "dist/index.d.ts",
-  "module": "dist/index.js",
+  "type": "module",
   "exports": {
     ".": {
       "import": "./dist/index.js"
@@ -28,6 +31,8 @@
       "import": "./dist/parsers/typescript/index.js"
     }
   },
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "typesVersions": {
     "*": {
       "index.js": [
@@ -54,6 +59,9 @@
       ]
     }
   },
+  "bin": {
+    "cspell-grammar": "bin.mjs"
+  },
   "files": [
     "bin.mjs",
     "dist",
@@ -65,27 +73,19 @@
     "!**/*.map"
   ],
   "scripts": {
-    "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "build": "tsc -p .",
+    "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "vitest run --coverage",
-    "test:watch": "vitest",
     "test": "vitest run",
+    "test:watch": "vitest",
     "watch": "tsc -p . -w"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/streetsidesoftware/cspell.git",
-    "directory": "packages/cspell-grammar"
-  },
-  "bugs": {
-    "url": "https://github.com/streetsidesoftware/cspell/issues?q=is%3Aissue%20state%3Aopen%20label%3Acspell-grammar"
-  },
-  "engines": {
-    "node": ">=22.18.0"
   },
   "dependencies": {
     "@cspell/cspell-pipe": "workspace:*",
     "@cspell/cspell-types": "workspace:*"
+  },
+  "engines": {
+    "node": ">=22.18.0"
   }
 }
