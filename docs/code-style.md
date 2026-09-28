@@ -31,7 +31,7 @@ Internal code follows the rules above: a doc comment only when it adds something
 
 ## Invisible characters
 
-Write invisible and non-printing characters as escape sequences (` `, `​`, ` `), including in strings,
+Write invisible and non-printing characters as escape sequences (`\u00a0`, `\u200b`, `\u2028`), including in strings,
 regular expressions, and `case` labels. A literal invisible character can't be seen in a review, and editors can
 silently change it.
 
