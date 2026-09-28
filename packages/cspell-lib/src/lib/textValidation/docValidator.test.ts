@@ -91,6 +91,17 @@ describe('docValidator', () => {
             expect(dVal.getCheckedTextRanges()).toEqual([{ startPos: 0, endPos: text.length }]);
             expect(calcTextInclusionRanges).toHaveBeenCalledTimes(1);
         });
+
+        test('are not calculated when the text is updated', async () => {
+            const dVal = new DocumentValidator(td('file:///not-checked.txt', text), options, settings);
+            await dVal.prepare();
+            vi.mocked(calcTextInclusionRanges).mockClear();
+
+            await dVal.updateDocumentText('This has another wrngwrd.');
+
+            expect(dVal.checkDocument()).toEqual([]);
+            expect(calcTextInclusionRanges).not.toHaveBeenCalled();
+        });
     });
 
     // cspell:ignore fnptrvalue fnptr

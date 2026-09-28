@@ -763,6 +763,59 @@ interface TextValidationFactoryOptions extends ValidationOptions {
   transformer: TextTransformer | undefined;
 }
 //#endregion
+//#region src/lib/textValidation/docValidatorPreparations.d.ts
+/**
+ * The preparations that depend on the document's settings. They are replaced when the document changes.
+ */
+interface DocumentSettingsPreparations {
+  dictionary: SpellingDictionaryCollection;
+  /** configuration after applying in-doc settings */
+  docSettings: CSpellSettingsInternal;
+  finalSettings: CSpellSettingsInternalFinalized;
+  shouldCheck: boolean;
+  validateOptions: TextValidationFactoryOptions;
+  textValidator: TextValidator;
+  transformer: TextTransformer;
+  /**
+   * Runs every ignore pattern over the whole document, so it is only called once the include ranges are needed.
+   */
+  calcIncludeRanges: () => MatchRange[];
+}
+/**
+ * What a `DocumentValidator` needs to spell check its document.
+ *
+ * The include ranges, and the segmenter built from them, are calculated on first use. A document that
+ * is never checked never pays for them.
+ */
+declare class DocumentValidatorPreparations {
+  #private;
+  readonly config: CSpellSettingsInternal;
+  readonly localConfig: CSpellUserSettings | undefined;
+  readonly localConfigFilepath: string | undefined;
+  dictionary: SpellingDictionaryCollection;
+  /** configuration after applying in-doc settings */
+  docSettings: CSpellSettingsInternal;
+  finalSettings: CSpellSettingsInternalFinalized;
+  shouldCheck: boolean;
+  validateOptions: TextValidationFactoryOptions;
+  textValidator: TextValidator;
+  transformer: TextTransformer;
+  /**
+   * @param config - loaded config
+   * @param localConfig - the config file found for the document, if any.
+   * @param localConfigFilepath - the path of `localConfig`.
+   * @param prep - the preparations that depend on the document's settings.
+   */
+  constructor(config: CSpellSettingsInternal, localConfig: CSpellUserSettings | undefined, localConfigFilepath: string | undefined, prep: DocumentSettingsPreparations);
+  /**
+   * Replace the preparations that depend on the document's settings. The include ranges are
+   * calculated again on next use.
+   */
+  update(prep: DocumentSettingsPreparations): void;
+  get includeRanges(): MatchRange[];
+  get segmenter(): (texts: MappedText) => Iterable<MappedText>;
+}
+//#endregion
 //#region src/lib/textValidation/traceWord.d.ts
 type Href = string;
 interface DictionaryTraceResult {
@@ -923,8 +976,20 @@ declare class DocumentValidator {
   shouldCheckDocument(): boolean;
   /**
    * Internal `cspell-lib` use.
+   * @deprecated Will be removed in a future major version. Use {@link _getLocalConfig} and
+   * {@link _getLocalConfigFilepath} instead.
    */
-  _getPreparations(): Preparations | undefined;
+  _getPreparations(): DocumentValidatorPreparations | undefined;
+  /**
+   * Internal `cspell-lib` use.
+   * @returns the config file found for the document, if any.
+   */
+  _getLocalConfig(): CSpellUserSettings | undefined;
+  /**
+   * Internal `cspell-lib` use.
+   * @returns the path of the config file found for the document, if any.
+   */
+  _getLocalConfigFilepath(): string | undefined;
   /**
    * Get the calculated ranges of text that should be included in the spell checking.
    *
@@ -936,22 +1001,6 @@ declare class DocumentValidator {
   getRangesChecked(): Iterable<SimpleRange>;
   get recordCheckedRanges(): boolean;
   set recordCheckedRanges(value: boolean);
-}
-interface Preparations {
-  /** loaded config */
-  config: CSpellSettingsInternal;
-  dictionary: SpellingDictionaryCollection;
-  /** configuration after applying in-doc settings */
-  docSettings: CSpellSettingsInternal;
-  finalSettings: CSpellSettingsInternalFinalized;
-  includeRanges: MatchRange[];
-  textValidator: TextValidator;
-  segmenter: (texts: MappedText) => Iterable<MappedText>;
-  shouldCheck: boolean;
-  validateOptions: TextValidationFactoryOptions;
-  localConfig: CSpellUserSettings | undefined;
-  localConfigFilepath: string | undefined;
-  transformer: TextTransformer;
 }
 interface ShouldCheckDocumentResult {
   /** possible errors found while loading configuration. */

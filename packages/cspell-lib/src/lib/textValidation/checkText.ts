@@ -1,5 +1,3 @@
-import assert from 'node:assert';
-
 import type { CSpellUserSettings } from '@cspell/cspell-types';
 
 import type { Document } from '../Document/index.js';
@@ -92,8 +90,6 @@ export async function genCheckText(docValidator: DocumentValidator): Promise<Che
     docValidator.recordCheckedRanges = true;
     await docValidator.prepare();
     const issues = docValidator.checkDocument(true);
-    const preparations = docValidator._getPreparations();
-    assert(preparations);
     return genResult(docValidator.document.text, issues, docValidator.getRangesChecked());
 }
 

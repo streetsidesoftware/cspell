@@ -46,7 +46,6 @@ import type { MatchRange, SimpleRange, TextTransformer } from '../Transform/inde
 import {
     chainTransformers,
     createIntlSegmentTextTransformer,
-    createMappedTextSegmenter,
     createSoftWordBreakTextTransformer,
     createSubstitutionTransformer,
 } from '../Transform/index.js';
@@ -56,7 +55,7 @@ import { uriToFilePath } from '../util/Uri.js';
 import { cleanValidationIssue } from './cleanValidationIssue.js';
 import { defaultMaxDuplicateProblems, defaultMaxNumberOfProblems } from './defaultConstants.js';
 import { determineTextDocumentSettings } from './determineTextDocumentSettings.js';
-import type { TextValidationFactoryOptions, TextValidator } from './lineValidatorFactory.js';
+import { DocumentValidatorPreparations } from './docValidatorPreparations.js';
 import { textValidatorFactory } from './lineValidatorFactory.js';
 import { settingsToValidateOptions } from './settingsToValidateOptions.js';
 import { calcTextInclusionRanges } from './textValidator.js';
@@ -112,7 +111,7 @@ export class DocumentValidator {
     private _ready = false;
     readonly errors: Error[] = [];
     private _prepared: Promise<void> | undefined;
-    private _preparations: Preparations | undefined;
+    private _preparations: DocumentValidatorPreparations | undefined;
     private _preparationTime = -1;
     private _suggestions = new AutoCache((text: string) => this.genSuggestions(text), 1000);
     readonly options: DocumentValidatorOptions;
@@ -233,20 +232,20 @@ export class DocumentValidator {
 
         recFinalizeTime();
 
-        this._preparations = withLazyIncludeRanges(
+        this._preparations = new DocumentValidatorPreparations(
+            config,
+            localConfig,
+            localConfig?.__importRef?.filename,
             {
-                config,
                 dictionary: dict,
                 docSettings,
                 finalSettings,
                 shouldCheck,
                 validateOptions,
                 textValidator,
-                localConfig,
-                localConfigFilepath: localConfig?.__importRef?.filename,
                 transformer,
+                calcIncludeRanges,
             },
-            calcIncludeRanges,
         );
 
         this._ready = true;
@@ -270,22 +269,16 @@ export class DocumentValidator {
             dict,
         );
 
-        // Copy the fields by name: spreading `prep` would compute its lazy include ranges.
-        this._preparations = withLazyIncludeRanges(
-            {
-                config: prep.config,
-                dictionary: dict,
-                docSettings,
-                finalSettings,
-                shouldCheck,
-                validateOptions,
-                textValidator,
-                localConfig: prep.localConfig,
-                localConfigFilepath: prep.localConfigFilepath,
-                transformer,
-            },
+        prep.update({
+            dictionary: dict,
+            docSettings,
+            finalSettings,
+            shouldCheck,
+            validateOptions,
+            textValidator,
+            transformer,
             calcIncludeRanges,
-        );
+        });
         this._preparationTime = timer.elapsed;
         stopMeasure();
     }
@@ -604,9 +597,27 @@ export class DocumentValidator {
 
     /**
      * Internal `cspell-lib` use.
+     * @deprecated Will be removed in a future major version. Use {@link _getLocalConfig} and
+     * {@link _getLocalConfigFilepath} instead.
      */
-    public _getPreparations(): Preparations | undefined {
+    public _getPreparations(): DocumentValidatorPreparations | undefined {
         return this._preparations;
+    }
+
+    /**
+     * Internal `cspell-lib` use.
+     * @returns the config file found for the document, if any.
+     */
+    public _getLocalConfig(): CSpellUserSettings | undefined {
+        return this._preparations?.localConfig;
+    }
+
+    /**
+     * Internal `cspell-lib` use.
+     * @returns the path of the config file found for the document, if any.
+     */
+    public _getLocalConfigFilepath(): string | undefined {
+        return this._preparations?.localConfigFilepath;
     }
 
     /**
@@ -646,44 +657,6 @@ function sanitizeSuggestion(sug: WordSuggestion): ExtendedSuggestion {
     if (isPreferred) return { word, isPreferred };
     if (wordAdjustedToMatchCase) return { word, wordAdjustedToMatchCase };
     return { word };
-}
-
-interface Preparations {
-    /** loaded config */
-    config: CSpellSettingsInternal;
-    dictionary: SpellingDictionaryCollection;
-    /** configuration after applying in-doc settings */
-    docSettings: CSpellSettingsInternal;
-    finalSettings: CSpellSettingsInternalFinalized;
-    includeRanges: MatchRange[];
-    textValidator: TextValidator;
-    segmenter: (texts: MappedText) => Iterable<MappedText>;
-    shouldCheck: boolean;
-    validateOptions: TextValidationFactoryOptions;
-    localConfig: CSpellUserSettings | undefined;
-    localConfigFilepath: string | undefined;
-    transformer: TextTransformer;
-}
-
-/**
- * The include ranges run every ignore pattern over the whole document, so they are only
- * calculated when the document is checked.
- */
-function withLazyIncludeRanges(
-    prep: Omit<Preparations, 'includeRanges' | 'segmenter'>,
-    calcIncludeRanges: () => MatchRange[],
-): Preparations {
-    let includeRanges: MatchRange[] | undefined;
-    let segmenter: Preparations['segmenter'] | undefined;
-    return {
-        ...prep,
-        get includeRanges() {
-            return (includeRanges ??= calcIncludeRanges());
-        },
-        get segmenter() {
-            return (segmenter ??= createMappedTextSegmenter(this.includeRanges));
-        },
-    };
 }
 
 async function searchForDocumentConfig(
