@@ -587,6 +587,128 @@ These changes lay the groundwork for parsers and other tools to annotate text wi
 
 </details>
 
+## v10.3.6 (2026-09-29)
+
+### Fixes
+
+<details>
+<summary>fix: Report unknown CSpell directives again (<a href="https://github.com/streetsidesoftware/cspell/pull/9319">#9319</a>)</summary>
+
+### fix: Report unknown CSpell directives again ([#9319](https://github.com/streetsidesoftware/cspell/pull/9319))
+
+## Summary
+
+`cspell lint` reports unknown in-document directives again, such as `cspell:bad-dir`, when `--validate-directives` or `validateDirectives: true` in the config asks for them. Since 9.1.0 they were found but never shown or counted.
+
+- `--validate-directives` and `--no-validate-directives` override the config setting.
+- An unknown directive counts as an issue, so `cspell lint` exits with an error, as it did before 9.1.0.
+- The JSON reporter, `@cspell/cspell-json-reporter`, includes them in its output again.
+
+<details>
+<summary>Technical Details</summary>
+
+- The default reporter and the JSON reporter now ask to receive directive issues. Other reporters still only get them if they ask for them.
+- The command-line flag is now applied as a setting, like `--report`, so it controls what is shown as well as what is checked.
+
+</details>
+
+---
+
+</details>
+
+<details>
+<summary>fix(cspell-io): Keep redirected requests under the private root (<a href="https://github.com/streetsidesoftware/cspell/pull/9329">#9329</a>)</summary>
+
+### fix(cspell-io): Keep redirected requests under the private root ([#9329](https://github.com/streetsidesoftware/cspell/pull/9329))
+
+## Summary
+
+`createRedirectProvider` in `cspell-io` now only serves requests that map to a location under its private root. A request that would resolve outside the private root is refused with `VFSErrorUnsupportedRequest`, the same error as a request outside the public root.
+
+- Refused: a path that starts with a separator (`/`, `\`, `%2F`, `%5C`) right after the public root.
+- Now served from inside the private root: file names that look like a URL scheme or a drive, such as `a:b.txt` or `C|`. They used to resolve to a different URL.
+
+cspell itself does not use `createRedirectProvider`. This affects projects that use `cspell-io` directly.
+
+<details>
+<summary>Technical Details</summary>
+
+- The part of the URL after the public root is resolved as a relative path under the private root, and the result is checked to be under the private root: same protocol, same host, and the same path prefix.
+- Results coming back from the private file system are checked the same way before they are shown under the public root.
+- The change is in commit [25359026e1](https://github.com/streetsidesoftware/cspell/commit/25359026e157f349185d39ff814bc91b85b1c4d9).
+
+</details>
+
+---
+
+</details>
+
+<details>
+<summary>fix: Don't reuse cached results made with different command-line options (<a href="https://github.com/streetsidesoftware/cspell/pull/9318">#9318</a>)</summary>
+
+### fix: Don't reuse cached results made with different command-line options ([#9318](https://github.com/streetsidesoftware/cspell/pull/9318))
+
+## Summary
+
+With `--cache`, `cspell lint` now rechecks a file when `--language-id`, `--locale`, `--report`, `--show-suggestions`, or `--validate-directives` differ from the run that cached its result. Before, the cached result was reused, so a run could report issues from the wrong language, at the wrong reporting level, or without suggestions.
+
+Existing cache files keep working.
+
+<details>
+<summary>Technical Details</summary>
+
+- Each cached result now also records which of these options were set.
+- A result cached without any of them, including every result in an existing cache file, is still reused by a run that doesn't set them either.
+
+</details>
+
+---
+
+</details>
+
+<details>
+<summary>fix(cspell-lib): Don't scan the text of documents that won't be checked (<a href="https://github.com/streetsidesoftware/cspell/pull/9311">#9311</a>)</summary>
+
+### fix(cspell-lib): Don't scan the text of documents that won't be checked ([#9311](https://github.com/streetsidesoftware/cspell/pull/9311))
+
+## Summary
+
+cspell-lib no longer searches the whole text of a document that won't be checked, such as one excluded by `ignorePaths` or with `enabled: false`. Tools built on cspell-lib that pass it such documents get their result faster, most noticeably for large files like lockfiles.
+
+The `cspell` command line isn't affected: it already skips excluded files before this point.
+
+<details>
+<summary>Technical Details</summary>
+
+- Before checking a document, cspell marks the parts of the text to skip, such as URLs and long hex strings, by searching the whole text with each ignore pattern.
+- That search used to run for every document, even one that then wasn't checked, and the result was thrown away.
+- Now the search runs only when the text is actually checked. Forcing a check of an excluded document still works.
+- In this repository, the 38 files excluded by `ignorePaths`, mostly lockfiles with 33 million characters in total, took about 1.2 seconds of this wasted work.
+- `DocumentValidator._getPreparations()` is deprecated. It was only meant for use inside cspell-lib, and will be removed in a future major version.
+
+</details>
+
+---
+
+</details>
+
+<details>
+<summary>fix: `--show-perf-summary` shows where all of the run's time goes (<a href="https://github.com/streetsidesoftware/cspell/pull/9307">#9307</a>)</summary>
+
+### fix: `--show-perf-summary` shows where all of the run's time goes ([#9307](https://github.com/streetsidesoftware/cspell/pull/9307))
+
+## Summary
+
+`--show-perf-summary` now accounts for all of Total Time. Before, about a sixth of it wasn't shown anywhere. Three new lines, together with Processing Time, add up to Total Time:
+
+- **Setup Time:** before the first file is checked: loading configuration and finding files.
+- **Between Files:** between one file and the next: deciding whether to check it, and reading it.
+- **Other Time:** everything else.
+
+---
+
+</details>
+
 ## v10.3.5 (2026-09-27)
 
 ### Fixes
