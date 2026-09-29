@@ -46,6 +46,9 @@ class RedirectProvider implements VFileSystemProvider {
  * Create a provider that will redirect requests from the publicRoot to the privateRoot.
  * This is useful for creating a virtual file system that is a subset of another file system.
  *
+ * A request under the publicRoot is only passed on if it maps to a URL under the privateRoot.
+ * Other requests are rejected with a `VFSErrorUnsupportedRequest`.
+ *
  * Example:
  * ```ts
  * const vfs = createVirtualFS();
@@ -91,38 +94,31 @@ function remapFS(
     options: RedirectOptions,
 ): VProviderFileSystem {
     const { capabilitiesMask = -1, capabilities } = options;
-    function mapToPrivate(url: URL): URL {
-        const relativePath = url.pathname.slice(publicRoot.pathname.length);
-        return new URL(relativePath, privateRoot);
-    }
+    const mapToPrivate = (url: URL, request: string): URL => mapUrl(url, publicRoot, privateRoot, request);
+    const mapToPublic = (url: URL, request: string): URL => mapUrl(url, privateRoot, publicRoot, request);
 
-    function mapToPublic(url: URL): URL {
-        const relativePath = url.pathname.slice(privateRoot.pathname.length);
-        return new URL(relativePath, publicRoot);
-    }
-
-    const mapFileReferenceToPrivate = (ref: FileReference): FileReference => {
-        return renameFileReference(ref, mapToPrivate(ref.url));
+    const mapFileReferenceToPrivate = (ref: FileReference, request: string): FileReference => {
+        return renameFileReference(ref, mapToPrivate(ref.url, request));
     };
 
-    const mapFileReferenceToPublic = (ref: FileReference): FileReference => {
-        return renameFileReference(ref, mapToPublic(ref.url));
+    const mapFileReferenceToPublic = (ref: FileReference, request: string): FileReference => {
+        return renameFileReference(ref, mapToPublic(ref.url, request));
     };
 
-    const mapUrlOrReferenceToPrivate = (urlOrRef: URL | FileReference): URL | FileReference => {
-        return urlOrRef instanceof URL ? mapToPrivate(urlOrRef) : mapFileReferenceToPrivate(urlOrRef);
+    const mapUrlOrReferenceToPrivate = (urlOrRef: URL | FileReference, request: string): URL | FileReference => {
+        return urlOrRef instanceof URL ? mapToPrivate(urlOrRef, request) : mapFileReferenceToPrivate(urlOrRef, request);
     };
 
-    const mapFileResourceToPublic = (res: FileResource): FileResource => {
-        return renameFileResource(res, mapToPublic(res.url));
+    const mapFileResourceToPublic = (res: FileResource, request: string): FileResource => {
+        return renameFileResource(res, mapToPublic(res.url, request));
     };
 
-    const mapFileResourceToPrivate = (res: FileResource): FileResource => {
-        return renameFileResource(res, mapToPrivate(res.url));
+    const mapFileResourceToPrivate = (res: FileResource, request: string): FileResource => {
+        return renameFileResource(res, mapToPrivate(res.url, request));
     };
 
-    const mapDirEntryToPublic = (de: DirEntry): DirEntry => {
-        const dir = mapToPublic(de.dir);
+    const mapDirEntryToPublic = (de: DirEntry, request: string): DirEntry => {
+        const dir = mapToPublic(de.dir, request);
         return { ...de, dir };
     };
 
@@ -130,26 +126,26 @@ function remapFS(
 
     const fs2: VProviderFileSystem = {
         stat: async (url) => {
-            const url2 = mapUrlOrReferenceToPrivate(url);
+            const url2 = mapUrlOrReferenceToPrivate(url, 'stat');
             const stat = await fs.stat(url2);
             return stat;
         },
 
         readFile: async (url, options?: VProviderFileSystemReadFileOptions) => {
-            const url2 = mapUrlOrReferenceToPrivate(url);
+            const url2 = mapUrlOrReferenceToPrivate(url, 'readFile');
             const file = await fs.readFile(url2, options);
-            return mapFileResourceToPublic(file);
+            return mapFileResourceToPublic(file, 'readFile');
         },
 
         readDirectory: async (url) => {
-            const url2 = mapToPrivate(url);
+            const url2 = mapToPrivate(url, 'readDirectory');
             const dir = await fs.readDirectory(url2);
-            return dir.map(mapDirEntryToPublic);
+            return dir.map((de) => mapDirEntryToPublic(de, 'readDirectory'));
         },
         writeFile: async (file) => {
-            const fileRef2 = mapFileResourceToPrivate(file);
+            const fileRef2 = mapFileResourceToPrivate(file, 'writeFile');
             const fileRef3 = await fs.writeFile(fileRef2);
-            return mapFileReferenceToPublic(fileRef3);
+            return mapFileReferenceToPublic(fileRef3, 'writeFile');
         },
         providerInfo: { ...fs.providerInfo, name },
         capabilities: capabilities ?? fs.capabilities & capabilitiesMask,
@@ -158,6 +154,30 @@ function remapFS(
     };
 
     return fsPassThrough(fs2, shadowFs, publicRoot);
+}
+
+/**
+ * Map a URL under `fromRoot` to the same relative path under `toRoot`.
+ * Throws if the URL is not under `fromRoot` or the result is not under `toRoot`.
+ */
+function mapUrl(url: URL, fromRoot: URL, toRoot: URL, request: string): URL {
+    const unsupported = () => new VFSErrorUnsupportedRequest(request, url);
+
+    if (!isUrlUnderRoot(url, fromRoot)) throw unsupported();
+
+    const relativePath = url.pathname.slice(fromRoot.pathname.length);
+    // A leading separator would make the path absolute, dropping the root.
+    if (/^(?:[/\\]|%2f|%5c)/i.test(relativePath)) throw unsupported();
+
+    // `./` keeps a segment like `c:` or `http:` from being read as a scheme.
+    const mapped = new URL('./' + relativePath, toRoot);
+    if (!isUrlUnderRoot(mapped, toRoot)) throw unsupported();
+
+    return mapped;
+}
+
+function isUrlUnderRoot(url: URL, root: URL): boolean {
+    return url.protocol === root.protocol && url.host === root.host && url.pathname.startsWith(root.pathname);
 }
 
 function fsPassThrough(
