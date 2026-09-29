@@ -98,6 +98,36 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - fix: Fix Sponsor cards on npmjs (<a href="https://github.com/streetsidesoftware/cspell/pull/9260">#9260</a>)
 
+## v10.3.6 (2026-09-29)
+
+### Fixes
+
+- fix: Report unknown CSpell directives again (<a href="https://github.com/streetsidesoftware/cspell/pull/9319">#9319</a>)
+
+---
+
+</details>
+
+- fix(cspell-io): Keep redirected requests under the private root (<a href="https://github.com/streetsidesoftware/cspell/pull/9329">#9329</a>)
+
+---
+
+</details>
+
+- fix: Don't reuse cached results made with different command-line options (<a href="https://github.com/streetsidesoftware/cspell/pull/9318">#9318</a>)
+
+---
+
+</details>
+
+- fix(cspell-lib): Don't scan the text of documents that won't be checked (<a href="https://github.com/streetsidesoftware/cspell/pull/9311">#9311</a>)
+
+---
+
+</details>
+
+- fix: `--show-perf-summary` shows where all of the run's time goes (<a href="https://github.com/streetsidesoftware/cspell/pull/9307">#9307</a>)
+
 ## v10.3.5 (2026-09-27)
 
 ### Fixes
