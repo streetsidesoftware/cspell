@@ -58,6 +58,7 @@ export class LintRequest {
         ];
         this.cspellSettingsFromCliOptions = {
             ...(noConfigSearch !== undefined ? { noConfigSearch } : {}),
+            ...(options.validateDirectives !== undefined ? { validateDirectives: options.validateDirectives } : {}),
             ...extractUnknownWordsConfig(options),
             languageSettings,
         };
