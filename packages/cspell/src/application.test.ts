@@ -8,7 +8,7 @@ import { afterEach, describe, expect, test, vi } from 'vitest';
 
 import * as App from './application.mjs';
 import { console } from './console.js';
-import type { LinterOptions, TraceOptions } from './options.js';
+import type { LinterCliOptions, LinterOptions, TraceOptions } from './options.js';
 import { pathPackageRoot, pathSamples } from './test/test.helper.js';
 import { asyncIterableToArray } from './util/async.js';
 import { InMemoryReporter } from './util/InMemoryReporter.js';
@@ -396,7 +396,7 @@ describe('Linter File Caching', () => {
         await fs.rm(cacheLocation, { recursive: true }).catch(() => undefined);
         const root = fr('cached-options');
 
-        const runs: [LinterOptions, Partial<RunResult>][] = [
+        const runs: [LinterCliOptions, Partial<RunResult>][] = [
             [{}, { cachedFiles: 0, issues: 1 }],
             [{}, { cachedFiles: 1, issues: 1 }],
             [{ report: 'flagged' }, { cachedFiles: 1, issues: 0 }],
