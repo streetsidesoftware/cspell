@@ -13,7 +13,7 @@ export type CreateParser<Options = unknown> = (
 ) => Promise<DocumentParser | undefined> | DocumentParser | undefined;
 
 /**
- * @since 10.4.0
+ * @since 10.5.0
  */
 export interface AvailableParsers<Options> {
     /**
@@ -24,7 +24,7 @@ export interface AvailableParsers<Options> {
 }
 
 /**
- * @since 10.4.0
+ * @since 10.5.0
  */
 export type Parsers = (DocumentParser | Parser)[];
 
@@ -51,7 +51,7 @@ export interface CSpellPlugin {
  * Extended Plugin API that supports parser creation and available parsers.
  *
  * Not yet in use.
- * @since 10.4.0
+ * @since 10.5.0
  */
 export interface CSpellPluginEx<Options = unknown> extends CSpellPlugin {
     /**
@@ -64,14 +64,14 @@ export interface CSpellPluginEx<Options = unknown> extends CSpellPlugin {
      * @param name - The name of the parser to create.
      * @param options - Plugin options to be passed to the parser creation function.
      * @returns A parser instance or undefined if not available.
-     * @since 10.4.0
+     * @since 10.5.0
      */
     createParser?: CreateParser<Options> | undefined;
 
     /**
      * A collection of available parsers provided by the plugin.
      * Each key is the name of the parser, and the value can be a `DocumentParser` instance, a `Parser` instance, or a `CreateParser` function.
-     * @since 10.4.0
+     * @since 10.5.0
      */
     availableParsers?: AvailableParsers<Options>;
 }
