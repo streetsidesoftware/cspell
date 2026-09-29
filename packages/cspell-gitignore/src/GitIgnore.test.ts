@@ -41,7 +41,7 @@ describe('GitIgnoreServer', () => {
         ${p(pkgCSpellLib)}       | ${[pkg]}          | ${[gitRoot, pkgCSpellLib]}
         ${p(pkgCSpellLib)}       | ${[packages]}     | ${[pkgCSpellLib]}
     `('findGitIgnoreHierarchy $dir $roots', async ({ dir, roots, expected }) => {
-        const gs = new GitIgnore(roots);
+        const gs = createGitIgnore(roots);
         const r = await gs.findGitIgnoreHierarchy(dir);
         expect(r.gitIgnoreChain.map((gif) => gif.root)).toEqual(expected);
     });
@@ -59,7 +59,7 @@ describe('GitIgnoreServer', () => {
         ${p(pkg, 'node_modules/bin')}      | ${[p(samples, 'ignored')]} | ${true}
     `('isIgnored $file $roots', async ({ file, roots, expected }) => {
         const dir = path.dirname(file);
-        const gs = new GitIgnore(roots);
+        const gs = createGitIgnore(roots);
         const r = await gs.findGitIgnoreHierarchy(dir);
         expect(r.isIgnored(file)).toEqual(expected);
     });
@@ -78,7 +78,7 @@ describe('GitIgnoreServer', () => {
         ${p(pkg, 'node_modules/bin')}      | ${[p(samples, 'ignored')]} | ${oc({ glob: 'node_modules/', matched: true, root: pr(gitRoot), gitIgnoreFile: gitIgnoreFile })}
     `('isIgnoredEx $file $roots', async ({ file, roots, expected }) => {
         const dir = path.dirname(file);
-        const gs = new GitIgnore(roots);
+        const gs = createGitIgnore(roots);
         const r = await gs.findGitIgnoreHierarchy(dir);
         expect(r.isIgnoredEx(file)).toEqual(expected);
     });
@@ -88,7 +88,7 @@ describe('GitIgnoreServer', () => {
         ${p(pkg, 'node_modules/')} | ${undefined} | ${oc({ glob: 'node_modules/', matched: true, root: pr(gitRoot), gitIgnoreFile: gitIgnoreFile })}
     `('isIgnoredEx $file $roots', async ({ file, roots, expected }) => {
         const dir = path.dirname(file);
-        const gs = new GitIgnore(roots);
+        const gs = createGitIgnore(roots);
         const r = await gs.findGitIgnoreHierarchy(dir);
         expect(r.isIgnoredEx(file)).toEqual(expected);
     });
@@ -101,7 +101,7 @@ describe('GitIgnoreServer', () => {
             p(pkg, 'node_modules/bin'),
             p(pkg, 'node_modules/'),
         ];
-        const gs = new GitIgnore();
+        const gs = createGitIgnore();
         const r = await gs.filterOutIgnored(files);
         expect(r).toEqual([__filename, p(samples, 'ignored/keepme.md')]);
     });
@@ -113,7 +113,7 @@ describe('GitIgnoreServer', () => {
         ${p(samples, 'ignored/file.txt')}  | ${undefined} | ${[p(samples, 'ignored')]} | ${true}        | ${false}
         ${p(pkg, 'node_modules/bin')}      | ${undefined} | ${[p(samples, 'ignored')]} | ${true}        | ${true}
     `('addRoots $file $addRoots', async ({ file, roots, addRoots, expectedBefore, expectedAfter }) => {
-        const gs = new GitIgnore(roots);
+        const gs = createGitIgnore(roots);
         const before = await gs.isIgnored(file);
         expect(before).toEqual(expectedBefore);
         gs.addRoots(addRoots);
@@ -123,7 +123,7 @@ describe('GitIgnoreServer', () => {
 
     test('addRoots only reset cache if a new root is added', async () => {
         const dir = p(samples, 'ignored');
-        const gs = new GitIgnore();
+        const gs = createGitIgnore();
         gs.findGitIgnoreHierarchy(dir);
         const p0 = gs.peekGitIgnoreHierarchy(dir);
         expect(p0).toBeDefined();
@@ -144,5 +144,13 @@ describe('GitIgnoreServer', () => {
 
     function pr(...dirs: string[]) {
         return path.join(path.resolve(...dirs), './');
+    }
+
+    /**
+     * Always stop at the repo root, so a `.gitignore` above the checkout
+     * (for example, when it is a worktree nested in another repo) can't change the results.
+     */
+    function createGitIgnore(roots: string[] = []) {
+        return new GitIgnore([gitRoot, ...roots]);
     }
 });

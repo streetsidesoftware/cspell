@@ -1,7 +1,8 @@
-import { GitIgnore } from 'cspell-gitignore';
+import { findRepoRoot, GitIgnore } from 'cspell-gitignore';
 
-const gitIgnore = new GitIgnore();
-
-export function run(filename: string) {
+export async function run(filename: string) {
+    // Stop at the repo root, so a `.gitignore` above the checkout can't change the result.
+    const root = await findRepoRoot(filename);
+    const gitIgnore = new GitIgnore(root ? [root] : []);
     return gitIgnore.isIgnored(filename);
 }
