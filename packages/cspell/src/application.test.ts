@@ -390,6 +390,32 @@ describe('Linter File Caching', () => {
         }
     });
 
+    test('cached results follow the command-line options', async () => {
+        const reporter = new InMemoryReporter();
+        const cacheLocation = tempLocation('.cspellcache-options');
+        await fs.rm(cacheLocation, { recursive: true }).catch(() => undefined);
+        const root = fr('cached-options');
+
+        const runs: [LinterOptions, Partial<RunResult>][] = [
+            [{}, { cachedFiles: 0, issues: 1 }],
+            [{}, { cachedFiles: 1, issues: 1 }],
+            [{ report: 'flagged' }, { cachedFiles: 1, issues: 0 }],
+            [{ languageId: 'markdown' }, { cachedFiles: 0, issues: 0 }],
+            [{ languageId: 'markdown' }, { cachedFiles: 1, issues: 0 }],
+            [{}, { cachedFiles: 0, issues: 1 }],
+            [{ showSuggestions: true }, { cachedFiles: 0, issues: 1 }],
+            [{ validateDirectives: true }, { cachedFiles: 0, issues: 1 }],
+        ];
+
+        let r = 0;
+        for (const [options, expected] of runs) {
+            ++r;
+            const result = await App.lint(['*.txt'], { ...WithCache, ...options, cacheLocation, root }, reporter);
+            expect(reporter.errors).toEqual([]);
+            expect(result, `run #${r} ${JSON.stringify(options)}`).toEqual(oc({ files: 1, ...expected }));
+        }
+    });
+
     test.each`
         runs                                                                                                                      | root                   | comment
         ${[run(['*.ts'], WithCache, fc(1, 0)), run(['*.{md,ts}'], WithCache, fc(2, 1)), run(['*.{md,ts}'], WithCache, fc(2, 2))]} | ${fr('cached-remote')} | ${'cached changing glob three runs U WWW'}

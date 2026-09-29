@@ -52,7 +52,11 @@ function prefetch(fileToProcess: FileToProcess, cfg: PrefetchConfig): PrefetchFi
         const getElapsedTimeMs = getTimeMeasurer();
         const cachedResult = await cfg.cache.getCachedLintResults(filename);
         if (cachedResult) {
-            const fileResult = { ...cachedResult, elapsedTimeMs: getElapsedTimeMs() };
+            const fileResult = {
+                ...cachedResult,
+                elapsedTimeMs: getElapsedTimeMs(),
+                reportIssueOptions: { ...cachedResult.reportIssueOptions, ...reportIssueOptions },
+            };
             return { fileResult };
         }
         const uri = filenameToUri(filename, cfg.root).href;
