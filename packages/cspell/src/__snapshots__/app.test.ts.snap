@@ -6578,6 +6578,91 @@ error"
 
 exports[`Validate cli > app 'max-file-size' Expect Error: undefined 3`] = `""`;
 
+exports[`Validate cli > app 'must find --file binary' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'must find --file binary' Expect Error: [Function CheckFailed] 2`] = `
+"error	CSpell: Files checked: 0, skipped: 1, Issues found: 0 in 0 files.
+error
+error	No files found to check (1 skipped).
+error"
+`;
+
+exports[`Validate cli > app 'must find --file binary' Expect Error: [Function CheckFailed] 3`] = `""`;
+
+exports[`Validate cli > app 'must find --file checked and skipped' Expect Error: undefined 1`] = `[]`;
+
+exports[`Validate cli > app 'must find --file checked and skipped' Expect Error: undefined 2`] = `
+"error	1/1 checked.md 0.00ms
+error
+error	CSpell: Files checked: 1, skipped: 1, Issues found: 0 in 0 files.
+error"
+`;
+
+exports[`Validate cli > app 'must find --file checked and skipped' Expect Error: undefined 3`] = `""`;
+
+exports[`Validate cli > app 'must find --file checked' Expect Error: undefined 1`] = `[]`;
+
+exports[`Validate cli > app 'must find --file checked' Expect Error: undefined 2`] = `
+"error	1/1 checked.md 0.00ms
+error
+error	CSpell: Files checked: 1, Issues found: 0 in 0 files.
+error"
+`;
+
+exports[`Validate cli > app 'must find --file checked' Expect Error: undefined 3`] = `""`;
+
+exports[`Validate cli > app 'must find --file disabled' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'must find --file disabled' Expect Error: [Function CheckFailed] 2`] = `
+"error	1/1 disabled.md 0.00ms skipped (Excluded by overrides or languageSettings.)
+error
+error	CSpell: Files checked: 0, skipped: 1, Issues found: 0 in 0 files.
+error
+error	No files found to check (1 skipped).
+error"
+`;
+
+exports[`Validate cli > app 'must find --file disabled' Expect Error: [Function CheckFailed] 3`] = `""`;
+
+exports[`Validate cli > app 'must find --file ignorePaths' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'must find --file ignorePaths' Expect Error: [Function CheckFailed] 2`] = `
+"error	CSpell: Files checked: 0, skipped: 1, Issues found: 0 in 0 files.
+error
+error	No files found to check (1 skipped).
+error"
+`;
+
+exports[`Validate cli > app 'must find --file ignorePaths' Expect Error: [Function CheckFailed] 3`] = `""`;
+
+exports[`Validate cli > app 'must find --file not in files' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'must find --file not in files' Expect Error: [Function CheckFailed] 2`] = `
+"error	CSpell: Files checked: 0, skipped: 1, Issues found: 0 in 0 files.
+error
+error	No files found to check (1 skipped).
+error"
+`;
+
+exports[`Validate cli > app 'must find --file not in files' Expect Error: [Function CheckFailed] 3`] = `""`;
+
+exports[`Validate cli > app 'must find --no-must-find-files skipped' Expect Error: undefined 1`] = `[]`;
+
+exports[`Validate cli > app 'must find --no-must-find-files skipped' Expect Error: undefined 2`] = `
+"error	1/1 disabled.md 0.00ms skipped (Excluded by overrides or languageSettings.)
+error
+error	CSpell: Files checked: 0, skipped: 1, Issues found: 0 in 0 files.
+error"
+`;
+
+exports[`Validate cli > app 'must find --no-must-find-files skipped' Expect Error: undefined 3`] = `""`;
+
+exports[`Validate cli > app 'must find --silent skipped' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'must find --silent skipped' Expect Error: [Function CheckFailed] 2`] = `""`;
+
+exports[`Validate cli > app 'must find --silent skipped' Expect Error: [Function CheckFailed] 3`] = `""`;
+
 exports[`Validate cli > app 'must find force no error' Expect Error: undefined 1`] = `[]`;
 
 exports[`Validate cli > app 'must find force no error' Expect Error: undefined 2`] = `
@@ -6587,10 +6672,25 @@ error"
 
 exports[`Validate cli > app 'must find force no error' Expect Error: undefined 3`] = `""`;
 
+exports[`Validate cli > app 'must find glob disabled' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'must find glob disabled' Expect Error: [Function CheckFailed] 2`] = `
+"error	1/1 disabled.md 0.00ms skipped (Excluded by overrides or languageSettings.)
+error
+error	CSpell: Files checked: 0, skipped: 1, Issues found: 0 in 0 files.
+error
+error	No files found to check (1 skipped).
+error"
+`;
+
+exports[`Validate cli > app 'must find glob disabled' Expect Error: [Function CheckFailed] 3`] = `""`;
+
 exports[`Validate cli > app 'must find with error' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app 'must find with error' Expect Error: [Function CheckFailed] 2`] = `
 "error	CSpell: Files checked: 0, Issues found: 0 in 0 files.
+error
+error	No files found to check.
 error"
 `;
 
@@ -6738,6 +6838,8 @@ exports[`Validate cli > app 'not found error by default' Expect Error: [Function
 
 exports[`Validate cli > app 'not found error by default' Expect Error: [Function CheckFailed] 2`] = `
 "error	CSpell: Files checked: 0, Issues found: 0 in 0 files.
+error
+error	No files found to check.
 error"
 `;
 

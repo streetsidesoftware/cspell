@@ -2,6 +2,7 @@ import type { AddHelpTextContext, Command, CommandOptions } from 'commander';
 
 import * as App from './application.mjs';
 import { collect, crOpt, prefixCollect } from './commandHelpers.js';
+import { console } from './console.js';
 import type { LinterCliCommandOptions, LinterCliOptions } from './options.js';
 import { cvtLinterCliCommandOptionsToLinterCliOptions, ReportChoicesAll } from './options.js';
 import { DEFAULT_CACHE_LOCATION } from './util/cache/index.js';
@@ -232,8 +233,15 @@ async function action(this: Command, fileGlobs: string[], cliOptions: LinterCliC
         this.outputHelp();
         throw new CheckFailed('outputHelp', 1);
     }
-    if (result.errors || (mustFindFiles && !result.files)) {
+    if (result.errors) {
         throw new CheckFailed('check failed', 1);
+    }
+    const skippedFiles = result.skippedFiles || 0;
+    if (mustFindFiles && result.files <= skippedFiles) {
+        if (!options.silent) {
+            console.error(`No files found to check${skippedFiles ? ` (${skippedFiles} skipped)` : ''}.`);
+        }
+        throw new CheckFailed('no files found', 1);
     }
     if (result.issues) {
         const exitCode = useExitCode ? 1 : 0;

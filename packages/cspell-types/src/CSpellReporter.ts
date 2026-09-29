@@ -155,7 +155,7 @@ export interface ProgressFileBegin extends ProgressFileBase {
 export type ProgressEmitter = (p: ProgressItem | ProgressFileComplete) => void;
 
 export interface RunResult {
-    /** Number of files processed. */
+    /** Number of files found, including skipped files. */
     files: number;
     /** Set of files where issues were found. */
     filesWithIssues: Set<string>;
