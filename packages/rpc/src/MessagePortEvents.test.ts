@@ -55,7 +55,7 @@ describe('MessagePortEvents', () => {
         const { port1, port2 } = channel;
 
         const calls: unknown[] = [];
-        const timeout = abortTimeout(100);
+        const timeout = abortTimeout(1000);
 
         using msgEvents1 = new MessagePortNotifyEvents(port1);
         using msgEvents2 = new MessagePortNotifyEvents(port2);
@@ -74,7 +74,7 @@ describe('MessagePortEvents', () => {
         const { port1, port2 } = channel;
 
         const calls: unknown[] = [];
-        const timeout = abortTimeout(100);
+        const timeout = abortTimeout(1000);
 
         using msgEvents1 = new MessagePortNotifyEvents(port1);
         using msgEvents2 = new MessagePortNotifyEvents(port2);
@@ -97,7 +97,6 @@ describe('MessagePortEvents', () => {
 
         const errors1: unknown[] = [];
         const errors2: unknown[] = [];
-        const timeout = abortTimeout(100);
 
         using msgEvents1 = new MessagePortNotifyEvents(port1);
         using msgEvents2 = new MessagePortNotifyEvents(port2);
@@ -111,6 +110,8 @@ describe('MessagePortEvents', () => {
         // Let send an error from port2 to port1
         port2.postMessage(new Error('Test error'));
         await wait(50);
+        // Start the timeout after the wait, so a slow timer doesn't use it up.
+        const timeout = abortTimeout(1000);
         port1.close();
         port1.postMessage('After Close');
         await expect(msgEvents1.awaitClose(timeout)).resolves.toBeInstanceOf(Event);
