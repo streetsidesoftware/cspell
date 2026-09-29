@@ -51,13 +51,28 @@ type Meta = FileDescriptor['meta'];
 
 export type CSpellCacheMeta = (Meta & CSpellCachedMetaData) | undefined;
 
+/** Optional fields that don't change the format of the meta data. */
+type OptionalCacheDataKeys = 'o';
+
+type RequiredCachedData = Required<Omit<CachedData, OptionalCacheDataKeys>>;
+
+type CacheDataKeys = {
+    [K in keyof RequiredCachedData]: K;
+};
+
+// The keys and their order are part of the format version. Changing the order invalidates existing caches.
+const cacheDataKeys: CacheDataKeys = {
+    v: 'v',
+    r: 'r',
+    d: 'd',
+};
+
 /**
  * Meta Data Version is used to detect if the structure of the meta data has changed.
  * This is used in combination with the Suffix and the version of CSpell.
- *
- * Existing cache files depend on this exact value. Adding an optional field to `CachedData` must not change it.
  */
-const META_DATA_VERSION_SUFFIX = '-1-v|r|d';
+const META_DATA_BASE_VERSION = '1';
+const META_DATA_VERSION_SUFFIX = '-' + META_DATA_BASE_VERSION + '-' + Object.keys(cacheDataKeys).join('|');
 
 interface DependencyCacheTree {
     d?: Dependency[];
