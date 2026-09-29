@@ -32,6 +32,8 @@ interface CachedData {
     r?: CachedFileResult | undefined;
     /** dependencies */
     d?: Dependency[] | undefined;
+    /** the command-line options that change the result, when any are set */
+    o?: string | undefined;
 }
 
 interface Dependency {
@@ -49,10 +51,16 @@ type Meta = FileDescriptor['meta'];
 
 export type CSpellCacheMeta = (Meta & CSpellCachedMetaData) | undefined;
 
+/** Optional fields that don't change the format of the meta data. */
+type OptionalCacheDataKeys = 'o';
+
+type RequiredCachedData = Required<Omit<CachedData, OptionalCacheDataKeys>>;
+
 type CacheDataKeys = {
-    [K in keyof Required<CachedData>]: K;
+    [K in keyof RequiredCachedData]: K;
 };
 
+// The keys and their order are part of the format version. Changing the order invalidates existing caches.
 const cacheDataKeys: CacheDataKeys = {
     v: 'v',
     r: 'r',
@@ -88,6 +96,7 @@ export class DiskCache implements CSpellLintResultCache {
         readonly cspellVersion: string,
         readonly useUniversalCache: boolean,
         private fileEntryCache: FileEntryCache,
+        readonly optionsKey?: string | undefined,
     ) {
         this.cacheDir = fileURLToPath(new URL('./', cacheFileLocation));
         this.version = calcVersion(cspellVersion);
@@ -100,11 +109,13 @@ export class DiskCache implements CSpellLintResultCache {
         const data = meta?.data;
         const result = data?.r;
         const versionMatches = this.version === data?.v;
+        const optionsMatch = this.optionsKey === data?.o;
 
         // Cached lint results are valid if and only if:
         // 1. The file is present in the filesystem
         // 2. The file has not changed since the time it was previously linted
         // 3. The CSpell configuration has not changed since the time the file was previously linted
+        // 4. The command-line options that change the result are the same
         // If any of these are not true, we will not reuse the lint results.
         if (
             fileDescriptor.notFound ||
@@ -112,6 +123,7 @@ export class DiskCache implements CSpellLintResultCache {
             !meta ||
             !result ||
             !versionMatches ||
+            !optionsMatch ||
             !(await this.checkDependencies(data.d))
         ) {
             return undefined;
@@ -152,6 +164,7 @@ export class DiskCache implements CSpellLintResultCache {
             v: this.version,
             r: this.normalizeResult(result),
             d: await this.calcDependencyHashes(dependsUponFiles),
+            ...(this.optionsKey ? { o: this.optionsKey } : {}),
         });
 
         meta.data = data;
@@ -281,9 +294,17 @@ export async function createDiskCache(
     useCheckSum: boolean,
     cspellVersion: string,
     useUniversalCache: boolean,
+    optionsKey?: string | undefined,
 ): Promise<DiskCache> {
     const fileEntryCache = await createFromFile(cacheFileLocation, useCheckSum, useUniversalCache);
-    const cache = new DiskCache(cacheFileLocation, useCheckSum, cspellVersion, useUniversalCache, fileEntryCache);
+    const cache = new DiskCache(
+        cacheFileLocation,
+        useCheckSum,
+        cspellVersion,
+        useUniversalCache,
+        fileEntryCache,
+        optionsKey,
+    );
     return cache;
 }
 

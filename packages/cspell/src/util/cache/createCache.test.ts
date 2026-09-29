@@ -19,6 +19,31 @@ const U = undefined;
 const T = true;
 const F = false;
 
+describe('calcOptionsKey', () => {
+    const { calcOptionsKey } = __testing__;
+
+    test.each`
+        options                                                 | expected
+        ${{}}                                                   | ${undefined}
+        ${{ languageId: '', locale: '' }}                       | ${undefined}
+        ${{ languageId: 'markdown' }}                           | ${'{"languageId":"markdown"}'}
+        ${{ locale: 'fr' }}                                     | ${'{"locale":"fr"}'}
+        ${{ report: 'flagged' }}                                | ${'{"report":"flagged"}'}
+        ${{ showSuggestions: false }}                           | ${'{"showSuggestions":false}'}
+        ${{ validateDirectives: true }}                         | ${'{"validateDirectives":true}'}
+        ${{ validateDirectives: true, languageId: 'markdown' }} | ${'{"languageId":"markdown","validateDirectives":true}'}
+    `('calcOptionsKey $options', ({ options, expected }) => {
+        expect(calcOptionsKey(options)).toBe(expected);
+    });
+
+    test('calcCacheSettings includes the options only when set', async () => {
+        expect(await calcCacheSettings({}, { version, languageId: 'markdown' }, '.')).toEqual(
+            expect.objectContaining({ optionsKey: '{"languageId":"markdown"}' }),
+        );
+        expect(await calcCacheSettings({}, { version }, '.')).not.toHaveProperty('optionsKey');
+    });
+});
+
 describe('Validate calcCacheSettings', () => {
     test.each`
         config                  | options                          | root             | expected                                | comment

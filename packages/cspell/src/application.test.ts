@@ -8,7 +8,7 @@ import { afterEach, describe, expect, test, vi } from 'vitest';
 
 import * as App from './application.mjs';
 import { console } from './console.js';
-import type { LinterOptions, TraceOptions } from './options.js';
+import type { LinterCliOptions, LinterOptions, TraceOptions } from './options.js';
 import { pathPackageRoot, pathSamples } from './test/test.helper.js';
 import { asyncIterableToArray } from './util/async.js';
 import { InMemoryReporter } from './util/InMemoryReporter.js';
@@ -387,6 +387,34 @@ describe('Linter File Caching', () => {
             const result = await App.lint(fileGlobs, useOptions, reporter);
             expect(reporter.errors).toEqual([]);
             expect(result, `run #${r}`).toEqual(oc(expected));
+        }
+    });
+
+    test('cached results follow the command-line options', async () => {
+        const reporter = new InMemoryReporter();
+        const cacheLocation = tempLocation('.cspellcache-options');
+        await fs.rm(cacheLocation, { recursive: true }).catch(() => undefined);
+        const root = fr('cached-options');
+
+        const runs: [LinterCliOptions, Partial<RunResult>][] = [
+            [{}, { cachedFiles: 0, issues: 1 }],
+            [{}, { cachedFiles: 1, issues: 1 }],
+            [{ report: 'flagged' }, { cachedFiles: 0, issues: 0 }],
+            [{ report: 'flagged' }, { cachedFiles: 1, issues: 0 }],
+            [{}, { cachedFiles: 0, issues: 1 }],
+            [{ languageId: 'markdown' }, { cachedFiles: 0, issues: 0 }],
+            [{ languageId: 'markdown' }, { cachedFiles: 1, issues: 0 }],
+            [{}, { cachedFiles: 0, issues: 1 }],
+            [{ showSuggestions: true }, { cachedFiles: 0, issues: 1 }],
+            [{ validateDirectives: true }, { cachedFiles: 0, issues: 1 }],
+        ];
+
+        let r = 0;
+        for (const [options, expected] of runs) {
+            ++r;
+            const result = await App.lint(['*.txt'], { ...WithCache, ...options, cacheLocation, root }, reporter);
+            expect(reporter.errors).toEqual([]);
+            expect(result, `run #${r} ${JSON.stringify(options)}`).toEqual(oc({ files: 1, ...expected }));
         }
     });
 
