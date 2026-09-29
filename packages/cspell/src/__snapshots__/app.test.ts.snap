@@ -139,13 +139,9 @@ exports[`Validate cli > app '--no-fail-fast with config' Expect Error: [Function
 exports[`Validate cli > app '--no-validate-directives over config' Expect Error: undefined 1`] = `[]`;
 
 exports[`Validate cli > app '--no-validate-directives over config' Expect Error: undefined 2`] = `
-"error	1/3 cspell-validate.json 0.00ms
+"error	1/1 notes.md 0.00ms
 error
-error	2/3 cspell.json 0.00ms
-error
-error	3/3 notes.md 0.00ms
-error
-error	CSpell: Files checked: 3, Issues found: 0 in 0 files.
+error	CSpell: Files checked: 1, Issues found: 0 in 0 files.
 error"
 `;
 
@@ -156,7 +152,7 @@ exports[`Validate cli > app '--validate-directives' Expect Error: [Function Chec
 exports[`Validate cli > app '--validate-directives' Expect Error: [Function CheckFailed] 2`] = `
 "log	notes.md:3:13 - Unknown CSpell directive (bad-dir)
 log
-error	CSpell: Files checked: 3, Issues found: 1 in 1 file.
+error	CSpell: Files checked: 1, Issues found: 1 in 1 file.
 error"
 `;
 
@@ -7871,7 +7867,7 @@ exports[`Validate cli > app 'typos' Expect Error: [Function CheckFailed] 3`] = `
 exports[`Validate cli > app 'validate directives off' Expect Error: undefined 1`] = `[]`;
 
 exports[`Validate cli > app 'validate directives off' Expect Error: undefined 2`] = `
-"error	CSpell: Files checked: 3, Issues found: 0 in 0 files.
+"error	CSpell: Files checked: 1, Issues found: 0 in 0 files.
 error"
 `;
 
@@ -7880,15 +7876,11 @@ exports[`Validate cli > app 'validate directives off' Expect Error: undefined 3`
 exports[`Validate cli > app 'validateDirectives in config' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app 'validateDirectives in config' Expect Error: [Function CheckFailed] 2`] = `
-"error	1/3 cspell-validate.json 0.00ms
-error
-error	2/3 cspell.json 0.00ms
-error
-error	3/3 notes.md 0.00ms X
+"error	1/1 notes.md 0.00ms X
 error
 log	notes.md:3:13 - Unknown CSpell directive (bad-dir)
 log
-error	CSpell: Files checked: 3, Issues found: 1 in 1 file.
+error	CSpell: Files checked: 1, Issues found: 1 in 1 file.
 error"
 `;
 

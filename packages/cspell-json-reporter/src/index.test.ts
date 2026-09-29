@@ -28,6 +28,10 @@ describe('getReporter', () => {
         mockWriteFile.mockReset();
     });
 
+    test('receives directive issues', () => {
+        expect(getReporter({ outFile: 'out.json' }).features).toEqual({ issueType: true });
+    });
+
     test('throws for invalid config', () => {
         expect(() => getReporter({ outFile: {} })).toThrowErrorMatchingSnapshot();
     });
