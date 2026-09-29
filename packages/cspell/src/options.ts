@@ -91,6 +91,16 @@ export interface LinterOptions
     mustFindFiles?: boolean;
 
     /**
+     * Allow checking `--file` and `--file-list` documents referenced by symbolic links.
+     * By default, a file that is a symbolic link, or is in a linked directory, is skipped.
+     * Glob searches never follow symbolic links.
+     *
+     * When not set, the `CSPELL_FOLLOW_SYMLINKS` environment variable is used.
+     * @default false
+     */
+    followSymlinks?: boolean | undefined;
+
+    /**
      * List of dictionary names to use.
      */
     dictionary?: string[] | undefined;

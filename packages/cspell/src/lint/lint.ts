@@ -31,7 +31,7 @@ import { LintReporter } from '../reporters/index.js';
 import { calcCacheSettings } from '../util/cache/index.js';
 import type { ConfigInfo } from '../util/configFileHelper.js';
 import { readConfig } from '../util/configFileHelper.js';
-import { CheckFailed, toApplicationError } from '../util/errors.js';
+import { ApplicationError, CheckFailed, toApplicationError } from '../util/errors.js';
 import { findFiles, isFile, isNotDir, readFileListFiles, relativeToCwd, resolveFilename } from '../util/fileHelper.js';
 import type { GlobOptions } from '../util/glob.js';
 import {
@@ -41,6 +41,8 @@ import {
     normalizeFileOrGlobsToRoot,
     normalizeGlobsToRoot,
 } from '../util/glob.js';
+import type { SymlinkChecker } from '../util/symlinks.js';
+import { createSymlinkChecker } from '../util/symlinks.js';
 import { getTimeMeasurer } from '../util/timer.js';
 import { unindent } from '../util/unindent.js';
 import * as util from '../util/util.js';
@@ -141,7 +143,8 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
 
         try {
             const cacheSettings = await calcCacheSettings(configInfo.config, { ...cfg.options, version }, root);
-            const filesToCheck = await determineFilesToCheck(configInfo, cfg, reporter, globInfo);
+            const symlinks = createSymlinkChecker(root);
+            const filesToCheck = await determineFilesToCheck(configInfo, cfg, reporter, globInfo, symlinks);
 
             const processFilesOptions: ProcessFilesOptions = {
                 chalk,
@@ -153,6 +156,8 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
                 userSettings: configInfo.config,
                 lintReporter: reporter,
                 cacheSettings,
+                symlinks,
+                followSymlinks: filesToCheck.followSymlinks,
             };
 
             const result = await processFiles(filesToCheck.files, processFilesOptions);
@@ -274,6 +279,11 @@ interface FilesToCheck {
      * This number is ONLY valid after `files` has been consumed.
      */
     numFiles: number;
+    /**
+     * Read the files even if they are referenced by symbolic links.
+     * Only `--file` and `--file-list` documents can be followed.
+     */
+    followSymlinks: boolean;
 }
 
 async function determineFilesToCheck(
@@ -281,10 +291,12 @@ async function determineFilesToCheck(
     cfg: LintRequest,
     reporter: FinalizedReporter,
     globInfo: AppGlobInfo,
+    symlinks: SymlinkChecker,
 ): Promise<FilesToCheck> {
     const result: FilesToCheck = {
         files: [],
         numFiles: 0,
+        followSymlinks: false,
     };
 
     function countFiles<T>(fnKeep?: (file: T) => boolean) {
@@ -309,6 +321,23 @@ async function determineFilesToCheck(
     async function determineFilesToCheckFromCliFiles(): Promise<FileToProcess[] | AsyncIterable<FileToProcess>> {
         const { fileLists } = cfg;
         const hasFileLists = !!fileLists.length;
+        const followSymlinks = cfg.options.followSymlinks ?? truthy(getEnvironmentVariable('CSPELL_FOLLOW_SYMLINKS'));
+        result.followSymlinks = followSymlinks;
+
+        // Let files referenced by symbolic links through, so they are reported as skipped.
+        const keepSymlinks = (fn: (file: string) => Promise<boolean>) =>
+            followSymlinks ? fn : async (file: string) => (await symlinks.isReachedThroughSymlink(file)) || fn(file);
+
+        if (!followSymlinks) {
+            for (const fileList of fileLists) {
+                if (fileList === 'stdin') continue;
+                if (await symlinks.isReachedThroughSymlink(path.resolve(fileList))) {
+                    throw new ApplicationError(
+                        `Error reading file list from: "${fileList}". It is referenced by a symbolic link, use --follow-symlinks to read it.`,
+                    );
+                }
+            }
+        }
         const { gitIgnore, allGlobs, excludeGlobs, normalizedExcludes } = globInfo;
 
         // Get Exclusions from the config files.
@@ -343,10 +372,13 @@ async function determineFilesToCheck(
         const rawCliFiles = cfg.files?.map((file) => resolveFilename(file, root)).filter(includeFilterCountSkipped);
         const cliFiles = cfg.options.mustFindFiles
             ? rawCliFiles
-            : rawCliFiles && pipeAsync(rawCliFiles, opFilterAsync(isFile));
+            : rawCliFiles && pipeAsync(rawCliFiles, opFilterAsync(keepSymlinks(isFile)));
 
         const foundFiles = hasFileLists
-            ? concatAsyncIterables(cliFiles, await useFileLists(fileLists, includeFilterCountSkipped))
+            ? concatAsyncIterables(
+                  cliFiles,
+                  await useFileLists(fileLists, includeFilterCountSkipped, keepSymlinks(isNotDir)),
+              )
             : cliFiles || [];
 
         const opFilterExcludedFiles = opFilter(filterOutExcludedFilesFn(globMatcher));
@@ -386,7 +418,17 @@ async function determineFilesToCheck(
         }
 
         const opFilterExcludedFiles = opFilter(filterOutExcludedFilesFn(globMatcher));
-        const foundFiles = await findFiles(fileGlobs, globOptions);
+        const globsToSearch: string[] = [];
+        for (const glob of fileGlobs) {
+            if (await symlinks.isGlobReachedThroughSymlink(glob)) {
+                if (calcVerboseLevel(cfg.options) > 0) {
+                    reporter.info(`Glob not searched: "${glob}" goes through a symbolic link.`, MessageTypes.Info);
+                }
+                continue;
+            }
+            globsToSearch.push(glob);
+        }
+        const foundFiles = await findFiles(globsToSearch, globOptions);
         const filtered = gitIgnore ? await gitIgnore.filterOutIgnored(foundFiles) : foundFiles;
 
         const files = isAsyncIterable(filtered)
@@ -491,9 +533,10 @@ async function generateGitIgnore(roots: string | string[] | undefined): Promise<
 async function useFileLists(
     fileListFiles: string[],
     filterFiles: (file: string) => boolean,
+    filterNotDir: (file: string) => Promise<boolean>,
 ): Promise<string[] | AsyncIterable<string>> {
     const files = readFileListFiles(fileListFiles);
-    return pipeAsync(files, opFilter(filterFiles), opFilterAsync(isNotDir));
+    return pipeAsync(files, opFilter(filterFiles), opFilterAsync(filterNotDir));
 }
 
 function createIncludeFileFilterFn(
