@@ -28,6 +28,7 @@ describe('calcOptionsKey', () => {
         ${{ languageId: '', locale: '' }}                       | ${undefined}
         ${{ languageId: 'markdown' }}                           | ${'{"languageId":"markdown"}'}
         ${{ locale: 'fr' }}                                     | ${'{"locale":"fr"}'}
+        ${{ report: 'flagged' }}                                | ${'{"report":"flagged"}'}
         ${{ showSuggestions: false }}                           | ${'{"showSuggestions":false}'}
         ${{ validateDirectives: true }}                         | ${'{"validateDirectives":true}'}
         ${{ validateDirectives: true, languageId: 'markdown' }} | ${'{"languageId":"markdown","validateDirectives":true}'}

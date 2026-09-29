@@ -399,7 +399,9 @@ describe('Linter File Caching', () => {
         const runs: [LinterCliOptions, Partial<RunResult>][] = [
             [{}, { cachedFiles: 0, issues: 1 }],
             [{}, { cachedFiles: 1, issues: 1 }],
+            [{ report: 'flagged' }, { cachedFiles: 0, issues: 0 }],
             [{ report: 'flagged' }, { cachedFiles: 1, issues: 0 }],
+            [{}, { cachedFiles: 0, issues: 1 }],
             [{ languageId: 'markdown' }, { cachedFiles: 0, issues: 0 }],
             [{ languageId: 'markdown' }, { cachedFiles: 1, issues: 0 }],
             [{}, { cachedFiles: 0, issues: 1 }],

@@ -85,10 +85,11 @@ export async function calcCacheSettings(
 }
 
 function calcOptionsKey(cacheOptions: CacheKeyOptions): string | undefined {
-    const { languageId, locale, showSuggestions, validateDirectives } = cacheOptions;
+    const { languageId, locale, report, showSuggestions, validateDirectives } = cacheOptions;
     const options = {
         languageId: languageId || undefined,
         locale: locale || undefined,
+        report: report || undefined,
         showSuggestions,
         validateDirectives,
     };

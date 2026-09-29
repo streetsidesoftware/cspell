@@ -44,6 +44,7 @@ export interface CacheOptions {
 export interface CacheKeyOptions {
     languageId?: string;
     locale?: string;
+    report?: string | undefined;
     showSuggestions?: boolean;
     validateDirectives?: boolean;
 }
