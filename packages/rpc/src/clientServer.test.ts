@@ -28,7 +28,7 @@ describe('Validate Client / Server communications', () => {
         await expect(clientApi.mul(10, 5)).resolves.toBe(50);
         await expect(clientApi.div(10, 5)).resolves.toBe(2);
 
-        await expect(client.isOK()).resolves.toBe(true);
+        await expect(client.isOK({ timeoutMs: 1000 })).resolves.toBe(true);
     });
 
     test('Simple API sleep', async () => {
