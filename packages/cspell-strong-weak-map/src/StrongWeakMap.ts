@@ -1,4 +1,4 @@
-export class StrongWeakMap<K, V extends object> implements Map<K, V> {
+export class StrongWeakMap<K, V extends object> {
     private map: Map<K, WeakRef<V>>;
 
     constructor(init?: [K, V][]) {
@@ -83,14 +83,14 @@ export class StrongWeakMap<K, V extends object> implements Map<K, V> {
     }
 
     /** Returns an iterable of entries in the map. */
-    [Symbol.iterator](): IterableIterator<[K, V]> {
+    [Symbol.iterator](): MapIterator<[K, V]> {
         return this.entries();
     }
 
     /**
      * Returns an iterable of key, value pairs for every entry in the map.
      */
-    *entries(): IterableIterator<[K, V]> {
+    *entries(): MapIterator<[K, V]> {
         for (const key of this.map.keys()) {
             const value = this.get(key);
             if (!value) continue;
@@ -103,14 +103,14 @@ export class StrongWeakMap<K, V extends object> implements Map<K, V> {
      *
      * Note: It is possible that the value associated with the key was released.
      */
-    keys(): IterableIterator<K> {
+    keys(): MapIterator<K> {
         return this.map.keys();
     }
 
     /**
      * Returns an iterable of values in the map
      */
-    *values(): IterableIterator<V> {
+    *values(): MapIterator<V> {
         for (const [_, value] of this) {
             yield value;
         }
