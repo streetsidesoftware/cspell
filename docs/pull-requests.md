@@ -27,10 +27,12 @@ Left out of the release notes:
 - `docs:`: README files and this repo's docs, including `docs/` and `CONTRIBUTING.md`.
 - `website:`: changes to the content of the website. Website dependency and tooling updates are `chore:`.
 - `refactor:`: internal restructuring with no change users would notice.
+- `dev:`: any other code change users wouldn't notice, such as a change to a feature that hasn't been released yet.
 - `test:`: tests only.
 - `perf:`: adding performance tests. A change users would notice as faster is `feat:` or `fix:`.
 - `ci:`: GitHub Actions and workflows.
-- `chore:`: everything else: tooling, dev dependencies, and the coding-agent setup.
+- `chore:`: tooling, dev dependencies, the coding-agent setup, and other repository maintenance. Not code changes: those
+  are `dev:` or `refactor:`.
 
 A title with any other prefix gets no label, and is left out. The labels, sections, and version bumps are in
 [Titles, labels, and sections](./releasing.md#titles-labels-and-sections).
