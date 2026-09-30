@@ -492,7 +492,16 @@ describe('Validate cli', () => {
             chalk.level = 0;
             const root = Path.join(tmp, 'repo');
             const commander = getCommander();
-            const cmd = argv('lint', '--root', root, '--file', 'linked-dir/words.txt', '--no-progress', ...args);
+            const cmd = argv(
+                'lint',
+                '--root',
+                root,
+                '--file',
+                'linked-dir/words.txt',
+                '--no-progress',
+                '--no-must-find-files',
+                ...args,
+            );
             const result = app.run(commander, cmd);
             await (issues ? expect(result).rejects.toThrow(app.CheckFailed) : expect(result).resolves.toBeUndefined());
             expect(JSON.stringify(logger.normalizedHistory()).includes('zqxtarget')).toBe(issues);
