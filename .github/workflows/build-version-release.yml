@@ -45,7 +45,9 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
-          ref: main
+          # The landed release commit, not the tip of main: anything merged
+          # since was not prepared for this release.
+          ref: ${{ github.sha }}
           persist-credentials: false
 
       - name: Setup Node and Pnpm
@@ -59,7 +61,15 @@ jobs:
           echo version=$(jq -r .version .release.json) >> $GITHUB_OUTPUT
 
       - name: Setup Git
+        # lerna versions a branch, not a detached HEAD. If main has moved on,
+        # lerna stops (EBEHIND) and no tag is pushed.
         run: |
+          if [ "$GITHUB_REF" != "refs/heads/main" ]; then
+            echo "::error::Releases run from main, not $GITHUB_REF."
+            exit 1
+          fi
+          git checkout -B main
+          git branch --set-upstream-to=origin/main
           git config user.name streetsidesoftware[bot]
           git config user.email streetsidesoftware[bot]@users.noreply.github.com
 
