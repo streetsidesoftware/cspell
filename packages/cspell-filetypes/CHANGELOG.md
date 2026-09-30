@@ -98,6 +98,52 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - fix: Fix Sponsor cards on npmjs (<a href="https://github.com/streetsidesoftware/cspell/pull/9260">#9260</a>)
 
+## v10.4.0-alpha.0 (2026-09-30)
+
+### Features
+
+- feat: Add `--glob-symlinks` to follow symbolic links when matching globs (<a href="https://github.com/streetsidesoftware/cspell/pull/9342">#9342</a>)
+
+---
+
+</details>
+
+- feat: Respect `COLUMNS` for help and table width (<a href="https://github.com/streetsidesoftware/cspell/pull/9358">#9358</a>)
+- feat: Add `--follow-symlinks` and skip files referenced by symbolic links (<a href="https://github.com/streetsidesoftware/cspell/pull/9340">#9340</a>)
+
+---
+
+</details>
+
+- feat: `--must-find-files` fails when every file was skipped (<a href="https://github.com/streetsidesoftware/cspell/pull/9327">#9327</a>)
+
+---
+
+</details>
+
+### Fixes
+
+- fix: `@cspell/strong-weak-map` types compile with the `esnext` lib (<a href="https://github.com/streetsidesoftware/cspell/pull/9371">#9371</a>)
+- fix: Published types no longer need `@types/node` (<a href="https://github.com/streetsidesoftware/cspell/pull/9359">#9359</a>)
+
+---
+
+</details>
+
+- fix: Show the lint options in cspell --help (<a href="https://github.com/streetsidesoftware/cspell/pull/9362">#9362</a>)
+- fix: Honor `--language-id` and `--locale` when deciding whether to check a file (<a href="https://github.com/streetsidesoftware/cspell/pull/9316">#9316</a>)
+
+---
+
+</details>
+
+- fix(cspell-lib): Check remote documents by URI without passing their text (<a href="https://github.com/streetsidesoftware/cspell/pull/9343">#9343</a>)
+- fix: Don't apply a repository's .gitignore to worktrees and submodules inside it (<a href="https://github.com/streetsidesoftware/cspell/pull/9341">#9341</a>)
+
+---
+
+</details>
+
 ## v10.3.6 (2026-09-29)
 
 ### Fixes
