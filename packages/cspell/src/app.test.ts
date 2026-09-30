@@ -471,6 +471,7 @@ describe('Validate cli', () => {
 
         afterAll(async () => {
             delete process.env['CSPELL_FOLLOW_SYMLINKS'];
+            delete process.env['CSPELL_GLOB_SYMLINKS'];
             await fsp.rm(tmp, { recursive: true, force: true });
         });
 
@@ -498,6 +499,37 @@ describe('Validate cli', () => {
                 root,
                 '--file',
                 'linked-dir/words.txt',
+                '--no-progress',
+                '--no-must-find-files',
+                ...args,
+            );
+            const result = app.run(commander, cmd);
+            await (issues ? expect(result).rejects.toThrow(app.CheckFailed) : expect(result).resolves.toBeUndefined());
+            expect(JSON.stringify(logger.normalizedHistory()).includes('zqxtarget')).toBe(issues);
+        });
+
+        test.each`
+            args                      | env          | issues
+            ${[]}                     | ${undefined} | ${false}
+            ${['--glob-symlinks']}    | ${undefined} | ${true}
+            ${[]}                     | ${'true'}    | ${true}
+            ${['--no-glob-symlinks']} | ${'true'}    | ${false}
+            ${['--follow-symlinks']}  | ${undefined} | ${false}
+        `('lint "linked-dir/*.txt" $args CSPELL_GLOB_SYMLINKS=$env', async ({ args, env, issues }) => {
+            delete process.env['CSPELL_FOLLOW_SYMLINKS'];
+            if (env === undefined) {
+                delete process.env['CSPELL_GLOB_SYMLINKS'];
+            } else {
+                process.env['CSPELL_GLOB_SYMLINKS'] = env;
+            }
+            chalk.level = 0;
+            const root = Path.join(tmp, 'repo');
+            const commander = getCommander();
+            const cmd = argv(
+                'lint',
+                '--root',
+                root,
+                'linked-dir/*.txt',
                 '--no-progress',
                 '--no-must-find-files',
                 ...args,

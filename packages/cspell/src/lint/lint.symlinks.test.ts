@@ -62,6 +62,7 @@ describe('lint and symbolic links', () => {
 
     afterEach(() => {
         delete process.env[environmentKeys.CSPELL_FOLLOW_SYMLINKS];
+        delete process.env[environmentKeys.CSPELL_GLOB_SYMLINKS];
     });
 
     async function lint(globs: string[], options: LinterCliOptions) {
@@ -118,6 +119,34 @@ describe('lint and symbolic links', () => {
         // No file in the linked directory is listed, not even as skipped.
         const listed = r.reporter.progressItems.map((p) => p.filename).filter((f) => f.includes('linked-dir'));
         expect(listed).toEqual([]);
+    });
+
+    test.each`
+        globs                       | options                    | env          | words
+        ${['linked-dir/*.txt']}     | ${{ globSymlinks: true }}  | ${undefined} | ${['zqxtarget']}
+        ${['linked-dir/words.txt']} | ${{ globSymlinks: true }}  | ${undefined} | ${['zqxtarget']}
+        ${['linked-dir']}           | ${{ globSymlinks: true }}  | ${undefined} | ${['zqxtarget']}
+        ${['linked-dir/*.txt']}     | ${{}}                      | ${'true'}    | ${['zqxtarget']}
+        ${['linked-dir/*.txt']}     | ${{ globSymlinks: false }} | ${'true'}    | ${[]}
+    `('globs with globSymlinks: $globs $options CSPELL_GLOB_SYMLINKS=$env', async ({ globs, options, env, words }) => {
+        if (env !== undefined) process.env[environmentKeys.CSPELL_GLOB_SYMLINKS] = env;
+        const r = await lint(globs, options);
+        expect(r.words).toEqual(words);
+    });
+
+    test('globSymlinks searches linked directories and linked files', async () => {
+        const r = await lint(['**'], { globSymlinks: true });
+        const expected = canLinkFiles
+            ? ['zqxinside', 'zqxinside', 'zqxtarget', 'zqxtarget']
+            : ['zqxinside', 'zqxtarget'];
+        expect(r.words).toEqual(expected);
+        expect(r.result).toEqual(oc({ errors: 0 }));
+    });
+
+    test('globSymlinks does not apply to files', async () => {
+        const r = await lint([], { files: ['linked-dir/words.txt'], globSymlinks: true });
+        expect(r.words).toEqual([]);
+        expect(r.result).toEqual(oc({ errors: 0, files: 1, skippedFiles: 1 }));
     });
 
     test('file list with entries that are links', async () => {
