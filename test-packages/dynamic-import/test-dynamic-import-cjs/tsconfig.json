@@ -6,6 +6,7 @@
         "module": "CommonJS",
         "rootDir": "./src",
         "outDir": "dist",
+        // vitest's type declarations don't resolve under CommonJS with `moduleResolution: bundler`.
         "skipLibCheck": true,
         "moduleResolution": "bundler",
         "resolvePackageJsonExports": false

@@ -6,5 +6,5 @@ declare module 'leaked-handles' {
         debugSockets?: boolean;
     }
 
-    export function set(opts: Options);
+    export function set(opts: Options): void;
 }

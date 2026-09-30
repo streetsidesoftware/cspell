@@ -6,7 +6,9 @@
         "rootDir": ".",
         "outDir": ".",
         "types": ["node"],
-        "declarationMap": false
+        "declarationMap": false,
+        // tsdown's type declarations import optional peer dependencies that aren't installed.
+        "skipLibCheck": true
     },
     "files": ["config.ts"]
 }

@@ -6,7 +6,9 @@
         "outDir": "dist",
         "isolatedDeclarations": true,
         "allowImportingTsExtensions": true,
-        "types": ["node"]
+        "types": ["node"],
+        // unplugin's type declarations import every bundler it supports, and most aren't installed.
+        "skipLibCheck": true
     },
     "include": ["src", "tests"]
 }
