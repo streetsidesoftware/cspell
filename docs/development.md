@@ -31,6 +31,14 @@ pnpm run check-spelling
 
 Then write the title and description: see [Pull requests](./pull-requests.md).
 
+## Tests
+
+Tests use vitest, next to the source. To run one package or one file, see
+[Commands](./build-and-packaging.md#commands).
+
+- When code relies on a library's behavior, such as how the glob library treats symbolic links, add a test that fails
+  if that behavior changes. Upgrading or replacing the library then shows up in CI instead of in a release.
+
 ## Spelling
 
 This repo is spell checked with cspell itself.
