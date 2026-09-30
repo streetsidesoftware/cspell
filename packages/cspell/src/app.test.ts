@@ -1,3 +1,5 @@
+import { promises as fsp } from 'node:fs';
+import * as os from 'node:os';
 import * as Path from 'node:path';
 import * as readline from 'node:readline';
 import { fileURLToPath } from 'node:url';
@@ -6,7 +8,7 @@ import * as Util from 'node:util';
 import { toFileDirURL } from '@cspell/url';
 import chalk from 'chalk';
 import * as Commander from 'commander';
-import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
+import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, test, vi } from 'vitest';
 
 import * as app from './app.mjs';
 import { console } from './console.js';
@@ -454,6 +456,77 @@ describe('Validate cli', () => {
             expect(normalizeOutput(captureStderr.text)).toMatchSnapshot();
         },
     );
+
+    describe('--follow-symlinks', () => {
+        let tmp = '';
+
+        beforeAll(async () => {
+            tmp = await fsp.mkdtemp(Path.join(os.tmpdir(), 'cspell-app-symlinks-'));
+            await fsp.mkdir(Path.join(tmp, 'target'));
+            await fsp.mkdir(Path.join(tmp, 'repo'));
+            await fsp.writeFile(Path.join(tmp, 'target/words.txt'), 'zqxtarget\n');
+            await fsp.writeFile(Path.join(tmp, 'repo/cspell.json'), '{"version": "0.2"}\n');
+            await fsp.symlink(Path.join(tmp, 'target'), Path.join(tmp, 'repo/linked-dir'), 'junction');
+        });
+
+        afterAll(async () => {
+            delete process.env['CSPELL_FOLLOW_SYMLINKS'];
+            await fsp.rm(tmp, { recursive: true, force: true });
+        });
+
+        // cspell:ignore zqxtarget
+        test.each`
+            args                                      | env          | issues
+            ${[]}                                     | ${undefined} | ${false}
+            ${['--follow-symlinks']}                  | ${undefined} | ${true}
+            ${['--no-follow-symlinks']}               | ${undefined} | ${false}
+            ${[]}                                     | ${'true'}    | ${true}
+            ${['--no-follow-symlinks']}               | ${'true'}    | ${false}
+            ${['--follow-symlinks', '--force-check']} | ${undefined} | ${true}
+        `('lint --file linked-dir/words.txt $args CSPELL_FOLLOW_SYMLINKS=$env', async ({ args, env, issues }) => {
+            if (env === undefined) {
+                delete process.env['CSPELL_FOLLOW_SYMLINKS'];
+            } else {
+                process.env['CSPELL_FOLLOW_SYMLINKS'] = env;
+            }
+            chalk.level = 0;
+            const root = Path.join(tmp, 'repo');
+            const commander = getCommander();
+            const cmd = argv(
+                'lint',
+                '--root',
+                root,
+                '--file',
+                'linked-dir/words.txt',
+                '--no-progress',
+                '--no-must-find-files',
+                ...args,
+            );
+            const result = app.run(commander, cmd);
+            await (issues ? expect(result).rejects.toThrow(app.CheckFailed) : expect(result).resolves.toBeUndefined());
+            expect(JSON.stringify(logger.normalizedHistory()).includes('zqxtarget')).toBe(issues);
+        });
+
+        test('lint --file linked-dir/words.txt --force-check', async () => {
+            delete process.env['CSPELL_FOLLOW_SYMLINKS'];
+            chalk.level = 0;
+            const root = Path.join(tmp, 'repo');
+            const commander = getCommander();
+            const cmd = argv(
+                'lint',
+                '--root',
+                root,
+                '--file',
+                'linked-dir/words.txt',
+                '--no-progress',
+                '--force-check',
+            );
+            const result = app.run(commander, cmd);
+            await expect(result).rejects.toThrow(app.CheckFailed);
+            expect(JSON.stringify(logger.normalizedHistory()).includes('zqxtarget')).toBe(false);
+            expect(error).toHaveBeenCalled();
+        });
+    });
 
     test.each`
         cmdArgs

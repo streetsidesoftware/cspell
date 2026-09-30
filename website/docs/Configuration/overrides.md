@@ -30,6 +30,11 @@ See [Understanding CSpell Globs](../globs.md) for glob syntax.
 A file is also skipped -- regardless of `overrides` or other settings -- if CSpell determines it to be binary,
 or of a known binary / generated file type.
 
+Files that are symbolic links, or are in a linked directory under the root, are skipped too. Glob searches never go
+through symbolic links. To check `--file`, `--files`, or `--file-list` documents referenced by symbolic links, use
+`--follow-symlinks` or set the environment variable `CSPELL_FOLLOW_SYMLINKS=true`. `--no-follow-symlinks` overrides the
+environment variable. A `--file-list` file that is referenced by a symbolic link is an error unless links are followed.
+
 ## Step 2: Determine the Settings and Check the Document
 
 Once a file has been selected, CSpell determines its settings and checks it.

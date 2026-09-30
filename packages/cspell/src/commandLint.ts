@@ -120,6 +120,10 @@ export function commandLint(prog: Command, opts: CommandOptions): Command {
             '--force-check',
             'Force the --file or --file-list documents to be checked even if it would normally be excluded.',
         )
+        .option('--follow-symlinks', 'Allow checking --file and --file-list documents referenced by symbolic links.')
+        .addOption(
+            crOpt('--no-follow-symlinks', 'Skip documents referenced by symbolic links.').default(undefined).hideHelp(),
+        )
         .option('--no-issues', 'Do not show the spelling errors.')
         .option('--no-progress', 'Turn off progress messages')
         .option('--no-summary', 'Turn off summary message in console.')
