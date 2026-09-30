@@ -33,5 +33,6 @@ setting `CSPELL_GLOB_SYMLINKS=true`.
 
 ## Decisions
 
-| #   | Title | Status |
-| --- | ----- | ------ |
+| #    | Title                                                                                                 | Status   |
+| ---- | ----------------------------------------------------------------------------------------------------- | -------- |
+| 0001 | [Glob searches follow links only when asked, with their own option](./0001-opt-in-separate-option.md) | Accepted |
