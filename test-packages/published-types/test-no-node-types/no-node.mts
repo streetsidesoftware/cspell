@@ -1,16 +1,14 @@
 // Type-checked by `check-no-node-types.mjs`: the published types must work without `@types/node`.
-import type * as cspellConfigLib from 'cspell-config-lib';
-import type * as cspellFiletypes from '@cspell/filetypes';
-import type * as cspellGrammar from 'cspell-grammar';
-import type * as cspellGrammarParsersTypescript from 'cspell-grammar/parsers/typescript';
-import type * as cspellCspellJsonReporter from '@cspell/cspell-json-reporter';
-import type * as cspellCspellJunitReporter from '@cspell/cspell-junit-reporter';
-import type * as cspellCspellPerformanceMonitor from '@cspell/cspell-performance-monitor';
-import type * as cspellCspellResolver from '@cspell/cspell-resolver';
-import type * as cspellUrl from '@cspell/url';
-import type * as cspellCspellWorker from '@cspell/cspell-worker';
-import type * as cspellRpc from '@cspell/rpc';
-import type * as flatpackJson from 'flatpack-json';
-import type * as hunspellReader from 'hunspell-reader';
-
-export type { cspellConfigLib, cspellFiletypes, cspellGrammar, cspellGrammarParsersTypescript, cspellCspellJsonReporter, cspellCspellJunitReporter, cspellCspellPerformanceMonitor, cspellCspellResolver, cspellUrl, cspellCspellWorker, cspellRpc, flatpackJson, hunspellReader };
+export type CspellConfigLib = typeof import('cspell-config-lib');
+export type CspellFiletypes = typeof import('@cspell/filetypes');
+export type CspellGrammar = typeof import('cspell-grammar');
+export type CspellGrammarParsersTypescript = typeof import('cspell-grammar/parsers/typescript');
+export type CspellCspellJsonReporter = typeof import('@cspell/cspell-json-reporter');
+export type CspellCspellJunitReporter = typeof import('@cspell/cspell-junit-reporter');
+export type CspellCspellPerformanceMonitor = typeof import('@cspell/cspell-performance-monitor');
+export type CspellCspellResolver = typeof import('@cspell/cspell-resolver');
+export type CspellUrl = typeof import('@cspell/url');
+export type CspellCspellWorker = typeof import('@cspell/cspell-worker');
+export type CspellRpc = typeof import('@cspell/rpc');
+export type FlatpackJson = typeof import('flatpack-json');
+export type HunspellReader = typeof import('hunspell-reader');

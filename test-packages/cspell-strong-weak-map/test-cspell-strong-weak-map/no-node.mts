@@ -1,4 +1,2 @@
 // Type-checked by `check-no-node-types.mjs`: the published types must work without `@types/node`.
-import type * as cspellStrongWeakMap from '@cspell/strong-weak-map';
-
-export type { cspellStrongWeakMap };
+export type CspellStrongWeakMap = typeof import('@cspell/strong-weak-map');

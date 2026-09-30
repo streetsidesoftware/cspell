@@ -1,4 +1,2 @@
 // Type-checked by `check-no-node-types.mjs`: the published types must work without `@types/node`.
-import type * as cspellTrieLib from 'cspell-trie-lib';
-
-export type { cspellTrieLib };
+export type CspellTrieLib = typeof import('cspell-trie-lib');

@@ -1,6 +1,4 @@
 // Type-checked by `check-no-node-types.mjs`: the published types must work without `@types/node`.
-import type * as cspellEslintPlugin from '@cspell/eslint-plugin';
-import type * as cspellEslintPluginConfigs from '@cspell/eslint-plugin/configs';
-import type * as cspellEslintPluginRecommended from '@cspell/eslint-plugin/recommended';
-
-export type { cspellEslintPlugin, cspellEslintPluginConfigs, cspellEslintPluginRecommended };
+export type CspellEslintPlugin = typeof import('@cspell/eslint-plugin');
+export type CspellEslintPluginConfigs = typeof import('@cspell/eslint-plugin/configs');
+export type CspellEslintPluginRecommended = typeof import('@cspell/eslint-plugin/recommended');
