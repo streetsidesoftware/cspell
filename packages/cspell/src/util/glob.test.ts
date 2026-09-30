@@ -1,3 +1,5 @@
+import { promises as fsp } from 'node:fs';
+import * as os from 'node:os';
 import * as path from 'node:path';
 
 import { GlobMatcher } from 'cspell-glob';
@@ -5,7 +7,8 @@ import type { Glob } from 'cspell-lib';
 import type { Options as MicromatchOptions } from 'micromatch';
 import micromatch from 'micromatch';
 import { minimatch } from 'minimatch';
-import { describe, expect, test } from 'vitest';
+import { glob as tinyGlob, isDynamicPattern } from 'tinyglobby';
+import { afterAll, beforeAll, describe, expect, test } from 'vitest';
 
 import { calcGlobs, normalizeGlobsToRoot } from './glob.js';
 
@@ -158,6 +161,79 @@ describe('Validate micromatch assumptions', () => {
             expect(r).toEqual(expected ? [file] : []);
         },
     );
+});
+
+describe('Validate tinyglobby assumptions', () => {
+    // globP and the symbolic link checks rely on how tinyglobby treats links and patterns.
+    let tmp = '';
+    let root = '';
+    let canLinkFiles = true;
+
+    beforeAll(async () => {
+        tmp = await fsp.mkdtemp(path.join(os.tmpdir(), 'cspell-tinyglobby-'));
+        root = path.join(tmp, 'root');
+        await fsp.mkdir(path.join(root, 'real'), { recursive: true });
+        await fsp.mkdir(path.join(tmp, 'target'), { recursive: true });
+        await fsp.writeFile(path.join(root, 'a.txt'), 'a\n');
+        await fsp.writeFile(path.join(root, 'real/b.txt'), 'b\n');
+        await fsp.writeFile(path.join(tmp, 'target/c.txt'), 'c\n');
+        await fsp.symlink(path.join(tmp, 'target'), path.join(root, 'linked-dir'), 'junction');
+        await fsp.symlink(path.join(root, 'real'), path.join(root, 'real/loop'), 'junction');
+        try {
+            await fsp.symlink(path.join(tmp, 'target/c.txt'), path.join(root, 'linked-file.txt'), 'file');
+        } catch {
+            // Creating file links can need extra permissions on Windows.
+            canLinkFiles = false;
+        }
+    });
+
+    afterAll(async () => {
+        await fsp.rm(tmp, { recursive: true, force: true });
+    });
+
+    async function find(pattern: string, followSymbolicLinks: boolean): Promise<string[]> {
+        const found = await tinyGlob([pattern], {
+            cwd: root,
+            onlyFiles: true,
+            absolute: true,
+            followSymbolicLinks,
+            expandDirectories: false,
+        });
+        return found.map((f) => path.relative(root, f).split(path.sep).join('/')).sort();
+    }
+
+    test('followSymbolicLinks: false skips linked files and does not enter linked directories', async () => {
+        expect(await find('**', false)).toEqual(['a.txt', 'real/b.txt']);
+    });
+
+    test('followSymbolicLinks: true reports files by the path through the link', async () => {
+        const expected = ['a.txt', 'linked-dir/c.txt', 'real/b.txt', 'real/loop/b.txt'];
+        if (canLinkFiles) expected.push('linked-file.txt');
+        expect(await find('**', true)).toEqual(expected.sort());
+    });
+
+    test('followSymbolicLinks: true follows a link to a parent directory once', async () => {
+        const found = await find('real/**', true);
+        expect(found).toEqual(['real/b.txt', 'real/loop/b.txt']);
+    });
+
+    test.each`
+        segment       | expected
+        ${'docs'}     | ${false}
+        ${'guide.md'} | ${false}
+        ${'.'}        | ${false}
+        ${'..'}       | ${false}
+        ${'*'}        | ${true}
+        ${'**'}       | ${true}
+        ${'*.md'}     | ${true}
+        ${'link*'}    | ${true}
+        ${'{a,b}'}    | ${true}
+        ${'[ab]'}     | ${true}
+        ${'@(a|b)'}   | ${true}
+        ${'a\\*b'}    | ${false}
+    `('isDynamicPattern($segment) is $expected', ({ segment, expected }) => {
+        expect(isDynamicPattern(segment)).toBe(expected);
+    });
 });
 
 describe('Validate internal functions', () => {
