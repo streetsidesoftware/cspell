@@ -22,7 +22,7 @@ export async function findRepoRoot(directory: string | URL, vfs?: VFileSystem): 
  */
 export async function isRepoRoot(directory: string | URL, vfs?: VFileSystem): Promise<boolean> {
     const dir = toFileDirURL(directory);
-    if (dir.protocol !== 'file:') return false;
+    if (!dir.pathname.startsWith('/')) return false;
     const fs = vfs || getDefaultVirtualFs().getFS(dir);
     return !!(await findDotGit(fs, dir));
 }

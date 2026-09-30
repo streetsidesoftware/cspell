@@ -2,6 +2,7 @@ import * as fs from 'node:fs/promises';
 import * as path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import type { VFileSystem } from 'cspell-io';
 import { beforeAll, describe, expect, test } from 'vitest';
 
 import { GitIgnore } from './GitIgnore.js';
@@ -179,11 +180,48 @@ describe('GitIgnoreServer', () => {
         });
     });
 
+    describe('nested repositories on a remote file system', () => {
+        const base = 'vscode-vfs://github/owner/';
+        const files = new Map([
+            [base + '.gitignore', '*.md\n'],
+            [base + 'repo/.git', ''],
+        ]);
+
+        test.each`
+            file                           | expected
+            ${base + 'README.md'}          | ${true}
+            ${base + 'repo/README.md'}     | ${false}
+            ${base + 'repo/src/README.md'} | ${false}
+        `('isIgnored $file', async ({ file, expected }) => {
+            const gs = new GitIgnore([], createRemoteFs(files));
+            expect(await gs.isIgnored(new URL(file))).toBe(expected);
+        });
+    });
+
     function p(dir: string, ...dirs: string[]) {
         return path.join(dir, ...dirs);
     }
 
     function pr(...dirs: string[]) {
         return path.join(path.resolve(...dirs), './');
+    }
+
+    /**
+     * A read-only file system for a scheme other than `file:`, like the remote ones in the VS Code extension.
+     */
+    function createRemoteFs(files: Map<string, string>): VFileSystem {
+        const find = async (url: URL) => {
+            const content = files.get(url.href);
+            if (content === undefined) throw new Error(`Not found: ${url.href}`);
+            return content;
+        };
+        const fs = {
+            stat: async (url: URL) => (await find(url), {}),
+            readFile: async (url: URL) => {
+                const content = await find(url);
+                return { url, content, getText: () => content };
+            },
+        };
+        return fs as unknown as VFileSystem;
     }
 });
