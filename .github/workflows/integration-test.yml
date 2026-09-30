@@ -11,6 +11,7 @@ on:
       - '*-lock.yaml'
       - '.github/workflows/integration-test.yml'
       - '.github/actions/build-for-integrations/**'
+      - '.github/actions/setup-pnpm/**'
       - '!website/**'
   push:
     branches:
@@ -26,6 +27,7 @@ on:
       - '*-lock.yaml'
       - '.github/workflows/integration-test.yml'
       - '.github/actions/build-for-integrations/**'
+      - '.github/actions/setup-pnpm/**'
       - '!website/**'
   # Run on demand
   workflow_dispatch:

@@ -8,7 +8,7 @@ inputs:
   node-version:
     required: false
     description: The version of Node to use.
-    default: 'lts/*'
+    default: 'lts'
   use-setup:
     required: false
     description: |
@@ -80,7 +80,7 @@ runs:
           Build Cache: ${{ steps.step-cache-build.outputs.cache-hit && 'Hit' || 'Miss' }}
 
     - name: Setup Env
-      uses: ./.github/actions/setup-node
+      uses: ./.github/actions/setup-pnpm
       with:
         node-version: ${{ inputs.node-version }}
 
