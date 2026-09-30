@@ -34,6 +34,8 @@ interface PrefetchConfig {
     readonly root: LintRequest['root'];
     readonly maxFileSize: LintRequest['maxFileSize'];
     readonly forceCheck: boolean;
+    readonly languageId: string | undefined;
+    readonly locale: string | undefined;
     readonly config: CSpellSettings;
     readonly cache: CSpellLintResultCache;
 }
@@ -56,7 +58,12 @@ function prefetch(fileToProcess: FileToProcess, cfg: PrefetchConfig): PrefetchFi
             return { fileResult };
         }
         const uri = filenameToUri(filename, cfg.root).href;
-        const checkResult = await shouldCheckDocument({ uri }, { forceCheck: cfg.forceCheck }, cfg.config);
+        const { languageId, locale } = cfg;
+        const checkResult = await shouldCheckDocument(
+            { uri, languageId, locale },
+            { forceCheck: cfg.forceCheck },
+            cfg.config,
+        );
         if (!checkResult.shouldCheck) {
             return { skip: true, skipReason: checkResult.reason || 'Ignored by configuration.' } as const;
         }
@@ -102,6 +109,8 @@ export async function processFiles(
         root: options.cfg.root,
         maxFileSize: options.cfg.maxFileSize,
         forceCheck: !!options.cfg.options.forceCheck,
+        languageId: options.cfg.options.languageId || undefined,
+        locale: options.cfg.locale || undefined,
         config: options.configInfo.config,
         cache,
     };

@@ -6533,6 +6533,39 @@ error"
 
 exports[`Validate cli > app 'issue-8200' Expect Error: undefined 3`] = `""`;
 
+exports[`Validate cli > app 'language-id disabled' Expect Error: undefined 1`] = `[]`;
+
+exports[`Validate cli > app 'language-id disabled' Expect Error: undefined 2`] = `
+"error	CSpell: Files checked: 0, skipped: 1, Issues found: 0 in 0 files.
+error"
+`;
+
+exports[`Validate cli > app 'language-id disabled' Expect Error: undefined 3`] = `""`;
+
+exports[`Validate cli > app 'language-id locale fr' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'language-id locale fr' Expect Error: [Function CheckFailed] 2`] = `
+"log	notes.txt:1:1 - Unknown word (This)
+log
+log	notes.txt:1:12 - Unknown word (wrngwrd)
+log
+error	CSpell: Files checked: 1, Issues found: 2 in 1 file.
+error"
+`;
+
+exports[`Validate cli > app 'language-id locale fr' Expect Error: [Function CheckFailed] 3`] = `""`;
+
+exports[`Validate cli > app 'language-id markdown' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'language-id markdown' Expect Error: [Function CheckFailed] 2`] = `
+"log	notes.txt:1:12 - Unknown word (wrngwrd)
+log
+error	CSpell: Files checked: 1, Issues found: 1 in 1 file.
+error"
+`;
+
+exports[`Validate cli > app 'language-id markdown' Expect Error: [Function CheckFailed] 3`] = `""`;
+
 exports[`Validate cli > app 'link add' 1`] = `""`;
 
 exports[`Validate cli > app 'link list' 1`] = `""`;
