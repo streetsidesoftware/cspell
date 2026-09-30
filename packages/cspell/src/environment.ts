@@ -31,6 +31,12 @@ export interface CSpellEnvironmentVariables {
      * Acceptable values are: 'true', 'false', 't', 'f', 'on', 'off', 'yes', 'no', '1', '0'
      */
     CSPELL_FOLLOW_SYMLINKS?: string;
+    /**
+     * Follow symbolic links when matching globs.
+     * The `--glob-symlinks` and `--no-glob-symlinks` options take precedence.
+     * Acceptable values are: 'true', 'false', 't', 'f', 'on', 'off', 'yes', 'no', '1', '0'
+     */
+    CSPELL_GLOB_SYMLINKS?: string;
 }
 
 export type EnvironmentKeys = keyof CSpellEnvironmentVariables;
@@ -47,6 +53,7 @@ export const environmentKeys: EnvironmentKeyNames = {
     CSPELL_CONFIG_PATH: 'CSPELL_CONFIG_PATH',
     CSPELL_DEFAULT_CONFIG_PATH: 'CSPELL_DEFAULT_CONFIG_PATH',
     CSPELL_FOLLOW_SYMLINKS: 'CSPELL_FOLLOW_SYMLINKS',
+    CSPELL_GLOB_SYMLINKS: 'CSPELL_GLOB_SYMLINKS',
 };
 
 export function getEnvironmentVariables(): CSpellEnvironmentVariables {

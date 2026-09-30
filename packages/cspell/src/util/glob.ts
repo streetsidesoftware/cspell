@@ -21,6 +21,10 @@ export interface GlobOptions {
     dot?: boolean | undefined;
     nodir?: boolean | undefined; // cspell:ignore nodir
     ignore?: string | Array<string> | undefined;
+    /**
+     * Follow symbolic links.
+     */
+    followSymlinks?: boolean | undefined;
 }
 
 const defaultExcludeGlobs = ['node_modules/**'];
@@ -43,7 +47,7 @@ export async function globP(pattern: string | string[], options?: GlobOptions): 
         dot,
         ignore,
         absolute: true,
-        followSymbolicLinks: false,
+        followSymbolicLinks: options?.followSymlinks ?? false,
         expandDirectories: false,
         // debug: true,
     });

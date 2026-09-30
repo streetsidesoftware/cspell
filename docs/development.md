@@ -31,6 +31,16 @@ pnpm run check-spelling
 
 Then write the title and description: see [Pull requests](./pull-requests.md).
 
+## Tests
+
+Tests use vitest, next to the source. To run one package or one file, see
+[Commands](./build-and-packaging.md#commands).
+
+- When code depends on how a library behaves, test that behavior: only the part the code relies on, not the library as a
+  whole. Put these tests in a `describe('Validate <library> assumptions', …)` block next to the code that depends on it,
+  as [`globHelper.test.ts`](../packages/cspell-glob/src/globHelper.test.ts) does for micromatch and minimatch. If an
+  upgrade or a replacement behaves differently, CI shows it instead of a release.
+
 ## Spelling
 
 This repo is spell checked with cspell itself.

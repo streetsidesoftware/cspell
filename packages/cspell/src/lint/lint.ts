@@ -281,7 +281,6 @@ interface FilesToCheck {
     numFiles: number;
     /**
      * Read the files even if they are referenced by symbolic links.
-     * Only `--file` and `--file-list` documents can be followed.
      */
     followSymlinks: boolean;
 }
@@ -416,11 +415,14 @@ async function determineFilesToCheck(
         if (enableGlobDot !== undefined) {
             globOptions.dot = enableGlobDot;
         }
+        const globSymlinks = cfg.options.globSymlinks ?? truthy(getEnvironmentVariable('CSPELL_GLOB_SYMLINKS'));
+        globOptions.followSymlinks = globSymlinks;
+        result.followSymlinks = globSymlinks;
 
         const opFilterExcludedFiles = opFilter(filterOutExcludedFilesFn(globMatcher));
         const globsToSearch: string[] = [];
         for (const glob of fileGlobs) {
-            if (await symlinks.isGlobReachedThroughSymlink(glob)) {
+            if (!globSymlinks && (await symlinks.isGlobReachedThroughSymlink(glob))) {
                 if (calcVerboseLevel(cfg.options) > 0) {
                     reporter.info(`Glob not searched: "${glob}" goes through a symbolic link.`, MessageTypes.Info);
                 }

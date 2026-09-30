@@ -11,7 +11,7 @@ import { InMemoryReporter } from '../util/InMemoryReporter.js';
 import { runLint } from './lint.js';
 import { LintRequest } from './LintRequest.js';
 
-// cspell:ignore zqxtarget zqxinside
+// cspell:ignore zqxtarget zqxinside zqxloop
 
 const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
 
@@ -62,6 +62,7 @@ describe('lint and symbolic links', () => {
 
     afterEach(() => {
         delete process.env[environmentKeys.CSPELL_FOLLOW_SYMLINKS];
+        delete process.env[environmentKeys.CSPELL_GLOB_SYMLINKS];
     });
 
     async function lint(globs: string[], options: LinterCliOptions) {
@@ -118,6 +119,50 @@ describe('lint and symbolic links', () => {
         // No file in the linked directory is listed, not even as skipped.
         const listed = r.reporter.progressItems.map((p) => p.filename).filter((f) => f.includes('linked-dir'));
         expect(listed).toEqual([]);
+    });
+
+    test.each`
+        globs                       | options                    | env          | words
+        ${['linked-dir/*.txt']}     | ${{ globSymlinks: true }}  | ${undefined} | ${['zqxtarget']}
+        ${['linked-dir/words.txt']} | ${{ globSymlinks: true }}  | ${undefined} | ${['zqxtarget']}
+        ${['linked-dir']}           | ${{ globSymlinks: true }}  | ${undefined} | ${['zqxtarget']}
+        ${['linked-dir/*.txt']}     | ${{}}                      | ${'true'}    | ${['zqxtarget']}
+        ${['linked-dir/*.txt']}     | ${{ globSymlinks: false }} | ${'true'}    | ${[]}
+    `('globs with globSymlinks: $globs $options CSPELL_GLOB_SYMLINKS=$env', async ({ globs, options, env, words }) => {
+        if (env !== undefined) process.env[environmentKeys.CSPELL_GLOB_SYMLINKS] = env;
+        const r = await lint(globs, options);
+        expect(r.words).toEqual(words);
+    });
+
+    test('globSymlinks searches linked directories and linked files', async () => {
+        const r = await lint(['**'], { globSymlinks: true });
+        const expected = canLinkFiles
+            ? ['zqxinside', 'zqxinside', 'zqxtarget', 'zqxtarget']
+            : ['zqxinside', 'zqxtarget'];
+        expect(r.words).toEqual(expected);
+        expect(r.result).toEqual(oc({ errors: 0 }));
+    });
+
+    test('globSymlinks stops at a link to a parent directory', async () => {
+        // A separate tree, so the loop doesn't change what the other tests find.
+        const loopRoot = path.join(tmp, 'loop-repo');
+        await fsp.mkdir(path.join(loopRoot, 'src/deeper'), { recursive: true });
+        await fsp.writeFile(path.join(loopRoot, 'src/a.txt'), 'zqxloop\n');
+        await fsp.symlink(path.join(loopRoot, 'src'), path.join(loopRoot, 'src/deeper/loop'), 'junction');
+
+        const r = await lint(['**'], { root: loopRoot, globSymlinks: true });
+        const checked = r.reporter.progressItems
+            .filter((p) => p.type === 'ProgressFileComplete')
+            .map((p) => path.relative(loopRoot, p.filename).split(path.sep).join('/'))
+            .sort();
+        expect(checked).toEqual(['src/a.txt', 'src/deeper/loop/a.txt']);
+        expect(r.words).toEqual(['zqxloop', 'zqxloop']);
+    });
+
+    test('globSymlinks does not apply to files', async () => {
+        const r = await lint([], { files: ['linked-dir/words.txt'], globSymlinks: true });
+        expect(r.words).toEqual([]);
+        expect(r.result).toEqual(oc({ errors: 0, files: 1, skippedFiles: 1 }));
     });
 
     test('file list with entries that are links', async () => {
