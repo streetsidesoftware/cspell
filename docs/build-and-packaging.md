@@ -46,9 +46,9 @@ The settings live in `tsconfig.json`. `tsconfig.base.json` extends it, not the o
 - `moduleResolution: node16`: relative imports need an explicit `.js` extension.
 - `isolatedDeclarations`: every exported symbol needs an explicit type annotation.
 - `exactOptionalPropertyTypes`: `{ x?: string }` doesn't accept an explicit `undefined`.
-- `skipLibCheck`: prefer `false`. The root `tsconfig.json` sets `false`. `tsconfig.esm.json`, which most packages
-  extend, sets `true`, because type errors in third-party packages broke builds. Don't turn it on anywhere new without
-  that reason.
+- `skipLibCheck`: `false`, set in the root `tsconfig.json`, so dependencies' type declarations are checked too. A few
+  projects set `true` because a third-party package ships declarations with errors, each with a comment naming it.
+  Don't turn it on anywhere else without that reason.
 
 ### Cross-platform
 
