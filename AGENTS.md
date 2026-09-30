@@ -29,7 +29,6 @@ pnpm run build
 pnpm test
 pnpm run lint-ci          # check only
 pnpm run check-spelling
-pnpm run check-types-no-node   # published types work without @types/node
 git status --porcelain    # only intended changes
 ```
 

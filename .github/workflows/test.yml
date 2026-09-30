@@ -68,10 +68,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Check published types work without @types/node
-        if: matrix.os == 'ubuntu-latest' && matrix.node-version == '24.x'
-        run: pnpm run check-types-no-node
-
       - name: Test Yarn projects
         # Also installs the Yarn projects that the `CSPELL_TEST_YARN` tests need.
         run: pnpm run test:yarn

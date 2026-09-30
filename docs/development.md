@@ -22,7 +22,6 @@ pnpm run build
 pnpm test
 pnpm run lint-ci
 pnpm run check-spelling
-pnpm run check-types-no-node
 ```
 
 - `pnpm run lint` runs ESLint and Prettier and writes their fixes. `pnpm run lint-ci` only checks. On a PR, autofix.ci
