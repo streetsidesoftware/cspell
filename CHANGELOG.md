@@ -587,6 +587,325 @@ These changes lay the groundwork for parsers and other tools to annotate text wi
 
 </details>
 
+## v10.4.0-alpha.0 (2026-09-30)
+
+### Features
+
+<details>
+<summary>feat: Add `--glob-symlinks` to follow symbolic links when matching globs (<a href="https://github.com/streetsidesoftware/cspell/pull/9342">#9342</a>)</summary>
+
+### feat: Add `--glob-symlinks` to follow symbolic links when matching globs ([#9342](https://github.com/streetsidesoftware/cspell/pull/9342))
+
+## Summary
+
+`cspell lint` can now follow symbolic links in glob searches, with `--glob-symlinks`. Glob searches skip linked files and linked directories by default, so a tree made of links, such as Bazel runfiles, found nothing to check.
+
+Closes #7700.
+
+## Feature
+
+```sh
+cspell lint --glob-symlinks "**"
+```
+
+- `--glob-symlinks` follows symbolic links, and searches linked directories, when matching globs. Links are followed wherever they point.
+- `CSPELL_GLOB_SYMLINKS=true` does the same for a whole job. `--no-glob-symlinks` overrides it.
+- API: `globSymlinks` in the `lint` options.
+- It can't be set in a configuration file.
+- Files are reported by the path through the link. A file reached by two paths is checked under both.
+- It applies only to glob searches. For `--file`, `--files`, and `--file-list` documents, use `--follow-symlinks`.
+
+<details>
+<summary>Technical Details</summary>
+
+- The design decisions are recorded in `docs/ADRs/glob-symlinks/`.
+- Link loops, such as a link to a parent directory, are stopped by the glob search after one level.
+
+</details>
+
+---
+
+</details>
+
+<details>
+<summary>feat: Respect `COLUMNS` for help and table width (<a href="https://github.com/streetsidesoftware/cspell/pull/9358">#9358</a>)</summary>
+
+### feat: Respect `COLUMNS` for help and table width ([#9358](https://github.com/streetsidesoftware/cspell/pull/9358))
+
+## Summary
+
+Help, and the tables from `cspell trace` and `cspell dictionaries`, now follow the `COLUMNS` environment variable. That lets you choose a narrower width, which helps with large fonts and screen magnifiers. The help in the `cspell` README now fits on npmjs.com without scrolling sideways.
+
+## Feature
+
+Set `COLUMNS` to pick the output width:
+
+```sh
+COLUMNS=60 cspell lint --help
+```
+
+Before, `cspell lint --help` at 80 columns:
+
+```text
+Usage: cspell lint [options] [globs...] [file://<path> ...] [stdin[://<path>]]
+...
+Options:
+  -c, --config <cspell.json>     Configuration file to use.  By default cspell
+                                 looks for cspell.json in the current directory.
+  --no-config-search             Disable automatic searching for additional
+                                 configuration files in parent directories. Only
+                                 the specified config file (if any) will be
+                                 used.
+```
+
+After, `COLUMNS=72 cspell lint --help`:
+
+```text
+Usage: cspell lint [options] [globs...] [file://<path> ...]
+                   [stdin[://<path>]]
+...
+Options:
+  -c, --config <cspell.json>     Configuration file to use.  By default
+                                 cspell looks for cspell.json in the
+                                 current directory.
+  --no-config-search             Disable automatic searching for
+                                 additional configuration files in
+                                 parent directories. Only the specified
+                                 config file (if any) will be used.
+```
+
+- `COLUMNS` takes priority over the terminal width when it is set to a positive number.
+- Without it, cspell uses the terminal width as before, or 80 when output isn't a terminal.
+- Option descriptions in help now wrap at narrower widths. Before, anything narrower than about 73 columns left them unwrapped.
+
+## Other changes
+
+- A few lines in `cspell lint --help` are shorter, so the help fits in 72 columns. The usage line now breaks before `[stdin[://<path>]]`.
+- The help in the `cspell` README is generated at 72 columns, which is what npmjs.com shows in a code block.
+
+---
+
+</details>
+
+<details>
+<summary>feat: Add `--follow-symlinks` and skip files referenced by symbolic links (<a href="https://github.com/streetsidesoftware/cspell/pull/9340">#9340</a>)</summary>
+
+### feat: Add `--follow-symlinks` and skip files referenced by symbolic links ([#9340](https://github.com/streetsidesoftware/cspell/pull/9340))
+
+## Summary
+
+`cspell lint` now skips files that are symbolic links, or are in a linked directory, and adds `--follow-symlinks` to check them.
+
+Glob searches already skipped linked files and linked directories. Files named explicitly were read through links. Now every way of naming files behaves the same:
+
+- A file that is a symbolic link, or is in a linked directory, is skipped. This applies to `--file`, `--files`, `--file-list` entries, the `files` option of `lint`, and file or glob arguments.
+- A glob that goes through a linked directory, such as `docs/*.md` when `docs` is a link, is not searched.
+- A `--file-list` file that is a symbolic link is an error, like a missing list.
+- A linked file named with `--file`, `--files`, or `--file-list` shows as `skipped` in the progress. File and glob arguments leave links out, as glob searches always have. Use `--verbose` to see why a file or glob was skipped.
+- With `--force-check`, a linked file is an error instead of being skipped.
+
+If you check linked files on purpose, for example Bazel runfiles, add `--follow-symlinks`.
+
+## Feature
+
+```sh
+cspell lint --follow-symlinks --file-list files.txt
+```
+
+- `--follow-symlinks` allows checking `--file` and `--file-list` documents referenced by symbolic links. Glob searches don't follow links unless `--glob-symlinks` is used ([#9342](https://github.com/streetsidesoftware/cspell/pull/9342)).
+- `CSPELL_FOLLOW_SYMLINKS=true` does the same for a whole job. `--no-follow-symlinks` overrides it.
+- API: `followSymlinks` in the `lint` options.
+
+<details>
+<summary>Technical Details</summary>
+
+- For a file under the root, each folder from the root down, and the file itself, is checked for a symbolic link. For a file outside the root, only the file itself is checked, so paths such as a worktree's commit message file still work.
+- Links above the root, such as `/tmp` on macOS, don't count.
+- A link is recognized without following it, so a link to a missing file is skipped the same way as any other link.
+
+</details>
+
+---
+
+</details>
+
+<details>
+<summary>feat: `--must-find-files` fails when every file was skipped (<a href="https://github.com/streetsidesoftware/cspell/pull/9327">#9327</a>)</summary>
+
+### feat: `--must-find-files` fails when every file was skipped ([#9327](https://github.com/streetsidesoftware/cspell/pull/9327))
+
+## Summary
+
+With `--must-find-files`, which is on by default, `cspell lint` now fails when every file it found was skipped, and says so. Since 10.2.0 the summary shows skipped files, but they still counted as found, so a run that checked nothing could pass.
+
+Fixes #9326.
+
+## Feature
+
+A file is skipped when it is excluded by `ignorePaths`, `.gitignore`, or the `files` setting, when it is binary, or when an override or language setting turns off checking for it. Skipped files are still listed in the summary, but they no longer count as found.
+
+```text
+$ cspell lint --file sub/doc.md
+CSpell: Files checked: 0, skipped: 1, Issues found: 0 in 0 files.
+No files found to check (1 skipped).
+$ echo $?
+1
+```
+
+- This applies to `--file`, `--file-list`, and globs alike.
+- A run that checks at least one file is not affected.
+- To let a run pass when every file is skipped, use `--no-must-find-files`.
+- `--silent` hides the new message.
+
+<details>
+<summary>Technical Details</summary>
+
+- The file count passed to custom reporters has included skipped files since 10.2.0. Its documentation now says so.
+
+</details>
+
+---
+
+</details>
+
+### Fixes
+
+<details>
+<summary>fix: `@cspell/strong-weak-map` types compile with the `esnext` lib (<a href="https://github.com/streetsidesoftware/cspell/pull/9371">#9371</a>)</summary>
+
+### fix: `@cspell/strong-weak-map` types compile with the `esnext` lib ([#9371](https://github.com/streetsidesoftware/cspell/pull/9371))
+
+## Summary
+
+`@cspell/strong-weak-map`'s types now compile in projects that use TypeScript's `esnext` lib with `skipLibCheck: false`.
+
+- `keys()`, `values()`, `entries()`, and iterating a `StrongWeakMap` are now typed as returning a `MapIterator`, like a `Map`, so the iterator helpers (`map`, `filter`, `take`, …) are typed too. Before, they returned `IterableIterator`, which `esnext` rejects.
+- `StrongWeakMap` no longer declares that it implements `Map`. With `esnext`, `Map` has `getOrInsert` and `getOrInsertComputed`, which `StrongWeakMap` doesn't have, so the declaration was already an error there. It keeps all of its methods and works the same. Code that passes a `StrongWeakMap` where a `Map` is expected only compiles where the two still match.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Published types no longer need `@types/node` (<a href="https://github.com/streetsidesoftware/cspell/pull/9359">#9359</a>)</summary>
+
+### fix: Published types no longer need `@types/node` ([#9359](https://github.com/streetsidesoftware/cspell/pull/9359))
+
+## Summary
+
+The TypeScript types published with `cspell`, `cspell-lib`, and `cspell-io` no longer need `@types/node`. Projects that use these packages' types, but don't install Node.js types, now type-check cleanly.
+
+- `cspell-io`: the types no longer import from `node:buffer`.
+- `cspell-lib`: the `encoding` option of `spellCheckFile`, and `resolveDocument`, accept the same encodings as before, without Node's global `BufferEncoding`.
+- `cspell`: `AppError` keeps the same shape. A reporter's `console.stdoutChannel.stream` and `console.stderrChannel.stream` are now typed as the parts of the stream cspell uses: `write`, `isTTY`, `rows`, `columns`, and optional `hasColors`, `clearLine`, and `getColorDepth`. A reporter written in TypeScript that calls other stream methods, such as `on` or `end`, needs to cast.
+- The types still use the standard web globals, such as `URL` and `AbortSignal`, so the `dom` lib (or `@types/node`) is still needed for those.
+
+<details>
+<summary>Technical Details</summary>
+
+- The `cspell` types no longer pull in `chalk`'s types, which themselves need Node.js types.
+
+</details>
+
+---
+
+</details>
+
+<details>
+<summary>fix: Show the lint options in cspell --help (<a href="https://github.com/streetsidesoftware/cspell/pull/9362">#9362</a>)</summary>
+
+### fix: Show the lint options in cspell --help ([#9362](https://github.com/streetsidesoftware/cspell/pull/9362))
+
+## Summary
+
+`cspell --help` now lists the options for `cspell lint`, the command that runs when no command is given. Before, it only listed the commands, so you had to know to run `cspell lint --help` to see options such as `--no-progress` or `--cache`.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Honor `--language-id` and `--locale` when deciding whether to check a file (<a href="https://github.com/streetsidesoftware/cspell/pull/9316">#9316</a>)</summary>
+
+### fix: Honor `--language-id` and `--locale` when deciding whether to check a file ([#9316](https://github.com/streetsidesoftware/cspell/pull/9316))
+
+## Summary
+
+`cspell lint` now uses `--language-id` and `--locale` when it decides whether to check a file. Before, a file could be skipped because of a `languageSettings` entry that didn't match the language or locale given on the command line.
+
+For example, with this config, `cspell lint --language-id markdown notes.txt` skipped `notes.txt`. It's now checked as Markdown. `--locale fr` works the same way.
+
+```yaml
+languageSettings:
+  - languageId: plaintext
+    locale: en
+    enabled: false
+```
+
+<details>
+<summary>Technical Details</summary>
+
+- cspell decides which files to check before reading them, and then checks only those.
+- That first decision worked out the language from the file name, and ignored `--locale`. The check itself used both flags.
+- Now both steps use the same language and locale, so they agree.
+
+</details>
+
+---
+
+</details>
+
+<details>
+<summary>fix(cspell-lib): Check remote documents by URI without passing their text (<a href="https://github.com/streetsidesoftware/cspell/pull/9343">#9343</a>)</summary>
+
+### fix(cspell-lib): Check remote documents by URI without passing their text ([#9343](https://github.com/streetsidesoftware/cspell/pull/9343))
+
+## Summary
+
+`spellCheckDocument` and `spellCheckFile` in `cspell-lib` can now read a document from any URL the file system supports, such as `https:`, `data:`, or a virtual file system like the one the VS Code extension uses for remote repositories. Before, a document passed without its text had to be a `file:` URL, or the check failed with "Unsupported schema".
+
+- A remote document gets the same issues as the same file checked locally.
+- `stdin:` documents still need their text.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Don't apply a repository's .gitignore to worktrees and submodules inside it (<a href="https://github.com/streetsidesoftware/cspell/pull/9341">#9341</a>)</summary>
+
+### fix: Don't apply a repository's .gitignore to worktrees and submodules inside it ([#9341](https://github.com/streetsidesoftware/cspell/pull/9341))
+
+## Summary
+
+With `useGitignore`, cspell now stops looking for `.gitignore` files at the root of the file's git repository, as git does. A repository's `.gitignore` no longer applies to a worktree or submodule inside it.
+
+## Why
+
+- cspell kept reading `.gitignore` files above the repository. A worktree kept in an ignored folder of its clone, such as `.worktrees/` or `.claude/worktrees/`, had all of its files skipped. The result was `Files checked: 0`, locally only.
+- Files in a submodule were skipped when the outer repository's `.gitignore` matched them, even though git does not ignore them.
+- Setting `gitignoreRoot` to a folder above a worktree or submodule had the same effect.
+
+Linting from inside a worktree already worked with the `cspell` command-line tool, because it starts at the current repository. Other paths, including the `cspell-gitignore` package's API with no roots, did not. The VS Code extension uses that API.
+
+Files that are not in a git repository are unchanged: `.gitignore` files are read up to the `gitignoreRoot`, or to the top of the file system.
+
+Related: #8975, streetsidesoftware/vscode-spell-checker#3099, streetsidesoftware/vscode-spell-checker#2366
+
+<details>
+<summary>Technical Details</summary>
+
+- While walking up from a file, a folder with a `.git` folder or a `.git` file marks the root of a repository, and the search stops there. A clone has a `.git` folder, and a worktree or submodule has a `.git` file.
+- `gitignoreRoot` can still stop the search earlier, but it no longer extends it past a repository root.
+- This applies to remote files in the VS Code extension too, when that file system can see the `.git`.
+- The `cspell-gitignore` tests go back to using the default search, and new tests cover a worktree and a submodule inside a clone, and a repository on a remote file system.
+
+</details>
+
+---
+
+</details>
+
 ## v10.3.6 (2026-09-29)
 
 ### Fixes
