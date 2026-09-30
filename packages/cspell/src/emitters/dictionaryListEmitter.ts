@@ -6,6 +6,7 @@ import { console } from '../console.js';
 import type { ListDictionariesResult } from '../dictionaries/index.js';
 import type { DictionariesOptions } from '../options.js';
 import { ansiWidth, pruneAnsiTextEnd, pruneAnsiTextStart } from '../util/ansi.js';
+import { getOutputWidth } from '../util/outputWidth.js';
 import type { TableCell, TableRow } from '../util/table.js';
 import { tableToLines } from '../util/table.js';
 import type { DictionaryPathFormat } from './DictionaryPathFormat.js';
@@ -51,7 +52,7 @@ export function calcListDictsResultsReport(
     const t = tableToLines({
         header,
         rows,
-        terminalWidth: options.lineWidth || process.stdout.columns || maxWidth,
+        terminalWidth: options.lineWidth || getOutputWidth() || maxWidth,
         deliminator: ' ',
         maxColumnWidths: {
             locales: 12,

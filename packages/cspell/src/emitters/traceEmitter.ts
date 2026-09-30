@@ -4,6 +4,7 @@ import chalk from 'chalk';
 
 import type { TraceResult } from '../application.mjs';
 import { console } from '../console.js';
+import { getOutputWidth } from '../util/outputWidth.js';
 import type { TableRow } from '../util/table.js';
 import { tableToLines } from '../util/table.js';
 import type { DictionaryPathFormat } from './DictionaryPathFormat.js';
@@ -60,7 +61,7 @@ export function calcTraceResultsReport(
     const t = tableToLines({
         header,
         rows,
-        terminalWidth: options.lineWidth || process.stdout.columns || maxWidth,
+        terminalWidth: options.lineWidth || getOutputWidth() || maxWidth,
         deliminator: ' ',
     });
 

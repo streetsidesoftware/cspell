@@ -104,110 +104,128 @@ The `lint` command is used for spell checking files.
 cspell lint --help
 ```
 
+Help, and the tables from `cspell trace` and `cspell dictionaries`, fit the width of your terminal. To use a different
+width, set the `COLUMNS` environment variable:
+
+```sh
+COLUMNS=60 cspell lint --help
+```
+
 ### Options
 
 <!--- @@inject: static/help-lint.txt --->
 
 ```
-Usage: cspell lint [options] [globs...] [file://<path> ...] [stdin[://<path>]]
+Usage: cspell lint [options] [globs...] [file://<path> ...]
+                   [stdin[://<path>]]
 
 Patterns:
  - [globs...]            Glob Patterns
  - [stdin]               Read from "stdin" assume text file.
- - [stdin://<path>]      Read from "stdin", use <path> for file type and config.
+ - [stdin://<path>]      Read stdin; <path> sets file type and config.
  - [file://<path>]       Check the file at <path>
 
 Examples:
     cspell .                        Recursively check all files.
     cspell lint .                   The same as "cspell ."
-    cspell "*.js"                   Check all .js files in the current directory
+    cspell "*.js"                   Check .js files in this directory
     cspell "**/*.js"                Check all .js files recursively
     cspell "src/**/*.js"            Only check .js under src
     cspell "**/*.txt" "**/*.js"     Check both .js and .txt files.
     cspell "**/*.{txt,js,md}"       Check .txt, .js, and .md files.
     cat LICENSE | cspell stdin      Check stdin
-    cspell stdin://docs/doc.md      Check stdin as if it was "./docs/doc.md"
+    cspell stdin://docs/doc.md      Check stdin as "./docs/doc.md"
 
 Check spelling
 
 Options:
-  -c, --config <cspell.json>     Configuration file to use.  By default cspell
-                                 looks for cspell.json in the current directory.
-  --no-config-search             Disable automatic searching for additional
-                                 configuration files in parent directories. Only
-                                 the specified config file (if any) will be
-                                 used.
-  --stop-config-search-at <dir>  Specify a directory at which to stop searching
-                                 for configuration files when walking up from
-                                 the files being checked. Useful for limiting
-                                 config inheritance.
-  -v, --verbose                  Display more information about the files being
-                                 checked. Add more than one -v for increased
-                                 verbosity.
-  --locale <locale>              Set language locales. i.e. "en,fr" for English
-                                 and French, or "en-GB" for British English.
+  -c, --config <cspell.json>     Configuration file to use.  By default
+                                 cspell looks for cspell.json in the
+                                 current directory.
+  --no-config-search             Disable automatic searching for
+                                 additional configuration files in
+                                 parent directories. Only the specified
+                                 config file (if any) will be used.
+  --stop-config-search-at <dir>  Specify a directory at which to stop
+                                 searching for configuration files when
+                                 walking up from the files being
+                                 checked. Useful for limiting config
+                                 inheritance.
+  -v, --verbose                  Display more information about the
+                                 files being checked. Add more than one
+                                 -v for increased verbosity.
+  --locale <locale>              Set language locales. i.e. "en,fr" for
+                                 English and French, or "en-GB" for
+                                 British English.
   --language-id <file-type>      Force programming language for unknown
                                  extensions. i.e. "php" or "scala"
   --words-only                   Only output the words not found in the
                                  dictionaries.
-  -u, --unique                   Only output the first instance of a word not
-                                 found in the dictionaries.
-  -e, --exclude <glob>           Exclude files matching the glob pattern. This
-                                 option can be used multiple times to add
-                                 multiple globs.
-  --file-list <path or stdin>    Specify a list of files to be spell checked.
-                                 The list is filtered against the glob file
-                                 patterns. Note: the format is 1 file path per
-                                 line.
-  --file [file...]               Specify files to spell check. They are filtered
-                                 by the [globs...].
-  --force-check                  Force the --file or --file-list documents to be
-                                 checked even if it would normally be excluded.
-  --follow-symlinks              Allow checking --file and --file-list documents
-                                 referenced by symbolic links.
+  -u, --unique                   Only output the first instance of a
+                                 word not found in the dictionaries.
+  -e, --exclude <glob>           Exclude files matching the glob
+                                 pattern. This option can be used
+                                 multiple times to add multiple globs.
+  --file-list <path or stdin>    Specify a list of files to be spell
+                                 checked. The list is filtered against
+                                 the glob file patterns. Note: the
+                                 format is 1 file path per line.
+  --file [file...]               Specify files to spell check. They are
+                                 filtered by the [globs...].
+  --force-check                  Force the --file or --file-list
+                                 documents to be checked even if it
+                                 would normally be excluded.
+  --follow-symlinks              Allow checking --file and --file-list
+                                 documents referenced by symbolic links.
   --no-issues                    Do not show the spelling errors.
   --no-progress                  Turn off progress messages
   --no-summary                   Turn off summary message in console.
   -s, --silent                   Silent mode, suppress error messages.
-  --no-exit-code                 Do not return an exit code if issues are found.
+  --no-exit-code                 Do not return an exit code if issues
+                                 are found.
   --quiet                        Only show spelling issues or errors.
-  --fail-fast                    Exit after first file with an issue or error.
-  --continue-on-error            Continue processing files even if there is a
-                                 configuration error.
-  -r, --root <root folder>       Root directory, defaults to current directory.
-  --no-relative                  Issues are displayed with absolute path instead
-                                 of relative to the root.
-  --show-context                 Show the surrounding text around an issue.
+  --fail-fast                    Exit after first file with an issue or
+                                 error.
+  --continue-on-error            Continue processing files even if there
+                                 is a configuration error.
+  -r, --root <root folder>       Root directory, defaults to current
+                                 directory.
+  --no-relative                  Issues are displayed with absolute path
+                                 instead of relative to the root.
+  --show-context                 Show the surrounding text around an
+                                 issue.
   --show-suggestions             Show spelling suggestions.
-  --no-show-suggestions          Do not show spelling suggestions or fixes.
+  --no-show-suggestions          Do not show spelling suggestions or
+                                 fixes.
   --no-must-find-files           Do not error if no files are found.
   --cache                        Use cache to only check changed files.
   --no-cache                     Do not use cache.
   --cache-reset                  Reset the cache file.
-  --cache-strategy <strategy>    Strategy to use for detecting changed files.
-                                 (choices: "content", "metadata", default:
-                                 "content")
-  --cache-location <path>        Path to the cache file or directory. (default:
-                                 ".cspellcache")
-  --dot                          Include files and directories starting with `.`
-                                 (period) when matching globs.
-  --gitignore                    Ignore files matching glob patterns found in
-                                 .gitignore files.
+  --cache-strategy <strategy>    Strategy to use for detecting changed
+                                 files. (choices: "content", "metadata",
+                                 default: "content")
+  --cache-location <path>        Path to the cache file or directory.
+                                 (default: ".cspellcache")
+  --dot                          Include files and directories starting
+                                 with `.` (period) when matching globs.
+  --gitignore                    Ignore files matching glob patterns
+                                 found in .gitignore files.
   --no-gitignore                 Do NOT use .gitignore files.
-  --gitignore-root <path>        Prevent searching for .gitignore files past
-                                 root.
+  --gitignore-root <path>        Prevent searching for .gitignore files
+                                 past root.
   --validate-directives          Validate in-document CSpell directives.
-  --max-file-size <size>         Prevent checking large files. i.e 1MB, 50KB,
-                                 1GB
+  --max-file-size <size>         Prevent checking large files. i.e 1MB,
+                                 50KB, 1GB
   --color                        Force color.
   --no-color                     Turn off color.
-  --no-default-configuration     Do not load the default configuration and
-                                 dictionaries.
+  --no-default-configuration     Do not load the default configuration
+                                 and dictionaries.
   --dictionary <name>            Enable a dictionary by name.
   --disable-dictionary <name>    Disable a dictionary by name.
   --reporter <module|path>       Specify one or more reporters to use.
-  --report <level>               Set how unknown words are reported (choices:
-                                 "all", "simple", "typos", "flagged")
+  --report <level>               Set how unknown words are reported
+                                 (choices: "all", "simple", "typos",
+                                 "flagged")
   --issue-template [template]    Use a custom issue template. See --help
                                  --issue-template for details.
   -h, --help                     display help for command
@@ -230,7 +248,7 @@ More Examples:
 
     cspell "/*.md" --no-must-find-files --files $FILES
         Only spell check the "/*.md" files in $FILES,
-        where $FILES is a shell variable that contains the list of files.
+        where $FILES is a shell variable containing the list of files.
 
     cspell --help --verbose
         Show all options including hidden options.
@@ -279,26 +297,32 @@ Usage: cspell trace [options] [words...]
 Trace words -- Search for words in the configuration and dictionaries.
 
 Options:
-  -c, --config <cspell.json>  Configuration file to use.  By default cspell
-                              looks for cspell.json in the current directory.
-  --locale <locale>           Set language locales. i.e. "en,fr" for English and
-                              French, or "en-GB" for British English.
-  --language-id <language>    Use programming language. i.e. "php" or "scala".
+  -c, --config <cspell.json>  Configuration file to use.  By default
+                              cspell looks for cspell.json in the
+                              current directory.
+  --locale <locale>           Set language locales. i.e. "en,fr" for
+                              English and French, or "en-GB" for British
+                              English.
+  --language-id <language>    Use programming language. i.e. "php" or
+                              "scala".
   --allow-compound-words      Turn on allowCompoundWords
   --no-allow-compound-words   Turn off allowCompoundWords
-  --ignore-case               Ignore case and accents when searching for words.
-  --no-ignore-case            Do not ignore case and accents when searching for
+  --ignore-case               Ignore case and accents when searching for
                               words.
-  --dictionary <name>         Enable a dictionary by name. Can be used multiple
-                              times.
-  --no-dictionary <name>      Disable a dictionary by name. Can be used multiple
-                              times.
-  --dictionary-path <format>  Configure how to display the dictionary path.
-                              (choices: "hide", "short", "long", "full",
-                              default: Display most of the path.)
+  --no-ignore-case            Do not ignore case and accents when
+                              searching for words.
+  --dictionary <name>         Enable a dictionary by name. Can be used
+                              multiple times.
+  --no-dictionary <name>      Disable a dictionary by name. Can be used
+                              multiple times.
+  --dictionary-path <format>  Configure how to display the dictionary
+                              path. (choices: "hide", "short", "long",
+                              "full", default: Display most of the
+                              path.)
   --stdin                     Read words from stdin.
   --all                       Show all dictionaries.
-  --only-found                Show only dictionaries that have the words.
+  --only-found                Show only dictionaries that have the
+                              words.
   --color                     Force color.
   --no-color                  Turn off color.
   --no-default-configuration  Do not load the default configuration and
