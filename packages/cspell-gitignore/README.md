@@ -27,6 +27,8 @@ const files = await gitIgnore.filterOutIgnored(allFiles);
 ## Logic
 
 - For each file, search for the `.gitignore` files in the directory hierarchy.
+- Stop at the root of the file's git repository, the nearest directory with a `.git` directory or file. Like `git`,
+  the `.gitignore` files of a repository do not apply to a worktree or submodule nested inside it.
 - Ignore any files that match the globs found in the `.gitignore` files.
 
 The `.gitignore` globs are evaluated from highest to lowest, matching the `git` behavior.
