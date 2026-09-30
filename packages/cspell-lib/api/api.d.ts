@@ -51,6 +51,13 @@ interface DocumentWithText extends Document {
 //#region src/lib/Document/isBinaryDoc.d.ts
 declare function isBinaryFile(filename: Uri | URL | string, languageId?: string | string[], text?: string): boolean;
 //#endregion
+//#region src/lib/Models/BufferEncoding.d.ts
+/**
+ * The text encodings Node.js supports, the same as its global `BufferEncoding`.
+ * Declared here so the published types do not need `@types/node`.
+ */
+type BufferEncoding = "ascii" | "utf8" | "utf-8" | "utf16le" | "utf-16le" | "ucs2" | "ucs-2" | "base64" | "base64url" | "latin1" | "binary" | "hex";
+//#endregion
 //#region src/lib/Models/TextDocument.d.ts
 interface Position {
   /**

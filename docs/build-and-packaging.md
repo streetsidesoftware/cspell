@@ -49,6 +49,10 @@ The settings live in `tsconfig.json`. `tsconfig.base.json` extends it, not the o
 - `skipLibCheck`: prefer `false`. The root `tsconfig.json` sets `false`. `tsconfig.esm.json`, which most packages
   extend, sets `true`, because type errors in third-party packages broke builds. Don't turn it on anywhere new without
   that reason.
+- `types: ["node"]`: the source can use Node.js types, but the published declarations must not. Users of the packages
+  may not have `@types/node`. Keep `Buffer`, `NodeJS.*`, `BufferEncoding`, and `node:*` types out of exported
+  signatures: declare a local type with the same shape instead. `pnpm run check-types-no-node` checks the built
+  declarations, and CI runs it.
 
 ### Cross-platform
 

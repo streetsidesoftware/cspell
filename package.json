@@ -27,6 +27,7 @@
     "build:readme:root": "inject-markdown README.md \"packages/*/README.md\" && prettier -w README.md \"packages/*/README.md\"",
     "docs:inject": "inject-markdown \"website/src/**/*.md\" && pnpm lint-docs",
     "check-spelling": "npx cspell -c cspell.test.all.json",
+    "check-types-no-node": "node ./scripts/check-types-without-node.mts",
     "clean-build": "pnpm run clean && pnpm -r --stream --workspace-concurrency=2 run build",
     "clean-dist": "shx rm -rf \"packages/*/dist\"",
     "clean": "shx rm -rf \"{*,*/*}/{*.tsbuildinfo,*.tsbuildInfo,temp,coverage,*.cpuprofile}\" \"**/dist/**/*.tsbuildInfo\" lcov.info && pnpm -r run clean",

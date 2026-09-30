@@ -4,8 +4,9 @@ import { Buffer } from 'node:buffer';
 import { gunzipSync } from 'node:zlib';
 
 import type { TArrayBufferView } from '../types.js';
-import { arrayBufferViewToBuffer, swap16, swapBytes, toUint8Array } from './arrayBuffers.js';
+import { swap16, swapBytes, toUint8Array } from './arrayBuffers.js';
 import type { BufferEncodingExt, TextEncodingExt } from './BufferEncoding.js';
+import { arrayBufferViewToBuffer } from './nodeBuffer.js';
 
 const BOM_BE = 0xfeff;
 const BOM_LE = 0xfffe;

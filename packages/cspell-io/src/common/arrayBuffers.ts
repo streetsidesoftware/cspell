@@ -1,6 +1,5 @@
-import { Buffer } from 'node:buffer';
-
 import type { TArrayBufferView } from '../types.js';
+import { arrayBufferViewToBuffer } from './nodeBuffer.js';
 
 /**
  * Treat a TArrayBufferView as a Uint8Array.
@@ -15,16 +14,6 @@ export function toUint8Array(data: ArrayBufferView): Uint8Array {
         return data;
     }
     return new Uint8Array(data.buffer, data.byteOffset, data.byteLength);
-}
-
-export function arrayBufferViewToBuffer(data: TArrayBufferView): Buffer<ArrayBuffer>;
-export function arrayBufferViewToBuffer(data: ArrayBufferView): Buffer;
-export function arrayBufferViewToBuffer(data: ArrayBufferView): Buffer {
-    if (data instanceof Buffer) {
-        return data;
-    }
-    const buf = Buffer.from(data.buffer, data.byteOffset, data.byteLength);
-    return buf;
 }
 
 /**
