@@ -36,8 +36,10 @@ Then write the title and description: see [Pull requests](./pull-requests.md).
 Tests use vitest, next to the source. To run one package or one file, see
 [Commands](./build-and-packaging.md#commands).
 
-- When code relies on a library's behavior, such as how the glob library treats symbolic links, add a test that fails
-  if that behavior changes. Upgrading or replacing the library then shows up in CI instead of in a release.
+- When code depends on how a library behaves, test that behavior: only the part the code relies on, not the library as a
+  whole. Put these tests in a `describe('Validate <library> assumptions', …)` block next to the code that depends on it,
+  as [`globHelper.test.ts`](../packages/cspell-glob/src/globHelper.test.ts) does for micromatch and minimatch. If an
+  upgrade or a replacement behaves differently, CI shows it instead of a release.
 
 ## Spelling
 
