@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import type { TextEncoding } from 'cspell-io';
 
 import { readTextFile } from '../fileSystem.js';
+import type { BufferEncoding } from '../Models/BufferEncoding.js';
 import type { TextDocument } from '../Models/TextDocument.js';
 import { createTextDocument } from '../Models/TextDocument.js';
 import * as Uri from '../util/Uri.js';

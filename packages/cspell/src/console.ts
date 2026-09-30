@@ -1,12 +1,20 @@
-import type { WriteStream } from 'node:tty';
 import { formatWithOptions } from 'node:util';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Log = (format?: any, ...params: any[]) => void;
 
-type IOStream = NodeJS.WritableStream &
-    Pick<WriteStream, 'isTTY' | 'rows' | 'columns'> &
-    Pick<Partial<WriteStream>, 'hasColors' | 'clearLine' | 'getColorDepth'>;
+/**
+ * The parts of an output stream, such as `process.stdout`, that the console uses.
+ */
+export interface IOStream {
+    write(chunk: string): boolean;
+    isTTY: boolean;
+    rows: number;
+    columns: number;
+    hasColors?(count?: number): boolean;
+    clearLine?(dir: -1 | 0 | 1, callback?: () => void): boolean;
+    getColorDepth?(env?: object): number;
+}
 
 export interface IConsole {
     readonly log: Log;

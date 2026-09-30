@@ -5,6 +5,7 @@ import { satisfiesCSpellConfigFile } from 'cspell-config-lib';
 import type { Document, DocumentWithText } from './Document/index.js';
 import { isBinaryDoc } from './Document/isBinaryDoc.js';
 import { documentToTextDocument, resolveDocument } from './Document/resolveDocument.js';
+import type { BufferEncoding } from './Models/BufferEncoding.js';
 import { createTextDocument } from './Models/TextDocument.js';
 import type { ValidationIssueRPC } from './Models/ValidationIssue.js';
 import { toValidationIssueRPC } from './Models/ValidationIssue.js';

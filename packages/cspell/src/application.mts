@@ -33,7 +33,15 @@ export { listDictionaries } from './dictionaries/index.js';
 export type { TraceResult } from 'cspell-lib';
 export { IncludeExcludeFlag } from 'cspell-lib';
 
-export type AppError = NodeJS.ErrnoException;
+/**
+ * The same shape as `NodeJS.ErrnoException`, declared here so the published types do not need `@types/node`.
+ */
+export interface AppError extends Error {
+    errno?: number | undefined;
+    code?: string | undefined;
+    path?: string | undefined;
+    syscall?: string | undefined;
+}
 
 export function lint(fileGlobs: string[], options: LinterCliOptions, reporter?: CSpellReporter): Promise<RunResult> {
     options = fixLegacy(options);

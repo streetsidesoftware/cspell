@@ -8,9 +8,9 @@ import { gunzipSync, gzip } from 'node:zlib';
 import type { Dispatcher, ServiceBus } from '@cspell/cspell-service-bus';
 import { createResponse, createResponseFail, isServiceResponseSuccess } from '@cspell/cspell-service-bus';
 
-import { arrayBufferViewToBuffer } from '../../common/arrayBuffers.js';
 import { encodeString, isGZipped } from '../../common/encode-decode.js';
 import { CFileResource } from '../../common/index.js';
+import { arrayBufferViewToBuffer } from '../../common/nodeBuffer.js';
 import { assert } from '../../errors/assert.js';
 import { toError } from '../../errors/index.js';
 import type { DirEntry, FileReference, Stats } from '../../models/index.js';

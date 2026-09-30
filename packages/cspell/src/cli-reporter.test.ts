@@ -3,11 +3,10 @@ import { Chalk } from 'chalk';
 import { afterEach, describe, expect, test, vi } from 'vitest';
 
 import { ApplicationError } from './app.mjs';
-import type { ReporterIssue } from './cli-reporter.js';
-import { __testing__, checkTemplate, getReporter } from './cli-reporter.js';
+import { getReporter } from './cli-reporter.js';
 import { console } from './console.js';
-
-const { formatIssue } = __testing__;
+import type { ReporterIssue } from './formatIssue.js';
+import { checkTemplate, formatIssue } from './formatIssue.js';
 
 const doc = `
 This is a simple document with a bit of text.
