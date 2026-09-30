@@ -1,4 +1,4 @@
-import type { Command } from 'commander';
+import type { AddHelpTextContext, Command } from 'commander';
 import { program } from 'commander';
 import { satisfies as semverSatisfies } from 'semver';
 
@@ -37,7 +37,8 @@ export async function run(command?: Command, argv?: string[]): Promise<void> {
         );
     }
 
-    addGlobalOptionsToAction(commandLint(prog, { isDefault: true }));
+    const lintCommand = addGlobalOptionsToAction(commandLint(prog, { isDefault: true }));
+    prog.addHelpText('after', (context) => defaultCommandOptionsHelp(context, lintCommand));
     addGlobalOptionsToAction(commandTrace(prog));
     addGlobalOptionsToAction(commandCheck(prog));
     addGlobalOptionsToAction(commandSuggestion(prog));
@@ -49,4 +50,27 @@ export async function run(command?: Command, argv?: string[]): Promise<void> {
 
     prog.exitOverride();
     await prog.parseAsync(args);
+}
+
+/**
+ * `cspell --help` is answered by the program, not the default command,
+ * so list the default command's options here.
+ */
+function defaultCommandOptionsHelp(context: AddHelpTextContext, defaultCommand: Command): string {
+    const helper = defaultCommand.createHelp();
+    helper.prepareContext({ helpWidth: getOutputWidth(context.error ? process.stderr : process.stdout) ?? 80 });
+    const termWidth = helper.longestOptionTermLength(defaultCommand, helper);
+    const items = helper
+        .visibleOptions(defaultCommand)
+        .filter((option) => option.long !== '--help')
+        .map((option) =>
+            helper.formatItem(
+                helper.styleOptionTerm(helper.optionTerm(option)),
+                termWidth,
+                helper.styleOptionDescription(helper.optionDescription(option)),
+                helper,
+            ),
+        );
+    const heading = `Options for "${defaultCommand.name()}" (the default command):`;
+    return '\n' + helper.formatItemList(heading, items, helper).join('\n');
 }
