@@ -39,6 +39,11 @@ jobs:
         run: |
           pnpm self-update
 
+      - name: Update the lockfile
+        # `pnpm-lock.yaml` also records the pnpm version, and `self-update` doesn't change it.
+        run: |
+          pnpm install --lockfile-only
+
       - name: Gen Body
         id: git-body
         uses: streetsidesoftware/actions/public/pr-body@v1
