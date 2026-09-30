@@ -11,7 +11,7 @@ import { InMemoryReporter } from '../util/InMemoryReporter.js';
 import { runLint } from './lint.js';
 import { LintRequest } from './LintRequest.js';
 
-// cspell:ignore zqxtarget zqxinside
+// cspell:ignore zqxtarget zqxinside zqxloop
 
 const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
 
@@ -141,6 +141,22 @@ describe('lint and symbolic links', () => {
             : ['zqxinside', 'zqxtarget'];
         expect(r.words).toEqual(expected);
         expect(r.result).toEqual(oc({ errors: 0 }));
+    });
+
+    test('globSymlinks stops at a link to a parent directory', async () => {
+        // A separate tree, so the loop doesn't change what the other tests find.
+        const loopRoot = path.join(tmp, 'loop-repo');
+        await fsp.mkdir(path.join(loopRoot, 'src/deeper'), { recursive: true });
+        await fsp.writeFile(path.join(loopRoot, 'src/a.txt'), 'zqxloop\n');
+        await fsp.symlink(path.join(loopRoot, 'src'), path.join(loopRoot, 'src/deeper/loop'), 'junction');
+
+        const r = await lint(['**'], { root: loopRoot, globSymlinks: true });
+        const checked = r.reporter.progressItems
+            .filter((p) => p.type === 'ProgressFileComplete')
+            .map((p) => path.relative(loopRoot, p.filename).split(path.sep).join('/'))
+            .sort();
+        expect(checked).toEqual(['src/a.txt', 'src/deeper/loop/a.txt']);
+        expect(r.words).toEqual(['zqxloop', 'zqxloop']);
     });
 
     test('globSymlinks does not apply to files', async () => {
