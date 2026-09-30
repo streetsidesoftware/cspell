@@ -163,6 +163,8 @@ Options:
                                  by the [globs...].
   --force-check                  Force the --file or --file-list documents to be
                                  checked even if it would normally be excluded.
+  --follow-symlinks              Allow checking --file and --file-list documents
+                                 referenced by symbolic links.
   --no-issues                    Do not show the spelling errors.
   --no-progress                  Turn off progress messages
   --no-summary                   Turn off summary message in console.
