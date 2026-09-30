@@ -4,8 +4,8 @@ import * as path from 'node:path';
 
 import { describe, expect, test } from 'vitest';
 
-import { TypeScript } from '../grammars/index.js';
 import * as Simple from '../grammars/simple.js';
+import * as TypeScript from '../grammars/typescript.js';
 import { normalizeGrammar } from './grammarNormalizer.js';
 import { tokenizeText } from './tokenizeLine.js';
 import type { TokenizedLine } from './types.js';
