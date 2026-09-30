@@ -27,7 +27,7 @@ describe('Validate CSpellWorker', () => {
         await expect(worker.ok(1000)).resolves.toBe(true);
 
         const t = performance.now();
-        await expect(client.isOK()).resolves.toBe(true);
+        await expect(client.isOK({ timeoutMs: 1000 })).resolves.toBe(true);
         console.log(`isOK time: ${performance.now() - t} ms`);
 
         const urls = [import.meta.url, 'cspellWorker.ts', 'index.ts'];

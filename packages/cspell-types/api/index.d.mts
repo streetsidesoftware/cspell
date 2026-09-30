@@ -427,7 +427,7 @@ interface CSpellSettingsValidation {
    *
    * @default { "*": true }
    * @experimental
-   * @since 10.4.0
+   * @since 10.5.0
    */
   validate?: ValidationTags;
 }
@@ -1278,7 +1278,7 @@ type SourceMap = number[];
 type Range = readonly [start: number, end: number];
 /**
  * Interface used to pass documents to the parser.
- * @since 10.4.0
+ * @since 10.5.0
  */
 interface TextDocument {
   /**
@@ -1294,7 +1294,7 @@ interface TextDocument {
 }
 /**
  * A fragment of a text document, representing a subset of the full document.
- * @since 10.4.0
+ * @since 10.5.0
  */
 interface TextDocumentFragment extends TextDocument {
   /**
@@ -1481,7 +1481,7 @@ interface TransformedText extends Mapped {
 //#region src/Plugin/index.d.ts
 type CreateParser<Options = unknown> = (name: string, options?: Options) => Promise<DocumentParser | undefined> | DocumentParser | undefined;
 /**
- * @since 10.4.0
+ * @since 10.5.0
  */
 interface AvailableParsers<Options> {
   /**
@@ -1491,7 +1491,7 @@ interface AvailableParsers<Options> {
   [name: string]: DocumentParser | Parser | CreateParser<Options>;
 }
 /**
- * @since 10.4.0
+ * @since 10.5.0
  */
 type Parsers = (DocumentParser | Parser)[];
 /**

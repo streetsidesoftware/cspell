@@ -206,6 +206,8 @@ describe('Validate cli', () => {
     });
 
     const failFastConfig = pathSamples('fail-fast/fail-fast-cspell.json');
+
+    const vdConfig = pathFeat('validate-directives', 'cspell-validate.json');
     const failFastRoot = pathSamples('fail-fast');
 
     test.each`
@@ -254,6 +256,10 @@ describe('Validate cli', () => {
         ${'reporting level typos'}                     | ${[rpFeat('unknown-words'), '--report=typos', '.']}                                          | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
         ${'reporting level simple'}                    | ${[rpFeat('unknown-words'), '--report=simple', '.']}                                         | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
         ${'reporting level all'}                       | ${[rpFeat('unknown-words'), '--report=all', '.']}                                            | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
+        ${'validate directives off'}                   | ${[rpFeat('validate-directives'), '--no-progress', 'notes.md']}                              | ${undefined}                | ${true}  | ${false} | ${false}
+        ${'--validate-directives'}                     | ${[rpFeat('validate-directives'), '--no-progress', '--validate-directives', 'notes.md']}     | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
+        ${'validateDirectives in config'}              | ${[rpFeat('validate-directives'), '-c', vdConfig, 'notes.md']}                               | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
+        ${'--no-validate-directives over config'}      | ${[rpFeat('validate-directives'), '-c', vdConfig, '--no-validate-directives', 'notes.md']}   | ${undefined}                | ${true}  | ${false} | ${false}
         ${'max-file-size'}                             | ${[rpFeat('max-file-size'), '.']}                                                            | ${undefined}                | ${true}  | ${false} | ${false}
         ${'max-file-size 1mb'}                         | ${[rpFeat('max-file-size'), '--max-file-size=1mb', '.']}                                     | ${undefined}                | ${true}  | ${false} | ${false}
         ${'max-file-size 1meg'}                        | ${[rpFeat('max-file-size'), '--max-file-size=1meg', '.']}                                    | ${Commander.CommanderError} | ${false} | ${false} | ${false}

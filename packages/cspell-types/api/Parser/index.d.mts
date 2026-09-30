@@ -51,7 +51,7 @@ type SourceMap = number[];
 type Range = readonly [start: number, end: number];
 /**
  * Interface used to pass documents to the parser.
- * @since 10.4.0
+ * @since 10.5.0
  */
 interface TextDocument {
   /**
@@ -67,7 +67,7 @@ interface TextDocument {
 }
 /**
  * A fragment of a text document, representing a subset of the full document.
- * @since 10.4.0
+ * @since 10.5.0
  */
 interface TextDocumentFragment extends TextDocument {
   /**

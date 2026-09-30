@@ -262,7 +262,7 @@ export class LintReporter {
 
     emitProgressComplete(filename: string, fileNum: number, fileCount: number, result: LintFileResult): number {
         const filteredIssues = result.issues.filter((issue) =>
-            filterFeatureIssues({}, issue, result.reportIssueOptions),
+            filterFeatureIssues({ issueType: true }, issue, result.reportIssueOptions),
         );
         const numIssues = filteredIssues.length;
 

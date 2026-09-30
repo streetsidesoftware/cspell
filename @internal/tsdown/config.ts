@@ -1,4 +1,3 @@
-/* eslint-disable  n/no-extraneous-import */
 import type { DepsConfig, UserConfig } from 'tsdown';
 import { defineConfig } from 'tsdown';
 
