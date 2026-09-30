@@ -2,7 +2,8 @@ import { Buffer } from 'node:buffer';
 
 import { describe, expect, test } from 'vitest';
 
-import { arrayBufferViewToBuffer, swap16, swap16Poly, toUint8Array } from './arrayBuffers.js';
+import { swap16, swap16Poly, toUint8Array } from './arrayBuffers.js';
+import { arrayBufferViewToBuffer } from './nodeBuffer.js';
 
 const sampleText = 'This is a bit of text to test things with.';
 

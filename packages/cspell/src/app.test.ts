@@ -191,6 +191,7 @@ describe('Validate cli', () => {
         captureStdout.startCapture();
         captureStderr.startCapture();
         chalk.level = 3;
+        vi.stubEnv('COLUMNS', '');
     });
 
     afterEach(() => {
@@ -205,6 +206,7 @@ describe('Validate cli', () => {
         captureStderr.stopCapture();
         captureStderr.clear();
         chalk.level = colorLevel;
+        vi.unstubAllEnvs(); // cspell:ignore unstub
     });
 
     const failFastConfig = pathSamples('fail-fast/fail-fast-cspell.json');
@@ -584,6 +586,21 @@ describe('Validate cli', () => {
 
         expect(captureStdout.text).toMatchSnapshot();
         expect(normalizeOutput(captureStderr.text)).toMatchSnapshot();
+    });
+
+    test.each`
+        cmdArgs
+        ${['lint', '--help']}
+        ${['trace', '--help']}
+    `('app help $cmdArgs fits in COLUMNS', async ({ cmdArgs }) => {
+        vi.stubEnv('COLUMNS', '72');
+        const commander = getCommander();
+        const result = app.run(commander, argv(...cmdArgs));
+        await expect(result).rejects.toThrow('outputHelp');
+
+        const lines = captureStdout.text.map((line) => Util.stripVTControlCharacters(line));
+        expect(lines.join('\n')).toContain('Usage: cspell');
+        expect(lines.filter((line) => line.length > 72)).toEqual([]);
     });
 
     test.each`

@@ -20,6 +20,20 @@ describe('traceEmitter', () => {
         expect(stripVTControlCharacters(report.table)).toEqual('Word F Dictionary Dictionary Location');
     });
 
+    test('uses COLUMNS when lineWidth is not set', () => {
+        vi.stubEnv('COLUMNS', '60');
+        const report = calcTraceResultsReport('errorcode', true, sampleResults(), {
+            cwd: '/this_is_a_very/long/path',
+            dictionaryPathFormat: 'long',
+            iPath: posix,
+        });
+        vi.unstubAllEnvs(); // cspell:ignore unstub
+        const lines = report.table.split('\n').map(stripVTControlCharacters);
+        const width = lines.reduce((a, b) => Math.max(a, b.length), 0);
+        expect(width).toBeLessThanOrEqual(60);
+        expect(width).toBeGreaterThan(50);
+    });
+
     test('posix format long', () => {
         const lineWidth = 80;
         const report = calcTraceResultsReport('errorcode', true, sampleResults(), {

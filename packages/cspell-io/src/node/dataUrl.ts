@@ -3,7 +3,7 @@ import { Buffer } from 'node:buffer';
 import { promises as fs } from 'node:fs';
 import * as fsPath from 'node:path';
 
-import { arrayBufferViewToBuffer } from '../common/arrayBuffers.js';
+import { arrayBufferViewToBuffer } from '../common/nodeBuffer.js';
 import type { TArrayBufferView } from '../types.js';
 import { toFileURL } from './file/url.js';
 
@@ -55,7 +55,7 @@ function encodeString(
 }
 
 export interface DecodedDataUrl {
-    data: Buffer<ArrayBuffer>;
+    data: Uint8Array<ArrayBuffer>;
     mediaType: string;
     encoding?: string | undefined;
     attributes: Map<string, string>;

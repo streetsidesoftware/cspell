@@ -5,8 +5,9 @@ import zlib from 'node:zlib';
 
 import { describe, expect, test } from 'vitest';
 
-import { arrayBufferViewToBuffer, swap16 as swapBytesInPlace, swapBytes } from './arrayBuffers.js';
+import { swap16 as swapBytesInPlace, swapBytes } from './arrayBuffers.js';
 import { decode, decodeToString, decompress, encodeString } from './encode-decode.js';
+import { arrayBufferViewToBuffer } from './nodeBuffer.js';
 
 const gzip = promisify(zlib.gzip);
 const deflate = promisify(zlib.deflate);
