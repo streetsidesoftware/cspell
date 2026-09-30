@@ -9,7 +9,8 @@
     "cspell-cli": "index.js"
   },
   "scripts": {
-    "build": "tsc -p .",
+    "build": "tsc -p . && pnpm run build:no-node",
+    "build:no-node": "node ../../check-no-node-types.mjs",
     "test": "node ./index.js . --reporter=./dist/reporter.js"
   },
   "repository": {

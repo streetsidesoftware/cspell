@@ -11,7 +11,8 @@
   "type": "module",
   "scripts": {
     "clean": "shx rm -rf dist",
-    "build": "pnpm build:ts && tsdown",
+    "build": "pnpm build:ts && tsdown && pnpm run build:no-node",
+    "build:no-node": "node ../../check-no-node-types.mjs",
     "build:ts": "pnpm run compile && ts2mjs dist/esm",
     "clean-build": "pnpm run clean && pnpm run build",
     "compile": "tsc -b . -f",

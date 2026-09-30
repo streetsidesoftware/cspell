@@ -49,6 +49,11 @@ The settings live in `tsconfig.json`. `tsconfig.base.json` extends it, not the o
 - `skipLibCheck`: `false`, set in the root `tsconfig.json`, so dependencies' type declarations are checked too. A few
   projects set `true` because a third-party package ships declarations with errors, each with a comment naming it.
   Don't turn it on anywhere else without that reason.
+- `types: ["node"]`: the source can use Node.js types, but the published type declarations must not, because users may
+  not have `@types/node`. Keep `Buffer`, `NodeJS.*`, and `node:*` types out of exported signatures; declare a local type
+  with the same shape instead. The build checks this: each public package is imported by a `no-node.mts` in a test
+  package, which `test-packages/check-no-node-types.mjs` type-checks without Node.js types. A new public package, or a
+  new entry point, needs an import there too.
 
 ### Cross-platform
 

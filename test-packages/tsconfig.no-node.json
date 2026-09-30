@@ -1,0 +1,15 @@
+{
+    "$schema": "https://json.schemastore.org/tsconfig",
+    // The settings of a project that uses the published packages without `@types/node`.
+    // Used by `check-no-node-types.mjs`. It doesn't extend the repository's settings on purpose.
+    "compilerOptions": {
+        "lib": ["esnext", "dom"],
+        "types": [],
+        "module": "nodenext",
+        "moduleResolution": "nodenext",
+        "target": "es2023",
+        "strict": true,
+        "skipLibCheck": false,
+        "noEmit": true
+    }
+}

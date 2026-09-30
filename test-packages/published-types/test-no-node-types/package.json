@@ -1,0 +1,30 @@
+{
+  "name": "test-no-node-types",
+  "version": "9.0.2",
+  "description": "Pure testing package: checks that the types of published packages without their own test package work without @types/node.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "pnpm run build:no-node",
+    "build:no-node": "node ../../check-no-node-types.mjs"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@cspell/cspell-json-reporter": "workspace:*",
+    "@cspell/cspell-junit-reporter": "workspace:*",
+    "@cspell/cspell-performance-monitor": "workspace:*",
+    "@cspell/cspell-resolver": "workspace:*",
+    "@cspell/cspell-worker": "workspace:*",
+    "@cspell/filetypes": "workspace:*",
+    "@cspell/rpc": "workspace:*",
+    "@cspell/url": "workspace:*",
+    "cspell-config-lib": "workspace:*",
+    "cspell-grammar": "workspace:*",
+    "flatpack-json": "workspace:*",
+    "hunspell-reader": "workspace:*"
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  }
+}
