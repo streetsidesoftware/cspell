@@ -37,3 +37,14 @@ export interface CacheOptions {
      */
     cacheFormat?: CacheFormat;
 }
+
+/**
+ * The command-line options that change a file's result. A cached result is only reused when they match.
+ */
+export interface CacheKeyOptions {
+    languageId?: string;
+    locale?: string;
+    report?: string | undefined;
+    showSuggestions?: boolean;
+    validateDirectives?: boolean;
+}

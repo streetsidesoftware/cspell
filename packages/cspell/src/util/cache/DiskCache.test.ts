@@ -132,6 +132,57 @@ describe('DiskCache', () => {
         });
     });
 
+    describe('command-line options', () => {
+        const optionsKey = '{"languageId":"markdown"}';
+
+        async function createCacheWithOptions(key: string | undefined) {
+            const cache = await createDiskCache(pathToFileURL('.foobar'), false, 'version', false, key);
+            const fileEntryCache = await mockCreateFileEntryCache.mock.results.at(-1)?.value;
+            return { cache, fileEntryCache };
+        }
+
+        test('the version marker matches existing cache files', () => {
+            expect(calcVersion('9.2')).toBe('9.2-1-v|r|d');
+        });
+
+        test.each`
+            cacheKey      | entryKey             | expected
+            ${undefined}  | ${undefined}         | ${true}
+            ${optionsKey} | ${optionsKey}        | ${true}
+            ${optionsKey} | ${undefined}         | ${false}
+            ${undefined}  | ${optionsKey}        | ${false}
+            ${optionsKey} | ${'{"locale":"fr"}'} | ${false}
+        `(
+            'cache options $cacheKey, entry options $entryKey, reused: $expected',
+            async ({ cacheKey, entryKey, expected }) => {
+                const { cache, fileEntryCache } = await createCacheWithOptions(cacheKey);
+                fileEntryCache.getFileDescriptor.mockReturnValue(entry(RESULT_NO_ISSUES, [], 100, entryKey));
+
+                const cachedResult = await cache.getCachedLintResults('file');
+
+                expect(!!cachedResult).toBe(expected);
+            },
+        );
+
+        test.each`
+            cacheKey
+            ${undefined}
+            ${optionsKey}
+        `('writes the options $cacheKey only when set', async ({ cacheKey }) => {
+            const { cache, fileEntryCache } = await createCacheWithOptions(cacheKey);
+            const descriptor: { meta: CSpellCacheMeta } = { meta: { size: 0 } };
+            fileEntryCache.getFileDescriptor.mockReturnValue(descriptor);
+
+            await cache.setCachedLintResults(
+                { ...RESULT_NO_ISSUES, fileInfo: { filename: 'file' }, elapsedTimeMs: 1 },
+                [],
+            );
+
+            expect(descriptor.meta?.data && 'o' in descriptor.meta.data).toBe(!!cacheKey);
+            expect(descriptor.meta?.data?.o).toBe(cacheKey);
+        });
+    });
+
     describe('setCachedLintResults', () => {
         test('skips not found files', async () => {
             const descriptor = { notFound: true, meta: { result: undefined } };
@@ -225,7 +276,12 @@ describe('getDependencyForUrl', () => {
     });
 });
 
-function entry(result: CachedFileResult, dependencies: string[] = [], size = 100): { meta: CSpellCacheMeta } {
+function entry(
+    result: CachedFileResult,
+    dependencies: string[] = [],
+    size = 100,
+    optionsKey?: string,
+): { meta: CSpellCacheMeta } {
     return {
         meta: {
             size,
@@ -233,6 +289,7 @@ function entry(result: CachedFileResult, dependencies: string[] = [], size = 100
                 r: result,
                 d: dependencies.map((f) => ({ f, h: 'hash' })),
                 v: calcVersion('version'),
+                ...(optionsKey ? { o: optionsKey } : {}),
             },
         },
     };

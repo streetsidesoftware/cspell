@@ -169,6 +169,102 @@ describe('Validate RedirectProvider', () => {
             expect(stat3).toEqual(stat);
         },
     );
+
+    // cspell:ignore Fetc Cetc
+    describe('requests stay under the private root', () => {
+        const publicRoot = new URL('file:///public/');
+        const privateRoot = new URL('file:///srv/app/uploads/');
+
+        test.each`
+            href
+            ${'file:///public//etc/passwd'}
+            ${'file:///public///etc/passwd'}
+            ${'file:///public/%2Fetc/passwd'}
+            ${'file:///public/%2fetc/passwd'}
+            ${'file:///public/%5Cetc/passwd'}
+        `('reject $href', async ({ href }) => {
+            await expectRejectedForAllOperations(publicRoot, privateRoot, new URL(href));
+        });
+
+        test.each`
+            href
+            ${'virtual-fs://host/public/\\etc/passwd'}
+            ${'virtual-fs://host/public/a\\..\\..\\..\\..\\etc/passwd'}
+            ${'virtual-fs://host/public/%5Cetc/passwd'}
+        `('reject $href with a non-file public root', async ({ href }) => {
+            await expectRejectedForAllOperations(new URL('virtual-fs://host/public/'), privateRoot, new URL(href));
+        });
+
+        test.each`
+            href
+            ${'custom:pub/../etc/passwd'}
+            ${'custom:pub/a/../../../etc/passwd'}
+        `('reject $href with an opaque public root', async ({ href }) => {
+            // `..` in an opaque path is not resolved by the URL parser.
+            await expectRejectedForAllOperations(new URL('custom:pub/'), privateRoot, new URL(href));
+        });
+
+        test('`..` does not reach the private file system', async () => {
+            // The URL parser resolves `..` before the request is routed, so the request falls outside the public root.
+            await expectRejectedForAllOperations(publicRoot, privateRoot, new URL('file:///public/%2e%2e/etc/passwd'));
+            await expectRejectedForAllOperations(publicRoot, privateRoot, new URL('file:///public/a/../../etc/passwd'));
+        });
+
+        test.each`
+            href                                   | expected
+            ${'file:///public/file.txt'}           | ${'file:///srv/app/uploads/file.txt'}
+            ${'file:///public/etc/passwd'}         | ${'file:///srv/app/uploads/etc/passwd'}
+            ${'file:///public/a:b.txt'}            | ${'file:///srv/app/uploads/a:b.txt'}
+            ${'file:///public/C|/etc/passwd'}      | ${'file:///srv/app/uploads/C|/etc/passwd'}
+            ${'file:///public/c:/windows/'}        | ${'file:///srv/app/uploads/c:/windows/'}
+            ${'file:///public/http:evil'}          | ${'file:///srv/app/uploads/http:evil'}
+            ${'file:///public/data:text/plain,hi'} | ${'file:///srv/app/uploads/data:text/plain,hi'}
+            ${'file:///public/dir/a%2Fb.txt'}      | ${'file:///srv/app/uploads/dir/a%2Fb.txt'}
+            ${'file:///public/dir/'}               | ${'file:///srv/app/uploads/dir/'}
+        `('map $href to $expected', async ({ href, expected }) => {
+            const mockFS = createMockFS();
+            const fs = getRedirectFS(publicRoot, privateRoot, mockFS);
+            await expect(fs.stat(new URL(href))).rejects.toThrowError(VFSErrorUnsupportedRequest);
+            expect(mockFS.stat).toHaveBeenCalledWith(new URL(expected));
+        });
+
+        test('reject a result from the private file system outside the private root', async () => {
+            const mockFS = createMockFS();
+            vi.mocked(mockFS.readFile).mockImplementation(async () => ({
+                url: new URL('file:///etc/passwd'),
+                content: 'root',
+            }));
+            vi.mocked(mockFS.readDirectory).mockImplementation(async () => [
+                { name: 'passwd', dir: new URL('file:///etc/'), fileType: 1 },
+            ]);
+            const fs = getRedirectFS(publicRoot, privateRoot, mockFS);
+            await expect(fs.readFile(new URL('file:///public/file.txt'))).rejects.toThrowError(
+                VFSErrorUnsupportedRequest,
+            );
+            await expect(fs.readDirectory(new URL('file:///public/'))).rejects.toThrowError(VFSErrorUnsupportedRequest);
+        });
+
+        async function expectRejectedForAllOperations(publicRoot: URL, privateRoot: URL, url: URL) {
+            const mockFS = createMockFS();
+            const fs = getRedirectFS(publicRoot, privateRoot, mockFS);
+            await expect(fs.stat(url)).rejects.toThrowError(VFSErrorUnsupportedRequest);
+            await expect(fs.stat({ url })).rejects.toThrowError(VFSErrorUnsupportedRequest);
+            await expect(fs.readFile(url)).rejects.toThrowError(VFSErrorUnsupportedRequest);
+            await expect(fs.readDirectory(url)).rejects.toThrowError(VFSErrorUnsupportedRequest);
+            await expect(fs.writeFile({ url, content: 'x' })).rejects.toThrowError(VFSErrorUnsupportedRequest);
+            expect(mockFS.stat).not.toHaveBeenCalled();
+            expect(mockFS.readFile).not.toHaveBeenCalled();
+            expect(mockFS.readDirectory).not.toHaveBeenCalled();
+            expect(mockFS.writeFile).not.toHaveBeenCalled();
+        }
+
+        function getRedirectFS(publicRoot: URL, privateRoot: URL, privateFS: VProviderFileSystem) {
+            const provider = createRedirectProvider('test', publicRoot, privateRoot);
+            const fs = provider.getFileSystem(publicRoot, (url) => (url === privateRoot ? privateFS : undefined));
+            assert(fs);
+            return fs;
+        }
+    });
 });
 
 function getVFS() {

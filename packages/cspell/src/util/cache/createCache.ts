@@ -6,7 +6,7 @@ import type { CacheSettings, CSpellSettings } from '@cspell/cspell-types';
 import { toFileURL } from '@cspell/url';
 
 import { isErrorLike } from '../errors.js';
-import type { CacheOptions } from './CacheOptions.js';
+import type { CacheKeyOptions, CacheOptions } from './CacheOptions.js';
 import type { CSpellLintResultCache } from './CSpellLintResultCache.js';
 import { createDiskCache } from './DiskCache.js';
 import { DummyCache } from './DummyCache.js';
@@ -25,6 +25,12 @@ export interface CreateCacheSettings extends Required<CacheSettings> {
      * or cache files.
      */
     reset?: true;
+
+    /**
+     * The command-line options that change a file's result. A cached result is only reused when they match.
+     * `undefined` when none are set.
+     */
+    optionsKey?: string | undefined;
 }
 
 const versionSuffix = '';
@@ -38,7 +44,9 @@ export async function createCache(options: CreateCacheSettings): Promise<CSpellL
     const useChecksum = cacheStrategy === 'content';
     const version = normalizeVersion(options.version);
     const useUniversal = options.cacheFormat === 'universal';
-    const cache = useCache ? await createDiskCache(location, useChecksum, version, useUniversal) : new DummyCache();
+    const cache = useCache
+        ? await createDiskCache(location, useChecksum, version, useUniversal, options.optionsKey)
+        : new DummyCache();
     if (reset) {
         await cache.reset();
     }
@@ -47,7 +55,7 @@ export async function createCache(options: CreateCacheSettings): Promise<CSpellL
 
 export async function calcCacheSettings(
     config: CSpellSettings,
-    cacheOptions: CacheOptions,
+    cacheOptions: CacheOptions & CacheKeyOptions,
     root: string,
 ): Promise<CreateCacheSettings> {
     const cs = config.cache ?? {};
@@ -62,6 +70,10 @@ export async function calcCacheSettings(
     if (cacheOptions.cacheReset) {
         optionals.reset = true;
     }
+    const optionsKey = calcOptionsKey(cacheOptions);
+    if (optionsKey) {
+        optionals.optionsKey = optionsKey;
+    }
     return {
         ...optionals,
         useCache,
@@ -70,6 +82,19 @@ export async function calcCacheSettings(
         version: cacheOptions.version,
         cacheFormat,
     };
+}
+
+function calcOptionsKey(cacheOptions: CacheKeyOptions): string | undefined {
+    const { languageId, locale, report, showSuggestions, validateDirectives } = cacheOptions;
+    const options = {
+        languageId: languageId || undefined,
+        locale: locale || undefined,
+        report: report || undefined,
+        showSuggestions,
+        validateDirectives,
+    };
+    const set = Object.entries(options).filter(([, value]) => value !== undefined);
+    return set.length ? JSON.stringify(Object.fromEntries(set)) : undefined;
 }
 
 async function resolveCacheLocation(cacheLocation: string): Promise<string> {
@@ -96,9 +121,11 @@ function normalizeVersion(version: string): string {
 }
 
 export const __testing__: {
+    calcOptionsKey: typeof calcOptionsKey;
     normalizeVersion: typeof normalizeVersion;
     versionSuffix: string;
 } = {
+    calcOptionsKey,
     normalizeVersion,
     versionSuffix,
 };

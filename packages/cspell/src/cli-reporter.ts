@@ -489,7 +489,7 @@ export function getReporter(options: ReporterOptions, config?: CSpellReporterCon
         debug: emitters.Debug,
         progress,
         result: !silent && summary ? resultEmitter : nullEmitter,
-        features: undefined,
+        features: { issueType: true },
     };
 }
 

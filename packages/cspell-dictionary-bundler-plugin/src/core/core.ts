@@ -55,9 +55,6 @@ export function createPlugin(): UnpluginInstance<Options | undefined, false> {
                 },
             },
             resolveId: {
-                filter: {
-                    id: { include: options.include, exclude: options.exclude },
-                },
                 handler(id, importer) {
                     consoleLog(`Can Resolve ${id}? ${filter(id) ? 'yes' : 'no'} %o`, { id, importer });
                     if (id.includes('\0') || !filter(id)) return undefined;

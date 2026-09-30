@@ -17,7 +17,7 @@ describe('Index', () => {
         expect(worker.numberOfPendingRequests).toBe(0);
         const client = worker.client;
         await expect(worker.ok()).resolves.toBe(true);
-        await expect(client.isOK()).resolves.toBe(true);
+        await expect(client.isOK({ timeoutMs: 1000 })).resolves.toBe(true);
 
         await expect(client.getApi().echo('hello')).resolves.toBe('hello');
     });
@@ -29,7 +29,7 @@ describe('Index', () => {
 
         await expect(worker.ok(1000)).resolves.toBe(true);
 
-        await expect(client.isOK()).resolves.toBe(true);
+        await expect(client.isOK({ timeoutMs: 1000 })).resolves.toBe(true);
 
         const api = client.getApi();
 
