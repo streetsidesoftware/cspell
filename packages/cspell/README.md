@@ -208,6 +208,8 @@ Options:
                                  (default: ".cspellcache")
   --dot                          Include files and directories starting
                                  with `.` (period) when matching globs.
+  --glob-symlinks                Follow symbolic links when matching
+                                 globs.
   --gitignore                    Ignore files matching glob patterns
                                  found in .gitignore files.
   --no-gitignore                 Do NOT use .gitignore files.
