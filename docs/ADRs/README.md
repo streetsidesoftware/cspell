@@ -117,5 +117,6 @@ ADRs, keeps the glossaries current, and offers to archive features that are due.
 
 ## Features
 
-| Feature | Description | Shipped | Status |
-| ------- | ----------- | ------- | ------ |
+| Feature                                    | Description                                                       | Shipped | Status   |
+| ------------------------------------------ | ----------------------------------------------------------------- | ------- | -------- |
+| [glob-symlinks](./glob-symlinks/README.md) | Opt-in following of symbolic links in `cspell lint` glob searches |         | Accepted |

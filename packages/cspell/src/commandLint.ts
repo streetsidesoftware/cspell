@@ -172,6 +172,12 @@ export function commandLint(prog: Command, opts: CommandOptions): Command {
             `Path to the cache file or directory. (default: "${DEFAULT_CACHE_LOCATION}")`,
         )
         .option('--dot', 'Include files and directories starting with `.` (period) when matching globs.')
+        .option('--glob-symlinks', 'Follow symbolic links when matching globs.')
+        .addOption(
+            crOpt('--no-glob-symlinks', 'Do not follow symbolic links when matching globs.')
+                .default(undefined)
+                .hideHelp(),
+        )
         .option('--gitignore', 'Ignore files matching glob patterns found in .gitignore files.')
         .option('--no-gitignore', 'Do NOT use .gitignore files.')
         .option('--gitignore-root <path>', 'Prevent searching for .gitignore files past root.', collect)
