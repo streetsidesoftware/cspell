@@ -1,0 +1,24 @@
+name: setup_pnpm
+description: |
+  Install pnpm (the version in `packageManager`) and Node with `pnpm/setup`.
+  Node installed this way has no npm, npx, or Corepack.
+inputs:
+  node-version:
+    required: false
+    description: The version of Node to use, for example `24.x` or `lts`.
+    default: 'lts'
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup pnpm and Node.js ${{ inputs.node-version }}
+      uses: pnpm/setup@fbda4c85fc2e1e08721cd8763afea8f48d60f024 # v3.0.0
+      with:
+        runtime: node@${{ inputs.node-version }}
+        cache: true
+        install: false
+
+    - name: Versions
+      run: |
+        pnpm -v
+        node -v
+      shell: bash

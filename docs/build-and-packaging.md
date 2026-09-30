@@ -173,6 +173,9 @@ The main workflows in `.github/workflows/`:
 
 When adding or changing a workflow:
 
+- Set up Node and pnpm with `.github/actions/setup-node`, the same setup that publishing uses. Jobs that run many
+  times per PR, like the integration tests, use `.github/actions/setup-pnpm` (`pnpm/setup`) instead. Its Node has no
+  npm, npx, or Corepack.
 - Add `workflow_dispatch` when possible, so it can be run by hand.
 - Add `workflow_call` only to a new workflow, and only if it has no `concurrency` section: in a called workflow,
   `github.workflow` is the caller's name, so the groups can collide. Don't add it to existing workflows.
