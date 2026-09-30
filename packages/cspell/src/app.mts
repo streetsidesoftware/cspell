@@ -12,6 +12,7 @@ import { commandTrace } from './commandTrace.js';
 import { addGlobalOptionsAndHooks, addGlobalOptionsToAction } from './globalOptions.js';
 import { npmPackage } from './pkgInfo.js';
 import { ApplicationError } from './util/errors.js';
+import { getOutputWidth } from './util/outputWidth.js';
 
 export type { LinterCliOptions as Options } from './options.js';
 export { ApplicationError, CheckFailed } from './util/errors.js';
@@ -21,6 +22,12 @@ export async function run(command?: Command, argv?: string[]): Promise<void> {
     const args = argv || process.argv;
 
     prog.exitOverride();
+    prog.configureOutput({
+        getOutHelpWidth: () => getOutputWidth(process.stdout) ?? 80,
+        getErrHelpWidth: () => getOutputWidth(process.stderr) ?? 80,
+    });
+    // Commander stops wrapping when the description column is under 40 wide; that is too wide for narrow output.
+    prog.configureHelp({ minWidthToWrap: 20 });
 
     prog.version(npmPackage.version).description('Spelling Checker for Code').name('cspell');
 

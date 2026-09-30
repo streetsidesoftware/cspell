@@ -8,30 +8,32 @@ import { cvtLinterCliCommandOptionsToLinterCliOptions, ReportChoicesAll } from '
 import { DEFAULT_CACHE_LOCATION } from './util/cache/index.js';
 import { canUseColor } from './util/canUseColor.js';
 import { CheckFailed } from './util/errors.js';
+import { getOutputWidth } from './util/outputWidth.js';
 import { unindent } from './util/unindent.js';
 import { validateUnitSize } from './util/unitNumbers.js';
 
 // interface InitOptions extends Options {}
 
 const usage = `\
-[options] [globs...] [file://<path> ...] [stdin[://<path>]]
+[options] [globs...] [file://<path> ...]
+                   [stdin[://<path>]]
 
 Patterns:
  - [globs...]            Glob Patterns
  - [stdin]               Read from "stdin" assume text file.
- - [stdin://<path>]      Read from "stdin", use <path> for file type and config.
+ - [stdin://<path>]      Read stdin; <path> sets file type and config.
  - [file://<path>]       Check the file at <path>
 
 Examples:
     cspell .                        Recursively check all files.
     cspell lint .                   The same as "cspell ."
-    cspell "*.js"                   Check all .js files in the current directory
+    cspell "*.js"                   Check .js files in this directory
     cspell "**/*.js"                Check all .js files recursively
     cspell "src/**/*.js"            Only check .js under src
     cspell "**/*.txt" "**/*.js"     Check both .js and .txt files.
     cspell "**/*.{txt,js,md}"       Check .txt, .js, and .md files.
     cat LICENSE | cspell stdin      Check stdin
-    cspell stdin://docs/doc.md      Check stdin as if it was "./docs/doc.md"\
+    cspell stdin://docs/doc.md      Check stdin as "./docs/doc.md"\
 `;
 
 const advanced = `
@@ -53,7 +55,7 @@ More Examples:
 
     cspell "/*.md" --no-must-find-files --files $FILES
         Only spell check the "/*.md" files in $FILES,
-        where $FILES is a shell variable that contains the list of files.
+        where $FILES is a shell variable containing the list of files.
 
     cspell --help --verbose
         Show all options including hidden options.
@@ -300,7 +302,7 @@ function augmentCommandHelp(context: AddHelpTextContext) {
     const showHidden = !!opts.verbose;
     const hiddenHelp: string[] = [];
     const help = command.createHelp();
-    help.helpWidth = process.stdout.columns || 80;
+    help.helpWidth = getOutputWidth() || 80;
     const hiddenOptions = command.options.filter((opt) => opt.hidden && showHidden);
     const flagColWidth = Math.max(...command.options.map((opt) => opt.flags.length), 0);
     // const indent = flagColWidth + 4;
