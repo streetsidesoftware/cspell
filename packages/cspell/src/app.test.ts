@@ -1,3 +1,5 @@
+import { promises as fsp } from 'node:fs';
+import * as os from 'node:os';
 import * as Path from 'node:path';
 import * as readline from 'node:readline';
 import { fileURLToPath } from 'node:url';
@@ -6,7 +8,7 @@ import * as Util from 'node:util';
 import { toFileDirURL } from '@cspell/url';
 import chalk from 'chalk';
 import * as Commander from 'commander';
-import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
+import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, test, vi } from 'vitest';
 
 import * as app from './app.mjs';
 import { console } from './console.js';
@@ -234,6 +236,15 @@ describe('Validate cli', () => {
         ${'not found error by default'}                | ${['*.not']}                                                                                 | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
         ${'must find with error'}                      | ${['*.not', '--must-find-files']}                                                            | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
         ${'must find force no error'}                  | ${['*.not', '--no-must-find-files']}                                                         | ${undefined}                | ${true}  | ${false} | ${false}
+        ${'must find --file checked'}                  | ${[rpFeat('must-find-files'), '--file', 'checked.md']}                                       | ${undefined}                | ${true}  | ${false} | ${false}
+        ${'must find --file ignorePaths'}              | ${[rpFeat('must-find-files'), '--file', 'excluded/excluded.md']}                             | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
+        ${'must find --file not in files'}             | ${[rpFeat('must-find-files'), '--file', 'not-in-files.txt']}                                 | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
+        ${'must find --file disabled'}                 | ${[rpFeat('must-find-files'), '--file', 'disabled.md']}                                      | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
+        ${'must find --file binary'}                   | ${[rpFeat('must-find-files'), '--file', Path.join(repoRoot, 'resources/patreon.png')]}       | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
+        ${'must find --file checked and skipped'}      | ${[rpFeat('must-find-files'), '--file', 'checked.md', '--file', 'excluded/excluded.md']}     | ${undefined}                | ${true}  | ${false} | ${false}
+        ${'must find glob disabled'}                   | ${[rpFeat('must-find-files'), 'disabled.md']}                                                | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
+        ${'must find --no-must-find-files skipped'}    | ${[rpFeat('must-find-files'), '--file', 'disabled.md', '--no-must-find-files']}              | ${undefined}                | ${true}  | ${false} | ${false}
+        ${'must find --silent skipped'}                | ${[rpFeat('must-find-files'), '--silent', '--file', 'disabled.md']}                          | ${app.CheckFailed}          | ${false} | ${false} | ${false}
         ${'cspell-bad.json'}                           | ${['-c', pathSamples('cspell-bad.json'), __filename]}                                        | ${undefined}                | ${true}  | ${false} | ${false}
         ${'cspell-import-missing.json'}                | ${['-c', pathSamples('linked/cspell-import-missing.json'), __filename]}                      | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
         ${'--fail-fast no option'}                     | ${['-r', failFastRoot, '*.txt']}                                                             | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
@@ -369,16 +380,19 @@ describe('Validate cli', () => {
     });
 
     test.each`
-        msg                           | testArgs                                                                   | errorCheck         | eError  | eLog     | eInfo
-        ${'issue-2998 --language-id'} | ${[rpFix('issue-2998'), '-v', '-v', '--language-id=fix', 'fix-words.txt']} | ${undefined}       | ${true} | ${false} | ${true}
-        ${'issue-4811 **/README.md'}  | ${['-r', pIssues('issue-4811'), '--no-progress', '**/README.md']}          | ${undefined}       | ${true} | ${false} | ${false}
-        ${'issue-4811'}               | ${['-r', pIssues('issue-4811'), '--no-progress', '.']}                     | ${app.CheckFailed} | ${true} | ${true}  | ${false}
-        ${'issue-6373 .'}             | ${[rpFix('issue-6373'), '--no-progress', '.']}                             | ${app.CheckFailed} | ${true} | ${true}  | ${false}
-        ${'issue-6373'}               | ${[rpFix('issue-6373'), '--no-progress']}                                  | ${undefined}       | ${true} | ${false} | ${false}
-        ${'issue-6353'}               | ${[rpFix('issue-6353'), '--no-progress']}                                  | ${undefined}       | ${true} | ${false} | ${true}
-        ${'issue-7837'}               | ${[rpFix('issue-7837'), '.']}                                              | ${app.CheckFailed} | ${true} | ${false} | ${false}
-        ${'issue-7902'}               | ${[rpFix('issue-7902'), '.']}                                              | ${app.CheckFailed} | ${true} | ${true}  | ${false}
-        ${'issue-8200'}               | ${[rpFix('issue-8200'), '-vv', '.']}                                       | ${undefined}       | ${true} | ${false} | ${true}
+        msg                           | testArgs                                                                           | errorCheck         | eError  | eLog     | eInfo
+        ${'issue-2998 --language-id'} | ${[rpFix('issue-2998'), '-v', '-v', '--language-id=fix', 'fix-words.txt']}         | ${undefined}       | ${true} | ${false} | ${true}
+        ${'issue-4811 **/README.md'}  | ${['-r', pIssues('issue-4811'), '--no-progress', '**/README.md']}                  | ${undefined}       | ${true} | ${false} | ${false}
+        ${'issue-4811'}               | ${['-r', pIssues('issue-4811'), '--no-progress', '.']}                             | ${app.CheckFailed} | ${true} | ${true}  | ${false}
+        ${'issue-6373 .'}             | ${[rpFix('issue-6373'), '--no-progress', '.']}                                     | ${app.CheckFailed} | ${true} | ${true}  | ${false}
+        ${'issue-6373'}               | ${[rpFix('issue-6373'), '--no-progress']}                                          | ${undefined}       | ${true} | ${false} | ${false}
+        ${'issue-6353'}               | ${[rpFix('issue-6353'), '--no-progress']}                                          | ${undefined}       | ${true} | ${false} | ${true}
+        ${'issue-7837'}               | ${[rpFix('issue-7837'), '.']}                                                      | ${app.CheckFailed} | ${true} | ${false} | ${false}
+        ${'issue-7902'}               | ${[rpFix('issue-7902'), '.']}                                                      | ${app.CheckFailed} | ${true} | ${true}  | ${false}
+        ${'issue-8200'}               | ${[rpFix('issue-8200'), '-vv', '.']}                                               | ${undefined}       | ${true} | ${false} | ${true}
+        ${'language-id disabled'}     | ${[rpFeat('language-id'), '--no-progress', 'notes.txt']}                           | ${app.CheckFailed} | ${true} | ${false} | ${false}
+        ${'language-id markdown'}     | ${[rpFeat('language-id'), '--no-progress', '--language-id=markdown', 'notes.txt']} | ${app.CheckFailed} | ${true} | ${true}  | ${false}
+        ${'language-id locale fr'}    | ${[rpFeat('language-id'), '--no-progress', '--locale=fr', 'notes.txt']}            | ${app.CheckFailed} | ${true} | ${true}  | ${false}
     `('app $msg Expect Error: $errorCheck', async ({ testArgs, errorCheck, eError, eLog, eInfo }: TestCase) => {
         chalk.level = 1;
         const commander = getCommander();
@@ -442,6 +456,77 @@ describe('Validate cli', () => {
             expect(normalizeOutput(captureStderr.text)).toMatchSnapshot();
         },
     );
+
+    describe('--follow-symlinks', () => {
+        let tmp = '';
+
+        beforeAll(async () => {
+            tmp = await fsp.mkdtemp(Path.join(os.tmpdir(), 'cspell-app-symlinks-'));
+            await fsp.mkdir(Path.join(tmp, 'target'));
+            await fsp.mkdir(Path.join(tmp, 'repo'));
+            await fsp.writeFile(Path.join(tmp, 'target/words.txt'), 'zqxtarget\n');
+            await fsp.writeFile(Path.join(tmp, 'repo/cspell.json'), '{"version": "0.2"}\n');
+            await fsp.symlink(Path.join(tmp, 'target'), Path.join(tmp, 'repo/linked-dir'), 'junction');
+        });
+
+        afterAll(async () => {
+            delete process.env['CSPELL_FOLLOW_SYMLINKS'];
+            await fsp.rm(tmp, { recursive: true, force: true });
+        });
+
+        // cspell:ignore zqxtarget
+        test.each`
+            args                                      | env          | issues
+            ${[]}                                     | ${undefined} | ${false}
+            ${['--follow-symlinks']}                  | ${undefined} | ${true}
+            ${['--no-follow-symlinks']}               | ${undefined} | ${false}
+            ${[]}                                     | ${'true'}    | ${true}
+            ${['--no-follow-symlinks']}               | ${'true'}    | ${false}
+            ${['--follow-symlinks', '--force-check']} | ${undefined} | ${true}
+        `('lint --file linked-dir/words.txt $args CSPELL_FOLLOW_SYMLINKS=$env', async ({ args, env, issues }) => {
+            if (env === undefined) {
+                delete process.env['CSPELL_FOLLOW_SYMLINKS'];
+            } else {
+                process.env['CSPELL_FOLLOW_SYMLINKS'] = env;
+            }
+            chalk.level = 0;
+            const root = Path.join(tmp, 'repo');
+            const commander = getCommander();
+            const cmd = argv(
+                'lint',
+                '--root',
+                root,
+                '--file',
+                'linked-dir/words.txt',
+                '--no-progress',
+                '--no-must-find-files',
+                ...args,
+            );
+            const result = app.run(commander, cmd);
+            await (issues ? expect(result).rejects.toThrow(app.CheckFailed) : expect(result).resolves.toBeUndefined());
+            expect(JSON.stringify(logger.normalizedHistory()).includes('zqxtarget')).toBe(issues);
+        });
+
+        test('lint --file linked-dir/words.txt --force-check', async () => {
+            delete process.env['CSPELL_FOLLOW_SYMLINKS'];
+            chalk.level = 0;
+            const root = Path.join(tmp, 'repo');
+            const commander = getCommander();
+            const cmd = argv(
+                'lint',
+                '--root',
+                root,
+                '--file',
+                'linked-dir/words.txt',
+                '--no-progress',
+                '--force-check',
+            );
+            const result = app.run(commander, cmd);
+            await expect(result).rejects.toThrow(app.CheckFailed);
+            expect(JSON.stringify(logger.normalizedHistory()).includes('zqxtarget')).toBe(false);
+            expect(error).toHaveBeenCalled();
+        });
+    });
 
     test.each`
         cmdArgs

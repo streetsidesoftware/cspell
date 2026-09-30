@@ -243,7 +243,7 @@ interface ProgressFileBegin extends ProgressFileBase {
 }
 type ProgressEmitter = (p: ProgressItem | ProgressFileComplete) => void;
 interface RunResult {
-  /** Number of files processed. */
+  /** Number of files found, including skipped files. */
   files: number;
   /** Set of files where issues were found. */
   filesWithIssues: Set<string>;
@@ -446,13 +446,13 @@ interface ValidationTags {
    * The default validation setting for any tag not otherwise matched.
    * @default true
    */
-  "*"?: boolean;
+  "*"?: boolean | undefined;
   /**
    * Validation setting for the specific tag.
    *
    * If not specified, the default (`'*'`) will be used.
    */
-  [tag: TagPattern]: boolean;
+  [tag: TagPattern]: boolean | undefined;
 }
 //#endregion
 //#region src/suggestionCostsDef.d.ts

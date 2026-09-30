@@ -21,7 +21,7 @@ Please show your support through one of the following sites:
 ## Features
 
 - Spell Checks Code -- Parses code into words before checking them against the dictionaries.
-  - Supports CamelCase, snake\_case, and compoundwords naming styles.
+  - Supports CamelCase, snake_case, and compoundwords naming styles.
 - Self contained -- does not depend upon OS libraries like Hunspell or Aspell. Nor does it depend upon online services.
 - Fast -- checks 1000's of lines of code in seconds.
 - Programming Language Specific Dictionaries -- Has dedicated support for:
@@ -163,6 +163,8 @@ Options:
                                  by the [globs...].
   --force-check                  Force the --file or --file-list documents to be
                                  checked even if it would normally be excluded.
+  --follow-symlinks              Allow checking --file and --file-list documents
+                                 referenced by symbolic links.
   --no-issues                    Do not show the spelling errors.
   --no-progress                  Turn off progress messages
   --no-summary                   Turn off summary message in console.
@@ -345,7 +347,7 @@ CSpell needs Node 22 and above.
 
 ## How it works
 
-The concept is simple: split camelCase and snake\_case words before checking them against a list of known words.
+The concept is simple: split camelCase and snake_case words before checking them against a list of known words.
 
 - `camelCase` -> `camel case`
 - `HTMLInput` -> `html input`
@@ -706,7 +708,7 @@ The spell checker includes a set of default dictionaries.
 
 ### General Dictionaries
 
-- **en\_US** - Derived from Hunspell US English words.
+- **en_US** - Derived from Hunspell US English words.
 - **en-gb** - Derived from Hunspell GB English words.
 - **companies** - List of well known companies
 - **softwareTerms** - Software Terms and concepts like "coroutine", "debounce", "tree", etc.

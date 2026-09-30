@@ -2,6 +2,7 @@ import type { AddHelpTextContext, Command, CommandOptions } from 'commander';
 
 import * as App from './application.mjs';
 import { collect, crOpt, prefixCollect } from './commandHelpers.js';
+import { console } from './console.js';
 import type { LinterCliCommandOptions, LinterCliOptions } from './options.js';
 import { cvtLinterCliCommandOptionsToLinterCliOptions, ReportChoicesAll } from './options.js';
 import { DEFAULT_CACHE_LOCATION } from './util/cache/index.js';
@@ -119,6 +120,10 @@ export function commandLint(prog: Command, opts: CommandOptions): Command {
             '--force-check',
             'Force the --file or --file-list documents to be checked even if it would normally be excluded.',
         )
+        .option('--follow-symlinks', 'Allow checking --file and --file-list documents referenced by symbolic links.')
+        .addOption(
+            crOpt('--no-follow-symlinks', 'Skip documents referenced by symbolic links.').default(undefined).hideHelp(),
+        )
         .option('--no-issues', 'Do not show the spelling errors.')
         .option('--no-progress', 'Turn off progress messages')
         .option('--no-summary', 'Turn off summary message in console.')
@@ -232,8 +237,15 @@ async function action(this: Command, fileGlobs: string[], cliOptions: LinterCliC
         this.outputHelp();
         throw new CheckFailed('outputHelp', 1);
     }
-    if (result.errors || (mustFindFiles && !result.files)) {
+    if (result.errors) {
         throw new CheckFailed('check failed', 1);
+    }
+    const skippedFiles = result.skippedFiles || 0;
+    if (mustFindFiles && result.files <= skippedFiles) {
+        if (!options.silent) {
+            console.error(`No files found to check${skippedFiles ? ` (${skippedFiles} skipped)` : ''}.`);
+        }
+        throw new CheckFailed('no files found', 1);
     }
     if (result.issues) {
         const exitCode = useExitCode ? 1 : 0;

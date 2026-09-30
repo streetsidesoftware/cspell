@@ -9,7 +9,7 @@ on:
         default: 'main'
 
   schedule:
-    - cron: '0 12 * * 1'
+    - cron: '0 12 * * *'
 
 permissions:
   contents: read
@@ -29,11 +29,15 @@ jobs:
           ref: ${{ env.REF_BRANCH }}
 
       - name: Setup
-        uses: streetsidesoftware/actions/public/setup-node-pnpm@v1
+        uses: ./.github/actions/setup-pnpm
 
       - name: Update PNPM
+        # Updates `packageManager` in `package.json` to the newest pnpm that is old enough.
+        # `self-update` ignores `minimumReleaseAge` in `pnpm-workspace.yaml`, so set it here to match.
+        env:
+          PNPM_CONFIG_MINIMUM_RELEASE_AGE: 2880 # two days
         run: |
-          corepack use pnpm@latest
+          pnpm self-update
 
       - name: Gen Body
         id: git-body

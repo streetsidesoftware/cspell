@@ -1,6 +1,7 @@
 import { toFileDirURL, toFileURL, urlDirname } from '@cspell/url';
 import type { VFileSystem } from 'cspell-io';
 
+import { isRepoRoot } from './findRepoRoot.js';
 import type { IsIgnoredExResult } from './GitIgnoreFile.js';
 import { GitIgnoreHierarchy, loadGitIgnore } from './GitIgnoreFile.js';
 import { isParentOf } from './utils.js';
@@ -17,8 +18,9 @@ export class GitIgnore {
 
     /**
      * @param roots - (search roots) an optional array of root paths to prevent searching for `.gitignore` files above the root.
-     *   If a file is under multiple roots, the closest root will apply. If a file is not under any root, then
-     *   the search for `.gitignore` will go all the way to the system root of the file.
+     *   If a file is under multiple roots, the closest root will apply. The search always stops at the root of
+     *   the git repository (a directory with a `.git` directory or file), as git does. If a file is not in a
+     *   repository and not under any root, then the search for `.gitignore` will go all the way to the system root of the file.
      */
     constructor(roots: (string | URL)[] = [], vfs?: VFileSystem) {
         this._vfs = vfs;
@@ -112,8 +114,10 @@ export class GitIgnore {
         directory = toFileDirURL(directory);
         const root = this.determineRoot(directory);
         const parent = urlDirname(directory);
+        // Like git, do not apply `.gitignore` files from above a repository, so a nested
+        // worktree or submodule is not ignored by the repository around it.
         const parentHierarchy =
-            parent.href !== directory.href && isParentOf(root, parent)
+            parent.href !== directory.href && isParentOf(root, parent) && !(await isRepoRoot(directory, this._vfs))
                 ? await this.findGitIgnoreHierarchy(parent)
                 : undefined;
         const git = await loadGitIgnore(directory, this._vfs);

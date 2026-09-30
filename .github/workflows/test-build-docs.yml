@@ -1,6 +1,19 @@
 name: Test - Build Docs
 on:
+  workflow_dispatch:
   pull_request:
+    # Everything the package and website builds read.
+    paths:
+      - '.github/actions/setup/**'
+      - '.github/workflows/test-build-docs.yml'
+      - '@internal/**'
+      - '*-lock.yaml'
+      - 'package.json'
+      - 'packages/**'
+      - 'patches/**'
+      - 'pnpm-workspace.yaml'
+      - 'tsconfig*.json'
+      - 'website/**'
   push:
     branches:
       - main

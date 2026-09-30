@@ -254,10 +254,10 @@ importers:
         version: 8.70.1(eslint@10.11.0(jiti@1.21.7)(supports-color@9.4.0))(supports-color@9.4.0)(typescript@6.0.3)
       vite:
         specifier: ^8.3.1
-        version: 8.3.1(@types/node@22.20.4)(esbuild@0.28.2)(jiti@1.21.7)(terser@5.51.2)
+        version: 8.3.1(@types/node@22.20.4)(esbuild@0.28.2)(jiti@1.21.7)(sass@1.105.0)(terser@5.51.2)(yaml@2.9.1)
       vitest:
         specifier: ~4.1.11
-        version: 4.1.11(@types/node@22.20.4)(@vitest/coverage-istanbul@4.1.11)(vite@8.3.1(@types/node@22.20.4)(esbuild@0.28.2)(jiti@1.21.7)(terser@5.51.2))
+        version: 4.1.11(@types/node@22.20.4)(@vitest/coverage-istanbul@4.1.11)(jsdom@30.1.1(@noble/hashes@1.8.0))(vite@8.3.1(@types/node@22.20.4)(esbuild@0.28.2)(jiti@1.21.7)(sass@1.105.0)(terser@5.51.2)(yaml@2.9.1))
 
   '@internal/tsdown': {}
 
@@ -302,19 +302,19 @@ importers:
         specifier: ^7.3.0
         version: 7.3.0
       chalk:
-        specifier: ^6.0.0
+        specifier: ^6.0.1
         version: 6.0.1
       commander:
         specifier: ^15.0.0
         version: 15.0.0
       csv-parse:
-        specifier: ^7.0.2
+        specifier: ^7.0.3
         version: 7.0.3
       csv-stringify:
-        specifier: ^6.8.3
+        specifier: ^6.9.0
         version: 6.9.0
       jest-diff:
-        specifier: ^30.5.1
+        specifier: ^30.5.2
         version: 30.5.2
       shelljs:
         specifier: ^0.10.0
@@ -326,7 +326,7 @@ importers:
         specifier: ^3.2.0
         version: 3.2.0
       yaml:
-        specifier: ^2.9.0
+        specifier: ^2.9.1
         version: 2.9.1
     devDependencies:
       '@cspell/cspell-bundled-dicts':
@@ -336,7 +336,7 @@ importers:
         specifier: ^4.1.2
         version: 4.1.2
       '@cspell/dict-en_us':
-        specifier: ^4.4.37
+        specifier: ^4.4.40
         version: 4.4.40
       '@cspell/dict-rust':
         specifier: ^4.1.2
@@ -378,13 +378,13 @@ importers:
         specifier: workspace:*
         version: link:../cspell-url
       ansi-regex:
-        specifier: ^6.3.0
+        specifier: ^6.4.0
         version: 6.4.0
       chalk:
-        specifier: ^6.0.0
+        specifier: ^6.0.1
         version: 6.0.1
       chalk-template:
-        specifier: ^1.1.2
+        specifier: ^1.1.3
         version: 1.1.3
       commander:
         specifier: ^15.0.0
@@ -629,10 +629,10 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0
       smol-toml:
-        specifier: ^1.8.0
+        specifier: ^1.9.0
         version: 1.9.0
       yaml:
-        specifier: ^2.9.0
+        specifier: ^2.9.1
         version: 2.9.1
 
   packages/cspell-dictionary:
@@ -650,7 +650,7 @@ importers:
         specifier: workspace:*
         version: link:../cspell-trie-lib
       fast-equals:
-        specifier: ^6.0.2
+        specifier: ^6.0.4
         version: 6.0.4
     devDependencies:
       '@cspell/dict-de-de':
@@ -675,8 +675,8 @@ importers:
         specifier: workspace:*
         version: link:../cspell-trie-lib
       unplugin:
-        specifier: ^3.3.0
-        version: 3.4.0(esbuild@0.28.2)(rolldown@1.2.11)(rollup@4.63.5)(vite@8.3.1(@types/node@22.20.4)(esbuild@0.28.2)(jiti@1.21.7)(terser@5.51.2))
+        specifier: ^3.4.0
+        version: 3.4.0(esbuild@0.28.2)(rolldown@1.2.11)(rollup@4.63.5)(vite@8.3.1(@types/node@22.20.4)(esbuild@0.28.2)(jiti@1.21.7)(sass@1.105.0)(terser@5.51.2)(yaml@2.9.1))(webpack@5.111.1(@swc/core@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(svgo@3.3.5)(uglify-js@3.19.3))
     devDependencies:
       '@cspell/cspell-types':
         specifier: workspace:*
@@ -685,14 +685,14 @@ importers:
         specifier: ^4.0.5
         version: 4.0.5
       '@sxzz/test-utils':
-        specifier: ^0.5.18
+        specifier: ^0.5.19
         version: 0.5.19(esbuild@0.28.2)(rolldown@1.2.11)(rollup@4.63.5)(typescript@6.0.3)(vitest@4.1.11)
       rollup:
-        specifier: ^4.63.1
+        specifier: ^4.63.5
         version: 4.63.5
       vitest:
         specifier: ~4.1.11
-        version: 4.1.11(@types/node@22.20.4)(@vitest/coverage-istanbul@4.1.11)(vite@8.3.1(@types/node@22.20.4)(esbuild@0.28.2)(jiti@1.21.7)(terser@5.51.2))
+        version: 4.1.11(@types/node@22.20.4)(@vitest/coverage-istanbul@4.1.11)(jsdom@30.1.1(@noble/hashes@1.8.0))(vite@8.3.1(@types/node@22.20.4)(esbuild@0.28.2)(jiti@1.21.7)(sass@1.105.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/cspell-eslint-plugin:
     dependencies:
@@ -725,13 +725,13 @@ importers:
         specifier: ^10.0.10
         version: 10.0.10
       '@typescript-eslint/parser':
-        specifier: ^8.69.0
+        specifier: ^8.70.1
         version: 8.70.1(eslint@10.11.0(jiti@1.21.7)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)
       '@typescript-eslint/types':
-        specifier: ^8.69.0
+        specifier: ^8.70.1
         version: 8.70.1
       eslint:
-        specifier: ^10.9.1
+        specifier: ^10.11.0
         version: 10.11.0(jiti@1.21.7)(supports-color@8.1.1)
       eslint-plugin-jsonc:
         specifier: ^3.4.2
@@ -740,7 +740,7 @@ importers:
         specifier: ^3.8.1
         version: 3.8.1(eslint@10.11.0(jiti@1.21.7)(supports-color@8.1.1))(supports-color@8.1.1)
       eslint-plugin-n:
-        specifier: ^18.3.0
+        specifier: ^18.4.0
         version: 18.4.0(eslint@10.11.0(jiti@1.21.7)(supports-color@8.1.1))(typescript@6.0.3)
       eslint-plugin-react:
         specifier: ^7.37.5
@@ -758,7 +758,7 @@ importers:
         specifier: ^3.3.0
         version: 3.3.0
       mocha:
-        specifier: ^12.0.0
+        specifier: ^12.0.2
         version: 12.0.2
       ts-json-schema-generator:
         specifier: 2.9.0
@@ -767,7 +767,7 @@ importers:
         specifier: ~6.0.3
         version: 6.0.3
       typescript-eslint:
-        specifier: ^8.69.0
+        specifier: ^8.70.1
         version: 8.70.1(eslint@10.11.0(jiti@1.21.7)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)
       yaml-eslint-parser:
         specifier: ^2.1.0
@@ -782,7 +782,7 @@ importers:
         specifier: ^1.52.0
         version: 1.52.0
       eslint:
-        specifier: ^10.9.1
+        specifier: ^10.11.0
         version: 10.11.0(jiti@1.21.7)(supports-color@9.4.0)
 
   packages/cspell-eslint-plugin/fixtures/import-support:
@@ -797,7 +797,7 @@ importers:
         specifier: workspace:^
         version: link:../..
       eslint:
-        specifier: ^10.9.1
+        specifier: ^10.11.0
         version: 10.11.0(jiti@1.21.7)(supports-color@9.4.0)
 
   packages/cspell-eslint-plugin/fixtures/simple:
@@ -809,10 +809,10 @@ importers:
         specifier: ^10.0.1
         version: 10.0.1(eslint@10.11.0(jiti@1.21.7)(supports-color@9.4.0))
       eslint:
-        specifier: ^10.9.1
+        specifier: ^10.11.0
         version: 10.11.0(jiti@1.21.7)(supports-color@9.4.0)
       typescript-eslint:
-        specifier: ^8.69.0
+        specifier: ^8.70.1
         version: 8.70.1(eslint@10.11.0(jiti@1.21.7)(supports-color@9.4.0))(supports-color@9.4.0)(typescript@6.0.3)
 
   packages/cspell-eslint-plugin/scripts:
@@ -954,13 +954,13 @@ importers:
         specifier: ^8.0.8
         version: 8.0.8
       import-fresh:
-        specifier: ^4.0.0
+        specifier: ^4.0.1
         version: 4.0.1
       resolve-from:
         specifier: ^5.0.0
         version: 5.0.0
       vscode-languageserver-textdocument:
-        specifier: ^1.0.14
+        specifier: ^1.0.15
         version: 1.0.15
       vscode-uri:
         specifier: ^3.2.0
@@ -970,7 +970,7 @@ importers:
         version: 5.1.0
     devDependencies:
       '@cspell/dict-cpp':
-        specifier: ^7.1.0
+        specifier: ^7.1.2
         version: 7.1.2
       '@cspell/dict-csharp':
         specifier: ^4.0.8
@@ -979,7 +979,7 @@ importers:
         specifier: ^4.1.2
         version: 4.1.2
       '@cspell/dict-en_us':
-        specifier: ^4.4.37
+        specifier: ^4.4.40
         version: 4.4.40
       '@cspell/dict-fa-ir':
         specifier: ^4.0.5
@@ -994,10 +994,10 @@ importers:
         specifier: ^2.4.2
         version: 2.4.2
       '@cspell/dict-python':
-        specifier: ^4.5.0
+        specifier: ^4.5.2
         version: 4.5.2
       '@cspell/dict-th-th':
-        specifier: ^1.0.0
+        specifier: ^1.0.1
         version: 1.0.1
       '@cspell/dictionary-bundler-plugin':
         specifier: workspace:*
@@ -1076,7 +1076,7 @@ importers:
         specifier: workspace:*
         version: link:../hunspell-reader
       yaml:
-        specifier: ^2.9.0
+        specifier: ^2.9.1
         version: 2.9.1
     devDependencies:
       lorem-ipsum:
@@ -1117,10 +1117,10 @@ importers:
         specifier: workspace:*
         version: link:../cspell-pipe
       '@cspell/dict-cpp':
-        specifier: ^7.1.0
+        specifier: ^7.1.2
         version: 7.1.2
       '@cspell/dict-en_us':
-        specifier: ^4.4.37
+        specifier: ^4.4.40
         version: 4.4.40
       '@cspell/dict-es-es':
         specifier: ^3.0.8
@@ -1231,7 +1231,7 @@ importers:
         specifier: ^5.1.0
         version: 5.1.0
       yaml:
-        specifier: ^2.9.0
+        specifier: ^2.9.1
         version: 2.9.1
     devDependencies:
       '@tsconfig/node24':
@@ -1282,7 +1282,7 @@ importers:
   test-packages/cspell-eslint-plugin/test-cspell-eslint-plugin-v10:
     dependencies:
       react:
-        specifier: ^19.2.8
+        specifier: ^19.3.0
         version: 19.3.0
     devDependencies:
       '@cspell/eslint-plugin':
@@ -1292,16 +1292,16 @@ importers:
         specifier: ^10.0.1
         version: 10.0.1(eslint@10.11.0(jiti@1.21.7)(supports-color@9.4.0))
       '@types/react':
-        specifier: ^19.2.18
+        specifier: ^19.3.0
         version: 19.3.0
       eslint:
-        specifier: ^10.9.1
+        specifier: ^10.11.0
         version: 10.11.0(jiti@1.21.7)(supports-color@9.4.0)
       eslint-plugin-n:
-        specifier: ^18.3.0
+        specifier: ^18.4.0
         version: 18.4.0(eslint@10.11.0(jiti@1.21.7)(supports-color@9.4.0))(typescript@6.0.3)
       typescript-eslint:
-        specifier: ^8.69.0
+        specifier: ^8.70.1
         version: 8.70.1(eslint@10.11.0(jiti@1.21.7)(supports-color@9.4.0))(supports-color@9.4.0)(typescript@6.0.3)
 
   test-packages/cspell-eslint-plugin/test-cspell-eslint-plugin-v10-basic:
@@ -1313,13 +1313,13 @@ importers:
         specifier: ^10.0.1
         version: 10.0.1(eslint@10.11.0(jiti@1.21.7)(supports-color@9.4.0))
       eslint:
-        specifier: ^10.9.1
+        specifier: ^10.11.0
         version: 10.11.0(jiti@1.21.7)(supports-color@9.4.0)
 
   test-packages/cspell-eslint-plugin/test-cspell-eslint-plugin-v9:
     dependencies:
       react:
-        specifier: ^19.2.8
+        specifier: ^19.3.0
         version: 19.3.0
     devDependencies:
       '@cspell/eslint-plugin':
@@ -1329,16 +1329,16 @@ importers:
         specifier: ^9.39.5
         version: 9.39.5
       '@types/react':
-        specifier: ^19.2.18
+        specifier: ^19.3.0
         version: 19.3.0
       eslint:
         specifier: ^9.39.5
         version: 9.39.5(jiti@1.21.7)(supports-color@9.4.0)
       eslint-plugin-n:
-        specifier: ^18.3.0
+        specifier: ^18.4.0
         version: 18.4.0(eslint@9.39.5(jiti@1.21.7)(supports-color@9.4.0))(typescript@6.0.3)
       typescript-eslint:
-        specifier: ^8.69.0
+        specifier: ^8.70.1
         version: 8.70.1(eslint@9.39.5(jiti@1.21.7)(supports-color@9.4.0))(supports-color@9.4.0)(typescript@6.0.3)
 
   test-packages/cspell-eslint-plugin/test-cspell-eslint-plugin-v9-basic:
@@ -1583,10 +1583,10 @@ importers:
         specifier: ^15.0.0
         version: 15.0.0
       csv-parse:
-        specifier: ^7.0.2
+        specifier: ^7.0.3
         version: 7.0.3
       csv-stringify:
-        specifier: ^6.8.3
+        specifier: ^6.9.0
         version: 6.9.0
       thistogram:
         specifier: ^2.0.0
@@ -1608,7 +1608,7 @@ importers:
         specifier: ^7.9.0
         version: 7.9.0
       jsdom:
-        specifier: ^30.0.1
+        specifier: ^30.1.1
         version: 30.1.1(@noble/hashes@1.8.0)
       skia-canvas:
         specifier: ^3.0.8
@@ -1635,16 +1635,16 @@ importers:
         specifier: ^2.1.1
         version: 2.1.1
       docusaurus-plugin-sass:
-        specifier: ^0.2.6
-        version: 0.2.7(@docusaurus/core@3.10.2(@mdx-js/react@3.1.1(@types/react@19.3.0)(react@19.3.0))(@swc/core@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(debug@4.4.3(supports-color@9.4.0))(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(supports-color@9.4.0)(svgo@3.3.5)(typescript@6.0.3)(uglify-js@3.19.3))(sass@1.105.0)
+        specifier: ^0.2.7
+        version: 0.2.7(@docusaurus/core@3.10.2(@mdx-js/react@3.1.1(@types/react@19.3.0)(react@19.3.0))(@swc/core@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(debug@4.4.3(supports-color@9.4.0))(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(supports-color@9.4.0)(svgo@3.3.5)(typescript@6.0.3)(uglify-js@3.19.3))(sass@1.105.0)(webpack@5.111.1(@swc/core@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(svgo@3.3.5)(uglify-js@3.19.3))
       prism-react-renderer:
         specifier: ^2.4.1
         version: 2.4.1(react@19.3.0)
       react:
-        specifier: ^19.2.8
+        specifier: ^19.3.0
         version: 19.3.0
       react-dom:
-        specifier: ^19.2.8
+        specifier: ^19.3.0
         version: 19.3.0(react@19.3.0)
     devDependencies:
       '@cspell/filetypes':
@@ -1660,19 +1660,19 @@ importers:
         specifier: ^3.10.2
         version: 3.10.2(@swc/core@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(supports-color@9.4.0)(svgo@3.3.5)(uglify-js@3.19.3)
       '@types/react':
-        specifier: ^19.2.18
+        specifier: ^19.3.0
         version: 19.3.0
       docusaurus-plugin-typedoc:
-        specifier: ^1.4.2
+        specifier: ^1.4.3
         version: 1.4.3(typedoc-plugin-markdown@4.13.1(typedoc@0.28.20(typescript@6.0.3)))(typedoc@0.28.20(typescript@6.0.3))
       sass:
-        specifier: ^1.103.1
+        specifier: ^1.105.0
         version: 1.105.0
       typedoc:
         specifier: 0.28.20
         version: 0.28.20(typescript@6.0.3)
       typedoc-plugin-markdown:
-        specifier: ^4.13.0
+        specifier: ^4.13.1
         version: 4.13.1(typedoc@0.28.20(typescript@6.0.3))
       typescript:
         specifier: ^6.0.3
@@ -1687,7 +1687,7 @@ importers:
         specifier: ^7.0.15
         version: 7.0.15
       '@types/node':
-        specifier: ^24.13.3
+        specifier: ^24.19.0
         version: 24.19.0
       cspell-lib:
         specifier: workspace:*
@@ -1706,14 +1706,14 @@ packages:
     resolution: {integrity: sha512-rSTin9Uta23uaewYVQEp8XI9T3iA/zrg0/1G2vhf8oFFDxFL5vybnZ5IQwsVAg4JpKxPX4/WYNKdcfWrZymk7w==}
     engines: {node: '>= 14.0.0'}
 
-  '@algolia/autocomplete-core@1.19.11':
-    resolution: {integrity: sha512-Txje8Sw5yMH4ApvgqR9rAxxWgmVKG+lIgl/e6MEn/IVkQvB/NZu7rV2+2Iy4/p34/D+DWS+hxpZL39w33pJXKA==}
+  '@algolia/autocomplete-core@1.19.12':
+    resolution: {integrity: sha512-nJU03L3Q0LlfnFsQTE1YppSrNcbP0lBg29mCaGCeYPog841HP9WWk5KtrTvNH2LPX6p5eELPFetSeSO8I1MFPg==}
 
   '@algolia/autocomplete-core@1.19.2':
     resolution: {integrity: sha512-mKv7RyuAzXvwmq+0XRK8HqZXt9iZ5Kkm2huLjgn5JoCPtDy+oh9yxUMfDDaVCw0oyzZ1isdJBc7l9nuCyyR7Nw==}
 
-  '@algolia/autocomplete-plugin-algolia-insights@1.19.11':
-    resolution: {integrity: sha512-NW7gVJqk1dQQeOEsY9+GqImCJwjL0YZW50gLDdfjI/9zfYNiCCByzpQaUM9YRzVr1QM61FHiVRjT6advLwl9Qw==}
+  '@algolia/autocomplete-plugin-algolia-insights@1.19.12':
+    resolution: {integrity: sha512-L3Fvu4Ajb7c9X1DMTHFFD8d1uK898b9bg9ENrjLpkSP8BAzO4vS5/MIsU0ks0FqpOihZ4VDAVYRaU6bhm/CljQ==}
     peerDependencies:
       search-insights: '>= 1 < 3'
 
@@ -1722,8 +1722,8 @@ packages:
     peerDependencies:
       search-insights: '>= 1 < 3'
 
-  '@algolia/autocomplete-shared@1.19.11':
-    resolution: {integrity: sha512-9oYPEMmMAH+/EDUGKJJ6oX6JI7YNq7tmWTxEbe8r/qmZnM5BoJSzo8C3Wa2Kc/EPyBJjFrjw7qwo7huzqAYW0g==}
+  '@algolia/autocomplete-shared@1.19.12':
+    resolution: {integrity: sha512-goe55oftoEduuOHhTg4viHr58/ZsZvYEtfxkKFy6LdJxZ7+jOdVwp2bZz7qjip9CdFqkIB+34d4esftcaErCzA==}
     peerDependencies:
       '@algolia/client-search': '>= 4.9.1 < 6'
       algoliasearch: '>= 4.9.1 < 6'
@@ -5910,8 +5910,8 @@ packages:
   browser-stdout@1.3.1:
     resolution: {integrity: sha512-qhAVI1+Av2X7qelOfAIYwXONood6XlZE/fXaBSmW/T5SzLAmCgzi+eiWE7fUvbHaeNBQH13UftjpXxsfLkMpgw==}
 
-  browserslist@4.29.1:
-    resolution: {integrity: sha512-AUdjuRyCNGUYtqpqfTmWyM4fXay8yIQhmLnvYe/THMGfT9B/34X7xQd3ifKxwyNPPpowVBjLb+64BN9Rn1mizw==}
+  browserslist@4.29.2:
+    resolution: {integrity: sha512-/u9r8k8ue4ZhHCw9ovDtltpWdXeXzjhdxCGj6vm1RGLPXb8lu33EMdoCHF5Sx8oYBS+Q/FYYNmAqlHncxR3RmA==}
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
 
@@ -11807,10 +11807,10 @@ snapshots:
       '@algolia/requester-fetch': 5.59.0
       '@algolia/requester-node-http': 5.59.0
 
-  '@algolia/autocomplete-core@1.19.11(@algolia/client-search@5.59.0)(algoliasearch@5.59.0)(search-insights@2.17.3)':
+  '@algolia/autocomplete-core@1.19.12(@algolia/client-search@5.59.0)(algoliasearch@5.59.0)(search-insights@2.17.3)':
     dependencies:
-      '@algolia/autocomplete-plugin-algolia-insights': 1.19.11(@algolia/client-search@5.59.0)(algoliasearch@5.59.0)(search-insights@2.17.3)
-      '@algolia/autocomplete-shared': 1.19.11(@algolia/client-search@5.59.0)(algoliasearch@5.59.0)
+      '@algolia/autocomplete-plugin-algolia-insights': 1.19.12(@algolia/client-search@5.59.0)(algoliasearch@5.59.0)(search-insights@2.17.3)
+      '@algolia/autocomplete-shared': 1.19.12(@algolia/client-search@5.59.0)(algoliasearch@5.59.0)
     transitivePeerDependencies:
       - '@algolia/client-search'
       - algoliasearch
@@ -11825,9 +11825,9 @@ snapshots:
       - algoliasearch
       - search-insights
 
-  '@algolia/autocomplete-plugin-algolia-insights@1.19.11(@algolia/client-search@5.59.0)(algoliasearch@5.59.0)(search-insights@2.17.3)':
+  '@algolia/autocomplete-plugin-algolia-insights@1.19.12(@algolia/client-search@5.59.0)(algoliasearch@5.59.0)(search-insights@2.17.3)':
     dependencies:
-      '@algolia/autocomplete-shared': 1.19.11(@algolia/client-search@5.59.0)(algoliasearch@5.59.0)
+      '@algolia/autocomplete-shared': 1.19.12(@algolia/client-search@5.59.0)(algoliasearch@5.59.0)
       search-insights: 2.17.3
     transitivePeerDependencies:
       - '@algolia/client-search'
@@ -11841,7 +11841,7 @@ snapshots:
       - '@algolia/client-search'
       - algoliasearch
 
-  '@algolia/autocomplete-shared@1.19.11(@algolia/client-search@5.59.0)(algoliasearch@5.59.0)':
+  '@algolia/autocomplete-shared@1.19.12(@algolia/client-search@5.59.0)(algoliasearch@5.59.0)':
     dependencies:
       '@algolia/client-search': 5.59.0
       algoliasearch: 5.59.0
@@ -11989,7 +11989,7 @@ snapshots:
     dependencies:
       '@babel/compat-data': 7.29.7
       '@babel/helper-validator-option': 7.29.7
-      browserslist: 4.29.1
+      browserslist: 4.29.2
       lru-cache: 5.1.1
       semver: 6.3.1
 
@@ -14184,7 +14184,7 @@ snapshots:
 
   '@docusaurus/theme-search-algolia@3.10.2(@algolia/client-search@5.59.0)(@mdx-js/react@3.1.1(@types/react@19.3.0)(react@19.3.0))(@swc/core@1.16.2)(@types/react@19.3.0)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(debug@4.4.3(supports-color@9.4.0))(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(search-insights@2.17.3)(supports-color@9.4.0)(svgo@3.3.5)(typescript@6.0.3)(uglify-js@3.19.3)':
     dependencies:
-      '@algolia/autocomplete-core': 1.19.11(@algolia/client-search@5.59.0)(algoliasearch@5.59.0)(search-insights@2.17.3)
+      '@algolia/autocomplete-core': 1.19.12(@algolia/client-search@5.59.0)(algoliasearch@5.59.0)(search-insights@2.17.3)
       '@docsearch/react': 4.7.0(@algolia/client-search@5.59.0)(@types/react@19.3.0)(algoliasearch@5.59.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(search-insights@2.17.3)
       '@docusaurus/core': 3.10.2(@mdx-js/react@3.1.1(@types/react@19.3.0)(react@19.3.0))(@swc/core@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(debug@4.4.3(supports-color@9.4.0))(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(supports-color@9.4.0)(svgo@3.3.5)(typescript@6.0.3)(uglify-js@3.19.3)
       '@docusaurus/logger': 3.10.2
@@ -16026,7 +16026,7 @@ snapshots:
     dependencies:
       tinyglobby: 0.2.17
       unplugin-utils: 0.3.2
-      vitest: 4.1.11(@types/node@22.20.4)(@vitest/coverage-istanbul@4.1.11)(vite@8.3.1(@types/node@22.20.4)(esbuild@0.28.2)(jiti@1.21.7)(terser@5.51.2))
+      vitest: 4.1.11(@types/node@22.20.4)(@vitest/coverage-istanbul@4.1.11)(jsdom@30.1.1(@noble/hashes@1.8.0))(vite@8.3.1(@types/node@22.20.4)(esbuild@0.28.2)(jiti@1.21.7)(sass@1.105.0)(terser@5.51.2)(yaml@2.9.1))
     optionalDependencies:
       esbuild: 0.28.2
       rolldown: 1.2.11
@@ -16684,7 +16684,7 @@ snapshots:
       magicast: 0.5.5
       obug: 2.2.1
       tinyrainbow: 3.1.1
-      vitest: 4.1.11(@types/node@22.20.4)(@vitest/coverage-istanbul@4.1.11)(vite@8.3.1(@types/node@22.20.4)(esbuild@0.28.2)(jiti@1.21.7)(terser@5.51.2))
+      vitest: 4.1.11(@types/node@22.20.4)(@vitest/coverage-istanbul@4.1.11)(jsdom@30.1.1(@noble/hashes@1.8.0))(vite@8.3.1(@types/node@22.20.4)(esbuild@0.28.2)(jiti@1.21.7)(sass@1.105.0)(terser@5.51.2)(yaml@2.9.1))
     transitivePeerDependencies:
       - supports-color
 
@@ -16697,13 +16697,13 @@ snapshots:
       chai: 6.2.2
       tinyrainbow: 3.1.1
 
-  '@vitest/mocker@4.1.11(vite@8.3.1(@types/node@22.20.4)(esbuild@0.28.2)(jiti@1.21.7)(terser@5.51.2))':
+  '@vitest/mocker@4.1.11(vite@8.3.1(@types/node@22.20.4)(esbuild@0.28.2)(jiti@1.21.7)(sass@1.105.0)(terser@5.51.2)(yaml@2.9.1))':
     dependencies:
       '@vitest/spy': 4.1.11
       estree-walker: 3.0.3
       magic-string: 0.30.21
     optionalDependencies:
-      vite: 8.3.1(@types/node@22.20.4)(esbuild@0.28.2)(jiti@1.21.7)(terser@5.51.2)
+      vite: 8.3.1(@types/node@22.20.4)(esbuild@0.28.2)(jiti@1.21.7)(sass@1.105.0)(terser@5.51.2)(yaml@2.9.1)
 
   '@vitest/pretty-format@4.1.11':
     dependencies:
@@ -17093,7 +17093,7 @@ snapshots:
 
   autoprefixer@10.6.1(postcss@8.5.28):
     dependencies:
-      browserslist: 4.29.1
+      browserslist: 4.29.2
       caniuse-lite: 1.0.30001812
       fraction.js: 5.3.4
       picocolors: 1.1.1
@@ -17242,13 +17242,13 @@ snapshots:
 
   browser-stdout@1.3.1: {}
 
-  browserslist@4.29.1:
+  browserslist@4.29.2:
     dependencies:
       baseline-browser-mapping: 2.11.26
       caniuse-lite: 1.0.30001812
       electron-to-chromium: 1.5.439
       node-releases: 2.0.57
-      update-browserslist-db: 1.3.3(browserslist@4.29.1)
+      update-browserslist-db: 1.3.3(browserslist@4.29.2)
 
   buffer-from@1.1.2: {}
 
@@ -17329,7 +17329,7 @@ snapshots:
 
   caniuse-api@3.0.0:
     dependencies:
-      browserslist: 4.29.1
+      browserslist: 4.29.2
       caniuse-lite: 1.0.30001812
       lodash.memoize: 4.1.2
       lodash.uniq: 4.5.0
@@ -17640,7 +17640,7 @@ snapshots:
 
   core-js-compat@3.50.0:
     dependencies:
-      browserslist: 4.29.1
+      browserslist: 4.29.2
 
   core-js@3.50.0: {}
 
@@ -17860,7 +17860,7 @@ snapshots:
   cssnano-preset-advanced@6.1.2(postcss@8.5.28):
     dependencies:
       autoprefixer: 10.6.1(postcss@8.5.28)
-      browserslist: 4.29.1
+      browserslist: 4.29.2
       cssnano-preset-default: 6.1.2(postcss@8.5.28)
       postcss: 8.5.28
       postcss-discard-unused: 6.0.5(postcss@8.5.28)
@@ -17870,7 +17870,7 @@ snapshots:
 
   cssnano-preset-default@6.1.2(postcss@8.5.28):
     dependencies:
-      browserslist: 4.29.1
+      browserslist: 4.29.2
       css-declaration-sorter: 7.4.0(postcss@8.5.28)
       cssnano-utils: 4.0.2(postcss@8.5.28)
       postcss: 8.5.28
@@ -18214,11 +18214,11 @@ snapshots:
     dependencies:
       esutils: 2.0.3
 
-  docusaurus-plugin-sass@0.2.7(@docusaurus/core@3.10.2(@mdx-js/react@3.1.1(@types/react@19.3.0)(react@19.3.0))(@swc/core@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(debug@4.4.3(supports-color@9.4.0))(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(supports-color@9.4.0)(svgo@3.3.5)(typescript@6.0.3)(uglify-js@3.19.3))(sass@1.105.0):
+  docusaurus-plugin-sass@0.2.7(@docusaurus/core@3.10.2(@mdx-js/react@3.1.1(@types/react@19.3.0)(react@19.3.0))(@swc/core@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(debug@4.4.3(supports-color@9.4.0))(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(supports-color@9.4.0)(svgo@3.3.5)(typescript@6.0.3)(uglify-js@3.19.3))(sass@1.105.0)(webpack@5.111.1(@swc/core@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(svgo@3.3.5)(uglify-js@3.19.3)):
     dependencies:
       '@docusaurus/core': 3.10.2(@mdx-js/react@3.1.1(@types/react@19.3.0)(react@19.3.0))(@swc/core@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(debug@4.4.3(supports-color@9.4.0))(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(supports-color@9.4.0)(svgo@3.3.5)(typescript@6.0.3)(uglify-js@3.19.3)
       sass: 1.105.0
-      sass-loader: 16.0.8(sass@1.105.0)
+      sass-loader: 16.0.8(sass@1.105.0)(webpack@5.111.1(@swc/core@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(svgo@3.3.5)(uglify-js@3.19.3))
     transitivePeerDependencies:
       - '@rspack/core'
       - node-sass
@@ -18766,7 +18766,7 @@ snapshots:
     dependencies:
       '@eslint-community/eslint-utils': 4.10.1(eslint@10.11.0(jiti@1.21.7)(supports-color@9.4.0))
       '@eslint/css-tree': 4.1.1
-      browserslist: 4.29.1
+      browserslist: 4.29.2
       change-case: 5.4.4
       ci-info: 4.4.0
       core-js-compat: 3.50.0
@@ -20148,7 +20148,7 @@ snapshots:
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 24.19.0
+      '@types/node': 22.20.4
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
@@ -21817,7 +21817,7 @@ snapshots:
 
   postcss-colormin@6.1.0(postcss@8.5.28):
     dependencies:
-      browserslist: 4.29.1
+      browserslist: 4.29.2
       caniuse-api: 3.0.0
       colord: 2.10.0
       postcss: 8.5.28
@@ -21825,7 +21825,7 @@ snapshots:
 
   postcss-convert-values@6.1.0(postcss@8.5.28):
     dependencies:
-      browserslist: 4.29.1
+      browserslist: 4.29.2
       postcss: 8.5.28
       postcss-value-parser: 4.2.0
 
@@ -21949,7 +21949,7 @@ snapshots:
 
   postcss-merge-rules@6.1.1(postcss@8.5.28):
     dependencies:
-      browserslist: 4.29.1
+      browserslist: 4.29.2
       caniuse-api: 3.0.0
       cssnano-utils: 4.0.2(postcss@8.5.28)
       postcss: 8.5.28
@@ -21969,7 +21969,7 @@ snapshots:
 
   postcss-minify-params@6.1.0(postcss@8.5.28):
     dependencies:
-      browserslist: 4.29.1
+      browserslist: 4.29.2
       cssnano-utils: 4.0.2(postcss@8.5.28)
       postcss: 8.5.28
       postcss-value-parser: 4.2.0
@@ -22038,7 +22038,7 @@ snapshots:
 
   postcss-normalize-unicode@6.1.0(postcss@8.5.28):
     dependencies:
-      browserslist: 4.29.1
+      browserslist: 4.29.2
       postcss: 8.5.28
       postcss-value-parser: 4.2.0
 
@@ -22119,7 +22119,7 @@ snapshots:
       '@csstools/postcss-trigonometric-functions': 4.0.9(postcss@8.5.28)
       '@csstools/postcss-unset-value': 4.0.0(postcss@8.5.28)
       autoprefixer: 10.6.1(postcss@8.5.28)
-      browserslist: 4.29.1
+      browserslist: 4.29.2
       css-blank-pseudo: 7.0.1(postcss@8.5.28)
       css-has-pseudo: 7.0.3(postcss@8.5.28)
       css-prefers-color-scheme: 10.0.0(postcss@8.5.28)
@@ -22163,7 +22163,7 @@ snapshots:
 
   postcss-reduce-initial@6.1.0(postcss@8.5.28):
     dependencies:
-      browserslist: 4.29.1
+      browserslist: 4.29.2
       caniuse-api: 3.0.0
       postcss: 8.5.28
 
@@ -22798,11 +22798,12 @@ snapshots:
 
   safer-buffer@2.1.2: {}
 
-  sass-loader@16.0.8(sass@1.105.0):
+  sass-loader@16.0.8(sass@1.105.0)(webpack@5.111.1(@swc/core@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(svgo@3.3.5)(uglify-js@3.19.3)):
     dependencies:
       neo-async: 2.6.2
     optionalDependencies:
       sass: 1.105.0
+      webpack: 5.111.1(@swc/core@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(svgo@3.3.5)(uglify-js@3.19.3)
 
   sass@1.105.0:
     dependencies:
@@ -23326,7 +23327,7 @@ snapshots:
 
   stylehacks@6.1.1(postcss@8.5.28):
     dependencies:
-      browserslist: 4.29.1
+      browserslist: 4.29.2
       postcss: 8.5.28
       postcss-selector-parser: 6.1.4
 
@@ -23785,7 +23786,7 @@ snapshots:
       pathe: 2.0.3
       picomatch: 4.0.7
 
-  unplugin@3.4.0(esbuild@0.28.2)(rolldown@1.2.11)(rollup@4.63.5)(vite@8.3.1(@types/node@22.20.4)(esbuild@0.28.2)(jiti@1.21.7)(terser@5.51.2)):
+  unplugin@3.4.0(esbuild@0.28.2)(rolldown@1.2.11)(rollup@4.63.5)(vite@8.3.1(@types/node@22.20.4)(esbuild@0.28.2)(jiti@1.21.7)(sass@1.105.0)(terser@5.51.2)(yaml@2.9.1))(webpack@5.111.1(@swc/core@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(svgo@3.3.5)(uglify-js@3.19.3)):
     dependencies:
       '@jridgewell/remapping': 2.3.5
       picomatch: 4.0.7
@@ -23794,7 +23795,8 @@ snapshots:
       esbuild: 0.28.2
       rolldown: 1.2.11
       rollup: 4.63.5
-      vite: 8.3.1(@types/node@22.20.4)(esbuild@0.28.2)(jiti@1.21.7)(terser@5.51.2)
+      vite: 8.3.1(@types/node@22.20.4)(esbuild@0.28.2)(jiti@1.21.7)(sass@1.105.0)(terser@5.51.2)(yaml@2.9.1)
+      webpack: 5.111.1(@swc/core@1.16.2)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.28))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.28)(svgo@3.3.5)(uglify-js@3.19.3)
 
   unrs-resolver@1.12.2:
     dependencies:
@@ -23823,9 +23825,9 @@ snapshots:
       '@unrs/resolver-binding-win32-ia32-msvc': 1.12.2
       '@unrs/resolver-binding-win32-x64-msvc': 1.12.2
 
-  update-browserslist-db@1.3.3(browserslist@4.29.1):
+  update-browserslist-db@1.3.3(browserslist@4.29.2):
     dependencies:
-      browserslist: 4.29.1
+      browserslist: 4.29.2
       escalade: 3.2.0
       picocolors: 1.1.1
 
@@ -23922,7 +23924,7 @@ snapshots:
       '@types/unist': 3.0.3
       vfile-message: 4.0.3
 
-  vite@8.3.1(@types/node@22.20.4)(esbuild@0.28.2)(jiti@1.21.7)(terser@5.51.2):
+  vite@8.3.1(@types/node@22.20.4)(esbuild@0.28.2)(jiti@1.21.7)(sass@1.105.0)(terser@5.51.2)(yaml@2.9.1):
     dependencies:
       lightningcss: 1.33.0
       picomatch: 4.0.7
@@ -23934,16 +23936,18 @@ snapshots:
       esbuild: 0.28.2
       fsevents: 2.3.3
       jiti: 1.21.7
+      sass: 1.105.0
       terser: 5.51.2
+      yaml: 2.9.1
 
   vitest-fetch-mock@0.4.5(vitest@4.1.11):
     dependencies:
-      vitest: 4.1.11(@types/node@22.20.4)(@vitest/coverage-istanbul@4.1.11)(vite@8.3.1(@types/node@22.20.4)(esbuild@0.28.2)(jiti@1.21.7)(terser@5.51.2))
+      vitest: 4.1.11(@types/node@22.20.4)(@vitest/coverage-istanbul@4.1.11)(jsdom@30.1.1(@noble/hashes@1.8.0))(vite@8.3.1(@types/node@22.20.4)(esbuild@0.28.2)(jiti@1.21.7)(sass@1.105.0)(terser@5.51.2)(yaml@2.9.1))
 
-  vitest@4.1.11(@types/node@22.20.4)(@vitest/coverage-istanbul@4.1.11)(vite@8.3.1(@types/node@22.20.4)(esbuild@0.28.2)(jiti@1.21.7)(terser@5.51.2)):
+  vitest@4.1.11(@types/node@22.20.4)(@vitest/coverage-istanbul@4.1.11)(jsdom@30.1.1(@noble/hashes@1.8.0))(vite@8.3.1(@types/node@22.20.4)(esbuild@0.28.2)(jiti@1.21.7)(sass@1.105.0)(terser@5.51.2)(yaml@2.9.1)):
     dependencies:
       '@vitest/expect': 4.1.11
-      '@vitest/mocker': 4.1.11(vite@8.3.1(@types/node@22.20.4)(esbuild@0.28.2)(jiti@1.21.7)(terser@5.51.2))
+      '@vitest/mocker': 4.1.11(vite@8.3.1(@types/node@22.20.4)(esbuild@0.28.2)(jiti@1.21.7)(sass@1.105.0)(terser@5.51.2)(yaml@2.9.1))
       '@vitest/pretty-format': 4.1.11
       '@vitest/runner': 4.1.11
       '@vitest/snapshot': 4.1.11
@@ -23960,11 +23964,12 @@ snapshots:
       tinyexec: 1.3.1
       tinyglobby: 0.2.17
       tinyrainbow: 3.1.1
-      vite: 8.3.1(@types/node@22.20.4)(esbuild@0.28.2)(jiti@1.21.7)(terser@5.51.2)
+      vite: 8.3.1(@types/node@22.20.4)(esbuild@0.28.2)(jiti@1.21.7)(sass@1.105.0)(terser@5.51.2)(yaml@2.9.1)
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 22.20.4
       '@vitest/coverage-istanbul': 4.1.11(supports-color@9.4.0)(vitest@4.1.11)
+      jsdom: 30.1.1(@noble/hashes@1.8.0)
     transitivePeerDependencies:
       - msw
 
@@ -24088,7 +24093,7 @@ snapshots:
       '@webassemblyjs/ast': 1.14.1
       '@webassemblyjs/wasm-edit': 1.14.1
       '@webassemblyjs/wasm-parser': 1.14.1
-      browserslist: 4.29.1
+      browserslist: 4.29.2
       chrome-trace-event: 1.0.4
       enhanced-resolve: 5.25.1
       es-module-lexer: 2.3.2

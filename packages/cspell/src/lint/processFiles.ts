@@ -6,15 +6,18 @@ import { shouldCheckDocument } from 'cspell-lib';
 
 import type { LintFileReporter, LintFileResult } from '../reporters/LintFileResult.js';
 import type { LintReporter } from '../reporters/reporters.js';
-import { extractReporterIssueOptions, replayReportItems } from '../reporters/reporters.js';
+import { extractReporterIssueOptions, replayReportItems, ReportItemCollector } from '../reporters/reporters.js';
 import type { CreateCacheSettings, CSpellLintResultCache } from '../util/cache/index.js';
 import { createCache } from '../util/cache/index.js';
 import type { ConfigInfo } from '../util/configFileHelper.js';
 import { ApplicationError, toApplicationError } from '../util/errors.js';
 import { filenameToUri, getFileSize, isBinaryFile, readFileInfo, relativeToCwd } from '../util/fileHelper.js';
 import { prefetchIterable } from '../util/prefetch.js';
+import type { SymlinkChecker } from '../util/symlinks.js';
+import { createSymlinkChecker } from '../util/symlinks.js';
 import { getTimeMeasurer } from '../util/timer.js';
 import { sizeToNumber } from '../util/unitNumbers.js';
+import { LinterError } from './LinterError.js';
 import type { LintRequest } from './LintRequest.js';
 import type { ProcessFileOptions } from './processFile.js';
 import { processFile } from './processFile.js';
@@ -34,6 +37,11 @@ interface PrefetchConfig {
     readonly root: LintRequest['root'];
     readonly maxFileSize: LintRequest['maxFileSize'];
     readonly forceCheck: boolean;
+    readonly symlinks: SymlinkChecker;
+    readonly followSymlinks: boolean;
+    readonly verbose: boolean;
+    readonly languageId: string | undefined;
+    readonly locale: string | undefined;
     readonly config: CSpellSettings;
     readonly cache: CSpellLintResultCache;
 }
@@ -50,13 +58,26 @@ function prefetch(fileToProcess: FileToProcess, cfg: PrefetchConfig): PrefetchFi
 
     async function fetch(): Promise<PFCached | PFFile | PFSkipped> {
         const getElapsedTimeMs = getTimeMeasurer();
+        if (!cfg.followSymlinks && (await cfg.symlinks.isReachedThroughSymlink(filename))) {
+            const skipReason = 'referenced by a symbolic link, use --follow-symlinks to check it';
+            if (cfg.forceCheck) {
+                const error = new LinterError(`File ${skipReason}: "${filename}"`);
+                return { skip: true, skipReason, error } as const;
+            }
+            return { skip: true, skipReason: cfg.verbose ? skipReason : undefined } as const;
+        }
         const cachedResult = await cfg.cache.getCachedLintResults(filename);
         if (cachedResult) {
             const fileResult = { ...cachedResult, elapsedTimeMs: getElapsedTimeMs() };
             return { fileResult };
         }
         const uri = filenameToUri(filename, cfg.root).href;
-        const checkResult = await shouldCheckDocument({ uri }, { forceCheck: cfg.forceCheck }, cfg.config);
+        const { languageId, locale } = cfg;
+        const checkResult = await shouldCheckDocument(
+            { uri, languageId, locale },
+            { forceCheck: cfg.forceCheck },
+            cfg.config,
+        );
         if (!checkResult.shouldCheck) {
             return { skip: true, skipReason: checkResult.reason || 'Ignored by configuration.' } as const;
         }
@@ -88,6 +109,11 @@ export interface ProcessFilesOptions {
     readonly chalk: ChalkInstance;
     readonly userSettings: CSpellSettingsWithSourceTrace;
     readonly cacheSettings: CreateCacheSettings;
+    readonly symlinks?: SymlinkChecker | undefined;
+    /**
+     * Read files referenced by symbolic links.
+     */
+    readonly followSymlinks?: boolean | undefined;
 }
 
 export async function processFiles(
@@ -102,6 +128,11 @@ export async function processFiles(
         root: options.cfg.root,
         maxFileSize: options.cfg.maxFileSize,
         forceCheck: !!options.cfg.options.forceCheck,
+        symlinks: options.symlinks ?? createSymlinkChecker(options.cfg.root),
+        followSymlinks: !!options.followSymlinks,
+        verbose: options.verboseLevel > 0,
+        languageId: options.cfg.options.languageId || undefined,
+        locale: options.cfg.locale || undefined,
         config: options.configInfo.config,
         cache,
     };
@@ -163,6 +194,10 @@ export async function processFiles(
                 elapsedTimeMs: getElapsedTimeMs(),
                 skippedReason: fetchResult.skipReason,
             };
+            if (fetchResult.error) {
+                new ReportItemCollector(result).error('Linter:', fetchResult.error);
+                result.errors = 1;
+            }
             return { filename, sequence, sequenceSize, result };
         }
         const result = await processFile(pf, cache, fetchResult, processFileOptionsGeneral);

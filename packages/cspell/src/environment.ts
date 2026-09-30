@@ -25,6 +25,12 @@ export interface CSpellEnvironmentVariables {
      * Path to the default CSpell config file, used if no other config is found.
      */
     CSPELL_DEFAULT_CONFIG_PATH?: string;
+    /**
+     * Allow checking `--file` and `--file-list` documents referenced by symbolic links.
+     * The `--follow-symlinks` and `--no-follow-symlinks` options take precedence.
+     * Acceptable values are: 'true', 'false', 't', 'f', 'on', 'off', 'yes', 'no', '1', '0'
+     */
+    CSPELL_FOLLOW_SYMLINKS?: string;
 }
 
 export type EnvironmentKeys = keyof CSpellEnvironmentVariables;
@@ -40,6 +46,7 @@ export const environmentKeys: EnvironmentKeyNames = {
     CSPELL_GLOB_ROOT: 'CSPELL_GLOB_ROOT',
     CSPELL_CONFIG_PATH: 'CSPELL_CONFIG_PATH',
     CSPELL_DEFAULT_CONFIG_PATH: 'CSPELL_DEFAULT_CONFIG_PATH',
+    CSPELL_FOLLOW_SYMLINKS: 'CSPELL_FOLLOW_SYMLINKS',
 };
 
 export function getEnvironmentVariables(): CSpellEnvironmentVariables {

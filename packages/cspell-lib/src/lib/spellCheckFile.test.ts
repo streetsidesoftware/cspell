@@ -5,12 +5,14 @@ import { pathToFileURL } from 'node:url';
 
 import type { CSpellSettingsWithSourceTrace, CSpellUserSettings } from '@cspell/cspell-types';
 import type { ICSpellConfigFile } from 'cspell-config-lib';
-import { describe, expect, test } from 'vitest';
+import { createRedirectProvider } from 'cspell-io';
+import { afterAll, beforeAll, describe, expect, test } from 'vitest';
 
-import { pathPackageSamples, pathRepoTestFixtures } from '../test-util/index.mjs';
+import { pathPackageSamples, pathPackageSamplesURL, pathRepoTestFixtures } from '../test-util/index.mjs';
 import { extendExpect } from '../test-util/test.matchers.mjs';
 import type { Document } from './Document/index.js';
 import { fileToDocument, fileToTextDocument } from './Document/resolveDocument.js';
+import { getVirtualFS } from './fileSystem.js';
 import type { CSpellSettingsInternal } from './Settings/index.js';
 import type { SpellCheckFileOptions, SpellCheckFileResult } from './spellCheckFile.js';
 import { determineFinalDocumentSettings, spellCheckDocument, spellCheckFile } from './spellCheckFile.js';
@@ -184,6 +186,31 @@ describe('Validate Spell Checking Documents', async () => {
             expect(r).toEqual(oc(expected));
         },
     );
+});
+
+describe('Validate Spell Checking Documents on a remote file system', () => {
+    const remoteRoot = new URL('vscode-vfs://github/owner/repo/');
+    let dispose: (() => void) | undefined;
+
+    beforeAll(() => {
+        const provider = createRedirectProvider('remote-test', remoteRoot, pathPackageSamplesURL);
+        dispose = getVirtualFS().registerFileSystemProvider(provider).dispose;
+    });
+
+    afterAll(() => dispose?.());
+
+    test.each`
+        file              | settings
+        ${'src/sample.c'} | ${{}}
+        ${'Dutch.txt'}    | ${{ noConfigSearch: true, language: 'en' }}
+    `('reads $file without text and reports the same issues as file:', async ({ file, settings }) => {
+        const words = (r: SpellCheckFileResult) => r.issues.map((issue) => issue.text);
+        const local = await spellCheckDocument({ uri: new URL(file, pathPackageSamplesURL).href }, {}, settings);
+        const remote = await spellCheckDocument({ uri: new URL(file, remoteRoot).href }, {}, settings);
+        expect(remote.errors).toBeUndefined();
+        expect(remote.checked).toBe(true);
+        expect(words(remote)).toEqual(words(local));
+    });
 });
 
 describe('Validate Uri assumptions', () => {

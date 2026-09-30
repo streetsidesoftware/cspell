@@ -32,6 +32,10 @@ export interface PFSkipped extends PrefetchResult {
     skip: true;
     skipReason?: string | undefined;
     reportIssueOptions?: undefined;
+    /**
+     * Report an error for the skipped file.
+     */
+    error?: Error | undefined;
 }
 
 export interface FileToProcess {
