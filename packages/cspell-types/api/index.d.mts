@@ -243,7 +243,7 @@ interface ProgressFileBegin extends ProgressFileBase {
 }
 type ProgressEmitter = (p: ProgressItem | ProgressFileComplete) => void;
 interface RunResult {
-  /** Number of files processed. */
+  /** Number of files found, including skipped files. */
   files: number;
   /** Set of files where issues were found. */
   filesWithIssues: Set<string>;
