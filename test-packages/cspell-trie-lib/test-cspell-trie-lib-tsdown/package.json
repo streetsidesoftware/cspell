@@ -10,7 +10,8 @@
   "type": "module",
   "scripts": {
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
-    "build": "tsdown",
+    "build": "tsdown && pnpm run build:no-node",
+    "build:no-node": "node ../../check-no-node-types.mjs",
     "clean-build": "pnpm run clean && pnpm run build",
     "test": "pnpm test:unit && pnpm test:smoke",
     "test:smoke": "node ./bin.mjs && node ./bin.cjs",
