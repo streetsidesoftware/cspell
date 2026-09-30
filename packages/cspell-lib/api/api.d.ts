@@ -1,6 +1,6 @@
+import { FSCapabilityFlags, VFileSystem, VFileSystem as VFileSystem$1, VFileSystemProvider, VirtualFS, VirtualFS as VirtualFS$1, asyncIterableToArray, readFileText as readFile, readFileTextSync as readFileSync, writeToFile, writeToFileIterable, writeToFileIterableP } from "cspell-io";
 import "vscode-uri";
 import { AdvancedCSpellSettingsWithSourceTrace, CSpellSettings, CSpellSettingsWithSourceTrace, CSpellUserSettings, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, DictionaryDefinitionInline, DictionaryDefinitionPreferred, DictionaryDefinitionSimple, DictionaryId, DictionaryReference, DocumentParser, Glob, ImportFileRef, Issue, LocaleId, MappedText, ParsedText, Parser, PnPSettings, Range, ReportingConfiguration, TextDocumentOffset, TextOffset } from "@cspell/cspell-types";
-import { FSCapabilityFlags, VFileSystem, VFileSystem as VFileSystem$1, VFileSystemProvider, VirtualFS, VirtualFS as VirtualFS$1, asyncIterableToArray, readFileText as readFile, readFileTextSync as readFileSync, writeToFile, writeToFileIterable, writeToFileIterableP } from "cspell-io";
 import { FileTypeId as LanguageId, findMatchingFileTypes as getLanguagesForBasename, getFileTypesForExt as getLanguagesForExt } from "@cspell/filetypes";
 import { CachingDictionary, SpellingDictionary, SpellingDictionaryCollection, SuggestOptions, SuggestionCollector, SuggestionResult, createCollection, createSpellingDictionary } from "cspell-dictionary";
 import { CompoundWordsMethod, WeightMap } from "cspell-trie-lib";
