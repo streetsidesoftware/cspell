@@ -16,6 +16,18 @@ export async function findRepoRoot(directory: string | URL, vfs?: VFileSystem): 
 }
 
 /**
+ * Check if a directory is the root of a git repository, clone or worktree.
+ * @param directory - directory to check.
+ * @returns resolves to true when the directory has a `.git` file or directory.
+ */
+export async function isRepoRoot(directory: string | URL, vfs?: VFileSystem): Promise<boolean> {
+    const dir = toFileDirURL(directory);
+    if (dir.protocol !== 'file:') return false;
+    const fs = vfs || getDefaultVirtualFs().getFS(dir);
+    return !!(await findDotGit(fs, dir));
+}
+
+/**
  * Look for `.git` in a single directory, without caring whether it is a file or a directory.
  *
  * A clone marks its root with a `.git` directory and a worktree marks its root with a `.git` file,
