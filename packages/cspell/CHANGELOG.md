@@ -906,6 +906,36 @@ Related: #8975, streetsidesoftware/vscode-spell-checker#3099, streetsidesoftware
 
 </details>
 
+## v10.4.0-alpha.1 (2026-09-30)
+
+### Fixes
+
+<details>
+<summary>fix: Deprecate `cspell-lib/rpc`; import from `@cspell/rpc` (<a href="https://github.com/streetsidesoftware/cspell/pull/9376">#9376</a>)</summary>
+
+### fix: Deprecate `cspell-lib/rpc`; import from `@cspell/rpc` ([#9376](https://github.com/streetsidesoftware/cspell/pull/9376))
+
+## Summary
+
+`cspell-lib/rpc` is deprecated: import from `@cspell/rpc` instead. It still works, and editors now mark each of its exports as deprecated.
+
+- `cspell-lib/rpc` only passes `@cspell/rpc` through. Everything it exports (`RPCClient`, `RPCServer`, the RPC error classes, and their types) is available from `@cspell/rpc` directly.
+- Nothing else changes for users: every package exports the same names as before.
+
+<details>
+<summary>Technical Details</summary>
+
+- The published packages now list their exports by name instead of re-exporting whole modules, so the public API of each package is visible in its entry file, and anything added to an internal module only becomes public on purpose.
+- `cspell` and `cspell-lib` still re-export everything from `@cspell/cspell-types`, so everything their users need comes from one place.
+- The `@cspell/eslint-plugin` `recommended` config, from `@cspell/eslint-plugin/configs`, is now a plain config object with the same `plugins` and `rules`.
+- Unused files that only re-exported other modules were removed from `@cspell/cspell-types` and `cspell-grammar`.
+
+</details>
+
+---
+
+</details>
+
 ## v10.3.6 (2026-09-29)
 
 ### Fixes
