@@ -5,7 +5,7 @@ import { createConfig } from '@internal/tsdown';
 export default createConfig([
     {
         // The API
-        entry: ['src/api.ts', 'src/rpc.ts'],
+        entry: { api: 'src/index.ts', rpc: 'src/rpc.ts' },
         outDir: 'api',
         format: ['esm'],
         fixedExtension: false,

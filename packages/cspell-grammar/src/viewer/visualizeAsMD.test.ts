@@ -3,7 +3,7 @@ import * as path from 'node:path';
 
 import { describe, expect, test } from 'vitest';
 
-import { TypeScript } from '../grammars/index.js';
+import * as TypeScript from '../grammars/typescript.js';
 import { normalizeGrammar } from '../parser/grammarNormalizer.js';
 import { tokenizeText } from '../parser/index.js';
 import { tokenizedLinesToMarkdown } from './visualizeAsMD.js';
