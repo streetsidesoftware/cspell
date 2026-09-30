@@ -9,7 +9,7 @@ on:
         default: 'main'
 
   schedule:
-    - cron: '0 12 * * 1'
+    - cron: '0 12 * * *'
 
 permissions:
   contents: read
@@ -32,7 +32,10 @@ jobs:
         uses: ./.github/actions/setup-pnpm
 
       - name: Update PNPM
-        # Updates `packageManager` in `package.json`.
+        # Updates `packageManager` in `package.json` to the newest pnpm that is old enough.
+        # `self-update` ignores `minimumReleaseAge` in `pnpm-workspace.yaml`, so set it here to match.
+        env:
+          PNPM_CONFIG_MINIMUM_RELEASE_AGE: 2880 # two days
         run: |
           pnpm self-update
 
