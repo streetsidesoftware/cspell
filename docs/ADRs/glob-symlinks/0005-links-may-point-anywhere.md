@@ -27,3 +27,7 @@ linked directory.
 - It works for Bazel runfiles and similar layouts.
 - One rule to explain. There is no second mode.
 - Users turn it on only for trees whose links they trust, as with `--follow-symlinks`.
+
+<!---
+    cspell:ignore runfiles
+-->

@@ -30,3 +30,7 @@ searches. It ships in the same release as `--follow-symlinks`.
 - Existing command lines behave exactly as before. Following links in globs is something users turn on.
 - Two options to explain. The help text and the website say which one applies to which files.
 - A tree made of links can be checked with a plain glob.
+
+<!---
+    cspell:ignore runfiles
+-->

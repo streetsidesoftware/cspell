@@ -40,3 +40,7 @@ setting `CSPELL_GLOB_SYMLINKS=true`.
 | 0003 | [Set on the command line, in the API, or in the environment, not in configuration](./0003-where-it-can-be-set.md)    | Accepted |
 | 0004 | [Files are reported by the path through the link, and each path is checked](./0004-reported-paths-and-duplicates.md) | Accepted |
 | 0005 | [Followed links may point anywhere](./0005-links-may-point-anywhere.md)                                              | Accepted |
+
+<!---
+    cspell:ignore runfiles
+-->

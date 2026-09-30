@@ -27,3 +27,7 @@ reached by two paths is checked, and reported, twice.
 - Reports, `ignorePaths`, `.gitignore`, and configuration lookups all use the path the user sees.
 - No extra work per file, and results still stream.
 - Duplicate issues are possible when a tree links to itself. This matches tools like `grep -R` and `find -L`.
+
+<!---
+    cspell:ignore fdir
+-->
