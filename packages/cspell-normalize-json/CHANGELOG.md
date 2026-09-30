@@ -144,6 +144,16 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 </details>
 
+## v10.4.0-alpha.1 (2026-09-30)
+
+### Fixes
+
+- fix: Deprecate `cspell-lib/rpc`; import from `@cspell/rpc` (<a href="https://github.com/streetsidesoftware/cspell/pull/9376">#9376</a>)
+
+---
+
+</details>
+
 ## v10.3.6 (2026-09-29)
 
 ### Fixes
