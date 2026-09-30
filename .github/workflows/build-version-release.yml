@@ -82,14 +82,11 @@ jobs:
         # version commit and tag: pushes made with the default GITHUB_TOKEN do
         # not trigger other workflows, so the tag push would never fire
         # publish.yml's `push: tags: v*` trigger.
-        # Pull first: in CI mode lerna silently skips versioning when main has
-        # moved on since checkout.
         env:
           VERSION: ${{ steps.version.outputs.version }}
           GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
         run: |
           git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/streetsidesoftware/cspell.git"
-          git pull --ff-only origin main
           pnpm lerna version "$VERSION" --no-private --sync-workspace-lock --no-changelog --yes $DRY_RUN
 
       - name: Convert Draft Release to Published
@@ -97,8 +94,9 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VERSION: ${{ steps.version.outputs.version }}
-        # --verify-tag: without the tag from Push Version, gh would create it
-        # with GITHUB_TOKEN, which does not trigger publish.yml.
+        # --verify-tag: in CI mode lerna skips versioning without failing when
+        # main moved on since checkout. Without the tag from Push Version, gh
+        # would create it with GITHUB_TOKEN, which does not trigger publish.yml.
         run: |
           gh release edit "v${VERSION}" --draft=false --verify-tag
           echo "Release v${VERSION} published."
