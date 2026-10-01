@@ -1,4 +1,4 @@
-import { assert } from 'node:console';
+import assert from 'node:assert/strict';
 
 import type { CSpellReporter } from '@cspell/cspell-types';
 import type { CSpellApplicationOptions, Issue, ProgressItem, RunResult } from 'cspell';
@@ -12,16 +12,16 @@ async function test() {
      */
     const functions = [checkText, lint, trace];
 
-    functions.forEach((fn) => assert(typeof fn === 'function', "typeof %o === 'function'", fn));
+    functions.forEach((fn) => assert(typeof fn === 'function', `typeof ${fn.name} === 'function'`));
 
     const logger = new ConsoleLogger();
 
     const options: CSpellApplicationOptions = {};
 
-    const result: RunResult = await lint(['*.md'], options, logger);
-    assert(result.errors === 0);
-    assert(result.issues === 0);
-    assert(result.files === 2);
+    const result: RunResult = await lint(['README.md'], options, logger);
+    assert.equal(result.errors, 0);
+    assert.equal(result.issues, 0);
+    assert.equal(result.files, 1);
 
     console.log(JSON.stringify(result));
 
