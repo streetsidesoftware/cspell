@@ -6,7 +6,7 @@ import { commandCheck } from './commandCheck.js';
 import { commandDictionaries } from './commandDictionaries.js';
 import { commandInit } from './commandInit.js';
 import { commandLink } from './commandLink.js';
-import { commandLint } from './commandLint.js';
+import { commandLint, lintHelpForProgram } from './commandLint.js';
 import { commandSuggestion } from './commandSuggestion.js';
 import { commandTrace } from './commandTrace.js';
 import { addGlobalOptionsAndHooks, addGlobalOptionsToAction } from './globalOptions.js';
@@ -38,7 +38,10 @@ export async function run(command?: Command, argv?: string[]): Promise<void> {
     }
 
     const lintCommand = addGlobalOptionsToAction(commandLint(prog, { isDefault: true }));
-    prog.addHelpText('after', (context) => defaultCommandOptionsHelp(context, lintCommand));
+    prog.addHelpText(
+        'after',
+        (context) => defaultCommandOptionsHelp(context, lintCommand) + lintHelpForProgram(context, lintCommand),
+    );
     addGlobalOptionsToAction(commandTrace(prog));
     addGlobalOptionsToAction(commandCheck(prog));
     addGlobalOptionsToAction(commandSuggestion(prog));
