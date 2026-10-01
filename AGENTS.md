@@ -119,8 +119,8 @@ The PR title and body are published verbatim in the release notes. Follow
 
 ### Designing a feature
 
-For a feature with more than one reasonable design, follow [`docs/ADRs/README.md`](docs/ADRs/README.md) before
-writing code. The `feature-adr` skill runs that process as an interview.
+For a feature with more than one reasonable design, settle the design before writing code. The
+[ADR README](docs/ADRs/README.md) describes one way to do it, and the `feature-adr` skill runs it as an interview.
 
 ### Config options and CLI flags
 

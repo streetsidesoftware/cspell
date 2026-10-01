@@ -5,7 +5,7 @@ write them into config files, scripts, and CI. So existing values keep working (
 [Design principles](./design-principles.md#existing-configs-keep-working)).
 
 If the design has more than one reasonable answer, such as the name, the shape, the default, or where the option
-applies, decide it first with an [ADR](./ADRs/README.md).
+applies, settle it before writing code. [ADRs](./ADRs/README.md) are a tool for that.
 
 ## Config options
 
