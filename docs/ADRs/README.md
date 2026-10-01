@@ -117,8 +117,9 @@ each other's files, and those are deleted together.
 
 Work on a design in an `adr/<feature>` branch, and on archiving in an `adr-archive/<feature>` branch.
 
+A small feature can ship its design and implementation together, with the ADRs in the feature's `feat:` or `fix:` PR.
 When a design is worth reviewing before any code is written, merge it on its own with a `docs:` PR, so it stays out of
-the release notes. Otherwise, include the ADRs in the feature's `feat:` or `fix:` PR.
+the release notes.
 
 ## With Claude Code
 
