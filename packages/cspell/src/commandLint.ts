@@ -302,8 +302,22 @@ function helpIssueTemplate(opts: LinterCliOptions): string {
  * @returns
  */
 function augmentCommandHelp(context: AddHelpTextContext) {
+    return lintHelpAfterOptions(context.command, 'Hidden Options:');
+}
+
+/**
+ * The extra lint help for `cspell --help`.
+ * The program answers `--help` before the lint options are parsed, so parse them from its arguments.
+ * @param context - the program's help context.
+ * @param lintCommand - the lint command.
+ */
+export function lintHelpForProgram(context: AddHelpTextContext, lintCommand: Command): string {
+    lintCommand.parseOptions(context.command.args);
+    return lintHelpAfterOptions(lintCommand, `Hidden options for "${lintCommand.name()}":`);
+}
+
+function lintHelpAfterOptions(command: Command, hiddenOptionsHeading: string): string {
     const output: string[] = [];
-    const command = context.command;
     const opts = command.opts();
     const showHidden = !!opts.verbose;
     const hiddenHelp: string[] = [];
@@ -314,7 +328,7 @@ function augmentCommandHelp(context: AddHelpTextContext) {
     // const indent = flagColWidth + 4;
     for (const options of hiddenOptions) {
         if (!hiddenHelp.length) {
-            hiddenHelp.push('\nHidden Options:');
+            hiddenHelp.push('\n' + hiddenOptionsHeading);
         }
         hiddenHelp.push(help.formatItem(options.flags, flagColWidth, options.description, help));
     }

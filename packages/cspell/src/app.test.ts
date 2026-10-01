@@ -565,6 +565,8 @@ describe('Validate cli', () => {
     test.each`
         cmdArgs
         ${['--help']}
+        ${['--help', '--verbose']}
+        ${['--help', '--issue-template']}
         ${['lint', '--help']}
         ${['lint', '--help', '--verbose']}
         ${['lint', '--help', '--issue-template']}
