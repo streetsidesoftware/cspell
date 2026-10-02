@@ -42,6 +42,8 @@ describe('Validate LanguageIds', () => {
         ${'composer.lock'}                   | ${['json', 'lock']}
         ${'code.jl'}                         | ${['julia']}
         ${'code.m'}                          | ${['matlab', 'objective-c']}
+        ${'script.matlab'}                   | ${['matlab']}
+        ${'data.mat'}                        | ${['matlab-binary']}
         ${'code.ts.map'}                     | ${['json', 'map']}
     `('getLanguagesForBasename $filename', ({ filename, expected }) => {
         expect(LangId.findMatchingFileTypes(filename)).toEqual(expected);
@@ -57,6 +59,9 @@ describe('Validate LanguageIds', () => {
     test.each`
         ext          | expected
         ${'.md'}     | ${false}
+        ${'.m'}      | ${false}
+        ${'.mat'}    | ${true}
+        ${'.mlx'}    | ${true}
         ${'.exe'}    | ${true}
         ${'.obj'}    | ${true}
         ${'.dll'}    | ${true}
