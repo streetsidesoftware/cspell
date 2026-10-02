@@ -163,6 +163,7 @@ export const definitions: FileTypeDefinitions = [
     { id: 'markdown', extensions: ['.markdn', '.markdown', '.md', '.mdown', '.mdtext', '.mdtxt', '.mdwn', '.mkd', '.workbook'] },
     { id: 'markdown_latex_combined', extensions: [] },
     { id: 'markdown-math', extensions: [] },
+    { id: 'matlab', extensions: ['.m'] },
     { id: 'mdx', extensions: ['.mdx'] },
     { id: 'monkeyc', extensions: ['.mb', '.mc'] },
     { id: 'mustache', extensions: ['.mst', '.mu', '.mustache', '.stache'] },

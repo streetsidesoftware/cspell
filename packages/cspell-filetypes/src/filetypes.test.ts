@@ -13,6 +13,7 @@ describe('Validate LanguageIds', () => {
         ${'tex'}    | ${['latex']}
         ${'hs'}     | ${['haskell']}
         ${'PNG'}    | ${['image']}
+        ${'.m'}     | ${['matlab', 'objective-c']}
     `('getLanguagesForExt $ext', ({ ext, expected }) => {
         expect(LangId.getFileTypesForExt(ext)).toEqual(expected);
     });
@@ -40,6 +41,7 @@ describe('Validate LanguageIds', () => {
         ${'docker.aws.compose.yaml'}         | ${['dockercompose']}
         ${'composer.lock'}                   | ${['json', 'lock']}
         ${'code.jl'}                         | ${['julia']}
+        ${'code.m'}                          | ${['matlab', 'objective-c']}
         ${'code.ts.map'}                     | ${['json', 'map']}
     `('getLanguagesForBasename $filename', ({ filename, expected }) => {
         expect(LangId.findMatchingFileTypes(filename)).toEqual(expected);
