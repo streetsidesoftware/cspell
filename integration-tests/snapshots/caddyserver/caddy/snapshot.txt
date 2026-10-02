@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 357, Issues found: 3907 in 316 files.
+ CSpell: Files checked: 357, Issues found: 3889 in 316 files.
  exit code: 1
 admin.go:1011:38   - Unknown word (xxhash)      -- hash.Hash { return xxhash.New() }
 admin.go:1145:20   - Unknown word (Redir)       -- return errInternalRedir
@@ -54,7 +54,6 @@ caddy.go:1130:54   - Unknown word (caddyevents) -- current instance of the caddy
 caddy.go:1182:41   - Unknown word (specversion) -- string `json:"specversion"`
 caddy.go:1185:41   - Unknown word (datacontenttype) -- string `json:"datacontenttype,omitempty"`
 caddy.go:1255:101  - Unknown word (nolint)          -- in this process") //nolint:unused
-caddy.go:1291:10   - Unknown word (basenames)       -- // 4. If basenames are equal, match.
 caddy.go:38:14     - Unknown word (caddyserver) -- "github.com/caddyserver/certmagic"
 caddy.go:38:26     - Unknown word (certmagic)   -- github.com/caddyserver/certmagic"
 caddy.go:42:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/internal/filesystems
@@ -677,8 +676,6 @@ caddytest/integration/fastcgi_chunked_test.go:65:37     - Unknown word (fastcgi)
 caddytest/integration/fastcgi_chunked_test.go:74:37     - Unknown word (fastcgi)     -- transport": {"protocol": "fastcgi"},
 caddytest/integration/forwardauth_test.go:120:33    - Unknown word (superadmin)  -- Set("X-User-Role", "superadmin") // forged
 caddytest/integration/forwardauth_test.go:173:12    - Unknown word (caddytest)   -- tester := caddytest.NewTester(t)
-caddytest/integration/forwardauth_test.go:210:53    - Unknown word (GHSA)        -- HeadersUnderscoreAlias guards GHSA-f59h-q822-g45g and
-caddytest/integration/forwardauth_test.go:211:4     - Unknown word (GHSA)        -- // GHSA-49wc-4hcv-v58q: client
 caddytest/integration/forwardauth_test.go:244:12    - Unknown word (caddytest)   -- tester := caddytest.NewTester(t)
 caddytest/integration/forwardauth_test.go:25:14     - Unknown word (stretchr)   -- "github.com/stretchr/testify/assert"
 caddytest/integration/forwardauth_test.go:27:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/caddytest"
@@ -2209,10 +2206,8 @@ modules/caddyhttp/reverseproxy/fastcgi/fastcgi.go:35:14     - Unknown word (cadd
 modules/caddyhttp/reverseproxy/fastcgi/fastcgi.go:35:43     - Unknown word (caddytls)    -- caddyserver/caddy/v2/modules/caddytls"
 modules/caddyhttp/reverseproxy/fastcgi/fastcgi.go:409:22    - Unknown word (caddytls)    -- for _, cs := range caddytls.SupportedCipherSuites
 modules/caddyhttp/reverseproxy/fastcgi/fastcgi.go:446:65    - Unknown word (fullwidth)   -- Unicode equivalence (e.g. fullwidth or
-modules/caddyhttp/reverseproxy/fastcgi/fastcgi.go:449:26    - Unknown word (GHSA)        -- FrankenPHP advisories GHSA-3g8v-8r37-cgjm and GHSA
 modules/caddyhttp/reverseproxy/fastcgi/fastcgi.go:449:4     - Unknown word (Franken)     -- // FrankenPHP advisories GHSA-
 modules/caddyhttp/reverseproxy/fastcgi/fastcgi.go:449:41    - Unknown word (cgjm)        -- advisories GHSA-3g8v-8r37-cgjm and GHSA-v4h7-cj44-
-modules/caddyhttp/reverseproxy/fastcgi/fastcgi.go:449:50    - Unknown word (GHSA)        -- GHSA-3g8v-8r37-cgjm and GHSA-v4h7-cj44-8fc8.
 modules/caddyhttp/reverseproxy/fastcgi/fastcgi.go:451:17    - Unknown word (Franken)     -- // Adapted from FrankenPHP's code (copyright
 modules/caddyhttp/reverseproxy/fastcgi/fastcgi.go:451:51    - Unknown word (Kévin)       -- code (copyright 2026 Kévin Dunglas, MIT license
 modules/caddyhttp/reverseproxy/fastcgi/fastcgi.go:451:57    - Unknown word (Dunglas)     -- copyright 2026 Kévin Dunglas, MIT license)
@@ -2222,7 +2217,6 @@ modules/caddyhttp/reverseproxy/fastcgi/fastcgi.go:64:22     - Unknown word (fast
 modules/caddyhttp/reverseproxy/fastcgi/fastcgi.go:99:38     - Unknown word (fastcgi)     -- reverse_proxy.transport.fastcgi",
 modules/caddyhttp/reverseproxy/fastcgi/fastcgi_test.go:11:14     - Unknown word (stretchr)   -- "github.com/stretchr/testify/assert"
 modules/caddyhttp/reverseproxy/fastcgi/fastcgi_test.go:12:14     - Unknown word (stretchr)   -- "github.com/stretchr/testify/require"
-modules/caddyhttp/reverseproxy/fastcgi/fastcgi_test.go:133:51    - Unknown word (GHSA)        -- tests (security fix for GHSA-g966-83w7-6w38)
 modules/caddyhttp/reverseproxy/fastcgi/fastcgi_test.go:138:20    - Unknown word (Ⱥshell)      -- path: "/ȺȺȺȺshell.php",
 modules/caddyhttp/reverseproxy/fastcgi/fastcgi_test.go:144:20    - Unknown word (Ⱥshell)      -- path: "/ȺȺȺȺshell.php/path/info",
 modules/caddyhttp/reverseproxy/fastcgi/fastcgi_test.go:14:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
@@ -2235,16 +2229,12 @@ modules/caddyhttp/reverseproxy/fastcgi/fastcgi_test.go:176:17    - Unknown word 
 modules/caddyhttp/reverseproxy/fastcgi/fastcgi_test.go:199:36    - Unknown word (Franken)     -- Regression tests adapted from FrankenPHP advisories
 modules/caddyhttp/reverseproxy/fastcgi/fastcgi_test.go:1:9       - Unknown word (fastcgi)    -- package fastcgi
 modules/caddyhttp/reverseproxy/fastcgi/fastcgi_test.go:200:21    - Unknown word (cgjm)        -- // GHSA-3g8v-8r37-cgjm and GHSA-v4h7-cj44-
-modules/caddyhttp/reverseproxy/fastcgi/fastcgi_test.go:200:30    - Unknown word (GHSA)        -- GHSA-3g8v-8r37-cgjm and GHSA-v4h7-cj44-8fc8: search
-modules/caddyhttp/reverseproxy/fastcgi/fastcgi_test.go:200:6     - Unknown word (GHSA)        -- // GHSA-3g8v-8r37-cgjm and GHSA
 modules/caddyhttp/reverseproxy/fastcgi/fastcgi_test.go:222:16    - Unknown word (fullwidth)   -- name: "fullwidth full stop ． in extension
 modules/caddyhttp/reverseproxy/fastcgi/fastcgi_test.go:228:16    - Unknown word (fullwidth)   -- name: "fullwidth p in extension must
 modules/caddyhttp/reverseproxy/fastcgi/fastcgi_test.go:280:32    - Unknown word (reconstructable) -- Original path should be reconstructable
 modules/caddyhttp/reverseproxy/fastcgi/fastcgi_test.go:281:67    - Unknown word (reconstructable) -- pathInfo, "path should be reconstructable from split parts")
-modules/caddyhttp/reverseproxy/fastcgi/fastcgi_test.go:288:17    - Unknown word (GHSA)            -- // described in GHSA-g966-83w7-6w38 where
 modules/caddyhttp/reverseproxy/fastcgi/fastcgi_test.go:292:15    - Unknown word (Ⱥshell)          -- path := "/ȺȺȺȺshell.php.txt.php"
 modules/caddyhttp/reverseproxy/fastcgi/fastcgi_test.go:317:14    - Unknown word (caddyhttp)       -- // filter in caddyhttp.Server.serveHTTP (see
-modules/caddyhttp/reverseproxy/fastcgi/fastcgi_test.go:317:46    - Unknown word (GHSA)            -- Server.serveHTTP (see GHSA-f59h-q822-g45g,
 modules/caddyhttp/reverseproxy/fastcgi/fastcgi_test.go:340:67    - Unknown word (Franken)         -- codeBypass guards against the FrankenPHP
 modules/caddyhttp/reverseproxy/fastcgi/fastcgi_test.go:341:30    - Unknown word (cgjm)            -- advisories GHSA-3g8v-8r37-cgjm (uninitialized match
 modules/caddyhttp/reverseproxy/fastcgi/fastcgi_test.go:343:12    - Unknown word (fullwidth)       -- // folding fullwidth/mathematical/circled
@@ -2583,7 +2573,6 @@ modules/caddyhttp/rewrite/rewrite.go:120:5     - Unknown word (rewr)        -- i
 modules/caddyhttp/rewrite/rewrite.go:132:76    - Unknown word (caddyhttp)   -- *http.Request, next caddyhttp.Handler) error {
 modules/caddyhttp/rewrite/rewrite.go:146:26    - Unknown word (caddyhttp)   -- zap.Object("request", caddyhttp.LoggableHTTPRequest
 modules/caddyhttp/rewrite/rewrite.go:146:36    - Unknown word (Loggable)    -- request", caddyhttp.LoggableHTTPRequest{Request:
-modules/caddyhttp/rewrite/rewrite.go:243:23    - Unknown word (GHSA)        -- // evaluated (see GHSA-j8px-rmrx-76h9).
 modules/caddyhttp/rewrite/rewrite.go:243:33    - Unknown word (rmrx)        -- evaluated (see GHSA-j8px-rmrx-76h9).
 modules/caddyhttp/rewrite/rewrite.go:27:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 modules/caddyhttp/rewrite/rewrite.go:28:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddyhttp
@@ -2605,7 +2594,6 @@ modules/caddyhttp/rewrite/rewrite_test.go:371:59    - Unknown word (findme)     
 modules/caddyhttp/rewrite/rewrite_test.go:372:39    - Unknown word (findme)      -- newRequest(t, "GET", "/foo/findme/bar"),
 modules/caddyhttp/rewrite/rewrite_test.go:376:59    - Unknown word (findme)      -- substrReplacer{{Find: "findme", Replace: "replaced
 modules/caddyhttp/rewrite/rewrite_test.go:377:39    - Unknown word (findme)      -- newRequest(t, "GET", "/foo/findme%2Fbar"),
-modules/caddyhttp/rewrite/rewrite_test.go:400:27    - Unknown word (GHSA)        -- regression tests for GHSA-j8px-rmrx-76h9: when
 modules/caddyhttp/rewrite/rewrite_test.go:400:37    - Unknown word (rmrx)        -- tests for GHSA-j8px-rmrx-76h9: when the rewrite
 modules/caddyhttp/rewrite/rewrite_test.go:411:47    - Unknown word (Benv)        -- GET", "/serve/foo?%7Benv.CADDY_REWRITE_TEST_SECRET
 modules/caddyhttp/rewrite/rewrite_test.go:417:50    - Unknown word (Benv)        -- GET", "/serve/ok?key=%7Benv.CADDY_REWRITE_TEST_SECRET
@@ -2647,8 +2635,6 @@ modules/caddyhttp/server.go:1477:5    - Unknown word (nolint)      -- // nolint:
 modules/caddyhttp/server.go:15:9      - Unknown word (caddyhttp)  -- package caddyhttp
 modules/caddyhttp/server.go:1610:15   - Unknown word (fdgram)      -- "fdgram": "fdgram",
 modules/caddyhttp/server.go:1610:3    - Unknown word (fdgram)      -- "fdgram": "fdgram",
-modules/caddyhttp/server.go:167:6     - Unknown word (GHSA)        -- // (GHSA-f59h-q822-g45g). When
-modules/caddyhttp/server.go:196:21    - Unknown word (GHSA)        -- // PHP's $_SERVER (GHSA-49wc-4hcv-v58q). When
 modules/caddyhttp/server.go:230:21    - Unknown word (unrouted)    -- // By default, all unrouted requests receive a
 modules/caddyhttp/server.go:255:18    - Unknown word (caddytls)    -- TLSConnPolicies caddytls.ConnectionPolicies
 modules/caddyhttp/server.go:34:14     - Unknown word (caddyserver) -- "github.com/caddyserver/certmagic"
@@ -2676,8 +2662,6 @@ modules/caddyhttp/server.go:669:37    - Unknown word (loggable)    -- accessLogg
 modules/caddyhttp/server.go:671:33    - Unknown word (wrec)        -- logRequest(accLog, r, wrec, &duration, &writeErr
 modules/caddyhttp/server.go:74:18     - Unknown word (slowloris)   -- // it mitigates slowloris-style attacks without
 modules/caddyhttp/server.go:808:67    - Unknown word (Franken)     -- `: once FastCGI/CGI/FrankenPHP etc.
-modules/caddyhttp/server.go:812:27    - Unknown word (GHSA)        -- GHSA-f59h-q822-g45g, GHSA-49wc-4hcv-v58q).
-modules/caddyhttp/server.go:812:6     - Unknown word (GHSA)        -- // (GHSA-f59h-q822-g45g, GHSA
 modules/caddyhttp/server.go:85:16     - Unknown word (reqtimeout)  -- // Apache mod_reqtimeout terms). If zero, no
 modules/caddyhttp/server.go:996:57    - Unknown word (caddytls)    -- TLSConnPolicies, func(cp *caddytls.ConnectionPolicy) bool
 modules/caddyhttp/server_test.go:107:2     - Unknown word (wrec)        -- wrec := NewResponseRecorder
@@ -2691,9 +2675,7 @@ modules/caddyhttp/server_test.go:20:14     - Unknown word (stretchr)    -- "gith
 modules/caddyhttp/server_test.go:21:14     - Unknown word (stretchr)    -- "github.com/stretchr/testify/require"
 modules/caddyhttp/server_test.go:33:9      - Unknown word (Syncer)      -- type nopSyncer writeFunc
 modules/caddyhttp/server_test.go:47:12     - Unknown word (Syncer)      -- func (n nopSyncer) Write(p []byte) (int
-modules/caddyhttp/server_test.go:506:54    - Unknown word (GHSA)        -- DropsUnderscoreHeader covers GHSA-f59h-q822-g45g: an
 modules/caddyhttp/server_test.go:51:12     - Unknown word (Syncer)      -- func (n nopSyncer) Sync() error {
-modules/caddyhttp/server_test.go:551:47    - Unknown word (GHSA)        -- DropsDotHeader guards GHSA-49wc-4hcv-v58q: a
 modules/caddyhttp/server_test.go:58:11     - Unknown word (Syncer)      -- ws := nopSyncer(wf)
 modules/caddyhttp/server_test.go:79:2      - Unknown word (wrec)        -- wrec := NewResponseRecorder
 modules/caddyhttp/server_test.go:88:28     - Unknown word (wrec)        -- logRequest(accLog, req, wrec, &duration, nil, repl
