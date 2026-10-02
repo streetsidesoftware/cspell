@@ -154,6 +154,13 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 </details>
 
+## v10.4.0-alpha.2 (2026-10-02)
+
+### Fixes
+
+- fix: Recognize MATLAB files (<a href="https://github.com/streetsidesoftware/cspell/pull/9402">#9402</a>)
+- fix: Show hidden lint options and issue template help in `cspell --help` (<a href="https://github.com/streetsidesoftware/cspell/pull/9387">#9387</a>)
+
 ## v10.3.6 (2026-09-29)
 
 ### Fixes

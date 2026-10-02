@@ -936,6 +936,73 @@ Related: #8975, streetsidesoftware/vscode-spell-checker#3099, streetsidesoftware
 
 </details>
 
+## v10.4.0-alpha.2 (2026-10-02)
+
+### Fixes
+
+<details>
+<summary>fix: Recognize MATLAB files (<a href="https://github.com/streetsidesoftware/cspell/pull/9402">#9402</a>)</summary>
+
+### fix: Recognize MATLAB files ([#9402](https://github.com/streetsidesoftware/cspell/pull/9402))
+
+## Summary
+
+- Associates `.m` and `.matlab` with the `matlab` file type.
+- Marks MATLAB's binary formats as binary, so cspell doesn't treat them as text: `.mat`, `.fig`, `.mlx`, `.mlapp`,
+  `.mltbx`, `.mlappinstall`, and MEX files (`.mexa64`, `.mexmaca64`, `.mexmaci64`, `.mexw64`).
+
+Notes:
+
+- `.m` stays associated with `objective-c` too, since both languages use it.
+- `.p` (MATLAB P-code) isn't marked binary, because Pascal uses `.p` for source files.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Show hidden lint options and issue template help in `cspell --help` (<a href="https://github.com/streetsidesoftware/cspell/pull/9387">#9387</a>)</summary>
+
+### fix: Show hidden lint options and issue template help in `cspell --help` ([#9387](https://github.com/streetsidesoftware/cspell/pull/9387))
+
+## Summary
+
+Running `cspell --help --verbose` or `cspell --help --issue-template` now shows the same extra help as the `cspell lint --help` forms. Before, those flags were silently ignored, even though the help for `--issue-template` says "See --help --issue-template for details."
+
+- With `--verbose`, the hidden `lint` options are listed under `Hidden options for "lint":`.
+- With `--issue-template`, the help explains the issue template placeholders and styles.
+- The plain `cspell --help` now ends with the same "More Examples" as `cspell lint --help`.
+
+Before:
+
+```
+$ cspell --help --verbose
+...
+Options for "lint" (the default command):
+  ...
+  -h, --help                     display help for command
+```
+
+After:
+
+```
+$ cspell --help --verbose
+...
+Options for "lint" (the default command):
+  ...
+
+Hidden options for "lint":
+  --config-search                Allow searching for configuration files.
+  ...
+
+More Examples:
+  ...
+```
+
+---
+
+</details>
+
 ## v10.3.6 (2026-09-29)
 
 ### Fixes
