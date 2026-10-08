@@ -168,6 +168,10 @@ describe('Validate wordSearchForms', () => {
         ${'café'.normalize('NFD')}  | ${false}        | ${false}   | ${['café']}
         ${'café'.normalize('NFKC')} | ${false}        | ${false}   | ${['café']}
         ${'café'.normalize('NFKD')} | ${false}        | ${false}   | ${['café']}
+        ${'Ispanak'}                | ${true}         | ${true}    | ${['ispanak', 'ıspanak']}
+        ${'İnceleme'}               | ${true}         | ${true}    | ${['i\u0307nceleme', 'inceleme']}
+        ${'İNCELEME'}               | ${true}         | ${false}   | ${['İNCELEME', 'I\u0307nceleme', 'İnceleme', 'i\u0307nceleme', 'inceleme']}
+        ${'Ispanak'}                | ${false}        | ${true}    | ${['ispanak', 'ıspanak']}
     `('$word $isCaseSensitive $ignoreCase $expected', ({ word, isCaseSensitive, ignoreCase, expected }) => {
         const words = __testMethods__.wordSearchFormsArray(word, isCaseSensitive, ignoreCase);
         expect(words.sort()).toEqual(expected.sort());
@@ -208,6 +212,46 @@ describe('Verify Case Sensitive Dictionaries', () => {
         const sugs = dict.suggest(word, { ignoreCase });
         const sugWords = sugs.map((s) => s.word);
         expect(sugWords).toEqual(expected);
+    });
+});
+
+// cspell:ignore inceleme nceleme İnceleme İNCELEME ıspanak Ispanak ISPANAK ışık Işık IŞIK İstanbul İSTANBUL ispanak
+describe('Verify Turkish I and İ', () => {
+    const words = ['inceleme', 'ıspanak', 'ışık', 'İstanbul'];
+
+    test.each`
+        word          | ignoreCase | expected
+        ${'inceleme'} | ${true}    | ${true}
+        ${'İnceleme'} | ${true}    | ${true}
+        ${'İNCELEME'} | ${true}    | ${true}
+        ${'İnceleme'} | ${false}   | ${true}
+        ${'İNCELEME'} | ${false}   | ${true}
+        ${'ıspanak'}  | ${true}    | ${true}
+        ${'Ispanak'}  | ${true}    | ${true}
+        ${'ISPANAK'}  | ${true}    | ${true}
+        ${'Ispanak'}  | ${false}   | ${true}
+        ${'ISPANAK'}  | ${false}   | ${true}
+        ${'IŞIK'}     | ${false}   | ${true}
+        ${'İstanbul'} | ${false}   | ${true}
+        ${'İSTANBUL'} | ${false}   | ${true}
+        ${'ispanak'}  | ${true}    | ${false}
+    `('has $word ignoreCase: $ignoreCase', ({ word, ignoreCase, expected }) => {
+        const dict = createSpellingDictionary(words, 'tr', 'test', opts());
+        expect(dict.has(word, { ignoreCase })).toBe(expected);
+    });
+});
+
+describe('Validate JavaScript assumptions', () => {
+    test('toLowerCase ignores the Turkish rules for I and İ', () => {
+        expect('İ'.toLowerCase()).toBe('i\u0307');
+        expect('I'.toLowerCase()).toBe('i');
+    });
+
+    test('toLocaleLowerCase and toLocaleUpperCase apply the Turkish rules for I and İ', () => {
+        expect('İ'.toLocaleLowerCase('tr')).toBe('i');
+        expect('I'.toLocaleLowerCase('tr')).toBe('ı');
+        expect('i'.toLocaleUpperCase('tr')).toBe('İ');
+        expect('ı'.toLocaleUpperCase('tr')).toBe('I');
     });
 });
 

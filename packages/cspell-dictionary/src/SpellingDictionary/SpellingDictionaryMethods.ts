@@ -2,7 +2,7 @@ import type { DictionaryInformation } from '@cspell/cspell-types';
 import type { SuggestionResult, WeightMap } from 'cspell-trie-lib';
 import { mapDictionaryInformationToWeightMap } from 'cspell-trie-lib';
 
-import { isUpperCase, removeUnboundAccents, ucFirst } from '../util/text.js';
+import { isUpperCase, removeUnboundAccents, turkishLowerCase, turkishUcFirst, ucFirst } from '../util/text.js';
 import type { HasOptions, SearchOptions } from './SpellingDictionary.js';
 
 export { impersonateCollector, suggestionCollector } from 'cspell-trie-lib';
@@ -19,6 +19,8 @@ export function wordSearchForms(word: string, isDictionaryCaseSensitive: boolean
     const forms = new Set<string>();
     word = word.normalize('NFC');
     const wordLc = word.toLowerCase();
+    // `toLowerCase` turns `İ` into `i` plus a combining dot, and `I` into `i`. Turkish words need `i` and `ı`.
+    const wordLcTr = turkishLowerCase(word);
     if (ignoreCase) {
         if (isDictionaryCaseSensitive) {
             forms.add(wordLc);
@@ -34,6 +36,7 @@ export function wordSearchForms(word: string, isDictionaryCaseSensitive: boolean
             // HOUSE -> House, house
             if (isUpperCase(word)) {
                 forms.add(ucFirst(wordLc));
+                wordLcTr && forms.add(turkishUcFirst(wordLcTr));
             }
         } else {
             forms.add(wordLc);
@@ -41,6 +44,7 @@ export function wordSearchForms(word: string, isDictionaryCaseSensitive: boolean
             forms.add(removeUnboundAccents(wordLc));
         }
     }
+    wordLcTr && forms.add(wordLcTr);
     return forms;
 }
 
