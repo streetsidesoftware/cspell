@@ -294,8 +294,7 @@ function splitWords(match: string): string[] {
 
 function mergeList<T>(a: T[] | undefined, b: T[]): T[] {
     if (!a) return b;
-    if (!b) return a;
-    return [...a, ...b];
+    return !b ? a : [...a, ...b];
 }
 
 function reduceWordList(
@@ -335,10 +334,7 @@ function parseRegEx(match: string): string[] {
     const patterns = [match.replace(/^[^\s]+\s+/, '')].map((a) => {
         regExMatchRegEx.lastIndex = 0;
         const m = a.match(regExMatchRegEx);
-        if (m && m[0]) {
-            return m[0];
-        }
-        return a.replace(/((?:[^\s]|\\ )+).*/, '$1');
+        return m && m[0] ? m[0] : a.replace(/((?:[^\s]|\\ )+).*/, '$1');
     });
     return patterns;
 }

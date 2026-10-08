@@ -128,8 +128,7 @@ export function parseTyposLine(line: TypoEntry): TypoEntry | undefined {
     }
     if (Array.isArray(line)) {
         const [key, ...sugs] = line.filter(assertString).map((s) => s.trim());
-        if (!key) return undefined;
-        return [key, ...sugs];
+        return !key ? undefined : [key, ...sugs];
     }
     return sanitizeIntoTypoDef(line);
 }
@@ -159,11 +158,7 @@ function splitEntry(line: string): readonly [string, string | undefined] {
     // Remove any sequencing values like `:1:` or `:a:`
 
     const m = line.match(sugFormatRegex);
-    if (!m?.groups) {
-        return [line.trim(), undefined];
-    }
-
-    return [m.groups.word.trim(), m.groups.sugs.trim()];
+    return !m?.groups ? [line.trim(), undefined] : [m.groups.word.trim(), m.groups.sugs.trim()];
 }
 
 export function parseTyposFile(content: string): TyposDef {

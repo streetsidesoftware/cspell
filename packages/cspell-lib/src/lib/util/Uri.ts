@@ -18,8 +18,7 @@ export function toUri(uriOrFile: string | Uri | URL): UriInstance {
     if (uriOrFile instanceof URL) return UriImpl.parse(uriOrFile.toString());
     if (isHRef(uriOrFile)) return UriImpl.parse(uriOrFile.href);
     if (isUri(uriOrFile)) return UriImpl.from(uriOrFile);
-    if (isUrlLike(uriOrFile)) return UriImpl.parse(uriOrFile);
-    return UriImpl.file(normalizeDriveLetter(uriOrFile));
+    return isUrlLike(uriOrFile) ? UriImpl.parse(uriOrFile) : UriImpl.file(normalizeDriveLetter(uriOrFile));
 }
 
 const isWindows = process.platform === 'win32';

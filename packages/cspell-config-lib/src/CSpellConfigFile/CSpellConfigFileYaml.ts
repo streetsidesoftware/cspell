@@ -131,10 +131,7 @@ export class CSpellConfigFileYaml extends MutableCSpellConfigFile {
 
         const found = findPair(contents, key as string);
         const pair = found && this.#fixPair(found);
-        if (!pair) {
-            return undefined;
-        }
-        return toConfigNode(this.yamlDoc, pair.key) as RCfgNode<string>;
+        return !pair ? undefined : (toConfigNode(this.yamlDoc, pair.key) as RCfgNode<string>);
     }
 
     /**
@@ -276,17 +273,11 @@ export function parseCSpellConfigFileYaml(file: TextFile): CSpellConfigFileYaml 
 }
 
 function getScalarValue<T>(node: T | Scalar<T>): T {
-    if (isScalar(node)) {
-        return node.value;
-    }
-    return node;
+    return isScalar(node) ? node.value : node;
 }
 
 function toScalar<T>(node: T | Scalar<T>): Scalar<T> {
-    if (isScalar(node)) {
-        return node;
-    }
-    return new Scalar(node);
+    return isScalar(node) ? node : new Scalar(node);
 }
 
 type StringOrScalar = string | Scalar<string>;
@@ -311,8 +302,7 @@ function groupWords(words: StringOrScalar[]): StringOrScalar[][] {
 function isSectionHeader(word: StringOrScalar): boolean {
     if (!isScalar(word) || (!word.commentBefore && !word.spaceBefore)) return false;
     if (word.spaceBefore) return true;
-    if (!word.commentBefore) return false;
-    return word.commentBefore.includes('\n\n');
+    return !word.commentBefore ? false : word.commentBefore.includes('\n\n');
 }
 
 function adjustSectionHeader(word: Scalar<string>, prev: StringOrScalar, isFirstSection: boolean): void {
@@ -370,10 +360,7 @@ function sortWords(words: StringOrScalar[]): StringOrScalar[] {
 }
 
 function cloneWord(word: StringOrScalar): StringOrScalar {
-    if (isScalar(word)) {
-        return word.clone() as Scalar<string>;
-    }
-    return word;
+    return isScalar(word) ? (word.clone() as Scalar<string>) : word;
 }
 
 function getYamlNode(yamlDoc: YamlDocument | YAMLMap | YAMLSeq, key: unknown | unknown[]): YamlNode | undefined {
@@ -436,14 +423,12 @@ class ConfigArrayNode<T extends unknown[]>
 
     getNode(key: number) {
         const node = getYamlNode(this.#yNode, key);
-        if (!node) return undefined;
-        return toConfigNode<ArrayType<T>>(this.#doc, node) as RCfgNode<ArrayType<T>>;
+        return !node ? undefined : (toConfigNode<ArrayType<T>>(this.#doc, node) as RCfgNode<ArrayType<T>>);
     }
 
     getValue(key: number): ArrayType<T> | undefined {
         const node = getYamlNode(this.#yNode, key);
-        if (!node) return undefined;
-        return node.toJS(this.#doc) as ArrayType<T>;
+        return !node ? undefined : (node.toJS(this.#doc) as ArrayType<T>);
     }
 
     setValue(key: number, value: NodeOrValue<ArrayType<T>>): void {
@@ -514,13 +499,11 @@ class ConfigObjectNode<T extends object> extends ConfigNodeBase<'object', T> imp
 
     getValue<K extends keyof T>(key: K): T[K] | undefined {
         const node = getYamlNode(this.#yNode, key);
-        if (!node) return undefined;
-        return node.toJS(this.#doc) as T[K];
+        return !node ? undefined : (node.toJS(this.#doc) as T[K]);
     }
     getNode<K extends keyof T>(key: K): RCfgNode<T[K]> | undefined {
         const node = getYamlNode(this.#yNode, key);
-        if (!node) return undefined;
-        return toConfigNode<T[K]>(this.#doc, node);
+        return !node ? undefined : toConfigNode<T[K]>(this.#doc, node);
     }
     setValue<K extends KeyOf<T>>(key: K, value: NodeOrValue<ValueOf1<T, K>>): void {
         if (!isNodeValue(value)) {
@@ -611,8 +594,7 @@ function yamlNodeType(node: YamlNode): 'scalar' | 'seq' | 'map' | 'alias' | 'unk
     if (isScalar(node)) return 'scalar';
     if (isSeq(node)) return 'seq';
     if (isMap(node)) return 'map';
-    if (isAlias(node)) return 'alias';
-    return 'unknown';
+    return isAlias(node) ? 'alias' : 'unknown';
 }
 
 function setYamlNodeComments(yamlNode: YamlNode | undefined, comments: NodeComments): void {

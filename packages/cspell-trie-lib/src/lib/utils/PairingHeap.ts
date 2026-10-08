@@ -38,8 +38,7 @@ export class PairingHeap<T> implements IterableIterator<T> {
     /** take an item from the heap. */
     dequeue(): T | undefined {
         const n = this.next();
-        if (n.done) return undefined;
-        return n.value;
+        return n.done ? undefined : n.value;
     }
 
     /** Add items to the heap */
@@ -82,8 +81,7 @@ export class PairingHeap<T> implements IterableIterator<T> {
 }
 
 function removeHead<T>(compare: CompareFn<T>, heap: PairHeapNode<T> | undefined): PairHeapNode<T> | undefined {
-    if (!heap || !heap.c) return undefined;
-    return mergeSiblings(compare, heap.c);
+    return !heap || !heap.c ? undefined : mergeSiblings(compare, heap.c);
 }
 
 function insert<T>(compare: CompareFn<T>, heap: PairHeapNode<T> | undefined, v: T): PairHeapNode<T> {

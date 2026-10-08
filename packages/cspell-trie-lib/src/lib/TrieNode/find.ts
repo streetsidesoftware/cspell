@@ -277,10 +277,9 @@ function findCompoundWord(
         compoundSeparator,
     );
     // Was it a word?
-    if (!node || !node.f) {
-        return { found: false, compoundUsed, node, forbidden: undefined, caseMatched };
-    }
-    return { found, compoundUsed, node, forbidden: undefined, caseMatched };
+    return !node || !node.f
+        ? { found: false, compoundUsed, node, forbidden: undefined, caseMatched }
+        : { found, compoundUsed, node, forbidden: undefined, caseMatched };
 }
 
 export function findWordExact(root: Root | TrieNode | undefined, word: string): boolean {

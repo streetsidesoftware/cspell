@@ -5,10 +5,7 @@ import { toFileURL } from '@cspell/url';
 import { STDINProtocol } from './constants.js';
 
 export function isStdinUrl(url: string | URL): boolean {
-    if (url instanceof URL) {
-        return url.protocol === STDINProtocol;
-    }
-    return url.startsWith(STDINProtocol);
+    return url instanceof URL ? url.protocol === STDINProtocol : url.startsWith(STDINProtocol);
 }
 
 /**

@@ -250,11 +250,9 @@ export function parse(data: string): Unpacked {
 
 function annotateUnpacked<T extends RawUnpacked>(value: T, meta: UnpackedAnnotation): AnnotateUnpacked<T> {
     if (value && typeof value === 'object') {
-        if (Object.hasOwn(value, symbolFlatpackAnnotation)) {
-            return value as AnnotateUnpacked<T>;
-        }
-
-        return Object.defineProperty(value, symbolFlatpackAnnotation, { value: meta }) as AnnotateUnpacked<T>;
+        return Object.hasOwn(value, symbolFlatpackAnnotation)
+            ? (value as AnnotateUnpacked<T>)
+            : (Object.defineProperty(value, symbolFlatpackAnnotation, { value: meta }) as AnnotateUnpacked<T>);
     }
     return value as AnnotateUnpacked<T>;
 }

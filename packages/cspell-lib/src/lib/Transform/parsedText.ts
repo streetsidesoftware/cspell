@@ -26,15 +26,11 @@ function mapTextOffsetBackToOriginalPos(mappedText: MappedText, textOff: TextOff
 }
 
 export function mapRangeBackToOriginalPos(offRange: SimpleRange, map: SourceMap | undefined): SimpleRange {
-    if (!map || !map.length) return offRange;
-
-    return calculateRangeInSrc(map, offRange);
+    return !map || !map.length ? offRange : calculateRangeInSrc(map, offRange);
 }
 
 export function mapRangeToLocal(rangeOrig: SimpleRange, map: SourceMap | undefined): SimpleRange {
-    if (!map?.length) return rangeOrig;
-
-    return calculateRangeInDest(map, rangeOrig);
+    return !map?.length ? rangeOrig : calculateRangeInDest(map, rangeOrig);
 }
 
 /**

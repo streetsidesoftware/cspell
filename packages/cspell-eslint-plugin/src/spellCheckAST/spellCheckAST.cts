@@ -124,44 +124,45 @@ export function spellCheckAST(filename: string, text: string, root: Node, option
 
     function isImportIdentifier(node: ASTNode): boolean {
         const parent = node.parent;
-        if (node.type !== 'Identifier' || !parent) return false;
-        return (
-            (parent.type === 'ImportSpecifier' ||
-                parent.type === 'ImportNamespaceSpecifier' ||
-                parent.type === 'ImportDefaultSpecifier') &&
-            parent.local === node
-        );
+        return node.type !== 'Identifier' || !parent
+            ? false
+            : (parent.type === 'ImportSpecifier' ||
+                  parent.type === 'ImportNamespaceSpecifier' ||
+                  parent.type === 'ImportDefaultSpecifier') &&
+                  parent.local === node;
     }
 
     function isExportIdentifier(node: ASTNode): boolean {
         const parent = getExportParent(node);
-        if (node.type !== 'Identifier' || !parent) return false;
-        return parent.type === 'ExportSpecifier' && parent.exported === node;
+        return node.type !== 'Identifier' || !parent
+            ? false
+            : parent.type === 'ExportSpecifier' && parent.exported === node;
     }
 
     function isRawImportIdentifier(node: ASTNode): boolean {
         const parent = node.parent;
-        if (node.type !== 'Identifier' || !parent) return false;
-        return (
-            (parent.type === 'ImportSpecifier' && parent.imported === node) ||
-            (parent.type === 'ExportSpecifier' && parent.local === node)
-        );
+        return node.type !== 'Identifier' || !parent
+            ? false
+            : (parent.type === 'ImportSpecifier' && parent.imported === node) ||
+                  (parent.type === 'ExportSpecifier' && parent.local === node);
     }
 
     function isLocalImportIdentifierUnique(node: ASTNode): boolean {
         const parent = getImportParent(node);
         if (!parent) return true;
         const { imported, local } = parent;
-        if (imported.type === 'Identifier' && imported.name !== local.name) return true;
-        return imported.range?.[0] !== local.range?.[0] && imported.range?.[1] !== local.range?.[1];
+        return imported.type === 'Identifier' && imported.name !== local.name
+            ? true
+            : imported.range?.[0] !== local.range?.[0] && imported.range?.[1] !== local.range?.[1];
     }
 
     function isLocalExportIdentifierUnique(node: ASTNode): boolean {
         const parent = getExportParent(node);
         if (!parent) return true;
         const { exported, local } = parent;
-        if (exported.type === 'Identifier' && exported.name !== (local as Identifier).name) return true;
-        return exported.range?.[0] !== local.range?.[0] && exported.range?.[1] !== local.range?.[1];
+        return exported.type === 'Identifier' && exported.name !== (local as Identifier).name
+            ? true
+            : exported.range?.[0] !== local.range?.[0] && exported.range?.[1] !== local.range?.[1];
     }
 
     function getImportParent(node: ASTNode): ImportSpecifier | undefined {
@@ -240,8 +241,9 @@ export function spellCheckAST(filename: string, text: string, root: Node, option
             .filter((s) => s.score > 0);
         const maxScore = Math.max(0, ...scores.map((s) => s.score));
         const topScopes = scores.filter((s) => s.score === maxScore);
-        if (!topScopes.length) return undefined;
-        return Object.fromEntries(topScopes.map((s) => [s.scope.scopeField(), s.check]));
+        return !topScopes.length
+            ? undefined
+            : Object.fromEntries(topScopes.map((s) => [s.scope.scopeField(), s.check]));
     }
 
     function defaultHandler(path: ASTPath) {
@@ -266,15 +268,13 @@ export function spellCheckAST(filename: string, text: string, root: Node, option
     function _dumpNode(path: ASTPath) {
         function value(v: unknown) {
             if (['string', 'number', 'boolean'].includes(typeof v)) return v;
-            if (v && typeof v === 'object' && 'type' in v) return `{ type: ${v.type} }`;
-            return `<${v}>`;
+            return v && typeof v === 'object' && 'type' in v ? `{ type: ${v.type} }` : `<${v}>`;
         }
 
         function dotValue(v: { [key: string]: unknown } | unknown) {
-            if (typeof v === 'object' && v) {
-                return Object.fromEntries(Object.entries(v).map(([k, v]) => [k, value(v)]));
-            }
-            return `<${typeof v}>`;
+            return typeof v === 'object' && v
+                ? Object.fromEntries(Object.entries(v).map(([k, v]) => [k, value(v)]))
+                : `<${typeof v}>`;
         }
 
         const { parent: _, ...n } = path.node;
@@ -301,8 +301,9 @@ export function spellCheckAST(filename: string, text: string, root: Node, option
     }
 
     function isFunctionCall(node: ASTNode | undefined, name: string): boolean {
-        if (!node) return false;
-        return node.type === 'CallExpression' && node.callee.type === 'Identifier' && node.callee.name === name;
+        return !node
+            ? false
+            : node.type === 'CallExpression' && node.callee.type === 'Identifier' && node.callee.name === name;
     }
 
     function isRequireCall(node: ASTNode | undefined) {
@@ -350,10 +351,7 @@ function mapNode(path: ASTPath, key: Key | undefined): ScopeItem {
         const value = typeof node.value === 'string' ? node.value : '';
         return scopeItem(value[0] === '*' ? 'Comment.docBlock' : 'Comment.block');
     }
-    if (node.type === 'Line') {
-        return scopeItem('Comment.line');
-    }
-    return mapNodeToScope(path, key);
+    return node.type === 'Line' ? scopeItem('Comment.line') : mapNodeToScope(path, key);
 }
 
 function inheritanceSummary(path: ASTPath) {

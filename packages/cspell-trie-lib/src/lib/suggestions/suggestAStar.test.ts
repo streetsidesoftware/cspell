@@ -166,8 +166,7 @@ describe('weights', () => {
 
 function nCompare(v: number): 1 | 0 | -1 {
     if (v < 0) return -1;
-    if (v > 0) return 1;
-    return 0;
+    return v > 0 ? 1 : 0;
 }
 
 const sampleWords = [

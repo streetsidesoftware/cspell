@@ -18,10 +18,7 @@ export function fork<T>(iterable: Iterable<T>): ForkedIterables<T> {
     let iterator: Iterator<T> | undefined = undefined;
 
     function getIterator(): Iterator<T> {
-        if (iterator) {
-            return iterator;
-        }
-        return (iterator = iterable[Symbol.iterator]());
+        return iterator ? iterator : (iterator = iterable[Symbol.iterator]());
     }
 
     function* gen(mask: number, a: BufClosure, b: BufClosure): Iterable<T> {

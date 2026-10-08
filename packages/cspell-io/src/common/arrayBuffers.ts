@@ -10,10 +10,7 @@ import { arrayBufferViewToBuffer } from './nodeBuffer.js';
 export function toUint8Array(data: TArrayBufferView): Uint8Array<ArrayBuffer>;
 export function toUint8Array(data: ArrayBufferView): Uint8Array;
 export function toUint8Array(data: ArrayBufferView): Uint8Array {
-    if (data instanceof Uint8Array) {
-        return data;
-    }
-    return new Uint8Array(data.buffer, data.byteOffset, data.byteLength);
+    return data instanceof Uint8Array ? data : new Uint8Array(data.buffer, data.byteOffset, data.byteLength);
 }
 
 /**

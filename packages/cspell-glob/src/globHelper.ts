@@ -124,8 +124,7 @@ export function isGlobPatternWithOptionalRoot(g: GlobPattern): g is GlobPatternW
 }
 
 export function isGlobPatternWithRoot(g: GlobPattern): g is GlobPatternWithRoot {
-    if (typeof g === 'string') return false;
-    return typeof g.root === 'string' && 'isGlobalPattern' in g;
+    return typeof g === 'string' ? false : typeof g.root === 'string' && 'isGlobalPattern' in g;
 }
 
 export function isGlobPatternNormalized(g: GlobPattern | GlobPatternNormalized): g is GlobPatternNormalized {
@@ -139,8 +138,7 @@ export function isGlobPatternNormalizedToRoot(
     g: GlobPattern | GlobPatternNormalized,
     options: NormalizeOptions,
 ): g is GlobPatternNormalized {
-    if (!isGlobPatternNormalized(g)) return false;
-    return g.root === options.root;
+    return !isGlobPatternNormalized(g) ? false : g.root === options.root;
 }
 
 function urlBuilder(path: PathInterface = Path): FileUrlBuilder {
@@ -164,8 +162,7 @@ function normalizePattern(pattern: string, nested: boolean): string[] {
 function normalizePatternNested(pattern: string): string[] {
     // no slashes will match files names or folders
     if (!pattern.includes('/')) {
-        if (pattern === '**') return ['**'];
-        return ['**/' + pattern, '**/' + pattern + '/**'];
+        return pattern === '**' ? ['**'] : ['**/' + pattern, '**/' + pattern + '/**'];
     }
     const hasLeadingSlash = pattern.startsWith('/');
     pattern = hasLeadingSlash ? pattern.slice(1) : pattern;
@@ -176,11 +173,7 @@ function normalizePatternNested(pattern: string): string[] {
         return hasLeadingSlash || pattern.slice(0, -1).includes('/') ? [pattern + '**/*'] : ['**/' + pattern + '**/*'];
     }
 
-    if (pattern.endsWith('**')) {
-        return [pattern];
-    }
-
-    return [pattern, pattern + '/**'];
+    return pattern.endsWith('**') ? [pattern] : [pattern, pattern + '/**'];
 }
 
 function normalizePatternGeneral(pattern: string): [string] {
@@ -468,8 +461,7 @@ interface SplitGlob {
 }
 
 function isGlobPart(part: string): boolean {
-    if (part === GlobPlaceHolders.cwd) return false;
-    return hasGlobCharacters(part);
+    return part === GlobPlaceHolders.cwd ? false : hasGlobCharacters(part);
 }
 
 /**
@@ -515,11 +507,9 @@ function createSplitGlob(path: string | undefined, glob: string): SplitGlob {
 }
 
 function rootToUrl(root: string, builder: FileUrlBuilder): URL {
-    if (root.startsWith(GlobPlaceHolders.cwd)) {
-        return new URL(builder.normalizeFilePathForUrl(root.replace(GlobPlaceHolders.cwd, '.')), builder.cwd);
-    }
-
-    return builder.toFileDirURL(root);
+    return root.startsWith(GlobPlaceHolders.cwd)
+        ? new URL(builder.normalizeFilePathForUrl(root.replace(GlobPlaceHolders.cwd, '.')), builder.cwd)
+        : builder.toFileDirURL(root);
 }
 
 function fixPatternRoot(glob: GlobPatternWithRoot, builder: FileUrlBuilder): GlobPatternWithRoot {

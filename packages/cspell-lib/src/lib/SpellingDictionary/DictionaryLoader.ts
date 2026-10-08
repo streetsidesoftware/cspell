@@ -9,8 +9,7 @@ export type { LoadOptions } from './DictionaryController/index.js';
 let loader: DictionaryLoader | undefined;
 
 export function getDictionaryLoader(vfs?: VFileSystem): DictionaryLoader {
-    if (loader) return loader;
-    return (loader = new DictionaryLoader(vfs || getFileSystem()));
+    return loader ? loader : (loader = new DictionaryLoader(vfs || getFileSystem()));
 }
 
 export function loadDictionary(def: DictionaryDefinitionInternal): Promise<SpellingDictionary> {

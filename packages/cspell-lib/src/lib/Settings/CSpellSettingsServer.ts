@@ -84,9 +84,7 @@ function mergeWordsCached(left: string[] | undefined, right: string[] | undefine
     if (!Array.isArray(left) || !left.length) {
         return Array.isArray(right) ? (right.length ? right : emptyWords) : undefined;
     }
-    if (!Array.isArray(right) || !right.length) return left;
-
-    return _mergeWordsCached(left, right);
+    return !Array.isArray(right) || !right.length ? left : _mergeWordsCached(left, right);
 }
 
 function mergeObjects(left: undefined, right: undefined): undefined;
@@ -95,16 +93,12 @@ function mergeObjects<T>(left: T, right: T): T;
 function mergeObjects<T>(left: undefined, right: T): T;
 function mergeObjects<T>(left?: T, right?: T): T | undefined {
     if (!left || typeof left !== 'object') return !right || typeof right !== 'object' ? undefined : right;
-    if (!right || typeof right !== 'object') return left;
-    return { ...left, ...right };
+    return !right || typeof right !== 'object' ? left : { ...left, ...right };
 }
 
 function replaceIfNotEmpty<T>(left: Array<T> = [], right: Array<T> = []) {
     const filtered = right.filter((a) => !!a);
-    if (filtered.length) {
-        return filtered;
-    }
-    return left;
+    return filtered.length ? filtered : left;
 }
 
 export function toCSpellSettingsWithSourceTrace(settings: CSpellSettingsWSTO | CSpellSettingsI): CSpellSettingsWSTO {
@@ -207,10 +201,9 @@ function versionBasedMergeList<T>(
     right: T[] | undefined,
     version: CSpellUserSettings['version'],
 ): T[] | undefined {
-    if (version === configSettingsFileVersion0_1) {
-        return takeRightOtherwiseLeft(left, right);
-    }
-    return mergeListUnique(left, right);
+    return version === configSettingsFileVersion0_1
+        ? takeRightOtherwiseLeft(left, right)
+        : mergeListUnique(left, right);
 }
 
 /**
@@ -257,10 +250,7 @@ function takeRightOtherwiseLeft<T>(left: T[], right: undefined): T[];
 function takeRightOtherwiseLeft<T>(left: undefined, right: T[]): T[];
 function takeRightOtherwiseLeft<T>(left: T[] | undefined, right: T[] | undefined): T[] | undefined;
 function takeRightOtherwiseLeft<T>(left: T[] | undefined, right: T[] | undefined): T[] | undefined {
-    if (right?.length) {
-        return right;
-    }
-    return left || right;
+    return right?.length ? right : left || right;
 }
 
 /**
@@ -293,9 +283,7 @@ export function toInternalSettings(settings: CSpellSettingsI | CSpellSettingsWST
 export function toInternalSettings(settings?: CSpellSettingsI | CSpellSettingsWSTO): CSpellSettingsI | undefined;
 export function toInternalSettings(settings?: CSpellSettingsI | CSpellSettingsWSTO): CSpellSettingsI | undefined {
     if (settings === undefined) return undefined;
-    if (isCSpellSettingsInternal(settings)) return settings;
-
-    return cacheInternalSettings.get(settings, _toInternalSettings);
+    return isCSpellSettingsInternal(settings) ? settings : cacheInternalSettings.get(settings, _toInternalSettings);
 }
 
 function _toInternalSettings(settings: CSpellSettingsI | CSpellSettingsWSTO): CSpellSettingsI {
@@ -426,9 +414,7 @@ function mapPlugins(plugins: Exclude<CSpellSettingsI['plugins'], undefined>): Ma
 }
 
 function extractParsers(plugins: CSpellSettingsI['plugins']): Map<string, Parser | DocumentParser> {
-    if (!plugins || !plugins.length) return emptyParserMap;
-
-    return parserCache.get(plugins, mapPlugins);
+    return !plugins || !plugins.length ? emptyParserMap : parserCache.get(plugins, mapPlugins);
 }
 
 export const __testing__: {

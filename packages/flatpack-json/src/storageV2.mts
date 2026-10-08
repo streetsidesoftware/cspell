@@ -85,11 +85,7 @@ export class CompactStorageV2 extends CompactStorage {
         if (value === undefined) return 0;
 
         const found = this.#getFromCacheAndReference(value);
-        if (found !== undefined && this.data.get(found) === value) {
-            return found;
-        }
-
-        return this.#setElement(value);
+        return found !== undefined && this.data.get(found) === value ? found : this.#setElement(value);
     }
 
     private addStringPrimitive(value: string): number {
@@ -98,11 +94,7 @@ export class CompactStorageV2 extends CompactStorage {
 
     private stringToIdx(value: string): FlatpackIndex {
         const found = this.#getFromCacheAndReference(value);
-        if (found !== undefined) {
-            return found;
-        }
-
-        return this.addStringPrimitive(value);
+        return found !== undefined ? found : this.addStringPrimitive(value);
     }
 
     private objSetToIdx(value: Set<Serializable>): FlatpackIndex {
@@ -383,10 +375,7 @@ export class CompactStorageV2 extends CompactStorage {
             if (Array.isArray(value)) {
                 return this.arrToIdx(value);
             }
-            if (value instanceof Date) {
-                return this.objDateToIdx(value);
-            }
-            return this.objToIdx(value as PrimitiveObject);
+            return value instanceof Date ? this.objDateToIdx(value) : this.objToIdx(value as PrimitiveObject);
         }
 
         return this.primitiveToIdx(value);
@@ -409,8 +398,7 @@ export class CompactStorageV2 extends CompactStorage {
 
     #getValueIndexFromAnnotation(value: Serializable): FlatpackIndex | undefined {
         const annotation = extractUnpackedAnnotation(value);
-        if (!annotation || annotation.meta !== this.unpackMetaData) return undefined;
-        return annotation.index;
+        return !annotation || annotation.meta !== this.unpackMetaData ? undefined : annotation.index;
     }
 
     #getSrcElementFromMetaData(idx: FlatpackIndex): FlattenedElement | undefined {

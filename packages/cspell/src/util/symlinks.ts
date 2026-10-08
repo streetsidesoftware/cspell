@@ -61,8 +61,7 @@ export function createSymlinkChecker(root: string): SymlinkChecker {
             fixed.push(segment);
         }
         const base = fixed.join('/');
-        if (!base) return false;
-        return isReachedThroughSymlink(path.resolve(rootPath, base));
+        return !base ? false : isReachedThroughSymlink(path.resolve(rootPath, base));
     }
 
     return { isReachedThroughSymlink, isGlobReachedThroughSymlink };

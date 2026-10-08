@@ -40,8 +40,5 @@ export function counter(name: string): Counter {
  */
 export function getCounters(): Iterable<Counter> {
     const g = getGlobalCSpellSettings();
-    if (g.counters) {
-        return g.counters.values();
-    }
-    return [];
+    return g.counters ? g.counters.values() : [];
 }

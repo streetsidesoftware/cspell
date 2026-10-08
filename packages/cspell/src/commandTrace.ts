@@ -105,8 +105,7 @@ export function commandTrace(prog: Command): Command {
 }
 
 function filterTraceResults(results: App.TraceResult[], options: TraceCommandOptions): App.TraceResult[] {
-    if (options.all) return results;
-    return results.filter((r) => filterTraceResult(r, options.onlyFound));
+    return options.all ? results : results.filter((r) => filterTraceResult(r, options.onlyFound));
 }
 
 function filterTraceResult(result: App.TraceResult, onlyFound?: boolean): boolean {

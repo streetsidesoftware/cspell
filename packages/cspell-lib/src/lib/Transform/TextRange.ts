@@ -32,8 +32,7 @@ export function findMatchingRanges(pattern: RegExp, text: string): MatchRangeOpt
     const regex = new RegExp(pattern);
     if (!regex.global) {
         const m = text.match(regex);
-        if (!m) return [];
-        return [toMatchRangeWithText(m)];
+        return !m ? [] : [toMatchRangeWithText(m)];
     }
     return [...text.matchAll(regex)].map(toMatchRangeWithText);
 }

@@ -86,12 +86,10 @@ export class CSpellIONode implements CSpellIO {
         return compareStats(left, right);
     }
     toURL(urlOrFilename: UrlOrReference, relativeTo?: string | URL): URL {
-        if (isFileReference(urlOrFilename)) return urlOrFilename.url;
-        return toURL(urlOrFilename, relativeTo);
+        return isFileReference(urlOrFilename) ? urlOrFilename.url : toURL(urlOrFilename, relativeTo);
     }
     toFileURL(urlOrFilename: UrlOrReference, relativeTo?: string | URL): URL {
-        if (isFileReference(urlOrFilename)) return urlOrFilename.url;
-        return toFileURL(urlOrFilename, relativeTo);
+        return isFileReference(urlOrFilename) ? urlOrFilename.url : toFileURL(urlOrFilename, relativeTo);
     }
     urlBasename(urlOrFilename: UrlOrReference): string {
         return urlBasename(this.toURL(urlOrFilename));

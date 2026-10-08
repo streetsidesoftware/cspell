@@ -171,20 +171,14 @@ export class FlatpackStoreV1 implements FlatpackApi {
         if (typeof value === 'bigint') return this.cvtBigintToRef(value);
 
         const found = this.cache.get(value);
-        if (found !== undefined) {
-            return found;
-        }
-
-        return this.addValueAndElement(value, new PrimitiveRefElement(value));
+        return found !== undefined ? found : this.addValueAndElement(value, new PrimitiveRefElement(value));
     }
 
     private createSubStringRef(baseString: StringRefElements, value: string, offset?: number): SubStringRefElement {
         const found = this.cache.get(value);
-        if (found !== undefined) {
-            return found as SubStringRefElement;
-        }
-
-        return this.addStringElement(value, new SubStringRefElement(baseString, value.length, offset));
+        return found !== undefined
+            ? (found as SubStringRefElement)
+            : this.addStringElement(value, new SubStringRefElement(baseString, value.length, offset));
     }
 
     private addKnownString(ref: StringRefElements, value: string) {
@@ -356,23 +350,19 @@ export class FlatpackStoreV1 implements FlatpackApi {
 
     private cvtRegExpToRef(value: RegExp): RegExpRefElement {
         const found = this.cache.get(value);
-        if (found !== undefined) {
-            return found as RegExpRefElement;
-        }
-
-        return this.addValueAndElement(
-            value,
-            new RegExpRefElement(this.stringToRef(value.source), this.stringToRef(value.flags)),
-        );
+        return found !== undefined
+            ? (found as RegExpRefElement)
+            : this.addValueAndElement(
+                  value,
+                  new RegExpRefElement(this.stringToRef(value.source), this.stringToRef(value.flags)),
+              );
     }
 
     private cvtDateToRef(value: Date): DateRefElement {
         const found = this.cache.get(value);
-        if (found !== undefined) {
-            return found as DateRefElement;
-        }
-
-        return this.addValueAndElement(value, new DateRefElement(value.getTime()));
+        return found !== undefined
+            ? (found as DateRefElement)
+            : this.addValueAndElement(value, new DateRefElement(value.getTime()));
     }
 
     private proxyDateRef(ref: DateRefElement): Date {
@@ -535,10 +525,7 @@ export class FlatpackStoreV1 implements FlatpackApi {
             if (Array.isArray(value)) {
                 return this.arrToRef(value);
             }
-            if (value instanceof Date) {
-                return this.cvtDateToRef(value);
-            }
-            return this.cvtObjToRef(value as PrimitiveObject);
+            return value instanceof Date ? this.cvtDateToRef(value) : this.cvtObjToRef(value as PrimitiveObject);
         }
 
         return this.primitiveToRef(value);
@@ -670,8 +657,7 @@ export class FlatpackStoreV1 implements FlatpackApi {
     }
 
     #toValue(ref: RefElements | undefined): Unpacked {
-        if (!ref) return undefined;
-        return getOrResolve(this.cachedProxies, ref, (ref) => this.#resolveToValueProxy(ref));
+        return !ref ? undefined : getOrResolve(this.cachedProxies, ref, (ref) => this.#resolveToValueProxy(ref));
     }
 
     toJSON(): Flatpacked {

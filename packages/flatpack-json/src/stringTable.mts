@@ -9,8 +9,7 @@ export class StringTable {
     get(index: number): string | undefined {
         if (!index) return '';
         index = index < 0 ? -index : index;
-        if (index >= this.stringTableElement.length) return undefined;
-        return this.#getCompoundString(index);
+        return index >= this.stringTableElement.length ? undefined : this.#getCompoundString(index);
     }
 
     *entries(): Iterable<[number, string]> {

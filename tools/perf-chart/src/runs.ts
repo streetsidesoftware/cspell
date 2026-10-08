@@ -44,8 +44,7 @@ export function filterOutIncompleteRuns(runs: CsvRecord[][]): CsvRecord[][] {
     // This doesn't happen very often, so we can just filter out runs that are too small.
     function getSize(i: number): number {
         if (i < 0) return sizes[0];
-        if (i >= sizes.length) return sizes[sizes.length - 1];
-        return sizes[i];
+        return i >= sizes.length ? sizes[sizes.length - 1] : sizes[i];
     }
 }
 

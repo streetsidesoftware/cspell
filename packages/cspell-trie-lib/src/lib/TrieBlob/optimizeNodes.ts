@@ -47,8 +47,7 @@ export function optimizeNodes<NodeType extends TrieBlobNode>(nodes: TrieBlobNode
 
     function findMatchingLockedNode(hash: number, node: NodeType): NodeType | undefined {
         const candidates = nodeHashMap.get(hash);
-        if (!candidates) return undefined;
-        return findMatchingNode(node, candidates);
+        return !candidates ? undefined : findMatchingNode(node, candidates);
     }
 
     function registerNode(nodeIdx: number, node: NodeType): number {

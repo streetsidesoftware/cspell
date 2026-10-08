@@ -32,12 +32,13 @@ export class Afx {
     }
 
     words(entry: string): Iterable<string> {
-        if (!entry.includes('/')) return [entry];
-        return pipe(
-            this.applyTo(entry),
-            opMap((ar) => ar.word),
-            opUnique(),
-        );
+        return !entry.includes('/')
+            ? [entry]
+            : pipe(
+                  this.applyTo(entry),
+                  opMap((ar) => ar.word),
+                  opUnique(),
+              );
     }
 
     *applyTo(word: string): Iterable<AfxWordAndRules> {
