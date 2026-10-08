@@ -2,6 +2,7 @@ const regExFirstUpper = /^\p{Lu}\p{M}?\p{Ll}+$/u;
 const regExAllUpper = /^(?:\p{Lu}\p{M}?)+$/u;
 const regExAllLower = /^(?:\p{Ll}\p{M}?)+$/u;
 const regExAccents = /\p{M}/gu;
+const regExTurkishCapitalI = /[Iİ]/;
 
 export function isUpperCase(word: string): boolean {
     return !!regExAllUpper.test(word);
@@ -21,6 +22,18 @@ export function isFirstCharacterLower(word: string): boolean {
 
 export function ucFirst(word: string): string {
     return word.slice(0, 1).toUpperCase() + word.slice(1);
+}
+
+/**
+ * Lower case a word the way Turkish and Azerbaijani do: `I` becomes `ı` and `İ` becomes `i`.
+ * @returns `undefined` if the word has no `I` or `İ`.
+ */
+export function turkishLowerCase(word: string): string | undefined {
+    return regExTurkishCapitalI.test(word) ? word.toLocaleLowerCase('tr') : undefined;
+}
+
+export function turkishUcFirst(word: string): string {
+    return word.slice(0, 1).toLocaleUpperCase('tr') + word.slice(1);
 }
 
 export function lcFirst(word: string): string {
