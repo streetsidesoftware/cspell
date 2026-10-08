@@ -3,9 +3,9 @@ Repository: gitbucket/gitbucket
 Url: https://github.com/gitbucket/gitbucket.git
 Args: '["**"]'
 Summary:
-  files: 422
-  filesWithIssues: 406
-  issues: 2165
+  files: 425
+  filesWithIssues: 409
+  issues: 2173
   errors: 0
 Errors: []
 
@@ -223,16 +223,17 @@ issues:
   - "src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:403:22      newuser     U       get(\"/admin/users/_newuser\")(adminOnly {"
   - "src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:422:32      edituser    U       admin/users/:userName/_edituser\")("
   - "src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:472:22      newgroup    U       get(\"/admin/users/_newgroup\")(adminOnly {"
-  - "src/main/scala/gitbucket/core/controller/WikiController.scala:220:22        Gollum      U       WebHookGollumPayload(\"edited\", form"
+  - "src/main/scala/gitbucket/core/controller/WikiController.scala:220:22        Gollum          U       WebHookGollumPayload(\"edited\", form"
+  - "src/main/scala/gitbucket/core/controller/WikiController.scala:332:88        jsessionid      U       parameters such as ;jsessionid="
   - "src/main/scala/gitbucket/core/GitBucketCoreModule.scala:158:21      gitdir      U       val gitdir = getRepositoryDir(owner"
   - "src/main/scala/gitbucket/core/model/AccountWebHook.scala:7:55           whct        U       WebHookContentType, String](whct => whct.code, code"
   - "src/main/scala/gitbucket/core/model/AccountWebHook.scala:14:45          CTYPE       U       WebHookContentType](\"CTYPE\")"
   - "src/main/scala/gitbucket/core/model/Profile.scala:48:2          nowarn      U       @nowarn(\"cat=deprecation\")"
   - "src/main/scala/gitbucket/core/model/WebHook.scala:34:37         gollum      U       Gollum extends Event(\"gollum\")"
   - "src/main/scala/gitbucket/core/service/AccountService.scala:256:35       devnull     U       mailAddress = groupName + \"@devnull\","
-  - "src/main/scala/gitbucket/core/service/IssuesService.scala:680:31        unassignment    U       TODO Notify plugins of unassignment as doing in registerIssueAssi"
+  - "src/main/scala/gitbucket/core/service/IssuesService.scala:681:31        unassignment    U       TODO Notify plugins of unassignment as doing in registerIssueAssi"
   - "src/main/scala/gitbucket/core/service/OpenIDConnectService.scala:217:6          HMAC    U       \"HMAC\" -> Family.HMAC_SHA"
-  - "src/main/scala/gitbucket/core/service/ProtectedBranchService.scala:186:15       Successed (Succeeded, Success, Successful)      U       unSuccessedContexts(command.getNewId"
+  - "src/main/scala/gitbucket/core/service/ProtectedBranchService.scala:185:15       Successed (Succeeded, Success, Successful)      U       unSuccessedContexts(command.getNewId"
   - "src/main/scala/gitbucket/core/service/PullRequestService.scala:419:9        patchs (patches, paths)     U       val patchs = positions.map { case"
   - "src/main/scala/gitbucket/core/service/RepositoryCreationService.scala:305:8         fccd        U       \"fccd29\""
   - "src/main/scala/gitbucket/core/service/RepositoryCreationService.scala:307:76        acacac      U       Some(\"Default.\"), \"acacac\")"
@@ -242,9 +243,10 @@ issues:
   - "src/main/scala/gitbucket/core/ssh/PublicKeyAuthenticator.scala:44:13        Publickey       U       extends PublickeyAuthenticator"
   - "src/main/scala/gitbucket/core/util/DatabaseConfig.scala:59:12       liqui       U       lazy val liquiDriver: AbstractJdbcDatabase"
   - "src/main/scala/gitbucket/core/util/FileUtil.scala:11:20         Tika    U       val tika = new Tika()"
-  - "src/main/scala/gitbucket/core/util/JDBCUtil.scala:194:46        FKTABLE     U       hildTableName = rs.getString(\"FKTABLE_NAME\").toUpperCase"
-  - "src/main/scala/gitbucket/core/util/JDBCUtil.scala:215:21        tsort       U       val ordered = tsort(edges).toSeq"
-  - "src/main/scala/gitbucket/core/util/JDBCUtil.scala:223:19        Preds       U       def tsort(toPreds: Map[A, Set[A]], done"
+  - "src/main/scala/gitbucket/core/util/JDBCUtil.scala:176:51        SCHEM (SCHEME, SCHEMA)      U       rs.getString(\"TABLE_SCHEM\")).getOrElse(\"\")"
+  - "src/main/scala/gitbucket/core/util/JDBCUtil.scala:196:46        FKTABLE                     U       hildTableName = rs.getString(\"FKTABLE_NAME\").toUpperCase"
+  - "src/main/scala/gitbucket/core/util/JDBCUtil.scala:218:21        tsort                       U       val ordered = tsort(edges).toSeq"
+  - "src/main/scala/gitbucket/core/util/JDBCUtil.scala:226:19        Preds                       U       def tsort(toPreds: Map[A, Set[A]], done"
   - "src/main/scala/gitbucket/core/util/JGitUtil.scala:1017:38       receivepack     U       setBoolean(\"http\", null, \"receivepack\", true)"
   - "src/main/scala/gitbucket/core/util/LDAPUtil.scala:135:46        JSSE        U       set the property that JSSE uses to identify"
   - "src/main/scala/gitbucket/core/util/LDAPUtil.scala:143:32        LDAPJSSE    U       new LDAPConnection(new LDAPJSSESecureSocketFactory("
@@ -338,6 +340,8 @@ issues:
   - "src/test/scala/gitbucket/core/service/MergeServiceSpec.scala:58:13          Confrict    U       def createConfrict(git: Git): ObjectId"
   - "src/test/scala/gitbucket/core/service/ProtectedBranchServiceSpec.scala:75:80        fuga    U       false, false, Seq(\"fuga\"), false, Nil)"
   - "src/test/scala/gitbucket/core/service/ServiceSpecBase.scala:173:49      baes    U       baseRepositoryName, baesBranch) = base.split"
+  - "src/test/scala/gitbucket/core/util/JDBCUtilExportSpec.scala:12:29       TINYINT     U       exportAsSQL exports TINYINT and SMALLINT columns"
+  - "src/test/scala/gitbucket/core/util/JDBCUtilExportSpec.scala:14:68       tinyint     U       \"jdbc:h2:mem:export-tinyint\")) { conn =>"
   - "src/test/scala/gitbucket/core/util/JGitUtilSpec.scala:345:53        finfo       U       git, branch, path).map(finfo => (finfo.name, finfo"
   - "src/test/scala/gitbucket/core/util/ValidationsSpec.scala:32:40          gghhii      U       validate(\"color\", \"#gghhii\", messages) == Some"
   - "src/test/scala/gitbucket/core/view/HelpersSpec.scala:45:37          metacharacters      U       properly escape html metacharacters\") {"
