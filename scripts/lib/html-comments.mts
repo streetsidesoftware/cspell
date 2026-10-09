@@ -83,15 +83,13 @@ function findCodeBlocks(markdown: string): Range[] {
     }
 
     const inBlock = (l: Line) => blocks.some(([s, e]) => l.start >= s && l.start < e);
-    if (lines.some((l) => /^ {0,3}`{3,}/.test(l.text) && !inBlock(l))) return [];
-    return blocks;
+    return lines.some((l) => /^ {0,3}`{3,}/.test(l.text) && !inBlock(l)) ? [] : blocks;
 }
 
 function openingFence(line: string): string | undefined {
     const m = /^(`{3,})(.*)$/.exec(line);
     // GitHub doesn't treat a backtick fence with another backtick on its line as a fence.
-    if (!m || m[2].includes('`')) return undefined;
-    return m[1];
+    return !m || m[2].includes('`') ? undefined : m[1];
 }
 
 function isClosingFence(line: string, fence: string): boolean {

@@ -22,10 +22,7 @@ export interface Edit {
 }
 
 export function toMappedText(text: string | MappedText): MappedText {
-    if (typeof text === 'string') {
-        return { text, range: [0, text.length], rawText: text };
-    }
-    return text;
+    return typeof text === 'string' ? { text, range: [0, text.length], rawText: text } : text;
 }
 
 export function chainTransformers(...transformers: TextTransformer[]): TextTransformer {

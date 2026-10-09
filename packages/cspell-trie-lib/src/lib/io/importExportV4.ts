@@ -382,10 +382,7 @@ function parseStream(radix: number, iter: Iterable<string>): TrieRoot {
                 isEscaped = true;
                 return acc;
             }
-            if (s === endOfComment) {
-                return { ...acc, parser: undefined };
-            }
-            return acc;
+            return s === endOfComment ? { ...acc, parser: undefined } : acc;
         }
         return { ...acc, parser };
     }

@@ -115,8 +115,9 @@ class SpellingDictionaryCollectionImpl implements SpellingDictionaryCollection {
     }
 
     private _isNoSuggestWord = (word: string, options?: HasOptionsRO) => {
-        if (!this.containsNoSuggestWords) return false;
-        return !!isNoSuggestWordInAnyDictionary(this.dictionaries, word, options || {});
+        return !this.containsNoSuggestWords
+            ? false
+            : !!isNoSuggestWordInAnyDictionary(this.dictionaries, word, options || {});
     };
 }
 

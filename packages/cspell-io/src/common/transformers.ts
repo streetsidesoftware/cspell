@@ -11,8 +11,7 @@ export function createDecoderTransformer(
 
     let decoder: ((buf: TArrayBufferView) => string) | undefined = undefined;
 
-    if (encoding && !encoding.startsWith('utf')) return decoderNonUtf;
-    return decoderUtf;
+    return encoding && !encoding.startsWith('utf') ? decoderNonUtf : decoderUtf;
 
     async function* decoderNonUtf(
         iterable: AsyncIterable<string | TArrayBufferView> | Iterable<string | TArrayBufferView>,

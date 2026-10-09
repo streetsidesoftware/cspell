@@ -52,10 +52,7 @@ export function filenameToUrl(filename: string | URL, cwd = '.'): URL {
     if (filename instanceof URL) return filename;
     const cwdURL = toFileDirURL(cwd);
     if (filename === STDIN) return new URL('stdin:///');
-    if (isStdinUrl(filename)) {
-        return new URL(resolveStdinUrl(filename, cwd));
-    }
-    return toFileURL(filename, cwdURL);
+    return isStdinUrl(filename) ? new URL(resolveStdinUrl(filename, cwd)) : toFileURL(filename, cwdURL);
 }
 
 export function filenameToUri(filename: string, cwd?: string): URL {
@@ -64,8 +61,7 @@ export function filenameToUri(filename: string, cwd?: string): URL {
 
 export function isBinaryFile(filename: string, cwd?: string): boolean {
     const uri = filenameToUri(filename, cwd);
-    if (uri.protocol.startsWith('stdin')) return false;
-    return isUriBinaryFile(uri);
+    return uri.protocol.startsWith('stdin') ? false : isUriBinaryFile(uri);
 }
 
 export interface ReadFileInfoResult extends FileInfo {
@@ -81,10 +77,7 @@ export function resolveFilenameToUrl(filename: string | URL, cwd?: string | URL)
         // Possible relative file URL -- this is now allowed by the URL spec, users can enter it on the command line.
         return new URL(filename.slice(FileUrlPrefix.length), cwdUrl);
     }
-    if (isStdinUrl(filename)) {
-        return resolveStdinUrl(filename, cwdUrl);
-    }
-    return toFileURL(filename, cwdUrl);
+    return isStdinUrl(filename) ? resolveStdinUrl(filename, cwdUrl) : toFileURL(filename, cwdUrl);
 }
 
 export function resolveFilename(filename: string, cwd?: string): string {
@@ -218,6 +211,5 @@ export function relativeToCwd(filename: string | URL, cwd: string | URL = proces
     const urlCwd = toFileDirURL(cwd);
     const url = toFileURL(filename, urlCwd);
     const rel = urlRelative(urlCwd, url);
-    if (rel.startsWith('..')) return toFilePathOrHref(url);
-    return rel;
+    return rel.startsWith('..') ? toFilePathOrHref(url) : rel;
 }

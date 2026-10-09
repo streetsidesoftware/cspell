@@ -179,9 +179,8 @@ export class AstPathScope {
     score(matcher: AstScopeMatcher): ScopeScore {
         const field = matcher.scopeField();
         const node = this.path.node;
-        if (field in node && typeof (node as unknown as Record<string, unknown>)[field] === 'string') {
-            return matcher.scoreItems(this.items);
-        }
-        return 0;
+        return field in node && typeof (node as unknown as Record<string, unknown>)[field] === 'string'
+            ? matcher.scoreItems(this.items)
+            : 0;
     }
 }

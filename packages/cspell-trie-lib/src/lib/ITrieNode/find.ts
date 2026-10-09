@@ -250,8 +250,7 @@ function findCompoundWord(
 
 export function findWordExact(root: Root | ITrieNode | undefined, word: string): boolean {
     const r = root as Root;
-    if (r?.findExact) return r.findExact(word);
-    return isEndOfWordNode(walk(root, word));
+    return r?.findExact ? r.findExact(word) : isEndOfWordNode(walk(root, word));
 }
 
 export function isEndOfWordNode(n: ITrieNode | undefined): boolean {
@@ -384,8 +383,7 @@ function findLegacyCompoundWord(
 
 export function isForbiddenWord(root: Root | ITrieNode | undefined, word: string, forbiddenPrefix: string): boolean {
     const r = root as Root | undefined;
-    if (r?.isForbidden) return r.isForbidden(word);
-    return findWordExact(root?.get(forbiddenPrefix), word);
+    return r?.isForbidden ? r.isForbidden(word) : findWordExact(root?.get(forbiddenPrefix), word);
 }
 
 export const createFindOptions: typeof _createFindOptions = memorizeLastCall(_createFindOptions);

@@ -14,6 +14,5 @@ export function getOutputWidth(
 }
 
 function parseColumns(value: string | undefined): number | undefined {
-    if (!value || !/^\s*\d+\s*$/.test(value)) return undefined;
-    return Number.parseInt(value, 10) || undefined;
+    return !value || !/^\s*\d+\s*$/.test(value) ? undefined : Number.parseInt(value, 10) || undefined;
 }

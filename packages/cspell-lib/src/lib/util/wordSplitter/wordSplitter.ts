@@ -377,8 +377,7 @@ function splitIntoWords(
     // maxCost one extra unit of slack above the seeded whole-word cost.
     function preferCandidate(candidate: PathNode, current: PathNode): boolean {
         if (candidate.c < current.c) return true;
-        if (candidate.c > current.c) return false;
-        return current === wholeWordNode && candidate !== wholeWordNode;
+        return candidate.c > current.c ? false : current === wholeWordNode && candidate !== wholeWordNode;
     }
 
     let maxCost = wholeWordCost + 1;
@@ -453,10 +452,9 @@ function splitIntoWords(
     }
 
     const result = pathToWords(bestPath);
-    if (result.length === 2 && result.every((r) => !r.isFound) && regExFirstUpper.test(wholeWord.text)) {
-        return [wholeWord];
-    }
-    return result;
+    return result.length === 2 && result.every((r) => !r.isFound) && regExFirstUpper.test(wholeWord.text)
+        ? [wholeWord]
+        : result;
 }
 
 export const __testing__: {

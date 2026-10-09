@@ -2,8 +2,7 @@ import { ansiWidth } from './ansi.js';
 
 export function pad(s: string, w: number): string {
     const p = padWidth(s, w);
-    if (!p) return s;
-    return s.padEnd(p + s.length);
+    return !p ? s : s.padEnd(p + s.length);
 }
 
 export function padWidth(s: string, target: number): number {
@@ -13,6 +12,5 @@ export function padWidth(s: string, target: number): number {
 
 export function padLeft(s: string, w: number): string {
     const p = padWidth(s, w);
-    if (!p) return s;
-    return s.padStart(p + s.length);
+    return !p ? s : s.padStart(p + s.length);
 }

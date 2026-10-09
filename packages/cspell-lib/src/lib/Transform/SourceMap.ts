@@ -139,11 +139,7 @@ export function createSourceMapCursor(sourceMap: SourceMap | undefined): SourceM
  * @returns The offset in the transformed text corresponding to the input offset in the source text. The offset is relative to the start of the text range.
  */
 export function calcOffsetInDst(cursor: SourceMapCursor | undefined, offsetInSrc: number): number {
-    if (!cursor?.sourceMap.length) {
-        return offsetInSrc;
-    }
-
-    return cursor.mapOffsetToDest(offsetInSrc);
+    return !cursor?.sourceMap.length ? offsetInSrc : cursor.mapOffsetToDest(offsetInSrc);
 }
 
 /**
@@ -153,11 +149,7 @@ export function calcOffsetInDst(cursor: SourceMapCursor | undefined, offsetInSrc
  * @returns The offset in the source text corresponding to the input offset in the transformed text. The offset is relative to the start of the text range.
  */
 export function calcOffsetInSrc(cursor: SourceMapCursor | undefined, offsetInDst: number): number {
-    if (!cursor?.sourceMap.length) {
-        return offsetInDst;
-    }
-
-    return cursor.mapOffsetToSrc(offsetInDst);
+    return !cursor?.sourceMap.length ? offsetInDst : cursor.mapOffsetToSrc(offsetInDst);
 }
 
 /**

@@ -59,10 +59,9 @@ export class CSpellDictionaryBundler {
     }
 
     importConfig(url: URL, content?: string): Promise<CSpellConfigFile> {
-        if (content && !isCodeFile(url)) {
-            return Promise.resolve(this.reader.parse({ url, content }));
-        }
-        return this.reader.readConfig(url);
+        return content && !isCodeFile(url)
+            ? Promise.resolve(this.reader.parse({ url, content }))
+            : this.reader.readConfig(url);
     }
 
     loadImports(config: CSpellConfigFile): Promise<ICSpellConfigFile[]> {
@@ -190,10 +189,7 @@ async function readFile(fileRef: FileReference): Promise<FileResource> {
  * @returns
  */
 function fileLength(file: FileResource): number {
-    if (typeof file.content === 'string') {
-        return file.content.length;
-    }
-    return file.content.byteLength;
+    return typeof file.content === 'string' ? file.content.length : file.content.byteLength;
 }
 
 function compressFile(file: FileResource): FileResource {

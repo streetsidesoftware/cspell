@@ -69,14 +69,14 @@ export class LintRequest {
 
 function mergeFiles(a: string[] | undefined, b: string[] | undefined): string[] | undefined {
     const files = merge(a, b);
-    if (!files) return undefined;
-    return [...new Set(files.flatMap((a) => a.split('\n').map((a) => a.trim())).filter((a) => !!a))];
+    return !files
+        ? undefined
+        : [...new Set(files.flatMap((a) => a.split('\n').map((a) => a.trim())).filter((a) => !!a))];
 }
 
 function merge<T>(a: T[] | undefined, b: T[] | undefined): T[] | undefined {
     if (!a) return b;
-    if (!b) return a;
-    return [...a, ...b];
+    return !b ? a : [...a, ...b];
 }
 
 export function extractUnknownWordsConfig(options: LinterCliOptions): UnknownWordsConfiguration {

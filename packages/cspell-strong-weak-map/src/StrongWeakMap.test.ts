@@ -142,10 +142,7 @@ describe('StrongWeakMap', () => {
 type Boxed<T> = T extends object ? T : { value: T };
 
 function box<T>(value: T): Boxed<T> {
-    if (value && typeof value === 'object') {
-        return value as Boxed<T>;
-    }
-    return { value } as Boxed<T>;
+    return value && typeof value === 'object' ? (value as Boxed<T>) : ({ value } as Boxed<T>);
 }
 
 function boxKeyValue<K, V>([k, v]: [K, V]): [K, Boxed<V>] {

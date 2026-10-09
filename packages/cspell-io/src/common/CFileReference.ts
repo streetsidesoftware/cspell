@@ -44,13 +44,14 @@ export class CFileReference implements FileReference {
         gz?: boolean | undefined,
     ): CFileReference {
         if (CFileReference.isCFileReference(fileReference)) return fileReference;
-        if (fileReference instanceof URL) return new CFileReference(fileReference, encoding, baseFilename, gz);
-        return new CFileReference(
-            fileReference.url,
-            fileReference.encoding,
-            fileReference.baseFilename,
-            fileReference.gz,
-        );
+        return fileReference instanceof URL
+            ? new CFileReference(fileReference, encoding, baseFilename, gz)
+            : new CFileReference(
+                  fileReference.url,
+                  fileReference.encoding,
+                  fileReference.baseFilename,
+                  fileReference.gz,
+              );
     }
 
     public toJson(): CFileReferenceJson {
@@ -78,8 +79,9 @@ export function toFileReference(
     gz?: boolean | undefined,
 ): FileReference {
     const fileReference = typeof file === 'string' ? toFileURL(file) : file;
-    if (fileReference instanceof URL) return new CFileReference(fileReference, encoding, baseFilename, gz);
-    return CFileReference.from(fileReference);
+    return fileReference instanceof URL
+        ? new CFileReference(fileReference, encoding, baseFilename, gz)
+        : CFileReference.from(fileReference);
 }
 
 export function isFileReference(ref: UrlOrReference): ref is FileReference {
@@ -96,6 +98,7 @@ export function toFileResourceRequest(
     signal?: AbortSignal,
 ): FileResourceRequest {
     const fileReference = typeof file === 'string' ? toFileURL(file) : file;
-    if (fileReference instanceof URL) return { url: fileReference, encoding, signal };
-    return { url: fileReference.url, encoding: encoding ?? fileReference.encoding, signal };
+    return fileReference instanceof URL
+        ? { url: fileReference, encoding, signal }
+        : { url: fileReference.url, encoding: encoding ?? fileReference.encoding, signal };
 }

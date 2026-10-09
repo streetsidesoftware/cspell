@@ -109,11 +109,7 @@ export class CSpellWorkerPool {
             return workers[0];
         }
 
-        if (options?.autostart && this.#workers.size < this.#maxWorkers) {
-            return this.#createWorker();
-        }
-
-        return undefined;
+        return options?.autostart && this.#workers.size < this.#maxWorkers ? this.#createWorker() : undefined;
     }
 
     stopWorker(worker: CSpellWorker): Promise<void> {

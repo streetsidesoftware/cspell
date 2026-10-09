@@ -104,8 +104,7 @@ export function factoryPathHelper(path: PathInterface): PathHelper {
 
     function makeRelativeTo(child: string, parent: string): string | undefined {
         const rel = path.relative(parent, child);
-        if (path.isAbsolute(rel) || rel[0] === '.') return undefined;
-        return normalizePath(rel);
+        return path.isAbsolute(rel) || rel[0] === '.' ? undefined : normalizePath(rel);
     }
 
     function normalizePath(path: string): string {

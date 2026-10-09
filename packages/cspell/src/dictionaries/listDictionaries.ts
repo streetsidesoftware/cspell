@@ -87,13 +87,12 @@ interface DictionaryLocalesAndFileTypes {
 
 function splitList(list: string | string[] | undefined): string[] {
     if (!list) return [];
-    if (typeof list === 'string') {
-        return list
-            .split(',')
-            .map((s) => s.trim())
-            .filter((s) => !!s);
-    }
-    return list.flatMap((s) => splitList(s));
+    return typeof list === 'string'
+        ? list
+              .split(',')
+              .map((s) => s.trim())
+              .filter((s) => !!s)
+        : list.flatMap((s) => splitList(s));
 }
 
 function extractDictionaryLocalesAndFileTypes(
@@ -205,8 +204,7 @@ export async function listDictionaries(options: DictionariesOptions): Promise<Li
     }
 
     function filterDicts(dict: DictionaryDefinition): boolean {
-        if (options.enabled === undefined) return true;
-        return options.enabled === enabledDictionaries.has(dict.name);
+        return options.enabled === undefined ? true : options.enabled === enabledDictionaries.has(dict.name);
     }
 
     const dictionaryDefinitions = (config.dictionaryDefinitions || []).filter(filterDicts);

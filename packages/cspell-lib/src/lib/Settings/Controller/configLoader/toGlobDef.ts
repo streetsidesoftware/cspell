@@ -20,8 +20,5 @@ export function toGlobDef(
         }
         return toGlobDef(glob, root, source);
     }
-    if (source) {
-        return { ...g, source };
-    }
-    return g;
+    return source ? { ...g, source } : g;
 }

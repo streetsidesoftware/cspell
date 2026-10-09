@@ -29,10 +29,7 @@ export interface Request {
 // cspell:ignore commitish
 
 function calcGetReleaseUrl(apiUrl: URL, tag: string): URL {
-    if (tag === 'latest') {
-        return new URL('releases/latest', apiUrl);
-    }
-    return new URL(`releases/tags/${tag}`, apiUrl);
+    return tag === 'latest' ? new URL('releases/latest', apiUrl) : new URL(`releases/tags/${tag}`, apiUrl);
 }
 
 export async function fetchGitHubReleaseData(request: Request): Promise<ReleaseData> {

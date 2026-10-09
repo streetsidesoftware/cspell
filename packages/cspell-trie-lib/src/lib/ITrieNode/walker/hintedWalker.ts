@@ -186,8 +186,7 @@ class ITrieNodeFiltered implements ITrieNode {
 
     get(char: string): ITrieNode | undefined {
         const node = this.keyMap.get(char);
-        if (node === undefined) return undefined;
-        return node;
+        return node === undefined ? undefined : node;
     }
 }
 

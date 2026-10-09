@@ -52,8 +52,7 @@ export async function compressIfNeeded(data: Uint8Array): Promise<Uint8Array> {
  * @returns true if the data is GZipped
  */
 export function isGZipped(data: Uint8Array | string): boolean {
-    if (typeof data === 'string') return false;
-    return data[0] === 0x1f && data[1] === 0x8b;
+    return typeof data === 'string' ? false : data[0] === 0x1f && data[1] === 0x8b;
 }
 
 function fixOSSystemID(zBuf: Uint8Array, os: OSFlags = OSFlags.Unix): Uint8Array {
@@ -69,6 +68,5 @@ export async function decompress(buf: Uint8Array | Buffer, encoding: 'utf8'): Pr
 export async function decompress(buf: Uint8Array | Buffer, encoding: 'utf8' | undefined): Promise<string | U8Array>;
 export async function decompress(buf: Uint8Array | Buffer, encoding?: 'utf8'): Promise<string | U8Array> {
     const dBuf = gunzip(buf);
-    if (!encoding) return dBuf;
-    return (await dBuf).toString(encoding);
+    return !encoding ? dBuf : (await dBuf).toString(encoding);
 }

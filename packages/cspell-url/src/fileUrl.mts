@@ -89,10 +89,7 @@ function addLongPathPrefixForce(path: string): string {
     if (hasLongPathPrefixAlt(path)) {
         return fixLongPathPrefix(path);
     }
-    if (isUncPath(path)) {
-        return uncWithLongPathPrefix + path.slice(2);
-    }
-    return uncLongPathPrefix + path;
+    return isUncPath(path) ? uncWithLongPathPrefix + path.slice(2) : uncLongPathPrefix + path;
 }
 
 /**
@@ -104,16 +101,12 @@ function addLongPathPrefixForce(path: string): string {
  * @returns the path with the long path prefix added if needed.
  */
 export function addLongPathPrefix(path: string): string {
-    if (!isWindows) return path;
-    return addLongPathPrefixForce(path);
+    return !isWindows ? path : addLongPathPrefixForce(path);
 }
 
 function addLongPathPrefixAltForce(path: string): string {
     if (hasLongPathPrefix(path) || hasLongPathPrefixAlt(path)) return path;
-    if (isUncPath(path)) {
-        return uncWithLongPathPrefixAlt + path.slice(2);
-    }
-    return uncLongPathPrefixAlt + path;
+    return isUncPath(path) ? uncWithLongPathPrefixAlt + path.slice(2) : uncLongPathPrefixAlt + path;
 }
 
 /**
@@ -125,8 +118,7 @@ function addLongPathPrefixAltForce(path: string): string {
  * @returns the path with the long path prefix added if needed.
  */
 export function addLongPathPrefixAlt(path: string): string {
-    if (!isWindows) return path;
-    return addLongPathPrefixAltForce(path);
+    return !isWindows ? path : addLongPathPrefixAltForce(path);
 }
 
 /**
@@ -135,6 +127,5 @@ export function addLongPathPrefixAlt(path: string): string {
  * @returns the path with the standard long path prefix if needed.
  */
 export function fixLongPathPrefix(path: string): string {
-    if (!hasLongPathPrefixAlt(path)) return path;
-    return uncLongPathPrefix + path.slice(uncLongPathPrefixAlt.length);
+    return !hasLongPathPrefixAlt(path) ? path : uncLongPathPrefix + path.slice(uncLongPathPrefixAlt.length);
 }

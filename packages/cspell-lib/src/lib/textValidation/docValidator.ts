@@ -517,8 +517,9 @@ export class DocumentValidator {
     private _parse(): Iterable<ParsedText> {
         assert(this._preparations, ERROR_NOT_PREPARED);
         const parser = this._preparations.finalSettings.parserFn;
-        if (typeof parser !== 'object') return this.defaultParser();
-        return parseDocumentWithParser(parser, this.document).parsedTexts;
+        return typeof parser !== 'object'
+            ? this.defaultParser()
+            : parseDocumentWithParser(parser, this.document).parsedTexts;
     }
 
     private getSuggestions(text: string): ExtendedSuggestion[] {
@@ -656,8 +657,7 @@ function sanitizeSuggestion(sug: WordSuggestion): ExtendedSuggestion {
     const { word, isPreferred, wordAdjustedToMatchCase } = sug;
     if (isPreferred && wordAdjustedToMatchCase) return { word, wordAdjustedToMatchCase, isPreferred };
     if (isPreferred) return { word, isPreferred };
-    if (wordAdjustedToMatchCase) return { word, wordAdjustedToMatchCase };
-    return { word };
+    return wordAdjustedToMatchCase ? { word, wordAdjustedToMatchCase } : { word };
 }
 
 async function searchForDocumentConfig(
@@ -675,10 +675,9 @@ async function searchForDocumentConfig(
 }
 
 function parseDocumentWithParser(parser: DocumentParser | Parser, document: TextDocument): ParseResult {
-    if (isDocumentParser(parser)) {
-        return parser.parseDocument({ text: document.text, url: documentUriToURL(document.uri) });
-    }
-    return parser.parse(document.text, toFilePathOrHref(documentUriToURL(document.uri)));
+    return isDocumentParser(parser)
+        ? parser.parseDocument({ text: document.text, url: documentUriToURL(document.uri) })
+        : parser.parse(document.text, toFilePathOrHref(documentUriToURL(document.uri)));
 }
 
 function isDocumentParser(parser: DocumentParser | Parser): parser is DocumentParser {

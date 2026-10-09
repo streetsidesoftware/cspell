@@ -25,8 +25,7 @@ export function splitCamelCaseIfAllowed(
               const lc = w.toLowerCase();
               const p = canCompound && isSingleLetter(px) ? compoundPrefix : '';
               const s = canCompound && isSingleLetter(sx) ? compoundPrefix : '';
-              if (lc.length < 4 || allowedWords.has(w, true)) return p + w + s;
-              return p + lc + s;
+              return lc.length < 4 || allowedWords.has(w, true) ? p + w + s : p + lc + s;
           });
 }
 
@@ -39,24 +38,19 @@ function adjustCase(word: string, allowedWords: AllowedSplitWordsCollection, kee
     if (!allowedWords.has(lc, true)) return word;
     if (lc === word) return word;
     if (word.slice(1).toLowerCase() === word.slice(1)) return lc;
-    if (!keepCase && word.toUpperCase() === word) return word.toLowerCase();
-    return word;
+    return !keepCase && word.toUpperCase() === word ? word.toLowerCase() : word;
 }
 
 function isUnknown(word: string, allowedWords: AllowedSplitWordsCollection): boolean {
-    if (word === 'ERROR') {
-        return !allowedWords.has(word, false);
-    }
-    return !allowedWords.has(word, false);
+    return word === 'ERROR' ? !allowedWords.has(word, false) : !allowedWords.has(word, false);
 }
 
 function splitCamelCase(word: string): Iterable<string> {
     const splitWords = splitCamelCaseWord(word).filter((word) => !regExpIsNumber.test(word));
     // We only want to preserve this: "New York" and not "Namespace DNSLookup"
-    if (splitWords.length > 1 && regExpSpaceOrDash.test(word)) {
-        return splitWords.flatMap((w) => w.split(regExpSpaceOrDash));
-    }
-    return splitWords;
+    return splitWords.length > 1 && regExpSpaceOrDash.test(word)
+        ? splitWords.flatMap((w) => w.split(regExpSpaceOrDash))
+        : splitWords;
 }
 
 interface WordIndex {

@@ -144,8 +144,9 @@ function applyFlags(word: string, flags: Flags): string[] {
     if (flags === (Flags.none | Flags.both | Flags.pfx)) return [word, '*' + word + '+'];
     if (flags === (Flags.both | Flags.pfx)) return ['*' + word + '+'];
     if (flags === (Flags.both | Flags.sfx)) return ['+' + word + '*'];
-    if (flags === (Flags.both | Flags.pfx | Flags.sfx)) return ['+' + word + '*', '*' + word + '+'];
-    return ['+' + word, word + '+'];
+    return flags === (Flags.both | Flags.pfx | Flags.sfx)
+        ? ['+' + word + '*', '*' + word + '+']
+        : ['+' + word, word + '+'];
 }
 
 function removeDuplicateForms(forms: Iterable<string>): Map<string, string[]> {

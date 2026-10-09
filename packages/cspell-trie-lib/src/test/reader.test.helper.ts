@@ -80,8 +80,7 @@ async function _readModuleDictionary(modulePath: string, name?: string): Promise
     }
     const dictPath = new URL(def.path || '', resolved);
 
-    if (dictPath.href.includes('.trie')) return readTrieFile(dictPath);
-    return readWordList(dictPath);
+    return dictPath.href.includes('.trie') ? readTrieFile(dictPath) : readWordList(dictPath);
 }
 
 // eslint-disable-next-line unicorn/text-encoding-identifier-case

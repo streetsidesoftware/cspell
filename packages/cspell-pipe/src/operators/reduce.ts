@@ -58,9 +58,7 @@ export function opReduceSync<T>(reduceFn: (p: T, c: T) => T, initialValue?: T): 
 function headTail<T>(iter: Iterable<T>): { head: T; tail: Iterable<T> } | undefined {
     const iterator = iter[Symbol.iterator]();
     const first = iterator.next();
-    if (first.done) return undefined;
-
-    return { head: first.value, tail: iteratorToIterable(iterator) };
+    return first.done ? undefined : { head: first.value, tail: iteratorToIterable(iterator) };
 }
 
 async function headTailAsync<T>(
@@ -68,9 +66,7 @@ async function headTailAsync<T>(
 ): Promise<{ head: T; tail: AsyncIterable<T> } | undefined> {
     const iterator = isIterable(iter) ? iter[Symbol.iterator]() : iter[Symbol.asyncIterator]();
     const first = await iterator.next();
-    if (first.done) return undefined;
-
-    return { head: first.value, tail: asyncIteratorToAsyncIterable(iterator) };
+    return first.done ? undefined : { head: first.value, tail: asyncIteratorToAsyncIterable(iterator) };
 }
 
 function isIterable<T>(i: Iterable<T> | AsyncIterable<T>): i is Iterable<T> {

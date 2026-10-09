@@ -230,8 +230,7 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
             if (setOfKnownSuccessfulWords.has(word.text)) return true;
             if (isWordFlagged(word)) return false;
             if (isWordValidWithEscapeRetry(hasDict, word, lineSegment.line)) return true;
-            if (isWordTooShort(word)) return true;
-            return isAllCapsWithTrailingCommonEnglishSuffixOk(word);
+            return isWordTooShort(word) ? true : isAllCapsWithTrailingCommonEnglishSuffixOk(word);
         }
 
         function isAllCapsWithTrailingCommonEnglishSuffixOk(tWord: TextOffsetRO): boolean {
@@ -429,8 +428,7 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
         }
 
         function isNotRandom(textOff: TextOffsetRO): boolean {
-            if (textOff.text.length < minRandomLength || !ignoreRandomStrings) return true;
-            return !isRandomString(textOff.text);
+            return textOff.text.length < minRandomLength || !ignoreRandomStrings ? true : !isRandomString(textOff.text);
         }
 
         const checkedPossibleWords: Iterable<ValidationIssue> = pipe(

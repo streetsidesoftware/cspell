@@ -81,8 +81,7 @@ function extractSummaryText(markdown: string): string {
     if (startIndex === -1) return '';
     startIndex += '<summary>'.length;
     const endIndex = markdown.indexOf('</summary>', startIndex);
-    if (endIndex === -1) return '';
-    return markdown.slice(startIndex, endIndex).trim();
+    return endIndex === -1 ? '' : markdown.slice(startIndex, endIndex).trim();
 }
 
 /**

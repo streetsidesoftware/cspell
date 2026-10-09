@@ -96,8 +96,7 @@ export function extractObjectKeyAndValueIndexesFrom(elem: ObjectElement): KeyVal
 export function extractObjectKeyAndValueIndexesFrom(elem: undefined): undefined;
 export function extractObjectKeyAndValueIndexesFrom(elem: FlattenedElement | undefined): KeyValueIndexes | undefined;
 export function extractObjectKeyAndValueIndexesFrom(elem: FlattenedElement | undefined): KeyValueIndexes | undefined {
-    if (!isObjectElement(elem)) return undefined;
-    return [elem[1], elem[2]];
+    return !isObjectElement(elem) ? undefined : [elem[1], elem[2]];
 }
 
 export function getFlatpackedRootIdx(flatpack: Flatpacked): FlatpackIndex {
@@ -145,15 +144,9 @@ export function generateUnpackMetaData(flatpack: Flatpacked): UnpackMetaData {
 }
 
 export function isStringTableElement(elem: FlattenedElement | undefined): elem is StringTableElement {
-    if (!Array.isArray(elem)) {
-        return false;
-    }
-    return elem[0] === ElementType.StringTable;
+    return !Array.isArray(elem) ? false : elem[0] === ElementType.StringTable;
 }
 
 export function isObjectElement(elem: FlattenedElement | undefined): elem is ObjectElement {
-    if (!Array.isArray(elem)) {
-        return false;
-    }
-    return elem[0] === ElementType.Object;
+    return !Array.isArray(elem) ? false : elem[0] === ElementType.Object;
 }
