@@ -63,7 +63,7 @@ interface PenaltyAdjustment {
  * @param editCost - the cost of each edit (defaults to 100)
  * @returns the edit distance.
  */
-declare function editDistance(wordA: string, wordB: string, editCost?: number): number;
+export declare function editDistance(wordA: string, wordB: string, editCost?: number): number;
 /**
  * Calculate the weighted edit distance between any two words.
  * @param wordA
@@ -72,13 +72,13 @@ declare function editDistance(wordA: string, wordB: string, editCost?: number): 
  * @param editCost - the cost of each edit (defaults to 100)
  * @returns the edit distance
  */
-declare function editDistanceWeighted(wordA: string, wordB: string, weights: WeightMap, editCost?: number): number;
+export declare function editDistanceWeighted(wordA: string, wordB: string, weights: WeightMap, editCost?: number): number;
 /**
  * Collect Map definitions into a single weighted map.
  * @param defs - list of definitions
  * @returns A Weighted Map to be used with distance calculations.
  */
-declare function createWeightedMap(defs: SuggestionCostMapDef[]): WeightMap;
+export declare function createWeightedMap(defs: SuggestionCostMapDef[]): WeightMap;
 //#endregion
 //#region src/lib/types.d.ts
 /**
@@ -194,7 +194,7 @@ type TrieOptionsRO = Readonly<TrieOptions>;
 type PartialTrieOptions = PartialTrieInfo;
 //#endregion
 //#region src/lib/TrieNode/TrieNode.d.ts
-declare const FLAG_WORD = 1;
+export declare const FLAG_WORD = 1;
 type ChildMap = Record<string, TrieNode>;
 interface TrieNode {
   f?: number | undefined;
@@ -205,8 +205,8 @@ interface TrieRoot extends TrieInfo, TrieCharacteristics {
 }
 //#endregion
 //#region src/lib/walker/walkerTypes.d.ts
-declare const JOIN_SEPARATOR = "+";
-declare const WORD_SEPARATOR = " ";
+export declare const JOIN_SEPARATOR = "+";
+export declare const WORD_SEPARATOR = " ";
 interface YieldResult {
   text: string;
   node: TrieNode;
@@ -227,13 +227,13 @@ declare const CompoundWordsMethodEnum: {
   readonly JOIN_WORDS: 2;
 };
 type CompoundWordsMethodEnum = typeof CompoundWordsMethodEnum;
-type CompoundWordsMethod = CompoundWordsMethodEnum[keyof CompoundWordsMethodEnum];
+export type CompoundWordsMethod = CompoundWordsMethodEnum[keyof CompoundWordsMethodEnum];
 interface CompoundWordsMethodByName extends CompoundWordsMethodEnum {
   "0": "NONE";
   "1": "SEPARATE_WORDS";
   "2": "JOIN_WORDS";
 }
-declare const CompoundWordsMethod: CompoundWordsMethodByName;
+export declare const CompoundWordsMethod: CompoundWordsMethodByName;
 type WalkerIterator = Generator<YieldResult, void, boolean | undefined>;
 //#endregion
 //#region src/lib/ITrieNode/walker/walkerTypes.d.ts
@@ -256,13 +256,13 @@ type WalkerIterator$1 = Generator<YieldResult$1, void, FalseToNotGoDeeper | unde
  * This can be used to limit the walker's depth.
  */
 type HintedWalkerIterator = Generator<YieldResult, void, Hinting | undefined>;
-declare function hintedWalker(root: TrieRoot, ignoreCase: boolean, hint: string, compoundingMethod: CompoundWordsMethod | undefined, emitWordSeparator?: string): HintedWalkerIterator;
+export declare function hintedWalker(root: TrieRoot, ignoreCase: boolean, hint: string, compoundingMethod: CompoundWordsMethod | undefined, emitWordSeparator?: string): HintedWalkerIterator;
 interface Hinting {
   goDeeper: boolean;
 }
 //#endregion
 //#region src/lib/walker/walker.d.ts
-declare function walker(root: TrieNode, compoundingMethod?: CompoundWordsMethod): WalkerIterator;
+export declare function walker(root: TrieNode, compoundingMethod?: CompoundWordsMethod): WalkerIterator;
 //#endregion
 //#region src/lib/suggestions/genSuggestionsOptions.d.ts
 interface GenSuggestionOptionsStrict {
@@ -422,7 +422,7 @@ interface SuggestionCollectorOptions extends Omit<GenSuggestionOptionsStrictRO, 
   weightMap?: WeightMap | undefined;
 }
 type SuggestionCollectorOptionsRO = Readonly<SuggestionCollectorOptions>;
-declare function suggestionCollector(wordToMatch: string, options: SuggestionCollectorOptionsRO): SuggestionCollector;
+export declare function suggestionCollector(wordToMatch: string, options: SuggestionCollectorOptionsRO): SuggestionCollector;
 /**
  * Impersonating a Collector, allows searching for multiple variants on the same word.
  * The collection is still in the original collector.
@@ -430,7 +430,7 @@ declare function suggestionCollector(wordToMatch: string, options: SuggestionCol
  * @param word - word to present instead of `collector.word`.
  * @returns a SuggestionCollector
  */
-declare function impersonateCollector(collector: SuggestionCollector, word: string): SuggestionCollector;
+export declare function impersonateCollector(collector: SuggestionCollector, word: string): SuggestionCollector;
 //#endregion
 //#region src/lib/TrieData.d.ts
 interface TrieDataFundamentals {
@@ -589,21 +589,21 @@ interface FindWordOptions {
 type FindWordOptionsRO = Readonly<FindWordOptions>;
 //#endregion
 //#region src/lib/buildITrie.d.ts
-declare function buildITrieFromWords(words: Iterable<string>, info?: PartialTrieInfo, buildOptions?: BuildOptions): ITrie;
+export declare function buildITrieFromWords(words: Iterable<string>, info?: PartialTrieInfo, buildOptions?: BuildOptions): ITrie;
 //#endregion
 //#region src/lib/consolidate.d.ts
 /**
  * Consolidate to DAWG
  * @param root the root of the Trie tree
  */
-declare function consolidate(root: TrieRoot): TrieRoot;
+export declare function consolidate(root: TrieRoot): TrieRoot;
 //#endregion
 //#region src/lib/constants.d.ts
-declare const COMPOUND_FIX = "+";
-declare const OPTIONAL_COMPOUND_FIX = "*";
-declare const CASE_INSENSITIVE_PREFIX = "~";
-declare const FORBID_PREFIX = "!";
-declare const defaultTrieInfo: TrieInfo;
+export declare const COMPOUND_FIX = "+";
+export declare const OPTIONAL_COMPOUND_FIX = "*";
+export declare const CASE_INSENSITIVE_PREFIX = "~";
+export declare const FORBID_PREFIX = "!";
+export declare const defaultTrieInfo: TrieInfo;
 //#endregion
 //#region ../cspell-pipe/dist/operators/types.d.ts
 type OperatorSync<T, U = T> = (i: Iterable<T>) => Iterable<U>;
@@ -625,7 +625,7 @@ interface FindFullResult extends FindResult {
 }
 //#endregion
 //#region src/lib/trie.d.ts
-declare class Trie {
+export declare class Trie {
   #private;
   private _options;
   private _findOptionsDefaults;
@@ -812,12 +812,12 @@ declare function createDictionaryLineParserMapper(options?: Partial<ParseDiction
  * @param _options - defines prefixes used when parsing lines.
  * @returns words that have been normalized.
  */
-declare function parseDictionaryLines(lines: Iterable<string> | string, options?: Partial<ParseDictionaryOptions>): Iterable<string>;
-declare function parseDictionaryLegacy(text: string | string[], options?: Partial<ParseDictionaryOptions>): Trie;
-declare function parseDictionary(text: string | Iterable<string>, options?: Partial<ParseDictionaryOptions>): ITrie;
+export declare function parseDictionaryLines(lines: Iterable<string> | string, options?: Partial<ParseDictionaryOptions>): Iterable<string>;
+export declare function parseDictionaryLegacy(text: string | string[], options?: Partial<ParseDictionaryOptions>): Trie;
+export declare function parseDictionary(text: string | Iterable<string>, options?: Partial<ParseDictionaryOptions>): ITrie;
 //#endregion
 //#region src/lib/decodeTrie.d.ts
-declare function decodeTrie(raw: string | ArrayBufferView<ArrayBuffer> | Uint8Array<ArrayBuffer>): ITrie;
+export declare function decodeTrie(raw: string | ArrayBufferView<ArrayBuffer> | Uint8Array<ArrayBuffer>): ITrie;
 interface FileResource {
   /**
    * The URL of the File
@@ -828,11 +828,11 @@ interface FileResource {
    */
   readonly content: string | Uint8Array<ArrayBuffer>;
 }
-declare function decodeFile(file: FileResource, options?: Partial<ParseDictionaryOptions>): Promise<ITrie>;
-declare function convertToBTrie(file: FileResource, options?: Partial<ParseDictionaryOptions>): Promise<FileResource>;
+export declare function decodeFile(file: FileResource, options?: Partial<ParseDictionaryOptions>): Promise<ITrie>;
+export declare function convertToBTrie(file: FileResource, options?: Partial<ParseDictionaryOptions>): Promise<FileResource>;
 //#endregion
 //#region src/lib/GTrie/GTrie.d.ts
-declare class GTrieNode<K, V> {
+export declare class GTrieNode<K, V> {
   children: Map<K, GTrieNode<K, V>> | undefined;
   value: V | undefined;
   constructor(value?: V, children?: Map<K, GTrieNode<K, V>>);
@@ -846,7 +846,7 @@ declare class GTrieNode<K, V> {
  * K - Key type
  * V - Value type
  */
-declare class GTrie<K, V> {
+export declare class GTrie<K, V> {
   root: GTrieNode<K, V>;
   constructor();
   /**
@@ -883,18 +883,18 @@ interface ExportOptions {
  * Even though it is possible to preserve the trie, dealing with very large tries can consume a lot of memory.
  * Considering this is the last step before exporting, it was decided to let this be destructive.
  */
-declare function serializeTrie(root: TrieRoot, options?: ExportOptions | number): Iterable<string>;
-declare function importTrie(input: Iterable<string> | IterableIterator<string> | string[] | string): TrieRoot;
+export declare function serializeTrie(root: TrieRoot, options?: ExportOptions | number): Iterable<string>;
+export declare function importTrie(input: Iterable<string> | IterableIterator<string> | string[] | string): TrieRoot;
 //#endregion
 //#region src/lib/models/DictionaryInformation.d.ts
 type DictionaryInformation = Exclude<DictionaryDefinitionAugmented["dictionaryInformation"], undefined>;
 //#endregion
 //#region src/lib/mappers/mapDictionaryInfoToWeightMap.d.ts
-declare function mapDictionaryInformationToWeightMap(dictInfo: DictionaryInformation): WeightMap;
+export declare function mapDictionaryInformationToWeightMap(dictInfo: DictionaryInformation): WeightMap;
 //#endregion
 //#region src/lib/TrieBlob/trieDataEncoder.d.ts
-declare function encodeITrieToBTrie(trie: ITrie, buildOptions?: BuildOptions): Uint8Array<ArrayBuffer>;
-declare function encodeTrieDataToBTrie(data: TrieData, buildOptions?: BuildOptions): Uint8Array<ArrayBuffer>;
+export declare function encodeITrieToBTrie(trie: ITrie, buildOptions?: BuildOptions): Uint8Array<ArrayBuffer>;
+export declare function encodeTrieDataToBTrie(data: TrieData, buildOptions?: BuildOptions): Uint8Array<ArrayBuffer>;
 //#endregion
 //#region src/lib/TrieBuilder.d.ts
 /**
@@ -903,14 +903,14 @@ declare function encodeTrieDataToBTrie(data: TrieData, buildOptions?: BuildOptio
  * @param words Iterable set of words -- no processing is done on the words, they are inserted as is.
  * @param trieOptions options for the Trie
  */
-declare function buildTrie(words: Iterable<string>, trieOptions?: PartialTrieOptions): Trie;
+export declare function buildTrie(words: Iterable<string>, trieOptions?: PartialTrieOptions): Trie;
 /**
  * Builds a Trie from a Iterable<string>. NO attempt a reducing the size of the Trie is done.
  * @param words Iterable set of words -- no processing is done on the words, they are inserted as is.
  * @param trieOptions options for the Trie
  */
-declare function buildTrieFast(words: Iterable<string>, trieOptions?: PartialTrieOptions): Trie;
-declare class TrieBuilder {
+export declare function buildTrieFast(words: Iterable<string>, trieOptions?: PartialTrieOptions): Trie;
+export declare class TrieBuilder {
   #private;
   private count;
   private readonly signatures;
@@ -936,32 +936,32 @@ declare class TrieBuilder {
 }
 //#endregion
 //#region src/lib/TrieNode/trie-util.d.ts
-declare function insert(word: string, root?: TrieNode): TrieNode;
-declare function isWordTerminationNode(node: TrieNode): boolean;
+export declare function insert(word: string, root?: TrieNode): TrieNode;
+export declare function isWordTerminationNode(node: TrieNode): boolean;
 /**
  * Sorts the nodes in a trie in place.
  */
-declare function orderTrie(node: TrieNode): void;
+export declare function orderTrie(node: TrieNode): void;
 /**
  * Generator an iterator that will walk the Trie parent then children in a depth first fashion that preserves sorted order.
  */
-declare function walk(node: TrieNode): Iterable<YieldResult>;
-declare const iterateTrie: typeof walk;
+export declare function walk(node: TrieNode): Iterable<YieldResult>;
+export declare const iterateTrie: typeof walk;
 /**
  * Generate a Iterator that can walk a Trie and yield the words.
  */
-declare function iteratorTrieWords(node: TrieNode): Iterable<string>;
-declare function createTrieRoot(options?: PartialTrieInfoRO): TrieRoot;
-declare function createTrieRootFromList(words: Iterable<string>, options?: PartialTrieInfo): TrieRoot;
-declare function has(node: TrieNode, word: string): boolean;
-declare function findNode(node: TrieNode, word: string): TrieNode | undefined;
-declare function countNodes(root: TrieNode): number;
-declare function countWords(root: TrieNode): number;
-declare function isCircular(root: TrieNode): boolean;
-declare function trieNodeToRoot(node: TrieNode, options: PartialTrieInfo): TrieRoot;
+export declare function iteratorTrieWords(node: TrieNode): Iterable<string>;
+export declare function createTrieRoot(options?: PartialTrieInfoRO): TrieRoot;
+export declare function createTrieRootFromList(words: Iterable<string>, options?: PartialTrieInfo): TrieRoot;
+export declare function has(node: TrieNode, word: string): boolean;
+export declare function findNode(node: TrieNode, word: string): TrieNode | undefined;
+export declare function countNodes(root: TrieNode): number;
+export declare function countWords(root: TrieNode): number;
+export declare function isCircular(root: TrieNode): boolean;
+export declare function trieNodeToRoot(node: TrieNode, options: PartialTrieInfo): TrieRoot;
 //#endregion
 //#region src/lib/utils/isDefined.d.ts
-declare function isDefined<T>(t: T | undefined): t is T;
+export declare function isDefined<T>(t: T | undefined): t is T;
 //#endregion
 //#region src/lib/utils/mergeDefaults.d.ts
 /**
@@ -971,12 +971,12 @@ declare function isDefined<T>(t: T | undefined): t is T;
  * @param value
  * @param defaultValue
  */
-declare function mergeDefaults<T extends object>(value: Readonly<PartialWithUndefined<T>> | undefined, defaultValue: T): T;
+export declare function mergeDefaults<T extends object>(value: Readonly<PartialWithUndefined<T>> | undefined, defaultValue: T): T;
 //#endregion
 //#region src/lib/utils/mergeOptionalWithDefaults.d.ts
 type ROPartialTrieOptions = Readonly<PartialTrieInfo>;
-declare function mergeOptionalWithDefaults(options: ROPartialTrieOptions): TrieInfo;
-declare function mergeOptionalWithDefaults(options: ROPartialTrieOptions, ...moreOptions: ROPartialTrieOptions[]): TrieInfo;
+export declare function mergeOptionalWithDefaults(options: ROPartialTrieOptions): TrieInfo;
+export declare function mergeOptionalWithDefaults(options: ROPartialTrieOptions, ...moreOptions: ROPartialTrieOptions[]): TrieInfo;
 //#endregion
 //#region src/lib/utils/normalizeWord.d.ts
 /**
@@ -984,20 +984,20 @@ declare function mergeOptionalWithDefaults(options: ROPartialTrieOptions, ...mor
  * @param text - text to normalize
  * @returns returns a word normalized to `NFC`
  */
-declare const normalizeWord: (text: string) => string;
+export declare const normalizeWord: (text: string) => string;
 /**
  * converts text to lower case and removes any accents.
  * @param text - text to convert
  * @returns lowercase word without accents
  * @deprecated true
  */
-declare const normalizeWordToLowercase: (text: string) => string;
+export declare const normalizeWordToLowercase: (text: string) => string;
 /**
  * generate case insensitive forms of a word
  * @param text - text to convert
  * @returns the forms of the word.
  */
-declare const normalizeWordForCaseInsensitive: (text: string) => string[];
+export declare const normalizeWordForCaseInsensitive: (text: string) => string[];
 //#endregion
 //#region src/lib/utils/text.d.ts
 /**
@@ -1012,7 +1012,7 @@ declare const normalizeWordForCaseInsensitive: (text: string) => string[];
  * @param line - set of characters
  * @param rangeChar - the character to indicate ranges, set to empty to not have ranges.
  */
-declare function expandCharacterSet(line: string, rangeChar?: string): Set<string>;
+export declare function expandCharacterSet(line: string, rangeChar?: string): Set<string>;
 //#endregion
-export { CASE_INSENSITIVE_PREFIX, COMPOUND_FIX, type ChildMap, CompoundWordsMethod, type ExportOptions, FLAG_WORD, FORBID_PREFIX, type FindFullResult, type FindWordOptions, GTrie, GTrieNode, type HintedWalkerIterator, type Hinting, type ITrie, JOIN_SEPARATOR, type MaxCost, OPTIONAL_COMPOUND_FIX, type PartialTrieOptions, type SuggestionCollector, type SuggestionCostMapDef, type SuggestionResult, Trie, TrieBuilder, type TrieNode, type TrieOptions, type TrieOptionsRO, type TrieRoot, WORD_SEPARATOR, type WalkerIterator, type WeightMap, type YieldResult, buildITrieFromWords, buildTrie, buildTrieFast, consolidate, convertToBTrie, countNodes, countWords, createDictionaryLineParserMapper as createDictionaryLineParser, createTrieRoot, createTrieRootFromList, createWeightedMap, decodeFile, decodeTrie, defaultTrieInfo, defaultTrieInfo as defaultTrieOptions, editDistance, editDistanceWeighted, encodeITrieToBTrie, encodeTrieDataToBTrie, expandCharacterSet, findNode, has, hintedWalker, impersonateCollector, importTrie, insert, isCircular, isDefined, isWordTerminationNode, iterateTrie, iteratorTrieWords, mapDictionaryInformationToWeightMap, mergeDefaults, mergeOptionalWithDefaults, normalizeWord, normalizeWordForCaseInsensitive, normalizeWordToLowercase, orderTrie, parseDictionary, parseDictionaryLegacy, parseDictionaryLines, serializeTrie, suggestionCollector, trieNodeToRoot, walk, walker };
+export { type ChildMap, type ExportOptions, type FindFullResult, type FindWordOptions, type HintedWalkerIterator, type Hinting, type ITrie, type MaxCost, type PartialTrieOptions, type SuggestionCollector, type SuggestionCostMapDef, type SuggestionResult, type TrieNode, type TrieOptions, type TrieOptionsRO, type TrieRoot, type WalkerIterator, type WeightMap, type YieldResult, createDictionaryLineParserMapper as createDictionaryLineParser, defaultTrieInfo as defaultTrieOptions };
 //# sourceMappingURL=index.d.ts.map
