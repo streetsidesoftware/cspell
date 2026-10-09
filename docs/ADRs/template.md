@@ -37,6 +37,10 @@ when the first release containing the feature is published.
 
 - <What this feature deliberately doesn't do.>
 
+## Design
+
+<The shape of the solution, in a few lines or bullets. Provisional: change it when a decision shows a better shape.>
+
 ## Decisions
 
 | #   | Title | Status |
@@ -48,14 +52,14 @@ when the first release containing the feature is published.
 
 ## Open questions
 
-- <Question deferred during the design, and what it's waiting on.>
+- <A side question set aside during the design, in one line.>
 
 ## Provisional names
 
 - `<Name>`: <what it names>. Decide by <when, for example before the option ships>. Tracked in <issue>.
 ```
 
-Add one row per ADR as it's written: `| 0001 | <title> | Accepted |`. Link the RFC under "Why" if there is one. Fill in
+Add one row per ADR as it's written: `| 0001 | <title> | Proposed |`. Link the RFC under "Why" if there is one. Fill in
 What we learned when the design is finalized. Remove the What we learned, Open questions, and Provisional names
 sections when they're empty.
 

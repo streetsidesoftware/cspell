@@ -8,27 +8,17 @@ The templates for every file described here are in [`template.md`](./template.md
 
 ## Purpose
 
-ADRs are a tool for designing a feature well. The goal is a well-designed feature, not the ADRs.
+ADRs are a tool for designing a feature well. The goal is a well-designed feature, not the ADRs. We ship working code,
+not ADRs, so aim for a good design, not a perfect one.
 
 They help us work through a design one decision at a time, and the commits keep the trail while we do. Once merged,
 they show the design and what mattered in it: the goals, the choices, and the background behind them. They aren't a
 contract: when building or using the feature shows a better answer, change the design.
 
-## ADRs and RFCs
+## When to use ADRs
 
-This repo also has [RFCs](../../rfc/). They do different jobs:
-
-- **An RFC** is a public proposal for a large capability, discussed with users and often linked from an issue. It
-  describes the problem and a proposed direction.
-- **ADRs** record the decisions made while designing and building a feature, one decision each, whether or not an RFC
-  motivated it.
-
-When a feature is designed from an RFC, its `README.md` links to the RFC.
-
-## When to write ADRs
-
-Write ADRs before building a feature whose design has more than one reasonable answer, especially when the choice is
-hard to undo once it ships:
+Use ADRs to settle a feature whose design has more than one reasonable answer, especially when the choice is hard to
+undo once it ships:
 
 - a config option's name, shape, default, or where it can be set
 - a CLI command or flag
@@ -38,32 +28,12 @@ hard to undo once it ships:
 
 Skip them for bug fixes, refactors, dependency updates, and changes whose behavior is already fully specified.
 
-## Layout
-
-Each feature has its own folder, named by a short kebab-case feature slug, for example `ignore-regex-per-language`.
-
-- `docs/ADRs/<feature>/README.md`: the feature's index. It states why the feature exists, who it affects, its goal,
-  what's out of scope, and lists its decisions.
-- `docs/ADRs/<feature>/NNNN-<decision>.md`: one file per decision. Numbers have four digits and start at `0001` within
-  each feature.
-
-Closely related decisions can share one ADR (an option's name, type, and default). Decisions that can change separately
-get separate ADRs (an option's default, and how it merges across config files).
-
-## Status
-
-An ADR's status:
-
-- `Proposed`: under discussion.
-- `Accepted`: decided.
-
-A feature's status, in the [Features](#features) table:
-
-- `Designing`: the interview is still going.
-- `Accepted`: the design is decided, whether or not it's built yet.
-- `Archived`: shipped, and its ADRs replaced by a summary.
-
 ## Designing a feature
+
+Work from the top down: the why, then the overall shape, then only the details that could change that shape. Go back
+up whenever a detail shows the shape is wrong. Start writing code as soon as the shape and its inflection points are settled.
+
+The files are described in [Layout](#layout).
 
 ### 1. Start with why
 
@@ -74,34 +44,49 @@ the goal, and what's out of scope. Every decision is weighed against these and a
 The Why, Stakeholders, Goal, and Out of scope are a draft until the design is final. Revise them when the design shows
 a better reason, and check them again before merge.
 
-### 2. Decide one thing at a time
+### 2. Sketch the design
 
-- Write an ADR for each decision as it's made, and add its row to the feature's `README.md`.
+Write the shape of the solution in the Design section of the feature's `README.md`: a few lines or bullets, agreed
+before any ADR.
+
+The sketch is provisional. It shows the problem can be solved and frames the decisions, but it shouldn't limit them.
+When a detail shows a better shape, change the sketch.
+
+### 3. Settle the inflection points
+
+Give a question time only when its answer could change the sketch, or is hard to undo once it ships (the list in
+[When to use ADRs](#when-to-use-adrs)). Settle anything else quickly with a sensible default. When it isn't clear which
+kind a question is, ask.
+
+- Write an ADR for each inflection point as it's decided, and add its row to the feature's `README.md`.
 - Commit each ADR as it's written. The commits let us go back to an earlier point and see how an idea evolved. They
   stay in the PR, so the ADRs don't need to carry that history.
-- Record questions that were deferred under "Open questions" in the feature's `README.md`.
-- Restructure whenever the ADRs stop reading as one line from the Why: merge, split, or renumber them. Nothing outside
-  the feature links to a single ADR, so only the links between its own ADRs need fixing.
+- Keep side questions short. Note one in a line under "Open questions" in the feature's `README.md` and set it aside.
+  The prototype or the code usually settles it.
+- Restructure whenever the ADRs stop reading as one line from the Why: merge, split, or renumber them. Links from
+  outside the feature go to its `README.md`, so only the links between its own ADRs need fixing.
 
-### 3. Keep the glossaries current
+### 4. Prototype
+
+Start writing code once the sketch and its inflection points are settled, on the same branch. Let the code settle the
+rest. When it shows something the design missed, update the sketch and the ADRs.
+
+### 5. Keep the glossaries current
 
 - A term introduced by this feature goes in the [ADR glossary](./glossary.md).
 - A concept maintainers need to know across the repo goes in the main [glossary](../glossary.md).
 - A term that becomes repo-wide moves from the ADR glossary to the main one.
 
-### 4. Finalize before merge
+### 6. Finalize before merge
 
-When the design is final, rewrite the feature's ADRs to state the design as it stands. The timeline stays in the PR's
-commits. What the design work showed to be important stays in the ADRs.
+Rewrite the feature's ADRs to state the design as it stands. The timeline stays in the PR's commits. What we learned
+stays: in the Context of the ADR it shaped, or in the "What we learned" section of the feature's `README.md`.
 
-- Check that the Why and the Goal in the feature's `README.md` still say why the feature is being done, and that each
-  ADR serves a stated goal.
-- Arrange the ADRs so they read as one line from the Why, with one ADR per decision that can change separately. Delete
-  any that no longer apply, merge ADRs that only refine each other, and split ADRs that hold unrelated decisions.
-- Write each ADR as the current decision, without the timeline. Keep in its Context the background and what we learned
-  along the way, including approaches tried before. List rejected approaches briefly.
-- Put what we learned about the feature as a whole in the "What we learned" section of its `README.md`.
-- Renumber from `0001`, mark everything `Accepted`, and update the index.
+- Check that the Why and the Goal still say why the feature is being done, and that each ADR serves a stated goal.
+- Arrange the ADRs as one line from the Why, one ADR per decision that can change separately. Renumber from `0001`,
+  and mark the ADRs and the feature `Accepted`.
+- Settle or drop each open question in a line. One becomes an issue only when it's a real problem someone would act
+  on, not a nice-to-have.
 - Have someone new to the design read only the feature's `README.md` and its ADRs. They should be able to say what gets
   built, why, and how the decisions fit together. Fix whatever they couldn't.
 
@@ -112,8 +97,8 @@ same PR:
 
 - Rewrite the ADR in place to state the current decision. Move the old choice to Rejected approaches, and add what we
   learned to its Context. The earlier version stays in git history.
-- Delete an ADR that no longer applies, and renumber the rest if needed. Links go only to the feature's `README.md`, so
-  only the links between its own ADRs need fixing.
+- Delete an ADR that no longer applies, and renumber the rest if needed. Links from outside the feature go to its
+  `README.md`, so only the links between its own ADRs need fixing.
 - Update the feature's index, and its "What we learned" section when the change taught something about the whole
   feature.
 
@@ -129,6 +114,31 @@ by a short summary. Archive a feature when it's due, or earlier when a maintaine
 - Rewrite the feature's `README.md` as the archive summary, with a permalink to the full ADRs in git history.
 - Delete the individual ADR files, and mark the feature archived in the table below.
 
+## Layout
+
+Each feature has its own folder, named by a short kebab-case feature slug, for example `ignore-regex-per-language`.
+
+- `docs/ADRs/<feature>/README.md`: the feature's index. It states why the feature exists, who it affects, its goal,
+  what's out of scope, and the design sketch, and lists its decisions.
+- `docs/ADRs/<feature>/NNNN-<decision>.md`: one file per decision. Numbers have four digits and start at `0001` within
+  each feature.
+
+Closely related decisions can share one ADR (an option's name, type, and default). Decisions that can change separately
+get separate ADRs (an option's default, and how it merges across config files).
+
+## Status
+
+An ADR's status:
+
+- `Proposed`: decided during the design, not yet final.
+- `Accepted`: final. Set at finalize.
+
+A feature's status, in the [Features](#features) table:
+
+- `Designing`: the design is still being worked out.
+- `Accepted`: the design is decided, whether or not it's built yet.
+- `Archived`: shipped, and its ADRs replaced by a summary.
+
 ## Links
 
 Link to a feature's `README.md`, never to a single ADR file. This applies to code comments, docs, glossary entries,
@@ -140,14 +150,26 @@ summary, so the links keep working. Only ADRs of the same feature link to each o
 Work on a design in an `adr/<feature>` branch, and on archiving in an `adr-archive/<feature>` branch.
 
 A small feature can ship its design and implementation together, with the ADRs in the feature's `feat:` or `fix:` PR.
-When a design is worth reviewing before any code is written, merge it on its own with a `docs:` PR, so it stays out of
-the release notes.
+When a design is worth merging before the code is ready, merge the ADRs on their own with a `docs:` PR, so they stay
+out of the release notes.
+
+## ADRs and RFCs
+
+This repo also has [RFCs](../../rfc/). They do different jobs:
+
+- **An RFC** is a public proposal for a large capability, discussed with users and often linked from an issue. It
+  describes the problem and a proposed direction.
+- **ADRs** record the decisions made while designing and building a feature, one decision each, whether or not an RFC
+  motivated it.
+
+When a feature is designed from an RFC, its `README.md` links to the RFC.
 
 ## With Claude Code
 
-The `feature-adr` skill runs this process as an interview: it asks one decision at a time, writes and commits the
-ADRs, keeps the glossaries current, and offers to archive features that are due. It opens a draft PR once the first
-ADR is committed, and runs the fresh-reader check with a subagent when the design is finalized.
+The `feature-adr` skill runs this process as a short interview: the why, the sketch, then one inflection point at a
+time. It writes and commits the ADRs, opens a draft PR once the first ADR is committed, moves on to a prototype, and
+runs the fresh-reader check with a subagent when the design is finalized. It also offers to archive features that are
+due.
 
 ## Features
 
