@@ -27,7 +27,10 @@ export function formatExecOutput(output: ExecOutput): string {
 }
 
 function split(text: string | undefined): string[] {
-    return !text ? [] : text.split('\n');
+    if (!text) {
+        return [];
+    }
+    return text.split('\n');
 }
 
 function splitAndPrefix(prefix: string, text: string): string[] {

@@ -63,12 +63,14 @@ export class StringTable {
     }
 
     getStringBytes(idx: number): U8Array | undefined {
-        return idx < 0 || idx >= this.#index.length ? undefined : this.#getBytesByIndexValue(this.#index[idx]);
+        if (idx < 0 || idx >= this.#index.length) return undefined;
+        return this.#getBytesByIndexValue(this.#index[idx]);
     }
 
     getString(idx: number): string | undefined {
         const bytes = this.getStringBytes(idx);
-        return !bytes ? undefined : this.#decoder.decode(bytes);
+        if (!bytes) return undefined;
+        return this.#decoder.decode(bytes);
     }
 
     #getBytesByIndexValue(value: number): U8Array {
@@ -284,9 +286,15 @@ export function decodeStringTableFromBinary(data: U8Array, endian: 'LE' | 'BE'):
 }
 
 function toU16Array(data: IndexArrayRO): U16Array {
-    return data instanceof Uint16Array ? data : new Uint16Array(data);
+    if (data instanceof Uint16Array) {
+        return data;
+    }
+    return new Uint16Array(data);
 }
 
 function toU32Array(data: IndexArrayRO): U32Array {
-    return data instanceof Uint32Array ? data : new Uint32Array(data);
+    if (data instanceof Uint32Array) {
+        return data;
+    }
+    return new Uint32Array(data);
 }

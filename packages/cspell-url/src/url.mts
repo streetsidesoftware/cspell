@@ -137,7 +137,8 @@ export function addTrailingSlash(url: URL): URL {
  */
 export function urlRemoveFilename(url: URL): URL {
     // Test if it is already a directory or it is not possible to remove the filename.
-    return url.pathname.endsWith('/') || !url.pathname.startsWith('/') ? url : new URL('./', url);
+    if (url.pathname.endsWith('/') || !url.pathname.startsWith('/')) return url;
+    return new URL('./', url);
 }
 
 /**
@@ -228,5 +229,8 @@ export function normalizeWindowsUrl(url: URL | string): URL {
  * @returns fixed URL if needed.
  */
 export function fixUncUrl(url: URL): URL {
-    return url.href.startsWith('file:////') ? new URL(url.href.replace(/^file:\/{4}/, 'file://')) : url;
+    if (url.href.startsWith('file:////')) {
+        return new URL(url.href.replace(/^file:\/{4}/, 'file://'));
+    }
+    return url;
 }

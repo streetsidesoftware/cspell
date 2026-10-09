@@ -101,9 +101,11 @@ function _mapDictDefToInternal(
         return def;
     }
     const source = pathToSettingsFile.href;
-    return isDictionaryDefinitionInlineInternal(def)
-        ? { ...def, __source: source }
-        : new _DictionaryDefinitionInternalWithSource(def, pathToSettingsFile);
+    if (isDictionaryDefinitionInlineInternal(def)) {
+        return { ...def, __source: source };
+    }
+
+    return new _DictionaryDefinitionInternalWithSource(def, pathToSettingsFile);
 }
 
 function determineName(filename: string, options: DictionaryDefinition): string {
@@ -116,7 +118,8 @@ export function calcDictionaryDefsToLoad(settings: CSpellSettingsInternal): Dict
     const colDicts = createDictionaryReferenceCollection([...dictionaries, ...colNoSug.enabled()]);
     const modDefs = dictionaryDefinitions.map((def) => {
         const enabled = colNoSug.isEnabled(def.name);
-        return enabled === undefined ? def : { ...def, noSuggest: enabled };
+        if (enabled === undefined) return def;
+        return { ...def, noSuggest: enabled };
     });
     return filterDictDefsToLoad(colDicts, modDefs);
 }

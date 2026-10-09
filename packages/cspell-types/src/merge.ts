@@ -140,7 +140,8 @@ export function mergeRecords<T extends object>(records: (T | undefined)[]): T | 
 export function mergeRecords<T extends object>(records: (T | undefined)[]): T | undefined {
     const values = records.filter((r): r is T => !!r);
     if (!values.length) return undefined;
-    return values.length === 1 ? values[0] : Object.assign(Object.create(null), ...values);
+    if (values.length === 1) return values[0];
+    return Object.assign(Object.create(null), ...values);
 }
 
 export function extractKeyValues<T, K extends keyof T>(key: K, records: (T | undefined)[]): Exclude<T[K], undefined>[] {
@@ -154,5 +155,6 @@ function recKV<K extends keyof CSpellSettings>(
     key: K,
     value: CSpellSettings[K] | undefined,
 ): Pick<CSpellSettings, K> | undefined {
-    return value === undefined ? undefined : ({ [key]: value } as Pick<CSpellSettings, K>);
+    if (value === undefined) return undefined;
+    return { [key]: value } as Pick<CSpellSettings, K>;
 }

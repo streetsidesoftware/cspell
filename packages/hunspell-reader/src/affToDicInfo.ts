@@ -79,12 +79,12 @@ function calcAffMapReplacements(aff: AffInfo): SuggestionCostMapDef[] {
 }
 
 function calcAffRepReplacements(aff: AffInfo): SuggestionCostMapDef[] {
-    return !aff.REP
-        ? []
-        : createCostMaps(
-              aff.REP.map((rep) => [rep.match, rep.replaceWith]),
-              { map: '', replace: 75, description: 'Hunspell Replace Map' },
-          );
+    if (!aff.REP) return [];
+
+    return createCostMaps(
+        aff.REP.map((rep) => [rep.match, rep.replaceWith]),
+        { map: '', replace: 75, description: 'Hunspell Replace Map' },
+    );
 }
 
 function calcCapsAndAccentReplacements(alphaInfo: AlphabetInfo): SuggestionCostMapDef[] {

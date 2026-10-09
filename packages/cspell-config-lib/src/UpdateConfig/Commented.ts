@@ -218,7 +218,8 @@ class RecordNode<T extends object> extends CollectionNode implements CommentedRe
 
     get<K extends keyof T>(key: K): ChildNode<T[K]> | undefined {
         const found = this.items.find(([k]) => k === key);
-        return !found ? undefined : (found[1] as unknown as ChildNode<T[K]>);
+        if (!found) return undefined;
+        return found[1] as unknown as ChildNode<T[K]>;
     }
 
     set<K extends keyof T>(key: K, value: T[K] | CommentedNode<T[K]>): void {

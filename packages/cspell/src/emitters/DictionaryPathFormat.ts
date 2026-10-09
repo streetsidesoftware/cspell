@@ -8,5 +8,6 @@ const formats: Record<DictionaryPathFormat, true> = {
 };
 
 export function isDictionaryPathFormat(value: string | undefined): value is DictionaryPathFormat {
-    return !value || typeof value !== 'string' ? false : value in formats;
+    if (!value || typeof value !== 'string') return false;
+    return value in formats;
 }

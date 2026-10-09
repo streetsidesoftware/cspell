@@ -109,5 +109,8 @@ export interface CSpellIO {
 
 export function toReadFileOptions(options?: ReadFileOptionsOrEncoding): ReadFileOptions | undefined {
     if (!options) return options;
-    return typeof options === 'string' ? { encoding: options } : options;
+    if (typeof options === 'string') {
+        return { encoding: options };
+    }
+    return options;
 }

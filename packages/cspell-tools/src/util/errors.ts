@@ -3,7 +3,8 @@ export interface NodeError extends Error {
 }
 
 export function toError(err: unknown): NodeError {
-    return isError(err) ? err : new Error(`${err}`);
+    if (isError(err)) return err;
+    return new Error(`${err}`);
 }
 
 export function isError(err: unknown): err is Error {

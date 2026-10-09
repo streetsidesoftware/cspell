@@ -58,7 +58,8 @@ export class MessagePortNotifyEvents<T extends MessagePortLike = MessagePortLike
      * @returns A Promise that resolves when the port is closed.
      */
     readonly awaitClose = (signal?: AbortSignal): Promise<Event> => {
-        return this.#closed ? Promise.resolve(this.#closed) : this.#notifyClose.awaitNext(signal);
+        if (this.#closed) return Promise.resolve(this.#closed);
+        return this.#notifyClose.awaitNext(signal);
     };
 
     /**

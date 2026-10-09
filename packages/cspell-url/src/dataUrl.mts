@@ -17,9 +17,10 @@ export function urlBasename(url: string | URL): string {
 
     url = toURL(url);
 
-    return url.protocol === 'data:'
-        ? guessDataUrlName(url.pathname.split(',', 1)[0])
-        : basenameOfUrlPathname(url.pathname);
+    if (url.protocol === 'data:') {
+        return guessDataUrlName(url.pathname.split(',', 1)[0]);
+    }
+    return basenameOfUrlPathname(url.pathname);
 }
 
 export function isDataURL(url: string | URL): boolean {

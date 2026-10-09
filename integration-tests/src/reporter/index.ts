@@ -194,7 +194,8 @@ async function createCsvFile(csvUrl: URL): Promise<void> {
 }
 
 function extractFieldFromCsv(csvRecord: CsvRecord, field: keyof CsvRecord): number | string | undefined {
-    return field === 'elapsedMs' ? csvRecord[field].toFixed(2) : csvRecord[field];
+    if (field === 'elapsedMs') return csvRecord[field].toFixed(2);
+    return csvRecord[field];
 }
 
 async function writePerfCsvRecord(csvRecord: CsvRecord, root: vscodeUri.URI): Promise<void> {
@@ -227,7 +228,10 @@ async function getFileSizes(files: string[]): Promise<number> {
 }
 
 function toReporterSettings(settings: unknown): ReporterSettings {
-    return !isReporterSettings(settings) ? {} : settings;
+    if (!isReporterSettings(settings)) {
+        return {};
+    }
+    return settings;
 }
 
 function isReporterSettings(settings: unknown): settings is ReporterSettings {

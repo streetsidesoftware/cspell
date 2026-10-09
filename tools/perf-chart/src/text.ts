@@ -129,7 +129,10 @@ export function unindent(str: string): string;
  */
 export function unindent(template: TemplateStringsArray, ...values: unknown[]): string;
 export function unindent(template: TemplateStringsArray | string, ...values: unknown[]): string {
-    return typeof template === 'string' ? _unindent(template) : _inject(template, ...values);
+    if (typeof template === 'string') {
+        return _unindent(template);
+    }
+    return _inject(template, ...values);
 }
 
 /**

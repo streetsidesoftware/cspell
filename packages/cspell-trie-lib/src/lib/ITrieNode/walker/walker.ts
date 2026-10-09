@@ -23,7 +23,10 @@ function* compoundWalker(root: ITrieNode, compoundingMethod: CompoundWordsMethod
             const c = Array.isArray(entries) ? entries : [...entries];
             return n.eow && rc ? [...c, ...rc] : c;
         }
-        return n.eow ? roots[compoundingMethod] : empty;
+        if (n.eow) {
+            return roots[compoundingMethod];
+        }
+        return empty;
     }
 
     let depth = 0;

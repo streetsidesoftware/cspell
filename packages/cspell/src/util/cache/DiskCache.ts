@@ -184,9 +184,10 @@ export class DiskCache implements CSpellLintResultCache {
 
     private normalizeResult(result: CachedFileResult): CachedFileResult {
         const { issues, processed, errors, configErrors, reportIssueOptions, ...rest } = result;
-        return !Object.keys(rest).length
-            ? this.ocCacheFileResult.get(result)
-            : this.ocCacheFileResult.get({ issues, processed, errors, configErrors, reportIssueOptions });
+        if (!Object.keys(rest).length) {
+            return this.ocCacheFileResult.get(result);
+        }
+        return this.ocCacheFileResult.get({ issues, processed, errors, configErrors, reportIssueOptions });
     }
 
     private async calcDependencyHashes(dependsUponFiles: string[]): Promise<Dependency[]> {
@@ -260,7 +261,10 @@ export class DiskCache implements CSpellLintResultCache {
     }
 
     private resolveFile(file: string): string {
-        return isUrlLike(file) ? file : normalizePath(resolvePath(this.cacheDir, file));
+        if (isUrlLike(file)) {
+            return file;
+        }
+        return normalizePath(resolvePath(this.cacheDir, file));
     }
 
     private toRelFile(file: string): string {
@@ -344,7 +348,8 @@ function calcVersion(version: string): string {
 }
 
 export function normalizePath(filePath: string): string {
-    return pathSep === '/' ? filePath : filePath.split(pathSep).join('/');
+    if (pathSep === '/') return filePath;
+    return filePath.split(pathSep).join('/');
 }
 
 export const __testing__: {

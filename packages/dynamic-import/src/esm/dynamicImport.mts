@@ -85,7 +85,8 @@ interface NodeError extends Error {
 }
 
 function toError(e: unknown): NodeError {
-    return isError(e) ? e : new Error(e?.toString());
+    if (isError(e)) return e;
+    return new Error(e?.toString());
 }
 
 function isError(e: unknown): e is NodeError {

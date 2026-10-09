@@ -39,7 +39,8 @@ export async function getStatHttp(url: URL): Promise<Stats> {
 }
 
 function toError(e: unknown): Error {
-    return isErrnoException(e) || e instanceof Error ? e : new Error(format(e));
+    if (isErrnoException(e) || e instanceof Error) return e;
+    return new Error(format(e));
 }
 
 function isErrnoException(e: unknown | NodeJS.ErrnoException): e is NodeJS.ErrnoException {

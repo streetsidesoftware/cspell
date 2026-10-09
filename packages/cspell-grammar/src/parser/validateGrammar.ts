@@ -75,5 +75,6 @@ function validatePatternName(p: Pattern, context: GrammarContext): asserts p {
 
 function isValidPatternName(name: Pattern['name']): boolean {
     if (name === undefined) return true;
-    return typeof name !== 'string' ? false : /^[-\w.]+$/.test(name);
+    if (typeof name !== 'string') return false;
+    return /^[-\w.]+$/.test(name);
 }

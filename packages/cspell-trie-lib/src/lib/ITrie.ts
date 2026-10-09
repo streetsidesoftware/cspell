@@ -248,9 +248,8 @@ export class ITrieImpl implements ITrie {
      * @returns true if the word is found and not forbidden.
      */
     has(word: string, minLegacyCompoundLength?: boolean | number): boolean {
-        return minLegacyCompoundLength !== undefined
-            ? this.#hasLegacy(word, minLegacyCompoundLength)
-            : this.hasWord(word, true);
+        if (minLegacyCompoundLength !== undefined) return this.#hasLegacy(word, minLegacyCompoundLength);
+        return this.hasWord(word, true);
     }
 
     #hasLegacy(word: string, minLegacyCompoundLength: boolean | number): boolean {

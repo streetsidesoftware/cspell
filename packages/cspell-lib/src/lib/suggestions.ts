@@ -261,7 +261,8 @@ function adjustLocale(locale: string | string[] | undefined): string | string[] 
     if (!locale) return undefined;
     const locales = [...normalizeLocaleIntl(locale)].filter((locale) => isValidLocaleIntlFormat(locale));
     if (!locales.length) return undefined;
-    return locales.length === 1 ? locales[0] : locales;
+    if (locales.length === 1) return locales[0];
+    return locales;
 }
 
 export function calcSuggestionAdjustedToToMatchCase<T extends SuggestionResult>(
@@ -324,7 +325,8 @@ function matchCase(word: string, isPreferred: boolean, style: CaseStyle): string
     if (hasCaps(word)) {
         if (style.isAllCaps) return word.toLocaleUpperCase(locale);
         if (!style.ignoreCase || style.hasCaps || isPreferred) return word;
-        return isTitleCase(word) || isAllCaps(word) ? word.toLocaleLowerCase(locale) : word;
+        if (isTitleCase(word) || isAllCaps(word)) return word.toLocaleLowerCase(locale);
+        return word;
     }
     if (!style.hasCaps) return word;
     if (style.isAllCaps) return word.toLocaleUpperCase(locale);

@@ -22,9 +22,10 @@ export const defaultConfig: UserConfig = {
 export function createConfig(config: UserConfig[]): UserConfig[];
 export function createConfig(config: UserConfig): UserConfig;
 export function createConfig(config: UserConfig | UserConfig[]): UserConfig | UserConfig[] {
-    return Array.isArray(config)
-        ? defineConfig(config.map((c) => ({ ...defaultConfig, ...c })))
-        : defineConfig({ ...defaultConfig, ...config });
+    if (Array.isArray(config)) {
+        return defineConfig(config.map((c) => ({ ...defaultConfig, ...c })));
+    }
+    return defineConfig({ ...defaultConfig, ...config });
 }
 
 /**

@@ -52,7 +52,10 @@ export class SubstitutionTransformer implements TextTransformer {
     }
 
     transformString(text: string): MappedText {
-        return !this.#trie ? toMappedText(text) : applyEditsToText(text, calcEdits(text, this.#trie));
+        if (!this.#trie) {
+            return toMappedText(text);
+        }
+        return applyEditsToText(text, calcEdits(text, this.#trie));
     }
 }
 

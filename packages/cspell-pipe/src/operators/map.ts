@@ -25,7 +25,8 @@ export function opMapSync<T, U = T>(mapFn: (v: T) => U): (iterable: Iterable<T>)
             const iter = iterable[Symbol.iterator]();
             function nextOpMap() {
                 const { done, value } = iter.next();
-                return done ? { done, value: undefined } : { value: mapFn(value) };
+                if (done) return { done, value: undefined };
+                return { value: mapFn(value) };
             }
             return {
                 next: nextOpMap,

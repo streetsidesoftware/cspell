@@ -150,7 +150,8 @@ export class TrieBlob implements TrieData {
      */
     #hasWord(nodeRef: Ref | undefined, word: string): boolean {
         const nodeIdxFound = this.#findNode(nodeRef, word);
-        return !nodeIdxFound ? false : this.isRefEOW(nodeIdxFound);
+        if (!nodeIdxFound) return false;
+        return this.isRefEOW(nodeIdxFound);
     }
 
     /**
@@ -500,7 +501,8 @@ export class TrieBlob implements TrieData {
         const pfxV = node & NodeHeaderPrefixMask;
         const prefix = pfxV ? this.#stringTable.getStringBytes(pfxV >>> NodeHeaderPrefixShift) : undefined;
         if (!prefix) return undefined;
-        return pfx >= prefix.length ? undefined : prefix;
+        if (pfx >= prefix.length) return undefined;
+        return prefix;
     }
 
     #cvtToRefPfx(ref: Ref | RefPfx): RefPfx {

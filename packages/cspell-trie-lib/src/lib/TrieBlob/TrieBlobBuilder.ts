@@ -59,7 +59,11 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
 
     insert(word: string | Iterable<string> | string[]): this {
         this.#assertNotReadonly();
-        return typeof word === 'string' ? this.#insertWord(word) : this.insertWords(word);
+        if (typeof word === 'string') {
+            return this.#insertWord(word);
+        }
+
+        return this.insertWords(word);
     }
 
     getCursor(): BuilderCursor {

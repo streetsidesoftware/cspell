@@ -8,11 +8,14 @@ import type { DeserializerNext, DeserializerParams, SerializerMiddleware, Serial
 const isSupportedFormat = /\bpackage\.json$/i;
 
 function deserializer(params: DeserializerParams, next: DeserializerNext): CSpellConfigFile {
-    return !isSupportedFormat.test(params.url.pathname) ? next(params) : parseCSpellConfigFilePackageJson(params);
+    if (!isSupportedFormat.test(params.url.pathname)) return next(params);
+
+    return parseCSpellConfigFilePackageJson(params);
 }
 
 function serializer(settings: ICSpellConfigFile, next: SerializerNext): string {
-    return !(settings instanceof CSpellConfigFilePackageJson) ? next(settings) : settings.serialize();
+    if (!(settings instanceof CSpellConfigFilePackageJson)) return next(settings);
+    return settings.serialize();
 }
 
 export const serializerPackageJson: SerializerMiddleware = { deserialize: deserializer, serialize: serializer };

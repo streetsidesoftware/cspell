@@ -192,7 +192,10 @@ export class CompactStorageV1 extends CompactStorage {
 
         const { data: tData, found: subStr } = trieFound;
         const cost = this.estimateSubStringCost(tData.idx, subStr, undefined);
-        return cost > subStr.length ? undefined : { idx: tData.idx, subStr, offset: undefined, cost };
+        if (cost > subStr.length) {
+            return undefined;
+        }
+        return { idx: tData.idx, subStr, offset: undefined, cost };
     }
 
     private findSuffix(value: string): FoundSubString | undefined {
@@ -467,7 +470,10 @@ export class CompactStorageV1 extends CompactStorage {
             if (Array.isArray(value)) {
                 return this.arrToIdx(value);
             }
-            return value instanceof Date ? this.objDateToIdx(value) : this.objToIdx(value as PrimitiveObject);
+            if (value instanceof Date) {
+                return this.objDateToIdx(value);
+            }
+            return this.objToIdx(value as PrimitiveObject);
         }
 
         return this.primitiveToIdx(value);

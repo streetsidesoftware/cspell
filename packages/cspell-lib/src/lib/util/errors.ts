@@ -38,7 +38,8 @@ export function isError(e: unknown): e is Error {
 }
 
 export function toError(e: unknown, errorFactory: UnknownErrorConstructor = UnknownError): Error {
-    return isError(e) ? e : new errorFactory(e);
+    if (isError(e)) return e;
+    return new errorFactory(e);
 }
 
 interface UnknownErrorConstructor {
@@ -66,7 +67,8 @@ export function catchPromiseError<T>(
     p: Promise<T> | undefined,
     handler: ErrorHandler<T>,
 ): Promise<T | undefined> | undefined {
-    return p === undefined ? undefined : _catchPromiseError(p, handler);
+    if (p === undefined) return undefined;
+    return _catchPromiseError(p, handler);
 }
 
 export function wrapCall<U>(fn: (...p: []) => U, handler: ErrorHandler<U>): (...p: []) => U | undefined;

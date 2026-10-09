@@ -127,5 +127,6 @@ function ce(message: string, suggestions?: number): RuleTester.TestCaseError {
 }
 
 function csError(error: InvalidTestCaseError, suggestions?: number): RuleTester.TestCaseError {
-    return error && typeof error === 'object' ? (error as RuleTester.TestCaseError) : ce(error, suggestions);
+    if (error && typeof error === 'object') return error as RuleTester.TestCaseError;
+    return ce(error, suggestions);
 }

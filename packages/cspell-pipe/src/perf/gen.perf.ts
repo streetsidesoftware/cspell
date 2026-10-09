@@ -36,7 +36,8 @@ function iterValues(i: Iterable<number>, fnMap: (v: number) => number): Iterable
             const iter = i[Symbol.iterator]();
             function next() {
                 const { done, value } = iter.next();
-                return done ? { done, value: undefined } : { value: fnMap(value) };
+                if (done) return { done, value: undefined };
+                return { value: fnMap(value) };
             }
             return {
                 next,

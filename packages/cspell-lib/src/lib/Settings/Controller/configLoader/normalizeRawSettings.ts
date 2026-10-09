@@ -155,9 +155,8 @@ export function normalizeCacheSettings(
     const { cache } = settings;
     if (cache === undefined) return {};
     const { cacheLocation } = cache;
-    return cacheLocation === undefined
-        ? { cache }
-        : { cache: { ...cache, cacheLocation: toFilePathOrHref(resolveFilePath(cacheLocation, pathToSettingsFile)) } };
+    if (cacheLocation === undefined) return { cache };
+    return { cache: { ...cache, cacheLocation: toFilePathOrHref(resolveFilePath(cacheLocation, pathToSettingsFile)) } };
 }
 
 function resolveFilePath(filename: string, pathToSettingsFile: URL): URL {
@@ -174,5 +173,8 @@ export function normalizeImport(imports: string | string[] | undefined): string[
     if (typeof imports === 'string') {
         return [imports];
     }
-    return Array.isArray(imports) ? imports : [];
+    if (Array.isArray(imports)) {
+        return imports;
+    }
+    return [];
 }

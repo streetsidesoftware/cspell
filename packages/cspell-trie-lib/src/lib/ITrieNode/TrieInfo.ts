@@ -269,7 +269,8 @@ export class TrieInfoBuilder {
 }
 
 function partialInfoToInfo(info: PartialTrieInfo): Partial<TrieInfo> {
-    return !info ? {} : Object.fromEntries(keysTrieInfo.map((k) => [k, info[k]] as const).filter(([_k, v]) => !!v));
+    if (!info) return {};
+    return Object.fromEntries(keysTrieInfo.map((k) => [k, info[k]] as const).filter(([_k, v]) => !!v));
 }
 
 function revTrieInfo(info: TrieInfo): Record<string, keyof TrieInfo> {

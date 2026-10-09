@@ -62,10 +62,12 @@ export function encodeToUtf8_32(code: CodePoint): Utf8_32 {
     if (code < 0x800) {
         return 0xc080 | ((code & 0x7c0) << 2) | (code & 0x3f);
     }
-    return code < 0x1_0000
-        ? 0xe0_8080 | ((code & 0xf000) << 4) | ((code & 0x0fc0) << 2) | (code & 0x3f)
-        : 0xf080_8080 +
-              (((code & 0x1c_0000) << 6) | ((code & 0x03_f000) << 4) | ((code & 0x0fc0) << 2) | (code & 0x3f));
+    if (code < 0x1_0000) {
+        return 0xe0_8080 | ((code & 0xf000) << 4) | ((code & 0x0fc0) << 2) | (code & 0x3f);
+    }
+    return (
+        0xf080_8080 + (((code & 0x1c_0000) << 6) | ((code & 0x03_f000) << 4) | ((code & 0x0fc0) << 2) | (code & 0x3f))
+    );
 }
 
 export function decodeUtf8_32(utf8: Utf8_32): CodePoint {
@@ -78,9 +80,10 @@ export function decodeUtf8_32(utf8: Utf8_32): CodePoint {
     if ((utf8 & 0xfff0_8080) === 0xe0_8080) {
         return ((utf8 >>> 4) & 0xf000) | ((utf8 >>> 2) & 0x0fc0) | (utf8 & 0x3f);
     }
-    return ((utf8 & 0xf880_8080) ^ 0xf080_8080) === 0
-        ? ((utf8 >>> 6) & 0x1c_0000) | ((utf8 >>> 4) & 0x03_f000) | ((utf8 >>> 2) & 0x0fc0) | (utf8 & 0x3f)
-        : 0xfffd;
+    if (((utf8 & 0xf880_8080) ^ 0xf080_8080) === 0) {
+        return ((utf8 >>> 6) & 0x1c_0000) | ((utf8 >>> 4) & 0x03_f000) | ((utf8 >>> 2) & 0x0fc0) | (utf8 & 0x3f);
+    }
+    return 0xfffd;
 }
 
 /**
@@ -104,13 +107,13 @@ export function encodeToUtf8_32Rev(code: CodePoint): Utf8_32Rev {
     if (code < 0x800) {
         return 0x80c0 | ((code & 0x7c0) >> 6) | ((code & 0x3f) << 8);
     }
-    return code < 0x1_0000
-        ? 0x80_80e0 | ((code & 0xf000) >>> 12) | ((code & 0xfc0) << 2) | ((code & 0x3f) << 16)
-        : 0x8080_80f0 +
-              (((code & 0x1c_0000) >>> 18) |
-                  ((code & 0x03_f000) >>> 4) |
-                  ((code & 0xfc0) << 10) |
-                  ((code & 0x3f) << 24));
+    if (code < 0x1_0000) {
+        return 0x80_80e0 | ((code & 0xf000) >>> 12) | ((code & 0xfc0) << 2) | ((code & 0x3f) << 16);
+    }
+    return (
+        0x8080_80f0 +
+        (((code & 0x1c_0000) >>> 18) | ((code & 0x03_f000) >>> 4) | ((code & 0xfc0) << 10) | ((code & 0x3f) << 24))
+    );
 }
 
 export function decodeUtf8_32Rev(utf8: Utf8_32Rev): CodePoint {
@@ -125,9 +128,12 @@ export function decodeUtf8_32Rev(utf8: Utf8_32Rev): CodePoint {
     if ((utf8 & 0xff80_80f0) === 0x80_80e0) {
         return ((utf8 << 12) & 0xf000) | ((utf8 >>> 2) & 0xfc0) | ((utf8 >>> 16) & 0x3f);
     }
-    return ((utf8 & 0x8080_80f8) ^ 0x8080_80f0) === 0
-        ? ((utf8 << 18) & 0x1c_0000) | ((utf8 << 4) & 0x03_f000) | ((utf8 >>> 10) & 0xfc0) | ((utf8 >>> 24) & 0x3f)
-        : 0xfffd;
+    if (((utf8 & 0x8080_80f8) ^ 0x8080_80f0) === 0) {
+        return (
+            ((utf8 << 18) & 0x1c_0000) | ((utf8 << 4) & 0x03_f000) | ((utf8 >>> 10) & 0xfc0) | ((utf8 >>> 24) & 0x3f)
+        );
+    }
+    return 0xfffd;
 }
 
 /**
@@ -165,7 +171,8 @@ export class Utf8Accumulator {
         let remaining = this.remaining;
         if (byte & ~0xff) return this.reset();
         if ((byte & 0x80) === 0) {
-            return remaining ? this.reset() : byte;
+            if (remaining) return this.reset();
+            return byte;
         }
         if (remaining) {
             if ((byte & 0xc0) !== 0x80) return this.reset();
@@ -238,9 +245,10 @@ export class Utf8Accumulator {
 export function decodeUtf8ByteStream(
     bytes: Iterable<number> | ReadonlyArray<number> | Uint8Array,
 ): Iterable<CodePoint> {
-    return Array.isArray(bytes) || bytes instanceof Uint8Array
-        ? decodeUtf8ByteArray(bytes)
-        : _decodeUtf8ByteStream(bytes);
+    if (Array.isArray(bytes) || bytes instanceof Uint8Array) {
+        return decodeUtf8ByteArray(bytes);
+    }
+    return _decodeUtf8ByteStream(bytes);
 }
 
 export function decodeUtf8ByteArray(bytes: ReadonlyArray<number> | Uint8Array): CodePoint[] {
@@ -310,13 +318,13 @@ export function encodeTextToUtf8_32Rev(offset: TextCursor): Utf8_32Rev {
     if (code < 0x800) {
         return 0x80c0 | ((code & 0x7c0) >> 6) | ((code & 0x3f) << 8);
     }
-    return code < 0x1_0000
-        ? 0x80_80e0 | ((code & 0xf000) >>> 12) | ((code & 0xfc0) << 2) | ((code & 0x3f) << 16)
-        : 0x8080_80f0 +
-              (((code & 0x1c_0000) >>> 18) |
-                  ((code & 0x03_f000) >>> 4) |
-                  ((code & 0xfc0) << 10) |
-                  ((code & 0x3f) << 24));
+    if (code < 0x1_0000) {
+        return 0x80_80e0 | ((code & 0xf000) >>> 12) | ((code & 0xfc0) << 2) | ((code & 0x3f) << 16);
+    }
+    return (
+        0x8080_80f0 +
+        (((code & 0x1c_0000) >>> 18) | ((code & 0x03_f000) >>> 4) | ((code & 0xfc0) << 10) | ((code & 0x3f) << 24))
+    );
 }
 
 export function encodeTextToUtf8Into(text: string, into: Array<number> | Uint8Array, offset = 0): number {

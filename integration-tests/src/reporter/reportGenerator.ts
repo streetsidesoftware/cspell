@@ -77,9 +77,10 @@ export function generateReport(data: ReportData, options: GenerateReportOptions)
 
     const issuesByFile = sortedByFile.map(([uri, issues]) => {
         const file = relative(uri);
-        return !issues.length
-            ? [`${file}:1:1\tNo issues found`]
-            : padLines(issues.map((issue) => formatIssue(file, issue)));
+        if (!issues.length) {
+            return [`${file}:1:1\tNo issues found`];
+        }
+        return padLines(issues.map((issue) => formatIssue(file, issue)));
     });
 
     const base: SortedFileIssues = [];

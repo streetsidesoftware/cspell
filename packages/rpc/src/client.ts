@@ -325,7 +325,8 @@ class RPCClientImpl<
      */
     getPendingRequestByPromise(promise: Promise<unknown>): PendingRequest | undefined {
         const requestId = this.#pendingRequestsByPromise.get(promise);
-        return !requestId ? undefined : this.getPendingRequestById(requestId);
+        if (!requestId) return undefined;
+        return this.getPendingRequestById(requestId);
     }
 
     /**
@@ -376,7 +377,8 @@ class RPCClientImpl<
      */
     abortPromise(promise: Promise<unknown>, reason: unknown): boolean {
         const pendingRequest = this.getPendingRequestByPromise(promise);
-        return !pendingRequest ? false : this.abortRequest(pendingRequest.id, reason);
+        if (!pendingRequest) return false;
+        return this.abortRequest(pendingRequest.id, reason);
     }
 
     /**
@@ -420,7 +422,8 @@ class RPCClientImpl<
      */
     async cancelRequest(id: RequestID): Promise<boolean> {
         const pendingRequest = this.getPendingRequestById(id);
-        return !pendingRequest ? false : await pendingRequest.cancel();
+        if (!pendingRequest) return false;
+        return await pendingRequest.cancel();
     }
 
     /**
@@ -432,7 +435,8 @@ class RPCClientImpl<
      */
     async cancelPromise(promise: Promise<unknown>): Promise<boolean> {
         const request = this.getPendingRequestByPromise(promise);
-        return !request ? false : this.cancelRequest(request.id);
+        if (!request) return false;
+        return this.cancelRequest(request.id);
     }
 
     /**

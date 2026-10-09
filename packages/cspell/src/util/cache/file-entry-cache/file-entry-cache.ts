@@ -68,9 +68,11 @@ class ImplFileEntryCache implements FileEntryCache {
             return { key: file, notFound: true, err: toError(error) };
         }
 
-        return this.useChecksum
-            ? this.#getFileDescriptorUsingChecksum(file)
-            : this.#getFileDescriptorUsingMtimeAndSize(file, fstat);
+        if (this.useChecksum) {
+            return this.#getFileDescriptorUsingChecksum(file);
+        }
+
+        return this.#getFileDescriptorUsingMtimeAndSize(file, fstat);
     }
 
     #getFileDescriptorUsingMtimeAndSize(file: string, fstat: Stats): FileDescriptor {
@@ -195,13 +197,17 @@ class ImplFileEntryCache implements FileEntryCache {
     }
 
     resolveKeyToFile(entryKey: string): string {
-        return this.currentWorkingDir ? path.resolve(this.currentWorkingDir, entryKey) : entryKey;
+        if (this.currentWorkingDir) {
+            return path.resolve(this.currentWorkingDir, entryKey);
+        }
+        return entryKey;
     }
 
     #getFileKey(file: string): string {
-        return this.currentWorkingDir && path.isAbsolute(file)
-            ? normalizePath(path.relative(this.currentWorkingDir, file))
-            : normalizePath(file);
+        if (this.currentWorkingDir && path.isAbsolute(file)) {
+            return normalizePath(path.relative(this.currentWorkingDir, file));
+        }
+        return normalizePath(file);
     }
 }
 
@@ -217,7 +223,10 @@ function toError(error: unknown): Error {
     if (error instanceof Error) {
         return error;
     }
-    return typeof error === 'string' ? new Error(error) : new Error('Unknown error', { cause: error });
+    if (typeof error === 'string') {
+        return new Error(error);
+    }
+    return new Error('Unknown error', { cause: error });
 }
 
 export interface AnalyzedFilesInfo {
@@ -261,5 +270,6 @@ export interface FileEntryCache {
 }
 
 export function normalizePath(filePath: string): string {
-    return path.sep === '/' ? filePath : filePath.split(path.sep).join('/');
+    if (path.sep === '/') return filePath;
+    return filePath.split(path.sep).join('/');
 }

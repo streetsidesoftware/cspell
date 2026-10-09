@@ -37,7 +37,8 @@ export class CFileResource implements TextFileResource {
     get gz(): boolean {
         if (this.#gz !== undefined) return this.#gz;
         if (this.url.pathname.endsWith('.gz')) return true;
-        return typeof this.content === 'string' ? false : isGZipped(this.content);
+        if (typeof this.content === 'string') return false;
+        return isGZipped(this.content);
     }
 
     getText(encoding?: BufferEncoding): string {

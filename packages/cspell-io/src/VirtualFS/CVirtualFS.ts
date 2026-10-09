@@ -84,7 +84,10 @@ class CVirtualFS implements VirtualFS {
                     this.revCacheFs.set(provider, s);
                     return fs;
                 }
-                return !calledNext ? next(url) : undefined;
+                if (!calledNext) {
+                    return next(url);
+                }
+                return undefined;
             };
         };
 

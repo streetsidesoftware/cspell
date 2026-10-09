@@ -42,23 +42,23 @@ export function createMapper(repMap: ReplaceMap | undefined, ignoreCharset?: str
 }
 
 function charsetToRepMapRegEx(charset: CharacterSet | undefined, replaceWith = ''): ReplaceMap | undefined {
-    return !charset
-        ? undefined
-        : charset
-              .split('|')
-              .map((chars) => `[${chars.replaceAll(/[\][\\]/g, '\\$&')}]`)
-              .map((map) => [map, replaceWith]);
+    if (!charset) return undefined;
+
+    return charset
+        .split('|')
+        .map((chars) => `[${chars.replaceAll(/[\][\\]/g, '\\$&')}]`)
+        .map((map) => [map, replaceWith]);
 }
 function charsetToRepMap(charset: undefined, replaceWith?: string): undefined;
 function charsetToRepMap(charset: CharacterSet, replaceWith?: string): ReplaceMap;
 function charsetToRepMap(charset: CharacterSet | undefined, replaceWith?: string): ReplaceMap | undefined;
 function charsetToRepMap(charset: CharacterSet | undefined, replaceWith = ''): ReplaceMap | undefined {
-    return !charset
-        ? undefined
-        : charset
-              .split('|')
-              .flatMap((chars) => [...expandCharacterSet(chars)])
-              .map((char) => [char, replaceWith]);
+    if (!charset) return undefined;
+
+    return charset
+        .split('|')
+        .flatMap((chars) => [...expandCharacterSet(chars)])
+        .map((char) => [char, replaceWith]);
 }
 
 function expandReplaceMap(repMap: ReplaceMap): ReplaceMap {

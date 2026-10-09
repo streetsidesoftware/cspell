@@ -18,7 +18,10 @@ interface SuggestionCommandOptions extends SuggestionOptions {
 
 function collect(value: string, previous: string[] | undefined): string[] {
     value = value.replace(/^=/, '');
-    return !previous ? [value] : [...previous, value];
+    if (!previous) {
+        return [value];
+    }
+    return [...previous, value];
 }
 
 function count(_: string, previous: number | undefined): number {
@@ -91,5 +94,6 @@ export function commandSuggestion(prog: Command): Command {
 
 function mergeArrays(a: string[] | undefined, b: string[] | undefined) {
     if (a === undefined) return b;
-    return b === undefined ? a : [...a, ...b];
+    if (b === undefined) return a;
+    return [...a, ...b];
 }

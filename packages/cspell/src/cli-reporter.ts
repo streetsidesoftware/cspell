@@ -85,7 +85,8 @@ function nullEmitter() {
 function relativeUriFilename(uri: string, rootURL: URL): string {
     const url = toFileURL(uri);
     const rel = urlRelative(rootURL, url);
-    return rel.startsWith('..') ? toFilePathOrHref(url) : rel;
+    if (rel.startsWith('..')) return toFilePathOrHref(url);
+    return rel;
 }
 
 function reportProgress(io: IO, p: ProgressItem, cwdURL: URL, options: CSpellReporterConfiguration) {
@@ -136,7 +137,8 @@ function reportTime(io: IO, elapsedTimeMs: number | undefined, cached: boolean):
 
 function isSlow(elapsedTmeMs: number | undefined): number | undefined {
     if (!elapsedTmeMs || elapsedTmeMs < 1000) return 0;
-    return elapsedTmeMs < 2000 ? 1 : 2;
+    if (elapsedTmeMs < 2000) return 1;
+    return 2;
 }
 
 export interface ReporterOptions extends Pick<
@@ -404,7 +406,10 @@ export function getReporter(options: ReporterOptions, config?: CSpellReporterCon
     function colorByDepth(chalk: ChalkInstance, depth: number, text: string): string {
         const colors = [chalk.green, chalk.cyan, chalk.blue, chalk.magenta, chalk.red];
         const color = colors[depth % colors.length];
-        return depth / colors.length >= 1 ? chalk.dim(color(text)) : color(text);
+        if (depth / colors.length >= 1) {
+            return chalk.dim(color(text));
+        }
+        return color(text);
     }
 
     function colorByDepthGrayscale(chalk: ChalkInstance, depth: number, text: string): string {

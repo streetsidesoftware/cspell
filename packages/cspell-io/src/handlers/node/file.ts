@@ -99,9 +99,8 @@ const supportedFetchProtocols: Record<string, true | undefined> = { 'http:': tru
 const handleRequestFsReadFileHttp = RequestFsReadFile.createRequestHandler(
     (req: RequestFsReadFile, next) => {
         const { url, signal, encoding } = req.params;
-        return !(url.protocol in supportedFetchProtocols)
-            ? next(req)
-            : createResponse(fetchURL(url, signal).then((content) => CFileResource.from({ url, encoding, content })));
+        if (!(url.protocol in supportedFetchProtocols)) return next(req);
+        return createResponse(fetchURL(url, signal).then((content) => CFileResource.from({ url, encoding, content })));
     },
     undefined,
     'Node: Read Http(s) file.',
@@ -132,7 +131,8 @@ const handleRequestFsReadFileData = RequestFsReadFile.createRequestHandler(
         const { url } = req.params;
         if (url.protocol !== 'data:') return next(req);
         const res = dispatcher.dispatch(RequestFsReadFileSync.create(req.params));
-        return !isServiceResponseSuccess(res) ? res : createResponse(Promise.resolve(res.value));
+        if (!isServiceResponseSuccess(res)) return res;
+        return createResponse(Promise.resolve(res.value));
     },
     undefined,
     'Node: Read data: urls.',
@@ -181,7 +181,8 @@ const handleRequestFsStatSync = RequestFsStatSync.createRequestHandler(
 const handleRequestFsStatHttp = RequestFsStat.createRequestHandler(
     (req, next) => {
         const { url } = req.params;
-        return !(url.protocol in supportedFetchProtocols) ? next(req) : createResponse(getStatHttp(url));
+        if (!(url.protocol in supportedFetchProtocols)) return next(req);
+        return createResponse(getStatHttp(url));
     },
     undefined,
     'Node: http get stat',
@@ -284,9 +285,8 @@ export function registerHandlers(serviceBus: ServiceBus): void {
 
 function encodeContent(ref: FileReference, content: string | TArrayBufferView): string | Buffer {
     if (typeof content === 'string') {
-        return [undefined, 'utf8', 'utf-8'].includes(ref.encoding)
-            ? content
-            : arrayBufferViewToBuffer(encodeString(content, ref.encoding));
+        if ([undefined, 'utf8', 'utf-8'].includes(ref.encoding)) return content;
+        return arrayBufferViewToBuffer(encodeString(content, ref.encoding));
     }
     return arrayBufferViewToBuffer(content);
 }

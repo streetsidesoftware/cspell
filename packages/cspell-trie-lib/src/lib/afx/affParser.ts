@@ -177,7 +177,8 @@ class AffSrcCursor {
     }
 
     nextLine(): string | undefined {
-        return this.line >= this.lines.length ? undefined : this.lines[++this.line];
+        if (this.line >= this.lines.length) return undefined;
+        return this.lines[++this.line];
     }
 
     peekLine(): string | undefined {
@@ -200,5 +201,9 @@ function opFlag(line: string): FlagSettings | undefined {
     if (flag === 'long') {
         return { parseWord: parseWordLongRules, wordRulesFormat: '..' };
     }
-    return flag === 'num' ? { parseWord: parseWordCommaRules, wordRulesFormat: ',' } : undefined;
+    if (flag === 'num') {
+        return { parseWord: parseWordCommaRules, wordRulesFormat: ',' };
+    }
+
+    return undefined;
 }

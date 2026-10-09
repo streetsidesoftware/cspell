@@ -26,9 +26,10 @@ export function fromElement(elem: FlattenedElement, resolve: (index: number) => 
                 break;
             }
             case ElementType.Object: {
-                return element[1] === 0 && element[2]
-                    ? ObjectWrapperRefElement.fromJSON(element as ObjectWrapperElement, resolve)
-                    : ObjectRefElement.fromJSON(element, resolve);
+                if (element[1] === 0 && element[2]) {
+                    return ObjectWrapperRefElement.fromJSON(element as ObjectWrapperElement, resolve);
+                }
+                return ObjectRefElement.fromJSON(element, resolve);
             }
             case ElementType.String: {
                 return StringConcatRefElement.fromJSON(element, resolve);
@@ -68,7 +69,10 @@ export function fromElement(elem: FlattenedElement, resolve: (index: number) => 
     }
 
     if (typeof elem === 'object') {
-        return elem === null ? PrimitiveRefElement.fromJSON(elem) : new ObjectRefElement();
+        if (elem === null) {
+            return PrimitiveRefElement.fromJSON(elem);
+        }
+        return new ObjectRefElement();
     }
 
     assert(typeof elem === 'boolean');

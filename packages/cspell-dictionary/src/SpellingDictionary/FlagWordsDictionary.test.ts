@@ -276,7 +276,8 @@ function createFlagWordsDictionaryLegacy(wordList: Iterable<string>, name: strin
     const trieDict = specialWords.size ? buildTrieDict(specialWords, name, source) : undefined;
     const typosDict = createTyposDictionary(typoWords, name, source);
 
-    return !trieDict ? typosDict : new FlagWordsDictionary(name, source, typosDict, trieDict);
+    if (!trieDict) return typosDict;
+    return new FlagWordsDictionary(name, source, typosDict, trieDict);
 }
 
 const regExpCleanIgnore = /^(!!)+/;

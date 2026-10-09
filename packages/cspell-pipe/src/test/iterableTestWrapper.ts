@@ -47,7 +47,10 @@ export function iterableTestWrapper<T>(
     type TNext = undefined;
 
     function getIterator() {
-        return iter ? iter : (iter = iterable[Symbol.iterator]());
+        if (iter) {
+            return iter;
+        }
+        return (iter = iterable[Symbol.iterator]());
     }
 
     const wrapper = {

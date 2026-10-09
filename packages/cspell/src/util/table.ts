@@ -99,9 +99,10 @@ export function tableToLines(table: Table, deliminator?: string): string[] {
     }
 
     function rowToCells(row: TableRow): (TableCell | undefined)[] {
-        return Array.isArray(row)
-            ? row
-            : columnFieldNames.map((fieldName) => (row as Record<string, TableCell>)[fieldName]);
+        if (Array.isArray(row)) {
+            return row;
+        }
+        return columnFieldNames.map((fieldName) => (row as Record<string, TableCell>)[fieldName]);
     }
 
     function getText(col: string | RowTextFn | undefined, maxWidth?: number): string {

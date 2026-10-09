@@ -202,22 +202,26 @@ function affKey(line: string, costs: Costs): SuggestionCostMapDef | undefined {
 
 function affKeyCaps(line: string, costs: Costs): SuggestionCostMapDef | undefined {
     const m = line.match(regExpKey);
-    return !m ? undefined : parseCaps(m[1], costs);
+    if (!m) return undefined;
+    return parseCaps(m[1], costs);
 }
 
 function affMapCaps(line: string, costs: Costs): SuggestionCostMapDef | undefined {
     const m = line.match(regExpMap);
-    return !m ? undefined : parseCaps(m[1], costs);
+    if (!m) return undefined;
+    return parseCaps(m[1], costs);
 }
 
 function affTryAccents(line: string, costs: Costs): SuggestionCostMapDef[] | undefined {
     const m = line.match(regExpTry);
-    return !m ? undefined : calcCostsForAccentedLetters(m[1], costs.locale, costs);
+    if (!m) return undefined;
+    return calcCostsForAccentedLetters(m[1], costs.locale, costs);
 }
 
 function affMapAccents(line: string, costs: Costs): SuggestionCostMapDef[] | undefined {
     const m = line.match(regExpMap);
-    return !m ? undefined : calcCostsForAccentedLetters(m[1], costs.locale, costs);
+    if (!m) return undefined;
+    return calcCostsForAccentedLetters(m[1], costs.locale, costs);
 }
 
 function parseCaps(value: string, costs: Costs): SuggestionCostMapDef | undefined {

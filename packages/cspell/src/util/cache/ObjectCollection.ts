@@ -167,5 +167,6 @@ function toValueType(v: any): Types {
     const t = typeof v;
     if (t !== 'object') return t;
     if (Array.isArray(v)) return 'array';
-    return v === null ? 'null' : t;
+    if (v === null) return 'null';
+    return t;
 }

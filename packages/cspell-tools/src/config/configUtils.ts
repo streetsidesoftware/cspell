@@ -5,9 +5,11 @@ export function isFilePath(source: DictionarySource): source is FilePath {
 }
 
 export function isFileSource(source: DictionarySource): source is FileSource {
-    return !source || isFilePath(source) ? false : (<FileSource>source).filename !== undefined;
+    if (!source || isFilePath(source)) return false;
+    return (<FileSource>source).filename !== undefined;
 }
 
 export function isFileListSource(source: DictionarySource): source is FileListSource {
-    return !source || isFilePath(source) ? false : (<FileListSource>source).listFile !== undefined;
+    if (!source || isFilePath(source)) return false;
+    return (<FileListSource>source).listFile !== undefined;
 }

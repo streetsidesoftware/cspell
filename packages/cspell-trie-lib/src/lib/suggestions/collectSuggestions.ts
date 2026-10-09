@@ -1,7 +1,8 @@
 import type { Progress, SuggestionGenerator, SuggestionResult } from './SuggestionTypes.ts';
 
 function isProgress(v: unknown | Progress): v is Progress {
-    return !v || typeof v !== 'object' ? false : (v as Progress).type === 'progress';
+    if (!v || typeof v !== 'object') return false;
+    return (v as Progress).type === 'progress';
 }
 
 export function collectSuggestions(sugGen: SuggestionGenerator, maxCost = 300, numSugs = 10): SuggestionResult[] {

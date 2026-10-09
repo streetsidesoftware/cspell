@@ -193,7 +193,11 @@ export function matchCase(example: string, word: string): string {
         return ucFirst(word);
     }
 
-    return isFirstCharacterLower(example) ? lcFirst(word) : word;
+    if (isFirstCharacterLower(example)) {
+        return lcFirst(word);
+    }
+
+    return word;
 }
 
 export function textOffset(text: string, offset = 0): TextOffset {

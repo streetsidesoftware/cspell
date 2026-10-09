@@ -53,7 +53,8 @@ class TrieBlobINode implements ITrieNode {
     }
 
     valueAt(keyIdx: number): ITrieNode {
-        return this._values ? this._values[keyIdx] : this.entryAt(keyIdx)[1];
+        if (this._values) return this._values[keyIdx];
+        return this.entryAt(keyIdx)[1];
     }
 
     entries(): readonly (readonly [string, ITrieNode])[] {
@@ -65,7 +66,8 @@ class TrieBlobINode implements ITrieNode {
     }
 
     entryAt(keyIdx: KeyIndex): readonly [string, ITrieNode] {
-        return this._entries ? this._entries[keyIdx] : this.entries()[keyIdx];
+        if (this._entries) return this._entries[keyIdx];
+        return this.entries()[keyIdx];
     }
 
     /** get child ITrieNode */
@@ -92,10 +94,12 @@ class TrieBlobINode implements ITrieNode {
     #getChildNode(char: string): ITrieNode | undefined {
         if (this.charToIdx) {
             const keyIdx = this.charToIdx[char];
-            return keyIdx === undefined ? undefined : this.child(keyIdx);
+            if (keyIdx === undefined) return undefined;
+            return this.child(keyIdx);
         }
         const idx = this.#getChildNodeRef(char);
-        return idx === undefined ? undefined : new TrieBlobINode(this.trie, idx);
+        if (idx === undefined) return undefined;
+        return new TrieBlobINode(this.trie, idx);
     }
 
     getNode(word: string): ITrieNode | undefined {

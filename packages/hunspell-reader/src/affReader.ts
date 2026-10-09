@@ -78,7 +78,8 @@ function simpleTable<T>(map: (values: string[][]) => T) {
         | undefined;
 
     function getValue() {
-        return data?.values ? map(data.values) : undefined;
+        if (data?.values) return map(data.values);
+        return undefined;
     }
 
     function addLine(line: AffLine): void {
@@ -233,7 +234,8 @@ function fixMatch(type: AffixRule['type'], match: string): RegExp {
 }
 
 function affixMatchToRegExpString(match: string): string {
-    return match === '0' ? '' : match.replaceAll(/([\\\-?*])/g, '\\$1');
+    if (match === '0') return '';
+    return match.replaceAll(/([\\\-?*])/g, '\\$1');
 }
 
 function collectFx(): Collector<Afx> {
@@ -397,9 +399,10 @@ export async function parseAffFile(filename: string, encoding: string = UTF8): P
     currentAffFilename = filename;
     const file = decode(buffer, encoding);
     const affInfo = parseAff(file, encoding);
-    return affInfo.SET && affInfo.SET.toLowerCase() !== encoding.toLowerCase()
-        ? parseAff(decode(buffer, affInfo.SET.toLowerCase()), affInfo.SET)
-        : affInfo;
+    if (affInfo.SET && affInfo.SET.toLowerCase() !== encoding.toLowerCase()) {
+        return parseAff(decode(buffer, affInfo.SET.toLowerCase()), affInfo.SET);
+    }
+    return affInfo;
 }
 
 function convertHtmlEntities(line: string, index: number): string {

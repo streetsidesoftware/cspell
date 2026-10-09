@@ -30,7 +30,8 @@ class ImplITrieNode implements ITrieNode {
 
     /** number of children */
     get size(): number {
-        return !this.node.c ? 0 : this.keys().length;
+        if (!this.node.c) return 0;
+        return this.keys().length;
     }
 
     /** get keys to children */
@@ -55,7 +56,8 @@ class ImplITrieNode implements ITrieNode {
     /** get child ITrieNode */
     get(char: string): ITrieNode | undefined {
         const n = this.node.c?.[char];
-        return !n ? undefined : ImplITrieNode.toITrieNode(n);
+        if (!n) return undefined;
+        return ImplITrieNode.toITrieNode(n);
     }
 
     getNode(chars: string): ITrieNode | undefined {

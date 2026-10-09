@@ -8,7 +8,10 @@ import { symbolFlatpackAnnotation } from './types.mjs';
  * @returns The meta data or undefined if the value is not annotated.
  */
 export function extractUnpackedAnnotation(data: Serializable): UnpackedAnnotation | undefined {
-    return isUnpackedAnnotated(data) ? data[symbolFlatpackAnnotation] : undefined;
+    if (isUnpackedAnnotated(data)) {
+        return data[symbolFlatpackAnnotation];
+    }
+    return undefined;
 }
 
 /**

@@ -77,7 +77,9 @@ export class WrappedProviderFs implements VFileSystemCore {
     }
 
     getCapabilities(url: URL): FSCapabilities {
-        return this.fs?.getCapabilities ? this.fs.getCapabilities(url) : this._capabilities;
+        if (this.fs?.getCapabilities) return this.fs.getCapabilities(url);
+
+        return this._capabilities;
     }
 
     async stat(urlRef: UrlOrReference): Promise<VfsStat> {

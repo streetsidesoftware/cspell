@@ -79,7 +79,10 @@ function formatSuggestions(io: IOChalk, issue: Issue): string {
             )
             .join(', ');
     }
-    return issue.suggestions ? issue.suggestions.join(', ') : '';
+    if (issue.suggestions) {
+        return issue.suggestions.join(', ');
+    }
+    return '';
 }
 
 function formatQuickFix(io: IOChalk, issue: Issue): string {

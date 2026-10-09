@@ -11,9 +11,9 @@ export class FetchUrlError extends Error implements NodeJS.ErrnoException {
 
     static create(url: URL, status: number, message?: string): FetchUrlError {
         if (status === 404) return new FetchUrlError(message || 'URL not found.', 'ENOENT', status, url);
-        return status >= 400 && status < 500
-            ? new FetchUrlError(message || 'Permission denied.', 'EACCES', status, url)
-            : new FetchUrlError(message || 'Fatal Error', 'ECONNREFUSED', status, url);
+        if (status >= 400 && status < 500)
+            return new FetchUrlError(message || 'Permission denied.', 'EACCES', status, url);
+        return new FetchUrlError(message || 'Fatal Error', 'ECONNREFUSED', status, url);
     }
 
     static fromError(url: URL, e: Error): FetchUrlError {
@@ -21,9 +21,10 @@ export class FetchUrlError extends Error implements NodeJS.ErrnoException {
         if (cause) {
             return new FetchUrlError(cause.message, cause.code, undefined, url);
         }
-        return isNodeError(e)
-            ? new FetchUrlError(e.message, e.code, undefined, url)
-            : new FetchUrlError(e.message, undefined, undefined, url);
+        if (isNodeError(e)) {
+            return new FetchUrlError(e.message, e.code, undefined, url);
+        }
+        return new FetchUrlError(e.message, undefined, undefined, url);
     }
 }
 

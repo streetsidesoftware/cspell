@@ -280,7 +280,8 @@ describe('fileToTextDocument', () => {
 });
 
 function fixDriveLetter(p: string): string {
-    return !hasDriveLetter.test(p) ? p : p[0].toUpperCase() + p.slice(1);
+    if (!hasDriveLetter.test(p)) return p;
+    return p[0].toUpperCase() + p.slice(1);
 }
 
 /**

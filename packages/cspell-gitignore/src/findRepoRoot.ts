@@ -11,7 +11,8 @@ export async function findRepoRoot(directory: string | URL, vfs?: VFileSystem): 
     const from = toFileDirURL(directory);
     const fs = vfs || getDefaultVirtualFs().getFS(from);
     const found = await fs.findUp((dir) => findDotGit(fs, dir), from);
-    return !found ? undefined : toFilePathOrHref(new URL('.', found));
+    if (!found) return undefined;
+    return toFilePathOrHref(new URL('.', found));
 }
 
 /**

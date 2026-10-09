@@ -30,7 +30,9 @@ export async function createAllowedSplitWordsFromFiles(
 }
 
 export function createAllowedSplitWords(words: Iterable<string> | undefined): AllowedSplitWordsCollection {
-    return !words ? defaultAllowedSplitWords : new AllowedSplitWordsImpl(createWordsCollection(words));
+    if (!words) return defaultAllowedSplitWords;
+
+    return new AllowedSplitWordsImpl(createWordsCollection(words));
 }
 
 function buildHasFn(dict: { hasWord: (word: string, caseSensitive: boolean) => boolean }) {
@@ -38,7 +40,8 @@ function buildHasFn(dict: { hasWord: (word: string, caseSensitive: boolean) => b
         const r = dict.hasWord(word, true);
         if (r || caseSensitive) return r;
         const lc = word.toLowerCase();
-        return lc === word ? false : dict.hasWord(lc, true);
+        if (lc === word) return false;
+        return dict.hasWord(lc, true);
     }
 
     return has;

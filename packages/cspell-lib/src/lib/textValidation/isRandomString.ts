@@ -11,7 +11,8 @@ const maxRadio = 0.5;
  */
 export function isRandomString(s: string, maxNoiseToLengthRatio: number = maxRadio): boolean {
     // Soft hyphen indicates a word break, so it's likely not a random string.
-    return s.includes(softHyphen) ? false : scoreRandomString(s) >= maxNoiseToLengthRatio;
+    if (s.includes(softHyphen)) return false;
+    return scoreRandomString(s) >= maxNoiseToLengthRatio;
 }
 
 /**

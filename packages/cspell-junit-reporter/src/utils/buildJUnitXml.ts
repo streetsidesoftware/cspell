@@ -49,7 +49,8 @@ function issueName(issue: Issue): string {
 }
 
 function issueMessage(issue: Issue): string {
-    return issue.message ? issue.message : `Unknown word: "${issue.text}"`;
+    if (issue.message) return issue.message;
+    return `Unknown word: "${issue.text}"`;
 }
 
 function buildTestCaseForIssue(filename: string, issue: Issue): string {

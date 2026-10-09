@@ -100,7 +100,8 @@ function calcOptionsKey(cacheOptions: CacheKeyOptions): string | undefined {
 async function resolveCacheLocation(cacheLocation: string): Promise<string> {
     try {
         const s = await stat(cacheLocation);
-        return s.isFile() ? cacheLocation : path.join(cacheLocation, DEFAULT_CACHE_LOCATION);
+        if (s.isFile()) return cacheLocation;
+        return path.join(cacheLocation, DEFAULT_CACHE_LOCATION);
     } catch (err) {
         if (isErrorLike(err) && err.code === 'ENOENT') {
             return cacheLocation;

@@ -788,7 +788,8 @@ export class BinaryDataReader {
      */
     getUint8Array(name: string): U8Array | undefined {
         const element = this.getDataElement(name);
-        return !element ? undefined : element.data;
+        if (!element) return undefined;
+        return element.data;
     }
 
     /**

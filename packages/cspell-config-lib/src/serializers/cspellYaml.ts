@@ -3,7 +3,9 @@ import { CSpellConfigFileYaml, parseCSpellConfigFileYaml } from '../CSpellConfig
 import type { DeserializerNext, DeserializerParams, SerializerMiddleware, SerializerNext } from '../Serializer.js';
 
 function deserializer(params: DeserializerParams, next: DeserializerNext): CSpellConfigFile {
-    return !isYamlFile(params.url.pathname) ? next(params) : parseCSpellConfigFileYaml(params);
+    if (!isYamlFile(params.url.pathname)) return next(params);
+
+    return parseCSpellConfigFileYaml(params);
 }
 
 function isYamlFile(pathname: string) {
@@ -12,7 +14,8 @@ function isYamlFile(pathname: string) {
 }
 
 function serializer(settings: ICSpellConfigFile, next: SerializerNext): string {
-    return !(settings instanceof CSpellConfigFileYaml) ? next(settings) : settings.serialize();
+    if (!(settings instanceof CSpellConfigFileYaml)) return next(settings);
+    return settings.serialize();
 }
 
 export const serializerCSpellYaml: SerializerMiddleware = { deserialize: deserializer, serialize: serializer };

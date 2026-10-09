@@ -113,7 +113,7 @@ export function guessMimeType(filename: string): GuessMimeTypeResult | undefined
     if (filename.endsWith('.txt.gz')) return { mimeType: 'application/gzip' };
     if (filename.endsWith('.gz')) return { mimeType: 'application/gzip' };
     if (filename.endsWith('.json')) return { mimeType: 'application/json', encoding: 'utf-8' };
-    return filename.endsWith('.yaml') || filename.endsWith('.yml')
-        ? { mimeType: 'application/x-yaml', encoding: 'utf-8' }
-        : undefined;
+    if (filename.endsWith('.yaml') || filename.endsWith('.yml'))
+        return { mimeType: 'application/x-yaml', encoding: 'utf-8' };
+    return undefined;
 }

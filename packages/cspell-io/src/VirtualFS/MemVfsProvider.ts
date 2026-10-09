@@ -22,7 +22,10 @@ export class MemFileSystemProvider implements VFileSystemProvider, DisposableEx 
     }
 
     getFileSystem(url: URL): VProviderFileSystem | undefined {
-        return url.protocol !== this.protocol ? undefined : this.#vfs;
+        if (url.protocol !== this.protocol) {
+            return undefined;
+        }
+        return this.#vfs;
     }
 
     get memFS(): MemVFileSystem {

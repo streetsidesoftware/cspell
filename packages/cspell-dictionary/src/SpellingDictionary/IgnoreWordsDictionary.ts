@@ -64,9 +64,8 @@ class IgnoreWordsDictionary implements SpellingDictionary {
         const ignoreCase = options?.ignoreCase ?? Defaults.ignoreCase;
         if (!ignoreCase) return undefined;
 
-        return this.dictNonStrict.has(nWord)
-            ? { found: nWord, forbidden: false, noSuggest: true }
-            : (this.dictNonStrict.has(lcWord) && { found: lcWord, forbidden: false, noSuggest: true }) || undefined;
+        if (this.dictNonStrict.has(nWord)) return { found: nWord, forbidden: false, noSuggest: true };
+        return (this.dictNonStrict.has(lcWord) && { found: lcWord, forbidden: false, noSuggest: true }) || undefined;
     }
 
     isForbidden(_word: string, _ignoreCase?: boolean): boolean {

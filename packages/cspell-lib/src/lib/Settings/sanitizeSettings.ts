@@ -173,7 +173,10 @@ function copyGlobOrGlobs(globOrGlobs: Glob[]): Glob[];
 function copyGlobOrGlobs(globOrGlobs: Glob): Glob;
 function copyGlobOrGlobs(globOrGlobs: Glob | Glob[]): Glob | Glob[];
 function copyGlobOrGlobs(globOrGlobs: Glob | Glob[]): Glob | Glob[] {
-    return Array.isArray(globOrGlobs) ? globOrGlobs.map(copyGlob) : copyGlob(globOrGlobs);
+    if (Array.isArray(globOrGlobs)) {
+        return globOrGlobs.map(copyGlob);
+    }
+    return copyGlob(globOrGlobs);
 }
 
 function copyGlob(glob: Glob): Glob {

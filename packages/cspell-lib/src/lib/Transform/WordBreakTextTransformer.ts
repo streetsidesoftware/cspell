@@ -15,7 +15,8 @@ export class SoftWordBreakTextTransformer implements TextTransformer {
 
     transform(text: string | MappedText): MappedText {
         const mText = toMappedText(text);
-        return !this.#patterns.length ? mText : applySoftWordBreaks(mText, this.#patterns);
+        if (!this.#patterns.length) return mText;
+        return applySoftWordBreaks(mText, this.#patterns);
     }
 
     *transformAll(src: Iterable<string | MappedText>): Iterable<MappedText> {
@@ -108,7 +109,9 @@ function applySoftWordBreaks(mText: MappedText, patterns: RegExp[]): MappedText 
         }
     }
 
-    return !edits.length ? mText : applyEditsToMappedText(mText, mergeEdits(edits));
+    if (!edits.length) return mText;
+
+    return applyEditsToMappedText(mText, mergeEdits(edits));
 }
 
 function mergeEdits(edits: Edit[]): Edit[] {

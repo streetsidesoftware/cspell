@@ -337,7 +337,8 @@ function lintHelpAfterOptions(command: Command, hiddenOptionsHeading: string): s
 }
 
 function validateMaxFileSize(size: string | undefined): string | undefined {
-    return !size ? undefined : validateUnitSize(size);
+    if (!size) return undefined;
+    return validateUnitSize(size);
 }
 
 function increaseVerbosity(_dummyValue: unknown, previous: number): number {
