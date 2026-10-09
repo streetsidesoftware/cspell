@@ -42,7 +42,9 @@ decisions while they're still cheap to change.
    - If the branch exists without a worktree, attach it (without `-b`).
    - If the session was given a branch to work on (a cloud session, for example), use that branch and skip the
      worktree.
-   - Creating the worktree is local and reversible, so no need to ask first. Don't push or open a PR unless asked.
+   - Creating the worktree is local and reversible, so no need to ask first.
+   - Open a draft PR once the first ADR is committed, and tell the user. It makes outside review easier and leaves a
+     trail. Push each later commit to it.
 
 4. **Prepare.**
    - Add the feature's row to the Features table, and create its `README.md` from `docs/ADRs/template.md`.
@@ -80,6 +82,9 @@ decisions while they're still cheap to change.
    `docs: ignore-regex-per-language ADR 0002, overrides replace the list`. Check the existing files first, in case
    this resumes an earlier session.
 
+   Restructure the ADRs whenever they stop reading as one line from the Why, as the README's "Decide one thing at a
+   time" describes. Don't wait for step 9.
+
 7. **Keep the glossaries current as terms come up,** by the README's rules. Link entries to the feature's `README.md`,
    never to a single ADR. Commit glossary edits as they happen.
 
@@ -92,9 +97,13 @@ decisions while they're still cheap to change.
    - Tell the user where the work lives: the branch, and the worktree path if there is one.
    - The skill stops at the design. If a question is easier to answer by trying it, a quick prototype is fine.
 
-9. **Finalize** when the user says the design is final: squash the ADRs as the README's "Finalize before merge"
-   describes, update the index and glossary links, and commit on the same branch. Ask whether the design gets its own
-   `docs:` PR or goes in the feature's PR, as the README's "Branches" describes.
+9. **Finalize** when the user says the design is final:
+   - Rewrite the ADRs as the README's "Finalize before merge" describes, including the Why, the Goal, and What we
+     learned. Update the index and glossary links, and commit on the same branch.
+   - Start a subagent that is given only the paths of the feature's `README.md` and its ADRs. Ask it to say what gets
+     built, why, and how the decisions fit together, and to list gaps, contradictions, and anything it had to guess.
+   - Show the user the subagent's report, and fix what they agree with.
+   - Ask whether the design gets its own `docs:` PR or goes in the feature's PR, as the README's "Branches" describes.
 
 10. **Change or archive** when asked, or when step 1 finds a feature due:
     - **Change:** follow the README's "Changing a merged design".

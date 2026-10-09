@@ -42,6 +42,10 @@ when the first release containing the feature is published.
 | #   | Title | Status |
 | --- | ----- | ------ |
 
+## What we learned
+
+- <Something the design work showed to be important for the whole feature, and how it shaped the design.>
+
 ## Open questions
 
 - <Question deferred during the design, and what it's waiting on.>
@@ -51,8 +55,9 @@ when the first release containing the feature is published.
 - `<Name>`: <what it names>. Decide by <when, for example before the option ships>. Tracked in <issue>.
 ```
 
-Add one row per ADR as it's written: `| 0001 | <title> | Accepted |`. Link the RFC under "Why" if there is one. Remove
-the Open questions and Provisional names sections when they're empty.
+Add one row per ADR as it's written: `| 0001 | <title> | Accepted |`. Link the RFC under "Why" if there is one. Fill in
+What we learned when the design is finalized. Remove the What we learned, Open questions, and Provisional names
+sections when they're empty.
 
 ## `docs/ADRs/<feature>/NNNN-<decision>.md`
 
@@ -61,22 +66,33 @@ Name the file with a kebab-case slug, for example `0001-cli-flag-overrides-confi
 ```markdown
 # NNNN. <Decision title, phrased as the thing being decided>
 
-Status: Proposed | Accepted | Superseded by [NNNN](./NNNN-slug.md)
+Status: Proposed | Accepted
 
-## Context
+## Why
 
-What makes this decision necessary? What constraints apply (config resolution and merging, `overrides` and
-`languageSettings`, CLI flags versus config, existing configs, the design principles)? What are the real options being
-weighed?
+**Goal:** <the feature goal this decision serves, and what it means for this decision.>
+
+**Problem:** <what goes wrong today, or would without this decision.>
 
 ## Decision
 
-The choice that was made, stated plainly ("We will ..."), not a summary of the discussion.
+The choice that was made, stated plainly, not a summary of the discussion. Precise enough that someone can build it.
 
 ## Consequences
 
 What this makes easier, what it makes harder, and what it rules out. Include concrete effects on this repo, for
 example: "the `fooBar` option becomes public as soon as it ships, so renaming it later needs a deprecation".
+
+## Context
+
+The background: how things are today and why, the constraints that apply (config resolution and merging, `overrides`
+and `languageSettings`, CLI flags versus config, existing configs, the design principles), and the facts that shaped the
+choice, such as counts, measurements, examples, and approaches tried before. Keep anything that could change how
+someone would solve the problem.
+
+## Rejected approaches
+
+- <Approach>: <why it wasn't chosen, in one line.>
 ```
 
 ## Archived `docs/ADRs/<feature>/README.md`
@@ -113,7 +129,8 @@ The full ADRs are in git history:
 
 ## Learnings and improvements
 
-- <What implementation or review changed, and what to do differently next time.>
+- <Start from the index's What we learned. Add what implementation or review changed, and what to do differently next
+  time.>
 ```
 
 ## Design principle entry
