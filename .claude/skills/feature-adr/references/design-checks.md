@@ -39,8 +39,8 @@ Read `docs/design-principles.md` and check the sketch against it:
 - **A command changes only what the user named.** Does any option write somewhere the user didn't ask for?
 - **Cost scales with the files checked.** Does any option add per-file or per-word work?
 
-If the feature needs a new principle, agree on it first, record it as ADR `0001`, and add it to
-`docs/design-principles.md` when it holds beyond this feature.
+If the feature needs a new principle, agree on it before the decisions that depend on it, record it in an ADR, and add
+it to `docs/design-principles.md` when it holds beyond this feature.
 
 ## Where hard-to-undo decisions hide
 

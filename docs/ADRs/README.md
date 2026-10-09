@@ -58,7 +58,8 @@ Give a question time only when its answer could change the sketch, or is hard to
 [When to use ADRs](#when-to-use-adrs)). Settle anything else quickly with a sensible default. When it isn't clear which
 kind a question is, ask.
 
-- Write an ADR for each inflection point as it's decided, and add its row to the feature's `README.md`.
+- Write an ADR for each inflection point as it's decided, and add its row to the feature's `README.md`. Keep it
+  short until finalize: the goal it serves, the decision, and a line or two on what shaped it.
 - Commit each ADR as it's written. The commits let us go back to an earlier point and see how an idea evolved. They
   stay in the PR, so the ADRs don't need to carry that history.
 - Keep side questions short. Note one in a line under "Open questions" in the feature's `README.md` and set it aside.
@@ -79,7 +80,7 @@ rest. When it shows something the design missed, update the sketch and the ADRs.
 
 ### 6. Finalize before merge
 
-Rewrite the feature's ADRs to state the design as it stands. The timeline stays in the PR's commits. What we learned
+Rewrite the feature's ADRs to state the design as it stands, filling in the sections each one needs. The timeline stays in the PR's commits. What we learned
 stays: in the Context of the ADR it shaped, or in the "What we learned" section of the feature's `README.md`.
 
 - Check that the Why and the Goal still say why the feature is being done, and that each ADR serves a stated goal.
@@ -149,9 +150,9 @@ summary, so the links keep working. Only ADRs of the same feature link to each o
 
 Work on a design in an `adr/<feature>` branch, and on archiving in an `adr-archive/<feature>` branch.
 
-A small feature can ship its design and implementation together, with the ADRs in the feature's `feat:` or `fix:` PR.
-When a design is worth merging before the code is ready, merge the ADRs on their own with a `docs:` PR, so they stay
-out of the release notes.
+The design and the code share one branch and one PR. The PR starts as a draft `docs:` PR, and becomes `feat:` or `fix:`
+once code lands, so the ADRs ship with the code. When a design is worth merging before the code is ready, copy its
+commits to a new branch from `main` and merge them with a `docs:` PR, so they stay out of the release notes.
 
 ## ADRs and RFCs
 
@@ -167,7 +168,7 @@ When a feature is designed from an RFC, its `README.md` links to the RFC.
 ## With Claude Code
 
 The `feature-adr` skill runs this process as a short interview: the why, the sketch, then one inflection point at a
-time. It writes and commits the ADRs, opens a draft PR once the first ADR is committed, moves on to a prototype, and
+time. It writes and commits the ADRs, opens a draft PR once the sketch is committed, moves on to a prototype, and
 runs the fresh-reader check with a subagent when the design is finalized. It also offers to archive features that are
 due.
 

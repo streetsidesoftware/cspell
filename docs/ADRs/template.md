@@ -65,7 +65,8 @@ sections when they're empty.
 
 ## `docs/ADRs/<feature>/NNNN-<decision>.md`
 
-Name the file with a kebab-case slug, for example `0001-cli-flag-overrides-config.md`.
+Name the file with a kebab-case slug, for example `0001-cli-flag-overrides-config.md`. During the design, write only the
+Goal, the Decision, and a line or two of Context. Fill in the rest at finalize, where it adds something.
 
 ```markdown
 # NNNN. <Decision title, phrased as the thing being decided>
