@@ -26,14 +26,29 @@ undo once it ships:
 - a change to the public API of a published package
 - a command that writes to users' config files or dictionaries
 
-Skip them for bug fixes, refactors, dependency updates, and changes whose behavior is already fully specified.
+A bug fix or small feature rarely needs ADR files. Its design notes go in the PR, as
+[Two ways to use it](#two-ways-to-use-it) describes. Skip ADRs for refactors, dependency updates, and changes whose
+behavior is already fully specified.
 
 ## Designing a feature
 
 Work from the top down: the why, then the overall shape, then only the details that could change that shape. Go back
-up whenever a detail shows the shape is wrong. Start writing code as soon as the shape and its inflection points are settled.
+up whenever a detail shows the shape is wrong. Stop when the remaining questions are easier to answer by writing the
+code.
 
 The files are described in [Layout](#layout).
+
+### Two ways to use it
+
+- **Capture for later.** A large feature, designed at a high level while the ideas are fresh, to be finished later.
+  Write down enough to pick it up again: the why, the sketch, the decisions made so far, and the questions still open.
+  It merges as a `docs:` PR, with the feature still `Designing`.
+- **Check before building.** A small feature or fix, checked to make sure it will work as expected and to catch side
+  effects. It usually needs no feature folder: the why, the sketch, and what the checks found go in the PR, in its
+  Technical Details when users would care, or in a PR comment when only reviewers would. A decision that's hard to undo
+  once it ships still gets a short feature folder, in the same PR.
+
+The steps below are the same for both. Without a feature folder, each one is a few lines in the PR.
 
 ### 1. Start with why
 
@@ -62,15 +77,19 @@ kind a question is, ask.
   short until finalize: the goal it serves, the decision, and a line or two on what shaped it.
 - Commit each ADR as it's written. The commits let us go back to an earlier point and see how an idea evolved. They
   stay in the PR, so the ADRs don't need to carry that history.
+- When a question turns on facts outside the repo, such as how other tools handle it, a library's behavior, or a
+  standard, research it briefly and bring back a short summary with sources. What shaped a decision goes in that ADR's
+  Context.
 - Keep side questions short. Note one in a line under "Open questions" in the feature's `README.md` and set it aside.
-  The prototype or the code usually settles it.
+  The code usually settles it.
 - Restructure whenever the ADRs stop reading as one line from the Why: merge, split, or renumber them. Links from
   outside the feature go to its `README.md`, so only the links between its own ADRs need fixing.
 
-### 4. Prototype
+### 4. Let the code settle the rest
 
-Start writing code once the sketch and its inflection points are settled, on the same branch. Let the code settle the
-rest. When it shows something the design missed, update the sketch and the ADRs.
+Stop designing when the remaining questions are easier to answer by writing the code. Note each one in a line under
+"Open questions". When a quick experiment would answer a question faster than discussion, suggest one. When the code
+shows something the design missed, update the sketch and the ADRs.
 
 ### 5. Keep the glossaries current
 
@@ -80,16 +99,21 @@ rest. When it shows something the design missed, update the sketch and the ADRs.
 
 ### 6. Finalize before merge
 
-Rewrite the feature's ADRs to state the design as it stands, filling in the sections each one needs. The timeline stays in the PR's commits. What we learned
-stays: in the Context of the ADR it shaped, or in the "What we learned" section of the feature's `README.md`.
+Rewrite the feature's ADRs to state the design as it stands, filling in the sections each one needs. The timeline stays
+in the PR's commits. What we learned stays: in the Context of the ADR it shaped, or in the "What we learned" section of
+the feature's `README.md`.
 
 - Check that the Why and the Goal still say why the feature is being done, and that each ADR serves a stated goal.
 - Arrange the ADRs as one line from the Why, one ADR per decision that can change separately. Renumber from `0001`,
-  and mark the ADRs and the feature `Accepted`.
+  and mark the ADRs `Accepted`.
 - Settle or drop each open question in a line. One becomes an issue only when it's a real problem someone would act
   on, not a nice-to-have.
+- Mark the feature `Accepted`.
 - Have someone new to the design read only the feature's `README.md` and its ADRs. They should be able to say what gets
   built, why, and how the decisions fit together. Fix whatever they couldn't.
+
+A captured design is finalized the same way, except that its open questions stay, each with what it depends on, its
+ADRs stay `Proposed`, and the feature stays `Designing`. The fresh reader should be able to pick it up.
 
 ## Changing a merged design
 
@@ -132,11 +156,11 @@ get separate ADRs (an option's default, and how it merges across config files).
 An ADR's status:
 
 - `Proposed`: decided during the design, not yet final.
-- `Accepted`: final. Set at finalize.
+- `Accepted`: final. Set at finalize, except in a captured design.
 
 A feature's status, in the [Features](#features) table:
 
-- `Designing`: the design is still being worked out.
+- `Designing`: the design is still being worked out, or was captured to be finished later.
 - `Accepted`: the design is decided, whether or not it's built yet.
 - `Archived`: shipped, and its ADRs replaced by a summary.
 
@@ -148,11 +172,14 @@ summary, so the links keep working. Only ADRs of the same feature link to each o
 
 ## Branches
 
-Work on a design in an `adr/<feature>` branch, and on archiving in an `adr-archive/<feature>` branch.
+Work on a design with a feature folder in an `adr/<feature>` branch, and on archiving in an `adr-archive/<feature>`
+branch.
 
-The design and the code share one branch and one PR. The PR starts as a draft `docs:` PR, and becomes `feat:` or `fix:`
-once code lands, so the ADRs ship with the code. When a design is worth merging before the code is ready, copy its
-commits to a new branch from `main` and merge them with a `docs:` PR, so they stay out of the release notes.
+- A captured design merges on its own as a `docs:` PR, so it stays out of the release notes.
+- When the code follows the design, they share one branch and one PR. The PR starts as a draft `docs:` PR, and becomes
+  `feat:` or `fix:` once code lands, so the ADRs ship with the code.
+- A check before building works on the change's own branch. Its design notes, and its feature folder if it needs one,
+  go in that change's PR.
 
 ## ADRs and RFCs
 
@@ -167,10 +194,11 @@ When a feature is designed from an RFC, its `README.md` links to the RFC.
 
 ## With Claude Code
 
-The `feature-adr` skill runs this process as a short interview: the why, the sketch, then one inflection point at a
-time. It writes and commits the ADRs, opens a draft PR once the sketch is committed, moves on to a prototype, and
-runs the fresh-reader check with a subagent when the design is finalized. It also offers to archive features that are
-due.
+The `feature-adr` skill runs this process as a short interview, in either of the two ways: the why, the sketch, then one
+inflection point at a time. It stops when the code is the easier way to answer the rest. With a feature folder, it
+commits the ADRs, opens a draft PR once the sketch is committed, and runs the fresh-reader check with a subagent at
+finalize. In a check before building, it drafts the design notes for the PR. It also offers to archive features that
+are due.
 
 ## Features
 

@@ -2,7 +2,7 @@
 
 What to check a design against, and where cspell's hard-to-undo decisions hide. Check these yourself: they aren't
 questions to ask the user one by one. Bring something up only when it could change the sketch or is hard to undo once
-it ships.
+it ships. In check mode, also report every side effect you find.
 
 ## Stakeholders
 

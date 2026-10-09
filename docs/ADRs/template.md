@@ -52,7 +52,7 @@ when the first release containing the feature is published.
 
 ## Open questions
 
-- <A side question set aside during the design, in one line.>
+- <A question set aside during the design, in one line, and what it depends on.>
 
 ## Provisional names
 
@@ -61,7 +61,7 @@ when the first release containing the feature is published.
 
 Add one row per ADR as it's written: `| 0001 | <title> | Proposed |`. Link the RFC under "Why" if there is one. Fill in
 What we learned when the design is finalized. Remove the What we learned, Open questions, and Provisional names
-sections when they're empty.
+sections when they're empty. In a captured design, the open questions are the hand-off: keep them.
 
 ## `docs/ADRs/<feature>/NNNN-<decision>.md`
 
