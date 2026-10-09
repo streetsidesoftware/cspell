@@ -286,10 +286,9 @@ export class ConfigLoader implements IConfigLoader {
         const location = await this.searchForConfigFileLocation(searchFrom, stopSearchAt);
         if (!location) return undefined;
         const file = await this.readConfigFile(location);
-        if (file instanceof Error) {
-            return new CSpellConfigFileWithErrors(location, configErrorToRawSettings(file, location), file);
-        }
-        return file;
+        return file instanceof Error
+            ? new CSpellConfigFileWithErrors(location, configErrorToRawSettings(file, location), file)
+            : file;
     }
 
     /**
@@ -305,10 +304,9 @@ export class ConfigLoader implements IConfigLoader {
         const stopAt = await this.#extractStopSearchAtURLs(options);
         const configFile = await this.searchForConfigFile(searchFrom, stopAt);
         if (!configFile) return undefined;
-        if (configFile instanceof CSpellConfigFileWithErrors) {
-            return toInternalSettings(configFile.settings);
-        }
-        return this.mergeConfigFileWithImports(configFile, options);
+        return configFile instanceof CSpellConfigFileWithErrors
+            ? toInternalSettings(configFile.settings)
+            : this.mergeConfigFileWithImports(configFile, options);
     }
 
     public getGlobalSettings(): CSpellSettingsI {
@@ -606,8 +604,7 @@ export class ConfigLoader implements IConfigLoader {
     }
 
     toCSpellConfigFile(cfg: ICSpellConfigFile): CSpellConfigFile {
-        if (cfg instanceof CSpellConfigFile) return cfg;
-        return this.createCSpellConfigFile(cfg.url, cfg.settings);
+        return cfg instanceof CSpellConfigFile ? cfg : this.createCSpellConfigFile(cfg.url, cfg.settings);
     }
 
     dispose(): void {
@@ -688,15 +685,12 @@ export class ConfigLoader implements IConfigLoader {
         const url = toFileURL(input, cwdURL());
         if (url.pathname.endsWith('/')) return url;
         if (input instanceof URL) return new URL('.', url);
-        if (
-            typeof input === 'string' &&
+        return typeof input === 'string' &&
             !isUrlLike(input) &&
             url.protocol === 'file:' &&
             (await isDirectory(this.fs, url))
-        ) {
-            return addTrailingSlash(url);
-        }
-        return new URL('.', url);
+            ? addTrailingSlash(url)
+            : new URL('.', url);
     }
 }
 
@@ -789,9 +783,7 @@ export function createConfigLoader(fs?: VFileSystem): IConfigLoader {
 }
 
 export function getDefaultConfigLoaderInternal(): ConfigLoaderInternal {
-    if (defaultConfigLoader) return defaultConfigLoader;
-
-    return (defaultConfigLoader = createConfigLoaderInternal());
+    return defaultConfigLoader ? defaultConfigLoader : (defaultConfigLoader = createConfigLoaderInternal());
 }
 
 function createIO(fs: VFileSystem): IO {

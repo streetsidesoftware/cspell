@@ -36,6 +36,5 @@ export function validateUnitSize(size: string): string | undefined {
 
 export function sizeToNumber(size: string): number {
     const p = parseUnitSize(size);
-    if (p.error) return Number.NaN;
-    return Number.parseFloat(p.digits) * (unitSizes[p.units] || 1);
+    return p.error ? Number.NaN : Number.parseFloat(p.digits) * (unitSizes[p.units] || 1);
 }

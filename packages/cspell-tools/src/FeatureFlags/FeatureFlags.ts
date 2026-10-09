@@ -117,6 +117,5 @@ const boolValues: Record<string, boolean | undefined> = {
 };
 
 function toBool(value: boolean | string | undefined): boolean | undefined {
-    if (typeof value !== 'string') return value;
-    return boolValues[value.toLowerCase()];
+    return typeof value !== 'string' ? value : boolValues[value.toLowerCase()];
 }

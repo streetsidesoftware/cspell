@@ -44,10 +44,7 @@ export function proxyObject<T extends object>(
         get(target, prop, _receiver) {
             const value = target[prop as keyof T];
             // log('get %o', { prop, match: value === obj[prop as keyof T] });
-            if (value instanceof Function) {
-                return value.bind(target);
-            }
-            return value;
+            return value instanceof Function ? value.bind(target) : value;
         },
 
         ownKeys(target) {

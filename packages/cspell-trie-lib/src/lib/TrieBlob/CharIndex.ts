@@ -157,6 +157,7 @@ function splitUtf8(utf8: number): number[] {
     utf8 = utf8 < 0 ? 0x1_0000_0000 + utf8 : utf8;
     if (utf8 <= 0xff) return [utf8];
     if (utf8 <= 0xffff) return [(utf8 >> 8) & 0xff, utf8 & 0xff];
-    if (utf8 <= 0xff_ffff) return [(utf8 >> 16) & 0xff, (utf8 >> 8) & 0xff, utf8 & 0xff];
-    return [(utf8 >> 24) & 0xff, (utf8 >> 16) & 0xff, (utf8 >> 8) & 0xff, utf8 & 0xff].filter((v) => v);
+    return utf8 <= 0xff_ffff
+        ? [(utf8 >> 16) & 0xff, (utf8 >> 8) & 0xff, utf8 & 0xff]
+        : [(utf8 >> 24) & 0xff, (utf8 >> 16) & 0xff, (utf8 >> 8) & 0xff, utf8 & 0xff].filter((v) => v);
 }

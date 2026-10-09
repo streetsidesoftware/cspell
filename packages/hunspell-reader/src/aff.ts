@@ -497,8 +497,7 @@ class AffData {
 
 function joinRules(a: AffRule[] | undefined, b: AffRule[] | undefined): AffRule[] | undefined {
     if (!a) return b;
-    if (!b) return a;
-    return [...a, ...b];
+    return !b ? a : [...a, ...b];
 }
 
 interface PartialRule {

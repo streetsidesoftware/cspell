@@ -18,6 +18,5 @@ export function makeRelativeTo(child: string | URL, parent: string | URL): strin
     const c = toFileURL(child);
     const p = toFileDirURL(parent);
     const rel = urlRelative(p, c);
-    if (rel.startsWith('../')) return undefined;
-    return rel;
+    return rel.startsWith('../') ? undefined : rel;
 }

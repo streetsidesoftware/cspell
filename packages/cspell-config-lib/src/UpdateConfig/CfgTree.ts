@@ -79,8 +79,9 @@ export type CfgNode<T> = T extends unknown[]
 
 export function isNodeValue<T>(value: unknown): value is NodeValue<T> {
     if (!(typeof value === 'object' && value !== null)) return false;
-    if (nodeValueSymbol in value) return true;
-    return 'value' in value && 'comment' in value && 'commentBefore' in value && Object.keys(value).length === 3;
+    return nodeValueSymbol in value
+        ? true
+        : 'value' in value && 'comment' in value && 'commentBefore' in value && Object.keys(value).length === 3;
 }
 
 export function createNodeValue<T>(value: T, comment?: string, commentBefore?: string): NodeValue<T> {

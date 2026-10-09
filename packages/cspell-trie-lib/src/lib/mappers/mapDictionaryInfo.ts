@@ -80,9 +80,7 @@ function processAccents(
 }
 
 export function mapDictionaryInformationToAdjustment(dictInfo: DictionaryInformation): PenaltyAdjustment[] {
-    if (!dictInfo.adjustments) return [];
-
-    return dictInfo.adjustments.map(mapAdjustment);
+    return !dictInfo.adjustments ? [] : dictInfo.adjustments.map(mapAdjustment);
 }
 
 type Adjustments = Exclude<DictionaryInformation['adjustments'], undefined>;

@@ -95,8 +95,9 @@ function normalizeSource(source: DictionarySource): DictionarySource {
     if (typeof source === 'string') {
         return normalizeSourcePath(source);
     }
-    if (isFileSource(source)) return { ...source, filename: normalizeSourcePath(source.filename) };
-    return { ...source, listFile: normalizeSourcePath(source.listFile) };
+    return isFileSource(source)
+        ? { ...source, filename: normalizeSourcePath(source.filename) }
+        : { ...source, listFile: normalizeSourcePath(source.listFile) };
 }
 
 function normalizeSourcePath(source: string): string {

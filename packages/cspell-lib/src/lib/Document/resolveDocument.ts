@@ -66,10 +66,9 @@ export function resolveDocument(
     if (uri.scheme === 'stdin') {
         throw new Error(`Unsupported schema: "${uri.scheme}", open "${uri.toString()}"`);
     }
-    if (uri.scheme !== 'file') {
-        return readDocumentFromUrl(document.uri, encoding);
-    }
-    return readDocument(Uri.uriToFilePath(uri), encoding);
+    return uri.scheme !== 'file'
+        ? readDocumentFromUrl(document.uri, encoding)
+        : readDocument(Uri.uriToFilePath(uri), encoding);
 }
 
 async function readDocumentFromUrl(

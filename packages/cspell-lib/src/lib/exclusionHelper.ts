@@ -27,10 +27,9 @@ function adjustGlobPatternForBackwardsCompatibility(g: string): string {
 
 function adjustGlobPatternsForBackwardsCompatibility(globs: Glob[]): Glob[] {
     return globs.map((g) => {
-        if (typeof g === 'string') {
-            return adjustGlobPatternForBackwardsCompatibility(g);
-        }
-        return { ...g, glob: adjustGlobPatternForBackwardsCompatibility(g.glob) };
+        return typeof g === 'string'
+            ? adjustGlobPatternForBackwardsCompatibility(g)
+            : { ...g, glob: adjustGlobPatternForBackwardsCompatibility(g.glob) };
     });
 }
 

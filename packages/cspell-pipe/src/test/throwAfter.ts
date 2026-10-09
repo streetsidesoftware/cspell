@@ -47,10 +47,7 @@ export function throwAfterAsync<T>(iterable: AsyncIterable<T>, count: number, e:
     type TNext = undefined;
 
     function getIterator() {
-        if (iter) {
-            return iter;
-        }
-        return (iter = iterable[Symbol.asyncIterator]());
+        return iter ? iter : (iter = iterable[Symbol.asyncIterator]());
     }
 
     return {

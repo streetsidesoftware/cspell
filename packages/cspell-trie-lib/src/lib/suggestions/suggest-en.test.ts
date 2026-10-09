@@ -234,8 +234,7 @@ function s(word: string, cost?: number): ExpectedSuggestion {
 
 function sr(...sugs: (string | ExpectedSuggestion)[]): ExpectedSuggestion[] {
     return sugs.map((s) => {
-        if (typeof s === 'string') return { word: s };
-        return s;
+        return typeof s === 'string' ? { word: s } : s;
     });
 }
 

@@ -201,15 +201,13 @@ export class DictionaryLoader {
 
     private isEqual(a: StatsOrError, b: StatsOrError | undefined): boolean {
         if (!b) return false;
-        if (isError(a)) {
-            return isError(b) && a.message === b.message && a.name === b.name;
-        }
-        return !isError(b) && !compareStats(a, b);
+        return isError(a)
+            ? isError(b) && a.message === b.message && a.name === b.name
+            : !isError(b) && !compareStats(a, b);
     }
 
     private normalizeOptions(uri: URL, options: LoadFileOptions): LoadFileOptions {
-        if (options.name) return options;
-        return { ...options, name: urlBasename(uri) };
+        return options.name ? options : { ...options, name: urlBasename(uri) };
     }
 
     private loadInlineDict(def: DictionaryDefinitionInlineInternal): SpellingDictionary {
@@ -295,10 +293,9 @@ async function legacyWordList(reader: Reader, filename: URL, options: LoadOption
     if (options.kind === 'flag-words') {
         return createFlagWordsDictionary([...words], options.name, filename.toString());
     }
-    if (options.kind === 'suggest-words') {
-        return createSuggestDictionary([...words], options.name, filename.toString());
-    }
-    return createSpellingDictionary(words, options.name, filename.toString(), applyKind(options), true);
+    return options.kind === 'suggest-words'
+        ? createSuggestDictionary([...words], options.name, filename.toString())
+        : createSpellingDictionary(words, options.name, filename.toString(), applyKind(options), true);
 }
 
 async function wordsPerLineWordList(reader: Reader, filename: URL, options: LoadOptions) {
@@ -315,10 +312,9 @@ async function wordsPerLineWordList(reader: Reader, filename: URL, options: Load
     if (options.kind === 'flag-words') {
         return createFlagWordsDictionary([...words], options.name, filename.href);
     }
-    if (options.kind === 'suggest-words') {
-        return createSuggestDictionary([...words], options.name, filename.href);
-    }
-    return createSpellingDictionary(words, options.name, filename.href, applyKind(options), true);
+    return options.kind === 'suggest-words'
+        ? createSuggestDictionary([...words], options.name, filename.href)
+        : createSpellingDictionary(words, options.name, filename.href, applyKind(options), true);
 }
 
 async function loadSimpleWordList(reader: Reader, filename: URL, options: LoadOptions) {
@@ -327,10 +323,9 @@ async function loadSimpleWordList(reader: Reader, filename: URL, options: LoadOp
     if (options.kind === 'flag-words') {
         return createFlagWordsDictionary(lines, options.name, filename.href);
     }
-    if (options.kind === 'suggest-words') {
-        return createSuggestDictionary(lines, options.name, filename.href);
-    }
-    return createSpellingDictionary(lines, options.name, filename.href, applyKind(options));
+    return options.kind === 'suggest-words'
+        ? createSuggestDictionary(lines, options.name, filename.href)
+        : createSpellingDictionary(lines, options.name, filename.href, applyKind(options));
 }
 
 async function loadTrie(reader: Reader, filename: URL, options: LoadOptions) {
@@ -339,10 +334,9 @@ async function loadTrie(reader: Reader, filename: URL, options: LoadOptions) {
     if (options.kind === 'flag-words') {
         return createFlagWordsDictionaryFromTrieFile(content, options.name, filename.href);
     }
-    if (options.kind === 'suggest-words') {
-        return createSuggestDictionaryFromTrieFile(content, options.name, filename.href);
-    }
-    return createSpellingDictionaryFromTrieFile(content, options.name, filename.href, applyKind(options));
+    return options.kind === 'suggest-words'
+        ? createSuggestDictionaryFromTrieFile(content, options.name, filename.href)
+        : createSpellingDictionaryFromTrieFile(content, options.name, filename.href, applyKind(options));
 }
 
 /**

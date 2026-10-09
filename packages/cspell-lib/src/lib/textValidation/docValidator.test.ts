@@ -548,6 +548,5 @@ function s(...settings: CSpellUserSettings[]): CSpellUserSettings {
 }
 
 function merge<T extends object>(first: T, ...rest: T[]): T {
-    if (!rest.length) return first;
-    return { ...first, ...merge(rest[0], ...rest.slice(1)) };
+    return !rest.length ? first : { ...first, ...merge(rest[0], ...rest.slice(1)) };
 }

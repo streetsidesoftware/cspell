@@ -26,10 +26,7 @@ function* compoundWalker(root: TrieNode, compoundingMethod: CompoundWordsMethod)
         if (n.c) {
             return Object.entries(n.c);
         }
-        if (n.f && rc) {
-            return rc;
-        }
-        return empty;
+        return n.f && rc ? rc : empty;
     }
 
     let depth = 0;
@@ -61,10 +58,7 @@ function* nodeWalker(root: TrieNode): WalkerIterator {
     type Children = Array<string>;
     const empty: Children = [];
     function children(n: TrieNode): string[] {
-        if (n.c) {
-            return Object.keys(n.c);
-        }
-        return empty;
+        return n.c ? Object.keys(n.c) : empty;
     }
 
     let depth = 0;
@@ -108,10 +102,7 @@ function* _walkerWords(root: TrieNode): Iterable<string> {
     type Children = Array<string>;
     const empty: Children = [];
     function children(n: TrieNode): string[] {
-        if (n.c) {
-            return Object.keys(n.c);
-        }
-        return empty;
+        return n.c ? Object.keys(n.c) : empty;
     }
 
     let depth = 0;

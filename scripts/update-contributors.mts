@@ -55,8 +55,7 @@ async function writeContributorsJson(contributors: Contributor[]): Promise<void>
 
 async function readExistingContributors(): Promise<Contributor[]> {
     const content = await readFile(outputJsonUrl, 'utf8').catch(() => undefined);
-    if (!content) return [];
-    return (JSON.parse(content) || {}).contributors || [];
+    return !content ? [] : (JSON.parse(content) || {}).contributors || [];
 }
 
 function mergeContributors(existing: Contributor[], incoming: Contributor[]): Contributor[] {

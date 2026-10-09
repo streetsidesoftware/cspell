@@ -17,10 +17,7 @@ export class WeakCache<V> {
     }
 
     get(key: unknown): V | undefined {
-        if (typeof key === 'object' && key !== null) {
-            return this.#objectCache.get(key);
-        }
-        return this.#primitiveCache.get(key);
+        return typeof key === 'object' && key !== null ? this.#objectCache.get(key) : this.#primitiveCache.get(key);
     }
 
     set(key: unknown, value: V): void {

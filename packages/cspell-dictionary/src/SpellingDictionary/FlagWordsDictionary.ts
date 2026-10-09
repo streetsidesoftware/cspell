@@ -41,8 +41,7 @@ export class FlagWordsDictionaryTrie extends SpellingDictionaryFromTrie {
 
     public find(word: string, hasOptions?: HasOptions): FindResult | undefined {
         const f = super.find(word, hasOptions);
-        if (!f || !f.forbidden) return undefined;
-        return f;
+        return !f || !f.forbidden ? undefined : f;
     }
 
     suggest(
@@ -95,8 +94,7 @@ export class FlagWordsDictionary implements SpellingDictionary {
         const findTypos = this.dictTypos.find(word, options);
         if (findTypos) return findTypos;
         const ignoreCase = options?.ignoreCase ?? Defaults.ignoreCase;
-        if (this.dictTypos.isSuggestedWord(word, ignoreCase)) return undefined;
-        return this.dictTrie?.find(word, options);
+        return this.dictTypos.isSuggestedWord(word, ignoreCase) ? undefined : this.dictTrie?.find(word, options);
     }
 
     isForbidden(
@@ -166,8 +164,7 @@ export function createFlagWordsDictionary(
         const trie = parseDictionary(specialWords, { stripCaseAndAccents: false, makeWordsForbidden: true });
         const trieDict = new FlagWordsDictionaryTrie(trie, name, source);
         const typosDict = createTyposDictionary(typoWords, name, source);
-        if (!specialWords.size) return typosDict;
-        return new FlagWordsDictionary(name, source, typosDict, trieDict);
+        return !specialWords.size ? typosDict : new FlagWordsDictionary(name, source, typosDict, trieDict);
     });
 }
 

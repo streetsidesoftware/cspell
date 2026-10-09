@@ -50,8 +50,7 @@ export function nPattern(p: Pattern): NPattern {
     if (isPatternMatch(p)) return normalizePatternMatch(p);
     if (isPatternBeginEnd(p)) return normalizePatternBeginEnd(p);
     if (isPatternInclude(p)) return normalizePatternInclude(p);
-    if (isPatternPatterns(p)) return normalizePatternsPatterns(p);
-    return normalizePatternName(p);
+    return isPatternPatterns(p) ? normalizePatternsPatterns(p) : normalizePatternName(p);
 }
 
 function normalizePatternMatch(p: PatternMatch): NPatternMatch {
@@ -180,16 +179,13 @@ function normalizePatterns(patterns: undefined): undefined;
 function normalizePatterns(patterns: PatternList): NPattern[];
 function normalizePatterns(patterns: PatternList | undefined): NPattern[] | undefined;
 function normalizePatterns(patterns: PatternList | undefined): NPattern[] | undefined {
-    if (!patterns) return undefined;
-    return patterns.map((p) => (typeof p === 'string' ? { include: p } : p)).map(nPattern);
+    return !patterns ? undefined : patterns.map((p) => (typeof p === 'string' ? { include: p } : p)).map(nPattern);
 }
 
 const emptyRepository: NRepository = Object.freeze(Object.create(null));
 
 function normalizePatternRepository(rep: Repository | undefined): NRepository {
-    if (!rep) return emptyRepository;
-
-    return normalizeRepository(rep);
+    return !rep ? emptyRepository : normalizeRepository(rep);
 }
 
 function normalizeRepository(rep: Repository): NRepository {
@@ -261,16 +257,14 @@ function normalizeCapture(cap: Captures | undefined): NCaptures | undefined {
 }
 
 function makeTestMatchFn(reg: string | RegExp): (line: LineOffsetAnchored) => MatchResult | undefined {
-    if (typeof reg === 'string') return matchString(reg);
-    return matchRegExp(reg);
+    return typeof reg === 'string' ? matchString(reg) : matchRegExp(reg);
 }
 
 function matchString(s: string): (line: LineOffsetAnchored) => MatchResult | undefined {
     return (line) => {
         const input = line.text;
         const index = input.indexOf(s, line.offset);
-        if (index < 0) return undefined;
-        return createSimpleMatchResult(s, input, index, line.lineNumber);
+        return index < 0 ? undefined : createSimpleMatchResult(s, input, index, line.lineNumber);
     };
 }
 

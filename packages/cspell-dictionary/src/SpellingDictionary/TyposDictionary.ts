@@ -104,8 +104,7 @@ class TyposDictionaryImpl implements TyposDictionary {
             }
         }
         if (word in this.typosDef) return { found: word, ignore: false };
-        if (lcWord in this.typosDef) return { found: lcWord, ignore: false };
-        return false;
+        return lcWord in this.typosDef ? { found: lcWord, ignore: false } : false;
     }
 
     isForbidden(
