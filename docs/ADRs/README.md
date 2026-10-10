@@ -45,15 +45,16 @@ The files are described in [Layout](#layout).
   It merges as a `docs:` PR, with the feature still `Designing`.
 - **Check before building.** A small feature or fix, checked to make sure it will work as expected and to catch side
   effects. It usually needs no feature folder: the why, the sketch, and what the checks found go in the PR, in its
-  Technical Details when users would care, or in a PR comment when only reviewers would. A decision that's hard to undo
-  once it ships still gets a short feature folder, in the same PR.
+  Technical Details when users would care, or in a PR comment when only reviewers would. It gets a short feature
+  folder, in the same PR, only when a decision that's hard to undo once it ships had more than one reasonable option,
+  and they were weighed. An uncontested name or default goes in the Technical Details.
 
 The steps below are the same for both. Without a feature folder, each one is a few lines in the PR.
 
 ### 1. Start with why
 
-Before any decision, write the feature's `README.md`: why it's being done, the stakeholders and how each is affected,
-the goal, and what's out of scope. Every decision is weighed against these and against
+Before any decision, write the feature's `README.md`: why it's being done, and the goal. Add the stakeholders and what's
+out of scope when they aren't obvious. Every decision is weighed against these and against
 [the design principles](../design-principles.md).
 
 The Why, Stakeholders, Goal, and Out of scope are a draft until the design is final. Revise them when the design shows
@@ -78,8 +79,8 @@ kind a question is, ask.
 - Commit each ADR as it's written. The commits let us go back to an earlier point and see how an idea evolved. They
   stay in the PR, so the ADRs don't need to carry that history.
 - When a question turns on facts outside the repo, such as how other tools handle it, a library's behavior, or a
-  standard, research it briefly and bring back a short summary with sources. What shaped a decision goes in that ADR's
-  Context.
+  standard, suggest researching it briefly, and bring back a short summary with sources. What shaped a decision goes
+  in that ADR's Context.
 - Keep side questions short. Note one in a line under "Open questions" in the feature's `README.md` and set it aside.
   The code usually settles it.
 - Restructure whenever the ADRs stop reading as one line from the Why: merge, split, or renumber them. Links from
@@ -197,8 +198,7 @@ When a feature is designed from an RFC, its `README.md` links to the RFC.
 The `feature-adr` skill runs this process as a short interview, in either of the two ways: the why, the sketch, then one
 inflection point at a time. It stops when the code is the easier way to answer the rest. With a feature folder, it
 commits the ADRs, opens a draft PR once the sketch is committed, and runs the fresh-reader check with a subagent at
-finalize. In a check before building, it drafts the design notes for the PR. It also offers to archive features that
-are due.
+finalize. In a check before building, it drafts the design notes for the PR.
 
 ## Features
 
