@@ -41,7 +41,7 @@ pull request, see [Development](./docs/development.md).
 - [Writing for users](./docs/writing-for-users.md): READMEs, the website, doc comments, and published PRs
 - [Config options and CLI flags](./docs/config-and-cli.md): adding or changing one
 - [Design principles](./docs/design-principles.md)
-- [ADRs](./docs/ADRs/README.md): design decisions, one folder per feature
+- [Designing a feature](./docs/designs/README.md): thinking a feature through before and while you build it
 - [Releasing](./docs/releasing.md): release-drafter, the Prepare Release PR, prerelease mode, fixing an entry
 - [Glossary](./docs/glossary.md)
 

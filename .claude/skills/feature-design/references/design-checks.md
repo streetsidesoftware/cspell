@@ -2,7 +2,7 @@
 
 What to check a design against, and where cspell's hard-to-undo decisions hide. Check these yourself: they aren't
 questions to ask the user one by one. Bring something up only when it could change the sketch or is hard to undo once
-it ships. In check mode, also report every side effect you find.
+it ships. When checking a change, also report every side effect you find.
 
 ## Stakeholders
 
@@ -18,7 +18,7 @@ In this repo, a feature usually affects some of:
 ## cspell's fixed rules
 
 What cspell already fixes, and the sketch has to fit. Many questions are settled by pointing back at these. Check each
-one in the code rather than assuming it, and note the ones that matter in the Context of the ADR they shape.
+one in the code rather than assuming it, and note the ones that matter in the Design section next to the choice they shape.
 
 - **Config resolution:** config files, `import`, then matching `overrides`, then matching `languageSettings`, then
   in-document directives (see `docs/glossary.md`, "Config resolution").
@@ -39,8 +39,8 @@ Read `docs/design-principles.md` and check the sketch against it:
 - **A command changes only what the user named.** Does any option write somewhere the user didn't ask for?
 - **Cost scales with the files checked.** Does any option add per-file or per-word work?
 
-If the feature needs a new principle, agree on it before the decisions that depend on it, record it in an ADR, and add
-it to `docs/design-principles.md` when it holds beyond this feature.
+If the feature needs a new principle, agree on it before the decisions that depend on it, and note it under Open questions
+so it can be added to `docs/design-principles.md` at trim time if it holds beyond this feature.
 
 ## Where hard-to-undo decisions hide
 
@@ -89,9 +89,3 @@ For a change to a published package's API, such as `cspell-lib` or `cspell-types
 
 - Which packages expose it, and through which `exports` entry point?
 - Is it additive, or does it change an existing signature or behavior?
-
-## Wrapping a topic into a decision
-
-Not every answer needs its own ADR. Bundle answers from the same group when they only make sense read together (an
-option's name, type, and default). Split them when they can change independently later (an option's default and how
-it merges across config files).

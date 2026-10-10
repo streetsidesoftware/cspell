@@ -7,18 +7,18 @@ flags, see [Config options and CLI flags](./config-and-cli.md). For publishing, 
 
 This is a pnpm workspace (`pnpm-workspace.yaml`). The main directories:
 
-| Directory                   | What it is                                                                    |
-| --------------------------- | ----------------------------------------------------------------------------- |
-| `packages/*`                | The published packages: `cspell` (the CLI), `cspell-lib`, `cspell-types`, ... |
-| `@internal/tsdown`          | Shared tsdown build config.                                                   |
-| `scripts`                   | Repo scripts: schema build, release notes, prerelease mode.                   |
-| `test-packages/*/*`         | Packages that test the published packages as a consumer would.                |
-| `test-fixtures`, `fixtures` | Test data. Misspellings in them are deliberate.                               |
-| `integration-tests`         | Runs cspell against real repositories. Needs network.                         |
-| `examples`                  | Example configs and files. Misspellings in them are deliberate.               |
-| `rfc`, `rfc/drafts`         | Design proposals. Some are workspace packages. See [ADRs](./ADRs/README.md).  |
-| `website`                   | The Docusaurus site at https://cspell.org, for people who use cspell.         |
-| `tools/perf-chart`          | Generates performance charts from cspell performance data. Not published.     |
+| Directory                   | What it is                                                                         |
+| --------------------------- | ---------------------------------------------------------------------------------- |
+| `packages/*`                | The published packages: `cspell` (the CLI), `cspell-lib`, `cspell-types`, ...      |
+| `@internal/tsdown`          | Shared tsdown build config.                                                        |
+| `scripts`                   | Repo scripts: schema build, release notes, prerelease mode.                        |
+| `test-packages/*/*`         | Packages that test the published packages as a consumer would.                     |
+| `test-fixtures`, `fixtures` | Test data. Misspellings in them are deliberate.                                    |
+| `integration-tests`         | Runs cspell against real repositories. Needs network.                              |
+| `examples`                  | Example configs and files. Misspellings in them are deliberate.                    |
+| `rfc`, `rfc/drafts`         | Design proposals. Some are workspace packages. See [designs](./designs/README.md). |
+| `website`                   | The Docusaurus site at https://cspell.org, for people who use cspell.              |
+| `tools/perf-chart`          | Generates performance charts from cspell performance data. Not published.          |
 
 ## Tooling
 

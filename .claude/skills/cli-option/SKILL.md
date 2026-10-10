@@ -1,6 +1,6 @@
 ---
 name: cli-option
-description: 'Add or change a cspell command-line flag (for example on cspell lint or cspell trace) end to end: a new flag, a renamed or deprecated flag, or changed behavior or help text. Runs a short design checklist, hands over to feature-adr when a decision is open and to config-option when the flag needs a matching config option, then defines the flag with commander, passes it through, adds app tests, updates the --help snapshots, and drafts the PR title and description. Use this whenever the user asks to add, change, rename, hide, or remove a CLI flag or option on a cspell command, even if they do not say "skill". Not for config options alone (use config-option).'
+description: 'Add or change a cspell command-line flag (for example on cspell lint or cspell trace) end to end: a new flag, a renamed or deprecated flag, or changed behavior or help text. Runs a short design checklist, suggests feature-design when a decision is open, hands over to config-option when the flag needs a matching config option, then defines the flag with commander, passes it through, adds app tests, updates the --help snapshots, and drafts the PR title and description. Use this whenever the user asks to add, change, rename, hide, or remove a CLI flag or option on a cspell command, even if they do not say "skill". Not for config options alone (use config-option).'
 ---
 
 # cli-option
@@ -31,8 +31,9 @@ first.
 - **Output and exit code:** does it change what's printed, a reporter's output, or when cspell exits non-zero?
 - **Help text:** what `--help` says.
 
-**Hand over to feature-adr** when an answer has more than one reasonable option with lasting effects, such as a new
-output format or a change to exit codes. Offer to run the `feature-adr` skill, and continue here once it's decided.
+**Suggest a design first** when an answer has more than one reasonable option with lasting effects, such as a new
+output format or a change to exit codes. Say so in one line, offer the `feature-design` skill, and let the user
+decide. Continue here once it's decided.
 
 ### 3. Implement
 
