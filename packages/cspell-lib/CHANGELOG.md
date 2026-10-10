@@ -154,6 +154,17 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 </details>
 
+## v10.4.0-alpha.2 (2026-10-10)
+
+### Fixes
+
+- fix: Recognize MATLAB files (<a href="https://github.com/streetsidesoftware/cspell/pull/9402">#9402</a>)
+- fix: Show hidden lint options and issue template help in `cspell --help` (<a href="https://github.com/streetsidesoftware/cspell/pull/9387">#9387</a>)
+
+### Dictionary Updates
+
+- fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/9405">#9405</a>)
+
 ## v10.3.6 (2026-09-29)
 
 ### Fixes

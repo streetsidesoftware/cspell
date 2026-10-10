@@ -936,6 +936,126 @@ Related: #8975, streetsidesoftware/vscode-spell-checker#3099, streetsidesoftware
 
 </details>
 
+## v10.4.0-alpha.2 (2026-10-10)
+
+### Fixes
+
+<details>
+<summary>fix: Recognize MATLAB files (<a href="https://github.com/streetsidesoftware/cspell/pull/9402">#9402</a>)</summary>
+
+### fix: Recognize MATLAB files ([#9402](https://github.com/streetsidesoftware/cspell/pull/9402))
+
+## Summary
+
+- Associates `.m` and `.matlab` with the `matlab` file type.
+- Marks MATLAB's binary formats as binary, so cspell doesn't treat them as text: `.mat`, `.fig`, `.mlx`, `.mlapp`,
+  `.mltbx`, `.mlappinstall`, and MEX files (`.mexa64`, `.mexmaca64`, `.mexmaci64`, `.mexw64`).
+
+Notes:
+
+- `.m` stays associated with `objective-c` too, since both languages use it.
+- `.p` (MATLAB P-code) isn't marked binary, because Pascal uses `.p` for source files.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Show hidden lint options and issue template help in `cspell --help` (<a href="https://github.com/streetsidesoftware/cspell/pull/9387">#9387</a>)</summary>
+
+### fix: Show hidden lint options and issue template help in `cspell --help` ([#9387](https://github.com/streetsidesoftware/cspell/pull/9387))
+
+## Summary
+
+Running `cspell --help --verbose` or `cspell --help --issue-template` now shows the same extra help as the `cspell lint --help` forms. Before, those flags were silently ignored, even though the help for `--issue-template` says "See --help --issue-template for details."
+
+- With `--verbose`, the hidden `lint` options are listed under `Hidden options for "lint":`.
+- With `--issue-template`, the help explains the issue template placeholders and styles.
+- The plain `cspell --help` now ends with the same "More Examples" as `cspell lint --help`.
+
+Before:
+
+```
+$ cspell --help --verbose
+...
+Options for "lint" (the default command):
+  ...
+  -h, --help                     display help for command
+```
+
+After:
+
+```
+$ cspell --help --verbose
+...
+Options for "lint" (the default command):
+  ...
+
+Hidden options for "lint":
+  --config-search                Allow searching for configuration files.
+  ...
+
+More Examples:
+  ...
+```
+
+---
+
+</details>
+
+### Dictionary Updates
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/9405">#9405</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#9405](https://github.com/streetsidesoftware/cspell/pull/9405))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../snapshots/AdaDoom3/AdaDoom3/report.yaml        |  120 +-
+ .../MartinThoma/LaTeX-examples/report.yaml         |   30 +-
+ .../MicrosoftDocs/PowerShell-Docs/report.yaml      |   32 +-
+ .../snapshots/RustPython/RustPython/report.yaml    |  120 +-
+ .../snapshots/TheAlgorithms/Python/report.yaml     |   14 +-
+ .../snapshots/alexiosc/megistos/report.yaml        |  148 +-
+ .../aspnetboilerplate/report.yaml                  |   18 +-
+ .../snapshots/caddyserver/caddy/report.yaml        |   20 +-
+ .../snapshots/caddyserver/caddy/snapshot.txt       |   20 +-
+ .../snapshots/dart-lang/sdk/report.yaml            |   82 +-
+ .../snapshots/django/django/report.yaml            |  376 +-
+ .../snapshots/eslint/eslint/report.yaml            |    2 +-
+ .../snapshots/flutter/samples/report.yaml          |   34 +-
+ .../snapshots/gitbucket/gitbucket/report.yaml      |    8 +-
+ .../googleapis/google-cloud-cpp/report.yaml        |   45 +-
+ .../googleapis/google-cloud-cpp/snapshot.txt       |    3 +-
+ .../snapshots/graphql/graphql-spec/report.yaml     |  102 +-
+ .../iluwatar/java-design-patterns/report.yaml      |   12 +-
+ .../snapshots/ktaranov/sqlserver-kit/report.yaml   | 2952 +++---
+ .../snapshots/ktaranov/sqlserver-kit/snapshot.txt  |    3 +-
+ .../microsoft/TypeScript-Website/report.yaml       |    4 +-
+ .../snapshots/neovim/nvim-lspconfig/report.yaml    |   43 +-
+ .../snapshots/neovim/nvim-lspconfig/snapshot.txt   |    3 +-
+ .../snapshots/pagekit/pagekit/report.yaml          |   18 +-
+ .../snapshots/php/php-src/report.yaml              | 9373 ++++++++++----------
+ .../snapshots/php/php-src/snapshot.txt             |    3 +-
+ .../snapshots/shoelace-style/shoelace/report.yaml  |    2 +-
+ .../snapshots/sveltejs/svelte/report.yaml          | 2526 +++---
+ .../snapshots/vitest-dev/vitest/report.yaml        |    6 +-
+ .../snapshots/vitest-dev/vitest/snapshot.txt       |    3 +-
+ .../snapshots/wireapp/wire-webapp/report.yaml      |   60 +-
+ packages/cspell-bundled-dicts/package.json         |   14 +-
+ packages/cspell/src/__snapshots__/app.test.ts.snap |    2 +-
+ pnpm-lock.yaml                                     |   63 +-
+ 34 files changed, 8124 insertions(+), 8137 deletions(-)
+```
+
+---
+
+</details>
+
 ## v10.3.6 (2026-09-29)
 
 ### Fixes
