@@ -23,7 +23,7 @@ const parsers: Record<string, Linter.Parser | undefined> = {
 type ValidTestCase = RuleTester.ValidTestCase;
 type Options = Partial<RuleOptions>;
 
-const KnownErrors: TestCaseError[] = [ce('Unknown word: "Summmer"', 8)];
+const KnownErrors: TestCaseError[] = [ce('Misspelled word: "Summmer" (summer)', 8)];
 
 const ruleTesterReact = new RuleTester({
     files: ['**/*.{js,jsx,mjs,cjs,ts,tsx}'],
@@ -47,12 +47,18 @@ ruleTesterReact.run('cspell with React', Rule.rules.spellchecker, {
     valid: [readSample('react/sample.jsx'), readSample('react/sample.tsx')],
     invalid: [
         // cspell:ignore Welcomeeeee Summmer
-        readInvalid('with-errors/react/sample.jsx', ['Unknown word: "Welcomeeeee"', 'Unknown word: "Summmer"']),
-        readInvalid('with-errors/react/sample.tsx', ['Unknown word: "Welcomeeeee"', 'Unknown word: "Summmer"']),
-        readInvalid('with-errors/react/sample.tsx', ['Unknown word: "Summmer"'], {
+        readInvalid('with-errors/react/sample.jsx', [
+            'Unknown word: "Welcomeeeee"',
+            'Misspelled word: "Summmer" (summer)',
+        ]),
+        readInvalid('with-errors/react/sample.tsx', [
+            'Unknown word: "Welcomeeeee"',
+            'Misspelled word: "Summmer" (summer)',
+        ]),
+        readInvalid('with-errors/react/sample.tsx', ['Misspelled word: "Summmer" (summer)'], {
             checkJSXText: false,
         }),
-        readInvalid('with-errors/react/sample.jsx', ['Unknown word: "Summmer"'], {
+        readInvalid('with-errors/react/sample.jsx', ['Misspelled word: "Summmer" (summer)'], {
             checkJSXText: false,
         }),
     ],
