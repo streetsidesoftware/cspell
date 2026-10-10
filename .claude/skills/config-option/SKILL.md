@@ -1,6 +1,6 @@
 ---
 name: config-option
-description: 'Add or change a cspell configuration option (a property in cspell.json / cspell.config.yaml, defined in packages/cspell-types) end to end: a new option, a changed default or type, a rename, a deprecation, or a removal. Runs a short design checklist, hands over to feature-adr when a decision is open, then defines the option with its user-facing doc comment, registers it, wires it into cspell-lib, adds tests, regenerates the schema and API files, and drafts the PR title and description. Use this whenever the user asks to add, change, rename, deprecate, or remove a config option or setting, or to make something configurable in cspell config, even if they do not say "skill". For a command-line flag, use cli-option (which calls back here if the flag needs a config option).'
+description: 'Add or change a cspell configuration option (a property in cspell.json / cspell.config.yaml, defined in packages/cspell-types) end to end: a new option, a changed default or type, a rename, a deprecation, or a removal. Runs a short design checklist, suggests feature-design when a decision is open, then defines the option with its user-facing doc comment, registers it, wires it into cspell-lib, adds tests, regenerates the schema and API files, and drafts the PR title and description. Use this whenever the user asks to add, change, rename, deprecate, or remove a config option or setting, or to make something configurable in cspell config, even if they do not say "skill". For a command-line flag, use cli-option (which calls back here if the flag needs a config option).'
 ---
 
 # config-option
@@ -42,9 +42,9 @@ For a change:
 - **Compatibility:** how existing values keep working.
 - **The replacement,** for a deprecation: the new option, or the reason there is none.
 
-**Hand over to feature-adr** when an answer has more than one reasonable option with lasting effects, for example a
+**Suggest a design first** when an answer has more than one reasonable option with lasting effects, for example a
 name other options will follow, a new object shape, a default that changes what gets flagged, or new merge behavior.
-Say so, and offer to run the `feature-adr` skill. Continue here once the design is decided.
+Say so in one line, offer the `feature-design` skill, and let the user decide. Continue here once the design is decided.
 
 Record the answers. They go into the PR description in step 5.
 
