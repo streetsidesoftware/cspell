@@ -65,7 +65,7 @@ jobs:
         run: echo "key=$KEY" >> "$GITHUB_OUTPUT"
 
       - name: Save CSpell cache
-        uses: actions/cache/save@v6.1.0
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           key: ${{ steps.cspell-cache-key.outputs.key }}
           path: .cspellcache
@@ -99,7 +99,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Restore build
-        uses: actions/cache/restore@v6.1.0
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           key: ${{ needs.build-and-smoke-test.outputs.build-key }}
           path: ${{ needs.build-and-smoke-test.outputs.build-path }}
@@ -107,7 +107,7 @@ jobs:
           fail-on-cache-miss: true
 
       - name: Restore CSpell cache
-        uses: actions/cache/restore@v6.1.0
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           key: ${{ needs.build-and-smoke-test.outputs.cspell-cache-key }}
           path: .cspellcache
