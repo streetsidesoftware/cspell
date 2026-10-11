@@ -76,6 +76,10 @@ jobs:
     needs:
       - build-and-smoke-test
 
+    env:
+      # Match the Linux `node_modules/.pnpm` names (Windows defaults to 60), so the CSpell cache dependencies resolve.
+      pnpm_config_virtual_store_dir_max_length: 120
+
     strategy:
       fail-fast: false
       matrix:
