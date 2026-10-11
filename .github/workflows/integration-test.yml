@@ -23,6 +23,8 @@ on:
       - 'packages/**/*.mts'
       - 'integration-tests/**'
       - '!integration-tests/perf/**'
+      # Restart an in-progress run, so its rows are appended to the latest perf data.
+      - 'integration-tests/perf/perf.csv'
       - 'package.json'
       - '*-lock.yaml'
       - '.github/workflows/integration-test.yml'
@@ -216,8 +218,8 @@ jobs:
           cd integration-tests
           && pnpm run integration-tests -- "$REPO"
 
+      # Also on a cache hit: a cancelled run may have cached rows it never appended.
       - name: store perf run
-        if: ${{ steps.step-cache-run.outputs.cache-hit != 'true' }}
         uses: actions/upload-artifact@v7
         with:
           name: perf-repo-${{ steps.step-normalize-repo-name.outputs.REPO_NAME }}
@@ -260,7 +262,9 @@ jobs:
       - name: append the runs
         run: |
           touch temp/perf/perf-run-empty.csv
-          cat temp/perf/perf-run-*.csv | sort >> integration-tests/perf/perf.csv
+          # Skip rows already in perf.csv; cached runs upload their rows again.
+          cat temp/perf/perf-run-*.csv | sort | awk 'NR == FNR { seen[$0] = 1; next } !seen[$0]++' integration-tests/perf/perf.csv - > temp/perf-new-rows.csv
+          cat temp/perf-new-rows.csv >> integration-tests/perf/perf.csv
           ./tools/perf-chart/bin.ts ./integration-tests/perf/perf.csv -o perf-report.md --daily-csv ./static/daily-stats.csv
 
       - name: Gen Report
