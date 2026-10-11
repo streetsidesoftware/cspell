@@ -184,7 +184,7 @@ jobs:
       - uses: ./.github/actions/echo
         with:
           value: |
-            Run Cache: ${{ steps.step-cache-run.outputs == 'true' && 'Hit' || 'Miss' }}
+            Run Cache: ${{ steps.step-cache-run.outputs.cache-hit == 'true' && 'Hit' || 'Miss' }}
 
       - name: Use Cache Build
         id: step-cache-build
@@ -192,12 +192,6 @@ jobs:
         uses: ./.github/actions/build-for-integrations
         with:
           node-version: ${{ matrix.node-version }}
-
-      - uses: ./.github/actions/echo
-        if: ${{ steps.step-cache-run.outputs.cache-hit != 'true' }}
-        with:
-          value: |
-            Run Cache: ${{ steps.step-cache-run.outputs.cache-hit == 'true' && 'Hit' || 'Miss' }}
 
       - name: Cache Integration Test Repository Files
         if: ${{ steps.step-cache-run.outputs.cache-hit != 'true' }}
