@@ -190,6 +190,8 @@ jobs:
         id: step-cache-build
         if: ${{ steps.step-cache-run.outputs.cache-hit != 'true' }}
         uses: ./.github/actions/build-for-integrations
+        with:
+          node-version: ${{ matrix.node-version }}
 
       - uses: ./.github/actions/echo
         if: ${{ steps.step-cache-run.outputs.cache-hit != 'true' }}
@@ -238,6 +240,8 @@ jobs:
 
       - name: Install Using Cached Build
         uses: ./.github/actions/build-for-integrations
+        with:
+          node-version: ${{ needs.prepare.outputs.node_version }}
 
       - name: Create the temp directory
         run: |
