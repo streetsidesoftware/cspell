@@ -72,7 +72,7 @@
   "scripts": {
     "build": "tsdown && pnpm build:tsc",
     "build:readme": "pnpm build:readme:help",
-    "build:readme:help": "pnpm build:readme:help:lint && pnpm build:readme:help:trace && inject-markdown README.md && prettier -w README.md",
+    "build:readme:help": "pnpm build:readme:help:lint && pnpm build:readme:help:trace && inject-markdown --allow-outside-root ../.. README.md && prettier -w README.md",
     "build:readme:help:lint": "COLUMNS=72 ./bin.mjs lint --help > static/help-lint.txt",
     "build:readme:help:trace": "COLUMNS=72 ./bin.mjs trace --help > static/help-trace.txt",
     "build:tsc": "tsc -p .",
