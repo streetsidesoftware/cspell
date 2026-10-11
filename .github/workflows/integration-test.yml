@@ -239,7 +239,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: ${{ github.ref_name == 'main' && 'main' || '' }}
+          ref: ${{ github.ref_name == 'main' && 'main' || needs.prepare.outputs.ref }}
 
       - name: Install Using Cached Build
         uses: ./.github/actions/build-for-integrations
