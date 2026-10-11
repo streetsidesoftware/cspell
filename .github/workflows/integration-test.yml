@@ -92,6 +92,7 @@ jobs:
           show-summary: true
           node-version: ${{ env.NODE_VERSION }}
           use-setup: true
+          save-cache: true
 
   integration-tests:
     needs:
