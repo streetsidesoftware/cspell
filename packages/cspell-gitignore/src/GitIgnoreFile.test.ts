@@ -57,6 +57,19 @@ describe('GitIgnoreFile', () => {
         expect(gif?.isIgnored(require.resolve('vitest'))).toBe(true);
     });
 
+    test.each`
+        patterns                        | filename          | expected
+        ${['!keep.txt', '*.txt']}       | ${'keep.txt'}     | ${true}
+        ${['*.txt', '!a.txt', 'a.txt']} | ${'a.txt'}        | ${true}
+        ${['tmp/*', '!tmp/.gitkeep']}   | ${'tmp/.gitkeep'} | ${false}
+        ${['tmp/*', '!tmp/.gitkeep']}   | ${'tmp/a.txt'}    | ${true}
+    `('honors rule order in a parsed .gitignore: $patterns, $filename', ({ patterns, filename, expected }) => {
+        const content = `# Ordered ignore rules\n\n${patterns.join('\n')}\n`;
+        const gif = GitIgnoreFile.parseGitignore(content, path.join(__dirname, '.gitignore'));
+
+        expect(gif.isIgnored(path.join(__dirname, filename))).toBe(expected);
+    });
+
     test('getGlobs', () => {
         const gif = sampleGitIgnoreFile();
         expect(gif.getGlobs(__dirname).sort()).toEqual([

@@ -253,6 +253,10 @@ describe('Rule ordering', () => {
         patterns                                                                       | filename                                    | expected
         ${['*ignored/', '!un-ignored/', 'node_modules/']}                              | ${'/test/un-ignored/node_modules/test.txt'} | ${true}
         ${['*ignored/', '!un-ignored/', 'node_modules/', '!un-ignored/node_modules/']} | ${'/test/un-ignored/node_modules/test.txt'} | ${false}
+        ${['!keep.txt', '*.txt']}                                                      | ${'/test/keep.txt'}                         | ${true}
+        ${['*.txt', '!a.txt', 'a.txt']}                                                | ${'/test/a.txt'}                            | ${true}
+        ${['tmp/*', '!tmp/.gitkeep']}                                                  | ${'/test/tmp/.gitkeep'}                     | ${false}
+        ${['tmp/*', '!tmp/.gitkeep']}                                                  | ${'/test/tmp/a.txt'}                        | ${true}
     `('honors the final matching ignore rule', ({ patterns, filename, expected }) => {
         const matcher = new GlobMatcher(patterns, { root: '/test' });
 
