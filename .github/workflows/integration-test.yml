@@ -23,8 +23,6 @@ on:
       - 'packages/**/*.mts'
       - 'integration-tests/**'
       - '!integration-tests/perf/**'
-      # Restart an in-progress run, so its rows are appended to the latest perf data.
-      - 'integration-tests/perf/perf.csv'
       - 'package.json'
       - '*-lock.yaml'
       - '.github/workflows/integration-test.yml'
@@ -237,8 +235,11 @@ jobs:
     # We do not want to fail the build if the user does not have permissions to comment on the PR.
     continue-on-error: true
     steps:
+      # On main, use the latest commit, so the rows are appended to the latest perf data.
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.ref_name == 'main' && 'main' || needs.prepare.outputs.ref }}
 
       - name: Install Using Cached Build
         uses: ./.github/actions/build-for-integrations
@@ -262,6 +263,10 @@ jobs:
       - name: append the runs
         run: |
           touch temp/perf/perf-run-empty.csv
+          # Keep the rows of an open perf data PR; updating the PR replaces its branch.
+          if git fetch --no-tags --depth=1 origin update-perf-main; then
+            git show FETCH_HEAD:integration-tests/perf/perf.csv > temp/perf/perf-run-pending.csv
+          fi
           # Skip rows already in perf.csv; cached runs upload their rows again.
           cat temp/perf/perf-run-*.csv | sort | awk 'NR == FNR { seen[$0] = 1; next } !seen[$0]++' integration-tests/perf/perf.csv - > temp/perf-new-rows.csv
           cat temp/perf-new-rows.csv >> integration-tests/perf/perf.csv
