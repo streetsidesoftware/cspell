@@ -13,6 +13,12 @@ inputs:
     required: false
     description: |
       Run node setup if it is necessary to build.
+  save-cache:
+    required: false
+    description: |
+      Save the pnpm store to the cache. Set it in one job per run, so the store is saved once
+      instead of once per job.
+    default: 'false'
 
 outputs:
   key:
@@ -83,6 +89,7 @@ runs:
       uses: ./.github/actions/setup-pnpm
       with:
         node-version: ${{ inputs.node-version }}
+        save-cache: ${{ inputs.save-cache }}
 
     - name: Install Dependencies
       # Install production (non-test) dependencies only
