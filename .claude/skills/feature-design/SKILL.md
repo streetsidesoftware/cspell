@@ -1,6 +1,6 @@
 ---
 name: feature-design
-description: 'Design a cspell feature before and while building it, through a short interview that writes a single design file under docs/designs/, or check a small change for side effects before it is built. Use when the user asks to design, spec, or think through a feature, asks for a design doc, or accepts a suggestion from config-option, cli-option, or a reviewer to design first. Also use when the user asks to check a change for side effects. Never start it unprompted: when a change makes a public, hard-to-undo choice with more than one reasonable answer, suggest it in one line and let the user decide. Not for refactors, dependency updates, or fully specified changes.'
+description: 'Design a cspell feature before and while building it, through a short interview that writes a design under docs/designs/ (one file, or a folder for a large feature), or check a small change for side effects before it is built. Use when the user asks to design, spec, or think through a feature, asks for a design doc, or accepts a suggestion from config-option, cli-option, or a reviewer to design first. Also use when the user asks to check a change for side effects. Never start it unprompted: when a change makes a public, hard-to-undo choice with more than one reasonable answer, suggest it in one line and let the user decide. Not for refactors, dependency updates, or fully specified changes.'
 ---
 
 # feature-design
@@ -14,7 +14,7 @@ into detail, step back to the sketch.
 ## Design a feature
 
 1. **Set up a branch.** Propose a short kebab-case slug, such as `ignore-regex-per-language`, and use it unless the user
-   objects. It names the file and the branch. Set up the branch and worktree before writing anything, so the design
+   objects. It names the design and the branch. Set up the branch and worktree before writing anything, so the design
    never sits as uncommitted changes in the user's checkout. Check for an earlier session's work first:
 
    ```sh
@@ -42,7 +42,8 @@ into detail, step back to the sketch.
 
 3. **Sketch.** Read `docs/design-principles.md`, `docs/glossary.md`, and `docs/designs/checks.md`. Look in `rfc/`
    and closed issues for earlier proposals, and link a matching RFC. Propose the sketch in a few lines and agree on it.
-   Write `docs/designs/<feature>.md` with the README's skeleton, and commit it.
+   Write `docs/designs/<feature>.md` with the README's skeleton, and commit it. When a part can be read on its own,
+   move to a folder as the README's "Where it lives" describes, and say so in a line.
 
    Check the sketch against the design checks yourself. They aren't questions to ask. Bring up a finding only when it
    could change the sketch or is hard to undo once it ships.
@@ -62,19 +63,19 @@ into detail, step back to the sketch.
      useful, not per decision.
 
 5. **Stop when the code is the easier answer.** Say so in a line, and stop. Don't start building unless asked. Offer to
-   look at a change's implications, review the code, or clean up afterward. During implementation, update the file when
+   look at a change's implications, review the code, or clean up afterward. During implementation, update the design when
    the code shows something the design missed.
 
 6. **Trim before merge,** when the user says the design is done, as in the README's "Before merge".
-   - Write the `tl;dr`, add the snapshot line, cut the Design section to what the code can't say, and collapse a folder
-     to its `README.md`.
+   - Write the `tl;dr`, add the snapshot line, and cut the Design section to what the code can't say. In a folder, trim
+     each file the same way, and delete one with nothing left to say.
    - List the open questions, and settle or drop each with the user. Propose an issue only for a real problem someone
      would act on.
    - List side remarks that might be standing rules, and let the user pick which go into `docs/design-principles.md` or
      another doc. A rule that could affect other designs gets its own `docs:` PR.
-   - Start a subagent that is given only the path of the trimmed file. Ask it to say what the feature does, why, and why
-     it's shaped that way, and to list anything it had to guess or found contradictory. Show the user its report, and
-     fix what they agree with.
+   - Start a subagent that is given only the paths of the trimmed design. Ask it to say what the feature does, why, and
+     why it's shaped that way, and to list anything it had to guess or found contradictory. Show the user its report,
+     and fix what they agree with.
    - If the code is on the same branch, check that the PR is titled `feat:` or `fix:` and its body is written for the
      release notes.
 
