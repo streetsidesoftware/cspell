@@ -1,8 +1,9 @@
 # Glob Symlinks
 
-**tl;dr:** `cspell lint --glob-symlinks`, or `CSPELL_GLOB_SYMLINKS=true`, makes glob searches follow symbolic links, so
-a tree of links such as Bazel runfiles can be checked with a plain glob. It's off by default, can't be set in a
-configuration file, and reports files by the path through the link.
+**tl;dr:** With `--glob-symlinks`, `cspell lint` follows symbolic links in glob searches. A tree of links, such as
+Bazel runfiles, can then be checked with a plain glob. Setting `CSPELL_GLOB_SYMLINKS=true` does the same. It's off by
+default, and it can't be set in a configuration file. Followed links may point anywhere. Files are reported by the path
+through the link, not by where it points.
 
 This describes the design when it merged, in [#9342](https://github.com/streetsidesoftware/cspell/pull/9342). The
 code and the docs are the source of truth.

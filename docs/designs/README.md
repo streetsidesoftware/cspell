@@ -79,7 +79,8 @@ Work from the top down, and stop when the code is the easier way to answer the r
 
 Finish the design in the same PR. This removes the working notes, not the explanation:
 
-- Add a `tl;dr` at the top: two or three lines on what the feature does and the choices that matter.
+- Add a `tl;dr` at the top: a short paragraph on what the feature does and the choices that matter. Use short, plain
+  sentences rather than packing it in.
 - Add a line saying it describes the design when it merged, and that the code and docs are the source of truth.
 - Make the Design section describe the feature as built: what a user does and sees, with examples, how it behaves in
   the cases that matter, and each choice with the alternatives turned down and why.
