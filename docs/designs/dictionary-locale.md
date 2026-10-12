@@ -83,7 +83,8 @@ Turned down:
 
 A dictionary with a locale is searched with the forms the locale's rules give, and with the forms cspell tries today.
 The two only differ for words where the locale's rules matter, such as Turkish words with `I` or `İ`, so other words
-cost nothing extra.
+cost nothing extra. Both case changes a lookup makes follow the locale: the lower-case form, and the capitalized form of
+an all-caps word (`İSTANBUL` to `İstanbul`, where the default rules leave a combining dot, U+0307, after the `i`).
 
 - `İnceleme`, `Ispanak`, and `IŞIK` pass through the Turkish forms.
 - `IRAK` with `ignoreCase` is still found through today's form, even in a dictionary built before this change. Every
@@ -106,8 +107,9 @@ suggestions agree. The Azerbaijani dictionary already sets it. The Turkish dicti
 
 This field used to only tune suggestions. Now it also changes what gets flagged, and its doc comment says so.
 
-The value is a comma-separated list, such as `tr,tr-TR`. cspell uses the first locale in the list that JavaScript
-supports. A value that isn't a valid locale, such as `*`, isn't meaningful here, but nothing rejects it when a config
+The value is a comma-separated list, such as `tr,tr-TR`. cspell reads it the way it already reads the document's
+locale when matching the case of suggestions: `tr_TR` is read as `tr-TR`, and the first locale in the list that
+JavaScript supports is used. A value that isn't a valid locale, such as `*`, isn't meaningful here, but nothing rejects it when a config
 is loaded. cspell then uses the default rules, so a bad value can't crash cspell or flag more words than before.
 
 Turned down:
@@ -124,5 +126,5 @@ Turned down:
 - Should `dictionaryInformation.locale` reject values that aren't locales? Today the schema allows any string.
 
 <!---
-    cspell:ignore inceleme İnceleme İNCELEME ispanak ıspanak ispanakk ışık IŞIK irak ırak ijsland jsland İnside isim ISIM İSİM
+    cspell:ignore inceleme İnceleme İNCELEME ispanak ıspanak ispanakk ışık IŞIK irak ırak ijsland jsland İnside isim ISIM İSİM İstanbul İSTANBUL
 -->
