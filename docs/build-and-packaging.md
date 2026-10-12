@@ -7,18 +7,18 @@ flags, see [Config options and CLI flags](./config-and-cli.md). For publishing, 
 
 This is a pnpm workspace (`pnpm-workspace.yaml`). The main directories:
 
-| Directory                   | What it is                                                                    |
-| --------------------------- | ----------------------------------------------------------------------------- |
-| `packages/*`                | The published packages: `cspell` (the CLI), `cspell-lib`, `cspell-types`, ... |
-| `@internal/tsdown`          | Shared tsdown build config.                                                   |
-| `scripts`                   | Repo scripts: schema build, release notes, prerelease mode.                   |
-| `test-packages/*/*`         | Packages that test the published packages as a consumer would.                |
-| `test-fixtures`, `fixtures` | Test data. Misspellings in them are deliberate.                               |
-| `integration-tests`         | Runs cspell against real repositories. Needs network.                         |
-| `examples`                  | Example configs and files. Misspellings in them are deliberate.               |
-| `rfc`, `rfc/drafts`         | Design proposals. Some are workspace packages. See [ADRs](./ADRs/README.md).  |
-| `website`                   | The Docusaurus site at https://cspell.org, for people who use cspell.         |
-| `tools/perf-chart`          | Generates performance charts from cspell performance data. Not published.     |
+| Directory                   | What it is                                                                                     |
+| --------------------------- | ---------------------------------------------------------------------------------------------- |
+| `packages/*`                | The published packages: `cspell` (the CLI), `cspell-lib`, `cspell-types`, ...                  |
+| `@internal/tsdown`          | Shared tsdown build config.                                                                    |
+| `scripts`                   | Repo scripts: schema build, release notes, prerelease mode.                                    |
+| `test-packages/*/*`         | Packages that test the published packages as a consumer would.                                 |
+| `test-fixtures`, `fixtures` | Test data. Misspellings in them are deliberate.                                                |
+| `integration-tests`         | Runs cspell against real repositories. Needs network.                                          |
+| `examples`                  | Example configs and files. Misspellings in them are deliberate.                                |
+| `rfc`, `rfc/drafts`         | Design proposals. Some are workspace packages. See [Designing a feature](./feature-design.md). |
+| `website`                   | The Docusaurus site at https://cspell.org, for people who use cspell.                          |
+| `tools/perf-chart`          | Generates performance charts from cspell performance data. Not published.                      |
 
 ## Tooling
 
@@ -180,7 +180,8 @@ When adding or changing a workflow:
 
 - Set up Node and pnpm with `.github/actions/setup-node`, the same setup that publishing uses. Jobs that run many
   times per PR, like the integration tests, use `.github/actions/setup-pnpm` (`pnpm/setup`) instead. Its Node has no
-  npm, npx, or Corepack.
+  npm, npx, or Corepack. Only one of those jobs should save the pnpm store (`save-cache`), or each job saves its own
+  copy and fills the cache.
 - Add `workflow_dispatch` when possible, so it can be run by hand.
 - Add `workflow_call` only to a new workflow, and only if it has no `concurrency` section: in a called workflow,
   `github.workflow` is the caller's name, so the groups can collide. Don't add it to existing workflows.

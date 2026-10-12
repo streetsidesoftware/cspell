@@ -92,6 +92,7 @@ jobs:
           show-summary: true
           node-version: ${{ env.NODE_VERSION }}
           use-setup: true
+          save-cache: true
 
   integration-tests:
     needs:
@@ -173,7 +174,7 @@ jobs:
 
       - name: Cache Integration Run
         id: step-cache-run
-        uses: actions/cache@v6.1.0
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           key: integration-run--${{ env.REF_BRANCH }}-${{ steps.repo-hash.outputs.value }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}-1
           # Store the patch files to update the integration perf data
@@ -183,22 +184,18 @@ jobs:
       - uses: ./.github/actions/echo
         with:
           value: |
-            Run Cache: ${{ steps.step-cache-run.outputs == 'true' && 'Hit' || 'Miss' }}
+            Run Cache: ${{ steps.step-cache-run.outputs.cache-hit == 'true' && 'Hit' || 'Miss' }}
 
       - name: Use Cache Build
         id: step-cache-build
         if: ${{ steps.step-cache-run.outputs.cache-hit != 'true' }}
         uses: ./.github/actions/build-for-integrations
-
-      - uses: ./.github/actions/echo
-        if: ${{ steps.step-cache-run.outputs.cache-hit != 'true' }}
         with:
-          value: |
-            Run Cache: ${{ steps.step-cache-run.outputs.cache-hit == 'true' && 'Hit' || 'Miss' }}
+          node-version: ${{ matrix.node-version }}
 
       - name: Cache Integration Test Repository Files
         if: ${{ steps.step-cache-run.outputs.cache-hit != 'true' }}
-        uses: actions/cache@v6.1.0
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           key: int-repo-temp-files-${{ matrix.repo }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}
           path: |
@@ -213,8 +210,8 @@ jobs:
           cd integration-tests
           && pnpm run integration-tests -- "$REPO"
 
+      # Also on a cache hit: a cancelled run may have cached rows it never appended.
       - name: store perf run
-        if: ${{ steps.step-cache-run.outputs.cache-hit != 'true' }}
         uses: actions/upload-artifact@v7
         with:
           name: perf-repo-${{ steps.step-normalize-repo-name.outputs.REPO_NAME }}
@@ -232,11 +229,16 @@ jobs:
     # We do not want to fail the build if the user does not have permissions to comment on the PR.
     continue-on-error: true
     steps:
+      # On main, use the latest commit, so the rows are appended to the latest perf data.
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.ref_name == 'main' && 'main' || needs.prepare.outputs.ref }}
 
       - name: Install Using Cached Build
         uses: ./.github/actions/build-for-integrations
+        with:
+          node-version: ${{ needs.prepare.outputs.node_version }}
 
       - name: Create the temp directory
         run: |
@@ -255,7 +257,13 @@ jobs:
       - name: append the runs
         run: |
           touch temp/perf/perf-run-empty.csv
-          cat temp/perf/perf-run-*.csv | sort >> integration-tests/perf/perf.csv
+          # Keep the rows of an open perf data PR; updating the PR replaces its branch.
+          if git fetch --no-tags --depth=1 origin update-perf-main; then
+            git show FETCH_HEAD:integration-tests/perf/perf.csv > temp/perf/perf-run-pending.csv
+          fi
+          # Skip rows already in perf.csv; cached runs upload their rows again.
+          cat temp/perf/perf-run-*.csv | sort | awk 'NR == FNR { seen[$0] = 1; next } !seen[$0]++' integration-tests/perf/perf.csv - > temp/perf-new-rows.csv
+          cat temp/perf-new-rows.csv >> integration-tests/perf/perf.csv
           ./tools/perf-chart/bin.ts ./integration-tests/perf/perf.csv -o perf-report.md --daily-csv ./static/daily-stats.csv
 
       - name: Gen Report

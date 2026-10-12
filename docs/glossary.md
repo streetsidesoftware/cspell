@@ -2,8 +2,6 @@
 
 Terms and concepts a maintainer needs to know, about cspell and this repo. Alphabetical.
 
-Terms introduced by a single feature's ADRs are in the [ADR glossary](./ADRs/glossary.md).
-
 ## Bundled dictionaries
 
 The dictionaries cspell loads by default, from the `@cspell/cspell-bundled-dicts` package. Its

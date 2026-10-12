@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["--issues-summary-report","**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2935, Issues found: 8870 in 953 files.
+ CSpell: Files checked: 2935, Issues found: 8876 in 954 files.
  exit code: 1
 django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 django/apps/registry.py:134:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -1117,22 +1117,22 @@ django/core/handlers/base.py:249:56    - Unknown word (subthread)  -- synchronou
 django/core/handlers/wsgi.py:151:12    - Unknown word (repercent)  -- return repercent_broken_unicode(path
 django/core/handlers/wsgi.py:167:53    - Unknown word (lighttpd)   -- not every web server (lighttpd!) passes this
 django/core/handlers/wsgi.py:8:35      - Unknown word (repercent)  -- utils.encoding import repercent_broken_unicode
-django/core/mail/__init__.py:100:12    - Unknown word (klass)      -- return klass(**kwds)
-django/core/mail/__init__.py:103:12    - Unknown word (posargs)    -- @deprecate_posargs(
-django/core/mail/__init__.py:186:12    - Unknown word (posargs)    -- @deprecate_posargs(
-django/core/mail/__init__.py:196:5     - Unknown word (datatuple)  -- datatuple,
-django/core/mail/__init__.py:205:13    - Unknown word (datatuple)  -- Given a datatuple of (subject, message
-django/core/mail/__init__.py:255:52    - Unknown word (datatuple)  -- sender, recipient in datatuple
-django/core/mail/__init__.py:273:18    - Unknown word (posargs)    -- # @deprecate_posargs decorator.
-django/core/mail/__init__.py:28:15     - Unknown word (posargs)    -- deprecate_posargs,
-django/core/mail/__init__.py:72:12     - Unknown word (posargs)    -- @deprecate_posargs(RemovedInDjango2028Warning
-django/core/mail/__init__.py:99:5      - Unknown word (klass)      -- klass = import_string(backend
+django/core/mail/__init__.py:100:5     - Unknown word (klass)      -- klass = import_string(backend
+django/core/mail/__init__.py:101:12    - Unknown word (klass)      -- return klass(**kwds)
+django/core/mail/__init__.py:104:12    - Unknown word (posargs)    -- @deprecate_posargs(
+django/core/mail/__init__.py:187:12    - Unknown word (posargs)    -- @deprecate_posargs(
+django/core/mail/__init__.py:197:5     - Unknown word (datatuple)  -- datatuple,
+django/core/mail/__init__.py:206:13    - Unknown word (datatuple)  -- Given a datatuple of (subject, message
+django/core/mail/__init__.py:256:52    - Unknown word (datatuple)  -- sender, recipient in datatuple
+django/core/mail/__init__.py:274:18    - Unknown word (posargs)    -- # @deprecate_posargs decorator.
+django/core/mail/__init__.py:29:15     - Unknown word (posargs)    -- deprecate_posargs,
+django/core/mail/__init__.py:73:12     - Unknown word (posargs)    -- @deprecate_posargs(RemovedInDjango2028Warning
 django/core/mail/backends/locmem.py:21:62     - Unknown word (posarg)     -- (The only supported posarg will be
 django/core/mail/message.py:213:41    - Unknown word (surrogateescape) -- line.encode(errors="surrogateescape"))
 django/core/mail/message.py:249:16    - Unknown word (posargs)         -- @deprecate_posargs(
 django/core/mail/message.py:24:15     - Unknown word (posargs)    -- deprecate_posargs,
-django/core/mail/message.py:494:61    - Unknown word (surrogateescape) -- encoding=encoding, errors="surrogateescape"
-django/core/mail/message.py:610:16    - Unknown word (posargs)         -- @deprecate_posargs(
+django/core/mail/message.py:499:61    - Unknown word (surrogateescape) -- encoding=encoding, errors="surrogateescape"
+django/core/mail/message.py:619:16    - Unknown word (posargs)         -- @deprecate_posargs(
 django/core/management/__init__.py:270:13    - Unknown word (klass)      -- klass = app_name
 django/core/management/__init__.py:272:13    - Unknown word (klass)      -- klass = load_command_class
 django/core/management/__init__.py:273:40    - Unknown word (klass)      -- settings_exception and klass.requires_settings:
@@ -1558,16 +1558,16 @@ django/db/backends/sqlite3/_functions.py:88:51     - Unknown word (Samp)       -
 django/db/backends/sqlite3/_functions.py:93:33     - Unknown word (UUIDV)      -- connection.create_function("UUIDV4", 0, _sqlite_uuid4
 django/db/backends/sqlite3/_functions.py:95:37     - Unknown word (UUIDV)      -- connection.create_function("UUIDV7", 0, _sqlite_uuid7
 django/db/backends/sqlite3/_functions.py:97:26     - Unknown word (compileoption) -- sql = "select sqlite_compileoption_used('ENABLE_MATH_FUNCTIONS
-django/db/backends/sqlite3/base.py:163:44    - Unknown word (DECLTYPES)  -- types": Database.PARSE_DECLTYPES | Database.PARSE_COLNAMES
-django/db/backends/sqlite3/base.py:163:71    - Unknown word (COLNAMES)   -- DECLTYPES | Database.PARSE_COLNAMES,
-django/db/backends/sqlite3/base.py:337:8     - Unknown word (QMARK)      -- FORMAT_QMARK_REGEX = _lazy_re_compile
-django/db/backends/sqlite3/base.py:347:26    - Unknown word (qmark)      -- "format" style to "qmark" style
-django/db/backends/sqlite3/base.py:361:9     - Unknown word (executemany) -- def executemany(self, query, param_list
-django/db/backends/sqlite3/base.py:364:9     - Unknown word (peekable)    -- peekable, param_list = tee(iter
-django/db/backends/sqlite3/base.py:365:28    - Unknown word (peekable)    -- if (params := next(peekable, None)) and isinstance
-django/db/backends/sqlite3/base.py:370:24    - Unknown word (executemany) -- return super().executemany(query, param_list)
-django/db/backends/sqlite3/base.py:374:47    - Unknown word (qmark)       -- from "format" style to "qmark" style.
-django/db/backends/sqlite3/base.py:375:27    - Unknown word (QMARK)       -- return FORMAT_QMARK_REGEX.sub("?", query
+django/db/backends/sqlite3/base.py:164:44    - Unknown word (DECLTYPES)  -- types": Database.PARSE_DECLTYPES | Database.PARSE_COLNAMES
+django/db/backends/sqlite3/base.py:164:71    - Unknown word (COLNAMES)   -- DECLTYPES | Database.PARSE_COLNAMES,
+django/db/backends/sqlite3/base.py:343:8     - Unknown word (QMARK)      -- FORMAT_QMARK_REGEX = _lazy_re_compile
+django/db/backends/sqlite3/base.py:353:26    - Unknown word (qmark)      -- "format" style to "qmark" style
+django/db/backends/sqlite3/base.py:367:9     - Unknown word (executemany) -- def executemany(self, query, param_list
+django/db/backends/sqlite3/base.py:370:9     - Unknown word (peekable)    -- peekable, param_list = tee(iter
+django/db/backends/sqlite3/base.py:371:28    - Unknown word (peekable)    -- if (params := next(peekable, None)) and isinstance
+django/db/backends/sqlite3/base.py:376:24    - Unknown word (executemany) -- return super().executemany(query, param_list)
+django/db/backends/sqlite3/base.py:380:47    - Unknown word (qmark)       -- from "format" style to "qmark" style.
+django/db/backends/sqlite3/base.py:381:27    - Unknown word (QMARK)       -- return FORMAT_QMARK_REGEX.sub("?", query
 django/db/backends/sqlite3/creation.py:105:13    - Unknown word (ondisk)     -- ondisk_db = sqlite3.connect
 django/db/backends/sqlite3/creation.py:106:47    - Unknown word (ondisk)     -- connection.connection.backup(ondisk_db)
 django/db/backends/sqlite3/creation.py:107:13    - Unknown word (ondisk)     -- ondisk_db.close()
@@ -1712,7 +1712,10 @@ django/db/models/functions/text.py:315:47    - Unknown word (Postgre)    -- Mixi
 django/db/models/functions/text.py:31:7      - Unknown word (Postgre)    -- class PostgreSQLSHAMixin:
 django/db/models/functions/text.py:320:47    - Unknown word (Postgre)    -- Mixin, OracleHashMixin, PostgreSQLSHAMixin, Transform
 django/db/models/functions/text.py:342:63    - Unknown word (STRPOS)     -- connection, function="STRPOS", **extra_context)
-django/db/models/functions/uuid.py:39:17     - Unknown word (UUIDV)      -- function = "UUIDV7"
+django/db/models/functions/uuid.py:35:69     - Unknown word (uppercased) -- which is implicitly uppercased
+django/db/models/functions/uuid.py:36:15     - Unknown word (RAWTOHEX)   -- # via RAWTOHEX() when persisted to
+django/db/models/functions/uuid.py:42:30     - Unknown word (RAWTOHEX)   -- template=f"LOWER(RAWTOHEX({self.template}))",
+django/db/models/functions/uuid.py:48:17     - Unknown word (UUIDV)      -- function = "UUIDV7"
 django/db/models/functions/uuid.py:7:17      - Unknown word (UUIDV)      -- function = "UUIDV4"
 django/db/models/functions/window.py:20:17     - Unknown word (CUME)       -- function = "CUME_DIST"
 django/db/models/lookups.py:398:18    - Unknown word (boolfield)  -- # turns "boolfield__exact=True" into "WHERE
@@ -2539,82 +2542,73 @@ django/views/i18n.py:49:43     - Unknown word (REFERER)    -- request.META.get("
 django/views/static.py:53:5      - Unknown word (statobj)    -- statobj = fullpath.stat()
 django/views/static.py:55:53     - Unknown word (statobj)    -- IF_MODIFIED_SINCE"), statobj.st_mtime
 django/views/static.py:61:51     - Unknown word (statobj)    -- Modified"] = http_date(statobj.st_mtime)
-docs/_ext/djangodocs.py:118:31    - Unknown word (starttag)        -- self.body.append(self.starttag(node, "table", CLASS
-docs/_ext/djangodocs.py:125:20    - Unknown word (parameterlist)   -- def visit_desc_parameterlist(self, node):
-docs/_ext/djangodocs.py:145:21    - Unknown word (parameterlist)   -- def depart_desc_parameterlist(self, node):
-docs/_ext/djangodocs.py:14:32     - Unknown word (Cmdoption)    -- sphinx.domains.std import Cmdoption
-docs/_ext/djangodocs.py:162:15    - Unknown word (versionmodified) -- def visit_versionmodified(self, node):
-docs/_ext/djangodocs.py:163:31    - Unknown word (starttag)        -- self.body.append(self.starttag(node, "div", CLASS=node
-docs/_ext/djangodocs.py:169:16    - Unknown word (versionmodified) -- def depart_versionmodified(self, node):
-docs/_ext/djangodocs.py:181:39    - Unknown word (signode)         -- admin_node(env, sig, signode):
-docs/_ext/djangodocs.py:185:5     - Unknown word (signode)         -- signode += addnodes.desc_name
-docs/_ext/djangodocs.py:197:24    - Unknown word (litblk)          -- def __init__(self, litblk_obj):
-docs/_ext/djangodocs.py:198:24    - Unknown word (litblk)          -- self.wrapped = litblk_obj
-docs/_ext/djangodocs.py:252:58    - Unknown word (docname)         -- self.builder.current_docname, node.line))
-docs/_ext/djangodocs.py:255:24    - Unknown word (doscon)          -- win_text, "doscon", warn=warner, linenos
-docs/_ext/djangodocs.py:273:12    - Unknown word (doscon)          -- # The 'doscon' Pygments formatter
-docs/_ext/djangodocs.py:27:9      - Unknown word (rolename)     -- rolename="setting",
-docs/_ext/djangodocs.py:323:13    - Unknown word (bchanged)        -- bchanged = False
-docs/_ext/djangodocs.py:326:17    - Unknown word (modline)         -- modline = cmdline_to_win(line
-docs/_ext/djangodocs.py:327:20    - Unknown word (modline)         -- if modline is None:
-docs/_ext/djangodocs.py:32:19     - Unknown word (ttag)         -- rolename="ttag",
-docs/_ext/djangodocs.py:32:9      - Unknown word (rolename)     -- rolename="ttag",
-docs/_ext/djangodocs.py:330:52    - Unknown word (modline)         -- append(self.WIN_PROMPT + modline)
-docs/_ext/djangodocs.py:331:21    - Unknown word (bchanged)        -- bchanged = True
-docs/_ext/djangodocs.py:332:16    - Unknown word (bchanged)        -- if bchanged:
-docs/_ext/djangodocs.py:345:42    - Unknown word (serialno)        -- uid"] = str(env.new_serialno("console"))
-docs/_ext/djangodocs.py:353:64    - Unknown word (rawsource)       -- = super().run()[0].rawsource
-docs/_ext/djangodocs.py:360:43    - Unknown word (templatename)    -- hook(app, pagename, templatename, context, doctree):
-docs/_ext/djangodocs.py:360:66    - Unknown word (doctree)         -- templatename, context, doctree):
-docs/_ext/djangodocs.py:365:9     - Unknown word (doctree)         -- doctree, "_console_directive
-docs/_ext/djangodocs.py:37:19     - Unknown word (tfilter)      -- rolename="tfilter",
-docs/_ext/djangodocs.py:37:9      - Unknown word (rolename)     -- rolename="tfilter",
-docs/_ext/djangodocs.py:405:9     - Unknown word (refuri)          -- refuri=url,
-docs/_ext/djangodocs.py:41:24     - Unknown word (fieldlookup)  -- directivename="fieldlookup",
-docs/_ext/djangodocs.py:42:9      - Unknown word (rolename)     -- rolename="lookup",
-docs/_ext/djangodocs.py:47:19     - Unknown word (djadmin)      -- rolename="djadmin",
-docs/_ext/djangodocs.py:47:9      - Unknown word (rolename)     -- rolename="djadmin",
-docs/_ext/djangodocs.py:51:46     - Unknown word (Cmdoption)    -- django-admin-option", Cmdoption)
-docs/_ext/djangodocs.py:92:25     - Unknown word (versionmodified) -- node = addnodes.versionmodified()
-docs/_ext/djangodocs.py:9:15      - Unknown word (statemachine) -- from docutils.statemachine import ViewList
+docs/_ext/djangodocs.py:101:24    - Unknown word (litblk)       -- def __init__(self, litblk_obj):
+docs/_ext/djangodocs.py:102:24    - Unknown word (litblk)       -- self.wrapped = litblk_obj
+docs/_ext/djangodocs.py:12:32     - Unknown word (Cmdoption)    -- sphinx.domains.std import Cmdoption
+docs/_ext/djangodocs.py:148:29    - Unknown word (atts)         -- win_node.update_all_atts(node)
+docs/_ext/djangodocs.py:149:33    - Unknown word (doscon)       -- node["language"] = "doscon"
+docs/_ext/djangodocs.py:152:19    - Unknown word (dupnames)     -- win_node["dupnames"] = []
+docs/_ext/djangodocs.py:172:12    - Unknown word (doscon)       -- # The 'doscon' Pygments formatter
+docs/_ext/djangodocs.py:222:13    - Unknown word (bchanged)     -- bchanged = False
+docs/_ext/djangodocs.py:225:17    - Unknown word (modline)      -- modline = cmdline_to_win(line
+docs/_ext/djangodocs.py:226:20    - Unknown word (modline)      -- if modline is None:
+docs/_ext/djangodocs.py:229:52    - Unknown word (modline)      -- append(self.WIN_PROMPT + modline)
+docs/_ext/djangodocs.py:230:21    - Unknown word (bchanged)     -- bchanged = True
+docs/_ext/djangodocs.py:231:16    - Unknown word (bchanged)     -- if bchanged:
+docs/_ext/djangodocs.py:244:42    - Unknown word (serialno)     -- uid"] = str(env.new_serialno("console"))
+docs/_ext/djangodocs.py:252:64    - Unknown word (rawsource)    -- = super().run()[0].rawsource
+docs/_ext/djangodocs.py:25:9      - Unknown word (rolename)     -- rolename="setting",
+docs/_ext/djangodocs.py:295:9     - Unknown word (refuri)       -- refuri=url,
+docs/_ext/djangodocs.py:30:19     - Unknown word (ttag)         -- rolename="ttag",
+docs/_ext/djangodocs.py:30:9      - Unknown word (rolename)     -- rolename="ttag",
+docs/_ext/djangodocs.py:35:19     - Unknown word (tfilter)      -- rolename="tfilter",
+docs/_ext/djangodocs.py:35:9      - Unknown word (rolename)     -- rolename="tfilter",
+docs/_ext/djangodocs.py:39:24     - Unknown word (fieldlookup)  -- directivename="fieldlookup",
+docs/_ext/djangodocs.py:40:9      - Unknown word (rolename)     -- rolename="lookup",
+docs/_ext/djangodocs.py:45:19     - Unknown word (djadmin)      -- rolename="djadmin",
+docs/_ext/djangodocs.py:45:9      - Unknown word (rolename)     -- rolename="djadmin",
+docs/_ext/djangodocs.py:49:46     - Unknown word (Cmdoption)    -- django-admin-option", Cmdoption)
+docs/_ext/djangodocs.py:85:39     - Unknown word (signode)      -- admin_node(env, sig, signode):
+docs/_ext/djangodocs.py:89:5      - Unknown word (signode)      -- signode += addnodes.desc_name
+docs/_ext/djangodocs.py:8:15      - Unknown word (statemachine) -- from docutils.statemachine import ViewList
 docs/_ext/github_links.py:35:22     - Unknown word (asname)     -- if alias.asname:
 docs/conf.py:106:12    - Unknown word (toctree)           -- # The root toctree document.
 docs/conf.py:142:1     - Unknown word (extlinks)          -- extlinks = {
 docs/conf.py:152:5     - Unknown word (extlinks)          -- extlinks["cve"] = ("https://www
-docs/conf.py:182:12    - Unknown word (sectionauthor)     -- # If true, sectionauthor and moduleauthor directives
-docs/conf.py:182:30    - Unknown word (moduleauthor)      -- true, sectionauthor and moduleauthor directives will be shown
-docs/conf.py:187:19    - Unknown word (trac)              -- pygments_style = "trac"
-docs/conf.py:207:15    - Unknown word (djangodocs)        -- html_theme = "djangodocs"
+docs/conf.py:183:12    - Unknown word (sectionauthor)     -- # If true, sectionauthor and moduleauthor directives
+docs/conf.py:183:30    - Unknown word (moduleauthor)      -- true, sectionauthor and moduleauthor directives will be shown
+docs/conf.py:188:19    - Unknown word (trac)              -- pygments_style = "trac"
+docs/conf.py:208:15    - Unknown word (djangodocs)        -- html_theme = "djangodocs"
 docs/conf.py:20:15     - Unknown word (doctree)    -- # pickle.dump(doctree, f, pickle.HIGHEST_PROTOCOL
-docs/conf.py:262:13    - Unknown word (sourcelink)        -- # html_show_sourcelink = True
+docs/conf.py:267:13    - Unknown word (sourcelink)        -- # html_show_sourcelink = True
 docs/conf.py:26:5      - Unknown word (setrecursionlimit) -- sys.setrecursionlimit(2000)
-docs/conf.py:273:12    - Unknown word (opensearch)        -- # html_use_opensearch = ''
-docs/conf.py:279:1     - Unknown word (htmlhelp)          -- htmlhelp_basename = "Djangodoc
-docs/conf.py:279:22    - Unknown word (Djangodoc)         -- htmlhelp_basename = "Djangodoc"
-docs/conf.py:281:1     - Unknown word (modindex)          -- modindex_common_prefix = ["django
-docs/conf.py:294:17    - Unknown word (xelatex)           -- latex_engine = "xelatex"
-docs/conf.py:295:11    - Unknown word (xindy)             -- latex_use_xindy = False
-docs/conf.py:298:6     - Unknown word (fontpkg)           -- "fontpkg": r"""
-docs/conf.py:299:10    - Unknown word (setmainfont)       -- \setmainfont{Symbola}
-docs/conf.py:299:22    - Unknown word (Symbola)           -- \setmainfont{Symbola}
-docs/conf.py:302:10    - Unknown word (usepackage)        -- \usepackage[UTF8]{ctex}
-docs/conf.py:302:27    - Unknown word (ctex)              -- \usepackage[UTF8]{ctex}
-docs/conf.py:307:10    - Unknown word (usepackage)        -- \usepackage{newunicodechar}
-docs/conf.py:308:29    - Unknown word (ensuremath)        -- \newunicodechar{π}{\ensuremath{\pi}}
-docs/conf.py:309:29    - Unknown word (ensuremath)        -- \newunicodechar{≤}{\ensuremath{\le}}
-docs/conf.py:310:29    - Unknown word (ensuremath)        -- \newunicodechar{≥}{\ensuremath{\ge}}
-docs/conf.py:311:29    - Unknown word (ensuremath)        -- \newunicodechar{♥}{\ensuremath{\heartsuit}}
-docs/conf.py:311:41    - Unknown word (heartsuit)         -- ewunicodechar{♥}{\ensuremath{\heartsuit}}
-docs/conf.py:312:29    - Unknown word (ensuremath)        -- \newunicodechar{…}{\ensuremath{\ldots}}
-docs/conf.py:338:14    - Unknown word (pagerefs)          -- # latex_show_pagerefs = False
-docs/conf.py:367:19    - Unknown word (startdocname)      -- # List of tuples (startdocname, targetname, title,
-docs/conf.py:367:33    - Unknown word (targetname)        -- tuples (startdocname, targetname, title, author, dir
-docs/conf.py:368:26    - Unknown word (toctree)           -- description, category, toctree_only)
-docs/conf.py:398:15    - Unknown word (djangodocs)        -- epub_theme = "djangodocs-epub"
-docs/conf.py:432:8     - Unknown word (tocdepth)          -- # epub_tocdepth = 3
-docs/conf.py:435:8     - Unknown word (tocdup)            -- # epub_tocdup = True
-docs/conf.py:437:33    - Unknown word (includehidden)     -- between 'default' and 'includehidden'.
-docs/conf.py:438:8     - Unknown word (tocscope)          -- # epub_tocscope = 'default'
+docs/conf.py:278:12    - Unknown word (opensearch)        -- # html_use_opensearch = ''
+docs/conf.py:284:1     - Unknown word (htmlhelp)          -- htmlhelp_basename = "Djangodoc
+docs/conf.py:284:22    - Unknown word (Djangodoc)         -- htmlhelp_basename = "Djangodoc"
+docs/conf.py:286:1     - Unknown word (modindex)          -- modindex_common_prefix = ["django
+docs/conf.py:299:17    - Unknown word (xelatex)           -- latex_engine = "xelatex"
+docs/conf.py:300:11    - Unknown word (xindy)             -- latex_use_xindy = False
+docs/conf.py:303:6     - Unknown word (fontpkg)           -- "fontpkg": r"""
+docs/conf.py:304:10    - Unknown word (setmainfont)       -- \setmainfont{Symbola}
+docs/conf.py:304:22    - Unknown word (Symbola)           -- \setmainfont{Symbola}
+docs/conf.py:307:10    - Unknown word (usepackage)        -- \usepackage[UTF8]{ctex}
+docs/conf.py:307:27    - Unknown word (ctex)              -- \usepackage[UTF8]{ctex}
+docs/conf.py:312:10    - Unknown word (usepackage)        -- \usepackage{newunicodechar}
+docs/conf.py:313:29    - Unknown word (ensuremath)        -- \newunicodechar{π}{\ensuremath{\pi}}
+docs/conf.py:314:29    - Unknown word (ensuremath)        -- \newunicodechar{≤}{\ensuremath{\le}}
+docs/conf.py:315:29    - Unknown word (ensuremath)        -- \newunicodechar{≥}{\ensuremath{\ge}}
+docs/conf.py:316:29    - Unknown word (ensuremath)        -- \newunicodechar{♥}{\ensuremath{\heartsuit}}
+docs/conf.py:316:41    - Unknown word (heartsuit)         -- ewunicodechar{♥}{\ensuremath{\heartsuit}}
+docs/conf.py:317:29    - Unknown word (ensuremath)        -- \newunicodechar{…}{\ensuremath{\ldots}}
+docs/conf.py:343:14    - Unknown word (pagerefs)          -- # latex_show_pagerefs = False
+docs/conf.py:372:19    - Unknown word (startdocname)      -- # List of tuples (startdocname, targetname, title,
+docs/conf.py:372:33    - Unknown word (targetname)        -- tuples (startdocname, targetname, title, author, dir
+docs/conf.py:373:26    - Unknown word (toctree)           -- description, category, toctree_only)
+docs/conf.py:403:15    - Unknown word (djangodocs)        -- epub_theme = "djangodocs-epub"
+docs/conf.py:437:8     - Unknown word (tocdepth)          -- # epub_tocdepth = 3
+docs/conf.py:440:8     - Unknown word (tocdup)            -- # epub_tocdup = True
+docs/conf.py:442:33    - Unknown word (includehidden)     -- between 'default' and 'includehidden'.
+docs/conf.py:443:8     - Unknown word (tocscope)          -- # epub_tocscope = 'default'
 docs/conf.py:48:6      - Unknown word (djangodocs)        -- "djangodocs",
 docs/conf.py:49:17     - Unknown word (extlinks)          -- "sphinx.ext.extlinks",
 docs/conf.py:51:17     - Unknown word (autosectionlabel)  -- "sphinx.ext.autosectionlabel",
@@ -3690,6 +3684,8 @@ tests/async/test_async_shortcuts.py:23:46     - Unknown word (relatedmodel) -- o
 tests/async/test_async_shortcuts.py:37:44     - Unknown word (relatedmodel) -- list_or_404(self.s1.relatedmodel_set, pk=self.r1.pk)
 tests/auth_tests/models/proxy.py:12:34     - Unknown word (proxys)     -- permissions = (("display_proxys", "May display proxys
 tests/auth_tests/models/proxy.py:12:56     - Unknown word (proxys)     -- proxys", "May display proxys information"),)
+tests/auth_tests/operations_migrations/0003_rename_newmodel_to_anothermodel.py:6:37      - Unknown word (oldmodel)   -- tests", "0002_rename_oldmodel_to_newmodel"),
+tests/auth_tests/operations_migrations/0003_rename_newmodel_to_anothermodel.py:6:49      - Unknown word (newmodel)   -- _rename_oldmodel_to_newmodel"),
 tests/auth_tests/test_auth_backends.py:103:20    - Unknown word (ahas)          -- async def test_ahas_perm(self):
 tests/auth_tests/test_auth_backends.py:104:39    - Unknown word (ahas)          -- assertIs(await self.user.ahas_perm("user_perm"), True
 tests/auth_tests/test_auth_backends.py:105:39    - Unknown word (ahas)          -- assertIs(await self.user.ahas_perm("group_perm"),
@@ -3837,16 +3833,22 @@ tests/auth_tests/test_hashers.py:93:42     - Unknown word (lètmeinz)   -- asser
 tests/auth_tests/test_management.py:1346:14   - Unknown word (usermodel)                     -- def test_usermodel_without_password(self
 tests/auth_tests/test_management.py:1359:14   - Unknown word (usermodel)                     -- def test_usermodel_without_password_interactive
 tests/auth_tests/test_management.py:155:53    - Unknown word (xfalia)     -- username = lambda: "J\xfalia"
-tests/auth_tests/test_management.py:1627:63   - Unknown word (oldmodel)                      -- codename=f"{action}_oldmodel").exists()
-tests/auth_tests/test_management.py:1630:63   - Unknown word (newmodel)                      -- codename=f"{action}_newmodel").exists()
-tests/auth_tests/test_management.py:1645:63   - Unknown word (oldmodel)                      -- codename=f"{action}_oldmodel").exists()
-tests/auth_tests/test_management.py:1648:63   - Unknown word (newmodel)                      -- codename=f"{action}_newmodel").exists()
-tests/auth_tests/test_management.py:1668:72   - Unknown word (oldmodel)                      -- auth_tests", model="oldmodel")
-tests/auth_tests/test_management.py:1670:30   - Unknown word (oldmodel)                      -- codename="change_oldmodel",
-tests/auth_tests/test_management.py:1680:68   - Unknown word (oldmodel)                      -- filter(codename="change_oldmodel").exists())
-tests/auth_tests/test_management.py:1681:69   - Unknown word (newmodel)                      -- filter(codename="change_newmodel").exists())
-tests/auth_tests/test_management.py:1714:58   - Unknown word (newmodel)                      -- change_oldmodel", "change_newmodel"]
-tests/auth_tests/test_management.py:1737:30   - Unknown word (newmodel)                      -- codename="change_newmodel",
+tests/auth_tests/test_management.py:1620:79   - Unknown word (oldmodel)                      -- auth_tests", model="oldmodel")
+tests/auth_tests/test_management.py:1629:63   - Unknown word (oldmodel)                      -- codename=f"{action}_oldmodel").exists()
+tests/auth_tests/test_management.py:1632:63   - Unknown word (newmodel)                      -- codename=f"{action}_newmodel").exists()
+tests/auth_tests/test_management.py:1636:41   - Unknown word (intermediatemodel)             -- codename=f"{action}_intermediatemodel"
+tests/auth_tests/test_management.py:1641:68   - Unknown word (anothermodel)                  -- codename=f"{action}_anothermodel"
+tests/auth_tests/test_management.py:1658:68   - Unknown word (oldmodel)                      -- codename=f"{action}_oldmodel"
+tests/auth_tests/test_management.py:1662:63   - Unknown word (newmodel)                      -- codename=f"{action}_newmodel").exists()
+tests/auth_tests/test_management.py:1666:41   - Unknown word (intermediatemodel)             -- codename=f"{action}_intermediatemodel"
+tests/auth_tests/test_management.py:1670:63   - Unknown word (anothermodel)                  -- codename=f"{action}_anothermodel").exists()
+tests/auth_tests/test_management.py:1689:27   - Unknown word (oldmodel)                      -- name="Can add oldmodel", codename="add_oldmodel
+tests/auth_tests/test_management.py:1689:52   - Unknown word (oldmodel)                      -- oldmodel", codename="add_oldmodel", content_type=other
+tests/auth_tests/test_management.py:1703:50   - Unknown word (anothermodel)                  -- objects.get(codename="add_anothermodel").content_type.model
+tests/auth_tests/test_management.py:1704:14   - Unknown word (anothermodel)                  -- "anothermodel",
+tests/auth_tests/test_management.py:1752:69   - Unknown word (newmodel)                      -- filter(codename="change_newmodel").exists())
+tests/auth_tests/test_management.py:1785:58   - Unknown word (newmodel)                      -- change_oldmodel", "change_newmodel"]
+tests/auth_tests/test_management.py:1808:30   - Unknown word (newmodel)                      -- codename="change_newmodel",
 tests/auth_tests/test_management.py:262:46    - Unknown word (xfalia)     -- create_user(username="J\xfalia", password="qwerty"
 tests/auth_tests/test_management.py:263:52    - Unknown word (xfalia)     -- changepassword", username="J\xfalia", stdout=self.stdout
 tests/auth_tests/test_management.py:347:18    - Unknown word (Uživatel)   -- "Uživatel (leave blank to use
@@ -4064,11 +4066,14 @@ tests/backends/sqlite/test_operations.py:112:35    - Unknown word (setlimit)    
 tests/backends/sqlite/test_operations.py:37:40     - Unknown word (verylongmodelnamezzzzzzzzzzzzzzzzzzzzzz) -- DELETE FROM "backends_verylongmodelnamezzzzzzzzzzzzzzzzzzzzzz'
 tests/backends/sqlite/test_operations.py:71:40     - Unknown word (verylongmodelnamezzzzzzzzzzzzzzzzzzzzzz) -- DELETE FROM "backends_verylongmodelnamezzzzzzzzzzzzzzzzzzzzzz'
 tests/backends/sqlite/test_operations.py:85:24     - Unknown word (verylongmodelnamezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz) -- "'backends_verylongmodelnamezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
-tests/backends/sqlite/tests.py:235:39    - Unknown word (getlimit)   -- connection.connection.getlimit(sqlite3.SQLITE_LIMIT
-tests/backends/sqlite/tests.py:239:39    - Unknown word (setlimit)   -- connection.connection.setlimit(limit, 1000)
-tests/backends/sqlite/tests.py:240:55    - Unknown word (setlimit)   -- connection.connection.setlimit, limit, current_limit
-tests/backends/sqlite/tests.py:244:39    - Unknown word (setlimit)   -- connection.connection.setlimit(limit, current_limit
-tests/backends/sqlite/tests.py:79:31     - Unknown word (memorydb)   -- "NAME": "file:memorydb_test?mode=memory&cache
+tests/backends/sqlite/tests.py:153:53    - Unknown word (subsubdir)  -- Path(tmp) / "subdir" / "subsubdir" / "test.db",
+tests/backends/sqlite/tests.py:160:61    - Unknown word (subsubdir)  -- join(tmp, "subdir", "subsubdir", "test.db"))
+tests/backends/sqlite/tests.py:177:44    - Unknown word (subsubdir)  -- subdir/test.db", "subdir/subsubdir/test.db")
+tests/backends/sqlite/tests.py:304:39    - Unknown word (getlimit)   -- connection.connection.getlimit(sqlite3.SQLITE_LIMIT
+tests/backends/sqlite/tests.py:308:39    - Unknown word (setlimit)   -- connection.connection.setlimit(limit, 1000)
+tests/backends/sqlite/tests.py:309:55    - Unknown word (setlimit)   -- connection.connection.setlimit, limit, current_limit
+tests/backends/sqlite/tests.py:313:39    - Unknown word (setlimit)   -- connection.connection.setlimit(limit, current_limit
+tests/backends/sqlite/tests.py:80:31     - Unknown word (memorydb)   -- "NAME": "file:memorydb_test?mode=memory&cache
 tests/backends/test_utils.py:78:24     - Unknown word (Nera)       -- ("Asia/Ust+Nera", ("Asia/Ust+Nera",
 tests/backends/test_utils.py:78:42     - Unknown word (Nera)       -- Ust+Nera", ("Asia/Ust+Nera", None, None)),
 tests/backends/test_utils.py:79:24     - Unknown word (Nera)       -- ("Asia/Ust-Nera", ("Asia/Ust-Nera",
@@ -4756,11 +4761,11 @@ tests/flatpages_tests/test_views.py:41:31     - Unknown word (sekrit)     -- con
 tests/flatpages_tests/test_views.py:79:52     - Unknown word (sekrit)     -- get("/flatpage_root/sekrit/")
 tests/flatpages_tests/test_views.py:81:76     - Unknown word (krit)       -- test@example.com", "s3krit")
 tests/foreign_object/test_forms.py:11:33     - Unknown word (foreignobject) -- manually deal with the foreignobject relation.
-tests/foreign_object/test_tuple_lookups.py:77:17     - Unknown word (cust)       -- cust_1, cust_2, cust_3, cust_4, cust
-tests/foreign_object/test_tuple_lookups.py:77:25     - Unknown word (cust)       -- cust_1, cust_2, cust_3, cust_4, cust_5 =
-tests/foreign_object/test_tuple_lookups.py:77:33     - Unknown word (cust)       -- cust_1, cust_2, cust_3, cust_4, cust_5 = (
-tests/foreign_object/test_tuple_lookups.py:77:41     - Unknown word (cust)       -- cust_2, cust_3, cust_4, cust_5 = (
-tests/foreign_object/test_tuple_lookups.py:77:9      - Unknown word (cust)       -- cust_1, cust_2, cust_3, cust
+tests/foreign_object/test_tuple_lookups.py:78:17     - Unknown word (cust)       -- cust_1, cust_2, cust_3, cust_4, cust
+tests/foreign_object/test_tuple_lookups.py:78:25     - Unknown word (cust)       -- cust_1, cust_2, cust_3, cust_4, cust_5 =
+tests/foreign_object/test_tuple_lookups.py:78:33     - Unknown word (cust)       -- cust_1, cust_2, cust_3, cust_4, cust_5 = (
+tests/foreign_object/test_tuple_lookups.py:78:41     - Unknown word (cust)       -- cust_2, cust_3, cust_4, cust_5 = (
+tests/foreign_object/test_tuple_lookups.py:78:9      - Unknown word (cust)       -- cust_1, cust_2, cust_3, cust
 tests/foreign_object/tests.py:252:23    - Unknown word (foreignobject) -- def test_prefetch_foreignobject_forward(self):
 tests/foreign_object/tests.py:269:23    - Unknown word (foreignobject) -- def test_prefetch_foreignobject_hidden_forward(self
 tests/foreign_object/tests.py:302:23    - Unknown word (foreignobject) -- def test_prefetch_foreignobject_null_hidden_forward
@@ -6177,86 +6182,87 @@ tests/mail/test_backends.py:600:31    - Unknown word (aiosmtpd)   -- skipUnless(
 tests/mail/test_backends.py:627:17    - Unknown word (AIOSMTPD)   -- @skipUnless(HAS_AIOSMTPD, "No aiosmtpd library
 tests/mail/test_backends.py:627:31    - Unknown word (aiosmtpd)   -- skipUnless(HAS_AIOSMTPD, "No aiosmtpd library detected.")
 tests/mail/test_deprecated.py:57:52     - Unknown word (fromlist)   -- "django.core.mail", fromlist=[name])
+tests/mail/tests.py:1054:25   - Unknown word (pièce)      -- msg.attach("une pièce jointe.pdf", b"%PDF
+tests/mail/tests.py:1054:31   - Unknown word (jointe)     -- msg.attach("une pièce jointe.pdf", b"%PDF-1.4.%.
+tests/mail/tests.py:1056:52   - Unknown word (pièce)      -- attachment.filename, "une pièce jointe.pdf")
+tests/mail/tests.py:1056:58   - Unknown word (jointe)     -- filename, "une pièce jointe.pdf")
 tests/mail/tests.py:117:71    - Unknown word (reparsing)  -- verify sent content by reparsing
-tests/mail/tests.py:1335:17   - Unknown word (южных)      -- ("В южных морях " * 60, "base
-tests/mail/tests.py:1335:23   - Unknown word (морях)      -- ("В южных морях " * 60, "base64"),
-tests/mail/tests.py:1336:20   - Unknown word (sørlige)    -- ("I de sørlige hav " * 58, "quoted
-tests/mail/tests.py:1375:18   - Unknown word (éxample)    -- ("to@éxample.com", "", "to@xn--xample
-tests/mail/tests.py:1375:44   - Unknown word (xample)     -- éxample.com", "", "to@xn--xample-9ua.com"),
-tests/mail/tests.py:1377:33   - Unknown word (éxample)    -- "To Example <to@éxample.com>",
-tests/mail/tests.py:1379:25   - Unknown word (xample)     -- "to@xn--xample-9ua.com",
-tests/mail/tests.py:1390:42   - Unknown word (nxasmm)     -- Display, Name" <to@xn--nxasmm1c.example.com>',
-tests/mail/tests.py:1392:25   - Unknown word (nxasmm)     -- "to@xn--nxasmm1c.example.com",
-tests/mail/tests.py:1411:52   - Unknown word (exampl)     -- very long" * 4 + " <to@exampl€.com>",
-tests/mail/tests.py:1413:25   - Unknown word (exampl)     -- "to@xn--exampl-nc1c.com",
-tests/mail/tests.py:1491:56   - Unknown word (localpartonly) -- email="django", to=["localpartonly"])
-tests/mail/tests.py:1497:56   - Unknown word (localpartonly) -- (Address(username="localpartonly", domain=""),)
-tests/mail/tests.py:1797:22   - Unknown word (Detta)         -- subject="Detta ämne innehåller icke
-tests/mail/tests.py:1797:28   - Unknown word (ämne)          -- subject="Detta ämne innehåller icke-ASCII
-tests/mail/tests.py:1797:33   - Unknown word (innehåller)    -- subject="Detta ämne innehåller icke-ASCII-tecken",
-tests/mail/tests.py:1797:44   - Unknown word (icke)          -- Detta ämne innehåller icke-ASCII-tecken",
-tests/mail/tests.py:1797:55   - Unknown word (tecken)        -- innehåller icke-ASCII-tecken",
-tests/mail/tests.py:1798:22   - Unknown word (åscî)          -- to=["nøn-åscîi@example.com"],
-tests/mail/tests.py:1804:23   - Unknown word (Detta)         -- "Subject: Detta ämne innehåller icke
-tests/mail/tests.py:1804:29   - Unknown word (ämne)          -- "Subject: Detta ämne innehåller icke-ASCII
-tests/mail/tests.py:1804:34   - Unknown word (innehåller)    -- Subject: Detta ämne innehåller icke-ASCII-tecken".encode
-tests/mail/tests.py:1804:45   - Unknown word (icke)          -- Detta ämne innehåller icke-ASCII-tecken".encode
-tests/mail/tests.py:1804:56   - Unknown word (tecken)        -- innehåller icke-ASCII-tecken".encode(), msg_bytes
-tests/mail/tests.py:1806:32   - Unknown word (åscî)          -- self.assertIn("To: nøn-åscîi@example.com".encode
-tests/mail/tests.py:1813:36   - Unknown word (Detta)         -- EmailMessage(body="Detta innehåller icke-ASCII
-tests/mail/tests.py:1813:42   - Unknown word (innehåller)    -- EmailMessage(body="Detta innehåller icke-ASCII-tecken")
-tests/mail/tests.py:1813:53   - Unknown word (icke)          -- body="Detta innehåller icke-ASCII-tecken")
-tests/mail/tests.py:1813:64   - Unknown word (tecken)        -- innehåller icke-ASCII-tecken")
-tests/mail/tests.py:1814:35   - Unknown word (يحتوي)         -- attach("file.txt", "يحتوي هذا المرفق على أحرف
-tests/mail/tests.py:1814:45   - Unknown word (المرفق)        -- file.txt", "يحتوي هذا المرفق على أحرف غير ASCII"
-tests/mail/tests.py:1814:56   - Unknown word (أحرف)          -- يحتوي هذا المرفق على أحرف غير ASCII")
-tests/mail/tests.py:1838:39   - Unknown word (Detta)         -- EmailMessage(subject="Detta ämne innehåller icke
-tests/mail/tests.py:1838:45   - Unknown word (ämne)          -- EmailMessage(subject="Detta ämne innehåller icke-ASCII
-tests/mail/tests.py:1838:50   - Unknown word (innehåller)    -- subject="Detta ämne innehåller icke-ASCII-tecken")
-tests/mail/tests.py:1838:61   - Unknown word (icke)          -- Detta ämne innehåller icke-ASCII-tecken")
-tests/mail/tests.py:1838:72   - Unknown word (tecken)        -- innehåller icke-ASCII-tecken")
-tests/mail/tests.py:1841:34   - Unknown word (Detta)         -- b"Subject: =?utf-8?q?Detta_=C3=A4mne_inneh=C3=A
-tests/mail/tests.py:1841:50   - Unknown word (inneh)         -- 8?q?Detta_=C3=A4mne_inneh=C3=A5ller_icke-ASCII
-tests/mail/tests.py:1841:61   - Unknown word (ller)          -- C3=A4mne_inneh=C3=A5ller_icke-ASCII-tecken?=
-tests/mail/tests.py:1841:66   - Unknown word (icke)          -- mne_inneh=C3=A5ller_icke-ASCII-tecken?=\n",
-tests/mail/tests.py:1841:77   - Unknown word (tecken)        -- C3=A5ller_icke-ASCII-tecken?=\n",
-tests/mail/tests.py:1845:49   - Unknown word (inneh)         -- 8?q?Detta_=C3=A4mne_inneh=C3=A5ller_icke-ASCII
-tests/mail/tests.py:1845:60   - Unknown word (ller)          -- C3=A4mne_inneh=C3=A5ller_icke-ASCII-tecken?=
+tests/mail/tests.py:1401:17   - Unknown word (южных)      -- ("В южных морях " * 60, "base
+tests/mail/tests.py:1401:23   - Unknown word (морях)      -- ("В южных морях " * 60, "base64"),
+tests/mail/tests.py:1402:20   - Unknown word (sørlige)    -- ("I de sørlige hav " * 58, "quoted
+tests/mail/tests.py:1441:18   - Unknown word (éxample)    -- ("to@éxample.com", "", "to@xn--xample
+tests/mail/tests.py:1441:44   - Unknown word (xample)     -- éxample.com", "", "to@xn--xample-9ua.com"),
+tests/mail/tests.py:1443:33   - Unknown word (éxample)    -- "To Example <to@éxample.com>",
+tests/mail/tests.py:1445:25   - Unknown word (xample)     -- "to@xn--xample-9ua.com",
+tests/mail/tests.py:1456:42   - Unknown word (nxasmm)     -- Display, Name" <to@xn--nxasmm1c.example.com>',
+tests/mail/tests.py:1458:25   - Unknown word (nxasmm)     -- "to@xn--nxasmm1c.example.com",
+tests/mail/tests.py:1477:52   - Unknown word (exampl)     -- very long" * 4 + " <to@exampl€.com>",
+tests/mail/tests.py:1479:25   - Unknown word (exampl)     -- "to@xn--exampl-nc1c.com",
+tests/mail/tests.py:1557:56   - Unknown word (localpartonly) -- email="django", to=["localpartonly"])
+tests/mail/tests.py:1563:56   - Unknown word (localpartonly) -- (Address(username="localpartonly", domain=""),)
+tests/mail/tests.py:1863:22   - Unknown word (Detta)         -- subject="Detta ämne innehåller icke
+tests/mail/tests.py:1863:28   - Unknown word (ämne)          -- subject="Detta ämne innehåller icke-ASCII
+tests/mail/tests.py:1863:33   - Unknown word (innehåller)    -- subject="Detta ämne innehåller icke-ASCII-tecken",
+tests/mail/tests.py:1863:44   - Unknown word (icke)          -- Detta ämne innehåller icke-ASCII-tecken",
+tests/mail/tests.py:1863:55   - Unknown word (tecken)        -- innehåller icke-ASCII-tecken",
+tests/mail/tests.py:1864:22   - Unknown word (åscî)          -- to=["nøn-åscîi@example.com"],
+tests/mail/tests.py:1870:23   - Unknown word (Detta)         -- "Subject: Detta ämne innehåller icke
+tests/mail/tests.py:1870:29   - Unknown word (ämne)          -- "Subject: Detta ämne innehåller icke-ASCII
+tests/mail/tests.py:1870:34   - Unknown word (innehåller)    -- Subject: Detta ämne innehåller icke-ASCII-tecken".encode
+tests/mail/tests.py:1870:45   - Unknown word (icke)          -- Detta ämne innehåller icke-ASCII-tecken".encode
+tests/mail/tests.py:1870:56   - Unknown word (tecken)        -- innehåller icke-ASCII-tecken".encode(), msg_bytes
+tests/mail/tests.py:1872:32   - Unknown word (åscî)          -- self.assertIn("To: nøn-åscîi@example.com".encode
+tests/mail/tests.py:1879:36   - Unknown word (Detta)         -- EmailMessage(body="Detta innehåller icke-ASCII
+tests/mail/tests.py:1879:42   - Unknown word (innehåller)    -- EmailMessage(body="Detta innehåller icke-ASCII-tecken")
+tests/mail/tests.py:1879:53   - Unknown word (icke)          -- body="Detta innehåller icke-ASCII-tecken")
+tests/mail/tests.py:1879:64   - Unknown word (tecken)        -- innehåller icke-ASCII-tecken")
+tests/mail/tests.py:1880:35   - Unknown word (يحتوي)         -- attach("file.txt", "يحتوي هذا المرفق على أحرف
+tests/mail/tests.py:1880:45   - Unknown word (المرفق)        -- file.txt", "يحتوي هذا المرفق على أحرف غير ASCII"
+tests/mail/tests.py:1880:56   - Unknown word (أحرف)          -- يحتوي هذا المرفق على أحرف غير ASCII")
+tests/mail/tests.py:1904:39   - Unknown word (Detta)         -- EmailMessage(subject="Detta ämne innehåller icke
+tests/mail/tests.py:1904:45   - Unknown word (ämne)          -- EmailMessage(subject="Detta ämne innehåller icke-ASCII
+tests/mail/tests.py:1904:50   - Unknown word (innehåller)    -- subject="Detta ämne innehåller icke-ASCII-tecken")
+tests/mail/tests.py:1904:61   - Unknown word (icke)          -- Detta ämne innehåller icke-ASCII-tecken")
+tests/mail/tests.py:1904:72   - Unknown word (tecken)        -- innehåller icke-ASCII-tecken")
+tests/mail/tests.py:1907:34   - Unknown word (Detta)         -- b"Subject: =?utf-8?q?Detta_=C3=A4mne_inneh=C3=A
+tests/mail/tests.py:1907:50   - Unknown word (inneh)         -- 8?q?Detta_=C3=A4mne_inneh=C3=A5ller_icke-ASCII
+tests/mail/tests.py:1907:61   - Unknown word (ller)          -- C3=A4mne_inneh=C3=A5ller_icke-ASCII-tecken?=
+tests/mail/tests.py:1907:66   - Unknown word (icke)          -- mne_inneh=C3=A5ller_icke-ASCII-tecken?=\n",
+tests/mail/tests.py:1907:77   - Unknown word (tecken)        -- C3=A5ller_icke-ASCII-tecken?=\n",
+tests/mail/tests.py:1911:49   - Unknown word (inneh)         -- 8?q?Detta_=C3=A4mne_inneh=C3=A5ller_icke-ASCII
+tests/mail/tests.py:1911:60   - Unknown word (ller)          -- C3=A4mne_inneh=C3=A5ller_icke-ASCII-tecken?=
 tests/mail/tests.py:203:43    - Unknown word (reparsing)  -- erializing django_message and reparsing the result.
 tests/mail/tests.py:215:28    - Unknown word (reparsing)  -- django_message and reparsing the result.
-tests/mail/tests.py:2305:9    - Unknown word (datatuple)     -- datatuple = (("Subject", "Message
-tests/mail/tests.py:2312:17   - Unknown word (datatuple)     -- datatuple, fail_silently=True
-tests/mail/tests.py:2318:9    - Unknown word (datatuple)     -- datatuple = (("Subject", "Message
-tests/mail/tests.py:2329:21   - Unknown word (datatuple)     -- datatuple, **{param: "value"}
-tests/mail/tests.py:2770:10   - Unknown word (surrogateescape) -- `surrogateescape`.
-tests/mail/tests.py:2774:59   - Unknown word (surrogateescape) -- provided charset and `surrogateescape` is
-tests/mail/tests.py:2787:18   - Unknown word (surrogateescape) -- # (Using surrogateescape for non-utf8 is covered
-tests/mail/tests.py:2798:45   - Unknown word (surrogateescape) -- decode("ascii", errors="surrogateescape")
-tests/mail/tests.py:2821:15   - Unknown word (localpartonly)   -- ("localpartonly", "ascii", "localpartonly
-tests/mail/tests.py:2821:41   - Unknown word (localpartonly)   -- localpartonly", "ascii", "localpartonly"),
-tests/mail/tests.py:2828:18   - Unknown word (éxample)         -- ("to@éxample.com", "utf-8", "to@xn
-tests/mail/tests.py:2828:49   - Unknown word (xample)          -- com", "utf-8", "to@xn--xample-9ua.com"),
-tests/mail/tests.py:2846:33   - Unknown word (éxample)         -- "To Example <to@éxample.com>",
-tests/mail/tests.py:2848:37   - Unknown word (xample)          -- "To Example <to@xn--xample-9ua.com>",
-tests/mail/tests.py:2851:33   - Unknown word (éxample)         -- "To Example <to@éxample.com>",
-tests/mail/tests.py:2853:37   - Unknown word (xample)          -- "To Example <to@xn--xample-9ua.com>",
-tests/mail/tests.py:2886:50   - Unknown word (exampl)          -- very long" * 4, "to@exampl€.com"),
-tests/mail/tests.py:2890:32   - Unknown word (exampl)          -- " long <to@xn--exampl-nc1c.com>",
-tests/mail/tests.py:646:33    - Unknown word (Sürname)    -- to=['"Firstname Sürname" <to@example.com>',
+tests/mail/tests.py:2371:9    - Unknown word (datatuple)     -- datatuple = (("Subject", "Message
+tests/mail/tests.py:2378:17   - Unknown word (datatuple)     -- datatuple, fail_silently=True
+tests/mail/tests.py:2384:9    - Unknown word (datatuple)     -- datatuple = (("Subject", "Message
+tests/mail/tests.py:2395:21   - Unknown word (datatuple)     -- datatuple, **{param: "value"}
+tests/mail/tests.py:2861:10   - Unknown word (surrogateescape) -- `surrogateescape`.
+tests/mail/tests.py:2865:59   - Unknown word (surrogateescape) -- provided charset and `surrogateescape` is
+tests/mail/tests.py:2878:18   - Unknown word (surrogateescape) -- # (Using surrogateescape for non-utf8 is covered
+tests/mail/tests.py:2889:45   - Unknown word (surrogateescape) -- decode("ascii", errors="surrogateescape")
+tests/mail/tests.py:2912:15   - Unknown word (localpartonly)   -- ("localpartonly", "ascii", "localpartonly
+tests/mail/tests.py:2912:41   - Unknown word (localpartonly)   -- localpartonly", "ascii", "localpartonly"),
+tests/mail/tests.py:2919:18   - Unknown word (éxample)         -- ("to@éxample.com", "utf-8", "to@xn
+tests/mail/tests.py:2919:49   - Unknown word (xample)          -- com", "utf-8", "to@xn--xample-9ua.com"),
+tests/mail/tests.py:2937:33   - Unknown word (éxample)         -- "To Example <to@éxample.com>",
+tests/mail/tests.py:2939:37   - Unknown word (xample)          -- "To Example <to@xn--xample-9ua.com>",
+tests/mail/tests.py:2942:33   - Unknown word (éxample)         -- "To Example <to@éxample.com>",
+tests/mail/tests.py:2944:37   - Unknown word (xample)          -- "To Example <to@xn--xample-9ua.com>",
+tests/mail/tests.py:2977:50   - Unknown word (exampl)          -- very long" * 4, "to@exampl€.com"),
+tests/mail/tests.py:2981:32   - Unknown word (exampl)          -- " long <to@xn--exampl-nc1c.com>",
+tests/mail/tests.py:503:32    - Unknown word (reparsed)   -- cast to a string and reparsed. The resulting header
 tests/mail/tests.py:64:41     - Unknown word (misparsed)  -- in place to correct misparsed rfc2047 display-names
-tests/mail/tests.py:653:49    - Unknown word (Sürname)    -- display_name="Firstname Sürname", addr_spec="to@example
-tests/mail/tests.py:661:23    - Unknown word (Sürname)    -- to=['"Sürname, Firstname" <to@example
-tests/mail/tests.py:668:39    - Unknown word (Sürname)    -- display_name="Sürname, Firstname", addr_spec
-tests/mail/tests.py:676:22    - Unknown word (Gżegżółka)  -- subject="Gżegżółka",
-tests/mail/tests.py:679:39    - Unknown word (Sürname)    -- Sender": '"Firstname Sürname" <sender@example.com
-tests/mail/tests.py:691:46    - Unknown word (Gżegżółka)  -- parsed["Subject"], "Gżegżółka")
-tests/mail/tests.py:799:29    - Unknown word (ccmail)     -- ("application/x-ccmail-rtf", b"non-text\x0
-tests/mail/tests.py:800:29    - Unknown word (ccmail)     -- ("application/x-ccmail-rtf", "non-text\x07string
+tests/mail/tests.py:712:33    - Unknown word (Sürname)    -- to=['"Firstname Sürname" <to@example.com>',
+tests/mail/tests.py:719:49    - Unknown word (Sürname)    -- display_name="Firstname Sürname", addr_spec="to@example
+tests/mail/tests.py:727:23    - Unknown word (Sürname)    -- to=['"Sürname, Firstname" <to@example
+tests/mail/tests.py:734:39    - Unknown word (Sürname)    -- display_name="Sürname, Firstname", addr_spec
+tests/mail/tests.py:742:22    - Unknown word (Gżegżółka)  -- subject="Gżegżółka",
+tests/mail/tests.py:745:39    - Unknown word (Sürname)    -- Sender": '"Firstname Sürname" <sender@example.com
+tests/mail/tests.py:757:46    - Unknown word (Gżegżółka)  -- parsed["Subject"], "Gżegżółka")
+tests/mail/tests.py:865:29    - Unknown word (ccmail)     -- ("application/x-ccmail-rtf", b"non-text\x0
+tests/mail/tests.py:866:29    - Unknown word (ccmail)     -- ("application/x-ccmail-rtf", "non-text\x07string
 tests/mail/tests.py:91:51     - Unknown word (undecoded)  -- to get access to raw (undecoded) headers.
-tests/mail/tests.py:988:25    - Unknown word (pièce)      -- msg.attach("une pièce jointe.pdf", b"%PDF
-tests/mail/tests.py:988:31    - Unknown word (jointe)     -- msg.attach("une pièce jointe.pdf", b"%PDF-1.4.%.
-tests/mail/tests.py:990:52    - Unknown word (pièce)      -- attachment.filename, "une pièce jointe.pdf")
-tests/mail/tests.py:990:58    - Unknown word (jointe)     -- filename, "une pièce jointe.pdf")
 tests/many_to_one/tests.py:458:43    - Unknown word (Royko)      -- name="Mike", last_name="Royko", email="royko@suntimes
 tests/many_to_one/tests.py:461:43    - Unknown word (Kass)       -- name="John", last_name="Kass", email="jkass@tribune
 tests/many_to_one/tests.py:587:38    - Unknown word (notafield)  -- Cannot resolve keyword 'notafield' into field. Choices

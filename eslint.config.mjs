@@ -53,6 +53,7 @@ export default defineConfig(
             'unicorn/prefer-math-trunc': 'off', // incorrectly sets Enums.
             'unicorn/prefer-native-coercion-functions': 'off', // Makes some strange choices
             'unicorn/prefer-string-slice': 'off', // substring is used where it make the most sense.
+            'unicorn/prefer-ternary': 'off', // Turns guard clauses into ternaries; guards tell the reader something.
             'unicorn/prefer-top-level-await': 'off', // it will be possible to require a module that does not use top level await.
             'unicorn/prevent-abbreviations': 'off',
 
@@ -143,7 +144,6 @@ export default defineConfig(
             'unicorn/prefer-string-starts-ends-with': 'error',
             'unicorn/prefer-string-trim-start-end': 'error',
             'unicorn/prefer-switch': 'error',
-            'unicorn/prefer-ternary': 'error',
             'unicorn/prefer-type-error': 'error',
             'unicorn/relative-url-style': 'error',
             'unicorn/require-array-join-separator': 'error',

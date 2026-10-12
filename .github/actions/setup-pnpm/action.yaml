@@ -7,14 +7,21 @@ inputs:
     required: false
     description: The version of Node to use, for example `24.x` or `lts`.
     default: 'lts'
+  save-cache:
+    required: false
+    description: |
+      Save the pnpm store to the cache at the end of the job. Set to `false` to only restore it,
+      for example in all but one job of a matrix.
+    default: 'true'
 runs:
   using: 'composite'
   steps:
     - name: Setup pnpm and Node.js ${{ inputs.node-version }}
-      uses: pnpm/setup@fbda4c85fc2e1e08721cd8763afea8f48d60f024 # v3.0.0
+      uses: pnpm/setup@a0881977cd8ea73b1ed212236c99ca10dcc80cf4 # v3.1.1
       with:
         runtime: node@${{ inputs.node-version }}
         cache: true
+        save-cache: ${{ inputs.save-cache }}
         install: false
 
     - name: Versions
