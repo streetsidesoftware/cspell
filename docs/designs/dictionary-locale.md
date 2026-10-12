@@ -45,6 +45,9 @@ special case. The general approach needs deciding so the PR can be answered with
 
 - Case rules JavaScript doesn't implement, such as the Dutch `IJ` digraph (`ijsland` to `IJsland`). cspell uses what
   `toLocaleLowerCase` and `toLocaleUpperCase` provide, and adds no rules of its own.
+- Building dictionaries with the locale's rules. Lookups try both rules, so dictionaries built with the default rules
+  work. The one case left is lower-case input that differs from the stored form: with `Irak` in the dictionary, `ırak`
+  is still reported, as it is today. A `locale` setting for `cspell-tools` could fix that later.
 - Choosing dictionaries by locale. `languageSettings` already does that, and it doesn't change.
 - Other text handling that depends on the locale, such as where words split, or Unicode normalization beyond changing
   case.
@@ -117,6 +120,7 @@ Turned down:
 
 ## Open questions
 
+- A `locale` setting for `cspell-tools`, so building a dictionary uses the locale's rules too.
 - Should `dictionaryInformation.locale` reject values that aren't locales? Today the schema allows any string.
 
 <!---
