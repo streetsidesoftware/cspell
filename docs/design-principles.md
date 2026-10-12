@@ -1,7 +1,7 @@
 # Design principles
 
 Principles that guide how cspell behaves. Weigh every behavior change against them. When a feature's
-[design](./designs/README.md) sets a new principle, add it here and link to the design.
+[design](./feature-design.md) sets a new principle, add it here and link to the design.
 
 ## Keep false positives low
 

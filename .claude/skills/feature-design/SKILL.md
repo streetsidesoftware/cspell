@@ -7,8 +7,8 @@ description: 'Design a cspell feature before and while building it, through an i
 
 The goal is a well-designed feature. The design file is a tool for getting there, and a by-product of the interview.
 
-Runs the process in `docs/designs/README.md` as an interview that drills down into the parts of a feature that matter.
-Read that README first: it holds the process. This skill adds only how to run it.
+Runs the process in `docs/feature-design.md` as an interview that drills down into the parts of a feature that matter.
+Read that guide first: it holds the process. This skill adds only how to run it.
 
 Aim for a good design quickly, not a perfect one. Whoever builds the feature writes the code. If the interview drifts
 into detail, step back to the sketch.
@@ -43,18 +43,18 @@ into detail, step back to the sketch.
    does that matter?" and redraft. Repeat, as in the five whys, until it reaches the reason. Then ask, one at a time,
    proposing an answer where the facts suggest one:
    - Why now: a bug report, a feature request, a limit hit while building something else?
-   - Who is affected, and how? Start from the stakeholders in `docs/designs/checks.md`.
+   - Who is affected, and how? Start from the stakeholders in `docs/design-questions.md`.
    - What does success look like, as something a user can do or a config they can write, that they can't today?
    - What's out of scope?
 
-3. **Sketch.** Read `docs/design-principles.md`, `docs/glossary.md`, and `docs/designs/checks.md`. Look in `rfc/` and
+3. **Sketch.** Read `docs/design-principles.md`, `docs/glossary.md`, and `docs/design-questions.md`. Look in `rfc/` and
    closed issues for earlier proposals, and link a matching RFC. Propose the sketch in a few lines, with one example:
    what a user writes (the config or the command line) and what cspell does. Agree on it. Write
-   `docs/designs/<feature>.md` with the README's skeleton, and commit it. When a part can be read on its own, move to a
-   folder as the README's "Where it lives" describes, and say so in a line.
+   `docs/designs/<feature>.md` with the guide's skeleton, add its line to `docs/designs/README.md`, and commit it. When
+   a part can be read on its own, move to a folder as the guide's "Where it lives" describes, and say so in a line.
 
-4. **Walk the design checks with the user,** one question at a time. Go through the relevant groups in
-   `docs/designs/checks.md`, and skip a group only when it obviously doesn't apply. Before each question, know how it
+4. **Walk the design questions with the user,** one question at a time. Go through the relevant groups in
+   `docs/design-questions.md`, and skip a group only when it obviously doesn't apply. Before each question, know how it
    connects to the sketch.
    - **The test** decides how much time a question gets, not whether the user hears it. A question whose answer could
      change the sketch, or would be hard to undo once it ships, gets discussed. For anything else, propose a default in
@@ -67,13 +67,13 @@ into detail, step back to the sketch.
    - **Tangents and side remarks.** Note each in a line under Open questions and move on. A remark that sounds like a
      rule beyond this feature goes there too.
    - **Record.** Update the Design section as each point is settled, with the alternatives turned down. Commit when it's
-     useful, not per decision. Define new terms as the README's "The file" describes.
+     useful, not per decision. Define new terms as the guide's "The file" describes.
 
 5. **Stop when the code is the easier answer.** Say so in a line, and stop. Don't start building unless asked. Offer to
    look at a change's implications, review the code, or clean up afterward. During implementation, update the design
    when the code shows something it missed.
 
-6. **Finish before merge,** when the user says the design is done, as in the README's "Before merge".
+6. **Finish before merge,** when the user says the design is done, as in the guide's "Before merge".
    - Write the `tl;dr`, add the snapshot line, and make the Design section describe the feature as built, with
      examples. A reader must understand it without the code. Remove working notes and code-level detail, not the
      explanation. In a folder, finish each file the same way.
@@ -93,7 +93,7 @@ For a small feature or fix, when the user asks to check it before or while build
 a few minutes of the user's time.
 
 1. State the change and its why in a sentence or two, from the conversation, the issue, and the code.
-2. Check it against `docs/designs/checks.md`. List every side effect you find, with what it would change for
+2. Check it against `docs/design-questions.md`. List every side effect you find, with what it would change for
    users.
 3. Raise anything that could change the approach or is hard to undo, as in step 4's test. If a hard-to-undo choice with
    more than one reasonable answer turns up, suggest designing it, in one line.
