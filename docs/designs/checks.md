@@ -1,8 +1,8 @@
 # Design checks
 
-What to check a design against, and where cspell's hard-to-undo decisions hide. Check these yourself: they aren't
-questions to ask the user one by one. Bring something up only when it could change the sketch or is hard to undo once
-it ships. When checking a change, also report every side effect you find.
+What to check a design against, and where cspell's hard-to-undo decisions hide. It's a checklist to run against the
+sketch, not a list of questions to answer one by one. Spend time on a finding only when it could change the sketch or is
+hard to undo once it ships. When checking a small change, note every side effect you find.
 
 ## Stakeholders
 
@@ -18,20 +18,21 @@ In this repo, a feature usually affects some of:
 ## cspell's fixed rules
 
 What cspell already fixes, and the sketch has to fit. Many questions are settled by pointing back at these. Check each
-one in the code rather than assuming it, and note the ones that matter in the Design section next to the choice they shape.
+one in the code rather than assuming it, and note the ones that matter in the Design section, next to the choice they
+shape.
 
 - **Config resolution:** config files, `import`, then matching `overrides`, then matching `languageSettings`, then
-  in-document directives (see `docs/glossary.md`, "Config resolution").
+  in-document directives (see "Config resolution" in the [glossary](../glossary.md)).
 - **Merging:** single values are last-wins; lists and objects combine only if `_merge` in
   `packages/cspell-lib/src/lib/Settings/CSpellSettingsServer.ts` says so.
 - **CLI versus config:** a CLI flag wins over the config file (`cfg.options.x ?? configInfo.config.x`).
 - **Where an option can be set:** decided by the interface in `CSpellSettingsDef.ts` (see
-  `docs/config-and-cli.md`).
+  [Config options and CLI flags](../config-and-cli.md)).
 - **Trust:** JavaScript config files and plugins aren't loaded in untrusted locations (`WorkspaceTrustSettings`).
 
 ## Principles
 
-Read `docs/design-principles.md` and check the sketch against it:
+Read the [design principles](../design-principles.md) and check the sketch against it:
 
 - **Keep false positives low.** Does any option flag more words by default?
 - **Existing configs keep working.** Does any option change a default or the meaning of an existing value?
@@ -39,8 +40,8 @@ Read `docs/design-principles.md` and check the sketch against it:
 - **A command changes only what the user named.** Does any option write somewhere the user didn't ask for?
 - **Cost scales with the files checked.** Does any option add per-file or per-word work?
 
-If the feature needs a new principle, agree on it before the decisions that depend on it, and note it under Open questions
-so it can be added to `docs/design-principles.md` at trim time if it holds beyond this feature.
+If the feature needs a new principle, agree on it before the decisions that depend on it. Note it under Open questions,
+so it can be added to the design principles before merge if it holds beyond this feature.
 
 ## Where hard-to-undo decisions hide
 
@@ -48,7 +49,7 @@ These become public as soon as the feature ships. Look here for inflection point
 
 ### Config options
 
-For a new or changed option (see `docs/config-and-cli.md`):
+For a new or changed option (see [Config options and CLI flags](../config-and-cli.md)):
 
 - **Name.** Does it collide with, shadow, or read as a synonym of an existing option? Check `cspell.schema.json` and
   https://cspell.org/configuration/properties/. Names are public as soon as they ship.

@@ -58,7 +58,8 @@ Work from the top down, and stop when the code is the easier way to answer the r
 1. **Get to the why.** A feature usually starts as a problem to solve, or as a solution ("we need an option"). Ask
    "why?" until you reach the reason: who is affected, and what goes wrong for them today. Look at the issue and the
    code first, so the why rests on facts.
-2. **Sketch the design** in a few lines. Check it against the [design principles](../design-principles.md).
+2. **Sketch the design** in a few lines. Check it against the [design checks](./checks.md), which include the
+   [design principles](../design-principles.md).
 3. **Settle the inflection points.** Spend time on a question only when its answer could change the sketch, or would
    be hard to undo once it ships: names, defaults, merging, what gets flagged, public API. Settle anything else with a
    sensible default. When a detail shows the sketch is wrong, change the sketch.

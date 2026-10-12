@@ -40,7 +40,7 @@ into detail, step back to the sketch.
    wrong. Let the user correct it. If the draft still reads like a solution ("we need an option"), ask "why does that
    matter?" and redraft. Repeat, as in the five whys, until it reaches the reason.
 
-3. **Sketch.** Read `docs/design-principles.md`, `docs/glossary.md`, and `references/design-checks.md`. Look in `rfc/`
+3. **Sketch.** Read `docs/design-principles.md`, `docs/glossary.md`, and `docs/designs/checks.md`. Look in `rfc/`
    and closed issues for earlier proposals, and link a matching RFC. Propose the sketch in a few lines and agree on it.
    Write `docs/designs/<feature>.md` with the README's skeleton, and commit it.
 
@@ -84,7 +84,7 @@ For a small feature or fix, when the user asks to check it before or while build
 a few minutes of the user's time.
 
 1. State the change and its why in a sentence or two, from the conversation, the issue, and the code.
-2. Check it against `references/design-checks.md`. List every side effect you find, with what it would change for
+2. Check it against `docs/designs/checks.md`. List every side effect you find, with what it would change for
    users.
 3. Raise anything that could change the approach or is hard to undo, as in step 4's test. If a hard-to-undo choice with
    more than one reasonable answer turns up, suggest designing it, in one line.
