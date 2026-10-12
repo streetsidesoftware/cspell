@@ -1,4 +1,4 @@
-# Design checks
+# Design questions
 
 The questions a design interview covers, and where cspell's hard-to-undo decisions hide. Go through the groups that
 apply, one question at a time. Spend time on a question when its answer could change the sketch or would be hard to
@@ -23,17 +23,17 @@ one in the code rather than assuming it, and note the ones that matter in the De
 shape.
 
 - **Config resolution:** config files, `import`, then matching `overrides`, then matching `languageSettings`, then
-  in-document directives (see "Config resolution" in the [glossary](../glossary.md)).
+  in-document directives (see "Config resolution" in the [glossary](./glossary.md)).
 - **Merging:** single values are last-wins; lists and objects combine only if `_merge` in
   `packages/cspell-lib/src/lib/Settings/CSpellSettingsServer.ts` says so.
 - **CLI versus config:** a CLI flag wins over the config file (`cfg.options.x ?? configInfo.config.x`).
 - **Where an option can be set:** decided by the interface in `CSpellSettingsDef.ts` (see
-  [Config options and CLI flags](../config-and-cli.md)).
+  [Config options and CLI flags](./config-and-cli.md)).
 - **Trust:** JavaScript config files and plugins aren't loaded in untrusted locations (`WorkspaceTrustSettings`).
 
 ## Principles
 
-Read the [design principles](../design-principles.md) and check the sketch against it:
+Read the [design principles](./design-principles.md) and check the sketch against it:
 
 - **Keep false positives low.** Does any option flag more words by default?
 - **Existing configs keep working.** Does any option change a default or the meaning of an existing value?
@@ -50,7 +50,7 @@ These become public as soon as the feature ships. Look here for inflection point
 
 ### Config options
 
-For a new or changed option (see [Config options and CLI flags](../config-and-cli.md)):
+For a new or changed option (see [Config options and CLI flags](./config-and-cli.md)):
 
 - **Name.** Does it collide with, shadow, or read as a synonym of an existing option? Check `cspell.schema.json` and
   https://cspell.org/configuration/properties/. Names are public as soon as they ship.

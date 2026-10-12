@@ -120,7 +120,7 @@ The PR title and body are published verbatim in the release notes. Follow
 ### Designing a feature
 
 For a feature with a public, hard-to-undo choice, a short design helps. It's never required: suggest it in one line and
-let the person decide. [Designing a feature](docs/designs/README.md) describes it, and the `feature-design` skill runs
+let the person decide. [Designing a feature](docs/feature-design.md) describes it, and the `feature-design` skill runs
 it as an interview.
 
 ### Config options and CLI flags
