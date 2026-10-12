@@ -63,8 +63,8 @@ into detail, step back to the sketch.
      useful, not per decision.
 
 5. **Stop when the code is the easier answer.** Say so in a line, and stop. Don't start building unless asked. Offer to
-   look at a change's implications, review the code, or clean up afterward. During implementation, update the design when
-   the code shows something the design missed.
+   look at a change's implications, review the code, or clean up afterward. During implementation, update the design
+   when the code shows something it missed.
 
 6. **Trim before merge,** when the user says the design is done, as in the README's "Before merge".
    - Write the `tl;dr`, add the snapshot line, and cut the Design section to what the code can't say. In a folder, trim
