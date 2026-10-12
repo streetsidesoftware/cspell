@@ -46,8 +46,9 @@ then.
 
 ## Design
 
-<The sketch: the shape of the solution in a few lines. Then each choice that could change the sketch or is hard to
-undo, with the alternatives turned down and why.>
+<The sketch: the shape of the solution in a few lines, with one example of what a user writes (the config or the
+command line) and what cspell does. Then each choice that could change the sketch or is hard to undo, with the
+alternatives turned down and why.>
 
 ## Open questions
 
@@ -65,12 +66,14 @@ Work from the top down, and stop when the code is the easier way to answer the r
 
 1. **Get to the why.** A feature usually starts as a problem to solve, or as a solution ("we need an option"). Ask
    "why?" until you reach the reason: who is affected, and what goes wrong for them today. Look at the issue and the
-   code first, so the why rests on facts.
-2. **Sketch the design** in a few lines. Check it against the [design checks](./checks.md), which include the
-   [design principles](../design-principles.md).
-3. **Settle the inflection points.** Spend time on a question only when its answer could change the sketch, or would
-   be hard to undo once it ships: names, defaults, merging, what gets flagged, public API. Settle anything else with a
-   sensible default. When a detail shows the sketch is wrong, change the sketch.
+   code first, so the why rests on facts. Then ask why now, what success looks like as something a user can do, and
+   what's out of scope.
+2. **Sketch the design** in a few lines, with one example: what a user writes (the config or the command line) and
+   what cspell does.
+3. **Work through the [design checks](./checks.md),** which include the
+   [design principles](../design-principles.md). Spend time on a question when its answer could change the sketch, or
+   would be hard to undo once it ships: names, defaults, merging, what gets flagged, public API. Settle anything else
+   with a sensible default. When a detail shows the sketch is wrong, change the sketch.
 4. **Note side questions** in a line under Open questions, and set them aside. The code usually settles them.
 5. **Let the code settle the rest.** When a question is easier to answer by building or trying something, stop
    designing and build. Update the design when the code shows something the design missed.

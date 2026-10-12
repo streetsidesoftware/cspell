@@ -70,7 +70,8 @@ each path. A link that loops back to a parent directory is followed one level, a
 that path.
 
 A broken link, one whose target doesn't exist, is skipped without a message, whether it was meant to point to a file or
-a directory.
+a directory. Reporting them is tracked in
+[#9441](https://github.com/streetsidesoftware/cspell/issues/9441).
 
 ### What happens when it's off
 

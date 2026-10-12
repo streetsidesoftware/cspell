@@ -1,8 +1,9 @@
 # Design checks
 
-What to check a design against, and where cspell's hard-to-undo decisions hide. It's a checklist to run against the
-sketch, not a list of questions to answer one by one. Spend time on a finding only when it could change the sketch or is
-hard to undo once it ships. When checking a small change, note every side effect you find.
+The questions a design interview covers, and where cspell's hard-to-undo decisions hide. Go through the groups that
+apply, one question at a time. Spend time on a question when its answer could change the sketch or would be hard to
+undo once it ships; settle the rest with a proposed default. When checking a small change, note every side effect you
+find.
 
 ## Stakeholders
 
@@ -62,6 +63,7 @@ For a new or changed option (see [Config options and CLI flags](../config-and-cl
 - **Sharing.** Should a shared config be able to set it through `import`, or is it inherently local?
 - **Replacing an option.** Is an old option deprecated? How do the two coexist, and what does the deprecation message
   say?
+- **Doc comment.** The doc comment is the user documentation: what does it say, and what example does it show?
 
 ### CLI commands and flags
 
@@ -90,3 +92,17 @@ For a change to a published package's API, such as `cspell-lib` or `cspell-types
 
 - Which packages expose it, and through which `exports` entry point?
 - Is it additive, or does it change an existing signature or behavior?
+- What does its doc comment say on hover?
+
+## Performance and platforms
+
+- Could it run per file, per word, or per line on a large repo? Is the cost bounded, cached, or opt-in?
+- Paths: does it work with Windows paths, and with case-insensitive file systems?
+- Does it work with the cache (`--cache`)?
+
+## Testing and release surface
+
+- Which tests cover it, and in which package? Does it need a fixture, an `app.test.ts` case, or a sample in
+  `test-packages/`?
+- Is it `feat:` or `fix:`, and is it breaking? What does the release note say, for someone using cspell?
+- Which docs change: the website, a package README, the generated Properties page?

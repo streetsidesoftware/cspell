@@ -1,12 +1,14 @@
 ---
 name: feature-design
-description: 'Design a cspell feature before and while building it, through a short interview that writes a design under docs/designs/ (one file, or a folder for a large feature), or check a small change for side effects before it is built. Use when the user asks to design, spec, or think through a feature, asks for a design doc, or accepts a suggestion from config-option, cli-option, or a reviewer to design first. Also use when the user asks to check a change for side effects. Never start it unprompted: when a change makes a public, hard-to-undo choice with more than one reasonable answer, suggest it in one line and let the user decide. Not for refactors, dependency updates, or fully specified changes.'
+description: 'Design a cspell feature before and while building it, through an interview that writes a design under docs/designs/ (one file, or a folder for a large feature), or check a small change for side effects before it is built. Use when the user asks to design, spec, or think through a feature, asks for a design doc, or accepts a suggestion from config-option, cli-option, or a reviewer to design first. Also use when the user asks to check a change for side effects. Never start it unprompted: when a change makes a public, hard-to-undo choice with more than one reasonable answer, suggest it in one line and let the user decide. Not for refactors, dependency updates, or fully specified changes.'
 ---
 
 # feature-design
 
-Runs the process in `docs/designs/README.md` as a short interview. Read that README first: it holds the process. This
-skill adds only how to run it.
+The goal is a well-designed feature. The design file is a tool for getting there, and a by-product of the interview.
+
+Runs the process in `docs/designs/README.md` as an interview that drills down into the parts of a feature that matter.
+Read that README first: it holds the process. This skill adds only how to run it.
 
 Aim for a good design quickly, not a perfect one. Whoever builds the feature writes the code. If the interview drifts
 into detail, step back to the sketch.
@@ -35,23 +37,28 @@ into detail, step back to the sketch.
    - If the session was given a branch to work on (a cloud session, for example), use it and skip the worktree.
    - Don't push or open a PR unless asked. Offer one when the user wants feedback before building.
 
-2. **Draft the why.** Start from the problem as the user states it. Look up the facts first: the issue, the code, a
-   reproduction. Then propose the why in one or two lines: who is affected, and what they can't do today or what goes
-   wrong. Let the user correct it. If the draft still reads like a solution ("we need an option"), ask "why does that
-   matter?" and redraft. Repeat, as in the five whys, until it reaches the reason.
+2. **The why, with the user.** Start from the problem as the user states it. Look up the facts first: the issue, the
+   code, a reproduction. Then propose the why in one or two lines: who is affected, and what they can't do today or
+   what goes wrong. Let the user correct it. If the draft still reads like a solution ("we need an option"), ask "why
+   does that matter?" and redraft. Repeat, as in the five whys, until it reaches the reason. Then ask, one at a time,
+   proposing an answer where the facts suggest one:
+   - Why now: a bug report, a feature request, a limit hit while building something else?
+   - Who is affected, and how? Start from the stakeholders in `docs/designs/checks.md`.
+   - What does success look like, as something a user can do or a config they can write, that they can't today?
+   - What's out of scope?
 
-3. **Sketch.** Read `docs/design-principles.md`, `docs/glossary.md`, and `docs/designs/checks.md`. Look in `rfc/`
-   and closed issues for earlier proposals, and link a matching RFC. Propose the sketch in a few lines and agree on it.
-   Write `docs/designs/<feature>.md` with the README's skeleton, and commit it. When a part can be read on its own,
-   move to a folder as the README's "Where it lives" describes, and say so in a line.
+3. **Sketch.** Read `docs/design-principles.md`, `docs/glossary.md`, and `docs/designs/checks.md`. Look in `rfc/` and
+   closed issues for earlier proposals, and link a matching RFC. Propose the sketch in a few lines, with one example:
+   what a user writes (the config or the command line) and what cspell does. Agree on it. Write
+   `docs/designs/<feature>.md` with the README's skeleton, and commit it. When a part can be read on its own, move to a
+   folder as the README's "Where it lives" describes, and say so in a line.
 
-   Check the sketch against the design checks yourself. They aren't questions to ask. Bring up a finding only when it
-   could change the sketch or is hard to undo once it ships.
-
-4. **Settle the inflection points** one at a time. Before each question, know how it connects to the sketch.
-   - **The test.** Discuss a question only if its answer could change the sketch, or is hard to undo once it ships.
-     For anything else, state your default in one line and wait for a quick yes or a correction. When you aren't sure
-     which kind a question is, ask.
+4. **Walk the design checks with the user,** one question at a time. Go through the relevant groups in
+   `docs/designs/checks.md`, and skip a group only when it obviously doesn't apply. Before each question, know how it
+   connects to the sketch.
+   - **The test** decides how much time a question gets, not whether the user hears it. A question whose answer could
+     change the sketch, or would be hard to undo once it ships, gets discussed. For anything else, propose a default in
+     one line and wait for a quick yes or a correction. When you aren't sure which kind a question is, ask.
    - **How to ask.** Options labelled (a), (b), …, each with what the user writes or sees: the config snippet or the
      command line, and what cspell reports. Put your recommendation first and say why. Check facts in the code first,
      and bring the result. If an answer covers only part of the question, ask about the rest.
@@ -76,8 +83,7 @@ into detail, step back to the sketch.
      another doc. A rule that could affect other designs gets its own `docs:` PR.
    - Start a subagent that is given only the paths of the design, and told not to read the code. Ask it to say what the
      feature does, how it behaves, why, and why it's shaped that way, and to list anything it had to guess or found
-     contradictory. Show the user its report,
-     and fix what they agree with.
+     contradictory. Show the user its report, and fix what they agree with.
    - If the code is on the same branch, check that the PR is titled `feat:` or `fix:` and its body is written for the
      release notes.
 
