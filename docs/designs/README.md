@@ -54,6 +54,9 @@ undo, with the alternatives turned down and why.>
 
 Add anything else the feature needs, such as who it affects or what's out of scope, under Why.
 
+Define a new term in the design where it's first used. If it's used across the repo, add it to the main
+[glossary](../glossary.md) in the same PR.
+
 ## How to design
 
 Work from the top down, and stop when the code is the easier way to answer the rest.

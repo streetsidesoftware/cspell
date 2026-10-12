@@ -60,7 +60,7 @@ into detail, step back to the sketch.
    - **Tangents and side remarks.** Note each in a line under Open questions and move on. A remark that sounds like a
      rule beyond this feature goes there too.
    - **Record.** Update the Design section as each point is settled, with the alternatives turned down. Commit when it's
-     useful, not per decision.
+     useful, not per decision. Define new terms as the README's "The file" describes.
 
 5. **Stop when the code is the easier answer.** Say so in a line, and stop. Don't start building unless asked. Offer to
    look at a change's implications, review the code, or clean up afterward. During implementation, update the design
