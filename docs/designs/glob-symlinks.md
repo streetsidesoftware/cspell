@@ -67,7 +67,8 @@ a glob search with `--glob-symlinks` on are allowed, so `--follow-symlinks` isn'
 Links may point anywhere: outside the directory being searched, and outside the repository.
 
 A file that can be reached by two paths, for example through a link and directly, is checked and reported once for
-each path. A link that loops back to a parent directory is followed one level, and the search goes no deeper down that path.
+each path. A link that loops back to a parent directory is followed one level, and the search goes no deeper down
+that path.
 
 ### What happens when it's off
 
