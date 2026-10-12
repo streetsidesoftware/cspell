@@ -55,8 +55,7 @@ A dictionary can declare its locale. When cspell changes case to look up a word 
 locale's rules. Building a dictionary uses the same rules for its case-insensitive forms, so the two agree. A dictionary
 without a locale behaves as today.
 
-For example, `@cspell/dict-tr-tr` declares its locale (where it's declared is still open; this uses the existing
-`dictionaryInformation.locale`):
+For example, `@cspell/dict-tr-tr` declares its locale:
 
 ```jsonc
 "dictionaryDefinitions": [
@@ -80,9 +79,29 @@ Turned down:
 - **Locale rules at lookup only.** A smaller change, but building and lookup would disagree: with `ignoreCase`, `IRAK`
   is found today, and would be missed if only the lookup used Turkish rules.
 
+### Where the locale is declared
+
+A dictionary declares its locale in `dictionaryInformation.locale`, a field that already exists and is documented as the
+locale of the dictionary. Suggestions already use it to change case when weighing suggestions, so lookups and
+suggestions agree. The Azerbaijani dictionary already sets it. The Turkish dictionary needs to add it.
+
+This field used to only tune suggestions. Now it also changes what gets flagged, and its doc comment says so.
+
+The value is a comma-separated list, such as `tr,tr-TR`. cspell uses the first locale in the list that JavaScript
+supports. A value that isn't a valid locale, such as `*`, isn't meaningful here, but nothing rejects it when a config
+is loaded. cspell then uses the default rules, so a bad value can't crash cspell or flag more words than before.
+
+Turned down:
+
+- **A new `locale` field on the dictionary definition.** Easier to find, but a new public name, and two locale fields
+  could disagree.
+- **The locale of the `languageSettings` entry that enables the dictionary.** Dictionaries would need no change, but
+  that locale is a filter: it can be `*` or a list, and several entries can enable the same dictionary. A dictionary
+  would behave differently depending on which config enabled it.
+
 ## Open questions
 
-- Where a dictionary's locale is declared.
+- Should `dictionaryInformation.locale` reject values that aren't locales? Today the schema allows any string.
 
 <!---
     cspell:ignore inceleme İnceleme İNCELEME ispanak ıspanak ispanakk ışık IŞIK irak ırak ijsland jsland İnside
