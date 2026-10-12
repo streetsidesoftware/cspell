@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 22033, skipped: 29, Issues found: 49404 in 8275 files.
+ CSpell: Files checked: 22039, skipped: 29, Issues found: 49419 in 8277 files.
  exit code: 1
 ARCHITECTURE.md:158:48    - Unknown word (googlemock) -- implementation using `googlemock`
 BUILD.bazel:152:20    - Unknown word (ctype)      -- name = "enable-ctype-cord-workaround",
@@ -251,6 +251,10 @@ doc/packaging.md:75:38     - Unknown word (physicalcpu) -- Linux, or `sysctl -n 
 doc/packaging.md:880:8     - Unknown word (DJSON)          -- -DJSON_BuildTests=OFF \
 doc/product-neutral-guides/core-concepts.md:38:10     - Unknown word (cerr)       -- std::cerr << "RPC failed: " <
 doc/product-neutral-guides/core-concepts.md:42:8      - Unknown word (cout)       -- std::cout << "Success: " << *response
+doc/product-neutral-guides/post-quantum-cryptography.md:20:51     - Unknown word (CURLOPT)    -- is prioritized in `CURLOPT_SSL_EC_CURVES`. | `libcurl
+doc/product-neutral-guides/post-quantum-cryptography.md:34:64     - Unknown word (middleboxes) -- firewalls, proxies, or middleboxes may
+doc/product-neutral-guides/post-quantum-cryptography.md:74:35     - Unknown word (SECP)        -- TLS_KEY_EXCHANGE_GROUP_SECP256R1,
+doc/product-neutral-guides/post-quantum-cryptography.md:8:71      - Unknown word (ECDH)       -- combining classical `X25519` ECDH with
 doc/public-api.md:163:20    - Unknown word (lgoogle)    -- e.g., by using `-lgoogle_cloud_cpp_bigtable`
 doc/v3-migration-guide.md:306:34    - Unknown word (creds)      -- project", "my-instance", creds);
 doc/v3-migration-guide.md:363:7     - Unknown word (Grpclb)     -- | `SetGrpclbFallbackTimeout`
@@ -572,20 +576,20 @@ google/cloud/composer/v1/environments_client.h:365:47    - Unknown word (pypi)  
 google/cloud/compute/BUILD.bazel:37:26     - Unknown word (rfind)      -- name = sample[sample.rfind("/") + 1:].replace(
 google/cloud/compute/autoscalers/v1/autoscalers_client.cc:28:1      - Unknown word (Autoscalers) -- AutoscalersClient::AutoscalersClient
 google/cloud/compute/autoscalers/v1/autoscalers_client.h:19:47     - Unknown word (AUTOSCALERS) -- GOOGLE_CLOUD_COMPUTE_AUTOSCALERS_V1_AUTOSCALERS_CLIENT
-google/cloud/compute/disks/v1/disks_client.h:691:47    - Unknown word (separatelydelete) -- from the disk. You must separatelydelete
+google/cloud/compute/disks/v1/disks_client.h:693:47    - Unknown word (separatelydelete) -- from the disk. You must separatelydelete
 google/cloud/compute/doc/environment-variables.dox:241:28    - Unknown word (MIRRORINGS) -- GOOGLE_CLOUD_CPP_PACKET_MIRRORINGS_ENDPOINT=...` overrides
 google/cloud/compute/doc/environment-variables.dox:243:22    - Unknown word (Mirrorings) -- used by `MakePacketMirroringsConnection()`.
 google/cloud/compute/doc/environment-variables.dox:421:21    - Unknown word (ROLLOUTS)   -- - `GOOGLE_CLOUD_CPP_ROLLOUTS_ENDPOINT=...` overrides
 google/cloud/compute/doc/environment-variables.dox:423:16    - Unknown word (Rollouts)   -- used by `MakeRolloutsConnection()`.
 google/cloud/compute/doc/environment-variables.dox:469:21    - Unknown word (SUBNETWORKS) -- - `GOOGLE_CLOUD_CPP_SUBNETWORKS_ENDPOINT=...` overrides
 google/cloud/compute/doc/environment-variables.dox:471:16    - Unknown word (Subnetworks) -- used by `MakeSubnetworksConnection()`.
-google/cloud/compute/instance_group_managers/v1/instance_group_managers_client.h:105:44    - Unknown word (thelistmanagedinstances) -- abandoning action with thelistmanagedinstances
-google/cloud/compute/instance_group_managers/v1/instance_group_managers_client.h:1907:65   - Unknown word (itscurrent)              -- instance by checking itscurrentAction
-google/cloud/compute/instance_group_managers/v1/instance_group_managers_client.h:2850:27   - Unknown word (sinceinstance)           -- seconds have passed sinceinstance.creationTimestamp when
-google/cloud/compute/instance_group_managers/v1/instance_group_managers_client.h:483:27    - Unknown word (listmanagedinstances)    -- or actions with the listmanagedinstances
-google/cloud/compute/instances/v1/instances_client.h:3825:7    - Unknown word (astopped)   -- /// astopped instance,
-google/cloud/compute/region_disks/v1/region_disks_client.h:482:48    - Unknown word (anysnapshots) -- disk does not delete anysnapshots
-google/cloud/compute/region_instance_group_managers/v1/region_instance_group_managers_client.h:668:7     - Unknown word (thedeleting) -- /// thedeleting action with thelistmanagedins
+google/cloud/compute/instance_group_managers/v1/instance_group_managers_client.h:107:44    - Unknown word (thelistmanagedinstances) -- abandoning action with thelistmanagedinstances
+google/cloud/compute/instance_group_managers/v1/instance_group_managers_client.h:1909:65   - Unknown word (itscurrent)              -- instance by checking itscurrentAction
+google/cloud/compute/instance_group_managers/v1/instance_group_managers_client.h:2852:27   - Unknown word (sinceinstance)           -- seconds have passed sinceinstance.creationTimestamp when
+google/cloud/compute/instance_group_managers/v1/instance_group_managers_client.h:485:27    - Unknown word (listmanagedinstances)    -- or actions with the listmanagedinstances
+google/cloud/compute/instances/v1/instances_client.h:3827:7    - Unknown word (astopped)   -- /// astopped instance,
+google/cloud/compute/region_disks/v1/region_disks_client.h:484:48    - Unknown word (anysnapshots) -- disk does not delete anysnapshots
+google/cloud/compute/region_instance_group_managers/v1/region_instance_group_managers_client.h:670:7     - Unknown word (thedeleting) -- /// thedeleting action with thelistmanagedins
 google/cloud/confidentialcomputing/v1/confidential_computing_client.h:19:39     - Unknown word (CONFIDENTIALCOMPUTING) -- CLOUD_CPP_GOOGLE_CLOUD_CONFIDENTIALCOMPUTING_V1_CONFIDENTIAL_COMPUTING
 google/cloud/configdelivery/v1/config_delivery_client.h:19:39     - Unknown word (CONFIGDELIVERY) -- CLOUD_CPP_GOOGLE_CLOUD_CONFIGDELIVERY_V1_CONFIG_DELIVERY_CLIENT
 google/cloud/contactcenterinsights/quickstart/quickstart.cc:29:13     - Unknown word (ccai)       -- namespace ccai = ::google::cloud::contactcen
@@ -771,6 +775,7 @@ google/cloud/spanner/integration_tests/client_integration_test.cc:474:31    - Un
 google/cloud/spanner/integration_tests/client_integration_test.cc:475:23    - Unknown word (Mariah)     -- {1969, "Mariah", "Carey"},
 google/cloud/spanner/integration_tests/client_integration_test.cc:484:14    - Unknown word (upserts)    -- // Use upserts as mutation groups are
 google/cloud/spanner/integration_tests/data_types_integration_test.cc:85:30     - Unknown word (Tmpl)       -- DataTypeIntegrationTestTmpl : public T {
+google/cloud/spanner/integration_tests/queue_integration_test.cc:254:26    - Unknown word (renewlease) -- 3. Extend lease via renewlease_<queue> TVF.
 google/cloud/spanner/internal/connection_impl_test.cc:3431:37   - Unknown word (BADDECAF)   -- { partition_token: "BADDECAF" }
 google/cloud/spanner/internal/connection_impl_test.cc:3433:25   - Unknown word (CAFEDEAD)   -- transaction: { id: "CAFEDEAD" }
 google/cloud/spanner/internal/connection_impl_test.cc:66:34     - Unknown word (Wmissing)   -- diagnostic ignored "-Wmissing-field-initializers"
@@ -788,7 +793,8 @@ google/cloud/spanner/interval_test.cc:346:31    - Unknown word (dayss)      -- T
 google/cloud/spanner/interval_test.cc:61:18     - Unknown word (intvl)      -- Interval const intvl(0, 1, 2, hours(3));
 google/cloud/spanner/json.h:90:11     - Unknown word (reparsing)  -- * avoids reparsing. Therefore, applications
 google/cloud/spanner/keys.cc:58:46     - Unknown word (differencer) -- :MessageDifferencer differencer;
-google/cloud/spanner/mutations_test.cc:377:37    - Unknown word (ZXMA)       -- string_value: "Ynl0ZXMA" }
+google/cloud/spanner/mutations_test.cc:379:37    - Unknown word (ZXMA)       -- string_value: "Ynl0ZXMA" }
+google/cloud/spanner/mutations_test.cc:537:33    - Unknown word (Ymlu)       -- payload: { string_value: "YmluYXJ5LXBheWxvYWQ=" }
 google/cloud/spanner/samples/README.md:22:2      - Unknown word (bazelbuild) -- [bazelbuild/bazel#10621](https:
 google/cloud/spanner/samples/graph_samples.cc:119:33    - Unknown word (Kollam)     -- "India", "Kollam")
 google/cloud/spanner/samples/postgresql_samples.cc:197:56    - Unknown word (Trentor)    -- cloud::spanner::Value("Trentor")}}),
@@ -877,10 +883,10 @@ google/cloud/storage/internal/async/connection_impl_open_test.cc:458:70    - Unk
 google/cloud/storage/internal/async/connection_impl_read_hash_test.cc:17:11     - Unknown word (pratap)     -- // TODO(v-pratap): Remove this when EnableMD
 google/cloud/storage/internal/async/connection_impl_upload_test.cc:487:42    - Unknown word (eksb)       -- sha256_bytes: "test-eksb"
 google/cloud/storage/internal/async/insert_object.cc:50:21     - Unknown word (Subcord)    -- auto next = data_.Subcord(0, n);
-google/cloud/storage/internal/async/writer_connection_buffered.cc:735:39    - Unknown word (unsatisified) -- call that returns an unsatisified future until the buffer
+google/cloud/storage/internal/async/writer_connection_buffered.cc:792:39    - Unknown word (unsatisified) -- call that returns an unsatisified future until the buffer
 google/cloud/storage/internal/grpc/object_request_parser_test.cc:63:33     - Unknown word (Cuakt)      -- md5) : StEvo2V/qoDCuaktZSw3IQ==
 google/cloud/storage/internal/grpc/stub.cc:372:10    - Unknown word (wopts)      -- auto wopts = grpc::WriteOptions
-google/cloud/storage/internal/hedged_object_read_source_test.cc:495:63    - Unknown word (unblocker)  -- failure and notify the unblocker thread.
+google/cloud/storage/internal/hedged_object_read_source_test.cc:496:63    - Unknown word (unblocker)  -- failure and notify the unblocker thread.
 google/cloud/storage/internal/object_requests_test.cc:261:61    - Unknown word (NEFCQ)      -- encryption-key: MTIzNEFCQ0Q="));
 google/cloud/storage/internal/object_requests_test.cc:281:61    - Unknown word (QUJDRD)     -- source-encryption-key: QUJDRDEyMzQ="));
 google/cloud/storage/internal/object_requests_test.cc:606:27    - Unknown word (sdlkj)      -- "&upload_id=xa298sd_sdlkj2";
@@ -944,32 +950,32 @@ protos/google/cloud/bigtable/test_proxy/test_proxy.proto:26:61     - Unknown wor
 protos/google/cloud/bigtable/test_proxy/test_proxy.proto:281:38    - Unknown word (inthe)       -- metadata for each column inthe query result.
 protos/google/cloud/bigtable/test_proxy/test_proxy.proto:354:17    - Unknown word (BTQL)        -- // Executes a BTQL query with the client
 protos/google/cloud/compute/CMakeLists.txt:49:53     - Unknown word (bigobj)     -- compute_protos PRIVATE "/bigobj")
-protos/google/cloud/compute/accelerator_types/v1/accelerator_types.proto:105:28    - Unknown word (Skylake)        -- cpuPlatform = "Intel Skylake")
-protos/google/cloud/compute/accelerator_types/v1/accelerator_types.proto:112:28    - Unknown word (Broadwell)      -- cpuPlatform = "Intel Broadwell") AND
+protos/google/cloud/compute/accelerator_types/v1/accelerator_types.proto:101:39    - Unknown word (onresource)     -- fields to filter based onresource labels.
+protos/google/cloud/compute/accelerator_types/v1/accelerator_types.proto:107:28    - Unknown word (Skylake)        -- cpuPlatform = "Intel Skylake")
+protos/google/cloud/compute/accelerator_types/v1/accelerator_types.proto:114:28    - Unknown word (Broadwell)      -- cpuPlatform = "Intel Broadwell") AND
 protos/google/cloud/compute/accelerator_types/v1/accelerator_types.proto:15:25     - Unknown word (microgenerator) -- Generated by the C++ microgenerator.
-protos/google/cloud/compute/accelerator_types/v1/accelerator_types.proto:99:39     - Unknown word (onresource)     -- fields to filter based onresource labels.
-protos/google/cloud/compute/disks/v1/disks.proto:155:36    - Unknown word (orsource)   -- sourceImage, sourceSnapshot, orsourceDisk) or create an empty
-protos/google/cloud/compute/instance_group_manager_resize_requests/v1/instance_group_manager_resize_requests.proto:149:18    - Unknown word (thezone)    -- // The name of thezone where the managed
-protos/google/cloud/compute/instance_group_managers/v1/instance_group_managers.proto:100:44    - Unknown word (thecreate)  -- operation is marked DONE if thecreateInstances request is
-protos/google/cloud/compute/instance_group_managers/v1/instance_group_managers.proto:102:69    - Unknown word (thecreating) -- verify the status of thecreating
-protos/google/cloud/compute/instance_group_managers/v1/instance_group_managers.proto:273:11    - Unknown word (thelist)     -- // with thelistManagedInstances
-protos/google/cloud/compute/instance_group_managers/v1/instance_group_managers.proto:404:40    - Unknown word (runapply)    -- run recreateInstances, runapplyUpdatesToInstances, or
-protos/google/cloud/compute/instance_group_managers/v1/instance_group_managers.proto:405:6     - Unknown word (group'supdate) -- // group'supdatePolicy.type to PROACTIVE
-protos/google/cloud/compute/instance_group_managers/v1/instance_group_managers.proto:44:65     - Unknown word (thetarget)  -- This method reduces thetargetSize of
-protos/google/cloud/compute/instance_group_managers/v1/instance_group_managers.proto:482:60    - Unknown word (thaninitial)   -- the instance. If more thaninitialDelaySec
-protos/google/cloud/compute/instance_group_managers/v1/instance_group_managers.proto:99:72     - Unknown word (Thecreate)  -- current instance template. Thecreate
-protos/google/cloud/compute/instance_groups/v1/instance_groups.proto:88:39     - Unknown word (theinstance) -- instance groups, use theinstanceGroupManagers
-protos/google/cloud/compute/instances/v1/instances.proto:352:51    - Unknown word (theinstances) -- was suspended using theinstances().suspend
-protos/google/cloud/compute/interconnect_remote_locations/v1/interconnect_remote_locations.proto:39:64     - Unknown word (alist)      -- locations by making alist() request.
-protos/google/cloud/compute/licenses/v1/licenses.proto:107:53    - Unknown word (orwindows)  -- such as debian-cloud orwindows-cloud.
-protos/google/cloud/compute/network_firewall_policies/v1/network_firewall_policies.proto:349:6     - Unknown word (betweenmin) -- // betweenminPriority and maxPriority
-protos/google/cloud/compute/projects/v1/projects.proto:240:48    - Unknown word (theusage)   -- export feature and sets theusage export bucket
-protos/google/cloud/compute/public_delegated_prefixes/v1/public_delegated_prefixes.proto:277:18    - Unknown word (theregion)  -- // The name of theregion where
-protos/google/cloud/compute/region_instance_group_managers/v1/region_instance_group_managers.proto:203:41    - Unknown word (andorder)   -- instance group. The filter andorderBy query parameters are
-protos/google/cloud/compute/region_instance_group_managers/v1/region_instance_group_managers.proto:322:45    - Unknown word (theresize)  -- operation is marked DONE if theresize request is successful
-protos/google/cloud/compute/regions/v1/regions.proto:51:56     - Unknown word (behaviour)  -- disables the fail-open behaviour when quota
-protos/google/cloud/compute/routers/v1/routers.proto:180:43    - Unknown word (subresources) -- of router named set subresources available to the
-protos/google/cloud/compute/routers/v1/routers.proto:244:57    - Unknown word (andupdate)    -- during router create andupdate operations.
+protos/google/cloud/compute/disks/v1/disks.proto:156:36    - Unknown word (orsource)   -- sourceImage, sourceSnapshot, orsourceDisk) or create an empty
+protos/google/cloud/compute/instance_group_manager_resize_requests/v1/instance_group_manager_resize_requests.proto:150:18    - Unknown word (thezone)    -- // The name of thezone where the managed
+protos/google/cloud/compute/instance_group_managers/v1/instance_group_managers.proto:100:72    - Unknown word (Thecreate)  -- current instance template. Thecreate
+protos/google/cloud/compute/instance_group_managers/v1/instance_group_managers.proto:101:44    - Unknown word (thecreate)  -- operation is marked DONE if thecreateInstances request is
+protos/google/cloud/compute/instance_group_managers/v1/instance_group_managers.proto:103:69    - Unknown word (thecreating) -- verify the status of thecreating
+protos/google/cloud/compute/instance_group_managers/v1/instance_group_managers.proto:274:11    - Unknown word (thelist)     -- // with thelistManagedInstances
+protos/google/cloud/compute/instance_group_managers/v1/instance_group_managers.proto:405:40    - Unknown word (runapply)    -- run recreateInstances, runapplyUpdatesToInstances, or
+protos/google/cloud/compute/instance_group_managers/v1/instance_group_managers.proto:406:6     - Unknown word (group'supdate) -- // group'supdatePolicy.type to PROACTIVE
+protos/google/cloud/compute/instance_group_managers/v1/instance_group_managers.proto:45:65     - Unknown word (thetarget)  -- This method reduces thetargetSize of
+protos/google/cloud/compute/instance_group_managers/v1/instance_group_managers.proto:483:60    - Unknown word (thaninitial)   -- the instance. If more thaninitialDelaySec
+protos/google/cloud/compute/instance_groups/v1/instance_groups.proto:89:39     - Unknown word (theinstance) -- instance groups, use theinstanceGroupManagers
+protos/google/cloud/compute/instances/v1/instances.proto:353:51    - Unknown word (theinstances) -- was suspended using theinstances().suspend
+protos/google/cloud/compute/interconnect_remote_locations/v1/interconnect_remote_locations.proto:40:64     - Unknown word (alist)      -- locations by making alist() request.
+protos/google/cloud/compute/licenses/v1/licenses.proto:108:53    - Unknown word (orwindows)  -- such as debian-cloud orwindows-cloud.
+protos/google/cloud/compute/network_firewall_policies/v1/network_firewall_policies.proto:350:6     - Unknown word (betweenmin) -- // betweenminPriority and maxPriority
+protos/google/cloud/compute/projects/v1/projects.proto:241:48    - Unknown word (theusage)   -- export feature and sets theusage export bucket
+protos/google/cloud/compute/public_delegated_prefixes/v1/public_delegated_prefixes.proto:271:18    - Unknown word (theregion)  -- // The name of theregion where
+protos/google/cloud/compute/region_instance_group_managers/v1/region_instance_group_managers.proto:204:41    - Unknown word (andorder)   -- instance group. The filter andorderBy query parameters are
+protos/google/cloud/compute/region_instance_group_managers/v1/region_instance_group_managers.proto:323:45    - Unknown word (theresize)  -- operation is marked DONE if theresize request is successful
+protos/google/cloud/compute/regions/v1/regions.proto:52:56     - Unknown word (behaviour)  -- disables the fail-open behaviour when quota
+protos/google/cloud/compute/routers/v1/routers.proto:181:43    - Unknown word (subresources) -- of router named set subresources available to the
+protos/google/cloud/compute/routers/v1/routers.proto:245:57    - Unknown word (andupdate)    -- during router create andupdate operations.
 protos/google/cloud/compute/v1/internal/common_000.proto:1018:69   - Unknown word (maxage)             -- valid TTL (max-age or s-maxage).
 protos/google/cloud/compute/v1/internal/common_000.proto:110:33    - Unknown word (aninstance)  -- fully-qualified URL of aninstance
 protos/google/cloud/compute/v1/internal/common_000.proto:1136:15   - Unknown word (SCTP)               -- // (TCP and SCTP) and only if the Tracking
@@ -1065,7 +1071,7 @@ protos/google/cloud/compute/v1/internal/common_016.proto:305:6     - Unknown wor
 protos/google/cloud/compute/v1/internal/common_016.proto:342:55    - Unknown word (andmydomain) -- mydomain.com/function1 andmydomain.com/function2
 protos/google/cloud/compute/v1/internal/common_016.proto:399:6     - Unknown word (alwayscompute) -- // alwayscompute#networkEndpointGroupList
 protos/google/cloud/compute/v1/internal/common_016.proto:91:20     - Unknown word (PORTMAP)    -- // withGCE_VM_IP_PORTMAP endpoint type.
-protos/google/cloud/compute/v1/internal/common_017.proto:1580:49   - Unknown word (Nics)       -- VM endpoints (i.e., Nics) that can use NAT.
+protos/google/cloud/compute/v1/internal/common_017.proto:1586:49   - Unknown word (Nics)       -- VM endpoints (i.e., Nics) that can use NAT.
 protos/google/cloud/compute/v1/internal/common_017.proto:220:18    - Unknown word (asns)       -- repeated int32 asns = 1 [json_name = "asns
 protos/google/cloud/compute/v1/internal/common_017.proto:234:44    - Unknown word (NLRI)       -- Reachability Information (NLRI) for a route.
 protos/google/cloud/compute/v1/internal/common_017.proto:642:42    - Unknown word (keepalive)  -- seconds between BGP keepalive messages that are
