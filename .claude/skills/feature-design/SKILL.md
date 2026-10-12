@@ -66,15 +66,17 @@ into detail, step back to the sketch.
    look at a change's implications, review the code, or clean up afterward. During implementation, update the design
    when the code shows something it missed.
 
-6. **Trim before merge,** when the user says the design is done, as in the README's "Before merge".
-   - Write the `tl;dr`, add the snapshot line, and cut the Design section to what the code can't say. In a folder, trim
-     each file the same way, and delete one with nothing left to say.
+6. **Finish before merge,** when the user says the design is done, as in the README's "Before merge".
+   - Write the `tl;dr`, add the snapshot line, and make the Design section describe the feature as built, with
+     examples. A reader must understand it without the code. Remove working notes and code-level detail, not the
+     explanation. In a folder, finish each file the same way.
    - List the open questions, and settle or drop each with the user. Propose an issue only for a real problem someone
      would act on.
    - List side remarks that might be standing rules, and let the user pick which go into `docs/design-principles.md` or
      another doc. A rule that could affect other designs gets its own `docs:` PR.
-   - Start a subagent that is given only the paths of the trimmed design. Ask it to say what the feature does, why, and
-     why it's shaped that way, and to list anything it had to guess or found contradictory. Show the user its report,
+   - Start a subagent that is given only the paths of the design, and told not to read the code. Ask it to say what the
+     feature does, how it behaves, why, and why it's shaped that way, and to list anything it had to guess or found
+     contradictory. Show the user its report,
      and fix what they agree with.
    - If the code is on the same branch, check that the PR is titled `feat:` or `fix:` and its body is written for the
      release notes.

@@ -1,7 +1,9 @@
 # Designing a feature
 
-A short design helps you think a feature through before and while you build it. It's for whoever builds the feature,
-and for the people who review it. It isn't a record to maintain: the code, tests, and docs are the source of truth.
+A design helps you think a feature through before and while you build it. It's for whoever builds the feature, for the
+people who review it, and for anyone who later wants to understand it. It should be clear and descriptive: a reader
+understands the feature's intent and behavior without reading the code. It isn't a replacement for the code or a record
+to maintain: the code, tests, and docs are the source of truth.
 
 ## When to write one
 
@@ -75,17 +77,19 @@ Work from the top down, and stop when the code is the easier way to answer the r
 
 ## Before merge
 
-Trim the design to a short summary, in the same PR:
+Finish the design in the same PR. This removes the working notes, not the explanation:
 
 - Add a `tl;dr` at the top: two or three lines on what the feature does and the choices that matter.
 - Add a line saying it describes the design when it merged, and that the code and docs are the source of truth.
-- Cut the Design section to the choices someone couldn't work out from the code, with the alternatives turned down.
+- Make the Design section describe the feature as built: what a user does and sees, with examples, how it behaves in
+  the cases that matter, and each choice with the alternatives turned down and why.
+- Leave out what only matters for writing the code, such as function names and internal steps.
 - Settle or drop each open question, and remove the section. Open an issue only for a real problem someone would act
   on.
-- In a folder, the `tl;dr` and that line go in the `README.md`. Trim each other file the same way, and delete one that
-  has nothing left the code can't say.
-- Have someone new to the design read only the trimmed design. They should be able to say what the feature does, why,
-  and why it's shaped the way it is.
+- In a folder, the `tl;dr` and that line go in the `README.md`. Finish each other file the same way, and delete one
+  that no longer adds anything.
+- Have someone new to the feature read only the design, without the code. They should be able to say what the feature
+  does, how it behaves, why, and why it's shaped the way it is.
 
 If the design set a rule that holds beyond this feature, such as a new design principle, add it to
 [`../design-principles.md`](../design-principles.md) or the relevant doc in `docs/`. When it could affect other
