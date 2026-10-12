@@ -69,11 +69,23 @@ A file that can be reached by two paths, for example through a link and directly
 each path. A link that loops back to a parent directory is followed one level, and the search goes no deeper down
 that path.
 
+A broken link, one whose target doesn't exist, is skipped without a message, whether it was meant to point to a file or
+a directory.
+
 ### What happens when it's off
 
 Nothing changes from before: linked files are skipped, and linked directories aren't searched. A glob that only makes
-sense through a link, such as `linked-dir/**/*.md` where `linked-dir` is a link, isn't searched at all. With
-`--verbose`, cspell says which glob was skipped and why.
+sense through a link, such as `linked-dir/**/*.md` where `linked-dir` is a link, isn't searched at all.
+
+A file path on the command line is a glob too. `cspell lint link.md`, where `link.md` is a link, and
+`cspell lint linked-dir/guide.md` both find nothing to check. With `--verbose`, cspell says which glob was skipped and
+why:
+
+```text
+Glob not searched: "link.md" goes through a symbolic link.
+```
+
+To check one linked file without following links in globs, name it with `--file` and use `--follow-symlinks`.
 
 ### How it relates to `--follow-symlinks`
 
