@@ -51,9 +51,8 @@ special case. The general approach needs deciding so the PR can be answered with
 
 ## Design
 
-A dictionary can declare its locale. When cspell changes case to look up a word in that dictionary, it uses that
-locale's rules. Building a dictionary uses the same rules for its case-insensitive forms, so the two agree. A dictionary
-without a locale behaves as today.
+A dictionary can declare its locale. When cspell changes case to look up a word in that dictionary, it also tries the
+forms that locale's rules give. A dictionary without a locale behaves as today.
 
 For example, `@cspell/dict-tr-tr` declares its locale:
 
@@ -76,8 +75,25 @@ Turned down:
 
 - **Turkish rules for every dictionary** (#9417). It needs no locale, but words typed with `İ` pass in every language,
   and each further language needs its own special case.
-- **Locale rules at lookup only.** A smaller change, but building and lookup would disagree: with `ignoreCase`, `IRAK`
-  is found today, and would be missed if only the lookup used Turkish rules.
+
+### Lookups try both rules
+
+A dictionary with a locale is searched with the forms the locale's rules give, and with the forms cspell tries today.
+The two only differ for words where the locale's rules matter, such as Turkish words with `I` or `İ`, so other words
+cost nothing extra.
+
+- `İnceleme`, `Ispanak`, and `IŞIK` pass through the Turkish forms.
+- `IRAK` with `ignoreCase` is still found through today's form, even in a dictionary built before this change. Every
+  dictionary is built with the default rules, which store `Irak` as `irak`, not `ırak`.
+- `ISIM` (Turkish writes `İSİM`) passes through today's form `isim`. It passes today too.
+
+So declaring a locale never makes a dictionary flag a word that passes today, and published dictionaries work without
+a rebuild.
+
+Turned down:
+
+- **The locale's forms only.** Stricter: `ISIM` would be reported. But every dictionary that declares a locale would
+  need a rebuild with that locale, or words like `IRAK` would start being reported.
 
 ### Where the locale is declared
 
@@ -104,5 +120,5 @@ Turned down:
 - Should `dictionaryInformation.locale` reject values that aren't locales? Today the schema allows any string.
 
 <!---
-    cspell:ignore inceleme İnceleme İNCELEME ispanak ıspanak ispanakk ışık IŞIK irak ırak ijsland jsland İnside
+    cspell:ignore inceleme İnceleme İNCELEME ispanak ıspanak ispanakk ışık IŞIK irak ırak ijsland jsland İnside isim ISIM İSİM
 -->
