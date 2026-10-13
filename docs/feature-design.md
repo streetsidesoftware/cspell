@@ -58,7 +58,9 @@ alternatives turned down and why.>
 - <A side question or deferred point, in one line.>
 ```
 
-Add anything else the feature needs, such as who it affects or what's out of scope, under Why.
+Add anything else the reader needs to understand the why, such as who it affects, under Why. Record what's out of
+scope only when a reader would otherwise assume the feature covers it, in a section at the end. A part left for later,
+such as a follow-up deliverable, goes where it belongs in the design.
 
 Define a new term in the design where it's first used. If it's used across the repo, add it to the main
 [glossary](./glossary.md) in the same PR.
@@ -70,7 +72,7 @@ Work from the top down, and stop when the code is the easier way to answer the r
 1. **Get to the why.** A feature usually starts as a problem to solve, or as a solution ("we need an option"). Ask
    "why?" until you reach the reason: who is affected, and what goes wrong for them today. Look at the issue and the
    code first, so the why rests on facts. Then ask why now, what success looks like as something a user can do, and
-   what's out of scope.
+   what's out of scope. Asking about scope keeps the design from growing. It doesn't need a section of its own.
 2. **Sketch the design** in a few lines, with one example: what a user writes (the config or the command line) and
    what cspell does.
 3. **Work through the [design questions](./design-questions.md),** which include the
