@@ -989,21 +989,21 @@ export declare function mergeOptionalWithDefaults(options: ROPartialTrieOptions,
  * @param text - text to normalize
  * @returns returns a word normalized to `NFC`
  */
-export declare const normalizeWord: (text: string) => string;
+export declare function normalizeWord(text: string): string;
 /**
  * converts text to lower case and removes any accents.
  * @param text - text to convert
  * @returns lowercase word without accents
  * @deprecated true
  */
-export declare const normalizeWordToLowercase: (text: string) => string;
+export declare function normalizeWordToLowercase(text: string): string;
 /**
  * generate case insensitive forms of a word
  * @param text - text to convert
  * @param locale - the locale whose case rules are used to lower-case the text. Default rules are used if not given.
  * @returns the forms of the word.
  */
-export declare const normalizeWordForCaseInsensitive: (text: string, locale?: string) => string[];
+export declare function normalizeWordForCaseInsensitive(text: string, locale?: string): string[];
 //#endregion
 //#region src/lib/utils/text.d.ts
 /**
