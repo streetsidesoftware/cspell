@@ -42,13 +42,24 @@ special case. The general approach needs deciding so the PR can be answered with
 - A dictionary for any language gets that language's case rules by declaring its locale, with no change to cspell's
   code.
 
+### Deliverables
+
+The feature ships in three parts. This design covers the first. The other two are improvements that follow.
+
+1. **Valid words are no longer reported.** Looking up a word uses its dictionary's locale. This fixes #6282.
+2. **Suggestions work as expected.** For `İncelemee`, cspell suggests `İnceleme`, not `Inceleme`. Today suggestions
+   are found from the default lower-case form, and their case is matched with the document's locale (`language`), not
+   the dictionary's. With `"language": "en,tr"` that's English.
+3. **`cspell-tools` builds dictionaries with the locale's rules.** Today every dictionary's case-insensitive forms are
+   made with the default rules, so `Irak` is stored as `irak`, not `ırak`.
+
+Until the third part ships, every dictionary is built with the default rules, and the first part has to work with
+them.
+
 ### Out of scope
 
 - Case rules JavaScript doesn't implement, such as the Dutch `IJ` digraph (`ijsland` to `IJsland`). cspell uses what
   `toLocaleLowerCase` and `toLocaleUpperCase` provide, and adds no rules of its own.
-- Building dictionaries with the locale's rules. Lookups try both rules, so dictionaries built with the default rules
-  work. The one case left is lower-case input that differs from the stored form: with `Irak` in the dictionary, `ırak`
-  is still reported, as it is today. A `locale` setting for `cspell-tools` could fix that later.
 - Choosing dictionaries by locale. `languageSettings` already does that, and it doesn't change.
 - Other text handling that depends on the locale, such as where words split, or Unicode normalization beyond changing
   case.
@@ -136,27 +147,8 @@ Turned down:
   could disagree.
 - **The text's locale,** such as a locale for one part of a file. cspell has no such thing today.
 
-### Suggestions
-
-Provisional: to revisit with which concerns this feature covers.
-
-When a dictionary with a locale searches for suggestions, it also starts from the forms its locale's rules give, the
-same way a lookup does.
-
-Matching a suggestion to the case of the misspelled word doesn't change. It already uses a locale, but the document's
-(`language`), not the dictionary's, and with `"language": "en,tr"` that's English. So `İncelemee` gets the suggestion
-`Inceleme`, with a plain `I`, where Turkish writes `İnceleme`.
-
-Turned down:
-
-- **Matching case with the dictionary's locale too.** It would fix `İncelemee`, but each suggestion would need to carry
-  its dictionary's locale through `cspell-lib`'s suggestion API. Suggestions aren't part of what this feature has to
-  fix.
-
 ## Open questions
 
-- Match a suggestion's case with its dictionary's locale, so `İncelemee` suggests `İnceleme`.
-- A `locale` setting for `cspell-tools`, so building a dictionary uses the locale's rules too.
 - Should `dictionaryInformation.locale` reject values that aren't locales? Today the schema allows any string.
 
 <!---
