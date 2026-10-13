@@ -70,11 +70,11 @@ A dictionary can declare its locale. When cspell changes case to look up a word 
 locale's rules. When case is ignored, it also keeps trying the forms it tries today. A dictionary without a locale
 behaves as today.
 
-For example, `@cspell/dict-tr-tr` declares its locale:
+For example, `@cspell/dict-tr-tr` declares its locale, as it does since cspell-dicts#5893:
 
 ```jsonc
 "dictionaryDefinitions": [
-    { "name": "tr-tr", "path": "./Turkish.trie.gz", "dictionaryInformation": { "locale": "tr" } }
+    { "name": "tr-tr", "path": "./Turkish.trie.gz", "dictionaryInformation": { "locale": "tr-TR" } }
 ]
 ```
 
