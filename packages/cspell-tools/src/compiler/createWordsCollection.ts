@@ -69,24 +69,33 @@ function readersToCollection(readers: Reader[], locale: string | undefined): Wor
     return collection;
 }
 
-const cache = new WeakMap<FilePath[], Map<string | undefined, WordsCollection>>();
+const cache = new WeakMap<FilePath[], Map<string | undefined, Promise<WordsCollection>>>();
+const filePaths = new Map<string, FilePath[]>();
 
-export async function createWordsCollectionFromFiles(
+export function createWordsCollectionFromFiles(
     files: FilePathOrFilePathArray,
     locale?: string | undefined,
 ): Promise<WordsCollection> {
     files = toFilePathArray(files);
 
-    const byLocale = cache.get(files) ?? new Map<string | undefined, WordsCollection>();
+    let byLocale = cache.get(files);
+    if (!byLocale) {
+        byLocale = new Map<string | undefined, Promise<WordsCollection>>();
+        cache.set(files, byLocale);
+    }
     const cached = byLocale.get(locale);
     if (cached) return cached;
-
-    const sources = await Promise.all(files.map((file) => readFile(file)));
-
-    const collection = readersToCollection(sources, locale);
-
+    const collection = _createWordsCollectionFromFiles(files, locale);
     byLocale.set(locale, collection);
-    cache.set(files, byLocale);
+    return collection;
+}
+
+async function _createWordsCollectionFromFiles(
+    files: FilePath[],
+    locale: string | undefined,
+): Promise<WordsCollection> {
+    const sources = await Promise.all(files.map((file) => readFile(file)));
+    const collection = readersToCollection(sources, locale);
     return collection;
 }
 
@@ -149,6 +158,13 @@ function lineReadersToCollection(readers: Reader[], locale: string | undefined):
     return { size: dict.size, has: buildHasFn(dict, locale) };
 }
 
-export function toFilePathArray(filePathOrArray: FilePathOrFilePathArray): FilePath[] {
-    return Array.isArray(filePathOrArray) ? filePathOrArray : [filePathOrArray];
+function toFilePathArray(filePathOrArray: FilePathOrFilePathArray): FilePath[] {
+    if (Array.isArray(filePathOrArray)) return filePathOrArray;
+
+    const found = filePaths.get(filePathOrArray);
+    if (found) return found;
+    const paths = [filePathOrArray];
+    filePaths.set(filePathOrArray, paths);
+
+    return paths;
 }
