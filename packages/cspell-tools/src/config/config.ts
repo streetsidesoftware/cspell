@@ -55,8 +55,6 @@ export interface CompileTargetOptions {
      * Without it, the default case rules are used.
      *
      * Use the same value as `dictionaryInformation.locale` in the dictionary definition.
-     *
-     * Note: an invalid locale stops the build.
      */
     locale?: string | undefined;
 
