@@ -4,7 +4,7 @@ import { describe, expect, test } from 'vitest';
 import { createSpellingDictionary } from './createSpellingDictionary.js';
 import type { SpellingDictionaryOptions } from './SpellingDictionary.js';
 import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie.js';
-import { wordSearchForms } from './SpellingDictionaryMethods.js';
+import { wordSearchAlternateForms } from './SpellingDictionaryMethods.js';
 
 // cSpell:ignore aple
 
@@ -144,7 +144,7 @@ describe('Validate finding compound words.', () => {
     });
 });
 
-describe('Validate wordSearchForms', () => {
+describe('Validate wordSearchAlternateForms', () => {
     test.each`
         word                        | isCaseSensitive | ignoreCase | expected
         ${'house'}                  | ${false}        | ${false}   | ${['house']}
@@ -169,14 +169,14 @@ describe('Validate wordSearchForms', () => {
         ${'café'.normalize('NFKC')} | ${false}        | ${false}   | ${['café']}
         ${'café'.normalize('NFKD')} | ${false}        | ${false}   | ${['café']}
     `('$word $isCaseSensitive $ignoreCase $expected', ({ word, isCaseSensitive, ignoreCase, expected }) => {
-        const words = [...wordSearchForms(word, isCaseSensitive, ignoreCase)];
+        const words = [...wordSearchAlternateForms(word, isCaseSensitive, ignoreCase)];
         expect(words.sort()).toEqual(expected.sort());
     });
 });
 
 // cspell:ignore inceleme İnceleme İNCELEME ispanak ıspanak Ispanakk ışık IŞIK irak ırak isim ISIM İSİM ısım
 // cspell:ignore İnside ınside άνθρωπος Άνθρωπος ΆΝΘΡΩΠΟΣ İstanbul İSTANBUL
-describe('Validate wordSearchForms with a locale', () => {
+describe('Validate wordSearchAlternateForms with a locale', () => {
     test.each`
         word          | isCaseSensitive | ignoreCase | locale       | expected
         ${'Ispanak'}  | ${false}        | ${true}    | ${'tr-TR'}   | ${['ispanak']}
@@ -192,7 +192,7 @@ describe('Validate wordSearchForms with a locale', () => {
     `(
         '$word $isCaseSensitive $ignoreCase $locale $expected',
         ({ word, isCaseSensitive, ignoreCase, locale, expected }) => {
-            const words = [...wordSearchForms(word, isCaseSensitive, ignoreCase, locale)];
+            const words = [...wordSearchAlternateForms(word, isCaseSensitive, ignoreCase, locale)];
             expect(words.sort()).toEqual(expected.sort());
         },
     );

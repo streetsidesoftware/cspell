@@ -12,13 +12,13 @@ export type FilterSuggestionsPredicate = (word: SuggestionResult) => boolean;
 export const defaultNumSuggestions = 10;
 
 /**
- * The forms of a word to look up in a dictionary.
+ * The alternate forms of a word to look up in a dictionary.
  * @param word - the word as written.
  * @param isDictionaryCaseSensitive - the dictionary contains words with capitals.
  * @param ignoreCase - case doesn't matter for the check.
  * @param locale - the dictionary's locale. Case changes follow its rules.
  */
-export function wordSearchForms(
+export function wordSearchAlternateForms(
     word: string,
     isDictionaryCaseSensitive: boolean,
     ignoreCase: boolean,

@@ -28,7 +28,7 @@ import {
     defaultNumSuggestions,
     hasOptionToSearchOption,
     impersonateCollector,
-    wordSearchForms,
+    wordSearchAlternateForms,
     wordSuggestForms,
 } from './SpellingDictionaryMethods.js';
 import type { SuggestOptions } from './SuggestOptions.js';
@@ -159,7 +159,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         if (findResult.found !== false) {
             return findResult;
         }
-        const forms = wordSearchForms(mWord, this.isDictionaryCaseSensitive, ignoreCase, this.#locale);
+        const forms = wordSearchAlternateForms(mWord, this.isDictionaryCaseSensitive, ignoreCase, this.#locale);
         for (const w of forms) {
             const findResult = this.trie.findWord(w, opts);
             if (findResult.found !== false) {
