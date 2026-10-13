@@ -26,7 +26,7 @@ jobs:
       - name: cspell@latest
         # The excluded configs import `cspell`, which would need a build.
         run: >-
-          npx cspell@latest --no-progress --report=typos
+          npx cspell@latest --no-progress
           --exclude="yarn2"
           --exclude="examples/mjs-config/**"
           --exclude="test-packages/cspell/test-cspell-cli/fixtures/CommonTS/**"
