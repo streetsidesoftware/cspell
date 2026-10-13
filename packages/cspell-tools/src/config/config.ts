@@ -50,9 +50,9 @@ export interface CompileTargetOptions {
     generateNonStrict?: boolean | undefined;
 
     /**
-     * The locale of the dictionary's words: a language and an optional region, such as `tr` or `tr-TR`. Words are lower-cased with this locale's case rules,
-     * for example, when generating the case insensitive forms with `generateNonStrict`.
-     * Without it, the default case rules are used.
+     * The locale of the dictionary's words: a language and an optional region, such as `tr` or `tr-TR`.
+     * Words are lower-cased with this locale's case rules, for example, when generating the case insensitive
+     * forms with `generateNonStrict`. Without it, the default case rules are used.
      *
      * Set `dictionaryInformation.locale` in the dictionary definition to the same locale, so cspell searches the
      * dictionary with the case rules it was built with. If the definition lists more than one locale, cspell uses the
