@@ -66,8 +66,9 @@ them.
 
 ## Design
 
-A dictionary can declare its locale. When cspell changes case to look up a word in that dictionary, it also tries the
-forms that locale's rules give. A dictionary without a locale behaves as today.
+A dictionary can declare its locale. When cspell changes case to look up a word in that dictionary, it uses that
+locale's rules. When case is ignored, it also keeps trying the forms it tries today. A dictionary without a locale
+behaves as today.
 
 For example, `@cspell/dict-tr-tr` declares its locale:
 
@@ -90,28 +91,6 @@ Turned down:
 
 - **Turkish rules for every dictionary** (#9417). It needs no locale, but words typed with `İ` pass in every language,
   and each further language needs its own special case.
-
-### Lookups try both rules
-
-Provisional: to revisit with whether the change may flag words that pass today.
-
-A dictionary with a locale is searched with the forms the locale's rules give, and with the forms cspell tries today.
-The two only differ for words where the locale's rules matter, such as Turkish words with `I` or `İ`, so other words
-cost nothing extra. Both case changes a lookup makes follow the locale: the lower-case form, and the capitalized form of
-an all-caps word (`İSTANBUL` to `İstanbul`, where the default rules leave a combining dot, U+0307, after the `i`).
-
-- `İnceleme`, `Ispanak`, and `IŞIK` pass through the Turkish forms.
-- `IRAK` with `ignoreCase` is still found through today's form, even in a dictionary built before this change. Every
-  dictionary is built with the default rules, which store `Irak` as `irak`, not `ırak`.
-- `ISIM` (Turkish writes `İSİM`) passes through today's form `isim`. It passes today too.
-
-So declaring a locale never makes a dictionary flag a word that passes today, and published dictionaries work without
-a rebuild.
-
-Turned down:
-
-- **The locale's forms only.** Stricter: `ISIM` would be reported. But every dictionary that declares a locale would
-  need a rebuild with that locale, or words like `IRAK` would start being reported.
 
 ### Whose locale
 
@@ -146,6 +125,42 @@ Turned down:
 - **A new `locale` field on the dictionary definition.** Easier to find, but a new public name, and two locale fields
   could disagree.
 - **The text's locale,** such as a locale for one part of a file. cspell has no such thing today.
+
+### Ignoring case and matching case
+
+A lookup changes case in two ways: it lower-cases the word, and it capitalizes an all-caps word (`İSTANBUL` to
+`İstanbul`, where the default rules leave a combining dot, U+0307, after the `i`). In a dictionary with a locale, both
+follow the locale.
+
+**When case is ignored** (the default), a lookup tries the locale's forms and today's forms. Until `cspell-tools`
+builds with the locale, every dictionary stores its case-insensitive forms the default way: `Irak` as `irak`, not
+`ırak`. Trying today's forms too means nothing that passes today starts being reported.
+
+- `İnceleme`, `Ispanak`, and `IŞIK` pass through the Turkish forms.
+- `IRAK` passes through today's form, as it does today.
+- `ISIM` (Turkish writes `İSİM`) passes through today's form `isim`, as it does today.
+
+The two sets of forms only differ for words where the locale's rules matter, such as Turkish words with `I` or `İ`, so
+other words cost nothing extra.
+
+**When case matters** (`caseSensitive: true`), a lookup tries only the locale's forms. This mode compares against the
+words as the dictionary stores them, not the case-insensitive forms building adds, so how the dictionary was built
+doesn't matter.
+
+- `IRAK` passes through its capitalized form `Irak`.
+- `İSTANBUL` passes through `İstanbul`. Today it's reported.
+- `Inceleme` (Turkish writes `İnceleme`) and `ISIM` are reported as wrong case. Today they pass, because the default
+  rules lower-case them to `inceleme` and `isim`.
+
+Users of this mode asked for case to matter, and the only words newly reported have capitals that are wrong in the
+dictionary's language.
+
+Turned down:
+
+- **Only the locale's forms when case is ignored.** Stricter, but until dictionaries are built with the locale, words
+  like `IRAK` would start being reported.
+- **Today's forms too when case matters.** Nothing would be newly reported, but wrong capitals like `Inceleme` would
+  keep passing in the mode meant to catch them.
 
 ## Open questions
 
