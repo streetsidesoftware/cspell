@@ -2,7 +2,7 @@ import type { DictionaryInformation } from '@cspell/cspell-types';
 import type { SuggestionResult, WeightMap } from 'cspell-trie-lib';
 import { mapDictionaryInformationToWeightMap } from 'cspell-trie-lib';
 
-import { isUpperCase, lcRest, removeUnboundAccents, ucFirst } from '../util/text.js';
+import { isUpperCase, lcRest, removeUnboundAccents } from '../util/text.js';
 import type { HasOptions, SearchOptions } from './SpellingDictionary.js';
 
 export { impersonateCollector, suggestionCollector } from 'cspell-trie-lib';
@@ -36,7 +36,7 @@ export function wordSearchAlternateForms(
     }
     if (!isUpperCase(word)) return [wordLcLocale];
     // HOUSE -> House, house
-    return [wordLcLocale, locale ? lcRest(word, locale) : ucFirst(wordLc)];
+    return [wordLcLocale, lcRest(word, locale)];
 }
 
 function wordSearchFormsLegacy(word: string): Set<string> {

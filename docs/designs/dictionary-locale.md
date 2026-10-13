@@ -117,6 +117,9 @@ Turned down:
 A lookup lower-cases the word with the dictionary's locale. When case matters, it also tries an all-caps word in its
 capitalized form, so `HOUSE` matches `House`. The capitalized form keeps the first letter as written, and lower-cases
 the rest with the locale: `İSTANBUL` gives `İstanbul`, and `ΆΝΘΡΩΠΟΣ` gives `Άνθρωπος`.
+Dictionaries without a locale make the capitalized form the same way, with the default rules. This is the one change
+for them: an all-caps word whose first letter doesn't survive being lower-cased and upper-cased again, such as
+`İSTANBUL`, can now be found.
 
 Turned down: upper-casing the first letter with the locale. Greek upper-casing removes accents, so `άνθρωπος` would give
 `Ανθρωπος`, and miss `Άνθρωπος`, which is found today. The default rules leave a combining dot after the `i` in

@@ -28,7 +28,7 @@ export function ucFirst(word: string): string {
  * Keep the first letter as written and lower-case the rest: `İSTANBUL` -> `İstanbul`.
  * Unlike upper-casing the first letter, this keeps accents that a locale's upper case would remove, as in Greek.
  */
-export function lcRest(word: string, locale: string): string {
+export function lcRest(word: string, locale?: string): string {
     const [first = ''] = word;
     return first + word.slice(first.length).toLocaleLowerCase(locale);
 }

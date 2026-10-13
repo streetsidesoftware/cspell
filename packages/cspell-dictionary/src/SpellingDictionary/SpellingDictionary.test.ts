@@ -175,13 +175,13 @@ describe('Validate wordSearchAlternateForms', () => {
 });
 
 // cspell:ignore inceleme İnceleme İNCELEME ispanak ıspanak Ispanakk ışık IŞIK irak ırak isim ISIM İSİM ısım
-// cspell:ignore İnside ınside άνθρωπος Άνθρωπος ΆΝΘΡΩΠΟΣ İstanbul İSTANBUL
+// cspell:ignore İnside ınside άνθρωπος Άνθρωπος ΆΝΘΡΩΠΟΣ İstanbul İSTANBUL nceleme stanbul
 describe('Validate wordSearchAlternateForms with a locale', () => {
     test.each`
         word          | isCaseSensitive | ignoreCase | locale       | expected
         ${'Ispanak'}  | ${false}        | ${true}    | ${'tr-TR'}   | ${['ispanak']}
-        ${'İnceleme'} | ${false}        | ${true}    | ${'tr-TR'}   | ${['inceleme', 'i̇nceleme']}
-        ${'İnceleme'} | ${true}         | ${true}    | ${'tr-TR'}   | ${['inceleme', 'i̇nceleme']}
+        ${'İnceleme'} | ${false}        | ${true}    | ${'tr-TR'}   | ${['inceleme', 'i\u0307nceleme']}
+        ${'İnceleme'} | ${true}         | ${true}    | ${'tr-TR'}   | ${['inceleme', 'i\u0307nceleme']}
         ${'İnceleme'} | ${true}         | ${false}   | ${'tr-TR'}   | ${['inceleme']}
         ${'IRAK'}     | ${true}         | ${false}   | ${'tr-TR'}   | ${['ırak', 'Irak']}
         ${'İSTANBUL'} | ${true}         | ${false}   | ${'tr-TR'}   | ${['istanbul', 'İstanbul']}
@@ -189,6 +189,7 @@ describe('Validate wordSearchAlternateForms with a locale', () => {
         ${'ΆΝΘΡΩΠΟΣ'} | ${true}         | ${false}   | ${'el-GR'}   | ${['άνθρωπος', 'Άνθρωπος']}
         ${'HOUSE'}    | ${true}         | ${false}   | ${'en-US'}   | ${['House', 'house']}
         ${'HOUSE'}    | ${true}         | ${false}   | ${undefined} | ${['House', 'house']}
+        ${'İSTANBUL'} | ${true}         | ${false}   | ${undefined} | ${['i\u0307stanbul', 'İstanbul']}
     `(
         '$word $isCaseSensitive $ignoreCase $locale $expected',
         ({ word, isCaseSensitive, ignoreCase, locale, expected }) => {
@@ -231,7 +232,7 @@ describe('Verify dictionaries with a locale', () => {
         word          | ignoreCase | expected
         ${'İnceleme'} | ${true}    | ${false}
         ${'Ispanak'}  | ${true}    | ${false}
-        ${'İSTANBUL'} | ${false}   | ${false}
+        ${'İSTANBUL'} | ${false}   | ${true}
     `('without a locale has $word ignoreCase: $ignoreCase', ({ word, ignoreCase, expected }) => {
         const dict = createSpellingDictionary(trWords, 'tr-test-no-locale', 'test', opts());
         expect(dict.has(word, { ignoreCase })).toBe(expected);
@@ -255,7 +256,7 @@ describe('Verify dictionaries with a locale', () => {
 
 describe('Validate JavaScript assumptions', () => {
     test('toLowerCase ignores the Turkish rules for I and İ', () => {
-        expect('İ'.toLowerCase()).toBe('i̇');
+        expect('İ'.toLowerCase()).toBe('i\u0307');
         expect('I'.toLowerCase()).toBe('i');
     });
 
