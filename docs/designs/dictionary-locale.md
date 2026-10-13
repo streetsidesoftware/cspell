@@ -104,7 +104,9 @@ cspell-dicts set it. This field used to only tune suggestions. Now it also chang
 comment says so.
 
 The locale is resolved once, when the dictionary is loaded. Lookups only use the result, so they do no extra work to
-read it.
+read it. It's normalized the same way the document's locale is when cspell matches the case of suggestions: an invalid
+locale is dropped without a message, and the dictionary behaves as one without a locale. Reporting invalid values is
+left to configuration validation ([#9450](https://github.com/streetsidesoftware/cspell/issues/9450)).
 
 A dictionary without a locale uses the default rules, as today. That covers dictionaries with no single language
 (names, companies, software terms), third-party dictionaries that don't set one, and the user's own word lists
