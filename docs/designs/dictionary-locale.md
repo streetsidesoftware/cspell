@@ -98,6 +98,8 @@ A dictionary without a locale uses the default rules. This includes dictionaries
 companies, software terms), third-party dictionaries that don't set a locale, and the user's own word lists (`words`,
 `ignoreWords`, `flagWords`, and `cspell:` comments). Their results don't depend on the document.
 
+A dictionary marked as not case-sensitive keeps the legacy lookup and doesn't use its locale.
+
 Turned down:
 
 - **The document's locales (`language`).** No dictionary would need a locale, but every dictionary would use the same
