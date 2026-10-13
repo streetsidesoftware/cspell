@@ -49,7 +49,7 @@ function adjustCase(
     const lc = lowerCase(word, locale);
     if (!allowedWords.has(lc, true)) return word;
     if (lc === word) return word;
-    if (lowerCase(word.slice(1), locale) === word.slice(1)) return lc;
+    if (word.slice(1).toLowerCase() === word.slice(1)) return lc;
     if (!keepCase && word.toUpperCase() === word) return lc;
     return word;
 }

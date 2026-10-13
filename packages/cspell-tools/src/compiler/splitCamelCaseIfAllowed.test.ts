@@ -24,6 +24,18 @@ describe('splitCamelCaseIfAllowed', () => {
     });
 
     test.each`
+        text                | locale       | expected
+        ${'Irak'}           | ${undefined} | ${['irak']}
+        ${'Irak'}           | ${'tr-TR'}   | ${['\u0131rak']}
+        ${'\u0130rak'}      | ${undefined} | ${['i\u0307rak']}
+        ${'\u0130rak'}      | ${'tr-TR'}   | ${['irak']}
+        ${'\uD801\uDC00ab'} | ${undefined} | ${['\uD801\uDC28ab']}
+    `('lower-case a capitalized word $text with locale $locale', ({ text, locale, expected }) => {
+        const allowed = createAllowedSplitWords(undefined);
+        expect(splitCamelCaseIfAllowed(text, allowed, false, '', 4, locale)).toEqual(expected);
+    });
+
+    test.each`
         text                               | keepCase | allowed                             | min  | expected
         ${''}                              | ${false} | ${undefined}                        | ${4} | ${[]}
         ${'hello'}                         | ${false} | ${undefined}                        | ${4} | ${['hello']}
@@ -46,3 +58,5 @@ describe('splitCamelCaseIfAllowed', () => {
         },
     );
 });
+
+// cspell:ignore irak
