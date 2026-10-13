@@ -59,6 +59,12 @@ export interface ParseDictionaryOptions extends BuildOptions {
     stripCaseAndAccentsOnForbidden: boolean;
 
     /**
+     * The locale whose case rules are used to create the case insensitive forms.
+     * Default rules are used if not given.
+     */
+    locale?: string | undefined;
+
+    /**
      * Tell the parser to split into words along spaces.
      * @default false
      */
@@ -140,6 +146,7 @@ const _defaultOptions = {
     suggestionPrefix: SUGGESTION_PREFIX,
     disableSuggestionHandling: false,
     makeWordsForbidden: false,
+    locale: undefined,
 } as const satisfies ParseDictionaryOptions;
 
 export const defaultParseDictionaryOptions: ParseDictionaryOptions = Object.freeze(_defaultOptions);
@@ -174,6 +181,7 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
         stripCaseAndAccentsOnForbidden = _defaultOptions.stripCaseAndAccentsOnForbidden,
         keepOptionalCompoundCharacter = _defaultOptions.keepOptionalCompoundCharacter,
         makeWordsForbidden = _defaultOptions.makeWordsForbidden,
+        locale = _defaultOptions.locale,
     } = _options;
 
     let {
@@ -300,7 +308,7 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
         const forms = new Set<string>();
         forms.add(nWord);
         if (stripCaseAndAccents && !(word[0] in doNotNormalizePrefix)) {
-            for (const n of normalizeWordForCaseInsensitive(nWord)) {
+            for (const n of normalizeWordForCaseInsensitive(nWord, locale)) {
                 (stripCaseAndAccentsKeepDuplicate || n !== nWord) && forms.add(ignoreCase + n);
             }
         }

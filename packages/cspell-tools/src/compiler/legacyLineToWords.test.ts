@@ -1,4 +1,4 @@
-// cSpell:ignore jpegs outing dirs lcode outring outrings
+// cSpell:ignore jpegs outing dirs lcode outring outrings irak stanbul
 
 import { opFilter, pipe } from '@cspell/cspell-pipe/sync';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
@@ -34,6 +34,14 @@ describe('Validate legacyLineToWords', () => {
         ${'apd_get_active_symbols'}           | ${['apd', 'get', 'active', 'symbols']}
     `('legacy splitting lines $line', ({ line, expectedResult }: { line: string; expectedResult: string[] }) => {
         expect([...pipe(legacyLineToWords(line, false, allowed), opFilter(distinct()))]).toEqual(expectedResult);
+    });
+
+    test.each`
+        line                    | locale       | expectedResult
+        ${'IRAK \u0130STANBUL'} | ${undefined} | ${['irak', 'i\u0307stanbul']}
+        ${'IRAK \u0130STANBUL'} | ${'tr-TR'}   | ${['\u0131rak', 'istanbul']}
+    `('legacy lower-cases $line with locale $locale', ({ line, locale, expectedResult }) => {
+        expect([...legacyLineToWords(line, false, allowed, locale)]).toEqual(expectedResult);
     });
 
     test.each`

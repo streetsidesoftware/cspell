@@ -1,4 +1,4 @@
-// cSpell:ignore jpegs outing dirs lcode outring outrings
+// cSpell:ignore jpegs outing dirs lcode outring outrings irak stanbul
 
 import * as fsp from 'node:fs/promises';
 import * as path from 'node:path';
@@ -231,6 +231,15 @@ describe('', () => {
     `('removeDuplicate $words', ({ words, expected }) => {
         words = typeof words === 'string' ? words.split('|') : words;
         const result = [...removeDuplicates(words)];
+        expect(result).toEqual(expected);
+    });
+
+    test.each`
+        words                    | locale       | expected
+        ${['Irak', '\u0131rak']} | ${undefined} | ${['Irak', '\u0131rak']}
+        ${['Irak', '\u0131rak']} | ${'tr-TR'}   | ${['\u0131rak']}
+    `('removeDuplicates $words with locale $locale', ({ words, locale, expected }) => {
+        const result = [...removeDuplicates(words, locale)];
         expect(result).toEqual(expected);
     });
 });

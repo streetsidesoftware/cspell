@@ -28,6 +28,13 @@ function tailToLowerCase(word: string): string {
     return letters[0] + letters.slice(1).join('').toLowerCase();
 }
 
+/**
+ * Lower-case a word with the case rules of `locale`, or the default rules if it isn't given.
+ */
+export function lowerCase(word: string, locale: string | undefined): string {
+    return locale ? word.toLocaleLowerCase(locale) : word.toLowerCase();
+}
+
 export function isSingleLetter(c: string): boolean {
     return regExpIsLetter.test(c);
 }

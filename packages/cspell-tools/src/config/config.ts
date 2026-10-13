@@ -50,6 +50,17 @@ export interface CompileTargetOptions {
     generateNonStrict?: boolean | undefined;
 
     /**
+     * The locale of the dictionary's words, such as `tr-TR`. Words are lower-cased with this locale's case rules,
+     * for example, when generating the case insensitive forms with `generateNonStrict`.
+     * Without it, the default case rules are used.
+     *
+     * Use the same value as `dictionaryInformation.locale` in the dictionary definition.
+     *
+     * Note: an invalid locale stops the build.
+     */
+    locale?: string | undefined;
+
+    /**
      * Sort the words in the resulting dictionary.
      * Does not apply to `trie` based formats.
      * @default true

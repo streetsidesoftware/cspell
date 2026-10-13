@@ -746,6 +746,11 @@ interface ParseDictionaryOptions extends BuildOptions {
    */
   stripCaseAndAccentsOnForbidden: boolean;
   /**
+   * The locale whose case rules are used to create the case insensitive forms.
+   * Default rules are used if not given.
+   */
+  locale?: string | undefined;
+  /**
    * Tell the parser to split into words along spaces.
    * @default false
    */
@@ -995,9 +1000,10 @@ export declare const normalizeWordToLowercase: (text: string) => string;
 /**
  * generate case insensitive forms of a word
  * @param text - text to convert
+ * @param locale - the locale whose case rules are used to lower-case the text. Default rules are used if not given.
  * @returns the forms of the word.
  */
-export declare const normalizeWordForCaseInsensitive: (text: string) => string[];
+export declare const normalizeWordForCaseInsensitive: (text: string, locale?: string) => string[];
 //#endregion
 //#region src/lib/utils/text.d.ts
 /**

@@ -7,6 +7,7 @@ import * as Trie from 'cspell-trie-lib';
 import type { CompileOptions } from './CompileOptions.ts';
 import type { WordListCompiler } from './CompilerDefinitions.ts';
 import { getLogger } from './logger.ts';
+import { lowerCase } from './text.ts';
 import { normalizeTargetWords } from './wordListParser.ts';
 import { writeTextToFile } from './writeTextToFile.ts';
 
@@ -47,7 +48,7 @@ export function createWordListCompiler(options: CompileOptions): WordListCompile
 function normalize(lines: Iterable<string>, options: CompileOptions): Iterable<string> {
     const filter = normalizeTargetWords(options);
 
-    const cleanLines = options.removeDuplicates ? removeDuplicates(lines) : lines;
+    const cleanLines = options.removeDuplicates ? removeDuplicates(lines, options.locale) : lines;
 
     const iter = pipe(cleanLines, filter);
     if (!options.sort) return iter;
@@ -60,11 +61,11 @@ function stripCompoundAFix(word: string): string {
     return word.replaceAll('*', '').replaceAll('+', '');
 }
 
-function* removeDuplicates(words: Iterable<string>): Iterable<string> {
+function* removeDuplicates(words: Iterable<string>, locale?: string | undefined): Iterable<string> {
     const wordSet = new Set(words);
     const wordForms = new Map<string, string[]>();
     for (const word of wordSet) {
-        const lc = stripCompoundAFix(word.toLowerCase());
+        const lc = stripCompoundAFix(lowerCase(word, locale));
         const forms = wordForms.get(lc) ?? [];
         forms.push(word);
         wordForms.set(lc, forms);
@@ -87,7 +88,7 @@ function* removeDuplicates(words: Iterable<string>): Iterable<string> {
         }
         // Handle upper / lower mix.
         const words = [...mForms.keys()];
-        const lc = words[0].toLowerCase();
+        const lc = lowerCase(words[0], locale);
         const lcForm = mForms.get(lc);
         if (!lcForm) {
             for (const form of mForms.values()) {
@@ -101,7 +102,7 @@ function* removeDuplicates(words: Iterable<string>): Iterable<string> {
         if (sLcForms.has('*' + lc + '*')) continue;
         for (const forms of mForms.values()) {
             for (const form of forms) {
-                if (sLcForms.has(form.toLowerCase())) continue;
+                if (sLcForms.has(lowerCase(form, locale))) continue;
                 yield form;
             }
         }

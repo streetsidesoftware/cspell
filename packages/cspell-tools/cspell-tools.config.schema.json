@@ -270,6 +270,11 @@
           "markdownDescription": "If `compress` is true, setting this value to true will also keep an uncompressed version of the dictionary.",
           "type": "boolean"
         },
+        "locale": {
+          "description": "The locale of the dictionary's words, such as `tr-TR`. Words are lower-cased with this locale's case rules, for example, when generating the case insensitive forms with `generateNonStrict`. Without it, the default case rules are used.\n\nUse the same value as `dictionaryInformation.locale` in the dictionary definition.\n\nNote: an invalid locale stops the build.",
+          "markdownDescription": "The locale of the dictionary's words, such as `tr-TR`. Words are lower-cased with this locale's case rules,\nfor example, when generating the case insensitive forms with `generateNonStrict`.\nWithout it, the default case rules are used.\n\nUse the same value as `dictionaryInformation.locale` in the dictionary definition.\n\nNote: an invalid locale stops the build.",
+          "type": "string"
+        },
         "name": {
           "description": "Name of target, used as the basis of target file name.",
           "markdownDescription": "Name of target, used as the basis of target file name.",
@@ -369,6 +374,11 @@
       "description": "Do not generate lower case / accent free versions of words.",
       "markdownDescription": "Do not generate lower case / accent free versions of words.",
       "type": "boolean"
+    },
+    "locale": {
+      "description": "The locale of the dictionary's words, such as `tr-TR`. Words are lower-cased with this locale's case rules, for example, when generating the case insensitive forms with `generateNonStrict`. Without it, the default case rules are used.\n\nUse the same value as `dictionaryInformation.locale` in the dictionary definition.\n\nNote: an invalid locale stops the build.",
+      "markdownDescription": "The locale of the dictionary's words, such as `tr-TR`. Words are lower-cased with this locale's case rules,\nfor example, when generating the case insensitive forms with `generateNonStrict`.\nWithout it, the default case rules are used.\n\nUse the same value as `dictionaryInformation.locale` in the dictionary definition.\n\nNote: an invalid locale stops the build.",
+      "type": "string"
     },
     "maxDepth": {
       "description": "Maximum number of nested Hunspell Rules to apply. This is needed for recursive dictionaries like Hebrew.",

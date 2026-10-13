@@ -1,3 +1,5 @@
+// cspell:ignore irak stanbul
+
 import { describe, expect, test } from 'vitest';
 
 import type { ParseDictionaryOptions } from './SimpleDictionaryParser.ts';
@@ -70,6 +72,16 @@ describe('Validate SimpleDictionaryParser', () => {
         ];
         const trie = parseDictionaryLegacy(words.join('\n'));
         const result = [...trie.words()];
+        expect(result).toEqual(expected);
+    });
+
+    test.each`
+        locale       | expected
+        ${undefined} | ${['Irak', '~irak', '\u0130stanbul', '~i\u0307stanbul', '~istanbul', 'I\u015F\u0131k', '~i\u015F\u0131k', '~is\u0131k']}
+        ${'tr-TR'}   | ${['Irak', '~\u0131rak', '\u0130stanbul', '~istanbul', 'I\u015F\u0131k', '~\u0131\u015F\u0131k', '~\u0131s\u0131k']}
+    `('case insensitive forms with locale $locale', ({ locale, expected }) => {
+        const words = ['Irak', '\u0130stanbul', 'I\u015F\u0131k'];
+        const result = [...parseDictionaryLines(words, { locale })];
         expect(result).toEqual(expected);
     });
 
