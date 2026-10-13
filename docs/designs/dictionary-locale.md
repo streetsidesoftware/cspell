@@ -2,75 +2,69 @@
 
 ## Why
 
-Languages differ in how letters change case. cspell changes case with the same rules for every language, so when a
-language's rules differ from the default, words its dictionary contains can't be found and are reported as
-misspellings. Turkish `İ` and `I` ([#6282](https://github.com/streetsidesoftware/cspell/issues/6282)) are one example:
-with `"language": "en,tr"`, `İnceleme` and `Ispanak` are reported, while `inceleme` and `ıspanak` pass.
+Languages differ in how letters change case. cspell uses the same case rules for every language. When a language's
+rules differ from the default ones, words in its dictionary aren't found and are reported as misspellings.
 
-Case changes in two places, and both use the default rules:
+Turkish is one example ([#6282](https://github.com/streetsidesoftware/cspell/issues/6282)). With `"language": "en,tr"`,
+the words `İnceleme` and `Ispanak` are reported, while `inceleme` and `ıspanak` pass.
+
+cspell changes case in two places, and both use the default rules:
 
 - **Looking up a word.** When a word isn't found as written, cspell looks up other forms of it, such as its lower-case
-  form. The default rules turn `İ` into `i` followed by a combining dot, and `I` into `i`. A Turkish dictionary has `i`
-  and `ı`.
-- **Building a dictionary.** `cspell-tools` adds lower-case forms of each word so lookups can ignore case. A dictionary
-  word with a capital `I`, such as `Irak`, is stored as `irak`, where Turkish expects `ırak`.
+  form. The default rules turn `İ` into `i` followed by a combining dot (U+0307), and `I` into `i`. The Turkish
+  dictionary has `i` and `ı`.
+- **Building a dictionary.** The `cspell-tools` package adds a lower-case form of each word, so lookups can ignore case.
+  It stores `Irak` as `irak`, where Turkish has `ırak`.
 
-Why now: a contributor opened a fix for #6282
-([#9417](https://github.com/streetsidesoftware/cspell/pull/9417)) that applies Turkish rules to every dictionary. With
-English only, a word typed with `İ`, such as `İnside`, would then pass, and each further language would need another
-special case. The general approach needs deciding so the PR can be answered with a fix that scales.
+A contributor proposed a fix for #6282 in [#9417](https://github.com/streetsidesoftware/cspell/pull/9417). It applies
+Turkish rules to every dictionary. With English only, a word typed with `İ`, such as `İnside`, would then pass, and each
+further language would need its own special case. This design describes a fix that works for any language.
 
 ### Who it affects
 
-- **People writing in a language whose case rules differ from the default** (Turkish, Azerbaijani, Lithuanian): words
-  their dictionary contains are no longer reported. They don't need to change their config.
-- **Dictionary authors in cspell-dicts:** a language dictionary declares its locale in `dictionaryInformation.locale`.
-  The language dictionaries, `tr-tr` among them, already do
-  ([cspell-dicts#5893](https://github.com/streetsidesoftware/cspell-dicts/pull/5893)).
-- **Projects using `cspell-lib` or `cspell-dictionary`:** creating or looking up a dictionary may take a locale. Changes
-  to the public API stay backward compatible.
-- **The VS Code extension, the ESLint plugin, and cspell-action:** they get the fix through `cspell-lib`, and give the
-  same results as the CLI.
-- **Everyone else:** nothing changes. Dictionaries without locale-specific case rules behave as before, and lookups cost
-  no more.
+Only dictionaries whose language has its own case rules. Of the locales the dictionaries in cspell-dicts declare,
+JavaScript has its own case rules for Turkish (`tr`), Azerbaijani (`az`), Lithuanian (`lt`), and Greek (`el`). Greek's
+rules only affect upper-casing, which this design doesn't use.
+
+- **Users of the Turkish, Azerbaijani, and Lithuanian dictionaries:** words in those dictionaries are no longer
+  reported. No config change is needed.
+- **Everyone else:** no change.
 
 ### Success
 
-- With `"language": "en,tr"`, `İnceleme`, `Ispanak`, `İNCELEME`, and `IŞIK` pass, and misspellings like `Ispanakk` are
+- With `"language": "en,tr"`, `İnceleme`, `Ispanak`, `İNCELEME`, and `IŞIK` pass. Misspellings such as `Ispanakk` are
   still reported.
-- With `"language": "en"` only, `İnside` is still reported. Turkish rules apply only to Turkish dictionaries.
-- A dictionary for any language gets that language's case rules by declaring its locale, with no change to cspell's
-  code.
+- With `"language": "en"`, `İnside` is still reported. Turkish rules apply only to the Turkish dictionary.
+- A dictionary gets its language's case rules by declaring its locale. cspell's code has no rules for specific
+  languages.
 
 ### Deliverables
 
 The feature ships in three parts. This design covers the first. The other two are improvements that follow.
 
 1. **Valid words are no longer reported.** Looking up a word uses its dictionary's locale. This fixes #6282.
-2. **Suggestions work as expected.** For `İncelemee`, cspell suggests `İnceleme`, not `Inceleme`. Today suggestions
-   are found from the default lower-case form, and their case is matched with the document's locale (`language`), not
-   the dictionary's. With `"language": "en,tr"` that's English.
-3. **`cspell-tools` builds dictionaries with the locale's rules.** Today every dictionary's case-insensitive forms are
-   made with the default rules, so `Irak` is stored as `irak`, not `ırak`.
+2. **Suggestions work as expected.** For `İncelemee`, cspell suggests `İnceleme`, not `Inceleme`. Suggestions are
+   found from the default lower-case form, and their case is matched with the document's locale (`language`), not the
+   dictionary's. With `"language": "en,tr"`, that locale is English.
+3. **The `cspell-tools` package builds dictionaries with the locale's rules,** so `Irak` is stored as `ırak`.
 
-Until the third part ships, every dictionary is built with the default rules, and the first part has to work with
-them.
+Until the third part ships, every dictionary is built with the default rules, and the first part has to work with them.
 
 ### Out of scope
 
-- Case rules JavaScript doesn't implement, such as the Dutch `IJ` digraph (`ijsland` to `IJsland`). cspell uses what
-  `toLocaleLowerCase` and `toLocaleUpperCase` provide, and adds no rules of its own.
-- Choosing dictionaries by locale. `languageSettings` already does that, and it doesn't change.
-- Other text handling that depends on the locale, such as where words split, or Unicode normalization beyond changing
-  case.
+- Case rules that JavaScript doesn't implement, such as the Dutch `IJ` digraph (`ijsland` to `IJsland`). cspell uses
+  the rules that `toLocaleLowerCase` provides, and adds none of its own.
+- Choosing dictionaries by locale. The `languageSettings` setting already does that, and it doesn't change.
+- Other text handling that depends on the locale, such as where words split.
 
 ## Design
 
 A dictionary can declare its locale. When cspell changes case to look up a word in that dictionary, it uses that
-locale's rules. When case is ignored, it also keeps trying the forms it tries today. A dictionary without a locale
-behaves as today.
+locale's rules. When case is ignored, it also tries the forms it uses today. A dictionary without a locale works as it
+does today.
 
-For example, `@cspell/dict-tr-tr` declares its locale, as it does since cspell-dicts#5893:
+For example, the Turkish dictionary declares its locale
+([cspell-dicts#5893](https://github.com/streetsidesoftware/cspell-dicts/pull/5893)):
 
 ```jsonc
 "dictionaryDefinitions": [
@@ -84,87 +78,86 @@ The user's config doesn't change:
 { "language": "en,tr" }
 ```
 
-`İnceleme`, `Ispanak`, and `İNCELEME` pass, and `Ispanakk` is still reported. With `"language": "en"`, `İnside` is
-still reported, because the English dictionary has no Turkish locale.
+The words `İnceleme`, `Ispanak`, and `İNCELEME` pass, and `Ispanakk` is still reported. With `"language": "en"`,
+`İnside` is still reported, because the English dictionary doesn't have a Turkish locale.
 
 Turned down:
 
-- **Turkish rules for every dictionary** (#9417). It needs no locale, but words typed with `İ` pass in every language,
-  and each further language needs its own special case.
+- **Turkish rules for every dictionary** (#9417). No dictionary needs a locale, but words typed with `İ` pass in every
+  language, and each further language needs its own special case.
 
 ### Whose locale
 
-The dictionary's locale decides how case changes when looking up a word in it. Each dictionary's words are written in
-its own language, so its own rules apply, and dictionaries in different languages don't interfere: with
-`"language": "en,tr"`, `İnceleme` and `Inside` both pass, whatever the order of the list.
+The dictionary's locale decides how case changes when cspell looks up a word in it. A dictionary's words are in its own
+language, so its own rules apply. Dictionaries in different languages don't affect each other. With
+`"language": "en,tr"`, both `İnceleme` and `Inside` pass, whatever the order of the list.
 
-A dictionary declares its locale in `dictionaryInformation.locale`, a field that already exists and is documented as the
-locale of the dictionary. Suggestions already use it when weighing suggestions. The language dictionaries in
-cspell-dicts set it. This field used to only tune suggestions. Now it also changes what gets flagged, and its doc
-comment says so.
+A dictionary declares its locale in `dictionaryInformation.locale`. The field already exists, and is documented as the
+locale of the dictionary. Until now it only tuned suggestions. Now it also changes which words are reported, and its
+doc comment says so. The language dictionaries in cspell-dicts set it.
 
-The locale is resolved once, when the dictionary is loaded. Lookups only use the result, so they do no extra work to
-read it. It's normalized the same way the document's locale is when cspell matches the case of suggestions: an invalid
-locale is dropped without a message, and the dictionary behaves as one without a locale. Reporting invalid values is
-left to configuration validation ([#9450](https://github.com/streetsidesoftware/cspell/issues/9450)).
+cspell reads the locale once, when the dictionary is loaded, so lookups do no extra work. The locale is normalized in
+the same way as the document's locale when cspell matches the case of suggestions. An invalid locale is dropped without
+a message, and the dictionary works as one without a locale. Reporting invalid values is left to configuration
+validation ([#9450](https://github.com/streetsidesoftware/cspell/issues/9450)).
 
-A dictionary without a locale uses the default rules, as today. That covers dictionaries with no single language
-(names, companies, software terms), third-party dictionaries that don't set one, and the user's own word lists
-(`words`, `ignoreWords`, `flagWords`, and `cspell:` comments). Their results never depend on the document.
+A dictionary without a locale uses the default rules. This includes dictionaries with no single language (names,
+companies, software terms), third-party dictionaries that don't set a locale, and the user's own word lists (`words`,
+`ignoreWords`, `flagWords`, and `cspell:` comments). Their results don't depend on the document.
 
 Turned down:
 
 - **The document's locales (`language`).** No dictionary would need a locale, but every dictionary would use the same
-  rules. With Turkish rules, the English dictionary looks up `Inside` as `ınside` and reports it. Avoiding that means
-  picking one locale by the order of the list, or trying every locale's rules, which lets `İnside` pass in any
-  document that lists `tr`. The same applies as a fallback for dictionaries without a locale: a names dictionary would
-  let `İnside` pass whenever `tr` is listed.
+  rules. With Turkish rules, the English dictionary looks up `Inside` as `ınside` and reports it. To avoid that, cspell
+  would have to pick one locale by the order of the list, or try every locale's rules, which lets `İnside` pass in any
+  document that lists `tr`. The same problem applies to dictionaries without a locale: a names dictionary would let
+  `İnside` pass whenever `tr` is listed.
 - **The locale of the `languageSettings` entry that enables the dictionary.** That locale is a filter that says when
   settings apply, not what language a dictionary's words are in. It can be `*` or a list, and several entries can
   enable the same dictionary.
-- **A new `locale` field on the dictionary definition.** Easier to find, but a new public name, and two locale fields
-  could disagree.
-- **The text's locale,** such as a locale for one part of a file. cspell has no such thing today.
+- **A new `locale` field on the dictionary definition.** It's easier to find, but it's a new public name, and two
+  locale fields could disagree.
+- **The text's locale,** such as a locale for one part of a file. cspell doesn't have one.
 
 ### Ignoring case and matching case
 
 A lookup lower-cases the word with the dictionary's locale. When case matters, it also tries an all-caps word in its
-capitalized form, so `HOUSE` matches `House`. That form keeps the first letter as written and lower-cases the rest with
-the locale: `İSTANBUL` gives `İstanbul`, and `ΆΝΘΡΩΠΟΣ` gives `Άνθρωπος`.
+capitalized form, so `HOUSE` matches `House`. The capitalized form keeps the first letter as written, and lower-cases
+the rest with the locale: `İSTANBUL` gives `İstanbul`, and `ΆΝΘΡΩΠΟΣ` gives `Άνθρωπος`.
 
-Turned down: capitalizing by upper-casing the first letter with the locale. Greek upper-casing removes accents, so
-`άνθρωπος` would give `Ανθρωπος` and miss `Άνθρωπος`, which is found today. The default rules, as today, leave a
-combining dot (U+0307) after the `i` in `İSTANBUL`.
+Turned down: upper-casing the first letter with the locale. Greek upper-casing removes accents, so `άνθρωπος` would give
+`Ανθρωπος`, and miss `Άνθρωπος`, which is found today. The default rules leave a combining dot after the `i` in
+`İSTANBUL`.
 
-**When case is ignored** (the default), a lookup tries the locale's forms and today's forms. Until `cspell-tools`
-builds with the locale, every dictionary stores its case-insensitive forms the default way: `Irak` as `irak`, not
-`ırak`. Trying today's forms too means nothing that passes today starts being reported.
+**When case is ignored** (the default), a lookup tries the locale's forms and the forms it uses today. Until the
+`cspell-tools` package builds with the locale, every dictionary stores its case-insensitive forms with the default
+rules: `Irak` as `irak`, not `ırak`. Because today's forms are still tried, no word that passes today is reported.
 
-- `İnceleme`, `Ispanak`, and `IŞIK` pass through the Turkish forms.
-- `IRAK` passes through today's form, as it does today.
-- `ISIM` (Turkish writes `İSİM`) passes through today's form `isim`, as it does today.
+- The words `İnceleme`, `Ispanak`, and `IŞIK` pass through the Turkish forms.
+- The word `IRAK` passes through today's form, as it does today.
+- The word `ISIM` (Turkish writes `İSİM`) passes through today's form `isim`, as it does today.
 
-The two sets of forms only differ for words where the locale's rules matter, such as Turkish words with `I` or `İ`, so
-other words cost nothing extra.
+The two sets of forms differ only for words where the locale's rules matter, such as Turkish words with `I` or `İ`.
+Other words don't need extra lookups.
 
-**When case matters** (`caseSensitive: true`), a lookup tries only the locale's forms. This mode compares against the
-words as the dictionary stores them, not the case-insensitive forms building adds, so how the dictionary was built
-doesn't matter.
+**When case matters** (`caseSensitive: true`), a lookup tries only the locale's forms. In this mode, words are compared
+with the dictionary's words as written, not with the case-insensitive forms, so how the dictionary was built doesn't
+matter.
 
-- `IRAK` passes through its capitalized form `Irak`.
-- `İSTANBUL` passes through `İstanbul`. Today it's reported.
-- `Inceleme` (Turkish writes `İnceleme`) and `ISIM` are reported as wrong case. Today they pass, because the default
-  rules lower-case them to `inceleme` and `isim`.
+- The word `IRAK` passes through its capitalized form `Irak`.
+- The word `İSTANBUL` passes through `İstanbul`. Today it's reported.
+- The words `Inceleme` (Turkish writes `İnceleme`) and `ISIM` are reported as wrong case. Today they pass, because the
+  default rules lower-case them to `inceleme` and `isim`.
 
-Users of this mode asked for case to matter, and the only words newly reported have capitals that are wrong in the
-dictionary's language.
+This mode is for users who want case to matter. The only words that are newly reported have capitals that are wrong
+in the dictionary's language.
 
 Turned down:
 
-- **Only the locale's forms when case is ignored.** Stricter, but until dictionaries are built with the locale, words
-  like `IRAK` would start being reported.
-- **Today's forms too when case matters.** Nothing would be newly reported, but wrong capitals like `Inceleme` would
-  keep passing in the mode meant to catch them.
+- **Only the locale's forms when case is ignored.** It's stricter, but until dictionaries are built with the locale,
+  words such as `IRAK` would be reported.
+- **Today's forms too when case matters.** No word would be newly reported, but wrong capitals such as `Inceleme` would
+  pass in the mode meant to catch them.
 
 <!---
     cspell:ignore inceleme İnceleme İNCELEME ispanak ıspanak ispanakk ışık IŞIK irak ırak ijsland jsland İnside isim ISIM İSİM İstanbul İSTANBUL İncelemee ınside άνθρωπος Άνθρωπος Ανθρωπος ΆΝΘΡΩΠΟΣ
