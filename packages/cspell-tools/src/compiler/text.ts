@@ -29,7 +29,10 @@ function tailToLowerCase(word: string): string {
 }
 
 /**
- * Lower-case a word with the case rules of `locale`, or the default rules if it isn't given.
+ * Lower-case a word.
+ * @param word - the word to lower-case.
+ * @param locale - the locale whose case rules are used. Default rules are used if not given.
+ * @returns the lower-case word.
  */
 export function lowerCase(word: string, locale: string | undefined): string {
     return locale ? word.toLocaleLowerCase(locale) : word.toLowerCase();

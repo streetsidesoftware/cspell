@@ -474,6 +474,7 @@ function logProgress<T>(freq = 100_000): (iter: Iterable<T>) => Iterable<T> {
 
 /**
  * @param excludeWordsFrom - List of files to read words from.
+ * @param locale - the locale used to lower-case words when matching them.
  * @returns a function that returns true if the word is not in the exclude list.
  */
 async function createExcludeFilter(
@@ -488,6 +489,7 @@ async function createExcludeFilter(
 
 /**
  * @param includeWordsFrom - List of files to read words from.
+ * @param locale - the locale used to lower-case words when matching them.
  * @returns a function that returns true if the word is in the include list.
  */
 async function createIncludeFilter(
