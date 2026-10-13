@@ -22,9 +22,9 @@ further language would need its own special case. This design describes a fix th
 
 ### Who it affects
 
-Only dictionaries whose language has its own case rules. Of the locales the dictionaries in cspell-dicts declare,
-JavaScript has its own case rules for Turkish (`tr`), Azerbaijani (`az`), Lithuanian (`lt`), and Greek (`el`). Greek's
-rules only affect upper-casing, which this design doesn't use.
+cspell lower-cases a word with `toLocaleLowerCase(locale)`, using the dictionary's locale. For most locales, the result
+is the same as before. It fixes lookups in languages where lower-casing differs, such as Turkish and Azerbaijani (`I`
+and `İ`) and Lithuanian.
 
 - **Users of the Turkish, Azerbaijani, and Lithuanian dictionaries:** words in those dictionaries are no longer
   reported. No config change is needed.
