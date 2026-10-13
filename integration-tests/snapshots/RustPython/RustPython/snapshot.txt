@@ -3,17 +3,17 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 980, skipped: 1, Issues found: 11364 in 135 files.
+ CSpell: Files checked: 988, skipped: 1, Issues found: 11379 in 137 files.
  exit code: 1
 AGENTS.md:294:76    - Unknown word (zizmor)     -- change must pass a [zizmor](https://docs.zizmor
 AGENTS.md:32:50     - Unknown word (prek)       -- pre-commit hook with `prek install` (or `pre-commit
 Cargo.toml:133:62    - Unknown word (redoxer)    -- to compile/check with redoxer
 Cargo.toml:147:28    - Unknown word (nsis)       -- package.metadata.packager.nsis]
 Cargo.toml:196:62    - Unknown word (zeroize)    -- alloc", "oid", "pem", "zeroize"] }
-Cargo.toml:279:8     - Unknown word (graviola)   -- rustls-graviola = "0.4"
-Cargo.toml:368:21    - Unknown word (scrutinee)  -- significant_drop_in_scrutinee = "warn"
-Cargo.toml:390:1     - Unknown word (elidable)   -- elidable_lifetime_names = "warn
-Cargo.toml:428:1     - Unknown word (uninlined)  -- uninlined_format_args = "warn
+Cargo.toml:278:8     - Unknown word (graviola)   -- rustls-graviola = "0.4"
+Cargo.toml:367:21    - Unknown word (scrutinee)  -- significant_drop_in_scrutinee = "warn"
+Cargo.toml:389:1     - Unknown word (elidable)   -- elidable_lifetime_names = "warn
+Cargo.toml:427:1     - Unknown word (uninlined)  -- uninlined_format_args = "warn
 Cargo.toml:66:8      - Unknown word (graviola)   -- rustls-graviola = { workspace = true
 LICENSE-logo:205:34    - Unknown word (waivable)   -- under any voluntary or waivable statutory or compulsory
 README.md:106:90    - Unknown word (Embedders)  -- the RustPython binary. Embedders can use `rustpython
@@ -24,7 +24,7 @@ README.md:193:4     - Unknown word (FOSDEM)     -- - [FOSDEM 2019](https://www.y
 README.md:202:4     - Unknown word (pyckitup)   -- - [pyckitup](https://github.com
 README.md:256:16    - Unknown word (rspython)   -- [windelbouwman/rspython](https://github.com
 README.md:257:2     - Unknown word (shinglyu)   -- [shinglyu/RustPython](https:/
-benches/README.md:102:10    - Unknown word (pyperf)     -- Their `pyperf` runners and internal
+benches/README.md:105:10    - Unknown word (pyperf)     -- Their `pyperf` runners and internal
 benches/_data/pypi_org__simple__psutil.json:1:787724  - Unknown word (musllinux)  -- psutil-7.2.0-cp36-abi3-musllinux_1_2_aarch64.whl","hashes
 benches/_data/pypi_org__simple__psutil.json:1:788354  - Unknown word (musllinux)  -- psutil-7.2.0-cp36-abi3-musllinux_1_2_x86_64.whl","hashes
 benches/_data/pypi_org__simple__psutil.json:1:801174  - Unknown word (musllinux)  -- psutil-7.2.1-cp36-abi3-musllinux_1_2_aarch64.whl","hashes
@@ -10932,6 +10932,13 @@ extra_tests/snippets/builtin_property.py:15:5      - Unknown word (Fubar)      -
 extra_tests/snippets/builtin_property.py:19:13     - Unknown word (Fubar)      -- assert type(Fubar.foo) is property
 extra_tests/snippets/builtin_property.py:4:7       - Unknown word (Fubar)      -- class Fubar:
 extra_tests/snippets/builtin_set.py:428:27    - Unknown word (aruguments) -- TODO: Assert that empty aruguments raises exception.
+extra_tests/snippets/builtin_str.py:1130:71   - Unknown word (udfff)      -- 001f600", "a\ud800b\udfff"):
+extra_tests/snippets/builtin_str.py:1138:13   - Unknown word (ababa)      -- assert "ababa".replace("aba", "x"
+extra_tests/snippets/builtin_str.py:1139:48   - Unknown word (udfff)      -- replace("\ud800", "\udfff", 1) == "\udfffx\ud
+extra_tests/snippets/builtin_str.py:1139:64   - Unknown word (udfffx)     -- , "\udfff", 1) == "\udfffx\ud800"
+extra_tests/snippets/builtin_str.py:1140:48   - Unknown word (udfff)      -- replace("\ud800", "\udfff") == "\udfffx\udfff
+extra_tests/snippets/builtin_str.py:1140:61   - Unknown word (udfffx)     -- 00", "\udfff") == "\udfffx\udfff"
+extra_tests/snippets/builtin_str.py:1140:68   - Unknown word (udfff)      -- udfff") == "\udfffx\udfff"
 extra_tests/snippets/builtin_str.py:114:9     - Unknown word (éabcé)      -- assert "éabcé".strip("é\ud800") =
 extra_tests/snippets/builtin_str.py:145:33    - Unknown word (Ssello)     -- ßello".capitalize() == "Ssello"
 extra_tests/snippets/builtin_str.py:145:9     - Unknown word (ßello)      -- assert "ßello".capitalize() == "Ssello
@@ -10957,8 +10964,8 @@ extra_tests/snippets/builtin_str.py:335:34    - Unknown word (ΊΣΥΦΟΣ)     
 extra_tests/snippets/builtin_str.py:335:9     - Unknown word (Σίσυφος)    -- assert "Σίσυφος".swapcase() == "σΊΣΥΦΟΣ
 extra_tests/snippets/builtin_str.py:42:21     - Unknown word (xyxyxy)     -- assert "xy" * 3 == "xyxyxy"
 extra_tests/snippets/builtin_str.py:46:21     - Unknown word (xyxyxy)     -- assert 3 * "xy" == "xyxyxy"
-extra_tests/snippets/builtin_str.py:917:28    - Unknown word (afoo)       -- assert s.removeprefix("afoo") == s_ref
-extra_tests/snippets/builtin_str.py:964:28    - Unknown word (fooa)       -- assert s.removesuffix("fooa") == s_ref
+extra_tests/snippets/builtin_str.py:945:28    - Unknown word (afoo)       -- assert s.removeprefix("afoo") == s_ref
+extra_tests/snippets/builtin_str.py:992:28    - Unknown word (fooa)       -- assert s.removesuffix("fooa") == s_ref
 extra_tests/snippets/builtin_str_encode.py:11:42     - Unknown word (estás)     -- UnicodeEncodeError, "¿como estás?".encode, "ascii")
 extra_tests/snippets/builtin_str_encode.py:21:25     - Unknown word (𝕐𝕥)       -- round_trip("☢🐣 ᖇ𝓤𝕊тⓟ𝕐𝕥卄σ𝔫 ♬👣")
 extra_tests/snippets/builtin_str_encode.py:22:19     - Unknown word (ק𝔂t)       -- round_trip("💀👌 ק𝔂tℍⓞ𝓷 ３  🔥👤")
@@ -11098,27 +11105,28 @@ extra_tests/snippets/stdlib_datetime.py:893:27    - Unknown word (aord)       --
 extra_tests/snippets/stdlib_datetime.py:896:57    - Unknown word (aord)       -- lambda: a.fromordinal(aord - 1))
 extra_tests/snippets/stdlib_datetime.py:899:37    - Unknown word (aord)       -- equal(b.toordinal(), aord + 1)
 extra_tests/snippets/stdlib_datetime.py:900:51    - Unknown word (aord)       -- theclass.fromordinal(aord + 1))
-extra_tests/snippets/stdlib_hashlib.py:45:30     - Unknown word (fubar)      -- hashlib.new("blake2s", b"fubar")
-extra_tests/snippets/stdlib_imp.py:41:7      - Unknown word (ispkg)      -- data, ispkg, origname = _imp.find
-extra_tests/snippets/stdlib_imp.py:42:8      - Unknown word (ispkg)      -- assert ispkg is False
+extra_tests/snippets/stdlib_hashlib.py:47:30     - Unknown word (fubar)      -- hashlib.new("blake2s", b"fubar")
+extra_tests/snippets/stdlib_imp.py:42:7      - Unknown word (ispkg)      -- data, ispkg, origname = _imp.find
+extra_tests/snippets/stdlib_imp.py:43:8      - Unknown word (ispkg)      -- assert ispkg is False
 extra_tests/snippets/stdlib_io.py:39:5      - Unknown word (nres)       -- nres = fio.read(1)
 extra_tests/snippets/stdlib_io.py:40:16     - Unknown word (nres)       -- assert len(nres) == 1
 extra_tests/snippets/stdlib_io.py:41:5      - Unknown word (nres)       -- nres = fio.read(2)
 extra_tests/snippets/stdlib_io.py:42:16     - Unknown word (nres)       -- assert len(nres) == 2
 extra_tests/snippets/stdlib_itertools.py:307:72    - Unknown word (ACEF)       -- 0, 1, 1])) == list("ACEF")
 extra_tests/snippets/stdlib_itertools.py:312:82    - Unknown word (ACEF)       -- ", 1, 9])) == list("ACEF")
-extra_tests/snippets/stdlib_json.py:70:33     - Unknown word (jsons)      -- reject non-str keys in jsons
+extra_tests/snippets/stdlib_json.py:88:33     - Unknown word (jsons)      -- reject non-str keys in jsons
 extra_tests/snippets/stdlib_logging.py:14:9      - Unknown word (WOOT)       -- assert "WOOT" in res
 extra_tests/snippets/stdlib_logging.py:9:16      - Unknown word (WOOT)       -- logging.error("WOOT")
+extra_tests/snippets/stdlib_math.py:128:3     - Unknown word (roundings)   -- # roundings
 extra_tests/snippets/stdlib_math.py:13:9      - Unknown word (Conversible) -- # class Conversible():
 extra_tests/snippets/stdlib_math.py:18:39     - Unknown word (Conversible) -- 1.1111) == math.log(Conversible())
-extra_tests/snippets/stdlib_math.py:20:3      - Unknown word (roundings)   -- # roundings
-extra_tests/snippets/stdlib_os.py:120:14    - Unknown word (BOYA)       -- CONTENT3 = b"BOYA"
-extra_tests/snippets/stdlib_os.py:519:63    - Unknown word (VDISABLE)   -- "PC_MAX_INPUT", "PC_VDISABLE"]:
-extra_tests/snippets/stdlib_pickle.py:5:1       - Unknown word (unpickler)  -- unpickler = _pickle.Unpickler
-extra_tests/snippets/stdlib_pickle.py:5:21      - Unknown word (Unpickler)  -- unpickler = _pickle.Unpickler(io.BytesIO(b"\x80\x
-extra_tests/snippets/stdlib_pickle.py:6:15      - Unknown word (unpickler)  -- left, right = unpickler.load()
-extra_tests/snippets/stdlib_pickle.py:8:8       - Unknown word (unpickler)  -- memo = unpickler.memo.copy()
+extra_tests/snippets/stdlib_os.py:203:14    - Unknown word (BOYA)       -- CONTENT3 = b"BOYA"
+extra_tests/snippets/stdlib_os.py:607:63    - Unknown word (VDISABLE)   -- "PC_MAX_INPUT", "PC_VDISABLE"]:
+extra_tests/snippets/stdlib_pickle.py:10:15     - Unknown word (unpickler)  -- left, right = unpickler.load()
+extra_tests/snippets/stdlib_pickle.py:12:8      - Unknown word (unpickler)  -- memo = unpickler.memo.copy()
+extra_tests/snippets/stdlib_pickle.py:30:30     - Unknown word (Unpickler)  -- lambda data: _pickle.Unpickler(io.BytesIO(data)).load
+extra_tests/snippets/stdlib_pickle.py:9:1       - Unknown word (unpickler)  -- unpickler = _pickle.Unpickler
+extra_tests/snippets/stdlib_pickle.py:9:21      - Unknown word (Unpickler)  -- unpickler = _pickle.Unpickler(io.BytesIO(b"\x80\x
 extra_tests/snippets/stdlib_re.py:125:34    - Unknown word (xaybz)      -- re.split(r"(a)|(b)", "xaybz") == ["x", "a", None
 extra_tests/snippets/stdlib_re.py:17:17     - Unknown word (abcabca)    -- s = p.sub("x", "abcabca")
 extra_tests/snippets/stdlib_re.py:19:14     - Unknown word (xcxca)      -- assert s == "xcxca"
@@ -11142,12 +11150,19 @@ extra_tests/snippets/stdlib_select.py:42:35     - Unknown word (recvr)      -- x
 extra_tests/snippets/stdlib_select.py:42:44     - Unknown word (sendr)      -- select.select([recvr], [sendr], [])
 extra_tests/snippets/stdlib_select.py:45:21     - Unknown word (rres)       -- assert recvr in rres
 extra_tests/snippets/stdlib_select.py:47:8      - Unknown word (sendr)      -- assert sendr in wres
+extra_tests/snippets/stdlib_signal.py:47:9      - Unknown word (uncatchable) -- for uncatchable in (9, 19):
+extra_tests/snippets/stdlib_signal.py:48:37     - Unknown word (uncatchable) -- previous = signal.getsignal(uncatchable)
+extra_tests/snippets/stdlib_signal.py:49:47     - Unknown word (uncatchable) -- OSError, signal.signal, uncatchable, signal.SIG_IGN)
+extra_tests/snippets/stdlib_signal.py:50:33     - Unknown word (uncatchable) -- assert signal.getsignal(uncatchable) is previous
 extra_tests/snippets/stdlib_sqlite.py:33:22     - Unknown word (mysum)      -- cx.create_aggregate("mysum", 1, AggrSum)
 extra_tests/snippets/stdlib_sqlite.py:34:21     - Unknown word (mysum)      -- cur.execute("select mysum(key) from foo")
 extra_tests/snippets/stdlib_ssl_short_recv.py:50:9      - Unknown word (ssock)      -- ssock = server_context.wrap
 extra_tests/snippets/stdlib_ssl_short_recv.py:52:13     - Unknown word (ssock)      -- ssock.sendall(DATA)
 extra_tests/snippets/stdlib_ssl_short_recv.py:54:13     - Unknown word (ssock)      -- ssock.close()
 extra_tests/snippets/stdlib_subprocess.py:22:36     - Unknown word (unixy)      -- make work in a non-unixy environment (something
+extra_tests/snippets/stdlib_time.py:135:54    - Unknown word (février)    -- "%B", february) == "février"
+extra_tests/snippets/stdlib_time.py:138:22    - Unknown word (février)    -- == "[février] 🐍 \ud800\0" + "202
+extra_tests/snippets/stdlib_time.py:140:60    - Unknown word (février)    -- 300, february) == "février" * 300
 extra_tests/snippets/stdlib_traceback.py:38:55     - Unknown word (valu)       -- suggestions(["value"], "valu") == "value"
 extra_tests/snippets/stdlib_unicode_shared.py:101:23    - Unknown word (straße)     -- assert re.fullmatch(r"straße", "STRAßE", re.IGNORECASE
 extra_tests/snippets/stdlib_unicode_shared.py:41:32     - Unknown word (strasse)    -- Straße".casefold() == "strasse"
@@ -11173,8 +11188,8 @@ extra_tests/snippets/syntax_fstring.py:139:35    - Unknown word (tenπ)       --
 extra_tests/snippets/syntax_function2.py:23:5      - Unknown word (fubar)      -- def fubar():
 extra_tests/snippets/syntax_function2.py:26:8      - Unknown word (fubar)      -- assert fubar() == (42,)
 extra_tests/snippets/syntax_function2.py:68:23     - Unknown word (abcw)       -- assert f5.__doc__ == 'abcw00t', f5.__doc__
-extra_tests/snippets/syntax_function_args.py:76:5      - Unknown word (fubar)      -- def fubar(x, y, obj=None):
-extra_tests/snippets/syntax_function_args.py:82:1      - Unknown word (fubar)      -- fubar(obj=6, *rest)
+extra_tests/snippets/syntax_function_args.py:160:5     - Unknown word (fubar)      -- def fubar(x, y, obj=None):
+extra_tests/snippets/syntax_function_args.py:166:1     - Unknown word (fubar)      -- fubar(obj=6, *rest)
 extra_tests/snippets/syntax_try.py:82:5      - Unknown word (fubar)      -- fubar
 extra_tests/snippets/syntax_with.py:30:16     - Unknown word (Ajuus)      -- print('Ajuus')
 extra_tests/snippets/syntax_with.py:5:16      - Unknown word (Entrada)    -- print('Entrada')
