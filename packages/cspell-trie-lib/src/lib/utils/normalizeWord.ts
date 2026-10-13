@@ -11,11 +11,15 @@ export function normalizeWord(text: string): string {
  * converts text to lower case and removes any accents.
  * @param text - text to convert
  * @returns lowercase word without accents
- * @deprecated true
  */
-export function normalizeWordToLowercase(text: string): string {
+export function normalizeWordToLowercaseAndRemoveAccents(text: string): string {
     return text.toLowerCase().normalize('NFD').replaceAll(/\p{M}/gu, '');
 }
+
+/**
+ * @deprecated Use {@link normalizeWordToLowercaseAndRemoveAccents}.
+ */
+export const normalizeWordToLowercase: (text: string) => string = normalizeWordToLowercaseAndRemoveAccents;
 
 /**
  * generate case insensitive forms of a word

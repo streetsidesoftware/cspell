@@ -65,6 +65,7 @@ export {
     normalizeWord,
     normalizeWordForCaseInsensitive,
     normalizeWordToLowercase,
+    normalizeWordToLowercaseAndRemoveAccents,
     OPTIONAL_COMPOUND_FIX,
     orderTrie,
     parseDictionary,

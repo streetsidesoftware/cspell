@@ -994,9 +994,12 @@ export declare function normalizeWord(text: string): string;
  * converts text to lower case and removes any accents.
  * @param text - text to convert
  * @returns lowercase word without accents
- * @deprecated true
  */
-export declare function normalizeWordToLowercase(text: string): string;
+export declare function normalizeWordToLowercaseAndRemoveAccents(text: string): string;
+/**
+ * @deprecated Use {@link normalizeWordToLowercaseAndRemoveAccents}.
+ */
+export declare const normalizeWordToLowercase: (text: string) => string;
 /**
  * generate case insensitive forms of a word
  * @param text - text to convert

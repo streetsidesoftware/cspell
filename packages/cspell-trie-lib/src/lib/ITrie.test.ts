@@ -9,7 +9,7 @@ import type { SuggestionOptions } from './suggestions/genSuggestionsOptions.ts';
 import type { SuggestionCollectorOptions } from './suggestions/suggestCollector.ts';
 import { suggestionCollector } from './suggestions/suggestCollector.ts';
 import { clean } from './utils/clean.ts';
-import { normalizeWordToLowercase } from './utils/normalizeWord.ts';
+import { normalizeWordToLowercaseAndRemoveAccents } from './utils/normalizeWord.ts';
 import { CompoundWordsMethod } from './walker/index.ts';
 
 describe('Validate Trie Class', () => {
@@ -270,21 +270,21 @@ describe('Validate Trie Class', () => {
     });
 
     test.each`
-        word                                | caseSensitive | found    | comment
-        ${'café'}                           | ${true}       | ${true}  | ${''}
-        ${'Café'}                           | ${true}       | ${false} | ${''}
-        ${'café'}                           | ${false}      | ${true}  | ${''}
-        ${'Café'}                           | ${false}      | ${false} | ${''}
-        ${normalizeWordToLowercase('café')} | ${false}      | ${true}  | ${''}
-        ${normalizeWordToLowercase('Café')} | ${false}      | ${true}  | ${''}
-        ${'BeginMiddleEnd'}                 | ${true}       | ${true}  | ${''}
-        ${'BeginMiddleMiddleEnd'}           | ${true}       | ${true}  | ${''}
-        ${'BeginEnd'}                       | ${true}       | ${true}  | ${''}
-        ${'MiddleEnd'}                      | ${true}       | ${false} | ${''}
-        ${'beginend'}                       | ${false}      | ${true}  | ${'cspell:disable-line'}
-        ${'playtime'}                       | ${true}       | ${false} | ${''}
-        ${'playtime'}                       | ${false}      | ${false} | ${''}
-        ${'playmiddletime'}                 | ${false}      | ${true}  | ${'cspell:disable-line'}
+        word                                                | caseSensitive | found    | comment
+        ${'café'}                                           | ${true}       | ${true}  | ${''}
+        ${'Café'}                                           | ${true}       | ${false} | ${''}
+        ${'café'}                                           | ${false}      | ${true}  | ${''}
+        ${'Café'}                                           | ${false}      | ${false} | ${''}
+        ${normalizeWordToLowercaseAndRemoveAccents('café')} | ${false}      | ${true}  | ${''}
+        ${normalizeWordToLowercaseAndRemoveAccents('Café')} | ${false}      | ${true}  | ${''}
+        ${'BeginMiddleEnd'}                                 | ${true}       | ${true}  | ${''}
+        ${'BeginMiddleMiddleEnd'}                           | ${true}       | ${true}  | ${''}
+        ${'BeginEnd'}                                       | ${true}       | ${true}  | ${''}
+        ${'MiddleEnd'}                                      | ${true}       | ${false} | ${''}
+        ${'beginend'}                                       | ${false}      | ${true}  | ${'cspell:disable-line'}
+        ${'playtime'}                                       | ${true}       | ${false} | ${''}
+        ${'playtime'}                                       | ${false}      | ${false} | ${''}
+        ${'playmiddletime'}                                 | ${false}      | ${true}  | ${'cspell:disable-line'}
     `('hasWord $word $caseSensitive $found', ({ word, caseSensitive, found }: HasWordTestCase) => {
         const trie = getCompoundDictionaryITrie();
         expect(trie.hasWord(word, caseSensitive)).toBe(found);
