@@ -152,13 +152,6 @@ Turned down:
 - **Today's forms too when case matters.** No word would be newly reported, but wrong capitals such as `Inceleme` would
   pass in the mode meant to catch them.
 
-## Out of scope
-
-- Case rules that JavaScript doesn't implement, such as the Dutch `IJ` digraph (`ijsland` to `IJsland`). cspell uses
-  the rules that `toLocaleLowerCase` provides, and adds none of its own.
-- Choosing dictionaries by locale. The `languageSettings` setting already does that, and it doesn't change.
-- Other text handling that depends on the locale, such as where words split.
-
 <!---
-    cspell:ignore inceleme İnceleme İNCELEME ispanak ıspanak ispanakk ışık IŞIK irak ırak ijsland jsland İnside isim ISIM İSİM İstanbul İSTANBUL İncelemee ınside άνθρωπος Άνθρωπος Ανθρωπος ΆΝΘΡΩΠΟΣ
+    cspell:ignore inceleme İnceleme İNCELEME ispanak ıspanak ispanakk ışık IŞIK irak ırak İnside isim ISIM İSİM İstanbul İSTANBUL İncelemee ınside άνθρωπος Άνθρωπος Ανθρωπος ΆΝΘΡΩΠΟΣ
 -->
