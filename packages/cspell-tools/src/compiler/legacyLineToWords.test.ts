@@ -1,4 +1,4 @@
-// cSpell:ignore jpegs outing dirs lcode outring outrings irak stanbul
+// cSpell:ignore jpegs outing dirs lcode outring outrings
 
 import { opFilter, pipe } from '@cspell/cspell-pipe/sync';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
@@ -65,3 +65,5 @@ function distinct(): (word: string) => boolean {
     const known = new Set<string>();
     return (a) => (known.has(a) ? false : (known.add(a), true));
 }
+
+// cspell:ignore irak stanbul

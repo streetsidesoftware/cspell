@@ -1,5 +1,3 @@
-// cspell:ignore irak stanbul
-
 import { promises as fs } from 'node:fs';
 import * as path from 'node:path';
 
@@ -318,3 +316,5 @@ describe('compile', () => {
 function t(...parts: string[]): string {
     return testHelper.resolveTemp(...parts);
 }
+
+// cspell:ignore irak stanbul

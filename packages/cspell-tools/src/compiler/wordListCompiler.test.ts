@@ -1,4 +1,4 @@
-// cSpell:ignore jpegs outing dirs lcode outring outrings irak stanbul
+// cSpell:ignore jpegs outing dirs lcode outring outrings
 
 import * as fsp from 'node:fs/promises';
 import * as path from 'node:path';
@@ -321,3 +321,5 @@ city
 london
 paris
 `;
+
+// cspell:ignore irak stanbul

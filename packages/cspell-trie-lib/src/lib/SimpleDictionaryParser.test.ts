@@ -1,5 +1,3 @@
-// cspell:ignore irak stanbul
-
 import { describe, expect, test } from 'vitest';
 
 import type { ParseDictionaryOptions } from './SimpleDictionaryParser.ts';
@@ -367,3 +365,5 @@ function pdOp(...opts: Partial<ParseDictionaryOptions>[]): Partial<ParseDictiona
     }
     return opt;
 }
+
+// cspell:ignore irak stanbul
