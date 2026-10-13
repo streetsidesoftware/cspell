@@ -177,6 +177,29 @@ describe('Validate DictionaryLoader', () => {
         expect(d.has(word)).toBe(hasWord);
     });
 
+    // cspell:ignore İnceleme Ispanak İSTANBUL turkish
+    test.each`
+        locale       | word          | ignoreCase | hasWord
+        ${'tr-TR'}   | ${'İnceleme'} | ${true}    | ${true}
+        ${'tr-TR'}   | ${'Ispanak'}  | ${true}    | ${true}
+        ${'tr-TR'}   | ${'İSTANBUL'} | ${false}   | ${true}
+        ${'tr_TR'}   | ${'İnceleme'} | ${true}    | ${true}
+        ${'en,tr'}   | ${'İnceleme'} | ${true}    | ${false}
+        ${'*'}       | ${'İnceleme'} | ${true}    | ${false}
+        ${undefined} | ${'İnceleme'} | ${true}    | ${false}
+    `(
+        'dictionaryInformation.locale $locale has $word ignoreCase: $ignoreCase',
+        async ({ locale, word, ignoreCase, hasWord }) => {
+            const def = dDef({
+                name: `turkish-${locale}`,
+                path: sample('turkish-words.txt'),
+                ...(locale ? { dictionaryInformation: { locale } } : {}),
+            });
+            const d = await dictionaryLoader.loadDictionary(def);
+            expect(d.has(word, { ignoreCase })).toBe(hasWord);
+        },
+    );
+
     describe('kind', () => {
         test('kind: ignore-words behaves like noSuggest', async () => {
             const def = dDef({ name: 'words', path: sample('words.txt'), kind: 'ignore-words' });

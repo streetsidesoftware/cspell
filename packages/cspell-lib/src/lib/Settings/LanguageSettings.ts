@@ -92,6 +92,19 @@ export function isLocaleInSet(locale: LocaleId | LocaleId[], setOfLocals: Set<Lo
     return doSetsIntersect(locales, setOfLocals);
 }
 
+/**
+ * Normalize a locale for use with `Intl` and `toLocaleLowerCase`. Locales that aren't valid are dropped.
+ * @param locale - a locale or a list of locales, for example `en,tr_TR`.
+ * @returns the valid locales, or `undefined` if there are none.
+ */
+export function normalizeLocaleForIntl(locale: LocaleId | LocaleId[] | undefined): string | string[] | undefined {
+    if (!locale) return undefined;
+    const locales = [...normalizeLocaleIntl(locale)].filter((locale) => isValidLocaleIntlFormat(locale));
+    if (!locales.length) return undefined;
+    if (locales.length === 1) return locales[0];
+    return locales;
+}
+
 const regExpValidIntlLocaleStrict = /^[a-z]{2}(-[A-Z]{2})?$/;
 const regExpValidIntlLocale = new RegExp(regExpValidIntlLocaleStrict, 'i');
 

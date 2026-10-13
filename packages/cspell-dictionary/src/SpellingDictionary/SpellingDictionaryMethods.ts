@@ -2,7 +2,7 @@ import type { DictionaryInformation } from '@cspell/cspell-types';
 import type { SuggestionResult, WeightMap } from 'cspell-trie-lib';
 import { mapDictionaryInformationToWeightMap } from 'cspell-trie-lib';
 
-import { isUpperCase, removeUnboundAccents, ucFirst } from '../util/text.js';
+import { isUpperCase, lcRest, removeUnboundAccents } from '../util/text.js';
 import type { HasOptions, SearchOptions } from './SpellingDictionary.js';
 
 export { impersonateCollector, suggestionCollector } from 'cspell-trie-lib';
@@ -11,37 +11,43 @@ export type FilterSuggestionsPredicate = (word: SuggestionResult) => boolean;
 
 export const defaultNumSuggestions = 10;
 
-function wordSearchFormsArray(word: string, isDictionaryCaseSensitive: boolean, ignoreCase: boolean): string[] {
-    return [...wordSearchForms(word, isDictionaryCaseSensitive, ignoreCase)];
-}
+/**
+ * The alternate forms of a word to look up in a dictionary.
+ * @param word - the word as written.
+ * @param isDictionaryCaseSensitive - the dictionary contains words with capitals.
+ * @param ignoreCase - case doesn't matter for the check.
+ * @param locale - the dictionary's locale. Case changes follow its rules.
+ */
+export function wordSearchAlternateForms(
+    word: string,
+    isDictionaryCaseSensitive: boolean,
+    ignoreCase: boolean,
+    locale?: string,
+): string[] {
+    if (!isDictionaryCaseSensitive) return wordSearchFormsLegacy(word);
 
-export function wordSearchForms(word: string, isDictionaryCaseSensitive: boolean, ignoreCase: boolean): Set<string> {
-    const forms = new Set<string>();
     word = word.normalize('NFC');
     const wordLc = word.toLowerCase();
+    const wordLcLocale = locale ? word.toLocaleLowerCase(locale) : wordLc;
+    if (word === wordLcLocale) return [];
     if (ignoreCase) {
-        if (isDictionaryCaseSensitive) {
-            forms.add(wordLc);
-        } else {
-            forms.add(wordLc);
-            // Legacy remove any unbound accents
-            forms.add(removeUnboundAccents(wordLc));
-        }
-    } else {
-        if (isDictionaryCaseSensitive) {
-            forms.add(word);
-            forms.add(wordLc);
-            // HOUSE -> House, house
-            if (isUpperCase(word)) {
-                forms.add(ucFirst(wordLc));
-            }
-        } else {
-            forms.add(wordLc);
-            // Legacy remove any unbound accents
-            forms.add(removeUnboundAccents(wordLc));
-        }
+        // Dictionaries store their case-insensitive forms with the default rules, so try those too.
+        return wordLcLocale === wordLc ? [wordLcLocale] : [wordLcLocale, wordLc];
     }
-    return forms;
+    if (!isUpperCase(word)) return [wordLcLocale];
+    // HOUSE -> House, house
+    return [wordLcLocale, lcRest(word, locale)];
+}
+
+function wordSearchFormsLegacy(word: string): string[] {
+    word = word.normalize('NFC');
+    const wordLc = word.toLowerCase();
+
+    const forms = new Set<string>();
+    // Legacy remove any unbound accents
+    forms.add(wordLc);
+    forms.add(removeUnboundAccents(wordLc));
+    return [...forms];
 }
 
 export function wordSuggestFormsArray(word: string): string[] {
@@ -97,11 +103,3 @@ export function createWeightMapFromDictionaryInformation(di: DictionaryInformati
 export function createWeightMapFromDictionaryInformation(di: DictionaryInformation | undefined): WeightMap | undefined {
     return di ? mapDictionaryInformationToWeightMap(di) : undefined;
 }
-
-export const __testMethods__: {
-    wordSearchForms: typeof wordSearchForms;
-    wordSearchFormsArray: typeof wordSearchFormsArray;
-} = {
-    wordSearchForms,
-    wordSearchFormsArray,
-};

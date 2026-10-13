@@ -12,6 +12,7 @@ To write one, see:
 
 ## Designs
 
-| Feature                             | Description                                                   |
-| ----------------------------------- | ------------------------------------------------------------- |
-| [Glob symlinks](./glob-symlinks.md) | Follow symbolic links in `cspell lint` glob searches, opt-in. |
+| Feature                                     | Description                                                   |
+| ------------------------------------------- | ------------------------------------------------------------- |
+| [Dictionary locale](./dictionary-locale.md) | Change case by a dictionary's locale when looking up words.   |
+| [Glob symlinks](./glob-symlinks.md)         | Follow symbolic links in `cspell lint` glob searches, opt-in. |

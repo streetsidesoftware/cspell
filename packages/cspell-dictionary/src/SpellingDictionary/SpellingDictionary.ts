@@ -100,6 +100,12 @@ export interface SpellingDictionaryOptions {
      * Optional WeightMap used to improve suggestions.
      */
     weightMap?: WeightMap | undefined;
+
+    /**
+     * The locale of the dictionary's words, for example `tr-TR`. When set, looking up a word changes its case with the
+     * rules of this locale. It must be a locale that `toLocaleLowerCase` accepts.
+     */
+    locale?: string | undefined;
 }
 
 export type SpellingDictionaryOptionsRO = Readonly<SpellingDictionaryOptions>;

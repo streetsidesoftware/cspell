@@ -12,11 +12,7 @@ import {
     mergeSettings,
     resolveConfigFileImports,
 } from './Settings/index.js';
-import {
-    calcSettingsForLanguageId,
-    isValidLocaleIntlFormat,
-    normalizeLocaleIntl,
-} from './Settings/LanguageSettings.js';
+import { calcSettingsForLanguageId, normalizeLocaleForIntl } from './Settings/LanguageSettings.js';
 import type { SpellingDictionaryCollection, SuggestionResult, SuggestOptions } from './SpellingDictionary/index.js';
 import { getDictionaryInternal, refreshDictionaryCache } from './SpellingDictionary/index.js';
 import { createAutoResolveCache } from './util/AutoResolve.js';
@@ -209,7 +205,7 @@ async function _suggestionsForWordAsync(
     const suggestionsByDictionary = dictionaryCollection.dictionaries.flatMap((dict) =>
         dict.suggest(word, opts).map((r) => ({ ...r, dictName: dict.name })),
     );
-    const locale = adjustLocale(language || config.language || undefined);
+    const locale = normalizeLocaleForIntl(language || config.language || undefined);
     const collator = Intl.Collator(locale);
     const combined = limitResults(
         combine(suggestionsByDictionary.sort((a, b) => a.cost - b.cost || collator.compare(a.word, b.word))),
@@ -257,14 +253,6 @@ function combine(suggestions: SuggestionResultWithDictionaryName[]): SuggestedWo
     return [...words.values()];
 }
 
-function adjustLocale(locale: string | string[] | undefined): string | string[] | undefined {
-    if (!locale) return undefined;
-    const locales = [...normalizeLocaleIntl(locale)].filter((locale) => isValidLocaleIntlFormat(locale));
-    if (!locales.length) return undefined;
-    if (locales.length === 1) return locales[0];
-    return locales;
-}
-
 export function calcSuggestionAdjustedToToMatchCase<T extends SuggestionResult>(
     originalWord: string,
     sugs: T[],
@@ -272,7 +260,7 @@ export function calcSuggestionAdjustedToToMatchCase<T extends SuggestionResult>(
     ignoreCase: boolean,
     dict: SpellingDictionaryCollection,
 ): (T & WordSuggestion)[] {
-    locale = adjustLocale(locale);
+    locale = normalizeLocaleForIntl(locale);
     const knownSugs = new Set(sugs.map((sug) => sug.word));
     const matchStyle = { ...analyzeCase(originalWord), locale, ignoreCase };
     /* Add adjusted words */

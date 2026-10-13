@@ -4,7 +4,7 @@ import { describe, expect, test } from 'vitest';
 import { createSpellingDictionary } from './createSpellingDictionary.js';
 import type { SpellingDictionaryOptions } from './SpellingDictionary.js';
 import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie.js';
-import { __testMethods__ } from './SpellingDictionaryMethods.js';
+import { wordSearchAlternateForms } from './SpellingDictionaryMethods.js';
 
 // cSpell:ignore aple
 
@@ -144,33 +144,130 @@ describe('Validate finding compound words.', () => {
     });
 });
 
-describe('Validate wordSearchForms', () => {
+describe('Validate wordSearchAlternateForms', () => {
     test.each`
         word                        | isCaseSensitive | ignoreCase | expected
         ${'house'}                  | ${false}        | ${false}   | ${['house']}
         ${'House'}                  | ${false}        | ${false}   | ${['house']}
         ${'House'}                  | ${false}        | ${false}   | ${['house']}
-        ${'House'}                  | ${true}         | ${false}   | ${['House', 'house']}
+        ${'House'}                  | ${true}         | ${false}   | ${['house']}
         ${'HOUSE'}                  | ${false}        | ${false}   | ${['house']}
-        ${'HOUSE'}                  | ${true}         | ${false}   | ${['HOUSE', 'House', 'house']}
+        ${'HOUSE'}                  | ${true}         | ${false}   | ${['House', 'house']}
         ${'café'}                   | ${false}        | ${false}   | ${['café']}
-        ${'café'}                   | ${true}         | ${false}   | ${['café']}
-        ${'café'}                   | ${true}         | ${true}    | ${['café']}
+        ${'café'}                   | ${true}         | ${false}   | ${[]}
+        ${'café'}                   | ${true}         | ${true}    | ${[]}
         ${'Café'}                   | ${false}        | ${false}   | ${['café']}
         ${'Café'}                   | ${false}        | ${true}    | ${['café']}
-        ${'Café'}                   | ${true}         | ${false}   | ${['Café', 'café']}
+        ${'Café'}                   | ${true}         | ${false}   | ${['café']}
         ${'Café'}                   | ${true}         | ${true}    | ${['café']}
         ${'CAFÉ'}                   | ${false}        | ${false}   | ${['café']}
         ${'CAFÉ'}                   | ${false}        | ${true}    | ${['café']}
-        ${'CAFÉ'}                   | ${true}         | ${false}   | ${['CAFÉ', 'Café', 'café']}
+        ${'CAFÉ'}                   | ${true}         | ${false}   | ${['Café', 'café']}
         ${'CAFÉ'}                   | ${true}         | ${true}    | ${['café']}
         ${'café'.normalize()}       | ${false}        | ${false}   | ${['café']}
         ${'café'.normalize('NFD')}  | ${false}        | ${false}   | ${['café']}
         ${'café'.normalize('NFKC')} | ${false}        | ${false}   | ${['café']}
         ${'café'.normalize('NFKD')} | ${false}        | ${false}   | ${['café']}
     `('$word $isCaseSensitive $ignoreCase $expected', ({ word, isCaseSensitive, ignoreCase, expected }) => {
-        const words = __testMethods__.wordSearchFormsArray(word, isCaseSensitive, ignoreCase);
+        const words = [...wordSearchAlternateForms(word, isCaseSensitive, ignoreCase)];
         expect(words.sort()).toEqual(expected.sort());
+    });
+});
+
+// cspell:ignore inceleme İnceleme İNCELEME ispanak ıspanak Ispanakk ışık IŞIK irak ırak isim ISIM İSİM ısım
+// cspell:ignore İnside ınside άνθρωπος Άνθρωπος ΆΝΘΡΩΠΟΣ İstanbul İSTANBUL nceleme stanbul
+describe('Validate wordSearchAlternateForms with a locale', () => {
+    test.each`
+        word          | isCaseSensitive | ignoreCase | locale       | expected
+        ${'Ispanak'}  | ${false}        | ${true}    | ${'tr-TR'}   | ${['ispanak']}
+        ${'İnceleme'} | ${false}        | ${true}    | ${'tr-TR'}   | ${['inceleme', 'i\u0307nceleme']}
+        ${'İnceleme'} | ${true}         | ${true}    | ${'tr-TR'}   | ${['inceleme', 'i\u0307nceleme']}
+        ${'İnceleme'} | ${true}         | ${false}   | ${'tr-TR'}   | ${['inceleme']}
+        ${'IRAK'}     | ${true}         | ${false}   | ${'tr-TR'}   | ${['ırak', 'Irak']}
+        ${'İSTANBUL'} | ${true}         | ${false}   | ${'tr-TR'}   | ${['istanbul', 'İstanbul']}
+        ${'ISIM'}     | ${false}        | ${false}   | ${'tr-TR'}   | ${['isim']}
+        ${'ΆΝΘΡΩΠΟΣ'} | ${true}         | ${false}   | ${'el-GR'}   | ${['άνθρωπος', 'Άνθρωπος']}
+        ${'HOUSE'}    | ${true}         | ${false}   | ${'en-US'}   | ${['House', 'house']}
+        ${'HOUSE'}    | ${true}         | ${false}   | ${undefined} | ${['House', 'house']}
+        ${'İSTANBUL'} | ${true}         | ${false}   | ${undefined} | ${['i\u0307stanbul', 'İstanbul']}
+    `(
+        '$word $isCaseSensitive $ignoreCase $locale $expected',
+        ({ word, isCaseSensitive, ignoreCase, locale, expected }) => {
+            const words = [...wordSearchAlternateForms(word, isCaseSensitive, ignoreCase, locale)];
+            expect(words.sort()).toEqual(expected.sort());
+        },
+    );
+});
+
+describe('Verify dictionaries with a locale', () => {
+    // Built with the default case rules, like the dictionaries in cspell-dicts.
+    const trWords = ['inceleme', 'ıspanak', 'ışık', 'isim', 'İstanbul', 'Irak'];
+
+    test.each`
+        word          | ignoreCase | expected
+        ${'inceleme'} | ${true}    | ${true}
+        ${'İnceleme'} | ${true}    | ${true}
+        ${'İNCELEME'} | ${true}    | ${true}
+        ${'Ispanak'}  | ${true}    | ${true}
+        ${'IŞIK'}     | ${true}    | ${true}
+        ${'İSTANBUL'} | ${true}    | ${true}
+        ${'IRAK'}     | ${true}    | ${true}
+        ${'ISIM'}     | ${true}    | ${true}
+        ${'Ispanakk'} | ${true}    | ${false}
+        ${'İnceleme'} | ${false}   | ${true}
+        ${'İNCELEME'} | ${false}   | ${true}
+        ${'Ispanak'}  | ${false}   | ${true}
+        ${'IŞIK'}     | ${false}   | ${true}
+        ${'İSTANBUL'} | ${false}   | ${true}
+        ${'IRAK'}     | ${false}   | ${true}
+        ${'İSİM'}     | ${false}   | ${true}
+        ${'ISIM'}     | ${false}   | ${false}
+        ${'Inceleme'} | ${false}   | ${false}
+    `('tr-TR has $word ignoreCase: $ignoreCase', ({ word, ignoreCase, expected }) => {
+        const dict = createSpellingDictionary(trWords, 'tr-test', 'test', opts({ locale: 'tr-TR' }));
+        expect(dict.has(word, { ignoreCase })).toBe(expected);
+    });
+
+    test.each`
+        word          | ignoreCase | expected
+        ${'İnceleme'} | ${true}    | ${false}
+        ${'Ispanak'}  | ${true}    | ${false}
+        ${'İSTANBUL'} | ${false}   | ${true}
+    `('without a locale has $word ignoreCase: $ignoreCase', ({ word, ignoreCase, expected }) => {
+        const dict = createSpellingDictionary(trWords, 'tr-test-no-locale', 'test', opts());
+        expect(dict.has(word, { ignoreCase })).toBe(expected);
+    });
+
+    test.each`
+        word        | ignoreCase | expected
+        ${'Inside'} | ${true}    | ${true}
+        ${'INSIDE'} | ${false}   | ${true}
+        ${'İnside'} | ${true}    | ${false}
+    `('en-US has $word ignoreCase: $ignoreCase', ({ word, ignoreCase, expected }) => {
+        const dict = createSpellingDictionary(['inside'], 'en-test', 'test', opts({ locale: 'en-US' }));
+        expect(dict.has(word, { ignoreCase })).toBe(expected);
+    });
+
+    test('el-GR keeps the accent on a capitalized word', () => {
+        const dict = createSpellingDictionary(['Άνθρωπος'], 'el-test', 'test', opts({ locale: 'el-GR' }));
+        expect(dict.has('ΆΝΘΡΩΠΟΣ', { ignoreCase: false })).toBe(true);
+    });
+});
+
+describe('Validate JavaScript assumptions', () => {
+    test('toLowerCase ignores the Turkish rules for I and İ', () => {
+        expect('İ'.toLowerCase()).toBe('i\u0307');
+        expect('I'.toLowerCase()).toBe('i');
+    });
+
+    test('toLocaleLowerCase applies the Turkish rules for I and İ', () => {
+        expect('İ'.toLocaleLowerCase('tr-TR')).toBe('i');
+        expect('I'.toLocaleLowerCase('tr-TR')).toBe('ı');
+    });
+
+    test('toLocaleUpperCase for Greek removes accents', () => {
+        expect('ά'.toLocaleUpperCase('el-GR')).toBe('Α');
+        expect('ά'.toUpperCase()).toBe('Ά');
     });
 });
 

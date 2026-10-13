@@ -23,6 +23,16 @@ export function ucFirst(word: string): string {
     return word.slice(0, 1).toUpperCase() + word.slice(1);
 }
 
+// cspell:ignore İstanbul İSTANBUL
+/**
+ * Keep the first letter as written and lower-case the rest: `İSTANBUL` -> `İstanbul`.
+ * Unlike upper-casing the first letter, this keeps accents that a locale's upper case would remove, as in Greek.
+ */
+export function lcRest(word: string, locale?: string): string {
+    const [first = ''] = word;
+    return first + word.slice(first.length).toLocaleLowerCase(locale);
+}
+
 export function lcFirst(word: string): string {
     return word.slice(0, 1).toLowerCase() + word.slice(1);
 }
