@@ -54,7 +54,9 @@ export interface CompileTargetOptions {
      * for example, when generating the case insensitive forms with `generateNonStrict`.
      * Without it, the default case rules are used.
      *
-     * Use the same value as `dictionaryInformation.locale` in the dictionary definition.
+     * Set `dictionaryInformation.locale` in the dictionary definition to the same locale, so cspell searches the
+     * dictionary with the case rules it was built with. If the definition lists more than one locale, cspell uses the
+     * first valid one for case rules, so put this locale first.
      */
     locale?: string | undefined;
 
