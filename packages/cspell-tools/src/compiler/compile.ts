@@ -438,18 +438,24 @@ async function readFileSource(
     return f;
 }
 
+// Only locales that cspell also keeps when it loads a dictionary's `dictionaryInformation.locale`.
+const regExpLocale = /^([a-z]{2})(?:[-_]([a-z]{2}))?$/i;
+
 /**
- * @returns the target's locale in its canonical form, such as `tr-TR` for `tr-tr`.
- * @throws if the locale is invalid.
+ * @returns the target's locale in its canonical form, such as `tr-TR` for `tr_tr`.
+ * @throws if the locale isn't a language and an optional region.
  */
 function canonicalLocale(target: Target): string | undefined {
     const { locale } = target;
     if (locale === undefined) return undefined;
-    try {
-        return Intl.getCanonicalLocales(locale)[0];
-    } catch {
-        throw new Error(`Invalid locale "${locale}" in target "${target.name}".`);
+    const m = regExpLocale.exec(locale);
+    if (!m) {
+        throw new Error(
+            `Invalid locale "${locale}" in target "${target.name}". Use a language and an optional region, such as "tr" or "tr-TR".`,
+        );
     }
+    const [, language, region] = m;
+    return region ? `${language.toLowerCase()}-${region.toUpperCase()}` : language.toLowerCase();
 }
 
 function normalizeTargetName(name: string) {

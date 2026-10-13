@@ -270,7 +270,7 @@ describe('compile', () => {
     test.each`
         locale       | expected                                     | notExpected
         ${undefined} | ${['~irak', '~i\u0307stanbul', '~istanbul']} | ${['~\u0131rak']}
-        ${'tr-tr'}   | ${['~\u0131rak', '~istanbul']}               | ${['~irak', '~i\u0307stanbul']}
+        ${'tr_tr'}   | ${['~\u0131rak', '~istanbul']}               | ${['~irak', '~i\u0307stanbul']}
     `('compile with generateNonStrict and locale $locale', async ({ locale, expected, notExpected }) => {
         const targetDirectory = t('.');
         testHelper.mkdir(targetDirectory);
@@ -296,21 +296,24 @@ describe('compile', () => {
         }
     });
 
-    test('compile with an invalid locale', async () => {
-        const targetDirectory = t('.');
-        const target: Target = {
-            name: 'myDictionary',
-            targetDirectory,
-            format: 'plaintext',
-            sources: [sample('cities.txt')],
-            locale: 'not a locale',
-            replacements: undefined,
-        };
+    test.each(['not a locale', 'az-Latn', 'tur', 'en,tr', ''])(
+        'compile with an invalid locale "%s"',
+        async (locale) => {
+            const targetDirectory = t('.');
+            const target: Target = {
+                name: 'myDictionary',
+                targetDirectory,
+                format: 'plaintext',
+                sources: [sample('cities.txt')],
+                locale,
+                replacements: undefined,
+            };
 
-        await expect(compile({ targets: [target] })).rejects.toThrow(
-            'Invalid locale "not a locale" in target "myDictionary".',
-        );
-    });
+            await expect(compile({ targets: [target] })).rejects.toThrow(
+                `Invalid locale "${locale}" in target "myDictionary".`,
+            );
+        },
+    );
 });
 
 function t(...parts: string[]): string {
