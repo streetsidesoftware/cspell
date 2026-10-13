@@ -120,11 +120,27 @@ Turned down:
   that locale is a filter: it can be `*` or a list, and several entries can enable the same dictionary. A dictionary
   would behave differently depending on which config enabled it.
 
+### Suggestions
+
+When a dictionary with a locale searches for suggestions, it also starts from the forms its locale's rules give, the
+same way a lookup does.
+
+Matching a suggestion to the case of the misspelled word doesn't change. It already uses a locale, but the document's
+(`language`), not the dictionary's, and with `"language": "en,tr"` that's English. So `İncelemee` gets the suggestion
+`Inceleme`, with a plain `I`, where Turkish writes `İnceleme`.
+
+Turned down:
+
+- **Matching case with the dictionary's locale too.** It would fix `İncelemee`, but each suggestion would need to carry
+  its dictionary's locale through `cspell-lib`'s suggestion API. Suggestions aren't part of what this feature has to
+  fix.
+
 ## Open questions
 
+- Match a suggestion's case with its dictionary's locale, so `İncelemee` suggests `İnceleme`.
 - A `locale` setting for `cspell-tools`, so building a dictionary uses the locale's rules too.
 - Should `dictionaryInformation.locale` reject values that aren't locales? Today the schema allows any string.
 
 <!---
-    cspell:ignore inceleme İnceleme İNCELEME ispanak ıspanak ispanakk ışık IŞIK irak ırak ijsland jsland İnside isim ISIM İSİM İstanbul İSTANBUL
+    cspell:ignore inceleme İnceleme İNCELEME ispanak ıspanak ispanakk ışık IŞIK irak ırak ijsland jsland İnside isim ISIM İSİM İstanbul İSTANBUL İncelemee
 -->
