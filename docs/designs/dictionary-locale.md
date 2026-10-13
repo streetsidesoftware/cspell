@@ -103,10 +103,7 @@ locale of the dictionary. Suggestions already use it when weighing suggestions. 
 cspell-dicts set it. This field used to only tune suggestions. Now it also changes what gets flagged, and its doc
 comment says so.
 
-The value is a comma-separated list, such as `tr,tr-TR`. cspell reads it the way it already reads the document's
-locale when matching the case of suggestions: `tr_TR` is read as `tr-TR`, and the first locale in the list that
-JavaScript supports is used. A value that isn't a valid locale, such as `*`, isn't meaningful here, but nothing rejects
-it when a config is loaded. cspell then uses the default rules, so a bad value can't crash cspell.
+The value is a comma-separated list, such as `tr,tr-TR`, read the same way cspell reads locales elsewhere.
 
 A dictionary without a locale uses the default rules, as today. That covers dictionaries with no single language
 (names, companies, software terms), third-party dictionaries that don't set one, and the user's own word lists
@@ -161,10 +158,6 @@ Turned down:
   like `IRAK` would start being reported.
 - **Today's forms too when case matters.** Nothing would be newly reported, but wrong capitals like `Inceleme` would
   keep passing in the mode meant to catch them.
-
-## Open questions
-
-- Should `dictionaryInformation.locale` reject values that aren't locales? Today the schema allows any string.
 
 <!---
     cspell:ignore inceleme İnceleme İNCELEME ispanak ıspanak ispanakk ışık IŞIK irak ırak ijsland jsland İnside isim ISIM İSİM İstanbul İSTANBUL İncelemee ınside
