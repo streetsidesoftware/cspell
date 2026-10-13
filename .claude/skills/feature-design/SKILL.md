@@ -45,7 +45,8 @@ into detail, step back to the sketch.
    - Why now: a bug report, a feature request, a limit hit while building something else?
    - Who is affected, and how? Start from the stakeholders in `docs/design-questions.md`.
    - What does success look like, as something a user can do or a config they can write, that they can't today?
-   - What's out of scope?
+   - What's out of scope? This keeps the design from growing. Write it in the design only when a reader would
+     otherwise assume the feature covers it, in a section at the end.
 
 3. **Sketch.** Read `docs/design-principles.md`, `docs/glossary.md`, and `docs/design-questions.md`. Look in `rfc/` and
    closed issues for earlier proposals, and link a matching RFC. Propose the sketch in a few lines, with one example:
