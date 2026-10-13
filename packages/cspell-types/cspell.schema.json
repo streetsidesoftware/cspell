@@ -929,8 +929,8 @@
     },
     "DictionaryInformation": {
       "additionalProperties": false,
-      "description": "Use by dictionary authors to help improve the quality of suggestions given from the dictionary.\n\nAdded with `v5.16.0`.",
-      "markdownDescription": "Use by dictionary authors to help improve the quality of suggestions\ngiven from the dictionary.\n\nAdded with `v5.16.0`.",
+      "description": "Provides extra information about the dictionary.\n\nIt is used to improve suggestions and casing rules.\n\nAdded with `v5.16.0`.",
+      "markdownDescription": "Provides extra information about the dictionary.\n\nIt is used to improve suggestions and casing rules.\n\nAdded with `v5.16.0`.",
       "properties": {
         "accents": {
           "anyOf": [
@@ -987,8 +987,8 @@
           "markdownDescription": "An optional set of characters that can possibly be removed from a word before\nchecking it.\n\nThis is useful in languages like Arabic where Harakat accents are optional.\n\nNote: All matching characters are removed or none. Partial removal is not supported."
         },
         "locale": {
-          "description": "The locale of the dictionary. Example: `nl,nl-be`\n\nWhen cspell changes the case of a word to look it up in the dictionary, it uses the case rules of the first valid locale. For example, with `tr-TR`, a capital `I` becomes `ı`, not `i`.",
-          "markdownDescription": "The locale of the dictionary.\nExample: `nl,nl-be`\n\nWhen cspell changes the case of a word to look it up in the dictionary, it uses the case rules of the first\nvalid locale. For example, with `tr-TR`, a capital `I` becomes `ı`, not `i`.",
+          "description": "The locale of the dictionary.\n\nThe locale should follow the IETF BCP 47 standard. If more than one locale is specified, the first valid locale will be used for casing rules.\n\nAvoid mixing different locales in the same dictionary.\n\nExample: `nl` or `nl-BE`",
+          "markdownDescription": "The locale of the dictionary.\n\nThe locale should follow the IETF BCP 47 standard.\nIf more than one locale is specified, the first valid locale will be used for casing rules.\n\nAvoid mixing different locales in the same dictionary.\n\nExample: `nl` or `nl-BE`",
           "type": "string"
         },
         "suggestionEditCosts": {

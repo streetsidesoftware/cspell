@@ -1,18 +1,23 @@
 import type { SuggestionCostsDefs } from './suggestionCostsDef.js';
 
 /**
- * Use by dictionary authors to help improve the quality of suggestions
- * given from the dictionary.
+ * Provides extra information about the dictionary.
+ *
+ * It is used to improve suggestions and casing rules.
  *
  * Added with `v5.16.0`.
  */
 export interface DictionaryInformation {
     /**
      * The locale of the dictionary.
-     * Example: `nl,nl-be`
      *
-     * When cspell changes the case of a word to look it up in the dictionary, it uses the case rules of the first
-     * valid locale. For example, with `tr-TR`, a capital `I` becomes `ı`, not `i`.
+     * The locale should follow the IETF BCP 47 standard.
+     * If more than one locale is specified, the first valid locale will be used for casing rules.
+     *
+     * Avoid mixing different locales in the same dictionary.
+     *
+     * Example: `nl` or `nl-BE`
+     *
      */
     locale?: string;
 

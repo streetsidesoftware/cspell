@@ -11,15 +11,6 @@ export type FilterSuggestionsPredicate = (word: SuggestionResult) => boolean;
 
 export const defaultNumSuggestions = 10;
 
-function wordSearchFormsArray(
-    word: string,
-    isDictionaryCaseSensitive: boolean,
-    ignoreCase: boolean,
-    locale?: string,
-): string[] {
-    return [...wordSearchForms(word, isDictionaryCaseSensitive, ignoreCase, locale)];
-}
-
 /**
  * The forms of a word to look up in a dictionary.
  * @param word - the word as written.
@@ -37,31 +28,35 @@ export function wordSearchForms(
     word = word.normalize('NFC');
     const wordLc = word.toLowerCase();
     const wordLcLocale = locale ? word.toLocaleLowerCase(locale) : wordLc;
-    if (ignoreCase) {
-        addLowerCaseForms(forms, wordLcLocale, isDictionaryCaseSensitive);
+    if (isDictionaryCaseSensitive && ignoreCase) {
+        forms.add(wordLcLocale);
         // Dictionaries store their case-insensitive forms with the default rules, so try those too.
-        addLowerCaseForms(forms, wordLc, isDictionaryCaseSensitive);
-    } else {
-        if (isDictionaryCaseSensitive) {
-            forms.add(word);
-            forms.add(wordLcLocale);
-            // HOUSE -> House, house
-            if (isUpperCase(word)) {
-                forms.add(locale ? lcRest(word, locale) : ucFirst(wordLc));
-            }
-        } else {
-            addLowerCaseForms(forms, wordLcLocale, false);
-        }
+        forms.add(wordLc);
+        return forms;
     }
-    return forms;
-}
 
-function addLowerCaseForms(forms: Set<string>, wordLc: string, isDictionaryCaseSensitive: boolean): void {
-    forms.add(wordLc);
-    if (!isDictionaryCaseSensitive) {
-        // Legacy remove any unbound accents
-        forms.add(removeUnboundAccents(wordLc));
+    if (isDictionaryCaseSensitive) {
+        forms.add(word);
+        forms.add(wordLcLocale);
+        // HOUSE -> House, house
+        if (isUpperCase(word)) {
+            forms.add(locale ? lcRest(word, locale) : ucFirst(wordLc));
+        }
+        return forms;
     }
+
+    // Legacy remove any unbound accents
+    if (ignoreCase) {
+        forms.add(wordLcLocale);
+        forms.add(removeUnboundAccents(wordLcLocale));
+        forms.add(wordLc);
+        forms.add(removeUnboundAccents(wordLc));
+        return forms;
+    }
+
+    forms.add(wordLcLocale);
+    forms.add(removeUnboundAccents(wordLcLocale));
+    return forms;
 }
 
 export function wordSuggestFormsArray(word: string): string[] {
@@ -117,11 +112,3 @@ export function createWeightMapFromDictionaryInformation(di: DictionaryInformati
 export function createWeightMapFromDictionaryInformation(di: DictionaryInformation | undefined): WeightMap | undefined {
     return di ? mapDictionaryInformationToWeightMap(di) : undefined;
 }
-
-export const __testMethods__: {
-    wordSearchForms: typeof wordSearchForms;
-    wordSearchFormsArray: typeof wordSearchFormsArray;
-} = {
-    wordSearchForms,
-    wordSearchFormsArray,
-};

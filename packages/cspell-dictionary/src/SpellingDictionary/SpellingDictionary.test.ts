@@ -4,7 +4,7 @@ import { describe, expect, test } from 'vitest';
 import { createSpellingDictionary } from './createSpellingDictionary.js';
 import type { SpellingDictionaryOptions } from './SpellingDictionary.js';
 import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie.js';
-import { __testMethods__ } from './SpellingDictionaryMethods.js';
+import { wordSearchForms } from './SpellingDictionaryMethods.js';
 
 // cSpell:ignore aple
 
@@ -169,7 +169,7 @@ describe('Validate wordSearchForms', () => {
         ${'café'.normalize('NFKC')} | ${false}        | ${false}   | ${['café']}
         ${'café'.normalize('NFKD')} | ${false}        | ${false}   | ${['café']}
     `('$word $isCaseSensitive $ignoreCase $expected', ({ word, isCaseSensitive, ignoreCase, expected }) => {
-        const words = __testMethods__.wordSearchFormsArray(word, isCaseSensitive, ignoreCase);
+        const words = [...wordSearchForms(word, isCaseSensitive, ignoreCase)];
         expect(words.sort()).toEqual(expected.sort());
     });
 });
@@ -192,7 +192,7 @@ describe('Validate wordSearchForms with a locale', () => {
     `(
         '$word $isCaseSensitive $ignoreCase $locale $expected',
         ({ word, isCaseSensitive, ignoreCase, locale, expected }) => {
-            const words = __testMethods__.wordSearchFormsArray(word, isCaseSensitive, ignoreCase, locale);
+            const words = [...wordSearchForms(word, isCaseSensitive, ignoreCase, locale)];
             expect(words.sort()).toEqual(expected.sort());
         },
     );
