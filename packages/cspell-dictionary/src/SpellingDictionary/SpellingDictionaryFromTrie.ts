@@ -168,6 +168,10 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         }
         if (useCompounds) {
             const optsUseCompounds = { ...opts, useLegacyWordCompounds: useCompounds };
+            const findResult = this.trie.findWord(mWord.normalize('NFC'), optsUseCompounds);
+            if (findResult.found !== false) {
+                return findResult;
+            }
             for (const w of forms) {
                 const findResult = this.trie.findWord(w, optsUseCompounds);
                 if (findResult.found !== false) {

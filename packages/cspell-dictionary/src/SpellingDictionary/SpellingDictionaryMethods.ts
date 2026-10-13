@@ -23,39 +23,35 @@ export function wordSearchForms(
     isDictionaryCaseSensitive: boolean,
     ignoreCase: boolean,
     locale?: string,
-): Set<string> {
-    const forms = new Set<string>();
+): Set<string> | string[] {
+    if (!isDictionaryCaseSensitive) return wordSearchFormsLegacy(word);
+
     word = word.normalize('NFC');
     const wordLc = word.toLowerCase();
     const wordLcLocale = locale ? word.toLocaleLowerCase(locale) : wordLc;
-    if (isDictionaryCaseSensitive && ignoreCase) {
-        forms.add(wordLcLocale);
-        // Dictionaries store their case-insensitive forms with the default rules, so try those too.
-        forms.add(wordLc);
-        return forms;
-    }
-
-    if (isDictionaryCaseSensitive) {
-        forms.add(word);
-        forms.add(wordLcLocale);
-        // HOUSE -> House, house
-        if (isUpperCase(word)) {
-            forms.add(locale ? lcRest(word, locale) : ucFirst(wordLc));
-        }
-        return forms;
-    }
-
-    // Legacy remove any unbound accents
+    if (word === wordLcLocale) return [];
     if (ignoreCase) {
-        forms.add(wordLcLocale);
-        forms.add(removeUnboundAccents(wordLcLocale));
-        forms.add(wordLc);
-        forms.add(removeUnboundAccents(wordLc));
-        return forms;
+        // Dictionaries store their case-insensitive forms with the default rules, so try those too.
+        return wordLcLocale === wordLc ? [wordLcLocale] : [wordLcLocale, wordLc];
     }
-
+    const forms = new Set<string>();
+    forms.add(word);
     forms.add(wordLcLocale);
-    forms.add(removeUnboundAccents(wordLcLocale));
+    // HOUSE -> House, house
+    if (isUpperCase(word)) {
+        forms.add(locale ? lcRest(word, locale) : ucFirst(wordLc));
+    }
+    return forms;
+}
+
+function wordSearchFormsLegacy(word: string): Set<string> {
+    word = word.normalize('NFC');
+    const wordLc = word.toLowerCase();
+
+    const forms = new Set<string>();
+    // Legacy remove any unbound accents
+    forms.add(wordLc);
+    forms.add(removeUnboundAccents(wordLc));
     return forms;
 }
 

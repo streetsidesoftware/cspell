@@ -154,8 +154,8 @@ describe('Validate wordSearchForms', () => {
         ${'HOUSE'}                  | ${false}        | ${false}   | ${['house']}
         ${'HOUSE'}                  | ${true}         | ${false}   | ${['HOUSE', 'House', 'house']}
         ${'café'}                   | ${false}        | ${false}   | ${['café']}
-        ${'café'}                   | ${true}         | ${false}   | ${['café']}
-        ${'café'}                   | ${true}         | ${true}    | ${['café']}
+        ${'café'}                   | ${true}         | ${false}   | ${[]}
+        ${'café'}                   | ${true}         | ${true}    | ${[]}
         ${'Café'}                   | ${false}        | ${false}   | ${['café']}
         ${'Café'}                   | ${false}        | ${true}    | ${['café']}
         ${'Café'}                   | ${true}         | ${false}   | ${['Café', 'café']}
@@ -179,13 +179,13 @@ describe('Validate wordSearchForms', () => {
 describe('Validate wordSearchForms with a locale', () => {
     test.each`
         word          | isCaseSensitive | ignoreCase | locale       | expected
-        ${'Ispanak'}  | ${false}        | ${true}    | ${'tr-TR'}   | ${['ıspanak', 'ispanak']}
+        ${'Ispanak'}  | ${false}        | ${true}    | ${'tr-TR'}   | ${['ispanak']}
         ${'İnceleme'} | ${false}        | ${true}    | ${'tr-TR'}   | ${['inceleme', 'i̇nceleme']}
         ${'İnceleme'} | ${true}         | ${true}    | ${'tr-TR'}   | ${['inceleme', 'i̇nceleme']}
         ${'İnceleme'} | ${true}         | ${false}   | ${'tr-TR'}   | ${['İnceleme', 'inceleme']}
         ${'IRAK'}     | ${true}         | ${false}   | ${'tr-TR'}   | ${['IRAK', 'ırak', 'Irak']}
         ${'İSTANBUL'} | ${true}         | ${false}   | ${'tr-TR'}   | ${['İSTANBUL', 'istanbul', 'İstanbul']}
-        ${'ISIM'}     | ${false}        | ${false}   | ${'tr-TR'}   | ${['ısım']}
+        ${'ISIM'}     | ${false}        | ${false}   | ${'tr-TR'}   | ${['isim']}
         ${'ΆΝΘΡΩΠΟΣ'} | ${true}         | ${false}   | ${'el-GR'}   | ${['ΆΝΘΡΩΠΟΣ', 'άνθρωπος', 'Άνθρωπος']}
         ${'HOUSE'}    | ${true}         | ${false}   | ${'en-US'}   | ${['HOUSE', 'House', 'house']}
         ${'HOUSE'}    | ${true}         | ${false}   | ${undefined} | ${['HOUSE', 'House', 'house']}
