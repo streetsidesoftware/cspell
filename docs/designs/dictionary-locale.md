@@ -24,8 +24,9 @@ special case. The general approach needs deciding so the PR can be answered with
 
 - **People writing in a language whose case rules differ from the default** (Turkish, Azerbaijani, Lithuanian): words
   their dictionary contains are no longer reported. They don't need to change their config.
-- **Dictionary authors in cspell-dicts:** a dictionary may need to declare its locale. Today `tr-tr` doesn't, and
-  `az-az` does, in `dictionaryInformation.locale`. Dictionaries that declare one need a rebuild.
+- **Dictionary authors in cspell-dicts:** a language dictionary declares its locale in `dictionaryInformation.locale`.
+  The language dictionaries, `tr-tr` among them, already do
+  ([cspell-dicts#5893](https://github.com/streetsidesoftware/cspell-dicts/pull/5893)).
 - **Projects using `cspell-lib` or `cspell-dictionary`:** creating or looking up a dictionary may take a locale. Changes
   to the public API stay backward compatible.
 - **The VS Code extension, the ESLint plugin, and cspell-action:** they get the fix through `cspell-lib`, and give the
@@ -81,6 +82,8 @@ Turned down:
 
 ### Lookups try both rules
 
+Provisional: to revisit with whether the change may flag words that pass today.
+
 A dictionary with a locale is searched with the forms the locale's rules give, and with the forms cspell tries today.
 The two only differ for words where the locale's rules matter, such as Turkish words with `I` or `İ`, so other words
 cost nothing extra. Both case changes a lookup makes follow the locale: the lower-case form, and the capitalized form of
@@ -99,28 +102,43 @@ Turned down:
 - **The locale's forms only.** Stricter: `ISIM` would be reported. But every dictionary that declares a locale would
   need a rebuild with that locale, or words like `IRAK` would start being reported.
 
-### Where the locale is declared
+### Whose locale
+
+The dictionary's locale decides how case changes when looking up a word in it. Each dictionary's words are written in
+its own language, so its own rules apply, and dictionaries in different languages don't interfere: with
+`"language": "en,tr"`, `İnceleme` and `Inside` both pass, whatever the order of the list.
 
 A dictionary declares its locale in `dictionaryInformation.locale`, a field that already exists and is documented as the
-locale of the dictionary. Suggestions already use it to change case when weighing suggestions, so lookups and
-suggestions agree. The Azerbaijani dictionary already sets it. The Turkish dictionary needs to add it.
-
-This field used to only tune suggestions. Now it also changes what gets flagged, and its doc comment says so.
+locale of the dictionary. Suggestions already use it when weighing suggestions. The language dictionaries in
+cspell-dicts set it. This field used to only tune suggestions. Now it also changes what gets flagged, and its doc
+comment says so.
 
 The value is a comma-separated list, such as `tr,tr-TR`. cspell reads it the way it already reads the document's
 locale when matching the case of suggestions: `tr_TR` is read as `tr-TR`, and the first locale in the list that
-JavaScript supports is used. A value that isn't a valid locale, such as `*`, isn't meaningful here, but nothing rejects it when a config
-is loaded. cspell then uses the default rules, so a bad value can't crash cspell or flag more words than before.
+JavaScript supports is used. A value that isn't a valid locale, such as `*`, isn't meaningful here, but nothing rejects
+it when a config is loaded. cspell then uses the default rules, so a bad value can't crash cspell.
+
+A dictionary without a locale uses the default rules, as today. That covers dictionaries with no single language
+(names, companies, software terms), third-party dictionaries that don't set one, and the user's own word lists
+(`words`, `ignoreWords`, `flagWords`, and `cspell:` comments). Their results never depend on the document.
 
 Turned down:
 
+- **The document's locales (`language`).** No dictionary would need a locale, but every dictionary would use the same
+  rules. With Turkish rules, the English dictionary looks up `Inside` as `ınside` and reports it. Avoiding that means
+  picking one locale by the order of the list, or trying every locale's rules, which lets `İnside` pass in any
+  document that lists `tr`. The same applies as a fallback for dictionaries without a locale: a names dictionary would
+  let `İnside` pass whenever `tr` is listed.
+- **The locale of the `languageSettings` entry that enables the dictionary.** That locale is a filter that says when
+  settings apply, not what language a dictionary's words are in. It can be `*` or a list, and several entries can
+  enable the same dictionary.
 - **A new `locale` field on the dictionary definition.** Easier to find, but a new public name, and two locale fields
   could disagree.
-- **The locale of the `languageSettings` entry that enables the dictionary.** Dictionaries would need no change, but
-  that locale is a filter: it can be `*` or a list, and several entries can enable the same dictionary. A dictionary
-  would behave differently depending on which config enabled it.
+- **The text's locale,** such as a locale for one part of a file. cspell has no such thing today.
 
 ### Suggestions
+
+Provisional: to revisit with which concerns this feature covers.
 
 When a dictionary with a locale searches for suggestions, it also starts from the forms its locale's rules give, the
 same way a lookup does.
@@ -142,5 +160,5 @@ Turned down:
 - Should `dictionaryInformation.locale` reject values that aren't locales? Today the schema allows any string.
 
 <!---
-    cspell:ignore inceleme İnceleme İNCELEME ispanak ıspanak ispanakk ışık IŞIK irak ırak ijsland jsland İnside isim ISIM İSİM İstanbul İSTANBUL İncelemee
+    cspell:ignore inceleme İnceleme İNCELEME ispanak ıspanak ispanakk ışık IŞIK irak ırak ijsland jsland İnside isim ISIM İSİM İstanbul İSTANBUL İncelemee ınside
 -->
