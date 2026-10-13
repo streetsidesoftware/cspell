@@ -126,9 +126,13 @@ Turned down:
 
 ### Ignoring case and matching case
 
-A lookup changes case in two ways: it lower-cases the word, and it capitalizes an all-caps word (`İSTANBUL` to
-`İstanbul`, where the default rules leave a combining dot, U+0307, after the `i`). In a dictionary with a locale, both
-follow the locale.
+A lookup lower-cases the word with the dictionary's locale. When case matters, it also tries an all-caps word in its
+capitalized form, so `HOUSE` matches `House`. That form keeps the first letter as written and lower-cases the rest with
+the locale: `İSTANBUL` gives `İstanbul`, and `ΆΝΘΡΩΠΟΣ` gives `Άνθρωπος`.
+
+Turned down: capitalizing by upper-casing the first letter with the locale. Greek upper-casing removes accents, so
+`άνθρωπος` would give `Ανθρωπος` and miss `Άνθρωπος`, which is found today. The default rules, as today, leave a
+combining dot (U+0307) after the `i` in `İSTANBUL`.
 
 **When case is ignored** (the default), a lookup tries the locale's forms and today's forms. Until `cspell-tools`
 builds with the locale, every dictionary stores its case-insensitive forms the default way: `Irak` as `irak`, not
@@ -161,5 +165,5 @@ Turned down:
   keep passing in the mode meant to catch them.
 
 <!---
-    cspell:ignore inceleme İnceleme İNCELEME ispanak ıspanak ispanakk ışık IŞIK irak ırak ijsland jsland İnside isim ISIM İSİM İstanbul İSTANBUL İncelemee ınside
+    cspell:ignore inceleme İnceleme İNCELEME ispanak ıspanak ispanakk ışık IŞIK irak ırak ijsland jsland İnside isim ISIM İSİM İstanbul İSTANBUL İncelemee ınside άνθρωπος Άνθρωπος Ανθρωπος ΆΝΘΡΩΠΟΣ
 -->
