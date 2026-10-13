@@ -34,14 +34,9 @@ export function wordSearchAlternateForms(
         // Dictionaries store their case-insensitive forms with the default rules, so try those too.
         return wordLcLocale === wordLc ? [wordLcLocale] : [wordLcLocale, wordLc];
     }
-    const forms = new Set<string>();
-    forms.add(word);
-    forms.add(wordLcLocale);
+    if (!isUpperCase(word)) return [wordLcLocale];
     // HOUSE -> House, house
-    if (isUpperCase(word)) {
-        forms.add(locale ? lcRest(word, locale) : ucFirst(wordLc));
-    }
-    return forms;
+    return [wordLcLocale, locale ? lcRest(word, locale) : ucFirst(wordLc)];
 }
 
 function wordSearchFormsLegacy(word: string): Set<string> {

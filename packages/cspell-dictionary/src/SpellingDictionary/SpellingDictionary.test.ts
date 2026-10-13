@@ -150,19 +150,19 @@ describe('Validate wordSearchAlternateForms', () => {
         ${'house'}                  | ${false}        | ${false}   | ${['house']}
         ${'House'}                  | ${false}        | ${false}   | ${['house']}
         ${'House'}                  | ${false}        | ${false}   | ${['house']}
-        ${'House'}                  | ${true}         | ${false}   | ${['House', 'house']}
+        ${'House'}                  | ${true}         | ${false}   | ${['house']}
         ${'HOUSE'}                  | ${false}        | ${false}   | ${['house']}
-        ${'HOUSE'}                  | ${true}         | ${false}   | ${['HOUSE', 'House', 'house']}
+        ${'HOUSE'}                  | ${true}         | ${false}   | ${['House', 'house']}
         ${'café'}                   | ${false}        | ${false}   | ${['café']}
         ${'café'}                   | ${true}         | ${false}   | ${[]}
         ${'café'}                   | ${true}         | ${true}    | ${[]}
         ${'Café'}                   | ${false}        | ${false}   | ${['café']}
         ${'Café'}                   | ${false}        | ${true}    | ${['café']}
-        ${'Café'}                   | ${true}         | ${false}   | ${['Café', 'café']}
+        ${'Café'}                   | ${true}         | ${false}   | ${['café']}
         ${'Café'}                   | ${true}         | ${true}    | ${['café']}
         ${'CAFÉ'}                   | ${false}        | ${false}   | ${['café']}
         ${'CAFÉ'}                   | ${false}        | ${true}    | ${['café']}
-        ${'CAFÉ'}                   | ${true}         | ${false}   | ${['CAFÉ', 'Café', 'café']}
+        ${'CAFÉ'}                   | ${true}         | ${false}   | ${['Café', 'café']}
         ${'CAFÉ'}                   | ${true}         | ${true}    | ${['café']}
         ${'café'.normalize()}       | ${false}        | ${false}   | ${['café']}
         ${'café'.normalize('NFD')}  | ${false}        | ${false}   | ${['café']}
@@ -182,13 +182,13 @@ describe('Validate wordSearchAlternateForms with a locale', () => {
         ${'Ispanak'}  | ${false}        | ${true}    | ${'tr-TR'}   | ${['ispanak']}
         ${'İnceleme'} | ${false}        | ${true}    | ${'tr-TR'}   | ${['inceleme', 'i̇nceleme']}
         ${'İnceleme'} | ${true}         | ${true}    | ${'tr-TR'}   | ${['inceleme', 'i̇nceleme']}
-        ${'İnceleme'} | ${true}         | ${false}   | ${'tr-TR'}   | ${['İnceleme', 'inceleme']}
-        ${'IRAK'}     | ${true}         | ${false}   | ${'tr-TR'}   | ${['IRAK', 'ırak', 'Irak']}
-        ${'İSTANBUL'} | ${true}         | ${false}   | ${'tr-TR'}   | ${['İSTANBUL', 'istanbul', 'İstanbul']}
+        ${'İnceleme'} | ${true}         | ${false}   | ${'tr-TR'}   | ${['inceleme']}
+        ${'IRAK'}     | ${true}         | ${false}   | ${'tr-TR'}   | ${['ırak', 'Irak']}
+        ${'İSTANBUL'} | ${true}         | ${false}   | ${'tr-TR'}   | ${['istanbul', 'İstanbul']}
         ${'ISIM'}     | ${false}        | ${false}   | ${'tr-TR'}   | ${['isim']}
-        ${'ΆΝΘΡΩΠΟΣ'} | ${true}         | ${false}   | ${'el-GR'}   | ${['ΆΝΘΡΩΠΟΣ', 'άνθρωπος', 'Άνθρωπος']}
-        ${'HOUSE'}    | ${true}         | ${false}   | ${'en-US'}   | ${['HOUSE', 'House', 'house']}
-        ${'HOUSE'}    | ${true}         | ${false}   | ${undefined} | ${['HOUSE', 'House', 'house']}
+        ${'ΆΝΘΡΩΠΟΣ'} | ${true}         | ${false}   | ${'el-GR'}   | ${['άνθρωπος', 'Άνθρωπος']}
+        ${'HOUSE'}    | ${true}         | ${false}   | ${'en-US'}   | ${['House', 'house']}
+        ${'HOUSE'}    | ${true}         | ${false}   | ${undefined} | ${['House', 'house']}
     `(
         '$word $isCaseSensitive $ignoreCase $locale $expected',
         ({ word, isCaseSensitive, ignoreCase, locale, expected }) => {
