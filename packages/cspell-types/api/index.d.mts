@@ -554,6 +554,9 @@ interface DictionaryInformation {
   /**
    * The locale of the dictionary.
    * Example: `nl,nl-be`
+   *
+   * When cspell changes the case of a word to look it up in the dictionary, it uses the case rules of the first
+   * valid locale. For example, with `tr-TR`, a capital `I` becomes `ı`, not `i`.
    */
   locale?: string;
   /**

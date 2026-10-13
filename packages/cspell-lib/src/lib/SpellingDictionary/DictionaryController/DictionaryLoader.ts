@@ -1,7 +1,7 @@
 import { opConcatMap, opFilter, opMap, pipe } from '@cspell/cspell-pipe/sync';
 import type { DictionaryFileTypes } from '@cspell/cspell-types';
 import { StrongWeakMap } from '@cspell/strong-weak-map';
-import type { SpellingDictionary } from 'cspell-dictionary';
+import type { SpellingDictionary, SpellingDictionaryOptions } from 'cspell-dictionary';
 import {
     createFailedToLoadDictionary,
     createFlagWordsDictionary,
@@ -23,6 +23,7 @@ import type {
     DictionaryFileDefinitionInternal,
 } from '../../Settings/index.js';
 import { isDictionaryDefinitionInlineInternal, isDictionaryFileDefinitionInternal } from '../../Settings/index.js';
+import { normalizeLocaleForIntl } from '../../Settings/LanguageSettings.js';
 import { AutoResolveWeakCache, AutoResolveWeakWeakCache } from '../../util/AutoResolve.js';
 import { toError } from '../../util/errors.js';
 import { SimpleCache } from '../../util/simpleCache.js';
@@ -298,7 +299,13 @@ async function legacyWordList(reader: Reader, filename: URL, options: LoadOption
     if (options.kind === 'suggest-words') {
         return createSuggestDictionary([...words], options.name, filename.toString());
     }
-    return createSpellingDictionary(words, options.name, filename.toString(), applyKind(options), true);
+    return createSpellingDictionary(
+        words,
+        options.name,
+        filename.toString(),
+        toSpellingDictionaryOptions(options),
+        true,
+    );
 }
 
 async function wordsPerLineWordList(reader: Reader, filename: URL, options: LoadOptions) {
@@ -318,7 +325,7 @@ async function wordsPerLineWordList(reader: Reader, filename: URL, options: Load
     if (options.kind === 'suggest-words') {
         return createSuggestDictionary([...words], options.name, filename.href);
     }
-    return createSpellingDictionary(words, options.name, filename.href, applyKind(options), true);
+    return createSpellingDictionary(words, options.name, filename.href, toSpellingDictionaryOptions(options), true);
 }
 
 async function loadSimpleWordList(reader: Reader, filename: URL, options: LoadOptions) {
@@ -330,7 +337,7 @@ async function loadSimpleWordList(reader: Reader, filename: URL, options: LoadOp
     if (options.kind === 'suggest-words') {
         return createSuggestDictionary(lines, options.name, filename.href);
     }
-    return createSpellingDictionary(lines, options.name, filename.href, applyKind(options));
+    return createSpellingDictionary(lines, options.name, filename.href, toSpellingDictionaryOptions(options));
 }
 
 async function loadTrie(reader: Reader, filename: URL, options: LoadOptions) {
@@ -342,7 +349,26 @@ async function loadTrie(reader: Reader, filename: URL, options: LoadOptions) {
     if (options.kind === 'suggest-words') {
         return createSuggestDictionaryFromTrieFile(content, options.name, filename.href);
     }
-    return createSpellingDictionaryFromTrieFile(content, options.name, filename.href, applyKind(options));
+    return createSpellingDictionaryFromTrieFile(
+        content,
+        options.name,
+        filename.href,
+        toSpellingDictionaryOptions(options),
+    );
+}
+
+/**
+ * The options for a spelling dictionary: the effect of `kind`, and the dictionary's locale, normalized once here so
+ * lookups don't have to. A locale that isn't valid is dropped.
+ */
+function toSpellingDictionaryOptions(options: LoadOptions): SpellingDictionaryOptions {
+    const opts = applyKind(options);
+    if (!isDictionaryFileDefinitionInternal(opts)) return opts;
+    const locales = normalizeLocaleForIntl(opts.dictionaryInformation?.locale);
+    const locale = Array.isArray(locales) ? locales[0] : locales;
+    if (!locale) return opts;
+    // `weightMap` is a getter on some definitions, so copy it explicitly.
+    return { ...opts, weightMap: opts.weightMap, locale };
 }
 
 /**

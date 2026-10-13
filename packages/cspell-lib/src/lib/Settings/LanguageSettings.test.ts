@@ -153,6 +153,19 @@ describe('Validate LanguageSettings', () => {
         expect(LS.isValidLocaleIntlFormat(locales, strict)).toEqual(expected);
     });
 
+    test.each`
+        locale                  | expected
+        ${undefined}            | ${undefined}
+        ${''}                   | ${undefined}
+        ${'*'}                  | ${undefined}
+        ${'tr-TR'}              | ${'tr-TR'}
+        ${'tr_TR'}              | ${'tr-TR'}
+        ${'en, tr_TR'}          | ${['en', 'tr-TR']}
+        ${['en', '*', 'tr-tr']} | ${['en', 'tr-TR']}
+    `('normalizeLocaleForIntl $locale', ({ locale, expected }) => {
+        expect(LS.normalizeLocaleForIntl(locale)).toEqual(expected);
+    });
+
     test('normalizeLocale $locales', () => {
         const localeSet = LS.normalizeLocale('en, en-GB, fr-fr,nl_NL');
         expect(localeSet.has('en')).toBe(true);

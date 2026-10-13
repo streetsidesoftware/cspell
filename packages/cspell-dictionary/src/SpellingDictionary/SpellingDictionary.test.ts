@@ -174,6 +174,102 @@ describe('Validate wordSearchForms', () => {
     });
 });
 
+// cspell:ignore inceleme İnceleme İNCELEME ispanak ıspanak Ispanakk ışık IŞIK irak ırak isim ISIM İSİM ısım
+// cspell:ignore İnside ınside άνθρωπος Άνθρωπος ΆΝΘΡΩΠΟΣ İstanbul İSTANBUL
+describe('Validate wordSearchForms with a locale', () => {
+    test.each`
+        word          | isCaseSensitive | ignoreCase | locale       | expected
+        ${'Ispanak'}  | ${false}        | ${true}    | ${'tr-TR'}   | ${['ıspanak', 'ispanak']}
+        ${'İnceleme'} | ${false}        | ${true}    | ${'tr-TR'}   | ${['inceleme', 'i̇nceleme']}
+        ${'İnceleme'} | ${true}         | ${true}    | ${'tr-TR'}   | ${['inceleme', 'i̇nceleme']}
+        ${'İnceleme'} | ${true}         | ${false}   | ${'tr-TR'}   | ${['İnceleme', 'inceleme']}
+        ${'IRAK'}     | ${true}         | ${false}   | ${'tr-TR'}   | ${['IRAK', 'ırak', 'Irak']}
+        ${'İSTANBUL'} | ${true}         | ${false}   | ${'tr-TR'}   | ${['İSTANBUL', 'istanbul', 'İstanbul']}
+        ${'ISIM'}     | ${false}        | ${false}   | ${'tr-TR'}   | ${['ısım']}
+        ${'ΆΝΘΡΩΠΟΣ'} | ${true}         | ${false}   | ${'el-GR'}   | ${['ΆΝΘΡΩΠΟΣ', 'άνθρωπος', 'Άνθρωπος']}
+        ${'HOUSE'}    | ${true}         | ${false}   | ${'en-US'}   | ${['HOUSE', 'House', 'house']}
+        ${'HOUSE'}    | ${true}         | ${false}   | ${undefined} | ${['HOUSE', 'House', 'house']}
+    `(
+        '$word $isCaseSensitive $ignoreCase $locale $expected',
+        ({ word, isCaseSensitive, ignoreCase, locale, expected }) => {
+            const words = __testMethods__.wordSearchFormsArray(word, isCaseSensitive, ignoreCase, locale);
+            expect(words.sort()).toEqual(expected.sort());
+        },
+    );
+});
+
+describe('Verify dictionaries with a locale', () => {
+    // Built with the default case rules, like the dictionaries in cspell-dicts.
+    const trWords = ['inceleme', 'ıspanak', 'ışık', 'isim', 'İstanbul', 'Irak'];
+
+    test.each`
+        word          | ignoreCase | expected
+        ${'inceleme'} | ${true}    | ${true}
+        ${'İnceleme'} | ${true}    | ${true}
+        ${'İNCELEME'} | ${true}    | ${true}
+        ${'Ispanak'}  | ${true}    | ${true}
+        ${'IŞIK'}     | ${true}    | ${true}
+        ${'İSTANBUL'} | ${true}    | ${true}
+        ${'IRAK'}     | ${true}    | ${true}
+        ${'ISIM'}     | ${true}    | ${true}
+        ${'Ispanakk'} | ${true}    | ${false}
+        ${'İnceleme'} | ${false}   | ${true}
+        ${'İNCELEME'} | ${false}   | ${true}
+        ${'Ispanak'}  | ${false}   | ${true}
+        ${'IŞIK'}     | ${false}   | ${true}
+        ${'İSTANBUL'} | ${false}   | ${true}
+        ${'IRAK'}     | ${false}   | ${true}
+        ${'İSİM'}     | ${false}   | ${true}
+        ${'ISIM'}     | ${false}   | ${false}
+        ${'Inceleme'} | ${false}   | ${false}
+    `('tr-TR has $word ignoreCase: $ignoreCase', ({ word, ignoreCase, expected }) => {
+        const dict = createSpellingDictionary(trWords, 'tr-test', 'test', opts({ locale: 'tr-TR' }));
+        expect(dict.has(word, { ignoreCase })).toBe(expected);
+    });
+
+    test.each`
+        word          | ignoreCase | expected
+        ${'İnceleme'} | ${true}    | ${false}
+        ${'Ispanak'}  | ${true}    | ${false}
+        ${'İSTANBUL'} | ${false}   | ${false}
+    `('without a locale has $word ignoreCase: $ignoreCase', ({ word, ignoreCase, expected }) => {
+        const dict = createSpellingDictionary(trWords, 'tr-test-no-locale', 'test', opts());
+        expect(dict.has(word, { ignoreCase })).toBe(expected);
+    });
+
+    test.each`
+        word        | ignoreCase | expected
+        ${'Inside'} | ${true}    | ${true}
+        ${'INSIDE'} | ${false}   | ${true}
+        ${'İnside'} | ${true}    | ${false}
+    `('en-US has $word ignoreCase: $ignoreCase', ({ word, ignoreCase, expected }) => {
+        const dict = createSpellingDictionary(['inside'], 'en-test', 'test', opts({ locale: 'en-US' }));
+        expect(dict.has(word, { ignoreCase })).toBe(expected);
+    });
+
+    test('el-GR keeps the accent on a capitalized word', () => {
+        const dict = createSpellingDictionary(['Άνθρωπος'], 'el-test', 'test', opts({ locale: 'el-GR' }));
+        expect(dict.has('ΆΝΘΡΩΠΟΣ', { ignoreCase: false })).toBe(true);
+    });
+});
+
+describe('Validate JavaScript assumptions', () => {
+    test('toLowerCase ignores the Turkish rules for I and İ', () => {
+        expect('İ'.toLowerCase()).toBe('i̇');
+        expect('I'.toLowerCase()).toBe('i');
+    });
+
+    test('toLocaleLowerCase applies the Turkish rules for I and İ', () => {
+        expect('İ'.toLocaleLowerCase('tr-TR')).toBe('i');
+        expect('I'.toLocaleLowerCase('tr-TR')).toBe('ı');
+    });
+
+    test('toLocaleUpperCase for Greek removes accents', () => {
+        expect('ά'.toLocaleUpperCase('el-GR')).toBe('Α');
+        expect('ά'.toUpperCase()).toBe('Ά');
+    });
+});
+
 describe('Verify Case Sensitive Dictionaries', () => {
     test.each`
         word       | ignoreCase   | expected

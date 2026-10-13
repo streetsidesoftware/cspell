@@ -2,7 +2,7 @@ import type { DictionaryInformation } from '@cspell/cspell-types';
 import type { SuggestionResult, WeightMap } from 'cspell-trie-lib';
 import { mapDictionaryInformationToWeightMap } from 'cspell-trie-lib';
 
-import { isUpperCase, removeUnboundAccents, ucFirst } from '../util/text.js';
+import { isUpperCase, lcRest, removeUnboundAccents, ucFirst } from '../util/text.js';
 import type { HasOptions, SearchOptions } from './SpellingDictionary.js';
 
 export { impersonateCollector, suggestionCollector } from 'cspell-trie-lib';
@@ -11,37 +11,57 @@ export type FilterSuggestionsPredicate = (word: SuggestionResult) => boolean;
 
 export const defaultNumSuggestions = 10;
 
-function wordSearchFormsArray(word: string, isDictionaryCaseSensitive: boolean, ignoreCase: boolean): string[] {
-    return [...wordSearchForms(word, isDictionaryCaseSensitive, ignoreCase)];
+function wordSearchFormsArray(
+    word: string,
+    isDictionaryCaseSensitive: boolean,
+    ignoreCase: boolean,
+    locale?: string,
+): string[] {
+    return [...wordSearchForms(word, isDictionaryCaseSensitive, ignoreCase, locale)];
 }
 
-export function wordSearchForms(word: string, isDictionaryCaseSensitive: boolean, ignoreCase: boolean): Set<string> {
+/**
+ * The forms of a word to look up in a dictionary.
+ * @param word - the word as written.
+ * @param isDictionaryCaseSensitive - the dictionary contains words with capitals.
+ * @param ignoreCase - case doesn't matter for the check.
+ * @param locale - the dictionary's locale. Case changes follow its rules.
+ */
+export function wordSearchForms(
+    word: string,
+    isDictionaryCaseSensitive: boolean,
+    ignoreCase: boolean,
+    locale?: string,
+): Set<string> {
     const forms = new Set<string>();
     word = word.normalize('NFC');
     const wordLc = word.toLowerCase();
+    const wordLcLocale = locale ? word.toLocaleLowerCase(locale) : wordLc;
     if (ignoreCase) {
-        if (isDictionaryCaseSensitive) {
-            forms.add(wordLc);
-        } else {
-            forms.add(wordLc);
-            // Legacy remove any unbound accents
-            forms.add(removeUnboundAccents(wordLc));
-        }
+        addLowerCaseForms(forms, wordLcLocale, isDictionaryCaseSensitive);
+        // Dictionaries store their case-insensitive forms with the default rules, so try those too.
+        addLowerCaseForms(forms, wordLc, isDictionaryCaseSensitive);
     } else {
         if (isDictionaryCaseSensitive) {
             forms.add(word);
-            forms.add(wordLc);
+            forms.add(wordLcLocale);
             // HOUSE -> House, house
             if (isUpperCase(word)) {
-                forms.add(ucFirst(wordLc));
+                forms.add(locale ? lcRest(word, locale) : ucFirst(wordLc));
             }
         } else {
-            forms.add(wordLc);
-            // Legacy remove any unbound accents
-            forms.add(removeUnboundAccents(wordLc));
+            addLowerCaseForms(forms, wordLcLocale, false);
         }
     }
     return forms;
+}
+
+function addLowerCaseForms(forms: Set<string>, wordLc: string, isDictionaryCaseSensitive: boolean): void {
+    forms.add(wordLc);
+    if (!isDictionaryCaseSensitive) {
+        // Legacy remove any unbound accents
+        forms.add(removeUnboundAccents(wordLc));
+    }
 }
 
 export function wordSuggestFormsArray(word: string): string[] {

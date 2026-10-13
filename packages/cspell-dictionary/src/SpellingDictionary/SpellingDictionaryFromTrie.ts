@@ -43,6 +43,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
     readonly type = 'SpellingDictionaryFromTrie';
     readonly isDictionaryCaseSensitive: boolean;
     readonly containsNoSuggestWords: boolean;
+    readonly #locale: string | undefined;
     #ignoreForbiddenWords = false;
     #findWordOptionsCaseSensitive: FindWordOptions = { caseSensitive: true };
     #findWordOptionsNotCaseSensitive: FindWordOptions = { caseSensitive: false };
@@ -64,6 +65,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
 
         this.isDictionaryCaseSensitive = options.caseSensitive ?? true;
         this.containsNoSuggestWords = options.noSuggest || false;
+        this.#locale = options.locale;
         this._size = size || 0;
         this.weightMap = options.weightMap || createWeightMapFromDictionaryInformation(options.dictionaryInformation);
         this.#ignoreForbiddenWords = !!options.ignoreForbiddenWords;
@@ -157,7 +159,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         if (findResult.found !== false) {
             return findResult;
         }
-        const forms = wordSearchForms(mWord, this.isDictionaryCaseSensitive, ignoreCase);
+        const forms = wordSearchForms(mWord, this.isDictionaryCaseSensitive, ignoreCase, this.#locale);
         for (const w of forms) {
             const findResult = this.trie.findWord(w, opts);
             if (findResult.found !== false) {

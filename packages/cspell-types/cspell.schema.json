@@ -987,8 +987,8 @@
           "markdownDescription": "An optional set of characters that can possibly be removed from a word before\nchecking it.\n\nThis is useful in languages like Arabic where Harakat accents are optional.\n\nNote: All matching characters are removed or none. Partial removal is not supported."
         },
         "locale": {
-          "description": "The locale of the dictionary. Example: `nl,nl-be`",
-          "markdownDescription": "The locale of the dictionary.\nExample: `nl,nl-be`",
+          "description": "The locale of the dictionary. Example: `nl,nl-be`\n\nWhen cspell changes the case of a word to look it up in the dictionary, it uses the case rules of the first valid locale. For example, with `tr-TR`, a capital `I` becomes `ı`, not `i`.",
+          "markdownDescription": "The locale of the dictionary.\nExample: `nl,nl-be`\n\nWhen cspell changes the case of a word to look it up in the dictionary, it uses the case rules of the first\nvalid locale. For example, with `tr-TR`, a capital `I` becomes `ı`, not `i`.",
           "type": "string"
         },
         "suggestionEditCosts": {
