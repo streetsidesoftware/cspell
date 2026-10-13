@@ -23,7 +23,7 @@ export function wordSearchAlternateForms(
     isDictionaryCaseSensitive: boolean,
     ignoreCase: boolean,
     locale?: string,
-): Set<string> | string[] {
+): string[] {
     if (!isDictionaryCaseSensitive) return wordSearchFormsLegacy(word);
 
     word = word.normalize('NFC');
@@ -39,7 +39,7 @@ export function wordSearchAlternateForms(
     return [wordLcLocale, lcRest(word, locale)];
 }
 
-function wordSearchFormsLegacy(word: string): Set<string> {
+function wordSearchFormsLegacy(word: string): string[] {
     word = word.normalize('NFC');
     const wordLc = word.toLowerCase();
 
@@ -47,7 +47,7 @@ function wordSearchFormsLegacy(word: string): Set<string> {
     // Legacy remove any unbound accents
     forms.add(wordLc);
     forms.add(removeUnboundAccents(wordLc));
-    return forms;
+    return [...forms];
 }
 
 export function wordSuggestFormsArray(word: string): string[] {
