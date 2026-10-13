@@ -103,7 +103,8 @@ locale of the dictionary. Suggestions already use it when weighing suggestions. 
 cspell-dicts set it. This field used to only tune suggestions. Now it also changes what gets flagged, and its doc
 comment says so.
 
-The value is a comma-separated list, such as `tr,tr-TR`, read the same way cspell reads locales elsewhere.
+The value is a comma-separated list, such as `tr,tr-TR`, read the same way cspell reads locales elsewhere. The locale is
+resolved once, when the dictionary is loaded. Lookups only use the result, so they do no extra work to read it.
 
 A dictionary without a locale uses the default rules, as today. That covers dictionaries with no single language
 (names, companies, software terms), third-party dictionaries that don't set one, and the user's own word lists
