@@ -936,6 +936,616 @@ Related: #8975, streetsidesoftware/vscode-spell-checker#3099, streetsidesoftware
 
 </details>
 
+## v10.4.0 (2026-10-14)
+
+### Features
+
+<details>
+<summary>feat: Add `--glob-symlinks` to follow symbolic links when matching globs (<a href="https://github.com/streetsidesoftware/cspell/pull/9342">#9342</a>)</summary>
+
+### feat: Add `--glob-symlinks` to follow symbolic links when matching globs ([#9342](https://github.com/streetsidesoftware/cspell/pull/9342))
+
+## Summary
+
+`cspell lint` can now follow symbolic links in glob searches, with `--glob-symlinks`. Glob searches skip linked files and linked directories by default, so a tree made of links, such as Bazel runfiles, found nothing to check.
+
+Closes #7700.
+
+## Feature
+
+```sh
+cspell lint --glob-symlinks "**"
+```
+
+- `--glob-symlinks` follows symbolic links, and searches linked directories, when matching globs. Links are followed wherever they point.
+- `CSPELL_GLOB_SYMLINKS=true` does the same for a whole job. `--no-glob-symlinks` overrides it.
+- API: `globSymlinks` in the `lint` options.
+- It can't be set in a configuration file.
+- Files are reported by the path through the link. A file reached by two paths is checked under both.
+- It applies only to glob searches. For `--file`, `--files`, and `--file-list` documents, use `--follow-symlinks`.
+
+<details>
+<summary>Technical Details</summary>
+
+- The design decisions are recorded in `docs/ADRs/glob-symlinks/`.
+- Link loops, such as a link to a parent directory, are stopped by the glob search after one level.
+
+</details>
+
+---
+
+</details>
+
+<details>
+<summary>feat: Respect `COLUMNS` for help and table width (<a href="https://github.com/streetsidesoftware/cspell/pull/9358">#9358</a>)</summary>
+
+### feat: Respect `COLUMNS` for help and table width ([#9358](https://github.com/streetsidesoftware/cspell/pull/9358))
+
+## Summary
+
+Help, and the tables from `cspell trace` and `cspell dictionaries`, now follow the `COLUMNS` environment variable. That lets you choose a narrower width, which helps with large fonts and screen magnifiers. The help in the `cspell` README now fits on npmjs.com without scrolling sideways.
+
+## Feature
+
+Set `COLUMNS` to pick the output width:
+
+```sh
+COLUMNS=60 cspell lint --help
+```
+
+Before, `cspell lint --help` at 80 columns:
+
+```text
+Usage: cspell lint [options] [globs...] [file://<path> ...] [stdin[://<path>]]
+...
+Options:
+  -c, --config <cspell.json>     Configuration file to use.  By default cspell
+                                 looks for cspell.json in the current directory.
+  --no-config-search             Disable automatic searching for additional
+                                 configuration files in parent directories. Only
+                                 the specified config file (if any) will be
+                                 used.
+```
+
+After, `COLUMNS=72 cspell lint --help`:
+
+```text
+Usage: cspell lint [options] [globs...] [file://<path> ...]
+                   [stdin[://<path>]]
+...
+Options:
+  -c, --config <cspell.json>     Configuration file to use.  By default
+                                 cspell looks for cspell.json in the
+                                 current directory.
+  --no-config-search             Disable automatic searching for
+                                 additional configuration files in
+                                 parent directories. Only the specified
+                                 config file (if any) will be used.
+```
+
+- `COLUMNS` takes priority over the terminal width when it is set to a positive number.
+- Without it, cspell uses the terminal width as before, or 80 when output isn't a terminal.
+- Option descriptions in help now wrap at narrower widths. Before, anything narrower than about 73 columns left them unwrapped.
+
+## Other changes
+
+- A few lines in `cspell lint --help` are shorter, so the help fits in 72 columns. The usage line now breaks before `[stdin[://<path>]]`.
+- The help in the `cspell` README is generated at 72 columns, which is what npmjs.com shows in a code block.
+
+---
+
+</details>
+
+<details>
+<summary>feat: Add `--follow-symlinks` and skip files referenced by symbolic links (<a href="https://github.com/streetsidesoftware/cspell/pull/9340">#9340</a>)</summary>
+
+### feat: Add `--follow-symlinks` and skip files referenced by symbolic links ([#9340](https://github.com/streetsidesoftware/cspell/pull/9340))
+
+## Summary
+
+`cspell lint` now skips files that are symbolic links, or are in a linked directory, and adds `--follow-symlinks` to check them.
+
+Glob searches already skipped linked files and linked directories. Files named explicitly were read through links. Now every way of naming files behaves the same:
+
+- A file that is a symbolic link, or is in a linked directory, is skipped. This applies to `--file`, `--files`, `--file-list` entries, the `files` option of `lint`, and file or glob arguments.
+- A glob that goes through a linked directory, such as `docs/*.md` when `docs` is a link, is not searched.
+- A `--file-list` file that is a symbolic link is an error, like a missing list.
+- A linked file named with `--file`, `--files`, or `--file-list` shows as `skipped` in the progress. File and glob arguments leave links out, as glob searches always have. Use `--verbose` to see why a file or glob was skipped.
+- With `--force-check`, a linked file is an error instead of being skipped.
+
+If you check linked files on purpose, for example Bazel runfiles, add `--follow-symlinks`.
+
+## Feature
+
+```sh
+cspell lint --follow-symlinks --file-list files.txt
+```
+
+- `--follow-symlinks` allows checking `--file` and `--file-list` documents referenced by symbolic links. Glob searches don't follow links unless `--glob-symlinks` is used ([#9342](https://github.com/streetsidesoftware/cspell/pull/9342)).
+- `CSPELL_FOLLOW_SYMLINKS=true` does the same for a whole job. `--no-follow-symlinks` overrides it.
+- API: `followSymlinks` in the `lint` options.
+
+<details>
+<summary>Technical Details</summary>
+
+- For a file under the root, each folder from the root down, and the file itself, is checked for a symbolic link. For a file outside the root, only the file itself is checked, so paths such as a worktree's commit message file still work.
+- Links above the root, such as `/tmp` on macOS, don't count.
+- A link is recognized without following it, so a link to a missing file is skipped the same way as any other link.
+
+</details>
+
+---
+
+</details>
+
+<details>
+<summary>feat: `--must-find-files` fails when every file was skipped (<a href="https://github.com/streetsidesoftware/cspell/pull/9327">#9327</a>)</summary>
+
+### feat: `--must-find-files` fails when every file was skipped ([#9327](https://github.com/streetsidesoftware/cspell/pull/9327))
+
+## Summary
+
+With `--must-find-files`, which is on by default, `cspell lint` now fails when every file it found was skipped, and says so. Since 10.2.0 the summary shows skipped files, but they still counted as found, so a run that checked nothing could pass.
+
+Fixes #9326.
+
+## Feature
+
+A file is skipped when it is excluded by `ignorePaths`, `.gitignore`, or the `files` setting, when it is binary, or when an override or language setting turns off checking for it. Skipped files are still listed in the summary, but they no longer count as found.
+
+```text
+$ cspell lint --file sub/doc.md
+CSpell: Files checked: 0, skipped: 1, Issues found: 0 in 0 files.
+No files found to check (1 skipped).
+$ echo $?
+1
+```
+
+- This applies to `--file`, `--file-list`, and globs alike.
+- A run that checks at least one file is not affected.
+- To let a run pass when every file is skipped, use `--no-must-find-files`.
+- `--silent` hides the new message.
+
+<details>
+<summary>Technical Details</summary>
+
+- The file count passed to custom reporters has included skipped files since 10.2.0. Its documentation now says so.
+
+</details>
+
+---
+
+</details>
+
+### Fixes
+
+<details>
+<summary>fix: Apply `.gitignore` and `ignorePaths` rules in order (<a href="https://github.com/streetsidesoftware/cspell/pull/9408">#9408</a>)</summary>
+
+### fix: Apply `.gitignore` and `ignorePaths` rules in order ([#9408](https://github.com/streetsidesoftware/cspell/pull/9408))
+
+## Summary
+
+Glob patterns in a list are now applied in the order they are written, and the last pattern that matches a file decides. Before, a pattern that starts with `!` always won, wherever it was in the list.
+
+For example, in a `.gitignore` file, a later `node_modules/` rule now ignores files beneath an earlier `!un-ignored/` rule.
+
+This applies to:
+
+- Rules in `.gitignore` files.
+- Patterns in `ignorePaths` that start with `!`, when files are checked through the `cspell-lib` API. The `cspell` command line still skips these patterns and shows a warning.
+- Patterns in `overrides[].filename`.
+- The globs that filter files passed with `--file` or `--file-list`.
+
+Part of #5104.
+
+---
+
+</details>
+
+<details>
+<summary>fix: cspell-tools: build case-insensitive forms with the dictionary's locale (<a href="https://github.com/streetsidesoftware/cspell/pull/9458">#9458</a>)</summary>
+
+### fix: cspell-tools: build case-insensitive forms with the dictionary's locale ([#9458](https://github.com/streetsidesoftware/cspell/pull/9458))
+
+## Summary
+
+`cspell-tools` can now build a dictionary with its language's case rules. Set `locale` in `cspell-tools.config.yaml`, and words are lower-cased with that locale's rules instead of the default ones. In a Turkish dictionary, `Irak` then gets the case-insensitive form `ırak`, not `irak`.
+
+## Feature
+
+Set `locale` at the top level, or per target:
+
+```yaml
+targets:
+  - name: turkish
+    format: trie3
+    sources:
+      - src/turkish.txt
+    generateNonStrict: true
+    locale: tr-TR
+```
+
+Set `dictionaryInformation.locale` in the dictionary definition to the same locale, so cspell searches the dictionary with the case rules it was built with. If the definition lists more than one locale, cspell uses the first valid one for case rules, so put this locale first.
+
+The locale applies everywhere `cspell-tools` lower-cases a word:
+
+- the case-insensitive forms made with `generateNonStrict`
+- words lower-cased before they're stored, for example with the `legacy` splitter
+- `removeDuplicates`
+- matching words against `allowedSplitWords`, `excludeWordsFrom`, and `excludeWordsNotFoundIn`
+
+An invalid locale stops the build with an error that names the target.
+
+Before, the case-insensitive form stored for `Irak` in a Turkish dictionary:
+
+```text
+~irak
+```
+
+After, with `locale: tr-TR`:
+
+```text
+~ırak
+```
+
+Without `locale`, dictionaries are built as before.
+
+This is the last part of the dictionary locale feature ([#6282](https://github.com/streetsidesoftware/cspell/issues/6282), [#9449](https://github.com/streetsidesoftware/cspell/pull/9449)). Once dictionaries are rebuilt with their locale, a lower-case word such as `ırak` is found in a Turkish dictionary that has `Irak`.
+
+<details>
+<summary>Technical Details</summary>
+
+- `cspell-trie-lib`: `normalizeWordForCaseInsensitive` takes an optional locale, and the dictionary line parser has a `locale` option.
+- `cspell-trie-lib`: `normalizeWordToLowercase` is renamed `normalizeWordToLowercaseAndRemoveAccents`. The old name still works, and is deprecated.
+
+</details>
+
+---
+
+</details>
+
+<details>
+<summary>fix: Search dictionaries using the dictionary's locale case rules, to support Turkish `İ` and `I` (<a href="https://github.com/streetsidesoftware/cspell/pull/9449">#9449</a>)</summary>
+
+### fix: Search dictionaries using the dictionary's locale case rules, to support Turkish `İ` and `I` ([#9449](https://github.com/streetsidesoftware/cspell/pull/9449))
+
+## Summary
+
+Words in a dictionary are no longer reported when finding them needs that language's case rules. With the Turkish dictionary, `İnceleme` and `Ispanak` now pass. Fixes #6282.
+
+- A dictionary uses the case rules of its own locale, set by `dictionaryInformation.locale`. The Turkish, Azerbaijani, and Lithuanian dictionaries are affected.
+- Rules from one language never apply to another language's dictionary: with `"language": "en,tr"`, a word typed with `İ`, such as `İnside`, is still reported.
+- With `caseSensitive: true`, a word with capitals that are wrong in the dictionary's language, such as `Inceleme` for `İnceleme`, is reported.
+
+With `"language": "en,tr"`, checking `İnceleme Ispanak Ispanakk İnside`:
+
+Before:
+
+```text
+sample.md:1:1 - Unknown word (İnceleme)
+sample.md:1:10 - Unknown word (Ispanak)
+sample.md:1:18 - Unknown word (Ispanakk)
+sample.md:1:27 - Unknown word (İnside)
+```
+
+After:
+
+```text
+sample.md:1:18 - Unknown word (Ispanakk)
+sample.md:1:27 - Unknown word (İnside)
+```
+
+<details>
+<summary>Technical Details</summary>
+
+- When a word isn't found as written, cspell looks up other forms of it, such as its lower-case form. These forms now follow the dictionary's locale. When case is ignored, the forms used before are also tried, so no word that passed before is reported.
+- An invalid `dictionaryInformation.locale` is ignored, as it is for suggestions.
+- The design is in `docs/designs/dictionary-locale.md`.
+
+</details>
+
+---
+
+</details>
+
+<details>
+<summary>fix: Recognize MATLAB files (<a href="https://github.com/streetsidesoftware/cspell/pull/9402">#9402</a>)</summary>
+
+### fix: Recognize MATLAB files ([#9402](https://github.com/streetsidesoftware/cspell/pull/9402))
+
+## Summary
+
+- Associates `.m` and `.matlab` with the `matlab` file type.
+- Marks MATLAB's binary formats as binary, so cspell doesn't treat them as text: `.mat`, `.fig`, `.mlx`, `.mlapp`,
+  `.mltbx`, `.mlappinstall`, and MEX files (`.mexa64`, `.mexmaca64`, `.mexmaci64`, `.mexw64`).
+
+Notes:
+
+- `.m` stays associated with `objective-c` too, since both languages use it.
+- `.p` (MATLAB P-code) isn't marked binary, because Pascal uses `.p` for source files.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Show hidden lint options and issue template help in `cspell --help` (<a href="https://github.com/streetsidesoftware/cspell/pull/9387">#9387</a>)</summary>
+
+### fix: Show hidden lint options and issue template help in `cspell --help` ([#9387](https://github.com/streetsidesoftware/cspell/pull/9387))
+
+## Summary
+
+Running `cspell --help --verbose` or `cspell --help --issue-template` now shows the same extra help as the `cspell lint --help` forms. Before, those flags were silently ignored, even though the help for `--issue-template` says "See --help --issue-template for details."
+
+- With `--verbose`, the hidden `lint` options are listed under `Hidden options for "lint":`.
+- With `--issue-template`, the help explains the issue template placeholders and styles.
+- The plain `cspell --help` now ends with the same "More Examples" as `cspell lint --help`.
+
+Before:
+
+```
+$ cspell --help --verbose
+...
+Options for "lint" (the default command):
+  ...
+  -h, --help                     display help for command
+```
+
+After:
+
+```
+$ cspell --help --verbose
+...
+Options for "lint" (the default command):
+  ...
+
+Hidden options for "lint":
+  --config-search                Allow searching for configuration files.
+  ...
+
+More Examples:
+  ...
+```
+
+---
+
+</details>
+
+<details>
+<summary>fix: Deprecate `cspell-lib/rpc`; import from `@cspell/rpc` (<a href="https://github.com/streetsidesoftware/cspell/pull/9376">#9376</a>)</summary>
+
+### fix: Deprecate `cspell-lib/rpc`; import from `@cspell/rpc` ([#9376](https://github.com/streetsidesoftware/cspell/pull/9376))
+
+## Summary
+
+`cspell-lib/rpc` is deprecated: import from `@cspell/rpc` instead. It still works, and editors now mark each of its exports as deprecated.
+
+- `cspell-lib/rpc` only passes `@cspell/rpc` through. Everything it exports (`RPCClient`, `RPCServer`, the RPC error classes, and their types) is available from `@cspell/rpc` directly.
+- Nothing else changes for users: every package exports the same names as before.
+
+<details>
+<summary>Technical Details</summary>
+
+- The published packages now list their exports by name instead of re-exporting whole modules, so the public API of each package is visible in its entry file, and anything added to an internal module only becomes public on purpose.
+- `cspell` and `cspell-lib` still re-export everything from `@cspell/cspell-types`, so everything their users need comes from one place.
+- The `@cspell/eslint-plugin` `recommended` config, from `@cspell/eslint-plugin/configs`, is now a plain config object with the same `plugins` and `rules`.
+- Unused files that only re-exported other modules were removed from `@cspell/cspell-types` and `cspell-grammar`.
+
+</details>
+
+---
+
+</details>
+
+<details>
+<summary>fix: `@cspell/strong-weak-map` types compile with the `esnext` lib (<a href="https://github.com/streetsidesoftware/cspell/pull/9371">#9371</a>)</summary>
+
+### fix: `@cspell/strong-weak-map` types compile with the `esnext` lib ([#9371](https://github.com/streetsidesoftware/cspell/pull/9371))
+
+## Summary
+
+`@cspell/strong-weak-map`'s types now compile in projects that use TypeScript's `esnext` lib with `skipLibCheck: false`.
+
+- `keys()`, `values()`, `entries()`, and iterating a `StrongWeakMap` are now typed as returning a `MapIterator`, like a `Map`, so the iterator helpers (`map`, `filter`, `take`, …) are typed too. Before, they returned `IterableIterator`, which `esnext` rejects.
+- `StrongWeakMap` no longer declares that it implements `Map`. With `esnext`, `Map` has `getOrInsert` and `getOrInsertComputed`, which `StrongWeakMap` doesn't have, so the declaration was already an error there. It keeps all of its methods and works the same. Code that passes a `StrongWeakMap` where a `Map` is expected only compiles where the two still match.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Published types no longer need `@types/node` (<a href="https://github.com/streetsidesoftware/cspell/pull/9359">#9359</a>)</summary>
+
+### fix: Published types no longer need `@types/node` ([#9359](https://github.com/streetsidesoftware/cspell/pull/9359))
+
+## Summary
+
+The TypeScript types published with `cspell`, `cspell-lib`, and `cspell-io` no longer need `@types/node`. Projects that use these packages' types, but don't install Node.js types, now type-check cleanly.
+
+- `cspell-io`: the types no longer import from `node:buffer`.
+- `cspell-lib`: the `encoding` option of `spellCheckFile`, and `resolveDocument`, accept the same encodings as before, without Node's global `BufferEncoding`.
+- `cspell`: `AppError` keeps the same shape. A reporter's `console.stdoutChannel.stream` and `console.stderrChannel.stream` are now typed as the parts of the stream cspell uses: `write`, `isTTY`, `rows`, `columns`, and optional `hasColors`, `clearLine`, and `getColorDepth`. A reporter written in TypeScript that calls other stream methods, such as `on` or `end`, needs to cast.
+- The types still use the standard web globals, such as `URL` and `AbortSignal`, so the `dom` lib (or `@types/node`) is still needed for those.
+
+<details>
+<summary>Technical Details</summary>
+
+- The `cspell` types no longer pull in `chalk`'s types, which themselves need Node.js types.
+
+</details>
+
+---
+
+</details>
+
+<details>
+<summary>fix: Show the lint options in cspell --help (<a href="https://github.com/streetsidesoftware/cspell/pull/9362">#9362</a>)</summary>
+
+### fix: Show the lint options in cspell --help ([#9362](https://github.com/streetsidesoftware/cspell/pull/9362))
+
+## Summary
+
+`cspell --help` now lists the options for `cspell lint`, the command that runs when no command is given. Before, it only listed the commands, so you had to know to run `cspell lint --help` to see options such as `--no-progress` or `--cache`.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Honor `--language-id` and `--locale` when deciding whether to check a file (<a href="https://github.com/streetsidesoftware/cspell/pull/9316">#9316</a>)</summary>
+
+### fix: Honor `--language-id` and `--locale` when deciding whether to check a file ([#9316](https://github.com/streetsidesoftware/cspell/pull/9316))
+
+## Summary
+
+`cspell lint` now uses `--language-id` and `--locale` when it decides whether to check a file. Before, a file could be skipped because of a `languageSettings` entry that didn't match the language or locale given on the command line.
+
+For example, with this config, `cspell lint --language-id markdown notes.txt` skipped `notes.txt`. It's now checked as Markdown. `--locale fr` works the same way.
+
+```yaml
+languageSettings:
+  - languageId: plaintext
+    locale: en
+    enabled: false
+```
+
+<details>
+<summary>Technical Details</summary>
+
+- cspell decides which files to check before reading them, and then checks only those.
+- That first decision worked out the language from the file name, and ignored `--locale`. The check itself used both flags.
+- Now both steps use the same language and locale, so they agree.
+
+</details>
+
+---
+
+</details>
+
+<details>
+<summary>fix(cspell-lib): Check remote documents by URI without passing their text (<a href="https://github.com/streetsidesoftware/cspell/pull/9343">#9343</a>)</summary>
+
+### fix(cspell-lib): Check remote documents by URI without passing their text ([#9343](https://github.com/streetsidesoftware/cspell/pull/9343))
+
+## Summary
+
+`spellCheckDocument` and `spellCheckFile` in `cspell-lib` can now read a document from any URL the file system supports, such as `https:`, `data:`, or a virtual file system like the one the VS Code extension uses for remote repositories. Before, a document passed without its text had to be a `file:` URL, or the check failed with "Unsupported schema".
+
+- A remote document gets the same issues as the same file checked locally.
+- `stdin:` documents still need their text.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Don't apply a repository's .gitignore to worktrees and submodules inside it (<a href="https://github.com/streetsidesoftware/cspell/pull/9341">#9341</a>)</summary>
+
+### fix: Don't apply a repository's .gitignore to worktrees and submodules inside it ([#9341](https://github.com/streetsidesoftware/cspell/pull/9341))
+
+## Summary
+
+With `useGitignore`, cspell now stops looking for `.gitignore` files at the root of the file's git repository, as git does. A repository's `.gitignore` no longer applies to a worktree or submodule inside it.
+
+## Why
+
+- cspell kept reading `.gitignore` files above the repository. A worktree kept in an ignored folder of its clone, such as `.worktrees/` or `.claude/worktrees/`, had all of its files skipped. The result was `Files checked: 0`, locally only.
+- Files in a submodule were skipped when the outer repository's `.gitignore` matched them, even though git does not ignore them.
+- Setting `gitignoreRoot` to a folder above a worktree or submodule had the same effect.
+
+Linting from inside a worktree already worked with the `cspell` command-line tool, because it starts at the current repository. Other paths, including the `cspell-gitignore` package's API with no roots, did not. The VS Code extension uses that API.
+
+Files that are not in a git repository are unchanged: `.gitignore` files are read up to the `gitignoreRoot`, or to the top of the file system.
+
+Related: #8975, streetsidesoftware/vscode-spell-checker#3099, streetsidesoftware/vscode-spell-checker#2366
+
+<details>
+<summary>Technical Details</summary>
+
+- While walking up from a file, a folder with a `.git` folder or a `.git` file marks the root of a repository, and the search stops there. A clone has a `.git` folder, and a worktree or submodule has a `.git` file.
+- `gitignoreRoot` can still stop the search earlier, but it no longer extends it past a repository root.
+- This applies to remote files in the VS Code extension too, when that file system can see the `.git`.
+- The `cspell-gitignore` tests go back to using the default search, and new tests cover a worktree and a submodule inside a clone, and a repository on a remote file system.
+
+</details>
+
+---
+
+</details>
+
+### Dictionary Updates
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/9446">#9446</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#9446](https://github.com/streetsidesoftware/cspell/pull/9446))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ packages/cspell-bundled-dicts/package.json | 10 +++----
+ pnpm-lock.yaml                             | 46 +++++++++++++++++++++---------
+ 2 files changed, 38 insertions(+), 18 deletions(-)
+```
+
+---
+
+</details>
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/9405">#9405</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#9405](https://github.com/streetsidesoftware/cspell/pull/9405))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../snapshots/AdaDoom3/AdaDoom3/report.yaml        |  120 +-
+ .../MartinThoma/LaTeX-examples/report.yaml         |   30 +-
+ .../MicrosoftDocs/PowerShell-Docs/report.yaml      |   32 +-
+ .../snapshots/RustPython/RustPython/report.yaml    |  120 +-
+ .../snapshots/TheAlgorithms/Python/report.yaml     |   14 +-
+ .../snapshots/alexiosc/megistos/report.yaml        |  148 +-
+ .../aspnetboilerplate/report.yaml                  |   18 +-
+ .../snapshots/caddyserver/caddy/report.yaml        |   20 +-
+ .../snapshots/caddyserver/caddy/snapshot.txt       |   20 +-
+ .../snapshots/dart-lang/sdk/report.yaml            |   82 +-
+ .../snapshots/django/django/report.yaml            |  376 +-
+ .../snapshots/eslint/eslint/report.yaml            |    2 +-
+ .../snapshots/flutter/samples/report.yaml          |   34 +-
+ .../snapshots/gitbucket/gitbucket/report.yaml      |    8 +-
+ .../googleapis/google-cloud-cpp/report.yaml        |   45 +-
+ .../googleapis/google-cloud-cpp/snapshot.txt       |    3 +-
+ .../snapshots/graphql/graphql-spec/report.yaml     |  102 +-
+ .../iluwatar/java-design-patterns/report.yaml      |   12 +-
+ .../snapshots/ktaranov/sqlserver-kit/report.yaml   | 2952 +++---
+ .../snapshots/ktaranov/sqlserver-kit/snapshot.txt  |    3 +-
+ .../microsoft/TypeScript-Website/report.yaml       |    4 +-
+ .../snapshots/neovim/nvim-lspconfig/report.yaml    |   43 +-
+ .../snapshots/neovim/nvim-lspconfig/snapshot.txt   |    3 +-
+ .../snapshots/pagekit/pagekit/report.yaml          |   18 +-
+ .../snapshots/php/php-src/report.yaml              | 9373 ++++++++++----------
+ .../snapshots/php/php-src/snapshot.txt             |    3 +-
+ .../snapshots/shoelace-style/shoelace/report.yaml  |    2 +-
+ .../snapshots/sveltejs/svelte/report.yaml          | 2526 +++---
+ .../snapshots/vitest-dev/vitest/report.yaml        |    6 +-
+ .../snapshots/vitest-dev/vitest/snapshot.txt       |    3 +-
+ .../snapshots/wireapp/wire-webapp/report.yaml      |   60 +-
+ packages/cspell-bundled-dicts/package.json         |   14 +-
+ packages/cspell/src/__snapshots__/app.test.ts.snap |    2 +-
+ pnpm-lock.yaml                                     |   63 +-
+ 34 files changed, 8124 insertions(+), 8137 deletions(-)
+```
+
+---
+
+</details>
+
 ## v10.3.6 (2026-09-29)
 
 ### Fixes
