@@ -5992,7 +5992,13 @@ Note: All matching characters are removed or none. Partial removal is not suppor
 <dd>
 
 The locale of the dictionary.
-Example: `nl,nl-be`
+
+The locale should follow the IETF BCP 47 standard.
+If more than one locale is specified, the first valid locale will be used for casing rules.
+
+Avoid mixing different locales in the same dictionary.
+
+Example: `nl` or `nl-BE`
 
 </dd>
 
