@@ -28,6 +28,11 @@ export interface SourceReaderOptions {
     storeSplitWordsAsCompounds: boolean | undefined;
 
     minCompoundLength?: number | undefined;
+
+    /**
+     * The locale used to lower-case words.
+     */
+    locale?: string | undefined;
 }
 
 export type AnnotatedWord = string;
@@ -68,7 +73,14 @@ function splitLines(lines: Iterable<string>, options: SourceReaderOptions): Iter
 }
 
 async function textFileReader(reader: Reader, options: SourceReaderOptions): Promise<SourceReader> {
-    const { legacy, splitWords: split, allowedSplitWords, storeSplitWordsAsCompounds, minCompoundLength } = options;
+    const {
+        legacy,
+        splitWords: split,
+        allowedSplitWords,
+        storeSplitWordsAsCompounds,
+        minCompoundLength,
+        locale,
+    } = options;
     const parseOptions = {
         legacy,
         split,
@@ -77,6 +89,7 @@ async function textFileReader(reader: Reader, options: SourceReaderOptions): Pro
         allowedSplitWords,
         storeSplitWordsAsCompounds,
         minCompoundLength,
+        locale,
     } as const satisfies RequireFields<ParseFileOptions>;
     const words = [...parseFileLines(reader.lines, parseOptions)];
 

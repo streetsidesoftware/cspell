@@ -13,6 +13,7 @@ export function legacyLineToWords(
     line: string,
     keepCase: boolean,
     allowedSplitWords: AllowedSplitWordsCollection,
+    locale?: string | undefined,
 ): Iterable<string> {
     // Remove punctuation and non-letters.
     const filteredLine = line.replaceAll(regNonWord, '|');
@@ -23,7 +24,7 @@ export function legacyLineToWords(
     const words = pipe(
         wordGroups,
         opConcatMap((a) => a.split(regExpSpaceOrDash)),
-        opConcatMap((a) => splitCamelCaseIfAllowed(a, allowedSplitWords, keepCase, '', _minCompoundLength)),
+        opConcatMap((a) => splitCamelCaseIfAllowed(a, allowedSplitWords, keepCase, '', _minCompoundLength, locale)),
         opMap((a) => a.trim()),
         opFilter((a) => !!a),
         opFilter((s) => !regExpRepeatChars.test(s)),
@@ -36,8 +37,9 @@ export function* legacyLinesToWords(
     lines: Iterable<string>,
     keepCase: boolean,
     allowedSplitWords: AllowedSplitWordsCollection,
+    locale?: string | undefined,
 ): Iterable<string> {
     for (const line of lines) {
-        yield* legacyLineToWords(line, keepCase, allowedSplitWords);
+        yield* legacyLineToWords(line, keepCase, allowedSplitWords, locale);
     }
 }

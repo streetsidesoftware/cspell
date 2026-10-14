@@ -233,6 +233,15 @@ describe('', () => {
         const result = [...removeDuplicates(words)];
         expect(result).toEqual(expected);
     });
+
+    test.each`
+        words                    | locale       | expected
+        ${['Irak', '\u0131rak']} | ${undefined} | ${['Irak', '\u0131rak']}
+        ${['Irak', '\u0131rak']} | ${'tr-TR'}   | ${['\u0131rak']}
+    `('removeDuplicates $words with locale $locale', ({ words, locale, expected }) => {
+        const result = [...removeDuplicates(words, locale)];
+        expect(result).toEqual(expected);
+    });
 });
 
 async function compileTrie(words: Iterable<string>, destFilename: string, options: CompileTrieOptions): Promise<void> {
@@ -312,3 +321,5 @@ city
 london
 paris
 `;
+
+// cspell:ignore irak stanbul

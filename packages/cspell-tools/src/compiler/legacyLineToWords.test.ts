@@ -37,6 +37,14 @@ describe('Validate legacyLineToWords', () => {
     });
 
     test.each`
+        line                    | locale       | expectedResult
+        ${'IRAK \u0130STANBUL'} | ${undefined} | ${['irak', 'i\u0307stanbul']}
+        ${'IRAK \u0130STANBUL'} | ${'tr-TR'}   | ${['\u0131rak', 'istanbul']}
+    `('legacy lower-cases $line with locale $locale', ({ line, locale, expectedResult }) => {
+        expect([...legacyLineToWords(line, false, allowed, locale)]).toEqual(expectedResult);
+    });
+
+    test.each`
         line                                  | expectedResult
         ${'hello'}                            | ${['hello']}
         ${'AppendIterator::getArrayIterator'} | ${['AppendIterator', 'getArrayIterator']}
@@ -57,3 +65,5 @@ function distinct(): (word: string) => boolean {
     const known = new Set<string>();
     return (a) => (known.has(a) ? false : (known.add(a), true));
 }
+
+// cspell:ignore irak stanbul

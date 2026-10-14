@@ -13,6 +13,7 @@ import type { AllowedSplitWordsCollection } from './WordsCollection.ts';
 export function normalizeTargetWords(options: CompileOptions): Operator<string> {
     const lineParser = createDictionaryLineParser({
         stripCaseAndAccents: options.generateNonStrict,
+        locale: options.locale,
         stripCaseAndAccentsOnForbidden: true,
         keepOptionalCompoundCharacter: true,
     });
@@ -97,6 +98,12 @@ export interface ParseFileOptions {
      * @default 4
      */
     minCompoundLength: number | undefined;
+
+    /**
+     * The locale used to lower-case words.
+     * @default undefined
+     */
+    locale?: string | undefined;
 }
 
 type ParseFileOptionsRequired = Required<ParseFileOptions>;
@@ -112,6 +119,7 @@ const _defaultOptions = {
     allowedSplitWords: { has: () => true, size: 0 },
     storeSplitWordsAsCompounds: defaultCompileSourceOptions.storeSplitWordsAsCompounds,
     minCompoundLength: defaultCompileSourceOptions.minCompoundLength,
+    locale: undefined,
 } as const satisfies ParseFileOptionsRequired;
 
 export const defaultParseDictionaryOptions: ParseFileOptionsRequired = Object.freeze(_defaultOptions);
@@ -133,6 +141,7 @@ export function createParseFileLineMapper(options?: Partial<ParseFileOptions>): 
         allowedSplitWords = _defaultOptions.allowedSplitWords,
         storeSplitWordsAsCompounds,
         minCompoundLength = _defaultOptions.minCompoundLength,
+        locale,
     } = _options;
 
     let { legacy = _defaultOptions.legacy } = _options;
@@ -221,13 +230,13 @@ export function createParseFileLineMapper(options?: Partial<ParseFileOptions>): 
     }
 
     function splitWordIntoWords(word: string): string[] {
-        return splitCamelCaseIfAllowed(word, allowedSplitWords, keepCase, compoundFix, minCompoundLength);
+        return splitCamelCaseIfAllowed(word, allowedSplitWords, keepCase, compoundFix, minCompoundLength, locale);
     }
 
     function* splitWords(lines: Iterable<string>): Iterable<string> {
         for (const line of lines) {
             if (legacy) {
-                yield* legacyLineToWords(line, keepCase, allowedSplitWords);
+                yield* legacyLineToWords(line, keepCase, allowedSplitWords, locale);
                 continue;
             }
             if (split) {

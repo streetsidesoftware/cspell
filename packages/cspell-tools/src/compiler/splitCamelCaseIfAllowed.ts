@@ -1,4 +1,4 @@
-import { isSingleLetter, splitCamelCaseWord } from './text.ts';
+import { isSingleLetter, lowerCase, splitCamelCaseWord } from './text.ts';
 import type { AllowedSplitWordsCollection } from './WordsCollection.ts';
 
 export const regExpSpaceOrDash: RegExp = /[- ]+/g;
@@ -10,19 +10,20 @@ export function splitCamelCaseIfAllowed(
     keepCase: boolean,
     compoundPrefix: string,
     minCompoundLength: number,
+    locale?: string | undefined,
 ): string[] {
     const split = [...splitCamelCase(word)];
-    if (split.length === 1) return adjustCases(split, allowedWords, keepCase);
+    if (split.length === 1) return adjustCases(split, allowedWords, keepCase, locale);
     const missing = split.some((w) => isUnknown(w, allowedWords));
     if (missing) return [word];
     const wordIndexes = calcWordIndex(word, split);
-    const adjusted = adjustCases(split, allowedWords, keepCase);
+    const adjusted = adjustCases(split, allowedWords, keepCase, locale);
     return !compoundPrefix
         ? adjusted
         : adjusted.map((w, i) => {
               const { px, sx } = wordIndexes[i];
               const canCompound = w.length >= minCompoundLength;
-              const lc = w.toLowerCase();
+              const lc = lowerCase(w, locale);
               const p = canCompound && isSingleLetter(px) ? compoundPrefix : '';
               const s = canCompound && isSingleLetter(sx) ? compoundPrefix : '';
               if (lc.length < 4 || allowedWords.has(w, true)) return p + w + s;
@@ -30,16 +31,26 @@ export function splitCamelCaseIfAllowed(
           });
 }
 
-function adjustCases(words: string[], allowedWords: AllowedSplitWordsCollection, keepCase: boolean): string[] {
-    return words.map((w) => adjustCase(w, allowedWords, keepCase));
+function adjustCases(
+    words: string[],
+    allowedWords: AllowedSplitWordsCollection,
+    keepCase: boolean,
+    locale: string | undefined,
+): string[] {
+    return words.map((w) => adjustCase(w, allowedWords, keepCase, locale));
 }
 
-function adjustCase(word: string, allowedWords: AllowedSplitWordsCollection, keepCase: boolean): string {
-    const lc = word.toLowerCase();
+function adjustCase(
+    word: string,
+    allowedWords: AllowedSplitWordsCollection,
+    keepCase: boolean,
+    locale: string | undefined,
+): string {
+    const lc = lowerCase(word, locale);
     if (!allowedWords.has(lc, true)) return word;
     if (lc === word) return word;
     if (word.slice(1).toLowerCase() === word.slice(1)) return lc;
-    if (!keepCase && word.toUpperCase() === word) return word.toLowerCase();
+    if (!keepCase && word.toUpperCase() === word) return lc;
     return word;
 }
 

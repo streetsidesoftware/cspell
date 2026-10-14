@@ -74,6 +74,16 @@ describe('Validate SimpleDictionaryParser', () => {
     });
 
     test.each`
+        locale       | expected
+        ${undefined} | ${['Irak', '~irak', '\u0130stanbul', '~i\u0307stanbul', '~istanbul', 'I\u015F\u0131k', '~i\u015F\u0131k', '~is\u0131k']}
+        ${'tr-TR'}   | ${['Irak', '~\u0131rak', '\u0130stanbul', '~istanbul', 'I\u015F\u0131k', '~\u0131\u015F\u0131k', '~\u0131s\u0131k']}
+    `('case insensitive forms with locale $locale', ({ locale, expected }) => {
+        const words = ['Irak', '\u0130stanbul', 'I\u015F\u0131k'];
+        const result = [...parseDictionaryLines(words, { locale })];
+        expect(result).toEqual(expected);
+    });
+
+    test.each`
         content      | options                                    | expected
         ${'*hello*'} | ${{}}                                      | ${['hello', 'hello+', '+hello', '+hello+']}
         ${'*hello*'} | ${{ keepOptionalCompoundCharacter: true }} | ${['*hello*']}
@@ -355,3 +365,5 @@ function pdOp(...opts: Partial<ParseDictionaryOptions>[]): Partial<ParseDictiona
     }
     return opt;
 }
+
+// cspell:ignore irak stanbul

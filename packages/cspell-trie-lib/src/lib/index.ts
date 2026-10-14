@@ -51,7 +51,12 @@ export { FLAG_WORD } from './TrieNode/TrieNode.ts';
 export { isDefined } from './utils/isDefined.ts';
 export { mergeDefaults } from './utils/mergeDefaults.ts';
 export { mergeOptionalWithDefaults } from './utils/mergeOptionalWithDefaults.ts';
-export { normalizeWord, normalizeWordForCaseInsensitive, normalizeWordToLowercase } from './utils/normalizeWord.ts';
+export {
+    normalizeWord,
+    normalizeWordForCaseInsensitive,
+    normalizeWordToLowercase,
+    normalizeWordToLowercaseAndRemoveAccents,
+} from './utils/normalizeWord.ts';
 export { expandCharacterSet } from './utils/text.ts';
 export type { HintedWalkerIterator, Hinting, WalkerIterator, YieldResult } from './walker/index.ts';
 export { CompoundWordsMethod, hintedWalker, JOIN_SEPARATOR, walker, WORD_SEPARATOR } from './walker/index.ts';
