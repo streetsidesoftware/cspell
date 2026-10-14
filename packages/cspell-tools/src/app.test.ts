@@ -185,6 +185,22 @@ describe('Validate the application', () => {
         expect(words).toMatchSnapshot();
     });
 
+    test('app compile merge with defaults --keep-raw-case', async () => {
+        const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+        const commander = getCommander();
+        const targetDir = relPathTemp();
+        const name = 'merge';
+        const target = name + '.txt';
+        const cities = path.join(pathSampleDicts, 'cities.txt');
+        const exampleHunspell = path.join(pathSampleDicts, 'hunspell', 'example.dic');
+        const args = argv('compile', '--keep-raw-case', '-n', '-M', name, cities, exampleHunspell, '-o', targetDir);
+        await expect(app.run(commander, args)).resolves.toBeUndefined();
+        const words = await fs.readFile(path.join(targetDir, target), 'utf8');
+        expect(words).toMatchSnapshot();
+        expect(warn).toHaveBeenCalledWith('--keep-raw-case has no effect and will be removed in future versions.');
+        warn.mockRestore();
+    });
+
     test('app compile --max_depth', async () => {
         const exampleHunspell = path.join(pathSampleDicts, 'hunspell', 'example.dic');
 
