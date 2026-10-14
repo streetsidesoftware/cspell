@@ -17,7 +17,7 @@ export interface RunConfig extends Partial<Omit<CompileRequest, 'targets'>> {
     rootDir?: string | undefined;
 }
 
-export interface CompileRequest extends Omit<CompileTargetOptions, 'replacements'>, CompileSourceOptions {
+export interface CompileRequest extends Omit<CompileTargetOptions, 'replacements'> {
     /**
      * Specify the directory where all relative paths will resolved against.
      * By default, all relative paths are relative to the current directory.
@@ -66,17 +66,6 @@ export interface CompileTargetOptions {
      * @default true
      */
     sort?: boolean | undefined;
-
-    /**
-     * Words in the `allowedSplitWords` are considered correct and can be used
-     * as a basis for splitting compound words.
-     *
-     * If entries can be split so that all the words in the entry are allowed,
-     * then only the individual words are added, otherwise the entire entry is added.
-     * This is to prevent misspellings in CamelCase words from being introduced into the
-     * dictionary.
-     */
-    allowedSplitWords?: FilePath | FilePath[] | undefined;
 
     /**
      * Injects `cspell-dictionary` directives into the dictionary header.
@@ -241,12 +230,6 @@ export interface CompileSourceOptions {
      * @default false
      */
     split?: boolean | 'legacy' | undefined;
-    /**
-     * Do not generate lower case / accent free versions of words.
-     * @default false
-     */
-    keepRawCase?: boolean | undefined;
-
     /**
      * Words in the `allowedSplitWords` are considered correct and can be used
      * as a basis for splitting compound words.

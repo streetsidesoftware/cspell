@@ -37,7 +37,6 @@ function addCompileOptions(compileCommand: Command): Command {
         .option('--split', 'Split each line', undefined)
         .option('--no-split', 'Treat each line as a dictionary entry, do not split')
         .option('--use-legacy-splitter', 'Do not use legacy line splitter logic.')
-        .option('--keep-raw-case', 'Do not normalize words before adding them to dictionary.')
         .option(
             '-x, --experimental <flag>',
             'Experimental flags, used for testing new concepts. Flags: compound',

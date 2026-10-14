@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=./../../cspell-tools.config.schema.json
+
+targets:
+  - name: defaults
+    sources:
+      - src/words.txt
+    format: plaintext
+    targetDirectory: '${cwd}/dict'
+
+  - name: overrides
+    sources:
+      - src/words.txt
+    format: plaintext
+    targetDirectory: '${cwd}/dict'
+    generateNonStrict: false
+    dictionaryDirectives: []
+
+generateNonStrict: true
+dictionaryDirectives:
+  - no-generate-alternatives

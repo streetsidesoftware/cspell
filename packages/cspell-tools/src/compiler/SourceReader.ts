@@ -21,8 +21,6 @@ export interface SourceReaderOptions {
      */
     legacy?: boolean | undefined;
 
-    keepCase?: boolean | undefined;
-
     allowedSplitWords: AllowedSplitWordsCollection;
 
     storeSplitWordsAsCompounds: boolean | undefined;

@@ -53,12 +53,6 @@
           "description": "Words in the `allowedSplitWords` are considered correct and can be used as a basis for splitting compound words.\n\nIf entries can be split so that all the words in the entry are allowed, then only the individual words are added, otherwise the entire entry is added. This is to prevent misspellings in CamelCase words from being introduced into the dictionary.",
           "markdownDescription": "Words in the `allowedSplitWords` are considered correct and can be used\nas a basis for splitting compound words.\n\nIf entries can be split so that all the words in the entry are allowed,\nthen only the individual words are added, otherwise the entire entry is added.\nThis is to prevent misspellings in CamelCase words from being introduced into the\ndictionary."
         },
-        "keepRawCase": {
-          "default": false,
-          "description": "Do not generate lower case / accent free versions of words.",
-          "markdownDescription": "Do not generate lower case / accent free versions of words.",
-          "type": "boolean"
-        },
         "listFile": {
           "$ref": "#/definitions/FilePath"
         },
@@ -128,12 +122,6 @@
         "filename": {
           "$ref": "#/definitions/FilePath"
         },
-        "keepRawCase": {
-          "default": false,
-          "description": "Do not generate lower case / accent free versions of words.",
-          "markdownDescription": "Do not generate lower case / accent free versions of words.",
-          "type": "boolean"
-        },
         "maxDepth": {
           "description": "Maximum number of nested Hunspell Rules to apply. This is needed for recursive dictionaries like Hebrew.",
           "markdownDescription": "Maximum number of nested Hunspell Rules to apply.\nThis is needed for recursive dictionaries like Hebrew.",
@@ -189,21 +177,6 @@
     "Target": {
       "additionalProperties": false,
       "properties": {
-        "allowedSplitWords": {
-          "anyOf": [
-            {
-              "$ref": "#/definitions/FilePath"
-            },
-            {
-              "items": {
-                "$ref": "#/definitions/FilePath"
-              },
-              "type": "array"
-            }
-          ],
-          "description": "Words in the `allowedSplitWords` are considered correct and can be used as a basis for splitting compound words.\n\nIf entries can be split so that all the words in the entry are allowed, then only the individual words are added, otherwise the entire entry is added. This is to prevent misspellings in CamelCase words from being introduced into the dictionary.",
-          "markdownDescription": "Words in the `allowedSplitWords` are considered correct and can be used\nas a basis for splitting compound words.\n\nIf entries can be split so that all the words in the entry are allowed,\nthen only the individual words are added, otherwise the entire entry is added.\nThis is to prevent misspellings in CamelCase words from being introduced into the\ndictionary."
-        },
         "bTrie": {
           "anyOf": [
             {
@@ -332,21 +305,6 @@
       "markdownDescription": "Url to JSON Schema",
       "type": "string"
     },
-    "allowedSplitWords": {
-      "anyOf": [
-        {
-          "$ref": "#/definitions/FilePath"
-        },
-        {
-          "items": {
-            "$ref": "#/definitions/FilePath"
-          },
-          "type": "array"
-        }
-      ],
-      "description": "Words in the `allowedSplitWords` are considered correct and can be used as a basis for splitting compound words.\n\nIf entries can be split so that all the words in the entry are allowed, then only the individual words are added, otherwise the entire entry is added. This is to prevent misspellings in CamelCase words from being introduced into the dictionary.",
-      "markdownDescription": "Words in the `allowedSplitWords` are considered correct and can be used\nas a basis for splitting compound words.\n\nIf entries can be split so that all the words in the entry are allowed,\nthen only the individual words are added, otherwise the entire entry is added.\nThis is to prevent misspellings in CamelCase words from being introduced into the\ndictionary."
-    },
     "checksumFile": {
       "description": "Path to checksum file. `true` - defaults to `./checksum.txt`.",
       "markdownDescription": "Path to checksum file. `true` - defaults to `./checksum.txt`.",
@@ -369,27 +327,10 @@
       "markdownDescription": "Generate lower case / accent free versions of words.",
       "type": "boolean"
     },
-    "keepRawCase": {
-      "default": false,
-      "description": "Do not generate lower case / accent free versions of words.",
-      "markdownDescription": "Do not generate lower case / accent free versions of words.",
-      "type": "boolean"
-    },
     "locale": {
       "description": "The locale of the dictionary's words: a language and an optional region, such as `tr` or `tr-TR`. Words are lower-cased with this locale's case rules, for example, when generating the case insensitive forms with `generateNonStrict`. Without it, the default case rules are used.\n\nSet `dictionaryInformation.locale` in the dictionary definition to the same locale, so cspell searches the dictionary with the case rules it was built with. If the definition lists more than one locale, cspell uses the first valid one for case rules, so put this locale first.",
       "markdownDescription": "The locale of the dictionary's words: a language and an optional region, such as `tr` or `tr-TR`.\nWords are lower-cased with this locale's case rules, for example, when generating the case insensitive\nforms with `generateNonStrict`. Without it, the default case rules are used.\n\nSet `dictionaryInformation.locale` in the dictionary definition to the same locale, so cspell searches the\ndictionary with the case rules it was built with. If the definition lists more than one locale, cspell uses the\nfirst valid one for case rules, so put this locale first.",
       "type": "string"
-    },
-    "maxDepth": {
-      "description": "Maximum number of nested Hunspell Rules to apply. This is needed for recursive dictionaries like Hebrew.",
-      "markdownDescription": "Maximum number of nested Hunspell Rules to apply.\nThis is needed for recursive dictionaries like Hebrew.",
-      "type": "number"
-    },
-    "minCompoundLength": {
-      "default": 4,
-      "description": "Controls the minimum length of a compound word when storing words using `storeSplitWordsAsCompounds`. The compound words are prefixed / suffixed with `*`, to allow them to be combined with other compound words. If the length is too low, then the dictionary will consider many misspelled words as correct.",
-      "markdownDescription": "Controls the minimum length of a compound word when storing words using `storeSplitWordsAsCompounds`.\nThe compound words are prefixed / suffixed with `*`, to allow them to be combined with other compound words.\nIf the length is too low, then the dictionary will consider many misspelled words as correct.",
-      "type": "number"
     },
     "removeDuplicates": {
       "default": false,
@@ -406,26 +347,6 @@
       "default": true,
       "description": "Sort the words in the resulting dictionary. Does not apply to `trie` based formats.",
       "markdownDescription": "Sort the words in the resulting dictionary.\nDoes not apply to `trie` based formats.",
-      "type": "boolean"
-    },
-    "split": {
-      "anyOf": [
-        {
-          "type": "boolean"
-        },
-        {
-          "const": "legacy",
-          "type": "string"
-        }
-      ],
-      "default": false,
-      "description": "Split lines into words.",
-      "markdownDescription": "Split lines into words."
-    },
-    "storeSplitWordsAsCompounds": {
-      "default": false,
-      "description": "Camel case words that have been split using the `allowedSplitWords` are added to the dictionary as compoundable words. These words are prefixed / suffixed with `*`.",
-      "markdownDescription": "Camel case words that have been split using the `allowedSplitWords` are added to the dictionary as compoundable words.\nThese words are prefixed / suffixed with `*`.",
       "type": "boolean"
     },
     "targets": {
