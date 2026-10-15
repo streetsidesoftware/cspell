@@ -12,11 +12,11 @@ export function splitCamelCaseIfAllowed(
     minCompoundLength: number,
 ): string[] {
     const split = [...splitCamelCase(word)];
-    if (split.length === 1) return adjustCases(split, allowedWords, keepCase);
+    if (split.length === 1) return lowerCaseUnlessAcronyms(split, allowedWords, keepCase);
     const missing = split.some((w) => isUnknown(w, allowedWords));
     if (missing) return [word];
     const wordIndexes = calcWordIndex(word, split);
-    const adjusted = adjustCases(split, allowedWords, keepCase);
+    const adjusted = lowerCaseUnlessAcronyms(split, allowedWords, keepCase);
     return !compoundPrefix
         ? adjusted
         : adjusted.map((w, i) => {
@@ -30,14 +30,19 @@ export function splitCamelCaseIfAllowed(
           });
 }
 
-function adjustCases(words: string[], allowedWords: AllowedSplitWordsCollection, keepCase: boolean): string[] {
-    return words.map((w) => adjustCase(w, allowedWords, keepCase));
+function lowerCaseUnlessAcronyms(
+    words: string[],
+    allowedWords: AllowedSplitWordsCollection,
+    keepCase: boolean,
+): string[] {
+    return words.map((w) => lowerCaseUnlessAcronym(w, allowedWords, keepCase));
 }
 
-function adjustCase(word: string, allowedWords: AllowedSplitWordsCollection, keepCase: boolean): string {
+function lowerCaseUnlessAcronym(word: string, allowedWords: AllowedSplitWordsCollection, keepCase: boolean): string {
     const lc = word.toLowerCase();
     if (!allowedWords.has(lc, true)) return word;
     if (lc === word) return word;
+    // Capitalized or a single capital: lower-case it. All caps is an acronym; keep it unless keep-case is off.
     if (word.slice(1).toLowerCase() === word.slice(1)) return lc;
     if (!keepCase && word.toUpperCase() === word) return word.toLowerCase();
     return word;
