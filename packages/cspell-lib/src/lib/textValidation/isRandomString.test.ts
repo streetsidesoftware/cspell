@@ -1,6 +1,12 @@
 import { describe, expect, test } from 'vitest';
 
-import { categorizeString, extractHexSequences, isRandomString, scoreRandomString } from './isRandomString.js';
+import {
+    categorizeString,
+    extractHexSequences,
+    hasImplausibleConsonantRun,
+    isRandomString,
+    scoreRandomString,
+} from './isRandomString.js';
 
 describe('isRandomString', () => {
     // cspell:disable
@@ -21,6 +27,16 @@ describe('isRandomString', () => {
         ${'PxTransform12transformInvERKS0_'}                                                                      | ${false}
         ${'_ZNK5physx11PxTransform12transformInvERKNS_6PxVec3E'}                                                  | ${false}
         ${'_ZNK5physx11PxERKNS_6PxVec3E'}                                                                         | ${false}
+        ${'qwjbzkxplmnovutsrhgfedcbayzqwer'}                                                                      | ${true}
+        ${'ncbueyfqpzslrjhwokgxvitdamzc'}                                                                         | ${true}
+        ${'ZWDKQPXMVLTJHRFYNBGSACOEUIWKQPXM'}                                                                     | ${true}
+        ${'strengths'}                                                                                            | ${false}
+        ${'nightclub'}                                                                                            | ${false}
+        ${'rhythmSection'}                                                                                        | ${false}
+        ${'knightsbridge'}                                                                                        | ${false}
+        ${'straightforward'}                                                                                      | ${false}
+        ${'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9'}                                                                 | ${true}
+        ${'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.access'}                                                          | ${false}
     `('isRandomString $str', ({ str, expected }) => {
         expect(isRandomString(str)).toBe(expected);
     });
@@ -84,6 +100,29 @@ describe('isRandomString', () => {
         ${'self.assertIn("schema_relationmodel_field_id_395fbb08_like")'} | ${['395fbb08']}
     `('extractHexSequences $str', ({ str, expected }) => {
         expect(extractHexSequences(str).map((a) => a.text)).toEqual(expected);
+    });
+    // cspell:enable
+
+    // cspell:disable
+    test.each`
+        str                                           | expected
+        ${''}                                         | ${false}
+        ${'hello'}                                    | ${false}
+        ${'qwjbzkxplmnovutsrhgfedcbayzqwer'}          | ${true}
+        ${'ZWDKQPXMVLTJHRFYNBGSACOEUIWKQPXM'}         | ${true}
+        ${'short'}                                    | ${false}
+        ${'strengths'}                                | ${false}
+        ${'nightclub'}                                | ${false}
+        ${'nightscout'}                               | ${false}
+        ${'catchphrase'}                              | ${false}
+        ${'knightsbridge'}                            | ${false}
+        ${'rhythm'}                                   | ${false}
+        ${'lymphocyte'}                               | ${false}
+        ${'syncthing'}                                | ${false}
+        ${'straightforward'}                          | ${false}
+        ${'residencyStandard2DMultisampleBlockShape'} | ${false}
+    `('hasImplausibleConsonantRun $str', ({ str, expected }) => {
+        expect(hasImplausibleConsonantRun(str)).toBe(expected);
     });
     // cspell:enable
 });
