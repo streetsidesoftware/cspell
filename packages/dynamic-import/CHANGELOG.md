@@ -154,6 +154,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 </details>
 
+## v10.4.1 (2026-10-15)
+
+- No changes
+
 ## v10.4.0 (2026-10-14)
 
 ### Features

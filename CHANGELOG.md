@@ -936,6 +936,10 @@ Related: #8975, streetsidesoftware/vscode-spell-checker#3099, streetsidesoftware
 
 </details>
 
+## v10.4.1 (2026-10-15)
+
+- No changes
+
 ## v10.4.0 (2026-10-14)
 
 ### Features
