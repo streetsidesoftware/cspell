@@ -10,7 +10,6 @@ export interface CompileCommonAppOptions {
     experimental?: string[] | undefined;
     split?: boolean | undefined;
     sort?: boolean | undefined;
-    keepRawCase?: boolean | undefined;
     trie?: boolean | undefined;
     trie3?: boolean | undefined;
     trie4?: boolean | undefined;
@@ -22,7 +21,6 @@ export interface CompileCommonAppOptions {
 }
 export interface CompileAppOptions extends CompileCommonAppOptions {
     sort: boolean;
-    keepRawCase: boolean;
 }
 export interface CompileTrieAppOptions extends CompileCommonAppOptions {
     trie3: boolean;

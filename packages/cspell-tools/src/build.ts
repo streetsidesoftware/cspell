@@ -60,6 +60,6 @@ export async function build(targets: string[] | undefined, options: BuildOptions
 }
 
 function normalizeRequest(buildInfo: CompileRequest, root: string): CompileRequest {
-    const { rootDir = root, targets = [], checksumFile } = buildInfo;
-    return { rootDir: path.resolve(rootDir), targets, checksumFile };
+    const { rootDir = root, targets = [], ...rest } = buildInfo;
+    return { ...rest, rootDir: path.resolve(rootDir), targets };
 }
