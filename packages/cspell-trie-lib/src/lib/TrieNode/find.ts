@@ -76,7 +76,7 @@ const knownCompoundModes = new Map<CompoundModes, CompoundModes>(arrayCompoundMo
 /**
  *
  * @param root Trie root node. root.c contains the compound root and forbidden root.
- * @param word A pre normalized word use `normalizeWord` or `normalizeWordToLowercase`
+ * @param word A pre normalized word use `normalizeWord` or `normalizeWordToLowercaseAndRemoveAccents`
  * @param options
  */
 export function findWord(root: Root, word: string, options?: PartialFindOptions): FindFullResult {
@@ -86,7 +86,7 @@ export function findWord(root: Root, word: string, options?: PartialFindOptions)
 /**
  *
  * @param root Trie root node. root.c contains the compound root and forbidden root.
- * @param word A pre normalized word use `normalizeWord` or `normalizeWordToLowercase`
+ * @param word A pre normalized word use `normalizeWord` or `normalizeWordToLowercaseAndRemoveAccents`
  * @param options
  */
 export function findWordNode(root: Root, word: string, options?: PartialFindOptions): FindFullNodeResult {
@@ -96,7 +96,7 @@ export function findWordNode(root: Root, word: string, options?: PartialFindOpti
 /**
  *
  * @param root Trie root node. root.c contains the compound root and forbidden root.
- * @param word A pre normalized word use `normalizeWord` or `normalizeWordToLowercase`
+ * @param word A pre normalized word use `normalizeWord` or `normalizeWordToLowercaseAndRemoveAccents`
  * @param options
  */
 function _findWord(root: Root, word: string, options: FindOptions): FindFullResult {
@@ -107,7 +107,7 @@ function _findWord(root: Root, word: string, options: FindOptions): FindFullResu
 /**
  *
  * @param root Trie root node. root.c contains the compound root and forbidden root.
- * @param word A pre normalized word use `normalizeWord` or `normalizeWordToLowercase`
+ * @param word A pre normalized word use `normalizeWord` or `normalizeWordToLowercaseAndRemoveAccents`
  * @param options
  */
 function _findWordNode(root: Root, word: string, options: FindOptions): FindFullNodeResult {

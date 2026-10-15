@@ -53,6 +53,7 @@ export async function compile(request: CompileRequest, options?: CompileOptions)
     const targetOptions: CompileTargetConfig = {
         sort: request.sort,
         generateNonStrict: request.generateNonStrict,
+        locale: request.locale,
         removeDuplicates: request.removeDuplicates,
         replacements: undefined,
     };
@@ -196,9 +197,10 @@ async function buildTargetDictionary(
     const { filename, useTrie, generateOnlyCompressedDictionary, checksumRoot } = buildOptions;
     const dictionaryDirectives = target.dictionaryDirectives ?? compileOptions.dictionaryDirectives;
     const removeDuplicates = target.removeDuplicates ?? false;
+    const locale = canonicalLocale(target);
 
-    const excludeFromFilter = await createExcludeFilter(excludeWordsFrom);
-    const includeFromFilter = await createIncludeFilter(excludeWordsNotFoundIn);
+    const excludeFromFilter = await createExcludeFilter(excludeWordsFrom, locale);
+    const includeFromFilter = await createIncludeFilter(excludeWordsNotFoundIn, locale);
     const excludeRegexFilter = createExcludeRegexFilter(excludeWordsMatchingRegex);
 
     const excludeFilter = (word: string) => {
@@ -209,13 +211,14 @@ async function buildTargetDictionary(
 
     const filesToProcessAsync = pipeAsync(
         readSourceList(sources, rootDir),
-        opMapAsync((src) => readFileSource(src, options)),
+        opMapAsync((src) => readFileSource(src, options, locale)),
         opAwaitAsync(),
     );
     const filesToProcess: FileToProcess[] = await toArray(filesToProcessAsync);
     const normalizer = normalizeTargetWords({
         sort: useTrie || sort,
         generateNonStrict,
+        locale,
         filter: excludeFilter,
         dictionaryDirectives,
         // removeDuplicates, // Add this in if we use it.
@@ -249,6 +252,7 @@ async function buildTargetDictionary(
             : createWordListCompiler({
                   sort,
                   generateNonStrict,
+                  locale,
                   dictionaryDirectives,
                   removeDuplicates,
                   replacements,
@@ -389,7 +393,11 @@ async function readFileList(fileList: FilePath): Promise<string[]> {
         .filter((a) => !!a);
 }
 
-async function readFileSource(fileSource: FileSource, sourceOptions: CompileSourceConfig): Promise<FileToProcess> {
+async function readFileSource(
+    fileSource: FileSource,
+    sourceOptions: CompileSourceConfig,
+    locale: string | undefined,
+): Promise<FileToProcess> {
     const {
         filename,
         keepRawCase = sourceOptions.keepRawCase || false,
@@ -406,6 +414,7 @@ async function readFileSource(fileSource: FileSource, sourceOptions: CompileSour
 
     const allowedSplitWords = await createAllowedSplitWordsFromFiles(
         fileSource.allowedSplitWords || sourceOptions.allowedSplitWords,
+        locale,
     );
 
     const readerOptions: SourceReaderOptions = {
@@ -416,6 +425,7 @@ async function readFileSource(fileSource: FileSource, sourceOptions: CompileSour
         allowedSplitWords,
         storeSplitWordsAsCompounds,
         minCompoundLength,
+        locale,
     };
 
     logWithTimestamp(`Reading ${path.basename(filename)}`);
@@ -426,6 +436,26 @@ async function readFileSource(fileSource: FileSource, sourceOptions: CompileSour
         words: stream,
     };
     return f;
+}
+
+// Only locales that cspell also keeps when it loads a dictionary's `dictionaryInformation.locale`.
+const regExpLocale = /^([a-z]{2})(?:[-_]([a-z]{2}))?$/i;
+
+/**
+ * @returns the target's locale in its canonical form, such as `tr-TR` for `tr_tr`.
+ * @throws if the locale isn't a language and an optional region.
+ */
+function canonicalLocale(target: Target): string | undefined {
+    const { locale } = target;
+    if (locale === undefined) return undefined;
+    const m = regExpLocale.exec(locale);
+    if (!m) {
+        throw new Error(
+            `Invalid locale "${locale}" in target "${target.name}". Use a language and an optional region, such as "tr" or "tr-TR".`,
+        );
+    }
+    const [, language, region] = m;
+    return region ? `${language.toLowerCase()}-${region.toUpperCase()}` : language.toLowerCase();
 }
 
 function normalizeTargetName(name: string) {
@@ -450,22 +480,30 @@ function logProgress<T>(freq = 100_000): (iter: Iterable<T>) => Iterable<T> {
 
 /**
  * @param excludeWordsFrom - List of files to read words from.
+ * @param locale - the locale used to lower-case words when matching them.
  * @returns a function that returns true if the word is not in the exclude list.
  */
-async function createExcludeFilter(excludeWordsFrom: FilePath[] | undefined): Promise<(word: string) => boolean> {
+async function createExcludeFilter(
+    excludeWordsFrom: FilePath[] | undefined,
+    locale: string | undefined,
+): Promise<(word: string) => boolean> {
     if (!excludeWordsFrom || !excludeWordsFrom.length) return () => true;
-    const excludeWords = await createWordsCollectionFromFiles(excludeWordsFrom);
+    const excludeWords = await createWordsCollectionFromFiles(excludeWordsFrom, locale);
 
     return (word: string) => !excludeWords.has(word, word.toUpperCase() !== word);
 }
 
 /**
  * @param includeWordsFrom - List of files to read words from.
+ * @param locale - the locale used to lower-case words when matching them.
  * @returns a function that returns true if the word is in the include list.
  */
-async function createIncludeFilter(includeWordsFrom: FilePath[] | undefined): Promise<(word: string) => boolean> {
+async function createIncludeFilter(
+    includeWordsFrom: FilePath[] | undefined,
+    locale: string | undefined,
+): Promise<(word: string) => boolean> {
     if (!includeWordsFrom || !includeWordsFrom.length) return () => true;
-    const excludeWords = await createWordsCollectionFromFiles(includeWordsFrom);
+    const excludeWords = await createWordsCollectionFromFiles(includeWordsFrom, locale);
 
     return (word: string) => excludeWords.has(word, word.toUpperCase() !== word);
 }

@@ -1,3 +1,4 @@
+import { promises as fs } from 'node:fs';
 import * as path from 'node:path';
 
 import { beforeAll, beforeEach, describe, expect, test } from 'vitest';
@@ -265,8 +266,58 @@ describe('compile', () => {
             expect(check2.passed).toBe(true);
         },
     );
+
+    test.each`
+        locale       | expected                                     | notExpected
+        ${undefined} | ${['~irak', '~i\u0307stanbul', '~istanbul']} | ${['~\u0131rak']}
+        ${'tr_tr'}   | ${['~\u0131rak', '~istanbul']}               | ${['~irak', '~i\u0307stanbul']}
+    `('compile with generateNonStrict and locale $locale', async ({ locale, expected, notExpected }) => {
+        const targetDirectory = t('.');
+        testHelper.mkdir(targetDirectory);
+        const src = t('words.txt');
+        await fs.writeFile(src, 'Irak\n\u0130stanbul\n');
+        const target: Target = {
+            name: 'myDictionary',
+            targetDirectory,
+            format: 'plaintext',
+            sources: [src],
+            generateNonStrict: true,
+            locale,
+            sort: true,
+            replacements: undefined,
+        };
+
+        await compile({ targets: [target] });
+
+        const lines = (await readTextFile(path.join(targetDirectory, 'myDictionary.txt'))).split('\n');
+        expect(lines).toEqual(expect.arrayContaining(expected));
+        for (const word of notExpected) {
+            expect(lines).not.toContain(word);
+        }
+    });
+
+    test.each(['not a locale', 'az-Latn', 'tur', 'en,tr', ''])(
+        'compile with an invalid locale "%s"',
+        async (locale) => {
+            const targetDirectory = t('.');
+            const target: Target = {
+                name: 'myDictionary',
+                targetDirectory,
+                format: 'plaintext',
+                sources: [sample('cities.txt')],
+                locale,
+                replacements: undefined,
+            };
+
+            await expect(compile({ targets: [target] })).rejects.toThrow(
+                `Invalid locale "${locale}" in target "myDictionary".`,
+            );
+        },
+    );
 });
 
 function t(...parts: string[]): string {
     return testHelper.resolveTemp(...parts);
 }
+
+// cspell:ignore irak stanbul

@@ -270,6 +270,11 @@
           "markdownDescription": "If `compress` is true, setting this value to true will also keep an uncompressed version of the dictionary.",
           "type": "boolean"
         },
+        "locale": {
+          "description": "The locale of the dictionary's words: a language and an optional region, such as `tr` or `tr-TR`. Words are lower-cased with this locale's case rules, for example, when generating the case insensitive forms with `generateNonStrict`. Without it, the default case rules are used.\n\nSet `dictionaryInformation.locale` in the dictionary definition to the same locale, so cspell searches the dictionary with the case rules it was built with. If the definition lists more than one locale, cspell uses the first valid one for case rules, so put this locale first.",
+          "markdownDescription": "The locale of the dictionary's words: a language and an optional region, such as `tr` or `tr-TR`.\nWords are lower-cased with this locale's case rules, for example, when generating the case insensitive\nforms with `generateNonStrict`. Without it, the default case rules are used.\n\nSet `dictionaryInformation.locale` in the dictionary definition to the same locale, so cspell searches the\ndictionary with the case rules it was built with. If the definition lists more than one locale, cspell uses the\nfirst valid one for case rules, so put this locale first.",
+          "type": "string"
+        },
         "name": {
           "description": "Name of target, used as the basis of target file name.",
           "markdownDescription": "Name of target, used as the basis of target file name.",
@@ -369,6 +374,11 @@
       "description": "Do not generate lower case / accent free versions of words.",
       "markdownDescription": "Do not generate lower case / accent free versions of words.",
       "type": "boolean"
+    },
+    "locale": {
+      "description": "The locale of the dictionary's words: a language and an optional region, such as `tr` or `tr-TR`. Words are lower-cased with this locale's case rules, for example, when generating the case insensitive forms with `generateNonStrict`. Without it, the default case rules are used.\n\nSet `dictionaryInformation.locale` in the dictionary definition to the same locale, so cspell searches the dictionary with the case rules it was built with. If the definition lists more than one locale, cspell uses the first valid one for case rules, so put this locale first.",
+      "markdownDescription": "The locale of the dictionary's words: a language and an optional region, such as `tr` or `tr-TR`.\nWords are lower-cased with this locale's case rules, for example, when generating the case insensitive\nforms with `generateNonStrict`. Without it, the default case rules are used.\n\nSet `dictionaryInformation.locale` in the dictionary definition to the same locale, so cspell searches the\ndictionary with the case rules it was built with. If the definition lists more than one locale, cspell uses the\nfirst valid one for case rules, so put this locale first.",
+      "type": "string"
     },
     "maxDepth": {
       "description": "Maximum number of nested Hunspell Rules to apply. This is needed for recursive dictionaries like Hebrew.",

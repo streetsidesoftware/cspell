@@ -171,7 +171,7 @@ export class GlobMatcher {
         this.patterns = globPatterns;
         this.root = normalizedRoot;
         this.dot = dot;
-        this.matchEx = buildMatcherFn(this.id, this.patterns, this.options);
+        this.matchEx = buildMatcherFn(this.id, globPatterns, this.options);
     }
 
     /**
@@ -190,7 +190,7 @@ type GlobMatchFn = (filename: string) => GlobMatch;
 
 interface GlobRule {
     /** The pattern */
-    pattern: GlobPatternWithRoot;
+    pattern: GlobPatternNormalized;
     /**
      * Index of the glob in the list.
      */
@@ -221,7 +221,7 @@ interface GlobRule {
  */
 function buildMatcherFn(
     _id: number,
-    patterns: GlobPatternWithRoot[],
+    patterns: GlobPatternNormalized[],
     options: NormalizedGlobMatchOptions,
 ): GlobMatchFn {
     // outputBuildMatcherFnPerfData(_id, patterns, options);
@@ -250,9 +250,6 @@ function buildMatcherFn(
                   };
             return { pattern, index, isNeg, fn, reg };
         });
-    const negRules = rules.filter((r) => r.isNeg);
-    const posRules = rules.filter((r) => !r.isNeg);
-
     const mapRoots = new Map<string, URL>();
 
     // const negRegEx = negRules.map((r) => r.reg).map((r) => r.toString());
@@ -285,7 +282,9 @@ function buildMatcherFn(
             return lastRel;
         }
 
-        function testRules(rules: GlobRule[], matched: boolean): GlobMatch | undefined {
+        function testRules(): GlobMatch | undefined {
+            let result: GlobMatch | undefined;
+            let lastMatchedPattern: GlobPatternNormalized | undefined;
             for (const rule of rules) {
                 const pattern = rule.pattern;
                 const root = pattern.root;
@@ -305,20 +304,25 @@ function buildMatcherFn(
                     const relPathToFile = relativeToRoot(rootURL);
                     isMatch = isRelativeValueNested(relPathToFile) && rule.fn(relPathToFile);
                 }
-                if (isMatch) {
-                    return {
-                        matched,
+                if (
+                    isMatch &&
+                    (pattern.rawRoot !== lastMatchedPattern?.rawRoot || pattern.rawGlob !== lastMatchedPattern?.rawGlob)
+                ) {
+                    result = {
+                        matched: !rule.isNeg,
                         glob: pattern.glob,
                         root,
                         pattern,
                         index: rule.index,
                         isNeg: rule.isNeg,
                     };
+                    lastMatchedPattern = pattern;
                 }
             }
+            return result;
         }
 
-        const result = testRules(negRules, false) || testRules(posRules, true) || { matched: false };
+        const result = testRules() || { matched: false };
         traceMode && logMatchTest(_id, filename, result);
         return result;
     };

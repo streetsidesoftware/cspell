@@ -5,7 +5,7 @@ import { describe, expect, test } from 'vitest';
 
 import { resolveGlobalDict } from '../../test/samples.ts';
 import { importTrie } from '../io/importExport.ts';
-import { normalizeWordToLowercase } from '../utils/normalizeWord.ts';
+import { normalizeWordToLowercaseAndRemoveAccents } from '../utils/normalizeWord.ts';
 import type { FindFullResult, PartialFindOptions } from './find.ts';
 import { findWord } from './find.ts';
 import type { TrieNode } from './TrieNode.ts';
@@ -96,11 +96,11 @@ describe('Validate findWord', () => {
 
     test.each(sampleWords())('Find Word case insensitive: %s', async (word) => {
         const trie = await pTrie;
-        const r = findWord(trie, normalizeWordToLowercase(word), {
+        const r = findWord(trie, normalizeWordToLowercaseAndRemoveAccents(word), {
             matchCase: false,
             compoundMode: 'compound',
         });
-        expect(r.found).toEqual(normalizeWordToLowercase(word));
+        expect(r.found).toEqual(normalizeWordToLowercaseAndRemoveAccents(word));
         expect(r.forbidden).toBeFalsy();
     });
 
