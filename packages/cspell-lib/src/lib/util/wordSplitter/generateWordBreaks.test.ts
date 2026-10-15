@@ -2,7 +2,7 @@ import type { TextOffset } from '@cspell/cspell-types';
 import { describe, expect, test } from 'vitest';
 
 import type { SortedBreaks } from './generateWordBreaks.js';
-import { generateWordBreaks } from './generateWordBreaks.js';
+import { generateWordBreaks, ignoreBreak } from './generateWordBreaks.js';
 
 describe('Validate wordSplitter', () => {
     interface TestApplyWordBreaks {
@@ -98,8 +98,8 @@ function extractBreaks(pwb: SortedBreaks): number[] {
     const r: number[] = [];
     for (const b of pwb) {
         const br = b.breaks[0];
-        if (br) {
-            r.splice(r.length, 0, ...br);
+        if (br && br !== ignoreBreak) {
+            r.push(...br);
         }
     }
     return r;
@@ -117,7 +117,7 @@ function genAllPossibleResults(text: string, breaks: SortedBreaks): string[] {
         for (const b of br.breaks) {
             const parts: string[] = [];
             let p = i;
-            for (let x = 0; x < b.length; x += 2) {
+            for (let x = 0; b !== ignoreBreak && x < b.length; x += 2) {
                 const s = b[x];
                 const e = b[x + 1];
                 parts.push(text.slice(p, s));
