@@ -14,23 +14,42 @@ Every command here reads your project's CSpell configuration, so the agent gets 
 Check the files the agent changed:
 
 ```sh
-npx cspell --no-progress --no-summary src/user.ts src/api.ts
+npx cspell --no-progress src/user.ts src/api.ts
 ```
 
-Or check every file changed since the last commit:
+Or check every file changed since the last commit, leaving out deleted files:
 
 ```sh
-git diff --name-only HEAD | npx cspell --no-progress --no-summary --no-must-find-files --file-list stdin
+git diff --name-only --diff-filter=d HEAD | npx cspell --no-progress --no-must-find-files --file-list stdin
 ```
 
-Each issue is one line, with the file, line, column, the unknown word, and a fix when CSpell is confident about one:
+Each issue is one line, with the file, line, column, the unknown word, and a fix when CSpell is confident about one. The last line is a summary:
 
 ```text
-src/user.ts:12:7 - Unknown word (recieve) fix: (receive)
-src/user.ts:12:14 - Unknown word (Mesage) fix: (Message)
+src/user.ts:1:7 - Unknown word (recieve) fix: (receive)
+src/user.ts:1:14 - Unknown word (Mesage) fix: (Message)
+CSpell: Files checked: 2, Issues found: 2 in 1 file.
 ```
 
 CSpell exits with code `1` when it finds issues.
+
+Keep the summary line. When there are no issues, it is the only way to tell "checked and clean" from "nothing was checked."
+
+### Files excluded by the configuration
+
+Files that the configuration excludes, for example with `ignorePaths`, are skipped without a message. The summary counts them:
+
+```text
+CSpell: Files checked: 0, skipped: 1, Issues found: 0 in 0 files.
+```
+
+This is usually what you want: excluded files are often test fixtures or generated files. To check an excluded file anyway, use `--force-check` with `--file` or `--file-list`:
+
+```sh
+npx cspell --no-progress --force-check --file gen/schema.ts
+```
+
+The `--force-check` flag doesn't work with `stdin://`.
 
 This output is compact, which keeps an agent's context small. Two alternatives:
 
@@ -42,11 +61,12 @@ This output is compact, which keeps an agent's context small. Two alternatives:
 An agent can check a new name or a paragraph before it writes it into a file. Pipe the text to CSpell, and give the path the text is meant for after `stdin://`. The path sets the file type and the configuration, so the check matches what CSpell will report once the text is in that file. The file doesn't need to exist.
 
 ```sh
-echo 'function fetchUserNmae() {}' | npx cspell --no-progress --no-summary --show-suggestions stdin://src/user.ts
+echo 'function fetchUserNmae() {}' | npx cspell --no-progress --show-suggestions stdin://src/user.ts
 ```
 
 ```text
-src/user.ts:1:18 - Unknown word (Nmae) Suggestions: [name*, Name, Nae, mae, Mae]
+src/user.ts:1:19 - Unknown word (Nmae) Suggestions: [name*, Name, Nae, mae, Mae]
+CSpell: Files checked: 1, Issues found: 1 in 1 file.
 ```
 
 This catches a misspelled identifier before it spreads through the code.
@@ -94,8 +114,8 @@ Agents read instructions from a file in your project, such as `AGENTS.md`, `CLAU
 ```markdown
 ## Spelling
 
-- Check changed files: `npx cspell --no-progress --no-summary <files>`
-- Check a new identifier or text before writing it: `echo '<text>' | npx cspell --no-progress --no-summary --show-suggestions stdin://<target-file>`
+- Check changed files: `npx cspell --no-progress <files>`. The summary line says how many files were checked and skipped.
+- Check a new identifier or text before writing it: `echo '<text>' | npx cspell --no-progress --show-suggestions stdin://<target-file>`
 - Explain a word: `npx cspell trace --only-found <word>`
 - Fix real misspellings. Add project vocabulary to the custom dictionary in the CSpell config (the one with `addWords: true`). For one-off words, use a `cspell:ignore` comment in that file.
 - Do not correct spelling in test fixtures or snapshots, and do not add words to a dictionary just to make a check pass.
