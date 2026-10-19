@@ -3,9 +3,9 @@ Repository: googleapis/google-cloud-cpp
 Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
-  files: 22068
+  files: 22069
   filesWithIssues: 8277
-  issues: 49419
+  issues: 49424
   errors: 0
 Errors: []
 
@@ -184,13 +184,13 @@ issues:
   - "cmake/templates/config.pc.in:26:1           Cflags          U       Cflags: -I${includedir} @GOOGLE"
   - "cmake/templates/config.pc.in:26:46          CFLAGS          U       GOOGLE_CLOUD_CPP_PC_CFLAGS@"
   - "CMakeLists.txt:20:13        BUGREPORT       U       set(PACKAGE_BUGREPORT \"https://github.com"
-  - "CMakeLists.txt:82:25        DOPENSSL        U       \" cmake -DOPENSSL_ROOT_DIR=/usr/local"
-  - "CMakeLists.txt:89:25        DGOOGLE         U       \" cmake -DGOOGLE_CLOUD_CPP_ENABLE_MACOS"
-  - "CMakeLists.txt:93:22        DNOMINMAX       U       add_definitions(-DNOMINMAX)"
-  - "CMakeLists.txt:117:37       REFDOC          U       CLOUD_CPP_USE_LATEST_FOR_REFDOC_LINKS"
-  - "CMakeLists.txt:126:31       DOCFX           U       GOOGLE_CLOUD_CPP_INTERNAL_DOCFX"
-  - "CMakeLists.txt:220:17       PROTOC          U       # `Protobuf_PROTOC_EXECUTABLE` is pretty"
-  - "CMakeLists.txt:256:64       gmock           U       GTest::gtest and GTest::gmock libraries."
+  - "CMakeLists.txt:76:25        DOPENSSL        U       \" cmake -DOPENSSL_ROOT_DIR=/usr/local"
+  - "CMakeLists.txt:83:25        DGOOGLE         U       \" cmake -DGOOGLE_CLOUD_CPP_ENABLE_MACOS"
+  - "CMakeLists.txt:87:22        DNOMINMAX       U       add_definitions(-DNOMINMAX)"
+  - "CMakeLists.txt:111:37       REFDOC          U       CLOUD_CPP_USE_LATEST_FOR_REFDOC_LINKS"
+  - "CMakeLists.txt:120:31       DOCFX           U       GOOGLE_CLOUD_CPP_INTERNAL_DOCFX"
+  - "CMakeLists.txt:214:17       PROTOC          U       # `Protobuf_PROTOC_EXECUTABLE` is pretty"
+  - "CMakeLists.txt:250:64       gmock           U       GTest::gtest and GTest::gmock libraries."
   - "doc/adr/2018-06-18-storage-request-parameters-are-function-arguments.md:6:33        Metageneration      U       the API can use `ifMetagenerationMatch` to apply an operation"
   - "doc/adr/2018-10-30-storage-metadata-fields-and-optional.md:15:8         chrono      U       std::chrono::system_clock::time"
   - "doc/adr/2019-01-04-error-reporting-with-statusor.md:13:43       badbit      U       report errors (e.g., [badbit][badbit-link] in the"
@@ -244,15 +244,15 @@ issues:
   - "doc/packaging.md:291:21         SHLIB               U       sed 's/@CURL_LT_SHLIB_VERSIONED_FLAVOUR@/OPENSSL"
   - "doc/packaging.md:296:10         DCURL               U       -DCURL_USE_OPENSSL=ON \\"
   - "doc/packaging.md:315:10         Dprotobuf           U       -Dprotobuf_BUILD_TESTS=OFF \\"
-  - "doc/packaging.md:363:20         GRPCPP              U       -DgRPC_BUILD_GRPCPP_OTEL_PLUGIN=ON \\"
-  - "doc/packaging.md:413:23         libopenssl          U       libcurl-devel libopenssl-devel nlohmann_json"
-  - "doc/packaging.md:422:28         usrlocal            U       tee /etc/ld.so.conf.d/usrlocal.conf"
-  - "doc/packaging.md:439:8          DABSL               U       -DABSL_BUILD_TESTING=OFF \\"
-  - "doc/packaging.md:566:24         noninteractive      U       export DEBIAN_FRONTEND=noninteractive"
-  - "doc/packaging.md:580:9          libsystemd          U       libsystemd-dev"
-  - "doc/packaging.md:880:8          DJSON               U       -DJSON_BuildTests=OFF \\"
-  - "doc/packaging.md:1136:21        epel                U       sudo dnf install -y epel-release && \\"
-  - "doc/packaging.md:1141:35        binutils            U       autoconf automake libtool binutils dnf-utils"
+  - "doc/packaging.md:366:20         GRPCPP              U       -DgRPC_BUILD_GRPCPP_OTEL_PLUGIN=ON \\"
+  - "doc/packaging.md:416:23         libopenssl          U       libcurl-devel libopenssl-devel nlohmann_json"
+  - "doc/packaging.md:425:28         usrlocal            U       tee /etc/ld.so.conf.d/usrlocal.conf"
+  - "doc/packaging.md:442:8          DABSL               U       -DABSL_BUILD_TESTING=OFF \\"
+  - "doc/packaging.md:572:24         noninteractive      U       export DEBIAN_FRONTEND=noninteractive"
+  - "doc/packaging.md:586:9          libsystemd          U       libsystemd-dev"
+  - "doc/packaging.md:892:8          DJSON               U       -DJSON_BuildTests=OFF \\"
+  - "doc/packaging.md:1151:21        epel                U       sudo dnf install -y epel-release && \\"
+  - "doc/packaging.md:1156:35        binutils            U       autoconf automake libtool binutils dnf-utils"
   - "doc/product-neutral-guides/core-concepts.md:38:10       cerr    U       std::cerr << \"RPC failed: \" <"
   - "doc/product-neutral-guides/core-concepts.md:42:8        cout    U       std::cout << \"Success: \" << *response"
   - "doc/product-neutral-guides/post-quantum-cryptography.md:8:71        ECDH            U       combining classical `X25519` ECDH with"
@@ -464,7 +464,7 @@ issues:
   - "google/cloud/bigquery/datapolicies/v2/data_policy_client.h:169:24       goverened       U       // underlying data goverened by the data policy."
   - "google/cloud/bigquery/datatransfer/v1/data_transfer_client.cc:296:35        Unenroll    U       DataTransferServiceClient::UnenrollDataSources("
   - "google/cloud/bigquery/v2/minimal/benchmarks/benchmark_test.cc:109:49        useast      U       size=10\", \"--location=useast\", \"--parent-job-id="
-  - "google/cloud/bigquery/v2/minimal/benchmarks/benchmark.cc:143:14         nsamples    U       auto const nsamples = result.operations"
+  - "google/cloud/bigquery/v2/minimal/benchmarks/benchmark.cc:144:14         nsamples    U       auto const nsamples = result.operations"
   - "google/cloud/bigquery/v2/minimal/benchmarks/benchmarks_config.cc:50:39          ODBCTESTDATASET     U       query\":\"insert into ODBCTESTDATASET.ODBCTESTTABLE_INSERT"
   - "google/cloud/bigquery/v2/minimal/benchmarks/benchmarks_config.cc:50:55          ODBCTESTTABLE       U       into ODBCTESTDATASET.ODBCTESTTABLE_INSERT VALUES\\u0028"
   - "google/cloud/bigquery/v2/minimal/internal/common_v2_resources_test.cc:355:22        mesg    U       error.message = \"e-mesg\";"
@@ -656,7 +656,7 @@ issues:
   - "google/cloud/hypercomputecluster/v1/hypercompute_cluster_client.h:19:39         HYPERCOMPUTECLUSTER     U       CLOUD_CPP_GOOGLE_CLOUD_HYPERCOMPUTECLUSTER_V1_HYPERCOMPUTE_CLUSTER"
   - "google/cloud/ids/doc/main.dox:9:12          Palo    U       built with Palo Alto Networks technologies"
   - "google/cloud/internal/api_client_header_test.cc:57:39       gccl    U       actual, IsClientHeader(\"gccl/\"));"
-  - "google/cloud/internal/async_read_write_stream_tracing_test.cc:350:6         Unstarted       U       UnstartedStreamShouldNotExtractMetadata"
+  - "google/cloud/internal/async_read_write_stream_tracing_test.cc:375:6         Unstarted       U       UnstartedStreamShouldNotExtractMetadata"
   - "google/cloud/internal/base64_transforms_test.cc:39:33       hpag        U       abcdefghij\", \"YWJjZGVmZ2hpag==\"},"
   - "google/cloud/internal/base64_transforms_test.cc:40:34       hpams       U       abcdefghijk\", \"YWJjZGVmZ2hpams=\"},"
   - "google/cloud/internal/base64_transforms_test.cc:41:35       hpamts      U       abcdefghijkl\", \"YWJjZGVmZ2hpamts\"},"
@@ -829,7 +829,7 @@ issues:
   - "google/cloud/storage/client_sign_policy_document_test.cc:131:55         Ymxv    U       blob = \"dGVzdC1zaWduZWQtYmxvYg==\";"
   - "google/cloud/storage/client_sign_url_test.cc:182:57         Fgoog       U       1%2Fauto%2Fstorage%2Fgoog4_request\""
   - "google/cloud/storage/client_test.cc:96:38       TESTBENCH       U       endpoint_(\"CLOUD_STORAGE_TESTBENCH_ENDPOINT\", {}),"
-  - "google/cloud/storage/client.cc:581:67       iamapi      U       \"/iamapi\");"
+  - "google/cloud/storage/client.cc:666:67       iamapi      U       \"/iamapi\");"
   - "google/cloud/storage/doc/parallel-uploads-design.md:232:23      Streambufs                  U       `ParallelObjectWriteStreambufs`"
   - "google/cloud/storage/doc/parallel-uploads-design.md:279:68      intiating (initiating)      U       has two versions - intiating the"
   - "google/cloud/storage/doc/setup-test-resources.md:99:1           KEYID       U       KEYID=... # e.g cloud-cpp"
@@ -885,7 +885,7 @@ issues:
   - "google/cloud/storage/internal/async/connection_impl_read_hash_test.cc:17:11         pratap      U       // TODO(v-pratap): Remove this when EnableMD"
   - "google/cloud/storage/internal/async/connection_impl_upload_test.cc:487:42       eksb    U       sha256_bytes: \"test-eksb\""
   - "google/cloud/storage/internal/async/insert_object.cc:50:21          Subcord     U       auto next = data_.Subcord(0, n);"
-  - "google/cloud/storage/internal/async/writer_connection_buffered.cc:792:39        unsatisified    U       call that returns an unsatisified future until the buffer"
+  - "google/cloud/storage/internal/async/writer_connection_buffered.cc:798:39        unsatisified    U       call that returns an unsatisified future until the buffer"
   - "google/cloud/storage/internal/grpc/object_request_parser_test.cc:63:33          Cuakt       U       md5) : StEvo2V/qoDCuaktZSw3IQ=="
   - "google/cloud/storage/internal/grpc/stub.cc:372:10       wopts       U       auto wopts = grpc::WriteOptions"
   - "google/cloud/storage/internal/hedged_object_read_source_test.cc:496:63      unblocker       U       failure and notify the unblocker thread."

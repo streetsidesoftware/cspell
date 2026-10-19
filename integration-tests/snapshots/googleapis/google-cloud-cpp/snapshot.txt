@@ -3,19 +3,19 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 22039, skipped: 29, Issues found: 49419 in 8277 files.
+ CSpell: Files checked: 22040, skipped: 29, Issues found: 49424 in 8277 files.
  exit code: 1
 ARCHITECTURE.md:158:48    - Unknown word (googlemock) -- implementation using `googlemock`
 BUILD.bazel:152:20    - Unknown word (ctype)      -- name = "enable-ctype-cord-workaround",
 BUILD.bazel:54:5      - Unknown word (testonly)   -- testonly = True,
-CMakeLists.txt:117:37    - Unknown word (REFDOC)     -- CLOUD_CPP_USE_LATEST_FOR_REFDOC_LINKS
-CMakeLists.txt:126:31    - Unknown word (DOCFX)      -- GOOGLE_CLOUD_CPP_INTERNAL_DOCFX
+CMakeLists.txt:111:37    - Unknown word (REFDOC)     -- CLOUD_CPP_USE_LATEST_FOR_REFDOC_LINKS
+CMakeLists.txt:120:31    - Unknown word (DOCFX)      -- GOOGLE_CLOUD_CPP_INTERNAL_DOCFX
 CMakeLists.txt:20:13     - Unknown word (BUGREPORT)  -- set(PACKAGE_BUGREPORT "https://github.com
-CMakeLists.txt:220:17    - Unknown word (PROTOC)     -- # `Protobuf_PROTOC_EXECUTABLE` is pretty
-CMakeLists.txt:256:64    - Unknown word (gmock)      -- GTest::gtest and GTest::gmock libraries.
-CMakeLists.txt:82:25     - Unknown word (DOPENSSL)   -- " cmake -DOPENSSL_ROOT_DIR=/usr/local
-CMakeLists.txt:89:25     - Unknown word (DGOOGLE)    -- " cmake -DGOOGLE_CLOUD_CPP_ENABLE_MACOS
-CMakeLists.txt:93:22     - Unknown word (DNOMINMAX)  -- add_definitions(-DNOMINMAX)
+CMakeLists.txt:214:17    - Unknown word (PROTOC)     -- # `Protobuf_PROTOC_EXECUTABLE` is pretty
+CMakeLists.txt:250:64    - Unknown word (gmock)      -- GTest::gtest and GTest::gmock libraries.
+CMakeLists.txt:76:25     - Unknown word (DOPENSSL)   -- " cmake -DOPENSSL_ROOT_DIR=/usr/local
+CMakeLists.txt:83:25     - Unknown word (DGOOGLE)    -- " cmake -DGOOGLE_CLOUD_CPP_ENABLE_MACOS
+CMakeLists.txt:87:22     - Unknown word (DNOMINMAX)  -- add_definitions(-DNOMINMAX)
 SECURITY.md:3:46      - Unknown word (vulnz)      -- issue, please use [g.co/vulnz](https://g.co/vulnz
 bazel/BUILD.bazel:17:37     - Unknown word (subpackages) -- visibility = ["//:__subpackages__"])
 bazel/bzlmod0.bzl:17:12     - Unknown word (bzlmod)     -- def gl_cpp_bzlmod0(name = None):
@@ -226,8 +226,8 @@ doc/contributor/howto-guide-setup-development-workstation.md:71:6      - Unknown
 doc/cpp-style-guide.md:54:18     - Unknown word (blorg)      -- #include <grpcpp/blorg.h>
 doc/cpp-style-guide.md:58:11     - Unknown word (unistd)     -- #include <unistd.h>
 doc/ctype-cord-workarounds.md:32:26     - Unknown word (CTYPE)      -- GOOGLE_CLOUD_CPP_ENABLE_CTYPE_CORD_WORKAROUND` CMake
-doc/packaging.md:1136:21   - Unknown word (epel)           -- sudo dnf install -y epel-release && \
-doc/packaging.md:1141:35   - Unknown word (binutils)       -- autoconf automake libtool binutils dnf-utils
+doc/packaging.md:1151:21   - Unknown word (epel)           -- sudo dnf install -y epel-release && \
+doc/packaging.md:1156:35   - Unknown word (binutils)       -- autoconf automake libtool binutils dnf-utils
 doc/packaging.md:198:10    - Unknown word (DWITH)       -- -DWITH_EXAMPLES=OFF \
 doc/packaging.md:201:10    - Unknown word (DOPENTELEMETRY) -- -DOPENTELEMETRY_INSTALL=ON \
 doc/packaging.md:236:10    - Unknown word (makecache)      -- sudo dnf makecache && \
@@ -238,17 +238,17 @@ doc/packaging.md:267:6     - Unknown word (ldconfig)       -- sudo ldconfig && c
 doc/packaging.md:291:21    - Unknown word (SHLIB)          -- sed 's/@CURL_LT_SHLIB_VERSIONED_FLAVOUR@/OPENSSL
 doc/packaging.md:296:10    - Unknown word (DCURL)          -- -DCURL_USE_OPENSSL=ON \
 doc/packaging.md:315:10    - Unknown word (Dprotobuf)      -- -Dprotobuf_BUILD_TESTS=OFF \
-doc/packaging.md:363:20    - Unknown word (GRPCPP)         -- -DgRPC_BUILD_GRPCPP_OTEL_PLUGIN=ON \
-doc/packaging.md:413:23    - Unknown word (libopenssl)     -- libcurl-devel libopenssl-devel nlohmann_json
-doc/packaging.md:422:28    - Unknown word (usrlocal)       -- tee /etc/ld.so.conf.d/usrlocal.conf
-doc/packaging.md:439:8     - Unknown word (DABSL)          -- -DABSL_BUILD_TESTING=OFF \
-doc/packaging.md:566:24    - Unknown word (noninteractive) -- export DEBIAN_FRONTEND=noninteractive
-doc/packaging.md:580:9     - Unknown word (libsystemd)     -- libsystemd-dev
+doc/packaging.md:366:20    - Unknown word (GRPCPP)         -- -DgRPC_BUILD_GRPCPP_OTEL_PLUGIN=ON \
+doc/packaging.md:416:23    - Unknown word (libopenssl)     -- libcurl-devel libopenssl-devel nlohmann_json
+doc/packaging.md:425:28    - Unknown word (usrlocal)       -- tee /etc/ld.so.conf.d/usrlocal.conf
+doc/packaging.md:442:8     - Unknown word (DABSL)          -- -DABSL_BUILD_TESTING=OFF \
+doc/packaging.md:572:24    - Unknown word (noninteractive) -- export DEBIAN_FRONTEND=noninteractive
+doc/packaging.md:586:9     - Unknown word (libsystemd)     -- libsystemd-dev
 doc/packaging.md:67:69     - Unknown word (msbuild)    -- generator from `make` (or `msbuild` on
 doc/packaging.md:69:16     - Unknown word (multicore)  -- advantage of multicore machines. Be aware that
 doc/packaging.md:72:65     - Unknown word (NCPU)       -- consider appending `-- -j ${NCPU}` to the
 doc/packaging.md:75:38     - Unknown word (physicalcpu) -- Linux, or `sysctl -n hw.physicalcpu` on macOS.
-doc/packaging.md:880:8     - Unknown word (DJSON)          -- -DJSON_BuildTests=OFF \
+doc/packaging.md:892:8     - Unknown word (DJSON)          -- -DJSON_BuildTests=OFF \
 doc/product-neutral-guides/core-concepts.md:38:10     - Unknown word (cerr)       -- std::cerr << "RPC failed: " <
 doc/product-neutral-guides/core-concepts.md:42:8      - Unknown word (cout)       -- std::cout << "Success: " << *response
 doc/product-neutral-guides/post-quantum-cryptography.md:20:51     - Unknown word (CURLOPT)    -- is prioritized in `CURLOPT_SSL_EC_CURVES`. | `libcurl
@@ -461,7 +461,7 @@ google/cloud/biglake/doc/main.dox:9:31      - Unknown word (lakehouse)  -- truth
 google/cloud/bigquery/analyticshub/v1/analytics_hub_client.h:19:48     - Unknown word (ANALYTICSHUB) -- GOOGLE_CLOUD_BIGQUERY_ANALYTICSHUB_V1_ANALYTICS_HUB_CLIENT
 google/cloud/bigquery/datapolicies/v2/data_policy_client.h:169:24    - Unknown word (goverened)  -- // underlying data goverened by the data policy.
 google/cloud/bigquery/datatransfer/v1/data_transfer_client.cc:296:35    - Unknown word (Unenroll)   -- DataTransferServiceClient::UnenrollDataSources(
-google/cloud/bigquery/v2/minimal/benchmarks/benchmark.cc:143:14    - Unknown word (nsamples)   -- auto const nsamples = result.operations
+google/cloud/bigquery/v2/minimal/benchmarks/benchmark.cc:144:14    - Unknown word (nsamples)   -- auto const nsamples = result.operations
 google/cloud/bigquery/v2/minimal/benchmarks/benchmark_test.cc:109:49    - Unknown word (useast)     -- size=10", "--location=useast", "--parent-job-id=
 google/cloud/bigquery/v2/minimal/benchmarks/benchmarks_config.cc:50:39     - Unknown word (ODBCTESTDATASET) -- query":"insert into ODBCTESTDATASET.ODBCTESTTABLE_INSERT
 google/cloud/bigquery/v2/minimal/benchmarks/benchmarks_config.cc:50:55     - Unknown word (ODBCTESTTABLE)   -- into ODBCTESTDATASET.ODBCTESTTABLE_INSERT VALUES\u0028
@@ -652,7 +652,7 @@ google/cloud/hypercomputecluster/doc/environment-variables.dox:12:21     - Unkno
 google/cloud/hypercomputecluster/v1/hypercompute_cluster_client.h:19:39     - Unknown word (HYPERCOMPUTECLUSTER) -- CLOUD_CPP_GOOGLE_CLOUD_HYPERCOMPUTECLUSTER_V1_HYPERCOMPUTE_CLUSTER
 google/cloud/ids/doc/main.dox:9:12      - Unknown word (Palo)       -- built with Palo Alto Networks technologies
 google/cloud/internal/api_client_header_test.cc:57:39     - Unknown word (gccl)       -- actual, IsClientHeader("gccl/"));
-google/cloud/internal/async_read_write_stream_tracing_test.cc:350:6     - Unknown word (Unstarted)  -- UnstartedStreamShouldNotExtractMetadata
+google/cloud/internal/async_read_write_stream_tracing_test.cc:375:6     - Unknown word (Unstarted)  -- UnstartedStreamShouldNotExtractMetadata
 google/cloud/internal/base64_transforms_test.cc:190:36    - Unknown word (QUJD)       -- UrlsafeBase64Decode("QUJD").value(), ElementsAre
 google/cloud/internal/base64_transforms_test.cc:191:36    - Unknown word (QUJDRA)     -- UrlsafeBase64Decode("QUJDRA").value(),
 google/cloud/internal/base64_transforms_test.cc:39:33     - Unknown word (hpag)       -- abcdefghij", "YWJjZGVmZ2hpag=="},
@@ -824,7 +824,7 @@ google/cloud/storage/benchmarks/async_throughput_benchmark.cc:92:11     - Unknow
 google/cloud/storage/bucket_autoclass.h:49:66     - Unknown word (tscu)       -- system_clock::time_point tscu)
 google/cloud/storage/bucket_encryption.h:139:61    - Unknown word (gmek)       -- edEncryptionEnforcementConfig gmek,
 google/cloud/storage/bucket_metadata.cc:240:14    - Unknown word (subpatch)   -- if (labels_subpatch_dirty_) {
-google/cloud/storage/client.cc:581:67    - Unknown word (iamapi)     -- "/iamapi");
+google/cloud/storage/client.cc:666:67    - Unknown word (iamapi)     -- "/iamapi");
 google/cloud/storage/client_sign_policy_document_test.cc:131:55    - Unknown word (Ymxv)       -- blob = "dGVzdC1zaWduZWQtYmxvYg==";
 google/cloud/storage/client_sign_url_test.cc:182:57    - Unknown word (Fgoog)      -- 1%2Fauto%2Fstorage%2Fgoog4_request"
 google/cloud/storage/client_test.cc:96:38     - Unknown word (TESTBENCH)  -- endpoint_("CLOUD_STORAGE_TESTBENCH_ENDPOINT", {}),
@@ -883,7 +883,7 @@ google/cloud/storage/internal/async/connection_impl_open_test.cc:458:70    - Unk
 google/cloud/storage/internal/async/connection_impl_read_hash_test.cc:17:11     - Unknown word (pratap)     -- // TODO(v-pratap): Remove this when EnableMD
 google/cloud/storage/internal/async/connection_impl_upload_test.cc:487:42    - Unknown word (eksb)       -- sha256_bytes: "test-eksb"
 google/cloud/storage/internal/async/insert_object.cc:50:21     - Unknown word (Subcord)    -- auto next = data_.Subcord(0, n);
-google/cloud/storage/internal/async/writer_connection_buffered.cc:792:39    - Unknown word (unsatisified) -- call that returns an unsatisified future until the buffer
+google/cloud/storage/internal/async/writer_connection_buffered.cc:798:39    - Unknown word (unsatisified) -- call that returns an unsatisified future until the buffer
 google/cloud/storage/internal/grpc/object_request_parser_test.cc:63:33     - Unknown word (Cuakt)      -- md5) : StEvo2V/qoDCuaktZSw3IQ==
 google/cloud/storage/internal/grpc/stub.cc:372:10    - Unknown word (wopts)      -- auto wopts = grpc::WriteOptions
 google/cloud/storage/internal/hedged_object_read_source_test.cc:496:63    - Unknown word (unblocker)  -- failure and notify the unblocker thread.
