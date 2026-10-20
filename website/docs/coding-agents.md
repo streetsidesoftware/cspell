@@ -39,7 +39,7 @@ If your configuration sets `reporters`, for example to write results to a file, 
 
 ### Files excluded by the configuration
 
-Files that the configuration excludes, for example with `ignorePaths`, are skipped without a message. The summary counts them:
+Files that the configuration excludes, for example with `ignorePaths`, are skipped. CSpell doesn't list them; the summary counts them:
 
 ```text
 CSpell: Files checked: 0, skipped: 1, Issues found: 0 in 0 files.
