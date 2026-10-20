@@ -51,7 +51,11 @@ This is usually what you want: excluded files are often test fixtures or generat
 npx cspell --no-progress --force-check --file gen/schema.ts
 ```
 
-The `--force-check` flag doesn't work with `stdin://`.
+To check piped text for an excluded path, pass it with `--file`:
+
+```sh
+echo 'export const schemaVersion = 1;' | npx cspell --no-progress --force-check --file stdin://gen/schema.ts
+```
 
 This output is compact, which keeps an agent's context small. Two alternatives:
 
