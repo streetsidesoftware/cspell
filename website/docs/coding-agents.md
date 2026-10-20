@@ -35,6 +35,8 @@ CSpell exits with code `1` when it finds issues.
 
 Keep the summary line. When there are no issues, it is the only way to tell "checked and clean" from "nothing was checked."
 
+If your configuration sets `reporters`, for example to write results to a file, these commands print nothing to the terminal. Add `--reporter default` to get the output shown here.
+
 ### Files excluded by the configuration
 
 Files that the configuration excludes, for example with `ignorePaths`, are skipped without a message. The summary counts them:
