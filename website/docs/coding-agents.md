@@ -75,6 +75,8 @@ src/user.ts:1:19 - Unknown word (Nmae) Suggestions: [name*, Name, Nae, mae, Mae]
 CSpell: Files checked: 1, Issues found: 1 in 1 file.
 ```
 
+With `--show-suggestions`, a list of suggestions replaces the fix, and the preferred one is marked with `*`.
+
 This catches a misspelled identifier before it spreads through the code.
 
 ## Understand a word
