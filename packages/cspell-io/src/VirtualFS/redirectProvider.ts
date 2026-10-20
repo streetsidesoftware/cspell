@@ -23,7 +23,7 @@ class RedirectProvider implements VFileSystemProvider {
         readonly name: string,
         readonly publicRoot: URL,
         readonly privateRoot: URL,
-        readonly options: RedirectOptions = { capabilitiesMask: -1 },
+        readonly options: RedirectOptions = {},
     ) {}
 
     getFileSystem(url: URL, next: (url: URL) => VProviderFileSystem | undefined): VProviderFileSystem | undefined {

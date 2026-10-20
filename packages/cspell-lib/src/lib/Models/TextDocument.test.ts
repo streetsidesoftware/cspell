@@ -57,16 +57,15 @@ describe('TextDocument', () => {
     });
 });
 
-function sampleDoc(filename?: string, content?: string) {
-    filename = filename ?? __filename;
-    content =
-        content ??
-        `
+function sampleDoc(
+    filename: string = __filename,
+    content: string = `
 import * as fs from 'fs';
 
 export function self(): string {
     return fs.readFileSync(__filename, 'utf8');
 }
-`;
+`,
+) {
     return createTextDocument({ uri: filename, content });
 }

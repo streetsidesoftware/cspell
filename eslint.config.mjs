@@ -117,7 +117,7 @@ export default defineConfig(
             'unicorn/prefer-blob-reading-methods': 'error',
             'unicorn/prefer-code-point': 'error',
             'unicorn/prefer-date-now': 'error',
-            'unicorn/prefer-default-parameters': 'error',
+            'unicorn/prefer-default-parameters': ['error', { checkFallbackExpressions: false }], // A default only replaces undefined; `||` and `??` fallbacks are often intended.
             'unicorn/prefer-dom-node-append': 'error',
             'unicorn/prefer-dom-node-dataset': 'error',
             'unicorn/prefer-dom-node-remove': 'error',
