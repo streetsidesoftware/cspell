@@ -3,18 +3,18 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 988, skipped: 1, Issues found: 11379 in 137 files.
+ CSpell: Files checked: 1047, skipped: 1, Issues found: 11485 in 144 files.
  exit code: 1
-AGENTS.md:294:76    - Unknown word (zizmor)     -- change must pass a [zizmor](https://docs.zizmor
+AGENTS.md:297:76    - Unknown word (zizmor)     -- change must pass a [zizmor](https://docs.zizmor
 AGENTS.md:32:50     - Unknown word (prek)       -- pre-commit hook with `prek install` (or `pre-commit
-Cargo.toml:133:62    - Unknown word (redoxer)    -- to compile/check with redoxer
-Cargo.toml:147:28    - Unknown word (nsis)       -- package.metadata.packager.nsis]
-Cargo.toml:196:62    - Unknown word (zeroize)    -- alloc", "oid", "pem", "zeroize"] }
-Cargo.toml:278:8     - Unknown word (graviola)   -- rustls-graviola = "0.4"
-Cargo.toml:367:21    - Unknown word (scrutinee)  -- significant_drop_in_scrutinee = "warn"
-Cargo.toml:389:1     - Unknown word (elidable)   -- elidable_lifetime_names = "warn
-Cargo.toml:427:1     - Unknown word (uninlined)  -- uninlined_format_args = "warn
-Cargo.toml:66:8      - Unknown word (graviola)   -- rustls-graviola = { workspace = true
+Cargo.toml:142:62    - Unknown word (redoxer)    -- to compile/check with redoxer
+Cargo.toml:156:28    - Unknown word (nsis)       -- package.metadata.packager.nsis]
+Cargo.toml:205:62    - Unknown word (zeroize)    -- alloc", "oid", "pem", "zeroize"] }
+Cargo.toml:287:8     - Unknown word (graviola)   -- rustls-graviola = "0.4"
+Cargo.toml:376:21    - Unknown word (scrutinee)  -- significant_drop_in_scrutinee = "warn"
+Cargo.toml:398:1     - Unknown word (elidable)   -- elidable_lifetime_names = "warn
+Cargo.toml:436:1     - Unknown word (uninlined)  -- uninlined_format_args = "warn
+Cargo.toml:67:8      - Unknown word (graviola)   -- rustls-graviola = { workspace = true
 LICENSE-logo:205:34    - Unknown word (waivable)   -- under any voluntary or waivable statutory or compulsory
 README.md:106:90    - Unknown word (Embedders)  -- the RustPython binary. Embedders can use `rustpython
 README.md:127:8     - Unknown word (wapm)       -- Run by wapm
@@ -204,6 +204,95 @@ crates/unicode/tests/data/cpython3.14_predicates.txt:9:5914    - Unknown word (A
 crates/unicode/tests/data/cpython3.14_predicates.txt:9:5920    - Unknown word (AFFE)       -- ,1AFF5:1AFFB,1AFFD:1AFFE,1B000:1B122,1B132:1B
 crates/unicode/tests/data/cpython3.14_predicates.txt:9:7006    - Unknown word (EEAB)       -- :1EEA3,1EEA5:1EEA9,1EEAB:1EEBB,20000:2A6DF,2A
 crates/unicode/tests/data/cpython3.14_predicates.txt:9:7012    - Unknown word (EEBB)       -- ,1EEA5:1EEA9,1EEAB:1EEBB,20000:2A6DF,2A700:2B
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1068:10   - Unknown word (BADF)       -- 00BAC5:00BADF LVT None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1070:10   - Unknown word (BAFB)       -- 00BAE1:00BAFB LVT None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1071:10   - Unknown word (BAFC)       -- 00BAFC:00BAFC LV None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1071:3    - Unknown word (BAFC)       -- 00BAFC:00BAFC LV None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1072:3    - Unknown word (BAFD)       -- 00BAFD:00BB17 LVT None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1084:10   - Unknown word (BBBF)       -- 00BBA5:00BBBF LVT None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1086:10   - Unknown word (BBDB)       -- 00BBC1:00BBDB LVT None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1087:10   - Unknown word (BBDC)       -- 00BBDC:00BBDC LV None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1087:3    - Unknown word (BBDC)       -- 00BBDC:00BBDC LV None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1088:3    - Unknown word (BBDD)       -- 00BBDD:00BBF7 LVT None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1102:10   - Unknown word (BCBB)       -- 00BCA1:00BCBB LVT None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1103:10   - Unknown word (BCBC)       -- 00BCBC:00BCBC LV None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1103:3    - Unknown word (BCBC)       -- 00BCBC:00BCBC LV None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1104:3    - Unknown word (BCBD)       -- 00BCBD:00BCD7 LVT None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1124:10   - Unknown word (BDEF)       -- 00BDD5:00BDEF LVT None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1140:10   - Unknown word (BECF)       -- 00BEB5:00BECF LVT None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1142:10   - Unknown word (BEEB)       -- 00BED1:00BEEB LVT None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1143:10   - Unknown word (BEEC)       -- 00BEEC:00BEEC LV None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1143:3    - Unknown word (BEEC)       -- 00BEEC:00BEEC LV None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1156:10   - Unknown word (BFAF)       -- 00BF95:00BFAF LVT None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1158:10   - Unknown word (BFCB)       -- 00BFB1:00BFCB LVT None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1159:10   - Unknown word (BFCC)       -- 00BFCC:00BFCC LV None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1159:3    - Unknown word (BFCC)       -- 00BFCC:00BFCC LV None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1160:3    - Unknown word (BFCD)       -- 00BFCD:00BFE7 LVT None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1358:10   - Unknown word (CABB)       -- 00CAA1:00CABB LVT None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1359:10   - Unknown word (CABC)       -- 00CABC:00CABC LV None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1359:3    - Unknown word (CABC)       -- 00CABC:00CABC LV None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1360:3    - Unknown word (CABD)       -- 00CABD:00CAD7 LVT None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1380:10   - Unknown word (CBEF)       -- 00CBD5:00CBEF LVT None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1396:10   - Unknown word (CCCF)       -- 00CCB5:00CCCF LVT None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1398:10   - Unknown word (CCEB)       -- 00CCD1:00CCEB LVT None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1399:10   - Unknown word (CCEC)       -- 00CCEC:00CCEC LV None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1399:3    - Unknown word (CCEC)       -- 00CCEC:00CCEC LV None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1400:3    - Unknown word (CCED)       -- 00CCED:00CD07 LVT None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1412:10   - Unknown word (CDAF)       -- 00CD95:00CDAF LVT None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1414:10   - Unknown word (CDCB)       -- 00CDB1:00CDCB LVT None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1415:10   - Unknown word (CDCC)       -- 00CDCC:00CDCC LV None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1415:3    - Unknown word (CDCC)       -- 00CDCC:00CDCC LV None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1416:3    - Unknown word (CDCD)       -- 00CDCD:00CDE7 LVT None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1430:10   - Unknown word (CEAB)       -- 00CE91:00CEAB LVT None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1431:10   - Unknown word (CEAC)       -- 00CEAC:00CEAC LV None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1431:3    - Unknown word (CEAC)       -- 00CEAC:00CEAC LV None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1432:3    - Unknown word (CEAD)       -- 00CEAD:00CEC7 LVT None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1436:10   - Unknown word (CEFF)       -- 00CEE5:00CEFF LVT None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1452:10   - Unknown word (CFDF)       -- 00CFC5:00CFDF LVT None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1454:10   - Unknown word (CFFB)       -- 00CFE1:00CFFB LVT None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1455:10   - Unknown word (CFFC)       -- 00CFFC:00CFFC LV None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1455:3    - Unknown word (CFFC)       -- 00CFFC:00CFFC LV None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1605:10   - Unknown word (FEFE)       -- 00FE30:00FEFE Other None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1609:10   - Unknown word (FFEF)       -- 00FFA0:00FFEF Other None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1610:10   - Unknown word (FFFB)       -- 00FFF0:00FFFB Control None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1964:10   - Unknown word (CEFF)       -- 01BCA4:01CEFF Other None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1991:10   - Unknown word (DAAF)       -- 01DAA1:01DAAF Extend Extend 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:1992:10   - Unknown word (DFFF)       -- 01DAB0:01DFFF Other None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:2163:10   - Unknown word (FBFF)       -- 01FB00:01FBFF Other None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:2165:9    - Unknown word (DFFFF)      -- 01FFFE:0DFFFF Other None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:767:10    - Unknown word (AAAF)       -- 00AA80:00AAAF Other None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:773:10    - Unknown word (AABD)       -- 00AAB9:00AABD Other None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:774:10    - Unknown word (AABF)       -- 00AABE:00AABF Extend Extend 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:774:3     - Unknown word (AABE)       -- 00AABE:00AABF Extend Extend
+crates/unicode/tests/data/cpython3.15_graphemes.txt:778:10    - Unknown word (AAEA)       -- 00AAE0:00AAEA Other Consonant 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:779:10    - Unknown word (AAEB)       -- 00AAEB:00AAEB SpacingMark None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:779:3     - Unknown word (AAEB)       -- 00AAEB:00AAEB SpacingMark None
+crates/unicode/tests/data/cpython3.15_graphemes.txt:780:10    - Unknown word (AAED)       -- 00AAEC:00AAED Extend Extend 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:780:3     - Unknown word (AAEC)       -- 00AAEC:00AAED Extend Extend
+crates/unicode/tests/data/cpython3.15_graphemes.txt:781:3     - Unknown word (AAEE)       -- 00AAEE:00AAEF SpacingMark None
+crates/unicode/tests/data/cpython3.15_graphemes.txt:785:10    - Unknown word (ABBF)       -- 00AAF7:00ABBF Other None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:786:10    - Unknown word (ABDA)       -- 00ABC0:00ABDA Other Consonant 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:787:3     - Unknown word (ABDB)       -- 00ABDB:00ABE2 Other None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:792:10    - Unknown word (ABEA)       -- 00ABE9:00ABEA SpacingMark None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:793:10    - Unknown word (ABEB)       -- 00ABEB:00ABEB Other None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:793:3     - Unknown word (ABEB)       -- 00ABEB:00ABEB Other None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:794:10    - Unknown word (ABEC)       -- 00ABEC:00ABEC SpacingMark None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:794:3     - Unknown word (ABEC)       -- 00ABEC:00ABEC SpacingMark None
+crates/unicode/tests/data/cpython3.15_graphemes.txt:796:10    - Unknown word (ABFF)       -- 00ABEE:00ABFF Other None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:796:3     - Unknown word (ABEE)       -- 00ABEE:00ABFF Other None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:812:10    - Unknown word (ACDF)       -- 00ACC5:00ACDF LVT None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:814:10    - Unknown word (ACFB)       -- 00ACE1:00ACFB LVT None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:816:3     - Unknown word (ACFD)       -- 00ACFD:00AD17 LVT None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:828:10    - Unknown word (ADBF)       -- 00ADA5:00ADBF LVT None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:830:10    - Unknown word (ADDB)       -- 00ADC1:00ADDB LVT None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:831:10    - Unknown word (ADDC)       -- 00ADDC:00ADDC LV None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:831:3     - Unknown word (ADDC)       -- 00ADDC:00ADDC LV None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:832:3     - Unknown word (ADDD)       -- 00ADDD:00ADF7 LVT None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:846:10    - Unknown word (AEBB)       -- 00AEA1:00AEBB LVT None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:847:10    - Unknown word (AEBC)       -- 00AEBC:00AEBC LV None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:847:3     - Unknown word (AEBC)       -- 00AEBC:00AEBC LV None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:848:3     - Unknown word (AEBD)       -- 00AEBD:00AED7 LVT None 0
+crates/unicode/tests/data/cpython3.15_graphemes.txt:868:10    - Unknown word (AFEF)       -- 00AFD5:00AFEF LVT None 0
 crates/unicode/tests/data/version_skew_cpython3.14.txt:12:277    - Unknown word (CEAD)       -- FF,2B73A:2B73F,2CEA2:2CEAD,323B0:33479
 crates/unicode/tests/data/version_skew_cpython3.14.txt:14:142    - Unknown word (FDCE)       -- FBD2,FD90:FD91,FDC8:FDCE,10940:10959,10EC5:1
 crates/unicode/tests/data/version_skew_cpython3.14.txt:14:304    - Unknown word (CCFA)       -- :18D1E,18D80:18DF2,1CCFA:1CCFC,1CEBA:1CED0,1CEE
@@ -218,6 +307,11 @@ crates/unicode/tests/data/version_skew_cpython3.14.txt:14:502    - Unknown word 
 crates/unicode/tests/data/version_skew_cpython3.14.txt:14:526    - Unknown word (CEAD)       -- FBFA,2B73A:2B73F,2CEA2:2CEAD,323B0:33479
 crates/unicode/tests/data/version_skew_cpython3.14.txt:8:284     - Unknown word (CEAD)       -- FF,2B73A:2B73F,2CEA2:2CEAD,323B0:33479
 crates/unicode/tests/data/version_skew_cpython3.14.txt:9:272     - Unknown word (CEAD)       -- FF,2B73A:2B73F,2CEA2:2CEAD,323B0:33479
+crates/unicode/tests/generate_reference.py:111:17    - Unknown word (incb)       -- incb_names.index(unicodedata
+crates/unicode/tests/generate_reference.py:135:27    - Unknown word (incb)       -- for start, end, (gcb, incb, pictographic) in ranges
+crates/unicode/tests/generate_reference.py:137:55    - Unknown word (incb)       -- X} {gcb_names[gcb]} {incb_names[incb]} {pictographic
+crates/unicode/tests/generate_reference.py:137:66    - Unknown word (incb)       -- names[gcb]} {incb_names[incb]} {pictographic}"
+crates/unicode/tests/generate_reference.py:48:5      - Unknown word (incb)       -- incb_names = ("None", "Linker
 crates/unicode/unicode/latest/DerivedNumericValues.txt:1000:38   - Unknown word (AHOM)        -- .0 ; ; 4 # Nd       AHOM DIGIT FOUR
 crates/unicode/unicode/latest/DerivedNumericValues.txt:1001:45   - Unknown word (CITI)        -- 4 # Nd       WARANG CITI DIGIT FOUR
 crates/unicode/unicode/latest/DerivedNumericValues.txt:1002:44   - Unknown word (AKURU)       -- 4 # Nd       DIVES AKURU DIGIT FOUR
@@ -10844,25 +10938,25 @@ extra_tests/snippets/builtin_bytearray.py:416:7     - Unknown word (juyfjyujuyj)
 extra_tests/snippets/builtin_bytearray.py:422:46    - Unknown word (cmowz)             -- example.com").strip(b"cmowz.") == bytearray(b"example
 extra_tests/snippets/builtin_bytearray.py:424:47    - Unknown word (cmowz)             -- example.com").lstrip(b"cmowz.") == bytearray(b"example
 extra_tests/snippets/builtin_bytearray.py:60:23     - Unknown word (abcdé)      -- assert len(bytearray("abcdé", "utf8")) == 6
-extra_tests/snippets/builtin_bytearray.py:755:17    - Unknown word (appen)             -- a = bytearray(b"appen")
-extra_tests/snippets/builtin_bytearray.py:804:25    - Unknown word (whello)            -- assert a == bytearray(b"whello, world"), a
-extra_tests/snippets/builtin_bytearray.py:807:25    - Unknown word (whello)            -- assert a == bytearray(b"whello, worlwd"), a
-extra_tests/snippets/builtin_bytearray.py:807:33    - Unknown word (worlwd)            -- bytearray(b"whello, worlwd"), a
-extra_tests/snippets/builtin_bytearray.py:810:25    - Unknown word (owhello)           -- assert a == bytearray(b"owhello, worlwd"), a
-extra_tests/snippets/builtin_bytearray.py:810:34    - Unknown word (worlwd)            -- bytearray(b"owhello, worlwd"), a
-extra_tests/snippets/builtin_bytearray.py:813:25    - Unknown word (owhello)           -- assert a == bytearray(b"owhello, worlwdo"), a
-extra_tests/snippets/builtin_bytearray.py:813:34    - Unknown word (worlwdo)           -- bytearray(b"owhello, worlwdo"), a
-extra_tests/snippets/builtin_bytearray.py:826:25    - Unknown word (dlrow)             -- assert a == bytearray(b"dlrow ,olleh")
-extra_tests/snippets/builtin_bytearray.py:826:32    - Unknown word (olleh)             -- bytearray(b"dlrow ,olleh")
-extra_tests/snippets/builtin_bytearray.py:844:24    - Unknown word (bpython)           -- assert bytearray("rust%bpython%b", "utf-8") % (b"
-extra_tests/snippets/builtin_bytearray.py:855:18    - Unknown word (xffab)             -- a = bytearray(b"\xffab\x80\0\0\370\0\0")
-extra_tests/snippets/builtin_bytearray.py:858:112   - Unknown word (Vlatin)            -- \\u0000\\u0000\np2\nVlatin1\np3\ntp4\nRp5\ntp6
-extra_tests/snippets/builtin_bytearray.py:858:65    - Unknown word (xffab)             -- codecs\nencode\np1\n(V\xffab\x80\\u0000\\u0000\xf
-extra_tests/snippets/builtin_bytearray.py:862:87    - Unknown word (xbfab)             -- x0c\x00\x00\x00\xc3\xbfab\xc2\x80\x00\x00\xc3
-extra_tests/snippets/builtin_bytearray.py:866:93    - Unknown word (xbfab)             -- x0c\x00\x00\x00\xc3\xbfab\xc2\x80\x00\x00\xc3
-extra_tests/snippets/builtin_bytearray.py:870:18    - Unknown word (cbuiltins)         -- == b"\x80\x03cbuiltins\nbytearray\nq\x00C\t
-extra_tests/snippets/builtin_bytearray.py:870:49    - Unknown word (xffab)             -- nbytearray\nq\x00C\t\xffab\x80\x00\x00\xf8\x00
-extra_tests/snippets/builtin_bytearray.py:874:102   - Unknown word (xffab)             -- tbytearray\x94\x93\x94C\t\xffab\x80\x00\x00\xf8\x00
+extra_tests/snippets/builtin_bytearray.py:766:17    - Unknown word (appen)             -- a = bytearray(b"appen")
+extra_tests/snippets/builtin_bytearray.py:815:25    - Unknown word (whello)            -- assert a == bytearray(b"whello, world"), a
+extra_tests/snippets/builtin_bytearray.py:818:25    - Unknown word (whello)            -- assert a == bytearray(b"whello, worlwd"), a
+extra_tests/snippets/builtin_bytearray.py:818:33    - Unknown word (worlwd)            -- bytearray(b"whello, worlwd"), a
+extra_tests/snippets/builtin_bytearray.py:821:25    - Unknown word (owhello)           -- assert a == bytearray(b"owhello, worlwd"), a
+extra_tests/snippets/builtin_bytearray.py:821:34    - Unknown word (worlwd)            -- bytearray(b"owhello, worlwd"), a
+extra_tests/snippets/builtin_bytearray.py:824:25    - Unknown word (owhello)           -- assert a == bytearray(b"owhello, worlwdo"), a
+extra_tests/snippets/builtin_bytearray.py:824:34    - Unknown word (worlwdo)           -- bytearray(b"owhello, worlwdo"), a
+extra_tests/snippets/builtin_bytearray.py:837:25    - Unknown word (dlrow)             -- assert a == bytearray(b"dlrow ,olleh")
+extra_tests/snippets/builtin_bytearray.py:837:32    - Unknown word (olleh)             -- bytearray(b"dlrow ,olleh")
+extra_tests/snippets/builtin_bytearray.py:855:24    - Unknown word (bpython)           -- assert bytearray("rust%bpython%b", "utf-8") % (b"
+extra_tests/snippets/builtin_bytearray.py:866:18    - Unknown word (xffab)             -- a = bytearray(b"\xffab\x80\0\0\370\0\0")
+extra_tests/snippets/builtin_bytearray.py:869:112   - Unknown word (Vlatin)            -- \\u0000\\u0000\np2\nVlatin1\np3\ntp4\nRp5\ntp6
+extra_tests/snippets/builtin_bytearray.py:869:65    - Unknown word (xffab)             -- codecs\nencode\np1\n(V\xffab\x80\\u0000\\u0000\xf
+extra_tests/snippets/builtin_bytearray.py:873:87    - Unknown word (xbfab)             -- x0c\x00\x00\x00\xc3\xbfab\xc2\x80\x00\x00\xc3
+extra_tests/snippets/builtin_bytearray.py:877:93    - Unknown word (xbfab)             -- x0c\x00\x00\x00\xc3\xbfab\xc2\x80\x00\x00\xc3
+extra_tests/snippets/builtin_bytearray.py:881:18    - Unknown word (cbuiltins)         -- == b"\x80\x03cbuiltins\nbytearray\nq\x00C\t
+extra_tests/snippets/builtin_bytearray.py:881:49    - Unknown word (xffab)             -- nbytearray\nq\x00C\t\xffab\x80\x00\x00\xf8\x00
+extra_tests/snippets/builtin_bytearray.py:885:102   - Unknown word (xffab)             -- tbytearray\x94\x93\x94C\t\xffab\x80\x00\x00\xf8\x00
 extra_tests/snippets/builtin_bytes.py:15:29     - Unknown word (jilj)       -- bytes("bla", encoding=b"jilj")
 extra_tests/snippets/builtin_bytes.py:175:21    - Unknown word (hhjjk)      -- bytes.fromhex(b"hhjjk")
 extra_tests/snippets/builtin_bytes.py:177:11    - Unknown word (koki)       -- assert [b"koki".center(i, b"|") for
@@ -10902,6 +10996,11 @@ extra_tests/snippets/builtin_bytes.py:747:24    - Unknown word (bytess)         
 extra_tests/snippets/builtin_bytes.py:87:20     - Unknown word (efghij)     -- assert d[-6:] == b"efghij"
 extra_tests/snippets/builtin_bytes.py:88:22     - Unknown word (bdfh)       -- assert d[1:8:2] == b"bdfh"
 extra_tests/snippets/builtin_bytes.py:89:23     - Unknown word (igec)       -- assert d[8:1:-2] == b"igec"
+extra_tests/snippets/builtin_dict.py:982:24    - Unknown word (agen)       -- "async def agen():\n yield sys._getframe
+extra_tests/snippets/builtin_dict.py:986:23    - Unknown word (agen)       -- agen = local["agen"]()
+extra_tests/snippets/builtin_dict.py:986:9     - Unknown word (agen)       -- agen = local["agen"]()
+extra_tests/snippets/builtin_dict.py:987:23    - Unknown word (agen)       -- self.assertIs(agen.ag_frame.f_globals,
+extra_tests/snippets/builtin_dict.py:989:13    - Unknown word (agen)       -- agen.asend(None).send(None
 extra_tests/snippets/builtin_float.py:267:6     - Unknown word (infi)       -- "infi", # misspelt infinities
 extra_tests/snippets/builtin_float.py:278:6     - Unknown word (nfinity)    -- "nfinity",
 extra_tests/snippets/builtin_float.py:280:6     - Unknown word (iinity)     -- "iinity",
@@ -10931,7 +11030,7 @@ extra_tests/snippets/builtin_pow.py:177:19    - Unknown word (fiveto)     -- eq(
 extra_tests/snippets/builtin_property.py:15:5      - Unknown word (Fubar)      -- f = Fubar()
 extra_tests/snippets/builtin_property.py:19:13     - Unknown word (Fubar)      -- assert type(Fubar.foo) is property
 extra_tests/snippets/builtin_property.py:4:7       - Unknown word (Fubar)      -- class Fubar:
-extra_tests/snippets/builtin_set.py:428:27    - Unknown word (aruguments) -- TODO: Assert that empty aruguments raises exception.
+extra_tests/snippets/builtin_set.py:430:27    - Unknown word (aruguments) -- TODO: Assert that empty aruguments raises exception.
 extra_tests/snippets/builtin_str.py:1130:71   - Unknown word (udfff)      -- 001f600", "a\ud800b\udfff"):
 extra_tests/snippets/builtin_str.py:1138:13   - Unknown word (ababa)      -- assert "ababa".replace("aba", "x"
 extra_tests/snippets/builtin_str.py:1139:48   - Unknown word (udfff)      -- replace("\ud800", "\udfff", 1) == "\udfffx\ud
@@ -10989,14 +11088,14 @@ extra_tests/snippets/builtin_str_unicode_slice.py:53:42     - Unknown word (אֱ
 extra_tests/snippets/builtin_str_unicode_slice.py:58:34     - Unknown word (אםהֱאּ)      -- hebrew_text[30:10:-3] == "אםהֱאּ "
 extra_tests/snippets/builtin_str_unicode_slice.py:60:37     - Unknown word (םיִהֹלֱא)    -- text[30:10:-1] == "א ,םיִהֹלֱא אָרָּב ,"
 extra_tests/snippets/builtin_str_unicode_slice.py:60:46     - Unknown word (אָרּ)        -- -1] == "א ,םיִהֹלֱא אָרָּב ,"
-extra_tests/snippets/builtin_type.py:357:9     - Unknown word (stmethod)   -- def stmethod():
-extra_tests/snippets/builtin_type.py:377:25    - Unknown word (stmethod)   -- assert MyTypeWithMethod.stmethod.__name__ == "stmethod
-extra_tests/snippets/builtin_type.py:377:47    - Unknown word (stmethod)   -- stmethod.__name__ == "stmethod"
-extra_tests/snippets/builtin_type.py:378:27    - Unknown word (stmethod)   -- assert MyTypeWithMethod().stmethod.__name__ == "stmethod
-extra_tests/snippets/builtin_type.py:378:49    - Unknown word (stmethod)   -- stmethod.__name__ == "stmethod"
-extra_tests/snippets/builtin_type.py:416:3     - Unknown word (Regresesion) -- # Regresesion to
-extra_tests/snippets/builtin_type.py:621:6     - Unknown word (pyproperty)  -- # `#[pyproperty]`
-extra_tests/snippets/builtin_type.py:623:30    - Unknown word (pyproperty)  -- extension without `#[pyproperty]` override
+extra_tests/snippets/builtin_type.py:376:9     - Unknown word (stmethod)   -- def stmethod():
+extra_tests/snippets/builtin_type.py:396:25    - Unknown word (stmethod)   -- assert MyTypeWithMethod.stmethod.__name__ == "stmethod
+extra_tests/snippets/builtin_type.py:396:47    - Unknown word (stmethod)   -- stmethod.__name__ == "stmethod"
+extra_tests/snippets/builtin_type.py:397:27    - Unknown word (stmethod)   -- assert MyTypeWithMethod().stmethod.__name__ == "stmethod
+extra_tests/snippets/builtin_type.py:397:49    - Unknown word (stmethod)   -- stmethod.__name__ == "stmethod"
+extra_tests/snippets/builtin_type.py:435:3     - Unknown word (Regresesion) -- # Regresesion to
+extra_tests/snippets/builtin_type.py:640:6     - Unknown word (pyproperty)  -- # `#[pyproperty]`
+extra_tests/snippets/builtin_type.py:642:30    - Unknown word (pyproperty)  -- extension without `#[pyproperty]` override
 extra_tests/snippets/intro/3.1.2.5.py:1:9       - Unknown word (unununium)  -- assert "unununium" == 3 * "un" + "ium
 extra_tests/snippets/operator_comparison.py:117:19    - Unknown word (udfff)      -- check("\ud800", "\udfff", LT)
 extra_tests/snippets/operator_comparison.py:126:1     - Unknown word (bsame)      -- bsame = b"abc" * 3
@@ -11108,20 +11207,21 @@ extra_tests/snippets/stdlib_datetime.py:900:51    - Unknown word (aord)       --
 extra_tests/snippets/stdlib_hashlib.py:47:30     - Unknown word (fubar)      -- hashlib.new("blake2s", b"fubar")
 extra_tests/snippets/stdlib_imp.py:42:7      - Unknown word (ispkg)      -- data, ispkg, origname = _imp.find
 extra_tests/snippets/stdlib_imp.py:43:8      - Unknown word (ispkg)      -- assert ispkg is False
-extra_tests/snippets/stdlib_io.py:39:5      - Unknown word (nres)       -- nres = fio.read(1)
-extra_tests/snippets/stdlib_io.py:40:16     - Unknown word (nres)       -- assert len(nres) == 1
-extra_tests/snippets/stdlib_io.py:41:5      - Unknown word (nres)       -- nres = fio.read(2)
-extra_tests/snippets/stdlib_io.py:42:16     - Unknown word (nres)       -- assert len(nres) == 2
+extra_tests/snippets/stdlib_io.py:11:20     - Unknown word (udfffé)     -- ("a\ud800c", "\udfffé"),
+extra_tests/snippets/stdlib_io.py:72:5      - Unknown word (nres)       -- nres = fio.read(1)
+extra_tests/snippets/stdlib_io.py:73:16     - Unknown word (nres)       -- assert len(nres) == 1
+extra_tests/snippets/stdlib_io.py:74:5      - Unknown word (nres)       -- nres = fio.read(2)
+extra_tests/snippets/stdlib_io.py:75:16     - Unknown word (nres)       -- assert len(nres) == 2
 extra_tests/snippets/stdlib_itertools.py:307:72    - Unknown word (ACEF)       -- 0, 1, 1])) == list("ACEF")
 extra_tests/snippets/stdlib_itertools.py:312:82    - Unknown word (ACEF)       -- ", 1, 9])) == list("ACEF")
 extra_tests/snippets/stdlib_json.py:88:33     - Unknown word (jsons)      -- reject non-str keys in jsons
 extra_tests/snippets/stdlib_logging.py:14:9      - Unknown word (WOOT)       -- assert "WOOT" in res
 extra_tests/snippets/stdlib_logging.py:9:16      - Unknown word (WOOT)       -- logging.error("WOOT")
-extra_tests/snippets/stdlib_math.py:128:3     - Unknown word (roundings)   -- # roundings
-extra_tests/snippets/stdlib_math.py:13:9      - Unknown word (Conversible) -- # class Conversible():
-extra_tests/snippets/stdlib_math.py:18:39     - Unknown word (Conversible) -- 1.1111) == math.log(Conversible())
-extra_tests/snippets/stdlib_os.py:203:14    - Unknown word (BOYA)       -- CONTENT3 = b"BOYA"
-extra_tests/snippets/stdlib_os.py:607:63    - Unknown word (VDISABLE)   -- "PC_MAX_INPUT", "PC_VDISABLE"]:
+extra_tests/snippets/stdlib_math.py:203:3     - Unknown word (roundings)   -- # roundings
+extra_tests/snippets/stdlib_math.py:88:9      - Unknown word (Conversible) -- # class Conversible():
+extra_tests/snippets/stdlib_math.py:93:39     - Unknown word (Conversible) -- 1.1111) == math.log(Conversible())
+extra_tests/snippets/stdlib_os.py:225:14    - Unknown word (BOYA)       -- CONTENT3 = b"BOYA"
+extra_tests/snippets/stdlib_os.py:629:63    - Unknown word (VDISABLE)   -- "PC_MAX_INPUT", "PC_VDISABLE"]:
 extra_tests/snippets/stdlib_pickle.py:10:15     - Unknown word (unpickler)  -- left, right = unpickler.load()
 extra_tests/snippets/stdlib_pickle.py:12:8      - Unknown word (unpickler)  -- memo = unpickler.memo.copy()
 extra_tests/snippets/stdlib_pickle.py:30:30     - Unknown word (Unpickler)  -- lambda data: _pickle.Unpickler(io.BytesIO(data)).load
@@ -11154,16 +11254,21 @@ extra_tests/snippets/stdlib_signal.py:47:9      - Unknown word (uncatchable) -- 
 extra_tests/snippets/stdlib_signal.py:48:37     - Unknown word (uncatchable) -- previous = signal.getsignal(uncatchable)
 extra_tests/snippets/stdlib_signal.py:49:47     - Unknown word (uncatchable) -- OSError, signal.signal, uncatchable, signal.SIG_IGN)
 extra_tests/snippets/stdlib_signal.py:50:33     - Unknown word (uncatchable) -- assert signal.getsignal(uncatchable) is previous
+extra_tests/snippets/stdlib_socket.py:264:49    - Unknown word (Xriginal)   -- assert destination == b"Xriginal"
 extra_tests/snippets/stdlib_sqlite.py:33:22     - Unknown word (mysum)      -- cx.create_aggregate("mysum", 1, AggrSum)
 extra_tests/snippets/stdlib_sqlite.py:34:21     - Unknown word (mysum)      -- cur.execute("select mysum(key) from foo")
+extra_tests/snippets/stdlib_sqlite.py:402:62    - Unknown word (NOCASE)     -- words(word TEXT COLLATE NOCASE)")
+extra_tests/snippets/stdlib_sqlite.py:599:37    - Unknown word (closeme)    -- connection.create_function("closeme", 0, connection.close
+extra_tests/snippets/stdlib_sqlite.py:612:21    - Unknown word (closeme)    -- "SELECT closeme(); SELECT tail();" if
 extra_tests/snippets/stdlib_ssl_short_recv.py:50:9      - Unknown word (ssock)      -- ssock = server_context.wrap
 extra_tests/snippets/stdlib_ssl_short_recv.py:52:13     - Unknown word (ssock)      -- ssock.sendall(DATA)
 extra_tests/snippets/stdlib_ssl_short_recv.py:54:13     - Unknown word (ssock)      -- ssock.close()
 extra_tests/snippets/stdlib_subprocess.py:22:36     - Unknown word (unixy)      -- make work in a non-unixy environment (something
-extra_tests/snippets/stdlib_time.py:135:54    - Unknown word (février)    -- "%B", february) == "février"
-extra_tests/snippets/stdlib_time.py:138:22    - Unknown word (février)    -- == "[février] 🐍 \ud800\0" + "202
-extra_tests/snippets/stdlib_time.py:140:60    - Unknown word (février)    -- 300, february) == "février" * 300
+extra_tests/snippets/stdlib_time.py:141:54    - Unknown word (février)    -- "%B", february) == "février"
+extra_tests/snippets/stdlib_time.py:144:22    - Unknown word (février)    -- == "[février] 🐍 \ud800\0" + "202
+extra_tests/snippets/stdlib_time.py:146:60    - Unknown word (février)    -- 300, february) == "février" * 300
 extra_tests/snippets/stdlib_traceback.py:38:55     - Unknown word (valu)       -- suggestions(["value"], "valu") == "value"
+extra_tests/snippets/stdlib_typing.py:317:34    - Unknown word (udfff)      -- = Name("Scope.Alias\udfff")
 extra_tests/snippets/stdlib_unicode_shared.py:101:23    - Unknown word (straße)     -- assert re.fullmatch(r"straße", "STRAßE", re.IGNORECASE
 extra_tests/snippets/stdlib_unicode_shared.py:41:32     - Unknown word (strasse)    -- Straße".casefold() == "strasse"
 extra_tests/snippets/stdlib_unicode_shared.py:41:9      - Unknown word (Straße)     -- assert "Straße".casefold() == "strasse
@@ -11197,6 +11302,7 @@ extra_tests/snippets/testutils.py:71:28     - Unknown word (klass)      -- asser
 extra_tests/snippets/testutils.py:73:33     - Unknown word (klass)      -- lambda: isinstance(obj, klass), ["isisntance(", _typed
 extra_tests/snippets/testutils.py:73:43     - Unknown word (isisntance) -- isinstance(obj, klass), ["isisntance(", _typed(obj), ","
 extra_tests/snippets/testutils.py:73:75     - Unknown word (klass)      -- , _typed(obj), ",", klass, ")"]
+extra_tests/snippets/vm_frame_locals.py:248:44    - Unknown word (AGEN)       -- generator, "ag_state", "AGEN_CLOSED"),
 extra_tests/test_snippets.py:27:5      - Unknown word (pushd)      -- def pushd(path):
 host_env_proposal.md:217:14    - Unknown word (hchmod)     -- pub fn win32_hchmod(handle: HANDLE, mode
 host_env_proposal.md:29:10     - Unknown word (hchmod)     -- - `win32_hchmod()`, `win32_lchmod()
@@ -11304,11 +11410,11 @@ scripts/update_lib/deps.py:327:19    - Unknown word (xpickle)     -- "test_xpick
 scripts/update_lib/deps.py:328:14    - Unknown word (xpickle)     -- "xpickle_worker.py",
 scripts/update_lib/deps.py:547:19    - Unknown word (genexps)     -- "test_genexps.py",
 scripts/update_lib/deps.py:556:19    - Unknown word (descrtut)    -- "test_descrtut.py",
-scripts/update_lib/deps.py:576:19    - Unknown word (memoryio)    -- "test_memoryio.py",
 scripts/update_lib/deps.py:5:34      - Unknown word (libregrtest) -- library paths (e.g., libregrtest at Lib/test/libregrtest
 scripts/update_lib/deps.py:5:58      - Unknown word (libregrtest) -- libregrtest at Lib/test/libregrtest/)
-scripts/update_lib/deps.py:887:7     - Unknown word (profilee)    -- # profilee is used by test_monitoring
-scripts/update_lib/deps.py:889:24    - Unknown word (profilee)    -- "hard_deps": ["profilee"],
+scripts/update_lib/deps.py:884:7     - Unknown word (profilee)    -- # profilee is used by test_monitoring
+scripts/update_lib/deps.py:886:24    - Unknown word (profilee)    -- "hard_deps": ["profilee"],
+scripts/update_lib/tests/test_copy_lib.py:73:43     - Unknown word (xffasset)   -- assets/data.bin": b"\x00\xffasset",
 scripts/update_lib/tests/test_deps.py:74:26     - Unknown word (pymymodule) -- (lib_dir / "_pymymodule.py").write_text("#
 scripts/update_lib/tests/test_deps.py:74:57     - Unknown word (pymymodule) -- py").write_text("# _pymymodule")
 scripts/update_lib/tests/test_deps.py:79:46     - Unknown word (pymymodule) -- assertIn(tmpdir / "Lib" / "_pymymodule.py", paths)
