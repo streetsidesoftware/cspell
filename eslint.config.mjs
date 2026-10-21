@@ -48,6 +48,7 @@ export default defineConfig(
             'unicorn/no-useless-undefined': 'off', // Breaks return types and other things
             'unicorn/no-zero-fractions': 'off',
             'unicorn/number-literal-case': 'off', // doesn't fix anything, might conflict with other rules.
+            'unicorn/prefer-default-parameters': 'off', // Its fixes change behavior: a default replaces only undefined, not null, '' or 0. Defaults can make signatures harder to read.
             'unicorn/prefer-event-target': 'off', // It is broken
             'unicorn/prefer-logical-operator-over-ternary': 'off', // single line ternary is fine
             'unicorn/prefer-math-trunc': 'off', // incorrectly sets Enums.
@@ -117,7 +118,6 @@ export default defineConfig(
             'unicorn/prefer-blob-reading-methods': 'error',
             'unicorn/prefer-code-point': 'error',
             'unicorn/prefer-date-now': 'error',
-            'unicorn/prefer-default-parameters': ['error', { checkFallbackExpressions: false }], // A default only replaces undefined; `||` and `??` fallbacks are often intended.
             'unicorn/prefer-dom-node-append': 'error',
             'unicorn/prefer-dom-node-dataset': 'error',
             'unicorn/prefer-dom-node-remove': 'error',
