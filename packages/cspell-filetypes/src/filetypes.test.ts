@@ -14,6 +14,11 @@ describe('Validate LanguageIds', () => {
         ${'hs'}     | ${['haskell']}
         ${'PNG'}    | ${['image']}
         ${'.m'}     | ${['matlab', 'objective-c']}
+        ${'.f90'}   | ${['fortran', 'FortranFreeForm']}
+        ${'.F90'}   | ${['fortran', 'FortranFreeForm']}
+        ${'.cuf'}   | ${['fortran', 'FortranFreeForm']}
+        ${'.f'}     | ${['fortran', 'FortranFixedForm']}
+        ${'.ftn'}   | ${['fortran', 'FortranFixedForm']}
     `('getLanguagesForExt $ext', ({ ext, expected }) => {
         expect(LangId.getFileTypesForExt(ext)).toEqual(expected);
     });
@@ -45,6 +50,9 @@ describe('Validate LanguageIds', () => {
         ${'script.matlab'}                   | ${['matlab']}
         ${'data.mat'}                        | ${['matlab-binary']}
         ${'code.ts.map'}                     | ${['json', 'map']}
+        ${'solver.F90'}                      | ${['fortran', 'FortranFreeForm']}
+        ${'kernel.cuf'}                      | ${['fortran', 'FortranFreeForm']}
+        ${'legacy.FOR'}                      | ${['fortran', 'FortranFixedForm']}
     `('getLanguagesForBasename $filename', ({ filename, expected }) => {
         expect(LangId.findMatchingFileTypes(filename)).toEqual(expected);
     });
