@@ -11,10 +11,15 @@ type UrlOrReference = URL | FileReference;
 
 export interface RedirectOptions {
     /**
-     * Option ts to mask the capabilities of the provider.
-     * @default: -1
+     * A bit mask of {@link FSCapabilityFlags} applied to the capabilities of the private file system.
+     * Ignored when `capabilities` is set.
+     * @default -1
      */
     capabilitiesMask?: number;
+    /**
+     * The capabilities of the redirected file system.
+     * When set, it replaces the capabilities of the private file system, and `capabilitiesMask` is ignored.
+     */
     capabilities?: FSCapabilityFlags;
 }
 
@@ -23,7 +28,7 @@ class RedirectProvider implements VFileSystemProvider {
         readonly name: string,
         readonly publicRoot: URL,
         readonly privateRoot: URL,
-        readonly options: RedirectOptions = { capabilitiesMask: -1 },
+        readonly options: RedirectOptions,
     ) {}
 
     getFileSystem(url: URL, next: (url: URL) => VProviderFileSystem | undefined): VProviderFileSystem | undefined {
@@ -68,7 +73,7 @@ export function createRedirectProvider(
     name: string,
     publicRoot: URL,
     privateRoot: URL,
-    options?: RedirectOptions,
+    options: RedirectOptions = {},
 ): VFileSystemProvider {
     assert(publicRoot.pathname.endsWith('/'), 'publicRoot must end with a slash');
     assert(privateRoot.pathname.endsWith('/'), 'privateRoot must end with a slash');
