@@ -1,4 +1,7 @@
+import * as path from 'node:path';
+
 import type { ProgressFileBegin, ProgressFileComplete } from '@cspell/cspell-types';
+import { toFileDirURL } from '@cspell/url';
 import { Chalk } from 'chalk';
 import { afterEach, describe, expect, test, vi } from 'vitest';
 
@@ -111,6 +114,36 @@ describe('cli-reporter perf summary', () => {
                 '  Total Time      :    250.00ms',
             ]),
         );
+    });
+});
+
+describe('cli-reporter issue file names', () => {
+    afterEach(() => {
+        vi.restoreAllMocks();
+    });
+
+    const root = path.resolve('project');
+    const stdinRoot = toFileDirURL(root).href.replace(/^file:/, 'stdin:');
+    const stdinFile = new URL('src/b.ts', stdinRoot).href;
+
+    test.each`
+        uri          | relative | expected
+        ${stdinRoot} | ${true}  | ${'stdin'}
+        ${stdinRoot} | ${false} | ${'stdin'}
+        ${stdinFile} | ${true}  | ${'src/b.ts'}
+        ${stdinFile} | ${false} | ${stdinFile}
+    `('issue in $uri relative: $relative', ({ uri, relative, expected }) => {
+        vi.spyOn(console.stdoutChannel, 'getColorLevel').mockReturnValue(0);
+        const lines: string[] = [];
+        vi.spyOn(console.stdoutChannel, 'write').mockImplementation((msg) => lines.push(msg));
+
+        const reporter = getReporter(
+            { fileGlobs: [], root, relative, issues: true, progress: false },
+            { issueTemplate: '$filename' },
+        );
+        reporter.issue({ ...genIssue('line'), uri });
+
+        expect(lines).toEqual([expected + '\n']);
     });
 });
 

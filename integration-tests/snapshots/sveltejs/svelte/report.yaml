@@ -3,9 +3,9 @@ Repository: sveltejs/svelte
 Url: https://github.com/sveltejs/svelte.git
 Args: '["**"]'
 Summary:
-  files: 9137
-  filesWithIssues: 633
-  issues: 4149
+  files: 9212
+  filesWithIssues: 636
+  issues: 4155
   errors: 0
 Errors: []
 
@@ -1726,7 +1726,7 @@ issues:
   - "packages/svelte/src/internal/client/dev/debug.js:476:20         cchild          U       console.group('%cchild branches', 'font-weight"
   - "packages/svelte/src/internal/client/dev/tracing.js:105:28       cran    U       console.log(`${prefix} %cran outside of an effect"
   - "packages/svelte/src/internal/client/dom/blocks/await.js:60:91       treeshaken      U       let` or else it isn't treeshaken out */"
-  - "packages/svelte/src/internal/client/dom/blocks/boundary.js:486:18       oncommit    U       current_batch.oncommit(() => {"
+  - "packages/svelte/src/internal/client/dom/blocks/boundary.js:483:18       oncommit    U       current_batch.oncommit(() => {"
   - "packages/svelte/src/internal/client/dom/blocks/branches.js:214:12       unskip          U       batch.unskip_effect(effect);"
   - "packages/svelte/src/internal/client/dom/blocks/branches.js:229:10       ondiscard       U       batch.ondiscard(this.#discard);"
   - "packages/svelte/src/internal/client/dom/blocks/each.js:86:62        outrogroups     U       EachOutroGroup>} */ (state.outrogroups);"
@@ -1738,11 +1738,10 @@ issues:
   - "packages/svelte/src/internal/client/proxy.js:41:12          proxyable       U       // if non-proxyable, a component instance"
   - "packages/svelte/src/internal/client/proxy.js:96:32          inspectable     U       /** @type {any} */ (inspectable_array(/** @type {any"
   - "packages/svelte/src/internal/client/reactivity/batch.js:60:14       travelling      U       * When time travelling (i.e. working in one"
-  - "packages/svelte/src/internal/client/reactivity/batch.js:204:3       unskipped       U       #unskipped_branches = new Set("
-  - "packages/svelte/src/internal/client/reactivity/batch.js:434:77      unskipping      U       rescheduled through unskipping the skipped branches"
-  - "packages/svelte/src/internal/client/reactivity/batch.js:988:85      AFAICT          U       legacy `$:` effects AFAICT — we can remove later"
-  - "packages/svelte/src/internal/client/reactivity/batch.js:1148:82     nullpointers    U       else we could run into nullpointers"
-  - "packages/svelte/src/internal/client/reactivity/batch.js:1465:32     thath           U       they depend on things thath changed"
+  - "packages/svelte/src/internal/client/reactivity/batch.js:198:3       unskipped       U       #unskipped_branches = new Set("
+  - "packages/svelte/src/internal/client/reactivity/batch.js:421:77      unskipping      U       rescheduled through unskipping the skipped branches"
+  - "packages/svelte/src/internal/client/reactivity/batch.js:978:85      AFAICT          U       legacy `$:` effects AFAICT — we can remove later"
+  - "packages/svelte/src/internal/client/reactivity/batch.js:1138:82     nullpointers    U       else we could run into nullpointers"
   - "packages/svelte/src/internal/client/reactivity/deriveds.js:129:6        deferreds       U       var deferreds = new Set();"
   - "packages/svelte/src/internal/client/reactivity/effects.js:13:2          untracking      U       untracking,"
   - "packages/svelte/src/internal/client/reactivity/sources.js:286:63        overfiring      U       - this way we avoid overfiring."

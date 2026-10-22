@@ -6,7 +6,7 @@ declare const __dirname: string;
 let _dirname: string;
 
 try {
-    if (typeof import.meta.url !== 'string') throw new Error('assert');
+    if (typeof import.meta.url !== 'string') throw new TypeError('assert');
     _dirname = fileURLToPath(new URL('.', import.meta.url));
 } catch {
     _dirname = __dirname;

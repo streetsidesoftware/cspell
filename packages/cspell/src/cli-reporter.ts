@@ -24,6 +24,7 @@ import { checkTemplate, formatIssue } from './formatIssue.js';
 import type { CSpellReporterConfiguration } from './models.js';
 import type { LinterCliOptions } from './options.js';
 import type { FinalizedReporter } from './reporters/index.js';
+import { STDIN, STDINProtocol } from './util/constants.js';
 import type { PerfMeasurement } from './util/perfMeasurements.js';
 import { getPerfMeasurements } from './util/perfMeasurements.js';
 import type { Table, TableRow } from './util/table.js';
@@ -84,9 +85,22 @@ function nullEmitter() {
 
 function relativeUriFilename(uri: string, rootURL: URL): string {
     const url = toFileURL(uri);
+    if (isStdinWithoutPath(url)) return STDIN;
     const rel = urlRelative(rootURL, url);
     if (rel.startsWith('..')) return toFilePathOrHref(url);
     return rel;
+}
+
+function absoluteUriFilename(uri: string, rootURL: URL): string {
+    const url = toFileURL(uri, rootURL);
+    return isStdinWithoutPath(url) ? STDIN : toFilePathOrHref(url);
+}
+
+/**
+ * Plain `stdin` is given the current directory as its location, so it has no file name to show.
+ */
+function isStdinWithoutPath(url: URL): boolean {
+    return url.protocol === STDINProtocol && url.pathname.endsWith('/');
 }
 
 function reportProgress(io: IO, p: ProgressItem, cwdURL: URL, options: CSpellReporterConfiguration) {
@@ -234,7 +248,7 @@ export function getReporter(options: ReporterOptions, config?: CSpellReporterCon
     function relativeIssue(fn: (i: ReporterIssue) => void): (i: Issue) => void {
         const fnFilename = options.relative
             ? (uri: string) => relativeUriFilename(uri, rootURL)
-            : (uri: string) => toFilePathOrHref(toFileURL(uri, rootURL));
+            : (uri: string) => absoluteUriFilename(uri, rootURL);
         return (i: Issue) => {
             const fullFilename = i.uri ? toFilePathOrHref(toFileURL(i.uri, rootURL)) : '';
             const filename = i.uri ? fnFilename(i.uri) : '';

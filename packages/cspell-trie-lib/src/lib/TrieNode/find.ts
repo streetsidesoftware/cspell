@@ -326,7 +326,6 @@ function findLegacyCompoundNode(
         { n: root, usedRoots: 1, subLength: 0, isCompound: false, cr: undefined, caseMatched: true },
     ];
 
-    // eslint-disable-next-line unicorn/prefer-default-parameters
     const sep = compoundSeparator ?? '+';
 
     const w = word;
