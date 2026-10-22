@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 2392, Issues found: 31365 in 1663 files.
+ CSpell: Files checked: 2392, Issues found: 31361 in 1663 files.
  exit code: 1
 CODING_STANDARDS.md:111:23    - Unknown word (intvl)      -- // Could be 'date_intvl_create_from_date_str
 CODING_STANDARDS.md:120:8     - Unknown word (setclientencoding) -- pg_setclientencoding
@@ -2209,16 +2209,12 @@ ext/bcmath/libbcmath/src/xsse.h:639:15    - Unknown word (SSSE)         -- #if d
 ext/bcmath/libbcmath/src/xsse.h:641:9     - Unknown word (XSSSE)        -- #define XSSSE3
 ext/bcmath/libbcmath/src/xsse.h:645:9     - Unknown word (XSSSE)        -- #define XSSSE3
 ext/bcmath/libbcmath/src/xsse.h:651:38    - Unknown word (alignr)       -- FORCE_INLINE __m128i _mm_alignr_epi8(__m128i a, __m
-ext/bcmath/libbcmath/src/xsse.h:703:13    - Unknown word (hadd)         -- #define _mm_hadd_epi16(a, b) (vreinterpretq
-ext/bcmath/libbcmath/src/xsse.h:704:13    - Unknown word (hadd)         -- #define _mm_hadd_epi32(a, b) (vreinterpretq
 ext/bcmath/libbcmath/src/xsse.h:705:38    - Unknown word (hadds)        -- FORCE_INLINE __m128i _mm_hadds_epi16(__m128i a, __m
 ext/bcmath/libbcmath/src/xsse.h:709:20    - Unknown word (vuzp)         -- int16x8_t evens = vuzp1q_s16(a16, b16);
 ext/bcmath/libbcmath/src/xsse.h:710:19    - Unknown word (vuzp)         -- int16x8_t odds = vuzp2q_s16(a16, b16);
 ext/bcmath/libbcmath/src/xsse.h:711:30    - Unknown word (vqaddq)       -- vreinterpretq_s8_s16(vqaddq_s16(evens, odds));
-ext/bcmath/libbcmath/src/xsse.h:714:38    - Unknown word (hsub)         -- FORCE_INLINE __m128i _mm_hsub_epi16(__m128i a, __m
 ext/bcmath/libbcmath/src/xsse.h:718:21    - Unknown word (vuzp)         -- uint16x8_t evens = vuzp1q_u16(a16, b16);
 ext/bcmath/libbcmath/src/xsse.h:719:20    - Unknown word (vuzp)         -- uint16x8_t odds = vuzp2q_u16(a16, b16);
-ext/bcmath/libbcmath/src/xsse.h:722:38    - Unknown word (hsub)         -- FORCE_INLINE __m128i _mm_hsub_epi32(__m128i a, __m
 ext/bcmath/libbcmath/src/xsse.h:730:38    - Unknown word (hsubs)        -- FORCE_INLINE __m128i _mm_hsubs_epi16(__m128i a, __m
 ext/bcmath/libbcmath/src/xsse.h:736:30    - Unknown word (vqsubq)       -- vreinterpretq_s8_s16(vqsubq_s16(evens, odds));
 ext/bcmath/libbcmath/src/xsse.h:739:38    - Unknown word (maddubs)      -- FORCE_INLINE __m128i _mm_maddubs_epi16(__m128i a, __m
@@ -2229,10 +2225,10 @@ ext/bcmath/libbcmath/src/xsse.h:755:24    - Unknown word (vmovl)        -- int16
 ext/bcmath/libbcmath/src/xsse.h:757:21    - Unknown word (vmulq)        -- int16x8_t mul_lo = vmulq_s16(wide_a_lo, wide
 ext/bcmath/libbcmath/src/xsse.h:758:21    - Unknown word (vmulq)        -- int16x8_t mul_hi = vmulq_s16(wide_a_hi, wide
 ext/bcmath/libbcmath/src/xsse.h:766:38    - Unknown word (mulhrs)       -- FORCE_INLINE __m128i _mm_mulhrs_epi16(__m128i a, __m
-ext/bcmath/libbcmath/src/xsse.h:781:21    - Unknown word (vaddq)       -- int32x4_t add_lo = vaddq_s32(mul_lo, repeat_
-ext/bcmath/libbcmath/src/xsse.h:787:26    - Unknown word (vqmovn)      -- 6x4_t narrowed_lo = vqmovn_s32(lo);
-ext/bcmath/libbcmath/src/xsse.h:798:28    - Unknown word (vcltq)       -- x16_t upos_cmp_ret = vcltq_s8(repeat_0x00, b);
-ext/bcmath/libbcmath/src/xsse.h:799:28    - Unknown word (vcltq)       -- x16_t uneg_cmp_ret = vcltq_s8(b, repeat_0x00);
+ext/bcmath/libbcmath/src/xsse.h:781:21    - Unknown word (vaddq)        -- int32x4_t add_lo = vaddq_s32(mul_lo, repeat_
+ext/bcmath/libbcmath/src/xsse.h:787:26    - Unknown word (vqmovn)       -- 6x4_t narrowed_lo = vqmovn_s32(lo);
+ext/bcmath/libbcmath/src/xsse.h:798:28    - Unknown word (vcltq)        -- x16_t upos_cmp_ret = vcltq_s8(repeat_0x00, b);
+ext/bcmath/libbcmath/src/xsse.h:799:28    - Unknown word (vcltq)        -- x16_t uneg_cmp_ret = vcltq_s8(b, repeat_0x00);
 ext/bcmath/libbcmath/src/xsse.h:802:23    - Unknown word (vandq)       -- int8x16_t pos_mask = vandq_s8(pos_cmp_ret, repeat
 ext/bcmath/libbcmath/src/xsse.h:805:19    - Unknown word (vorrq)       -- int8x16_t mask = vorrq_s8(pos_mask, neg_mask
 ext/bcmath/libbcmath/src/xsse.h:807:9     - Unknown word (vmulq)       -- return vmulq_s8(a, mask);
