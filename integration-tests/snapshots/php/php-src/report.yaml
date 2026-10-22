@@ -5,7 +5,7 @@ Args: '["--config=${repoConfig}/cspell.json","**/*.{md,c,h,php}"]'
 Summary:
   files: 2392
   filesWithIssues: 1663
-  issues: 31365
+  issues: 31361
   errors: 0
 Errors: []
 
@@ -675,16 +675,12 @@ issues:
   - "ext/bcmath/libbcmath/src/xsse.h:641:9       XSSSE               U       #define XSSSE3"
   - "ext/bcmath/libbcmath/src/xsse.h:645:9       XSSSE               U       #define XSSSE3"
   - "ext/bcmath/libbcmath/src/xsse.h:651:38      alignr              U       FORCE_INLINE __m128i _mm_alignr_epi8(__m128i a, __m"
-  - "ext/bcmath/libbcmath/src/xsse.h:703:13      hadd                U       #define _mm_hadd_epi16(a, b) (vreinterpretq"
-  - "ext/bcmath/libbcmath/src/xsse.h:704:13      hadd                U       #define _mm_hadd_epi32(a, b) (vreinterpretq"
   - "ext/bcmath/libbcmath/src/xsse.h:705:38      hadds               U       FORCE_INLINE __m128i _mm_hadds_epi16(__m128i a, __m"
   - "ext/bcmath/libbcmath/src/xsse.h:709:20      vuzp                U       int16x8_t evens = vuzp1q_s16(a16, b16);"
   - "ext/bcmath/libbcmath/src/xsse.h:710:19      vuzp                U       int16x8_t odds = vuzp2q_s16(a16, b16);"
   - "ext/bcmath/libbcmath/src/xsse.h:711:30      vqaddq              U       vreinterpretq_s8_s16(vqaddq_s16(evens, odds));"
-  - "ext/bcmath/libbcmath/src/xsse.h:714:38      hsub                U       FORCE_INLINE __m128i _mm_hsub_epi16(__m128i a, __m"
   - "ext/bcmath/libbcmath/src/xsse.h:718:21      vuzp                U       uint16x8_t evens = vuzp1q_u16(a16, b16);"
   - "ext/bcmath/libbcmath/src/xsse.h:719:20      vuzp                U       uint16x8_t odds = vuzp2q_u16(a16, b16);"
-  - "ext/bcmath/libbcmath/src/xsse.h:722:38      hsub                U       FORCE_INLINE __m128i _mm_hsub_epi32(__m128i a, __m"
   - "ext/bcmath/libbcmath/src/xsse.h:730:38      hsubs               U       FORCE_INLINE __m128i _mm_hsubs_epi16(__m128i a, __m"
   - "ext/bcmath/libbcmath/src/xsse.h:736:30      vqsubq              U       vreinterpretq_s8_s16(vqsubq_s16(evens, odds));"
   - "ext/bcmath/libbcmath/src/xsse.h:739:38      maddubs             U       FORCE_INLINE __m128i _mm_maddubs_epi16(__m128i a, __m"
