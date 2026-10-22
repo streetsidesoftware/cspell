@@ -84,7 +84,7 @@ export async function normalizeReporters(
         if (typeof s === 'string') {
             return resolve(s);
         }
-        if (!Array.isArray(s) || typeof s[0] !== 'string') throw new Error('Invalid Reporter');
+        if (!Array.isArray(s) || typeof s[0] !== 'string') throw new TypeError('Invalid Reporter');
         // Preserve the shape of Reporter Setting while resolving the reporter file.
         const [r, ...rest] = s;
         return [await resolve(r), ...rest];
