@@ -12,6 +12,9 @@ on:
       - '.github/workflows/integration-test.yml'
       - '.github/actions/build-for-integrations/**'
       - '.github/actions/setup-pnpm/**'
+      - '!packages/cspell-tools/**'
+      - '!packages/cspell-tools-alias/**'
+      - '!packages/hunspell-reader/**'
       - '!website/**'
   push:
     branches:
@@ -28,6 +31,9 @@ on:
       - '.github/workflows/integration-test.yml'
       - '.github/actions/build-for-integrations/**'
       - '.github/actions/setup-pnpm/**'
+      - '!packages/cspell-tools/**'
+      - '!packages/cspell-tools-alias/**'
+      - '!packages/hunspell-reader/**'
       - '!website/**'
   # Run on demand
   workflow_dispatch:
