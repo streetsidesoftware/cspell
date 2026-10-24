@@ -3,7 +3,9 @@
  */
 
 import { promises as fs } from 'node:fs';
-import { inject, relativeToSite } from './lib/utils.mts';
+import { unindent } from '@streetsidesoftware/unindent';
+
+import { relativeToSite } from './lib/utils.mts';
 import { URL_SITE_COMPONENTS, URL_SITE_PKG } from './lib/constants.mts';
 
 const CONTRIBUTORS_JSON_URL = new URL('_static/contributors.json', URL_SITE_PKG);
@@ -27,7 +29,7 @@ function formatContributor(contributor: Contributor): string {
 }
 
 function makeContributorMdx(contributors: Contributor[]): string {
-    const mdx = inject`\
+    const mdx = unindent`\
         ---
         # AUTO-GENERATED ALL CHANGES WILL BE LOST
         # See \`${relativeToSite(import.meta.url)}\`
