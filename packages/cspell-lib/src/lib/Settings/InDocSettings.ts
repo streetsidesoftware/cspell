@@ -320,7 +320,10 @@ const localeLikeRegEx = /^[a-z][a-z0-9_-]{0,16}[a-z0-9]$/i;
 
 function parseLocale(acc: CSpellUserSettings, match: string): CSpellUserSettings {
     // Remove the closing marker of an HTML or block comment, it is not a locale.
-    const parts = match.split(/[\s,]+/).slice(1);
+    const parts = match
+        .replace(/[^a-z0-9]+$/i, '')
+        .split(/[\s,]+/)
+        .slice(1);
     const stop = parts.findIndex((locale) => !localeLikeRegEx.test(locale));
     if (stop !== -1) {
         parts.splice(stop);
