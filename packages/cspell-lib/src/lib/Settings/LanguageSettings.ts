@@ -61,30 +61,36 @@ export function normalizeLocale(locale: LocaleId | LocaleId[]): Set<LocaleId> {
     return _normalizeLocale(locale);
 }
 
-export function normalizeLocaleIntl(locale: LocaleId | LocaleId[]): Set<LocaleId> {
-    const values = [...normalizeLocale(locale)].map((locale) =>
-        locale.replace(
-            /^([a-z]{2})(?:-?([a-z]{4}))?-?([a-z]{2})$/,
-            (_, lang: string, script?: string, region?: string) => toLocaleIntl(lang, script, region),
-        ),
-    );
-    return new Set(values);
-}
-
 /**
- * See: https://developer.mozilla.org/en-US/docs/Glossary/BCP_47_language_tag
- * @returns locale normalized to BCP_47
+ * Normalize locales to the form `Intl` uses, for example `en_us` becomes `en-US`.
+ * Locales that `Intl` rejects are dropped.
  */
-function toLocaleIntl(lang: string, script?: string, region?: string): string {
-    const parts = [lang];
-    if (script) parts.push(firstUpper(script.toLowerCase()));
-    if (region) parts.push(region.toUpperCase());
-    return parts.join('-');
+export function normalizeLocaleIntl(locale: LocaleId | LocaleId[]): Set<LocaleId> {
+    return _normalizeLocaleIntl(typeof locale === 'string' ? locale : locale.join(','));
 }
 
-function firstUpper(str: string): string {
-    const [first, ...rest] = [...str];
-    return [first.toUpperCase(), ...rest].join('');
+const _normalizeLocaleIntl = memoize(__normalizeLocaleIntl);
+function __normalizeLocaleIntl(locale: LocaleId): Set<LocaleId> {
+    const locales = localesToList(locale)
+        .map((locale) => toLocaleIntl(locale.replaceAll('_', '-')))
+        .filter((locale) => locale !== undefined);
+    return new Set(locales);
+}
+
+// A locale written without separators, for example `enUS` or `zhHantTW`.
+const regExpLocaleWithoutSeparators = /^([a-z]{2})([a-z]{4})?([a-z]{2})$/i;
+
+function toLocaleIntl(locale: string): string | undefined {
+    locale = locale.replace(
+        regExpLocaleWithoutSeparators,
+        (_, lang: string, script: string | undefined, region: string) =>
+            script ? `${lang}-${script}-${region}` : `${lang}-${region}`,
+    );
+    try {
+        return Intl.getCanonicalLocales(locale)[0];
+    } catch {
+        return undefined;
+    }
 }
 
 export function isLocaleInSet(locale: LocaleId | LocaleId[], setOfLocals: Set<LocaleId>): boolean {
@@ -93,36 +99,16 @@ export function isLocaleInSet(locale: LocaleId | LocaleId[], setOfLocals: Set<Lo
 }
 
 /**
- * Normalize a locale for use with `Intl` and `toLocaleLowerCase`. Locales that aren't valid are dropped.
+ * Normalize a locale for use with `Intl` and `toLocaleLowerCase`. Locales that `Intl` rejects are dropped.
  * @param locale - a locale or a list of locales, for example `en,tr_TR`.
  * @returns the valid locales, or `undefined` if there are none.
  */
 export function normalizeLocaleForIntl(locale: LocaleId | LocaleId[] | undefined): string | string[] | undefined {
     if (!locale) return undefined;
-    const locales = [...normalizeLocaleIntl(locale)].filter((locale) => isValidLocaleIntlFormat(locale));
+    const locales = [...normalizeLocaleIntl(locale)];
     if (!locales.length) return undefined;
     if (locales.length === 1) return locales[0];
     return locales;
-}
-
-const regExpValidIntlLocaleStrict = /^[a-z]{2}(-[A-Z]{2})?$/;
-const regExpValidIntlLocale = new RegExp(regExpValidIntlLocaleStrict, 'i');
-
-/**
- * Test if a locale should be ok with Intl
- * @param locale - locale string
- * @param strict - case must match
- * @returns true if it matches the standard 2 letter or 4 letter forms.
- */
-export function isValidLocaleIntlFormat(locale: LocaleId | LocaleId[], strict = false): boolean {
-    if (typeof locale === 'string')
-        return strict ? regExpValidIntlLocaleStrict.test(locale) : regExpValidIntlLocale.test(locale);
-
-    for (const item of locale) {
-        if (!isValidLocaleIntlFormat(item, strict)) return false;
-    }
-
-    return locale.length > 0;
 }
 
 const cacheCalcSettingsForLanguage = createAutoResolveWeakCache<
