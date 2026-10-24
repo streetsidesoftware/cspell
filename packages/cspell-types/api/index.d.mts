@@ -1,4 +1,3 @@
-//#region src/cspell-vfs.d.ts
 /**
  * Binary data for CSpellVFS file.
  * This can be exported by a JavaScript based CSpell Configuration file.
@@ -58,8 +57,6 @@ type CSpellVFSFileUrl = string;
  * @stability experimental
  */
 type CSpellVFS = Record<CSpellVFSFileUrl, CSpellVFSFileEntry>;
-//#endregion
-//#region src/SuggestionsConfiguration.d.ts
 interface SuggestionsConfiguration {
   /**
    * Number of suggestions to make.
@@ -84,8 +81,6 @@ interface SuggestionsConfiguration {
    */
   suggestionNumChanges?: number;
 }
-//#endregion
-//#region src/TextOffset.d.ts
 interface TextOffset {
   /**
    * The text found at the offset. If the text has been transformed, then the length might not match `length`.
@@ -108,8 +103,6 @@ interface TextDocumentOffset extends TextOffset {
   col: number;
   line: TextOffset;
 }
-//#endregion
-//#region src/CSpellReporter.d.ts
 interface Suggestion {
   /**
    * Word to suggest.
@@ -394,8 +387,6 @@ interface UnknownWordsConfiguration {
    */
   unknownWords?: UnknownWordsChoices | undefined;
 }
-//#endregion
-//#region src/CSpellValidation.d.ts
 interface CSpellSettingsValidation {
   /**
    * Control which segments of text emitted by a parser are spell checked, based upon
@@ -454,8 +445,6 @@ interface ValidationTags {
    */
   [tag: TagPattern]: boolean | undefined;
 }
-//#endregion
-//#region src/suggestionCostsDef.d.ts
 /**
  * A WeightedMapDef enables setting weights for edits between related characters and substrings.
  *
@@ -542,8 +531,6 @@ interface CostMapDefInsDel extends CostMapDefBase {
 interface CostMapDefSwap extends CostMapDefBase {
   swap: number;
 }
-//#endregion
-//#region src/DictionaryInformation.d.ts
 /**
  * Provides extra information about the dictionary.
  *
@@ -763,8 +750,6 @@ interface PatternAdjustment {
   /** The amount of penalty to apply. */
   penalty: number;
 }
-//#endregion
-//#region src/InlineDictionary.d.ts
 interface InlineDictionary {
   /**
    * List of words to be considered correct.
@@ -817,8 +802,6 @@ interface InlineDictionary {
    */
   suggestWords?: string[];
 }
-//#endregion
-//#region src/DictionaryDefinition.d.ts
 type DictionaryDefinition = DictionaryDefinitionPreferred | DictionaryDefinitionCustom | DictionaryDefinitionAugmented | DictionaryDefinitionInline | DictionaryDefinitionSimple | DictionaryDefinitionAlternate | DictionaryDefinitionLegacy;
 type DictionaryFileTypes = "S" | "W" | "C" | "T";
 interface DictionaryDefinitionBase {
@@ -1190,8 +1173,6 @@ type DictionaryKindSuggestWords = "suggest-words";
  * - `suggest-words` - A dictionary containing suggested word corrections.
  */
 type DictionaryKind = DictionaryKindWords | DictionaryKindFlagWords | DictionaryKindIgnoreWords | DictionaryKindSuggestWords;
-//#endregion
-//#region src/features.d.ts
 /**
  * These are experimental features and are subject to change or removal without notice.
  */
@@ -1232,8 +1213,6 @@ type FeatureEnableOnly = boolean;
 interface FeatureWithConfiguration {
   enable: boolean;
 }
-//#endregion
-//#region src/Parser/types.d.ts
 /**
  * A SourceMap is used to map or transform the location of a piece of text back to its original offsets.
  * This is necessary in order to report the correct location of a spelling issue.
@@ -1318,8 +1297,6 @@ interface TextDocumentFragment extends TextDocument {
    */
   readonly fullText?: string;
 }
-//#endregion
-//#region src/Parser/Mapped.d.ts
 interface Mapped {
   /**
    * The absolute start and end offset of the text in the source.
@@ -1340,8 +1317,6 @@ interface Mapped {
    */
   map?: SourceMap | undefined;
 }
-//#endregion
-//#region src/Parser/parser.d.ts
 type ParserOptions = Record<string, unknown>;
 type ParserName = string;
 interface Parser {
@@ -1472,8 +1447,6 @@ type ParsedTag = boolean | undefined;
 interface ParsedTags {
   readonly [tag: string]: ParsedTag;
 }
-//#endregion
-//#region src/Parser/TextMap.d.ts
 type MappedText = Readonly<TransformedText>;
 interface TransformedText extends Mapped {
   /**
@@ -1485,8 +1458,6 @@ interface TransformedText extends Mapped {
    */
   rawText?: string | undefined;
 }
-//#endregion
-//#region src/Plugin/index.d.ts
 type CreateParser<Options = unknown> = (name: string, options?: Options) => Promise<DocumentParser | undefined> | DocumentParser | undefined;
 /**
  * @since 10.5.0
@@ -1527,8 +1498,6 @@ interface CSpellSettingsPlugins {
    */
   plugins?: CSpellPlugin[];
 }
-//#endregion
-//#region src/Substitutions.d.ts
 /**
  * The ID for a substitution definition. This is used to reference the substitution definition in the substitutions array.
  * @since 9.7.0
@@ -1584,11 +1553,7 @@ type SubstitutionDefinitions = SubstitutionDefinition[];
  * This is a collection of substitution entries that can be applied to a document before spell checking.
  */
 type Substitutions = (SubstitutionEntry | SubstitutionID)[];
-//#endregion
-//#region src/types.d.ts
 type Serializable = number | string | boolean | null | object;
-//#endregion
-//#region src/WordSegmentation.d.ts
 interface WordSegmentationSettings {
   /**
    * Enables locale-sensitive text segmentation to support languages like Japanese, Chinese, Thai, Lao, Khmer, Myanmar, etc.
@@ -1709,8 +1674,6 @@ interface SoftWordBreakDefinitions {
 interface SoftWordBreaks {
   [name: string]: boolean;
 }
-//#endregion
-//#region src/CSpellSettingsDef.d.ts
 /**
  * These settings come from user and workspace settings.
  */
@@ -2500,24 +2463,15 @@ interface CompatibleEngineVersions {
    */
   [engine: string]: SemVersionPredicate | undefined;
 }
-//#endregion
-//#region src/configFields.d.ts
 type ConfigKeys = Exclude<keyof CSpellUserSettings, "$schema" | "version" | "id">;
 type CSpellUserSettingsFields = { [key in ConfigKeys]: key; };
 export declare const ConfigFields: CSpellUserSettingsFields;
-//#endregion
-//#region src/defaultConfigSettings.d.ts
 export declare const defaultCSpellSettings: {
   readonly ignoreRandomStrings: boolean;
   readonly minRandomLength: number;
 };
-//#endregion
-//#region src/defineConfig.d.ts
 export declare function defineConfig(config: AdvancedCSpellSettings): CSpellSettings;
-//#endregion
-//#region src/merge.d.ts
 export declare function mergeConfig(settings: CSpellSettings[]): CSpellSettings;
 export declare function mergeConfig(...settings: [CSpellSettings, ...CSpellSettings[]]): CSpellSettings;
 export declare function mergeConfig(...settings: [CSpellSettings[], ...CSpellSettings[]]): CSpellSettings;
-//#endregion
 export type { AdvancedCSpellSettings, AdvancedCSpellSettingsWithSourceTrace, AvailableParsers, BaseSetting, CSpellPackageSettings, CSpellPlugin, CSpellPlugin as Plugin, CSpellReporter, CSpellReporterEmitters, CSpellReporterModule, CSpellSettings, CSpellSettingsWithSourceTrace, CSpellUserSettings, CSpellUserSettingsFields, CSpellUserSettingsWithComments, CSpellVFS, CSpellVFSBinaryData, CSpellVFSData, CSpellVFSFile, CSpellVFSFileEntry, CSpellVFSFileUrl, CSpellVFSTextData, CacheFormat, CacheSettings, CacheStrategy, CharacterSet, CharacterSetCosts, CommandLineSettings, CreateParser, CustomDictionaryPath, CustomDictionaryScope, DebugEmitter, DictionaryDefinition, DictionaryDefinitionAlternate, DictionaryDefinitionAugmented, DictionaryDefinitionBase, DictionaryDefinitionCustom, DictionaryDefinitionInline, DictionaryDefinitionInlineFlagWords, DictionaryDefinitionInlineIgnoreWords, DictionaryDefinitionInlineWords, DictionaryDefinitionLegacy, DictionaryDefinitionPreferred, DictionaryDefinitionSimple, DictionaryFileTypes, DictionaryId, DictionaryInformation, DictionaryNegRef, DictionaryPath, DictionaryRef, DictionaryReference, DocumentParser, EditCosts, ErrorEmitter, ErrorLike, ExperimentalBaseSettings, ExperimentalFileSettings, ExtendableSettings, FSPathResolvable, Feature, Features, FeaturesSupportedByReporter, FileSettings, FileSource, FsPath, Glob, GlobDef, ImportFileRef, InMemorySource, Issue, LanguageId, LanguageIdMultiple, LanguageIdMultipleNeg, LanguageIdSingle, LanguageSetting, LanguageSettingFilterFields, LanguageSettingFilterFieldsDeprecated, LanguageSettingFilterFieldsPreferred, LegacySettings, LocalId, LocaleId, MappedText, MatchingFileType, MergeSource, MessageEmitter, MessageType, MessageTypeLookup, OverrideFilterFields, OverrideSettings, ParseResult, ParsedTag, ParsedTags, ParsedText, Parser, ParserName, ParserOptions, Parsers, Pattern, PatternId, PatternRef, PnPSettings, PredefinedPatterns, ProgressBase, ProgressEmitter, ProgressFileBase, ProgressFileBegin, ProgressFileComplete, ProgressItem, ProgressTypes, Range, RegExpPatternDefinition, RegExpPatternList, ReplaceEntry, ReplaceMap, ReportIssueOptions, ReporterConfiguration, ReporterSettings, ReportingConfiguration, ResultEmitter, RunResult, Settings, SimpleGlob, SoftWordBreak, SoftWordBreakDefinitions, SoftWordBreakPattern, SoftWordBreakRegExp, SoftWordBreakRegExpString, SoftWordBreakRule, SoftWordBreaks, Source, SourceMap, SpellingErrorEmitter, SubstitutionDefinition, SubstitutionDefinitions, SubstitutionEntry, SubstitutionID, Substitutions, SuggestionCostMapDef, SuggestionCostsDefs, SuggestionsConfiguration, TagPattern, TextDocument, TextDocumentFragment, TextDocumentOffset, TextOffset, TrustLevel, UnknownWordsChoices, UnknownWordsConfiguration, ValidationTags, Version, VersionLatest, VersionLegacy, WordSegmentationSettings, WorkspaceTrustSettings };

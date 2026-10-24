@@ -1,4 +1,3 @@
-//#region src/Parser/types.d.ts
 /**
  * A SourceMap is used to map or transform the location of a piece of text back to its original offsets.
  * This is necessary in order to report the correct location of a spelling issue.
@@ -83,8 +82,6 @@ interface TextDocumentFragment extends TextDocument {
    */
   readonly fullText?: string;
 }
-//#endregion
-//#region src/Parser/Mapped.d.ts
 interface Mapped {
   /**
    * The absolute start and end offset of the text in the source.
@@ -105,8 +102,6 @@ interface Mapped {
    */
   map?: SourceMap | undefined;
 }
-//#endregion
-//#region src/Parser/parser.d.ts
 type ParserOptions = Record<string, unknown>;
 type ParserName = string;
 interface Parser {
@@ -237,8 +232,6 @@ type ParsedTag = boolean | undefined;
 interface ParsedTags {
   readonly [tag: string]: ParsedTag;
 }
-//#endregion
-//#region src/Parser/TextMap.d.ts
 type MappedText = Readonly<TransformedText>;
 interface TransformedText extends Mapped {
   /**
@@ -250,5 +243,4 @@ interface TransformedText extends Mapped {
    */
   rawText?: string | undefined;
 }
-//#endregion
 export type { DelegateInfo, DocumentParser, MappedText, ParseResult, ParsedTag, ParsedTags, ParsedText, Parser, ParserName, ParserOptions, Range, Scope, ScopeChain, ScopeString, SourceMap, TextDocument, TextDocumentFragment };
