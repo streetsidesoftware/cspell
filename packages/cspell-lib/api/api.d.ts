@@ -8,8 +8,6 @@ import { CSpellConfigFile, CSpellConfigFile as CSpellConfigFile$1, ICSpellConfig
 import "@cspell/cspell-performance-monitor";
 import "@cspell/cspell-types/Parser";
 export * from "@cspell/cspell-types";
-//#endregion
-//#region src/lib/clearCachedFiles.d.ts
 /**
  * Clear the cached files and other cached data.
  * Calling this function will cause the next spell check to take longer because it will need to reload configuration files and dictionaries.
@@ -25,8 +23,6 @@ export declare function clearCachedFiles(): Promise<void>;
  * It is safe to replace {@link clearCaches} with {@link clearCachedFiles}
  */
 export declare function clearCaches(): void;
-//#endregion
-//#region src/lib/util/IUri.d.ts
 interface Uri {
   readonly scheme: string;
   readonly path: string;
@@ -35,8 +31,6 @@ interface Uri {
   readonly query?: string;
 }
 type DocumentUri = Uri | URL | string;
-//#endregion
-//#region src/lib/Document/Document.d.ts
 interface Document {
   uri: UriString;
   text?: string;
@@ -47,18 +41,12 @@ type UriString = string;
 interface DocumentWithText extends Document {
   text: string;
 }
-//#endregion
-//#region src/lib/Document/isBinaryDoc.d.ts
 export declare function isBinaryFile(filename: Uri | URL | string, languageId?: string | string[], text?: string): boolean;
-//#endregion
-//#region src/lib/Models/BufferEncoding.d.ts
 /**
  * The text encodings Node.js supports, the same as its global `BufferEncoding`.
  * Declared here so the published types do not need `@types/node`.
  */
 type BufferEncoding = "ascii" | "utf8" | "utf-8" | "utf16le" | "utf-16le" | "ucs2" | "ucs-2" | "base64" | "base64url" | "latin1" | "binary" | "hex";
-//#endregion
-//#region src/lib/Models/TextDocument.d.ts
 interface Position {
   /**
    * The line number (zero-based).
@@ -146,8 +134,6 @@ interface TextDocumentContentChangeEvent {
 }
 export declare function createTextDocument({ uri, content, languageId, locale, version }: CreateTextDocumentParams): TextDocument;
 export declare function updateTextDocument(doc: TextDocument, edits: TextDocumentContentChangeEvent[], version?: number): TextDocument;
-//#endregion
-//#region src/lib/Document/resolveDocument.d.ts
 export declare function fileToDocument(file: string): Document;
 export declare function fileToDocument(file: string, text: string, languageId?: string, locale?: string): DocumentWithText;
 export declare function fileToDocument(file: string, text?: string, languageId?: string, locale?: string): Document | DocumentWithText;
@@ -175,8 +161,6 @@ declare function generateExclusionFunctionForUri(globs: Glob[], root: string, al
  * @param root - root directory
  */
 declare function generateExclusionFunctionForFiles(globs: Glob[], root: string): FileExclusionFunction;
-//#endregion
-//#region src/lib/FeatureFlags/FeatureFlags.d.ts
 interface FeatureFlag {
   name: string;
   description: string;
@@ -205,11 +189,7 @@ export declare class UnknownFeatureFlagError extends Error {
   constructor(flag: string);
 }
 export declare function getSystemFeatureFlags(): FeatureFlags;
-//#endregion
-//#region src/lib/fileSystem.d.ts
 export declare function getVirtualFS(): VirtualFS$1;
-//#endregion
-//#region src/lib/util/types.d.ts
 /**
  * The keys of an object where the values cannot be undefined.
  */
@@ -218,8 +198,6 @@ type OptionalKeys<T> = Exclude<{ [P in keyof T]: T[P] extends Exclude<T[P], unde
  * Allow undefined in optional fields
  */
 type OptionalOrUndefined<T> = { [P in keyof T]: P extends OptionalKeys<T> ? T[P] | undefined : T[P]; };
-//#endregion
-//#region src/lib/Settings/internal/InternalDictionaryDef.d.ts
 type DictionaryDefinitionCustomUniqueFields = Omit<DictionaryDefinitionCustom, keyof DictionaryDefinitionPreferred>;
 type DictionaryDefinitionInternal = DictionaryFileDefinitionInternal | DictionaryDefinitionInlineInternal | DictionaryDefinitionSimpleInternal;
 type DictionaryDefinitionInlineInternal = DictionaryDefinitionInline & {
@@ -238,8 +216,6 @@ interface DictionaryFileDefinitionInternal extends Readonly<DictionaryDefinition
   /** The path to the config file that contains this dictionary definition */
   readonly __source?: string | undefined;
 }
-//#endregion
-//#region src/lib/Settings/internal/CSpellSettingsInternalDef.d.ts
 declare const SymbolCSpellSettingsInternal: unique symbol;
 interface CSpellSettingsInternal extends Omit<AdvancedCSpellSettingsWithSourceTrace, "dictionaryDefinitions"> {
   [SymbolCSpellSettingsInternal]: true;
@@ -251,8 +227,6 @@ interface CSpellSettingsInternalFinalized extends CSpellSettingsInternal {
   ignoreRegExpList: RegExp[];
   includeRegExpList: RegExp[];
 }
-//#endregion
-//#region src/lib/Settings/DictionaryReferenceCollection.d.ts
 /**
  * A collection of dictionary references to determine if a dictionary is enabled or blocked.
  */
@@ -269,8 +243,6 @@ interface DictionaryReferenceCollection {
  * @returns DictionaryReferenceCollection
  */
 export declare function createDictionaryReferenceCollection(dictionaries: DictionaryReference[]): DictionaryReferenceCollection;
-//#endregion
-//#region src/lib/Settings/CSpellSettingsServer.d.ts
 type CSpellSettingsWST$1 = AdvancedCSpellSettingsWithSourceTrace;
 type CSpellSettingsWSTO = OptionalOrUndefined<AdvancedCSpellSettingsWithSourceTrace>;
 type CSpellSettingsI$1 = CSpellSettingsInternal;
@@ -296,24 +268,16 @@ interface ConfigurationDependencies {
   dictionaryFiles: string[];
 }
 export declare function extractDependencies(settings: CSpellSettingsWSTO | CSpellSettingsI$1): ConfigurationDependencies;
-//#endregion
-//#region src/lib/Settings/calcOverrideSettings.d.ts
 export declare function calcOverrideSettings(settings: CSpellSettingsWSTO, filename: string): CSpellSettingsI$1;
-//#endregion
-//#region src/lib/globs/checkFilenameMatchesGlob.d.ts
 /**
  * @param filename - filename
  * @param globs - globs
  * @returns true if it matches
  */
 declare function checkFilenameMatchesExcludeGlob(filename: string, globs: Glob | Glob[]): boolean;
-//#endregion
-//#region src/lib/Settings/constants.d.ts
 declare const configSettingsFileVersion0_2 = "0.2";
 export declare const currentSettingsFileVersion: typeof configSettingsFileVersion0_2;
 export declare const ENV_CSPELL_GLOB_ROOT = "CSPELL_GLOB_ROOT";
-//#endregion
-//#region src/lib/util/resolveFile.d.ts
 interface ResolveFileResult {
   /**
    * Absolute path or URL to the file.
@@ -331,18 +295,10 @@ interface ResolveFileResult {
   method: string;
 }
 export declare function resolveFile(filename: string | URL, relativeTo: string | URL, fs?: VFileSystem): Promise<ResolveFileResult>;
-//#endregion
-//#region src/lib/Settings/Controller/pnpLoader.d.ts
 type LoaderResult = URL | undefined;
-//#endregion
-//#region src/lib/Settings/Controller/configLoader/PnPSettings.d.ts
 type PnPSettingsOptional = OptionalOrUndefined<PnPSettings>;
-//#endregion
-//#region src/lib/Settings/Controller/configLoader/types.d.ts
 type CSpellSettingsWST = CSpellSettingsWithSourceTrace;
 type CSpellSettingsI = CSpellSettingsInternal;
-//#endregion
-//#region src/lib/Settings/Controller/configLoader/configLoader.d.ts
 type StopSearchAt = URL | string | (URL | string)[] | undefined;
 export declare const sectionCSpell = "cSpell";
 export declare const defaultFileName = "cspell.json";
@@ -409,11 +365,7 @@ interface IConfigLoader {
 }
 export declare function loadPnP(pnpSettings: PnPSettingsOptional, searchFrom: URL): Promise<LoaderResult>;
 export declare function createConfigLoader(fs?: VFileSystem$1): IConfigLoader;
-//#endregion
-//#region src/lib/Settings/Controller/configLoader/configLocations.d.ts
 export declare const defaultConfigFilenames: readonly string[];
-//#endregion
-//#region src/lib/Settings/Controller/configLoader/defaultConfigLoader.d.ts
 /**
  *
  * @param searchFrom the directory / file to start searching from.
@@ -443,14 +395,10 @@ export declare function getGlobalSettingsAsync(): Promise<CSpellSettingsI>;
 export declare function getCachedFileSize(): number;
 export declare function getDefaultConfigLoader(): IConfigLoader;
 export declare function readRawSettings(filename: string | URL, relativeTo?: string | URL): Promise<CSpellSettingsWST>;
-//#endregion
-//#region src/lib/Settings/Controller/configLoader/extractImportErrors.d.ts
 export declare function extractImportErrors(settings: CSpellSettingsWST): ImportFileRefWithError$1[];
 interface ImportFileRefWithError$1 extends ImportFileRef {
   error: Error;
 }
-//#endregion
-//#region src/lib/Settings/Controller/configLoader/readSettings.d.ts
 /**
  * Read / import a cspell configuration file.
  * @param filename - the path to the file.
@@ -472,8 +420,6 @@ export declare function readSettings(filename: string | URL, pnpSettings: PnPSet
  */
 export declare function readSettings(filename: string | URL, relativeTo: string | URL): Promise<CSpellSettingsI>;
 export declare function readSettings(filename: string | URL, relativeTo: string | URL, pnpSettings: PnPSettingsOptional): Promise<CSpellSettingsI>;
-//#endregion
-//#region src/lib/Settings/Controller/configLoader/readSettingsFiles.d.ts
 /**
  *
  * @param filenames - settings files to read
@@ -481,24 +427,14 @@ export declare function readSettings(filename: string | URL, relativeTo: string 
  * @deprecated true
  */
 export declare function readSettingsFiles(filenames: string[]): Promise<CSpellSettingsI>;
-//#endregion
-//#region src/lib/Settings/Controller/ImportError.d.ts
 export declare class ImportError extends Error {
   readonly cause: Error | undefined;
   constructor(msg: string, cause?: Error | unknown);
 }
-//#endregion
-//#region src/lib/Settings/DefaultSettings.d.ts
 export declare function getDefaultSettings(useDefaultDictionaries?: boolean): Promise<CSpellSettingsInternal>;
 export declare function getDefaultBundledSettingsAsync(): Promise<CSpellSettingsInternal>;
-//#endregion
-//#region src/lib/SpellingDictionary/Dictionaries.d.ts
 export declare function refreshDictionaryCache(maxAge?: number): Promise<void>;
-//#endregion
-//#region src/lib/SpellingDictionary/DictionaryController/DictionaryLoader.d.ts
 type LoadOptions = DictionaryDefinitionInternal;
-//#endregion
-//#region src/lib/SpellingDictionary/SpellingDictionaryError.d.ts
 export declare class SpellingDictionaryLoadError extends Error {
   readonly uri: string;
   readonly options: LoadOptions;
@@ -507,16 +443,12 @@ export declare class SpellingDictionaryLoadError extends Error {
   constructor(uri: string, options: LoadOptions, cause: Error, message: string);
 }
 export declare function isSpellingDictionaryLoadError(e: Error): e is SpellingDictionaryLoadError;
-//#endregion
-//#region src/lib/getDictionary.d.ts
 /**
  * Load a dictionary collection defined by the settings.
  * @param settings - that defines the dictionaries and the ones to load.
  * @returns a dictionary collection that represents all the enabled dictionaries.
  */
 export declare function getDictionary(settings: CSpellUserSettings): Promise<SpellingDictionaryCollection>;
-//#endregion
-//#region src/lib/perf/timer.d.ts
 interface PerfTimer {
   readonly name: string;
   readonly startTime: number;
@@ -526,8 +458,6 @@ interface PerfTimer {
 }
 type TimeNowFn = () => number;
 export declare function createPerfTimer(name: string, onEnd?: (elapsed: number, name: string) => void, timeNowFn?: TimeNowFn): PerfTimer;
-//#endregion
-//#region src/lib/Settings/link.d.ts
 interface ListGlobalImportsResult {
   filename: string;
   name: string | undefined;
@@ -574,11 +504,7 @@ interface ResolveSettingsResult {
 declare namespace index_link_d_exports {
   export { AddPathsToGlobalImportsResults, ListGlobalImportsResult, ListGlobalImportsResults, RemovePathsFromGlobalImportsResult, ResolveSettingsResult, addPathsToGlobalImports, listGlobalImports, removePathsFromGlobalImports };
 }
-//#endregion
-//#region src/lib/Settings/TextDocumentSettings.d.ts
 export declare function combineTextAndLanguageSettings(settings: CSpellUserSettings, text: string | undefined, languageId: string | string[]): CSpellSettingsInternal;
-//#endregion
-//#region src/lib/Models/Suggestion.d.ts
 interface ExtendedSuggestion {
   /**
    * The suggestion.
@@ -598,8 +524,6 @@ interface ExtendedSuggestion {
    */
   cost?: number;
 }
-//#endregion
-//#region src/lib/Models/ValidationResult.d.ts
 interface ValidationResult extends Omit<TextOffset, "length">, Pick<Issue, "message" | "issueType" | "hasPreferredSuggestions" | "hasSimpleSuggestions"> {
   length?: number | undefined;
   line: TextOffset;
@@ -626,8 +550,6 @@ interface ValidationResultRPC extends Pick<ValidationResult, "text" | "length" |
   row?: undefined;
   col?: undefined;
 }
-//#endregion
-//#region src/lib/Models/ValidationIssue.d.ts
 interface ValidationIssue extends ValidationResult {
   suggestions?: string[] | undefined;
   suggestionsEx?: ExtendedSuggestion[] | undefined;
@@ -638,14 +560,10 @@ interface ValidationIssue extends ValidationResult {
 interface ValidationIssueRPC extends ValidationResultRPC {
   suggestionsEx?: ExtendedSuggestion[] | undefined;
 }
-//#endregion
-//#region src/lib/Transform/Transformer.d.ts
 interface TextTransformer {
   transform(text: string | MappedText): MappedText;
   transformAll(src: Iterable<string | MappedText>): Iterable<MappedText>;
 }
-//#endregion
-//#region src/lib/Transform/TextRange.d.ts
 /**
  * A range of text in a document.
  * The range is inclusive of the startPos and exclusive of the endPos.
@@ -654,11 +572,7 @@ interface MatchRange {
   startPos: number;
   endPos: number;
 }
-//#endregion
-//#region src/lib/Transform/types.d.ts
 type SimpleRange = Readonly<Range>;
-//#endregion
-//#region src/lib/suggestions.d.ts
 interface WordSuggestion extends SuggestionResult {
   /**
    * The suggested word adjusted to match the original case.
@@ -727,8 +641,6 @@ export declare class SuggestionError extends Error {
   readonly code: string;
   constructor(message: string, code: string);
 }
-//#endregion
-//#region src/lib/textValidation/ValidationTypes.d.ts
 type TextOffsetRO = Readonly<TextOffset>;
 interface ValidationOptions extends IncludeExcludeOptions, ReportingConfiguration {
   maxNumberOfProblems?: number;
@@ -756,8 +668,6 @@ interface MappedTextValidationResult extends MappedText, Pick<Issue, "hasSimpleS
   isFound?: boolean | undefined;
 }
 type TextValidatorFn = (text: MappedText) => Iterable<MappedTextValidationResult>;
-//#endregion
-//#region src/lib/textValidation/lineValidatorFactory.d.ts
 interface LineValidator {
   fn: LineValidatorFn;
   dict: CachingDictionary;
@@ -769,8 +679,6 @@ interface TextValidator {
 interface TextValidationFactoryOptions extends ValidationOptions {
   transformer: TextTransformer | undefined;
 }
-//#endregion
-//#region src/lib/textValidation/docValidatorPreparations.d.ts
 /**
  * What a `DocumentValidator` needs to spell check its document.
  */
@@ -790,8 +698,6 @@ interface Preparations {
   localConfigFilepath: string | undefined;
   transformer: TextTransformer;
 }
-//#endregion
-//#region src/lib/textValidation/traceWord.d.ts
 type Href = string;
 interface DictionaryTraceResult {
   /** The word being traced. */
@@ -821,8 +727,6 @@ interface WordSplits {
 interface TraceResult$1 extends Array<DictionaryTraceResult> {
   splits?: readonly WordSplits[];
 }
-//#endregion
-//#region src/lib/textValidation/ValidateTextOptions.d.ts
 interface ValidateTextOptions {
   /**
    * Generate suggestions where there are spelling issues.
@@ -842,8 +746,6 @@ interface ValidateTextOptions {
    */
   skipValidation?: boolean;
 }
-//#endregion
-//#region src/lib/textValidation/docValidator.d.ts
 interface DocumentValidatorOptions extends ValidateTextOptions {
   /**
    * Optional path to a configuration file.
@@ -1004,8 +906,6 @@ interface ShouldCheckDocumentResult {
  * @returns ShouldCheckDocumentResult
  */
 export declare function shouldCheckDocument(doc: TextDocumentRef, options: DocumentValidatorOptions, settings: CSpellUserSettings): Promise<ShouldCheckDocumentResult>;
-//#endregion
-//#region src/lib/textValidation/checkText.d.ts
 /**
  * Annotate text with issues and include / exclude zones.
  * @param text - the text to annotate.
@@ -1038,15 +938,11 @@ interface CheckTextOptions extends DocumentValidatorOptions {}
  * @returns
  */
 export declare function checkTextDocument(doc: TextDocument | Document, options: CheckTextOptions, settings?: CSpellUserSettings): Promise<CheckTextInfo>;
-//#endregion
-//#region src/lib/textValidation/validator.d.ts
 /**
  * @deprecated
  * @deprecationMessage Use spellCheckDocument
  */
 export declare function validateText(text: string, settings: CSpellUserSettings, options?: ValidateTextOptions): Promise<ValidationIssue[]>;
-//#endregion
-//#region src/lib/spellCheckFile.d.ts
 interface SpellCheckFileOptions extends ValidateTextOptions, Pick<CSpellUserSettings, "unknownWords"> {
   /**
    * Optional path to a configuration file.
@@ -1151,8 +1047,6 @@ interface DetermineFinalDocumentSettingsResult {
  * @param settings - The near final settings. Should already be the combination of all configuration files.
  */
 export declare function determineFinalDocumentSettings(document: DocumentWithText, settings: CSpellUserSettings): Promise<DetermineFinalDocumentSettingsResult>;
-//#endregion
-//#region src/lib/trace.d.ts
 interface TraceResult extends DictionaryTraceResult {
   /** True if the dictionary is currently active. */
   dictActive: boolean;
@@ -1171,8 +1065,6 @@ interface TraceWordResult extends Array<TraceResult> {
 }
 export declare function traceWords(words: string[], settings: CSpellSettings | ICSpellConfigFile$1, options: TraceOptions | undefined): Promise<TraceResult[]>;
 export declare function traceWordsAsync(words: Iterable<string> | AsyncIterable<string>, settingsOrConfig: CSpellSettings | ICSpellConfigFile$1, options: TraceOptions | undefined): AsyncIterableIterator<TraceWordResult>;
-//#endregion
-//#region src/lib/util/logger.d.ts
 interface Logger {
   log: (...args: unknown[]) => void;
   warn: (...args: unknown[]) => void;
@@ -1189,11 +1081,7 @@ export declare function setLogger(logger: Logger): Logger;
  * @returns the current logger.
  */
 export declare function getLogger(): Logger;
-//#endregion
-//#region src/lib/util/textRegex.d.ts
 declare function stringToRegExpOrUndefined(pattern: string | RegExp, defaultFlags?: string, forceFlags?: string): RegExp | undefined;
-//#endregion
-//#region src/lib/util/text.d.ts
 declare function splitCamelCaseWordWithOffset(wo: TextOffset): TextOffset[];
 /**
  * Split camelCase words into an array of strings.
@@ -1243,5 +1131,4 @@ declare function removeAccents(text: string): string;
 declare namespace textApi_d_exports {
   export { calculateTextDocumentOffsets, camelToSnake, cleanText, cleanTextOffset, extractLinesOfText, extractPossibleWordsFromTextOffset, extractText, extractWordsFromCode, extractWordsFromCodeTextOffset, extractWordsFromText, extractWordsFromTextOffset, isFirstCharacterLower, isFirstCharacterUpper, isLowerCase, isUpperCase, lcFirst, match, matchCase, matchStringToTextOffset, matchToTextOffset, removeAccents, snakeToCamel, splitCamelCaseWord, splitCamelCaseWordWithOffset, stringToRegExpOrUndefined as stringToRegExp, textOffset, ucFirst };
 }
-//#endregion
 export { type CSpellConfigFile, type CheckTextInfo, CompoundWordsMethod, type ConfigurationDependencies, type CreateTextDocumentParams, type DetermineFinalDocumentSettingsResult, type DictionaryReferenceCollection, type Document, type DocumentValidatorOptions, type ExcludeFilesGlobMap, type ExclusionFunction, exclusionHelper_d_exports as ExclusionHelper, FSCapabilityFlags, type FeatureFlag, type ICSpellConfigFile, type ImportFileRefWithError, type IncludeExcludeOptions, index_link_d_exports as Link, type Logger, type PerfTimer, type SpellCheckFileOptions, type SpellCheckFilePerf, type SpellCheckFileResult, type SpellingDictionary, type SpellingDictionaryCollection, type SuggestOptions, type SuggestedWord, type SuggestionCollector, type SuggestionOptions, type SuggestionResult, type SuggestionsForWordResult, textApi_d_exports as Text, type TextDocument, type TextDocumentLine, type TextDocumentRef, type TextInfoItem, type TraceOptions, type TraceResult, type TraceWordResult, type VFileSystemProvider, type ValidationIssue, type VirtualFS, asyncIterableToArray, checkFilenameMatchesExcludeGlob as checkFilenameMatchesGlob, combineTextAndLanguageSettings as constructSettingsForText, createSpellingDictionary, createCollection as createSpellingDictionaryCollection, defaultFileName as defaultSettingsFilename, getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt, readFile, readFileSync, writeToFile, writeToFileIterable, writeToFileIterableP };
