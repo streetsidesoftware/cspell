@@ -315,7 +315,11 @@ function parseWords(acc: CSpellUserSettings, match: string): CSpellUserSettings 
 }
 
 function parseLocale(acc: CSpellUserSettings, match: string): CSpellUserSettings {
-    const parts = match.trim().split(/[\s,]+/);
+    // Remove the closing marker of an HTML or block comment, it is not a locale.
+    const parts = match
+        .replace(/\s*(?:-{2,}>|\*+\/)\s*$/, '')
+        .trim()
+        .split(/[\s,]+/);
     const language = parts.slice(1).join(',');
     if (language) {
         acc.language = language;

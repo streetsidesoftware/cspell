@@ -126,6 +126,20 @@ describe('Validate InDocSettings', () => {
     });
 
     test.each`
+        text                                       | expected
+        ${'cspell\u003Alocale en'}                 | ${'en'}
+        ${'cspell\u003Alocale en-->'}              | ${'en'}
+        ${'<!-- cspell\u003Alocale en -->'}        | ${'en'}
+        ${'<!-- cspell\u003Alocale th,en -->'}     | ${'th,en'}
+        ${'<!--- cspell\u003Alanguage es-ES --->'} | ${'es-ES'}
+        ${'/* cspell\u003Alocale en */'}           | ${'en'}
+        ${'/* cspell\u003Alocale en-US, nl-NL */'} | ${'en-US,nl-NL'}
+        ${'/* cspell\u003Alocale en*/'}            | ${'en'}
+    `('locale directive ignores comment closers: $text', ({ text, expected }) => {
+        expect(InDoc.getInDocumentSettings(text).language).toBe(expected);
+    });
+
+    test.each`
         test                                      | text                                     | expected
         ${'Empty Doc'}                            | ${''}                                    | ${{ id: 'in-doc-settings' }}
         ${'sampleTextWithIncompleteInDocSetting'} | ${sampleTextWithIncompleteInDocSetting}  | ${oc(inDocDict(sampleInDocDict, ['php']))}
