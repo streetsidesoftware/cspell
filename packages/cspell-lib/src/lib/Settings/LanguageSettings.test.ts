@@ -135,7 +135,8 @@ describe('Validate LanguageSettings', () => {
         ${['en_GB, ', 'fr-Brai-fr, ru-Cyrl-BY']} | ${['en-GB', 'fr-Brai-FR', 'ru-Cyrl-BY']}
         ${'ru-cyrl-by'}                          | ${['ru-Cyrl-BY']}
         ${'es-419, de-CH-1996'}                  | ${['es-419', 'de-CH-1996']}
-        ${'*, en, -->, !!, enGB, en'}            | ${['en']}
+        ${'*, en, -->, !!, en'}                  | ${['en']}
+        ${'enUS, enGB, zhHantTW, ruCyrlBY'}      | ${['en-US', 'en-GB', 'zh-Hant-TW', 'ru-Cyrl-BY']}
         ${'lorem, lorem-ipsum'}                  | ${['lorem', 'lorem-ipsum']}
     `('normalizeLocaleIntl $locales', ({ locales, expected }) => {
         const localeSet = LS.normalizeLocaleIntl(locales);

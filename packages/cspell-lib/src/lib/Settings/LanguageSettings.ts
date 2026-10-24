@@ -77,7 +77,15 @@ function __normalizeLocaleIntl(locale: LocaleId): Set<LocaleId> {
     return new Set(locales);
 }
 
+// A locale written without separators, for example `enUS` or `zhHantTW`.
+const regExpLocaleWithoutSeparators = /^([a-z]{2})([a-z]{4})?([a-z]{2})$/i;
+
 function toLocaleIntl(locale: string): string | undefined {
+    locale = locale.replace(
+        regExpLocaleWithoutSeparators,
+        (_, lang: string, script: string | undefined, region: string) =>
+            script ? `${lang}-${script}-${region}` : `${lang}-${region}`,
+    );
     try {
         return Intl.getCanonicalLocales(locale)[0];
     } catch {
