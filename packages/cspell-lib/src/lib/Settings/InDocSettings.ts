@@ -316,7 +316,7 @@ function parseWords(acc: CSpellUserSettings, match: string): CSpellUserSettings 
 
 // a non-perfect but reasonable regex to match locale-like strings
 // must match "lorem-ipsum" and similar fake locale-like strings
-const localeLikeRegEx = /^[a-z][a-z_-]{0,16}[a-z]$/i;
+const localeLikeRegEx = /^[a-z][a-z0-9_-]{0,16}[a-z0-9]$/i;
 
 function parseLocale(acc: CSpellUserSettings, match: string): CSpellUserSettings {
     // Remove the closing marker of an HTML or block comment, it is not a locale.
