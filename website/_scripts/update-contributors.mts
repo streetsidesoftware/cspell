@@ -3,7 +3,7 @@
  */
 
 import { promises as fs } from 'node:fs';
-import { unindent } from '@streetsidesoftware/unindent';
+import { unindent as md } from '@streetsidesoftware/unindent';
 
 import { relativeToSite } from './lib/utils.mts';
 import { URL_SITE_COMPONENTS, URL_SITE_PKG } from './lib/constants.mts';
@@ -29,7 +29,7 @@ function formatContributor(contributor: Contributor): string {
 }
 
 function makeContributorMdx(contributors: Contributor[]): string {
-    const mdx = unindent`\
+    const mdx = md`\
         ---
         # AUTO-GENERATED ALL CHANGES WILL BE LOST
         # See \`${relativeToSite(import.meta.url)}\`

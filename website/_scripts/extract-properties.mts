@@ -1,7 +1,7 @@
 import assert from 'node:assert';
 import { promises as fs } from 'node:fs';
 import type { JSONSchema7, JSONSchema7Definition } from 'json-schema';
-import { indent, unindent } from '@streetsidesoftware/unindent';
+import { indent, unindent as md } from '@streetsidesoftware/unindent';
 
 import { createTable, relativeToSite } from './lib/utils.mts';
 import { URL_REPO_ROOT_PKG, URL_SITE_DOCS } from './lib/constants.mts';
@@ -95,7 +95,7 @@ export async function run(): Promise<void> {
     const schema = await loadSchema();
     linkRegistry = buildLinkRegistry(schema);
 
-    const header = unindent`\
+    const header = md`\
         ---
         # AUTO-GENERATED ALL CHANGES WILL BE LOST
         # See \`${relativeToSite(import.meta.url)}\`
@@ -193,7 +193,7 @@ function formatPropertyToDisplay(
     nameOfParentType: string,
     isRequired: boolean,
 ): string {
-    return unindent`
+    return md`
 
         ---
 
@@ -205,7 +205,7 @@ function formatPropertyToDisplay(
 
 function formatTopLevelType(key: string, entry: JSONSchema7): string {
     currentSectionName = '';
-    return unindent`
+    return md`
 
         ---
 
@@ -220,7 +220,7 @@ function formatTypeEntryBody(entry: Definition, isRequired: boolean | undefined)
 
     let dlDescription = formatEntryDescription(entry, '');
     if (dlDescription) {
-        dlDescription = unindent`
+        dlDescription = md`
             <dt>Description</dt>
             <dd>
 
@@ -232,13 +232,13 @@ function formatTypeEntryBody(entry: Definition, isRequired: boolean | undefined)
 
     let dlSince = '';
     if (entry.since) {
-        dlSince = unindent`
+        dlSince = md`
             <dt>Since</dt>
             <dd>${entry.since}</dd>
         `;
     }
 
-    return unindent`
+    return md`
         <dl>
         ${dlDescription}
         <dt>Type${req}</dt>

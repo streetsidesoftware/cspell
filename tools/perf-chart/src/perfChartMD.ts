@@ -1,4 +1,4 @@
-import { unindent } from '@streetsidesoftware/unindent';
+import { unindent as md } from '@streetsidesoftware/unindent';
 import { plotPointRelativeToStandardDeviation, simpleHistogram } from 'thistogram';
 
 import { calcAllStats } from './calcAllStats.ts';
@@ -12,7 +12,7 @@ import { createMdTable } from './text.ts';
 export function perfReportMd(records: CsvRecordsRO, _options: Options): string {
     const dailyStats = createDailyStats(records);
     const data = [...groupBy(records, 'repo')].sort((a, b) => a[0].localeCompare(b[0]));
-    const markdown = unindent`\
+    const markdown = md`\
         <!---
         # This file is auto-generated. Do not edit.
         # cspell:disable
@@ -77,7 +77,7 @@ function createPerfTable1(data: [string, CsvRecord[]][]): string {
         rows,
     });
 
-    return unindent`
+    return md`
         <details>
         <summary>Time to Process Files</summary>
 
@@ -113,7 +113,7 @@ function createFpsPerfTable(data: [string, CsvRecord[]][]): string {
         rows,
     });
 
-    return unindent`
+    return md`
         <details>
         <summary>Files per Second over Time</summary>
 
@@ -148,7 +148,7 @@ function createThroughputPerfTable(data: [string, CsvRecord[]][]): string {
         rows,
     });
 
-    return unindent`
+    return md`
         <details>
         <summary>Data Throughput</summary>
 
@@ -170,7 +170,7 @@ function createDailyPerfGraph(dailyStats: DailyStats[]): string {
         return `line [${records.map((r) => r.fps.avg.toFixed(2)).join(', ')}]`;
     });
     const xAxis = dailyStats.map((d) => `${monthNames[d.date.getUTCMonth()]}-${d.date.getUTCDate()}`);
-    return unindent`
+    return md`
         <details>
         <summary>Daily Performance</summary>
 
