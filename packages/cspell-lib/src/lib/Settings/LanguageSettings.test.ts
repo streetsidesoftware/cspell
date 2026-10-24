@@ -142,18 +142,6 @@ describe('Validate LanguageSettings', () => {
     });
 
     test.each`
-        locales                              | strict       | expected
-        ${''}                                | ${undefined} | ${false}
-        ${'fr-fr'}                           | ${undefined} | ${true}
-        ${'fr-fr'}                           | ${true}      | ${false}
-        ${['en', 'en-GB', 'fr-FR', 'nl-NL']} | ${undefined} | ${true}
-        ${['en', 'en-GB', 'fr-FR', 'nl-NL']} | ${true}      | ${true}
-        ${['en, en-GB', 'fr-fr, nl_NL']}     | ${undefined} | ${false}
-    `('isValidLocaleIntlFormat $locales', ({ locales, strict, expected }) => {
-        expect(LS.isValidLocaleIntlFormat(locales, strict)).toEqual(expected);
-    });
-
-    test.each`
         locale                  | expected
         ${undefined}            | ${undefined}
         ${''}                   | ${undefined}
@@ -162,6 +150,12 @@ describe('Validate LanguageSettings', () => {
         ${'tr_TR'}              | ${'tr-TR'}
         ${'en, tr_TR'}          | ${['en', 'tr-TR']}
         ${['en', '*', 'tr-tr']} | ${['en', 'tr-TR']}
+        ${'en, -->'}            | ${'en'}
+        ${'en !!'}              | ${'en'}
+        ${'lorem-ipsum'}        | ${undefined}
+        ${'fil'}                | ${'fil'}
+        ${'zh-Hant-TW'}         | ${'zh-Hant-TW'}
+        ${'sr_latn_rs, xyz'}    | ${['sr-Latn-RS', 'xyz']}
     `('normalizeLocaleForIntl $locale', ({ locale, expected }) => {
         expect(LS.normalizeLocaleForIntl(locale)).toEqual(expected);
     });

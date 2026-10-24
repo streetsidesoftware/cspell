@@ -17,6 +17,17 @@ describe('IntlSegmentTextTransformer', () => {
         const result = t.transform(input);
         expect(result.text).toBe(expected);
     });
+
+    test.each`
+        locale
+        ${''}
+        ${'en, -->'}
+        ${'th !!'}
+        ${'lorem-ipsum'}
+    `('should ignore locales that Intl rejects $locale', ({ locale }) => {
+        const t = new IntlSegmentTextTransformer(locale);
+        expect(t.transform('Hello world').text).toBe('Hello world');
+    });
 });
 
 interface Sample {

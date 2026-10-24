@@ -93,36 +93,25 @@ export function isLocaleInSet(locale: LocaleId | LocaleId[], setOfLocals: Set<Lo
 }
 
 /**
- * Normalize a locale for use with `Intl` and `toLocaleLowerCase`. Locales that aren't valid are dropped.
+ * Normalize a locale for use with `Intl` and `toLocaleLowerCase`. Locales that `Intl` rejects are dropped.
  * @param locale - a locale or a list of locales, for example `en,tr_TR`.
  * @returns the valid locales, or `undefined` if there are none.
  */
 export function normalizeLocaleForIntl(locale: LocaleId | LocaleId[] | undefined): string | string[] | undefined {
     if (!locale) return undefined;
-    const locales = [...normalizeLocaleIntl(locale)].filter((locale) => isValidLocaleIntlFormat(locale));
+    const locales = [...normalizeLocaleIntl(locale)].filter(isLocaleSupportedByIntl);
     if (!locales.length) return undefined;
     if (locales.length === 1) return locales[0];
     return locales;
 }
 
-const regExpValidIntlLocaleStrict = /^[a-z]{2}(-[A-Z]{2})?$/;
-const regExpValidIntlLocale = new RegExp(regExpValidIntlLocaleStrict, 'i');
-
-/**
- * Test if a locale should be ok with Intl
- * @param locale - locale string
- * @param strict - case must match
- * @returns true if it matches the standard 2 letter or 4 letter forms.
- */
-export function isValidLocaleIntlFormat(locale: LocaleId | LocaleId[], strict = false): boolean {
-    if (typeof locale === 'string')
-        return strict ? regExpValidIntlLocaleStrict.test(locale) : regExpValidIntlLocale.test(locale);
-
-    for (const item of locale) {
-        if (!isValidLocaleIntlFormat(item, strict)) return false;
+const isLocaleSupportedByIntl = memoize(_isLocaleSupportedByIntl);
+function _isLocaleSupportedByIntl(locale: string): boolean {
+    try {
+        return Intl.getCanonicalLocales(locale).length > 0;
+    } catch {
+        return false;
     }
-
-    return locale.length > 0;
 }
 
 const cacheCalcSettingsForLanguage = createAutoResolveWeakCache<
