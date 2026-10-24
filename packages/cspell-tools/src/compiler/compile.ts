@@ -6,7 +6,6 @@ import { opConcatMap, opMap, pipe } from '@cspell/cspell-pipe/sync';
 
 import type {
     CompileRequest,
-    CompileSourceOptions as CompileSourceConfig,
     CompileTargetOptions as CompileTargetConfig,
     DictionarySource,
     FilePath,
@@ -68,7 +67,7 @@ export async function compile(request: CompileRequest, options?: CompileOptions)
         if (!keep) continue;
         const adjustedTarget: Target = { ...targetOptions, ...target };
         // console.warn('adjustedTarget: %o', adjustedTarget);
-        const deps = await compileTarget(adjustedTarget, request, {
+        const deps = await compileTarget(adjustedTarget, {
             rootDir,
             cwd,
             conditional,
@@ -104,18 +103,14 @@ interface CompileTargetOptions {
     dictionaryDirectives: string[] | undefined;
 }
 
-export async function compileTarget(
-    target: Target,
-    options: CompileSourceConfig,
-    compileOptions: CompileTargetOptions,
-): Promise<string[]> {
+export async function compileTarget(target: Target, compileOptions: CompileTargetOptions): Promise<string[]> {
     logWithTimestamp(`Start compile: ${target.name}`);
     const buildOptions = genBuildTargetDictionaryOptions(target, compileOptions);
     const deps: Set<string> = new Set();
 
     addToSet(
         deps,
-        await buildTargetDictionary(target, options, compileOptions, buildOptions),
+        await buildTargetDictionary(target, compileOptions, buildOptions),
         await compressDictionaryFileIfNeeded(buildOptions),
         await genBTrieForTarget(target, buildOptions),
     );
@@ -178,7 +173,6 @@ function genBuildTargetDictionaryOptions(
 
 async function buildTargetDictionary(
     target: Target,
-    options: CompileSourceConfig,
     compileOptions: CompileTargetOptions,
     buildOptions: BuildTargetDictionaryOptions,
 ): Promise<string[]> {
@@ -211,7 +205,7 @@ async function buildTargetDictionary(
 
     const filesToProcessAsync = pipeAsync(
         readSourceList(sources, rootDir),
-        opMapAsync((src) => readFileSource(src, options, locale)),
+        opMapAsync((src) => readFileSource(src, locale)),
         opAwaitAsync(),
     );
     const filesToProcess: FileToProcess[] = await toArray(filesToProcessAsync);
@@ -393,35 +387,20 @@ async function readFileList(fileList: FilePath): Promise<string[]> {
         .filter((a) => !!a);
 }
 
-async function readFileSource(
-    fileSource: FileSource,
-    sourceOptions: CompileSourceConfig,
-    locale: string | undefined,
-): Promise<FileToProcess> {
-    const {
-        filename,
-        keepRawCase = sourceOptions.keepRawCase || false,
-        split = sourceOptions.split || false,
-        maxDepth,
-        storeSplitWordsAsCompounds,
-        minCompoundLength,
-    } = fileSource;
+async function readFileSource(fileSource: FileSource, locale: string | undefined): Promise<FileToProcess> {
+    const { filename, split = false, maxDepth, storeSplitWordsAsCompounds, minCompoundLength } = fileSource;
 
     const legacy = split === 'legacy';
     const splitWords = legacy ? false : split;
 
     // console.warn('fileSource: %o,\n targetOptions %o, \n opt: %o', fileSource, targetOptions, opt);
 
-    const allowedSplitWords = await createAllowedSplitWordsFromFiles(
-        fileSource.allowedSplitWords || sourceOptions.allowedSplitWords,
-        locale,
-    );
+    const allowedSplitWords = await createAllowedSplitWordsFromFiles(fileSource.allowedSplitWords, locale);
 
     const readerOptions: SourceReaderOptions = {
         maxDepth,
         legacy,
         splitWords,
-        keepCase: keepRawCase,
         allowedSplitWords,
         storeSplitWordsAsCompounds,
         minCompoundLength,

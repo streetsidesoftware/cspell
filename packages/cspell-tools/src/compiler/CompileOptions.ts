@@ -1,6 +1,6 @@
 import type { CompileTargetOptions } from '../config/index.ts';
 
-export interface CompileOptions extends Omit<CompileTargetOptions, 'allowedSplitWords'> {
+export interface CompileOptions extends CompileTargetOptions {
     /**
      * Sort the words in the resulting dictionary.
      * Does not apply to `trie` based formats.

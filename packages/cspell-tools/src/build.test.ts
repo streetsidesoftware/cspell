@@ -56,7 +56,25 @@ describe('build action', () => {
             }
         },
     );
+
+    test('top-level target options are defaults for every target', async () => {
+        const config = cfgYaml('build-top-level-options');
+        await expect(build(undefined, { config, cwd: t() })).resolves.toBeUndefined();
+
+        const defaults = lines(await readTextFile(t('dict/defaults.txt')));
+        expect(defaults).toContain('# cspell-dictionary: no-generate-alternatives');
+        expect(defaults).toEqual(expect.arrayContaining(['Hello', '~hello', 'Café', '~cafe']));
+
+        const overrides = lines(await readTextFile(t('dict/overrides.txt')));
+        expect(overrides).not.toContain('# cspell-dictionary: no-generate-alternatives');
+        expect(overrides).toEqual(expect.arrayContaining(['Hello', 'Café']));
+        expect(overrides.filter((line) => line.startsWith('~'))).toEqual([]);
+    });
 });
+
+function lines(text: string): string[] {
+    return text.split('\n');
+}
 
 function tBuilds(...parts: string[]): string {
     return helper.packageTemp('builds', ...parts);

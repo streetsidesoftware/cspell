@@ -66,8 +66,8 @@ targets:
     format: trie3
     sources:
       - listFile: src/source-files.txt
+        maxDepth: 5
     generateNonStrict: true
-maxDepth: 5
 `;
         await processCompileAction([], options, undefined);
         expect(mockWriteFile).toHaveBeenLastCalledWith('cspell-tools.config.yaml', expected);

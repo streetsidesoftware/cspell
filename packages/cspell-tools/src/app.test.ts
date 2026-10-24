@@ -186,6 +186,7 @@ describe('Validate the application', () => {
     });
 
     test('app compile merge with defaults --keep-raw-case', async () => {
+        const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
         const commander = getCommander();
         const targetDir = relPathTemp();
         const name = 'merge';
@@ -196,6 +197,25 @@ describe('Validate the application', () => {
         await expect(app.run(commander, args)).resolves.toBeUndefined();
         const words = await fs.readFile(path.join(targetDir, target), 'utf8');
         expect(words).toMatchSnapshot();
+        expect(warn).toHaveBeenCalledWith('--keep-raw-case has no effect and will be removed in future versions.');
+        warn.mockRestore();
+    });
+
+    test('app compile --max_depth', async () => {
+        const exampleHunspell = path.join(pathSampleDicts, 'hunspell', 'example.dic');
+
+        async function compileWords(...extraArgs: string[]): Promise<string[]> {
+            const targetDir = relPathTemp();
+            const args = argv('compile', '-n', ...extraArgs, exampleHunspell, '-o', targetDir);
+            await expect(app.run(getCommander(), args)).resolves.toBeUndefined();
+            const content = await fs.readFile(path.join(targetDir, 'example.txt'), 'utf8');
+            return content.split('\n').filter((line) => line && !line.startsWith('#'));
+        }
+
+        const allWords = await compileWords();
+        const rootWords = await compileWords('--max_depth', '0');
+        expect(rootWords.length).toBeGreaterThan(0);
+        expect(rootWords.length).toBeLessThan(allWords.length);
     });
 
     test('app no args', async () => {
