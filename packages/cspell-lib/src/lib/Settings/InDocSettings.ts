@@ -314,13 +314,18 @@ function parseWords(acc: CSpellUserSettings, match: string): CSpellUserSettings 
     return reduceWordList(acc, match, 'words');
 }
 
+// a non-perfect but reasonable regex to match locale-like strings
+// must match "lorem-ipsum" and similar fake locale-like strings
+const localeLikeRegEx = /^[a-z][a-z_-]{,16}[a-z]$/i;
+
 function parseLocale(acc: CSpellUserSettings, match: string): CSpellUserSettings {
     // Remove the closing marker of an HTML or block comment, it is not a locale.
-    const parts = match
-        .replace(/\s*(?:-{2,}>|\*+\/)\s*$/, '')
-        .trim()
-        .split(/[\s,]+/);
-    const language = parts.slice(1).join(',');
+    const parts = match.split(/[\s,]+/).slice(1);
+    const stop = parts.findIndex((locale) => !localeLikeRegEx.test(locale));
+    if (stop !== -1) {
+        parts.splice(stop);
+    }
+    const language = parts.join(',');
     if (language) {
         acc.language = language;
     }
