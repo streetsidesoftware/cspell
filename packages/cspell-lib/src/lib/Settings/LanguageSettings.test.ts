@@ -126,18 +126,19 @@ describe('Validate LanguageSettings', () => {
         expect([...localeSet]).toEqual(expected);
     });
 
-    // cspell:ignore Brai
+    // cspell:ignore Brai loremipsum
     test.each`
-        locales                                 | expected
-        ${''}                                   | ${[]}
-        ${'en, en-GB, fr-fr, nl_NL'}            | ${['en', 'en-GB', 'fr-FR', 'nl-NL']}
-        ${['en, en-GB', 'fr-fr, nl_NL']}        | ${['en', 'en-GB', 'fr-FR', 'nl-NL']}
-        ${['enGB, ', 'fr-Brai-fr, ru-Cyrl-BY']} | ${['en-GB', 'fr-Brai-FR', 'ru-Cyrl-BY']}
-        ${'ru-cyrl-by'}                         | ${['ru-Cyrl-BY']}
+        locales                                  | expected
+        ${''}                                    | ${[]}
+        ${'en, en-GB, fr-fr, nl_NL'}             | ${['en', 'en-GB', 'fr-FR', 'nl-NL']}
+        ${['en, en-GB', 'fr-fr, nl_NL']}         | ${['en', 'en-GB', 'fr-FR', 'nl-NL']}
+        ${['en_GB, ', 'fr-Brai-fr, ru-Cyrl-BY']} | ${['en-GB', 'fr-Brai-FR', 'ru-Cyrl-BY']}
+        ${'ru-cyrl-by'}                          | ${['ru-Cyrl-BY']}
+        ${'es-419, de-CH-1996'}                  | ${['es-419', 'de-CH-1996']}
+        ${'*, en, -->, !!, enGB, en'}            | ${['en']}
+        ${'lorem, lorem-ipsum'}                  | ${['lorem', 'lorem-ipsum']}
     `('normalizeLocaleIntl $locales', ({ locales, expected }) => {
         const localeSet = LS.normalizeLocaleIntl(locales);
-        const regExValidLocale: RegExp = /^\w{2}(-\w{4})?(-\w{2,3})?$/;
-        expect([...localeSet].every((locale) => regExValidLocale.test(locale))).toBe(true);
         expect([...localeSet]).toEqual(expected);
     });
 
@@ -152,7 +153,7 @@ describe('Validate LanguageSettings', () => {
         ${['en', '*', 'tr-tr']} | ${['en', 'tr-TR']}
         ${'en, -->'}            | ${'en'}
         ${'en !!'}              | ${'en'}
-        ${'lorem-ipsum'}        | ${undefined}
+        ${'loremipsum'}         | ${undefined}
         ${'fil'}                | ${'fil'}
         ${'zh-Hant-TW'}         | ${'zh-Hant-TW'}
         ${'sr_latn_rs, xyz'}    | ${['sr-Latn-RS', 'xyz']}

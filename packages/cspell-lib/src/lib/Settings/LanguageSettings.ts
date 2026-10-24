@@ -61,30 +61,28 @@ export function normalizeLocale(locale: LocaleId | LocaleId[]): Set<LocaleId> {
     return _normalizeLocale(locale);
 }
 
-export function normalizeLocaleIntl(locale: LocaleId | LocaleId[]): Set<LocaleId> {
-    const values = [...normalizeLocale(locale)].map((locale) =>
-        locale.replace(
-            /^([a-z]{2})(?:-?([a-z]{4}))?-?([a-z]{2})$/,
-            (_, lang: string, script?: string, region?: string) => toLocaleIntl(lang, script, region),
-        ),
-    );
-    return new Set(values);
-}
-
 /**
- * See: https://developer.mozilla.org/en-US/docs/Glossary/BCP_47_language_tag
- * @returns locale normalized to BCP_47
+ * Normalize locales to the form `Intl` uses, for example `en_us` becomes `en-US`.
+ * Locales that `Intl` rejects are dropped.
  */
-function toLocaleIntl(lang: string, script?: string, region?: string): string {
-    const parts = [lang];
-    if (script) parts.push(firstUpper(script.toLowerCase()));
-    if (region) parts.push(region.toUpperCase());
-    return parts.join('-');
+export function normalizeLocaleIntl(locale: LocaleId | LocaleId[]): Set<LocaleId> {
+    return _normalizeLocaleIntl(typeof locale === 'string' ? locale : locale.join(','));
 }
 
-function firstUpper(str: string): string {
-    const [first, ...rest] = [...str];
-    return [first.toUpperCase(), ...rest].join('');
+const _normalizeLocaleIntl = memoize(__normalizeLocaleIntl);
+function __normalizeLocaleIntl(locale: LocaleId): Set<LocaleId> {
+    const locales = localesToList(locale)
+        .map((locale) => toLocaleIntl(locale.replaceAll('_', '-')))
+        .filter((locale) => locale !== undefined);
+    return new Set(locales);
+}
+
+function toLocaleIntl(locale: string): string | undefined {
+    try {
+        return Intl.getCanonicalLocales(locale)[0];
+    } catch {
+        return undefined;
+    }
 }
 
 export function isLocaleInSet(locale: LocaleId | LocaleId[], setOfLocals: Set<LocaleId>): boolean {
@@ -99,19 +97,10 @@ export function isLocaleInSet(locale: LocaleId | LocaleId[], setOfLocals: Set<Lo
  */
 export function normalizeLocaleForIntl(locale: LocaleId | LocaleId[] | undefined): string | string[] | undefined {
     if (!locale) return undefined;
-    const locales = [...normalizeLocaleIntl(locale)].filter(isLocaleSupportedByIntl);
+    const locales = [...normalizeLocaleIntl(locale)];
     if (!locales.length) return undefined;
     if (locales.length === 1) return locales[0];
     return locales;
-}
-
-const isLocaleSupportedByIntl = memoize(_isLocaleSupportedByIntl);
-function _isLocaleSupportedByIntl(locale: string): boolean {
-    try {
-        return Intl.getCanonicalLocales(locale).length > 0;
-    } catch {
-        return false;
-    }
 }
 
 const cacheCalcSettingsForLanguage = createAutoResolveWeakCache<

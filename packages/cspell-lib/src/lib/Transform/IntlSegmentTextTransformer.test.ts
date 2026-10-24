@@ -23,7 +23,7 @@ describe('IntlSegmentTextTransformer', () => {
         ${''}
         ${'en, -->'}
         ${'th !!'}
-        ${'lorem-ipsum'}
+        ${'*'}
     `('should ignore locales that Intl rejects $locale', ({ locale }) => {
         const t = new IntlSegmentTextTransformer(locale);
         expect(t.transform('Hello world').text).toBe('Hello world');
