@@ -1,8 +1,8 @@
+import { unindent } from '@streetsidesoftware/unindent';
 import { describe, expect, test } from 'vitest';
 
 import { cspellConfigFileSchema } from '../CSpellConfigFile.js';
 import { createTextFile } from '../TextFile.js';
-import { unindent } from '../util/unindent.js';
 import { CSpellConfigFileJson, parseCSpellConfigFileJson } from './CSpellConfigFileJson.js';
 
 describe('CSpellConfigFileJson', () => {

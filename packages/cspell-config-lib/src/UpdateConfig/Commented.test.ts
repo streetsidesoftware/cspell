@@ -1,7 +1,7 @@
+import { unindent } from '@streetsidesoftware/unindent';
 import { parse as parseJsonC } from 'comment-json';
 import { describe, expect, test } from 'vitest';
 
-import { unindent } from '../util/unindent.js';
 import { createCommentedNode } from './Commented.js';
 
 describe('Commented', () => {

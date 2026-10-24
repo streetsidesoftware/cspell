@@ -1,5 +1,6 @@
 import { formatWithOptions } from 'node:util';
 
+import { indent, unindent } from '@streetsidesoftware/unindent';
 import type { ChalkInstance } from 'chalk';
 import type {
     CSpellSettings,
@@ -27,7 +28,6 @@ import { toError } from '../util/errors.js';
 import { extractContext } from '../util/extractContext.js';
 import { fileInfoToDocument, readFileInfo, relativeToCwd } from '../util/fileHelper.js';
 import { getTimeMeasurer } from '../util/timer.js';
-import { indent, unindent } from '../util/unindent.js';
 import * as util from '../util/util.js';
 import { wordWrapAnsiText } from '../util/wrap.js';
 import { LinterError } from './LinterError.js';

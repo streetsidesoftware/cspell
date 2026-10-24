@@ -7,6 +7,7 @@ import { pipe } from '@cspell/cspell-pipe/sync';
 import type { Glob, RunResult } from '@cspell/cspell-types';
 import { MessageTypes } from '@cspell/cspell-types';
 import { toFileURL } from '@cspell/url';
+import { unindent } from '@streetsidesoftware/unindent';
 import chalk from 'chalk';
 import { dictionaryCacheEnableLogging, dictionaryCacheGetLog } from 'cspell-dictionary';
 import { findRepoRoot, GitIgnore } from 'cspell-gitignore';
@@ -44,7 +45,6 @@ import {
 import type { SymlinkChecker } from '../util/symlinks.js';
 import { createSymlinkChecker } from '../util/symlinks.js';
 import { getTimeMeasurer } from '../util/timer.js';
-import { unindent } from '../util/unindent.js';
 import * as util from '../util/util.js';
 import { wordWrapAnsiText } from '../util/wrap.js';
 import { writeFileOrStream } from '../util/writeFile.js';

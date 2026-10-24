@@ -1,8 +1,8 @@
+import { unindent } from '@streetsidesoftware/unindent';
 import { describe, expect, test } from 'vitest';
 
 import { readFixtureFile } from '../../test/samples.ts';
 import { assert } from '../utils/assert.ts';
-import { unindent } from '../utils/unindent.ts';
 import { parseAff, parseAffRule } from './affParser.ts';
 import {
     Afx,

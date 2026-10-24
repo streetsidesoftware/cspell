@@ -1,11 +1,11 @@
 import assert from 'node:assert';
 
+import { unindent } from '@streetsidesoftware/unindent';
 import { stringify as toml } from 'smol-toml';
 import { describe, expect, test, vi } from 'vitest';
 
 import { CSpellConfigFileToml } from '../CSpellConfigFile/CSpellConfigFileToml.js';
 import { defaultNextDeserializer, defaultNextSerializer } from '../defaultNext.js';
-import { unindent } from '../util/unindent.js';
 import { serializerCSpellToml } from './cspellToml.js';
 
 const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
