@@ -1,9 +1,9 @@
+import { unindent } from '@streetsidesoftware/unindent';
 import { parse } from 'smol-toml';
 import { describe, expect, test } from 'vitest';
 
 import { cspellConfigFileSchema } from '../CSpellConfigFile.js';
 import { createTextFile } from '../TextFile.js';
-import { unindent } from '../util/unindent.js';
 import { CSpellConfigFileToml, parseCSpellConfigFileToml } from './CSpellConfigFileToml.js';
 
 describe('CSpellConfigFileToml', () => {

@@ -1,11 +1,11 @@
 import assert from 'node:assert';
 
+import { unindent } from '@streetsidesoftware/unindent';
 import { describe, expect, test, vi } from 'vitest';
 
 import { CSpellConfigFileJson } from '../CSpellConfigFile/CSpellConfigFileJson.js';
 import { defaultNextDeserializer, defaultNextSerializer } from '../defaultNext.js';
 import { json } from '../test-helpers/util.js';
-import { unindent } from '../util/unindent.js';
 import { serializerCSpellJson } from './cspellJson.js';
 
 const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);

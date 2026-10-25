@@ -1,6 +1,6 @@
+import { unindent } from '@streetsidesoftware/unindent';
 import { describe, expect, test } from 'vitest';
 
-import { unindent } from '../utils/unindent.ts';
 import { parseAff, parseAffRule } from './affParser.ts';
 
 describe('parseAff', () => {

@@ -1,7 +1,9 @@
 import assert from 'node:assert';
 import { promises as fs } from 'node:fs';
 import type { JSONSchema7, JSONSchema7Definition } from 'json-schema';
-import { inject, createTable, padLines, relativeToSite } from './lib/utils.mts';
+import { indent, unindent as md } from '@streetsidesoftware/unindent';
+
+import { createTable, relativeToSite } from './lib/utils.mts';
 import { URL_REPO_ROOT_PKG, URL_SITE_DOCS } from './lib/constants.mts';
 
 const schemaFile = new URL('cspell.schema.json', URL_REPO_ROOT_PKG);
@@ -93,7 +95,7 @@ export async function run(): Promise<void> {
     const schema = await loadSchema();
     linkRegistry = buildLinkRegistry(schema);
 
-    const header = inject`\
+    const header = md`\
         ---
         # AUTO-GENERATED ALL CHANGES WILL BE LOST
         # See \`${relativeToSite(import.meta.url)}\`
@@ -191,7 +193,7 @@ function formatPropertyToDisplay(
     nameOfParentType: string,
     isRequired: boolean,
 ): string {
-    return inject`
+    return md`
 
         ---
 
@@ -203,7 +205,7 @@ function formatPropertyToDisplay(
 
 function formatTopLevelType(key: string, entry: JSONSchema7): string {
     currentSectionName = '';
-    return inject`
+    return md`
 
         ---
 
@@ -218,7 +220,7 @@ function formatTypeEntryBody(entry: Definition, isRequired: boolean | undefined)
 
     let dlDescription = formatEntryDescription(entry, '');
     if (dlDescription) {
-        dlDescription = inject`
+        dlDescription = md`
             <dt>Description</dt>
             <dd>
 
@@ -230,13 +232,13 @@ function formatTypeEntryBody(entry: Definition, isRequired: boolean | undefined)
 
     let dlSince = '';
     if (entry.since) {
-        dlSince = inject`
+        dlSince = md`
             <dt>Since</dt>
             <dd>${entry.since}</dd>
         `;
     }
 
-    return inject`
+    return md`
         <dl>
         ${dlDescription}
         <dt>Type${req}</dt>
@@ -311,7 +313,7 @@ function formatEntryDescription(entry: Definition, padding: string): string {
     }
 
     description = replaceLinks(description);
-    description = padLines(description, padding);
+    description = indent(description, padding);
     return description;
 }
 

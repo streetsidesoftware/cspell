@@ -1,3 +1,4 @@
+import { unindent } from '@streetsidesoftware/unindent';
 import type { AddHelpTextContext, Command, CommandOptions } from 'commander';
 
 import * as App from './application.mjs';
@@ -9,7 +10,6 @@ import { DEFAULT_CACHE_LOCATION } from './util/cache/index.js';
 import { canUseColor } from './util/canUseColor.js';
 import { CheckFailed } from './util/errors.js';
 import { getOutputWidth } from './util/outputWidth.js';
-import { unindent } from './util/unindent.js';
 import { validateUnitSize } from './util/unitNumbers.js';
 
 // interface InitOptions extends Options {}
