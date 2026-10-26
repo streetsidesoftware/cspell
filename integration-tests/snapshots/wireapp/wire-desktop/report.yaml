@@ -3,9 +3,9 @@ Repository: wireapp/wire-desktop
 Url: https://github.com/wireapp/wire-desktop.git
 Args: '["*.md","electron/renderer/**/*.jsx","electron/src/**/*.ts","electron/html/*.html"]'
 Summary:
-  files: 84
-  filesWithIssues: 14
-  issues: 72
+  files: 83
+  filesWithIssues: 13
+  issues: 71
   errors: 0
 Errors: []
 
@@ -34,17 +34,17 @@ issues:
   - "electron/src/logging/logCleanupScheduler.ts:20:13       Unrefable       U       export type UnrefableInterval = {"
   - "electron/src/mainProcess.ts:479:51      webrtc      U       disable-features', 'webrtc-hide-local-ips-with"
   - "electron/src/mainProcess.ts:479:78      mdns        U       hide-local-ips-with-mdns');"
-  - "electron/src/managed/backends/linux.ts:33:28        APPLOCK     U       return managedConfig?.[APPLOCK_OVERRIDE_KEY] !== false"
+  - "electron/src/managed/backends/macos.ts:33:45        APPLOCK     U       temPreferences.getUserDefault(APPLOCK_OVERRIDE_KEY, 'boolean"
   - "electron/src/managed/backends/windows.ts:37:33          subkey      U       enumerateKeys: (hive: number, subkey: string) => string["
-  - "electron/src/managed/ManagedConfig.ts:35:3          applock     U       applockOverride: boolean;"
-  - "electron/src/managed/ManagedConfig.ts:40:16         Applock     U       function detectApplockOverride(): boolean"
+  - "electron/src/managed/ManagedConfig.ts:34:3          applock     U       applockOverride: boolean;"
+  - "electron/src/managed/ManagedConfig.ts:39:16         Applock     U       function detectApplockOverride(): boolean"
   - "electron/src/preload/preload-webview.ts:289:37      polyfilling     U       This can be improved by polyfilling getDisplayMedia function"
   - "electron/src/preload/preload-webview.ts:347:8       SQSERVICES      U       // see SQSERVICES-1882 and SQSERVICES"
   - "electron/src/sso/MacWebAuthentication.ts:22:6           Nobjc       U       type NobjcObject = {[selector:"
   - "electron/src/sso/MacWebAuthentication.ts:51:84          objc        U       typedBlock} = require('objc-js');"
   - "electron/src/sso/MacWebAuthentication.ts:78:59          TSFN        U       always dispatch through a TSFN in Electron,"
-  - "README.md:65:50         HKLM        U       SOFTWARE\\Policies\\Wire` (HKLM, HKCU fallback) | `applockOve"
-  - "README.md:65:56         HKCU        U       Policies\\Wire` (HKLM, HKCU fallback) | `applockOverride"
-  - "README.md:81:44         Intune      U       automatically on an Intune/MDM-enrolled or Azure"
-  - "README.md:83:77         zclient     U       production is `com.wearezeta.zclient.mac`; dev/internal differ"
-  - "README.md:134:211       PKCE        U       not a single-use-code/PKCE exchange."
+  - "README.md:58:50         HKLM        U       SOFTWARE\\Policies\\Wire` (HKLM, HKCU fallback) | `applockOve"
+  - "README.md:58:56         HKCU        U       Policies\\Wire` (HKLM, HKCU fallback) | `applockOverride"
+  - "README.md:73:44         Intune      U       automatically on an Intune/MDM-enrolled or Azure"
+  - "README.md:75:77         zclient     U       production is `com.wearezeta.zclient.mac`; dev/internal differ"
+  - "README.md:115:211       PKCE        U       not a single-use-code/PKCE exchange."

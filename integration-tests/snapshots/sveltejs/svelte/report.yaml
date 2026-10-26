@@ -3,9 +3,9 @@ Repository: sveltejs/svelte
 Url: https://github.com/sveltejs/svelte.git
 Args: '["**"]'
 Summary:
-  files: 9212
-  filesWithIssues: 636
-  issues: 4155
+  files: 9221
+  filesWithIssues: 638
+  issues: 4162
   errors: 0
 Errors: []
 
@@ -1693,8 +1693,8 @@ issues:
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/constants.js:7:53        brailleroledescription      U       autocomplete braillelabel brailleroledescription busy checked colcount"
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/constants.js:36:19       labelable                   U       export const a11y_labelable = ["
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/constants.js:251:3       impp                        U       'impp'"
-  - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/index.js:129:12      proptypes       U       // aria-proptypes"
-  - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/index.js:718:21      webauthn        U       if (tokens[0] === 'webauthn') {"
+  - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/index.js:130:12      proptypes       U       // aria-proptypes"
+  - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/index.js:719:21      webauthn        U       if (tokens[0] === 'webauthn') {"
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/utils.js:131:41       inbetween (between)     U       whitespace is allowed inbetween. TODO remove once legacy"
   - "packages/svelte/src/compiler/phases/3-transform/client/transform-client.js:169:3        memoizer    U       memoizer: /** @type {any} */"
   - "packages/svelte/src/compiler/phases/3-transform/client/transform-template/fix-attribute-casing.js:2:1321        onbegin     U       offset onabort onactivate onbegin onclick onend onerror"
@@ -1731,7 +1731,7 @@ issues:
   - "packages/svelte/src/internal/client/dom/blocks/branches.js:229:10       ondiscard       U       batch.ondiscard(this.#discard);"
   - "packages/svelte/src/internal/client/dom/blocks/each.js:86:62        outrogroups     U       EachOutroGroup>} */ (state.outrogroups);"
   - "packages/svelte/src/internal/client/dom/elements/actions.js:18:8        inited      U       var inited = false;"
-  - "packages/svelte/src/internal/client/dom/elements/attributes.js:434:15       spreaded (spread)       U       // 3. the spreaded value is ''"
+  - "packages/svelte/src/internal/client/dom/elements/attributes.js:442:15       spreaded (spread)       U       // 3. the spreaded value is ''"
   - "packages/svelte/src/internal/client/dom/elements/bindings/input.js:30:14        numberlike      U       value = is_numberlike_input(input) ? to_number"
   - "packages/svelte/src/internal/client/dom/elements/bindings/select.js:252:71      SELECTEDCONTENT     U       node.nodeName === 'SELECTEDCONTENT');"
   - "packages/svelte/src/internal/client/dom/elements/events.js:168:47       expando     U       GCed too early, the expando __root property"
@@ -1739,10 +1739,10 @@ issues:
   - "packages/svelte/src/internal/client/proxy.js:96:32          inspectable     U       /** @type {any} */ (inspectable_array(/** @type {any"
   - "packages/svelte/src/internal/client/reactivity/batch.js:60:14       travelling      U       * When time travelling (i.e. working in one"
   - "packages/svelte/src/internal/client/reactivity/batch.js:198:3       unskipped       U       #unskipped_branches = new Set("
-  - "packages/svelte/src/internal/client/reactivity/batch.js:421:77      unskipping      U       rescheduled through unskipping the skipped branches"
-  - "packages/svelte/src/internal/client/reactivity/batch.js:978:85      AFAICT          U       legacy `$:` effects AFAICT — we can remove later"
-  - "packages/svelte/src/internal/client/reactivity/batch.js:1138:82     nullpointers    U       else we could run into nullpointers"
-  - "packages/svelte/src/internal/client/reactivity/deriveds.js:129:6        deferreds       U       var deferreds = new Set();"
+  - "packages/svelte/src/internal/client/reactivity/batch.js:422:77      unskipping      U       rescheduled through unskipping the skipped branches"
+  - "packages/svelte/src/internal/client/reactivity/batch.js:946:85      AFAICT          U       legacy `$:` effects AFAICT — we can remove later"
+  - "packages/svelte/src/internal/client/reactivity/batch.js:1106:82     nullpointers    U       else we could run into nullpointers"
+  - "packages/svelte/src/internal/client/reactivity/deriveds.js:130:6        deferreds       U       var deferreds = new Set();"
   - "packages/svelte/src/internal/client/reactivity/effects.js:13:2          untracking      U       untracking,"
   - "packages/svelte/src/internal/client/reactivity/sources.js:286:63        overfiring      U       - this way we avoid overfiring."
   - "packages/svelte/src/internal/client/runtime.js:409:21       reexecuted      U       // DIRTY so it is reexecuted once someone wants its"
@@ -2004,13 +2004,13 @@ issues:
   - "packages/svelte/tests/validator/samples/a11y-aria-activedescendant/warnings.json:3:43           tabindex    U       activedescendant_has_tabindex\","
   - "packages/svelte/tests/validator/samples/a11y-aria-proptypes-number/warnings.json:4:34           valuemax    U       \"The value of 'aria-valuemax' must be a number\","
   - "packages/svelte/tests/validator/samples/a11y-autocomplete-valid/input.svelte:14:72          WEBAUTHN    U       SHIPPING WORK EMAIL WEBAUTHN\" />"
+  - "packages/svelte/tests/validator/samples/a11y-fallback-roles/warnings.json:27:20         noninteractive      U       \"code\": \"a11y_no_noninteractive_tabindex\","
   - "packages/svelte/tests/validator/samples/a11y-figcaption-wrong-place/warnings.json:3:17          figcaption      U       \"code\": \"a11y_figcaption_index\","
   - "packages/svelte/tests/validator/samples/a11y-interactive-supports-focus/warnings.json:236:16        mouseout    U       \"message\": \"'mouseout' event must be accompanied"
   - "packages/svelte/tests/validator/samples/a11y-no-abstract-roles/input.svelte:6:12        roletype        U       <div role=\"roletype\"></div>"
   - "packages/svelte/tests/validator/samples/a11y-no-abstract-roles/input.svelte:8:12        sectionhead     U       <div role=\"sectionhead\"></div>"
   - "packages/svelte/tests/validator/samples/a11y-no-access-key/warnings.json:3:17           accesskey       U       \"code\": \"a11y_accesskey\","
-  - "packages/svelte/tests/validator/samples/a11y-no-interactive-element-to-noninteractive-role/warnings.json:3:43           noninteractive      U       interactive_element_to_noninteractive_role\","
-  - "packages/svelte/tests/validator/samples/a11y-no-interactive-element-to-noninteractive-role/warnings.json:56:39          listitem            U       ` cannot have role 'listitem'\","
+  - "packages/svelte/tests/validator/samples/a11y-no-interactive-element-to-noninteractive-role/warnings.json:56:39          listitem    U       ` cannot have role 'listitem'\","
   - "packages/svelte/tests/validator/samples/a11y-no-noninteractive-element-to-interactive-role/input.svelte:34:17       biblioref       U       <menu role=\"doc-biblioref\"></menu>"
   - "packages/svelte/tests/validator/samples/a11y-no-noninteractive-element-to-interactive-role/input.svelte:35:18       glossref        U       <meter role=\"doc-glossref\"></meter>"
   - "packages/svelte/tests/validator/samples/a11y-no-noninteractive-element-to-interactive-role/input.svelte:36:16       noteref         U       <nav role=\"doc-noteref\"></nav>"
