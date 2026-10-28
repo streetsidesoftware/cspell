@@ -29,7 +29,7 @@ export interface CSpellSettingsValidation {
      *
      * @default { "*": true }
      * @experimental
-     * @since 10.5.0
+     * @since 11.0.0
      */
     validate?: ValidationTags;
 }
