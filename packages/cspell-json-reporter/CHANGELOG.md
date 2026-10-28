@@ -154,6 +154,25 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 </details>
 
+## v10.4.1 (2026-10-28)
+
+### Fixes
+
+- fix: A locale that isn't valid no longer stops a file from being checked (<a href="https://github.com/streetsidesoftware/cspell/pull/9501">#9501</a>)
+
+---
+
+</details>
+
+- fix: Ignore the comment closing marker in a locale directive (<a href="https://github.com/streetsidesoftware/cspell/pull/9496">#9496</a>)
+- fix: Show "stdin" as the file name when checking stdin (<a href="https://github.com/streetsidesoftware/cspell/pull/9487">#9487</a>)
+
+- fix: Recognize Fortran source files (<a href="https://github.com/streetsidesoftware/cspell/pull/9490">#9490</a>)
+
+### Dictionary Updates
+
+- fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/9494">#9494</a>)
+
 ## v10.4.0 (2026-10-14)
 
 ### Features
