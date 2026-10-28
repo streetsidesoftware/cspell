@@ -3,7 +3,7 @@ Repository: neovim/nvim-lspconfig
 Url: "https://github.com/neovim/nvim-lspconfig.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 884, Issues found: 9897 in 785 files.
+ CSpell: Files checked: 884, Issues found: 9899 in 785 files.
  exit code: 1
 AGENTS.md:1:20      - Unknown word (lspconfig)  -- Everything in `lua/lspconfig/*` (except `util.lua
 CONTRIBUTING.md:12:81     - Unknown word (upstreamed) -- "util" code must be upstreamed to Nvim core.
@@ -704,7 +704,7 @@ lua/lspconfig/types/lsp/elixirls.lua:47:275    - Unknown word (underspecs) -- sp
 lua/lspconfig/types/lsp/elixirls.lua:86:93     - Unknown word (youruser)   -- code lookup. E.g. /home/youruser/.asdf/installs/elixir
 lua/lspconfig/types/lsp/elmls.lua:16:72     - Unknown word (analyse)    -- server, including elm-analyse checks.
 lua/lspconfig/types/lsp/emmylua_ls.lua:13:48     - Unknown word (Emmyrc)     -- settings.emmylua_ls.defs.EmmyrcCodeAction
-lua/lspconfig/types/lsp/eslint.lua:288:14    - Unknown word (Realpaths)  -- ---@field useRealpaths? boolean
+lua/lspconfig/types/lsp/eslint.lua:290:14    - Unknown word (Realpaths)  -- ---@field useRealpaths? boolean
 lua/lspconfig/types/lsp/fsautocomplete.lua:263:25    - Unknown word (paket)          -- default = { ".git", "paket-files", ".fable", "packages
 lua/lspconfig/types/lsp/fsautocomplete.lua:272:48    - Unknown word (Ionide)         -- Interactive tool used by Ionide-FSharp (When using
 lua/lspconfig/types/lsp/fsautocomplete.lua:282:35    - Unknown word (binlog)         -- generation of `msbuild.binlog` files for project loading
@@ -994,18 +994,19 @@ lua/lspconfig/types/lsp/jdtls.lua:220:99    - Unknown word (factorypath)      --
 lua/lspconfig/types/lsp/jdtls.lua:227:17    - Unknown word (Jdks)             -- ---@field detectJdksAtStart? boolean
 lua/lspconfig/types/lsp/jdtls.lua:3:43      - Unknown word (Autobuild)  -- settings.jdtls.Java.Autobuild
 lua/lspconfig/types/lsp/jdtls.lua:409:87    - Unknown word (subfolders)       -- negate patterns to allow subfolders imports. You have to
-lua/lspconfig/types/lsp/jdtls.lua:510:50    - Unknown word (Appcds)           -- settings.jdtls.Java.Jdt.Ls.Appcds
-lua/lspconfig/types/lsp/jdtls.lua:518:50    - Unknown word (Aspectj)          -- settings.jdtls.Java.Jdt.Ls.AspectjSupport
-lua/lspconfig/types/lsp/jdtls.lua:519:34    - Unknown word (freefair)         -- whether to enable `io.freefair.aspectj` plugin in Gradle
-lua/lspconfig/types/lsp/jdtls.lua:519:43    - Unknown word (aspectj)          -- enable `io.freefair.aspectj` plugin in Gradle projects
-lua/lspconfig/types/lsp/jdtls.lua:537:50    - Unknown word (Javac)            -- settings.jdtls.Java.Jdt.Ls.Javac
-lua/lspconfig/types/lsp/jdtls.lua:581:11    - Unknown word (appcds)           -- ---@field appcds? _.lspconfig.settings
-lua/lspconfig/types/lsp/jdtls.lua:596:153   - Unknown word (Dsun)             -- AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping
-lua/lspconfig/types/lsp/jdtls.lua:596:205   - Unknown word (Xlog)             -- true -Xmx2G -Xms100m -Xlog:disable` to optimize
-lua/lspconfig/types/lsp/jdtls.lua:601:11    - Unknown word (vmargs)           -- ---@field vmargs? string
-lua/lspconfig/types/lsp/jdtls.lua:657:9     - Unknown word (quickfixes)       -- ---Show quickfixes at the problem or line
+lua/lspconfig/types/lsp/jdtls.lua:421:7     - Unknown word (ondemand)         -- ---- `ondemand`: projects are imported
+lua/lspconfig/types/lsp/jdtls.lua:518:50    - Unknown word (Appcds)           -- settings.jdtls.Java.Jdt.Ls.Appcds
+lua/lspconfig/types/lsp/jdtls.lua:526:50    - Unknown word (Aspectj)          -- settings.jdtls.Java.Jdt.Ls.AspectjSupport
+lua/lspconfig/types/lsp/jdtls.lua:527:34    - Unknown word (freefair)         -- whether to enable `io.freefair.aspectj` plugin in Gradle
+lua/lspconfig/types/lsp/jdtls.lua:527:43    - Unknown word (aspectj)          -- enable `io.freefair.aspectj` plugin in Gradle projects
+lua/lspconfig/types/lsp/jdtls.lua:545:50    - Unknown word (Javac)            -- settings.jdtls.Java.Jdt.Ls.Javac
+lua/lspconfig/types/lsp/jdtls.lua:589:11    - Unknown word (appcds)           -- ---@field appcds? _.lspconfig.settings
+lua/lspconfig/types/lsp/jdtls.lua:604:153   - Unknown word (Dsun)             -- AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping
+lua/lspconfig/types/lsp/jdtls.lua:604:205   - Unknown word (Xlog)             -- true -Xmx2G -Xms100m -Xlog:disable` to optimize
+lua/lspconfig/types/lsp/jdtls.lua:609:11    - Unknown word (vmargs)           -- ---@field vmargs? string
+lua/lspconfig/types/lsp/jdtls.lua:665:9     - Unknown word (quickfixes)       -- ---Show quickfixes at the problem or line
 lua/lspconfig/types/lsp/jdtls.lua:73:36     - Unknown word (modifer)    -- generate the 'final' modifer for code actions that
-lua/lspconfig/types/lsp/jdtls.lua:873:11    - Unknown word (autobuild)        -- ---@field autobuild? _.lspconfig.settings
+lua/lspconfig/types/lsp/jdtls.lua:881:11    - Unknown word (autobuild)        -- ---@field autobuild? _.lspconfig.settings
 lua/lspconfig/types/lsp/jetls.lua:133:59    - Unknown word (Testrunner)     -- JetlsClient.Settings.Testrunner
 lua/lspconfig/types/lsp/jetls.lua:134:133   - Unknown word (JULIAUP)        -- run tests with, and `JULIAUP_CHANNEL` selects a
 lua/lspconfig/types/lsp/jetls.lua:134:161   - Unknown word (juliaup)        -- CHANNEL` selects a [juliaup](https://github.com
@@ -1125,95 +1126,95 @@ lua/lspconfig/types/lsp/ruby_lsp.lua:200:78    - Unknown word (chruby)     -- in
 lua/lspconfig/types/lsp/ruby_lsp.lua:207:73    - Unknown word (shadowenv)  -- "rbenv"|"rvm"|"rv"|"shadowenv"|"mise"|"custom"
 lua/lspconfig/types/lsp/ruby_lsp.lua:272:84    - Unknown word (rubyfmt)    -- syntax_tree"|"standard"|"rubyfmt"|"none"
 lua/lspconfig/types/lsp/ruby_lsp.lua:28:30     - Unknown word (Rubo)       -- Enable code actions, like RuboCop quick fixes
-lua/lspconfig/types/lsp/ruff.lua:1024:21   - Unknown word (confusables) -- ---@field ["allowed-confusables"]? string[]
-lua/lspconfig/types/lsp/ruff.lua:116:15    - Unknown word (etree)      -- ---like [`xml.etree.ElementTree.tostring
-lua/lspconfig/types/lsp/ruff.lua:1184:52   - Unknown word (Cabe)        -- settings.ruff.defs.McCabeOptions
-lua/lspconfig/types/lsp/ruff.lua:1198:21   - Unknown word (pydoclint)   -- ---Options for the `pydoclint` plugin.
-lua/lspconfig/types/lsp/ruff.lua:1199:53   - Unknown word (Pydoclint)   -- lspconfig.settings.ruff.defs.PydoclintOptions
-lua/lspconfig/types/lsp/ruff.lua:1206:21   - Unknown word (pyupgrade)   -- ---Options for the `pyupgrade` plugin.
-lua/lspconfig/types/lsp/ruff.lua:127:63    - Unknown word (webhelpers) -- qualified names (e.g., `webhelpers.html.literal`, rather
-lua/lspconfig/types/lsp/ruff.lua:1294:7    - Unknown word (rdjson)      -- ---| "rdjson"
-lua/lspconfig/types/lsp/ruff.lua:1315:6    - Unknown word (classmethod) -- ---`@classmethod`).
-lua/lspconfig/types/lsp/ruff.lua:1339:6    - Unknown word (staticmethod) -- ---`@staticmethod`).
-lua/lspconfig/types/lsp/ruff.lua:1357:19   - Unknown word (Pydantic)     -- ---libraries like Pydantic and FastAPI, which rely
-lua/lspconfig/types/lsp/ruff.lua:140:63    - Unknown word (pydantic)   -- qualified names (e.g., `pydantic.Field`, rather than
-lua/lspconfig/types/lsp/ruff.lua:1456:19   - Unknown word (overindented) -- ---[`D214`](rules/overindented-section.md),
-lua/lspconfig/types/lsp/ruff.lua:147:75    - Unknown word (dataclass)  -- or `function-call-in-dataclass-defaults`
-lua/lspconfig/types/lsp/ruff.lua:150:63    - Unknown word (fastapi)    -- qualified names (e.g., `fastapi.Query`, rather than
-lua/lspconfig/types/lsp/ruff.lua:1519:39   - Unknown word (functools)    -- and standard-library `@functools.cached_property`).
-lua/lspconfig/types/lsp/ruff.lua:1530:19   - Unknown word (hvplot)       -- ---import (e.g., `hvplot.pandas`).
-lua/lspconfig/types/lsp/ruff.lua:1548:19   - Unknown word (dunder)       -- ---@field ["allow-dunder-method-names"]? string
-lua/lspconfig/types/lsp/ruff.lua:164:49    - Unknown word (ignorelist) -- has been renamed to `ignorelist`. Use `ignorelist` instead
-lua/lspconfig/types/lsp/ruff.lua:208:28    - Unknown word (errmsg)     -- Options for the `flake8-errmsg` plugin.
-lua/lspconfig/types/lsp/ruff.lua:2117:7    - Unknown word (FURB)         -- ---| "FURB"
-lua/lspconfig/types/lsp/ruff.lua:21:35     - Unknown word (mypy)       -- path patterns, like `.mypy_cache` (to exclude any
-lua/lspconfig/types/lsp/ruff.lua:254:48    - Unknown word (Pytest)     -- settings.ruff.defs.Flake8PytestStyleOptions
-lua/lspconfig/types/lsp/ruff.lua:29:60     - Unknown word (globset)    -- syntax, refer to the [`globset` documentation](https
-lua/lspconfig/types/lsp/ruff.lua:3100:15   - Unknown word (xcom)         -- ---| "airflow-xcom-pull-in-template-string
-lua/lspconfig/types/lsp/ruff.lua:3129:7    - Unknown word (asyncio)      -- ---| "asyncio-dangling-task"
-lua/lspconfig/types/lsp/ruff.lua:3167:26   - Unknown word (httpx)        -- "blocking-http-call-httpx-in-async-function"
-lua/lspconfig/types/lsp/ruff.lua:3186:17   - Unknown word (fromtimestamp) -- ---| "call-date-fromtimestamp"
-lua/lspconfig/types/lsp/ruff.lua:3190:21   - Unknown word (strptime)      -- ---| "call-datetime-strptime-without-zone"
-lua/lspconfig/types/lsp/ruff.lua:3192:21   - Unknown word (utcfromtimestamp) -- ---| "call-datetime-utcfromtimestamp"
-lua/lspconfig/types/lsp/ruff.lua:3193:21   - Unknown word (utcnow)           -- ---| "call-datetime-utcnow"
-lua/lspconfig/types/lsp/ruff.lua:3231:23   - Unknown word (kwarg)            -- -| "default-factory-kwarg"
-lua/lspconfig/types/lsp/ruff.lua:3320:7    - Unknown word (fromisoformat)    -- ---| "fromisoformat-replace-z"
-lua/lspconfig/types/lsp/ruff.lua:3342:7    - Unknown word (hashlib)          -- ---| "hashlib-digest-hex"
-lua/lspconfig/types/lsp/ruff.lua:3405:15   - Unknown word (pathlib)          -- ---| "invalid-pathlib-with-suffix"
-lua/lspconfig/types/lsp/ruff.lua:3452:22   - Unknown word (maxsize)          -- --| "lru-cache-with-maxsize-none"
-lua/lspconfig/types/lsp/ruff.lua:3472:15   - Unknown word (maxsplit)         -- ---| "missing-maxsplit-arg"
-lua/lspconfig/types/lsp/ruff.lua:3525:15   - Unknown word (contextvar)       -- ---| "mutable-contextvar-default"
-lua/lspconfig/types/lsp/ruff.lua:3527:15   - Unknown word (fromkeys)         -- ---| "mutable-fromkeys-value"
-lua/lspconfig/types/lsp/ruff.lua:3541:19   - Unknown word (stacklevel)       -- ---| "no-explicit-stacklevel"
-lua/lspconfig/types/lsp/ruff.lua:3588:10   - Unknown word (listdir)          -- ---| "os-listdir"
-lua/lspconfig/types/lsp/ruff.lua:3589:10   - Unknown word (makedirs)         -- ---| "os-makedirs"
-lua/lspconfig/types/lsp/ruff.lua:3591:15   - Unknown word (abspath)          -- ---| "os-path-abspath"
-lua/lspconfig/types/lsp/ruff.lua:3593:15   - Unknown word (commonprefix)     -- ---| "os-path-commonprefix"
-lua/lspconfig/types/lsp/ruff.lua:3596:15   - Unknown word (expanduser)       -- ---| "os-path-expanduser"
-lua/lspconfig/types/lsp/ruff.lua:3597:15   - Unknown word (getatime)         -- ---| "os-path-getatime"
-lua/lspconfig/types/lsp/ruff.lua:3598:15   - Unknown word (getctime)         -- ---| "os-path-getctime"
-lua/lspconfig/types/lsp/ruff.lua:3599:15   - Unknown word (getmtime)         -- ---| "os-path-getmtime"
-lua/lspconfig/types/lsp/ruff.lua:3600:15   - Unknown word (getsize)          -- ---| "os-path-getsize"
-lua/lspconfig/types/lsp/ruff.lua:3601:15   - Unknown word (isabs)            -- ---| "os-path-isabs"
-lua/lspconfig/types/lsp/ruff.lua:3603:15   - Unknown word (isfile)           -- ---| "os-path-isfile"
-lua/lspconfig/types/lsp/ruff.lua:3604:15   - Unknown word (islink)           -- ---| "os-path-islink"
-lua/lspconfig/types/lsp/ruff.lua:3606:15   - Unknown word (samefile)         -- ---| "os-path-samefile"
-lua/lspconfig/types/lsp/ruff.lua:3607:15   - Unknown word (splitext)         -- ---| "os-path-splitext"
-lua/lspconfig/types/lsp/ruff.lua:3608:10   - Unknown word (readlink)         -- ---| "os-readlink"
-lua/lspconfig/types/lsp/ruff.lua:3624:14   - Unknown word (nunique)          -- ---| "pandas-nunique-constant-series-check
-lua/lspconfig/types/lsp/ruff.lua:3634:21   - Unknown word (inplace)          -- ---| "pandas-use-of-inplace-argument"
-lua/lspconfig/types/lsp/ruff.lua:3636:7    - Unknown word (paramiko)         -- ---| "paramiko-call"
-lua/lspconfig/types/lsp/ruff.lua:3675:22   - Unknown word (autouse)          -- --| "pytest-fixture-autouse"
-lua/lspconfig/types/lsp/ruff.lua:3711:7    - Unknown word (readlines)        -- ---| "readlines-in-for"
-lua/lspconfig/types/lsp/ruff.lua:3731:21   - Unknown word (starmap)          -- ---| "reimplemented-starmap"
-lua/lspconfig/types/lsp/ruff.lua:3769:7    - Unknown word (singledispatch)   -- ---| "singledispatch-method"
-lua/lspconfig/types/lsp/ruff.lua:3770:7    - Unknown word (singledispatchmethod) -- ---| "singledispatchmethod-function"
-lua/lspconfig/types/lsp/ruff.lua:3792:14   - Unknown word (repr)                 -- ---| "str-or-repr-defined-in-stub"
-lua/lspconfig/types/lsp/ruff.lua:3803:24   - Unknown word (preexec)              -- | "subprocess-popen-preexec-fn"
-lua/lspconfig/types/lsp/ruff.lua:3818:18   - Unknown word (ftplib)               -- ---| "suspicious-ftplib-import"
-lua/lspconfig/types/lsp/ruff.lua:3819:18   - Unknown word (httpoxy)              -- ---| "suspicious-httpoxy-import"
-lua/lspconfig/types/lsp/ruff.lua:3829:18   - Unknown word (pycrypto)             -- ---| "suspicious-pycrypto-import"
-lua/lspconfig/types/lsp/ruff.lua:3830:18   - Unknown word (pyghmi)               -- ---| "suspicious-pyghmi-import"
-lua/lspconfig/types/lsp/ruff.lua:3833:18   - Unknown word (telnetlib)            -- ---| "suspicious-telnetlib-import"
-lua/lspconfig/types/lsp/ruff.lua:3842:22   - Unknown word (minidom)              -- --| "suspicious-xml-minidom-import"
-lua/lspconfig/types/lsp/ruff.lua:3844:22   - Unknown word (pulldom)              -- --| "suspicious-xml-pulldom-import"
-lua/lspconfig/types/lsp/ruff.lua:3847:18   - Unknown word (xmlc)                 -- ---| "suspicious-xmlc-element-tree-usage"
-lua/lspconfig/types/lsp/ruff.lua:3892:12   - Unknown word (bivariance)           -- ---| "type-bivariance"
-lua/lspconfig/types/lsp/ruff.lua:3904:7    - Unknown word (unaliased)            -- ---| "unaliased-collections-abc-set
-lua/lspconfig/types/lsp/ruff.lua:3951:41   - Unknown word (deque)                -- empty-iterable-within-deque-call"
-lua/lspconfig/types/lsp/ruff.lua:3989:7    - Unknown word (unraw)                -- ---| "unraw-re-pattern"
-lua/lspconfig/types/lsp/ruff.lua:4018:21   - Unknown word (metaclass)            -- ---| "useless-class-metaclass-type"
-lua/lspconfig/types/lsp/ruff.lua:4020:15   - Unknown word (contextlib)           -- ---| "useless-contextlib-suppress"
-lua/lspconfig/types/lsp/ruff.lua:448:59    - Unknown word (Pydantic's) -- required semantics is Pydantic's `pydantic.BaseModel
-lua/lspconfig/types/lsp/ruff.lua:467:42    - Unknown word (sqlalchemy) -- cases like SQLAlchemy's `sqlalchemy.orm.DeclarativeBase
-lua/lspconfig/types/lsp/ruff.lua:72:7      - Unknown word (kwargs)     -- ---`**kwargs` arguments.
-lua/lspconfig/types/lsp/ruff.lua:775:21    - Unknown word (isort)      -- ---Options for the `isort` plugin.
-lua/lspconfig/types/lsp/ruff.lua:776:42    - Unknown word (Isort)      -- lspconfig.settings.ruff.defs.IsortOptions
-lua/lspconfig/types/lsp/ruff.lua:785:46    - Unknown word (isort's)    -- on the same line. See isort's [`combine-as-imports
-lua/lspconfig/types/lsp/ruff.lua:810:24    - Unknown word (itertools)  -- imports (like `from itertools import groupby`). Instead
-lua/lspconfig/types/lsp/ruff.lua:810:41    - Unknown word (groupby)    -- from itertools import groupby`). Instead, sort the
-lua/lspconfig/types/lsp/ruff.lua:95:6      - Unknown word (markupsafe) -- ---[`markupsafe.Markup`](https://markupsafe
-lua/lspconfig/types/lsp/ruff.lua:967:30    - Unknown word (langchain)  -- LangChain ecosystem (`langchain-core`, `langchain-openai
+lua/lspconfig/types/lsp/ruff.lua:1028:21   - Unknown word (confusables) -- ---@field ["allowed-confusables"]? string[]
+lua/lspconfig/types/lsp/ruff.lua:1188:52   - Unknown word (Cabe)        -- settings.ruff.defs.McCabeOptions
+lua/lspconfig/types/lsp/ruff.lua:1202:21   - Unknown word (pydoclint)   -- ---Options for the `pydoclint` plugin.
+lua/lspconfig/types/lsp/ruff.lua:1203:53   - Unknown word (Pydoclint)   -- lspconfig.settings.ruff.defs.PydoclintOptions
+lua/lspconfig/types/lsp/ruff.lua:120:15    - Unknown word (etree)      -- ---like [`xml.etree.ElementTree.tostring
+lua/lspconfig/types/lsp/ruff.lua:1210:21   - Unknown word (pyupgrade)   -- ---Options for the `pyupgrade` plugin.
+lua/lspconfig/types/lsp/ruff.lua:1298:7    - Unknown word (rdjson)      -- ---| "rdjson"
+lua/lspconfig/types/lsp/ruff.lua:1319:6    - Unknown word (classmethod) -- ---`@classmethod`).
+lua/lspconfig/types/lsp/ruff.lua:131:63    - Unknown word (webhelpers) -- qualified names (e.g., `webhelpers.html.literal`, rather
+lua/lspconfig/types/lsp/ruff.lua:1343:6    - Unknown word (staticmethod) -- ---`@staticmethod`).
+lua/lspconfig/types/lsp/ruff.lua:1361:19   - Unknown word (Pydantic)     -- ---libraries like Pydantic and FastAPI, which rely
+lua/lspconfig/types/lsp/ruff.lua:144:63    - Unknown word (pydantic)   -- qualified names (e.g., `pydantic.Field`, rather than
+lua/lspconfig/types/lsp/ruff.lua:1460:19   - Unknown word (overindented) -- ---[`D214`](rules/overindented-section.md),
+lua/lspconfig/types/lsp/ruff.lua:151:75    - Unknown word (dataclass)  -- or `function-call-in-dataclass-defaults`
+lua/lspconfig/types/lsp/ruff.lua:1523:39   - Unknown word (functools)    -- and standard-library `@functools.cached_property`).
+lua/lspconfig/types/lsp/ruff.lua:1534:19   - Unknown word (hvplot)       -- ---import (e.g., `hvplot.pandas`).
+lua/lspconfig/types/lsp/ruff.lua:154:63    - Unknown word (fastapi)    -- qualified names (e.g., `fastapi.Query`, rather than
+lua/lspconfig/types/lsp/ruff.lua:1552:19   - Unknown word (dunder)       -- ---@field ["allow-dunder-method-names"]? string
+lua/lspconfig/types/lsp/ruff.lua:168:49    - Unknown word (ignorelist) -- has been renamed to `ignorelist`. Use `ignorelist` instead
+lua/lspconfig/types/lsp/ruff.lua:2126:7    - Unknown word (FURB)         -- ---| "FURB"
+lua/lspconfig/types/lsp/ruff.lua:212:28    - Unknown word (errmsg)     -- Options for the `flake8-errmsg` plugin.
+lua/lspconfig/types/lsp/ruff.lua:258:48    - Unknown word (Pytest)     -- settings.ruff.defs.Flake8PytestStyleOptions
+lua/lspconfig/types/lsp/ruff.lua:25:35     - Unknown word (mypy)       -- path patterns, like `.mypy_cache` (to exclude any
+lua/lspconfig/types/lsp/ruff.lua:3109:15   - Unknown word (xcom)         -- ---| "airflow-xcom-pull-in-template-string
+lua/lspconfig/types/lsp/ruff.lua:3138:7    - Unknown word (asyncio)      -- ---| "asyncio-dangling-task"
+lua/lspconfig/types/lsp/ruff.lua:3176:26   - Unknown word (httpx)        -- "blocking-http-call-httpx-in-async-function"
+lua/lspconfig/types/lsp/ruff.lua:3195:17   - Unknown word (fromtimestamp) -- ---| "call-date-fromtimestamp"
+lua/lspconfig/types/lsp/ruff.lua:3199:21   - Unknown word (strptime)      -- ---| "call-datetime-strptime-without-zone"
+lua/lspconfig/types/lsp/ruff.lua:3201:21   - Unknown word (utcfromtimestamp) -- ---| "call-datetime-utcfromtimestamp"
+lua/lspconfig/types/lsp/ruff.lua:3202:21   - Unknown word (utcnow)           -- ---| "call-datetime-utcnow"
+lua/lspconfig/types/lsp/ruff.lua:3240:23   - Unknown word (kwarg)            -- -| "default-factory-kwarg"
+lua/lspconfig/types/lsp/ruff.lua:3329:7    - Unknown word (fromisoformat)    -- ---| "fromisoformat-replace-z"
+lua/lspconfig/types/lsp/ruff.lua:3351:7    - Unknown word (hashlib)          -- ---| "hashlib-digest-hex"
+lua/lspconfig/types/lsp/ruff.lua:33:60     - Unknown word (globset)    -- syntax, refer to the [`globset` documentation](https
+lua/lspconfig/types/lsp/ruff.lua:3414:15   - Unknown word (pathlib)          -- ---| "invalid-pathlib-with-suffix"
+lua/lspconfig/types/lsp/ruff.lua:3461:22   - Unknown word (maxsize)          -- --| "lru-cache-with-maxsize-none"
+lua/lspconfig/types/lsp/ruff.lua:3481:15   - Unknown word (maxsplit)         -- ---| "missing-maxsplit-arg"
+lua/lspconfig/types/lsp/ruff.lua:3534:15   - Unknown word (contextvar)       -- ---| "mutable-contextvar-default"
+lua/lspconfig/types/lsp/ruff.lua:3536:15   - Unknown word (fromkeys)         -- ---| "mutable-fromkeys-value"
+lua/lspconfig/types/lsp/ruff.lua:3550:19   - Unknown word (stacklevel)       -- ---| "no-explicit-stacklevel"
+lua/lspconfig/types/lsp/ruff.lua:3597:10   - Unknown word (listdir)          -- ---| "os-listdir"
+lua/lspconfig/types/lsp/ruff.lua:3598:10   - Unknown word (makedirs)         -- ---| "os-makedirs"
+lua/lspconfig/types/lsp/ruff.lua:3600:15   - Unknown word (abspath)          -- ---| "os-path-abspath"
+lua/lspconfig/types/lsp/ruff.lua:3602:15   - Unknown word (commonprefix)     -- ---| "os-path-commonprefix"
+lua/lspconfig/types/lsp/ruff.lua:3605:15   - Unknown word (expanduser)       -- ---| "os-path-expanduser"
+lua/lspconfig/types/lsp/ruff.lua:3606:15   - Unknown word (getatime)         -- ---| "os-path-getatime"
+lua/lspconfig/types/lsp/ruff.lua:3607:15   - Unknown word (getctime)         -- ---| "os-path-getctime"
+lua/lspconfig/types/lsp/ruff.lua:3608:15   - Unknown word (getmtime)         -- ---| "os-path-getmtime"
+lua/lspconfig/types/lsp/ruff.lua:3609:15   - Unknown word (getsize)          -- ---| "os-path-getsize"
+lua/lspconfig/types/lsp/ruff.lua:3610:15   - Unknown word (isabs)            -- ---| "os-path-isabs"
+lua/lspconfig/types/lsp/ruff.lua:3612:15   - Unknown word (isfile)           -- ---| "os-path-isfile"
+lua/lspconfig/types/lsp/ruff.lua:3613:15   - Unknown word (islink)           -- ---| "os-path-islink"
+lua/lspconfig/types/lsp/ruff.lua:3615:15   - Unknown word (samefile)         -- ---| "os-path-samefile"
+lua/lspconfig/types/lsp/ruff.lua:3616:15   - Unknown word (splitext)         -- ---| "os-path-splitext"
+lua/lspconfig/types/lsp/ruff.lua:3617:10   - Unknown word (readlink)         -- ---| "os-readlink"
+lua/lspconfig/types/lsp/ruff.lua:3633:14   - Unknown word (nunique)          -- ---| "pandas-nunique-constant-series-check
+lua/lspconfig/types/lsp/ruff.lua:3643:21   - Unknown word (inplace)          -- ---| "pandas-use-of-inplace-argument"
+lua/lspconfig/types/lsp/ruff.lua:3645:7    - Unknown word (paramiko)         -- ---| "paramiko-call"
+lua/lspconfig/types/lsp/ruff.lua:3684:22   - Unknown word (autouse)          -- --| "pytest-fixture-autouse"
+lua/lspconfig/types/lsp/ruff.lua:3720:7    - Unknown word (readlines)        -- ---| "readlines-in-for"
+lua/lspconfig/types/lsp/ruff.lua:3740:21   - Unknown word (starmap)          -- ---| "reimplemented-starmap"
+lua/lspconfig/types/lsp/ruff.lua:3778:7    - Unknown word (singledispatch)   -- ---| "singledispatch-method"
+lua/lspconfig/types/lsp/ruff.lua:3779:7    - Unknown word (singledispatchmethod) -- ---| "singledispatchmethod-function"
+lua/lspconfig/types/lsp/ruff.lua:3801:14   - Unknown word (repr)                 -- ---| "str-or-repr-defined-in-stub"
+lua/lspconfig/types/lsp/ruff.lua:3812:24   - Unknown word (preexec)              -- | "subprocess-popen-preexec-fn"
+lua/lspconfig/types/lsp/ruff.lua:3827:18   - Unknown word (ftplib)               -- ---| "suspicious-ftplib-import"
+lua/lspconfig/types/lsp/ruff.lua:3828:18   - Unknown word (httpoxy)              -- ---| "suspicious-httpoxy-import"
+lua/lspconfig/types/lsp/ruff.lua:3838:18   - Unknown word (pycrypto)             -- ---| "suspicious-pycrypto-import"
+lua/lspconfig/types/lsp/ruff.lua:3839:18   - Unknown word (pyghmi)               -- ---| "suspicious-pyghmi-import"
+lua/lspconfig/types/lsp/ruff.lua:3842:18   - Unknown word (telnetlib)            -- ---| "suspicious-telnetlib-import"
+lua/lspconfig/types/lsp/ruff.lua:3851:22   - Unknown word (minidom)              -- --| "suspicious-xml-minidom-import"
+lua/lspconfig/types/lsp/ruff.lua:3853:22   - Unknown word (pulldom)              -- --| "suspicious-xml-pulldom-import"
+lua/lspconfig/types/lsp/ruff.lua:3856:18   - Unknown word (xmlc)                 -- ---| "suspicious-xmlc-element-tree-usage"
+lua/lspconfig/types/lsp/ruff.lua:3901:12   - Unknown word (bivariance)           -- ---| "type-bivariance"
+lua/lspconfig/types/lsp/ruff.lua:3913:7    - Unknown word (unaliased)            -- ---| "unaliased-collections-abc-set
+lua/lspconfig/types/lsp/ruff.lua:3960:41   - Unknown word (deque)                -- empty-iterable-within-deque-call"
+lua/lspconfig/types/lsp/ruff.lua:3998:7    - Unknown word (unraw)                -- ---| "unraw-re-pattern"
+lua/lspconfig/types/lsp/ruff.lua:4027:21   - Unknown word (metaclass)            -- ---| "useless-class-metaclass-type"
+lua/lspconfig/types/lsp/ruff.lua:4029:15   - Unknown word (contextlib)           -- ---| "useless-contextlib-suppress"
+lua/lspconfig/types/lsp/ruff.lua:452:59    - Unknown word (Pydantic's) -- required semantics is Pydantic's `pydantic.BaseModel
+lua/lspconfig/types/lsp/ruff.lua:471:42    - Unknown word (sqlalchemy) -- cases like SQLAlchemy's `sqlalchemy.orm.DeclarativeBase
+lua/lspconfig/types/lsp/ruff.lua:76:7      - Unknown word (kwargs)     -- ---`**kwargs` arguments.
+lua/lspconfig/types/lsp/ruff.lua:779:21    - Unknown word (isort)      -- ---Options for the `isort` plugin.
+lua/lspconfig/types/lsp/ruff.lua:780:42    - Unknown word (Isort)      -- lspconfig.settings.ruff.defs.IsortOptions
+lua/lspconfig/types/lsp/ruff.lua:789:46    - Unknown word (isort's)    -- on the same line. See isort's [`combine-as-imports
+lua/lspconfig/types/lsp/ruff.lua:814:24    - Unknown word (itertools)  -- imports (like `from itertools import groupby`). Instead
+lua/lspconfig/types/lsp/ruff.lua:814:41    - Unknown word (groupby)    -- from itertools import groupby`). Instead, sort the
+lua/lspconfig/types/lsp/ruff.lua:971:30    - Unknown word (langchain)  -- LangChain ecosystem (`langchain-core`, `langchain-openai
+lua/lspconfig/types/lsp/ruff.lua:99:6      - Unknown word (markupsafe) -- ---[`markupsafe.Markup`](https://markupsafe
 lua/lspconfig/types/lsp/ruff_lsp.lua:3:63      - Unknown word (noqa)       -- to disable rules via `noqa` suppression comments
 lua/lspconfig/types/lsp/rust_analyzer.lua:1018:70   - Unknown word (Reborrow)    -- RustAnalyzer.InlayHints.ReborrowHints
 lua/lspconfig/types/lsp/rust_analyzer.lua:106:11    - Unknown word (autoreload) -- ---@field autoreload? boolean

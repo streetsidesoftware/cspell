@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 396, Issues found: 4396 in 352 files.
+ CSpell: Files checked: 400, Issues found: 4419 in 355 files.
  exit code: 1
 admin.go:1011:38   - Unknown word (xxhash)      -- hash.Hash { return xxhash.New() }
 admin.go:1145:20   - Unknown word (Redir)       -- return errInternalRedir
@@ -1522,7 +1522,7 @@ modules/caddyhttp/celmatcher_test.go:15:9      - Unknown word (caddyhttp)  -- pa
 modules/caddyhttp/celmatcher_test.go:27:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 modules/caddyhttp/celmatcher_test.go:28:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/caddyconfig
 modules/caddyhttp/celmatcher_test.go:28:35     - Unknown word (caddyconfig) -- caddyserver/caddy/v2/caddyconfig/caddyfile"
-modules/caddyhttp/celmatcher_test.go:59:60     - Unknown word (localdomain) -- subject} == 'CN=client.localdomain'",
+modules/caddyhttp/celmatcher_test.go:60:60     - Unknown word (localdomain) -- subject} == 'CN=client.localdomain'",
 modules/caddyhttp/encode/brotli/brotli_precompressed.go:1:9       - Unknown word (caddybrotli) -- package caddybrotli
 modules/caddyhttp/encode/brotli/brotli_precompressed.go:4:14      - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 modules/caddyhttp/encode/brotli/brotli_precompressed.go:5:14      - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddyhttp
@@ -2075,33 +2075,33 @@ modules/caddyhttp/marshalers.go:56:46     - Unknown word (Loggable)    -- encodi
 modules/caddyhttp/marshalers.go:64:44     - Unknown word (loggable)    -- makes an HTTP header loggable with zap.Object().
 modules/caddyhttp/marshalers.go:67:49     - Unknown word (marshalable) -- makes a slice of strings marshalable for logging.
 modules/caddyhttp/marshalers.go:70:54     - Unknown word (loggable)    -- TLS connection state loggable with zap.Object().
-modules/caddyhttp/matchers.go:1011:56   - Unknown word (Filippo)     -- lementation is different, and Filippo Valsorda rightly wrote
-modules/caddyhttp/matchers.go:1011:64   - Unknown word (Valsorda)    -- different, and Filippo Valsorda rightly wrote:
-modules/caddyhttp/matchers.go:1077:13   - Unknown word (Errf)        -- return d.Errf("malformed header matcher
-modules/caddyhttp/matchers.go:1082:14   - Unknown word (Errf)        -- return d.Errf("malformed header matcher
-modules/caddyhttp/matchers.go:1090:14   - Unknown word (Errf)        -- return d.Errf("malformed header matcher
-modules/caddyhttp/matchers.go:1094:14   - Unknown word (Errf)        -- return d.Errf("malformed header matcher
-modules/caddyhttp/matchers.go:138:53    - Unknown word (escapings)   -- including those with bad escapings or illegal characters
-modules/caddyhttp/matchers.go:1538:13   - Unknown word (Iface)       -- for _, modIface := range modMap {
-modules/caddyhttp/matchers.go:1539:21   - Unknown word (Iface)       -- if mod, ok := modIface.(RequestMatcherWithError
-modules/caddyhttp/matchers.go:1543:21   - Unknown word (Iface)       -- if mod, ok := modIface.(RequestMatcher); ok
-modules/caddyhttp/matchers.go:1547:64   - Unknown word (Iface)       -- request matcher: %T", modIface)
-modules/caddyhttp/matchers.go:1578:22   - Unknown word (embedable)   -- / MatchRegexp is an embedable type for matching
+modules/caddyhttp/matchers.go:1014:56   - Unknown word (Filippo)     -- lementation is different, and Filippo Valsorda rightly wrote
+modules/caddyhttp/matchers.go:1014:64   - Unknown word (Valsorda)    -- different, and Filippo Valsorda rightly wrote:
+modules/caddyhttp/matchers.go:1080:13   - Unknown word (Errf)        -- return d.Errf("malformed header matcher
+modules/caddyhttp/matchers.go:1085:14   - Unknown word (Errf)        -- return d.Errf("malformed header matcher
+modules/caddyhttp/matchers.go:1093:14   - Unknown word (Errf)        -- return d.Errf("malformed header matcher
+modules/caddyhttp/matchers.go:1097:14   - Unknown word (Errf)        -- return d.Errf("malformed header matcher
+modules/caddyhttp/matchers.go:141:53    - Unknown word (escapings)   -- including those with bad escapings or illegal characters
+modules/caddyhttp/matchers.go:1595:13   - Unknown word (Iface)       -- for _, modIface := range modMap {
+modules/caddyhttp/matchers.go:1596:21   - Unknown word (Iface)       -- if mod, ok := modIface.(RequestMatcherWithError
 modules/caddyhttp/matchers.go:15:9      - Unknown word (caddyhttp)  -- package caddyhttp
-modules/caddyhttp/matchers.go:204:47    - Unknown word (unmarshals)  -- because of how this type unmarshals JSON in a
-modules/caddyhttp/matchers.go:269:70    - Unknown word (fastpath)    -- comparison in large-list fastpath later on.
-modules/caddyhttp/matchers.go:38:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
-modules/caddyhttp/matchers.go:39:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/caddyconfig
-modules/caddyhttp/matchers.go:39:35     - Unknown word (caddyconfig) -- caddyserver/caddy/v2/caddyconfig/caddyfile"
-modules/caddyhttp/matchers.go:637:52    - Unknown word (fbar)        -- wildcard (e.g. "/foo%2fbar") would behave like
-modules/caddyhttp/matchers.go:638:66    - Unknown word (fbarbaz)     -- longer paths (e.g. "/foo%2fbarbaz").
-modules/caddyhttp/matchers.go:639:62    - Unknown word (normalised)  -- here, so compare in normalised space.
-modules/caddyhttp/matchers.go:649:22    - Unknown word (rawpath)     -- // we can now treat rawpath globs (%*) as regular
-modules/caddyhttp/matchers.go:704:68    - Unknown word (csecret)     -- e.g. GET /private.%5csecret.txt,
-modules/caddyhttp/matchers.go:88:41     - Unknown word (Fbar)        -- a matcher of `/foo%2Fbar` will match a request
-modules/caddyhttp/matchers.go:89:25     - Unknown word (Fbar)        -- of precisely `/foo%2Fbar`, but not `/foo/bar
-modules/caddyhttp/matchers.go:900:14    - Unknown word (uppercases)  -- // Provision uppercases all configured methods
-modules/caddyhttp/matchers.go:975:14    - Unknown word (Errf)        -- return d.Errf("malformed query matcher
+modules/caddyhttp/matchers.go:1600:21   - Unknown word (Iface)       -- if mod, ok := modIface.(RequestMatcher); ok
+modules/caddyhttp/matchers.go:1604:64   - Unknown word (Iface)       -- request matcher: %T", modIface)
+modules/caddyhttp/matchers.go:1635:22   - Unknown word (embedable)   -- / MatchRegexp is an embedable type for matching
+modules/caddyhttp/matchers.go:207:47    - Unknown word (unmarshals)  -- because of how this type unmarshals JSON in a
+modules/caddyhttp/matchers.go:272:70    - Unknown word (fastpath)    -- comparison in large-list fastpath later on.
+modules/caddyhttp/matchers.go:41:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
+modules/caddyhttp/matchers.go:42:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/caddyconfig
+modules/caddyhttp/matchers.go:42:35     - Unknown word (caddyconfig) -- caddyserver/caddy/v2/caddyconfig/caddyfile"
+modules/caddyhttp/matchers.go:640:52    - Unknown word (fbar)        -- wildcard (e.g. "/foo%2fbar") would behave like
+modules/caddyhttp/matchers.go:641:66    - Unknown word (fbarbaz)     -- longer paths (e.g. "/foo%2fbarbaz").
+modules/caddyhttp/matchers.go:642:62    - Unknown word (normalised)  -- here, so compare in normalised space.
+modules/caddyhttp/matchers.go:652:22    - Unknown word (rawpath)     -- // we can now treat rawpath globs (%*) as regular
+modules/caddyhttp/matchers.go:707:68    - Unknown word (csecret)     -- e.g. GET /private.%5csecret.txt,
+modules/caddyhttp/matchers.go:903:14    - Unknown word (uppercases)  -- // Provision uppercases all configured methods
+modules/caddyhttp/matchers.go:91:41     - Unknown word (Fbar)        -- a matcher of `/foo%2Fbar` will match a request
+modules/caddyhttp/matchers.go:92:25     - Unknown word (Fbar)        -- of precisely `/foo%2Fbar`, but not `/foo/bar
+modules/caddyhttp/matchers.go:978:14    - Unknown word (Errf)        -- return d.Errf("malformed query matcher
 modules/caddyhttp/matchers_test.go:1002:30   - Unknown word (somekey)     -- Set("http.vars.key", "somekey")
 modules/caddyhttp/matchers_test.go:1041:43   - Unknown word (barfoo)      -- Header{"Field": []string{"barfoo", "foobar"}},
 modules/caddyhttp/matchers_test.go:1350:51   - Unknown word (uppercases)  -- get after Provision uppercases it",
@@ -2408,6 +2408,13 @@ modules/caddyhttp/reverseproxy/copyresponse.go:38:13     - Unknown word (caddyht
 modules/caddyhttp/reverseproxy/copyresponse.go:58:85     - Unknown word (caddyhttp)   -- req *http.Request, _ caddyhttp.Handler) error {
 modules/caddyhttp/reverseproxy/copyresponse.go:64:10     - Unknown word (caddyhttp)   -- return caddyhttp.Error(http.StatusInternalServ
 modules/caddyhttp/reverseproxy/copyresponse.go:73:11     - Unknown word (caddyhttp)   -- return caddyhttp.Error(http.StatusInternalServ
+modules/caddyhttp/reverseproxy/copyresponse_test.go:100:50    - Unknown word (caddyhttp)   -- prepareTestRequest(r), caddyhttp.HandlerFunc(func(http
+modules/caddyhttp/reverseproxy/copyresponse_test.go:25:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
+modules/caddyhttp/reverseproxy/copyresponse_test.go:26:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddyhttp
+modules/caddyhttp/reverseproxy/copyresponse_test.go:26:43     - Unknown word (caddyhttp)   -- caddyserver/caddy/v2/modules/caddyhttp"
+modules/caddyhttp/reverseproxy/copyresponse_test.go:49:12     - Unknown word (caddyhttp)   -- route := caddyhttp.Route{HandlersRaw: handles
+modules/caddyhttp/reverseproxy/copyresponse_test.go:53:24     - Unknown word (caddyhttp)   -- h.HandleResponse = []caddyhttp.ResponseHandler{{
+modules/caddyhttp/reverseproxy/copyresponse_test.go:54:12     - Unknown word (caddyhttp)   -- Routes: caddyhttp.RouteList{route},
 modules/caddyhttp/reverseproxy/dynamic_upstreams_test.go:122:33    - Unknown word (behaviour)   -- , which is the core behaviour fixed by this change
 modules/caddyhttp/reverseproxy/dynamic_upstreams_test.go:22:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 modules/caddyhttp/reverseproxy/extended_connect_test.go:115:32    - Unknown word (caddyhttp)   -- h.ServeHTTP(rr, req, caddyhttp.HandlerFunc(func(w http
@@ -2728,63 +2735,75 @@ modules/caddyhttp/reverseproxy/prepare_request_bench_test.go:36:57     - Unknown
 modules/caddyhttp/reverseproxy/request_trailers_test.go:354:55    - Unknown word (replayable)  -- request body became replayable")
 modules/caddyhttp/reverseproxy/request_trailers_test.go:356:51    - Unknown word (replayable)  -- consumed body is not replayable")
 modules/caddyhttp/reverseproxy/request_trailers_test.go:35:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
-modules/caddyhttp/reverseproxy/retries_test.go:17:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
-modules/caddyhttp/reverseproxy/retries_test.go:18:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/caddyconfig
-modules/caddyhttp/reverseproxy/retries_test.go:18:35     - Unknown word (caddyconfig) -- caddyserver/caddy/v2/caddyconfig/caddyfile"
-modules/caddyhttp/reverseproxy/retries_test.go:19:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddyhttp
-modules/caddyhttp/reverseproxy/retries_test.go:19:43     - Unknown word (caddyhttp)   -- caddyserver/caddy/v2/modules/caddyhttp"
-modules/caddyhttp/reverseproxy/retries_test.go:239:33    - Unknown word (caddyhttp)   -- ServeHTTP(rec, req, caddyhttp.HandlerFunc(func(w http
-modules/caddyhttp/reverseproxy/retries_test.go:26:42     - Unknown word (caddyhttp)   -- Server is passed so that caddyhttp.ServerCtxKey is set
-modules/caddyhttp/reverseproxy/retries_test.go:30:51     - Unknown word (caddyhttp)   -- epareRequest(req, repl, nil, &caddyhttp.Server{})
-modules/caddyhttp/reverseproxy/retries_test.go:30:9      - Unknown word (caddyhttp)   -- return caddyhttp.PrepareRequest(req,
-modules/caddyhttp/reverseproxy/retries_test.go:34:41     - Unknown word (behaviour)   -- fail, mimicking the behaviour of a real HTTP request
-modules/caddyhttp/reverseproxy/retries_test.go:93:56     - Unknown word (behaviour)   -- to match production behaviour.
-modules/caddyhttp/reverseproxy/reverseproxy.go:1173:4    - Unknown word (nolint)      -- //nolint:errcheck
-modules/caddyhttp/reverseproxy/reverseproxy.go:1186:46   - Unknown word (webtransport) -- Extended CONNECT :protocol=webtransport can't flow
-modules/caddyhttp/reverseproxy/reverseproxy.go:1188:17   - Unknown word (datagrams)    -- // streams and datagrams that need bidirectional
-modules/caddyhttp/reverseproxy/reverseproxy.go:1191:17   - Unknown word (misconfig)    -- // pre-upgrade misconfig and post-upgrade failures
-modules/caddyhttp/reverseproxy/reverseproxy.go:1228:32   - Unknown word (roundtripped) -- set before request is roundtripped to avoid a race condition
-modules/caddyhttp/reverseproxy/reverseproxy.go:1249:35   - Unknown word (Loggable)     -- request", caddyhttp.LoggableHTTPRequest{
-modules/caddyhttp/reverseproxy/reverseproxy.go:1265:36   - Unknown word (Loggable)     -- headers", caddyhttp.LoggableHTTPHeader{
-modules/caddyhttp/reverseproxy/reverseproxy.go:1376:48   - Unknown word (behaviour)    -- default finalize/copy behaviour
-modules/caddyhttp/reverseproxy/reverseproxy.go:1481:12   - Unknown word (bodyclose)    -- //nolint:bodyclose
-modules/caddyhttp/reverseproxy/reverseproxy.go:1481:5    - Unknown word (nolint)       -- //nolint:bodyclose
-modules/caddyhttp/reverseproxy/reverseproxy.go:1483:28   - Unknown word (stdlib)       -- no extra logging from stdlib
-modules/caddyhttp/reverseproxy/reverseproxy.go:1491:12   - Unknown word (bodyclose)    -- //nolint:bodyclose
-modules/caddyhttp/reverseproxy/reverseproxy.go:1491:5    - Unknown word (nolint)       -- //nolint:bodyclose
-modules/caddyhttp/reverseproxy/reverseproxy.go:1732:46   - Unknown word (stdlib)       -- borrowed from the Go stdlib reverse proxy,
-modules/caddyhttp/reverseproxy/reverseproxy.go:1751:30   - Unknown word (behaviour)    -- breaks reverseproxy behaviour, overriding how the
-modules/caddyhttp/reverseproxy/reverseproxy.go:2017:21   - Unknown word (Overrider)    -- // HealthCheckSchemeOverriderTransport is implemented
-modules/caddyhttp/reverseproxy/reverseproxy.go:2019:23   - Unknown word (Overrider)    -- type HealthCheckSchemeOverriderTransport interface
-modules/caddyhttp/reverseproxy/reverseproxy.go:2058:15   - Unknown word (httpsfv)      -- list, err := httpsfv.UnmarshalList(upstream
-modules/caddyhttp/reverseproxy/reverseproxy.go:2060:10   - Unknown word (httpsfv)      -- list = httpsfv.List{}
-modules/caddyhttp/reverseproxy/reverseproxy.go:2063:23   - Unknown word (httpsfv)      -- item, ok := member.(httpsfv.Item)
-modules/caddyhttp/reverseproxy/reverseproxy.go:2065:11   - Unknown word (httpsfv)      -- list = httpsfv.List{}
-modules/caddyhttp/reverseproxy/reverseproxy.go:2114:62   - Unknown word (bodyless)     -- an unknown length for bodyless GET and
-modules/caddyhttp/reverseproxy/reverseproxy.go:2136:29   - Unknown word (bodyless)     -- HTTP/3 can represent a bodyless GET or HEAD with an
-modules/caddyhttp/reverseproxy/reverseproxy.go:234:22    - Unknown word (roundtrips)  -- // after successful roundtrips. The first handler that
-modules/caddyhttp/reverseproxy/reverseproxy.go:246:19    - Unknown word (caddyhttp)   -- HandleResponse []caddyhttp.ResponseHandler `json
-modules/caddyhttp/reverseproxy/reverseproxy.go:275:30    - Unknown word (caddyhttp)   -- responseMatchers map[string]caddyhttp.ResponseMatcher
-modules/caddyhttp/reverseproxy/reverseproxy.go:286:10    - Unknown word (caddyevents) -- events *caddyevents.App
-modules/caddyhttp/reverseproxy/reverseproxy.go:302:10    - Unknown word (Iface)       -- eventAppIface, err := ctx.App("events
-modules/caddyhttp/reverseproxy/reverseproxy.go:306:21    - Unknown word (Iface)       -- h.events = eventAppIface.(*caddyevents.App)
-modules/caddyhttp/reverseproxy/reverseproxy.go:306:29    - Unknown word (caddyevents) -- events = eventAppIface.(*caddyevents.App)
+modules/caddyhttp/reverseproxy/retries_test.go:21:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
+modules/caddyhttp/reverseproxy/retries_test.go:22:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/caddyconfig
+modules/caddyhttp/reverseproxy/retries_test.go:22:35     - Unknown word (caddyconfig) -- caddyserver/caddy/v2/caddyconfig/caddyfile"
+modules/caddyhttp/reverseproxy/retries_test.go:23:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddyhttp
+modules/caddyhttp/reverseproxy/retries_test.go:23:43     - Unknown word (caddyhttp)   -- caddyserver/caddy/v2/modules/caddyhttp"
+modules/caddyhttp/reverseproxy/retries_test.go:243:33    - Unknown word (caddyhttp)   -- ServeHTTP(rec, req, caddyhttp.HandlerFunc(func(w http
+modules/caddyhttp/reverseproxy/retries_test.go:30:42     - Unknown word (caddyhttp)   -- Server is passed so that caddyhttp.ServerCtxKey is set
+modules/caddyhttp/reverseproxy/retries_test.go:34:51     - Unknown word (caddyhttp)   -- epareRequest(req, repl, nil, &caddyhttp.Server{})
+modules/caddyhttp/reverseproxy/retries_test.go:34:9      - Unknown word (caddyhttp)   -- return caddyhttp.PrepareRequest(req,
+modules/caddyhttp/reverseproxy/retries_test.go:38:41     - Unknown word (behaviour)   -- fail, mimicking the behaviour of a real HTTP request
+modules/caddyhttp/reverseproxy/retries_test.go:860:58    - Unknown word (proxyconnect) -- net.OpError with Op "proxyconnect", and
+modules/caddyhttp/reverseproxy/retries_test.go:881:30    - Unknown word (proxyconnect) -- &net.OpError{Op: "proxyconnect", Net: "tcp", Err: dialErr
+modules/caddyhttp/reverseproxy/retries_test.go:892:13    - Unknown word (proxyconnect) -- name: "proxyconnect error without a dial
+modules/caddyhttp/reverseproxy/retries_test.go:893:30    - Unknown word (proxyconnect) -- &net.OpError{Op: "proxyconnect", Net: "tcp", Err: errors
+modules/caddyhttp/reverseproxy/retries_test.go:97:56     - Unknown word (behaviour)   -- to match production behaviour.
+modules/caddyhttp/reverseproxy/reverseproxy.go:1182:4    - Unknown word (nolint)      -- //nolint:errcheck
+modules/caddyhttp/reverseproxy/reverseproxy.go:1195:46   - Unknown word (webtransport) -- Extended CONNECT :protocol=webtransport can't flow
+modules/caddyhttp/reverseproxy/reverseproxy.go:1197:17   - Unknown word (datagrams)    -- // streams and datagrams that need bidirectional
+modules/caddyhttp/reverseproxy/reverseproxy.go:1200:17   - Unknown word (misconfig)    -- // pre-upgrade misconfig and post-upgrade failures
+modules/caddyhttp/reverseproxy/reverseproxy.go:1239:32   - Unknown word (roundtripped) -- set before request is roundtripped to avoid a race condition
+modules/caddyhttp/reverseproxy/reverseproxy.go:1260:35   - Unknown word (Loggable)     -- request", caddyhttp.LoggableHTTPRequest{
+modules/caddyhttp/reverseproxy/reverseproxy.go:1276:36   - Unknown word (Loggable)     -- headers", caddyhttp.LoggableHTTPHeader{
+modules/caddyhttp/reverseproxy/reverseproxy.go:1387:48   - Unknown word (behaviour)    -- default finalize/copy behaviour
+modules/caddyhttp/reverseproxy/reverseproxy.go:1489:12   - Unknown word (bodyclose)    -- //nolint:bodyclose
+modules/caddyhttp/reverseproxy/reverseproxy.go:1489:5    - Unknown word (nolint)       -- //nolint:bodyclose
+modules/caddyhttp/reverseproxy/reverseproxy.go:1491:28   - Unknown word (stdlib)       -- no extra logging from stdlib
+modules/caddyhttp/reverseproxy/reverseproxy.go:1499:12   - Unknown word (bodyclose)    -- //nolint:bodyclose
+modules/caddyhttp/reverseproxy/reverseproxy.go:1499:5    - Unknown word (nolint)       -- //nolint:bodyclose
+modules/caddyhttp/reverseproxy/reverseproxy.go:1566:20   - Unknown word (proxyconnect) -- // *net.OpError ("proxyconnect") when a forward proxy
+modules/caddyhttp/reverseproxy/reverseproxy.go:1628:9    - Unknown word (otelhttp)     -- return otelhttp.NewTransport(rt,
+modules/caddyhttp/reverseproxy/reverseproxy.go:1629:28   - Unknown word (autoprop)     -- otelhttp.WithPropagators(autoprop.NewTextMapPropagator
+modules/caddyhttp/reverseproxy/reverseproxy.go:1629:3    - Unknown word (otelhttp)     -- otelhttp.WithPropagators(autoprop
+modules/caddyhttp/reverseproxy/reverseproxy.go:1637:34   - Unknown word (oteltrace)    -- tracedTransport == nil || !oteltrace.SpanContextFromContext
+modules/caddyhttp/reverseproxy/reverseproxy.go:1768:46   - Unknown word (stdlib)       -- borrowed from the Go stdlib reverse proxy,
+modules/caddyhttp/reverseproxy/reverseproxy.go:1787:30   - Unknown word (behaviour)    -- breaks reverseproxy behaviour, overriding how the
+modules/caddyhttp/reverseproxy/reverseproxy.go:2063:21   - Unknown word (Overrider)    -- // HealthCheckSchemeOverriderTransport is implemented
+modules/caddyhttp/reverseproxy/reverseproxy.go:2065:23   - Unknown word (Overrider)    -- type HealthCheckSchemeOverriderTransport interface
+modules/caddyhttp/reverseproxy/reverseproxy.go:2104:15   - Unknown word (httpsfv)      -- list, err := httpsfv.UnmarshalList(upstream
+modules/caddyhttp/reverseproxy/reverseproxy.go:2106:10   - Unknown word (httpsfv)      -- list = httpsfv.List{}
+modules/caddyhttp/reverseproxy/reverseproxy.go:2109:23   - Unknown word (httpsfv)      -- item, ok := member.(httpsfv.Item)
+modules/caddyhttp/reverseproxy/reverseproxy.go:2111:11   - Unknown word (httpsfv)      -- list = httpsfv.List{}
+modules/caddyhttp/reverseproxy/reverseproxy.go:2160:62   - Unknown word (bodyless)     -- an unknown length for bodyless GET and
+modules/caddyhttp/reverseproxy/reverseproxy.go:2182:29   - Unknown word (bodyless)     -- HTTP/3 can represent a bodyless GET or HEAD with an
+modules/caddyhttp/reverseproxy/reverseproxy.go:237:22    - Unknown word (roundtrips)  -- // after successful roundtrips. The first handler that
+modules/caddyhttp/reverseproxy/reverseproxy.go:249:19    - Unknown word (caddyhttp)   -- HandleResponse []caddyhttp.ResponseHandler `json
+modules/caddyhttp/reverseproxy/reverseproxy.go:278:30    - Unknown word (caddyhttp)   -- responseMatchers map[string]caddyhttp.ResponseMatcher
+modules/caddyhttp/reverseproxy/reverseproxy.go:293:10    - Unknown word (caddyevents) -- events *caddyevents.App
+modules/caddyhttp/reverseproxy/reverseproxy.go:309:10    - Unknown word (Iface)       -- eventAppIface, err := ctx.App("events
+modules/caddyhttp/reverseproxy/reverseproxy.go:313:21    - Unknown word (Iface)       -- h.events = eventAppIface.(*caddyevents.App)
+modules/caddyhttp/reverseproxy/reverseproxy.go:313:29    - Unknown word (caddyevents) -- events = eventAppIface.(*caddyevents.App)
 modules/caddyhttp/reverseproxy/reverseproxy.go:40:14     - Unknown word (dunglas)    -- "github.com/dunglas/httpsfv"
 modules/caddyhttp/reverseproxy/reverseproxy.go:40:22     - Unknown word (httpsfv)    -- "github.com/dunglas/httpsfv"
-modules/caddyhttp/reverseproxy/reverseproxy.go:46:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
-modules/caddyhttp/reverseproxy/reverseproxy.go:47:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/caddyconfig
-modules/caddyhttp/reverseproxy/reverseproxy.go:47:35     - Unknown word (caddyconfig) -- caddyserver/caddy/v2/caddyconfig/caddyfile"
-modules/caddyhttp/reverseproxy/reverseproxy.go:48:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddyevents
-modules/caddyhttp/reverseproxy/reverseproxy.go:48:43     - Unknown word (caddyevents) -- caddyserver/caddy/v2/modules/caddyevents"
-modules/caddyhttp/reverseproxy/reverseproxy.go:49:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddyhttp
-modules/caddyhttp/reverseproxy/reverseproxy.go:49:43     - Unknown word (caddyhttp)   -- caddyserver/caddy/v2/modules/caddyhttp"
-modules/caddyhttp/reverseproxy/reverseproxy.go:50:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddyhttp
-modules/caddyhttp/reverseproxy/reverseproxy.go:50:43     - Unknown word (caddyhttp)   -- caddyserver/caddy/v2/modules/caddyhttp/headers"
-modules/caddyhttp/reverseproxy/reverseproxy.go:51:43     - Unknown word (caddyhttp)   -- caddyserver/caddy/v2/modules/caddyhttp/rewrite"
-modules/caddyhttp/reverseproxy/reverseproxy.go:802:40    - Unknown word (hostport)    -- reverse_proxy.upstream.hostport", dialInfo.Address)
-modules/caddyhttp/reverseproxy/reverseproxy.go:91:34     - Unknown word (hostport)    -- reverse_proxy.upstream.hostport}` | The host:port of
-modules/caddyhttp/reverseproxy/reverseproxy.go:947:26    - Unknown word (gunicorn)    -- with "slow clients" (gunicorn, etc.) - this obviously
-modules/caddyhttp/reverseproxy/reverseproxy.go:949:47    - Unknown word (slowloris)   -- more susceptible to slowloris
+modules/caddyhttp/reverseproxy/reverseproxy.go:42:56     - Unknown word (otelhttp)   -- instrumentation/net/http/otelhttp"
+modules/caddyhttp/reverseproxy/reverseproxy.go:43:43     - Unknown word (autoprop)   -- contrib/propagators/autoprop"
+modules/caddyhttp/reverseproxy/reverseproxy.go:44:2      - Unknown word (oteltrace)  -- oteltrace "go.opentelemetry.io
+modules/caddyhttp/reverseproxy/reverseproxy.go:49:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
+modules/caddyhttp/reverseproxy/reverseproxy.go:50:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/caddyconfig
+modules/caddyhttp/reverseproxy/reverseproxy.go:50:35     - Unknown word (caddyconfig) -- caddyserver/caddy/v2/caddyconfig/caddyfile"
+modules/caddyhttp/reverseproxy/reverseproxy.go:51:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddyevents
+modules/caddyhttp/reverseproxy/reverseproxy.go:51:43     - Unknown word (caddyevents) -- caddyserver/caddy/v2/modules/caddyevents"
+modules/caddyhttp/reverseproxy/reverseproxy.go:52:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddyhttp
+modules/caddyhttp/reverseproxy/reverseproxy.go:52:43     - Unknown word (caddyhttp)   -- caddyserver/caddy/v2/modules/caddyhttp"
+modules/caddyhttp/reverseproxy/reverseproxy.go:53:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddyhttp
+modules/caddyhttp/reverseproxy/reverseproxy.go:53:43     - Unknown word (caddyhttp)   -- caddyserver/caddy/v2/modules/caddyhttp/headers"
+modules/caddyhttp/reverseproxy/reverseproxy.go:54:43     - Unknown word (caddyhttp)   -- caddyserver/caddy/v2/modules/caddyhttp/rewrite"
+modules/caddyhttp/reverseproxy/reverseproxy.go:811:40    - Unknown word (hostport)    -- reverse_proxy.upstream.hostport", dialInfo.Address)
+modules/caddyhttp/reverseproxy/reverseproxy.go:94:34     - Unknown word (hostport)    -- reverse_proxy.upstream.hostport}` | The host:port of
+modules/caddyhttp/reverseproxy/reverseproxy.go:956:26    - Unknown word (gunicorn)    -- with "slow clients" (gunicorn, etc.) - this obviously
+modules/caddyhttp/reverseproxy/reverseproxy.go:958:47    - Unknown word (slowloris)   -- more susceptible to slowloris
 modules/caddyhttp/reverseproxy/selectionpolicies.go:112:13    - Unknown word (Errf)        -- return d.Errf("invalid weight value
 modules/caddyhttp/reverseproxy/selectionpolicies.go:115:13    - Unknown word (Errf)        -- return d.Errf("invalid weight value
 modules/caddyhttp/reverseproxy/selectionpolicies.go:211:12    - Unknown word (Errf)        -- return d.Errf("invalid choice value
@@ -2832,63 +2851,66 @@ modules/caddyhttp/reverseproxy/selectionpolicies_test.go:412:2     - Unknown wor
 modules/caddyhttp/reverseproxy/selectionpolicies_test.go:412:34    - Unknown word (caddyhttp)   -- SetVar(req.Context(), caddyhttp.ClientIPVarKey, "17
 modules/caddyhttp/reverseproxy/selectionpolicies_test.go:417:2     - Unknown word (caddyhttp)   -- caddyhttp.SetVar(req.Context(
 modules/caddyhttp/reverseproxy/selectionpolicies_test.go:899:16    - Unknown word (caddyconfig) -- FallbackRaw: caddyconfig.JSONModuleObject(FirstSelecti
-modules/caddyhttp/reverseproxy/streaming.go:112:17    - Unknown word (caddyhttp)   -- if body, ok := caddyhttp.GetVar(req.Context(
-modules/caddyhttp/reverseproxy/streaming.go:125:12    - Unknown word (bodyclose)   -- //nolint:bodyclose
-modules/caddyhttp/reverseproxy/streaming.go:125:5     - Unknown word (nolint)      -- //nolint:bodyclose
-modules/caddyhttp/reverseproxy/streaming.go:138:15    - Unknown word (caddyhttp)   -- detached = caddyhttp.DetachResponseWriterAfterHija
-modules/caddyhttp/reverseproxy/streaming.go:143:5     - Unknown word (caddyhttp)   -- caddyhttp.DetachResponseWriterAfterHija
-modules/caddyhttp/reverseproxy/streaming.go:156:12    - Unknown word (bodyclose)   -- //nolint:bodyclose
-modules/caddyhttp/reverseproxy/streaming.go:156:5     - Unknown word (nolint)      -- //nolint:bodyclose
-modules/caddyhttp/reverseproxy/streaming.go:210:3     - Unknown word (caddyhttp)   -- caddyhttp.SetVar(req.Context(
-modules/caddyhttp/reverseproxy/streaming.go:277:70    - Unknown word (errc)        -- error will be read from errc
+modules/caddyhttp/reverseproxy/streaming.go:124:17    - Unknown word (caddyhttp)   -- if body, ok := caddyhttp.GetVar(req.Context(
+modules/caddyhttp/reverseproxy/streaming.go:137:12    - Unknown word (bodyclose)   -- //nolint:bodyclose
+modules/caddyhttp/reverseproxy/streaming.go:137:5     - Unknown word (nolint)      -- //nolint:bodyclose
+modules/caddyhttp/reverseproxy/streaming.go:150:15    - Unknown word (caddyhttp)   -- detached = caddyhttp.DetachResponseWriterAfterHija
+modules/caddyhttp/reverseproxy/streaming.go:155:5     - Unknown word (caddyhttp)   -- caddyhttp.DetachResponseWriterAfterHija
+modules/caddyhttp/reverseproxy/streaming.go:168:12    - Unknown word (bodyclose)   -- //nolint:bodyclose
+modules/caddyhttp/reverseproxy/streaming.go:168:5     - Unknown word (nolint)      -- //nolint:bodyclose
+modules/caddyhttp/reverseproxy/streaming.go:222:3     - Unknown word (caddyhttp)   -- caddyhttp.SetVar(req.Context(
 modules/caddyhttp/reverseproxy/streaming.go:27:2      - Unknown word (weakrand)   -- weakrand "math/rand/v2"
-modules/caddyhttp/reverseproxy/streaming.go:281:2     - Unknown word (errc)        -- errc := make(chan error,
-modules/caddyhttp/reverseproxy/streaming.go:292:6     - Unknown word (timeoutc)    -- var timeoutc <-chan time.Time
-modules/caddyhttp/reverseproxy/streaming.go:296:3     - Unknown word (timeoutc)    -- timeoutc = timer.C
-modules/caddyhttp/reverseproxy/streaming.go:299:23    - Unknown word (errc)        -- go spc.copyToBackend(errc)
-modules/caddyhttp/reverseproxy/streaming.go:300:25    - Unknown word (errc)        -- spc.copyFromBackend(errc)
-modules/caddyhttp/reverseproxy/streaming.go:310:14    - Unknown word (errc)        -- // err := <-errc
-modules/caddyhttp/reverseproxy/streaming.go:334:15    - Unknown word (timeoutc)    -- case t := <-timeoutc:
+modules/caddyhttp/reverseproxy/streaming.go:290:70    - Unknown word (errc)        -- error will be read from errc
+modules/caddyhttp/reverseproxy/streaming.go:294:2     - Unknown word (errc)        -- errc := make(chan error,
+modules/caddyhttp/reverseproxy/streaming.go:305:6     - Unknown word (timeoutc)    -- var timeoutc <-chan time.Time
+modules/caddyhttp/reverseproxy/streaming.go:309:3     - Unknown word (timeoutc)    -- timeoutc = timer.C
+modules/caddyhttp/reverseproxy/streaming.go:312:23    - Unknown word (errc)        -- go spc.copyToBackend(errc)
+modules/caddyhttp/reverseproxy/streaming.go:313:25    - Unknown word (errc)        -- spc.copyFromBackend(errc)
+modules/caddyhttp/reverseproxy/streaming.go:323:14    - Unknown word (errc)        -- // err := <-errc
+modules/caddyhttp/reverseproxy/streaming.go:347:15    - Unknown word (timeoutc)    -- case t := <-timeoutc:
 modules/caddyhttp/reverseproxy/streaming.go:39:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 modules/caddyhttp/reverseproxy/streaming.go:40:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddyhttp
 modules/caddyhttp/reverseproxy/streaming.go:40:43     - Unknown word (caddyhttp)   -- caddyserver/caddy/v2/modules/caddyhttp"
-modules/caddyhttp/reverseproxy/streaming.go:440:13    - Unknown word (bodyclose)   -- //nolint:bodyclose
-modules/caddyhttp/reverseproxy/streaming.go:440:6     - Unknown word (nolint)      -- //nolint:bodyclose
-modules/caddyhttp/reverseproxy/streaming.go:481:7     - Unknown word (rerr)        -- nr, rerr := src.Read(buf)
-modules/caddyhttp/reverseproxy/streaming.go:484:22    - Unknown word (rerr)        -- c.Write(zap.Error(rerr))
-modules/caddyhttp/reverseproxy/streaming.go:486:21    - Unknown word (rerr)        -- if rerr != nil && rerr != io.EOF && rerr !
-modules/caddyhttp/reverseproxy/streaming.go:486:39    - Unknown word (rerr)        -- & rerr != io.EOF && rerr != context.Canceled
-modules/caddyhttp/reverseproxy/streaming.go:486:6     - Unknown word (rerr)        -- if rerr != nil && rerr != io
-modules/caddyhttp/reverseproxy/streaming.go:488:7     - Unknown word (fastcgi)     -- // fastcgi PoC earlier; but it
-modules/caddyhttp/reverseproxy/streaming.go:500:8     - Unknown word (werr)        -- nw, werr := dst.Write(buf[:nr
-modules/caddyhttp/reverseproxy/streaming.go:508:16    - Unknown word (werr)        -- zap.Error(werr),
-modules/caddyhttp/reverseproxy/streaming.go:511:7     - Unknown word (werr)        -- if werr != nil {
-modules/caddyhttp/reverseproxy/streaming.go:512:64    - Unknown word (werr)        -- errWritingDownstream, werr)
+modules/caddyhttp/reverseproxy/streaming.go:453:13    - Unknown word (bodyclose)   -- //nolint:bodyclose
+modules/caddyhttp/reverseproxy/streaming.go:453:6     - Unknown word (nolint)      -- //nolint:bodyclose
+modules/caddyhttp/reverseproxy/streaming.go:494:7     - Unknown word (rerr)        -- nr, rerr := src.Read(buf)
+modules/caddyhttp/reverseproxy/streaming.go:497:22    - Unknown word (rerr)        -- c.Write(zap.Error(rerr))
+modules/caddyhttp/reverseproxy/streaming.go:499:21    - Unknown word (rerr)        -- if rerr != nil && rerr != io.EOF && rerr !
+modules/caddyhttp/reverseproxy/streaming.go:499:39    - Unknown word (rerr)        -- & rerr != io.EOF && rerr != context.Canceled
+modules/caddyhttp/reverseproxy/streaming.go:499:6     - Unknown word (rerr)        -- if rerr != nil && rerr != io
+modules/caddyhttp/reverseproxy/streaming.go:501:7     - Unknown word (fastcgi)     -- // fastcgi PoC earlier; but it
+modules/caddyhttp/reverseproxy/streaming.go:513:8     - Unknown word (werr)        -- nw, werr := dst.Write(buf[:nr
+modules/caddyhttp/reverseproxy/streaming.go:521:16    - Unknown word (werr)        -- zap.Error(werr),
+modules/caddyhttp/reverseproxy/streaming.go:524:7     - Unknown word (werr)        -- if werr != nil {
+modules/caddyhttp/reverseproxy/streaming.go:525:64    - Unknown word (werr)        -- errWritingDownstream, werr)
 modules/caddyhttp/reverseproxy/streaming.go:54:11     - Unknown word (bodyclose)   -- //nolint:bodyclose
 modules/caddyhttp/reverseproxy/streaming.go:54:4      - Unknown word (nolint)      -- //nolint:bodyclose
-modules/caddyhttp/reverseproxy/streaming.go:643:37    - Unknown word (pascaldekloe) -- connection. Thanks to @pascaldekloe who provided inspiration
-modules/caddyhttp/reverseproxy/streaming.go:645:15    - Unknown word (pascaldekloe) -- // github.com/pascaldekloe/websocket. Further work
-modules/caddyhttp/reverseproxy/streaming.go:721:28    - Unknown word (nolint)       -- = key[(pos+i)&3] // nolint:gosec // false positive
-modules/caddyhttp/reverseproxy/streaming.go:721:35    - Unknown word (gosec)        -- pos+i)&3] // nolint:gosec // false positive, impossible
-modules/caddyhttp/reverseproxy/streaming.go:743:7     - Unknown word (weakrand)     -- n := weakrand.Uint32()
-modules/caddyhttp/reverseproxy/streaming_test.go:115:4     - Unknown word (errc)        -- errc := make(chan error,
-modules/caddyhttp/reverseproxy/streaming_test.go:125:28    - Unknown word (errc)        -- copier.copyToBackend(errc)
-modules/caddyhttp/reverseproxy/streaming_test.go:21:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
-modules/caddyhttp/reverseproxy/streaming_test.go:22:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/caddyconfig
-modules/caddyhttp/reverseproxy/streaming_test.go:22:35     - Unknown word (caddyconfig) -- caddyserver/caddy/v2/caddyconfig/caddyfile"
-modules/caddyhttp/reverseproxy/streaming_test.go:23:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddyhttp
-modules/caddyhttp/reverseproxy/streaming_test.go:23:43     - Unknown word (caddyhttp)   -- caddyserver/caddy/v2/modules/caddyhttp"
-modules/caddyhttp/reverseproxy/streaming_test.go:443:4     - Unknown word (srvc)        -- srvc := make(chan *net.TCPConn
-modules/caddyhttp/reverseproxy/streaming_test.go:462:5     - Unknown word (srvc)        -- srvc <- tcp
-modules/caddyhttp/reverseproxy/streaming_test.go:477:47    - Unknown word (caddyhttp)   -- prepareTestRequest(r), caddyhttp.HandlerFunc(func(http
-modules/caddyhttp/reverseproxy/streaming_test.go:514:17    - Unknown word (srvc)        -- case srv = <-srvc:
-modules/caddyhttp/reverseproxy/streaming_test.go:54:6      - Unknown word (errc)        -- var errc = make(chan error,
-modules/caddyhttp/reverseproxy/streaming_test.go:657:3     - Unknown word (caddyhttp)   -- *caddyhttp.ResponseWriterWrapper
-modules/caddyhttp/reverseproxy/streaming_test.go:681:41    - Unknown word (caddyhttp)   -- rejectingUpgradeWriter{&caddyhttp.ResponseWriterWrapper
-modules/caddyhttp/reverseproxy/streaming_test.go:682:11    - Unknown word (caddyhttp)   -- return caddyhttp.NewResponseRecorder
-modules/caddyhttp/reverseproxy/streaming_test.go:73:26     - Unknown word (errc)        -- copier.copyToBackend(errc)
-modules/caddyhttp/reverseproxy/streaming_test.go:754:45    - Unknown word (subtest)     -- counters after this subtest finishes.
-modules/caddyhttp/reverseproxy/streaming_test.go:77:14     - Unknown word (errc)        -- if err := <-errc; !errors.Is(err, errCopyDone
+modules/caddyhttp/reverseproxy/streaming.go:656:37    - Unknown word (pascaldekloe) -- connection. Thanks to @pascaldekloe who provided inspiration
+modules/caddyhttp/reverseproxy/streaming.go:658:15    - Unknown word (pascaldekloe) -- // github.com/pascaldekloe/websocket. Further work
+modules/caddyhttp/reverseproxy/streaming.go:734:28    - Unknown word (nolint)       -- = key[(pos+i)&3] // nolint:gosec // false positive
+modules/caddyhttp/reverseproxy/streaming.go:734:35    - Unknown word (gosec)        -- pos+i)&3] // nolint:gosec // false positive, impossible
+modules/caddyhttp/reverseproxy/streaming.go:756:7     - Unknown word (weakrand)     -- n := weakrand.Uint32()
+modules/caddyhttp/reverseproxy/streaming_test.go:116:4     - Unknown word (errc)        -- errc := make(chan error,
+modules/caddyhttp/reverseproxy/streaming_test.go:126:28    - Unknown word (errc)        -- copier.copyToBackend(errc)
+modules/caddyhttp/reverseproxy/streaming_test.go:22:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
+modules/caddyhttp/reverseproxy/streaming_test.go:23:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/caddyconfig
+modules/caddyhttp/reverseproxy/streaming_test.go:23:35     - Unknown word (caddyconfig) -- caddyserver/caddy/v2/caddyconfig/caddyfile"
+modules/caddyhttp/reverseproxy/streaming_test.go:24:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddyhttp
+modules/caddyhttp/reverseproxy/streaming_test.go:24:43     - Unknown word (caddyhttp)   -- caddyserver/caddy/v2/modules/caddyhttp"
+modules/caddyhttp/reverseproxy/streaming_test.go:444:4     - Unknown word (srvc)        -- srvc := make(chan *net.TCPConn
+modules/caddyhttp/reverseproxy/streaming_test.go:463:5     - Unknown word (srvc)        -- srvc <- tcp
+modules/caddyhttp/reverseproxy/streaming_test.go:478:47    - Unknown word (caddyhttp)   -- prepareTestRequest(r), caddyhttp.HandlerFunc(func(http
+modules/caddyhttp/reverseproxy/streaming_test.go:515:17    - Unknown word (srvc)        -- case srv = <-srvc:
+modules/caddyhttp/reverseproxy/streaming_test.go:55:6      - Unknown word (errc)        -- var errc = make(chan error,
+modules/caddyhttp/reverseproxy/streaming_test.go:658:3     - Unknown word (caddyhttp)   -- *caddyhttp.ResponseWriterWrapper
+modules/caddyhttp/reverseproxy/streaming_test.go:682:41    - Unknown word (caddyhttp)   -- rejectingUpgradeWriter{&caddyhttp.ResponseWriterWrapper
+modules/caddyhttp/reverseproxy/streaming_test.go:683:11    - Unknown word (caddyhttp)   -- return caddyhttp.NewResponseRecorder
+modules/caddyhttp/reverseproxy/streaming_test.go:74:26     - Unknown word (errc)        -- copier.copyToBackend(errc)
+modules/caddyhttp/reverseproxy/streaming_test.go:755:45    - Unknown word (subtest)     -- counters after this subtest finishes.
+modules/caddyhttp/reverseproxy/streaming_test.go:78:14     - Unknown word (errc)        -- if err := <-errc; !errors.Is(err, errCopyDone
+modules/caddyhttp/reverseproxy/tracing_test.go:28:38     - Unknown word (tracetest)  -- entelemetry.io/otel/sdk/trace/tracetest"
+modules/caddyhttp/reverseproxy/tracing_test.go:31:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
+modules/caddyhttp/reverseproxy/tracing_test.go:44:15     - Unknown word (tracetest)   -- recorder := tracetest.NewSpanRecorder()
 modules/caddyhttp/reverseproxy/upstreams.go:108:14    - Unknown word (gosec)       -- //nolint:gosec
 modules/caddyhttp/reverseproxy/upstreams.go:108:7     - Unknown word (nolint)      -- //nolint:gosec
 modules/caddyhttp/reverseproxy/upstreams.go:109:34    - Unknown word (weakrand)    -- su.Resolver.netAddrs[weakrand.IntN(len(su.Resolver
@@ -3295,9 +3317,9 @@ modules/caddyhttp/templates/tplcontext_test.go:34:14     - Unknown word (caddyse
 modules/caddyhttp/templates/tplcontext_test.go:34:43     - Unknown word (caddyhttp)   -- caddyserver/caddy/v2/modules/caddyhttp"
 modules/caddyhttp/templates/tplcontext_test.go:518:75    - Unknown word (ctxtest)     -- tplContext.Root), "caddy_ctxtest")
 modules/caddyhttp/templates/tplcontext_test.go:60:54     - Unknown word (caddyhttp)   -- tplContext.Req.Context(), caddyhttp.ServerCtxKey, test.handler
-modules/caddyhttp/templates/tplcontext_test.go:722:58    - Unknown word (caddyhttp)   -- the template", value: caddyhttp.RequestBodyLimitError
-modules/caddyhttp/templates/tplcontext_test.go:723:72    - Unknown word (caddyhttp)   -- like before", value: caddyhttp.HandlerError{Err: errors
-modules/caddyhttp/templates/tplcontext_test.go:740:16    - Unknown word (caddyhttp)   -- var marker caddyhttp.RequestBodyLimitError
+modules/caddyhttp/templates/tplcontext_test.go:733:58    - Unknown word (caddyhttp)   -- the template", value: caddyhttp.RequestBodyLimitError
+modules/caddyhttp/templates/tplcontext_test.go:734:72    - Unknown word (caddyhttp)   -- like before", value: caddyhttp.HandlerError{Err: errors
+modules/caddyhttp/templates/tplcontext_test.go:751:16    - Unknown word (caddyhttp)   -- var marker caddyhttp.RequestBodyLimitError
 modules/caddyhttp/timeouts/caddyfile.go:23:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/caddyconfig
 modules/caddyhttp/timeouts/caddyfile.go:23:35     - Unknown word (caddyconfig) -- caddyserver/caddy/v2/caddyconfig/httpcaddyfile"
 modules/caddyhttp/timeouts/caddyfile.go:23:47     - Unknown word (httpcaddyfile) -- caddy/v2/caddyconfig/httpcaddyfile"
@@ -4374,18 +4396,19 @@ modules/standard/imports.go:8:45      - Unknown word (caddyfs)      -- caddyserv
 modules/standard/imports.go:9:16      - Unknown word (caddyserver)  -- _ "github.com/caddyserver/caddy/v2/modules/caddyhttp
 modules/standard/imports.go:9:45      - Unknown word (caddyhttp)    -- caddyserver/caddy/v2/modules/caddyhttp/standard"
 replacer_fuzz.go:15:12     - Unknown word (gofuzz)     -- //go:build gofuzz
-replacer_test.go:257:14    - Unknown word (NOOO)       -- return "NOOO", false
-replacer_test.go:269:14    - Unknown word (NOOO)       -- return "NOOO", false
-replacer_test.go:282:26    - Unknown word (äütest)     -- expected: "val1123öö_äütest-123space value1.2.3
-replacer_test.go:297:17    - Unknown word (teval)      -- expected: "{teval1{as{{dftest-123",
-replacer_test.go:297:28    - Unknown word (dftest)     -- expected: "{teval1{as{{dftest-123",
-replacer_test.go:385:36    - Unknown word (envtest)    -- CADDY_REPLACER_TEST", "envtest")
-replacer_test.go:414:15    - Unknown word (envtest)    -- value: "envtest",
-replacer_test.go:432:20    - Unknown word (caddytest)  -- variable: "file.caddytest/integration/testdata
-replacer_test.go:436:20    - Unknown word (caddytest)  -- variable: "file.caddytest/integration/testdata
-replacer_test.go:440:20    - Unknown word (caddytest)  -- variable: "file.caddytest/integration/testdata
-replacer_test.go:470:20    - Unknown word (caddytest)  -- variable: "file.caddytest/integration/testdata
+replacer_test.go:258:14    - Unknown word (NOOO)       -- return "NOOO", false
+replacer_test.go:270:14    - Unknown word (NOOO)       -- return "NOOO", false
+replacer_test.go:283:26    - Unknown word (äütest)     -- expected: "val1123öö_äütest-123space value1.2.3
+replacer_test.go:298:17    - Unknown word (teval)      -- expected: "{teval1{as{{dftest-123",
+replacer_test.go:298:28    - Unknown word (dftest)     -- expected: "{teval1{as{{dftest-123",
+replacer_test.go:386:36    - Unknown word (envtest)    -- CADDY_REPLACER_TEST", "envtest")
+replacer_test.go:415:15    - Unknown word (envtest)    -- value: "envtest",
+replacer_test.go:433:20    - Unknown word (caddytest)  -- variable: "file.caddytest/integration/testdata
+replacer_test.go:437:20    - Unknown word (caddytest)  -- variable: "file.caddytest/integration/testdata
+replacer_test.go:441:20    - Unknown word (caddytest)  -- variable: "file.caddytest/integration/testdata
+replacer_test.go:471:20    - Unknown word (caddytest)  -- variable: "file.caddytest/integration/testdata
 service_windows.go:23:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/notify"
+service_windows_test.go:26:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/notify"
 sigtrap_posix.go:26:14     - Unknown word (caddyserver) -- "github.com/caddyserver/certmagic"
 sigtrap_posix.go:26:26     - Unknown word (certmagic)   -- github.com/caddyserver/certmagic"
 sigtrap_posix.go:33:12     - Unknown word (Moby)        -- // Docker/Moby has a similar hack:
