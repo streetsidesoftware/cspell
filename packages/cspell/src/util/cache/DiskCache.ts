@@ -10,7 +10,7 @@ import {
 } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { isUrlLike, toFilePathOrHref } from '@cspell/url';
+import { isUrlLike, toFilePathOrHref, toFileURL } from '@cspell/url';
 
 import type { LintFileResult } from '../../reporters/index.js';
 import { readFileInfo } from '../../util/fileHelper.js';
@@ -142,8 +142,12 @@ export class DiskCache implements CSpellLintResultCache {
         const cached = true;
         const shouldReadFile = cached && hasErrors;
 
+        // A universal cache can come from another folder or machine: report the issues at this file's location.
+        const uri = toFileURL(filename).href;
+
         return {
             ...result,
+            issues: result.issues.map((issue) => ({ ...issue, uri })),
             elapsedTimeMs: undefined,
             fileInfo: shouldReadFile ? await readFileInfo(filename) : { filename },
             cached,
