@@ -142,7 +142,7 @@ export class DiskCache implements CSpellLintResultCache {
         const cached = true;
         const shouldReadFile = cached && hasErrors;
 
-        // A universal cache can come from another folder or machine: report the issues at this file's location.
+        // Cached issues are stored without a location: they take the location of the file being checked.
         const uri = toFileURL(filename).href;
 
         return {
@@ -164,9 +164,12 @@ export class DiskCache implements CSpellLintResultCache {
             return;
         }
 
+        // The entry already belongs to this file, and an absolute location would expose the creator's folders.
+        const issues = result.issues.map(({ uri: _, ...issue }) => issue);
+
         const data: CachedData = this.objectCollection.get({
             v: this.version,
-            r: this.normalizeResult(result),
+            r: this.normalizeResult({ ...result, issues }),
             d: await this.calcDependencyHashes(dependsUponFiles),
             ...(this.optionsKey ? { o: this.optionsKey } : {}),
         });

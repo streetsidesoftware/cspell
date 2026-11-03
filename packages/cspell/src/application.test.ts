@@ -433,6 +433,8 @@ describe('Linter File Caching', () => {
         const resultA = await App.lint(['*.txt'], options(dirA), reporterA);
         expect(resultA).toEqual(oc({ files: 1, cachedFiles: 0, issues: 1 }));
         expect(reporterA.issues.map((issue) => issue.uri)).toEqual([pathToFileURL(r(dirA, 'notes.txt')).href]);
+        const cacheText = await fs.readFile(r(dirA, '.cspellcache'), 'utf8');
+        expect(cacheText).not.toContain(dirA.split(path.sep).join('/'));
 
         await fs.cp(dirA, dirB, { recursive: true });
 
