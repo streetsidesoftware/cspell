@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 22087, skipped: 29, Issues found: 49452 in 8289 files.
+ CSpell: Files checked: 22087, skipped: 29, Issues found: 49494 in 8295 files.
  exit code: 1
 ARCHITECTURE.md:158:48    - Unknown word (googlemock) -- implementation using `googlemock`
 BUILD.bazel:152:20    - Unknown word (ctype)      -- name = "enable-ctype-cord-workaround",
@@ -682,6 +682,7 @@ google/cloud/internal/populate_common_options_test.cc:98:11     - Unknown word (
 google/cloud/internal/rest_opentelemetry_test.cc:53:8      - Unknown word (aaabbbbb)   -- "aaabbbbb";
 google/cloud/internal/routing_matcher_test.cc:120:73    - Unknown word (Ffoo)       -- previous", "routing_id=foo%2Ffoo"));
 google/cloud/internal/ssl_ec_curves_test.cc:50:54     - Unknown word (mlkem)      -- groups = {"P-256", "x25519mlkem768", "P-384"};
+google/cloud/internal/unified_grpc_credentials_test.cc:949:47    - Unknown word (paramgen)   -- newkey ec -pkeyopt ec_paramgen_curve:prime256v1 -nodes
 google/cloud/internal/win32/parse_service_account_p12_file.cc:134:10    - Unknown word (HCRYPTPROV) -- StatusOr<HCRYPTPROV> GetCertificatePrivateKey
 google/cloud/internal/win32/parse_service_account_p12_file.cc:239:64    - Unknown word (NOCR)       -- BASE64 | CRYPT_STRING_NOCR, nullptr,
 google/cloud/internal/win32/parse_service_account_p12_file.cc:37:19     - Unknown word (HCERTSTORE) -- void operator()(HCERTSTORE store) const { CertCloseStore
@@ -876,21 +877,23 @@ google/cloud/storage/examples/storage_object_file_transfer_samples.cc:148:11    
 google/cloud/storage/examples/storage_object_file_transfer_samples.cc:148:19    - Unknown word (deserunt)      -- culpa qui officia deserunt mollit anim id est laborum
 google/cloud/storage/examples/storage_object_file_transfer_samples.cc:148:28    - Unknown word (mollit)        -- qui officia deserunt mollit anim id est laborum
 google/cloud/storage/examples/storage_object_file_transfer_samples.cc:148:47    - Unknown word (laborum)       -- deserunt mollit anim id est laborum.
+google/cloud/storage/grpc_plugin.h:160:65    - Unknown word (preprod)    -- same applies to the preprod
 google/cloud/storage/hashing_options_test.cc:41:19     - Unknown word (Tcrto)      -- EXPECT_EQ("nhB9nTcrtoJr2B01QqQZ1g==", actual
 google/cloud/storage/hashing_options_test.cc:57:16     - Unknown word (IEBA)       -- EXPECT_EQ("ImIEBA==", actual);
 google/cloud/storage/internal/async/connection_impl_appendable_upload_test.cc:134:40    - Unknown word (wopt)       -- grpc::WriteOptions wopt) {
 google/cloud/storage/internal/async/connection_impl_open_test.cc:458:70    - Unknown word (testbench)  -- against the storage-testbench
 google/cloud/storage/internal/async/connection_impl_read_hash_test.cc:17:11     - Unknown word (pratap)     -- // TODO(v-pratap): Remove this when EnableMD
-google/cloud/storage/internal/async/connection_impl_upload_test.cc:487:42    - Unknown word (eksb)       -- sha256_bytes: "test-eksb"
+google/cloud/storage/internal/async/connection_impl_upload_test.cc:496:42    - Unknown word (eksb)       -- sha256_bytes: "test-eksb"
 google/cloud/storage/internal/async/insert_object.cc:50:21     - Unknown word (Subcord)    -- auto next = data_.Subcord(0, n);
-google/cloud/storage/internal/async/writer_connection_buffered.cc:798:39    - Unknown word (unsatisified) -- call that returns an unsatisified future until the buffer
+google/cloud/storage/internal/async/writer_connection_buffered.cc:816:39    - Unknown word (unsatisified) -- call that returns an unsatisified future until the buffer
+google/cloud/storage/internal/grpc/channel_telemetry_test.cc:52:17     - Unknown word (Preprod)    -- auto constexpr kPreprodInterconnectEndpoint
+google/cloud/storage/internal/grpc/default_options_test.cc:614:52    - Unknown word (Testbench)  -- DirectPathOverInterconnectTestbenchOverride) {
 google/cloud/storage/internal/grpc/object_request_parser_test.cc:63:33     - Unknown word (Cuakt)      -- md5) : StEvo2V/qoDCuaktZSw3IQ==
 google/cloud/storage/internal/grpc/stub.cc:372:10    - Unknown word (wopts)      -- auto wopts = grpc::WriteOptions
 google/cloud/storage/internal/hedged_object_read_source_test.cc:496:63    - Unknown word (unblocker)  -- failure and notify the unblocker thread.
 google/cloud/storage/internal/object_requests_test.cc:261:61    - Unknown word (NEFCQ)      -- encryption-key: MTIzNEFCQ0Q="));
 google/cloud/storage/internal/object_requests_test.cc:281:61    - Unknown word (QUJDRD)     -- source-encryption-key: QUJDRDEyMzQ="));
 google/cloud/storage/internal/object_requests_test.cc:606:27    - Unknown word (sdlkj)      -- "&upload_id=xa298sd_sdlkj2";
-google/cloud/storage/internal/object_requests_test.cc:987:32    - Unknown word (preprod)    -- upsert("environment", {"preprod", {}, {}});
 google/cloud/storage/internal/object_write_streambuf_test.cc:368:39    - Unknown word (Putn)       -- ectWriteStreambufTest, MixPutcPutn) {
 google/cloud/storage/internal/retry_logging.cc:33:14     - Unknown word (greppable)  -- // A stable, greppable prefix. Applications
 google/cloud/storage/internal/retry_logging_test.cc:166:35    - Unknown word (recognisable) -- opaque token with no recognisable structure is still redacted
@@ -983,18 +986,18 @@ protos/google/cloud/compute/v1/internal/common_000.proto:1230:19   - Unknown wor
 protos/google/cloud/compute/v1/internal/common_000.proto:127:43    - Unknown word (backend'sbalancing) -- Not available if the backend'sbalancingMode is RATE.
 protos/google/cloud/compute/v1/internal/common_000.proto:1284:6    - Unknown word (Alwayscompute)      -- // Alwayscompute#backendServiceGroupHealth
 protos/google/cloud/compute/v1/internal/common_000.proto:1297:12   - Unknown word (GARP)               -- // - >GARP_RA: Provides a method
-protos/google/cloud/compute/v1/internal/common_000.proto:1465:56   - Unknown word (thanmax)            -- of results is larger thanmaxResults, use the
-protos/google/cloud/compute/v1/internal/common_000.proto:1492:20   - Unknown word (OVERRIDEN)          -- // FIELD_VALUE_OVERRIDEN: Warning that value
-protos/google/cloud/compute/v1/internal/common_000.proto:1496:41   - Unknown word (WIEGHTED)           -- HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB: A WEIGHTED_MAGLEV
-protos/google/cloud/compute/v1/internal/common_000.proto:1735:6    - Unknown word (myorg)              -- // myorg.CustomLbPolicy). The
-protos/google/cloud/compute/v1/internal/common_000.proto:1932:46   - Unknown word (SVID)               -- SPIFFE ID to use in the SVID presented by the Load
-protos/google/cloud/compute/v1/internal/common_000.proto:1961:37   - Unknown word (onlytls)            -- system will set up a read-onlytlsSettings.authenticationConfig
-protos/google/cloud/compute/v1/internal/common_000.proto:2207:37   - Unknown word (stdev)              -- success rate: mean - (stdev * successRateStdevFactor
-protos/google/cloud/compute/v1/internal/common_000.proto:2207:56   - Unknown word (Stdev)              -- (stdev * successRateStdevFactor). This factor
-protos/google/cloud/compute/v1/internal/common_000.proto:2244:45   - Unknown word (certificate'ssubject) -- client inspects the certificate'ssubjectAltName field.
-protos/google/cloud/compute/v1/internal/common_000.proto:2254:47   - Unknown word (withload)             -- global BackendService withloadBalancingScheme set to
-protos/google/cloud/compute/v1/internal/common_000.proto:2256:46   - Unknown word (attachedclient)       -- BackendService has an attachedclientTlsPolicy with
-protos/google/cloud/compute/v1/internal/common_000.proto:2266:22   - Unknown word (SUBSETTING)           -- // CONSISTENT_HASH_SUBSETTING: Subsetting based on
+protos/google/cloud/compute/v1/internal/common_000.proto:1468:56   - Unknown word (thanmax)            -- of results is larger thanmaxResults, use the
+protos/google/cloud/compute/v1/internal/common_000.proto:1495:20   - Unknown word (OVERRIDEN)          -- // FIELD_VALUE_OVERRIDEN: Warning that value
+protos/google/cloud/compute/v1/internal/common_000.proto:1499:41   - Unknown word (WIEGHTED)           -- HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB: A WEIGHTED_MAGLEV
+protos/google/cloud/compute/v1/internal/common_000.proto:1738:6    - Unknown word (myorg)              -- // myorg.CustomLbPolicy). The
+protos/google/cloud/compute/v1/internal/common_000.proto:1935:46   - Unknown word (SVID)               -- SPIFFE ID to use in the SVID presented by the Load
+protos/google/cloud/compute/v1/internal/common_000.proto:1964:37   - Unknown word (onlytls)            -- system will set up a read-onlytlsSettings.authenticationConfig
+protos/google/cloud/compute/v1/internal/common_000.proto:2210:37   - Unknown word (stdev)              -- success rate: mean - (stdev * successRateStdevFactor
+protos/google/cloud/compute/v1/internal/common_000.proto:2210:56   - Unknown word (Stdev)              -- (stdev * successRateStdevFactor). This factor
+protos/google/cloud/compute/v1/internal/common_000.proto:2247:45   - Unknown word (certificate'ssubject) -- client inspects the certificate'ssubjectAltName field.
+protos/google/cloud/compute/v1/internal/common_000.proto:2257:47   - Unknown word (withload)             -- global BackendService withloadBalancingScheme set to
+protos/google/cloud/compute/v1/internal/common_000.proto:2259:46   - Unknown word (attachedclient)       -- BackendService has an attachedclientTlsPolicy with
+protos/google/cloud/compute/v1/internal/common_000.proto:2269:22   - Unknown word (SUBSETTING)           -- // CONSISTENT_HASH_SUBSETTING: Subsetting based on
 protos/google/cloud/compute/v1/internal/common_000.proto:31:9      - Unknown word (AWSV)       -- message AWSV4Signature {
 protos/google/cloud/compute/v1/internal/common_000.proto:334:37    - Unknown word (MAGLEV)             -- henlocalityLbPolicy is set to MAGLEV orRING_HASH.
 protos/google/cloud/compute/v1/internal/common_000.proto:334:6     - Unknown word (whenlocality)       -- // whenlocalityLbPolicy is set to MAGLEV
@@ -1039,7 +1042,7 @@ protos/google/cloud/compute/v1/internal/common_004.proto:602:39    - Unknown wor
 protos/google/cloud/compute/v1/internal/common_004.proto:621:38    - Unknown word (preemptible)       -- whether the instance is preemptible. This can only be set
 protos/google/cloud/compute/v1/internal/common_004.proto:622:46    - Unknown word (isstopped)         -- or while the instance isstopped and
 protos/google/cloud/compute/v1/internal/common_004.proto:628:6     - Unknown word (ACPI)              -- // ACPI G2
-protos/google/cloud/compute/v1/internal/common_004.proto:713:53    - Unknown word (Vtpm)              -- [json_name = "enableVtpm"];
+protos/google/cloud/compute/v1/internal/common_004.proto:717:53    - Unknown word (Vtpm)              -- [json_name = "enableVtpm"];
 protos/google/cloud/compute/v1/internal/common_004.proto:89:51     - Unknown word (inipv)      -- field is unspecified inipv6AccessConfig, a default
 protos/google/cloud/compute/v1/internal/common_004.proto:89:6      - Unknown word (inaccess)   -- // inaccessConfig. If this field
 protos/google/cloud/compute/v1/internal/common_005.proto:104:9     - Unknown word (NETLB)      -- // or NETLB. This is used for deciding
@@ -1082,12 +1085,12 @@ protos/google/cloud/compute/v1/internal/common_017.proto:878:57    - Unknown wor
 protos/google/cloud/compute/v1/internal/common_018.proto:135:6     - Unknown word (thedisk)    -- // thediskEncryptionKey.kmsKeyName
 protos/google/cloud/compute/v1/internal/common_018.proto:272:55    - Unknown word (thesource)  -- persistent disk using thesourceImage,
 protos/google/cloud/compute/v1/internal/common_018.proto:277:63    - Unknown word (ofsize)     -- a source, the value ofsizeGb must not
-protos/google/cloud/compute/v1/internal/common_019.proto:175:34    - Unknown word (tollerate)    -- workloads that cannot tollerate distribution over multiple
-protos/google/cloud/compute/v1/internal/common_019.proto:48:57     - Unknown word (Ifmin)      -- as the default value. Ifmin_count instances
-protos/google/cloud/compute/v1/internal/common_019.proto:58:49     - Unknown word (asinst)     -- instance names such asinst-0001 and inst-0002.
-protos/google/cloud/compute/v1/internal/common_019.proto:63:6      - Unknown word (nameinst)   -- // nameinst-0050, then instance
-protos/google/cloud/compute/v1/internal/common_019.proto:63:61     - Unknown word (patterninst) -- generated using the patterninst-####
-protos/google/cloud/compute/v1/internal/common_019.proto:75:37     - Unknown word (withinstance) -- sourceInstanceTemplate withinstanceProperties to override
+protos/google/cloud/compute/v1/internal/common_019.proto:173:34    - Unknown word (tollerate)    -- workloads that cannot tollerate distribution over multiple
+protos/google/cloud/compute/v1/internal/common_019.proto:53:57     - Unknown word (Ifmin)      -- as the default value. Ifmin_count instances
+protos/google/cloud/compute/v1/internal/common_019.proto:63:49     - Unknown word (asinst)     -- instance names such asinst-0001 and inst-0002.
+protos/google/cloud/compute/v1/internal/common_019.proto:68:6      - Unknown word (nameinst)   -- // nameinst-0050, then instance
+protos/google/cloud/compute/v1/internal/common_019.proto:68:61     - Unknown word (patterninst) -- generated using the patterninst-####
+protos/google/cloud/compute/v1/internal/common_019.proto:80:37     - Unknown word (withinstance) -- sourceInstanceTemplate withinstanceProperties to override
 protos/google/cloud/compute/v1/internal/common_024.proto:1006:47   - Unknown word (itsfilter)       -- tadataFilter in this list, if itsfilterMatchCriteria is set
 protos/google/cloud/compute/v1/internal/common_024.proto:1007:33   - Unknown word (thefilter)       -- ANY, at least one of thefilterLabels must match the
 protos/google/cloud/compute/v1/internal/common_024.proto:1019:58   - Unknown word (haveload)        -- load balancers that haveloadBalancingScheme
@@ -1317,6 +1320,7 @@ protos/google/cloud/compute/v1/internal/common_171.proto:41:53     - Unknown wor
 protos/google/cloud/compute/v1/internal/common_176.proto:103:32    - Unknown word (vpntunnels)   -- created using the compute.vpntunnels.insert method and
 protos/google/cloud/compute/v1/internal/common_176.proto:27:31     - Unknown word (thethe)     -- more information, read thethe
 protos/google/cloud/compute/v1/internal/common_176.proto:39:34     - Unknown word (usingcompute) -- ForwardingRules are created usingcompute.forwardingRules.insert
+protos/google/cloud/compute/v1/internal/common_184.proto:507:6     - Unknown word (Diffie)     -- // Diffie-Hellman groups for IKE
 protos/google/cloud/compute/v1/internal/common_185.proto:149:52    - Unknown word (autoallocate) -- to `4093`. You can autoallocate a tag by
 protos/google/cloud/compute/v1/internal/common_185.proto:158:21    - Unknown word (pseudowires)  -- // - Port mode pseudowires must have a single VLAN
 protos/google/cloud/compute/v1/internal/common_185.proto:24:6      - Unknown word (pseudowire) -- // A pseudowire that connects two Interconnec
