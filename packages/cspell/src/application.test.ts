@@ -2,6 +2,7 @@ import * as fs from 'node:fs/promises';
 import * as path from 'node:path';
 import { resolve as r } from 'node:path';
 import streamConsumers from 'node:stream/consumers';
+import { pathToFileURL } from 'node:url';
 
 import type { Issue, RunResult } from '@cspell/cspell-types';
 import { afterEach, describe, expect, test, vi } from 'vitest';
@@ -416,6 +417,29 @@ describe('Linter File Caching', () => {
             expect(reporter.errors).toEqual([]);
             expect(result, `run #${r} ${JSON.stringify(options)}`).toEqual(oc({ files: 1, ...expected }));
         }
+    });
+
+    test('cached issues are reported at the folder the cache was moved to', async () => {
+        const dirA = tempLocation('a');
+        const dirB = tempLocation('b');
+        await fs.cp(fr('cached-options'), dirA, { recursive: true });
+        const options = (root: string): LinterOptions => ({
+            ...WithCache,
+            root,
+            cacheLocation: r(root, '.cspellcache'),
+        });
+
+        const reporterA = new InMemoryReporter();
+        const resultA = await App.lint(['*.txt'], options(dirA), reporterA);
+        expect(resultA).toEqual(oc({ files: 1, cachedFiles: 0, issues: 1 }));
+        expect(reporterA.issues.map((issue) => issue.uri)).toEqual([pathToFileURL(r(dirA, 'notes.txt')).href]);
+
+        await fs.cp(dirA, dirB, { recursive: true });
+
+        const reporterB = new InMemoryReporter();
+        const resultB = await App.lint(['*.txt'], options(dirB), reporterB);
+        expect(resultB).toEqual(oc({ files: 1, cachedFiles: 1, issues: 1 }));
+        expect(reporterB.issues.map((issue) => issue.uri)).toEqual([pathToFileURL(r(dirB, 'notes.txt')).href]);
     });
 
     test.each`

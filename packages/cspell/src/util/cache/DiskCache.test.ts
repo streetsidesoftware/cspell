@@ -1,4 +1,4 @@
-import { pathToFileURL } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import type { Mock } from 'vitest';
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
@@ -121,6 +121,19 @@ describe('DiskCache', () => {
 
             expect(mockReadFileInfo).toHaveBeenCalledTimes(1);
             expect(cachedResult?.fileInfo).toEqual(fileInfo);
+        });
+
+        test('reports cached issues at the location of the file', async () => {
+            const issue = { text: 'example', offset: 14, row: 1, col: 15, line: { text: '', offset: 0 } };
+            const result = { ...RESULT_NO_ISSUES, issues: [{ ...issue, uri: 'file:///old-machine/project/doc.md' }] };
+            const fileEntryCache = await getFileEntryCache();
+            fileEntryCache.getFileDescriptor.mockReturnValue(entry(result));
+            mockReadFileInfo.mockReturnValue(Promise.resolve({ filename: 'file', text: '' }));
+
+            const filename = fileURLToPath(new URL('doc.md', import.meta.url));
+            const cachedResult = await diskCache.getCachedLintResults(filename);
+
+            expect(cachedResult?.issues).toEqual([{ ...issue, uri: pathToFileURL(filename).href }]);
         });
 
         test('with failed dependencies', async () => {
