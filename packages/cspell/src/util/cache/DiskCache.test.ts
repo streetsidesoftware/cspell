@@ -125,7 +125,7 @@ describe('DiskCache', () => {
 
         test('reports cached issues at the location of the file', async () => {
             const issue = { text: 'example', offset: 14, row: 1, col: 15, line: { text: '', offset: 0 } };
-            const result = { ...RESULT_NO_ISSUES, issues: [{ ...issue, uri: 'file:///old-machine/project/doc.md' }] };
+            const result = { ...RESULT_NO_ISSUES, issues: [issue] };
             const fileEntryCache = await getFileEntryCache();
             fileEntryCache.getFileDescriptor.mockReturnValue(entry(result));
             mockReadFileInfo.mockReturnValue(Promise.resolve({ filename: 'file', text: '' }));
@@ -234,6 +234,19 @@ describe('DiskCache', () => {
 
             expect(fileEntryCache.getFileDescriptor).toHaveBeenCalledWith('some-file');
             expect(descriptor.meta.data.r).toEqual(result);
+        });
+
+        test('stores issues without their location', async () => {
+            const descriptor = { meta: { data: { r: undefined } } };
+            const fileEntryCache = await getFileEntryCache();
+            fileEntryCache.getFileDescriptor.mockReturnValue(descriptor);
+
+            const filename = fileURLToPath(new URL('doc.md', import.meta.url));
+            const issue = { text: 'example', offset: 14, row: 1, col: 15, line: { text: '', offset: 0 } };
+            const result = { ...RESULT_NO_ISSUES, issues: [{ ...issue, uri: pathToFileURL(filename).href }] };
+            await diskCache.setCachedLintResults({ ...result, fileInfo: { filename }, elapsedTimeMs: 100 }, []);
+
+            expect(descriptor.meta.data.r).toEqual({ ...result, issues: [issue] });
         });
 
         test('handles remote dependencies', { timeout: 60_000 }, async () => {
