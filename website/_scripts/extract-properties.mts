@@ -253,7 +253,7 @@ function formatEntryDescriptionShort(entry: Definition): MDInlineFragment {
     const description = entry.markdownDescription || entry.description || '';
     const firstLine = replaceLinks(description.split('\n')[0]);
     const cell = md.parse(firstLine);
-    assert(cell.kind === 'inline', `A table cell must be one line of Markdown: ${JSON.stringify(firstLine)}`);
+    assert(cell.kind === 'inline', `A description's first line must be inline Markdown: ${JSON.stringify(firstLine)}`);
     return cell;
 }
 
