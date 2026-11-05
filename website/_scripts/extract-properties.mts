@@ -1,9 +1,16 @@
 import assert from 'node:assert';
 import { promises as fs } from 'node:fs';
 import type { JSONSchema7, JSONSchema7Definition } from 'json-schema';
-import { indent, unindent as md } from '@streetsidesoftware/unindent';
+import type {
+    BlockContent,
+    DefinitionEntry,
+    InlineContent,
+    MDInlineFragment,
+} from '@streetsidesoftware/markdown-toolkit';
+import * as md from '@streetsidesoftware/markdown-toolkit';
+import { unindent } from '@streetsidesoftware/unindent';
 
-import { createTable, relativeToSite } from './lib/utils.mts';
+import { relativeToSite } from './lib/utils.mts';
 import { URL_REPO_ROOT_PKG, URL_SITE_DOCS } from './lib/constants.mts';
 
 const schemaFile = new URL('cspell.schema.json', URL_REPO_ROOT_PKG);
@@ -95,8 +102,7 @@ export async function run(): Promise<void> {
     const schema = await loadSchema();
     linkRegistry = buildLinkRegistry(schema);
 
-    const header = md`\
-        ---
+    const frontmatter = unindent`\
         # AUTO-GENERATED ALL CHANGES WILL BE LOST
         # See \`${relativeToSite(import.meta.url)}\`
         title: Properties
@@ -105,72 +111,48 @@ export async function run(): Promise<void> {
         sidebar_position: 1
         sidebar_label: Properties
         format: md
-        ---
-
-        # CSpell Configuration
     `;
 
-    const sections = [header, '', schemaEntry(schema, 'Settings'), '', formatDefinitions(schema)];
+    const page = md.document(
+        md.frontmatter(frontmatter),
+        md.heading(1, 'CSpell Configuration'),
+        schemaEntry(schema, 'Settings'),
+        formatDefinitions(schema),
+    );
 
-    const doc = sections.join('\n').replace(/\u200B/g, ''); // remove zero width spaces
-
-    await fs.writeFile(generatedTargetUrl, doc, 'utf8');
+    await fs.writeFile(generatedTargetUrl, page.toString(), 'utf8');
     console.log(`Generating config properties at ${relativeToSite(generatedTargetUrl)} - Done.`);
 }
 
-function schemaEntry(entry: JSONSchema7, name: string): string {
+function schemaEntry(entry: JSONSchema7, name: string): BlockContent {
     if (entry.type === 'object') {
         return schemaObjectEntry(entry, name);
     }
     return formatTopLevelType(name, entry);
 }
 
-function schemaObjectEntry(schemaTypeObject: JSONSchema7, nameOfType: string): string {
+function schemaObjectEntry(schemaTypeObject: JSONSchema7, nameOfType: string): BlockContent {
     currentSectionName = nameOfType;
-    const properties = schemaTypeObject.properties || {};
     const required = new Set(schemaTypeObject.required || []);
-    // console.error('Object Type %s\n%o', 'Properties:', properties);
-    const lines: string[] = [];
-
-    if (nameOfType) {
-        lines.push(`## ${nameOfType}\n`);
-    }
 
     const isRequired = (key: string) => (required.has(key) && 1) || 0;
-    const entries = Object.entries(properties).sort(
-        (a, b) => isRequired(b[0]) - isRequired(a[0]) || a[0].localeCompare(b[0]),
-    );
+    const entries = Object.entries(schemaTypeObject.properties || {})
+        .filter(propertyIsJSONSchema7)
+        .sort((a, b) => isRequired(b[0]) - isRequired(a[0]) || a[0].localeCompare(b[0]));
 
-    // Object Fields as a table
-    lines.push(
-        createTable(
+    return [
+        md.heading(2, nameOfType),
+        md.table(
             ['Field', 'Type', 'Description'],
-            entries
-                .map(([key, entry]) =>
-                    entryIsJSONSchema7(entry)
-                        ? formatPropertyForOverview(key, entry, nameOfType, required.has(key))
-                        : [],
-                )
-                .filter((e) => e.length > 0),
+            entries.map(([key, entry]) => formatPropertyForOverview(key, entry, nameOfType, required.has(key))),
         ),
-    );
-
-    // Add Object Fields Expanded.
-
-    lines.push(`\n\n### ${nameOfType} Fields`);
-
-    for (const [key, entry] of entries) {
-        if (!entryIsJSONSchema7(entry)) continue;
-        lines.push(formatPropertyToDisplay(key, entry, nameOfType, required.has(key)));
-    }
-
-    return lines.join('\n');
+        md.heading(3, `${nameOfType} Fields`),
+        entries.map(([key, entry]) => formatPropertyToDisplay(key, entry, nameOfType, required.has(key))),
+    ];
 }
 
-function linkToHeader(name: string, section?: string, text?: string): string {
-    text = text || name;
-    const id = toId(section, name);
-    return `[${text}](#${id})`;
+function linkToHeader(name: string, section?: string, text?: InlineContent): InlineContent {
+    return md.link(text ?? name, `#${toId(section, name)}`);
 }
 
 function toId(nameOfParentType: string | undefined, header: string): string {
@@ -182,9 +164,13 @@ function formatPropertyForOverview(
     entry: Definition,
     section: string,
     isRequired: boolean,
-): [string, string, string] {
-    const req = isRequired ? ' <sup>_req_</sup>' : '';
-    return [linkToHeader(key, section) + req, formatEntryType(entry), formatEntryDescriptionShort(entry)];
+): InlineContent[] {
+    const link = linkToHeader(key, section);
+    return [
+        isRequired ? [link, ' ', md.sup(md.emphasis('req'))] : link,
+        formatEntryType(entry),
+        formatEntryDescriptionShort(entry),
+    ];
 }
 
 function formatPropertyToDisplay(
@@ -192,140 +178,83 @@ function formatPropertyToDisplay(
     entry: Definition,
     nameOfParentType: string,
     isRequired: boolean,
-): string {
-    return md`
-
-        ---
-
-        #### \`${key}\` {#${toId(nameOfParentType, key)}}
-
-        ${formatTypeEntryBody(entry, isRequired)}
-    `;
+): BlockContent {
+    return [
+        md.hr(),
+        md.heading(4, [md.inlineCode(key), ` {#${toId(nameOfParentType, key)}}`]),
+        formatTypeEntryBody(entry, isRequired),
+    ];
 }
 
-function formatTopLevelType(key: string, entry: JSONSchema7): string {
+function formatTopLevelType(key: string, entry: JSONSchema7): BlockContent {
     currentSectionName = '';
-    return md`
-
-        ---
-
-        ## ${key} {#${toId('', key)}}
-
-        ${formatTypeEntryBody(entry, undefined)}
-    `;
+    return [md.hr(), md.heading(2, `${key} {#${toId('', key)}}`), formatTypeEntryBody(entry, false)];
 }
 
-function formatTypeEntryBody(entry: Definition, isRequired: boolean | undefined): string {
-    const req = isRequired ? ' <sub><sup> _< required >_ </sup></sub>' : '';
+function formatTypeEntryBody(entry: Definition, isRequired: boolean): BlockContent {
+    const entries: DefinitionEntry[] = [];
 
-    let dlDescription = formatEntryDescription(entry, '');
-    if (dlDescription) {
-        dlDescription = md`
-            <dt>Description</dt>
-            <dd>
-
-            ${dlDescription}
-
-            </dd>
-        `;
+    const description = entry.markdownDescription || entry.description;
+    if (description) {
+        entries.push(['Description', md.parse(replaceLinks(description))]);
     }
 
-    let dlSince = '';
+    const type = isRequired ? ['Type', ' ', md.sub(md.sup(md.emphasis('< required >')))] : 'Type';
+    entries.push([type, formatEntryType(entry)]);
+
     if (entry.since) {
-        dlSince = md`
-            <dt>Since</dt>
-            <dd>${entry.since}</dd>
-        `;
+        entries.push(['Since', entry.since]);
     }
 
-    return md`
-        <dl>
-        ${dlDescription}
-        <dt>Type${req}</dt>
-        <dd>
-
-        ${formatEntryType(entry)}
-
-        </dd>
-        ${dlSince}
-        </dl>
-    `;
+    return md.dl(entries);
 }
 
-function formatEntryType(entry: Definition, addFix = '`'): string {
-    function fix(value: string | string[]): string {
-        return addFix + value + addFix;
-    }
-
+function formatEntryType(entry: Definition): InlineContent {
     if (entry.type === 'array' && entry.items && typeof entry.items === 'object') {
         if (!Array.isArray(entry.items)) {
-            const item = entry.items;
-            return formatEntryType(item, '`') + '&ZeroWidthSpace;' + fix(`[]`);
+            return [formatEntryType(entry.items), md.htmlEntity('ZeroWidthSpace'), md.inlineCode('[]')];
         }
-        const items = entry.items;
-        return (
-            fix('[') +
-            items
-                .filter(entryIsJSONSchema7)
-                .map((item) => formatEntryType(item, '`'))
-                .join(', ') +
-            fix(`]`)
-        );
+        const items = entry.items.filter(entryIsJSONSchema7).map((item) => formatEntryType(item));
+        return [md.inlineCode('['), joinInline(items, ', '), md.inlineCode(']')];
     }
     if (entry.enum) {
-        return entry.enum.map((e) => fix(JSON.stringify(e))).join(' | ');
+        const values = entry.enum.map((value) => md.inlineCode(JSON.stringify(value)));
+        return joinInline(values, ' | ');
     }
     if (entry.type) {
-        return fix(entry.type);
+        return md.inlineCode(String(entry.type));
     }
     if (entry.$ref) {
-        return formatReferenceType(entry.$ref, fix);
+        return formatReferenceType(entry.$ref);
     }
     if (entry.anyOf) {
-        return entry.anyOf
-            .filter(entryIsJSONSchema7)
-            .map((entry) => formatEntryType(entry))
-            .join('<br />');
+        const types = entry.anyOf.filter(entryIsJSONSchema7).map((type) => formatEntryType(type));
+        return joinInline(types, md.br());
     }
-    return fix('Unknown');
+    return md.inlineCode('Unknown');
 }
 
-function formatReferenceType(ref: string, fnFix: (fix: string) => string): string {
+function joinInline(parts: InlineContent[], separator: InlineContent): InlineContent {
+    return parts.flatMap((part, i) => (i ? [separator, part] : [part]));
+}
+
+function formatReferenceType(ref: string): InlineContent {
     const refType = ref.split('/').slice(-1).join('');
-    return linkToHeader(refType, '', fnFix(refType));
+    return linkToHeader(refType, '', md.inlineCode(refType));
 }
 
-function formatDefinitions(schema: Definition): string {
+function formatDefinitions(schema: Definition): BlockContent {
     return Object.entries(schema.definitions || {})
         .filter(propertyIsJSONSchema7)
-        .map(([key, entry]) => {
-            assert(entryIsJSONSchema7(entry), `Expected entry to be JSONSchema7: ${key}`);
-            return schemaEntry(entry, key);
-        })
-        .join('\n\n');
+        .map(([key, entry]) => schemaEntry(entry, key));
 }
 
-function formatEntryDescription(entry: Definition, padding: string): string {
-    let description = entry.markdownDescription || entry.description || '';
-    if (typeof description !== 'string') {
-        console.error('%o', description);
-        return '**`Strange Object`**';
-    }
-
-    description = replaceLinks(description);
-    description = indent(description, padding);
-    return description;
-}
-
-function formatEntryDescriptionShort(entry: Definition): string {
+function formatEntryDescriptionShort(entry: Definition): MDInlineFragment {
     const description = entry.markdownDescription || entry.description || '';
-    if (typeof description !== 'string') {
-        console.error('%o', description);
-        return '**`Strange Object`**';
-    }
-    let short = description.split('\n').slice(0, 1).join('');
-    short = replaceLinks(short);
-    return short;
+    const firstLine = replaceLinks(description.split('\n')[0]);
+    const cell = md.parse(firstLine);
+    assert(cell.kind === 'inline', `A description's first line must be inline Markdown: ${JSON.stringify(firstLine)}`);
+    return cell;
 }
 
 async function loadSchema(): Promise<JSONSchema7> {
