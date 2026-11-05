@@ -222,7 +222,8 @@ function formatEntryType(entry: Definition): InlineContent {
         return joinInline(values, ' | ');
     }
     if (entry.type) {
-        return md.inlineCode(String(entry.type));
+        const types = Array.isArray(entry.type) ? entry.type.join(' | ') : entry.type;
+        return md.inlineCode(types);
     }
     if (entry.$ref) {
         return formatReferenceType(entry.$ref);
