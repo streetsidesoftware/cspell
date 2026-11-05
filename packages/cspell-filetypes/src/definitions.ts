@@ -284,6 +284,7 @@ export const definitions: FileTypeDefinitions = [
     { id: 'typst', extensions: ['.typ', '.typst'] },
     { id: 'vala', extensions: ['.vala'] },
     { id: 'vb', extensions: ['.bas', '.brs', '.vb', '.vba', '.vbs'] },
+    { id: 'vim', extensions: ['.vim'], filenames: ['.gvimrc', '.vimrc', '_gvimrc', '_vimrc', 'vimrc'] },
     { id: 'vue', extensions: ['.vue'] },
     {
         id: 'xml',
