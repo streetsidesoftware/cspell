@@ -59,6 +59,23 @@ describe('globP', () => {
         expect((await globP('{app.ts,gzip}', { cwd })).sort()).toEqual(['app.ts', 'gzip']);
         expect(await globP('{app.ts,gzip}', { cwd, nodir: true })).toEqual(['app.ts']);
     });
+
+    test.each([{ nodir: false }, { nodir: true }])(
+        'changing directory during the search does not change the base, $nodir',
+        async ({ nodir }) => {
+            const start = process.cwd();
+            const relativeDir = relative(start, utilDir);
+            try {
+                const withCwd = globP('globP.ts', { cwd: relativeDir, nodir });
+                const withoutCwd = globP(join(relativeDir, 'globP.ts'), { nodir });
+                process.chdir(srcDir);
+                expect(await withCwd).toEqual(['globP.ts']);
+                expect(await withoutCwd).toEqual([join(relativeDir, 'globP.ts')]);
+            } finally {
+                process.chdir(start);
+            }
+        },
+    );
 });
 
 // cspell:ignore nodir
