@@ -1636,8 +1636,6 @@ type SoftWordBreakRegExpString = string;
  * - `^` -- Indicates the start of a word
  * - `$` -- Indicates the end of a word
  *
- * For more complicated word break rules, consider using regular expressions with the {@link SoftWordBreakRegExp} type.
- *
  * Examples:
  * - `"^ptr|"` -- Would help with pointer definitions starting with `ptr`, such as `ptrvalue`.
  * - `"^I|"` -- Would help with interface definitions starting with `I`, such as `IERROR`.
