@@ -19,7 +19,7 @@ function makeMD(helpText: string): string {
         format: md
     `;
 
-    return md.document(md.frontmatter(frontmatter), md.codeBlock(helpText.replace(/\r?\n$/, ''), 'text')).toString();
+    return md.document(md.frontmatter(frontmatter), md.codeBlock(helpText.trimEnd(), 'text')).toString();
 }
 
 export async function run(): Promise<void> {
