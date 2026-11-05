@@ -42,6 +42,23 @@ describe('globP', () => {
         const file = relative(process.cwd(), join(utilDir, 'globP.ts'));
         expect(await globP(file, { nodir: true })).toEqual([file]);
     });
+
+    test.each`
+        name          | cwd
+        ${'absolute'} | ${utilDir}
+        ${'relative'} | ${relative(process.cwd(), utilDir)}
+        ${'file URL'} | ${new URL('.', import.meta.url)}
+    `('results are relative to a $name cwd', async ({ cwd }) => {
+        const expected = ['globP.test.ts', 'globP.ts'];
+        expect((await globP('globP*.ts', { cwd })).sort()).toEqual(expected);
+        expect((await globP('globP*.ts', { cwd, nodir: true })).sort()).toEqual(expected);
+    });
+
+    test('cwd with a pattern matching a directory', async () => {
+        const cwd = srcDir;
+        expect((await globP('{app.ts,gzip}', { cwd })).sort()).toEqual(['app.ts', 'gzip']);
+        expect(await globP('{app.ts,gzip}', { cwd, nodir: true })).toEqual(['app.ts']);
+    });
 });
 
 // cspell:ignore nodir
