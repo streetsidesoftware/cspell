@@ -131,7 +131,9 @@ export function createRepMapper(repMap: ReplaceMap | undefined, ignoreCharset?: 
     };
 }
 
-function applyEdits(word: string, edits: Edit[]): string[] {
+const defaultMaxSubWordEdits = 256;
+
+function applyEdits(word: string, edits: Edit[], maxEdits: number = defaultMaxSubWordEdits): string[] {
     if (!edits.length) return [word];
 
     // Prepare
@@ -151,11 +153,18 @@ function applyEdits(word: string, edits: Edit[]): string[] {
     for (let i = word.length - 1; i >= 0; --i) {
         const le = letterEdits[i];
         const sfx = le.suffixes;
+        const maxPerEdit = Math.max(1, Math.floor(maxEdits / le.edits.length));
         for (const edit of le.edits) {
+            if (sfx.length >= maxEdits) break;
             const pfx = edit.r;
             const nSfx = letterEdits[edit.e].suffixes;
-            for (const s of nSfx) {
-                sfx.push(pfx + s);
+            const step = Math.max(1, Math.ceil(nSfx.length / maxPerEdit));
+            const startLen = sfx.length;
+            for (let j = 0; j < nSfx.length && sfx.length < maxEdits; j += step) {
+                sfx.push(pfx + nSfx[j]);
+            }
+            if (step > 1 && sfx.length - startLen > 1) {
+                sfx[sfx.length - 1] = pfx + nSfx[nSfx.length - 1];
             }
         }
     }

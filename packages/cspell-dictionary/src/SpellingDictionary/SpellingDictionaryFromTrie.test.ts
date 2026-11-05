@@ -40,6 +40,7 @@ describe('SpellingDictionaryFromTrie', () => {
         expect(dict.has('Bundesstaat')).toBe(true);
         expect(dict.has('Goerresstraße')).toBe(true);
         expect(dict.has('Hoehenschnittpunkt')).toBe(true);
+        expect(dict.has('s'.repeat(38))).toBe(false);
     });
 });
 
