@@ -2,10 +2,6 @@ name: ' 🚀 Publish: 2. Publish to NPM (automatic)'
 
 on:
   workflow_dispatch:
-  workflow_call:
-    secrets:
-      PUBLISH_NPM:
-        required: true
   push:
     tags:
       - 'v*' # publish when a version tag is created
