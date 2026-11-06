@@ -11,14 +11,17 @@ export function commandInit(prog: Command): Command {
         .addOption(
             crOpt(
                 '-c, --config <path>',
-                'Path to the CSpell configuration file. Conflicts with --output and --format.',
+                'Path to the CSpell configuration file. Defaults to the one in the current directory. Conflicts with --output and --format.',
             ).conflicts(['output', 'format']),
         )
-        .option('-o, --output <path>', 'Define where to write file.')
+        .option('-o, --output <path>', 'Define where to write a new file instead of using an existing config.')
         .addOption(
-            crOpt('--format <format>', 'Define the format of the file.')
-                .choices(['yaml', 'yml', 'json', 'jsonc'])
-                .default('yaml'),
+            crOpt('--format <format>', 'Define the format of a new file. Default: yaml.').choices([
+                'yaml',
+                'yml',
+                'json',
+                'jsonc',
+            ]),
         )
         .option('--import <path|package>', 'Import a configuration file or dictionary package.', collect)
         .option('--locale <locale>', 'Define the locale to use when spell checking (e.g., en, en-US, de).')
