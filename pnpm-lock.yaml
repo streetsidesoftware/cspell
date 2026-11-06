@@ -1010,8 +1010,8 @@ importers:
         specifier: workspace:*
         version: link:../cspell-dictionary-bundler-plugin
       '@types/configstore':
-        specifier: ^6.0.2
-        version: 6.0.2
+        specifier: ^8.0.0
+        version: 8.0.0
       comment-json:
         specifier: ^5.0.0
         version: 5.0.0
@@ -4989,8 +4989,9 @@ packages:
   '@types/concat-stream@2.0.3':
     resolution: {integrity: sha512-3qe4oQAPNwVNwK4C9c8u+VJqv9kez+2MR4qJpoPFfXtgxxif1QbFusvXzK0/Wra2VX07smostI2VMmJNSpZjuQ==}
 
-  '@types/configstore@6.0.2':
-    resolution: {integrity: sha512-OS//b51j9uyR3zvwD04Kfs5kHpve2qalQ18JhY/ho3voGYUTPLEG90/ocfKPI48hyHH8T04f7KEEbK6Ue60oZQ==}
+  '@types/configstore@8.0.0':
+    resolution: {integrity: sha512-hEDj/0wiAroOaJ/cOcsU+8wjBwVxuO9vnpe8w/8VqvhESao4uOZL2n05di6sVTcOIqRSvpQkhyjnAjkxwFZt1A==}
+    deprecated: This is a stub types definition. configstore provides its own type definitions, so you do not need this installed.
 
   '@types/connect-history-api-fallback@1.5.4':
     resolution: {integrity: sha512-n6Cr2xS1h4uAulPRdlw6Jl6s1oG8KrVilPN2yUITEs+K48EzMJJ3W1xy8K5eWuFvjp3R74AOIGSmp2UfBJ8HFw==}
@@ -15741,7 +15742,9 @@ snapshots:
     dependencies:
       '@types/node': 22.20.5
 
-  '@types/configstore@6.0.2': {}
+  '@types/configstore@8.0.0':
+    dependencies:
+      configstore: 8.0.0
 
   '@types/connect-history-api-fallback@1.5.4':
     dependencies:
