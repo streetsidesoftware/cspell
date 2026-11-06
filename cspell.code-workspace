@@ -15,6 +15,7 @@
         { "path": "packages/cspell-grammar" },
         { "path": "packages/cspell-io" },
         { "path": "packages/cspell-json-reporter" },
+        { "path": "packages/cspell-junit-reporter" },
         { "path": "packages/cspell-lib" },
         { "path": "packages/cspell-normalize-json" },
         { "path": "packages/cspell-performance-monitor" },
@@ -38,32 +39,6 @@
         { "path": "rfc" },
         { "path": "website" }
     ],
-    "launch": {
-        "configurations": [
-            {
-                "type": "node",
-                "request": "launch",
-                "name": "ViTest: Current Test File",
-                "autoAttachChildProcesses": true,
-                "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
-                "program": "${workspaceRoot:cspell-monorepo}/node_modules/vitest/vitest.mjs",
-                "env": {
-                    "NODE_OPTIONS": "--enable-source-maps"
-                },
-                "args": [
-                    "run",
-                    "--testTimeout=600000",
-                    "--hideSkippedTests",
-                    "--no-file-parallelism",
-                    "${relativeFile}"
-                ],
-                "cwd": "${fileWorkspaceFolder}",
-                "smartStep": true,
-                "console": "integratedTerminal"
-            }
-        ],
-        "compounds": []
-    },
     "settings": {
         "typescript.tsdk": "cspell-monorepo/node_modules/typescript/lib",
         "cSpell.customDictionaries": {
