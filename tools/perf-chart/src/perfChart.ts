@@ -31,8 +31,6 @@ export async function perfReport(csvFile: string | URL, options: Options): Promi
 
     await outputDailyCsv(recordsGraph, options);
 
-    await generateSvg(recordsGraph, options);
-
     await generatePng(recordsGraph, options);
 }
 
@@ -54,16 +52,6 @@ async function outputReport(markdown: string, options: Options): Promise<void> {
     }
 
     await outputFile(options.output, markdown + '\n');
-}
-
-async function generateSvg(records: CsvRecord[], options: Options): Promise<void> {
-    if (!options.svg) return;
-
-    // Delay the import until needed - not actively used.
-    const { plotSvg } = await import('./experimental/plotSvg.ts');
-
-    const svg = plotSvg(records, options);
-    await outputFile(options.svg, svg);
 }
 
 async function outputDailyCsv(records: CsvRecord[], options: Options): Promise<void> {
