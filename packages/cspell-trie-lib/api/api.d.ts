@@ -424,38 +424,6 @@ interface TrieData extends TrieDataFundamentals, Readonly<TrieCharacteristics> {
   readonly size: number;
   encodeToBTrie?: () => Uint8Array<ArrayBuffer>;
 }
-/**
- * Replaces each match in a word with a single replacement.
- */
-interface ReplaceMapper {
-  /** Matches a word that has something to replace. */
-  test?: RegExp;
-  /** Returns the word with its matches replaced. */
-  fn: (src: string) => string;
-}
-/**
- * Create a mapper that gives one result for each word.
- * @param repMap - the replacements to make.
- * @param ignoreCharset - characters to remove.
- * @returns the mapper, or `undefined` when there is nothing to replace.
- */
-export declare function createMapper(repMap: ReplaceMap | undefined, ignoreCharset?: string): ReplaceMapper | undefined;
-/**
- * Generates the replacement forms of a word.
- */
-interface RepMapper {
-  /** Matches a word that has something to replace. */
-  test: RegExp;
-  /** Returns the word and its replacement forms. The number of forms is limited. */
-  fn: (word: string) => string[];
-}
-/**
- * Create a mapper that gives every combination of replacements, up to a limit.
- * @param repMap - the replacements to make.
- * @param ignoreCharset - characters to remove.
- * @returns the mapper, or `undefined` when there is nothing to replace.
- */
-export declare function createRepMapper(repMap: ReplaceMap | undefined, ignoreCharset?: string): RepMapper | undefined;
 interface ITrie {
   readonly data: TrieData;
   /**
@@ -500,19 +468,28 @@ interface ITrie {
    * @returns true if the word was found and is not forbidden.
    */
   hasWord(word: string, caseSensitive: boolean): boolean;
+  /**
+   * Find a word. On a trie with replacements, the word's replacement forms are also looked up.
+   * @param word - the word to search for.
+   * @param options - how to look up the word.
+   * @returns the result for the word or the first replacement form found.
+   */
   findWord(word: string, options?: FindWordOptionsRO): FindFullResult$1;
   /**
-   * Find the first form of a word that is in the trie.
-   *
-   * The forms are the word, its NFC and NFD forms, and then their replacement forms. Each form is looked up as it is,
-   * then by its alternate forms, and then both again as compounds.
-   *
-   * @param word - the word as written.
-   * @param options - how to look up each form.
-   * @param forms - which forms to look up.
-   * @returns the result for the first form found, otherwise `undefined`.
+   * Get a trie with the same words that also finds words written with replacements.
+   * @param repMap - the replacements to make to a word when looking it up.
+   * @param ignoreCharset - characters to remove from a word when looking it up.
+   * @returns a trie with the replacements, or this trie if there is nothing to replace.
    */
-  findWordAnyForm(word: string, options: FindWordOptionsRO | undefined, forms: WordFormsOptions): FindFullResult$1 | undefined;
+  withReplacements(repMap: ReplaceMap | undefined, ignoreCharset?: string): ITrie;
+  /**
+   * Replaces each match in a word with one replacement. `undefined` when there is nothing to replace.
+   */
+  readonly mapWord: ((word: string) => string) | undefined;
+  /**
+   * Generates the replacement forms of a word, up to a limit. `undefined` when there is nothing to replace.
+   */
+  readonly remapWord: ((word: string) => string[]) | undefined;
   /**
    * Determine if a word is in the forbidden word list.
    * @param word the word to lookup.
@@ -598,23 +575,6 @@ interface FindWordOptions {
   compoundSeparator?: string;
 }
 type FindWordOptionsRO = Readonly<FindWordOptions>;
-/**
- * The forms of a word to look up.
- */
-interface WordFormsOptions {
-  /**
-   * Generates the replacement forms.
-   */
-  repMapper: RepMapper | undefined;
-  /**
-   * Generates the alternate forms of a form, such as its case variations.
-   */
-  alternateForms: (word: string) => string[];
-  /**
-   * Also look up compounds. A number is the minimum length of each part.
-   */
-  useLegacyWordCompounds: boolean | number | undefined;
-}
 export declare function buildITrieFromWords(words: Iterable<string>, info?: PartialTrieInfo, buildOptions?: BuildOptions): ITrie;
 /**
  * Consolidate to DAWG
@@ -1010,5 +970,5 @@ export declare function normalizeWordForCaseInsensitive(text: string, locale?: s
  * @param rangeChar - the character to indicate ranges, set to empty to not have ranges.
  */
 export declare function expandCharacterSet(line: string, rangeChar?: string): Set<string>;
-export { type ChildMap, type ExportOptions, type FindFullResult, type FindWordOptions, type HintedWalkerIterator, type Hinting, type ITrie, type MaxCost, type PartialTrieOptions, type RepMapper, type ReplaceMapper, type SuggestionCollector, type SuggestionCostMapDef, type SuggestionResult, type TrieNode, type TrieOptions, type TrieOptionsRO, type TrieRoot, type WalkerIterator, type WeightMap, type WordFormsOptions, type YieldResult, createDictionaryLineParserMapper as createDictionaryLineParser, defaultTrieInfo as defaultTrieOptions };
+export { type ChildMap, type ExportOptions, type FindFullResult, type FindWordOptions, type HintedWalkerIterator, type Hinting, type ITrie, type MaxCost, type PartialTrieOptions, type SuggestionCollector, type SuggestionCostMapDef, type SuggestionResult, type TrieNode, type TrieOptions, type TrieOptionsRO, type TrieRoot, type WalkerIterator, type WeightMap, type YieldResult, createDictionaryLineParserMapper as createDictionaryLineParser, defaultTrieInfo as defaultTrieOptions };
 //# sourceMappingURL=index.d.ts.map

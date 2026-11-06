@@ -245,59 +245,6 @@ function regexpRemoveFlags(re: RegExp, flagsToRemove: string): RegExp {
     return new RegExp(re.source, flags);
 }
 
-// eslint-disable-next-line no-control-regex
-const isAsciiRange = /^[\u0000-\u007F]*$/;
-
-export function* outerWordForms(word: string, repMapper: RepMapper | undefined): Iterable<string> {
-    // Only generate the needed forms.
-    const sent = new Set<string>();
-    let w = word;
-    const ww = w;
-    yield w;
-
-    // this function is called for every word lookup, so needs to be efficient.
-    // Check to see if it is a pure ascii word.
-    if (!isAsciiRange.test(w)) {
-        sent.add(w);
-        w = word.normalize('NFC');
-        if (w !== ww) {
-            yield w;
-            sent.add(w);
-        }
-        w = word.normalize('NFD');
-        if (w !== ww && !sent.has(w)) {
-            yield w;
-            sent.add(w);
-        }
-    }
-
-    if (!repMapper) return;
-    const mapWord = repMapper.fn;
-
-    // nothing was added to the set, just do the map.
-    if (!sent.size) {
-        if (!repMapper.test.test(ww)) return;
-        for (const m of mapWord(ww)) {
-            if (m !== ww && !sent.has(m)) {
-                yield m;
-                sent.add(m);
-            }
-        }
-        return;
-    }
-
-    const mapped = new Set<string>();
-    for (const f of sent) {
-        for (const m of mapWord(f)) {
-            if (!sent.has(m) && !mapped.has(m)) {
-                yield m;
-                mapped.add(m);
-            }
-        }
-    }
-    return;
-}
-
 export const __testing__: {
     charsetToRepMap: typeof charsetToRepMapRegEx;
     createMapperRegExp: typeof createMapperRegExp;

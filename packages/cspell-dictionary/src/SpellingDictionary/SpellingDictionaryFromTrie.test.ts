@@ -1,15 +1,50 @@
 import assert from 'node:assert';
 
 import type { DictionaryDefinition, DictionaryDefinitionAugmented } from '@cspell/cspell-types';
+import { buildITrieFromWords } from 'cspell-trie-lib';
 import { describe, expect, test } from 'vitest';
 
 import { readDictionaryDefinitions, readFile } from '../test/reader.test.helper.js';
 import type { SpellingDictionaryOptions } from './SpellingDictionary.js';
-import { createSpellingDictionaryFromTrieFile, SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie.js';
+import {
+    __testing__,
+    createSpellingDictionaryFromTrieFile,
+    SpellingDictionaryFromTrie,
+} from './SpellingDictionaryFromTrie.js';
+
+const { outerWordForms } = __testing__;
 
 // cspell:ignore Bundesstaat Goerresstraße Hoehenschnittpunkt Strasse Straße
 
 describe('SpellingDictionaryFromTrie', () => {
+    test.each`
+        word       | expected
+        ${'hello'} | ${['hello']}
+        ${'éa'}    | ${['éa', N('éa')]}
+        ${N('éa')} | ${[N('éa'), 'éa']}
+    `('outerWordForms $word', ({ word, expected }) => {
+        expect([...outerWordForms(word)]).toEqual(expected);
+    });
+
+    test.each`
+        word          | expected
+        ${'straße'}   | ${true}
+        ${'strasse'}  | ${true}
+        ${'Strasse'}  | ${true}
+        ${'STRASSE'}  | ${true}
+        ${'strassen'} | ${false}
+    `('has with repMap $word', ({ word, expected }) => {
+        const trie = buildITrieFromWords(['straße']);
+        const dict = new SpellingDictionaryFromTrie(trie, 'test', { repMap: [['ss', 'ß']] });
+        expect(dict.has(word, { ignoreCase: false })).toBe(expected);
+    });
+
+    test('mapWord and remapWord are undefined without a repMap', () => {
+        const dict = new SpellingDictionaryFromTrie(buildITrieFromWords(['word']), 'test', {});
+        expect(dict.mapWord).toBe(undefined);
+        expect(dict.remapWord).toBe(undefined);
+    });
+
     test('has with German Dictionary to make sure remap works as expected', async () => {
         const dict = await readTrieDictionaryFromModules('@cspell/dict-de-de', 'de-de');
         expect(dict).toBeInstanceOf(SpellingDictionaryFromTrie);
@@ -39,6 +74,10 @@ async function readTrieDictionaryFromModules(modulePath: string, name: string): 
 
     const dict = createSpellingDictionaryFromTrieFile(trieData, name, dictInfo.url.href, options);
     return dict as SpellingDictionaryFromTrie;
+}
+
+function N(s: string, mode: 'NFD' | 'NFC' = 'NFD') {
+    return s.normalize(mode);
 }
 
 function isDict(dict: DictionaryDefinition): dict is DictionaryDefinitionAugmented {

@@ -2,12 +2,11 @@ import type {
     FindFullResult,
     FindWordOptions,
     ITrie,
-    RepMapper,
     SuggestionCollector,
     SuggestionResult,
     WeightMap,
 } from 'cspell-trie-lib';
-import { CompoundWordsMethod, createMapper, createRepMapper, decodeTrie, suggestionCollector } from 'cspell-trie-lib';
+import { CompoundWordsMethod, decodeTrie, suggestionCollector } from 'cspell-trie-lib';
 
 import { clean } from '../util/clean.js';
 import { measurePerf } from '../util/performance.js';
@@ -38,7 +37,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
     readonly unknownWords: Set<string> = new Set<string>();
     readonly mapWord: MapWordSingleFn | undefined;
     readonly remapWord: MapWordMultipleFn | undefined;
-    readonly repMapper: RepMapper | undefined;
+    readonly trie: ITrie;
     readonly type = 'SpellingDictionaryFromTrie';
     readonly isDictionaryCaseSensitive: boolean;
     readonly containsNoSuggestWords: boolean;
@@ -46,25 +45,19 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
     #ignoreForbiddenWords = false;
     #findWordOptionsCaseSensitive: FindWordOptions = { caseSensitive: true };
     #findWordOptionsNotCaseSensitive: FindWordOptions = { caseSensitive: false };
-    #alternateFormsMatchCase = (word: string) =>
-        wordSearchAlternateForms(word, this.isDictionaryCaseSensitive, false, this.#locale);
-    #alternateFormsIgnoreCase = (word: string) =>
-        wordSearchAlternateForms(word, this.isDictionaryCaseSensitive, true, this.#locale);
 
     private weightMap: WeightMap | undefined;
 
     constructor(
-        readonly trie: ITrie,
+        trie: ITrie,
         readonly name: string,
         readonly options: SpellingDictionaryOptionsRO,
         readonly source = 'from trie',
         size?: number,
     ) {
-        const mapWord = createMapper(options.repMap, options.dictionaryInformation?.ignore);
-        const repMapper = createRepMapper(options.repMap, options.dictionaryInformation?.ignore);
-        this.mapWord = mapWord?.fn;
-        this.remapWord = repMapper?.fn;
-        this.repMapper = repMapper;
+        this.trie = trie.withReplacements(options.repMap, options.dictionaryInformation?.ignore);
+        this.mapWord = this.trie.mapWord;
+        this.remapWord = this.trie.remapWord;
 
         this.isDictionaryCaseSensitive = options.caseSensitive ?? true;
         this.containsNoSuggestWords = options.noSuggest || false;
@@ -136,6 +129,19 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         ignoreCase: boolean,
         compoundSeparator: string | undefined,
     ): FindAnyFormResult | undefined {
+        for (const form of outerWordForms(word)) {
+            const r = this._findAnyForm(form, useCompounds, ignoreCase, compoundSeparator);
+            if (r) return r;
+        }
+        return undefined;
+    }
+
+    private _findAnyForm(
+        mWord: string,
+        useCompounds: number | boolean | undefined,
+        ignoreCase: boolean,
+        compoundSeparator: string | undefined,
+    ): FindAnyFormResult | undefined {
         let opts: FindWordOptions = ignoreCase
             ? this.#findWordOptionsNotCaseSensitive
             : this.#findWordOptionsCaseSensitive;
@@ -143,11 +149,31 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         if (compoundSeparator) {
             opts = { ...opts, compoundSeparator };
         }
-        return this.trie.findWordAnyForm(word, opts, {
-            repMapper: this.repMapper,
-            alternateForms: ignoreCase ? this.#alternateFormsIgnoreCase : this.#alternateFormsMatchCase,
-            useLegacyWordCompounds: useCompounds,
-        });
+        const findResult = this.trie.findWord(mWord, opts);
+        if (findResult.found !== false) {
+            return findResult;
+        }
+        const forms = wordSearchAlternateForms(mWord, this.isDictionaryCaseSensitive, ignoreCase, this.#locale);
+        for (const w of forms) {
+            const findResult = this.trie.findWord(w, opts);
+            if (findResult.found !== false) {
+                return findResult;
+            }
+        }
+        if (useCompounds) {
+            const optsUseCompounds = { ...opts, useLegacyWordCompounds: useCompounds };
+            const findResult = this.trie.findWord(mWord, optsUseCompounds);
+            if (findResult.found !== false) {
+                return findResult;
+            }
+            for (const w of forms) {
+                const findResult = this.trie.findWord(w, optsUseCompounds);
+                if (findResult.found !== false) {
+                    return findResult;
+                }
+            }
+        }
+        return undefined;
     }
 
     public isNoSuggestWord(word: string, options?: HasOptionsRO): boolean {
@@ -230,3 +256,23 @@ export function createSpellingDictionaryFromTrieFile(
     endPerf();
     return d;
 }
+
+// eslint-disable-next-line no-control-regex
+const isAsciiRange = /^[\u0000-\u007F]*$/;
+
+function* outerWordForms(word: string): Iterable<string> {
+    yield word;
+
+    // this function is called for every word lookup, so needs to be efficient.
+    if (isAsciiRange.test(word)) return;
+
+    const nfc = word.normalize('NFC');
+    if (nfc !== word) yield nfc;
+
+    const nfd = word.normalize('NFD');
+    if (nfd !== word && nfd !== nfc) yield nfd;
+}
+
+export const __testing__: {
+    outerWordForms: typeof outerWordForms;
+} = { outerWordForms };

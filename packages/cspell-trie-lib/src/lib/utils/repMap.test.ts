@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { __testing__, createMapper, createRepMapper, outerWordForms } from './repMap.ts';
+import { __testing__, createMapper, createRepMapper } from './repMap.ts';
 
 const { createMapperRegExp, charsetToRepMap, createTrie, calcAllEdits, applyEdits } = __testing__;
 
@@ -170,34 +170,6 @@ describe('RepMapper', () => {
         expect(forms.length).toBeLessThanOrEqual(256);
         expect(forms[0]).toBe(word);
         expect(forms).toContain(expectedReplaced);
-    });
-});
-
-describe('outerWordForms', () => {
-    // cspell:ignore guenstig günstig Bundesstaat Bundeßtaat
-    // cspell:ignore Goerresstraße Goerreßtraße Görresstraße Görreßtraße
-    test.each`
-        word               | repMap                                                  | expected
-        ${'hello'}         | ${undefined}                                            | ${['hello']}
-        ${'guenstig'}      | ${[['ae', 'ä'], ['oe', 'ö'], ['ue', 'ü'], ['ss', 'ß']]} | ${['guenstig', 'günstig']}
-        ${'günstig'}       | ${[['ae', 'ä'], ['oe', 'ö'], ['ue', 'ü'], ['ss', 'ß']]} | ${['günstig', N('günstig')]}
-        ${'Bundesstaat'}   | ${[['ae', 'ä'], ['oe', 'ö'], ['ue', 'ü'], ['ss', 'ß']]} | ${['Bundesstaat', 'Bundeßtaat']}
-        ${'Goerresstraße'} | ${[['ae', 'ä'], ['oe', 'ö'], ['ue', 'ü'], ['ss', 'ß']]} | ${['Goerresstraße', 'Goerreßtraße', 'Görresstraße', 'Görreßtraße']}
-        ${'éa'}            | ${[['a', 'b'], ['b', 'c']]}                             | ${['éa', N('éa'), 'éb', N('éb')]}
-    `('outerWordForms $word', ({ word, repMap, expected }) => {
-        expect([...outerWordForms(word, createRepMapper(repMap))]).toEqual([...new Set(expected)]);
-    });
-
-    test('outerWordForms only maps the starting forms', () => {
-        const repMap: [string, string][] = [
-            ['a', 'æ'],
-            ['a', 'å'],
-        ];
-        const word = 'é' + 'a'.repeat(12);
-        const startingForms = 2;
-        const maxFormsPerMap = 256;
-        const forms = [...outerWordForms(word, createRepMapper(repMap))];
-        expect(forms.length).toBeLessThanOrEqual(startingForms + startingForms * maxFormsPerMap);
     });
 });
 
