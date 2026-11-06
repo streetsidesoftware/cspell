@@ -30,8 +30,6 @@ export async function perfReport(csvFile: string | URL, options: Options): Promi
     const recordsGraph = limitDataToDaysAgo(rawRecords, days * 3);
 
     await outputDailyCsv(recordsGraph, options);
-
-    await generatePng(recordsGraph, options);
 }
 
 function limitDataToDaysAgo(data: CsvRecordsRO, days: number): CsvRecord[] {
@@ -62,17 +60,7 @@ async function outputDailyCsv(records: CsvRecord[], options: Options): Promise<v
     await outputFile(options.dailyCsv, dailyCsv);
 }
 
-async function generatePng(records: CsvRecord[], options: Options): Promise<void> {
-    if (!options.png) return;
-
-    // Delay the import until needed - not actively used.
-    const { plotPng } = await import('./experimental/plotPng.ts');
-
-    const buffer = await plotPng(records, options);
-    await outputFile(options.png, buffer);
-}
-
-async function outputFile(filePath: string, content: string | Buffer): Promise<void> {
+async function outputFile(filePath: string, content: string): Promise<void> {
     await fs.mkdir(Path.dirname(filePath), { recursive: true });
     await fs.writeFile(filePath, content);
 }
