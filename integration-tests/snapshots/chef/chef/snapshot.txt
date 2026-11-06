@@ -3,7 +3,52 @@ Repository: chef/chef
 Url: "https://github.com/chef/chef.git"
 Args: ["--config=../../../cspell-chef.config.yaml","**"]
 Lines:
- Configuration Configuration Loader Error: Failed to resolve configuration file: "./temp/chef/chef/cspell.json" referenced from "../../../cspell-chef.config.yaml"
+ CSpell: Files checked: 1040, Issues found: 47 in 12 files.
  exit code: 1
--------------------------------------------
-CSpell: Files checked: 0, Issues found: 0 in 0 files with 1 error.
+chef-utils/lib/chef-utils/dsl/default_paths.rb:36:73     - Unknown word (extensionless) -- usr/bin, which has an extensionless
+docs/dev/how_to/github-runner-setup-guide.md:187:19    - Unknown word (YTDVFEL)    -- TOKEN="ABFBQT5WJE4YTDVFEL3EMBDJCX7CS"
+docs/dev/how_to/github-runner-setup-guide.md:187:27    - Unknown word (EMBDJCX)    -- "ABFBQT5WJE4YTDVFEL3EMBDJCX7CS"
+docs/dev/how_to/github-runner-setup-guide.md:187:8     - Unknown word (ABFBQT)     -- TOKEN="ABFBQT5WJE4YTDVFEL3EMBDJCX
+kitchen-tests/cookbooks/end_to_end/recipes/_tests.rb:19:25     - Unknown word (Cmlaut)     -- file "/tmp/chef-test-\xFCmlaut" do
+kitchen-tests/cookbooks/end_to_end/recipes/_windows_system_path.rb:46:3      - Unknown word (extensionless) -- # extensionless MSYS `cmd` script from
+kitchen-tests/cookbooks/end_to_end/recipes/_windows_system_path.rb:50:20     - Unknown word (notmatch)      -- if ($resolved -notmatch '\\\\System32\\\\cmd
+lib/chef/provider/package/portage.rb:82:23     - Unknown word (nqualified) -- if /[Uu]nqualified atom .*match.* multiple
+lib/chef/provider/package/yum/python_helper.rb:119:115   - Unknown word (alphapca)   -- alphaev68 alphaev7 alphapca56 armv5tejl armv5tel
+lib/chef/provider/package/yum/python_helper.rb:119:131   - Unknown word (tejl)       -- alphaev7 alphapca56 armv5tejl armv5tel armv5tl armv
+lib/chef/provider/package/yum/python_helper.rb:119:212   - Unknown word (athlon)     -- armv7hnl armv8hl i386 athlon geode i386 i486 i58
+lib/chef/provider/package/yum/python_helper.rb:119:255   - Unknown word (mipsel)     -- i586 i686 ia64 mips mipsel mips64 mips64el noarch
+lib/chef/provider/package/yum/python_helper.rb:119:300   - Unknown word (iseries)    -- noarch ppc ppc64 ppc64iseries ppc64p7 ppc64pseries
+lib/chef/provider/package/yum/python_helper.rb:119:321   - Unknown word (pseries)    -- iseries ppc64p7 ppc64pseries ppc64le riscv32 riscv
+lib/chef/provider/package/yum/python_helper.rb:119:337   - Unknown word (riscv)      -- ppc64pseries ppc64le riscv32 riscv64 riscv128 s
+lib/chef/provider/package/yum/python_helper.rb:119:345   - Unknown word (riscv)      -- pseries ppc64le riscv32 riscv64 riscv128 s390 s39
+lib/chef/provider/package/yum/python_helper.rb:119:353   - Unknown word (riscv)      -- 4le riscv32 riscv64 riscv128 s390 s390x sh3 sh
+lib/chef/provider/package/yum/python_helper.rb:119:39    - Unknown word (alphaev)    -- arches = %w{aarch64 alpha alphaev4 alphaev45 alphaev5
+lib/chef/provider/package/yum/python_helper.rb:119:409   - Unknown word (sparcv)     -- sparc sparc64 sparc64v sparcv8 sparcv9 sparcv9v x
+lib/chef/provider/package/yum/python_helper.rb:119:417   - Unknown word (sparcv)     -- sparc64 sparc64v sparcv8 sparcv9 sparcv9v x86_64 amd
+lib/chef/provider/package/yum/python_helper.rb:119:425   - Unknown word (sparcv)     -- sparc64v sparcv8 sparcv9 sparcv9v x86_64 amd64 ia32e
+lib/chef/provider/package/yum/python_helper.rb:119:48    - Unknown word (alphaev)    -- aarch64 alpha alphaev4 alphaev45 alphaev5 alphaev5
+lib/chef/provider/package/yum/python_helper.rb:119:58    - Unknown word (alphaev)    -- alpha alphaev4 alphaev45 alphaev5 alphaev56 alphaev6
+lib/chef/provider/package/yum/python_helper.rb:119:67    - Unknown word (alphaev)    -- alphaev45 alphaev5 alphaev56 alphaev6 alphaev6
+lib/chef/provider/package/yum/python_helper.rb:119:77    - Unknown word (alphaev)    -- alphaev5 alphaev56 alphaev6 alphaev67 alphaev6
+lib/chef/resource/user_ulimit.rb:142:57    - Unknown word (rctl)       -- privilege,value,deny)" rctl clause is already present
+lib/chef/resource/user_ulimit.rb:143:31    - Unknown word (rctl)       -- for the given project/rctl pair in /etc/project
+lib/chef/resource/user_ulimit.rb:155:44    - Unknown word (unsuffixed) -- from this resource's unsuffixed/soft/hard properties
+lib/chef/resource/user_ulimit.rb:155:80    - Unknown word (unsuffixed) -- hard properties. An unsuffixed
+lib/chef/resource/user_ulimit.rb:207:23    - Unknown word (projadd)    -- command ["projadd", "-U", new_resource
+lib/chef/resource/user_ulimit.rb:211:19    - Unknown word (RCTL)       -- SOLARIS_RCTL_MAP.each do |base, rctl
+lib/chef/resource/user_ulimit.rb:222:25    - Unknown word (projmod)    -- command ["projmod", "-s", "-K", "#{rctl
+lib/chef/resource/user_ulimit.rb:281:23    - Unknown word (projdel)    -- command ["projdel", project_name]
+lib/chef/resource/user_ulimit.rb:29:270    - Unknown word (rctls)      -- as resource controls (rctls) on a `project(4)` entry
+lib/chef/resource/user_ulimit.rb:29:306    - Unknown word (projadd)    -- project(4)` entry via `projadd`/`projmod`."
+lib/chef/resource/user_ulimit.rb:29:316    - Unknown word (projmod)    -- entry via `projadd`/`projmod`."
+lib/chef/resource/user_ulimit.rb:60:56     - Unknown word (rctl)       -- ) resource control (rctl) equivalent. Properties
+lib/chef/resource/user_ulimit.rb:62:40     - Unknown word (rctl)       -- with no Solaris kernel rctl equivalent) are rejected
+lib/chef/resource/user_ulimit.rb:65:15     - Unknown word (RCTL)       -- SOLARIS_RCTL_MAP = {
+lib/chef/resource/user_ulimit.rb:74:53     - Unknown word (rctl)       -- no supported Solaris rctl mapping. If any of these
+lib/chef/resource/windows_security_policy.rb:140:107   - Unknown word (CEFLMNPR)   -- Select-String -Pattern "^[CEFLMNPR].* =.*$" | Out-String
+lib/chef/resource/windows_task.rb:526:47    - Unknown word (NINETH)     -- TaskScheduler::TASK_NINETH,
+lib/chef/resource/windows_task.rb:547:48    - Unknown word (THIRTYETH)  -- TaskScheduler::TASK_THIRTYETH,
+lib/chef/win32/api/error.rb:879:9     - Unknown word (DONT)       -- DONT_RESOLVE_DLL_REFERENCES
+lib/chef/win32/api/error.rb:93:23     - Unknown word (ACCEP)      -- ERROR_REQ_NOT_ACCEP = 71
+lib/chef/win32/api/net.rb:42:12     - Unknown word (DONT)       -- UF_DONT_EXPIRE_PASSWD = 0x
+lib/chef/win32/net.rb:43:41     - Unknown word (DONT)       -- flags: UF_SCRIPT | UF_DONT_EXPIRE_PASSWD | UF_NORMAL
