@@ -1,12 +1,17 @@
+import { execFile } from 'node:child_process';
 import { promises as fs } from 'node:fs';
 import * as os from 'node:os';
 import * as path from 'node:path';
+import { promisify } from 'node:util';
 
 import { Command } from 'commander';
 import { cspellConfigFileSchema } from 'cspell-config-lib';
 import { afterEach, beforeEach, describe, expect, test } from 'vitest';
 
 import { run } from './app.mjs';
+import { pathPackageRoot } from './test/test.helper.js';
+
+const execFileAsync = promisify(execFile);
 
 const oldSchema = 'https://example.com/old.schema.json';
 const yamlSchemaComment = `# yaml-language-server: $schema=${cspellConfigFileSchema}`;
@@ -139,5 +144,98 @@ describe('cspell init', () => {
         const packageJson = { name: 'sample', cspell: { words: ['one'] } };
         await writeConfig('package.json', JSON.stringify(packageJson));
         expect(JSON.parse(await initConfig('package.json'))).toEqual(packageJson);
+    });
+
+    describe('without a path', () => {
+        const codeConfig = 'export default { words: ["one"] };\n';
+
+        async function initHere(...args: string[]): Promise<void> {
+            await execFileAsync(process.execPath, [path.join(pathPackageRoot, 'bin.mjs'), 'init', ...args], {
+                cwd: tempDir,
+            });
+        }
+
+        function readHere(fileName: string): Promise<string> {
+            return fs.readFile(path.join(tempDir, fileName), 'utf8');
+        }
+
+        async function writeHere(fileName: string, content: string): Promise<void> {
+            await fs.mkdir(path.dirname(path.join(tempDir, fileName)), { recursive: true });
+            await writeConfig(fileName, content);
+        }
+
+        test('creates the default file when there is no config', async () => {
+            await initHere();
+            expect(await fs.readdir(tempDir)).toEqual(['cspell.config.yaml']);
+        });
+
+        test.each`
+            fileName
+            ${'cspell.json'}
+            ${'.cspell.config.yaml'}
+            ${'.vscode/cspell.json'}
+            ${'.config/cspell.yaml'}
+        `('updates $fileName', async ({ fileName }) => {
+            await writeHere(fileName, '{ "words": ["one"] }\n');
+            await initHere('--locale', 'en-GB');
+            expect(await readHere(fileName)).toContain('en-GB');
+            expect(await fs.readdir(tempDir)).not.toContain('cspell.config.yaml');
+        });
+
+        test('updates the file cspell would load', async () => {
+            await writeHere('cspell.json', '{ "words": ["one"] }\n');
+            await writeHere('cspell.config.yaml', 'words:\n  - two\n');
+            await initHere('--locale', 'en-GB');
+            expect(await readHere('cspell.json')).toContain('en-GB');
+            expect(await readHere('cspell.config.yaml')).not.toContain('en-GB');
+        });
+
+        test('package.json counts only with a cspell section', async () => {
+            await writeHere('package.json', '{ "name": "sample" }\n');
+            await initHere();
+            expect(JSON.parse(await readHere('package.json'))).toEqual({ name: 'sample' });
+            expect(await readHere('cspell.config.yaml')).toContain('version');
+
+            await fs.rm(path.join(tempDir, 'cspell.config.yaml'));
+            await writeHere('package.json', '{ "name": "sample", "cspell": { "words": ["one"] } }\n');
+            await initHere('--locale', 'en-GB');
+            expect(JSON.parse(await readHere('package.json')).cspell.language).toBe('en-GB');
+            expect(await fs.readdir(tempDir)).toEqual(['package.json']);
+        });
+
+        test.each`
+            args                      | fileName
+            ${['--output', 'o.json']} | ${'o.json'}
+            ${['--format', 'jsonc']}  | ${'cspell.jsonc'}
+        `('$args creates a new file', async ({ args, fileName }) => {
+            await writeHere('cspell.json', '{ "words": ["one"] }\n');
+            await initHere(...args);
+            expect(await readHere('cspell.json')).toBe('{ "words": ["one"] }\n');
+            expect(await readHere(fileName)).toContain('version');
+        });
+
+        test('writes nothing for a code config when no change is requested', async () => {
+            await writeHere('cspell.config.mjs', codeConfig);
+            await initHere();
+            expect(await fs.readdir(tempDir)).toEqual(['cspell.config.mjs']);
+        });
+
+        test('imports a code config into a new file with only what was asked for', async () => {
+            await writeHere('cspell.config.mjs', codeConfig);
+            await initHere('--locale', 'en-GB', '--no-comments');
+            expect(await readHere('cspell.config.mjs')).toBe(codeConfig);
+            expect(await readHere('cspell.config.yaml')).toBe(
+                'language: en-GB\n' + 'import:\n' + '  - ./cspell.config.mjs\n',
+            );
+        });
+
+        test('imports a code config in a subfolder', async () => {
+            await writeHere('.config/cspell.config.ts', 'export default {};\n');
+            await initHere('--schema');
+            const content = await readHere('cspell.config.yaml');
+            expect(content).toContain(yamlSchemaComment);
+            expect(content).toContain('- ./.config/cspell.config.ts');
+            expect(content).not.toContain('version');
+        });
     });
 });
