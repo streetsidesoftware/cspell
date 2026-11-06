@@ -2,16 +2,15 @@ import type {
     FindFullResult,
     FindWordOptions,
     ITrie,
+    RepMapper,
     SuggestionCollector,
     SuggestionResult,
     WeightMap,
 } from 'cspell-trie-lib';
-import { CompoundWordsMethod, decodeTrie, suggestionCollector } from 'cspell-trie-lib';
+import { CompoundWordsMethod, createMapper, createRepMapper, decodeTrie, suggestionCollector } from 'cspell-trie-lib';
 
 import { clean } from '../util/clean.js';
 import { measurePerf } from '../util/performance.js';
-import type { RepMapper } from '../util/repMap.js';
-import { createMapper, createRepMapper } from '../util/repMap.js';
 import * as Defaults from './defaults.js';
 import type {
     FindOptionsRO,
@@ -47,6 +46,10 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
     #ignoreForbiddenWords = false;
     #findWordOptionsCaseSensitive: FindWordOptions = { caseSensitive: true };
     #findWordOptionsNotCaseSensitive: FindWordOptions = { caseSensitive: false };
+    #alternateFormsMatchCase = (word: string) =>
+        wordSearchAlternateForms(word, this.isDictionaryCaseSensitive, false, this.#locale);
+    #alternateFormsIgnoreCase = (word: string) =>
+        wordSearchAlternateForms(word, this.isDictionaryCaseSensitive, true, this.#locale);
 
     private weightMap: WeightMap | undefined;
 
@@ -133,21 +136,6 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         ignoreCase: boolean,
         compoundSeparator: string | undefined,
     ): FindAnyFormResult | undefined {
-        const outerForms = outerWordForms(word, this.repMapper);
-
-        for (const form of outerForms) {
-            const r = this._findAnyForm(form, useCompounds, ignoreCase, compoundSeparator);
-            if (r) return r;
-        }
-        return undefined;
-    }
-
-    private _findAnyForm(
-        mWord: string,
-        useCompounds: number | boolean | undefined,
-        ignoreCase: boolean,
-        compoundSeparator: string | undefined,
-    ): FindAnyFormResult | undefined {
         let opts: FindWordOptions = ignoreCase
             ? this.#findWordOptionsNotCaseSensitive
             : this.#findWordOptionsCaseSensitive;
@@ -155,31 +143,11 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         if (compoundSeparator) {
             opts = { ...opts, compoundSeparator };
         }
-        const findResult = this.trie.findWord(mWord, opts);
-        if (findResult.found !== false) {
-            return findResult;
-        }
-        const forms = wordSearchAlternateForms(mWord, this.isDictionaryCaseSensitive, ignoreCase, this.#locale);
-        for (const w of forms) {
-            const findResult = this.trie.findWord(w, opts);
-            if (findResult.found !== false) {
-                return findResult;
-            }
-        }
-        if (useCompounds) {
-            const optsUseCompounds = { ...opts, useLegacyWordCompounds: useCompounds };
-            const findResult = this.trie.findWord(mWord, optsUseCompounds);
-            if (findResult.found !== false) {
-                return findResult;
-            }
-            for (const w of forms) {
-                const findResult = this.trie.findWord(w, optsUseCompounds);
-                if (findResult.found !== false) {
-                    return findResult;
-                }
-            }
-        }
-        return undefined;
+        return this.trie.findWordAnyForm(word, opts, {
+            repMapper: this.repMapper,
+            alternateForms: ignoreCase ? this.#alternateFormsIgnoreCase : this.#alternateFormsMatchCase,
+            useLegacyWordCompounds: useCompounds,
+        });
     }
 
     public isNoSuggestWord(word: string, options?: HasOptionsRO): boolean {
@@ -262,60 +230,3 @@ export function createSpellingDictionaryFromTrieFile(
     endPerf();
     return d;
 }
-
-// eslint-disable-next-line no-control-regex
-const isAsciiRange = /^[\u0000-\u007F]*$/;
-
-function* outerWordForms(word: string, repMapper: RepMapper | undefined): Iterable<string> {
-    // Only generate the needed forms.
-    const sent = new Set<string>();
-    let w = word;
-    const ww = w;
-    yield w;
-
-    // this function is called for every word lookup, so needs to be efficient.
-    // Check to see if it is a pure ascii word.
-    if (!isAsciiRange.test(w)) {
-        sent.add(w);
-        w = word.normalize('NFC');
-        if (w !== ww) {
-            yield w;
-            sent.add(w);
-        }
-        w = word.normalize('NFD');
-        if (w !== ww && !sent.has(w)) {
-            yield w;
-            sent.add(w);
-        }
-    }
-
-    if (!repMapper) return;
-    const mapWord = repMapper.fn;
-
-    // nothing was added to the set, just do the map.
-    if (!sent.size) {
-        if (!repMapper.test.test(ww)) return;
-        for (const m of mapWord(ww)) {
-            if (m !== ww && !sent.has(m)) {
-                yield m;
-                sent.add(m);
-            }
-        }
-        return;
-    }
-
-    const mapped = new Set<string>();
-    for (const f of sent) {
-        for (const m of mapWord(f)) {
-            if (!sent.has(m) && !mapped.has(m)) {
-                yield m;
-                mapped.add(m);
-            }
-        }
-    }
-    return;
-}
-
-export const __testing__: {
-    outerWordForms: typeof outerWordForms;
-} = { outerWordForms };

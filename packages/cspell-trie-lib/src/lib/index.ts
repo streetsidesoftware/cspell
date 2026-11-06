@@ -14,7 +14,7 @@ export type { WeightMap } from './distance/index.ts';
 export { createWeightedMap, editDistance, editDistanceWeighted } from './distance/index.ts';
 export { GTrie, GTrieNode } from './GTrie/index.ts';
 export { type ExportOptions, importTrie, serializeTrie } from './io/importExport.ts';
-export type { FindWordOptions, ITrie } from './ITrie.ts';
+export type { FindWordOptions, ITrie, WordFormsOptions } from './ITrie.ts';
 export { mapDictionaryInformationToWeightMap } from './mappers/mapDictionaryInfoToWeightMap.ts';
 export type { SuggestionCostMapDef } from './models/suggestionCostsDef.ts';
 export {
@@ -57,6 +57,8 @@ export {
     normalizeWordToLowercase,
     normalizeWordToLowercaseAndRemoveAccents,
 } from './utils/normalizeWord.ts';
+export type { ReplaceMapper, RepMapper } from './utils/repMap.ts';
+export { createMapper, createRepMapper } from './utils/repMap.ts';
 export { expandCharacterSet } from './utils/text.ts';
 export type { HintedWalkerIterator, Hinting, WalkerIterator, YieldResult } from './walker/index.ts';
 export { CompoundWordsMethod, hintedWalker, JOIN_SEPARATOR, walker, WORD_SEPARATOR } from './walker/index.ts';

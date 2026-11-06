@@ -1,51 +1,15 @@
 import assert from 'node:assert';
 
 import type { DictionaryDefinition, DictionaryDefinitionAugmented } from '@cspell/cspell-types';
-import { buildITrieFromWords } from 'cspell-trie-lib';
 import { describe, expect, test } from 'vitest';
 
 import { readDictionaryDefinitions, readFile } from '../test/reader.test.helper.js';
 import type { SpellingDictionaryOptions } from './SpellingDictionary.js';
-import {
-    __testing__,
-    createSpellingDictionaryFromTrieFile,
-    SpellingDictionaryFromTrie,
-} from './SpellingDictionaryFromTrie.js';
+import { createSpellingDictionaryFromTrieFile, SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie.js';
 
-const { outerWordForms } = __testing__;
-
-// cspell:ignore guenstig günstig Bundesstaat Bundeßtaat
-// cspell:ignore Goerresstraße, Goerreßtraße, Görresstraße, Görreßtraße Hoehenschnittpunkt Strasse Straße
+// cspell:ignore Bundesstaat Goerresstraße Hoehenschnittpunkt Strasse Straße
 
 describe('SpellingDictionaryFromTrie', () => {
-    test.each`
-        word               | repMap                                                  | expected
-        ${'hello'}         | ${undefined}                                            | ${['hello']}
-        ${'guenstig'}      | ${[['ae', 'ä'], ['oe', 'ö'], ['ue', 'ü'], ['ss', 'ß']]} | ${['guenstig', 'günstig']}
-        ${'günstig'}       | ${[['ae', 'ä'], ['oe', 'ö'], ['ue', 'ü'], ['ss', 'ß']]} | ${['günstig', N('günstig')]}
-        ${'Bundesstaat'}   | ${[['ae', 'ä'], ['oe', 'ö'], ['ue', 'ü'], ['ss', 'ß']]} | ${['Bundesstaat', 'Bundeßtaat']}
-        ${'Goerresstraße'} | ${[['ae', 'ä'], ['oe', 'ö'], ['ue', 'ü'], ['ss', 'ß']]} | ${['Goerresstraße', 'Goerreßtraße', 'Görresstraße', 'Görreßtraße']}
-        ${'éa'}            | ${[['a', 'b'], ['b', 'c']]}                             | ${['éa', N('éa'), 'éb', N('éb')]}
-    `('outerWordForms $word', ({ word, repMap, expected }) => {
-        const trie = buildITrieFromWords([]);
-        const dict = new SpellingDictionaryFromTrie(trie, 'test', { repMap });
-        expect([...outerWordForms(word, dict.repMapper)]).toEqual([...new Set(expected)]);
-    });
-
-    test('outerWordForms only maps the starting forms', () => {
-        const trie = buildITrieFromWords([]);
-        const repMap: [string, string][] = [
-            ['a', 'æ'],
-            ['a', 'å'],
-        ];
-        const dict = new SpellingDictionaryFromTrie(trie, 'test', { repMap });
-        const word = 'é' + 'a'.repeat(12);
-        const startingForms = 2;
-        const maxFormsPerMap = 256;
-        const forms = [...outerWordForms(word, dict.repMapper)];
-        expect(forms.length).toBeLessThanOrEqual(startingForms + startingForms * maxFormsPerMap);
-    });
-
     test('has with German Dictionary to make sure remap works as expected', async () => {
         const dict = await readTrieDictionaryFromModules('@cspell/dict-de-de', 'de-de');
         expect(dict).toBeInstanceOf(SpellingDictionaryFromTrie);
@@ -75,10 +39,6 @@ async function readTrieDictionaryFromModules(modulePath: string, name: string): 
 
     const dict = createSpellingDictionaryFromTrieFile(trieData, name, dictInfo.url.href, options);
     return dict as SpellingDictionaryFromTrie;
-}
-
-function N(s: string, mode: 'NFD' | 'NFC' = 'NFD') {
-    return s.normalize(mode);
 }
 
 function isDict(dict: DictionaryDefinition): dict is DictionaryDefinitionAugmented {

@@ -18,6 +18,8 @@ import type { TrieData } from './TrieData.ts';
 import { clean } from './utils/clean.ts';
 import { memorizeLastCall } from './utils/memorizeLastCall.ts';
 import { mergeOptionalWithDefaults } from './utils/mergeOptionalWithDefaults.ts';
+import type { RepMapper } from './utils/repMap.ts';
+import { outerWordForms } from './utils/repMap.ts';
 import { replaceAllFactory } from './utils/util.ts';
 
 const defaultLegacyMinCompoundLength = 3;
@@ -85,6 +87,23 @@ export interface ITrie {
     hasWord(word: string, caseSensitive: boolean): boolean;
 
     findWord(word: string, options?: FindWordOptionsRO): FindFullResult;
+
+    /**
+     * Find the first form of a word that is in the trie.
+     *
+     * The forms are the word, its NFC and NFD forms, and then their replacement forms. Each form is looked up as it is,
+     * then by its alternate forms, and then both again as compounds.
+     *
+     * @param word - the word as written.
+     * @param options - how to look up each form.
+     * @param forms - which forms to look up.
+     * @returns the result for the first form found, otherwise `undefined`.
+     */
+    findWordAnyForm(
+        word: string,
+        options: FindWordOptionsRO | undefined,
+        forms: WordFormsOptions,
+    ): FindFullResult | undefined;
 
     /**
      * Determine if a word is in the forbidden word list.
@@ -293,6 +312,51 @@ export class ITrieImpl implements ITrie {
         return findWord(this.root, word, cvtFindWordOptions(options));
     }
 
+    findWordAnyForm(
+        word: string,
+        options: FindWordOptionsRO | undefined,
+        forms: WordFormsOptions,
+    ): FindFullResult | undefined {
+        for (const form of outerWordForms(word, forms.repMapper)) {
+            const result = this.#findForm(form, options, forms);
+            if (result) return result;
+        }
+        return undefined;
+    }
+
+    #findForm(
+        word: string,
+        options: FindWordOptionsRO | undefined,
+        forms: WordFormsOptions,
+    ): FindFullResult | undefined {
+        const findResult = this.findWord(word, options);
+        if (findResult.found !== false) {
+            return findResult;
+        }
+        const alternateForms = forms.alternateForms(word);
+        for (const w of alternateForms) {
+            const findResult = this.findWord(w, options);
+            if (findResult.found !== false) {
+                return findResult;
+            }
+        }
+        const { useLegacyWordCompounds } = forms;
+        if (useLegacyWordCompounds) {
+            const optionsCompounds = { ...options, useLegacyWordCompounds };
+            const findResult = this.findWord(word, optionsCompounds);
+            if (findResult.found !== false) {
+                return findResult;
+            }
+            for (const w of alternateForms) {
+                const findResult = this.findWord(w, optionsCompounds);
+                if (findResult.found !== false) {
+                    return findResult;
+                }
+            }
+        }
+        return undefined;
+    }
+
     /**
      * Determine if a word is in the forbidden word list.
      * @param word the word to lookup.
@@ -455,6 +519,24 @@ export interface FindWordOptions {
 }
 
 export type FindWordOptionsRO = Readonly<FindWordOptions>;
+
+/**
+ * The forms of a word to look up.
+ */
+export interface WordFormsOptions {
+    /**
+     * Generates the replacement forms.
+     */
+    repMapper: RepMapper | undefined;
+    /**
+     * Generates the alternate forms of a form, such as its case variations.
+     */
+    alternateForms: (word: string) => string[];
+    /**
+     * Also look up compounds. A number is the minimum length of each part.
+     */
+    useLegacyWordCompounds: boolean | number | undefined;
+}
 
 export interface WalkITriedNodeStackItem {
     /** current node */

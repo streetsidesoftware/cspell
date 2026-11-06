@@ -8,6 +8,8 @@ export type {
     ITrie,
     MaxCost,
     PartialTrieOptions,
+    ReplaceMapper,
+    RepMapper,
     SuggestionCollector,
     SuggestionCostMapDef,
     SuggestionResult,
@@ -17,6 +19,7 @@ export type {
     TrieRoot,
     WalkerIterator,
     WeightMap,
+    WordFormsOptions,
     YieldResult,
 } from './lib/index.ts';
 export {
@@ -31,6 +34,8 @@ export {
     countNodes,
     countWords,
     createDictionaryLineParser,
+    createMapper,
+    createRepMapper,
     createTrieRoot,
     createTrieRootFromList,
     createWeightedMap,
