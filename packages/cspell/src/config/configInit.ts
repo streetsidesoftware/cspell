@@ -6,7 +6,7 @@ import type { CSpellConfigFile, CSpellConfigFileReaderWriter } from 'cspell-conf
 import { createReaderWriter, cspellConfigFileSchema } from 'cspell-config-lib';
 
 import { console } from '../console.js';
-import { addDictionariesToConfigFile, addImportsToConfigFile } from './adjustConfig.js';
+import { addDictionariesToConfigFile, addImportsToConfigFile, fileExists } from './adjustConfig.js';
 import { applyValuesToConfigFile } from './config.js';
 import { defaultConfig } from './constants.js';
 import type { InitOptions } from './options.js';
@@ -24,8 +24,9 @@ const defaultConfigYaml = `
 export async function configInit(options: InitOptions): Promise<void> {
     const rw = createReaderWriter();
     const url = determineFileNameURL(options);
+    const schema = options.schema ?? !(await fileExists(url));
     const configFile = await createConfigFile(rw, url, options);
-    await applyOptionsToConfigFile(configFile, options);
+    await applyOptionsToConfigFile(configFile, { ...options, schema });
     await fs.mkdir(new URL('./', configFile.url), { recursive: true });
 
     if (options.stdout) {
@@ -46,7 +47,7 @@ async function applyOptionsToConfigFile(configFile: CSpellConfigFile, options: I
         configFile.removeAllComments();
     }
 
-    if (options.schema ?? true) {
+    if (options.schema) {
         configFile.setSchema(schemaRef);
     }
 

@@ -33,6 +33,7 @@ export interface BaseConfigOptions {
      * Whether to add the schema reference to the configuration file.
      * - `true` - the schema reference will be added / updated.
      * - `false` - no schema reference will be added.
+     * - `undefined` - the schema reference will be added only when creating a new file.
      */
     schema?: boolean;
     /**

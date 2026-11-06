@@ -30,6 +30,11 @@ export function commandInit(prog: Command): Command {
         .addOption(crOpt('--comments', 'Add comments to the config file.').default(undefined).hideHelp())
         .option('--no-comments', 'Do not add comments to the config file.')
         .addOption(crOpt('--remove-comments', 'Remove all comments from the config file.').implies({ comments: false }))
+        .addOption(
+            crOpt('--schema', 'Add or update the schema reference. This is the default for a new file.').default(
+                undefined,
+            ),
+        )
         .option('--no-schema', 'Do not add the schema reference to the config file.')
         .option('--stdout', 'Write the configuration to stdout instead of a file.')
         .action((options: InitOptions) => {
