@@ -14,7 +14,7 @@ import {
 
 const { outerWordForms } = __testing__;
 
-// cspell:ignore Bundesstaat Goerresstraße Hoehenschnittpunkt Strasse Straße
+// cspell:ignore Bundesstaat Goerresstraße Hoehenschnittpunkt Strasse Straße strassen
 
 describe('SpellingDictionaryFromTrie', () => {
     test.each`

@@ -4,22 +4,11 @@ import { isDefined } from './isDefined.ts';
 import { escapeRegEx } from './regexHelper.ts';
 import { expandCharacterSet } from './text.ts';
 
-/**
- * Replaces each match in a word with a single replacement.
- */
 export interface ReplaceMapper {
-    /** Matches a word that has something to replace. */
     test?: RegExp;
-    /** Returns the word with its matches replaced. */
     fn: (src: string) => string;
 }
 
-/**
- * Create a mapper that gives one result for each word.
- * @param repMap - the replacements to make.
- * @param ignoreCharset - characters to remove.
- * @returns the mapper, or `undefined` when there is nothing to replace.
- */
 export function createMapper(repMap: ReplaceMap | undefined, ignoreCharset?: string): ReplaceMapper | undefined {
     if (!repMap && !ignoreCharset) return undefined;
 
@@ -114,22 +103,11 @@ interface Edit {
     r: string;
 }
 
-/**
- * Generates the replacement forms of a word.
- */
 export interface RepMapper {
-    /** Matches a word that has something to replace. */
     test: RegExp;
-    /** Returns the word and its replacement forms. The number of forms is limited. */
     fn: (word: string) => string[];
 }
 
-/**
- * Create a mapper that gives every combination of replacements, up to a limit.
- * @param repMap - the replacements to make.
- * @param ignoreCharset - characters to remove.
- * @returns the mapper, or `undefined` when there is nothing to replace.
- */
 export function createRepMapper(repMap: ReplaceMap | undefined, ignoreCharset?: string): RepMapper | undefined {
     if (!repMap?.length && !ignoreCharset) return undefined;
 
