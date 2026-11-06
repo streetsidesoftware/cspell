@@ -4,9 +4,8 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: 'The release tag to publish, such as v10.4.1'
+        description: 'Prefer running from the tag: select it under "Use workflow from" and leave this empty. Only needed when not running from the tag.'
         type: string
-        required: true
   push:
     tags:
       - 'v*' # publish when a version tag is created
@@ -23,8 +22,10 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
-          # A manual run publishes the tag it was given. A tag push publishes that tag.
-          ref: ${{ inputs.tag && format('refs/tags/{0}', inputs.tag) || github.ref }}
+          ref: ${{ inputs.tag }}
+
+      - name: Verify a Release Tag Is Checked Out
+        run: git describe --exact-match --tags --match 'v*'
 
       - name: Setup and Build
         uses: ./.github/actions/install-build
@@ -62,7 +63,8 @@ jobs:
           NPM_CONFIG_PROVENANCE: true
           DIST_TAG: ${{ steps.dist_tag.outputs.value }}
         # --git-head: record the tagged commit. HEAD is the sponsor commit, which is lost
-        # when this job ends. GITHUB_SHA is not the tag's commit on a manual run.
+        # when this job ends. GITHUB_SHA is not the tag's commit on a run started from
+        # another ref.
         run: |
           pnpm lerna publish from-package --no-push --no-private --yes --git-head "$(git rev-parse HEAD^)" $DIST_TAG
 
