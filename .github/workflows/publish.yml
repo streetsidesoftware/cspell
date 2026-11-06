@@ -33,6 +33,14 @@ jobs:
         run: |
           pnpm run publish:fix:sponsor
 
+      - name: Commit Sponsor Changes
+        # lerna publish refuses to run on a dirty working tree. This commit is never
+        # pushed, so the changes reach the NPM packages but not the repository.
+        run: |
+          git config user.name streetsidesoftware[bot]
+          git config user.email streetsidesoftware[bot]@users.noreply.github.com
+          git commit -am "Update sponsor for NPM"
+
       - name: Version
         id: version
         run: |
@@ -51,8 +59,10 @@ jobs:
           NPM_CONFIG_PROVENANCE: true
           DIST_TAG: ${{ steps.dist_tag.outputs.value }}
         # TODO: support --sign-git-tag --sign-git-commit
+        # --git-head: record the commit in the repository, not the sponsor commit, which
+        # is lost when this job ends.
         run: |
-          pnpm lerna publish from-package --no-push --no-private --yes $DIST_TAG
+          pnpm lerna publish from-package --no-push --no-private --yes --git-head "$GITHUB_SHA" $DIST_TAG
 
       - name: Summary
         uses: streetsidesoftware/actions/public/summary@v1
