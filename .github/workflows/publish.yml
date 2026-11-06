@@ -2,6 +2,11 @@ name: ' 🚀 Publish: 2. Publish to NPM (automatic)'
 
 on:
   workflow_dispatch:
+    inputs:
+      tag:
+        description: 'The release tag to publish, such as v10.4.1'
+        type: string
+        required: true
   push:
     tags:
       - 'v*' # publish when a version tag is created
@@ -18,6 +23,8 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
+          # A manual run publishes the tag it was given. A tag push publishes that tag.
+          ref: ${{ inputs.tag && format('refs/tags/{0}', inputs.tag) || github.ref }}
 
       - name: Setup and Build
         uses: ./.github/actions/install-build
@@ -54,10 +61,10 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.PUBLISH_NPM}}
           NPM_CONFIG_PROVENANCE: true
           DIST_TAG: ${{ steps.dist_tag.outputs.value }}
-        # --git-head: record the commit in the repository, not the sponsor commit, which
-        # is lost when this job ends.
+        # --git-head: record the tagged commit. HEAD is the sponsor commit, which is lost
+        # when this job ends. GITHUB_SHA is not the tag's commit on a manual run.
         run: |
-          pnpm lerna publish from-package --no-push --no-private --yes --git-head "$GITHUB_SHA" $DIST_TAG
+          pnpm lerna publish from-package --no-push --no-private --yes --git-head "$(git rev-parse HEAD^)" $DIST_TAG
 
       - name: Summary
         uses: streetsidesoftware/actions/public/summary@v1
