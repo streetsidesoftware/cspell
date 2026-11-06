@@ -6,9 +6,8 @@ program
     .argument('<file>', 'path to perf data file')
     .description('Generate a min/max chart of the perf data')
     .option('-o, --output <path>', 'Path to the output the Markdown file.')
-    .option('-g, --svg <path>', 'Path to SVG file to generate.')
     .option('-p, --png <path>', 'Path to PNG file to generate.')
-    .option('-u, --site-url <url>', 'The url to prefix svg/png path when adding it to the markdown.')
+    .option('-u, --site-url <url>', 'The url to prefix png path when adding it to the markdown.')
     .option('--daily-csv <path>', 'Path out output the daily csv')
     .option(
         '-d, --days <number>',
