@@ -58,7 +58,6 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.PUBLISH_NPM}}
           NPM_CONFIG_PROVENANCE: true
           DIST_TAG: ${{ steps.dist_tag.outputs.value }}
-        # TODO: support --sign-git-tag --sign-git-commit
         # --git-head: record the commit in the repository, not the sponsor commit, which
         # is lost when this job ends.
         run: |
