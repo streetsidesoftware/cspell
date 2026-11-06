@@ -1,10 +1,8 @@
 import fs from 'node:fs/promises';
-import path from 'node:path';
 
-import ConfigStoreExport from 'configstore';
 import { afterEach, describe, expect, test, vi } from 'vitest';
 
-import { defaultConfigFileName, GlobalConfigStore, legacyLocationDir } from './cfgStore.js';
+import { defaultConfigFileName, GlobalConfigStore } from './cfgStore.js';
 
 const fsData = new Map<string, string>();
 
@@ -31,12 +29,6 @@ describe('GlobalConfigStore', () => {
 
     test('GlobalConfigStore', () => {
         expect(GlobalConfigStore.defaultLocation).toEqual(sc('cspell.json'));
-    });
-
-    test('legacyLocation', () => {
-        const configStoreLocation = new ConfigStoreExport('cspell').path;
-        const legacyLocation = path.join(legacyLocationDir || '', defaultConfigFileName);
-        expect(legacyLocation).toBe(configStoreLocation);
     });
 
     test('readConfigFile found', async () => {
