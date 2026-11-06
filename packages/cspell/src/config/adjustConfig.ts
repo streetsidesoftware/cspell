@@ -10,7 +10,7 @@ import { isCfgArrayNode, MutableCSpellConfigFile } from 'cspell-config-lib';
 
 import { toError } from '../util/errors.js';
 
-export async function fileExists(url: URL): Promise<boolean> {
+async function fileExists(url: URL): Promise<boolean> {
     if (url.protocol !== 'file:') {
         return false; // Only check file URLs
     }
