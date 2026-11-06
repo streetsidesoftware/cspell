@@ -304,11 +304,12 @@ function* outerWordForms(word: string, repMapper: RepMapper | undefined): Iterab
         return;
     }
 
+    const mapped = new Set<string>();
     for (const f of sent) {
         for (const m of mapWord(f)) {
-            if (m !== ww && !sent.has(m)) {
+            if (!sent.has(m) && !mapped.has(m)) {
                 yield m;
-                sent.add(m);
+                mapped.add(m);
             }
         }
     }
