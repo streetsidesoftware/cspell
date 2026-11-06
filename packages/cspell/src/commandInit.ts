@@ -31,7 +31,7 @@ export function commandInit(prog: Command): Command {
         .option('--no-comments', 'Do not add comments to the config file.')
         .addOption(crOpt('--remove-comments', 'Remove all comments from the config file.').implies({ comments: false }))
         .addOption(
-            crOpt('--schema', 'Add or update the schema reference. This is the default for a new file.').default(
+            crOpt('--schema', 'Add or update the schema reference. Default for a config with no settings.').default(
                 undefined,
             ),
         )

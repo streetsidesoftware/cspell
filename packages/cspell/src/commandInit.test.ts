@@ -11,7 +11,7 @@ import { run } from './app.mjs';
 const oldSchema = 'https://example.com/old.schema.json';
 const yamlSchemaComment = `# yaml-language-server: $schema=${cspellConfigFileSchema}`;
 
-describe('cspell init $schema', () => {
+describe('cspell init', () => {
     let tempDir: string;
 
     beforeEach(async () => {
@@ -83,5 +83,61 @@ describe('cspell init $schema', () => {
         await writeConfig('cspell.config.yaml', 'words:\n  - one\n');
         const content = await init('cspell.config.yaml', ...args);
         expect(content.includes(yamlSchemaComment)).toBe(expected);
+    });
+
+    async function initConfig(fileName: string, ...args: string[]): Promise<string> {
+        const filePath = path.join(tempDir, fileName);
+        await run(new Command(), [...process.argv.slice(0, 2), 'init', '--config', filePath, ...args]);
+        return fs.readFile(filePath, 'utf8');
+    }
+
+    const newFileSettings = { $schema: cspellConfigFileSchema, version: '0.2', language: 'en' };
+
+    test.each`
+        fileName
+        ${'cspell.json'}
+        ${'cspell.jsonc'}
+    `('new $fileName with --config', async ({ fileName }) => {
+        expect(JSON.parse(await initConfig(fileName, '--no-comments'))).toEqual(newFileSettings);
+    });
+
+    test('new JSON file with --output and the default format', async () => {
+        const filePath = path.join(tempDir, 'cspell.json');
+        await run(new Command(), [...process.argv.slice(0, 2), 'init', '--output', filePath]);
+        expect(JSON.parse(await fs.readFile(filePath, 'utf8'))).toEqual(newFileSettings);
+    });
+
+    test('existing JSON file only changes what was asked for', async () => {
+        await writeConfig('cspell.json', '{ "words": ["one"] }\n');
+        expect(JSON.parse(await initConfig('cspell.json'))).toEqual({ words: ['one'] });
+        expect(JSON.parse(await initConfig('cspell.json', '--locale', 'en-GB'))).toEqual({
+            words: ['one'],
+            language: 'en-GB',
+        });
+    });
+
+    test('existing YAML file is unchanged', async () => {
+        const content = 'words:\n  - one\n';
+        await writeConfig('cspell.config.yaml', content);
+        expect(await initConfig('cspell.config.yaml')).toBe(content);
+    });
+
+    test('existing file with no settings is initialized', async () => {
+        await writeConfig('cspell.json', '{}\n');
+        expect(JSON.parse(await initConfig('cspell.json'))).toEqual(newFileSettings);
+    });
+
+    test('package.json without a cspell section gets one', async () => {
+        await writeConfig('package.json', '{ "name": "sample" }\n');
+        expect(JSON.parse(await initConfig('package.json'))).toEqual({
+            name: 'sample',
+            cspell: { version: '0.2', language: 'en' },
+        });
+    });
+
+    test('package.json with a cspell section is unchanged', async () => {
+        const packageJson = { name: 'sample', cspell: { words: ['one'] } };
+        await writeConfig('package.json', JSON.stringify(packageJson));
+        expect(JSON.parse(await initConfig('package.json'))).toEqual(packageJson);
     });
 });

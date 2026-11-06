@@ -6,8 +6,9 @@ import type { CSpellConfigFile, CSpellConfigFileReaderWriter } from 'cspell-conf
 import { createReaderWriter, cspellConfigFileSchema } from 'cspell-config-lib';
 
 import { console } from '../console.js';
-import { addDictionariesToConfigFile, addImportsToConfigFile, fileExists } from './adjustConfig.js';
+import { addDictionariesToConfigFile, addImportsToConfigFile } from './adjustConfig.js';
 import { applyValuesToConfigFile } from './config.js';
+import type { CommentConfig } from './constants.js';
 import { defaultConfig } from './constants.js';
 import type { InitOptions } from './options.js';
 
@@ -24,9 +25,8 @@ const defaultConfigYaml = `
 export async function configInit(options: InitOptions): Promise<void> {
     const rw = createReaderWriter();
     const url = determineFileNameURL(options);
-    const schema = options.schema ?? !(await fileExists(url));
-    const configFile = await createConfigFile(rw, url, options);
-    await applyOptionsToConfigFile(configFile, { ...options, schema });
+    const configFile = await createConfigFile(rw, url);
+    await applyOptionsToConfigFile(configFile, options);
     await fs.mkdir(new URL('./', configFile.url), { recursive: true });
 
     if (options.stdout) {
@@ -38,6 +38,7 @@ export async function configInit(options: InitOptions): Promise<void> {
 
 async function applyOptionsToConfigFile(configFile: CSpellConfigFile, options: InitOptions): Promise<CSpellConfigFile> {
     const settings: CSpellSettings = {};
+    const hasSettings = Object.keys(configFile.settings).length > 0;
 
     const addComments =
         options.comments ||
@@ -47,7 +48,7 @@ async function applyOptionsToConfigFile(configFile: CSpellConfigFile, options: I
         configFile.removeAllComments();
     }
 
-    if (options.schema) {
+    if (options.schema ?? !hasSettings) {
         configFile.setSchema(schemaRef);
     }
 
@@ -55,7 +56,8 @@ async function applyOptionsToConfigFile(configFile: CSpellConfigFile, options: I
         settings.language = options.locale;
     }
 
-    applyValuesToConfigFile(configFile, settings, defaultConfig, addComments);
+    const defaults = hasSettings ? withoutDefaultValues(defaultConfig) : defaultConfig;
+    applyValuesToConfigFile(configFile, settings, defaults, addComments);
 
     if (options.import) {
         await addImportsToConfigFile(
@@ -74,6 +76,10 @@ async function applyOptionsToConfigFile(configFile: CSpellConfigFile, options: I
     }
 
     return configFile;
+}
+
+function withoutDefaultValues(config: CommentConfig): CommentConfig {
+    return Object.fromEntries(Object.entries(config).map(([key, entry]) => [key, { ...entry, value: undefined }]));
 }
 
 function determineFileNameURL(options: InitOptions): URL {
@@ -110,32 +116,16 @@ function determineDefaultFileName(options: InitOptions): string {
     throw new Error(`Unsupported format: ${options.format}`);
 }
 
-function getDefaultContent(options: InitOptions): string {
-    switch (options.format) {
-        case undefined:
-        case 'yaml': {
-            return defaultConfigYaml;
-        }
-        case 'json':
-        case 'jsonc': {
-            return defaultConfigJson;
-        }
-        default: {
-            throw new Error(`Unsupported format: ${options.format}`);
-        }
-    }
+function getDefaultContent(url: URL): string {
+    return /\.jsonc?$/.test(url.pathname) ? defaultConfigJson : defaultConfigYaml;
 }
 
-async function createConfigFile(
-    rw: CSpellConfigFileReaderWriter,
-    url: URL,
-    options: InitOptions,
-): Promise<CSpellConfigFile> {
+async function createConfigFile(rw: CSpellConfigFileReaderWriter, url: URL): Promise<CSpellConfigFile> {
     if (url.pathname.endsWith('package.json')) {
         return rw.readConfig(url);
     }
 
-    const content = await fs.readFile(url, 'utf8').catch(() => getDefaultContent(options));
+    const content = await fs.readFile(url, 'utf8').catch(() => getDefaultContent(url));
 
     return rw.parse({ url, content });
 }
