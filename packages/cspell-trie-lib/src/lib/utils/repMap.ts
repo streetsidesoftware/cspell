@@ -115,7 +115,7 @@ export function createRepMapper(repMap: ReplaceMap | undefined, ignoreCharset?: 
     let tRepMap = repMap || [];
     const charsetMap = charsetToRepMapRegEx(ignoreCharset);
     if (charsetMap) {
-        tRepMap = [...tRepMap, ...charsetMap, ...ignoredLatinAccentsToRepMap(ignoreCharset)];
+        tRepMap = [...tRepMap, ...charsetMap];
     }
 
     const regEx = createMapperRegExp(tRepMap);
@@ -134,11 +134,6 @@ export function createRepMapper(repMap: ReplaceMap | undefined, ignoreCharset?: 
 }
 
 const defaultMaxSubWordEdits = 256;
-const regExLatinAccent = /^[̀-ͯ]$/;
-const latinLetterRanges = [
-    [0x00c0, 0x024f],
-    [0x1e00, 0x1eff],
-] as const;
 
 function applyEdits(word: string, edits: Edit[], maxEdits: number = defaultMaxSubWordEdits): string[] {
     if (!edits.length) return [word];
@@ -201,35 +196,8 @@ function calcAllEdits(root: RepTrieNode, word: string): Edit[] {
     return edits;
 }
 
-/**
- * NFC joins a Latin letter and its accent into one character, which hides the accent from the characters to ignore.
- * @returns the replacements for the Latin letters with an accent that is ignored.
- */
-function ignoredLatinAccentsToRepMap(ignoreCharset: CharacterSet | undefined): ReplaceMap {
-    const accents = new Set(
-        charsetToRepMap(ignoreCharset)
-            ?.map(([char]) => char)
-            .filter((c) => regExLatinAccent.test(c)),
-    );
-    if (!accents.size) return [];
-
-    const entries: ReplaceEntry[] = [];
-    for (const [first, last] of latinLetterRanges) {
-        for (let code = first; code <= last; ++code) {
-            const letter = String.fromCodePoint(code);
-            const parts = [...letter.normalize('NFD')];
-            const kept = parts.filter((part) => !accents.has(part));
-            if (kept.length === parts.length) continue;
-            entries.push([letter, kept.join('').normalize('NFC')]);
-        }
-    }
-    return entries;
-}
-
 function createTrie(repMap: ReplaceMap | undefined, ignoreCharset?: string): RepTrieNode {
-    const combined = [repMap, charsetToRepMap(ignoreCharset), ignoredLatinAccentsToRepMap(ignoreCharset)]
-        .filter(isDefined)
-        .flat();
+    const combined = [repMap, charsetToRepMap(ignoreCharset)].filter(isDefined).flat();
     const expanded = expandReplaceMap(combined);
 
     const trieRoot: RepTrieNode = Object.create(null);
