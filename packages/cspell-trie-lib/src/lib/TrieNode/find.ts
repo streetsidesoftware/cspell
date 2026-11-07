@@ -26,6 +26,12 @@ export type CompoundModesLegacy = 'legacy';
 export type CompoundModes = CompoundModeNone | CompoundModesCompound | CompoundModesLegacy;
 
 const defaultLegacyMinCompoundLength = 3;
+
+/**
+ * How many times a legacy compound search backs up to an earlier compound boundary before it gives up.
+ * The possible splits of a word multiply at each boundary, while real words need about 100 retries at most.
+ */
+const maxLegacyCompoundRetries = 200;
 export interface FindOptions {
     matchCase: boolean;
     compoundMode: CompoundModes;
@@ -334,6 +340,7 @@ function findLegacyCompoundNode(
     let caseMatched = true;
     let i = 0;
     let node: TrieNode | undefined;
+    let retries = 0;
 
     while (true) {
         const s = stack[i];
@@ -363,7 +370,7 @@ function findLegacyCompoundNode(
                     break;
                 }
             }
-            if (i > 0 || stack[i].usedRoots < numRoots) {
+            if ((i > 0 || stack[i].usedRoots < numRoots) && retries++ < maxLegacyCompoundRetries) {
                 compoundUsed = i > 0;
                 const s = stack[i];
                 s.cr = roots[s.usedRoots++];
