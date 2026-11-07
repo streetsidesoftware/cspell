@@ -111,6 +111,56 @@ describe('findWord following replacements in the walk', () => {
         expect(trie.findWord(word, { caseSensitive: true }).found).toBe('a'.repeat(20_001));
     });
 
+    // Without this, the search takes exponential time and the test times out.
+    // More repeats would hang the test worker instead of failing.
+    test('positions reached by many forms are searched once', () => {
+        const trie = buildITrieFromWords(['a+', 'b+', '+a+', '+b+', '+a', '+b']).withReplacements([
+            ['x', 'a'],
+            ['x', 'b'],
+        ]);
+        expect(trie.findWord('x'.repeat(13) + 'q', { caseSensitive: true }).found).toBe(false);
+    }, 1000);
+
+    test('the same position and node are searched again with a different part length', () => {
+        const trie = buildITrieFromWords(['qqqq', 'ef', 'abcdef', 'xyz']).withReplacements([['qqqq', 'abcd']]);
+        const options = { caseSensitive: true, useLegacyWordCompounds: 3 };
+        expect(trie.findWord('qqqqefxyz', options).found).toBe('abcdef+xyz');
+    });
+
+    test('letters outside the BMP are read as one letter', () => {
+        const trie = buildITrieFromWords(['𝒜bcd']).withReplacements([['q', 'd']]);
+        expect(trie.findWord('𝒜bcq', { caseSensitive: true }).found).toBe('𝒜bcd');
+    });
+
+    test('compound parts can be words stored without case', () => {
+        const trie = buildITrieFromWords(['Wun+', '~wun+', '+Derbar', '~+derbar']).withReplacements([['q', 'd']]);
+        expect(trie.findWord('wunqerbar', { caseSensitive: false }).found).toBe('wunderbar');
+    });
+
+    test('legacy compound parts can be words stored without case', () => {
+        const trie = buildITrieFromWords(['Blue', '~bell']).withReplacements([['q', 'l']]);
+        const options = { caseSensitive: false, useLegacyWordCompounds: 3 };
+        expect(trie.findWord('Bluebelq', options).found).toBe('Blue+bell');
+    });
+
+    test('every replacement of a key is followed', () => {
+        const trie = buildITrieFromWords(['zbc']).withReplacements([
+            ['x', 'y'],
+            ['x', 'z'],
+        ]);
+        expect(trie.findWord('xbc', { caseSensitive: true }).found).toBe('zbc');
+    });
+
+    test('both a shorter and a longer key are followed', () => {
+        const trie = buildITrieFromWords(['blåbær']).withReplacements([
+            ['a', 'æ'],
+            ['a', 'å'],
+            ['ae', 'æ'],
+            ['aa', 'å'],
+        ]);
+        expect(trie.findWord('blaabaer', { caseSensitive: true }).found).toBe('blåbær');
+    });
+
     test.each`
         word
         ${'blaabaer'}
