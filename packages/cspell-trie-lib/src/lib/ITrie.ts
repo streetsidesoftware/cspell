@@ -4,6 +4,7 @@ import type { ReplaceMap } from '@cspell/cspell-types';
 import type { WeightMap } from './distance/index.ts';
 import { createFindOptions, findLegacyCompound, findWord, findWordNode, isForbiddenWord } from './ITrieNode/find.ts';
 import type { FindOptions, PartialFindOptions } from './ITrieNode/FindOptions.ts';
+import { findReplacementForm } from './ITrieNode/findReplacementForm.ts';
 import type { ITrieNode, ITrieNodeRoot } from './ITrieNode/index.ts';
 import type { FindFullResult, ITrieNodeId } from './ITrieNode/ITrieNode.ts';
 import { countWords, iteratorTrieWords } from './ITrieNode/trie-util.ts';
@@ -80,8 +81,8 @@ export interface ITrie {
     has(word: string, minLegacyCompoundLength: boolean | number): boolean;
 
     /**
-     * Determine if a word is in the dictionary.
-     * @param word - the exact word to search for - must be normalized.
+     * Determine if a word is in the dictionary. On a trie with replacements, the word's replacement forms are also looked up.
+     * @param word - the word to search for - must be normalized.
      * @param caseSensitive - false means also searching a dictionary where the words were normalized to lower case and accents removed.
      * @returns true if the word was found and is not forbidden.
      */
@@ -97,9 +98,9 @@ export interface ITrie {
 
     /**
      * Get a trie with the same words that also finds words written with replacements.
-     * @param repMap - the replacements to make to a word when looking it up.
+     * @param repMap - the replacements to make to a word when looking it up. They take the place of any this trie has.
      * @param ignoreCharset - characters to remove from a word when looking it up.
-     * @returns a trie with the replacements, or this trie if there is nothing to replace.
+     * @returns a trie with the replacements, or this trie if both parameters are empty.
      */
     withReplacements(repMap: ReplaceMap | undefined, ignoreCharset?: string): ITrie;
 
@@ -299,8 +300,8 @@ export class ITrieImpl implements ITrie {
     }
 
     /**
-     * Determine if a word is in the dictionary.
-     * @param word - the exact word to search for - must be normalized.
+     * Determine if a word is in the dictionary. On a trie with replacements, the word's replacement forms are also looked up.
+     * @param word - the word to search for - must be normalized.
      * @param caseSensitive - false means also searching a dictionary where the words were normalized to lower case and accents removed.
      * @returns true if the word was found and is not forbidden.
      */
@@ -314,12 +315,15 @@ export class ITrieImpl implements ITrie {
         const result = this.#findWordAsWritten(word, options);
         const repMapper = this.#repMapper;
         if (result.found !== false || !repMapper || !repMapper.test.test(word)) return result;
-        for (const form of repMapper.fn(word)) {
-            if (form === word) continue;
-            const mapped = this.#findWordAsWritten(form, options);
-            if (mapped.found !== false) return mapped;
-        }
-        return result;
+        const legacyCompounds = options?.useLegacyWordCompounds;
+        const form = findReplacementForm(
+            this.root,
+            word,
+            repMapper.replacements,
+            options?.caseSensitive || false,
+            legacyCompounds === true ? defaultLegacyMinCompoundLength : legacyCompounds || 0,
+        );
+        return form === undefined ? result : this.#findWordAsWritten(form, options);
     }
 
     withReplacements(repMap: ReplaceMap | undefined, ignoreCharset?: string): ITrie {

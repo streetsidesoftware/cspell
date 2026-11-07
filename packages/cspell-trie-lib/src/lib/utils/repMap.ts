@@ -92,7 +92,7 @@ function createMapperRegExp(repMap: ReplaceMap): RegExp {
     return regEx;
 }
 
-interface RepTrieNode {
+export interface RepTrieNode {
     rep?: string[];
     children?: Record<string, RepTrieNode>;
 }
@@ -106,6 +106,7 @@ interface Edit {
 export interface RepMapper {
     test: RegExp;
     fn: (word: string) => string[];
+    replacements: RepTrieNode;
 }
 
 export function createRepMapper(repMap: ReplaceMap | undefined, ignoreCharset?: string): RepMapper | undefined {
@@ -128,6 +129,7 @@ export function createRepMapper(repMap: ReplaceMap | undefined, ignoreCharset?: 
             const edits = calcAllEdits(trie, word);
             return applyEdits(word, edits);
         },
+        replacements: trie,
     };
 }
 
