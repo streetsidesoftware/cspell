@@ -41,11 +41,11 @@ describe('SpellingDictionaryFromTrie', () => {
 
     test.each`
         word       | expected
-        ${'QUICK'} | ${false}
+        ${'Quick'} | ${true}
         ${'quick'} | ${false}
-    `('has with a map of only capitals $word', ({ word, expected }) => {
-        const trie = buildITrieFromWords(['kick']);
-        const dict = new SpellingDictionaryFromTrie(trie, 'test', { repMap: [['QU', 'k']] });
+    `('a replacement only applies in the case it lists: $word', ({ word, expected }) => {
+        const trie = buildITrieFromWords(['Kick']);
+        const dict = new SpellingDictionaryFromTrie(trie, 'test', { repMap: [['Qu', 'K']] });
         expect(dict.has(word, { ignoreCase: false })).toBe(expected);
     });
 
