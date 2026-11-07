@@ -187,4 +187,4 @@ describe('findWord following replacements in the walk', () => {
     });
 });
 
-// cspell:ignore aaoe blaabaeq blaabaer blaabaerblue blaabær blueblaabaer blåbaer blåbær derbar forboden fqrbqden grossart grossarz phoné qerbar Strasse Straße wunderbar wuqerbar wünderbar xbcq xerlin Zerlin Zlue
+// cspell:ignore aaoe blaabaeq blaabaer blaabaerblue blaabær blueblaabaer blåbaer blåbær derbar forboden fqrbqden grossart grossarz phoné qerbar Strasse Straße wunderbar wuqerbar wünderbar xbcq xerlin Zerlin Zlue Bluebelq qqqqefxyz wunqerbar 𝒜bcd 𝒜bcq
