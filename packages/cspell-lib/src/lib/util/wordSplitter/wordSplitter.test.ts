@@ -36,6 +36,18 @@ describe('Validate wordSplitter', () => {
         expect(result.words.filter((w) => !w.isFound).length).toBe(7);
     });
 
+    test('issue #9469: word splitter misses dictionary word after long camelCase prefix', () => {
+        const testWords = new Set(['HTTPRedirectHandler', 'max_redirections', 'HTTP', 'Redirect', 'Handler', 'max']);
+        function isValidWord(t: TextOffset): boolean {
+            return testWords.has(t.text);
+        }
+        for (const sep of ['.', '-', '_']) {
+            const text = `HTTPRedirectHandler${sep}max_redirections`;
+            const result = split({ text, offset: 0 }, 0, isValidWord);
+            expect(result.words.filter((w) => !w.isFound).map((w) => w.text)).toEqual([]);
+        }
+    });
+
     test.each`
         text                 | expected
         ${'hello'}           | ${{ text: 'hello', offset: 0 }}
@@ -332,6 +344,8 @@ describe('wordSplitter against dictionary', async () => {
         'QmFzZTY0IHN0cmluZyBvZiB0ZXh0IGhlcmU',
         'bool',
         'NSURL',
+        'HTTPRedirectHandler',
+        'max_redirections',
     );
     // cspell:enable
     const settings = calcSettingsForLanguageId(finalizeSettings(s), 'en,en-gb');
@@ -352,6 +366,9 @@ describe('wordSplitter against dictionary', async () => {
         ${'NSProgress_ffiVoidNSURLboolNSError_fnPtrTrampoline'} | ${'NS|Progress|<ffi>|Void|NSURL|bool|NS|Error|<fn>|<Ptr>|Trampoline' /* cspell:disable-line */}
         ${'To_EntityDto_And_To_DrivedEntityDto'}                | ${'To|Entity|<Dto>|And|To|<Drived>|Entity|<Dto>' /* cspell:disable-line */}
         ${'QmFzZTY0IHN0cmluZyBvZiB0ZXh0IGhlcmU.access'}         | ${'QmFzZTY0IHN0cmluZyBvZiB0ZXh0IGhlcmU|access' /* cspell:disable-line */}
+        ${'HTTPRedirectHandler.max_redirections'}               | ${'HTTP|Redirect|Handler|max_redirections'}
+        ${'HTTPRedirectHandler-max_redirections'}               | ${'HTTP|Redirect|Handler|max_redirections'}
+        ${'HTTPRedirectHandler_max_redirections'}               | ${'HTTP|Redirect|Handler|max_redirections'}
     `('validate against dictionary', ({ text, expected }) => {
         expected = typeof expected === 'string' ? expected.split('|') : expected;
         const line = {
