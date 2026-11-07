@@ -18,8 +18,8 @@ interface Step {
  * Search the trie for a form of the word, following each letter and each matching replacement at the same time.
  * A branch ends as soon as the trie has no match for it, so the cost does not grow with the number of forms.
  *
- * Pairs of position and node that have already failed are not searched again. The trie shares the endings of its
- * words, so many forms reach the same pair.
+ * Steps with the same position, node, and part length are not searched again. The trie shares the endings of its
+ * words, so many forms reach the same step.
  *
  * @param root - the root of the trie.
  * @param word - the word to search for.

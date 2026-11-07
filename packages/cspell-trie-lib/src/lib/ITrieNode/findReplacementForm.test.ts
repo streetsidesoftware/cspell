@@ -8,8 +8,6 @@ const words = [
     'blue',
     'bell',
     'blåbær',
-    'gross+',
-    '+art',
     'wun+',
     '+derbar',
     '~berlin',
@@ -89,8 +87,8 @@ describe('findWord following replacements in the walk', () => {
     });
 
     test('characters to ignore are removed', () => {
-        const trie = createTrie(['phone'], [], '́');
-        expect(trie.findWord('phoné', { caseSensitive: true }).found).toBe('phone');
+        const trie = createTrie(['phone'], [], '\u0301');
+        expect(trie.findWord('phone\u0301', { caseSensitive: true }).found).toBe('phone');
     });
 
     test('finds a word with more forms than the limit of remapWord', () => {
@@ -189,4 +187,4 @@ describe('findWord following replacements in the walk', () => {
     });
 });
 
-// cspell:ignore aaoe blaabaeq blaabaer blaabaerblue blaabær blueblaabaer blåbaer blåbær derbar forboden fqrbqden grossart grossarz phoné qerbar Strasse Straße wunderbar wuqerbar wünderbar xbcq xerlin Zerlin Zlue Bluebelq qqqqefxyz wunqerbar 𝒜bcd 𝒜bcq aabc babcq pabcq
+// cspell:ignore aaoe blaabaeq blaabaer blaabaerblue blaabær blueblaabaer blåbaer blåbær derbar forboden fqrbqden qerbar Strasse Straße wunderbar wuqerbar wünderbar xerlin Zerlin Bluebelq qqqqefxyz wunqerbar 𝒜bcd 𝒜bcq aabc babcq pabcq
