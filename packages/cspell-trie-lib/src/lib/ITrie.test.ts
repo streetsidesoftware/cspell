@@ -12,6 +12,66 @@ import { clean } from './utils/clean.ts';
 import { normalizeWordToLowercaseAndRemoveAccents } from './utils/normalizeWord.ts';
 import { CompoundWordsMethod } from './walker/index.ts';
 
+describe('withReplacements', () => {
+    // cspell:ignore strasse straße xssyss
+    const repMap: [string, string][] = [['ss', 'ß']];
+    const trie = ITrieClass.create(['straße', 'blue', 'bell']);
+
+    test.each`
+        repMap       | ignoreCharset
+        ${undefined} | ${undefined}
+        ${[]}        | ${undefined}
+    `('nothing to replace $repMap', ({ repMap, ignoreCharset }) => {
+        const t = trie.withReplacements(repMap, ignoreCharset);
+        expect(t).toBe(trie);
+        expect(t.mapWord).toBe(undefined);
+        expect(t.remapWord).toBe(undefined);
+    });
+
+    test('does not change the original trie', () => {
+        trie.withReplacements(repMap);
+        expect(trie.findWord('strasse').found).toBe(false);
+        expect(trie.mapWord).toBe(undefined);
+    });
+
+    test.each`
+        word          | options                          | found
+        ${'straße'}   | ${{ caseSensitive: true }}       | ${'straße'}
+        ${'strasse'}  | ${{ caseSensitive: true }}       | ${'straße'}
+        ${'strasse'}  | ${{ caseSensitive: false }}      | ${'straße'}
+        ${'STRASSE'}  | ${{ caseSensitive: true }}       | ${false}
+        ${'xssyss'}   | ${{ caseSensitive: true }}       | ${false}
+        ${'bluebell'} | ${{ caseSensitive: true }}       | ${false}
+        ${'blue'}     | ${{ useLegacyWordCompounds: 3 }} | ${'blue'}
+        ${'bluebell'} | ${{ useLegacyWordCompounds: 3 }} | ${'blue+bell'}
+    `('findWord $word $options', ({ word, options, found }) => {
+        expect(trie.withReplacements(repMap).findWord(word, options).found).toBe(found);
+    });
+
+    test('has and hasWord use the replacements', () => {
+        const t = trie.withReplacements(repMap);
+        expect(t.has('strasse')).toBe(true);
+        expect(t.hasWord('strasse', true)).toBe(true);
+    });
+
+    test('isForbiddenWord does not use the replacements', () => {
+        const t = ITrieClass.create(['!straße']).withReplacements(repMap);
+        expect(t.isForbiddenWord('straße')).toBe(true);
+        expect(t.isForbiddenWord('strasse')).toBe(false);
+    });
+
+    test('mapWord and remapWord', () => {
+        const t = trie.withReplacements(repMap);
+        expect(t.mapWord?.('strasse')).toBe('straße');
+        expect(t.remapWord?.('strasse')).toEqual(['strasse', 'straße']);
+    });
+
+    test('ignoreCharset', () => {
+        const t = ITrieClass.create(['phone']).withReplacements(undefined, '\u0300-\u0308');
+        expect(t.findWord('phone\u0301', { caseSensitive: true }).found).toBe('phone');
+    });
+});
+
 describe('Validate Trie Class', () => {
     const NumSuggestions: SuggestionOptions = { numSuggestions: 10 };
     const SEPARATE_WORDS: SuggestionOptions = { compoundMethod: CompoundWordsMethod.SEPARATE_WORDS };

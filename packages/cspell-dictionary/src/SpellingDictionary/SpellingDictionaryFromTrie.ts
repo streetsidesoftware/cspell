@@ -10,8 +10,6 @@ import { CompoundWordsMethod, decodeTrie, suggestionCollector } from 'cspell-tri
 
 import { clean } from '../util/clean.js';
 import { measurePerf } from '../util/performance.js';
-import type { RepMapper } from '../util/repMap.js';
-import { createMapper, createRepMapper } from '../util/repMap.js';
 import * as Defaults from './defaults.js';
 import type {
     FindOptionsRO,
@@ -39,7 +37,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
     readonly unknownWords: Set<string> = new Set<string>();
     readonly mapWord: MapWordSingleFn | undefined;
     readonly remapWord: MapWordMultipleFn | undefined;
-    readonly repMapper: RepMapper | undefined;
+    readonly trie: ITrie;
     readonly type = 'SpellingDictionaryFromTrie';
     readonly isDictionaryCaseSensitive: boolean;
     readonly containsNoSuggestWords: boolean;
@@ -51,17 +49,15 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
     private weightMap: WeightMap | undefined;
 
     constructor(
-        readonly trie: ITrie,
+        trie: ITrie,
         readonly name: string,
         readonly options: SpellingDictionaryOptionsRO,
         readonly source = 'from trie',
         size?: number,
     ) {
-        const mapWord = createMapper(options.repMap, options.dictionaryInformation?.ignore);
-        const repMapper = createRepMapper(options.repMap, options.dictionaryInformation?.ignore);
-        this.mapWord = mapWord?.fn;
-        this.remapWord = repMapper?.fn;
-        this.repMapper = repMapper;
+        this.trie = trie.withReplacements(options.repMap, options.dictionaryInformation?.ignore);
+        this.mapWord = this.trie.mapWord;
+        this.remapWord = this.trie.remapWord;
 
         this.isDictionaryCaseSensitive = options.caseSensitive ?? true;
         this.containsNoSuggestWords = options.noSuggest || false;
@@ -133,9 +129,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         ignoreCase: boolean,
         compoundSeparator: string | undefined,
     ): FindAnyFormResult | undefined {
-        const outerForms = outerWordForms(word, this.repMapper);
-
-        for (const form of outerForms) {
+        for (const form of outerWordForms(word)) {
             const r = this._findAnyForm(form, useCompounds, ignoreCase, compoundSeparator);
             if (r) return r;
         }
@@ -266,54 +260,17 @@ export function createSpellingDictionaryFromTrieFile(
 // eslint-disable-next-line no-control-regex
 const isAsciiRange = /^[\u0000-\u007F]*$/;
 
-function* outerWordForms(word: string, repMapper: RepMapper | undefined): Iterable<string> {
-    // Only generate the needed forms.
-    const sent = new Set<string>();
-    let w = word;
-    const ww = w;
-    yield w;
+function* outerWordForms(word: string): Iterable<string> {
+    yield word;
 
     // this function is called for every word lookup, so needs to be efficient.
-    // Check to see if it is a pure ascii word.
-    if (!isAsciiRange.test(w)) {
-        sent.add(w);
-        w = word.normalize('NFC');
-        if (w !== ww) {
-            yield w;
-            sent.add(w);
-        }
-        w = word.normalize('NFD');
-        if (w !== ww && !sent.has(w)) {
-            yield w;
-            sent.add(w);
-        }
-    }
+    if (isAsciiRange.test(word)) return;
 
-    if (!repMapper) return;
-    const mapWord = repMapper.fn;
+    const nfc = word.normalize('NFC');
+    if (nfc !== word) yield nfc;
 
-    // nothing was added to the set, just do the map.
-    if (!sent.size) {
-        if (!repMapper.test.test(ww)) return;
-        for (const m of mapWord(ww)) {
-            if (m !== ww && !sent.has(m)) {
-                yield m;
-                sent.add(m);
-            }
-        }
-        return;
-    }
-
-    const mapped = new Set<string>();
-    for (const f of sent) {
-        for (const m of mapWord(f)) {
-            if (!sent.has(m) && !mapped.has(m)) {
-                yield m;
-                mapped.add(m);
-            }
-        }
-    }
-    return;
+    const nfd = word.normalize('NFD');
+    if (nfd !== word && nfd !== nfc) yield nfd;
 }
 
 export const __testing__: {

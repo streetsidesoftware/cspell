@@ -14,36 +14,35 @@ import {
 
 const { outerWordForms } = __testing__;
 
-// cspell:ignore guenstig günstig Bundesstaat Bundeßtaat
-// cspell:ignore Goerresstraße, Goerreßtraße, Görresstraße, Görreßtraße Hoehenschnittpunkt Strasse Straße
+// cspell:ignore Bundesstaat Goerresstraße Hoehenschnittpunkt Strasse Straße strassen
 
 describe('SpellingDictionaryFromTrie', () => {
     test.each`
-        word               | repMap                                                  | expected
-        ${'hello'}         | ${undefined}                                            | ${['hello']}
-        ${'guenstig'}      | ${[['ae', 'ä'], ['oe', 'ö'], ['ue', 'ü'], ['ss', 'ß']]} | ${['guenstig', 'günstig']}
-        ${'günstig'}       | ${[['ae', 'ä'], ['oe', 'ö'], ['ue', 'ü'], ['ss', 'ß']]} | ${['günstig', N('günstig')]}
-        ${'Bundesstaat'}   | ${[['ae', 'ä'], ['oe', 'ö'], ['ue', 'ü'], ['ss', 'ß']]} | ${['Bundesstaat', 'Bundeßtaat']}
-        ${'Goerresstraße'} | ${[['ae', 'ä'], ['oe', 'ö'], ['ue', 'ü'], ['ss', 'ß']]} | ${['Goerresstraße', 'Goerreßtraße', 'Görresstraße', 'Görreßtraße']}
-        ${'éa'}            | ${[['a', 'b'], ['b', 'c']]}                             | ${['éa', N('éa'), 'éb', N('éb')]}
-    `('outerWordForms $word', ({ word, repMap, expected }) => {
-        const trie = buildITrieFromWords([]);
-        const dict = new SpellingDictionaryFromTrie(trie, 'test', { repMap });
-        expect([...outerWordForms(word, dict.repMapper)]).toEqual([...new Set(expected)]);
+        word       | expected
+        ${'hello'} | ${['hello']}
+        ${'éa'}    | ${['éa', N('éa')]}
+        ${N('éa')} | ${[N('éa'), 'éa']}
+    `('outerWordForms $word', ({ word, expected }) => {
+        expect([...outerWordForms(word)]).toEqual(expected);
     });
 
-    test('outerWordForms only maps the starting forms', () => {
-        const trie = buildITrieFromWords([]);
-        const repMap: [string, string][] = [
-            ['a', 'æ'],
-            ['a', 'å'],
-        ];
-        const dict = new SpellingDictionaryFromTrie(trie, 'test', { repMap });
-        const word = 'é' + 'a'.repeat(12);
-        const startingForms = 2;
-        const maxFormsPerMap = 256;
-        const forms = [...outerWordForms(word, dict.repMapper)];
-        expect(forms.length).toBeLessThanOrEqual(startingForms + startingForms * maxFormsPerMap);
+    test.each`
+        word          | expected
+        ${'straße'}   | ${true}
+        ${'strasse'}  | ${true}
+        ${'Strasse'}  | ${true}
+        ${'STRASSE'}  | ${true}
+        ${'strassen'} | ${false}
+    `('has with repMap $word', ({ word, expected }) => {
+        const trie = buildITrieFromWords(['straße']);
+        const dict = new SpellingDictionaryFromTrie(trie, 'test', { repMap: [['ss', 'ß']] });
+        expect(dict.has(word, { ignoreCase: false })).toBe(expected);
+    });
+
+    test('mapWord and remapWord are undefined without a repMap', () => {
+        const dict = new SpellingDictionaryFromTrie(buildITrieFromWords(['word']), 'test', {});
+        expect(dict.mapWord).toBe(undefined);
+        expect(dict.remapWord).toBe(undefined);
     });
 
     test('has with German Dictionary to make sure remap works as expected', async () => {

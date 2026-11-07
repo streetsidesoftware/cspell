@@ -1,4 +1,5 @@
 import { opAppend, opFilter, opMap, pipe } from '@cspell/cspell-pipe/sync';
+import type { ReplaceMap } from '@cspell/cspell-types';
 
 import type { WeightMap } from './distance/index.ts';
 import { createFindOptions, findLegacyCompound, findWord, findWordNode, isForbiddenWord } from './ITrieNode/find.ts';
@@ -18,6 +19,8 @@ import type { TrieData } from './TrieData.ts';
 import { clean } from './utils/clean.ts';
 import { memorizeLastCall } from './utils/memorizeLastCall.ts';
 import { mergeOptionalWithDefaults } from './utils/mergeOptionalWithDefaults.ts';
+import type { ReplaceMapper, RepMapper } from './utils/repMap.ts';
+import { createMapper, createRepMapper } from './utils/repMap.ts';
 import { replaceAllFactory } from './utils/util.ts';
 
 const defaultLegacyMinCompoundLength = 3;
@@ -84,7 +87,31 @@ export interface ITrie {
      */
     hasWord(word: string, caseSensitive: boolean): boolean;
 
+    /**
+     * Find a word. On a trie with replacements, the word's replacement forms are also looked up.
+     * @param word - the word to search for.
+     * @param options - how to look up the word.
+     * @returns the result for the word or the first replacement form found.
+     */
     findWord(word: string, options?: FindWordOptionsRO): FindFullResult;
+
+    /**
+     * Get a trie with the same words that also finds words written with replacements.
+     * @param repMap - the replacements to make to a word when looking it up.
+     * @param ignoreCharset - characters to remove from a word when looking it up.
+     * @returns a trie with the replacements, or this trie if there is nothing to replace.
+     */
+    withReplacements(repMap: ReplaceMap | undefined, ignoreCharset?: string): ITrie;
+
+    /**
+     * Replaces each match in a word with one replacement. `undefined` when there is nothing to replace.
+     */
+    readonly mapWord: ((word: string) => string) | undefined;
+
+    /**
+     * Generates the replacement forms of a word, up to a limit. `undefined` when there is nothing to replace.
+     */
+    readonly remapWord: ((word: string) => string[]) | undefined;
 
     /**
      * Determine if a word is in the forbidden word list.
@@ -187,9 +214,15 @@ export class ITrieImpl implements ITrie {
     readonly hasCompoundWords: boolean;
     readonly hasNonStrictWords: boolean;
     readonly data: TrieData;
+    readonly mapWord: ((word: string) => string) | undefined;
+    readonly remapWord: ((word: string) => string[]) | undefined;
+    #repMapper: RepMapper | undefined;
 
-    constructor(data: TrieData) {
+    constructor(data: TrieData, mapper?: ReplaceMapper, repMapper?: RepMapper) {
         this.data = data;
+        this.mapWord = mapper?.fn;
+        this.remapWord = repMapper?.fn;
+        this.#repMapper = repMapper;
         this.root = data.getRoot();
         this._info = mergeOptionalWithDefaults(data.info);
         this.hasForbiddenWords = data.hasForbiddenWords;
@@ -278,6 +311,24 @@ export class ITrieImpl implements ITrie {
     }
 
     findWord(word: string, options?: FindWordOptionsRO): FindFullResult {
+        const result = this.#findWordAsWritten(word, options);
+        const repMapper = this.#repMapper;
+        if (result.found !== false || !repMapper || !repMapper.test.test(word)) return result;
+        for (const form of repMapper.fn(word)) {
+            if (form === word) continue;
+            const mapped = this.#findWordAsWritten(form, options);
+            if (mapped.found !== false) return mapped;
+        }
+        return result;
+    }
+
+    withReplacements(repMap: ReplaceMap | undefined, ignoreCharset?: string): ITrie {
+        const mapper = createMapper(repMap, ignoreCharset);
+        const repMapper = createRepMapper(repMap, ignoreCharset);
+        return mapper || repMapper ? new ITrieImpl(this.data, mapper, repMapper) : this;
+    }
+
+    #findWordAsWritten(word: string, options: FindWordOptionsRO | undefined): FindFullResult {
         if (options?.useLegacyWordCompounds) {
             const len =
                 options.useLegacyWordCompounds !== true
