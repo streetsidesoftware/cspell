@@ -161,22 +161,22 @@ describe('findWord following replacements in the walk', () => {
         expect(trie.findWord('blaabaer', { caseSensitive: true }).found).toBe('blåbær');
     });
 
-    describe.each([
-        { caseSensitive: true },
-        { caseSensitive: false },
-        { caseSensitive: true, useLegacyWordCompounds: true },
-        { caseSensitive: false, useLegacyWordCompounds: true },
-    ])('with options %j', (options) => {
-        test.each(['blaabaer', 'BLAABAER', 'wuqerbar', 'grossart', 'grossarz', 'Zlue', 'xbcq', 'strasse'])(
-            'accepts %s exactly when one of its forms is found',
-            (word) => {
+    describe('accepts the same words as looking up each form from remapWord', () => {
+        // A failure means the search missed a form of the word, or accepted a word that none of its forms allow.
+        describe.each([
+            { caseSensitive: true },
+            { caseSensitive: false },
+            { caseSensitive: true, useLegacyWordCompounds: true },
+            { caseSensitive: false, useLegacyWordCompounds: true },
+        ])('with options %j', (options) => {
+            test.each(['blaabaer', 'blaabaeq', 'wuqerbar', 'blaabaerblue', 'Zerlin', 'Strasse'])('%s', (word) => {
                 const trie = createTrie();
                 const plain = buildITrieFromWords(words);
                 const forms = trie.remapWord?.(word) || [];
                 const expected = forms.some((form) => plain.findWord(form, options).found !== false);
                 expect(trie.findWord(word, options).found !== false).toBe(expected);
-            },
-        );
+            });
+        });
     });
 });
 
