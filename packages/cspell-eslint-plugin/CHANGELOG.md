@@ -154,6 +154,17 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 </details>
 
+## v10.4.2-alpha.0 (2026-11-07)
+
+### Fixes
+
+- fix: Avoid slow checks on non-ASCII words with many repMap matches (<a href="https://github.com/streetsidesoftware/cspell/pull/9564">#9564</a>)
+- fix: Avoid running out of memory on words with many repMap matches (<a href="https://github.com/streetsidesoftware/cspell/pull/9543">#9543</a>)
+
+---
+
+</details>
+
 ## v10.4.1 (2026-11-06)
 
 ### Fixes

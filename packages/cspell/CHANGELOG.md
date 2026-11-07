@@ -936,6 +936,51 @@ Related: #8975, streetsidesoftware/vscode-spell-checker#3099, streetsidesoftware
 
 </details>
 
+## v10.4.2-alpha.0 (2026-11-07)
+
+### Fixes
+
+<details>
+<summary>fix: Avoid slow checks on non-ASCII words with many repMap matches (<a href="https://github.com/streetsidesoftware/cspell/pull/9564">#9564</a>)</summary>
+
+### fix: Avoid slow checks on non-ASCII words with many repMap matches ([#9564](https://github.com/streetsidesoftware/cspell/pull/9564))
+
+## Summary
+
+Checking a non-ASCII word no longer takes seconds when a dictionary's `repMap` has many matches for that word.
+
+- With the `nn-no-alt` dictionary, `é` followed by 12 `a`s took about 3 seconds. It now takes a few milliseconds.
+- For non-ASCII words, the result of a replacement is no longer replaced again. With `a` → `b` and `b` → `c`, `éa` no longer matches `éc`. ASCII words already work this way.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Avoid running out of memory on words with many repMap matches (<a href="https://github.com/streetsidesoftware/cspell/pull/9543">#9543</a>)</summary>
+
+### fix: Avoid running out of memory on words with many repMap matches ([#9543](https://github.com/streetsidesoftware/cspell/pull/9543))
+
+## Summary
+
+Checking a word with many letters that match a dictionary's `repMap` no longer runs out of memory or fails with a `RangeError`.
+
+- Words with long runs of characters matching single-letter or multi-letter `repMap` entries (such as in `@cspell/dict-da-dk`, `@cspell/dict-de-de`, or custom `repMap` definitions) no longer crash `cspell`.
+- When a word has more than 256 replacement forms, only a sample of them is looked up, so a correct word can be reported as unknown. With `nn-no-alt`, this affected 65 of 34,077 words in a document with every `æ`, `ø`, and `å` written as `ae`, `oe`, and `aa`.
+
+Related to #9535
+
+<details>
+<summary>Technical Details</summary>
+
+- Keep at most 256 replacement forms at each letter of a word, instead of every combination. The kept forms are a sample across the full list, and they include the unedited word and one form with every match replaced.
+
+</details>
+
+---
+
+</details>
+
 ## v10.4.1 (2026-11-06)
 
 ### Fixes
