@@ -4,6 +4,7 @@ import type { ReplaceMap } from '@cspell/cspell-types';
 import type { WeightMap } from './distance/index.ts';
 import { createFindOptions, findLegacyCompound, findWord, findWordNode, isForbiddenWord } from './ITrieNode/find.ts';
 import type { FindOptions, PartialFindOptions } from './ITrieNode/FindOptions.ts';
+import { findReplacementForm } from './ITrieNode/findReplacementForm.ts';
 import type { ITrieNode, ITrieNodeRoot } from './ITrieNode/index.ts';
 import type { FindFullResult, ITrieNodeId } from './ITrieNode/ITrieNode.ts';
 import { countWords, iteratorTrieWords } from './ITrieNode/trie-util.ts';
@@ -314,12 +315,15 @@ export class ITrieImpl implements ITrie {
         const result = this.#findWordAsWritten(word, options);
         const repMapper = this.#repMapper;
         if (result.found !== false || !repMapper || !repMapper.test.test(word)) return result;
-        for (const form of repMapper.fn(word)) {
-            if (form === word) continue;
-            const mapped = this.#findWordAsWritten(form, options);
-            if (mapped.found !== false) return mapped;
-        }
-        return result;
+        const legacyCompounds = options?.useLegacyWordCompounds;
+        const form = findReplacementForm(
+            this.root,
+            word,
+            repMapper.replacements,
+            options?.caseSensitive || false,
+            legacyCompounds === true ? defaultLegacyMinCompoundLength : legacyCompounds || 0,
+        );
+        return form === undefined ? result : this.#findWordAsWritten(form, options);
     }
 
     withReplacements(repMap: ReplaceMap | undefined, ignoreCharset?: string): ITrie {
