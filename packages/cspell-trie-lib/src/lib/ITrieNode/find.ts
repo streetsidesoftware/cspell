@@ -8,6 +8,12 @@ type Root = ITrieNodeRoot;
 
 const defaultLegacyMinCompoundLength = 3;
 
+/**
+ * How many times a legacy compound search backs up to an earlier compound boundary before it gives up.
+ * The possible splits of a word multiply at each boundary, while real words need about 100 retries at most.
+ */
+const maxLegacyCompoundRetries = 200;
+
 const _defaultFindOptions: FindOptions = {
     matchCase: false,
     compoundMode: 'compound',
@@ -299,6 +305,7 @@ function findLegacyCompoundNode(
     let caseMatched = true;
     let i = 0;
     let node: ITrieNode | undefined;
+    let retries = 0;
 
     while (true) {
         const s = stack[i];
@@ -328,7 +335,7 @@ function findLegacyCompoundNode(
                     break;
                 }
             }
-            if (i > 0 || stack[i].usedRoots < numRoots) {
+            if ((i > 0 || stack[i].usedRoots < numRoots) && retries++ < maxLegacyCompoundRetries) {
                 compoundUsed = i > 0;
                 const s = stack[i];
                 s.cr = roots[s.usedRoots++];
