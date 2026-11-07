@@ -93,6 +93,33 @@ describe('findWord following replacements in the walk', () => {
         expect(trie.findWord('phoné', { caseSensitive: true }).found).toBe('phone');
     });
 
+    test.each`
+        words         | word                    | expected
+        ${['cafe']}   | ${'caf\u00E9'}          | ${'cafe'}
+        ${['Cafe']}   | ${'Caf\u00E9'}          | ${'Cafe'}
+        ${['resume']} | ${'r\u00E9sum\u00E9'}   | ${'resume'}
+        ${['resume']} | ${'re\u0301sume\u0301'} | ${'resume'}
+        ${['cafe']}   | ${'caf\u00E0'}          | ${false}
+        ${['cafe']}   | ${'cof\u00E9'}          | ${false}
+    `('ignored Latin accents $word', ({ words, word, expected }) => {
+        const trie = createTrie(words, [], '\u0300-\u0308');
+        expect(trie.findWord(word, { caseSensitive: true }).found).toBe(expected);
+    });
+
+    test('accents that are not ignored still count', () => {
+        const trie = createTrie(['cafe'], [], '\u0301');
+        expect(trie.findWord('caf\u00E9', { caseSensitive: true }).found).toBe('cafe');
+        expect(trie.findWord('caf\u00E0', { caseSensitive: true }).found).toBe(false);
+    });
+
+    test('marks that do not join a Latin letter add no replacements', () => {
+        const trie = createTrie(['\u0643\u062A\u0628'], [], '\u0640\u064B-\u0651\u0670');
+        expect(trie.findWord('\u0643\u064E\u062A\u064E\u0628', { caseSensitive: true }).found).toBe(
+            '\u0643\u062A\u0628',
+        );
+        expect(trie.findWord('caf\u00E9', { caseSensitive: true }).found).toBe(false);
+    });
+
     test('finds a word with more forms than the limit of remapWord', () => {
         const stem = 'aaoe'.repeat(10);
         const trie = createTrie(['åø'.repeat(10)]);
@@ -137,4 +164,4 @@ describe('findWord following replacements in the walk', () => {
     });
 });
 
-// cspell:ignore aaoe blaabaeq blaabaer blaabaerblue blaabær blueblaabaer blåbaer blåbær derbar forboden fqrbqden grossart grossarz phoné qerbar Strasse Straße wunderbar wuqerbar wünderbar xbcq xerlin Zerlin Zlue
+// cspell:ignore sume aaoe blaabaeq blaabaer blaabaerblue blaabær blueblaabaer blåbaer blåbær derbar forboden fqrbqden grossart grossarz phoné qerbar Strasse Straße wunderbar wuqerbar wünderbar xbcq xerlin Zerlin Zlue

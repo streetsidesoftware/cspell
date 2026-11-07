@@ -81,8 +81,8 @@ export interface ITrie {
     has(word: string, minLegacyCompoundLength: boolean | number): boolean;
 
     /**
-     * Determine if a word is in the dictionary.
-     * @param word - the exact word to search for - must be normalized.
+     * Determine if a word is in the dictionary. On a trie with replacements, the word's replacement forms are also looked up.
+     * @param word - the word to search for - must be normalized.
      * @param caseSensitive - false means also searching a dictionary where the words were normalized to lower case and accents removed.
      * @returns true if the word was found and is not forbidden.
      */
@@ -98,9 +98,9 @@ export interface ITrie {
 
     /**
      * Get a trie with the same words that also finds words written with replacements.
-     * @param repMap - the replacements to make to a word when looking it up.
+     * @param repMap - the replacements to make to a word when looking it up. They take the place of any this trie has.
      * @param ignoreCharset - characters to remove from a word when looking it up.
-     * @returns a trie with the replacements, or this trie if there is nothing to replace.
+     * @returns a trie with the replacements, or this trie if both parameters are empty.
      */
     withReplacements(repMap: ReplaceMap | undefined, ignoreCharset?: string): ITrie;
 
@@ -300,8 +300,8 @@ export class ITrieImpl implements ITrie {
     }
 
     /**
-     * Determine if a word is in the dictionary.
-     * @param word - the exact word to search for - must be normalized.
+     * Determine if a word is in the dictionary. On a trie with replacements, the word's replacement forms are also looked up.
+     * @param word - the word to search for - must be normalized.
      * @param caseSensitive - false means also searching a dictionary where the words were normalized to lower case and accents removed.
      * @returns true if the word was found and is not forbidden.
      */
