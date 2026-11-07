@@ -161,29 +161,22 @@ describe('findWord following replacements in the walk', () => {
         expect(trie.findWord('blaabaer', { caseSensitive: true }).found).toBe('blåbær');
     });
 
-    test.each`
-        word
-        ${'blaabaer'}
-        ${'BLAABAER'}
-        ${'wuqerbar'}
-        ${'grossart'}
-        ${'grossarz'}
-        ${'Zlue'}
-        ${'xbcq'}
-        ${'strasse'}
-    `('accepts $word exactly when one of its forms is found', ({ word }) => {
-        const trie = createTrie();
-        const plain = buildITrieFromWords(words);
-        for (const options of [
-            { caseSensitive: true },
-            { caseSensitive: false },
-            { caseSensitive: true, useLegacyWordCompounds: true },
-            { caseSensitive: false, useLegacyWordCompounds: true },
-        ]) {
-            const forms = trie.remapWord?.(word) || [];
-            const expected = forms.some((form) => plain.findWord(form, options).found !== false);
-            expect(trie.findWord(word, options).found !== false).toBe(expected);
-        }
+    describe.each([
+        { caseSensitive: true },
+        { caseSensitive: false },
+        { caseSensitive: true, useLegacyWordCompounds: true },
+        { caseSensitive: false, useLegacyWordCompounds: true },
+    ])('with options %j', (options) => {
+        test.each(['blaabaer', 'BLAABAER', 'wuqerbar', 'grossart', 'grossarz', 'Zlue', 'xbcq', 'strasse'])(
+            'accepts %s exactly when one of its forms is found',
+            (word) => {
+                const trie = createTrie();
+                const plain = buildITrieFromWords(words);
+                const forms = trie.remapWord?.(word) || [];
+                const expected = forms.some((form) => plain.findWord(form, options).found !== false);
+                expect(trie.findWord(word, options).found !== false).toBe(expected);
+            },
+        );
     });
 });
 
