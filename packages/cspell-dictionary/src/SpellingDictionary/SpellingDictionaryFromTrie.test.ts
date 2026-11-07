@@ -39,6 +39,16 @@ describe('SpellingDictionaryFromTrie', () => {
         expect(dict.has(word, { ignoreCase: false })).toBe(expected);
     });
 
+    test.each`
+        word         | expected
+        ${'STRASSE'} | ${false}
+        ${'strasse'} | ${false}
+    `('has with a map of only capitals $word', ({ word, expected }) => {
+        const trie = buildITrieFromWords(['straße']);
+        const dict = new SpellingDictionaryFromTrie(trie, 'test', { repMap: [['SS', 'ß']] });
+        expect(dict.has(word, { ignoreCase: false })).toBe(expected);
+    });
+
     test('mapWord and remapWord are undefined without a repMap', () => {
         const dict = new SpellingDictionaryFromTrie(buildITrieFromWords(['word']), 'test', {});
         expect(dict.mapWord).toBe(undefined);
