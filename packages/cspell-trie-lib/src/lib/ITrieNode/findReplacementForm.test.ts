@@ -161,6 +161,15 @@ describe('findWord following replacements in the walk', () => {
         expect(trie.findWord('blaabaer', { caseSensitive: true }).found).toBe('blåbær');
     });
 
+    test('a form with a last part that is too short does not end the search', () => {
+        const trie = buildITrieFromWords(['aabc', 'q', 'babcq']).withReplacements([
+            ['p', 'a'],
+            ['p', 'b'],
+        ]);
+        const options = { caseSensitive: true, useLegacyWordCompounds: 3 };
+        expect(trie.findWord('pabcq', options).found).toBe('babcq');
+    });
+
     describe('accepts the same words as looking up each form from remapWord', () => {
         // A failure means the search missed a form of the word, or accepted a word that none of its forms allow.
         describe.each([
@@ -180,4 +189,4 @@ describe('findWord following replacements in the walk', () => {
     });
 });
 
-// cspell:ignore aaoe blaabaeq blaabaer blaabaerblue blaabær blueblaabaer blåbaer blåbær derbar forboden fqrbqden grossart grossarz phoné qerbar Strasse Straße wunderbar wuqerbar wünderbar xbcq xerlin Zerlin Zlue Bluebelq qqqqefxyz wunqerbar 𝒜bcd 𝒜bcq
+// cspell:ignore aaoe blaabaeq blaabaer blaabaerblue blaabær blueblaabaer blåbaer blåbær derbar forboden fqrbqden grossart grossarz phoné qerbar Strasse Straße wunderbar wuqerbar wünderbar xbcq xerlin Zerlin Zlue Bluebelq qqqqefxyz wunqerbar 𝒜bcd 𝒜bcq aabc babcq pabcq
