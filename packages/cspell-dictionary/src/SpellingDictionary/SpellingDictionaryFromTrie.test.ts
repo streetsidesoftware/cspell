@@ -40,12 +40,12 @@ describe('SpellingDictionaryFromTrie', () => {
     });
 
     test.each`
-        word         | expected
-        ${'STRASSE'} | ${false}
-        ${'strasse'} | ${false}
+        word       | expected
+        ${'QUICK'} | ${false}
+        ${'quick'} | ${false}
     `('has with a map of only capitals $word', ({ word, expected }) => {
-        const trie = buildITrieFromWords(['straße']);
-        const dict = new SpellingDictionaryFromTrie(trie, 'test', { repMap: [['SS', 'ß']] });
+        const trie = buildITrieFromWords(['kick']);
+        const dict = new SpellingDictionaryFromTrie(trie, 'test', { repMap: [['QU', 'k']] });
         expect(dict.has(word, { ignoreCase: false })).toBe(expected);
     });
 
