@@ -1,7 +1,8 @@
 export interface BaseConfigOptions {
     /**
      * The path to the configuration file to create / update.
-     * If not provided, a default file name will be used based on the format.
+     * If not provided, the configuration file in the current directory is updated.
+     * If there is none, a default file name will be used based on the format.
      */
     config?: string;
     /**
@@ -33,6 +34,7 @@ export interface BaseConfigOptions {
      * Whether to add the schema reference to the configuration file.
      * - `true` - the schema reference will be added / updated.
      * - `false` - no schema reference will be added.
+     * - `undefined` - the schema reference will be added only if the configuration has no settings yet.
      */
     schema?: boolean;
     /**
@@ -51,7 +53,8 @@ export interface BaseConfigOptions {
 export interface InitOptions extends BaseConfigOptions {
     /**
      * The path where the configuration file will be written, it can be a file path or a URL.
-     * If not provided, a default file name will be used based on the format.
+     * If not provided, the configuration file in the current directory is updated.
+     * If there is none, a default file name will be used based on the format.
      * The default will be `cspell.config.yaml` or `cspell.json` based on the format.
      * @conflicts `config` - If `config` is provided, it will be used instead of `output`.
      */

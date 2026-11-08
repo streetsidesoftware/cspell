@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { __testing__, createMapper } from './repMap.js';
+import { __testing__, createMapper, createRepMapper } from './repMap.ts';
 
 const { createMapperRegExp, charsetToRepMap, createTrie, calcAllEdits, applyEdits } = __testing__;
 
@@ -155,6 +155,21 @@ describe('RepMapper', () => {
         const root = createTrie(repMap, ignoreChars);
         const edits = calcAllEdits(root, word);
         expect(applyEdits(word, edits)).toEqual(expected);
+    });
+
+    test.each`
+        repMap                      | word              | expectedReplaced
+        ${[['a', 'æ'], ['a', 'å']]} | ${'a'.repeat(16)} | ${'å'.repeat(16)}
+        ${[['a', 'æ'], ['a', 'å']]} | ${'a'.repeat(18)} | ${'å'.repeat(18)}
+        ${[['aa', 'å']]}            | ${'a'.repeat(38)} | ${'å'.repeat(19)}
+        ${[['ss', 'ß']]}            | ${'s'.repeat(38)} | ${'ß'.repeat(19)}
+    `('applyEdits bounds forms for many matching letters $repMap', ({ repMap, word, expectedReplaced }) => {
+        const mapper = createRepMapper(repMap);
+        const forms = mapper?.fn(word) ?? [];
+        expect(forms.length).toBeGreaterThan(1);
+        expect(forms.length).toBeLessThanOrEqual(256);
+        expect(forms[0]).toBe(word);
+        expect(forms).toContain(expectedReplaced);
     });
 });
 

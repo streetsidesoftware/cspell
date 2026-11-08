@@ -3,11 +3,57 @@ Repository: chef/chef
 Url: https://github.com/chef/chef.git
 Args: '["--config=../../../cspell-chef.config.yaml","**"]'
 Summary:
-  files: 0
-  filesWithIssues: 0
-  issues: 0
-  errors: 1
-Errors:
-  - Configuration
+  files: 1040
+  filesWithIssues: 12
+  issues: 47
+  errors: 0
+Errors: []
 
-issues: []
+issues:
+  - "chef-utils/lib/chef-utils/dsl/default_paths.rb:36:73        extensionless       U       usr/bin, which has an extensionless"
+  - "docs/dev/how_to/github-runner-setup-guide.md:187:8          ABFBQT      U       TOKEN=\"ABFBQT5WJE4YTDVFEL3EMBDJCX"
+  - "docs/dev/how_to/github-runner-setup-guide.md:187:19         YTDVFEL     U       TOKEN=\"ABFBQT5WJE4YTDVFEL3EMBDJCX7CS\""
+  - "docs/dev/how_to/github-runner-setup-guide.md:187:27         EMBDJCX     U       \"ABFBQT5WJE4YTDVFEL3EMBDJCX7CS\""
+  - "kitchen-tests/cookbooks/end_to_end/recipes/_tests.rb:19:25          Cmlaut      U       file \"/tmp/chef-test-\\xFCmlaut\" do"
+  - "kitchen-tests/cookbooks/end_to_end/recipes/_windows_system_path.rb:46:3         extensionless       U       # extensionless MSYS `cmd` script from"
+  - "kitchen-tests/cookbooks/end_to_end/recipes/_windows_system_path.rb:50:20        notmatch            U       if ($resolved -notmatch '\\\\\\\\System32\\\\\\\\cmd"
+  - "lib/chef/provider/package/portage.rb:82:23          nqualified      U       if /[Uu]nqualified atom .*match.* multiple"
+  - "lib/chef/provider/package/yum/python_helper.rb:119:39       alphaev     U       arches = %w{aarch64 alpha alphaev4 alphaev45 alphaev5"
+  - "lib/chef/provider/package/yum/python_helper.rb:119:48       alphaev     U       aarch64 alpha alphaev4 alphaev45 alphaev5 alphaev5"
+  - "lib/chef/provider/package/yum/python_helper.rb:119:58       alphaev     U       alpha alphaev4 alphaev45 alphaev5 alphaev56 alphaev6"
+  - "lib/chef/provider/package/yum/python_helper.rb:119:67       alphaev     U       alphaev45 alphaev5 alphaev56 alphaev6 alphaev6"
+  - "lib/chef/provider/package/yum/python_helper.rb:119:77       alphaev     U       alphaev5 alphaev56 alphaev6 alphaev67 alphaev6"
+  - "lib/chef/provider/package/yum/python_helper.rb:119:115      alphapca    U       alphaev68 alphaev7 alphapca56 armv5tejl armv5tel"
+  - "lib/chef/provider/package/yum/python_helper.rb:119:131      tejl        U       alphaev7 alphapca56 armv5tejl armv5tel armv5tl armv"
+  - "lib/chef/provider/package/yum/python_helper.rb:119:212      athlon      U       armv7hnl armv8hl i386 athlon geode i386 i486 i58"
+  - "lib/chef/provider/package/yum/python_helper.rb:119:255      mipsel      U       i586 i686 ia64 mips mipsel mips64 mips64el noarch"
+  - "lib/chef/provider/package/yum/python_helper.rb:119:300      iseries     U       noarch ppc ppc64 ppc64iseries ppc64p7 ppc64pseries"
+  - "lib/chef/provider/package/yum/python_helper.rb:119:321      pseries     U       iseries ppc64p7 ppc64pseries ppc64le riscv32 riscv"
+  - "lib/chef/provider/package/yum/python_helper.rb:119:337      riscv       U       ppc64pseries ppc64le riscv32 riscv64 riscv128 s"
+  - "lib/chef/provider/package/yum/python_helper.rb:119:345      riscv       U       pseries ppc64le riscv32 riscv64 riscv128 s390 s39"
+  - "lib/chef/provider/package/yum/python_helper.rb:119:353      riscv       U       4le riscv32 riscv64 riscv128 s390 s390x sh3 sh"
+  - "lib/chef/provider/package/yum/python_helper.rb:119:409      sparcv      U       sparc sparc64 sparc64v sparcv8 sparcv9 sparcv9v x"
+  - "lib/chef/provider/package/yum/python_helper.rb:119:417      sparcv      U       sparc64 sparc64v sparcv8 sparcv9 sparcv9v x86_64 amd"
+  - "lib/chef/provider/package/yum/python_helper.rb:119:425      sparcv      U       sparc64v sparcv8 sparcv9 sparcv9v x86_64 amd64 ia32e"
+  - "lib/chef/resource/user_ulimit.rb:29:270         rctls           U       as resource controls (rctls) on a `project(4)` entry"
+  - "lib/chef/resource/user_ulimit.rb:29:306         projadd         U       project(4)` entry via `projadd`/`projmod`.\""
+  - "lib/chef/resource/user_ulimit.rb:29:316         projmod         U       entry via `projadd`/`projmod`.\""
+  - "lib/chef/resource/user_ulimit.rb:60:56          rctl            U       ) resource control (rctl) equivalent. Properties"
+  - "lib/chef/resource/user_ulimit.rb:62:40          rctl            U       with no Solaris kernel rctl equivalent) are rejected"
+  - "lib/chef/resource/user_ulimit.rb:65:15          RCTL            U       SOLARIS_RCTL_MAP = {"
+  - "lib/chef/resource/user_ulimit.rb:74:53          rctl            U       no supported Solaris rctl mapping. If any of these"
+  - "lib/chef/resource/user_ulimit.rb:142:57         rctl            U       privilege,value,deny)\" rctl clause is already present"
+  - "lib/chef/resource/user_ulimit.rb:143:31         rctl            U       for the given project/rctl pair in /etc/project"
+  - "lib/chef/resource/user_ulimit.rb:155:44         unsuffixed      U       from this resource's unsuffixed/soft/hard properties"
+  - "lib/chef/resource/user_ulimit.rb:155:80         unsuffixed      U       hard properties. An unsuffixed"
+  - "lib/chef/resource/user_ulimit.rb:207:23         projadd         U       command [\"projadd\", \"-U\", new_resource"
+  - "lib/chef/resource/user_ulimit.rb:211:19         RCTL            U       SOLARIS_RCTL_MAP.each do |base, rctl"
+  - "lib/chef/resource/user_ulimit.rb:222:25         projmod         U       command [\"projmod\", \"-s\", \"-K\", \"#{rctl"
+  - "lib/chef/resource/user_ulimit.rb:281:23         projdel         U       command [\"projdel\", project_name]"
+  - "lib/chef/resource/windows_security_policy.rb:140:107        CEFLMNPR    U       Select-String -Pattern \"^[CEFLMNPR].* =.*$\" | Out-String"
+  - "lib/chef/resource/windows_task.rb:526:47        NINETH (NINTH)      U       TaskScheduler::TASK_NINETH,"
+  - "lib/chef/resource/windows_task.rb:547:48        THIRTYETH           U       TaskScheduler::TASK_THIRTYETH,"
+  - "lib/chef/win32/api/error.rb:93:23       ACCEP (ACCEPT)      U       ERROR_REQ_NOT_ACCEP = 71"
+  - "lib/chef/win32/api/error.rb:879:9       DONT                U       DONT_RESOLVE_DLL_REFERENCES"
+  - "lib/chef/win32/api/net.rb:42:12         DONT    U       UF_DONT_EXPIRE_PASSWD = 0x"
+  - "lib/chef/win32/net.rb:43:41         DONT    U       flags: UF_SCRIPT | UF_DONT_EXPIRE_PASSWD | UF_NORMAL"

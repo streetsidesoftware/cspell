@@ -154,6 +154,45 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 </details>
 
+## v10.4.1 (2026-11-06)
+
+### Fixes
+
+- fix: `cspell init` updates the config in the current directory (<a href="https://github.com/streetsidesoftware/cspell/pull/9552">#9552</a>)
+- fix: `cspell init` only changes what you ask for and handles new JSON paths (<a href="https://github.com/streetsidesoftware/cspell/pull/9551">#9551</a>)
+
+- fix: `cspell init` no longer adds the schema to existing config files (<a href="https://github.com/streetsidesoftware/cspell/pull/9550">#9550</a>)
+- fix: cspell-tools no longer depends on the glob package (<a href="https://github.com/streetsidesoftware/cspell/pull/9540">#9540</a>)
+
+- fix: Stop storing the file paths of issues in the cache (<a href="https://github.com/streetsidesoftware/cspell/pull/9522">#9522</a>)
+
+---
+
+</details>
+
+- fix: Report cached issues at the file's current location (<a href="https://github.com/streetsidesoftware/cspell/pull/9519">#9519</a>)
+
+---
+
+</details>
+
+- fix: cspell-tools: apply top-level target options and remove options that have no effect (<a href="https://github.com/streetsidesoftware/cspell/pull/9470">#9470</a>)
+- fix: A locale that isn't valid no longer stops a file from being checked (<a href="https://github.com/streetsidesoftware/cspell/pull/9501">#9501</a>)
+
+---
+
+</details>
+
+- fix: Ignore the comment closing marker in a locale directive (<a href="https://github.com/streetsidesoftware/cspell/pull/9496">#9496</a>)
+- fix: Show "stdin" as the file name when checking stdin (<a href="https://github.com/streetsidesoftware/cspell/pull/9487">#9487</a>)
+
+- fix: Recognize Fortran source files (<a href="https://github.com/streetsidesoftware/cspell/pull/9490">#9490</a>)
+
+### Dictionary Updates
+
+- fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/9548">#9548</a>)
+- fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/9494">#9494</a>)
+
 ## v10.4.0 (2026-10-14)
 
 ### Features

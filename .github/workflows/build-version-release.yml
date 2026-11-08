@@ -10,8 +10,6 @@ on:
 
   workflow_call:
     secrets:
-      PUBLISH_NPM:
-        required: true
       AUTOMATION_APP_ID:
         required: true
       AUTOMATION_PRIVATE_KEY:
@@ -24,7 +22,6 @@ on:
 
 permissions:
   contents: write
-  id-token: write
 
 env:
   DRY_RUN: ${{ (inputs.dry_run && '--dry-run') || '' }}
@@ -119,12 +116,5 @@ jobs:
 
             - **Version**: `${{ steps.version.outputs.version }}`
             - **Dry Run**: `${{ inputs.dry_run }}`
-
-  # publish_version:
-  #   if: github.repository_owner == 'streetsidesoftware' && !inputs.dry_run
-  #   needs: release_version
-  #   uses: ./.github/workflows/publish.yml
-  #   secrets:
-  #     PUBLISH_NPM: ${{ secrets.PUBLISH_NPM }}
 
 # cspell:ignore pnpx envinfo conventionalcommits EBEHIND

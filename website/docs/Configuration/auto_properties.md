@@ -8494,8 +8494,6 @@ Special characters like `|`, `^`, and `$` have specific meanings.
 - `^` -- Indicates the start of a word
 - `$` -- Indicates the end of a word
 
-For more complicated word break rules, consider using regular expressions with the  `SoftWordBreakRegExp`  type.
-
 Examples:
 
 - `"^ptr|"` -- Would help with pointer definitions starting with `ptr`, such as `ptrvalue`.

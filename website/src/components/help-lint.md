@@ -148,5 +148,4 @@ More Examples:
 References:
     https://cspell.org
     https://github.com/streetsidesoftware/cspell
-
 ```

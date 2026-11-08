@@ -936,6 +936,451 @@ Related: #8975, streetsidesoftware/vscode-spell-checker#3099, streetsidesoftware
 
 </details>
 
+## v10.4.1 (2026-11-06)
+
+### Fixes
+
+<details>
+<summary>fix: `cspell init` updates the config in the current directory (<a href="https://github.com/streetsidesoftware/cspell/pull/9552">#9552</a>)</summary>
+
+### fix: `cspell init` updates the config in the current directory ([#9552](https://github.com/streetsidesoftware/cspell/pull/9552))
+
+## Summary
+
+`cspell init` now updates the config file in the current directory, so you no longer need `-c` to point at it. Parent directories are not searched.
+
+## Feature
+
+Run `cspell init` with the options you want, and it updates the config that cspell would load for the current directory:
+
+```sh
+cspell init --locale en-GB --dictionary python
+```
+
+- **Which file:** the first match in cspell's usual search order, including `.vscode/` and `.config/`.
+- **`package.json`:** it counts only if it has a `cspell` section.
+- **Creating a new file:** `--output` or `--format` still creates a new file, even if a config exists. `--config` still names the file to use.
+- **No config found:** `cspell init` creates `cspell.config.yaml`, as before.
+
+### JavaScript and TypeScript configs
+
+`cspell init` can't edit a config such as `cspell.config.mjs`, so changes go in a new `cspell.config.yaml` that imports it. The code file is not changed, and the new file holds only what you asked for.
+
+For example, `cspell init --locale en-GB` beside `cspell.config.mjs` creates this file:
+
+```yaml
+# The locale to use when spell checking. (e.g., en, en-GB, de-DE
+language: en-GB
+# Configuration or packages to import.
+import:
+  - ./cspell.config.mjs
+```
+
+Before, it created a separate config that did not import the code file, which hid its settings.
+
+The new file takes priority over the code file, so a setting it holds overrides the same setting there. If no option asks for a change, nothing is written.
+
+---
+
+</details>
+
+<details>
+<summary>fix: `cspell init` only changes what you ask for and handles new JSON paths (<a href="https://github.com/streetsidesoftware/cspell/pull/9551">#9551</a>)</summary>
+
+### fix: `cspell init` only changes what you ask for and handles new JSON paths ([#9551](https://github.com/streetsidesoftware/cspell/pull/9551))
+
+## Summary
+
+`cspell init` now changes only what you ask for in a config that already has settings, and no longer crashes when creating a new JSON file by path.
+
+- **Existing settings are left alone:** `version`, `language`, and their comments are no longer added. Options such as `--locale`, `--import`, and `--dictionary` still apply.
+- **Configs with no settings are still initialized:** this covers a new file, an empty `{}` file, and a `package.json` with no `cspell` section. They get the default settings, and the schema reference where the format supports it.
+- **New JSON files work by path:** `cspell init -c cspell.json` and `cspell init -o cspell.json` used to fail with `Unable to parse` unless you also passed `--format json`. The file extension now decides the format of a new file named this way.
+
+For this existing `cspell.config.yaml`:
+
+```yaml
+words:
+  - foo
+```
+
+Before, `cspell init -c cspell.config.yaml` wrote:
+
+```yaml
+# yaml-language-server: $schema=https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json
+
+words:
+  - foo
+# The version of the configuration file format.
+version: "0.2"
+# The locale to use when spell checking. (e.g., en, en-GB, de-DE
+language: en
+```
+
+After, the file is unchanged.
+
+---
+
+</details>
+
+<details>
+<summary>fix: `cspell init` no longer adds the schema to existing config files (<a href="https://github.com/streetsidesoftware/cspell/pull/9550">#9550</a>)</summary>
+
+### fix: `cspell init` no longer adds the schema to existing config files ([#9550](https://github.com/streetsidesoftware/cspell/pull/9550))
+
+## Summary
+
+`cspell init` no longer adds or replaces the schema reference in a config file that already exists, unless you ask for it with the new `--schema` flag.
+
+- **New file:** the schema reference is added by default, as before. `--no-schema` still leaves it out.
+- **Existing file:** the schema reference is left as it is by default. This applies to JSON and YAML config files.
+- **`--schema`:** adds the schema reference to an existing file, or replaces the one it has.
+
+For this existing `cspell.json`:
+
+```json
+{
+  "words": ["foo"]
+}
+```
+
+Before, `cspell init -c cspell.json` wrote:
+
+```json
+{
+  "words": ["foo"],
+  "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+  "version": "0.2",
+  "language": "en"
+}
+```
+
+After:
+
+```json
+{
+  "words": ["foo"],
+  "version": "0.2",
+  "language": "en"
+}
+```
+
+---
+
+</details>
+
+<details>
+<summary>fix: cspell-tools no longer depends on the glob package (<a href="https://github.com/streetsidesoftware/cspell/pull/9540">#9540</a>)</summary>
+
+### fix: cspell-tools no longer depends on the glob package ([#9540](https://github.com/streetsidesoftware/cspell/pull/9540))
+
+## Summary
+
+`@cspell/cspell-tools` now finds files with the glob support built into Node.js, so installing it no longer pulls in the `glob` package.
+
+`cspell-tools compile` and `cspell-tools gzip` match the same files as before, except for these cases:
+
+- **Symbolic links to directories:** patterns that reach files through a symbolic link, such as `*/*.txt` or `./**/*.txt`, can find different files than before. The result depends on the pattern and the Node.js version. Naming the link in the pattern, such as `link/*.txt`, works as before.
+- **`**` followed by a dot name, such as `**/.hidden/*`:** these patterns match nothing on older Node.js versions, such as 22.21.1. They work on 22.23.0 and 24.13.1 and later.
+
+Matching files can also be processed in a different order. This can only affect the output of `compile --no-sort`, when several files are merged into one dictionary.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Stop storing the file paths of issues in the cache (<a href="https://github.com/streetsidesoftware/cspell/pull/9522">#9522</a>)</summary>
+
+### fix: Stop storing the file paths of issues in the cache ([#9522](https://github.com/streetsidesoftware/cspell/pull/9522))
+
+## Summary
+
+The cache no longer stores the full path of the file with each spelling issue. A `universal` cache shared with others no longer shows where the project lived on the machine that made it, and cache files with issues are smaller.
+
+Follows up on #9519.
+
+- Reported issues don't change: cached issues are still reported at the file's current location.
+
+<details>
+<summary>Technical Details</summary>
+
+- Each cache entry already belongs to one file, so the issues inside it are now stored without a location.
+- When a cached result is reused, its issues take the location of the file being checked.
+- As with every cspell release, existing cache files are rebuilt after upgrading.
+
+</details>
+
+---
+
+</details>
+
+<details>
+<summary>fix: Report cached issues at the file's current location (<a href="https://github.com/streetsidesoftware/cspell/pull/9519">#9519</a>)</summary>
+
+### fix: Report cached issues at the file's current location ([#9519](https://github.com/streetsidesoftware/cspell/pull/9519))
+
+## Summary
+
+Issues read from a `universal` cache are now reported at the file's current location. Before, a cache copied to another folder or machine reported issues at the path of the folder that made it.
+
+Fixes #9427
+
+- Running `cspell doc.md` in a copied folder now prints `doc.md:1:12 - Unknown word (speling)`, the same as `--no-cache`.
+- Nothing changes for caches that were not moved.
+
+<details>
+<summary>Technical Details</summary>
+
+- A cached result stores the full location of the file it came from.
+- When a cached result is reused, each issue now takes the location of the file being checked in this run, instead of the stored one.
+- Existing cache files need no rebuild: the stored location is simply replaced when read.
+
+</details>
+
+---
+
+</details>
+
+<details>
+<summary>fix: cspell-tools: apply top-level target options and remove options that have no effect (<a href="https://github.com/streetsidesoftware/cspell/pull/9470">#9470</a>)</summary>
+
+### fix: cspell-tools: apply top-level target options and remove options that have no effect ([#9470](https://github.com/streetsidesoftware/cspell/pull/9470))
+
+## Summary
+
+`cspell-tools build` now applies target options set at the top level of `cspell-tools.config.yaml` to every target. Options that were accepted but never had an effect are removed, so the config only offers settings that work.
+
+## What changed
+
+Top-level target options now work. Each one is a default for every target, and a target's own value wins:
+
+- `generateNonStrict`
+- `locale`
+- `sort`
+- `removeDuplicates`
+- `dictionaryDirectives`
+
+Source options belong on sources. They were accepted in other places but ignored there, and are now removed:
+
+- `split`, `maxDepth`, `allowedSplitWords`, `storeSplitWordsAsCompounds`, and `minCompoundLength` at the top level.
+- `allowedSplitWords` on a target.
+
+`keepRawCase` is removed everywhere. It has had no effect since at least early 2023. To keep the case of words read with `split: legacy`, add `# cspell-tools: keep-case` to the word list file.
+
+For the `compile` command:
+
+- `--keep-raw-case` is deprecated. It had no effect. It is hidden from `--help`, and using it prints a warning.
+- `--max_depth` now takes effect. It was ignored before.
+- `--init` writes `--max_depth` and `--split` on each source, so `build` uses them.
+
+## Example
+
+```yaml
+targets:
+  - name: words
+    format: plaintext
+    sources:
+      - src/words.txt
+generateNonStrict: true
+```
+
+With `src/words.txt` containing `Hello`, the built `words.txt` before this change:
+
+```text
+Hello
+```
+
+After:
+
+```text
+Hello
+~hello
+```
+
+## Does this affect my dictionaries?
+
+- No dictionary output changes on its own. Removed options were already ignored.
+- If your config sets a removed option at the top level, it never took effect. To use it, move it onto the sources. This can change the output a lot: Hebrew in `cspell-dicts` sets `maxDepth: 0` at the top level, and moving it onto its Hunspell source shrinks the dictionary from about 108 million words to about 325 thousand.
+- If a build script passes `--keep-raw-case` to `cspell-tools compile`, it still works, and prints `--keep-raw-case has no effect and will be removed in future versions.` Remove the flag to silence the warning.
+
+---
+
+</details>
+
+<details>
+<summary>fix: A locale that isn't valid no longer stops a file from being checked (<a href="https://github.com/streetsidesoftware/cspell/pull/9501">#9501</a>)</summary>
+
+### fix: A locale that isn't valid no longer stops a file from being checked ([#9501](https://github.com/streetsidesoftware/cspell/pull/9501))
+
+## Summary
+
+With word segmentation on, a locale that isn't valid stopped the whole file from being checked. Now cspell ignores
+that locale and checks the file.
+
+Word segmentation is on for Thai and a few other languages. The error was easy to hit with a locale comment in
+Markdown or HTML when a word after the locale wasn't one, for example:
+
+```markdown
+<!-- cspell:locale th,en !! -->
+```
+
+Before:
+
+```text
+Failed to process "README.md" RangeError: Invalid language tag:
+```
+
+After: the file is checked using `th` and `en`.
+
+<details>
+<summary>Technical Details</summary>
+
+- Locales are now checked by JavaScript's built-in `Intl`, which also does the word segmentation. Before, a pattern
+  allowed only forms like `en` and `en-US`, and word segmentation didn't check locales at all.
+- Locales such as `zh-Hant-TW`, `es-419`, and `fil` are now also used for the case of suggestions and for dictionaries.
+- A `cspell:locale` directive stops at the first word that doesn't look like a locale.
+
+</details>
+
+---
+
+</details>
+
+<details>
+<summary>fix: Ignore the comment closing marker in a locale directive (<a href="https://github.com/streetsidesoftware/cspell/pull/9496">#9496</a>)</summary>
+
+### fix: Ignore the comment closing marker in a locale directive ([#9496](https://github.com/streetsidesoftware/cspell/pull/9496))
+
+## Summary
+
+- A `cspell:locale` (or `cspell:language`) directive no longer treats the closing `-->` of an HTML comment, or `*/` of a block comment, as an extra locale.
+- Before, `<!-- cspell:locale en -->` made files fail with `RangeError: Invalid language tag` when `useIntlWordSegmentation` was on.
+
+Fixes #9480
+
+---
+
+</details>
+
+<details>
+<summary>fix: Show "stdin" as the file name when checking stdin (<a href="https://github.com/streetsidesoftware/cspell/pull/9487">#9487</a>)</summary>
+
+### fix: Show "stdin" as the file name when checking stdin ([#9487](https://github.com/streetsidesoftware/cspell/pull/9487))
+
+## Summary
+
+When `cspell lint` checks text from `stdin`, the issues it reports now name the file `stdin`. Before, the file name was empty.
+
+This applies to `cspell lint stdin`, `cspell lint --file stdin`, and `cspell lint stdin://`. With `stdin://<path>`, the issues still show `<path>`.
+
+Before:
+
+```text
+$ echo 'const recieve = 1;' | cspell lint --no-progress --file stdin
+:1:7 - Unknown word (recieve) fix: (receive)
+```
+
+After:
+
+```text
+$ echo 'const recieve = 1;' | cspell lint --no-progress --file stdin
+stdin:1:7 - Unknown word (recieve) fix: (receive)
+```
+
+With `--no-relative`, the name is also `stdin`, instead of a `stdin:` URL that points to the current folder.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Recognize Fortran source files (<a href="https://github.com/streetsidesoftware/cspell/pull/9490">#9490</a>)</summary>
+
+### fix: Recognize Fortran source files ([#9490](https://github.com/streetsidesoftware/cspell/pull/9490))
+
+## Summary
+
+cspell now recognizes Fortran source files. Each one gets the file type `fortran`, plus `FortranFreeForm` or `FortranFixedForm`, the language IDs used by the Modern Fortran extension for VS Code. Settings and dictionaries can now target Fortran files.
+
+## Feature
+
+| File type          | Extensions                                                                            |
+| ------------------ | ------------------------------------------------------------------------------------- |
+| `fortran`          | all of the extensions below                                                           |
+| `FortranFreeForm`  | `.f90`, `.f95`, `.f03`, `.f08`, `.f18`, `.fpp`, `.fypp`, `.pf`, `.cuf` (CUDA Fortran) |
+| `FortranFixedForm` | `.f`, `.f77`, `.for`, `.ftn`                                                          |
+
+Uppercase extensions, such as `.F90`, match too.
+
+Use `fortran` to match both forms:
+
+```json
+{
+  "languageSettings": [
+    {
+      "languageId": "fortran",
+      "words": ["gfortran", "nvfortran"]
+    }
+  ]
+}
+```
+
+To match a Fortran file opened in VS Code, list the VS Code IDs too: `"languageId": "fortran,FortranFreeForm,FortranFixedForm"`.
+
+---
+
+</details>
+
+### Dictionary Updates
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/9548">#9548</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#9548](https://github.com/streetsidesoftware/cspell/pull/9548))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../snapshots/php/php-src/report.yaml              |  7 +--
+ .../snapshots/php/php-src/snapshot.txt             | 17 +++----
+ .../snapshots/wireapp/wire-webapp/report.yaml      |  3 +-
+ .../snapshots/wireapp/wire-webapp/snapshot.txt     |  3 +-
+ packages/cspell-bundled-dicts/package.json         | 12 ++---
+ pnpm-lock.yaml                                     | 56 +++++++++++++++++-----
+ 6 files changed, 59 insertions(+), 39 deletions(-)
+```
+
+---
+
+</details>
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/9494">#9494</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#9494](https://github.com/streetsidesoftware/cspell/pull/9494))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../MicrosoftDocs/PowerShell-Docs/report.yaml      | 37 ++++++++++------------
+ .../MicrosoftDocs/PowerShell-Docs/snapshot.txt     |  7 +---
+ .../snapshots/php/php-src/report.yaml              |  6 +---
+ .../snapshots/php/php-src/snapshot.txt             | 14 +++-----
+ packages/cspell-bundled-dicts/package.json         |  8 ++---
+ packages/cspell/src/__snapshots__/app.test.ts.snap | 12 ++++---
+ pnpm-lock.yaml                                     | 37 +++++++++++++++-------
+ 7 files changed, 61 insertions(+), 60 deletions(-)
+```
+
+---
+
+</details>
+
 ## v10.4.0 (2026-10-14)
 
 ### Features

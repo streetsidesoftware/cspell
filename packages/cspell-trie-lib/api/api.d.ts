@@ -1,4 +1,4 @@
-import { DictionaryDefinitionAugmented, SuggestionCostMapDef } from "@cspell/cspell-types";
+import { DictionaryDefinitionAugmented, ReplaceMap, SuggestionCostMapDef } from "@cspell/cspell-types";
 interface BuildOptions {
   /**
    * Optimize the trie for size by merging duplicate sub-tries and using a String Table.
@@ -468,7 +468,28 @@ interface ITrie {
    * @returns true if the word was found and is not forbidden.
    */
   hasWord(word: string, caseSensitive: boolean): boolean;
+  /**
+   * Find a word. On a trie with replacements, the word's replacement forms are also looked up.
+   * @param word - the word to search for.
+   * @param options - how to look up the word.
+   * @returns the result for the word or the first replacement form found.
+   */
   findWord(word: string, options?: FindWordOptionsRO): FindFullResult$1;
+  /**
+   * Get a trie with the same words that also finds words written with replacements.
+   * @param repMap - the replacements to make to a word when looking it up.
+   * @param ignoreCharset - characters to remove from a word when looking it up.
+   * @returns a trie with the replacements, or this trie if there is nothing to replace.
+   */
+  withReplacements(repMap: ReplaceMap | undefined, ignoreCharset?: string): ITrie;
+  /**
+   * Replaces each match in a word with one replacement. `undefined` when there is nothing to replace.
+   */
+  readonly mapWord: ((word: string) => string) | undefined;
+  /**
+   * Generates the replacement forms of a word, up to a limit. `undefined` when there is nothing to replace.
+   */
+  readonly remapWord: ((word: string) => string[]) | undefined;
   /**
    * Determine if a word is in the forbidden word list.
    * @param word the word to lookup.
