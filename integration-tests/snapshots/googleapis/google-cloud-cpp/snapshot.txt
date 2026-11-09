@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 22087, skipped: 29, Issues found: 49494 in 8295 files.
+ CSpell: Files checked: 22090, skipped: 29, Issues found: 49517 in 8297 files.
  exit code: 1
 ARCHITECTURE.md:158:48    - Unknown word (googlemock) -- implementation using `googlemock`
 BUILD.bazel:152:20    - Unknown word (ctype)      -- name = "enable-ctype-cord-workaround",
@@ -325,12 +325,16 @@ external/googleapis/protolists/aiplatform.list:86:41     - Unknown word (genai) 
 external/googleapis/protolists/alloydb.list:1:38      - Unknown word (csql)       -- google/cloud/alloydb/v1:csql_resources.proto
 external/googleapis/protolists/artifactregistry.list:16:50     - Unknown word (vpcsc)      -- artifactregistry/v1:vpcsc_config.proto
 external/googleapis/protolists/asset.list:1:53      - Unknown word (resourceowners) -- v1:asset_enrichment_resourceowners.proto
-external/googleapis/protolists/backupdr.list:10:51     - Unknown word (cloudsql)              -- backupdr/v1:backupvault_cloudsql.proto
-external/googleapis/protolists/backupdr.list:13:39     - Unknown word (datasourcereference)   -- google/cloud/backupdr/v1:datasourcereference.proto
+external/googleapis/protolists/backupdr.list:10:39     - Unknown word (backupvault)                 -- google/cloud/backupdr/v1:backupvault.proto
+external/googleapis/protolists/backupdr.list:13:51     - Unknown word (cloudsql)                    -- backupdr/v1:backupvault_cloudsql.proto
+external/googleapis/protolists/backupdr.list:16:39     - Unknown word (bindingmatchingresource)     -- google/cloud/backupdr/v1:bindingmatchingresource.proto
+external/googleapis/protolists/backupdr.list:17:39     - Unknown word (datasourcereference)         -- google/cloud/backupdr/v1:datasourcereference.proto
 external/googleapis/protolists/backupdr.list:3:47      - Unknown word (reportlog)  -- backupdr/logging/v1:reportlog.proto
-external/googleapis/protolists/backupdr.list:5:39      - Unknown word (backupplan) -- google/cloud/backupdr/v1:backupplan.proto
-external/googleapis/protolists/backupdr.list:6:39      - Unknown word (backupplanassociation) -- google/cloud/backupdr/v1:backupplanassociation.proto
-external/googleapis/protolists/backupdr.list:7:39      - Unknown word (backupvault)           -- google/cloud/backupdr/v1:backupvault.proto
+external/googleapis/protolists/backupdr.list:4:39      - Unknown word (appliedautoprotectionpolicy) -- google/cloud/backupdr/v1:appliedautoprotectionpolicy.proto
+external/googleapis/protolists/backupdr.list:5:39      - Unknown word (autoprotectionpolicy)        -- google/cloud/backupdr/v1:autoprotectionpolicy.proto
+external/googleapis/protolists/backupdr.list:6:39      - Unknown word (autoprotectionpolicybinding) -- google/cloud/backupdr/v1:autoprotectionpolicybinding.proto
+external/googleapis/protolists/backupdr.list:8:39      - Unknown word (backupplan)                  -- google/cloud/backupdr/v1:backupplan.proto
+external/googleapis/protolists/backupdr.list:9:39      - Unknown word (backupplanassociation)       -- google/cloud/backupdr/v1:backupplanassociation.proto
 external/googleapis/protolists/baremetalsolution.list:7:48      - Unknown word (osimage)    -- baremetalsolution/v2:osimage.proto
 external/googleapis/protolists/ces.list:27:34     - Unknown word (omnichannel) -- google/cloud/ces/v1:omnichannel.proto
 external/googleapis/protolists/connectors.list:1:41      - Unknown word (authconfig) -- cloud/connectors/v1:authconfig.proto
@@ -398,9 +402,9 @@ generator/internal/codegen_utils_test.cc:463:45    - Unknown word (uhoh)        
 generator/internal/codegen_utils_test.cc:466:43    - Unknown word (wordthatiswaytoolong)                -- atCommentBlockTestParams{"foo wordthatiswaytoolong", 0, "", 0, 5,
 generator/internal/codegen_utils_test.cc:62:22     - Unknown word (baaaaa)     -- EXPECT_EQ("foo_bar_baaaaa", CamelCaseToSnakeCase
 generator/internal/codegen_utils_test.cc:62:59     - Unknown word (BAAAAA)     -- CamelCaseToSnakeCase("fooBarBAAAAA"));
-generator/internal/descriptor_utils.cc:283:32    - Unknown word (scikit)     -- environment would specify the scikit-learn version as follows
-generator/internal/discovery_to_proto.cc:613:13    - Unknown word (sdhart)     -- // TODO(sdhart): figure out if we can
-generator/internal/discovery_to_proto.cc:613:68    - Unknown word (nhlomann)   -- more error info from nhlomann as
+generator/internal/descriptor_utils.cc:284:32    - Unknown word (scikit)     -- environment would specify the scikit-learn version as follows
+generator/internal/discovery_to_proto.cc:614:13    - Unknown word (sdhart)     -- // TODO(sdhart): figure out if we can
+generator/internal/discovery_to_proto.cc:614:68    - Unknown word (nhlomann)   -- more error info from nhlomann as
 generator/internal/discovery_to_proto_test.cc:1836:46   - Unknown word (Circlular)  -- ourceLabelsToTypesTest, HandleCirclularDependency) {
 generator/internal/discovery_to_proto_test.cc:1935:39   - Unknown word (Nonsynthesized) -- ypesContainsBothSynthesizedAndNonsynthesizedTypes) {
 generator/internal/discovery_to_proto_test.cc:2507:14   - Unknown word (GVNIC)          -- "GVNIC",
@@ -416,10 +420,10 @@ generator/internal/http_annotation_parser_test.cc:245:6     - Unknown word (Pars
 generator/internal/pagination_test.cc:255:49    - Unknown word (Repated)    -- PaginationAIP4233ExactlyOneRepatedStringResponse) {
 generator/internal/printer_test.cc:36:33     - Unknown word (Inigo)      -- VarsDictionary vars{{"name", "Inigo Montoya"}};
 generator/internal/routing.h:78:7      - Unknown word (actools)    -- * go/actools-dynamic-routing-proposal
-generator/internal/scaffold_generator.cc:1078:8    - Unknown word (CXXLDFLAGS) -- CLIENT_CXXLDFLAGS := $$(shell pkg-config
+generator/internal/scaffold_generator.cc:1079:8    - Unknown word (CXXLDFLAGS) -- CLIENT_CXXLDFLAGS := $$(shell pkg-config
 generator/internal/scaffold_generator_test.cc:424:38    - Unknown word (CXXLD)      -- actual, HasSubstr("\t$(CXXLD) "));
 generator/internal/scaffold_generator_test.cc:461:37    - Unknown word (Bazelrc)    -- ScaffoldGenerator, QuickstartBazelrc) {
-generator/internal/service_code_generator.h:209:46    - Unknown word (autopopulated) -- of the methods has an autopopulated `request_id`-like
+generator/internal/service_code_generator.h:210:46    - Unknown word (autopopulated) -- of the methods has an autopopulated `request_id`-like
 generator/templates/WORKSPACE.bazel:19:21     - Unknown word (Starlark)   -- # Add the necessary Starlark functions to fetch google
 google/cloud/BUILD.bazel:245:26    - Unknown word (ncrypt)     -- "-DEFAULTLIB:ncrypt.lib",
 google/cloud/BUILD.bazel:60:15     - Unknown word (DEFAULTLIB) -- "-DEFAULTLIB:bcrypt.lib",
@@ -451,6 +455,7 @@ google/cloud/asset/doc/environment-variables.dox:13:40     - Unknown word (cloud
 google/cloud/asset/v1/asset_client.h:1551:21   - Unknown word (ainotebooks) -- /// * constraints/ainotebooks.accessMode
 google/cloud/assuredworkloads/v1/assured_workloads_client.h:19:39     - Unknown word (ASSUREDWORKLOADS) -- CLOUD_CPP_GOOGLE_CLOUD_ASSUREDWORKLOADS_V1_ASSURED_WORKLOADS
 google/cloud/backupdr/v1/backup_dr_client.h:19:39     - Unknown word (BACKUPDR)   -- CLOUD_CPP_GOOGLE_CLOUD_BACKUPDR_V1_BACKUP_DR_CLIENT
+google/cloud/backupdr/v1/backup_dr_client.h:4131:64   - Unknown word (CCFE)       -- binding read from the CCFE tables.
 google/cloud/baremetalsolution/v2/bare_metal_solution_client.h:19:39     - Unknown word (BAREMETALSOLUTION) -- CLOUD_CPP_GOOGLE_CLOUD_BAREMETALSOLUTION_V2_BARE_METAL_SOLUTION
 google/cloud/baremetalsolution/v2/bare_metal_solution_client.h:3416:16   - Unknown word (provisiong)        -- /// Submit a provisiong configuration for a
 google/cloud/beyondcorp/appconnectors/v1/app_connectors_client.h:19:50     - Unknown word (APPCONNECTORS) -- GOOGLE_CLOUD_BEYONDCORP_APPCONNECTORS_V1_APP_CONNECTORS_CLIENT
@@ -683,11 +688,11 @@ google/cloud/internal/rest_opentelemetry_test.cc:53:8      - Unknown word (aaabb
 google/cloud/internal/routing_matcher_test.cc:120:73    - Unknown word (Ffoo)       -- previous", "routing_id=foo%2Ffoo"));
 google/cloud/internal/ssl_ec_curves_test.cc:50:54     - Unknown word (mlkem)      -- groups = {"P-256", "x25519mlkem768", "P-384"};
 google/cloud/internal/unified_grpc_credentials_test.cc:949:47    - Unknown word (paramgen)   -- newkey ec -pkeyopt ec_paramgen_curve:prime256v1 -nodes
-google/cloud/internal/win32/parse_service_account_p12_file.cc:134:10    - Unknown word (HCRYPTPROV) -- StatusOr<HCRYPTPROV> GetCertificatePrivateKey
-google/cloud/internal/win32/parse_service_account_p12_file.cc:239:64    - Unknown word (NOCR)       -- BASE64 | CRYPT_STRING_NOCR, nullptr,
-google/cloud/internal/win32/parse_service_account_p12_file.cc:37:19     - Unknown word (HCERTSTORE) -- void operator()(HCERTSTORE store) const { CertCloseStore
-google/cloud/internal/win32/parse_service_account_p12_file.cc:72:38     - Unknown word (HCRYPTKEY)  -- ptDestroyKey(reinterpret_cast<HCRYPTKEY>(key));
-google/cloud/internal/win32/sign_using_sha256.cc:103:34    - Unknown word (RSAPRIVATE) -- BCRYPT_RSAPRIVATE_BLOB, &key_handle, buffer
+google/cloud/internal/win32/parse_service_account_p12_file.cc:135:10    - Unknown word (HCRYPTPROV) -- StatusOr<HCRYPTPROV> GetCertificatePrivateKey
+google/cloud/internal/win32/parse_service_account_p12_file.cc:240:64    - Unknown word (NOCR)       -- BASE64 | CRYPT_STRING_NOCR, nullptr,
+google/cloud/internal/win32/parse_service_account_p12_file.cc:38:19     - Unknown word (HCERTSTORE) -- void operator()(HCERTSTORE store) const { CertCloseStore
+google/cloud/internal/win32/parse_service_account_p12_file.cc:73:38     - Unknown word (HCRYPTKEY)  -- ptDestroyKey(reinterpret_cast<HCRYPTKEY>(key));
+google/cloud/internal/win32/sign_using_sha256.cc:102:34    - Unknown word (RSAPRIVATE) -- BCRYPT_RSAPRIVATE_BLOB, &key_handle, buffer
 google/cloud/kms/doc/environment-variables.dox:12:21     - Unknown word (AUTOKEY)    -- - `GOOGLE_CLOUD_CPP_AUTOKEY_ADMIN_ENDPOINT=...`
 google/cloud/kms/doc/environment-variables.dox:13:40     - Unknown word (cloudkms)   -- (which defaults to "cloudkms.googleapis.com")
 google/cloud/kms/doc/environment-variables.dox:14:16     - Unknown word (Autokey)    -- used by `MakeAutokeyAdminConnection()`.
@@ -717,10 +722,10 @@ google/cloud/opentelemetry/internal/recordable_test.cc:722:27    - Unknown word 
 google/cloud/opentelemetry/quickstart/README.md:48:18     - Unknown word (nostd)      -- Abseil, its own `nostd` implementation, and
 google/cloud/optimization/doc/environment-variables.dox:13:40     - Unknown word (cloudoptimization) -- (which defaults to "cloudoptimization.googleapis.com")
 google/cloud/oracledatabase/doc/main.dox:7:105     - Unknown word (Exadata)    -- database services, such as Exadata and Autonomous Databases
-google/cloud/oracledatabase/v1/internal/oracle_database_auth_decorator.cc:1171:49   - Unknown word (Goldengate)  -- oracledatabase::v1::ListGoldengateDeploymentsResponse>
 google/cloud/oracledatabase/v1/internal/oracle_database_auth_decorator.cc:121:35    - Unknown word (Exascale)   -- leDatabaseAuth::AsyncConfigureExascaleCloudExadataInfrastructure
+google/cloud/oracledatabase/v1/internal/oracle_database_auth_decorator.cc:1245:49   - Unknown word (Goldengate)  -- oracledatabase::v1::ListGoldengateDeploymentsResponse>
 google/cloud/oracledatabase/v1/internal/oracle_database_auth_decorator.cc:663:63    - Unknown word (Refreshable) -- ::AutonomousDatabaseRefreshableClones>
-google/cloud/oracledatabase/v1/internal/oracle_database_auth_decorator.cc:822:49    - Unknown word (Exadb)       -- oracledatabase::v1::ListExadbVmClustersResponse>
+google/cloud/oracledatabase/v1/internal/oracle_database_auth_decorator.cc:896:49    - Unknown word (Exadb)       -- oracledatabase::v1::ListExadbVmClustersResponse>
 google/cloud/oracledatabase/v1/internal/oracle_database_auth_decorator.h:19:39     - Unknown word (ORACLEDATABASE) -- CLOUD_CPP_GOOGLE_CLOUD_ORACLEDATABASE_V1_INTERNAL_ORACLE_DATABASE
 google/cloud/orgpolicy/v2/internal/org_policy_auth_decorator.h:19:39     - Unknown word (ORGPOLICY)  -- CLOUD_CPP_GOOGLE_CLOUD_ORGPOLICY_V2_INTERNAL_ORG_POLICY
 google/cloud/osconfig/agentendpoint/v1/agent_endpoint_client.h:19:48     - Unknown word (AGENTENDPOINT) -- GOOGLE_CLOUD_OSCONFIG_AGENTENDPOINT_V1_AGENT_ENDPOINT_CLIENT
@@ -801,9 +806,9 @@ google/cloud/spanner/samples/graph_samples.cc:119:33    - Unknown word (Kollam) 
 google/cloud/spanner/samples/postgresql_samples.cc:197:56    - Unknown word (Trentor)    -- cloud::spanner::Value("Trentor")}}),
 google/cloud/spanner/samples/postgresql_samples.cc:317:44    - Unknown word (singerid)   -- SingerId will be folded to "singerid"
 google/cloud/spanner/samples/postgresql_samples.cc:438:40    - Unknown word (TIMESTAMPTZ) -- 11-03T09:35:01UTC'::TIMESTAMPTZ as timestamp
-google/cloud/spanner/samples/samples.cc:1323:20   - Unknown word (MRCMEK)     -- void CopyBackupWithMRCMEK(
-google/cloud/spanner/samples/samples.cc:4178:8    - Unknown word (songinfo)   -- auto songinfo = SongInfo(
-google/cloud/spanner/samples/samples.cc:4959:28   - Unknown word (partitionable) -- For a SQL query to be partitionable, it has to satisfy some
+google/cloud/spanner/samples/samples.cc:1322:20   - Unknown word (MRCMEK)     -- void CopyBackupWithMRCMEK(
+google/cloud/spanner/samples/samples.cc:4177:8    - Unknown word (songinfo)   -- auto songinfo = SongInfo(
+google/cloud/spanner/samples/samples.cc:4958:28   - Unknown word (partitionable) -- For a SQL query to be partitionable, it has to satisfy some
 google/cloud/spanner/value.h:129:9     - Unknown word (Nullness)   -- * @par Nullness
 google/cloud/sql/doc/environment-variables.dox:13:40     - Unknown word (sqladmin)   -- (which defaults to "sqladmin.googleapis.com")
 google/cloud/sql/v1/internal/sql_instances_rest_connection_impl.cc:657:53    - Unknown word (Ssrs)       -- :SqlInstancesAcquireSsrsLeaseResponse>
@@ -880,13 +885,14 @@ google/cloud/storage/examples/storage_object_file_transfer_samples.cc:148:47    
 google/cloud/storage/grpc_plugin.h:160:65    - Unknown word (preprod)    -- same applies to the preprod
 google/cloud/storage/hashing_options_test.cc:41:19     - Unknown word (Tcrto)      -- EXPECT_EQ("nhB9nTcrtoJr2B01QqQZ1g==", actual
 google/cloud/storage/hashing_options_test.cc:57:16     - Unknown word (IEBA)       -- EXPECT_EQ("ImIEBA==", actual);
-google/cloud/storage/internal/async/connection_impl_appendable_upload_test.cc:134:40    - Unknown word (wopt)       -- grpc::WriteOptions wopt) {
-google/cloud/storage/internal/async/connection_impl_open_test.cc:458:70    - Unknown word (testbench)  -- against the storage-testbench
+google/cloud/storage/internal/async/connection_impl_appendable_upload_test.cc:135:40    - Unknown word (wopt)       -- grpc::WriteOptions wopt) {
+google/cloud/storage/internal/async/connection_impl_open_test.cc:631:70    - Unknown word (testbench)  -- against the storage-testbench
 google/cloud/storage/internal/async/connection_impl_read_hash_test.cc:17:11     - Unknown word (pratap)     -- // TODO(v-pratap): Remove this when EnableMD
 google/cloud/storage/internal/async/connection_impl_upload_test.cc:496:42    - Unknown word (eksb)       -- sha256_bytes: "test-eksb"
 google/cloud/storage/internal/async/insert_object.cc:50:21     - Unknown word (Subcord)    -- auto next = data_.Subcord(0, n);
-google/cloud/storage/internal/async/writer_connection_buffered.cc:816:39    - Unknown word (unsatisified) -- call that returns an unsatisified future until the buffer
+google/cloud/storage/internal/async/writer_connection_buffered.cc:817:39    - Unknown word (unsatisified) -- call that returns an unsatisified future until the buffer
 google/cloud/storage/internal/grpc/channel_telemetry_test.cc:52:17     - Unknown word (Preprod)    -- auto constexpr kPreprodInterconnectEndpoint
+google/cloud/storage/internal/grpc/configure_client_context_test.cc:102:65    - Unknown word (AAAAAQ)     -- Pair(kFeaturesHeader, "AAAAAQ==")));
 google/cloud/storage/internal/grpc/default_options_test.cc:614:52    - Unknown word (Testbench)  -- DirectPathOverInterconnectTestbenchOverride) {
 google/cloud/storage/internal/grpc/object_request_parser_test.cc:63:33     - Unknown word (Cuakt)      -- md5) : StEvo2V/qoDCuaktZSw3IQ==
 google/cloud/storage/internal/grpc/stub.cc:372:10    - Unknown word (wopts)      -- auto wopts = grpc::WriteOptions
@@ -897,6 +903,8 @@ google/cloud/storage/internal/object_requests_test.cc:606:27    - Unknown word (
 google/cloud/storage/internal/object_write_streambuf_test.cc:368:39    - Unknown word (Putn)       -- ectWriteStreambufTest, MixPutcPutn) {
 google/cloud/storage/internal/retry_logging.cc:33:14     - Unknown word (greppable)  -- // A stable, greppable prefix. Applications
 google/cloud/storage/internal/retry_logging_test.cc:166:35    - Unknown word (recognisable) -- opaque token with no recognisable structure is still redacted
+google/cloud/storage/internal/tracked_features_test.cc:74:36     - Unknown word (AAAABA)     -- EncodeFeatureMask(4), "AAAABA==");
+google/cloud/storage/internal/tracked_features_test.cc:94:45     - Unknown word (AQAAAA)     -- codeFeatureMask(0x01000000), "AQAAAA==");
 google/cloud/storage/internal/tuple_filter_test.cc:66:25     - Unknown word (rvalues)    -- Test that forwarding rvalues works.
 google/cloud/storage/policy_document_test.cc:160:8     - Unknown word (asdfasdfasdf) -- "asdfasdfasdf", "asdfasdfasdf"};
 google/cloud/storage/policy_document_test.cc:201:14    - Unknown word (rsaposttest)  -- "rsaposttest, access_id=foo@foo.com

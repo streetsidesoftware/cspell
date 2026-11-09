@@ -3,7 +3,7 @@ Repository: neovim/nvim-lspconfig
 Url: "https://github.com/neovim/nvim-lspconfig.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 889, Issues found: 9939 in 790 files.
+ CSpell: Files checked: 891, Issues found: 9961 in 792 files.
  exit code: 1
 AGENTS.md:1:20      - Unknown word (lspconfig)  -- Everything in `lua/lspconfig/*` (except `util.lua
 CONTRIBUTING.md:12:81     - Unknown word (upstreamed) -- "util" code must be upstreamed to Nvim core.
@@ -671,9 +671,10 @@ lua/lspconfig/health.lua:86:16     - Unknown word (fmtpath)    -- local function
 lua/lspconfig/health.lua:90:9      - Unknown word (isdir)      -- local isdir = 0 ~= vim.fn.isdirectory
 lua/lspconfig/manager.lua:183:20    - Unknown word (buftype)    -- if vim.bo[bufnr].buftype == 'nofile' then
 lua/lspconfig/manager.lua:183:32    - Unknown word (nofile)     -- bo[bufnr].buftype == 'nofile' then
-lua/lspconfig/types/lsp/ada_ls.lua:129:113   - Unknown word (Rbuild)     -- relocate-build-tree GPRbuild command line switch
-lua/lspconfig/types/lsp/ada_ls.lua:77:30     - Unknown word (cgpr)       -- configuration file (*.cgpr) for this workspace
-lua/lspconfig/types/lsp/ada_ls.lua:99:53     - Unknown word (gnatmetric) -- metrics provided by `gnatmetric`. Each key is a metric
+lua/lspconfig/types/lsp/ada_ls.lua:108:53    - Unknown word (gnatmetric) -- metrics provided by `gnatmetric`. Each key is a metric
+lua/lspconfig/types/lsp/ada_ls.lua:138:113   - Unknown word (Rbuild)     -- relocate-build-tree GPRbuild command line switch
+lua/lspconfig/types/lsp/ada_ls.lua:3:43      - Unknown word (Alire)      -- settings.ada_ls.Ada.Alire
+lua/lspconfig/types/lsp/ada_ls.lua:86:30     - Unknown word (cgpr)       -- configuration file (*.cgpr) for this workspace
 lua/lspconfig/types/lsp/ansiblels.lua:103:14    - Unknown word (msecs)      -- ---Delay (in msecs) prior to sending an
 lua/lspconfig/types/lsp/ansiblels.lua:12:112    - Unknown word (FQCNs)      -- Disabling it will only use FQCNs when necessary.
 lua/lspconfig/types/lsp/ansiblels.lua:12:49     - Unknown word (FQCN)       -- qualified collection names (FQCN) when inserting a module
@@ -697,6 +698,7 @@ lua/lspconfig/types/lsp/bashls.lua:16:11     - Unknown word (shfmt)      -- ---I
 lua/lspconfig/types/lsp/bashls.lua:3:47      - Unknown word (Shfmt)      -- settings.bashls.BashIde.Shfmt
 lua/lspconfig/types/lsp/bashls.lua:52:14     - Unknown word (explainshell) -- ---Configure explainshell server endpoint in order
 lua/lspconfig/types/lsp/bashls.lua:72:133    - Unknown word (shellcheck)   -- external-sources (if shellcheckExternalSources is true
+lua/lspconfig/types/lsp/c3_lsp.lua:3:41      - Unknown word (lspclient)  -- lspconfig.settings.c3_lsp.C3lspclient.Lsp.C3
 lua/lspconfig/types/lsp/dartls.lua:394:50    - Unknown word (canvaskit)  -- "flutter-default"|"canvaskit"|"html"|"auto"
 lua/lspconfig/types/lsp/dartls.lua:409:74    - Unknown word (direnv)     -- using tools such as direnv, asdf, mise... The command
 lua/lspconfig/types/lsp/dartls.lua:581:22    - Unknown word (Pubspec)    -- --@field runPubGetOnPubspecChanges? "always"|"prompt
@@ -1063,6 +1065,10 @@ lua/lspconfig/types/lsp/luau_lsp.lua:395:12    - Unknown word (Rojo)       -- --
 lua/lspconfig/types/lsp/luau_lsp.lua:46:69     - Unknown word (Autofilled) -- Completion.AnonymousAutofilledFunction
 lua/lspconfig/types/lsp/nixd.lua:11:37     - Unknown word (Nixd)         -- lspconfig.settings.nixd.Nixd.Eval
 lua/lspconfig/types/lsp/nixd.lua:3:8       - Unknown word (installables) -- ---Nix installables that will be used for
+lua/lspconfig/types/lsp/ols.lua:35:175    - Unknown word (explicity)  -- checker_path` feature to explicity tell `ols` the projects
+lua/lspconfig/types/lsp/ols.lua:41:156    - Unknown word (colour)     -- render the label without colour on one line.
+lua/lspconfig/types/lsp/ols.lua:82:23     - Unknown word (untaken)    -- -@field enable_fade_untaken_when_branches? boolean
+lua/lspconfig/types/lsp/ols.lua:85:29     - Unknown word (odinfmt)    -- Turns on formatting with odinfmt.
 lua/lspconfig/types/lsp/omnisharp.lua:240:40    - Unknown word (Omnisharp)  -- omnisharp.csharp.showOmnisharpLogOnError%
 lua/lspconfig/types/lsp/omnisharp.lua:724:15    - Unknown word (coreclr)    -- ---default = "coreclr"
 lua/lspconfig/types/lsp/omnisharp.lua:893:35    - Unknown word (devmode)    -- configuration.omnisharp.razor.devmode%
@@ -1204,12 +1210,12 @@ lua/lspconfig/types/lsp/ruff.lua:3843:18   - Unknown word (telnetlib)           
 lua/lspconfig/types/lsp/ruff.lua:3852:22   - Unknown word (minidom)              -- --| "suspicious-xml-minidom-import"
 lua/lspconfig/types/lsp/ruff.lua:3854:22   - Unknown word (pulldom)              -- --| "suspicious-xml-pulldom-import"
 lua/lspconfig/types/lsp/ruff.lua:3857:18   - Unknown word (xmlc)                 -- ---| "suspicious-xmlc-element-tree-usage"
-lua/lspconfig/types/lsp/ruff.lua:3902:12   - Unknown word (bivariance)           -- ---| "type-bivariance"
-lua/lspconfig/types/lsp/ruff.lua:3914:7    - Unknown word (unaliased)            -- ---| "unaliased-collections-abc-set
-lua/lspconfig/types/lsp/ruff.lua:3961:41   - Unknown word (deque)                -- empty-iterable-within-deque-call"
-lua/lspconfig/types/lsp/ruff.lua:4000:7    - Unknown word (unraw)                -- ---| "unraw-re-pattern"
-lua/lspconfig/types/lsp/ruff.lua:4029:21   - Unknown word (metaclass)            -- ---| "useless-class-metaclass-type"
-lua/lspconfig/types/lsp/ruff.lua:4031:15   - Unknown word (contextlib)           -- ---| "useless-contextlib-suppress"
+lua/lspconfig/types/lsp/ruff.lua:3903:12   - Unknown word (bivariance)           -- ---| "type-bivariance"
+lua/lspconfig/types/lsp/ruff.lua:3915:7    - Unknown word (unaliased)            -- ---| "unaliased-collections-abc-set
+lua/lspconfig/types/lsp/ruff.lua:3962:41   - Unknown word (deque)                -- empty-iterable-within-deque-call"
+lua/lspconfig/types/lsp/ruff.lua:4001:7    - Unknown word (unraw)                -- ---| "unraw-re-pattern"
+lua/lspconfig/types/lsp/ruff.lua:4030:21   - Unknown word (metaclass)            -- ---| "useless-class-metaclass-type"
+lua/lspconfig/types/lsp/ruff.lua:4032:15   - Unknown word (contextlib)           -- ---| "useless-contextlib-suppress"
 lua/lspconfig/types/lsp/ruff.lua:452:59    - Unknown word (Pydantic's) -- required semantics is Pydantic's `pydantic.BaseModel
 lua/lspconfig/types/lsp/ruff.lua:471:42    - Unknown word (sqlalchemy) -- cases like SQLAlchemy's `sqlalchemy.orm.DeclarativeBase
 lua/lspconfig/types/lsp/ruff.lua:76:7      - Unknown word (kwargs)     -- ---`**kwargs` arguments.
@@ -1221,31 +1227,31 @@ lua/lspconfig/types/lsp/ruff.lua:814:41    - Unknown word (groupby)    -- from i
 lua/lspconfig/types/lsp/ruff.lua:971:30    - Unknown word (langchain)  -- LangChain ecosystem (`langchain-core`, `langchain-openai
 lua/lspconfig/types/lsp/ruff.lua:99:6      - Unknown word (markupsafe) -- ---[`markupsafe.Markup`](https://markupsafe
 lua/lspconfig/types/lsp/ruff_lsp.lua:3:63      - Unknown word (noqa)       -- to disable rules via `noqa` suppression comments
-lua/lspconfig/types/lsp/rust_analyzer.lua:1018:70   - Unknown word (Reborrow)    -- RustAnalyzer.InlayHints.ReborrowHints
+lua/lspconfig/types/lsp/rust_analyzer.lua:1031:70   - Unknown word (Reborrow)    -- RustAnalyzer.InlayHints.ReborrowHints
 lua/lspconfig/types/lsp/rust_analyzer.lua:106:11    - Unknown word (autoreload) -- ---@field autoreload? boolean
 lua/lspconfig/types/lsp/rust_analyzer.lua:115:37    - Unknown word (miri)       -- debug_assertions", "miri" }
 lua/lspconfig/types/lsp/rust_analyzer.lua:117:11    - Unknown word (cfgs)       -- ---@field cfgs? string[]
-lua/lspconfig/types/lsp/rust_analyzer.lua:1306:69   - Unknown word (Doctest)     -- RustAnalyzer.Runnables.Doctest
-lua/lspconfig/types/lsp/rust_analyzer.lua:1368:39   - Unknown word (libtest)     -- built-in test harness (“libtest”)](https://doc.rust
-lua/lspconfig/types/lsp/rust_analyzer.lua:1371:19   - Unknown word (nocapture)   -- ---default = { "--nocapture" }
-lua/lspconfig/types/lsp/rust_analyzer.lua:1695:7    - Unknown word (norun)       -- ---```norun
-lua/lspconfig/types/lsp/rust_analyzer.lua:1700:9    - Unknown word (Buildfile)   -- --- Buildfile(AbsPathBuf),
-lua/lspconfig/types/lsp/rust_analyzer.lua:1719:34   - Unknown word (buildfile)   -- project develop-json '{ "buildfile": "myproject/BUCK"
-lua/lspconfig/types/lsp/rust_analyzer.lua:349:70    - Unknown word (Autoself)   -- RustAnalyzer.Completion.Autoself
-lua/lspconfig/types/lsp/rust_analyzer.lua:398:19    - Unknown word (pinbox)     -- --- postfix = "pinbox",
-lua/lspconfig/types/lsp/rust_analyzer.lua:441:70    - Unknown word (Turbofish)  -- RustAnalyzer.Completion.Turbofish
-lua/lspconfig/types/lsp/rust_analyzer.lua:442:13    - Unknown word (turbofish)  -- ---Complete turbofish (`::<>`) at the call
-lua/lspconfig/types/lsp/rust_analyzer.lua:469:11    - Unknown word (autoself)   -- ---@field autoself? _.lspconfig.settings
-lua/lspconfig/types/lsp/rust_analyzer.lua:503:105   - Unknown word (webfreak)   -- ms-vscode.cpptools"|"webfreak.debug"
-lua/lspconfig/types/lsp/rust_analyzer.lua:503:51    - Unknown word (lldb)       -- llvm-vs-code-extensions.lldb-dap"|"vadimcn.vscode
-lua/lspconfig/types/lsp/rust_analyzer.lua:503:62    - Unknown word (vadimcn)    -- extensions.lldb-dap"|"vadimcn.vscode-lldb"|"ms-vscode
-lua/lspconfig/types/lsp/rust_analyzer.lua:514:31    - Unknown word (USERPROFILE) -- rustc/<id>"] = "${env:USERPROFILE}/.rustup/toolchains
+lua/lspconfig/types/lsp/rust_analyzer.lua:1319:69   - Unknown word (Doctest)     -- RustAnalyzer.Runnables.Doctest
+lua/lspconfig/types/lsp/rust_analyzer.lua:1381:39   - Unknown word (libtest)     -- built-in test harness (“libtest”)](https://doc.rust
+lua/lspconfig/types/lsp/rust_analyzer.lua:1384:19   - Unknown word (nocapture)   -- ---default = { "--nocapture" }
+lua/lspconfig/types/lsp/rust_analyzer.lua:1708:7    - Unknown word (norun)       -- ---```norun
+lua/lspconfig/types/lsp/rust_analyzer.lua:1713:9    - Unknown word (Buildfile)   -- --- Buildfile(AbsPathBuf),
+lua/lspconfig/types/lsp/rust_analyzer.lua:1732:34   - Unknown word (buildfile)   -- project develop-json '{ "buildfile": "myproject/BUCK"
+lua/lspconfig/types/lsp/rust_analyzer.lua:357:70    - Unknown word (Autoself)   -- RustAnalyzer.Completion.Autoself
+lua/lspconfig/types/lsp/rust_analyzer.lua:406:19    - Unknown word (pinbox)     -- --- postfix = "pinbox",
+lua/lspconfig/types/lsp/rust_analyzer.lua:449:70    - Unknown word (Turbofish)  -- RustAnalyzer.Completion.Turbofish
+lua/lspconfig/types/lsp/rust_analyzer.lua:450:13    - Unknown word (turbofish)  -- ---Complete turbofish (`::<>`) at the call
+lua/lspconfig/types/lsp/rust_analyzer.lua:478:11    - Unknown word (autoself)   -- ---@field autoself? _.lspconfig.settings
+lua/lspconfig/types/lsp/rust_analyzer.lua:512:105   - Unknown word (webfreak)   -- ms-vscode.cpptools"|"webfreak.debug"
+lua/lspconfig/types/lsp/rust_analyzer.lua:512:51    - Unknown word (lldb)       -- llvm-vs-code-extensions.lldb-dap"|"vadimcn.vscode
+lua/lspconfig/types/lsp/rust_analyzer.lua:512:62    - Unknown word (vadimcn)    -- extensions.lldb-dap"|"vadimcn.vscode-lldb"|"ms-vscode
+lua/lspconfig/types/lsp/rust_analyzer.lua:523:31    - Unknown word (USERPROFILE) -- rustc/<id>"] = "${env:USERPROFILE}/.rustup/toolchains
 lua/lspconfig/types/lsp/rust_analyzer.lua:85:9      - Unknown word (RUSTC)      -- ---Use `RUSTC_WRAPPER=rust-analyzer
 lua/lspconfig/types/lsp/rust_analyzer.lua:91:14     - Unknown word (Rustc)      -- ---@field useRustcWrapper? boolean
-lua/lspconfig/types/lsp/rust_analyzer.lua:926:37    - Unknown word (fieldless)   -- enable? "always"|"never"|"fieldless"
-lua/lspconfig/types/lsp/rust_analyzer.lua:929:12    - Unknown word (reborrows)   -- ---Disable reborrows in expression adjustments
-lua/lspconfig/types/lsp/rust_analyzer.lua:931:4     - Unknown word (Reborrows)   -- ---Reborrows are a pair of a builtin
-lua/lspconfig/types/lsp/rust_analyzer.lua:944:37    - Unknown word (reborrow)    -- enable? "always"|"never"|"reborrow"
+lua/lspconfig/types/lsp/rust_analyzer.lua:935:37    - Unknown word (fieldless)   -- enable? "always"|"never"|"fieldless"
+lua/lspconfig/types/lsp/rust_analyzer.lua:938:12    - Unknown word (reborrows)   -- ---Disable reborrows in expression adjustments
+lua/lspconfig/types/lsp/rust_analyzer.lua:940:4     - Unknown word (Reborrows)   -- ---Reborrows are a pair of a builtin
+lua/lspconfig/types/lsp/rust_analyzer.lua:953:37    - Unknown word (reborrow)    -- enable? "always"|"never"|"reborrow"
 lua/lspconfig/types/lsp/solargraph.lua:11:43     - Unknown word (Solargraph) -- settings.solargraph.Solargraph.ExternalServer
 lua/lspconfig/types/lsp/solidity_ls.lua:106:4     - Unknown word (Solium)             -- ---Solium linting validation rules
 lua/lspconfig/types/lsp/solidity_ls.lua:22:415    - Unknown word (nodemodulespackage) -- package configured on 'nodemodulespackage' and 'embedded' which
@@ -1280,9 +1286,9 @@ lua/lspconfig/types/lsp/tinymist.lua:166:15    - Unknown word (typstyle)   -- --
 lua/lspconfig/types/lsp/tinymist.lua:168:48    - Unknown word (typstfmt)   -- disable"|"typstyle"|"typstfmt"
 lua/lspconfig/types/lsp/tinymist.lua:211:22    - Unknown word (dreamin)    -- --default = "myriad-dreamin.tinymist"
 lua/lspconfig/types/lsp/tinymist.lua:28:38     - Unknown word (stepless)   -- make symbol completion stepless. For example, `$ar|
-lua/lspconfig/types/lsp/tombi.lua:140:69    - Unknown word (Pyproject)  -- settings.tombi.defs.PyprojectExtensionFeatures
-lua/lspconfig/types/lsp/tombi.lua:184:55    - Unknown word (Tombi's)    -- comment text according to Tombi's formatting rules.
-lua/lspconfig/types/lsp/tombi.lua:548:44    - Unknown word (pypi)       -- links are created for `pypi.org` package references
+lua/lspconfig/types/lsp/tombi.lua:227:69    - Unknown word (Pyproject)  -- settings.tombi.defs.PyprojectExtensionFeatures
+lua/lspconfig/types/lsp/tombi.lua:271:55    - Unknown word (Tombi's)    -- comment text according to Tombi's formatting rules.
+lua/lspconfig/types/lsp/tombi.lua:635:44    - Unknown word (pypi)       -- links are created for `pypi.org` package references
 lua/lspconfig/types/lsp/ts_ls.lua:376:14    - Unknown word (Tsgo)       -- ---@field useTsgo? boolean
 lua/lspconfig/types/lsp/ts_ls.lua:883:87    - Unknown word (heapsnapshot) -- writes by passing `--heapsnapshot-near-heap-limit`. Set
 lua/lspconfig/types/lsp/vtsls.lua:874:38    - Unknown word (Vtsls)      -- lspconfig.settings.vtsls.Vtsls.Experimental.Completion

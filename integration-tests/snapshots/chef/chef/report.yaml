@@ -3,9 +3,9 @@ Repository: chef/chef
 Url: https://github.com/chef/chef.git
 Args: '["--config=../../../cspell-chef.config.yaml","**"]'
 Summary:
-  files: 1040
+  files: 1041
   filesWithIssues: 12
-  issues: 47
+  issues: 48
   errors: 0
 Errors: []
 
@@ -35,21 +35,22 @@ issues:
   - "lib/chef/provider/package/yum/python_helper.rb:119:409      sparcv      U       sparc sparc64 sparc64v sparcv8 sparcv9 sparcv9v x"
   - "lib/chef/provider/package/yum/python_helper.rb:119:417      sparcv      U       sparc64 sparc64v sparcv8 sparcv9 sparcv9v x86_64 amd"
   - "lib/chef/provider/package/yum/python_helper.rb:119:425      sparcv      U       sparc64v sparcv8 sparcv9 sparcv9v x86_64 amd64 ia32e"
-  - "lib/chef/resource/user_ulimit.rb:29:270         rctls           U       as resource controls (rctls) on a `project(4)` entry"
-  - "lib/chef/resource/user_ulimit.rb:29:306         projadd         U       project(4)` entry via `projadd`/`projmod`.\""
-  - "lib/chef/resource/user_ulimit.rb:29:316         projmod         U       entry via `projadd`/`projmod`.\""
-  - "lib/chef/resource/user_ulimit.rb:60:56          rctl            U       ) resource control (rctl) equivalent. Properties"
-  - "lib/chef/resource/user_ulimit.rb:62:40          rctl            U       with no Solaris kernel rctl equivalent) are rejected"
-  - "lib/chef/resource/user_ulimit.rb:65:15          RCTL            U       SOLARIS_RCTL_MAP = {"
-  - "lib/chef/resource/user_ulimit.rb:74:53          rctl            U       no supported Solaris rctl mapping. If any of these"
-  - "lib/chef/resource/user_ulimit.rb:142:57         rctl            U       privilege,value,deny)\" rctl clause is already present"
-  - "lib/chef/resource/user_ulimit.rb:143:31         rctl            U       for the given project/rctl pair in /etc/project"
-  - "lib/chef/resource/user_ulimit.rb:155:44         unsuffixed      U       from this resource's unsuffixed/soft/hard properties"
-  - "lib/chef/resource/user_ulimit.rb:155:80         unsuffixed      U       hard properties. An unsuffixed"
-  - "lib/chef/resource/user_ulimit.rb:207:23         projadd         U       command [\"projadd\", \"-U\", new_resource"
-  - "lib/chef/resource/user_ulimit.rb:211:19         RCTL            U       SOLARIS_RCTL_MAP.each do |base, rctl"
-  - "lib/chef/resource/user_ulimit.rb:222:25         projmod         U       command [\"projmod\", \"-s\", \"-K\", \"#{rctl"
-  - "lib/chef/resource/user_ulimit.rb:281:23         projdel         U       command [\"projdel\", project_name]"
+  - "lib/chef/resource/user_ulimit.rb:30:270         rctls               U       as resource controls (rctls) on a `project(4)` entry"
+  - "lib/chef/resource/user_ulimit.rb:30:306         projadd             U       project(4)` entry via `projadd`/`projmod`.\""
+  - "lib/chef/resource/user_ulimit.rb:30:316         projmod             U       entry via `projadd`/`projmod`.\""
+  - "lib/chef/resource/user_ulimit.rb:61:56          rctl                U       ) resource control (rctl) equivalent. Properties"
+  - "lib/chef/resource/user_ulimit.rb:63:40          rctl                U       with no Solaris kernel rctl equivalent) are rejected"
+  - "lib/chef/resource/user_ulimit.rb:66:15          RCTL                U       SOLARIS_RCTL_MAP = {"
+  - "lib/chef/resource/user_ulimit.rb:75:53          rctl                U       no supported Solaris rctl mapping. If any of these"
+  - "lib/chef/resource/user_ulimit.rb:143:57         rctl                U       privilege,value,deny)\" rctl clause is already present"
+  - "lib/chef/resource/user_ulimit.rb:144:31         rctl                U       for the given project/rctl pair in /etc/project"
+  - "lib/chef/resource/user_ulimit.rb:156:44         unsuffixed          U       from this resource's unsuffixed/soft/hard properties"
+  - "lib/chef/resource/user_ulimit.rb:156:80         unsuffixed          U       hard properties. An unsuffixed"
+  - "lib/chef/resource/user_ulimit.rb:206:9          metacharacters      U       # metacharacters like the parentheses"
+  - "lib/chef/resource/user_ulimit.rb:224:44         projadd             U       solaris_shell_command(\"projadd\", \"-U\", new_resource"
+  - "lib/chef/resource/user_ulimit.rb:228:19         RCTL                U       SOLARIS_RCTL_MAP.each do |base, rctl"
+  - "lib/chef/resource/user_ulimit.rb:239:46         projmod             U       solaris_shell_command(\"projmod\", \"-s\", \"-K\", \"#{rctl"
+  - "lib/chef/resource/user_ulimit.rb:298:44         projdel             U       solaris_shell_command(\"projdel\", project_name)"
   - "lib/chef/resource/windows_security_policy.rb:140:107        CEFLMNPR    U       Select-String -Pattern \"^[CEFLMNPR].* =.*$\" | Out-String"
   - "lib/chef/resource/windows_task.rb:526:47        NINETH (NINTH)      U       TaskScheduler::TASK_NINETH,"
   - "lib/chef/resource/windows_task.rb:547:48        THIRTYETH           U       TaskScheduler::TASK_THIRTYETH,"

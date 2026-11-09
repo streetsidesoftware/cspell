@@ -3,9 +3,9 @@ Repository: eslint/eslint
 Url: https://github.com/eslint/eslint
 Args: '[".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]'
 Summary:
-  files: 2087
-  filesWithIssues: 301
-  issues: 1556
+  files: 2090
+  filesWithIssues: 300
+  issues: 1548
   errors: 0
 Errors: []
 
@@ -17,6 +17,9 @@ issues:
   - "conf/rule-type-list.json:1:1\tNo issues found"
   - "CONTRIBUTING.md:1:1\tNo issues found"
   - "cypress.config.js:1:1\tNo issues found"
+  - "docs/_examples/code-path-analysis-code/check-cb-called.js:1:1\tNo issues found"
+  - "docs/_examples/code-path-analysis-code/check-cb-called.test.js:1:1\tNo issues found"
+  - "docs/_examples/code-path-analysis-code/package.json:1:1\tNo issues found"
   - "docs/_examples/custom-rule-tutorial-code/enforce-foo-bar.js:1:1\tNo issues found"
   - "docs/_examples/custom-rule-tutorial-code/enforce-foo-bar.test.js:1:1\tNo issues found"
   - "docs/_examples/custom-rule-tutorial-code/eslint-plugin-example.js:1:1\tNo issues found"
@@ -114,8 +117,7 @@ issues:
   - "docs/src/contribute/request-change.md:1:1\tNo issues found"
   - "docs/src/contribute/tests.md:1:1\tNo issues found"
   - "docs/src/contribute/work-on-issue.md:1:1\tNo issues found"
-  - "docs/src/extend/code-path-analysis.md:539:2         hoge    U       hoge();"
-  - "docs/src/extend/code-path-analysis.md:588:3         fuga    U       fuga();"
+  - "docs/src/extend/code-path-analysis.md:1:1\tNo issues found"
   - "docs/src/extend/custom-formatters.md:223:61         Guake               U       www.iterm2.com/) or [Guake](http://guake.org/)"
   - "docs/src/extend/custom-formatters.md:245:9          eslintformatter     U       - `\"eslintformatter\"`"
   - "docs/src/extend/custom-parsers.md:124:31        myparser    U       packages: [\"eslint-parser-myparser\"],"
@@ -1038,7 +1040,7 @@ issues:
   - "messages/shared.js:1:1\tNo issues found"
   - "messages/whitespace-found.js:1:1\tNo issues found"
   - "package.json:191:6          eslump          U       \"eslump\": \"^3.0.0\","
-  - "package.json:205:6          metascraper     U       \"metascraper\": \"^5.25.7\","
+  - "package.json:203:6          metascraper     U       \"metascraper\": \"^5.25.7\","
   - "packages/eslint-config-eslint/base.js:1:1\tNo issues found"
   - "packages/eslint-config-eslint/cjs.js:1:1\tNo issues found"
   - "packages/eslint-config-eslint/formatting.js:1:1\tNo issues found"
@@ -1271,7 +1273,7 @@ issues:
   - "tests/fixtures/code-path-analysis/generator-yield-return-1.js:1:1\tNo issues found"
   - "tests/fixtures/code-path-analysis/if-1.js:1:1\tNo issues found"
   - "tests/fixtures/code-path-analysis/if-2.js:1:1\tNo issues found"
-  - "tests/fixtures/code-path-analysis/if-3.js:1:1\tNo issues found"
+  - "tests/fixtures/code-path-analysis/if-3.js:15:5          hoge    U       hoge();"
   - "tests/fixtures/code-path-analysis/if-4.js:1:1\tNo issues found"
   - "tests/fixtures/code-path-analysis/if-5.js:1:1\tNo issues found"
   - "tests/fixtures/code-path-analysis/if-6.js:1:1\tNo issues found"
@@ -1334,7 +1336,7 @@ issues:
   - "tests/fixtures/code-path-analysis/optional-chaining--simple-2.js:1:1\tNo issues found"
   - "tests/fixtures/code-path-analysis/optional-chaining--simple-3.js:1:1\tNo issues found"
   - "tests/fixtures/code-path-analysis/optional-chaining--simple-4.js:1:1\tNo issues found"
-  - "tests/fixtures/code-path-analysis/switch--cases-1.js:1:1\tNo issues found"
+  - "tests/fixtures/code-path-analysis/switch--cases-1.js:24:9           fuga    U       fuga();"
   - "tests/fixtures/code-path-analysis/switch--cases-2.js:1:1\tNo issues found"
   - "tests/fixtures/code-path-analysis/switch--cases-and-default-1.js:1:1\tNo issues found"
   - "tests/fixtures/code-path-analysis/switch--cases-and-default-2.js:1:1\tNo issues found"
@@ -2426,7 +2428,7 @@ issues:
   - "tools/test-ecosystem/update.mjs:1:1\tNo issues found"
   - "tools/update-eslint-all.js:1:1\tNo issues found"
   - "tools/update-eslint-recommended.js:1:1\tNo issues found"
-  - "tools/update-readme.js:39:31        Prerendered     U       returns {Promise<string>} Prerendered sponsors markdown."
+  - "tools/update-readme.js:38:31        Prerendered     U       returns {Promise<string>} Prerendered sponsors markdown."
   - "tools/update-rule-type-headers.js:1:1\tNo issues found"
   - "tsconfig.base.json:1:1\tNo issues found"
   - "tsconfig.types-legacy.json:1:1\tNo issues found"
@@ -2617,7 +2619,7 @@ issuesSummary:
   - "text: frontmatter, count: 1, files: 1,"
   - "text: Fsvg, count: 2, files: 1,"
   - "text: fucntion, count: 1, files: 1,"
-  - "text: fuga, count: 13, files: 6,"
+  - "text: fuga, count: 10, files: 5,"
   - "text: funcs, count: 2, files: 1,"
   - "text: funcscope, count: 3, files: 1,"
   - "text: funct, count: 5, files: 1,"
@@ -2642,7 +2644,7 @@ issuesSummary:
   - "text: Harish, count: 1, files: 1,"
   - "text: Harish's, count: 1, files: 1,"
   - "text: Hildenbiddle, count: 1, files: 1,"
-  - "text: hoge, count: 18, files: 7,"
+  - "text: hoge, count: 13, files: 6,"
   - "text: hsep, count: 2, files: 1,"
   - "text: humanfs, count: 3, files: 2,"
   - "text: humanwhocodes, count: 5, files: 4,"
