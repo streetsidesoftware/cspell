@@ -9,7 +9,7 @@ sidebar_label: Default Dictionaries
 
 # Dictionaries
 
-The spell checker includes a set of default dictionaries.
+CSpell includes default dictionaries. This page lists some common ones.
 
 Use the `trace` command to see a list of dictionaries: See [Searching Dictionaries](./dictionaries/searching-dictionaries)
 
@@ -67,23 +67,7 @@ Use the `trace` command to see a list of dictionaries: See [Searching Dictionari
 
 ## Disabling a Dictionary
 
-It is possible to prevent a dictionary from being loaded. This is useful if you want to use your own dictionary or just
-turn off an existing dictionary.
+<span id="disable-default-cpp-dictionary" />
 
-#### Disable Default cpp Dictionary
-
-```javascript
-"dictionaries": ["!cpp"],
-"overrides": [
-  {
-      "filename": "legacy/**/*.cpp",
-      "dictionaries": ["!!cpp"], // add it back for *.cpp files under the legacy folder
-  },
-]
-```
-
-The number of `!`'s is important.
-
-- `!cpp` remove `cpp` dictionary
-- `!!cpp` add it back
-- `!!!cpp` remove it again.
+See [Turning dictionaries on and off](./turning-dictionaries-on-and-off.md) to disable a dictionary globally or for
+matching files.
