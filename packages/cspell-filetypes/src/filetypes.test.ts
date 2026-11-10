@@ -54,10 +54,10 @@ describe('Validate LanguageIds', () => {
         ${'kernel.cuf'}                      | ${['fortran', 'FortranFreeForm']}
         ${'legacy.FOR'}                      | ${['fortran', 'FortranFixedForm']}
         ${'plugin.vim'}                      | ${['vim']}
-        ${'.vimrc'}                          | ${['vim']}
+        ${'.vimrc'}                          | ${['vim'] /* cspell:ignore vimrc */}
         ${'_vimrc'}                          | ${['vim']}
         ${'vimrc'}                           | ${['vim']}
-        ${'.gvimrc'}                         | ${['vim']}
+        ${'.gvimrc'}                         | ${['vim'] /* cspell:ignore gvimrc */}
     `('getLanguagesForBasename $filename', ({ filename, expected }) => {
         expect(LangId.findMatchingFileTypes(filename)).toEqual(expected);
     });
