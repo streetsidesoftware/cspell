@@ -37,6 +37,7 @@ describe('Validate wordSplitter', () => {
     });
 
     test('issue #9469: word splitter misses dictionary word after long camelCase prefix', () => {
+        // cspell:ignore redirections
         const testWords = new Set(['HTTPRedirectHandler', 'max_redirections', 'HTTP', 'Redirect', 'Handler', 'max']);
         function isValidWord(t: TextOffset): boolean {
             return testWords.has(t.text);
@@ -366,9 +367,9 @@ describe('wordSplitter against dictionary', async () => {
         ${'NSProgress_ffiVoidNSURLboolNSError_fnPtrTrampoline'} | ${'NS|Progress|<ffi>|Void|NSURL|bool|NS|Error|<fn>|<Ptr>|Trampoline' /* cspell:disable-line */}
         ${'To_EntityDto_And_To_DrivedEntityDto'}                | ${'To|Entity|<Dto>|And|To|<Drived>|Entity|<Dto>' /* cspell:disable-line */}
         ${'QmFzZTY0IHN0cmluZyBvZiB0ZXh0IGhlcmU.access'}         | ${'QmFzZTY0IHN0cmluZyBvZiB0ZXh0IGhlcmU|access' /* cspell:disable-line */}
-        ${'HTTPRedirectHandler.max_redirections'}               | ${'HTTP|Redirect|Handler|max_redirections'}
-        ${'HTTPRedirectHandler-max_redirections'}               | ${'HTTP|Redirect|Handler|max_redirections'}
-        ${'HTTPRedirectHandler_max_redirections'}               | ${'HTTP|Redirect|Handler|max_redirections'}
+        ${'HTTPRedirectHandler.max_redirections'}               | ${'HTTP|Redirect|Handler|max_redirections' /* cspell:disable-line */}
+        ${'HTTPRedirectHandler-max_redirections'}               | ${'HTTP|Redirect|Handler|max_redirections' /* cspell:disable-line */}
+        ${'HTTPRedirectHandler_max_redirections'}               | ${'HTTP|Redirect|Handler|max_redirections' /* cspell:disable-line */}
     `('validate against dictionary', ({ text, expected }) => {
         expected = typeof expected === 'string' ? expected.split('|') : expected;
         const line = {
