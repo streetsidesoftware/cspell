@@ -39,6 +39,16 @@ describe('SpellingDictionaryFromTrie', () => {
         expect(dict.has(word, { ignoreCase: false })).toBe(expected);
     });
 
+    test.each`
+        word       | expected
+        ${'Quick'} | ${true}
+        ${'quick'} | ${false}
+    `('a replacement only applies in the case it lists: $word', ({ word, expected }) => {
+        const trie = buildITrieFromWords(['Kick']);
+        const dict = new SpellingDictionaryFromTrie(trie, 'test', { repMap: [['Qu', 'K']] });
+        expect(dict.has(word, { ignoreCase: false })).toBe(expected);
+    });
+
     test('mapWord and remapWord are undefined without a repMap', () => {
         const dict = new SpellingDictionaryFromTrie(buildITrieFromWords(['word']), 'test', {});
         expect(dict.mapWord).toBe(undefined);
