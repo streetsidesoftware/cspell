@@ -3,7 +3,7 @@ Repository: chef/chef
 Url: "https://github.com/chef/chef.git"
 Args: ["--config=../../../cspell-chef.config.yaml","**"]
 Lines:
- CSpell: Files checked: 1040, Issues found: 47 in 12 files.
+ CSpell: Files checked: 1041, Issues found: 48 in 12 files.
  exit code: 1
 chef-utils/lib/chef-utils/dsl/default_paths.rb:36:73     - Unknown word (extensionless) -- usr/bin, which has an extensionless
 docs/dev/how_to/github-runner-setup-guide.md:187:19    - Unknown word (YTDVFEL)    -- TOKEN="ABFBQT5WJE4YTDVFEL3EMBDJCX7CS"
@@ -30,21 +30,22 @@ lib/chef/provider/package/yum/python_helper.rb:119:48    - Unknown word (alphaev
 lib/chef/provider/package/yum/python_helper.rb:119:58    - Unknown word (alphaev)    -- alpha alphaev4 alphaev45 alphaev5 alphaev56 alphaev6
 lib/chef/provider/package/yum/python_helper.rb:119:67    - Unknown word (alphaev)    -- alphaev45 alphaev5 alphaev56 alphaev6 alphaev6
 lib/chef/provider/package/yum/python_helper.rb:119:77    - Unknown word (alphaev)    -- alphaev5 alphaev56 alphaev6 alphaev67 alphaev6
-lib/chef/resource/user_ulimit.rb:142:57    - Unknown word (rctl)       -- privilege,value,deny)" rctl clause is already present
-lib/chef/resource/user_ulimit.rb:143:31    - Unknown word (rctl)       -- for the given project/rctl pair in /etc/project
-lib/chef/resource/user_ulimit.rb:155:44    - Unknown word (unsuffixed) -- from this resource's unsuffixed/soft/hard properties
-lib/chef/resource/user_ulimit.rb:155:80    - Unknown word (unsuffixed) -- hard properties. An unsuffixed
-lib/chef/resource/user_ulimit.rb:207:23    - Unknown word (projadd)    -- command ["projadd", "-U", new_resource
-lib/chef/resource/user_ulimit.rb:211:19    - Unknown word (RCTL)       -- SOLARIS_RCTL_MAP.each do |base, rctl
-lib/chef/resource/user_ulimit.rb:222:25    - Unknown word (projmod)    -- command ["projmod", "-s", "-K", "#{rctl
-lib/chef/resource/user_ulimit.rb:281:23    - Unknown word (projdel)    -- command ["projdel", project_name]
-lib/chef/resource/user_ulimit.rb:29:270    - Unknown word (rctls)      -- as resource controls (rctls) on a `project(4)` entry
-lib/chef/resource/user_ulimit.rb:29:306    - Unknown word (projadd)    -- project(4)` entry via `projadd`/`projmod`."
-lib/chef/resource/user_ulimit.rb:29:316    - Unknown word (projmod)    -- entry via `projadd`/`projmod`."
-lib/chef/resource/user_ulimit.rb:60:56     - Unknown word (rctl)       -- ) resource control (rctl) equivalent. Properties
-lib/chef/resource/user_ulimit.rb:62:40     - Unknown word (rctl)       -- with no Solaris kernel rctl equivalent) are rejected
-lib/chef/resource/user_ulimit.rb:65:15     - Unknown word (RCTL)       -- SOLARIS_RCTL_MAP = {
-lib/chef/resource/user_ulimit.rb:74:53     - Unknown word (rctl)       -- no supported Solaris rctl mapping. If any of these
+lib/chef/resource/user_ulimit.rb:143:57    - Unknown word (rctl)       -- privilege,value,deny)" rctl clause is already present
+lib/chef/resource/user_ulimit.rb:144:31    - Unknown word (rctl)       -- for the given project/rctl pair in /etc/project
+lib/chef/resource/user_ulimit.rb:156:44    - Unknown word (unsuffixed) -- from this resource's unsuffixed/soft/hard properties
+lib/chef/resource/user_ulimit.rb:156:80    - Unknown word (unsuffixed) -- hard properties. An unsuffixed
+lib/chef/resource/user_ulimit.rb:206:9     - Unknown word (metacharacters) -- # metacharacters like the parentheses
+lib/chef/resource/user_ulimit.rb:224:44    - Unknown word (projadd)        -- solaris_shell_command("projadd", "-U", new_resource
+lib/chef/resource/user_ulimit.rb:228:19    - Unknown word (RCTL)           -- SOLARIS_RCTL_MAP.each do |base, rctl
+lib/chef/resource/user_ulimit.rb:239:46    - Unknown word (projmod)        -- solaris_shell_command("projmod", "-s", "-K", "#{rctl
+lib/chef/resource/user_ulimit.rb:298:44    - Unknown word (projdel)        -- solaris_shell_command("projdel", project_name)
+lib/chef/resource/user_ulimit.rb:30:270    - Unknown word (rctls)      -- as resource controls (rctls) on a `project(4)` entry
+lib/chef/resource/user_ulimit.rb:30:306    - Unknown word (projadd)    -- project(4)` entry via `projadd`/`projmod`."
+lib/chef/resource/user_ulimit.rb:30:316    - Unknown word (projmod)    -- entry via `projadd`/`projmod`."
+lib/chef/resource/user_ulimit.rb:61:56     - Unknown word (rctl)       -- ) resource control (rctl) equivalent. Properties
+lib/chef/resource/user_ulimit.rb:63:40     - Unknown word (rctl)       -- with no Solaris kernel rctl equivalent) are rejected
+lib/chef/resource/user_ulimit.rb:66:15     - Unknown word (RCTL)       -- SOLARIS_RCTL_MAP = {
+lib/chef/resource/user_ulimit.rb:75:53     - Unknown word (rctl)       -- no supported Solaris rctl mapping. If any of these
 lib/chef/resource/windows_security_policy.rb:140:107   - Unknown word (CEFLMNPR)   -- Select-String -Pattern "^[CEFLMNPR].* =.*$" | Out-String
 lib/chef/resource/windows_task.rb:526:47    - Unknown word (NINETH)     -- TaskScheduler::TASK_NINETH,
 lib/chef/resource/windows_task.rb:547:48    - Unknown word (THIRTYETH)  -- TaskScheduler::TASK_THIRTYETH,

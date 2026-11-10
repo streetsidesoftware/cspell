@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["--issues-summary-report","**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2941, Issues found: 8945 in 961 files.
+ CSpell: Files checked: 2945, Issues found: 8969 in 962 files.
  exit code: 1
 django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 django/apps/registry.py:134:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -511,40 +511,43 @@ django/contrib/gis/gdal/field.py:45:13     - Unknown word (capi)       -- capi.g
 django/contrib/gis/gdal/field.py:54:17     - Unknown word (capi)       -- capi.get_field_as_integer
 django/contrib/gis/gdal/field.py:60:17     - Unknown word (capi)       -- capi.get_field_as_integer
 django/contrib/gis/gdal/field.py:6:54      - Unknown word (capi)       -- prototypes import ds as capi
+django/contrib/gis/gdal/geojson.py:21:14     - Unknown word (epsga)      -- "epsga",
+django/contrib/gis/gdal/geojson.py:27:14     - Unknown word (ignf)       -- "ignf",
+django/contrib/gis/gdal/geojson.py:30:14     - Unknown word (nrcan)      -- "nrcan",
 django/contrib/gis/gdal/geometries.py:28:17     - Unknown word (ellps)      -- +proj=longlat +ellps=WGS84 +datum=WGS84
 django/contrib/gis/gdal/geometries.py:31:17     - Unknown word (ellps)      -- +proj=longlat +ellps=clrk66 +datum=NAD27
 django/contrib/gis/gdal/geometries.py:31:23     - Unknown word (clrk)       -- proj=longlat +ellps=clrk66 +datum=NAD27 +no_defs
-django/contrib/gis/gdal/geometries.py:408:25    - Unknown word (wkbsize)    -- return capi.get_wkbsize(self.ptr)
-django/contrib/gis/gdal/geometries.py:470:13    - Unknown word (klone)      -- klone = self.clone()
-django/contrib/gis/gdal/geometries.py:471:13    - Unknown word (klone)      -- klone.transform(coord_trans
-django/contrib/gis/gdal/geometries.py:472:20    - Unknown word (klone)      -- return klone
-django/contrib/gis/gdal/geometries.py:535:10    - Unknown word (geomgen)    -- def _geomgen(self, gen_func, other
-django/contrib/gis/gdal/geometries.py:545:22    - Unknown word (geomgen)    -- return self._geomgen(capi.get_boundary)
-django/contrib/gis/gdal/geometries.py:54:56     - Unknown word (capi)       -- prototypes import geom as capi
-django/contrib/gis/gdal/geometries.py:553:22    - Unknown word (geomgen)    -- return self._geomgen(capi.geom_convex_hull
-django/contrib/gis/gdal/geometries.py:560:22    - Unknown word (geomgen)    -- return self._geomgen(capi.geom_diff, other
-django/contrib/gis/gdal/geometries.py:567:22    - Unknown word (geomgen)    -- return self._geomgen(capi.geom_intersection
-django/contrib/gis/gdal/geometries.py:623:25    - Unknown word (getm)       -- return capi.getm(self.ptr, 0)
-django/contrib/gis/gdal/geometries.py:68:18     - Unknown word (capi)       -- destructor = capi.destroy_geom
-django/contrib/gis/gdal/geometries.py:699:39    - Unknown word (getm)       -- return self._listarr(capi.getm)
-django/contrib/gis/gdal/geometries.py:841:30    - Unknown word (CIRCULARSTRING) -- CircularString, # CIRCULARSTRING Z
-django/contrib/gis/gdal/geometries.py:842:29    - Unknown word (COMPOUNDCURVE)  -- : CompoundCurve,  # COMPOUNDCURVE Z
-django/contrib/gis/gdal/geometries.py:843:28    - Unknown word (CURVEPOLYGON)   -- 0: CurvePolygon,  # CURVEPOLYGON Z
-django/contrib/gis/gdal/geometries.py:844:26    - Unknown word (MULTICURVE)     -- 011: MultiCurve,  # MULTICURVE Z
-django/contrib/gis/gdal/geometries.py:845:28    - Unknown word (MULTICURVE)     -- 2: MultiSurface,  # MULTICURVE Z
-django/contrib/gis/gdal/geometries.py:853:30    - Unknown word (CIRCULARSTRING) -- CircularString, # CIRCULARSTRING M
-django/contrib/gis/gdal/geometries.py:854:29    - Unknown word (COMPOUNDCURVE)  -- : CompoundCurve,  # COMPOUNDCURVE M
-django/contrib/gis/gdal/geometries.py:855:28    - Unknown word (CURVEPOLYGON)   -- 0: CurvePolygon,  # CURVEPOLYGON M
-django/contrib/gis/gdal/geometries.py:856:26    - Unknown word (MULTICURVE)     -- 011: MultiCurve,  # MULTICURVE M
-django/contrib/gis/gdal/geometries.py:857:28    - Unknown word (MULTICURVE)     -- 2: MultiSurface,  # MULTICURVE M
-django/contrib/gis/gdal/geometries.py:865:30    - Unknown word (CIRCULARSTRING) -- CircularString, # CIRCULARSTRING ZM
-django/contrib/gis/gdal/geometries.py:866:29    - Unknown word (COMPOUNDCURVE)  -- : CompoundCurve,  # COMPOUNDCURVE ZM
-django/contrib/gis/gdal/geometries.py:867:28    - Unknown word (CURVEPOLYGON)   -- 0: CurvePolygon,  # CURVEPOLYGON ZM
-django/contrib/gis/gdal/geometries.py:868:26    - Unknown word (MULTICURVE)     -- 011: MultiCurve,  # MULTICURVE ZM
-django/contrib/gis/gdal/geometries.py:869:28    - Unknown word (MULTISURFACE)   -- 2: MultiSurface,  # MULTISURFACE ZM
-django/contrib/gis/gdal/geometries.py:91:25     - Unknown word (capi)       -- g = capi.create_geom(OGRGeomType
-django/contrib/gis/gdal/geometries.py:92:21     - Unknown word (capi)       -- capi.import_wkt(g, byref
-django/contrib/gis/gdal/geometries.py:94:25     - Unknown word (capi)       -- g = capi.from_wkt(
+django/contrib/gis/gdal/geometries.py:411:25    - Unknown word (wkbsize)    -- return capi.get_wkbsize(self.ptr)
+django/contrib/gis/gdal/geometries.py:473:13    - Unknown word (klone)      -- klone = self.clone()
+django/contrib/gis/gdal/geometries.py:474:13    - Unknown word (klone)      -- klone.transform(coord_trans
+django/contrib/gis/gdal/geometries.py:475:20    - Unknown word (klone)      -- return klone
+django/contrib/gis/gdal/geometries.py:538:10    - Unknown word (geomgen)    -- def _geomgen(self, gen_func, other
+django/contrib/gis/gdal/geometries.py:548:22    - Unknown word (geomgen)    -- return self._geomgen(capi.get_boundary)
+django/contrib/gis/gdal/geometries.py:556:22    - Unknown word (geomgen)    -- return self._geomgen(capi.geom_convex_hull
+django/contrib/gis/gdal/geometries.py:55:56     - Unknown word (capi)       -- prototypes import geom as capi
+django/contrib/gis/gdal/geometries.py:563:22    - Unknown word (geomgen)    -- return self._geomgen(capi.geom_diff, other
+django/contrib/gis/gdal/geometries.py:570:22    - Unknown word (geomgen)    -- return self._geomgen(capi.geom_intersection
+django/contrib/gis/gdal/geometries.py:626:25    - Unknown word (getm)       -- return capi.getm(self.ptr, 0)
+django/contrib/gis/gdal/geometries.py:69:18     - Unknown word (capi)       -- destructor = capi.destroy_geom
+django/contrib/gis/gdal/geometries.py:702:39    - Unknown word (getm)       -- return self._listarr(capi.getm)
+django/contrib/gis/gdal/geometries.py:844:30    - Unknown word (CIRCULARSTRING) -- CircularString, # CIRCULARSTRING Z
+django/contrib/gis/gdal/geometries.py:845:29    - Unknown word (COMPOUNDCURVE)  -- : CompoundCurve,  # COMPOUNDCURVE Z
+django/contrib/gis/gdal/geometries.py:846:28    - Unknown word (CURVEPOLYGON)   -- 0: CurvePolygon,  # CURVEPOLYGON Z
+django/contrib/gis/gdal/geometries.py:847:26    - Unknown word (MULTICURVE)     -- 011: MultiCurve,  # MULTICURVE Z
+django/contrib/gis/gdal/geometries.py:848:28    - Unknown word (MULTICURVE)     -- 2: MultiSurface,  # MULTICURVE Z
+django/contrib/gis/gdal/geometries.py:856:30    - Unknown word (CIRCULARSTRING) -- CircularString, # CIRCULARSTRING M
+django/contrib/gis/gdal/geometries.py:857:29    - Unknown word (COMPOUNDCURVE)  -- : CompoundCurve,  # COMPOUNDCURVE M
+django/contrib/gis/gdal/geometries.py:858:28    - Unknown word (CURVEPOLYGON)   -- 0: CurvePolygon,  # CURVEPOLYGON M
+django/contrib/gis/gdal/geometries.py:859:26    - Unknown word (MULTICURVE)     -- 011: MultiCurve,  # MULTICURVE M
+django/contrib/gis/gdal/geometries.py:860:28    - Unknown word (MULTICURVE)     -- 2: MultiSurface,  # MULTICURVE M
+django/contrib/gis/gdal/geometries.py:868:30    - Unknown word (CIRCULARSTRING) -- CircularString, # CIRCULARSTRING ZM
+django/contrib/gis/gdal/geometries.py:869:29    - Unknown word (COMPOUNDCURVE)  -- : CompoundCurve,  # COMPOUNDCURVE ZM
+django/contrib/gis/gdal/geometries.py:870:28    - Unknown word (CURVEPOLYGON)   -- 0: CurvePolygon,  # CURVEPOLYGON ZM
+django/contrib/gis/gdal/geometries.py:871:26    - Unknown word (MULTICURVE)     -- 011: MultiCurve,  # MULTICURVE ZM
+django/contrib/gis/gdal/geometries.py:872:28    - Unknown word (MULTISURFACE)   -- 2: MultiSurface,  # MULTISURFACE ZM
+django/contrib/gis/gdal/geometries.py:92:25     - Unknown word (capi)       -- g = capi.create_geom(OGRGeomType
+django/contrib/gis/gdal/geometries.py:93:21     - Unknown word (capi)       -- capi.import_wkt(g, byref
+django/contrib/gis/gdal/geometries.py:95:25     - Unknown word (capi)       -- g = capi.from_wkt(
 django/contrib/gis/gdal/geomtype.py:38:16     - Unknown word (TINZ)       -- 1016: "TINZ",
 django/contrib/gis/gdal/geomtype.py:53:16     - Unknown word (TINM)       -- 2016: "TINM",
 django/contrib/gis/gdal/geomtype.py:68:16     - Unknown word (TINZM)      -- 3016: "TINZM",
@@ -616,20 +619,20 @@ django/contrib/gis/gdal/prototypes/raster.py:33:11     - Unknown word (voidptr) 
 django/contrib/gis/gdal/prototypes/raster.py:36:11     - Unknown word (voidptr)    -- copy_ds = voidptr_output(
 django/contrib/gis/gdal/prototypes/raster.py:42:17     - Unknown word (voidptr)    -- get_ds_driver = voidptr_output(std_call("GDALGetDatas
 django/contrib/gis/gdal/prototypes/raster.py:9:30      - Unknown word (libgdal)    -- django.contrib.gis.gdal.libgdal import std_call
-django/contrib/gis/gdal/prototypes/srs.py:100:1     - Unknown word (islocal)       -- islocal = int_output(lgdal.OSRIsLocal
-django/contrib/gis/gdal/prototypes/srs.py:100:28    - Unknown word (OSRIs)         -- islocal = int_output(lgdal.OSRIsLocal, [c_void_p])
-django/contrib/gis/gdal/prototypes/srs.py:101:1     - Unknown word (isprojected)   -- isprojected = int_output(lgdal.OSRIsProje
-django/contrib/gis/gdal/prototypes/srs.py:101:32    - Unknown word (OSRIs)         -- sprojected = int_output(lgdal.OSRIsProjected, [c_void_p
+django/contrib/gis/gdal/prototypes/srs.py:104:1     - Unknown word (isgeographic)  -- isgeographic = int_output(lgdal.OSRIsGeogr
+django/contrib/gis/gdal/prototypes/srs.py:104:33    - Unknown word (OSRIs)         -- geographic = int_output(lgdal.OSRIsGeographic, [c_void_p
+django/contrib/gis/gdal/prototypes/srs.py:105:1     - Unknown word (islocal)       -- islocal = int_output(lgdal.OSRIsLocal
+django/contrib/gis/gdal/prototypes/srs.py:105:28    - Unknown word (OSRIs)         -- islocal = int_output(lgdal.OSRIsLocal, [c_void_p])
+django/contrib/gis/gdal/prototypes/srs.py:106:1     - Unknown word (isprojected)   -- isprojected = int_output(lgdal.OSRIsProje
+django/contrib/gis/gdal/prototypes/srs.py:106:32    - Unknown word (OSRIs)         -- sprojected = int_output(lgdal.OSRIsProjected, [c_void_p
 django/contrib/gis/gdal/prototypes/srs.py:28:60     - Unknown word (strarg)     -- POINTER(c_char_p)], strarg=True)
 django/contrib/gis/gdal/prototypes/srs.py:34:27     - Unknown word (lgdal)      -- release_srs = void_output(lgdal.OSRRelease, [c_void
 django/contrib/gis/gdal/prototypes/srs.py:38:28     - Unknown word (lgdal)      -- validate = void_output(lgdal.OSRValidate, [c_void
-django/contrib/gis/gdal/prototypes/srs.py:3:30      - Unknown word (libgdal)    -- django.contrib.gis.gdal.libgdal import lgdal, std_call
-django/contrib/gis/gdal/prototypes/srs.py:3:45      - Unknown word (lgdal)      -- gdal.libgdal import lgdal, std_call
+django/contrib/gis/gdal/prototypes/srs.py:3:30      - Unknown word (libgdal)    -- django.contrib.gis.gdal.libgdal import GDAL_VERSION
+django/contrib/gis/gdal/prototypes/srs.py:3:59      - Unknown word (lgdal)      -- import GDAL_VERSION, lgdal, std_call
 django/contrib/gis/gdal/prototypes/srs.py:40:5      - Unknown word (lgdal)      -- lgdal.OSRSetAxisMappingStrategy
 django/contrib/gis/gdal/prototypes/srs.py:44:25     - Unknown word (lgdal)      -- semi_major = srs_double(lgdal.OSRGetSemiMajor)
 django/contrib/gis/gdal/prototypes/srs.py:46:1      - Unknown word (invflattening) -- invflattening = srs_double(lgdal.OSRGetInvF
-django/contrib/gis/gdal/prototypes/srs.py:99:1      - Unknown word (isgeographic)  -- isgeographic = int_output(lgdal.OSRIsGeogr
-django/contrib/gis/gdal/prototypes/srs.py:99:33     - Unknown word (OSRIs)         -- geographic = int_output(lgdal.OSRIsGeographic, [c_void_p
 django/contrib/gis/gdal/raster/band.py:108:22    - Unknown word (smin)       -- result = smin.value, smax.value, smean
 django/contrib/gis/gdal/raster/band.py:108:34    - Unknown word (smax)       -- result = smin.value, smax.value, smean.value,
 django/contrib/gis/gdal/raster/band.py:108:46    - Unknown word (smean)      -- smin.value, smax.value, smean.value, sstd.value
@@ -670,37 +673,44 @@ django/contrib/gis/gdal/raster/source.py:164:23    - Unknown word (papszlist)  -
 django/contrib/gis/gdal/raster/source.py:165:13    - Unknown word (papsz)      -- papsz_options = (c_char_p
 django/contrib/gis/gdal/raster/source.py:19:58     - Unknown word (capi)       -- prototypes import raster as capi
 django/contrib/gis/gdal/raster/source.py:221:21    - Unknown word (vsimem)     -- if self._is_vsimem_based:
-django/contrib/gis/gdal/raster/source.py:269:42    - Unknown word (geotransforms) -- that needs flushing are geotransforms, coordinate systems
-django/contrib/gis/gdal/raster/source.py:439:49    - Unknown word (Neighbour)     -- resampling="NearestNeighbour", max_error=0.0):
-django/contrib/gis/gdal/raster/source.py:482:11    - Unknown word (Reproject)     -- # Reproject image
-django/contrib/gis/gdal/raster/source.py:483:14    - Unknown word (reproject)     -- capi.reproject_image(
-django/contrib/gis/gdal/raster/source.py:523:63    - Unknown word (Neighbour)     -- resampling="NearestNeighbour", max_error=0.0
-django/contrib/gis/gdal/raster/source.py:526:38    - Unknown word (reprojected)   -- copy of this raster reprojected into the given spatial
-django/contrib/gis/gdal/raster/source.py:579:30    - Unknown word (gdalinfo)      -- to the output of the gdalinfo command line utility
+django/contrib/gis/gdal/raster/source.py:268:42    - Unknown word (geotransforms) -- that needs flushing are geotransforms, coordinate systems
+django/contrib/gis/gdal/raster/source.py:438:49    - Unknown word (Neighbour)     -- resampling="NearestNeighbour", max_error=0.0):
+django/contrib/gis/gdal/raster/source.py:481:11    - Unknown word (Reproject)     -- # Reproject image
+django/contrib/gis/gdal/raster/source.py:482:14    - Unknown word (reproject)     -- capi.reproject_image(
+django/contrib/gis/gdal/raster/source.py:522:63    - Unknown word (Neighbour)     -- resampling="NearestNeighbour", max_error=0.0
+django/contrib/gis/gdal/raster/source.py:525:38    - Unknown word (reprojected)   -- copy of this raster reprojected into the given spatial
+django/contrib/gis/gdal/raster/source.py:578:30    - Unknown word (gdalinfo)      -- to the output of the gdalinfo command line utility
 django/contrib/gis/gdal/raster/source.py:84:18     - Unknown word (capi)       -- destructor = capi.close_ds
-django/contrib/gis/gdal/srs.py:120:18    - Unknown word (GEOGCS)     -- ... 'GEOGCS["WGS 84",'
-django/contrib/gis/gdal/srs.py:125:24    - Unknown word (GEOGCS)     -- >>> print(srs['GEOGCS'])
+django/contrib/gis/gdal/srs.py:105:19    - Unknown word (capi)       -- srs = capi.new_srs(buf)
 django/contrib/gis/gdal/srs.py:12:9      - Unknown word (TOWGS)      -- TOWGS84[0,0,0,0,0,0,0],
-django/contrib/gis/gdal/srs.py:133:24    - Unknown word (TOWGS)      -- >>> print(srs['TOWGS84', 4]) # the fourth
+django/contrib/gis/gdal/srs.py:130:18    - Unknown word (GEOGCS)     -- ... 'GEOGCS["WGS 84",'
+django/contrib/gis/gdal/srs.py:135:24    - Unknown word (GEOGCS)     -- >>> print(srs['GEOGCS'])
+django/contrib/gis/gdal/srs.py:143:24    - Unknown word (TOWGS)      -- >>> print(srs['TOWGS84', 4]) # the fourth
 django/contrib/gis/gdal/srs.py:14:5      - Unknown word (PRIMEM)     -- PRIMEM["Greenwich",0,
-django/contrib/gis/gdal/srs.py:153:62    - Unknown word (PROJCS)     -- given target node (e.g. 'PROJCS'). The
-django/contrib/gis/gdal/srs.py:200:37    - Unknown word (PROJCS)     -- return self.attr_value("PROJCS")
-django/contrib/gis/gdal/srs.py:202:37    - Unknown word (GEOGCS)     -- return self.attr_value("GEOGCS")
+django/contrib/gis/gdal/srs.py:163:62    - Unknown word (PROJCS)     -- given target node (e.g. 'PROJCS'). The
 django/contrib/gis/gdal/srs.py:20:16     - Unknown word (ellps)      -- +proj=longlat +ellps=WGS84 +datum=WGS84
-django/contrib/gis/gdal/srs.py:261:11    - Unknown word (semimajor)  -- (semimajor axis, semiminor axis
-django/contrib/gis/gdal/srs.py:261:27    - Unknown word (semiminor)  -- (semimajor axis, semiminor axis, and inverse flattening
-django/contrib/gis/gdal/srs.py:278:21    - Unknown word (invflattening) -- return capi.invflattening(self.ptr, byref(c_int
-django/contrib/gis/gdal/srs.py:285:24    - Unknown word (GEOGCS)        -- (root node is GEOGCS).
-django/contrib/gis/gdal/srs.py:287:26    - Unknown word (isgeographic)  -- return bool(capi.isgeographic(self.ptr))
-django/contrib/gis/gdal/srs.py:294:26    - Unknown word (islocal)       -- return bool(capi.islocal(self.ptr))
-django/contrib/gis/gdal/srs.py:300:24    - Unknown word (PROJCS)        -- (root node is PROJCS).
-django/contrib/gis/gdal/srs.py:302:26    - Unknown word (isprojected)   -- return bool(capi.isprojected(self.ptr))
-django/contrib/gis/gdal/srs.py:36:55     - Unknown word (capi)       -- prototypes import srs as capi
-django/contrib/gis/gdal/srs.py:52:18     - Unknown word (capi)       -- destructor = capi.release_srs
-django/contrib/gis/gdal/srs.py:67:24     - Unknown word (capi)       -- self.ptr = capi.new_srs(c_char_p(b"
-django/contrib/gis/gdal/srs.py:70:17     - Unknown word (capi)       -- capi.set_axis_strategy(self
+django/contrib/gis/gdal/srs.py:210:37    - Unknown word (PROJCS)     -- return self.attr_value("PROJCS")
+django/contrib/gis/gdal/srs.py:212:37    - Unknown word (GEOGCS)     -- return self.attr_value("GEOGCS")
+django/contrib/gis/gdal/srs.py:271:11    - Unknown word (semimajor)  -- (semimajor axis, semiminor axis
+django/contrib/gis/gdal/srs.py:271:27    - Unknown word (semiminor)  -- (semimajor axis, semiminor axis, and inverse flattening
+django/contrib/gis/gdal/srs.py:288:21    - Unknown word (invflattening) -- return capi.invflattening(self.ptr, byref(c_int
+django/contrib/gis/gdal/srs.py:295:24    - Unknown word (GEOGCS)        -- (root node is GEOGCS).
+django/contrib/gis/gdal/srs.py:297:26    - Unknown word (isgeographic)  -- return bool(capi.isgeographic(self.ptr))
+django/contrib/gis/gdal/srs.py:304:26    - Unknown word (islocal)       -- return bool(capi.islocal(self.ptr))
+django/contrib/gis/gdal/srs.py:310:24    - Unknown word (PROJCS)        -- (root node is PROJCS).
+django/contrib/gis/gdal/srs.py:312:26    - Unknown word (isprojected)   -- return bool(capi.isprojected(self.ptr))
+django/contrib/gis/gdal/srs.py:333:65    - Unknown word (PAPSZ)         -- ptr, user_input, byref(PAPSZ_OPTIONS))
+django/contrib/gis/gdal/srs.py:36:30     - Unknown word (libgdal)    -- django.contrib.gis.gdal.libgdal import GDAL_VERSION
+django/contrib/gis/gdal/srs.py:37:55     - Unknown word (capi)       -- prototypes import srs as capi
+django/contrib/gis/gdal/srs.py:41:1      - Unknown word (papsz)      -- papsz_options = [
+django/contrib/gis/gdal/srs.py:46:11     - Unknown word (papszlist)  -- # Convert papszlist to ctypes array.
+django/contrib/gis/gdal/srs.py:47:1      - Unknown word (PAPSZ)      -- PAPSZ_OPTIONS = (c_char_p
+django/contrib/gis/gdal/srs.py:47:33     - Unknown word (papsz)      -- OPTIONS = (c_char_p * len(papsz_options))(*papsz_options
+django/contrib/gis/gdal/srs.py:47:50     - Unknown word (papsz)      -- len(papsz_options))(*papsz_options)
+django/contrib/gis/gdal/srs.py:62:18     - Unknown word (capi)       -- destructor = capi.release_srs
+django/contrib/gis/gdal/srs.py:77:24     - Unknown word (capi)       -- self.ptr = capi.new_srs(c_char_p(b"
+django/contrib/gis/gdal/srs.py:80:17     - Unknown word (capi)       -- capi.set_axis_strategy(self
 django/contrib/gis/gdal/srs.py:8:1       - Unknown word (GEOGCS)     -- GEOGCS["WGS 84",
-django/contrib/gis/gdal/srs.py:95:19     - Unknown word (capi)       -- srs = capi.new_srs(buf)
 django/contrib/gis/geoip2.py:11:23     - Unknown word (mmdb)       -- Grab GeoLite2-Country.mmdb.gz and GeoLite2-City
 django/contrib/gis/geoip2.py:11:49     - Unknown word (mmdb)       -- gz and GeoLite2-City.mmdb.gz, and unzip them in
 django/contrib/gis/geoip2.py:204:28    - Unknown word (djangoproject) -- '24.124.1.80' and 'djangoproject.com' are valid parameters
@@ -977,21 +987,21 @@ django/contrib/postgres/operations.py:35:20     - Unknown word (oids)       -- g
 django/contrib/postgres/operations.py:3:16      - Unknown word (oids)       -- get_hstore_oids,
 django/contrib/postgres/operations.py:61:51     - Unknown word (extname)    -- FROM pg_extension WHERE extname = %s",
 django/contrib/postgres/operations.py:96:27     - Unknown word (pgcrypto)   -- super().__init__("pgcrypto", hints=hints)
-django/contrib/postgres/search.py:107:21    - Unknown word (regconfig)  -- return "%s::regconfig" % sql, params
-django/contrib/postgres/search.py:130:20    - Unknown word (tsvector)   -- function = "to_tsvector"
-django/contrib/postgres/search.py:186:20    - Unknown word (setweight)  -- sql = "setweight({}, {})".format(sql
-django/contrib/postgres/search.py:230:19    - Unknown word (plainto)    -- "plain": "plainto_tsquery",
-django/contrib/postgres/search.py:230:27    - Unknown word (tsquery)    -- "plain": "plainto_tsquery",
-django/contrib/postgres/search.py:231:20    - Unknown word (phraseto)   -- "phrase": "phraseto_tsquery",
-django/contrib/postgres/search.py:231:29    - Unknown word (tsquery)    -- "phrase": "phraseto_tsquery",
-django/contrib/postgres/search.py:232:20    - Unknown word (tsquery)    -- "raw": "to_tsquery",
-django/contrib/postgres/search.py:233:36    - Unknown word (tsquery)    -- websearch": "websearch_to_tsquery",
-django/contrib/postgres/search.py:510:9     - Unknown word (lsql)       -- lsql, params = compiler.compile
-django/contrib/postgres/search.py:513:9     - Unknown word (rsql)       -- rsql, params = compiler.compile
-django/contrib/postgres/search.py:516:28    - Unknown word (lsql)       -- combined_sql = f"({lsql} {self.connector} {rsql
-django/contrib/postgres/search.py:516:52    - Unknown word (rsql)       -- lsql} {self.connector} {rsql})"
-django/contrib/postgres/search.py:73:17     - Unknown word (tsvector)   -- return "tsvector"
-django/contrib/postgres/search.py:78:17     - Unknown word (tsquery)    -- return "tsquery"
+django/contrib/postgres/search.py:109:21    - Unknown word (regconfig)  -- return "%s::regconfig" % sql, params
+django/contrib/postgres/search.py:132:20    - Unknown word (tsvector)   -- function = "to_tsvector"
+django/contrib/postgres/search.py:188:20    - Unknown word (setweight)  -- sql = "setweight({}, {})".format(sql
+django/contrib/postgres/search.py:232:19    - Unknown word (plainto)    -- "plain": "plainto_tsquery",
+django/contrib/postgres/search.py:232:27    - Unknown word (tsquery)    -- "plain": "plainto_tsquery",
+django/contrib/postgres/search.py:233:20    - Unknown word (phraseto)   -- "phrase": "phraseto_tsquery",
+django/contrib/postgres/search.py:233:29    - Unknown word (tsquery)    -- "phrase": "phraseto_tsquery",
+django/contrib/postgres/search.py:234:20    - Unknown word (tsquery)    -- "raw": "to_tsquery",
+django/contrib/postgres/search.py:235:36    - Unknown word (tsquery)    -- websearch": "websearch_to_tsquery",
+django/contrib/postgres/search.py:512:9     - Unknown word (lsql)       -- lsql, params = compiler.compile
+django/contrib/postgres/search.py:515:9     - Unknown word (rsql)       -- rsql, params = compiler.compile
+django/contrib/postgres/search.py:518:28    - Unknown word (lsql)       -- combined_sql = f"({lsql} {self.connector} {rsql
+django/contrib/postgres/search.py:518:52    - Unknown word (rsql)       -- lsql} {self.connector} {rsql})"
+django/contrib/postgres/search.py:75:17     - Unknown word (tsvector)   -- return "tsvector"
+django/contrib/postgres/search.py:80:17     - Unknown word (tsquery)    -- return "tsquery"
 django/contrib/postgres/signals.py:11:26     - Unknown word (typarray)   -- "SELECT oid, typarray FROM pg_type WHERE typname
 django/contrib/postgres/signals.py:11:54     - Unknown word (typname)    -- typarray FROM pg_type WHERE typname = %s", (type_name,)
 django/contrib/postgres/signals.py:13:9      - Unknown word (oids)       -- oids = []
@@ -1073,10 +1083,10 @@ django/core/cache/backends/memcached.py:187:46    - Unknown word (serde)        
 django/core/cache/utils.py:11:23     - Unknown word (netstring)  -- # Use the netstring delimiter (with trailing
 django/core/checks/messages.py:32:38     - Unknown word (applabel)   -- method doesn't return "applabel.modellabel" and cannot
 django/core/checks/messages.py:32:47     - Unknown word (modellabel) -- doesn't return "applabel.modellabel" and cannot be
-django/core/checks/registry.py:45:33     - Unknown word (mytag)      -- @registry.register('mytag', 'anothertag')
-django/core/checks/registry.py:45:42     - Unknown word (anothertag) -- registry.register('mytag', 'anothertag')
-django/core/checks/registry.py:50:42     - Unknown word (mytag)      -- register(my_check, 'mytag', 'anothertag')
-django/core/checks/registry.py:50:51     - Unknown word (anothertag) -- my_check, 'mytag', 'anothertag')
+django/core/checks/registry.py:46:33     - Unknown word (mytag)      -- @registry.register('mytag', 'anothertag')
+django/core/checks/registry.py:46:42     - Unknown word (anothertag) -- registry.register('mytag', 'anothertag')
+django/core/checks/registry.py:51:42     - Unknown word (mytag)      -- register(my_check, 'mytag', 'anothertag')
+django/core/checks/registry.py:51:51     - Unknown word (anothertag) -- my_check, 'mytag', 'anothertag')
 django/core/checks/security/base.py:167:6     - Unknown word (xframe)     -- def _xframe_middleware():
 django/core/checks/security/base.py:196:11    - Unknown word (xframe)     -- def check_xframe_options_middleware(app
 django/core/checks/security/base.py:197:21    - Unknown word (xframe)     -- passed_check = _xframe_middleware()
@@ -1173,14 +1183,16 @@ django/core/management/commands/makemessages.py:337:42    - Unknown word (xgette
 django/core/management/commands/makemessages.py:353:43    - Unknown word (djangojs)    -- domain not in ("django", "djangojs"):
 django/core/management/commands/makemessages.py:356:32    - Unknown word (djangojs)    -- "'django' and 'djangojs'"
 django/core/management/commands/makemessages.py:358:28    - Unknown word (djangojs)    -- if self.domain == "djangojs":
-django/core/management/commands/makemessages.py:545:19    - Unknown word (topdown)     -- root, topdown=True, followlinks=self
-django/core/management/commands/makemessages.py:545:33    - Unknown word (followlinks) -- root, topdown=True, followlinks=self.symlinks
-django/core/management/commands/makemessages.py:612:37    - Unknown word (djangojs)    -- self.domain not in ("djangojs", "django"):
-django/core/management/commands/makemessages.py:718:9     - Unknown word (pofile)      -- pofile = os.path.join(basedir
-django/core/management/commands/makemessages.py:720:27    - Unknown word (pofile)      -- if os.path.exists(pofile):
-django/core/management/commands/makemessages.py:721:57    - Unknown word (pofile)      -- self.msgmerge_options, pofile, potfile]
-django/core/management/commands/makemessages.py:730:25    - Unknown word (pofile)      -- msgs = Path(pofile).read_text(encoding
-django/core/management/commands/makemessages.py:740:19    - Unknown word (pofile)      -- with open(pofile, "w", encoding="utf
+django/core/management/commands/makemessages.py:446:38    - Unknown word (subtags)     -- # Two-letter subtags are region codes (e
+django/core/management/commands/makemessages.py:447:31    - Unknown word (uppercased)  -- # are uppercased. Others, such as scripts
+django/core/management/commands/makemessages.py:551:19    - Unknown word (topdown)     -- root, topdown=True, followlinks=self
+django/core/management/commands/makemessages.py:551:33    - Unknown word (followlinks) -- root, topdown=True, followlinks=self.symlinks
+django/core/management/commands/makemessages.py:618:37    - Unknown word (djangojs)    -- self.domain not in ("djangojs", "django"):
+django/core/management/commands/makemessages.py:724:9     - Unknown word (pofile)      -- pofile = os.path.join(basedir
+django/core/management/commands/makemessages.py:726:27    - Unknown word (pofile)      -- if os.path.exists(pofile):
+django/core/management/commands/makemessages.py:727:57    - Unknown word (pofile)      -- self.msgmerge_options, pofile, potfile]
+django/core/management/commands/makemessages.py:736:25    - Unknown word (pofile)      -- msgs = Path(pofile).read_text(encoding
+django/core/management/commands/makemessages.py:746:19    - Unknown word (pofile)      -- with open(pofile, "w", encoding="utf
 django/core/management/commands/makemessages.py:81:12     - Unknown word (templatized) -- def is_templatized(self):
 django/core/management/commands/makemessages.py:97:24     - Unknown word (templatized) -- if not self.is_templatized:
 django/core/management/commands/migrate.py:15:31     - Unknown word (Truncator)  -- django.utils.text import Truncator
@@ -1814,11 +1826,11 @@ django/db/models/sql/query.py:1663:18   - Unknown word (someval)    -- # If some
 django/db/models/sql/query.py:1663:48   - Unknown word (someval)    -- is a nullable column, someval IS NOT NULL is
 django/db/models/sql/query.py:2154:34   - Unknown word (louter)     -- trimmed_prefix, contains_louter = query.trim_start(names
 django/db/models/sql/query.py:2522:44   - Unknown word (datastructure) -- that we can use a set datastructure. We do the foo__bar
-django/db/models/sql/query.py:2719:42   - Unknown word (outerq)        -- lookup usable for doing outerq.filter(lookup=self)
-django/db/models/sql/query.py:2815:5    - Unknown word (dirn)          -- dirn = ORDER_DIR[default
-django/db/models/sql/query.py:2817:27   - Unknown word (dirn)          -- return field[1:], dirn[1]
-django/db/models/sql/query.py:2818:19   - Unknown word (dirn)          -- return field, dirn[0]
-django/db/models/sql/query.py:2895:61   - Unknown word (rels)          -- 2, if either of the rels produce NULL
+django/db/models/sql/query.py:2727:42   - Unknown word (outerq)        -- lookup usable for doing outerq.filter(lookup=self)
+django/db/models/sql/query.py:2823:5    - Unknown word (dirn)          -- dirn = ORDER_DIR[default
+django/db/models/sql/query.py:2825:27   - Unknown word (dirn)          -- return field[1:], dirn[1]
+django/db/models/sql/query.py:2826:19   - Unknown word (dirn)          -- return field, dirn[0]
+django/db/models/sql/query.py:2903:61   - Unknown word (rels)          -- 2, if either of the rels produce NULL
 django/db/models/sql/query.py:364:53    - Unknown word (deepcopied) -- work when a Query is deepcopied."""
 django/db/models/sql/query.py:432:21    - Unknown word (klass)      -- def chain(self, klass=None):
 django/db/models/sql/query.py:435:13    - Unknown word (klass)      -- The klass argument changes the
@@ -1891,25 +1903,25 @@ django/forms/utils.py:61:28     - Unknown word (Renderable) -- RenderableFieldMi
 django/forms/utils.py:61:7      - Unknown word (Renderable) -- class RenderableFieldMixin(RenderableMixin
 django/forms/utils.py:67:28     - Unknown word (Renderable) -- "Subclasses of RenderableFieldMixin must provide
 django/forms/widgets.py:110:24    - Unknown word (flatatt)    -- attributes=flatatt({**(attrs or {}), *
-django/forms/widgets.py:1112:43   - Unknown word (splitdatetime) -- django/forms/widgets/splitdatetime.html"
-django/forms/widgets.py:1146:43   - Unknown word (splithiddendatetime) -- django/forms/widgets/splithiddendatetime.html"
+django/forms/widgets.py:1113:43   - Unknown word (splitdatetime) -- django/forms/widgets/splitdatetime.html"
+django/forms/widgets.py:1147:43   - Unknown word (splithiddendatetime) -- django/forms/widgets/splithiddendatetime.html"
 django/forms/widgets.py:12:32     - Unknown word (flatatt)    -- django.forms.utils import flatatt, to_current_timezone
-django/forms/widgets.py:784:17    - Unknown word (subvalue)   -- for subvalue, sublabel in choices
-django/forms/widgets.py:784:27    - Unknown word (sublabel)   -- for subvalue, sublabel in choices:
-django/forms/widgets.py:786:21    - Unknown word (subvalue)   -- subvalue
-django/forms/widgets.py:792:25    - Unknown word (subvalue)   -- subvalue,
-django/forms/widgets.py:793:25    - Unknown word (sublabel)   -- sublabel,
+django/forms/widgets.py:785:17    - Unknown word (subvalue)   -- for subvalue, sublabel in choices
+django/forms/widgets.py:785:27    - Unknown word (sublabel)   -- for subvalue, sublabel in choices:
+django/forms/widgets.py:787:21    - Unknown word (subvalue)   -- subvalue
+django/forms/widgets.py:793:25    - Unknown word (subvalue)   -- subvalue,
+django/forms/widgets.py:794:25    - Unknown word (sublabel)   -- sublabel,
 django/http/cookie.py:11:5      - Unknown word (cookiedict) -- cookiedict = {}
 django/http/cookie.py:22:13     - Unknown word (cookiedict) -- cookiedict[key] = cookies._unquote
 django/http/cookie.py:23:12     - Unknown word (cookiedict) -- return cookiedict
-django/http/multipartparser.py:368:17    - Unknown word (shortcircuits) -- # any() shortcircuits if a handler's upload
-django/http/multipartparser.py:519:64    - Unknown word (ungetting)     -- one chunk. If we keep ungetting the
-django/http/multipartparser.py:721:33    - Unknown word (CRLFCRLF)      -- as throwing away the CRLFCRLF bytes from above.
-django/http/multipartparser.py:725:5     - Unknown word (outdict)       -- outdict = {}
-django/http/multipartparser.py:742:9     - Unknown word (outdict)       -- outdict[name] = value, params
-django/http/multipartparser.py:747:19    - Unknown word (outdict)       -- return (TYPE, outdict, stream)
-django/http/multipartparser.py:756:9     - Unknown word (boundarystream) -- boundarystream = InterBoundaryIter
-django/http/multipartparser.py:757:27    - Unknown word (boundarystream) -- for sub_stream in boundarystream:
+django/http/multipartparser.py:370:17    - Unknown word (shortcircuits) -- # any() shortcircuits if a handler's upload
+django/http/multipartparser.py:521:64    - Unknown word (ungetting)     -- one chunk. If we keep ungetting the
+django/http/multipartparser.py:723:33    - Unknown word (CRLFCRLF)      -- as throwing away the CRLFCRLF bytes from above.
+django/http/multipartparser.py:727:5     - Unknown word (outdict)       -- outdict = {}
+django/http/multipartparser.py:744:9     - Unknown word (outdict)       -- outdict[name] = value, params
+django/http/multipartparser.py:749:19    - Unknown word (outdict)       -- return (TYPE, outdict, stream)
+django/http/multipartparser.py:758:9     - Unknown word (boundarystream) -- boundarystream = InterBoundaryIter
+django/http/multipartparser.py:759:27    - Unknown word (boundarystream) -- for sub_stream in boundarystream:
 django/http/request.py:273:44    - Unknown word (schemeless) -- an absolute url (but schemeless and domainless) for
 django/http/request.py:273:59    - Unknown word (domainless) -- (but schemeless and domainless) for the
 django/http/request.py:838:66    - Unknown word (codepoint)  -- with Unicode "unknown" codepoint
@@ -2167,7 +2179,8 @@ django/utils/cache.py:319:41    - Unknown word (newheader)  -- newheader.strip()
 django/utils/cache.py:321:9     - Unknown word (newheader)  -- newheader
 django/utils/cache.py:322:13    - Unknown word (newheader)  -- for newheader in newheaders
 django/utils/cache.py:323:12    - Unknown word (newheader)  -- if newheader.lower() not in existing
-django/utils/cache.py:362:19    - Unknown word (netstring)  -- # Use the netstring delimiter (with trailing
+django/utils/cache.py:362:39    - Unknown word (netstring)  -- cannot collide with any netstring.
+django/utils/cache.py:366:19    - Unknown word (netstring)  -- # Use the netstring delimiter (with trailing
 django/utils/cache.py:50:9      - Unknown word (dictitem)   -- def dictitem(s):
 django/utils/cache.py:57:9      - Unknown word (dictvalue)  -- def dictvalue(*t):
 django/utils/cache.py:66:32     - Unknown word (dictitem)   -- directive, value = dictitem(field)
@@ -2544,35 +2557,37 @@ django/views/i18n.py:49:43     - Unknown word (REFERER)    -- request.META.get("
 django/views/static.py:53:5      - Unknown word (statobj)    -- statobj = fullpath.stat()
 django/views/static.py:55:53     - Unknown word (statobj)    -- IF_MODIFIED_SINCE"), statobj.st_mtime
 django/views/static.py:61:51     - Unknown word (statobj)    -- Modified"] = http_date(statobj.st_mtime)
-docs/_ext/djangodocs.py:10:32     - Unknown word (Cmdoption)    -- sphinx.domains.std import Cmdoption
-docs/_ext/djangodocs.py:146:29    - Unknown word (atts)         -- win_node.update_all_atts(node)
-docs/_ext/djangodocs.py:147:33    - Unknown word (doscon)       -- node["language"] = "doscon"
-docs/_ext/djangodocs.py:150:19    - Unknown word (dupnames)     -- win_node["dupnames"] = []
-docs/_ext/djangodocs.py:170:12    - Unknown word (doscon)       -- # The 'doscon' Pygments formatter
+docs/_ext/djangodocs.py:10:32     - Unknown word (Cmdoption)    -- sphinx.domains.std import Cmdoption, GenericObject
+docs/_ext/djangodocs.py:110:24    - Unknown word (litblk)       -- def __init__(self, litblk_obj):
+docs/_ext/djangodocs.py:111:24    - Unknown word (litblk)       -- self.wrapped = litblk_obj
+docs/_ext/djangodocs.py:159:29    - Unknown word (atts)         -- win_node.update_all_atts(node)
+docs/_ext/djangodocs.py:160:33    - Unknown word (doscon)       -- node["language"] = "doscon"
+docs/_ext/djangodocs.py:163:19    - Unknown word (dupnames)     -- win_node["dupnames"] = []
+docs/_ext/djangodocs.py:183:12    - Unknown word (doscon)       -- # The 'doscon' Pygments formatter
 docs/_ext/djangodocs.py:21:9      - Unknown word (rolename)     -- rolename="setting",
-docs/_ext/djangodocs.py:220:13    - Unknown word (bchanged)     -- bchanged = False
-docs/_ext/djangodocs.py:223:17    - Unknown word (modline)      -- modline = cmdline_to_win(line
-docs/_ext/djangodocs.py:224:20    - Unknown word (modline)      -- if modline is None:
-docs/_ext/djangodocs.py:227:52    - Unknown word (modline)      -- append(self.WIN_PROMPT + modline)
-docs/_ext/djangodocs.py:228:21    - Unknown word (bchanged)     -- bchanged = True
-docs/_ext/djangodocs.py:229:16    - Unknown word (bchanged)     -- if bchanged:
-docs/_ext/djangodocs.py:236:47    - Unknown word (serialno)     -- = str(self.env.new_serialno("console"))
-docs/_ext/djangodocs.py:244:64    - Unknown word (rawsource)    -- = super().run()[0].rawsource
+docs/_ext/djangodocs.py:233:13    - Unknown word (bchanged)     -- bchanged = False
+docs/_ext/djangodocs.py:236:17    - Unknown word (modline)      -- modline = cmdline_to_win(line
+docs/_ext/djangodocs.py:237:20    - Unknown word (modline)      -- if modline is None:
+docs/_ext/djangodocs.py:240:52    - Unknown word (modline)      -- append(self.WIN_PROMPT + modline)
+docs/_ext/djangodocs.py:241:21    - Unknown word (bchanged)     -- bchanged = True
+docs/_ext/djangodocs.py:242:16    - Unknown word (bchanged)     -- if bchanged:
+docs/_ext/djangodocs.py:249:47    - Unknown word (serialno)     -- = str(self.env.new_serialno("console"))
+docs/_ext/djangodocs.py:257:64    - Unknown word (rawsource)    -- = super().run()[0].rawsource
 docs/_ext/djangodocs.py:26:19     - Unknown word (ttag)         -- rolename="ttag",
 docs/_ext/djangodocs.py:26:9      - Unknown word (rolename)     -- rolename="ttag",
-docs/_ext/djangodocs.py:287:9     - Unknown word (refuri)       -- refuri=url,
+docs/_ext/djangodocs.py:300:9     - Unknown word (refuri)       -- refuri=url,
 docs/_ext/djangodocs.py:31:19     - Unknown word (tfilter)      -- rolename="tfilter",
 docs/_ext/djangodocs.py:31:9      - Unknown word (rolename)     -- rolename="tfilter",
 docs/_ext/djangodocs.py:35:24     - Unknown word (fieldlookup)  -- directivename="fieldlookup",
 docs/_ext/djangodocs.py:36:9      - Unknown word (rolename)     -- rolename="lookup",
-docs/_ext/djangodocs.py:41:19     - Unknown word (djadmin)      -- rolename="djadmin",
-docs/_ext/djangodocs.py:41:9      - Unknown word (rolename)     -- rolename="djadmin",
-docs/_ext/djangodocs.py:45:46     - Unknown word (Cmdoption)    -- django-admin-option", Cmdoption)
+docs/_ext/djangodocs.py:41:9      - Unknown word (rolename)     -- rolename="cli",
+docs/_ext/djangodocs.py:46:37     - Unknown word (Cmdoption)    -- directive("cli-option", Cmdoption)
 docs/_ext/djangodocs.py:6:15      - Unknown word (statemachine) -- from docutils.statemachine import ViewList
-docs/_ext/djangodocs.py:81:39     - Unknown word (signode)      -- admin_node(env, sig, signode):
-docs/_ext/djangodocs.py:85:5      - Unknown word (signode)      -- signode += addnodes.desc_name
-docs/_ext/djangodocs.py:97:24     - Unknown word (litblk)       -- def __init__(self, litblk_obj):
-docs/_ext/djangodocs.py:98:24     - Unknown word (litblk)       -- self.wrapped = litblk_obj
+docs/_ext/djangodocs.py:82:37     - Unknown word (signode)      -- django_cli_node(env, sig, signode):
+docs/_ext/djangodocs.py:86:5      - Unknown word (signode)      -- signode += addnodes.desc_name
+docs/_ext/djangodocs.py:94:47     - Unknown word (signode)      -- index(self, name, sig, signode):
+docs/_ext/djangodocs.py:96:9      - Unknown word (signode)      -- signode["ids"].append(
+docs/_ext/djangodocs.py:99:49     - Unknown word (signode)      -- and_index(name, sig, signode)
 docs/_ext/github_links.py:35:22     - Unknown word (asname)     -- if alias.asname:
 docs/_utils.py:11:13     - Unknown word (confdir)    -- confdir=srcdir,
 docs/_utils.py:13:13     - Unknown word (doctreedir) -- doctreedir=tmpdir,
@@ -2959,36 +2974,36 @@ tests/admin_scripts/tests.py:2268:40   - Unknown word (personnalisée) -- Comman
 tests/admin_scripts/tests.py:2478:64   - Unknown word (deflaut)       -- database: invalid choice: 'deflaut', "
 tests/admin_scripts/tests.py:2484:64   - Unknown word (deflaut)       -- database: invalid choice: 'deflaut' "
 tests/admin_scripts/tests.py:2507:50   - Unknown word (deflaut)       -- arg, "--database", "deflaut", verbosity=0)
-tests/admin_scripts/tests.py:2696:49   - Unknown word (othertestproject) -- tartproject", "testproject", "othertestproject"]
-tests/admin_scripts/tests.py:2697:56   - Unknown word (othertestproject) -- join(self.test_dir, "othertestproject")
+tests/admin_scripts/tests.py:2698:49   - Unknown word (othertestproject) -- tartproject", "testproject", "othertestproject"]
+tests/admin_scripts/tests.py:2699:56   - Unknown word (othertestproject) -- join(self.test_dir, "othertestproject")
 tests/admin_scripts/tests.py:269:17    - Unknown word (klass)      -- klass = load_command_class
 tests/admin_scripts/tests.py:270:20    - Unknown word (klass)      -- if klass.requires_settings:
-tests/admin_scripts/tests.py:2761:63   - Unknown word (tarballtestproject) -- template", template_path, "tarballtestproject"]
-tests/admin_scripts/tests.py:2762:56   - Unknown word (tarballtestproject) -- join(self.test_dir, "tarballtestproject")
-tests/admin_scripts/tests.py:2779:14   - Unknown word (tarballtestproject) -- "tarballtestproject",
-tests/admin_scripts/tests.py:2780:14   - Unknown word (altlocation)        -- "altlocation",
-tests/admin_scripts/tests.py:2782:56   - Unknown word (altlocation)        -- join(self.test_dir, "altlocation")
-tests/admin_scripts/tests.py:2880:14   - Unknown word (Procfile)           -- "Procfile",
-tests/admin_scripts/tests.py:2889:20   - Unknown word (Procfile)           -- for f in ("Procfile", "additional_file.py
-tests/admin_scripts/tests.py:3070:42   - Unknown word (umasks)             -- only partially supports umasks and chmod.",
-tests/admin_scripts/tests.py:3094:18   - Unknown word (mynewapp)           -- "mynewapp",
-tests/admin_scripts/tests.py:3226:42   - Unknown word (umasks)             -- only partially supports umasks and chmod.",
-tests/admin_scripts/tests.py:3358:7    - Unknown word (Listurls)           -- class Listurls(AdminScriptTestCase
-tests/admin_scripts/tests.py:3365:18   - Unknown word (listurls)           -- args = ["listurls"]
-tests/admin_scripts/tests.py:3384:34   - Unknown word (nons)               -- assertOutput(out, "/nons/named")
-tests/admin_scripts/tests.py:3385:77   - Unknown word (nons)               -- urls.views.view_func_nons_named")
-tests/admin_scripts/tests.py:3388:34   - Unknown word (nons)               -- assertOutput(out, "/nons/unnamed")
-tests/admin_scripts/tests.py:3391:58   - Unknown word (nons)               -- urls.views.view_func_nons_unnamed",
-tests/admin_scripts/tests.py:3394:24   - Unknown word (metachars)          -- def test_urls_with_metachars(self):
-tests/admin_scripts/tests.py:3400:18   - Unknown word (listurls)           -- args = ["listurls", "--prefix", "/.well
-tests/admin_scripts/tests.py:3412:18   - Unknown word (listurls)           -- args = ["listurls", "--prefix", "/cbv
-tests/admin_scripts/tests.py:3426:18   - Unknown word (listurls)           -- args = ["listurls", "-f", "tabular"]
-tests/admin_scripts/tests.py:3444:34   - Unknown word (nons)               -- assertOutput(out, "/nons/named")
-tests/admin_scripts/tests.py:3549:23   - Unknown word (Listurls)           -- command = ListurlsCommand(stdout=out, stderr
-tests/admin_scripts/tests.py:3570:23   - Unknown word (Listurls)           -- command = ListurlsCommand(stdout=out, stderr
-tests/admin_scripts/tests.py:3585:23   - Unknown word (Listurls)           -- command = ListurlsCommand(stdout=out, stderr
-tests/admin_scripts/tests.py:3662:18   - Unknown word (rnserver)           -- args = ["rnserver", "--settings=test_project
-tests/admin_scripts/tests.py:3665:51   - Unknown word (rnserver)           -- "Unknown command: 'rnserver'. Did you mean runserver
+tests/admin_scripts/tests.py:2763:63   - Unknown word (tarballtestproject) -- template", template_path, "tarballtestproject"]
+tests/admin_scripts/tests.py:2764:56   - Unknown word (tarballtestproject) -- join(self.test_dir, "tarballtestproject")
+tests/admin_scripts/tests.py:2781:14   - Unknown word (tarballtestproject) -- "tarballtestproject",
+tests/admin_scripts/tests.py:2782:14   - Unknown word (altlocation)        -- "altlocation",
+tests/admin_scripts/tests.py:2784:56   - Unknown word (altlocation)        -- join(self.test_dir, "altlocation")
+tests/admin_scripts/tests.py:2882:14   - Unknown word (Procfile)           -- "Procfile",
+tests/admin_scripts/tests.py:2891:20   - Unknown word (Procfile)           -- for f in ("Procfile", "additional_file.py
+tests/admin_scripts/tests.py:3072:42   - Unknown word (umasks)             -- only partially supports umasks and chmod.",
+tests/admin_scripts/tests.py:3096:18   - Unknown word (mynewapp)           -- "mynewapp",
+tests/admin_scripts/tests.py:3228:42   - Unknown word (umasks)             -- only partially supports umasks and chmod.",
+tests/admin_scripts/tests.py:3360:7    - Unknown word (Listurls)           -- class Listurls(AdminScriptTestCase
+tests/admin_scripts/tests.py:3367:18   - Unknown word (listurls)           -- args = ["listurls"]
+tests/admin_scripts/tests.py:3386:34   - Unknown word (nons)               -- assertOutput(out, "/nons/named")
+tests/admin_scripts/tests.py:3387:77   - Unknown word (nons)               -- urls.views.view_func_nons_named")
+tests/admin_scripts/tests.py:3390:34   - Unknown word (nons)               -- assertOutput(out, "/nons/unnamed")
+tests/admin_scripts/tests.py:3393:58   - Unknown word (nons)               -- urls.views.view_func_nons_unnamed",
+tests/admin_scripts/tests.py:3396:24   - Unknown word (metachars)          -- def test_urls_with_metachars(self):
+tests/admin_scripts/tests.py:3402:18   - Unknown word (listurls)           -- args = ["listurls", "--prefix", "/.well
+tests/admin_scripts/tests.py:3414:18   - Unknown word (listurls)           -- args = ["listurls", "--prefix", "/cbv
+tests/admin_scripts/tests.py:3428:18   - Unknown word (listurls)           -- args = ["listurls", "-f", "tabular"]
+tests/admin_scripts/tests.py:3446:34   - Unknown word (nons)               -- assertOutput(out, "/nons/named")
+tests/admin_scripts/tests.py:3551:23   - Unknown word (Listurls)           -- command = ListurlsCommand(stdout=out, stderr
+tests/admin_scripts/tests.py:3572:23   - Unknown word (Listurls)           -- command = ListurlsCommand(stdout=out, stderr
+tests/admin_scripts/tests.py:3587:23   - Unknown word (Listurls)           -- command = ListurlsCommand(stdout=out, stderr
+tests/admin_scripts/tests.py:3664:18   - Unknown word (rnserver)           -- args = ["rnserver", "--settings=test_project
+tests/admin_scripts/tests.py:3667:51   - Unknown word (rnserver)           -- "Unknown command: 'rnserver'. Did you mean runserver
 tests/admin_scripts/tests.py:36:38     - Unknown word (listurls)   -- management.commands.listurls import Command as ListurlsCom
 tests/admin_scripts/tests.py:36:65     - Unknown word (Listurls)   -- listurls import Command as ListurlsCommand
 tests/admin_scripts/tests.py:66:65     - Unknown word (sdict)      -- None, is_dir=False, sdict=None, extra=None):
@@ -2997,11 +3012,17 @@ tests/admin_utils/test_logentry.py:108:62    - Unknown word (Ajout)      -- get_
 tests/admin_utils/test_logentry.py:202:42    - Unknown word (Ajout)      -- Modification de Domain. Ajout de article « Added article
 tests/admin_utils/test_logentry.py:337:14    - Unknown word (recentactions) -- def test_recentactions_without_content_type
 tests/admin_utils/test_logentry.py:96:74     - Unknown word (Historique) -- Modification de Title et Historique."
-tests/admin_utils/tests.py:302:25    - Unknown word (Eiyf)       -- "md5$zjIiKM8EiyfXEGiexlQRw4$a59a82cf
-tests/admin_utils/tests.py:302:31    - Unknown word (Giexl)      -- "md5$zjIiKM8EiyfXEGiexlQRw4$a59a82cf344546e
-tests/admin_utils/tests.py:356:23    - Unknown word (cheeze)     -- (" cheeze", "cheeze"),
-tests/admin_utils/tests.py:356:33    - Unknown word (cheeze)     -- (" cheeze", "cheeze"),
-tests/admin_utils/tests.py:552:74    - Unknown word (Aother)     -- ), "something_0Aor_0Aother")
+tests/admin_utils/tests.py:306:25    - Unknown word (Eiyf)       -- "md5$zjIiKM8EiyfXEGiexlQRw4$a59a82cf
+tests/admin_utils/tests.py:306:31    - Unknown word (Giexl)      -- "md5$zjIiKM8EiyfXEGiexlQRw4$a59a82cf344546e
+tests/admin_utils/tests.py:319:32    - Unknown word (Eiyf)       -- password = "md5$zjIiKM8EiyfXEGiexlQRw4$a59a82cf
+tests/admin_utils/tests.py:319:38    - Unknown word (Giexl)      -- = "md5$zjIiKM8EiyfXEGiexlQRw4$a59a82cf344546e
+tests/admin_utils/tests.py:326:32    - Unknown word (Eiyf)       -- password = "md5$zjIiKM8EiyfXEGiexlQRw4$a59a82cf
+tests/admin_utils/tests.py:326:38    - Unknown word (Giexl)      -- = "md5$zjIiKM8EiyfXEGiexlQRw4$a59a82cf344546e
+tests/admin_utils/tests.py:336:32    - Unknown word (Eiyf)       -- password = "md5$zjIiKM8EiyfXEGiexlQRw4$a59a82cf
+tests/admin_utils/tests.py:336:38    - Unknown word (Giexl)      -- = "md5$zjIiKM8EiyfXEGiexlQRw4$a59a82cf344546e
+tests/admin_utils/tests.py:385:23    - Unknown word (cheeze)     -- (" cheeze", "cheeze"),
+tests/admin_utils/tests.py:385:33    - Unknown word (cheeze)     -- (" cheeze", "cheeze"),
+tests/admin_utils/tests.py:581:74    - Unknown word (Aother)     -- ), "something_0Aor_0Aother")
 tests/admin_views/admin.py:1231:13   - Unknown word (Referer)          -- class InlineRefererAdmin(admin.ModelAdmin
 tests/admin_views/admin.py:123:16    - Unknown word (UUIDPK)     -- RelatedWithUUIDPKModel,
 tests/admin_views/admin.py:1334:15   - Unknown word (Vodcast)          -- site.register(Vodcast, VodcastAdmin)
@@ -3573,53 +3594,53 @@ tests/aggregation_regress/tests.py:957:11    - Unknown word (realiased)    -- # 
 tests/aggregation_regress/tests.py:975:9     - Unknown word (qstr)         -- qstr = str(
 tests/aggregation_regress/tests.py:983:26    - Unknown word (qstr)         -- self.assertEqual(qstr[qstr.index("GROUP BY
 tests/aggregation_regress/tests.py:983:31    - Unknown word (qstr)         -- self.assertEqual(qstr[qstr.index("GROUP BY") :
-tests/annotations/tests.py:1023:30   - Unknown word (Holovaty)   -- name="Adrian Holovaty",
-tests/annotations/tests.py:1039:36   - Unknown word (Kaplan)     -- jacob_name": "Jacob Kaplan-Moss", "james_name"
-tests/annotations/tests.py:1062:44   - Unknown word (Sams)       -- books_qs, [{"name": "Sams"}, {"name": "Morgan
-tests/annotations/tests.py:1062:69   - Unknown word (Kaufmann)   -- }, {"name": "Morgan Kaufmann"}]
-tests/annotations/tests.py:1086:27   - Unknown word (Apress)     -- {"name": "Apress"},
-tests/annotations/tests.py:1087:27   - Unknown word (Sams)       -- {"name": "Sams"},
-tests/annotations/tests.py:1089:34   - Unknown word (Kaufmann)   -- {"name": "Morgan Kaufmann"},
-tests/annotations/tests.py:1183:32   - Unknown word (Bissex)     -- {"name": "Paul Bissex", "max_pages": 0},
-tests/annotations/tests.py:1184:37   - Unknown word (Chun)       -- {"name": "Wesley J. Chun", "max_pages": 0},
-tests/annotations/tests.py:1231:14   - Unknown word (alia)       -- "alia s",
-tests/annotations/tests.py:1291:53   - Unknown word (Holovaty)   -- create(name="Adrian Holovaty", age=34)
-tests/annotations/tests.py:1292:52   - Unknown word (Kaplan)     -- objects.create(name="Jacob Kaplan-Moss", age=35)
-tests/annotations/tests.py:1296:45   - Unknown word (Apress)     -- objects.create(name="Apress", num_awards=3)
-tests/annotations/tests.py:1532:25   - Unknown word (otherage)   -- ).aggregate(otherage_sum=Sum("other_age"
-tests/annotations/tests.py:167:29    - Unknown word (Pappa's)    -- name="Mamma and Pappa's Books",
-tests/annotations/tests.py:393:13    - Unknown word (otherage)   -- otherage_sum=Sum("other_age"
-tests/annotations/tests.py:396:31    - Unknown word (otherage)   -- self.assertEqual(agg["otherage_sum"], other_agg["age
-tests/annotations/tests.py:410:14    - Unknown word (Catelyn)    -- "Catelyn Stark",
-tests/annotations/tests.py:537:14    - Unknown word (preupdate)  -- book_preupdate = Book.objects.get(pk
-tests/annotations/tests.py:541:14    - Unknown word (postupdate) -- book_postupdate = Book.objects.get(pk
-tests/annotations/tests.py:542:31    - Unknown word (preupdate)  -- self.assertEqual(book_preupdate.rating - 1, book_postupdate
-tests/annotations/tests.py:542:58    - Unknown word (postupdate) -- preupdate.rating - 1, book_postupdate.rating)
-tests/annotations/tests.py:566:52    - Unknown word (Pappa's)    -- Books.com", "Mamma and Pappa's Books"],
-tests/annotations/tests.py:62:53     - Unknown word (Holovaty)   -- create(name="Adrian Holovaty", age=34)
-tests/annotations/tests.py:633:20    - Unknown word (Westfield)  -- chain="Westfield",
-tests/annotations/tests.py:63:52     - Unknown word (Kaplan)     -- objects.create(name="Jacob Kaplan-Moss", age=35)
-tests/annotations/tests.py:648:28    - Unknown word (Westfield)  -- .filter(chain="Westfield")
-tests/annotations/tests.py:64:51     - Unknown word (Dayley)     -- objects.create(name="Brad Dayley", age=45)
-tests/annotations/tests.py:654:39    - Unknown word (Westfield)  -- Angus & Robinson", "Westfield", True, "155860191"
-tests/annotations/tests.py:655:39    - Unknown word (Westfield)  -- Angus & Robinson", "Westfield", True, "159059725"
-tests/annotations/tests.py:66:54     - Unknown word (Forcier)    -- create(name="Jeffrey Forcier", age=37)
-tests/annotations/tests.py:67:51     - Unknown word (Bissex)     -- objects.create(name="Paul Bissex", age=29)
-tests/annotations/tests.py:68:56     - Unknown word (Chun)       -- create(name="Wesley J. Chun", age=25)
-tests/annotations/tests.py:713:20    - Unknown word (Westfield)  -- chain="Westfield",
-tests/annotations/tests.py:80:49     - Unknown word (Apress)     -- objects.create(name="Apress", num_awards=3)
-tests/annotations/tests.py:81:49     - Unknown word (Sams)       -- objects.create(name="Sams", num_awards=1)
-tests/annotations/tests.py:83:56     - Unknown word (Kaufmann)   -- create(name="Morgan Kaufmann", num_awards=9)
-tests/annotations/tests.py:84:49     - Unknown word (Jonno's)    -- objects.create(name="Jonno's House of Books", num
-tests/annotations/tests.py:864:26    - Unknown word (APPL)       -- ticker_name="APPL",
-tests/annotations/tests.py:896:28    - Unknown word (APPL)       -- ("Apple", "APPL"),
-tests/annotations/tests.py:908:26    - Unknown word (APPL)       -- ticker_name="APPL",
-tests/annotations/tests.py:952:28    - Unknown word (APPL)       -- ("Apple", "APPL".lower()),
-tests/annotations/tests.py:983:54    - Unknown word (Apress)     -- value_sum": 9, "name": "Apress"},
-tests/annotations/tests.py:984:54    - Unknown word (Jonno's)    -- value_sum": 0, "name": "Jonno's House of Books"},
-tests/annotations/tests.py:985:62    - Unknown word (Kaufmann)   -- 27, "name": "Morgan Kaufmann"},
-tests/annotations/tests.py:987:54    - Unknown word (Sams)       -- value_sum": 3, "name": "Sams"},
-tests/annotations/tests.py:98:19     - Unknown word (Sams)       -- name="Sams Teach Yourself Django
+tests/annotations/tests.py:1006:28   - Unknown word (APPL)       -- ("Apple", "APPL".lower()),
+tests/annotations/tests.py:100:19    - Unknown word (Sams)       -- name="Sams Teach Yourself Django
+tests/annotations/tests.py:1037:54   - Unknown word (Apress)     -- value_sum": 9, "name": "Apress"},
+tests/annotations/tests.py:1038:54   - Unknown word (Jonno's)    -- value_sum": 0, "name": "Jonno's House of Books"},
+tests/annotations/tests.py:1039:62   - Unknown word (Kaufmann)   -- 27, "name": "Morgan Kaufmann"},
+tests/annotations/tests.py:1041:54   - Unknown word (Sams)       -- value_sum": 3, "name": "Sams"},
+tests/annotations/tests.py:1077:30   - Unknown word (Holovaty)   -- name="Adrian Holovaty",
+tests/annotations/tests.py:1093:36   - Unknown word (Kaplan)     -- jacob_name": "Jacob Kaplan-Moss", "james_name"
+tests/annotations/tests.py:1116:44   - Unknown word (Sams)       -- books_qs, [{"name": "Sams"}, {"name": "Morgan
+tests/annotations/tests.py:1116:69   - Unknown word (Kaufmann)   -- }, {"name": "Morgan Kaufmann"}]
+tests/annotations/tests.py:1140:27   - Unknown word (Apress)     -- {"name": "Apress"},
+tests/annotations/tests.py:1141:27   - Unknown word (Sams)       -- {"name": "Sams"},
+tests/annotations/tests.py:1143:34   - Unknown word (Kaufmann)   -- {"name": "Morgan Kaufmann"},
+tests/annotations/tests.py:1237:32   - Unknown word (Bissex)     -- {"name": "Paul Bissex", "max_pages": 0},
+tests/annotations/tests.py:1238:37   - Unknown word (Chun)       -- {"name": "Wesley J. Chun", "max_pages": 0},
+tests/annotations/tests.py:1285:14   - Unknown word (alia)       -- "alia s",
+tests/annotations/tests.py:1345:53   - Unknown word (Holovaty)   -- create(name="Adrian Holovaty", age=34)
+tests/annotations/tests.py:1346:52   - Unknown word (Kaplan)     -- objects.create(name="Jacob Kaplan-Moss", age=35)
+tests/annotations/tests.py:1350:45   - Unknown word (Apress)     -- objects.create(name="Apress", num_awards=3)
+tests/annotations/tests.py:1586:25   - Unknown word (otherage)   -- ).aggregate(otherage_sum=Sum("other_age"
+tests/annotations/tests.py:169:29    - Unknown word (Pappa's)    -- name="Mamma and Pappa's Books",
+tests/annotations/tests.py:395:13    - Unknown word (otherage)   -- otherage_sum=Sum("other_age"
+tests/annotations/tests.py:398:31    - Unknown word (otherage)   -- self.assertEqual(agg["otherage_sum"], other_agg["age
+tests/annotations/tests.py:412:14    - Unknown word (Catelyn)    -- "Catelyn Stark",
+tests/annotations/tests.py:539:14    - Unknown word (preupdate)  -- book_preupdate = Book.objects.get(pk
+tests/annotations/tests.py:543:14    - Unknown word (postupdate) -- book_postupdate = Book.objects.get(pk
+tests/annotations/tests.py:544:31    - Unknown word (preupdate)  -- self.assertEqual(book_preupdate.rating - 1, book_postupdate
+tests/annotations/tests.py:544:58    - Unknown word (postupdate) -- preupdate.rating - 1, book_postupdate.rating)
+tests/annotations/tests.py:568:52    - Unknown word (Pappa's)    -- Books.com", "Mamma and Pappa's Books"],
+tests/annotations/tests.py:64:53     - Unknown word (Holovaty)   -- create(name="Adrian Holovaty", age=34)
+tests/annotations/tests.py:65:52     - Unknown word (Kaplan)     -- objects.create(name="Jacob Kaplan-Moss", age=35)
+tests/annotations/tests.py:66:51     - Unknown word (Dayley)     -- objects.create(name="Brad Dayley", age=45)
+tests/annotations/tests.py:687:20    - Unknown word (Westfield)  -- chain="Westfield",
+tests/annotations/tests.py:68:54     - Unknown word (Forcier)    -- create(name="Jeffrey Forcier", age=37)
+tests/annotations/tests.py:69:51     - Unknown word (Bissex)     -- objects.create(name="Paul Bissex", age=29)
+tests/annotations/tests.py:702:28    - Unknown word (Westfield)  -- .filter(chain="Westfield")
+tests/annotations/tests.py:708:39    - Unknown word (Westfield)  -- Angus & Robinson", "Westfield", True, "155860191"
+tests/annotations/tests.py:709:39    - Unknown word (Westfield)  -- Angus & Robinson", "Westfield", True, "159059725"
+tests/annotations/tests.py:70:56     - Unknown word (Chun)       -- create(name="Wesley J. Chun", age=25)
+tests/annotations/tests.py:767:20    - Unknown word (Westfield)  -- chain="Westfield",
+tests/annotations/tests.py:82:49     - Unknown word (Apress)     -- objects.create(name="Apress", num_awards=3)
+tests/annotations/tests.py:83:49     - Unknown word (Sams)       -- objects.create(name="Sams", num_awards=1)
+tests/annotations/tests.py:85:56     - Unknown word (Kaufmann)   -- create(name="Morgan Kaufmann", num_awards=9)
+tests/annotations/tests.py:86:49     - Unknown word (Jonno's)    -- objects.create(name="Jonno's House of Books", num
+tests/annotations/tests.py:918:26    - Unknown word (APPL)       -- ticker_name="APPL",
+tests/annotations/tests.py:950:28    - Unknown word (APPL)       -- ("Apple", "APPL"),
+tests/annotations/tests.py:962:26    - Unknown word (APPL)       -- ticker_name="APPL",
 tests/app_loading/tests.py:15:24     - Unknown word (modelapp)   -- egg_name = "%s/modelapp.egg" % self.egg_dir
 tests/app_loading/tests.py:27:24     - Unknown word (nomodelapp) -- egg_name = "%s/nomodelapp.egg" % self.egg_dir
 tests/app_loading/tests.py:63:24     - Unknown word (brokenapp)  -- egg_name = "%s/brokenapp.egg" % self.egg_dir
@@ -4166,21 +4187,21 @@ tests/cache/tests.py:2080:52   - Unknown word (SETINFO)              -- below 7.
 tests/cache/tests.py:232:31    - Unknown word (Iñtërnâtiônàlizætiøn) -- "unicode_ascii": "Iñtërnâtiônàlizætiøn1",
 tests/cache/tests.py:233:14    - Unknown word (Iñtërnâtiônàlizætiøn) -- "Iñtërnâtiônàlizætiøn": "Iñtërnâtiônàlizætiøn
 tests/cache/tests.py:233:38    - Unknown word (Iñtërnâtiônàlizætiøn) -- Iñtërnâtiônàlizætiøn": "Iñtërnâtiônàlizætiøn2",
-tests/cache/tests.py:2500:22   - Unknown word (dictitem)             -- # form (i.e. dictitem() lacks a strip()).
-tests/cache/tests.py:2514:15   - Unknown word (Surronding)           -- # Surronding whitespace on values
-tests/cache/tests.py:2538:28   - Unknown word (cacheprefix)          -- "KEY_PREFIX": "cacheprefix",
-tests/cache/tests.py:2752:63   - Unknown word (somethingelse)        -- path, {"foo": "bar", "somethingelse": "true"})
-tests/cache/tests.py:2761:28   - Unknown word (mundo)                -- es_message = "Hola mundo!"
-tests/cache/tests.py:2796:25   - Unknown word (doesnt)               -- def test_middleware_doesnt_cache_streaming_response
-tests/cache/tests.py:2818:28   - Unknown word (cacheprefix)          -- "KEY_PREFIX": "cacheprefix",
+tests/cache/tests.py:2519:22   - Unknown word (dictitem)             -- # form (i.e. dictitem() lacks a strip()).
+tests/cache/tests.py:2533:15   - Unknown word (Surronding)           -- # Surronding whitespace on values
+tests/cache/tests.py:2557:28   - Unknown word (cacheprefix)          -- "KEY_PREFIX": "cacheprefix",
+tests/cache/tests.py:2771:63   - Unknown word (somethingelse)        -- path, {"foo": "bar", "somethingelse": "true"})
+tests/cache/tests.py:2780:28   - Unknown word (mundo)                -- es_message = "Hola mundo!"
+tests/cache/tests.py:2815:25   - Unknown word (doesnt)               -- def test_middleware_doesnt_cache_streaming_response
+tests/cache/tests.py:2837:28   - Unknown word (cacheprefix)          -- "KEY_PREFIX": "cacheprefix",
 tests/cache/tests.py:299:31    - Unknown word (cacheprefix)          -- prefix": {"KEY_PREFIX": "cacheprefix{}".format(os.getpid
 tests/cache/tests.py:299:56    - Unknown word (getpid)               -- cacheprefix{}".format(os.getpid())},
-tests/cache/tests.py:3086:39   - Unknown word (superstring)          -- cache_control_not_cached_superstring(self):
-tests/cache/tests.py:3088:10   - Unknown word (myprivate)            -- "myprivate", a hypothetical extension
-tests/cache/tests.py:3093:24   - Unknown word (myprivate)            -- @cache_control(myprivate=True)
-tests/cache/tests.py:3167:13   - Unknown word (maxage)               -- ``s-maxage`` and ``must-revalidate
-tests/cache/tests.py:3175:45   - Unknown word (superstring)          -- uthorization_header_exception_superstring(self):
-tests/cache/tests.py:3177:10   - Unknown word (nopublic)             -- "nopublic", a hypothetical extension
+tests/cache/tests.py:3105:39   - Unknown word (superstring)          -- cache_control_not_cached_superstring(self):
+tests/cache/tests.py:3107:10   - Unknown word (myprivate)            -- "myprivate", a hypothetical extension
+tests/cache/tests.py:3112:24   - Unknown word (myprivate)            -- @cache_control(myprivate=True)
+tests/cache/tests.py:3186:13   - Unknown word (maxage)               -- ``s-maxage`` and ``must-revalidate
+tests/cache/tests.py:3194:45   - Unknown word (superstring)          -- uthorization_header_exception_superstring(self):
+tests/cache/tests.py:3196:10   - Unknown word (nopublic)             -- "nopublic", a hypothetical extension
 tests/cache/tests.py:355:20    - Unknown word (somekey)              -- cache.set("somekey", "value")
 tests/cache/tests.py:358:49    - Unknown word (somekey)              -- caches["prefix"].has_key("somekey"), False)
 tests/cache/tests.py:360:31    - Unknown word (somekey)              -- caches["prefix"].set("somekey", "value2")
@@ -5004,8 +5025,8 @@ tests/forms_tests/widget_tests/test_selectdatewidget.py:488:35    - Unknown word
 tests/forms_tests/widget_tests/test_selectdatewidget.py:491:35    - Unknown word (juni)       -- <option value="6">juni</option>
 tests/forms_tests/widget_tests/test_selectdatewidget.py:492:35    - Unknown word (juli)       -- <option value="7">juli</option>
 tests/forms_tests/widget_tests/test_selectdatewidget.py:495:36    - Unknown word (oktober)    -- <option value="10">oktober</option>
-tests/forms_tests/widget_tests/test_textarea.py:48:30     - Unknown word (ampersanded) -- 'some "quoted" & ampersanded value',
-tests/forms_tests/widget_tests/test_textarea.py:51:48     - Unknown word (ampersanded) -- quot;quoted&quot; &amp; ampersanded value</textarea>"
+tests/forms_tests/widget_tests/test_textarea.py:51:30     - Unknown word (ampersanded) -- 'some "quoted" & ampersanded value',
+tests/forms_tests/widget_tests/test_textarea.py:54:48     - Unknown word (ampersanded) -- quot;quoted&quot; &amp; ampersanded value</textarea>"
 tests/forms_tests/widget_tests/test_textinput.py:50:30     - Unknown word (ampersanded) -- 'some "quoted" & ampersanded value',
 tests/forms_tests/widget_tests/test_textinput.py:53:55     - Unknown word (ampersanded) -- quot;quoted&quot; &amp; ampersanded value">'
 tests/forms_tests/widget_tests/test_textinput.py:72:17     - Unknown word (Žćžšđ)       -- "ŠĐĆŽćžšđ",
@@ -5193,37 +5214,38 @@ tests/gis_tests/gdal_tests/test_ds.py:71:9      - Unknown word (nfeat)      -- n
 tests/gis_tests/gdal_tests/test_ds.py:77:78     - Unknown word (QGIS)       -- # Got extent from QGIS
 tests/gis_tests/gdal_tests/test_ds.py:82:9      - Unknown word (nfeat)      -- nfeat=3,
 tests/gis_tests/gdal_tests/test_ds.py:97:83     - Unknown word (QGIS)       -- # Got extent from QGIS
-tests/gis_tests/gdal_tests/test_geom.py:1023:44   - Unknown word (CIRCULARSTRING) -- assertEqual(curve.geom_name, "CIRCULARSTRING")
-tests/gis_tests/gdal_tests/test_geom.py:1026:14   - Unknown word (CIRCULARSTRING) -- "CIRCULARSTRING (-0.797 0.466,-0.61
-tests/gis_tests/gdal_tests/test_geom.py:1045:14   - Unknown word (circularstring) -- def test_circularstring_has_linestring_features
-tests/gis_tests/gdal_tests/test_geom.py:1046:29   - Unknown word (CIRCULARSTRING) -- geom = OGRGeometry("CIRCULARSTRING ZM (1 5 0 1, 6 2 0
-tests/gis_tests/gdal_tests/test_geom.py:1059:14   - Unknown word (curvepolygon)   -- def test_curvepolygon_has_polygon_features
-tests/gis_tests/gdal_tests/test_geom.py:1061:14   - Unknown word (CURVEPOLYGON)   -- "CURVEPOLYGON ZM (CIRCULARSTRING ZM
-tests/gis_tests/gdal_tests/test_geom.py:1061:31   - Unknown word (CIRCULARSTRING) -- "CURVEPOLYGON ZM (CIRCULARSTRING ZM (0 0 0 0, 4 0 0
-tests/gis_tests/gdal_tests/test_geom.py:123:27    - Unknown word (jsons)      -- # Loading jsons to prevent decimal difference
-tests/gis_tests/gdal_tests/test_geom.py:149:13    - Unknown word (mgeom)      -- mgeom1 = OGRGeometry(mp.wkt
-tests/gis_tests/gdal_tests/test_geom.py:150:33    - Unknown word (mgeom)      -- self.assertEqual(4, mgeom1.geom_type)
-tests/gis_tests/gdal_tests/test_geom.py:151:44    - Unknown word (mgeom)      -- assertEqual("MULTIPOINT", mgeom1.geom_name)
-tests/gis_tests/gdal_tests/test_geom.py:152:13    - Unknown word (mgeom)      -- mgeom2 = OGRGeometry("MULTIPOINT
-tests/gis_tests/gdal_tests/test_geom.py:153:13    - Unknown word (mgeom)      -- mgeom3 = OGRGeometry("MULTIPOINT
-tests/gis_tests/gdal_tests/test_geom.py:165:35    - Unknown word (linestrings) -- ls in self.geometries.linestrings:
-tests/gis_tests/gdal_tests/test_geom.py:179:18    - Unknown word (tmpx)        -- x = [tmpx for tmpx, tmpy in ls
-tests/gis_tests/gdal_tests/test_geom.py:179:27    - Unknown word (tmpx)        -- x = [tmpx for tmpx, tmpy in ls.coords]
-tests/gis_tests/gdal_tests/test_geom.py:179:33    - Unknown word (tmpy)        -- x = [tmpx for tmpx, tmpy in ls.coords]
-tests/gis_tests/gdal_tests/test_geom.py:180:18    - Unknown word (tmpy)        -- y = [tmpy for tmpx, tmpy in ls
-tests/gis_tests/gdal_tests/test_geom.py:180:27    - Unknown word (tmpx)        -- y = [tmpy for tmpx, tmpy in ls.coords]
-tests/gis_tests/gdal_tests/test_geom.py:180:33    - Unknown word (tmpy)        -- y = [tmpy for tmpx, tmpy in ls.coords]
-tests/gis_tests/gdal_tests/test_geom.py:206:35    - Unknown word (linearrings) -- rr in self.geometries.linearrings:
-tests/gis_tests/gdal_tests/test_geom.py:261:14    - Unknown word (closepolygons) -- def test_closepolygons(self):
-tests/gis_tests/gdal_tests/test_geom.py:302:13    - Unknown word (klone)         -- klone = mpoly.clone()
-tests/gis_tests/gdal_tests/test_geom.py:303:38    - Unknown word (klone)         -- assertEqual(sr.wkt, klone.srs.wkt)
-tests/gis_tests/gdal_tests/test_geom.py:370:9     - Unknown word (prec)          -- prec = -1
-tests/gis_tests/gdal_tests/test_geom.py:372:50    - Unknown word (prec)          -- sertAlmostEqual(trans.x, p.x, prec)
-tests/gis_tests/gdal_tests/test_geom.py:373:50    - Unknown word (prec)          -- sertAlmostEqual(trans.y, p.y, prec)
-tests/gis_tests/gdal_tests/test_geom.py:382:9     - Unknown word (prec)          -- prec = -1
-tests/gis_tests/gdal_tests/test_geom.py:386:61    - Unknown word (prec)          -- x[0], ls_orig.x[0], prec)
-tests/gis_tests/gdal_tests/test_geom.py:423:46    - Unknown word (sdiff)         -- OGRGeometry(self.geometries.sdiff_geoms[i].wkt)
-tests/gis_tests/gdal_tests/test_geom.py:984:29    - Unknown word (CIRCULARSTRING) -- geom = OGRGeometry("CIRCULARSTRING (-0.797 0.466,-0.48
+tests/gis_tests/gdal_tests/test_geom.py:1045:29   - Unknown word (CIRCULARSTRING) -- geom = OGRGeometry("CIRCULARSTRING (-0.797 0.466,-0.48
+tests/gis_tests/gdal_tests/test_geom.py:1084:44   - Unknown word (CIRCULARSTRING) -- assertEqual(curve.geom_name, "CIRCULARSTRING")
+tests/gis_tests/gdal_tests/test_geom.py:1087:14   - Unknown word (CIRCULARSTRING) -- "CIRCULARSTRING (-0.797 0.466,-0.61
+tests/gis_tests/gdal_tests/test_geom.py:1106:14   - Unknown word (circularstring) -- def test_circularstring_has_linestring_features
+tests/gis_tests/gdal_tests/test_geom.py:1107:29   - Unknown word (CIRCULARSTRING) -- geom = OGRGeometry("CIRCULARSTRING ZM (1 5 0 1, 6 2 0
+tests/gis_tests/gdal_tests/test_geom.py:1120:14   - Unknown word (curvepolygon)   -- def test_curvepolygon_has_polygon_features
+tests/gis_tests/gdal_tests/test_geom.py:1122:14   - Unknown word (CURVEPOLYGON)   -- "CURVEPOLYGON ZM (CIRCULARSTRING ZM
+tests/gis_tests/gdal_tests/test_geom.py:1122:31   - Unknown word (CIRCULARSTRING) -- "CURVEPOLYGON ZM (CIRCULARSTRING ZM (0 0 0 0, 4 0 0
+tests/gis_tests/gdal_tests/test_geom.py:125:27    - Unknown word (jsons)      -- # Loading jsons to prevent decimal difference
+tests/gis_tests/gdal_tests/test_geom.py:176:56    - Unknown word (hasnull)    -- properties": {"name": "hasnull\x00"}}
+tests/gis_tests/gdal_tests/test_geom.py:210:13    - Unknown word (mgeom)      -- mgeom1 = OGRGeometry(mp.wkt
+tests/gis_tests/gdal_tests/test_geom.py:211:33    - Unknown word (mgeom)      -- self.assertEqual(4, mgeom1.geom_type)
+tests/gis_tests/gdal_tests/test_geom.py:212:44    - Unknown word (mgeom)      -- assertEqual("MULTIPOINT", mgeom1.geom_name)
+tests/gis_tests/gdal_tests/test_geom.py:213:13    - Unknown word (mgeom)      -- mgeom2 = OGRGeometry("MULTIPOINT
+tests/gis_tests/gdal_tests/test_geom.py:214:13    - Unknown word (mgeom)      -- mgeom3 = OGRGeometry("MULTIPOINT
+tests/gis_tests/gdal_tests/test_geom.py:226:35    - Unknown word (linestrings) -- ls in self.geometries.linestrings:
+tests/gis_tests/gdal_tests/test_geom.py:240:18    - Unknown word (tmpx)        -- x = [tmpx for tmpx, tmpy in ls
+tests/gis_tests/gdal_tests/test_geom.py:240:27    - Unknown word (tmpx)        -- x = [tmpx for tmpx, tmpy in ls.coords]
+tests/gis_tests/gdal_tests/test_geom.py:240:33    - Unknown word (tmpy)        -- x = [tmpx for tmpx, tmpy in ls.coords]
+tests/gis_tests/gdal_tests/test_geom.py:241:18    - Unknown word (tmpy)        -- y = [tmpy for tmpx, tmpy in ls
+tests/gis_tests/gdal_tests/test_geom.py:241:27    - Unknown word (tmpx)        -- y = [tmpy for tmpx, tmpy in ls.coords]
+tests/gis_tests/gdal_tests/test_geom.py:241:33    - Unknown word (tmpy)        -- y = [tmpy for tmpx, tmpy in ls.coords]
+tests/gis_tests/gdal_tests/test_geom.py:267:35    - Unknown word (linearrings) -- rr in self.geometries.linearrings:
+tests/gis_tests/gdal_tests/test_geom.py:322:14    - Unknown word (closepolygons) -- def test_closepolygons(self):
+tests/gis_tests/gdal_tests/test_geom.py:363:13    - Unknown word (klone)         -- klone = mpoly.clone()
+tests/gis_tests/gdal_tests/test_geom.py:364:38    - Unknown word (klone)         -- assertEqual(sr.wkt, klone.srs.wkt)
+tests/gis_tests/gdal_tests/test_geom.py:431:9     - Unknown word (prec)          -- prec = -1
+tests/gis_tests/gdal_tests/test_geom.py:433:50    - Unknown word (prec)          -- sertAlmostEqual(trans.x, p.x, prec)
+tests/gis_tests/gdal_tests/test_geom.py:434:50    - Unknown word (prec)          -- sertAlmostEqual(trans.y, p.y, prec)
+tests/gis_tests/gdal_tests/test_geom.py:443:9     - Unknown word (prec)          -- prec = -1
+tests/gis_tests/gdal_tests/test_geom.py:447:61    - Unknown word (prec)          -- x[0], ls_orig.x[0], prec)
+tests/gis_tests/gdal_tests/test_geom.py:484:46    - Unknown word (sdiff)         -- OGRGeometry(self.geometries.sdiff_geoms[i].wkt)
 tests/gis_tests/gdal_tests/test_raster.py:105:35    - Unknown word (geotransforms) -- geotransform in error_geotransforms:
 tests/gis_tests/gdal_tests/test_raster.py:11:58     - Unknown word (capi)       -- prototypes import raster as capi
 tests/gis_tests/gdal_tests/test_raster.py:129:9     - Unknown word (rast)          -- rast = GDALRaster(
@@ -5288,53 +5310,53 @@ tests/gis_tests/gdal_tests/test_raster.py:950:9     - Unknown word (bandmemjson)
 tests/gis_tests/gdal_tests/test_raster.py:953:17    - Unknown word (bandmemjson)   -- bandmemjson.data(), numpy.array
 tests/gis_tests/gdal_tests/test_raster.py:956:30    - Unknown word (bandmemjson)   -- self.assertEqual(bandmemjson.data(), list(range(
 tests/gis_tests/gdal_tests/test_raster.py:99:15     - Unknown word (geotransforms) -- error_geotransforms = [
-tests/gis_tests/gdal_tests/test_srs.py:105:14    - Unknown word (PROJCS)     -- "PROJCS": (None, None),
-tests/gis_tests/gdal_tests/test_srs.py:108:15    - Unknown word (PROJCS)     -- ("PROJCS|GeOgCs|spheroid", "GRS
-tests/gis_tests/gdal_tests/test_srs.py:109:16    - Unknown word (projcs)     -- (("projcs", 9), "UNIT"),
-tests/gis_tests/gdal_tests/test_srs.py:110:16    - Unknown word (projcs)     -- (("projcs", 11), "AXIS"),
-tests/gis_tests/gdal_tests/test_srs.py:134:10    - Unknown word (GEOGCS)     -- 'GEOGCS["WGS 84",DATUM["WGS
-tests/gis_tests/gdal_tests/test_srs.py:135:36    - Unknown word (TOWGS)      -- AUTHORITY["EPSG","7030"]],TOWGS84[0,0,0,0,0,0,0],AUTHORITY
-tests/gis_tests/gdal_tests/test_srs.py:136:10    - Unknown word (PRIMEM)     -- 'PRIMEM["Greenwich",0,AUTHORITY
-tests/gis_tests/gdal_tests/test_srs.py:146:10    - Unknown word (PRIMEM)     -- 'PRIMEM["Greenwich",0,AUTHORITY
-tests/gis_tests/gdal_tests/test_srs.py:176:18    - Unknown word (NZGD)       -- 'PROJCS["NZGD49 / Karamea Circuit
-tests/gis_tests/gdal_tests/test_srs.py:176:27    - Unknown word (Karamea)    -- 'PROJCS["NZGD49 / Karamea Circuit",GEOGCS["NZGD
-tests/gis_tests/gdal_tests/test_srs.py:176:52    - Unknown word (NZGD)       -- Karamea Circuit",GEOGCS["NZGD49",'
-tests/gis_tests/gdal_tests/test_srs.py:180:10    - Unknown word (TOWGS)      -- "TOWGS84[59.47,-5.04,187.4
-tests/gis_tests/gdal_tests/test_srs.py:191:15    - Unknown word (NZGD)       -- name="NZGD49 / Karamea Circuit
-tests/gis_tests/gdal_tests/test_srs.py:191:24    - Unknown word (Karamea)    -- name="NZGD49 / Karamea Circuit",
-tests/gis_tests/gdal_tests/test_srs.py:199:5     - Unknown word (srlist)     -- bad_srlist = (
-tests/gis_tests/gdal_tests/test_srs.py:201:6     - Unknown word (OOJCS)      -- 'OOJCS["NAD83 / Texas South
-tests/gis_tests/gdal_tests/test_srs.py:219:18    - Unknown word (srlist)     -- for s in srlist:
-tests/gis_tests/gdal_tests/test_srs.py:21:1      - Unknown word (srlist)     -- srlist = (
-tests/gis_tests/gdal_tests/test_srs.py:224:24    - Unknown word (srlist)     -- for bad in bad_srlist:
-tests/gis_tests/gdal_tests/test_srs.py:235:18    - Unknown word (srlist)     -- for s in srlist:
-tests/gis_tests/gdal_tests/test_srs.py:23:10     - Unknown word (GEOGCS)     -- 'GEOGCS["WGS 84",DATUM["WGS
-tests/gis_tests/gdal_tests/test_srs.py:247:15    - Unknown word (ellps)      -- "+ellps=WGS84",
-tests/gis_tests/gdal_tests/test_srs.py:248:15    - Unknown word (towgs)      -- "+towgs84=0,0,0,0,0,0,0",
-tests/gis_tests/gdal_tests/test_srs.py:24:36     - Unknown word (TOWGS)      -- AUTHORITY["EPSG","7030"]],TOWGS84[0,0,0,0,0,0,0],AUTHORITY
-tests/gis_tests/gdal_tests/test_srs.py:25:10     - Unknown word (PRIMEM)     -- 'PRIMEM["Greenwich",0,AUTHORITY
-tests/gis_tests/gdal_tests/test_srs.py:337:22    - Unknown word (DHDN)       -- 'PROJCS["DHDN / Soldner 39 Langschoß
-tests/gis_tests/gdal_tests/test_srs.py:337:29    - Unknown word (Soldner)    -- 'PROJCS["DHDN / Soldner 39 Langschoß",'
-tests/gis_tests/gdal_tests/test_srs.py:337:40    - Unknown word (Langschoß)  -- PROJCS["DHDN / Soldner 39 Langschoß",'
-tests/gis_tests/gdal_tests/test_srs.py:338:22    - Unknown word (DHDN)       -- 'GEOGCS["DHDN",DATUM["Deutsches_Hauptdreiec
-tests/gis_tests/gdal_tests/test_srs.py:338:35    - Unknown word (Deutsches)  -- GEOGCS["DHDN",DATUM["Deutsches_Hauptdreiecksnetz",
-tests/gis_tests/gdal_tests/test_srs.py:338:45    - Unknown word (Hauptdreiecksnetz) -- DHDN",DATUM["Deutsches_Hauptdreiecksnetz",'
-tests/gis_tests/gdal_tests/test_srs.py:343:52    - Unknown word (Cassini)           -- 4314"]],PROJECTION["Cassini_Soldner"],'
-tests/gis_tests/gdal_tests/test_srs.py:343:60    - Unknown word (Soldner)           -- PROJECTION["Cassini_Soldner"],'
-tests/gis_tests/gdal_tests/test_srs.py:355:41    - Unknown word (DHDN)              -- assertEqual(srs.name, "DHDN / Soldner 39 Langschoß
-tests/gis_tests/gdal_tests/test_srs.py:355:48    - Unknown word (Soldner)           -- assertEqual(srs.name, "DHDN / Soldner 39 Langschoß")
-tests/gis_tests/gdal_tests/test_srs.py:355:59    - Unknown word (Langschoß)         -- "DHDN / Soldner 39 Langschoß")
-tests/gis_tests/gdal_tests/test_srs.py:357:28    - Unknown word (Langschoß)         -- self.assertIn("Langschoß", srs.pretty_wkt)
-tests/gis_tests/gdal_tests/test_srs.py:359:32    - Unknown word (Langschoß)         -- self.assertIn("Langschoß", srs.xml)
-tests/gis_tests/gdal_tests/test_srs.py:38:14     - Unknown word (GEOGCS)     -- "GEOGCS": ("EPSG", "4326"),
-tests/gis_tests/gdal_tests/test_srs.py:44:15     - Unknown word (primem)     -- ("primem|authority", "EPSG")
-tests/gis_tests/gdal_tests/test_srs.py:48:10     - Unknown word (PROJCS)     -- 'PROJCS["NAD83 / Texas South
-tests/gis_tests/gdal_tests/test_srs.py:49:10     - Unknown word (GEOGCS)     -- 'GEOGCS["NAD83",DATUM["North
-tests/gis_tests/gdal_tests/test_srs.py:51:36     - Unknown word (PRIMEM)     -- AUTHORITY["EPSG","6269"]],PRIMEM["Greenwich",0,AUTHORITY
-tests/gis_tests/gdal_tests/test_srs.py:70:14     - Unknown word (PROJCS)     -- "PROJCS": ("EPSG", "32140")
-tests/gis_tests/gdal_tests/test_srs.py:81:10     - Unknown word (PROJCS)     -- 'PROJCS["NAD83 / Texas South
-tests/gis_tests/gdal_tests/test_srs.py:82:10     - Unknown word (GEOGCS)     -- 'GEOGCS["NAD83",DATUM["North
-tests/gis_tests/gdal_tests/test_srs.py:85:10     - Unknown word (PRIMEM)     -- 'PRIMEM["Greenwich",0],'
+tests/gis_tests/gdal_tests/test_srs.py:110:14    - Unknown word (PROJCS)     -- "PROJCS": (None, None),
+tests/gis_tests/gdal_tests/test_srs.py:113:15    - Unknown word (PROJCS)     -- ("PROJCS|GeOgCs|spheroid", "GRS
+tests/gis_tests/gdal_tests/test_srs.py:114:16    - Unknown word (projcs)     -- (("projcs", 9), "UNIT"),
+tests/gis_tests/gdal_tests/test_srs.py:115:16    - Unknown word (projcs)     -- (("projcs", 11), "AXIS"),
+tests/gis_tests/gdal_tests/test_srs.py:139:10    - Unknown word (GEOGCS)     -- 'GEOGCS["WGS 84",DATUM["WGS
+tests/gis_tests/gdal_tests/test_srs.py:140:36    - Unknown word (TOWGS)      -- AUTHORITY["EPSG","7030"]],TOWGS84[0,0,0,0,0,0,0],AUTHORITY
+tests/gis_tests/gdal_tests/test_srs.py:141:10    - Unknown word (PRIMEM)     -- 'PRIMEM["Greenwich",0,AUTHORITY
+tests/gis_tests/gdal_tests/test_srs.py:151:10    - Unknown word (PRIMEM)     -- 'PRIMEM["Greenwich",0,AUTHORITY
+tests/gis_tests/gdal_tests/test_srs.py:181:18    - Unknown word (NZGD)       -- 'PROJCS["NZGD49 / Karamea Circuit
+tests/gis_tests/gdal_tests/test_srs.py:181:27    - Unknown word (Karamea)    -- 'PROJCS["NZGD49 / Karamea Circuit",GEOGCS["NZGD
+tests/gis_tests/gdal_tests/test_srs.py:181:52    - Unknown word (NZGD)       -- Karamea Circuit",GEOGCS["NZGD49",'
+tests/gis_tests/gdal_tests/test_srs.py:185:10    - Unknown word (TOWGS)      -- "TOWGS84[59.47,-5.04,187.4
+tests/gis_tests/gdal_tests/test_srs.py:196:15    - Unknown word (NZGD)       -- name="NZGD49 / Karamea Circuit
+tests/gis_tests/gdal_tests/test_srs.py:196:24    - Unknown word (Karamea)    -- name="NZGD49 / Karamea Circuit",
+tests/gis_tests/gdal_tests/test_srs.py:204:5     - Unknown word (srlist)     -- bad_srlist = (
+tests/gis_tests/gdal_tests/test_srs.py:206:6     - Unknown word (OOJCS)      -- 'OOJCS["NAD83 / Texas South
+tests/gis_tests/gdal_tests/test_srs.py:224:18    - Unknown word (srlist)     -- for s in srlist:
+tests/gis_tests/gdal_tests/test_srs.py:229:24    - Unknown word (srlist)     -- for bad in bad_srlist:
+tests/gis_tests/gdal_tests/test_srs.py:240:18    - Unknown word (srlist)     -- for s in srlist:
+tests/gis_tests/gdal_tests/test_srs.py:252:15    - Unknown word (ellps)      -- "+ellps=WGS84",
+tests/gis_tests/gdal_tests/test_srs.py:253:15    - Unknown word (towgs)      -- "+towgs84=0,0,0,0,0,0,0",
+tests/gis_tests/gdal_tests/test_srs.py:26:1      - Unknown word (srlist)     -- srlist = (
+tests/gis_tests/gdal_tests/test_srs.py:28:10     - Unknown word (GEOGCS)     -- 'GEOGCS["WGS 84",DATUM["WGS
+tests/gis_tests/gdal_tests/test_srs.py:29:36     - Unknown word (TOWGS)      -- AUTHORITY["EPSG","7030"]],TOWGS84[0,0,0,0,0,0,0],AUTHORITY
+tests/gis_tests/gdal_tests/test_srs.py:30:10     - Unknown word (PRIMEM)     -- 'PRIMEM["Greenwich",0,AUTHORITY
+tests/gis_tests/gdal_tests/test_srs.py:342:22    - Unknown word (DHDN)       -- 'PROJCS["DHDN / Soldner 39 Langschoß
+tests/gis_tests/gdal_tests/test_srs.py:342:29    - Unknown word (Soldner)    -- 'PROJCS["DHDN / Soldner 39 Langschoß",'
+tests/gis_tests/gdal_tests/test_srs.py:342:40    - Unknown word (Langschoß)  -- PROJCS["DHDN / Soldner 39 Langschoß",'
+tests/gis_tests/gdal_tests/test_srs.py:343:22    - Unknown word (DHDN)       -- 'GEOGCS["DHDN",DATUM["Deutsches_Hauptdreiec
+tests/gis_tests/gdal_tests/test_srs.py:343:35    - Unknown word (Deutsches)  -- GEOGCS["DHDN",DATUM["Deutsches_Hauptdreiecksnetz",
+tests/gis_tests/gdal_tests/test_srs.py:343:45    - Unknown word (Hauptdreiecksnetz) -- DHDN",DATUM["Deutsches_Hauptdreiecksnetz",'
+tests/gis_tests/gdal_tests/test_srs.py:348:52    - Unknown word (Cassini)           -- 4314"]],PROJECTION["Cassini_Soldner"],'
+tests/gis_tests/gdal_tests/test_srs.py:348:60    - Unknown word (Soldner)           -- PROJECTION["Cassini_Soldner"],'
+tests/gis_tests/gdal_tests/test_srs.py:360:41    - Unknown word (DHDN)              -- assertEqual(srs.name, "DHDN / Soldner 39 Langschoß
+tests/gis_tests/gdal_tests/test_srs.py:360:48    - Unknown word (Soldner)           -- assertEqual(srs.name, "DHDN / Soldner 39 Langschoß")
+tests/gis_tests/gdal_tests/test_srs.py:360:59    - Unknown word (Langschoß)         -- "DHDN / Soldner 39 Langschoß")
+tests/gis_tests/gdal_tests/test_srs.py:362:28    - Unknown word (Langschoß)         -- self.assertIn("Langschoß", srs.pretty_wkt)
+tests/gis_tests/gdal_tests/test_srs.py:364:32    - Unknown word (Langschoß)         -- self.assertIn("Langschoß", srs.xml)
+tests/gis_tests/gdal_tests/test_srs.py:43:14     - Unknown word (GEOGCS)     -- "GEOGCS": ("EPSG", "4326"),
+tests/gis_tests/gdal_tests/test_srs.py:49:15     - Unknown word (primem)     -- ("primem|authority", "EPSG")
+tests/gis_tests/gdal_tests/test_srs.py:53:10     - Unknown word (PROJCS)     -- 'PROJCS["NAD83 / Texas South
+tests/gis_tests/gdal_tests/test_srs.py:54:10     - Unknown word (GEOGCS)     -- 'GEOGCS["NAD83",DATUM["North
+tests/gis_tests/gdal_tests/test_srs.py:56:36     - Unknown word (PRIMEM)     -- AUTHORITY["EPSG","6269"]],PRIMEM["Greenwich",0,AUTHORITY
+tests/gis_tests/gdal_tests/test_srs.py:75:14     - Unknown word (PROJCS)     -- "PROJCS": ("EPSG", "32140")
+tests/gis_tests/gdal_tests/test_srs.py:86:10     - Unknown word (PROJCS)     -- 'PROJCS["NAD83 / Texas South
+tests/gis_tests/gdal_tests/test_srs.py:87:10     - Unknown word (GEOGCS)     -- 'GEOGCS["NAD83",DATUM["North
+tests/gis_tests/gdal_tests/test_srs.py:90:10     - Unknown word (PRIMEM)     -- 'PRIMEM["Greenwich",0],'
 tests/gis_tests/geo3d/models.py:16:5      - Unknown word (pointg)     -- pointg = models.PointField
 tests/gis_tests/geo3d/tests.py:122:17    - Unknown word (pointg)     -- pointg=Point(*pnt_data, srid
 tests/gis_tests/geo3d/tests.py:164:34    - Unknown word (pointg)     -- self.assertTrue(city.pointg.hasz)
@@ -5414,77 +5436,79 @@ tests/gis_tests/geoapp/test_regress.py:60:21     - Unknown word (Tioga)      -- 
 tests/gis_tests/geoapp/test_serializers.py:84:39     - Unknown word (Tioga)      -- Mansfield", county="Tioga", point="POINT(-77.
 tests/gis_tests/geoapp/test_sitemaps.py:27:14     - Unknown word (geositemap) -- def test_geositemap_kml(self):
 tests/gis_tests/geoapp/test_sitemaps.py:70:55     - Unknown word (Placemark)  -- getElementsByTagName("Placemark")),
-tests/gis_tests/geoapp/tests.py:102:9     - Unknown word (nullstate)   -- nullstate = State(name="NullState
-tests/gis_tests/geoapp/tests.py:103:32    - Unknown word (nullstate)   -- self.assertEqual(4326, nullstate.poly.srid) # SRID auto
-tests/gis_tests/geoapp/tests.py:104:9     - Unknown word (nullstate)   -- nullstate.save()
-tests/gis_tests/geoapp/tests.py:158:14    - Unknown word (createnull)  -- def test_createnull(self):
-tests/gis_tests/geoapp/tests.py:194:24    - Unknown word (geofields)   -- def test_inherited_geofields(self):
-tests/gis_tests/geoapp/tests.py:198:39    - Unknown word (Tioga)       -- Mansfield", county="Tioga", point="POINT(-77.
-tests/gis_tests/geoapp/tests.py:262:13    - Unknown word (klass)       -- for klass in geometry_classes
-tests/gis_tests/geoapp/tests.py:263:17    - Unknown word (klass)       -- g = klass(srid=4326)
-tests/gis_tests/geoapp/tests.py:270:64    - Unknown word (klass)       -- create(name=f"Empty {klass.__name__}", geom=g)
-tests/gis_tests/geoapp/tests.py:272:16    - Unknown word (klass)       -- if klass is LinearRing:
-tests/gis_tests/geoapp/tests.py:273:65    - Unknown word (Geomtry)     -- representable in WKB, so GEOSGeomtry.wkb
-tests/gis_tests/geoapp/tests.py:28:21     - Unknown word (textrasters) -- from ..data.rasters.textrasters import JSON_RASTER
-tests/gis_tests/geoapp/tests.py:365:9     - Unknown word (ptown)       -- ptown = City.objects.get(name
-tests/gis_tests/geoapp/tests.py:366:51    - Unknown word (ptown)       -- filter(point__disjoint=ptown.point)
-tests/gis_tests/geoapp/tests.py:368:51    - Unknown word (ptown)       -- filter(poly__disjoint=ptown.point)
-tests/gis_tests/geoapp/tests.py:391:9     - Unknown word (okcity)      -- okcity = City.objects.get(name
-tests/gis_tests/geoapp/tests.py:399:22    - Unknown word (EWKBHEX)     -- ) # Query w/EWKBHEX
-tests/gis_tests/geoapp/tests.py:413:56    - Unknown word (okcity)      -- filter(mpoly__contains=okcity.point.wkt)), 0
-tests/gis_tests/geoapp/tests.py:419:9     - Unknown word (okcity)      -- okcity = City.objects.get(name
-tests/gis_tests/geoapp/tests.py:420:55    - Unknown word (okcity)      -- filter(mpoly__bbcontains=okcity.point)
-tests/gis_tests/geoapp/tests.py:460:50    - Unknown word (lwgeom)      -- and BOX2D_right() in lwgeom_box2dfloat4.c in
-tests/gis_tests/geoapp/tests.py:460:61    - Unknown word (dfloat)      -- right() in lwgeom_box2dfloat4.c in
-tests/gis_tests/geoapp/tests.py:534:9     - Unknown word (nullqs)      -- nullqs = State.objects.filter
-tests/gis_tests/geoapp/tests.py:535:9     - Unknown word (validqs)     -- validqs = State.objects.filter
-tests/gis_tests/geoapp/tests.py:539:33    - Unknown word (nullqs)      -- self.assertEqual(1, len(nullqs))
-tests/gis_tests/geoapp/tests.py:540:41    - Unknown word (nullqs)      -- assertEqual("Puerto Rico", nullqs[0].name)
-tests/gis_tests/geoapp/tests.py:542:64    - Unknown word (nullqs)      -- objects.filter(poly=None), nullqs)
-tests/gis_tests/geoapp/tests.py:543:65    - Unknown word (validqs)     -- exclude(poly=None), validqs)
-tests/gis_tests/geoapp/tests.py:546:33    - Unknown word (validqs)     -- self.assertEqual(2, len(validqs))
-tests/gis_tests/geoapp/tests.py:547:40    - Unknown word (validqs)     -- names = [s.name for s in validqs]
-tests/gis_tests/geoapp/tests.py:61:9      - Unknown word (nullcity)    -- nullcity = City(name="NullCity
-tests/gis_tests/geoapp/tests.py:62:9      - Unknown word (nullcity)    -- nullcity.save()
-tests/gis_tests/geoapp/tests.py:68:17     - Unknown word (nullcity)    -- nullcity.point = bad
-tests/gis_tests/geoapp/tests.py:699:17    - Unknown word (anyinteract) -- mask = "anyinteract" if connection.ops.oracle
-tests/gis_tests/geoapp/tests.py:73:9      - Unknown word (nullcity)    -- nullcity.point = new
-tests/gis_tests/geoapp/tests.py:760:25    - Unknown word (vsimem)      -- vsimem_path = "/vsimem/raster.tif"
-tests/gis_tests/geoapp/tests.py:760:9     - Unknown word (vsimem)      -- vsimem_path = "/vsimem/raster
-tests/gis_tests/geoapp/tests.py:763:10    - Unknown word (rast)        -- _rast = gdal.GDALRaster(
-tests/gis_tests/geoapp/tests.py:765:25    - Unknown word (vsimem)      -- "name": vsimem_path,
-tests/gis_tests/geoapp/tests.py:77:32     - Unknown word (nullcity)    -- self.assertEqual(4326, nullcity.point.srid)
-tests/gis_tests/geoapp/tests.py:781:15    - Unknown word (vsicurl)     -- "/vsicurl/someurl",
-tests/gis_tests/geoapp/tests.py:781:23    - Unknown word (someurl)     -- "/vsicurl/someurl",
-tests/gis_tests/geoapp/tests.py:782:15    - Unknown word (vsicurl)     -- "/vsicurl_streaming/someurl",
-tests/gis_tests/geoapp/tests.py:782:33    - Unknown word (someurl)     -- "/vsicurl_streaming/someurl",
-tests/gis_tests/geoapp/tests.py:783:15    - Unknown word (vsis)        -- "/vsis3/someurl",
-tests/gis_tests/geoapp/tests.py:783:21    - Unknown word (someurl)     -- "/vsis3/someurl",
-tests/gis_tests/geoapp/tests.py:784:13    - Unknown word (vsimem)      -- vsimem_path,
-tests/gis_tests/geoapp/tests.py:835:43    - Unknown word (aggr)        -- essDBFeature("supports_extent_aggr")
-tests/gis_tests/geoapp/tests.py:858:40    - Unknown word (Smalltown)   -- objects.filter(name=("Smalltown")).aggregate(Extent
-tests/gis_tests/geoapp/tests.py:863:43    - Unknown word (aggr)        -- essDBFeature("supports_extent_aggr")
-tests/gis_tests/geoapp/tests.py:876:55    - Unknown word (aggr)        -- features.supports_make_line_aggr:
-tests/gis_tests/geoapp/tests.py:896:42    - Unknown word (aggr)        -- lessDBFeature("supports_union_aggr")
-tests/gis_tests/geoapp/tests.py:897:14    - Unknown word (unionagg)    -- def test_unionagg(self):
-tests/gis_tests/geoapp/tests.py:918:42    - Unknown word (aggr)        -- lessDBFeature("supports_union_aggr")
-tests/gis_tests/geoapp/tests.py:919:14    - Unknown word (geoagg)      -- def test_geoagg_subquery(self):
-tests/gis_tests/geoapp/tests.py:937:14    - Unknown word (unionagg)    -- def test_unionagg_tolerance(self):
-tests/gis_tests/geoapp/tests.py:940:19    - Unknown word (Forney)      -- name="Forney",
-tests/gis_tests/geoapp/tests.py:943:58    - Unknown word (Forney)      -- the distance between Forney and Dallas, so
-tests/gis_tests/geoapp/tests.py:945:9     - Unknown word (forney)      -- forney_houston = GEOSGeometry
-tests/gis_tests/geoapp/tests.py:949:9     - Unknown word (forney)      -- forney_houston.normalize()
-tests/gis_tests/geoapp/tests.py:962:34    - Unknown word (forney)      -- for expected in (forney_houston, dallas_houston
-tests/gis_tests/geoapp/tests.py:968:14    - Unknown word (unionagg)    -- def test_unionagg_tolerance_escaping(self
+tests/gis_tests/geoapp/tests.py:104:9     - Unknown word (nullstate)   -- nullstate = State(name="NullState
+tests/gis_tests/geoapp/tests.py:105:32    - Unknown word (nullstate)   -- self.assertEqual(4326, nullstate.poly.srid) # SRID auto
+tests/gis_tests/geoapp/tests.py:106:9     - Unknown word (nullstate)   -- nullstate.save()
+tests/gis_tests/geoapp/tests.py:160:14    - Unknown word (createnull)  -- def test_createnull(self):
+tests/gis_tests/geoapp/tests.py:196:24    - Unknown word (geofields)   -- def test_inherited_geofields(self):
+tests/gis_tests/geoapp/tests.py:200:39    - Unknown word (Tioga)       -- Mansfield", county="Tioga", point="POINT(-77.
+tests/gis_tests/geoapp/tests.py:264:13    - Unknown word (klass)       -- for klass in geometry_classes
+tests/gis_tests/geoapp/tests.py:265:17    - Unknown word (klass)       -- g = klass(srid=4326)
+tests/gis_tests/geoapp/tests.py:272:64    - Unknown word (klass)       -- create(name=f"Empty {klass.__name__}", geom=g)
+tests/gis_tests/geoapp/tests.py:274:16    - Unknown word (klass)       -- if klass is LinearRing:
+tests/gis_tests/geoapp/tests.py:275:65    - Unknown word (Geomtry)     -- representable in WKB, so GEOSGeomtry.wkb
+tests/gis_tests/geoapp/tests.py:30:21     - Unknown word (textrasters) -- from ..data.rasters.textrasters import JSON_RASTER
+tests/gis_tests/geoapp/tests.py:367:9     - Unknown word (ptown)       -- ptown = City.objects.get(name
+tests/gis_tests/geoapp/tests.py:368:51    - Unknown word (ptown)       -- filter(point__disjoint=ptown.point)
+tests/gis_tests/geoapp/tests.py:370:51    - Unknown word (ptown)       -- filter(poly__disjoint=ptown.point)
+tests/gis_tests/geoapp/tests.py:393:9     - Unknown word (okcity)      -- okcity = City.objects.get(name
+tests/gis_tests/geoapp/tests.py:401:22    - Unknown word (EWKBHEX)     -- ) # Query w/EWKBHEX
+tests/gis_tests/geoapp/tests.py:415:56    - Unknown word (okcity)      -- filter(mpoly__contains=okcity.point.wkt)), 0
+tests/gis_tests/geoapp/tests.py:421:9     - Unknown word (okcity)      -- okcity = City.objects.get(name
+tests/gis_tests/geoapp/tests.py:422:55    - Unknown word (okcity)      -- filter(mpoly__bbcontains=okcity.point)
+tests/gis_tests/geoapp/tests.py:462:50    - Unknown word (lwgeom)      -- and BOX2D_right() in lwgeom_box2dfloat4.c in
+tests/gis_tests/geoapp/tests.py:462:61    - Unknown word (dfloat)      -- right() in lwgeom_box2dfloat4.c in
+tests/gis_tests/geoapp/tests.py:536:9     - Unknown word (nullqs)      -- nullqs = State.objects.filter
+tests/gis_tests/geoapp/tests.py:537:9     - Unknown word (validqs)     -- validqs = State.objects.filter
+tests/gis_tests/geoapp/tests.py:541:33    - Unknown word (nullqs)      -- self.assertEqual(1, len(nullqs))
+tests/gis_tests/geoapp/tests.py:542:41    - Unknown word (nullqs)      -- assertEqual("Puerto Rico", nullqs[0].name)
+tests/gis_tests/geoapp/tests.py:544:64    - Unknown word (nullqs)      -- objects.filter(poly=None), nullqs)
+tests/gis_tests/geoapp/tests.py:545:65    - Unknown word (validqs)     -- exclude(poly=None), validqs)
+tests/gis_tests/geoapp/tests.py:548:33    - Unknown word (validqs)     -- self.assertEqual(2, len(validqs))
+tests/gis_tests/geoapp/tests.py:549:40    - Unknown word (validqs)     -- names = [s.name for s in validqs]
+tests/gis_tests/geoapp/tests.py:63:9      - Unknown word (nullcity)    -- nullcity = City(name="NullCity
+tests/gis_tests/geoapp/tests.py:64:9      - Unknown word (nullcity)    -- nullcity.save()
+tests/gis_tests/geoapp/tests.py:701:17    - Unknown word (anyinteract) -- mask = "anyinteract" if connection.ops.oracle
+tests/gis_tests/geoapp/tests.py:70:17     - Unknown word (nullcity)    -- nullcity.point = bad
+tests/gis_tests/geoapp/tests.py:75:9      - Unknown word (nullcity)    -- nullcity.point = new
+tests/gis_tests/geoapp/tests.py:775:25    - Unknown word (vsimem)      -- vsimem_path = "/vsimem/raster.tif"
+tests/gis_tests/geoapp/tests.py:775:9     - Unknown word (vsimem)      -- vsimem_path = "/vsimem/raster
+tests/gis_tests/geoapp/tests.py:778:10    - Unknown word (rast)        -- _rast = gdal.GDALRaster(
+tests/gis_tests/geoapp/tests.py:780:25    - Unknown word (vsimem)      -- "name": vsimem_path,
+tests/gis_tests/geoapp/tests.py:796:15    - Unknown word (vsicurl)     -- "/vsicurl/someurl",
+tests/gis_tests/geoapp/tests.py:796:23    - Unknown word (someurl)     -- "/vsicurl/someurl",
+tests/gis_tests/geoapp/tests.py:797:15    - Unknown word (vsicurl)     -- "/vsicurl_streaming/someurl",
+tests/gis_tests/geoapp/tests.py:797:33    - Unknown word (someurl)     -- "/vsicurl_streaming/someurl",
+tests/gis_tests/geoapp/tests.py:798:15    - Unknown word (vsis)        -- "/vsis3/someurl",
+tests/gis_tests/geoapp/tests.py:798:21    - Unknown word (someurl)     -- "/vsis3/someurl",
+tests/gis_tests/geoapp/tests.py:799:13    - Unknown word (vsimem)      -- vsimem_path,
+tests/gis_tests/geoapp/tests.py:79:32     - Unknown word (nullcity)    -- self.assertEqual(4326, nullcity.point.srid)
+tests/gis_tests/geoapp/tests.py:850:43    - Unknown word (aggr)        -- essDBFeature("supports_extent_aggr")
+tests/gis_tests/geoapp/tests.py:873:40    - Unknown word (Smalltown)   -- objects.filter(name=("Smalltown")).aggregate(Extent
+tests/gis_tests/geoapp/tests.py:878:43    - Unknown word (aggr)        -- essDBFeature("supports_extent_aggr")
+tests/gis_tests/geoapp/tests.py:891:55    - Unknown word (aggr)        -- features.supports_make_line_aggr:
+tests/gis_tests/geoapp/tests.py:911:42    - Unknown word (aggr)        -- lessDBFeature("supports_union_aggr")
+tests/gis_tests/geoapp/tests.py:912:14    - Unknown word (unionagg)    -- def test_unionagg(self):
+tests/gis_tests/geoapp/tests.py:933:42    - Unknown word (aggr)        -- lessDBFeature("supports_union_aggr")
+tests/gis_tests/geoapp/tests.py:934:14    - Unknown word (geoagg)      -- def test_geoagg_subquery(self):
+tests/gis_tests/geoapp/tests.py:952:14    - Unknown word (unionagg)    -- def test_unionagg_tolerance(self):
+tests/gis_tests/geoapp/tests.py:955:19    - Unknown word (Forney)      -- name="Forney",
+tests/gis_tests/geoapp/tests.py:958:58    - Unknown word (Forney)      -- the distance between Forney and Dallas, so
+tests/gis_tests/geoapp/tests.py:960:9     - Unknown word (forney)      -- forney_houston = GEOSGeometry
+tests/gis_tests/geoapp/tests.py:964:9     - Unknown word (forney)      -- forney_houston.normalize()
+tests/gis_tests/geoapp/tests.py:977:34    - Unknown word (forney)      -- for expected in (forney_houston, dallas_houston
+tests/gis_tests/geoapp/tests.py:983:14    - Unknown word (unionagg)    -- def test_unionagg_tolerance_escaping(self
 tests/gis_tests/geogapp/models.py:18:22     - Unknown word (geogapp)    -- app_label = "geogapp"
 tests/gis_tests/geogapp/models.py:41:22     - Unknown word (geogapp)    -- app_label = "geogapp"
 tests/gis_tests/geogapp/tests.py:102:19    - Unknown word (Bexar)      -- names = ["Bexar", "Galveston", "Harris
+tests/gis_tests/geogapp/tests.py:119:18    - Unknown word (geogapp)    -- fixtures = ["geogapp_initial"]
 tests/gis_tests/geogapp/tests.py:121:43    - Unknown word (aggr)       -- essDBFeature("supports_extent_aggr")
 tests/gis_tests/geogapp/tests.py:148:29    - Unknown word (spatialite) -- elif connection.ops.spatialite:
 tests/gis_tests/geogapp/tests.py:150:19    - Unknown word (Spatia)     -- # SpatiaLite < 5 returns non
 tests/gis_tests/geogapp/tests.py:171:31    - Unknown word (spatialite) -- if not connection.ops.spatialite:
 tests/gis_tests/geogapp/tests.py:181:37    - Unknown word (geogapp)    -- SELECT ST_Area(poly) FROM geogapp_zipcode WHERE code=
 tests/gis_tests/geogapp/tests.py:184:28    - Unknown word (geolib)     -- # the database and geolib) include 5439084, 5
+tests/gis_tests/geogapp/tests.py:21:18     - Unknown word (geogapp)    -- fixtures = ["geogapp_initial"]
 tests/gis_tests/geogapp/tests.py:50:9      - Unknown word (htown)      -- htown = City.objects.get(name
 tests/gis_tests/geogapp/tests.py:51:41     - Unknown word (htown)      -- objects.create(point=htown.point)
 tests/gis_tests/geogapp/tests.py:52:38     - Unknown word (htown)      -- duplicate = CityUnique(point=htown.point)
@@ -5677,13 +5701,15 @@ tests/gis_tests/test_data.py:77:44     - Unknown word (strconvert) -- self, key,
 tests/gis_tests/test_data.py:91:30     - Unknown word (strconvert) -- return TestGeomSet(**strconvert(geometries))
 tests/gis_tests/test_fields.py:77:15     - Unknown word (Attrless)   -- class AttrlessSpatialField(BaseSpatialField
 tests/gis_tests/test_fields.py:80:17     - Unknown word (Attrless)   -- field = AttrlessSpatialField()
-tests/gis_tests/test_geoforms.py:12:20     - Unknown word (textrasters) -- from .data.rasters.textrasters import JSON_RASTER
-tests/gis_tests/test_geoforms.py:144:15    - Unknown word (vsicurl)     -- "/vsicurl/http://example.com/raster
-tests/gis_tests/test_geoforms.py:282:45    - Unknown word (mapwidget)   -- script(attrs, "id_p_mapwidget_options")
-tests/gis_tests/test_geoforms.py:373:70    - Unknown word (mapwidget)   -- field.id_for_label}_mapwidget_options")
-tests/gis_tests/test_geoforms.py:37:9      - Unknown word (xform)       -- xform_geom = GEOSGeometry
-tests/gis_tests/test_geoforms.py:46:25     - Unknown word (xform)       -- self.assertTrue(xform_geom.equals_exact(cleaned
-tests/gis_tests/test_geoforms.py:543:45    - Unknown word (mapwidget)   -- script(attrs, "id_p_mapwidget_options")
+tests/gis_tests/test_geoforms.py:13:20     - Unknown word (textrasters) -- from .data.rasters.textrasters import JSON_RASTER
+tests/gis_tests/test_geoforms.py:212:15    - Unknown word (vsicurl)     -- "/vsicurl/http://example.com/raster
+tests/gis_tests/test_geoforms.py:350:45    - Unknown word (mapwidget)   -- script(attrs, "id_p_mapwidget_options")
+tests/gis_tests/test_geoforms.py:38:9      - Unknown word (xform)       -- xform_geom = GEOSGeometry
+tests/gis_tests/test_geoforms.py:441:70    - Unknown word (mapwidget)   -- field.id_for_label}_mapwidget_options")
+tests/gis_tests/test_geoforms.py:47:25     - Unknown word (xform)       -- self.assertTrue(xform_geom.equals_exact(cleaned
+tests/gis_tests/test_geoforms.py:611:45    - Unknown word (mapwidget)   -- script(attrs, "id_p_mapwidget_options")
+tests/gis_tests/test_geoforms.py:649:28    - Unknown word (mred)        -- ("escape\x1b[31mred\x1b[0m", "escape\\x
+tests/gis_tests/test_geoforms.py:649:57    - Unknown word (mred)        -- 0m", "escape\\x1b[31mred\\x1b[0m"),
 tests/gis_tests/test_geoip2.py:206:34    - Unknown word (mmdb)       -- CITY="GeoIP2-City-Test.mmdb",
 tests/gis_tests/test_geoip2.py:207:40    - Unknown word (mmdb)       -- GeoIP2-Country-Test.mmdb",
 tests/gis_tests/test_geoip2.py:215:17    - Unknown word (dbip)       -- GEOIP_CITY="dbip-city-lite-test.mmdb
@@ -5831,41 +5857,41 @@ tests/i18n/test_compilation.py:323:53    - Unknown word (Ленин)      -- sse
 tests/i18n/test_compilation.py:332:53    - Unknown word (Ленин)      -- ssertEqual(gettext("Lenin"), "Ленин")
 tests/i18n/test_compilation.py:333:53    - Unknown word (Водка)      -- ssertEqual(gettext("Vodka"), "Водка")
 tests/i18n/test_extraction.py:158:28    - Unknown word (msgctxt)    -- self.assertIn('msgctxt "Special trans context
-tests/i18n/test_extraction.py:195:27    - Unknown word (tachelhit)  -- def test_valid_locale_tachelhit_latin_morocco(self)
-tests/i18n/test_extraction.py:204:35    - Unknown word (subtag)     -- valid_locale_private_subtag(self):
-tests/i18n/test_extraction.py:240:37    - Unknown word (subtag)     -- invalid_locale_private_subtag(self):
+tests/i18n/test_extraction.py:204:27    - Unknown word (tachelhit)  -- def test_valid_locale_tachelhit_latin_morocco(self)
+tests/i18n/test_extraction.py:213:35    - Unknown word (subtag)     -- valid_locale_private_subtag(self):
+tests/i18n/test_extraction.py:258:37    - Unknown word (subtag)     -- invalid_locale_private_subtag(self):
 tests/i18n/test_extraction.py:30:30     - Unknown word (xgettext)   -- xgettext = find_command("xgettext")
 tests/i18n/test_extraction.py:30:5      - Unknown word (xgettext)   -- has_xgettext = find_command("xgettext
-tests/i18n/test_extraction.py:315:40    - Unknown word (áéíóúö)     -- non ASCII characters: áéíóúö",
-tests/i18n/test_extraction.py:320:40    - Unknown word (áéíóúö)     -- non ASCII characters: áéíóúö\n#. continued here.
+tests/i18n/test_extraction.py:333:40    - Unknown word (áéíóúö)     -- non ASCII characters: áéíóúö",
+tests/i18n/test_extraction.py:338:40    - Unknown word (áéíóúö)     -- non ASCII characters: áéíóúö\n#. continued here.
 tests/i18n/test_extraction.py:33:17     - Unknown word (xgettext)   -- @skipUnless(has_xgettext, "xgettext is mandatory
 tests/i18n/test_extraction.py:33:28     - Unknown word (xgettext)   -- skipUnless(has_xgettext, "xgettext is mandatory for extraction
-tests/i18n/test_extraction.py:371:43    - Unknown word (vidéo)      -- join(self.test_dir, "vidéo.txt"), "a").close()
-tests/i18n/test_extraction.py:376:14    - Unknown word (xgettext)   -- test xgettext warning about multiple
-tests/i18n/test_extraction.py:393:28    - Unknown word (msgctxt)    -- self.assertIn('msgctxt "Special trans context
-tests/i18n/test_extraction.py:395:28    - Unknown word (msgctxt)    -- self.assertIn('msgctxt "Special trans context
-tests/i18n/test_extraction.py:397:28    - Unknown word (msgctxt)    -- self.assertIn('msgctxt "Special trans context
-tests/i18n/test_extraction.py:405:22    - Unknown word (msgctxt)    -- 'msgctxt "context #7.1{}"'.format
-tests/i18n/test_extraction.py:455:63    - Unknown word (thtml)      -- LOCALE], extensions=["thtml"], verbosity=0
-tests/i18n/test_extraction.py:463:61    - Unknown word (thtml)      -- templates[/\\]comments.thtml, line 4\) "
-tests/i18n/test_extraction.py:469:61    - Unknown word (thtml)      -- templates[/\\]comments.thtml, line 6\) "
-tests/i18n/test_extraction.py:475:61    - Unknown word (thtml)      -- templates[/\\]comments.thtml, line 8\) "
-tests/i18n/test_extraction.py:529:40    - Unknown word (tfile)      -- = {os.path.splitext(tfile.file)[1] for tfile in
-tests/i18n/test_extraction.py:529:59    - Unknown word (tfile)      -- splitext(tfile.file)[1] for tfile in found_files}
-tests/i18n/test_extraction.py:533:23    - Unknown word (djangojs)   -- cmd.domain = "djangojs"
-tests/i18n/test_extraction.py:536:40    - Unknown word (tfile)      -- = {os.path.splitext(tfile.file)[1] for tfile in
-tests/i18n/test_extraction.py:536:59    - Unknown word (tfile)      -- splitext(tfile.file)[1] for tfile in found_files}
-tests/i18n/test_extraction.py:549:25    - Unknown word (Ulrich)     -- "Written by Ulrich Drepper.\n",
-tests/i18n/test_extraction.py:549:32    - Unknown word (Drepper)    -- "Written by Ulrich Drepper.\n",
-tests/i18n/test_extraction.py:584:32    - Unknown word (Größe)      -- self.assertMsgStr("Größe", po_contents)
-tests/i18n/test_extraction.py:681:38    - Unknown word (djangojs)   -- locale/%s/LC_MESSAGES/djangojs.po" % LOCALE
-tests/i18n/test_extraction.py:684:57    - Unknown word (djangojs)   -- makemessages(domain="djangojs")
-tests/i18n/test_extraction.py:689:27    - Unknown word (okkkk)      -- self.assertMsgId("okkkk", po_contents)
-tests/i18n/test_extraction.py:711:61    - Unknown word (djangojs)   -- makemessages(domain="djangojs")
-tests/i18n/test_extraction.py:724:57    - Unknown word (djangojs)   -- makemessages(domain="djangojs")
-tests/i18n/test_extraction.py:828:57    - Unknown word (djtpl)      -- "es"], extensions=["djtpl"], verbosity=0
-tests/i18n/test_extraction.py:847:67    - Unknown word (djtpl)      -- extensions=["html", "djtpl"], verbosity=0
-tests/i18n/test_extraction.py:916:36    - Unknown word (templatized) -- location_comments_for_templatized_files(self):
+tests/i18n/test_extraction.py:389:43    - Unknown word (vidéo)      -- join(self.test_dir, "vidéo.txt"), "a").close()
+tests/i18n/test_extraction.py:394:14    - Unknown word (xgettext)   -- test xgettext warning about multiple
+tests/i18n/test_extraction.py:411:28    - Unknown word (msgctxt)    -- self.assertIn('msgctxt "Special trans context
+tests/i18n/test_extraction.py:413:28    - Unknown word (msgctxt)    -- self.assertIn('msgctxt "Special trans context
+tests/i18n/test_extraction.py:415:28    - Unknown word (msgctxt)    -- self.assertIn('msgctxt "Special trans context
+tests/i18n/test_extraction.py:423:22    - Unknown word (msgctxt)    -- 'msgctxt "context #7.1{}"'.format
+tests/i18n/test_extraction.py:473:63    - Unknown word (thtml)      -- LOCALE], extensions=["thtml"], verbosity=0
+tests/i18n/test_extraction.py:481:61    - Unknown word (thtml)      -- templates[/\\]comments.thtml, line 4\) "
+tests/i18n/test_extraction.py:487:61    - Unknown word (thtml)      -- templates[/\\]comments.thtml, line 6\) "
+tests/i18n/test_extraction.py:493:61    - Unknown word (thtml)      -- templates[/\\]comments.thtml, line 8\) "
+tests/i18n/test_extraction.py:547:40    - Unknown word (tfile)      -- = {os.path.splitext(tfile.file)[1] for tfile in
+tests/i18n/test_extraction.py:547:59    - Unknown word (tfile)      -- splitext(tfile.file)[1] for tfile in found_files}
+tests/i18n/test_extraction.py:551:23    - Unknown word (djangojs)   -- cmd.domain = "djangojs"
+tests/i18n/test_extraction.py:554:40    - Unknown word (tfile)      -- = {os.path.splitext(tfile.file)[1] for tfile in
+tests/i18n/test_extraction.py:554:59    - Unknown word (tfile)      -- splitext(tfile.file)[1] for tfile in found_files}
+tests/i18n/test_extraction.py:567:25    - Unknown word (Ulrich)     -- "Written by Ulrich Drepper.\n",
+tests/i18n/test_extraction.py:567:32    - Unknown word (Drepper)    -- "Written by Ulrich Drepper.\n",
+tests/i18n/test_extraction.py:602:32    - Unknown word (Größe)      -- self.assertMsgStr("Größe", po_contents)
+tests/i18n/test_extraction.py:699:38    - Unknown word (djangojs)   -- locale/%s/LC_MESSAGES/djangojs.po" % LOCALE
+tests/i18n/test_extraction.py:702:57    - Unknown word (djangojs)   -- makemessages(domain="djangojs")
+tests/i18n/test_extraction.py:707:27    - Unknown word (okkkk)      -- self.assertMsgId("okkkk", po_contents)
+tests/i18n/test_extraction.py:729:61    - Unknown word (djangojs)   -- makemessages(domain="djangojs")
+tests/i18n/test_extraction.py:742:57    - Unknown word (djangojs)   -- makemessages(domain="djangojs")
+tests/i18n/test_extraction.py:846:57    - Unknown word (djtpl)      -- "es"], extensions=["djtpl"], verbosity=0
+tests/i18n/test_extraction.py:865:67    - Unknown word (djtpl)      -- extensions=["html", "djtpl"], verbosity=0
+tests/i18n/test_extraction.py:934:36    - Unknown word (templatized) -- location_comments_for_templatized_files(self):
 tests/i18n/test_percents.py:102:31    - Unknown word (littérale)  -- expected = "Pour cent littérale % avec un symbole au
 tests/i18n/test_percents.py:102:43    - Unknown word (avec)       -- Pour cent littérale % avec un symbole au milieu
 tests/i18n/test_percents.py:102:51    - Unknown word (symbole)    -- littérale % avec un symbole au milieu"
@@ -7314,10 +7340,10 @@ tests/postgres_tests/test_search.py:874:57    - Unknown word (piqué)           
 tests/postgres_tests/test_search.py:874:71    - Unknown word (abeille)         -- amour piqué par une abeille'"),
 tests/postgres_tests/test_search.py:881:15    - Unknown word (ampers)          -- ("ampers&nd", "'ampers nd'")
 tests/postgres_tests/test_search.py:881:29    - Unknown word (ampers)          -- ("ampers&nd", "'ampers nd'"),
-tests/postgres_tests/test_search.py:897:45    - Unknown word (Robi)            -- SearchQuery(Lexeme("Robi", prefix=True, invert
-tests/postgres_tests/test_search.py:916:25    - Unknown word (Robi)            -- Lexeme("Robi", prefix=True) & Lexeme
-tests/postgres_tests/test_search.py:927:58    - Unknown word (afrai)           -- prefix=True) | Lexeme("afrai", prefix=True)
-tests/postgres_tests/test_search.py:972:34    - Unknown word (Drandom)         -- invalid_weights = ["E", "Drandom", "AB", "C ", 0, ""
+tests/postgres_tests/test_search.py:898:45    - Unknown word (Robi)            -- SearchQuery(Lexeme("Robi", prefix=True, invert
+tests/postgres_tests/test_search.py:917:25    - Unknown word (Robi)            -- Lexeme("Robi", prefix=True) & Lexeme
+tests/postgres_tests/test_search.py:928:58    - Unknown word (afrai)           -- prefix=True) | Lexeme("afrai", prefix=True)
+tests/postgres_tests/test_search.py:973:34    - Unknown word (Drandom)         -- invalid_weights = ["E", "Drandom", "AB", "C ", 0, ""
 tests/postgres_tests/test_search.py:97:79     - Unknown word (Ramper)     -- Master Ruiz' de lu la Ramper"
 tests/postgres_tests/test_signals.py:16:26     - Unknown word (oids)       -- def assertOIDs(self, oids):
 tests/postgres_tests/test_signals.py:17:31     - Unknown word (oids)       -- self.assertIsInstance(oids, tuple)
@@ -7576,48 +7602,48 @@ tests/requests_tests/test_accept_header.py:55:28     - Unknown word (falsey)    
 tests/requests_tests/test_accept_header.py:57:34     - Unknown word (falsey)     -- other.main_type is falsey.
 tests/requests_tests/test_accept_header.py:59:32     - Unknown word (falsey)     -- # main sub_type is falsey.
 tests/requests_tests/test_accept_header.py:61:33     - Unknown word (falsey)     -- # other.sub_type is falsey.
-tests/requests_tests/tests.py:1134:28   - Unknown word (Günter)      -- "Hello Günter",
-tests/requests_tests/tests.py:1148:57   - Unknown word (Günter)      -- POST, {"name": ["Hello Günter"]})
-tests/requests_tests/tests.py:1152:61   - Unknown word (Œnter)       -- {"name": ["Hello GĂŒnter"]})
-tests/requests_tests/tests.py:1160:53   - Unknown word (Cnter)       -- "name=Hello%20G%C3%BCnter",
-tests/requests_tests/tests.py:1163:56   - Unknown word (Günter)      -- GET, {"name": ["Hello Günter"]})
-tests/requests_tests/tests.py:1165:69   - Unknown word (nter)        -- "Hello G\u0102\u0152nter"]})
-tests/requests_tests/tests.py:125:14    - Unknown word (wsgirequest) -- def test_wsgirequest_with_script_name(self
-tests/requests_tests/tests.py:1311:25   - Unknown word (badpath)     -- "example.com:80/badpath",
-tests/requests_tests/tests.py:1312:23   - Unknown word (recovermypassword) -- "example.com: recovermypassword.com",
-tests/requests_tests/tests.py:1322:25   - Unknown word (feee)              -- "[2001:19f0:feee::dead:beef:cafe]",
-tests/requests_tests/tests.py:1324:15   - Unknown word (multitenant)       -- ".multitenant.com",
-tests/requests_tests/tests.py:133:32    - Unknown word (somepath)    -- "PATH_INFO": "/somepath/",
-tests/requests_tests/tests.py:1371:25   - Unknown word (feee)              -- "[2001:19f0:feee::dead:beef:cafe]",
-tests/requests_tests/tests.py:1372:25   - Unknown word (feee)              -- "[2001:19f0:feee::dead:beef:cafe]:80
-tests/requests_tests/tests.py:1374:23   - Unknown word (multitenant)       -- "anything.multitenant.com",
-tests/requests_tests/tests.py:1375:14   - Unknown word (multitenant)       -- "multitenant.com",
-tests/requests_tests/tests.py:139:49    - Unknown word (somepath)    -- request.path, "/PREFIX/somepath/")
-tests/requests_tests/tests.py:143:32    - Unknown word (somepath)    -- "PATH_INFO": "/somepath/",
-tests/requests_tests/tests.py:1442:25   - Unknown word (feee)              -- "[2001:19f0:feee::dead:beef:cafe]",
-tests/requests_tests/tests.py:1443:25   - Unknown word (feee)              -- "[2001:19f0:feee::dead:beef:cafe]:80
-tests/requests_tests/tests.py:1506:17   - Unknown word (hostnames)         -- # Other hostnames raise a DisallowedHost
-tests/requests_tests/tests.py:151:14    - Unknown word (wsgirequest) -- def test_wsgirequest_script_url_double_slashes
-tests/requests_tests/tests.py:168:14    - Unknown word (wsgirequest) -- def test_wsgirequest_with_force_script_name
-tests/requests_tests/tests.py:184:14    - Unknown word (wsgirequest) -- def test_wsgirequest_path_with_force_script
-tests/requests_tests/tests.py:239:41    - Unknown word (سلام)        -- PATH_INFO": wsgi_str("/سلام/"),
-tests/requests_tests/tests.py:244:42    - Unknown word (سلام)        -- assertEqual(request.path, "/سلام/")
-tests/requests_tests/tests.py:284:59    - Unknown word (nefgh)       -- BytesIO(b"1234\n5678\nabcd\nefgh\nijkl"), 24)
-tests/requests_tests/tests.py:284:65    - Unknown word (nijkl)       -- 4\n5678\nabcd\nefgh\nijkl"), 24)
-tests/requests_tests/tests.py:294:48    - Unknown word (efgh)        -- stream.readline(4), b"efgh")
-tests/requests_tests/tests.py:298:47    - Unknown word (ijkl)        -- stream.readline(), b"ijkl")
-tests/requests_tests/tests.py:383:50    - Unknown word (España)      -- akePayload(urlencode({"key": "España"}))
-tests/requests_tests/tests.py:392:50    - Unknown word (España)      -- request.POST, {"key": ["España"]})
-tests/requests_tests/tests.py:395:50    - Unknown word (España)      -- akePayload(urlencode({"key": "España".encode("latin-1")}
-tests/requests_tests/tests.py:416:58    - Unknown word (España)      -- akePayload(urlencode({"key": "España"}))
-tests/requests_tests/tests.py:427:58    - Unknown word (España)      -- request.POST, {"key": ["España"]})
-tests/requests_tests/tests.py:466:33    - Unknown word (NOTACODEC)   -- "text/plain; title*=NOTACODEC''%E2%80%A6",
-tests/requests_tests/tests.py:636:22    - Unknown word (rmless)      -- 'rmless", "author": ["Douglas
-tests/requests_tests/tests.py:65:24     - Unknown word (Bsome)      -- expected = "/%3Bsome/%3Fawful/%3Dpath/foo
-tests/requests_tests/tests.py:65:32     - Unknown word (Fawful)     -- expected = "/%3Bsome/%3Fawful/%3Dpath/foo:bar/?;some
-tests/requests_tests/tests.py:79:26     - Unknown word (somepath)   -- request.path = "/somepath/"
-tests/requests_tests/tests.py:85:62     - Unknown word (somepath)   -- <HttpRequest: GET '/somepath/'>")
-tests/requests_tests/tests.py:97:14     - Unknown word (wsgirequest) -- def test_wsgirequest(self):
+tests/requests_tests/tests.py:1215:28   - Unknown word (Günter)      -- "Hello Günter",
+tests/requests_tests/tests.py:1229:57   - Unknown word (Günter)      -- POST, {"name": ["Hello Günter"]})
+tests/requests_tests/tests.py:1233:61   - Unknown word (Œnter)       -- {"name": ["Hello GĂŒnter"]})
+tests/requests_tests/tests.py:1241:53   - Unknown word (Cnter)       -- "name=Hello%20G%C3%BCnter",
+tests/requests_tests/tests.py:1244:56   - Unknown word (Günter)      -- GET, {"name": ["Hello Günter"]})
+tests/requests_tests/tests.py:1246:69   - Unknown word (nter)        -- "Hello G\u0102\u0152nter"]})
+tests/requests_tests/tests.py:126:14    - Unknown word (wsgirequest) -- def test_wsgirequest_with_script_name(self
+tests/requests_tests/tests.py:134:32    - Unknown word (somepath)    -- "PATH_INFO": "/somepath/",
+tests/requests_tests/tests.py:1392:25   - Unknown word (badpath)     -- "example.com:80/badpath",
+tests/requests_tests/tests.py:1393:23   - Unknown word (recovermypassword) -- "example.com: recovermypassword.com",
+tests/requests_tests/tests.py:1403:25   - Unknown word (feee)              -- "[2001:19f0:feee::dead:beef:cafe]",
+tests/requests_tests/tests.py:1405:15   - Unknown word (multitenant)       -- ".multitenant.com",
+tests/requests_tests/tests.py:140:49    - Unknown word (somepath)    -- request.path, "/PREFIX/somepath/")
+tests/requests_tests/tests.py:144:32    - Unknown word (somepath)    -- "PATH_INFO": "/somepath/",
+tests/requests_tests/tests.py:1452:25   - Unknown word (feee)              -- "[2001:19f0:feee::dead:beef:cafe]",
+tests/requests_tests/tests.py:1453:25   - Unknown word (feee)              -- "[2001:19f0:feee::dead:beef:cafe]:80
+tests/requests_tests/tests.py:1455:23   - Unknown word (multitenant)       -- "anything.multitenant.com",
+tests/requests_tests/tests.py:1456:14   - Unknown word (multitenant)       -- "multitenant.com",
+tests/requests_tests/tests.py:1523:25   - Unknown word (feee)              -- "[2001:19f0:feee::dead:beef:cafe]",
+tests/requests_tests/tests.py:1524:25   - Unknown word (feee)              -- "[2001:19f0:feee::dead:beef:cafe]:80
+tests/requests_tests/tests.py:152:14    - Unknown word (wsgirequest) -- def test_wsgirequest_script_url_double_slashes
+tests/requests_tests/tests.py:1587:17   - Unknown word (hostnames)         -- # Other hostnames raise a DisallowedHost
+tests/requests_tests/tests.py:169:14    - Unknown word (wsgirequest) -- def test_wsgirequest_with_force_script_name
+tests/requests_tests/tests.py:185:14    - Unknown word (wsgirequest) -- def test_wsgirequest_path_with_force_script
+tests/requests_tests/tests.py:240:41    - Unknown word (سلام)        -- PATH_INFO": wsgi_str("/سلام/"),
+tests/requests_tests/tests.py:245:42    - Unknown word (سلام)        -- assertEqual(request.path, "/سلام/")
+tests/requests_tests/tests.py:285:59    - Unknown word (nefgh)       -- BytesIO(b"1234\n5678\nabcd\nefgh\nijkl"), 24)
+tests/requests_tests/tests.py:285:65    - Unknown word (nijkl)       -- 4\n5678\nabcd\nefgh\nijkl"), 24)
+tests/requests_tests/tests.py:295:48    - Unknown word (efgh)        -- stream.readline(4), b"efgh")
+tests/requests_tests/tests.py:299:47    - Unknown word (ijkl)        -- stream.readline(), b"ijkl")
+tests/requests_tests/tests.py:384:50    - Unknown word (España)      -- akePayload(urlencode({"key": "España"}))
+tests/requests_tests/tests.py:393:50    - Unknown word (España)      -- request.POST, {"key": ["España"]})
+tests/requests_tests/tests.py:396:50    - Unknown word (España)      -- akePayload(urlencode({"key": "España".encode("latin-1")}
+tests/requests_tests/tests.py:417:58    - Unknown word (España)      -- akePayload(urlencode({"key": "España"}))
+tests/requests_tests/tests.py:428:58    - Unknown word (España)      -- request.POST, {"key": ["España"]})
+tests/requests_tests/tests.py:467:33    - Unknown word (NOTACODEC)   -- "text/plain; title*=NOTACODEC''%E2%80%A6",
+tests/requests_tests/tests.py:637:22    - Unknown word (rmless)      -- 'rmless", "author": ["Douglas
+tests/requests_tests/tests.py:66:24     - Unknown word (Bsome)      -- expected = "/%3Bsome/%3Fawful/%3Dpath/foo
+tests/requests_tests/tests.py:66:32     - Unknown word (Fawful)     -- expected = "/%3Bsome/%3Fawful/%3Dpath/foo:bar/?;some
+tests/requests_tests/tests.py:80:26     - Unknown word (somepath)   -- request.path = "/somepath/"
+tests/requests_tests/tests.py:86:62     - Unknown word (somepath)   -- <HttpRequest: GET '/somepath/'>")
+tests/requests_tests/tests.py:98:14     - Unknown word (wsgirequest) -- def test_wsgirequest(self):
 tests/responses/test_cookie.py:58:58     - Unknown word (usegmt)     -- 22(future_datetime, usegmt=True),
 tests/responses/test_cookie.py:59:76     - Unknown word (usegmt)     -- datetime.replace(second=7), usegmt=True),
 tests/responses/test_fileresponse.py:112:26    - Unknown word (nosuchfile) -- (__file__ + "nosuchfile", ["application/octet
@@ -7906,7 +7932,6 @@ tests/sphinx_tests/test_djangodocs.py:103:36    - Unknown word (descname)    -- 
 tests/sphinx_tests/test_djangodocs.py:111:55    - Unknown word (cmdoption)   -- sig sig-object" id="cmdoption-check-tag">', html)
 tests/sphinx_tests/test_djangodocs.py:113:36    - Unknown word (descname)    -- span class="sig-name descname"><span class="pre">
 tests/sphinx_tests/test_djangodocs.py:114:39    - Unknown word (descclassname) -- span class="sig-prename descclassname">'
-tests/sphinx_tests/test_djangodocs.py:122:40    - Unknown word (djadmin)       -- class="xref std std-djadmin docutils literal notranslate
 tests/sphinx_tests/test_djangodocs.py:127:51    - Unknown word (cmdoption)     -- reference internal" href="#cmdoption-check-tag">'
 tests/sphinx_tests/test_djangodocs.py:134:9     - Unknown word (genindex)      -- genindex = result.files["genindex
 tests/sphinx_tests/test_djangodocs.py:141:13    - Unknown word (confoverrides) -- confoverrides={"default_role": "default
@@ -7933,7 +7958,6 @@ tests/sphinx_tests/test_djangodocs.py:43:42     - Unknown word (genindex)    -- 
 tests/sphinx_tests/test_djangodocs.py:60:21     - Unknown word (genindex)    -- genindex,
 tests/sphinx_tests/test_djangodocs.py:65:21     - Unknown word (genindex)    -- genindex,
 tests/sphinx_tests/test_djangodocs.py:8:35      - Unknown word (djangodocs) -- conf = "extensions = ['djangodocs']"
-tests/sphinx_tests/test_djangodocs.py:94:18     - Unknown word (djadmin)     -- See :djadmin:`check` and :option
 tests/sphinx_tests/test_github_links.py:163:50    - Unknown word (existant)   -- bar.baz.hopefully_non_existant_module",
 tests/sphinx_tests/tests.py:101:13    - Unknown word (buildername)    -- buildername=buildername,
 tests/sphinx_tests/tests.py:101:25    - Unknown word (buildername)    -- buildername=buildername,
@@ -8551,10 +8575,10 @@ tests/utils_tests/test_autoreload.py:125:75    - Unknown word (zipf)       -- zi
 tests/utils_tests/test_autoreload.py:126:13    - Unknown word (zipf)       -- zipf.writestr("test_zipped
 tests/utils_tests/test_autoreload.py:218:32    - Unknown word (Werror)     -- [sys.executable, "-Werror", __file__, "runserver
 tests/utils_tests/test_autoreload.py:227:32    - Unknown word (Xutf)       -- [sys.executable, "-Xutf8", "-Xa=b", __file_
-tests/utils_tests/test_autoreload.py:572:15    - Unknown word (Xdev)       -- "-Xdev",
-tests/utils_tests/test_autoreload.py:573:15    - Unknown word (Xfaulthandler) -- "-Xfaulthandler",
-tests/utils_tests/test_autoreload.py:576:15    - Unknown word (Wdefault)      -- "-Wdefault",
-tests/utils_tests/test_autoreload.py:577:15    - Unknown word (Wignore)       -- "-Wignore::UserWarning",
+tests/utils_tests/test_autoreload.py:580:15    - Unknown word (Xdev)       -- "-Xdev",
+tests/utils_tests/test_autoreload.py:581:15    - Unknown word (Xfaulthandler) -- "-Xfaulthandler",
+tests/utils_tests/test_autoreload.py:584:15    - Unknown word (Wdefault)      -- "-Wdefault",
+tests/utils_tests/test_autoreload.py:585:15    - Unknown word (Wignore)       -- "-Wignore::UserWarning",
 tests/utils_tests/test_autoreload.py:94:30     - Unknown word (Ceci)       -- filename.write_text("Ceci n'est pas du Python
 tests/utils_tests/test_choices.py:368:11    - Unknown word (randomised) -- # randomised order in form fields
 tests/utils_tests/test_crypto.py:103:18    - Unknown word (dklen)      -- "dklen": 20,
