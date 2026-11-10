@@ -16,6 +16,7 @@ permissions:
 
 jobs:
   update-pnpm:
+    if: github.repository_owner == 'streetsidesoftware'
     uses: streetsidesoftware/actions/.github/workflows/update-pnpm.yml@v1
     with:
       base: ${{ inputs.base || 'main' }}
