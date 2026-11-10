@@ -292,6 +292,9 @@ function findLegacyCompoundNode(
     minCompoundLength: number,
     compoundSeparator: string,
 ): FindFullNodeResult {
+    // The search below reads the first letter before it checks the length.
+    if (!word) return { ...notFound, node: undefined };
+
     const root = roots[0];
     const numRoots = roots.length;
     // Approach - do a depth first search for the matching word.
@@ -353,7 +356,7 @@ function findLegacyCompoundNode(
     }
 
     function extractWord(): string | false {
-        if (!word || i < word.length) return false;
+        if (i < word.length) return false;
 
         const letters: string[] = [];
 

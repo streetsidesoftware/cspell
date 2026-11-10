@@ -374,6 +374,16 @@ describe('Validate Trie Class', () => {
     });
 
     test.each`
+        options
+        ${undefined}
+        ${{ useLegacyWordCompounds: true }}
+        ${{ useLegacyWordCompounds: 3 }}
+    `('findWord empty word $options', ({ options }) => {
+        const trie = ITrieClass.create(['hello', 'world']);
+        expect(trie.findWord('', options)).toEqual({ found: false, compoundUsed: false, caseMatched: false });
+    });
+
+    test.each`
         word                      | caseSensitive | found                        | forbidden | compoundUsed | comment
         ${'BeginMiddleEnd'}       | ${true}       | ${'Begin|Middle|End'}        | ${false}  | ${true}      | ${''}
         ${'BeginMiddleMiddleEnd'} | ${true}       | ${'Begin|Middle|Middle|End'} | ${false}  | ${true}      | ${''}
