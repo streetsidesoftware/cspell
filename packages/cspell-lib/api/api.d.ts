@@ -1,12 +1,9 @@
 import { FSCapabilityFlags, VFileSystem, VFileSystem as VFileSystem$1, VFileSystemProvider, VirtualFS, VirtualFS as VirtualFS$1, asyncIterableToArray, readFileText as readFile, readFileTextSync as readFileSync, writeToFile, writeToFileIterable, writeToFileIterableP } from "cspell-io";
-import "vscode-uri";
 import { AdvancedCSpellSettingsWithSourceTrace, CSpellSettings, CSpellSettingsWithSourceTrace, CSpellUserSettings, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, DictionaryDefinitionInline, DictionaryDefinitionPreferred, DictionaryDefinitionSimple, DictionaryId, DictionaryReference, DocumentParser, Glob, ImportFileRef, Issue, LocaleId, MappedText, ParsedText, Parser, PnPSettings, Range, ReportingConfiguration, TextDocumentOffset, TextOffset } from "@cspell/cspell-types";
 import { FileTypeId as LanguageId, findMatchingFileTypes as getLanguagesForBasename, getFileTypesForExt as getLanguagesForExt } from "@cspell/filetypes";
 import { CachingDictionary, SpellingDictionary, SpellingDictionaryCollection, SuggestOptions, SuggestionCollector, SuggestionResult, createCollection, createSpellingDictionary } from "cspell-dictionary";
 import { CompoundWordsMethod, WeightMap } from "cspell-trie-lib";
 import { CSpellConfigFile, CSpellConfigFile as CSpellConfigFile$1, ICSpellConfigFile, ICSpellConfigFile as ICSpellConfigFile$1 } from "cspell-config-lib";
-import "@cspell/cspell-performance-monitor";
-import "@cspell/cspell-types/Parser";
 export * from "@cspell/cspell-types";
 /**
  * Clear the cached files and other cached data.
