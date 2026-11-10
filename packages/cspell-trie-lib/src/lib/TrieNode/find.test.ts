@@ -160,6 +160,25 @@ describe('Validate Legacy Compound lookup', () => {
         }
         expect(find(word, compoundLen)).toBe(expected);
     });
+
+    // cspell:ignore walkerase
+    test('finds a long compound that needs retries', () => {
+        const root = parseDictionaryLegacy('walk\nwalker\nerase').root;
+        const word = 'walkerase'.repeat(6);
+        const expected = Array.from({ length: 6 }, () => 'walk+erase').join('+');
+        const r = findLegacyCompound(root, word, createFindOptions({ legacyMinCompoundLength: 3 }));
+        expect(r.found).toBe(expected);
+    });
+
+    test('gives up on an unknown word made of repeated words', () => {
+        const root = parseDictionaryLegacy('walk\nWalk').root;
+        const word = 'walk'.repeat(26) + 'qq';
+        const start = performance.now();
+        const r = findLegacyCompound(root, word, createFindOptions({ legacyMinCompoundLength: 3 }));
+        const elapsedMs = performance.now() - start;
+        expect(r.found).toBe(false);
+        expect(elapsedMs).toBeLessThan(500);
+    });
 });
 
 type PartialFindFullResult = Partial<FindFullResult>;
