@@ -64,6 +64,7 @@ jobs:
 
       - name: Upload coverage Coveralls
         id: coveralls
+        if: github.repository_owner == 'streetsidesoftware'
         uses: coverallsapp/github-action@8d6379e14d29928660c4ba802d8e85393440b329 # 2.3.8
         continue-on-error: true
         with:
@@ -72,6 +73,7 @@ jobs:
 
       - name: Upload coverage to Codecov
         id: codecov
+        if: github.repository_owner == 'streetsidesoftware'
         uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
         continue-on-error: true
         with:
