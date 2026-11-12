@@ -458,11 +458,11 @@ export declare function calcIgnorePathGlobs(settings: Pick<CSpellSettings, "igno
 /**
  * Check if the enabled `ignorePathPresets` ignore a file.
  *
- * @param filePath - absolute path of the file.
+ * @param url - the URL of the file.
  * @param settings - the settings with `ignorePathPresets`.
  * @returns `true` if the file is ignored.
  */
-export declare function isIgnoredByPresets(filePath: string, settings: Pick<CSpellSettings, "ignorePathPresets">): boolean;
+export declare function isIgnoredByPresets(url: URL, settings: Pick<CSpellSettings, "ignorePathPresets">): boolean;
 interface PerfTimer {
   readonly name: string;
   readonly startTime: number;

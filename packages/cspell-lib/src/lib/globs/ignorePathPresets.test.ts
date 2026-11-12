@@ -1,4 +1,5 @@
 import * as path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 import { describe, expect, test } from 'vitest';
 
@@ -44,17 +45,18 @@ describe('ignorePathPresets', () => {
         ${'wt/.git'}                          | ${{ git: false }} | ${false}
         ${'.git/config'}                      | ${{ git: false }} | ${false}
     `('isIgnoredByPresets $file $presets', ({ file, presets, expected }) => {
-        expect(isIgnoredByPresets(path.join(root, file), { ignorePathPresets: presets })).toBe(expected);
+        expect(isIgnoredByPresets(pathToFileURL(path.join(root, file)), { ignorePathPresets: presets })).toBe(expected);
     });
 
     test.each`
-        file                     | expected
-        ${'.git/config'}         | ${true}
-        ${'.git/COMMIT_EDITMSG'} | ${false}
-        ${'wt/.git'}             | ${true}
-    `('isIgnoredByPresets with forward slashes $file', ({ file, expected }) => {
-        const filePath = path.join(root, file).split(path.sep).join('/');
-        expect(isIgnoredByPresets(filePath, {})).toBe(expected);
+        url                                      | expected
+        ${'file:///C:/repo/.git/config'}         | ${true}
+        ${'file:///C:/repo/.git/COMMIT_EDITMSG'} | ${false}
+        ${'file:///C:/repo/wt/.git'}             | ${true}
+        ${'stdin:///.git/config'}                | ${true}
+        ${'stdin:///src/code.ts'}                | ${false}
+    `('isIgnoredByPresets $url', ({ url, expected }) => {
+        expect(isIgnoredByPresets(new URL(url), {})).toBe(expected);
     });
 
     test.each`

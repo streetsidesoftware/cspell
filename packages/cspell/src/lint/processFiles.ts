@@ -1,5 +1,3 @@
-import * as path from 'node:path';
-
 import { isAsyncIterable } from '@cspell/cspell-pipe';
 import { opMap, pipe } from '@cspell/cspell-pipe/sync';
 import type { CSpellSettings, CSpellSettingsWithSourceTrace, RunResult } from '@cspell/cspell-types';
@@ -56,7 +54,8 @@ function prefetch(fileToProcess: FileToProcess, cfg: PrefetchConfig): PrefetchFi
             result: Promise.resolve({ skip: true, skipReason: 'Binary file.' }),
         };
     }
-    if (isIgnoredByPresets(path.resolve(cfg.root, filename), cfg.config)) {
+    const url = filenameToUri(filename, cfg.root);
+    if (isIgnoredByPresets(url, cfg.config)) {
         return {
             ...fileToProcess,
             result: Promise.resolve({ skip: true, skipReason: 'Excluded by ignorePathPresets.' }),
@@ -79,10 +78,9 @@ function prefetch(fileToProcess: FileToProcess, cfg: PrefetchConfig): PrefetchFi
             const fileResult = { ...cachedResult, elapsedTimeMs: getElapsedTimeMs() };
             return { fileResult };
         }
-        const uri = filenameToUri(filename, cfg.root).href;
         const { languageId, locale } = cfg;
         const checkResult = await shouldCheckDocument(
-            { uri, languageId, locale },
+            { uri: url.href, languageId, locale },
             { forceCheck: cfg.forceCheck },
             cfg.config,
         );
