@@ -291,7 +291,7 @@ interface ResolveFileResult {
    */
   method: string;
 }
-export declare function resolveFile(filename: string | URL, relativeTo: string | URL, fs?: VFileSystem): Promise<ResolveFileResult>;
+export declare function resolveFile(filename: string | URL, relativeTo: string | URL, fs?: VFileSystem$1): Promise<ResolveFileResult>;
 type LoaderResult = URL | undefined;
 type PnPSettingsOptional = OptionalOrUndefined<PnPSettings>;
 type CSpellSettingsWST = CSpellSettingsWithSourceTrace;
@@ -361,7 +361,7 @@ interface IConfigLoader {
   isTrustedUrl(url: URL): boolean;
 }
 export declare function loadPnP(pnpSettings: PnPSettingsOptional, searchFrom: URL): Promise<LoaderResult>;
-export declare function createConfigLoader(fs?: VFileSystem$1): IConfigLoader;
+export declare function createConfigLoader(fs?: VFileSystem): IConfigLoader;
 export declare const defaultConfigFilenames: readonly string[];
 /**
  *
