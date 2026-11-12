@@ -201,7 +201,8 @@ export interface NormalizeOptions {
     /**
      * When `nested` is true, extend a glob to also match the files nested beneath a folder with that name.
      *
-     * Example: when `false`, `node_modules` becomes only `**​/node_modules`.
+     * Example: `examples.ts` becomes `**​/examples.ts` and `**​/examples.ts/**` when `true`, and only
+     * `**​/examples.ts` when `false`.
      *
      * @default true
      */
