@@ -50,12 +50,12 @@ More Examples:
     cspell . --reporter ./<path>/reporter.cjs
         Use a custom reporter. See API for details.
 
-    cspell "*.md" --exclude CHANGELOG.md --files README.md CHANGELOG.md
-        Spell check only check "README.md" but NOT "CHANGELOG.md".
+    cspell --exclude CHANGELOG.md --file README.md CHANGELOG.md
+        Spell check only "README.md" but NOT "CHANGELOG.md".
 
-    cspell "/*.md" --no-must-find-files --files $FILES
-        Only spell check the "/*.md" files in $FILES,
-        where $FILES is a shell variable containing the list of files.
+    cspell "/*.md" --no-must-find-files --file-list changed.txt
+        Only spell check the "/*.md" files listed in "changed.txt".
+        Use "--file-list stdin" to read the list from stdin.
 
     cspell --help --verbose
         Show all options including hidden options.
@@ -116,7 +116,7 @@ export function commandLint(prog: Command, opts: CommandOptions): Command {
                 ' Note: the format is 1 file path per line.',
             collect,
         )
-        .option('--file [file...]', 'Specify files to spell check. They are filtered by the [globs...].', collect)
+        .option('--file [file...]', 'Specify files to spell check. Cannot be combined with [globs...].', collect)
         .addOption(crOpt('--files [file...]', 'Alias of "--file". Files to spell check.', collect).hideHelp())
         .option(
             '--force-check',

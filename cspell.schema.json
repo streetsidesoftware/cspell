@@ -2300,11 +2300,11 @@
       "type": "string"
     },
     "ignorePaths": {
-      "description": "Glob patterns of files to be ignored.\n\nGlob patterns are relative to the  {@link  globRoot }  of the configuration file that defines them.\n\nThe default is `[\"node_modules/\"]`.\n\nWarning: if you ignore `\".git/\"` then it will also ignore `\".git/COMMIT_EDITMSG\"` which is needed for the `commit-msg` git hook; in that case, rather use `[\".git/{info,lfs,logs,refs,objects}/**\", \".git/{index,*refs,*HEAD}\"]`.",
+      "description": "Glob patterns of files to be ignored.\n\nGlob patterns are relative to the  {@link  globRoot }  of the configuration file that defines them.\n\nThe default is `[]`. Separately, the `cspell` command line skips `node_modules/**` unless `--exclude` is given.\n\nWarning: ignoring `\".git/\"` also ignores `\".git/COMMIT_EDITMSG\"`, which the `commit-msg` git hook checks. To ignore the rest of `.git` and keep the commit message, use `[\".git/!(COMMIT_EDITMSG)\"]`.",
       "items": {
         "$ref": "#/definitions/Glob"
       },
-      "markdownDescription": "Glob patterns of files to be ignored.\n\nGlob patterns are relative to the  {@link  globRoot }  of the configuration file that defines them.\n\nThe default is `[\"node_modules/\"]`.\n\nWarning: if you ignore `\".git/\"` then it will also ignore `\".git/COMMIT_EDITMSG\"` which is needed for the `commit-msg` git hook; in that case, rather use `[\".git/{info,lfs,logs,refs,objects}/**\", \".git/{index,*refs,*HEAD}\"]`.",
+      "markdownDescription": "Glob patterns of files to be ignored.\n\nGlob patterns are relative to the  {@link  globRoot }  of the configuration file that defines them.\n\nThe default is `[]`.\nSeparately, the `cspell` command line skips `node_modules/**` unless `--exclude` is given.\n\nWarning: ignoring `\".git/\"` also ignores `\".git/COMMIT_EDITMSG\"`, which the `commit-msg` git hook checks.\nTo ignore the rest of `.git` and keep the commit message, use `[\".git/!(COMMIT_EDITMSG)\"]`.",
       "type": "array"
     },
     "ignoreRandomStrings": {
