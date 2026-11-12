@@ -23,8 +23,10 @@ describe('ignorePathPresets', () => {
         ${'.git/NOTES_EDITMSG'}               | ${undefined}      | ${false}
         ${'.git/PULLREQ_EDITMSG'}             | ${undefined}      | ${false}
         ${'.git/EDIT_DESCRIPTION'}            | ${undefined}      | ${false}
-        ${'.git/worktrees/wt/COMMIT_EDITMSG'} | ${undefined}      | ${true}
-        ${'.git/modules/sub/COMMIT_EDITMSG'}  | ${undefined}      | ${true}
+        ${'.git/worktrees/wt/COMMIT_EDITMSG'} | ${undefined}      | ${false}
+        ${'.git/worktrees/wt/HEAD'}           | ${undefined}      | ${true}
+        ${'.git/modules/libs/a/MERGE_MSG'}    | ${undefined}      | ${false}
+        ${'.git/modules/libs/a/config'}       | ${undefined}      | ${true}
         ${'nested/clone/.git/HEAD'}           | ${undefined}      | ${true}
         ${'nested/clone/.git/COMMIT_EDITMSG'} | ${undefined}      | ${false}
         ${'nested/clone/src/code.ts'}         | ${undefined}      | ${false}
