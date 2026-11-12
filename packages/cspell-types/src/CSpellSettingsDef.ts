@@ -102,9 +102,28 @@ export interface FileSettings extends ExtendableSettings, CommandLineSettings {
      *
      * The default is `["node_modules/"]`.
      *
-     * Warning: if you ignore `".git/"` then it will also ignore `".git/COMMIT_EDITMSG"` which is needed for the `commit-msg` git hook; in that case, rather use `[".git/{info,lfs,logs,refs,objects}/**", ".git/{index,*refs,*HEAD}"]`.
+     * Git's own files are already ignored by {@link ignorePathPresets}, so there is no need to list `".git/"` here.
+     * Ignoring `".git/"` also ignores `".git/COMMIT_EDITMSG"`, which the `commit-msg` git hook checks.
      */
     ignorePaths?: Glob[];
+
+    /**
+     * Ignore well-known paths without writing {@link ignorePaths} globs for them.
+     *
+     * Each preset is turned on or off with `true` or `false`. A preset that is not set keeps its default.
+     *
+     * Presets only apply below the folder cspell runs from, or below `--root`. A folder above it does not count, so
+     * running cspell inside a `.git` folder still checks the files there.
+     *
+     * Example: check git's own files again.
+     *
+     * ```json
+     * "ignorePathPresets": { "git": false }
+     * ```
+     *
+     * @since 10.5.0
+     */
+    ignorePathPresets?: IgnorePathPresets;
 
     /**
      * Prevents searching for local configuration when checking individual documents.
@@ -181,6 +200,24 @@ export interface FileSettings extends ExtendableSettings, CommandLineSettings {
      * @since 9.6.3
      */
     engines?: CompatibleEngineVersions;
+}
+
+/**
+ * Well-known paths to ignore, turned on or off one by one.
+ */
+export interface IgnorePathPresets {
+    /**
+     * Ignore git's own files:
+     * - a file named `.git`, which git puts in a worktree or a submodule
+     * - everything inside a `.git` folder, except git's message files
+     *
+     * Git's message files stay checked, so a `commit-msg` hook can spell check the commit message. They are the files
+     * directly inside a `.git` folder whose names end in `MSG`, such as `COMMIT_EDITMSG`, `MERGE_MSG`, and
+     * `TAG_EDITMSG`, and `EDIT_DESCRIPTION`.
+     *
+     * @default true
+     */
+    git?: boolean;
 }
 
 /* eslint-disable no-irregular-whitespace */

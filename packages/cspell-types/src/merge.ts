@@ -32,6 +32,7 @@ const mergeDefinitionFunctions: SetOfMergeFunctions = {
     gitignoreRoot: (key, settings) => recKV(key, lastValue(exKV(key, settings))),
     globRoot: (key, settings) => recKV(key, lastValue(exKV(key, settings))),
     id: (key, settings) => recKV(key, lastValue(exKV(key, settings))),
+    ignorePathPresets: (key, settings) => recKV(key, mRec(exKV(key, settings))),
     ignorePaths: (key, settings) => recKV(key, mArr(exKV(key, settings))),
     ignoreRandomStrings: (key, settings) => recKV(key, lastValue(exKV(key, settings))),
     ignoreRegExpList: (key, settings) => recKV(key, mArr(exKV(key, settings))),

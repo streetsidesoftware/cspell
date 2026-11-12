@@ -61,6 +61,16 @@ describe('Validate CSpellSettingsServer', () => {
         );
     });
 
+    test.each`
+        left                                     | right                                    | expected
+        ${{ ignorePathPresets: { git: false } }} | ${{}}                                    | ${{ git: false }}
+        ${{ ignorePathPresets: { git: false } }} | ${{ ignorePathPresets: {} }}             | ${{ git: false }}
+        ${{ ignorePathPresets: { git: false } }} | ${{ ignorePathPresets: { git: true } }}  | ${{ git: true }}
+        ${{}}                                    | ${{ ignorePathPresets: { git: false } }} | ${{ git: false }}
+    `('mergeSettings combines ignorePathPresets $left $right', ({ left, right, expected }) => {
+        expect(mergeSettings(left, right).ignorePathPresets).toEqual(expected);
+    });
+
     test('tests mergeSettings with conflicting "enabled"', () => {
         const right = csi({ id: 'right', enabled: false });
         const left = csi({ id: 'left', enabled: true });

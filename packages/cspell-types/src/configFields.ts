@@ -25,6 +25,7 @@ export const ConfigFields: CSpellUserSettingsFields = {
     flagWords: 'flagWords',
     gitignoreRoot: 'gitignoreRoot',
     globRoot: 'globRoot',
+    ignorePathPresets: 'ignorePathPresets',
     ignorePaths: 'ignorePaths',
     ignoreRegExpList: 'ignoreRegExpList',
     ignoreWords: 'ignoreWords',

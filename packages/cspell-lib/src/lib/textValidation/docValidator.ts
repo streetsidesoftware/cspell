@@ -17,6 +17,7 @@ import type { ICSpellConfigFile } from 'cspell-config-lib';
 import { satisfiesCSpellConfigFile } from 'cspell-config-lib';
 
 import { getGlobMatcherForExcluding } from '../globs/getGlobMatcher.js';
+import { isIgnoredByPathPresets } from '../globs/ignorePathPresets.js';
 import type { ExtendedSuggestion } from '../Models/Suggestion.js';
 import type { TextDocument, TextDocumentLine, TextDocumentRef } from '../Models/TextDocument.js';
 import { documentUriToURL, updateTextDocument } from '../Models/TextDocument.js';
@@ -214,12 +215,16 @@ export class DocumentValidator {
 
         const recGlobMatcherTime = recordPerfTime(this.perfTiming, '_GlobMatcher');
         const matcher = getGlobMatcherForExcluding(localConfig?.ignorePaths);
-        const uri = this._document.uri;
+        const filePath = uriToFilePath(this._document.uri);
         recGlobMatcherTime();
         const recShouldCheckTime = recordPerfTime(this.perfTiming, '_shouldCheck');
 
-        // eslint-disable-next-line unicorn/prefer-regexp-test
-        const shouldCheck = options.forceCheck || (!matcher.match(uriToFilePath(uri)) && (docSettings.enabled ?? true));
+        const shouldCheck =
+            options.forceCheck ||
+            // eslint-disable-next-line unicorn/prefer-regexp-test
+            (!matcher.match(filePath) &&
+                !isIgnoredByPathPresets(filePath, config.ignorePathPresets) &&
+                (docSettings.enabled ?? true));
 
         recShouldCheckTime();
 
@@ -744,9 +749,19 @@ export async function shouldCheckDocument(
 
         const config = mergeSettings(settings, localConfig);
         const matcher = getGlobMatcherForExcluding(localConfig?.ignorePaths);
+        const filePath = uriToFilePath(doc.uri);
         // eslint-disable-next-line unicorn/prefer-regexp-test
-        if (!options.forceCheck && matcher.match(uriToFilePath(doc.uri))) {
+        if (!options.forceCheck && matcher.match(filePath)) {
             return { errors, shouldCheck: false, settings: localConfig, reason: 'Excluded by ignorePaths.' };
+        }
+        const preset = options.forceCheck ? undefined : isIgnoredByPathPresets(filePath, config.ignorePathPresets);
+        if (preset) {
+            return {
+                errors,
+                shouldCheck: false,
+                settings: localConfig,
+                reason: `Excluded by ignorePathPresets.${preset}.`,
+            };
         }
         const docSettings = await determineTextDocumentSettings(doc, config);
         const shouldCheck = options.forceCheck || (docSettings.enabled ?? true);

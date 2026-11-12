@@ -191,6 +191,7 @@ function _merge(
         languageSettings: mergeList(_left.languageSettings, _right.languageSettings),
         enabled: _right.enabled !== undefined ? _right.enabled : _left.enabled,
         files: mergeListUnique(_left.files, _right.files),
+        ignorePathPresets: mergeObjects(_left.ignorePathPresets, _right.ignorePathPresets),
         ignorePaths: versionBasedMergeList(_left.ignorePaths, _right.ignorePaths, version),
         overrides: versionBasedMergeList(_left.overrides, _right.overrides, version),
         features: mergeObjects(_left.features, _right.features),

@@ -61,6 +61,12 @@ const debugStats = false;
 
 const { opFilterAsync } = operators;
 
+/**
+ * Keeps the file search out of `.git` folders while `ignorePathPresets.git` is on, except for git's message files.
+ * cspell-lib skips the rest of what the preset ignores, such as a file named `.git`.
+ */
+const gitPresetSearchExcludes = ['**/.git/*/**', '**/.git/!(*MSG|EDIT_DESCRIPTION)'];
+
 export async function runLint(cfg: LintRequest): Promise<RunResult> {
     const reporter = new LintReporter(cfg.reporter, cfg.options);
     const configErrors = new Set<string>();
@@ -404,11 +410,12 @@ async function determineFilesToCheck(
         }
         const globMatcher = buildGlobMatcher(globsToExclude, root, true);
         const ignoreGlobs = extractGlobsFromMatcher(globMatcher);
+        const presetExcludes = configInfo.config.ignorePathPresets?.git === false ? [] : gitPresetSearchExcludes;
         // cspell:word nodir
         const globOptions: GlobOptions = {
             root,
             cwd: root,
-            ignore: [...ignoreGlobs, ...normalizedExcludes],
+            ignore: [...ignoreGlobs, ...normalizedExcludes, ...presetExcludes],
             nodir: true,
         };
         const enableGlobDot = cfg.enableGlobDot ?? configInfo.config.enableGlobDot;
