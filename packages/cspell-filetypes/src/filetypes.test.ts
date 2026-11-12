@@ -39,6 +39,9 @@ describe('Validate LanguageIds', () => {
         ${'path/Gemfile'}                    | ${['ruby']}
         ${'Cargo.lock'}                      | ${['lock', 'toml']}
         ${'.errors.log.2'}                   | ${['log']}
+        ${'console.log.ts'}                  | ${['typescript']}
+        ${'cspell.env.config.js'}            | ${['javascript']}
+        ${'README.ignore.md'}                | ${['markdown']}
         ${'my-cert.pem'}                     | ${['pem']}
         ${'my-private-cert.private-key.pem'} | ${['pem', 'pem-private-key']}
         ${'Dockerfile'}                      | ${['dockerfile']}

@@ -209,7 +209,7 @@ function simpleGlob(s: string): RegExp {
             }
         }
     }
-    return new RegExp(pattern);
+    return new RegExp(`^${pattern}$`);
 }
 
 function defToRegExp(def: FileTypeDefinition): RegExpMatchToFileTypeId | undefined {
