@@ -33,7 +33,7 @@ export function isIgnoredByPresets(filePath: string, settings: Pick<CSpellSettin
  * message files directly inside it.
  */
 function isGitFile(filePath: string): boolean {
-    const parts = filePath.split(path.sep);
+    const parts = path.normalize(filePath).split(path.sep);
     const name = parts.pop() || '';
     if (name === '.git') return true;
     const gitFolderIndex = parts.lastIndexOf('.git');

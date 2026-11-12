@@ -41,6 +41,16 @@ describe('ignorePathPresets', () => {
     });
 
     test.each`
+        file                     | expected
+        ${'.git/config'}         | ${true}
+        ${'.git/COMMIT_EDITMSG'} | ${false}
+        ${'wt/.git'}             | ${true}
+    `('isIgnoredByPresets with forward slashes $file', ({ file, expected }) => {
+        const filePath = path.join(root, file).split(path.sep).join('/');
+        expect(isIgnoredByPresets(filePath, {})).toBe(expected);
+    });
+
+    test.each`
         settings                                 | expected
         ${{}}                                    | ${[gitGlob]}
         ${{ ignorePathPresets: {} }}             | ${[gitGlob]}
