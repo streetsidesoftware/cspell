@@ -401,7 +401,8 @@ function splitIntoWords(
             const parentPath = knownPathsByIndex.get(j);
             const parentCost = parentPath?.c || 0;
 
-            if (parentCost + best.c >= maxCost) {
+            const isSeparator = i < j;
+            if ((!isSeparator || parentCost === 0) && parentCost + best.c >= maxCost) {
                 continue;
             }
 
