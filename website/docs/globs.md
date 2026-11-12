@@ -8,47 +8,287 @@ nav_order: 4
 
 # Globs
 
-Globs are used extensively by CSpell to determine which files to check and what settings to apply.
+CSpell uses globs to decide which files to check and which settings apply to a file. The same glob can match
+different files depending on where it is used.
 
-Here are some of the places globs are used:
+## Where Globs Are Used
 
-| Location               | Mode       | Note                                                                                                                                                            |
-| ---------------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `files[]`              | **strict** | The glob patterns used to search for files to spell check.                                                                                                      |
-| `ignorePaths[]`        | **loose**  | Glob patterns used to exclude files and directories from being checked. `!` are only partially supported due to an issue with the Glob library[<sup>1</sup>][1] |
-| `overrides[].filename` | **loose**  | Used to apply configuration settings to files whose path matches the glob                                                                                       |
+| Where                                 | Matching   | Used to                                 |
+| ------------------------------------- | ---------- | --------------------------------------- |
+| `files` and globs on the command line | **strict** | Search for the files to check.          |
+| `ignorePaths` and `--exclude`         | **loose**  | Skip files.                             |
+| `overrides[].filename`                | **loose**  | Apply settings to the files that match. |
 
-[1]: https://github.com/isaacs/node-glob/issues/409 'Glob - Does not match for negative ignore · Issue #409'
+- **Strict** matching matches only what the glob says. `*` and `**` do not match names that start with `.`.
+- **Loose** matching works like a `.gitignore` file. A glob can also match at any depth and match the contents of a
+  folder, and `*` and `**` match names that start with `.`.
 
-## Mode - Strict
+## Glob Syntax
 
-Strict mode is used to explicitly select files to be checked. It gives more nuanced control over the file search process.
+- `*` matches any part of a file or folder name.
+- `**` matches any number of folders, including none.
+- `?` matches one character.
+- `{md,txt}` matches any one of the comma-separated choices.
+- `[abc]` matches one of the characters.
+- `!(COMMIT_EDITMSG|HEAD)` matches any name except the ones listed.
+- A leading `!` negates a glob. What it does depends on the setting: see [Negative Globs](#negative-globs).
 
-Examples:
+Write globs with `/` between folder names, also on Windows.
 
-| Glob                         | Meaning                                                                                                  |
-| ---------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `*.md`                       | Only check the Markdown files in the current directory. It will not scan subdirectories.                 |
-| `*.{md,js}` or `{*.md,*.js}` | Only check the Markdown or JavaScript files in the current directory. It will not scan subdirectories.   |
-| `**/*.md`                    | Scan all directories (except _hidden_ ones starting with `.`) looking for markdown files.                |
-| `**/{*,.*}/**/*.md`          | Scan all directories including a _hidden_ one looking for markdown files. Does not match `*.md` in root. |
-| `src/**`                     | Scan the `src` directory looking for all _non-hidden_ files.                                             |
-| `**`                         | Use the `--dot` option to include hidden directories or files.                                           |
-| `**/.*`                      | Scan for only _hidden_ files.                                                                            |
+## The Example Folder
 
-## Mode - Loose
+The examples on this page use this folder as the root. Each file is listed with its full relative path.
 
-Loose mode is used to match files that have been found. It is designed to emulate `.gitignore` rules closely.
-By default, loose mode matches hidden files and directories.
+```text
+README.md
+.hidden.md
+.git/config
+.git/COMMIT_EDITMSG
+docs/a.md
+docs/.x.md
+node_modules/x/a.md
+sub/.git                 (a file, as in a git worktree)
+sub/node_modules/y/b.md
+test/a.md
+a/test/b.md
+```
 
-Examples:
+## Glob Roots
 
-| Glob               | Meaning                                                                                                                   |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------- |
-| `*.md`             | Will match against any path containing `*.md`                                                                             |
-| `node_modules`     | Will match against any path containing `node_modules`                                                                     |
-| `/node_modules`    | Matches against `./node_modules` and all contained files. It will not match nested paths like: `./package/node_modules/*` |
-| `/node_modules/`   | Matches the `./node_modules` directory and any files it contains.                                                         |
-| `/node_modules/**` | Same as `/node_modules/`                                                                                                  |
-| `test`             | Matches any directory or file called `test`. Equivalent to using both `**/test` and `**/test/**`.                         |
-| `**/test/**`       | Similar to `test`, but only matches paths contained in a `test` directory.                                                |
+A glob is relative to a folder, its root.
+
+- A glob in a configuration file is relative to that file's `globRoot`. By default, `globRoot` is the folder that
+  holds the configuration file, with these exceptions:
+  - For a configuration file inside a `.vscode` or `.config` folder, it is the folder above that one.
+  - For a `.vscode/cspell.json` without a `version` field, or a configuration with `"version": "0.1"`, it is
+    [`${cwd}`](#cwd).
+- Globs on the command line and `--exclude` globs are relative to the current working folder, or to the folder given
+  with `--root`.
+- A glob that starts with `/` is tied to the root. In `ignorePaths`, `/test` matches `test/a.md` but not
+  `a/test/b.md`.
+- A glob that starts with `**/` is tested against the file's full path, so folders above the root count. See
+  [A Project Inside a `node_modules` Folder](#a-project-inside-a-node_modules-folder).
+
+### `${cwd}`
+
+`${cwd}` stands for the current working folder.
+
+- Set `globRoot` to `${cwd}` to make the globs in a configuration file relative to where `cspell` runs, instead of
+  to the configuration file.
+- Start a glob with `${cwd}` to make that one glob relative to the current working folder: `${cwd}/docs`.
+
+**`cspell.json`**
+
+```json
+{
+  "globRoot": "${cwd}",
+  "ignorePaths": ["/docs"]
+}
+```
+
+With this file in `project/`, running `cspell "**"` from `project/` ignores `project/docs`. Running it from
+`project/sub/` ignores `project/sub/docs` instead.
+
+### Configuration Files Next to the Documents
+
+For each file it checks, CSpell also loads the configuration file nearest that file. Its `ignorePaths` and
+`overrides` apply to that file, relative to that configuration file's own `globRoot`. A `sub/cspell.json` with
+`"ignorePaths": ["/drafts"]` skips the files in `sub/drafts`.
+
+## Strict Matching: `files` and the Command Line
+
+`files` in the configuration and globs on the command line select the files to check. Globs on the command line
+replace `files`.
+
+- `*.md` matches only the Markdown files in the root, here `README.md`.
+- `**/*.md` matches Markdown files at any depth, except names that start with `.` and files inside folders that start
+  with `.`.
+- The name of an existing folder, such as `docs` or `docs/api`, matches all files in that folder.
+- `.` matches all files: `cspell .`.
+- A glob ending in `/**` also matches a file with that name. `**/.git/**` matches the file `sub/.git`.
+- On the command line, a glob that starts with `/` is an absolute path. In `files`, a leading `/` ties the glob to
+  the root.
+- A glob that starts with `!` skips the files it matches, using [loose matching](#what-loose-matching-adds). In
+  `files`, `["**", "!test"]` skips both `test/a.md` and `a/test/b.md`.
+
+### Dot Files and Folders
+
+By default, `*` and `**` do not match names that start with `.`, such as `.github` or `.hidden.md`.
+
+- Use `--dot` on the command line, or `"enableGlobDot": true` in the configuration, to include them.
+- A glob that names the dot explicitly matches without `--dot`: `**/.*` matches `.hidden.md`, `docs/.x.md`, and
+  `sub/.git`.
+- Without `--dot`, the search does not enter folders that start with `.`. A glob that starts with the folder's name
+  still works: `.git/**` finds the files in `.git`, but `**/.git/**` finds only the file `sub/.git`.
+
+`--dot` and `enableGlobDot` only change strict matching. Loose matching always matches dot files.
+
+## Loose Matching: `ignorePaths`, `--exclude`, and Overrides
+
+`ignorePaths`, `--exclude`, and `overrides[].filename` use loose matching.
+
+### What Loose Matching Adds
+
+| Glob                 | Examples                        | Matches                                                                                |
+| -------------------- | ------------------------------- | -------------------------------------------------------------------------------------- |
+| No `/`               | `node_modules`, `*.md`          | The name at any depth, and everything inside a folder with that name.                  |
+| A `/` before the end | `/src`, `lib/src`, `**/.git`    | The path, and everything inside a folder with that path.                               |
+| Ends with `/`        | `.git/`, `/src/`, `lib/src/`    | Only the contents of the folder. A single name, such as `.git/`, matches at any depth. |
+| Ends with `**`       | `node_modules/**`, `**/test/**` | As written.                                                                            |
+
+As in strict matching, a glob ending in `/**` also matches a file with that name: `**/test/**` matches a file named
+`test`.
+
+A consequence of these rules: an override with `"filename": "**/.git"` applies to the file `sub/.git` and also to
+every file inside a `.git` folder. Use `.git/` for the files inside `.git` folders only. To apply settings only to a
+file named `.git`, see [A File Named `.git`](#a-file-named-git).
+
+### `--exclude`
+
+Globs given with `--exclude` use loose matching, with these differences from `ignorePaths`:
+
+- Without `--exclude`, CSpell skips `node_modules/**`. That is only the `node_modules` folder in the root. Any
+  `--exclude` replaces this default.
+- A leading `/` does not tie a name without other slashes to the root: `--exclude /test` skips both `test/a.md` and
+  `a/test/b.md`. `--exclude /test/` skips only `test/a.md`.
+- A glob that matches at any depth is tested against the full path, as if it started with `**/`. This applies to
+  `node_modules`, `node_modules/`, `/**/node_modules/**`, and `${cwd}/**/node_modules/**`.
+
+## What Each Glob Matches
+
+The files each glob matches in [the example folder](#the-example-folder), without `--dot`. The `ignorePaths` column
+also applies to `overrides[].filename`.
+
+| Glob                 | `files` and command line                                                         | `ignorePaths` and overrides                      | `--exclude`                |
+| -------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------ | -------------------------- |
+| `*.md`               | `README.md`                                                                      | All `.md` files                                  | Same as `ignorePaths`      |
+| `**/*.md`            | All `.md` files except `.hidden.md` and `docs/.x.md`                             | All `.md` files                                  | Same as `ignorePaths`      |
+| `docs`               | `docs/a.md`                                                                      | `docs/a.md`, `docs/.x.md`                        | Same as `ignorePaths`      |
+| `test`               | `test/a.md`                                                                      | `test/a.md`, `a/test/b.md`                       | Same as `ignorePaths`      |
+| `/test`              | Nothing                                                                          | `test/a.md`                                      | `test/a.md`, `a/test/b.md` |
+| `test/`              | `test/a.md`                                                                      | `test/a.md`, `a/test/b.md`                       | Same as `ignorePaths`      |
+| `/test/`             | `test/a.md` (in `files`)                                                         | `test/a.md`                                      | Same as `ignorePaths`      |
+| `test/**`            | `test/a.md`                                                                      | `test/a.md`                                      | Same as `ignorePaths`      |
+| `**/test/**`         | `test/a.md`, `a/test/b.md`                                                       | `test/a.md`, `a/test/b.md`                       | Same as `ignorePaths`      |
+| `node_modules`       | `node_modules/x/a.md`                                                            | `node_modules/x/a.md`, `sub/node_modules/y/b.md` | Same as `ignorePaths`      |
+| `node_modules/`      | `node_modules/x/a.md`                                                            | `node_modules/x/a.md`, `sub/node_modules/y/b.md` | Same as `ignorePaths`      |
+| `node_modules/**`    | `node_modules/x/a.md`                                                            | `node_modules/x/a.md`                            | Same as `ignorePaths`      |
+| `**/node_modules/**` | `node_modules/x/a.md`, `sub/node_modules/y/b.md`                                 | `node_modules/x/a.md`, `sub/node_modules/y/b.md` | Same as `ignorePaths`      |
+| `.git`               | `.git/config`, `.git/COMMIT_EDITMSG`                                             | `.git/config`, `.git/COMMIT_EDITMSG`, `sub/.git` | Same as `ignorePaths`      |
+| `.git/`              | `.git/config`, `.git/COMMIT_EDITMSG`                                             | `.git/config`, `.git/COMMIT_EDITMSG`             | Same as `ignorePaths`      |
+| `.git/**`            | `.git/config`, `.git/COMMIT_EDITMSG`                                             | `.git/config`, `.git/COMMIT_EDITMSG`             | Same as `ignorePaths`      |
+| `**/.git`            | `sub/.git`                                                                       | `.git/config`, `.git/COMMIT_EDITMSG`, `sub/.git` | Same as `ignorePaths`      |
+| `**/.git/**`         | `sub/.git`                                                                       | `.git/config`, `.git/COMMIT_EDITMSG`, `sub/.git` | Same as `ignorePaths`      |
+| `**/.git/*`          | Nothing                                                                          | `.git/config`, `.git/COMMIT_EDITMSG`             | Same as `ignorePaths`      |
+| `**`                 | All files except `.hidden.md`, `docs/.x.md`, `sub/.git`, and the files in `.git` | All files                                        | Same as `ignorePaths`      |
+
+## Negative Globs
+
+A glob that starts with `!` behaves differently in each setting.
+
+- In `files` and on the command line, it skips the files it matches. See
+  [Strict Matching](#strict-matching-files-and-the-command-line).
+- In `ignorePaths` and `--exclude`, it is not used. CSpell warns, for example
+  `Negative glob exclusions are not supported: !.git/COMMIT_EDITMSG`, and applies the other globs.
+- In `overrides[].filename`, it removes files from the match. When several globs match a file, the last one wins:
+  `["**/*.md", "!docs/**"]` matches every Markdown file outside `docs`.
+
+## How CSpell Selects the Files to Check
+
+1. CSpell takes the globs from the command line, or from `files` when there are none.
+1. It searches for files that match. The search skips the files and folders that `ignorePaths` and `--exclude`
+   match, and it does not look inside a skipped folder. A glob that names a file inside a skipped folder finds
+   nothing.
+1. It filters the files it found against `ignorePaths` and `--exclude` again.
+1. For each file, it loads the configuration file nearest that file. Its `ignorePaths` can still skip the file,
+   and so can an override that sets `"enabled": false`.
+
+Files given with `--file`, `--files`, or `--file-list` are not searched for. They are still filtered:
+
+- by the globs on the command line, or by `files` when there are none;
+- by `ignorePaths` and `--exclude`;
+- by the configuration file nearest each file, as in step 4.
+
+Use `--force-check` to check them anyway.
+
+- `--file` and `--files` cannot be combined with globs on the command line.
+- `--file-list` can be. The globs then filter the list.
+- `--force-check` cannot be combined with globs on the command line.
+
+## Recipes
+
+### Ignore `node_modules`
+
+**`cspell.json`**
+
+```json
+{
+  "ignorePaths": ["node_modules/"]
+}
+```
+
+This skips the contents of every `node_modules` folder under the root. Without it, CSpell skips only the
+`node_modules` folder in the root, and only when no `--exclude` is given.
+
+### A Project Inside a `node_modules` Folder
+
+A glob that starts with `**/` is tested against the full path. When the root itself is inside a `node_modules`
+folder, for example when checking an installed package, `**/node_modules/**` matches every file:
+
+```text
+$ cd node_modules/my-package
+$ cspell "**"            # with "ignorePaths": ["**/node_modules/**"]
+No files found to check.
+```
+
+These globs skip only `node_modules` folders under the root, and keep the files in `node_modules/my-package`:
+
+- `node_modules/`
+- `node_modules`
+- `/**/node_modules/**`
+- `${cwd}/**/node_modules/**`
+
+[`--exclude`](#--exclude) treats some of these globs differently. `--exclude node_modules/` and
+`--exclude /**/node_modules/**` also report `No files found to check.` `--exclude /node_modules` keeps the files in
+`node_modules/my-package` and skips the `node_modules` folders under it.
+
+### Ignore `.git` but Check the Commit Message
+
+A `commit-msg` git hook can check the message with `cspell .git/COMMIT_EDITMSG`. If `ignorePaths` contains `.git`,
+`.git/`, or `.git/**`, that command reports `No files found to check.`
+
+Ignore everything in `.git` except the commit message:
+
+**`cspell.json`**
+
+```json
+{
+  "ignorePaths": [".git/!(COMMIT_EDITMSG)"]
+}
+```
+
+`cspell .git/COMMIT_EDITMSG` then checks the message, and `cspell --dot "**"` skips the rest of `.git`.
+
+### A File Named `.git`
+
+In a git worktree or a submodule, `.git` is a file instead of a folder.
+
+- In `files` and on the command line, `**/.git` matches only files named `.git`.
+- In `ignorePaths` and overrides, `.git` and `**/.git` match files named `.git` and everything inside `.git`
+  folders. `.git/` matches only what is inside `.git` folders.
+- In an override, a negative glob limits the match to files named `.git`:
+
+**`cspell.json`**
+
+```json
+{
+  "overrides": [
+    {
+      "filename": ["**/.git", "!.git/"],
+      "enabled": false
+    }
+  ]
+}
+```
+
+<!--- cspell:ignore EDITMSG -->
