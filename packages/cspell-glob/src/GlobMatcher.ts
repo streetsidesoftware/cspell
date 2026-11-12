@@ -75,6 +75,19 @@ interface NormalizedGlobMatchOptions {
     nested: boolean;
 
     /**
+     * When `nested` is enabled, extend a glob to also match the files nested beneath a folder with that name.
+     *
+     * - `true`: `examples.ts` matches a file or folder named `examples.ts` and the files beneath it.
+     * - `false`: a glob matches only the path it names. `examples.ts` matches only a file named `examples.ts`, and
+     *   `src/**` matches only the files beneath `src`.
+     *
+     * It has no effect when `nested` is disabled.
+     *
+     * @default true
+     */
+    extendNested: boolean;
+
+    /**
      * Mostly used for testing purposes. It allows explicitly specifying `path.win32` or `path.posix`.
      *
      * @default: require('path')
@@ -147,6 +160,7 @@ export class GlobMatcher {
         const cwd = options.cwd ?? nodePath.resolve();
         const dot = options.dot ?? isExcludeMode;
         const nested = options.nested ?? isExcludeMode;
+        const extendNested = options.extendNested ?? true;
         const nobrace = options.nobrace;
         const root = options.root ?? nodePath.resolve();
         const builder = new FileUrlBuilder({ path: nodePath });
@@ -154,7 +168,7 @@ export class GlobMatcher {
         const rootURL = builder.toFileDirURL(root);
         const normalizedRoot = builder.urlToFilePathOrHref(rootURL);
 
-        this.options = { root: normalizedRoot, dot, nodePath, nested, mode, nobrace, cwd };
+        this.options = { root: normalizedRoot, dot, nodePath, nested, extendNested, mode, nobrace, cwd };
 
         patterns = Array.isArray(patterns)
             ? patterns
