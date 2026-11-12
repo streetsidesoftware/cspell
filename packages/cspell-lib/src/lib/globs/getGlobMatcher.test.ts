@@ -13,7 +13,7 @@ function r(...parts: string[]): string {
 
 describe('getGlobMatcher', () => {
     test.each`
-        glob                      | file                          | off      | on
+        glob                      | file                          | disabled | enabled
         ${'examples.ts'}          | ${r('a/examples.ts')}         | ${true}  | ${true}
         ${'examples.ts'}          | ${r('examples.ts')}           | ${true}  | ${true}
         ${'examples.ts'}          | ${r('a/examples.ts/b.ts')}    | ${true}  | ${false}
@@ -45,37 +45,40 @@ describe('getGlobMatcher', () => {
         ${['*.md', '!README.md']} | ${r('a.md')}                  | ${true}  | ${true}
         ${['/src', 'src/**']}     | ${r('src')}                   | ${true}  | ${true}
         ${['/src', 'src/**']}     | ${r('src/a.ts')}              | ${true}  | ${true}
-    `('$glob $file off: $off, on: $on', ({ glob, file, off, on }) => {
+    `('$glob $file disabled: $disabled, enabled: $enabled', ({ glob, file, disabled, enabled }) => {
         const globs = toGlobDefs(glob, root);
-        expect(getGlobMatcherForExcluding(globs).match(file)).toBe(off);
-        expect(getGlobMatcherForExcludingFilesOnly(globs).match(file)).toBe(on);
+        expect(getGlobMatcherForExcluding(globs).match(file)).toBe(disabled);
+        expect(getGlobMatcherForExcludingFilesOnly(globs).match(file)).toBe(enabled);
     });
 
     test.each`
-        glob             | file                         | off      | on
+        glob             | file                         | disabled | enabled
         ${'examples.ts'} | ${r('examples.ts')}          | ${false} | ${false}
         ${'examples.ts'} | ${r('examples.ts/sub/a.ts')} | ${false} | ${false}
         ${'examples.ts'} | ${r('sub/x/examples.ts')}    | ${true}  | ${true}
         ${'/a.ts'}       | ${r('a.ts')}                 | ${false} | ${false}
         ${'/a.ts'}       | ${r('sub/a.ts')}             | ${true}  | ${true}
         ${'**/a.ts'}     | ${r('a.ts')}                 | ${true}  | ${true}
-    `('globs are relative to their root $glob $file off: $off, on: $on', ({ glob, file, off, on }) => {
-        // `examples.ts` is relative to its root, but `**/a.ts` matches the full path.
-        const globs = toGlobDefs(glob, r('sub'));
-        expect(getGlobMatcherForExcluding(globs).match(file)).toBe(off);
-        expect(getGlobMatcherForExcludingFilesOnly(globs).match(file)).toBe(on);
-    });
+    `(
+        'globs are relative to their root $glob $file disabled: $disabled, enabled: $enabled',
+        ({ glob, file, disabled, enabled }) => {
+            // `examples.ts` is relative to its root, but `**/a.ts` matches the full path.
+            const globs = toGlobDefs(glob, r('sub'));
+            expect(getGlobMatcherForExcluding(globs).match(file)).toBe(disabled);
+            expect(getGlobMatcherForExcludingFilesOnly(globs).match(file)).toBe(enabled);
+        },
+    );
 
     test.each`
-        glob             | file          | off     | on
-        ${'${cwd}/src'}  | ${'src'}      | ${true} | ${true}
-        ${'${cwd}/src'}  | ${'src/a.ts'} | ${true} | ${false}
-        ${'${cwd}/src/'} | ${'src/a.ts'} | ${true} | ${true}
-    `('${cwd} $glob $file off: $off, on: $on', ({ glob, file, off, on }) => {
+        glob             | file          | disabled | enabled
+        ${'${cwd}/src'}  | ${'src'}      | ${true}  | ${true}
+        ${'${cwd}/src'}  | ${'src/a.ts'} | ${true}  | ${false}
+        ${'${cwd}/src/'} | ${'src/a.ts'} | ${true}  | ${true}
+    `('${cwd} $glob $file disabled: $disabled, enabled: $enabled', ({ glob, file, disabled, enabled }) => {
         const globs = toGlobDefs(glob, r('sub'));
         const filename = path.resolve(file);
-        expect(getGlobMatcherForExcluding(globs).match(filename)).toBe(off);
-        expect(getGlobMatcherForExcludingFilesOnly(globs).match(filename)).toBe(on);
+        expect(getGlobMatcherForExcluding(globs).match(filename)).toBe(disabled);
+        expect(getGlobMatcherForExcludingFilesOnly(globs).match(filename)).toBe(enabled);
     });
 
     test('a plain string glob is relative to the current directory', () => {

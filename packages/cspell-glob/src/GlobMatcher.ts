@@ -75,13 +75,13 @@ interface NormalizedGlobMatchOptions {
     nested: boolean;
 
     /**
-     * When `nested` is on, extend a glob to also match the files nested beneath a folder with that name.
+     * When `nested` is enabled, extend a glob to also match the files nested beneath a folder with that name.
      *
      * - `true`: `examples.ts` matches a file or folder named `examples.ts` and the files beneath it.
      * - `false`: a glob matches only the path it names. `examples.ts` matches only a file named `examples.ts`, and
      *   `src/**` matches only the files beneath `src`.
      *
-     * It has no effect when `nested` is off.
+     * It has no effect when `nested` is disabled.
      *
      * @default true
      */

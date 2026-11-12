@@ -130,7 +130,7 @@ Example:
 By default, a `filename` glob also matches the files inside a folder with that name. For example, `examples.ts`
 matches a file named `examples.ts`, and also every file inside a folder named `examples.ts`.
 
-Turn on `overrideGlobsMatchFilesOnly` in `features` to make each glob match only the path it names. To apply an
+Enable `overrideGlobsMatchFilesOnly` in `features` to make each glob match only the path it names. To apply an
 override to the files in a folder, end the glob with `/`.
 
 **`cspell.config.yaml`**
@@ -144,7 +144,7 @@ overrides:
     enabled: false
 ```
 
-| Glob          | Off (default)                                                         | On                              |
+| Glob          | Disabled (default)                                                    | Enabled                         |
 | ------------- | --------------------------------------------------------------------- | ------------------------------- |
 | `examples.ts` | A file named `examples.ts`, and the files in a folder with that name. | A file named `examples.ts`.     |
 | `/src`        | A file named `src` at the root, and the files in the `src` folder.    | A file named `src` at the root. |
