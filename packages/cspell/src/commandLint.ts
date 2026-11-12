@@ -51,7 +51,7 @@ More Examples:
         Use a custom reporter. See API for details.
 
     cspell "*.md" --exclude CHANGELOG.md --files README.md CHANGELOG.md
-        Spell check only check "README.md" but NOT "CHANGELOG.md".
+        Spell check only "README.md" but NOT "CHANGELOG.md".
 
     cspell "/*.md" --no-must-find-files --files $FILES
         Only spell check the "/*.md" files in $FILES,
@@ -233,9 +233,6 @@ async function action(this: Command, fileGlobs: string[], cliOptions: LinterCliC
     const { mustFindFiles, fileList, files, file, forceCheck } = options;
     if (forceCheck && !file?.length && !files?.length && !fileList?.length) {
         this.error('error: --force-check requires --file, --files, or --file-list to be specified');
-    }
-    if (fileGlobs.length && (file?.length || files?.length)) {
-        this.error('error: mixing globs and --file is not supported');
     }
     if (fileGlobs.length && forceCheck) {
         this.error('error: mixing globs and --force-check is not supported');

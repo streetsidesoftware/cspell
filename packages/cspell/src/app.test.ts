@@ -247,6 +247,9 @@ describe('Validate cli', () => {
         ${'must find glob disabled'}                   | ${[rpFeat('must-find-files'), 'disabled.md']}                                                | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
         ${'must find --no-must-find-files skipped'}    | ${[rpFeat('must-find-files'), '--file', 'disabled.md', '--no-must-find-files']}              | ${undefined}                | ${true}  | ${false} | ${false}
         ${'must find --silent skipped'}                | ${[rpFeat('must-find-files'), '--silent', '--file', 'disabled.md']}                          | ${app.CheckFailed}          | ${false} | ${false} | ${false}
+        ${'globs filter --file'}                       | ${[rpFeat('must-find-files'), '*.md', '--file', 'checked.md', '--file', 'not-in-files.txt']} | ${undefined}                | ${true}  | ${false} | ${false}
+        ${'globs filter out every --file'}             | ${[rpFeat('must-find-files'), '*.txt', '--file', 'checked.md']}                              | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
+        ${'globs replace files setting for --file'}    | ${[rpFeat('must-find-files'), '*.txt', '--file', 'not-in-files.txt']}                        | ${undefined}                | ${true}  | ${false} | ${false}
         ${'cspell-bad.json'}                           | ${['-c', pathSamples('cspell-bad.json'), __filename]}                                        | ${undefined}                | ${true}  | ${false} | ${false}
         ${'cspell-import-missing.json'}                | ${['-c', pathSamples('linked/cspell-import-missing.json'), __filename]}                      | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
         ${'--fail-fast no option'}                     | ${['-r', failFastRoot, '*.txt']}                                                             | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
@@ -436,7 +439,6 @@ describe('Validate cli', () => {
     test.each`
         args                                                    | errorCheck                                                                         | eError   | eLog     | eInfo
         ${'lint --file package.json --force-check'}             | ${undefined}                                                                       | ${true}  | ${false} | ${false}
-        ${'lint README.md --file package.json'}                 | ${'error: mixing globs and --file is not supported'}                               | ${false} | ${false} | ${false}
         ${'lint README.md --force-check'}                       | ${'error: --force-check requires --file, --files, or --file-list to be specified'} | ${false} | ${false} | ${false}
         ${'lint README.md --file-list files.txt --force-check'} | ${'error: mixing globs and --force-check is not supported'}                        | ${false} | ${false} | ${false}
     `(
