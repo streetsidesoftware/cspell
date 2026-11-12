@@ -39,6 +39,7 @@ export type {
 } from './lib/index.js';
 export {
     asyncIterableToArray,
+    calcIgnorePaths,
     calcOverrideSettings,
     checkFilenameMatchesGlob,
     checkText,

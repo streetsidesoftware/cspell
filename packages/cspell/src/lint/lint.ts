@@ -15,6 +15,7 @@ import type { GlobMatchOptions, GlobPatternNormalized, GlobPatternWithRoot } fro
 import { GlobMatcher } from 'cspell-glob';
 import type { Logger } from 'cspell-lib';
 import {
+    calcIgnorePaths,
     ENV_CSPELL_GLOB_ROOT,
     getDefaultConfigLoader,
     isBinaryFile as cspellIsBinaryFile,
@@ -60,12 +61,6 @@ const version = npmPackage.version;
 const debugStats = false;
 
 const { opFilterAsync } = operators;
-
-/**
- * Keeps the file search out of `.git` folders while `ignorePathPresets.git` is on, except for git's message files.
- * cspell-lib skips the rest of what the preset ignores, such as a file named `.git`.
- */
-const gitPresetSearchExcludes = ['**/.git/*/**', '**/.git/!(*MSG|EDIT_DESCRIPTION)'];
 
 export async function runLint(cfg: LintRequest): Promise<RunResult> {
     const reporter = new LintReporter(cfg.reporter, cfg.options);
@@ -347,7 +342,7 @@ async function determineFilesToCheck(
 
         // Get Exclusions from the config files.
         const { root } = cfg;
-        const globsToExcludeRaw = [...(configInfo.config.ignorePaths || []), ...excludeGlobs];
+        const globsToExcludeRaw = [...calcIgnorePaths(configInfo.config), ...excludeGlobs];
         const globsToExclude = globsToExcludeRaw.filter((g) => !globPattern(g).startsWith('!'));
         if (globsToExclude.length !== globsToExcludeRaw.length) {
             const globs = globsToExcludeRaw.map((g) => globPattern(g)).filter((g) => g.startsWith('!'));
@@ -401,7 +396,7 @@ async function determineFilesToCheck(
 
         // Get Exclusions from the config files.
         const { root } = cfg;
-        const globsToExcludeRaw = [...(configInfo.config.ignorePaths || []), ...excludeGlobs];
+        const globsToExcludeRaw = [...calcIgnorePaths(configInfo.config), ...excludeGlobs];
         const globsToExclude = globsToExcludeRaw.filter((g) => !globPattern(g).startsWith('!'));
         if (globsToExclude.length !== globsToExcludeRaw.length) {
             const globs = globsToExcludeRaw.map((g) => globPattern(g)).filter((g) => g.startsWith('!'));
@@ -410,12 +405,11 @@ async function determineFilesToCheck(
         }
         const globMatcher = buildGlobMatcher(globsToExclude, root, true);
         const ignoreGlobs = extractGlobsFromMatcher(globMatcher);
-        const presetExcludes = configInfo.config.ignorePathPresets?.git === false ? [] : gitPresetSearchExcludes;
         // cspell:word nodir
         const globOptions: GlobOptions = {
             root,
             cwd: root,
-            ignore: [...ignoreGlobs, ...normalizedExcludes, ...presetExcludes],
+            ignore: [...ignoreGlobs, ...normalizedExcludes],
             nodir: true,
         };
         const enableGlobDot = cfg.enableGlobDot ?? configInfo.config.enableGlobDot;

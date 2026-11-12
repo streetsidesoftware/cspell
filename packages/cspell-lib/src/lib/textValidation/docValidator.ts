@@ -17,7 +17,7 @@ import type { ICSpellConfigFile } from 'cspell-config-lib';
 import { satisfiesCSpellConfigFile } from 'cspell-config-lib';
 
 import { getGlobMatcherForExcluding } from '../globs/getGlobMatcher.js';
-import { isIgnoredByPathPresets } from '../globs/ignorePathPresets.js';
+import { findIgnorePathPreset } from '../globs/ignorePathPresets.js';
 import type { ExtendedSuggestion } from '../Models/Suggestion.js';
 import type { TextDocument, TextDocumentLine, TextDocumentRef } from '../Models/TextDocument.js';
 import { documentUriToURL, updateTextDocument } from '../Models/TextDocument.js';
@@ -223,7 +223,7 @@ export class DocumentValidator {
             options.forceCheck ||
             // eslint-disable-next-line unicorn/prefer-regexp-test
             (!matcher.match(filePath) &&
-                !isIgnoredByPathPresets(filePath, config.ignorePathPresets) &&
+                !findIgnorePathPreset(filePath, config.ignorePathPresets) &&
                 (docSettings.enabled ?? true));
 
         recShouldCheckTime();
@@ -754,7 +754,7 @@ export async function shouldCheckDocument(
         if (!options.forceCheck && matcher.match(filePath)) {
             return { errors, shouldCheck: false, settings: localConfig, reason: 'Excluded by ignorePaths.' };
         }
-        const preset = options.forceCheck ? undefined : isIgnoredByPathPresets(filePath, config.ignorePathPresets);
+        const preset = options.forceCheck ? undefined : findIgnorePathPreset(filePath, config.ignorePathPresets);
         if (preset) {
             return {
                 errors,

@@ -446,6 +446,16 @@ export declare function isSpellingDictionaryLoadError(e: Error): e is SpellingDi
  * @returns a dictionary collection that represents all the enabled dictionaries.
  */
 export declare function getDictionary(settings: CSpellUserSettings): Promise<SpellingDictionaryCollection>;
+/**
+ * Get the globs to ignore: `ignorePaths` plus the folders ignored by `ignorePathPresets`.
+ *
+ * Use it to skip folders when searching for files to check. Deciding whether to check a file still needs the full
+ * settings, because some presets ignore single files.
+ *
+ * @param settings - the settings with `ignorePaths` and `ignorePathPresets`.
+ * @returns the globs to ignore.
+ */
+export declare function calcIgnorePaths(settings: Pick<CSpellSettings, "ignorePaths" | "ignorePathPresets">): Glob[];
 interface PerfTimer {
   readonly name: string;
   readonly startTime: number;
