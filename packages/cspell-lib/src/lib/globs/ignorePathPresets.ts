@@ -33,13 +33,17 @@ export function isIgnoredByPresets(filePath: string, settings: Pick<CSpellSettin
 
 /**
  * A file named `.git`, which git puts in a worktree or a submodule, or a file inside a `.git` folder other than git's
- * message files. Linked worktrees and submodules keep their message files in folders below `.git`.
+ * message files. Keeps the same message files as `gitIgnorePaths`: directly inside `.git` or `.git/worktrees/<name>`.
  */
 function isGitFile(filePath: string): boolean {
     const parts = path.normalize(filePath).split(path.sep);
     const name = parts.pop() || '';
     if (name === '.git') return true;
-    return parts.includes('.git') && !isGitMessageFile(name);
+    const gitFolderIndex = parts.lastIndexOf('.git');
+    if (gitFolderIndex < 0) return false;
+    if (!isGitMessageFile(name)) return true;
+    const folders = parts.slice(gitFolderIndex + 1);
+    return !(folders.length === 0 || (folders.length === 2 && folders[0] === 'worktrees'));
 }
 
 function isGitMessageFile(name: string): boolean {
