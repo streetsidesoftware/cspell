@@ -2315,16 +2315,16 @@
     },
     "ignorePathPresets": {
       "$ref": "#/definitions/IgnorePathPresets",
-      "description": "Ignore well-known paths without writing  {@link  ignorePaths }  globs for them.\n\nEach preset is turned on or off with `true` or `false`. A preset that is not set keeps its default.\n\nPresets only apply below the folder cspell runs from, or below `--root`. A folder above it does not count, so running cspell inside a `.git` folder still checks the files there.\n\nExample: check git's own files again.\n\n```json \"ignorePathPresets\": { \"git\": false } ```",
-      "markdownDescription": "Ignore well-known paths without writing  {@link  ignorePaths }  globs for them.\n\nEach preset is turned on or off with `true` or `false`. A preset that is not set keeps its default.\n\nPresets only apply below the folder cspell runs from, or below `--root`. A folder above it does not count, so\nrunning cspell inside a `.git` folder still checks the files there.\n\nExample: check git's own files again.\n\n```json\n\"ignorePathPresets\": { \"git\": false }\n```",
+      "description": "Ignore well-known paths, such as git's own files.\n\nEach preset is turned on or off with `true` or `false`. A preset that is not set keeps its default.\n\nPresets only apply below the folder cspell runs from, or below `--root`. A folder above it does not count, so running cspell inside a `.git` folder still checks the files there.\n\nExample: check git's own files again.\n\n```json \"ignorePathPresets\": { \"git\": false } ```",
+      "markdownDescription": "Ignore well-known paths, such as git's own files.\n\nEach preset is turned on or off with `true` or `false`. A preset that is not set keeps its default.\n\nPresets only apply below the folder cspell runs from, or below `--root`. A folder above it does not count, so\nrunning cspell inside a `.git` folder still checks the files there.\n\nExample: check git's own files again.\n\n```json\n\"ignorePathPresets\": { \"git\": false }\n```",
       "since": "10.5.0"
     },
     "ignorePaths": {
-      "description": "Glob patterns of files to be ignored.\n\nGlob patterns are relative to the  {@link  globRoot }  of the configuration file that defines them.\n\nThe default is `[\"node_modules/\"]`.\n\nGit's own files are already ignored by  {@link  ignorePathPresets } , so there is no need to list `\".git/\"` here. Ignoring `\".git/\"` also ignores `\".git/COMMIT_EDITMSG\"`, which the `commit-msg` git hook checks.",
+      "description": "Glob patterns of files to be ignored.\n\nGlob patterns are relative to the  {@link  globRoot }  of the configuration file that defines them.\n\nThe default is `[]`. Separately, the `cspell` command line skips `node_modules/**` unless `--exclude` is given.",
       "items": {
         "$ref": "#/definitions/Glob"
       },
-      "markdownDescription": "Glob patterns of files to be ignored.\n\nGlob patterns are relative to the  {@link  globRoot }  of the configuration file that defines them.\n\nThe default is `[\"node_modules/\"]`.\n\nGit's own files are already ignored by  {@link  ignorePathPresets } , so there is no need to list `\".git/\"` here.\nIgnoring `\".git/\"` also ignores `\".git/COMMIT_EDITMSG\"`, which the `commit-msg` git hook checks.",
+      "markdownDescription": "Glob patterns of files to be ignored.\n\nGlob patterns are relative to the  {@link  globRoot }  of the configuration file that defines them.\n\nThe default is `[]`.\nSeparately, the `cspell` command line skips `node_modules/**` unless `--exclude` is given.",
       "type": "array"
     },
     "ignoreRandomStrings": {

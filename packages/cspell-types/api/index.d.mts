@@ -1747,14 +1747,12 @@ interface FileSettings extends ExtendableSettings, CommandLineSettings {
    *
    * Glob patterns are relative to the {@link globRoot} of the configuration file that defines them.
    *
-   * The default is `["node_modules/"]`.
-   *
-   * Git's own files are already ignored by {@link ignorePathPresets}, so there is no need to list `".git/"` here.
-   * Ignoring `".git/"` also ignores `".git/COMMIT_EDITMSG"`, which the `commit-msg` git hook checks.
+   * The default is `[]`.
+   * Separately, the `cspell` command line skips `node_modules/**` unless `--exclude` is given.
    */
   ignorePaths?: Glob[];
   /**
-   * Ignore well-known paths without writing {@link ignorePaths} globs for them.
+   * Ignore well-known paths, such as git's own files.
    *
    * Each preset is turned on or off with `true` or `false`. A preset that is not set keeps its default.
    *
