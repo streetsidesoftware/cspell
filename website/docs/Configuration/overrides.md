@@ -139,6 +139,7 @@ that file and still check the files inside `.git` folders.
 **`cspell.config.yaml`**
 
 ```yaml
+enableGlobDot: true
 features:
   overrideGlobsMatchFilesOnly: true
 overrides:

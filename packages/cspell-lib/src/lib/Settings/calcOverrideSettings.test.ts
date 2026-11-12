@@ -17,6 +17,8 @@ describe('calcOverrideSettings', () => {
         ${undefined} | ${'src'}       | ${false}
         ${undefined} | ${'src/a.ts'}  | ${false}
         ${undefined} | ${'lib/a.ts'}  | ${undefined}
+        ${undefined} | ${'docs/a.md'} | ${false}
+        ${undefined} | ${'docs'}      | ${undefined}
         ${false}     | ${'src'}       | ${false}
         ${false}     | ${'src/a.ts'}  | ${false}
         ${true}      | ${'src'}       | ${false}

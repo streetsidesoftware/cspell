@@ -45,8 +45,6 @@ describe('getGlobMatcher', () => {
         ${['*.md', '!README.md']} | ${r('a.md')}                  | ${true}  | ${true}
         ${['/src', 'src/**']}     | ${r('src')}                   | ${true}  | ${true}
         ${['/src', 'src/**']}     | ${r('src/a.ts')}              | ${true}  | ${true}
-        ${['/src', '/src']}       | ${r('src')}                   | ${true}  | ${true}
-        ${['/src', '/src']}       | ${r('src/a.ts')}              | ${true}  | ${false}
     `('$glob $file off: $off, on: $on', ({ glob, file, off, on }) => {
         const globs = toGlobDefs(glob, root);
         expect(getGlobMatcherForExcluding(globs).match(file)).toBe(off);

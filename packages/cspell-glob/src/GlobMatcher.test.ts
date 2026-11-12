@@ -883,6 +883,14 @@ describe('GlobMatcher extendNested', () => {
         expect(m.match(f('sub/a/examples.ts'))).toBe(true);
     });
 
+    test('a glob root above the matcher root', () => {
+        const glob = { glob: '/src', root };
+        const m = new GlobMatcher([glob], { root: f('sub'), extendNested: false });
+        expect(m.match(f('src'))).toBe(true);
+        expect(m.match(f('src/a.ts'))).toBe(false);
+        expect(m.match(f('sub/src'))).toBe(false);
+    });
+
     test('options', () => {
         expect(new GlobMatcher('*.md').options.extendNested).toBe(true);
         expect(new GlobMatcher('*.md', { extendNested: false }).options.extendNested).toBe(false);

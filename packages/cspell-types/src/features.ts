@@ -25,7 +25,7 @@ export interface FeaturesActive {
      * `src/**`, also matches a file named `src`.
      *
      * When on:
-     * - `examples.ts` and `/src` match only a file with that name.
+     * - A glob such as `examples.ts` or `/src` matches only a file with that name.
      * - To apply an override to the files in a folder, end the glob with `/`, for example `src/` or `/src/`.
      *
      * @since 10.5.0
