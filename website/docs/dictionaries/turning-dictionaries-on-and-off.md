@@ -1,9 +1,9 @@
 ---
-title: Turning dictionaries on and off
+title: Enable and disable dictionaries
 sidebar_position: 4
 ---
 
-# Turning dictionaries on and off
+# Enable and disable dictionaries
 
 Use `dictionaries` in your CSpell configuration to choose which dictionaries apply. Some [default dictionaries](./index.md)
 are enabled for specific file types. If you installed a dictionary separately, follow its installation and import
@@ -27,7 +27,7 @@ To find an ID, use [`cspell trace`](./searching-dictionaries.md) to see which di
 
 ## Disable a dictionary
 
-Prefix the ID with `!`. For example, set `"dictionaries": ["!cpp"]` to turn off the dictionary with ID `cpp`, even when
+Prefix the ID with `!`. For example, set `"dictionaries": ["!cpp"]` to disable the dictionary with ID `cpp`, even when
 the default settings enable it for C++ files. The same rule applies if an imported configuration enables it through
 `languageSettings`. Other dictionaries from the same package, such as `cpp-refined`, can still apply.
 
