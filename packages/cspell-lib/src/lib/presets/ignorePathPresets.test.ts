@@ -1,8 +1,11 @@
+import { promises as fsp } from 'node:fs';
+import * as os from 'node:os';
 import * as path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
+import { toFileDirURL } from '@cspell/url';
 import { GlobMatcher } from 'cspell-glob';
-import { describe, expect, test } from 'vitest';
+import { afterAll, beforeAll, describe, expect, test } from 'vitest';
 
 import { calcIgnorePathGlobs, isIgnoredByPresets } from './ignorePathPresets.js';
 
@@ -113,8 +116,8 @@ describe('ignorePathPresets', () => {
     });
 
     // The search uses the globs, a single file uses `isIgnoredByPresets`. They must agree.
-    test.each(gitPresetFiles)('the globs and isIgnoredByPresets agree on %s', (file) => {
-        const matcher = new GlobMatcher(calcIgnorePathGlobs({}), { root, cwd: root, mode: 'exclude' });
+    test.each(gitPresetFiles)('the globs and isIgnoredByPresets agree on %s', async (file) => {
+        const matcher = new GlobMatcher(await calcIgnorePathGlobs({}, rootUrl), { root, cwd: root, mode: 'exclude' });
         const filename = path.join(root, file);
         const globsIgnore = matcher.match(filename) || path.basename(filename) === '.git';
         expect(isIgnoredByPresets(toUrl(root, file), rootUrl, {})).toBe(globsIgnore);
@@ -126,9 +129,62 @@ describe('ignorePathPresets', () => {
         ${{ ignorePathPresets: {} }}             | ${gitGlobs}
         ${{ ignorePathPresets: { git: true } }}  | ${gitGlobs}
         ${{ ignorePathPresets: { git: false } }} | ${[]}
-    `('calcIgnorePathGlobs $settings', ({ settings, expected }) => {
-        expect(calcIgnorePathGlobs(settings)).toEqual(expected);
+    `('calcIgnorePathGlobs $settings', async ({ settings, expected }) => {
+        expect(await calcIgnorePathGlobs(settings, rootUrl)).toEqual(expected);
     });
+});
+
+describe('ignorePathPresets nestedWorktrees', () => {
+    // Glob symbols that are allowed in folder names on every platform, and those allowed only outside Windows.
+    const worktrees = ['.worktrees/feat', 'wt (1)', 'a[b]', 'c{d,e}', 'f!(g)', 'h+(i)', 'j@(k)', 'l]m', 'n,o'];
+    const posixWorktrees = ['p*q', 'r?s', 't|u'];
+    const allWorktrees = process.platform === 'win32' ? worktrees : [...worktrees, ...posixWorktrees];
+    let tmp = '';
+    let repo = '';
+
+    beforeAll(async () => {
+        tmp = await fsp.mkdtemp(path.join(os.tmpdir(), 'cspell-presets-worktrees-'));
+        repo = path.join(tmp, 'repo');
+        await fsp.mkdir(path.join(repo, '.git'), { recursive: true });
+        for (const [i, folder] of allWorktrees.entries()) {
+            const dotGit = path.join(repo, folder, '.git');
+            const recordDir = path.join(repo, '.git/worktrees', `wt${i}`);
+            await fsp.mkdir(path.dirname(dotGit), { recursive: true });
+            await fsp.mkdir(recordDir, { recursive: true });
+            await fsp.writeFile(dotGit, `gitdir: ${recordDir}\n`);
+            await fsp.writeFile(path.join(recordDir, 'gitdir'), `${dotGit}\n`);
+        }
+    });
+
+    afterAll(async () => {
+        await fsp.rm(tmp, { recursive: true, force: true });
+    });
+
+    test.each`
+        presets                       | expected
+        ${undefined}                  | ${true}
+        ${{ nestedWorktrees: true }}  | ${true}
+        ${{ git: false }}             | ${true}
+        ${{ nestedWorktrees: false }} | ${false}
+    `('calcIgnorePathGlobs with worktrees $presets', async ({ presets, expected }) => {
+        const globs = await calcIgnorePathGlobs({ ignorePathPresets: presets }, toFileDirURL(repo));
+        const worktreeGlobs = globs.filter((g) => g.source === 'ignorePathPresets.nestedWorktrees');
+        expect(worktreeGlobs.length).toBe(expected ? allWorktrees.length : 0);
+        expect(globs.filter((g) => g.source === 'ignorePathPresets.git').length).toBe(presets?.git === false ? 0 : 2);
+    });
+
+    // The folder names hold glob symbols, so the globs must escape them.
+    test.each(allWorktrees)(
+        'Validate cspell-glob assumptions: the glob for %s matches only that folder',
+        async (folder) => {
+            const globs = await calcIgnorePathGlobs({ ignorePathPresets: { git: false } }, toFileDirURL(repo));
+            const matcher = new GlobMatcher(globs, { root: repo, cwd: repo, mode: 'exclude' });
+            expect(matcher.match(path.join(repo, folder, 'readme.md'))).toBe(true);
+            expect(matcher.match(path.join(repo, folder, 'src/code.ts'))).toBe(true);
+            expect(matcher.match(path.join(repo, folder + 'x', 'readme.md'))).toBe(false);
+            expect(matcher.match(path.join(repo, 'src/code.ts'))).toBe(false);
+        },
+    );
 });
 
 function toUrl(dir: string, file: string): URL {

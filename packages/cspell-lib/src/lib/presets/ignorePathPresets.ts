@@ -1,6 +1,11 @@
 import type { CSpellSettings, GlobDef } from '@cspell/cspell-types';
+import { toFileDirURL } from '@cspell/url';
+
+import { getFileSystem } from '../fileSystem.js';
+import { findNestedWorktrees } from './nestedWorktrees.js';
 
 const source = 'ignorePathPresets.git';
+const nestedWorktreesSource = 'ignorePathPresets.nestedWorktrees';
 
 // Anchored to the root, so git files outside the root, such as a submodule's message file, are not matched.
 // Keeps git's message files, such as `COMMIT_EDITMSG`, for the `commit-msg` hook, also those of linked worktrees.
@@ -13,17 +18,43 @@ const gitIgnorePaths: GlobDef[] = [
 /**
  * Get the globs of the enabled `ignorePathPresets`, for a file search to skip.
  *
- * The globs have no root. They match only below the root they are resolved against.
+ * The globs have no root. Resolve them against `root`: they match only below it.
  *
  * @param settings - the settings with `ignorePathPresets`.
+ * @param root - the URL of the folder the globs apply to.
  * @returns the globs to ignore.
  */
-export function calcIgnorePathGlobs(settings: Pick<CSpellSettings, 'ignorePathPresets'>): GlobDef[] {
-    return settings.ignorePathPresets?.git === false ? [] : gitIgnorePaths;
+export async function calcIgnorePathGlobs(
+    settings: Pick<CSpellSettings, 'ignorePathPresets'>,
+    root: URL,
+): Promise<GlobDef[]> {
+    const presets = settings.ignorePathPresets;
+    const globs = presets?.git === false ? [] : gitIgnorePaths;
+    if (presets?.nestedWorktrees === false) return globs;
+    const rootDir = toFileDirURL(root);
+    const worktrees = await findNestedWorktrees(rootDir, getFileSystem());
+    if (!worktrees.length) return globs;
+    const worktreeGlobs = worktrees.map((folder) => ({
+        glob: '/' + escapeGlobPath(decodeURIComponent(folder.href.slice(rootDir.href.length))) + '**',
+        source: nestedWorktreesSource,
+    }));
+    return [...globs, ...worktreeGlobs];
 }
 
 /**
- * Check if the enabled `ignorePathPresets` ignore a file.
+ * Escape the glob symbols in a path, like tinyglobby's `escapePath`.
+ *
+ * Each symbol becomes a character class, such as `[(]`, because on Windows globs are normalized by turning `\` into
+ * `/`. A `]` needs no escape once every `[` is escaped, and `!`, `+`, and `@` are symbols only before `(`.
+ */
+function escapeGlobPath(path: string): string {
+    return path.replaceAll(/[()[{}*?|]/g, '[$&]');
+}
+
+/**
+ * Check if the enabled `ignorePathPresets` ignore a file, by its path alone.
+ *
+ * Nested worktrees are not checked. The globs from {@link calcIgnorePathGlobs} skip them.
  *
  * @param url - the URL of the file.
  * @param root - the URL of the folder the presets apply to. Files outside it are not ignored.

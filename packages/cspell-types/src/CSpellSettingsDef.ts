@@ -106,7 +106,7 @@ export interface FileSettings extends ExtendableSettings, CommandLineSettings {
     ignorePaths?: Glob[];
 
     /**
-     * Skip well-known files that are not meant to be spell checked, such as git's own files.
+     * Skip well-known files that are not meant to be spell checked, such as git's own files and nested git worktrees.
      *
      * Each preset is enabled with `true` and disabled with `false`. A preset that is not set keeps its default.
      *
@@ -218,6 +218,20 @@ export interface IgnorePathPresets {
      * @default true
      */
     git?: boolean;
+
+    /**
+     * Skip git worktrees inside the root folder, such as `.worktrees/feature`. A worktree is another checkout of the
+     * same repository, often of another branch.
+     *
+     * The worktrees are found in the repository's own records, in `.git/worktrees`, so finding them does not search
+     * the folders. Only the worktrees of the repository that holds the root folder are skipped. Submodules and other
+     * repositories inside the root folder are still checked.
+     *
+     * Spell checking with the root folder inside a worktree still checks the worktree's files.
+     *
+     * @default true
+     */
+    nestedWorktrees?: boolean;
 }
 
 /* eslint-disable no-irregular-whitespace */
