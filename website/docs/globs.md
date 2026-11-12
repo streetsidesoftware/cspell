@@ -309,4 +309,23 @@ In a git worktree or a submodule, `.git` is a file instead of a folder.
 }
 ```
 
+With [`overrideGlobsMatchFilesOnly`](./Configuration/overrides.md#globs-that-match-files-only) enabled, `.git` in an
+override matches only files named `.git`:
+
+**`cspell.json`**
+
+```json
+{
+  "features": {
+    "overrideGlobsMatchFilesOnly": true
+  },
+  "overrides": [
+    {
+      "filename": ".git",
+      "enabled": false
+    }
+  ]
+}
+```
+
 <!--- cspell:ignore EDITMSG -->
