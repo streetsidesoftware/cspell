@@ -18,6 +18,7 @@ describe('features', () => {
 
         const exp: Features = {
             'weighted-suggestions': true,
+            overrideGlobsMatchFilesOnly: true,
         };
 
         type AllFeatures = {
@@ -29,6 +30,6 @@ describe('features', () => {
          * The following line should compile without errors.
          */
         const all: AllFeatures = exp;
-        expect(Object.keys(all)).toEqual(['weighted-suggestions']);
+        expect(Object.keys(all)).toEqual(['weighted-suggestions', 'overrideGlobsMatchFilesOnly']);
     });
 });

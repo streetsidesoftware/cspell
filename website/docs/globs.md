@@ -138,6 +138,11 @@ By default, `*` and `**` do not match names that start with `.`, such as `.githu
 As in strict matching, a glob ending in `/**` also matches a file with that name: `**/test/**` matches a file named
 `test`.
 
+In overrides, these extra matches can be disabled with
+[`overrideGlobsMatchFilesOnly`](./Configuration/overrides.md#globs-that-match-files-only). With it enabled,
+`examples.ts` matches only a file named `examples.ts`, not the files inside a folder with that name, and `src/**`
+matches only the files inside `src`, not a file named `src`.
+
 A consequence of these rules: an override with `"filename": "**/test"` applies to a file named `test` and also to
 every file inside a `test` folder. Use `test/` for the files inside `test` folders only.
 
