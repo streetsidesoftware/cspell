@@ -2,7 +2,7 @@ import * as path from 'node:path';
 
 import { describe, expect, test } from 'vitest';
 
-import { calcIgnorePaths, isIgnoredByPathPresets } from './ignorePathPresets.js';
+import { calcIgnorePathGlobs, isIgnoredByPresets } from './ignorePathPresets.js';
 
 const root = path.resolve('/repo');
 const gitGlob = { glob: '**/.git/!(EDIT_DESCRIPTION|*MSG)', source: 'ignorePathPresets.git' };
@@ -36,8 +36,8 @@ describe('ignorePathPresets', () => {
         ${'.git/config'}                      | ${{ git: true }}  | ${true}
         ${'wt/.git'}                          | ${{ git: false }} | ${false}
         ${'.git/config'}                      | ${{ git: false }} | ${false}
-    `('isIgnoredByPathPresets $file $presets', ({ file, presets, expected }) => {
-        expect(isIgnoredByPathPresets(path.join(root, file), { ignorePathPresets: presets })).toBe(expected);
+    `('isIgnoredByPresets $file $presets', ({ file, presets, expected }) => {
+        expect(isIgnoredByPresets(path.join(root, file), { ignorePathPresets: presets })).toBe(expected);
     });
 
     test.each`
@@ -46,8 +46,8 @@ describe('ignorePathPresets', () => {
         ${{ ignorePathPresets: {} }}             | ${[gitGlob]}
         ${{ ignorePathPresets: { git: true } }}  | ${[gitGlob]}
         ${{ ignorePathPresets: { git: false } }} | ${[]}
-    `('calcIgnorePaths $settings', ({ settings, expected }) => {
-        expect(calcIgnorePaths(settings)).toEqual(expected);
+    `('calcIgnorePathGlobs $settings', ({ settings, expected }) => {
+        expect(calcIgnorePathGlobs(settings)).toEqual(expected);
     });
 });
 

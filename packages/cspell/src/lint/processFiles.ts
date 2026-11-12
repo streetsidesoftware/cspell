@@ -4,7 +4,7 @@ import { isAsyncIterable } from '@cspell/cspell-pipe';
 import { opMap, pipe } from '@cspell/cspell-pipe/sync';
 import type { CSpellSettings, CSpellSettingsWithSourceTrace, RunResult } from '@cspell/cspell-types';
 import type { ChalkInstance } from 'chalk';
-import { isIgnoredByPathPresets, shouldCheckDocument } from 'cspell-lib';
+import { isIgnoredByPresets, shouldCheckDocument } from 'cspell-lib';
 
 import type { LintFileReporter, LintFileResult } from '../reporters/LintFileResult.js';
 import type { LintReporter } from '../reporters/reporters.js';
@@ -56,7 +56,7 @@ function prefetch(fileToProcess: FileToProcess, cfg: PrefetchConfig): PrefetchFi
             result: Promise.resolve({ skip: true, skipReason: 'Binary file.' }),
         };
     }
-    if (isIgnoredByPathPresets(path.resolve(cfg.root, filename), cfg.config)) {
+    if (isIgnoredByPresets(path.resolve(cfg.root, filename), cfg.config)) {
         return {
             ...fileToProcess,
             result: Promise.resolve({ skip: true, skipReason: 'Excluded by ignorePathPresets.' }),

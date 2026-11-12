@@ -15,7 +15,7 @@ import type { GlobMatchOptions, GlobPatternNormalized, GlobPatternWithRoot } fro
 import { GlobMatcher } from 'cspell-glob';
 import type { Logger } from 'cspell-lib';
 import {
-    calcIgnorePaths,
+    calcIgnorePathGlobs,
     ENV_CSPELL_GLOB_ROOT,
     getDefaultConfigLoader,
     isBinaryFile as cspellIsBinaryFile,
@@ -344,7 +344,7 @@ async function determineFilesToCheck(
         const { root } = cfg;
         const globsToExcludeRaw = [
             ...(configInfo.config.ignorePaths || []),
-            ...calcIgnorePaths(configInfo.config),
+            ...calcIgnorePathGlobs(configInfo.config),
             ...excludeGlobs,
         ];
         const globsToExclude = globsToExcludeRaw.filter((g) => !globPattern(g).startsWith('!'));
@@ -402,7 +402,7 @@ async function determineFilesToCheck(
         const { root } = cfg;
         const globsToExcludeRaw = [
             ...(configInfo.config.ignorePaths || []),
-            ...calcIgnorePaths(configInfo.config),
+            ...calcIgnorePathGlobs(configInfo.config),
             ...excludeGlobs,
         ];
         const globsToExclude = globsToExcludeRaw.filter((g) => !globPattern(g).startsWith('!'));

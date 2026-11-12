@@ -13,7 +13,7 @@ const gitIgnorePaths: GlobDef[] = [{ glob: '**/.git/!(EDIT_DESCRIPTION|*MSG)', s
  * @param settings - the settings with `ignorePathPresets`.
  * @returns the globs to ignore.
  */
-export function calcIgnorePaths(settings: Pick<CSpellSettings, 'ignorePathPresets'>): GlobDef[] {
+export function calcIgnorePathGlobs(settings: Pick<CSpellSettings, 'ignorePathPresets'>): GlobDef[] {
     return settings.ignorePathPresets?.git === false ? [] : gitIgnorePaths;
 }
 
@@ -24,7 +24,7 @@ export function calcIgnorePaths(settings: Pick<CSpellSettings, 'ignorePathPreset
  * @param settings - the settings with `ignorePathPresets`.
  * @returns `true` if the file is ignored.
  */
-export function isIgnoredByPathPresets(filePath: string, settings: Pick<CSpellSettings, 'ignorePathPresets'>): boolean {
+export function isIgnoredByPresets(filePath: string, settings: Pick<CSpellSettings, 'ignorePathPresets'>): boolean {
     return settings.ignorePathPresets?.git !== false && isGitFile(filePath);
 }
 
