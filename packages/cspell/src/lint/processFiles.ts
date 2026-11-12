@@ -50,13 +50,13 @@ interface PrefetchConfig {
 
 function prefetch(fileToProcess: FileToProcess, cfg: PrefetchConfig): PrefetchFileResult {
     const { filename } = fileToProcess;
-    if (isBinaryFile(filename, cfg.root)) {
+    const url = filenameToUri(filename, cfg.root);
+    if (isBinaryFile(url)) {
         return {
             ...fileToProcess,
             result: Promise.resolve({ skip: true, skipReason: 'Binary file.' }),
         };
     }
-    const url = filenameToUri(filename, cfg.root);
     if (isIgnoredByPresets(url, cfg.rootUrl, cfg.config)) {
         return {
             ...fileToProcess,
