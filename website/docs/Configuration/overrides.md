@@ -139,7 +139,7 @@ override to the files in a folder, end the glob with `/`.
 features:
   overrideGlobsMatchFilesOnly: true
 overrides:
-  # The files in the `fixtures` folder.
+  # The files in every folder named `fixtures`.
   - filename: 'fixtures/'
     enabled: false
 ```
