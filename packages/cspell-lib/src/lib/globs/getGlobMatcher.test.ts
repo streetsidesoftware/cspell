@@ -1,7 +1,6 @@
 import * as path from 'node:path';
 
 import type { GlobDef } from '@cspell/cspell-types';
-import { GlobMatcher } from 'cspell-glob';
 import { describe, expect, test } from 'vitest';
 
 import { getGlobMatcherForExcluding, getGlobMatcherForExcludingFilesOnly } from './getGlobMatcher.js';
@@ -92,31 +91,6 @@ describe('getGlobMatcher', () => {
         expect(getGlobMatcherForExcludingFilesOnly(globs)).toBe(getGlobMatcherForExcludingFilesOnly(globs));
         expect(getGlobMatcherForExcludingFilesOnly('/src')).toBe(getGlobMatcherForExcludingFilesOnly('/src'));
         expect(getGlobMatcherForExcludingFilesOnly(globs)).not.toBe(getGlobMatcherForExcluding(globs));
-    });
-});
-
-describe('Validate cspell-glob assumptions', () => {
-    // getGlobMatcherForExcludingFilesOnly relies on how an exclude matcher expands globs.
-    test.each`
-        glob              | expected
-        ${'examples.ts'}  | ${['**/examples.ts', '**/examples.ts/**']}
-        ${'/src'}         | ${['src', 'src/**']}
-        ${'**/.git'}      | ${['**/.git', '**/.git/**']}
-        ${'!lib/src'}     | ${['!lib/src', '!lib/src/**']}
-        ${'/src/'}        | ${['src/**/*']}
-        ${'examples.ts/'} | ${['**/examples.ts/**/*']}
-        ${'src/**'}       | ${['src/**']}
-        ${'**'}           | ${['**']}
-    `('expansion of $glob', ({ glob, expected }) => {
-        const m = new GlobMatcher([{ glob, root }]);
-        expect(m.patterns.map((p) => p.glob)).toEqual(expected);
-        // Each expansion keeps the same raw glob.
-        expect(new Set(m.patterns.map((p) => ('rawGlob' in p ? p.rawGlob : undefined)))).toEqual(new Set([glob]));
-    });
-
-    test('a glob without a slash stays relative to its root', () => {
-        const m = new GlobMatcher([{ glob: 'examples.ts', root }]);
-        expect(m.patterns.map((p) => p.isGlobalPattern)).toEqual([false, false]);
     });
 });
 

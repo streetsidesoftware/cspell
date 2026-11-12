@@ -428,8 +428,8 @@ describe('Validate Glob Normalization to root', () => {
 
     function nOpts(opts: Partial<NormalizeOptions> = {}): Required<NormalizeOptions> {
         const { nodePath = pathPosix } = opts;
-        const { root = nodePath.resolve(), cwd = nodePath.resolve(), nested = false } = opts;
-        return { root, cwd, nested, nodePath };
+        const { root = nodePath.resolve(), cwd = nodePath.resolve(), nested = false, extendNested = true } = opts;
+        return { root, cwd, nested, extendNested, nodePath };
     }
 
     function gN(glob: string, root: string, rawGlob: string, rawRoot: string): GlobPatternNormalized {
@@ -450,6 +450,37 @@ describe('Validate Glob Normalization to root', () => {
         ${{ glob: 'a/*.ts', root: '${cwd}/myRoot' }} | ${nOpts({ root: 'otherRoot' })} | ${[gN('a/*.ts', nOpts().nodePath.resolve('myRoot'), 'a/*.ts', '${cwd}/myRoot')]}
     `('normalizeGlobPattern glob: $glob, options: $options', ({ glob, options, expected }) => {
         expect(normalizeGlobPattern(glob, options)).toEqual(expected);
+    });
+
+    test.each`
+        glob              | extendNested | expected
+        ${'examples.ts'}  | ${true}      | ${['**/examples.ts', '**/examples.ts/**']}
+        ${'examples.ts'}  | ${false}     | ${['**/examples.ts']}
+        ${'/src'}         | ${true}      | ${['src', 'src/**']}
+        ${'/src'}         | ${false}     | ${['src']}
+        ${'**/.git'}      | ${false}     | ${['**/.git']}
+        ${'!lib/src'}     | ${false}     | ${['!lib/src']}
+        ${'/src/'}        | ${true}      | ${['src/**/*']}
+        ${'/src/'}        | ${false}     | ${['src/**/*']}
+        ${'examples.ts/'} | ${false}     | ${['**/examples.ts/**/*']}
+        ${'src/**'}       | ${true}      | ${['src/**']}
+        ${'src/**'}       | ${false}     | ${['src/**/*']}
+        ${'**/.git/**'}   | ${false}     | ${['**/.git/**/*']}
+        ${'!src/**'}      | ${false}     | ${['!src/**/*']}
+        ${'src/**/*'}     | ${false}     | ${['src/**/*']}
+        ${'**'}           | ${false}     | ${['**']}
+        ${'a**'}          | ${false}     | ${['**/a**']}
+    `('normalizeGlobPattern nested glob: $glob, extendNested: $extendNested', ({ glob, extendNested, expected }) => {
+        const options = nOpts({ nested: true, extendNested });
+        const r = normalizeGlobPattern(glob, options);
+        expect(r.map((p) => p.glob)).toEqual(expected);
+        expect(r.map((p) => p.isGlobalPattern)).toEqual(r.map(() => glob.replace(/^!/, '').startsWith('**')));
+    });
+
+    test('extendNested has no effect when not nested', () => {
+        const options = nOpts({ nested: false, extendNested: false });
+        expect(normalizeGlobPattern('src/**', options).map((p) => p.glob)).toEqual(['src/**']);
+        expect(normalizeGlobPattern('/src', options).map((p) => p.glob)).toEqual(['src']);
     });
 });
 

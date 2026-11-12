@@ -150,22 +150,23 @@ function urlBuilder(path: PathInterface = Path): FileUrlBuilder {
 /**
  * @param pattern glob pattern
  * @param nested when true add `**​/<glob>/​**`
+ * @param extendNested when nested, also match the files beneath `<glob>`.
  * @returns the set of matching globs.
  */
-function normalizePattern(pattern: string, nested: boolean): string[] {
+function normalizePattern(pattern: string, nested: boolean, extendNested: boolean): string[] {
     pattern = pattern.replace(/^(!!)+/, '');
     const isNeg = pattern.startsWith('!');
     const prefix = isNeg ? '!' : '';
     pattern = isNeg ? pattern.slice(1) : pattern;
-    const patterns = nested ? normalizePatternNested(pattern) : normalizePatternGeneral(pattern);
+    const patterns = nested ? normalizePatternNested(pattern, extendNested) : normalizePatternGeneral(pattern);
     return patterns.map((p) => prefix + p);
 }
 
-function normalizePatternNested(pattern: string): string[] {
+function normalizePatternNested(pattern: string, extendNested: boolean): string[] {
     // no slashes will match files names or folders
     if (!pattern.includes('/')) {
         if (pattern === '**') return ['**'];
-        return ['**/' + pattern, '**/' + pattern + '/**'];
+        return extendNested ? ['**/' + pattern, '**/' + pattern + '/**'] : ['**/' + pattern];
     }
     const hasLeadingSlash = pattern.startsWith('/');
     pattern = hasLeadingSlash ? pattern.slice(1) : pattern;
@@ -177,10 +178,11 @@ function normalizePatternNested(pattern: string): string[] {
     }
 
     if (pattern.endsWith('**')) {
-        return [pattern];
+        // `<dir>/**` also matches a file named `<dir>`, `<dir>/**/*` does not.
+        return extendNested || !pattern.endsWith('/**') ? [pattern] : [pattern + '/*'];
     }
 
-    return [pattern, pattern + '/**'];
+    return extendNested ? [pattern, pattern + '/**'] : [pattern];
 }
 
 function normalizePatternGeneral(pattern: string): [string] {
@@ -196,6 +198,14 @@ export interface NormalizeOptions {
      * Example: `node_modules` becomes `**​/node_modules/​**`, `**​/node_modules`, and `node_modules/​**`
      */
     nested: boolean;
+    /**
+     * When `nested` is true, extend a glob to also match the files nested beneath a folder with that name.
+     *
+     * Example: when `false`, `node_modules` becomes only `**​/node_modules`.
+     *
+     * @default true
+     */
+    extendNested?: boolean | undefined;
     /**
      * This is the root to use for the glob if the glob does not already contain one.
      */
@@ -234,7 +244,7 @@ export function normalizeGlobPatterns(patterns: GlobPattern[], options: Normaliz
 }
 
 export function normalizeGlobPattern(g: GlobPattern, options: NormalizeOptions): GlobPatternNormalized[] {
-    const { root, nodePath: path = Path, nested } = options;
+    const { root, nodePath: path = Path, nested, extendNested = true } = options;
     const builder = urlBuilder(path);
     const cwd = options.cwd ?? path.resolve();
     const cwdUrl = builder.toFileDirURL(cwd);
@@ -262,7 +272,7 @@ export function normalizeGlobPattern(g: GlobPattern, options: NormalizeOptions):
     const isGlobalPattern = gIsGlobalPattern ?? isGlobalGlob(gr.glob);
     gr.root = builder.urlToFilePathOrHref(builder.toFileDirURL(gr.root, rootUrl));
 
-    const globs = normalizePattern(gr.glob, nested);
+    const globs = normalizePattern(gr.glob, nested, extendNested);
     return globs.map((glob) => ({ ...gr, glob, rawGlob, rawRoot, isGlobalPattern }));
 }
 

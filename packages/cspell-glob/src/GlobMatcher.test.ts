@@ -845,3 +845,46 @@ function extractGlobsFromMatcher(globMatcher: GlobMatcher): string[] {
 function normalizeGlobsToRoot(globs: GlobPattern[], root: string, isExclude: boolean): string[] {
     return extractGlobsFromMatcher(buildGlobMatcherFromCommandLine(globs, root, isExclude));
 }
+
+describe('GlobMatcher extendNested', () => {
+    const root = path.resolve('/project');
+
+    function f(...parts: string[]): string {
+        return path.join(root, ...parts);
+    }
+
+    test.each`
+        glob                      | file                       | extended | notExtended
+        ${'examples.ts'}          | ${f('a/examples.ts')}      | ${true}  | ${true}
+        ${'examples.ts'}          | ${f('a/examples.ts/b.ts')} | ${true}  | ${false}
+        ${'/src'}                 | ${f('src')}                | ${true}  | ${true}
+        ${'/src'}                 | ${f('src/a.ts')}           | ${true}  | ${false}
+        ${'**/.git'}              | ${f('w/.git')}             | ${true}  | ${true}
+        ${'**/.git'}              | ${f('w/.git/NOTE')}        | ${true}  | ${false}
+        ${'/src/'}                | ${f('src')}                | ${false} | ${false}
+        ${'/src/'}                | ${f('src/a.ts')}           | ${true}  | ${true}
+        ${'src/**'}               | ${f('src')}                | ${true}  | ${false}
+        ${'src/**'}               | ${f('src/a/b.ts')}         | ${true}  | ${true}
+        ${'**/.git/**'}           | ${f('w/.git')}             | ${true}  | ${false}
+        ${'**/.git/**'}           | ${f('w/.git/NOTE')}        | ${true}  | ${true}
+        ${'*.json'}               | ${f('.vscode/a.json')}     | ${true}  | ${true}
+        ${['*.md', '!README.md']} | ${f('a/README.md')}        | ${false} | ${false}
+        ${['*.md', '!README.md']} | ${f('a/b.md')}             | ${true}  | ${true}
+    `('$glob $file extended: $extended, not extended: $notExtended', ({ glob, file, extended, notExtended }) => {
+        expect(new GlobMatcher(glob, { root }).match(file)).toBe(extended);
+        expect(new GlobMatcher(glob, { root, extendNested: true }).match(file)).toBe(extended);
+        expect(new GlobMatcher(glob, { root, extendNested: false }).match(file)).toBe(notExtended);
+    });
+
+    test('a glob without a slash stays relative to its root', () => {
+        const glob = { glob: 'examples.ts', root: f('sub') };
+        const m = new GlobMatcher([glob], { root, extendNested: false });
+        expect(m.match(f('examples.ts'))).toBe(false);
+        expect(m.match(f('sub/a/examples.ts'))).toBe(true);
+    });
+
+    test('options', () => {
+        expect(new GlobMatcher('*.md').options.extendNested).toBe(true);
+        expect(new GlobMatcher('*.md', { extendNested: false }).options.extendNested).toBe(false);
+    });
+});
