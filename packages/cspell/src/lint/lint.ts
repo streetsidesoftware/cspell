@@ -15,6 +15,7 @@ import type { GlobMatchOptions, GlobPatternNormalized, GlobPatternWithRoot } fro
 import { GlobMatcher } from 'cspell-glob';
 import type { Logger } from 'cspell-lib';
 import {
+    calcIgnorePathGlobs,
     ENV_CSPELL_GLOB_ROOT,
     getDefaultConfigLoader,
     isBinaryFile as cspellIsBinaryFile,
@@ -341,7 +342,11 @@ async function determineFilesToCheck(
 
         // Get Exclusions from the config files.
         const { root } = cfg;
-        const globsToExcludeRaw = [...(configInfo.config.ignorePaths || []), ...excludeGlobs];
+        const globsToExcludeRaw = [
+            ...(configInfo.config.ignorePaths || []),
+            ...calcIgnorePathGlobs(configInfo.config),
+            ...excludeGlobs,
+        ];
         const globsToExclude = globsToExcludeRaw.filter((g) => !globPattern(g).startsWith('!'));
         if (globsToExclude.length !== globsToExcludeRaw.length) {
             const globs = globsToExcludeRaw.map((g) => globPattern(g)).filter((g) => g.startsWith('!'));
@@ -395,7 +400,11 @@ async function determineFilesToCheck(
 
         // Get Exclusions from the config files.
         const { root } = cfg;
-        const globsToExcludeRaw = [...(configInfo.config.ignorePaths || []), ...excludeGlobs];
+        const globsToExcludeRaw = [
+            ...(configInfo.config.ignorePaths || []),
+            ...calcIgnorePathGlobs(configInfo.config),
+            ...excludeGlobs,
+        ];
         const globsToExclude = globsToExcludeRaw.filter((g) => !globPattern(g).startsWith('!'));
         if (globsToExclude.length !== globsToExcludeRaw.length) {
             const globs = globsToExcludeRaw.map((g) => globPattern(g)).filter((g) => g.startsWith('!'));

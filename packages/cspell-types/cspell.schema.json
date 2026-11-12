@@ -1222,6 +1222,20 @@
       ],
       "type": "object"
     },
+    "IgnorePathPresets": {
+      "additionalProperties": false,
+      "description": "Presets of files to skip. Each one is enabled or disabled on its own.",
+      "markdownDescription": "Presets of files to skip. Each one is enabled or disabled on its own.",
+      "properties": {
+        "git": {
+          "default": true,
+          "description": "Skip git's own files inside the root folder:\n- a file named `.git`, which git puts in a worktree or a submodule\n- everything inside a `.git` folder, except git's message files\n\nFiles outside the root folder are not skipped. For example, a submodule's commit message is in the parent repository's `.git` folder.\n\nGit's message files stay checked, so a `commit-msg` hook can spell check the commit message. They are the files whose names end in `MSG`, such as `COMMIT_EDITMSG`, `MERGE_MSG`, and `TAG_EDITMSG`, and `EDIT_DESCRIPTION`. They are kept in two places:\n- directly inside a `.git` folder\n- directly inside a linked worktree's folder in `.git/worktrees`",
+          "markdownDescription": "Skip git's own files inside the root folder:\n- a file named `.git`, which git puts in a worktree or a submodule\n- everything inside a `.git` folder, except git's message files\n\nFiles outside the root folder are not skipped. For example, a submodule's commit message is in the parent\nrepository's `.git` folder.\n\nGit's message files stay checked, so a `commit-msg` hook can spell check the commit message. They are the files\nwhose names end in `MSG`, such as `COMMIT_EDITMSG`, `MERGE_MSG`, and `TAG_EDITMSG`, and `EDIT_DESCRIPTION`.\nThey are kept in two places:\n- directly inside a `.git` folder\n- directly inside a linked worktree's folder in `.git/worktrees`",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
     "LanguageId": {
       "anyOf": [
         {
@@ -2306,12 +2320,18 @@
       "markdownDescription": "Optional identifier.",
       "type": "string"
     },
+    "ignorePathPresets": {
+      "$ref": "#/definitions/IgnorePathPresets",
+      "description": "Skip well-known files that are not meant to be spell checked, such as git's own files.\n\nEach preset is enabled with `true` and disabled with `false`. A preset that is not set keeps its default.\n\nExample: check git's own files again.\n\n```json \"ignorePathPresets\": { \"git\": false } ```",
+      "markdownDescription": "Skip well-known files that are not meant to be spell checked, such as git's own files.\n\nEach preset is enabled with `true` and disabled with `false`. A preset that is not set keeps its default.\n\nExample: check git's own files again.\n\n```json\n\"ignorePathPresets\": { \"git\": false }\n```",
+      "since": "10.5.0"
+    },
     "ignorePaths": {
-      "description": "Glob patterns of files to be ignored.\n\nGlob patterns are relative to the  {@link  globRoot }  of the configuration file that defines them.\n\nThe default is `[]`. Separately, the `cspell` command line skips `node_modules/**` unless `--exclude` is given.\n\nWarning: ignoring `\".git/\"` also ignores `\".git/COMMIT_EDITMSG\"`, which the `commit-msg` git hook checks. To ignore the rest of `.git` and keep the commit message, use `[\".git/!(COMMIT_EDITMSG)\"]`.",
+      "description": "Glob patterns of files to be ignored.\n\nGlob patterns are relative to the  {@link  globRoot }  of the configuration file that defines them.\n\nThe default is `[]`. Separately, the `cspell` command line skips `node_modules/**` unless `--exclude` is given.",
       "items": {
         "$ref": "#/definitions/Glob"
       },
-      "markdownDescription": "Glob patterns of files to be ignored.\n\nGlob patterns are relative to the  {@link  globRoot }  of the configuration file that defines them.\n\nThe default is `[]`.\nSeparately, the `cspell` command line skips `node_modules/**` unless `--exclude` is given.\n\nWarning: ignoring `\".git/\"` also ignores `\".git/COMMIT_EDITMSG\"`, which the `commit-msg` git hook checks.\nTo ignore the rest of `.git` and keep the commit message, use `[\".git/!(COMMIT_EDITMSG)\"]`.",
+      "markdownDescription": "Glob patterns of files to be ignored.\n\nGlob patterns are relative to the  {@link  globRoot }  of the configuration file that defines them.\n\nThe default is `[]`.\nSeparately, the `cspell` command line skips `node_modules/**` unless `--exclude` is given.",
       "type": "array"
     },
     "ignoreRandomStrings": {

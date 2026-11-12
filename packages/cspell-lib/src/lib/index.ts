@@ -22,6 +22,7 @@ export type {
 export { createTextDocument, updateTextDocument } from './Models/TextDocument.js';
 export type { PerfTimer } from './perf/index.js';
 export { createPerfTimer } from './perf/index.js';
+export { calcIgnorePathGlobs, isIgnoredByPresets } from './presets/index.js';
 export type {
     ConfigurationDependencies,
     CSpellConfigFile,

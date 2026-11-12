@@ -39,6 +39,7 @@ export type {
 } from './lib/index.js';
 export {
     asyncIterableToArray,
+    calcIgnorePathGlobs,
     calcOverrideSettings,
     checkFilenameMatchesGlob,
     checkText,
@@ -85,6 +86,7 @@ export {
     ImportError,
     IncludeExcludeFlag,
     isBinaryFile,
+    isIgnoredByPresets,
     isSpellingDictionaryLoadError,
     Link,
     loadConfig,

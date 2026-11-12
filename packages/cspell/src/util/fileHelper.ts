@@ -62,10 +62,9 @@ export function filenameToUri(filename: string, cwd?: string): URL {
     return toURL(filenameToUrl(filename, cwd));
 }
 
-export function isBinaryFile(filename: string, cwd?: string): boolean {
-    const uri = filenameToUri(filename, cwd);
-    if (uri.protocol.startsWith('stdin')) return false;
-    return isUriBinaryFile(uri);
+export function isBinaryFile(url: URL): boolean {
+    if (url.protocol.startsWith('stdin')) return false;
+    return isUriBinaryFile(url);
 }
 
 export interface ReadFileInfoResult extends FileInfo {

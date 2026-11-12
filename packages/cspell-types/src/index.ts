@@ -59,6 +59,7 @@ export type {
     FSPathResolvable,
     Glob,
     GlobDef,
+    IgnorePathPresets,
     ImportFileRef,
     InMemorySource,
     LanguageId,

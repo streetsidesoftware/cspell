@@ -1,5 +1,5 @@
 import { FSCapabilityFlags, VFileSystem, VFileSystem as VFileSystem$1, VFileSystemProvider, VirtualFS, VirtualFS as VirtualFS$1, asyncIterableToArray, readFileText as readFile, readFileTextSync as readFileSync, writeToFile, writeToFileIterable, writeToFileIterableP } from "cspell-io";
-import { AdvancedCSpellSettingsWithSourceTrace, CSpellSettings, CSpellSettingsWithSourceTrace, CSpellUserSettings, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, DictionaryDefinitionInline, DictionaryDefinitionPreferred, DictionaryDefinitionSimple, DictionaryId, DictionaryReference, DocumentParser, Glob, ImportFileRef, Issue, LocaleId, MappedText, ParsedText, Parser, PnPSettings, Range, ReportingConfiguration, TextDocumentOffset, TextOffset } from "@cspell/cspell-types";
+import { AdvancedCSpellSettingsWithSourceTrace, CSpellSettings, CSpellSettingsWithSourceTrace, CSpellUserSettings, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, DictionaryDefinitionInline, DictionaryDefinitionPreferred, DictionaryDefinitionSimple, DictionaryId, DictionaryReference, DocumentParser, Glob, GlobDef, ImportFileRef, Issue, LocaleId, MappedText, ParsedText, Parser, PnPSettings, Range, ReportingConfiguration, TextDocumentOffset, TextOffset } from "@cspell/cspell-types";
 import { FileTypeId as LanguageId, findMatchingFileTypes as getLanguagesForBasename, getFileTypesForExt as getLanguagesForExt } from "@cspell/filetypes";
 import { CachingDictionary, SpellingDictionary, SpellingDictionaryCollection, SuggestOptions, SuggestionCollector, SuggestionResult, createCollection, createSpellingDictionary } from "cspell-dictionary";
 import { CompoundWordsMethod, WeightMap } from "cspell-trie-lib";
@@ -455,6 +455,24 @@ interface PerfTimer {
 }
 type TimeNowFn = () => number;
 export declare function createPerfTimer(name: string, onEnd?: (elapsed: number, name: string) => void, timeNowFn?: TimeNowFn): PerfTimer;
+/**
+ * Get the globs of the enabled `ignorePathPresets`, for a file search to skip.
+ *
+ * The globs have no root. They match only below the root they are resolved against.
+ *
+ * @param settings - the settings with `ignorePathPresets`.
+ * @returns the globs to ignore.
+ */
+export declare function calcIgnorePathGlobs(settings: Pick<CSpellSettings, "ignorePathPresets">): GlobDef[];
+/**
+ * Check if the enabled `ignorePathPresets` ignore a file.
+ *
+ * @param url - the URL of the file.
+ * @param root - the URL of the folder the presets apply to. Files outside it are not ignored.
+ * @param settings - the settings with `ignorePathPresets`.
+ * @returns `true` if the file is ignored.
+ */
+export declare function isIgnoredByPresets(url: URL, root: URL, settings: Pick<CSpellSettings, "ignorePathPresets">): boolean;
 interface ListGlobalImportsResult {
   filename: string;
   name: string | undefined;

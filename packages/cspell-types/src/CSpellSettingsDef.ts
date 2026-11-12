@@ -102,11 +102,23 @@ export interface FileSettings extends ExtendableSettings, CommandLineSettings {
      *
      * The default is `[]`.
      * Separately, the `cspell` command line skips `node_modules/**` unless `--exclude` is given.
-     *
-     * Warning: ignoring `".git/"` also ignores `".git/COMMIT_EDITMSG"`, which the `commit-msg` git hook checks.
-     * To ignore the rest of `.git` and keep the commit message, use `[".git/!(COMMIT_EDITMSG)"]`.
      */
     ignorePaths?: Glob[];
+
+    /**
+     * Skip well-known files that are not meant to be spell checked, such as git's own files.
+     *
+     * Each preset is enabled with `true` and disabled with `false`. A preset that is not set keeps its default.
+     *
+     * Example: check git's own files again.
+     *
+     * ```json
+     * "ignorePathPresets": { "git": false }
+     * ```
+     *
+     * @since 10.5.0
+     */
+    ignorePathPresets?: IgnorePathPresets;
 
     /**
      * Prevents searching for local configuration when checking individual documents.
@@ -183,6 +195,29 @@ export interface FileSettings extends ExtendableSettings, CommandLineSettings {
      * @since 9.6.3
      */
     engines?: CompatibleEngineVersions;
+}
+
+/**
+ * Presets of files to skip. Each one is enabled or disabled on its own.
+ */
+export interface IgnorePathPresets {
+    /**
+     * Skip git's own files inside the root folder:
+     * - a file named `.git`, which git puts in a worktree or a submodule
+     * - everything inside a `.git` folder, except git's message files
+     *
+     * Files outside the root folder are not skipped. For example, a submodule's commit message is in the parent
+     * repository's `.git` folder.
+     *
+     * Git's message files stay checked, so a `commit-msg` hook can spell check the commit message. They are the files
+     * whose names end in `MSG`, such as `COMMIT_EDITMSG`, `MERGE_MSG`, and `TAG_EDITMSG`, and `EDIT_DESCRIPTION`.
+     * They are kept in two places:
+     * - directly inside a `.git` folder
+     * - directly inside a linked worktree's folder in `.git/worktrees`
+     *
+     * @default true
+     */
+    git?: boolean;
 }
 
 /* eslint-disable no-irregular-whitespace */

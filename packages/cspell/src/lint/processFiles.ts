@@ -1,8 +1,9 @@
 import { isAsyncIterable } from '@cspell/cspell-pipe';
 import { opMap, pipe } from '@cspell/cspell-pipe/sync';
 import type { CSpellSettings, CSpellSettingsWithSourceTrace, RunResult } from '@cspell/cspell-types';
+import { toFileDirURL } from '@cspell/url';
 import type { ChalkInstance } from 'chalk';
-import { shouldCheckDocument } from 'cspell-lib';
+import { isIgnoredByPresets, shouldCheckDocument } from 'cspell-lib';
 
 import type { LintFileReporter, LintFileResult } from '../reporters/LintFileResult.js';
 import type { LintReporter } from '../reporters/reporters.js';
@@ -35,6 +36,7 @@ const BATCH_PROCESS_SIZE = 1;
 
 interface PrefetchConfig {
     readonly root: LintRequest['root'];
+    readonly rootUrl: URL;
     readonly maxFileSize: LintRequest['maxFileSize'];
     readonly forceCheck: boolean;
     readonly symlinks: SymlinkChecker;
@@ -48,10 +50,17 @@ interface PrefetchConfig {
 
 function prefetch(fileToProcess: FileToProcess, cfg: PrefetchConfig): PrefetchFileResult {
     const { filename } = fileToProcess;
-    if (isBinaryFile(filename, cfg.root)) {
+    const url = filenameToUri(filename, cfg.root);
+    if (isBinaryFile(url)) {
         return {
             ...fileToProcess,
             result: Promise.resolve({ skip: true, skipReason: 'Binary file.' }),
+        };
+    }
+    if (isIgnoredByPresets(url, cfg.rootUrl, cfg.config)) {
+        return {
+            ...fileToProcess,
+            result: Promise.resolve({ skip: true, skipReason: 'Excluded by ignorePathPresets.' }),
         };
     }
     const reportIssueOptions = extractReporterIssueOptions(cfg.config);
@@ -71,10 +80,9 @@ function prefetch(fileToProcess: FileToProcess, cfg: PrefetchConfig): PrefetchFi
             const fileResult = { ...cachedResult, elapsedTimeMs: getElapsedTimeMs() };
             return { fileResult };
         }
-        const uri = filenameToUri(filename, cfg.root).href;
         const { languageId, locale } = cfg;
         const checkResult = await shouldCheckDocument(
-            { uri, languageId, locale },
+            { uri: url.href, languageId, locale },
             { forceCheck: cfg.forceCheck },
             cfg.config,
         );
@@ -126,6 +134,7 @@ export async function processFiles(
     const reporter: LintFileReporter = options.lintReporter;
     const prefetchConfig: PrefetchConfig = {
         root: options.cfg.root,
+        rootUrl: toFileDirURL(options.cfg.root),
         maxFileSize: options.cfg.maxFileSize,
         forceCheck: !!options.cfg.options.forceCheck,
         symlinks: options.symlinks ?? createSymlinkChecker(options.cfg.root),

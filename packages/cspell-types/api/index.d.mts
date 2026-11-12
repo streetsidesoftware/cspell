@@ -1764,11 +1764,22 @@ interface FileSettings extends ExtendableSettings, CommandLineSettings {
    *
    * The default is `[]`.
    * Separately, the `cspell` command line skips `node_modules/**` unless `--exclude` is given.
-   *
-   * Warning: ignoring `".git/"` also ignores `".git/COMMIT_EDITMSG"`, which the `commit-msg` git hook checks.
-   * To ignore the rest of `.git` and keep the commit message, use `[".git/!(COMMIT_EDITMSG)"]`.
    */
   ignorePaths?: Glob[];
+  /**
+   * Skip well-known files that are not meant to be spell checked, such as git's own files.
+   *
+   * Each preset is enabled with `true` and disabled with `false`. A preset that is not set keeps its default.
+   *
+   * Example: check git's own files again.
+   *
+   * ```json
+   * "ignorePathPresets": { "git": false }
+   * ```
+   *
+   * @since 10.5.0
+   */
+  ignorePathPresets?: IgnorePathPresets;
   /**
    * Prevents searching for local configuration when checking individual documents.
    *
@@ -1836,6 +1847,28 @@ interface FileSettings extends ExtendableSettings, CommandLineSettings {
    * @since 9.6.3
    */
   engines?: CompatibleEngineVersions;
+}
+/**
+ * Presets of files to skip. Each one is enabled or disabled on its own.
+ */
+interface IgnorePathPresets {
+  /**
+   * Skip git's own files inside the root folder:
+   * - a file named `.git`, which git puts in a worktree or a submodule
+   * - everything inside a `.git` folder, except git's message files
+   *
+   * Files outside the root folder are not skipped. For example, a submodule's commit message is in the parent
+   * repository's `.git` folder.
+   *
+   * Git's message files stay checked, so a `commit-msg` hook can spell check the commit message. They are the files
+   * whose names end in `MSG`, such as `COMMIT_EDITMSG`, `MERGE_MSG`, and `TAG_EDITMSG`, and `EDIT_DESCRIPTION`.
+   * They are kept in two places:
+   * - directly inside a `.git` folder
+   * - directly inside a linked worktree's folder in `.git/worktrees`
+   *
+   * @default true
+   */
+  git?: boolean;
 }
 /**
  * In the below JSDoc comment, we helpfully specify an example configuration for the end-user to
@@ -2489,4 +2522,4 @@ export declare function defineConfig(config: AdvancedCSpellSettings): CSpellSett
 export declare function mergeConfig(settings: CSpellSettings[]): CSpellSettings;
 export declare function mergeConfig(...settings: [CSpellSettings, ...CSpellSettings[]]): CSpellSettings;
 export declare function mergeConfig(...settings: [CSpellSettings[], ...CSpellSettings[]]): CSpellSettings;
-export type { AdvancedCSpellSettings, AdvancedCSpellSettingsWithSourceTrace, AvailableParsers, BaseSetting, CSpellPackageSettings, CSpellPlugin, CSpellPlugin as Plugin, CSpellReporter, CSpellReporterEmitters, CSpellReporterModule, CSpellSettings, CSpellSettingsWithSourceTrace, CSpellUserSettings, CSpellUserSettingsFields, CSpellUserSettingsWithComments, CSpellVFS, CSpellVFSBinaryData, CSpellVFSData, CSpellVFSFile, CSpellVFSFileEntry, CSpellVFSFileUrl, CSpellVFSTextData, CacheFormat, CacheSettings, CacheStrategy, CharacterSet, CharacterSetCosts, CommandLineSettings, CreateParser, CustomDictionaryPath, CustomDictionaryScope, DebugEmitter, DictionaryDefinition, DictionaryDefinitionAlternate, DictionaryDefinitionAugmented, DictionaryDefinitionBase, DictionaryDefinitionCustom, DictionaryDefinitionInline, DictionaryDefinitionInlineFlagWords, DictionaryDefinitionInlineIgnoreWords, DictionaryDefinitionInlineWords, DictionaryDefinitionLegacy, DictionaryDefinitionPreferred, DictionaryDefinitionSimple, DictionaryFileTypes, DictionaryId, DictionaryInformation, DictionaryNegRef, DictionaryPath, DictionaryRef, DictionaryReference, DocumentParser, EditCosts, ErrorEmitter, ErrorLike, ExperimentalBaseSettings, ExperimentalFileSettings, ExtendableSettings, FSPathResolvable, Feature, Features, FeaturesSupportedByReporter, FileSettings, FileSource, FsPath, Glob, GlobDef, ImportFileRef, InMemorySource, Issue, LanguageId, LanguageIdMultiple, LanguageIdMultipleNeg, LanguageIdSingle, LanguageSetting, LanguageSettingFilterFields, LanguageSettingFilterFieldsDeprecated, LanguageSettingFilterFieldsPreferred, LegacySettings, LocalId, LocaleId, MappedText, MatchingFileType, MergeSource, MessageEmitter, MessageType, MessageTypeLookup, OverrideFilterFields, OverrideSettings, ParseResult, ParsedTag, ParsedTags, ParsedText, Parser, ParserName, ParserOptions, Parsers, Pattern, PatternId, PatternRef, PnPSettings, PredefinedPatterns, ProgressBase, ProgressEmitter, ProgressFileBase, ProgressFileBegin, ProgressFileComplete, ProgressItem, ProgressTypes, Range, RegExpPatternDefinition, RegExpPatternList, ReplaceEntry, ReplaceMap, ReportIssueOptions, ReporterConfiguration, ReporterSettings, ReportingConfiguration, ResultEmitter, RunResult, Settings, SimpleGlob, SoftWordBreak, SoftWordBreakDefinitions, SoftWordBreakPattern, SoftWordBreakRegExp, SoftWordBreakRegExpString, SoftWordBreakRule, SoftWordBreaks, Source, SourceMap, SpellingErrorEmitter, SubstitutionDefinition, SubstitutionDefinitions, SubstitutionEntry, SubstitutionID, Substitutions, SuggestionCostMapDef, SuggestionCostsDefs, SuggestionsConfiguration, TagPattern, TextDocument, TextDocumentFragment, TextDocumentOffset, TextOffset, TrustLevel, UnknownWordsChoices, UnknownWordsConfiguration, ValidationTags, Version, VersionLatest, VersionLegacy, WordSegmentationSettings, WorkspaceTrustSettings };
+export type { AdvancedCSpellSettings, AdvancedCSpellSettingsWithSourceTrace, AvailableParsers, BaseSetting, CSpellPackageSettings, CSpellPlugin, CSpellPlugin as Plugin, CSpellReporter, CSpellReporterEmitters, CSpellReporterModule, CSpellSettings, CSpellSettingsWithSourceTrace, CSpellUserSettings, CSpellUserSettingsFields, CSpellUserSettingsWithComments, CSpellVFS, CSpellVFSBinaryData, CSpellVFSData, CSpellVFSFile, CSpellVFSFileEntry, CSpellVFSFileUrl, CSpellVFSTextData, CacheFormat, CacheSettings, CacheStrategy, CharacterSet, CharacterSetCosts, CommandLineSettings, CreateParser, CustomDictionaryPath, CustomDictionaryScope, DebugEmitter, DictionaryDefinition, DictionaryDefinitionAlternate, DictionaryDefinitionAugmented, DictionaryDefinitionBase, DictionaryDefinitionCustom, DictionaryDefinitionInline, DictionaryDefinitionInlineFlagWords, DictionaryDefinitionInlineIgnoreWords, DictionaryDefinitionInlineWords, DictionaryDefinitionLegacy, DictionaryDefinitionPreferred, DictionaryDefinitionSimple, DictionaryFileTypes, DictionaryId, DictionaryInformation, DictionaryNegRef, DictionaryPath, DictionaryRef, DictionaryReference, DocumentParser, EditCosts, ErrorEmitter, ErrorLike, ExperimentalBaseSettings, ExperimentalFileSettings, ExtendableSettings, FSPathResolvable, Feature, Features, FeaturesSupportedByReporter, FileSettings, FileSource, FsPath, Glob, GlobDef, IgnorePathPresets, ImportFileRef, InMemorySource, Issue, LanguageId, LanguageIdMultiple, LanguageIdMultipleNeg, LanguageIdSingle, LanguageSetting, LanguageSettingFilterFields, LanguageSettingFilterFieldsDeprecated, LanguageSettingFilterFieldsPreferred, LegacySettings, LocalId, LocaleId, MappedText, MatchingFileType, MergeSource, MessageEmitter, MessageType, MessageTypeLookup, OverrideFilterFields, OverrideSettings, ParseResult, ParsedTag, ParsedTags, ParsedText, Parser, ParserName, ParserOptions, Parsers, Pattern, PatternId, PatternRef, PnPSettings, PredefinedPatterns, ProgressBase, ProgressEmitter, ProgressFileBase, ProgressFileBegin, ProgressFileComplete, ProgressItem, ProgressTypes, Range, RegExpPatternDefinition, RegExpPatternList, ReplaceEntry, ReplaceMap, ReportIssueOptions, ReporterConfiguration, ReporterSettings, ReportingConfiguration, ResultEmitter, RunResult, Settings, SimpleGlob, SoftWordBreak, SoftWordBreakDefinitions, SoftWordBreakPattern, SoftWordBreakRegExp, SoftWordBreakRegExpString, SoftWordBreakRule, SoftWordBreaks, Source, SourceMap, SpellingErrorEmitter, SubstitutionDefinition, SubstitutionDefinitions, SubstitutionEntry, SubstitutionID, Substitutions, SuggestionCostMapDef, SuggestionCostsDefs, SuggestionsConfiguration, TagPattern, TextDocument, TextDocumentFragment, TextDocumentOffset, TextOffset, TrustLevel, UnknownWordsChoices, UnknownWordsConfiguration, ValidationTags, Version, VersionLatest, VersionLegacy, WordSegmentationSettings, WorkspaceTrustSettings };

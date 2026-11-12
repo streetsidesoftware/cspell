@@ -58,6 +58,7 @@ const handlers: CSpellSettingsHandlers = {
     flagWords: copy1,
     gitignoreRoot: copy1,
     globRoot: copy1,
+    ignorePathPresets: copy1,
     ignorePaths: copyGlobsSettingsFields,
     ignoreRegExpList: copy1,
     ignoreWords: copy1,
