@@ -1229,8 +1229,8 @@
       "properties": {
         "git": {
           "default": true,
-          "description": "Skip git's own files:\n- a file named `.git`, which git puts in a worktree or a submodule\n- everything inside a `.git` folder, except git's message files\n\nGit's message files stay checked, so a `commit-msg` hook can spell check the commit message. They are the files whose names end in `MSG`, such as `COMMIT_EDITMSG`, `MERGE_MSG`, and `TAG_EDITMSG`, and `EDIT_DESCRIPTION`:\n- directly inside a `.git` folder\n- directly inside a linked worktree's folder in `.git/worktrees`",
-          "markdownDescription": "Skip git's own files:\n- a file named `.git`, which git puts in a worktree or a submodule\n- everything inside a `.git` folder, except git's message files\n\nGit's message files stay checked, so a `commit-msg` hook can spell check the commit message. They are the files\nwhose names end in `MSG`, such as `COMMIT_EDITMSG`, `MERGE_MSG`, and `TAG_EDITMSG`, and `EDIT_DESCRIPTION`:\n- directly inside a `.git` folder\n- directly inside a linked worktree's folder in `.git/worktrees`",
+          "description": "Skip git's own files:\n- a file named `.git`, which git puts in a worktree or a submodule\n- everything inside a `.git` folder, except git's message files\n\nGit's message files stay checked, so a `commit-msg` hook can spell check the commit message. They are the files whose names end in `MSG`, such as `COMMIT_EDITMSG`, `MERGE_MSG`, and `TAG_EDITMSG`, and `EDIT_DESCRIPTION`. They are kept in two places:\n- directly inside a `.git` folder\n- directly inside a linked worktree's folder in `.git/worktrees`",
+          "markdownDescription": "Skip git's own files:\n- a file named `.git`, which git puts in a worktree or a submodule\n- everything inside a `.git` folder, except git's message files\n\nGit's message files stay checked, so a `commit-msg` hook can spell check the commit message. They are the files\nwhose names end in `MSG`, such as `COMMIT_EDITMSG`, `MERGE_MSG`, and `TAG_EDITMSG`, and `EDIT_DESCRIPTION`.\nThey are kept in two places:\n- directly inside a `.git` folder\n- directly inside a linked worktree's folder in `.git/worktrees`",
           "type": "boolean"
         }
       },
@@ -2322,8 +2322,8 @@
     },
     "ignorePathPresets": {
       "$ref": "#/definitions/IgnorePathPresets",
-      "description": "Skip well-known files that are not spell checked, such as git's own files.\n\nEach preset is enabled with `true` and disabled with `false`. A preset that is not set keeps its default.\n\nExample: check git's own files again.\n\n```json \"ignorePathPresets\": { \"git\": false } ```",
-      "markdownDescription": "Skip well-known files that are not spell checked, such as git's own files.\n\nEach preset is enabled with `true` and disabled with `false`. A preset that is not set keeps its default.\n\nExample: check git's own files again.\n\n```json\n\"ignorePathPresets\": { \"git\": false }\n```",
+      "description": "Skip well-known files that are not meant to be spell checked, such as git's own files.\n\nEach preset is enabled with `true` and disabled with `false`. A preset that is not set keeps its default.\n\nExample: check git's own files again.\n\n```json \"ignorePathPresets\": { \"git\": false } ```",
+      "markdownDescription": "Skip well-known files that are not meant to be spell checked, such as git's own files.\n\nEach preset is enabled with `true` and disabled with `false`. A preset that is not set keeps its default.\n\nExample: check git's own files again.\n\n```json\n\"ignorePathPresets\": { \"git\": false }\n```",
       "since": "10.5.0"
     },
     "ignorePaths": {
