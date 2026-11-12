@@ -307,7 +307,7 @@ jobs:
           message: ${{ steps.report.outputs.report }}
 
       - name: Create PR
-        if: github.ref_name == 'main'
+        if: github.repository_owner == 'streetsidesoftware' && github.ref_name == 'main'
         uses: peter-evans/create-pull-request@v8
         with:
           commit-message: 'chore: ${{ steps.pr-body.outputs.title }}'
