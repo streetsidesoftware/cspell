@@ -77,10 +77,8 @@ interface NormalizedGlobMatchOptions {
     /**
      * When `nested` is on, extend a glob to also match the files nested beneath a folder with that name.
      *
-     * - `true`: `src` matches a file or folder named `src` and the files beneath it. `src/**` also matches a file
-     *   named `src`.
-     * - `false`: a glob matches only the path it names. `src` matches only a file named `src`, and `src/**` matches
-     *   only the files beneath `src`. A glob ending in `/`, such as `src/`, still matches the files beneath the folder.
+     * - `true`: `src` matches a file or folder named `src` and the files beneath it.
+     * - `false`: a glob matches only the path it names. `src` matches only a file named `src`.
      *
      * It has no effect when `nested` is off.
      *
