@@ -133,6 +133,9 @@ matches a file named `examples.ts`, and also every file inside a folder named `e
 Turn on `overrideGlobsMatchFilesOnly` in `features` to make each glob match only the path it names. To apply an
 override to the files in a folder, end the glob with `/`.
 
+In a git worktree, `.git` is a file instead of a folder. With the option on, an override can turn off checking for
+that file and still check the files inside `.git` folders.
+
 **`cspell.config.yaml`**
 
 ```yaml
