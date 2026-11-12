@@ -39,11 +39,10 @@ export function isIgnoredByPresets(url: URL, root: URL, settings: Pick<CSpellSet
  * The `.git` file is not in the globs, because in a search a glob for it would also skip the `.git` folder.
  */
 function isGitFileInRoot(url: URL, root: URL): boolean {
-    if (url.protocol !== root.protocol || url.host !== root.host) return false;
-    const rootPath = root.pathname.endsWith('/') ? root.pathname : root.pathname + '/';
-    const pathname = url.pathname;
-    if (!pathname.startsWith(rootPath)) return false;
-    const relPath = pathname.slice(rootPath.length);
+    const rootHref = root.href.endsWith('/') ? root.href : root.href + '/';
+    const href = url.href;
+    if (!href.startsWith(rootHref)) return false;
+    const relPath = href.slice(rootHref.length);
     if (!relPath.includes('.git')) return false;
     const parts = relPath.split('/');
     if (parts[parts.length - 1] === '.git') return true;
