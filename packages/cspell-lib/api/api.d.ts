@@ -1,5 +1,5 @@
 import { FSCapabilityFlags, VFileSystem, VFileSystem as VFileSystem$1, VFileSystemProvider, VirtualFS, VirtualFS as VirtualFS$1, asyncIterableToArray, readFileText as readFile, readFileTextSync as readFileSync, writeToFile, writeToFileIterable, writeToFileIterableP } from "cspell-io";
-import { AdvancedCSpellSettingsWithSourceTrace, CSpellSettings, CSpellSettingsWithSourceTrace, CSpellUserSettings, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, DictionaryDefinitionInline, DictionaryDefinitionPreferred, DictionaryDefinitionSimple, DictionaryId, DictionaryReference, DocumentParser, Glob, ImportFileRef, Issue, LocaleId, MappedText, ParsedText, Parser, PnPSettings, Range, ReportingConfiguration, TextDocumentOffset, TextOffset } from "@cspell/cspell-types";
+import { AdvancedCSpellSettingsWithSourceTrace, CSpellSettings, CSpellSettingsWithSourceTrace, CSpellUserSettings, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, DictionaryDefinitionInline, DictionaryDefinitionPreferred, DictionaryDefinitionSimple, DictionaryId, DictionaryReference, DocumentParser, Glob, GlobDef, ImportFileRef, Issue, LocaleId, MappedText, ParsedText, Parser, PnPSettings, Range, ReportingConfiguration, TextDocumentOffset, TextOffset } from "@cspell/cspell-types";
 import { FileTypeId as LanguageId, findMatchingFileTypes as getLanguagesForBasename, getFileTypesForExt as getLanguagesForExt } from "@cspell/filetypes";
 import { CachingDictionary, SpellingDictionary, SpellingDictionaryCollection, SuggestOptions, SuggestionCollector, SuggestionResult, createCollection, createSpellingDictionary } from "cspell-dictionary";
 import { CompoundWordsMethod, WeightMap } from "cspell-trie-lib";
@@ -447,15 +447,14 @@ export declare function isSpellingDictionaryLoadError(e: Error): e is SpellingDi
  */
 export declare function getDictionary(settings: CSpellUserSettings): Promise<SpellingDictionaryCollection>;
 /**
- * Get the globs to ignore: `ignorePaths` plus the folders ignored by `ignorePathPresets`.
+ * Get the globs of the enabled `ignorePathPresets`, for a file search to skip.
  *
- * Use it to skip folders when searching for files to check. Deciding whether to check a file still needs the full
- * settings, because some presets ignore single files.
+ * The globs have no root.
  *
- * @param settings - the settings with `ignorePaths` and `ignorePathPresets`.
+ * @param settings - the settings with `ignorePathPresets`.
  * @returns the globs to ignore.
  */
-export declare function calcIgnorePaths(settings: Pick<CSpellSettings, "ignorePaths" | "ignorePathPresets">): Glob[];
+export declare function calcIgnorePaths(settings: Pick<CSpellSettings, "ignorePathPresets">): GlobDef[];
 interface PerfTimer {
   readonly name: string;
   readonly startTime: number;

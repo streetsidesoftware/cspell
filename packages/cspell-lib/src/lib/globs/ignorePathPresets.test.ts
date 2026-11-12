@@ -1,21 +1,13 @@
 import * as path from 'node:path';
 
-import { afterEach, beforeEach, describe, expect, test } from 'vitest';
+import { describe, expect, test } from 'vitest';
 
-import { ENV_CSPELL_GLOB_ROOT } from '../Settings/constants.js';
 import { calcIgnorePaths, findIgnorePathPreset } from './ignorePathPresets.js';
 
 const root = path.resolve('/repo');
+const gitGlob = { glob: '**/.git/!(EDIT_DESCRIPTION|*MSG)', source: 'ignorePathPresets.git' };
 
 describe('ignorePathPresets', () => {
-    beforeEach(() => {
-        process.env[ENV_CSPELL_GLOB_ROOT] = root;
-    });
-
-    afterEach(() => {
-        delete process.env[ENV_CSPELL_GLOB_ROOT];
-    });
-
     test.each`
         file                                  | presets           | expected
         ${'src/code.ts'}                      | ${undefined}      | ${undefined}
@@ -49,42 +41,14 @@ describe('ignorePathPresets', () => {
     });
 
     test.each`
-        file                       | runFrom                       | expected
-        ${'.git/config'}           | ${'.git'}                     | ${undefined}
-        ${'.git/objects/ab/cdef'}  | ${'.git'}                     | ${undefined}
-        ${'.git/objects/ab/cdef'}  | ${'.git/objects'}             | ${undefined}
-        ${'.git/config'}           | ${'src'}                      | ${undefined}
-        ${'node_modules/pkg/.git'} | ${'node_modules/pkg'}         | ${'git'}
-        ${'node_modules/pkg/a.md'} | ${'node_modules/pkg'}         | ${undefined}
-        ${'sub/.git/config'}       | ${'sub/.git'}                 | ${undefined}
-        ${'sub/.git/config'}       | ${'sub'}                      | ${'git'}
-        ${'.git/modules/sub/HEAD'} | ${'.git/modules/sub'}         | ${undefined}
-        ${'.git/modules/sub/HEAD'} | ${'.git/modules/sub/objects'} | ${undefined}
-    `('only the path below the root counts: $file from $runFrom', ({ file, runFrom, expected }) => {
-        process.env[ENV_CSPELL_GLOB_ROOT] = path.join(root, runFrom);
-        expect(findIgnorePathPreset(path.join(root, file), undefined)).toBe(expected);
-    });
-
-    test('the root defaults to the current working directory', () => {
-        delete process.env[ENV_CSPELL_GLOB_ROOT];
-        expect(findIgnorePathPreset(path.resolve('.git/config'), undefined)).toBe('git');
-        expect(findIgnorePathPreset(path.resolve('.git/COMMIT_EDITMSG'), undefined)).toBe(undefined);
-    });
-
-    test.each`
-        settings                                                         | expected
-        ${{}}                                                            | ${[gitGlob()]}
-        ${{ ignorePaths: ['dist/'] }}                                    | ${['dist/', gitGlob()]}
-        ${{ ignorePaths: ['dist/'], ignorePathPresets: {} }}             | ${['dist/', gitGlob()]}
-        ${{ ignorePaths: ['dist/'], ignorePathPresets: { git: false } }} | ${['dist/']}
-        ${{ ignorePathPresets: { git: false } }}                         | ${[]}
+        settings                                 | expected
+        ${{}}                                    | ${[gitGlob]}
+        ${{ ignorePathPresets: {} }}             | ${[gitGlob]}
+        ${{ ignorePathPresets: { git: true } }}  | ${[gitGlob]}
+        ${{ ignorePathPresets: { git: false } }} | ${[]}
     `('calcIgnorePaths $settings', ({ settings, expected }) => {
         expect(calcIgnorePaths(settings)).toEqual(expected);
     });
 });
-
-function gitGlob() {
-    return { glob: '/**/.git/!(EDIT_DESCRIPTION|*MSG)', root, source: 'ignorePathPresets.git' };
-}
 
 // cspell:ignore cdef EDITMSG PULLREQ

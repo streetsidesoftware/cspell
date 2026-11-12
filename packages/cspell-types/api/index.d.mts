@@ -1756,9 +1756,6 @@ interface FileSettings extends ExtendableSettings, CommandLineSettings {
    *
    * Each preset is turned on or off with `true` or `false`. A preset that is not set keeps its default.
    *
-   * Presets only apply below the folder cspell runs from, or below `--root`. A folder above it does not count, so
-   * running cspell inside a `.git` folder still checks the files there.
-   *
    * Example: check git's own files again.
    *
    * ```json

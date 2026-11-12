@@ -342,7 +342,11 @@ async function determineFilesToCheck(
 
         // Get Exclusions from the config files.
         const { root } = cfg;
-        const globsToExcludeRaw = [...calcIgnorePaths(configInfo.config), ...excludeGlobs];
+        const globsToExcludeRaw = [
+            ...(configInfo.config.ignorePaths || []),
+            ...calcIgnorePaths(configInfo.config),
+            ...excludeGlobs,
+        ];
         const globsToExclude = globsToExcludeRaw.filter((g) => !globPattern(g).startsWith('!'));
         if (globsToExclude.length !== globsToExcludeRaw.length) {
             const globs = globsToExcludeRaw.map((g) => globPattern(g)).filter((g) => g.startsWith('!'));
@@ -396,7 +400,11 @@ async function determineFilesToCheck(
 
         // Get Exclusions from the config files.
         const { root } = cfg;
-        const globsToExcludeRaw = [...calcIgnorePaths(configInfo.config), ...excludeGlobs];
+        const globsToExcludeRaw = [
+            ...(configInfo.config.ignorePaths || []),
+            ...calcIgnorePaths(configInfo.config),
+            ...excludeGlobs,
+        ];
         const globsToExclude = globsToExcludeRaw.filter((g) => !globPattern(g).startsWith('!'));
         if (globsToExclude.length !== globsToExcludeRaw.length) {
             const globs = globsToExcludeRaw.map((g) => globPattern(g)).filter((g) => g.startsWith('!'));

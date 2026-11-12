@@ -102,9 +102,9 @@ describe('lint with ignorePathPresets', () => {
         expect(r.checked).toEqual(['.git/config', 'wt/.git']);
     });
 
-    test('a run started inside a .git folder checks its files', async () => {
+    test('a run started inside a .git folder only checks the message files', async () => {
         const r = await lint(['**'], { dot: true }, 'cspell.json', '.git');
-        expect(r.checked).toEqual(sorted(allFiles.filter((f) => f.startsWith('.git/'))));
+        expect(r.checked).toEqual(messageFiles);
     });
 
     test('a run started inside a node_modules folder checks its files', async () => {
