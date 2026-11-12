@@ -69,5 +69,5 @@ Use the `trace` command to see a list of dictionaries: See [Searching Dictionari
 
 <span id="disable-default-cpp-dictionary" />
 
-See [Enable and disable dictionaries](./turning-dictionaries-on-and-off.md) to disable a dictionary globally or for
+See [Enable and disable dictionaries](./enabling-dictionaries.md) to disable a dictionary globally or for
 matching files.
