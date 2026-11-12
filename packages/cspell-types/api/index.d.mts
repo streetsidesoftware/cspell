@@ -1853,9 +1853,12 @@ interface FileSettings extends ExtendableSettings, CommandLineSettings {
  */
 interface IgnorePathPresets {
   /**
-   * Skip git's own files:
+   * Skip git's own files inside the root folder:
    * - a file named `.git`, which git puts in a worktree or a submodule
    * - everything inside a `.git` folder, except git's message files
+   *
+   * Files outside the root folder are not skipped. For example, a submodule's commit message is in the parent
+   * repository's `.git` folder.
    *
    * Git's message files stay checked, so a `commit-msg` hook can spell check the commit message. They are the files
    * whose names end in `MSG`, such as `COMMIT_EDITMSG`, `MERGE_MSG`, and `TAG_EDITMSG`, and `EDIT_DESCRIPTION`.

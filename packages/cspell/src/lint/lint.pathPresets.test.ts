@@ -24,9 +24,11 @@ const messageFiles = [
 const gitFiles = [
     '.git/config',
     '.git/HEAD',
+    '.git/modules/sub/COMMIT_EDITMSG',
     '.git/objects/ab/cdef0123',
     '.git/worktrees/wt/HEAD',
     'nested/.git/HEAD',
+    'sub/.git',
     'wt/.git',
 ];
 
@@ -112,9 +114,18 @@ describe('lint with ignorePathPresets', () => {
         expect(r.checked).toEqual(['.git/config', 'wt/.git']);
     });
 
-    test('a run started inside a .git folder only checks the message files', async () => {
+    test('a run started inside a .git folder checks its files', async () => {
         const r = await lint(['**'], { dot: true }, 'cspell.json', '.git');
-        expect(r.checked).toEqual(messageFiles);
+        expect(r.checked).toEqual(sorted(allFiles.filter((f) => f.startsWith('.git/'))));
+    });
+
+    test.each`
+        runFrom  | file
+        ${'sub'} | ${'.git/modules/sub/COMMIT_EDITMSG'}
+        ${'wt'}  | ${'.git/worktrees/wt/COMMIT_EDITMSG'}
+    `('a message file outside the root is checked: $file from $runFrom', async ({ runFrom, file }) => {
+        const r = await lint([], { file: [path.join(repo, file)] }, 'cspell.json', runFrom);
+        expect(r.checked).toEqual([file]);
     });
 
     test('a run started inside a node_modules folder checks its files', async () => {

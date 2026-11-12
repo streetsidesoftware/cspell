@@ -1,6 +1,7 @@
 import { isAsyncIterable } from '@cspell/cspell-pipe';
 import { opMap, pipe } from '@cspell/cspell-pipe/sync';
 import type { CSpellSettings, CSpellSettingsWithSourceTrace, RunResult } from '@cspell/cspell-types';
+import { toFileDirURL } from '@cspell/url';
 import type { ChalkInstance } from 'chalk';
 import { isIgnoredByPresets, shouldCheckDocument } from 'cspell-lib';
 
@@ -35,6 +36,7 @@ const BATCH_PROCESS_SIZE = 1;
 
 interface PrefetchConfig {
     readonly root: LintRequest['root'];
+    readonly rootUrl: URL;
     readonly maxFileSize: LintRequest['maxFileSize'];
     readonly forceCheck: boolean;
     readonly symlinks: SymlinkChecker;
@@ -55,7 +57,7 @@ function prefetch(fileToProcess: FileToProcess, cfg: PrefetchConfig): PrefetchFi
         };
     }
     const url = filenameToUri(filename, cfg.root);
-    if (isIgnoredByPresets(url, cfg.config)) {
+    if (isIgnoredByPresets(url, cfg.rootUrl, cfg.config)) {
         return {
             ...fileToProcess,
             result: Promise.resolve({ skip: true, skipReason: 'Excluded by ignorePathPresets.' }),
@@ -132,6 +134,7 @@ export async function processFiles(
     const reporter: LintFileReporter = options.lintReporter;
     const prefetchConfig: PrefetchConfig = {
         root: options.cfg.root,
+        rootUrl: toFileDirURL(options.cfg.root),
         maxFileSize: options.cfg.maxFileSize,
         forceCheck: !!options.cfg.options.forceCheck,
         symlinks: options.symlinks ?? createSymlinkChecker(options.cfg.root),

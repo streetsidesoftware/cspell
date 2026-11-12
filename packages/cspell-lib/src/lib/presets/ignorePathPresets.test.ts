@@ -6,9 +6,10 @@ import { describe, expect, test } from 'vitest';
 import { calcIgnorePathGlobs, isIgnoredByPresets } from './ignorePathPresets.js';
 
 const root = path.resolve('/repo');
+const rootUrl = toDirUrl(root);
 const gitGlobs = [
-    { glob: '**/.git/!(*MSG|EDIT_DESCRIPTION|worktrees)', source: 'ignorePathPresets.git' },
-    { glob: '**/.git/worktrees/*/!(*MSG|EDIT_DESCRIPTION)', source: 'ignorePathPresets.git' },
+    { glob: '/**/.git/!(*MSG|EDIT_DESCRIPTION|worktrees)', source: 'ignorePathPresets.git' },
+    { glob: '/**/.git/worktrees/*/!(*MSG|EDIT_DESCRIPTION)', source: 'ignorePathPresets.git' },
 ];
 
 describe('ignorePathPresets', () => {
@@ -45,18 +46,25 @@ describe('ignorePathPresets', () => {
         ${'wt/.git'}                          | ${{ git: false }} | ${false}
         ${'.git/config'}                      | ${{ git: false }} | ${false}
     `('isIgnoredByPresets $file $presets', ({ file, presets, expected }) => {
-        expect(isIgnoredByPresets(pathToFileURL(path.join(root, file)), { ignorePathPresets: presets })).toBe(expected);
+        expect(isIgnoredByPresets(toUrl(root, file), rootUrl, { ignorePathPresets: presets })).toBe(expected);
     });
 
     test.each`
-        url                                      | expected
-        ${'file:///C:/repo/.git/config'}         | ${true}
-        ${'file:///C:/repo/.git/COMMIT_EDITMSG'} | ${false}
-        ${'file:///C:/repo/wt/.git'}             | ${true}
-        ${'stdin:///.git/config'}                | ${true}
-        ${'stdin:///src/code.ts'}                | ${false}
-    `('isIgnoredByPresets $url', ({ url, expected }) => {
-        expect(isIgnoredByPresets(new URL(url), {})).toBe(expected);
+        fileRoot         | file                                       | expected
+        ${'super/sub'}   | ${'super/.git/modules/sub/COMMIT_EDITMSG'} | ${false}
+        ${'super/sub'}   | ${'super/.git/modules/sub/config'}         | ${false}
+        ${'super/sub'}   | ${'super/.git'}                            | ${false}
+        ${'super/sub'}   | ${'super/sub/.git'}                        | ${true}
+        ${'super/sub'}   | ${'super/sub/.git/config'}                 | ${true}
+        ${'main/wt'}     | ${'main/.git/worktrees/wt/COMMIT_EDITMSG'} | ${false}
+        ${'main/.git'}   | ${'main/.git/config'}                      | ${false}
+        ${'main/.git'}   | ${'main/.git/hooks/commit-msg'}            | ${false}
+        ${'main/.git'}   | ${'main/.git/modules/a/config'}            | ${false}
+        ${'main/.git'}   | ${'main/.git/x/.git'}                      | ${true}
+        ${'main/.git/x'} | ${'main/.git/x/.git/config'}               | ${true}
+    `('isIgnoredByPresets $file with root $fileRoot', ({ fileRoot, file, expected }) => {
+        const r = path.join(root, fileRoot);
+        expect(isIgnoredByPresets(toUrl(root, file), toDirUrl(r), {})).toBe(expected);
     });
 
     test.each`
@@ -69,5 +77,13 @@ describe('ignorePathPresets', () => {
         expect(calcIgnorePathGlobs(settings)).toEqual(expected);
     });
 });
+
+function toUrl(dir: string, file: string): URL {
+    return pathToFileURL(path.join(dir, file));
+}
+
+function toDirUrl(dir: string): URL {
+    return pathToFileURL(dir + path.sep);
+}
 
 // cspell:ignore cdef EDITMSG PULLREQ
