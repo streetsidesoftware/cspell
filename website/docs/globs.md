@@ -15,7 +15,7 @@ different files depending on where it is used.
 
 | Where                                 | Matching   | Used to                                 |
 | ------------------------------------- | ---------- | --------------------------------------- |
-| `files` and globs on the command line | **strict** | Search for the files to check.          |
+| Globs on the command line and `files` | **strict** | Search for the files to check.          |
 | `ignorePaths` and `--exclude`         | **loose**  | Skip files.                             |
 | `overrides[].filename`                | **loose**  | Apply settings to the files that match. |
 
@@ -57,13 +57,13 @@ a/test/b.md
 
 A glob is relative to a folder, its root.
 
+- Globs on the command line and `--exclude` globs are relative to the current working folder, or to the folder given
+  with `--root`.
 - A glob in a configuration file is relative to that file's `globRoot`. By default, `globRoot` is the folder that
   holds the configuration file, with these exceptions:
   - For a configuration file inside a `.vscode` or `.config` folder, it is the folder above that one.
   - For a `.vscode/cspell.json` without a `version` field, or a configuration with `"version": "0.1"`, it is
     [`${cwd}`](#cwd).
-- Globs on the command line and `--exclude` globs are relative to the current working folder, or to the folder given
-  with `--root`.
 - A glob that starts with `/` is tied to the root. In `ignorePaths`, `/test` matches `test/a.md` but not
   `a/test/b.md`.
 - A glob that starts with `**/` is tested against the file's full path, so folders above the root count. See
@@ -95,31 +95,32 @@ For each file it checks, CSpell also loads the configuration file nearest that f
 `overrides` apply to that file, relative to that configuration file's own `globRoot`. A `sub/cspell.json` with
 `"ignorePaths": ["/drafts"]` skips the files in `sub/drafts`.
 
-## Strict Matching: `files` and the Command Line
+## Strict Matching: the Command Line and `files`
 
-`files` in the configuration and globs on the command line select the files to check. Globs on the command line
-replace `files`.
+The globs on the command line select the files to check: `cspell "**/*.md"`. When there are none, CSpell uses `files`
+from the configuration. A glob in `files` matches the same files as on the command line, except where noted.
 
-- `*.md` matches only the Markdown files in the root, here `README.md`.
-- `**/*.md` matches Markdown files at any depth, except names that start with `.` and files inside folders that start
-  with `.`.
-- The name of an existing folder, such as `docs` or `docs/api`, matches all files in that folder.
-- `.` matches all files: `cspell .`.
-- A glob ending in `/**` also matches a file with that name. `**/.git/**` matches the file `sub/.git`.
+- `cspell "*.md"` checks only the Markdown files in the root, here `README.md`.
+- `cspell "**/*.md"` checks Markdown files at any depth, except names that start with `.` and files inside folders
+  that start with `.`.
+- `cspell docs` checks all files in the `docs` folder. This works for any existing folder, such as `docs/api`.
+- `cspell .` checks all files.
+- A glob ending in `/**` also matches a file with that name. `cspell "**/.git/**"` checks the file `sub/.git`.
 - On the command line, a glob that starts with `/` is an absolute path. In `files`, a leading `/` ties the glob to
   the root.
-- A glob that starts with `!` skips the files it matches, using [loose matching](#what-loose-matching-adds). In
-  `files`, `["**", "!test"]` skips both `test/a.md` and `a/test/b.md`.
+- A glob that starts with `!` skips the files it matches, using [loose matching](#what-loose-matching-adds).
+  `cspell "**/*.md" "!test"` skips both `test/a.md` and `a/test/b.md`. So does `["**/*.md", "!test"]` in `files`.
 
 ### Dot Files and Folders
 
 By default, `*` and `**` do not match names that start with `.`, such as `.github` or `.hidden.md`.
 
 - Use `--dot` on the command line, or `"enableGlobDot": true` in the configuration, to include them.
-- A glob that names the dot explicitly matches without `--dot`: `**/.*` matches `.hidden.md`, `docs/.x.md`, and
-  `sub/.git`.
+- A glob that names the dot explicitly matches without `--dot`: `cspell "**/.*"` checks `.hidden.md`, `docs/.x.md`,
+  and `sub/.git`.
 - Without `--dot`, the search does not enter folders that start with `.`. A glob that starts with the folder's name
-  still works: `.git/**` finds the files in `.git`, but `**/.git/**` finds only the file `sub/.git`.
+  still works: `cspell ".git/**"` checks the files in `.git`, but `cspell "**/.git/**"` checks only the file
+  `sub/.git`.
 
 `--dot` and `enableGlobDot` only change strict matching. Loose matching always matches dot files.
 
@@ -159,7 +160,7 @@ Globs given with `--exclude` use loose matching, with these differences from `ig
 The files each glob matches in [the example folder](#the-example-folder), without `--dot`. The `ignorePaths` column
 also applies to `overrides[].filename`.
 
-| Glob                 | `files` and command line                                                         | `ignorePaths` and overrides                      | `--exclude`                |
+| Glob                 | Command line and `files`                                                         | `ignorePaths` and overrides                      | `--exclude`                |
 | -------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------ | -------------------------- |
 | `*.md`               | `README.md`                                                                      | All `.md` files                                  | Same as `ignorePaths`      |
 | `**/*.md`            | All `.md` files except `.hidden.md` and `docs/.x.md`                             | All `.md` files                                  | Same as `ignorePaths`      |
@@ -167,7 +168,7 @@ also applies to `overrides[].filename`.
 | `test`               | `test/a.md`                                                                      | `test/a.md`, `a/test/b.md`                       | Same as `ignorePaths`      |
 | `/test`              | Nothing                                                                          | `test/a.md`                                      | `test/a.md`, `a/test/b.md` |
 | `test/`              | `test/a.md`                                                                      | `test/a.md`, `a/test/b.md`                       | Same as `ignorePaths`      |
-| `/test/`             | `test/a.md` (in `files`)                                                         | `test/a.md`                                      | Same as `ignorePaths`      |
+| `/test/`             | Nothing on the command line, `test/a.md` in `files`                              | `test/a.md`                                      | Same as `ignorePaths`      |
 | `test/**`            | `test/a.md`                                                                      | `test/a.md`                                      | Same as `ignorePaths`      |
 | `**/test/**`         | `test/a.md`, `a/test/b.md`                                                       | `test/a.md`, `a/test/b.md`                       | Same as `ignorePaths`      |
 | `node_modules`       | `node_modules/x/a.md`                                                            | `node_modules/x/a.md`, `sub/node_modules/y/b.md` | Same as `ignorePaths`      |
@@ -186,8 +187,8 @@ also applies to `overrides[].filename`.
 
 A glob that starts with `!` behaves differently in each setting.
 
-- In `files` and on the command line, it skips the files it matches. See
-  [Strict Matching](#strict-matching-files-and-the-command-line).
+- On the command line and in `files`, it skips the files it matches: `cspell "**/*.md" "!test"`. See
+  [Strict Matching](#strict-matching-the-command-line-and-files).
 - In `ignorePaths` and `--exclude`, it is not used. CSpell warns, for example
   `Negative glob exclusions are not supported: !.git/COMMIT_EDITMSG`, and applies the other globs.
 - In `overrides[].filename`, it removes files from the match. When several globs match a file, the last one wins:
@@ -285,7 +286,7 @@ Ignore everything in `.git` except the commit message:
 
 In a git worktree or a submodule, `.git` is a file instead of a folder.
 
-- In `files` and on the command line, `**/.git` matches only files named `.git`.
+- On the command line and in `files`, `**/.git` matches only files named `.git`.
 - In `ignorePaths` and overrides, `.git` and `**/.git` match files named `.git` and everything inside `.git`
   folders. `.git/` matches only what is inside `.git` folders.
 - In an override, a negative glob limits the match to files named `.git`:
