@@ -151,7 +151,4 @@ overrides:
 | ------------- | --------------------------------------------------------------------- | ------------------------------- |
 | `examples.ts` | A file named `examples.ts`, and the files in a folder with that name. | A file named `examples.ts`.     |
 | `/src`        | A file named `src` at the root, and the files in the `src` folder.    | A file named `src` at the root. |
-| `/src/`       | The files in the `src` folder.                                        | The files in the `src` folder.  |
 | `src/**`      | The files in the `src` folder, and a file named `src`.                | The files in the `src` folder.  |
-
-Only `overrides` are affected. `ignorePaths`, `files`, and `--exclude` match as before.

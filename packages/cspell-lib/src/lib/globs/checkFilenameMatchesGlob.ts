@@ -14,7 +14,6 @@ export function checkFilenameMatchesExcludeGlob(filename: string, globs: Glob | 
 
 /**
  * Like {@link checkFilenameMatchesExcludeGlob}, but a glob only matches the path it names.
- * A glob ending in `/` still matches the files inside the folder.
  * @param filename - filename
  * @param globs - globs
  * @returns true if it matches

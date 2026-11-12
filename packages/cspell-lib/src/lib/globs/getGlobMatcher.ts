@@ -22,7 +22,6 @@ export function getGlobMatcherForExcluding(glob: Glob | Glob[] | undefined): Glo
 
 /**
  * Like {@link getGlobMatcherForExcluding}, but a glob only matches the path it names.
- * A glob ending in `/` still matches the files inside the folder.
  */
 export function getGlobMatcherForExcludingFilesOnly(glob: Glob | Glob[] | undefined): GlobMatcher {
     return filesOnlyCache.get(glob);

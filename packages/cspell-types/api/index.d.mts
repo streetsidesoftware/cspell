@@ -1199,10 +1199,7 @@ interface FeaturesActive {
    *
    * When on:
    * - `examples.ts` and `/src` match only a file with that name.
-   * - `src/**` matches only the files inside the `src` folder.
    * - To apply an override to the files in a folder, end the glob with `/`, for example `src/` or `/src/`.
-   *
-   * Only `overrides` are affected. `ignorePaths` and `files` match as before.
    *
    * @since 10.5.0
    * @default false
