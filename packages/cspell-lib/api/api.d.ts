@@ -446,6 +446,15 @@ export declare function isSpellingDictionaryLoadError(e: Error): e is SpellingDi
  * @returns a dictionary collection that represents all the enabled dictionaries.
  */
 export declare function getDictionary(settings: CSpellUserSettings): Promise<SpellingDictionaryCollection>;
+interface PerfTimer {
+  readonly name: string;
+  readonly startTime: number;
+  readonly elapsed: number;
+  start(): void;
+  end(): void;
+}
+type TimeNowFn = () => number;
+export declare function createPerfTimer(name: string, onEnd?: (elapsed: number, name: string) => void, timeNowFn?: TimeNowFn): PerfTimer;
 /**
  * Get the globs of the enabled `ignorePathPresets`, for a file search to skip.
  *
@@ -463,15 +472,6 @@ export declare function calcIgnorePathGlobs(settings: Pick<CSpellSettings, "igno
  * @returns `true` if the file is ignored.
  */
 export declare function isIgnoredByPresets(url: URL, settings: Pick<CSpellSettings, "ignorePathPresets">): boolean;
-interface PerfTimer {
-  readonly name: string;
-  readonly startTime: number;
-  readonly elapsed: number;
-  start(): void;
-  end(): void;
-}
-type TimeNowFn = () => number;
-export declare function createPerfTimer(name: string, onEnd?: (elapsed: number, name: string) => void, timeNowFn?: TimeNowFn): PerfTimer;
 interface ListGlobalImportsResult {
   filename: string;
   name: string | undefined;

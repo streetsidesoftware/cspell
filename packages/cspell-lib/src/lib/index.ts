@@ -13,7 +13,6 @@ export type { VFileSystemProvider, VirtualFS } from './fileSystem.js';
 export { FSCapabilityFlags, getVirtualFS } from './fileSystem.js';
 export { getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt } from './fileTypes.js';
 export { getDictionary } from './getDictionary.js';
-export { calcIgnorePathGlobs, isIgnoredByPresets } from './globs/ignorePathPresets.js';
 export type {
     CreateTextDocumentParams,
     TextDocument,
@@ -23,6 +22,7 @@ export type {
 export { createTextDocument, updateTextDocument } from './Models/TextDocument.js';
 export type { PerfTimer } from './perf/index.js';
 export { createPerfTimer } from './perf/index.js';
+export { calcIgnorePathGlobs, isIgnoredByPresets } from './presets/index.js';
 export type {
     ConfigurationDependencies,
     CSpellConfigFile,
