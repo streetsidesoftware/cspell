@@ -13,7 +13,7 @@ export type { VFileSystemProvider, VirtualFS } from './fileSystem.js';
 export { FSCapabilityFlags, getVirtualFS } from './fileSystem.js';
 export { getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt } from './fileTypes.js';
 export { getDictionary } from './getDictionary.js';
-export { calcIgnorePaths } from './globs/ignorePathPresets.js';
+export { calcIgnorePaths, isIgnoredByPathPresets } from './globs/ignorePathPresets.js';
 export type {
     CreateTextDocumentParams,
     TextDocument,

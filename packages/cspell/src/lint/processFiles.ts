@@ -1,8 +1,10 @@
+import * as path from 'node:path';
+
 import { isAsyncIterable } from '@cspell/cspell-pipe';
 import { opMap, pipe } from '@cspell/cspell-pipe/sync';
 import type { CSpellSettings, CSpellSettingsWithSourceTrace, RunResult } from '@cspell/cspell-types';
 import type { ChalkInstance } from 'chalk';
-import { shouldCheckDocument } from 'cspell-lib';
+import { isIgnoredByPathPresets, shouldCheckDocument } from 'cspell-lib';
 
 import type { LintFileReporter, LintFileResult } from '../reporters/LintFileResult.js';
 import type { LintReporter } from '../reporters/reporters.js';
@@ -52,6 +54,12 @@ function prefetch(fileToProcess: FileToProcess, cfg: PrefetchConfig): PrefetchFi
         return {
             ...fileToProcess,
             result: Promise.resolve({ skip: true, skipReason: 'Binary file.' }),
+        };
+    }
+    if (isIgnoredByPathPresets(path.resolve(cfg.root, filename), cfg.config)) {
+        return {
+            ...fileToProcess,
+            result: Promise.resolve({ skip: true, skipReason: 'Excluded by ignorePathPresets.' }),
         };
     }
     const reportIssueOptions = extractReporterIssueOptions(cfg.config);

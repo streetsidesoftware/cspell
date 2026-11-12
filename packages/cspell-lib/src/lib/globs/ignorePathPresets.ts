@@ -1,6 +1,6 @@
 import * as path from 'node:path';
 
-import type { CSpellSettings, GlobDef, IgnorePathPresets } from '@cspell/cspell-types';
+import type { CSpellSettings, GlobDef } from '@cspell/cspell-types';
 
 // Keeps git's message files, such as `COMMIT_EDITMSG`, for the `commit-msg` hook.
 const gitIgnorePaths: GlobDef[] = [{ glob: '**/.git/!(EDIT_DESCRIPTION|*MSG)', source: 'ignorePathPresets.git' }];
@@ -18,17 +18,14 @@ export function calcIgnorePaths(settings: Pick<CSpellSettings, 'ignorePathPreset
 }
 
 /**
- * Find the preset that ignores a file.
+ * Check if the enabled `ignorePathPresets` ignore a file.
  *
  * @param filePath - absolute path of the file.
- * @param settings - the `ignorePathPresets` setting.
- * @returns the name of the preset that ignores the file, or `undefined`.
+ * @param settings - the settings with `ignorePathPresets`.
+ * @returns `true` if the file is ignored.
  */
-export function findIgnorePathPreset(
-    filePath: string,
-    settings: IgnorePathPresets | undefined,
-): keyof IgnorePathPresets | undefined {
-    return settings?.git !== false && isGitFile(filePath) ? 'git' : undefined;
+export function isIgnoredByPathPresets(filePath: string, settings: Pick<CSpellSettings, 'ignorePathPresets'>): boolean {
+    return settings.ignorePathPresets?.git !== false && isGitFile(filePath);
 }
 
 /**

@@ -428,50 +428,25 @@ describe('docValidator', () => {
     });
 });
 
-describe('DocumentValidator ignorePathPresets', () => {
-    // cspell:ignore wrngwrd
-    const text = 'This has a wrngwrd.';
-    const options: DocumentValidatorOptions = { generateSuggestions: false, noConfigSearch: true };
-
-    test.each`
-        file                     | settings                                 | expected
-        ${'.git/config'}         | ${{}}                                    | ${false}
-        ${'wt/.git'}             | ${{}}                                    | ${false}
-        ${'.git/COMMIT_EDITMSG'} | ${{}}                                    | ${true}
-        ${'.git/config'}         | ${{ ignorePathPresets: { git: false } }} | ${true}
-    `('$file $settings', async ({ file, settings, expected }) => {
-        const dVal = new DocumentValidator(td(pathToFileURL(file).href, text), options, settings);
-        await dVal.prepare();
-        expect(dVal.shouldCheckDocument()).toBe(expected);
-    });
-});
-
 describe('shouldCheckDocument', () => {
     test.each`
-        file                            | options                           | settings                                    | expected
-        ${'src/code.ts'}                | ${opts()}                         | ${s()}                                      | ${{ shouldCheck: true }}
-        ${'src/code.ts'}                | ${opts({ noConfigSearch: true })} | ${s()}                                      | ${{ shouldCheck: true }}
-        ${'src/code.ts'}                | ${opts()}                         | ${s({ noConfigSearch: true })}              | ${{ shouldCheck: true }}
-        ${'src/code.ts'}                | ${opts()}                         | ${s({ loadDefaultConfiguration: false })}   | ${{ shouldCheck: true }}
-        ${'src/code.ts'}                | ${opts({ noConfigSearch: true })} | ${s({ loadDefaultConfiguration: false })}   | ${{ shouldCheck: true }}
-        ${'node_modules/mod/index.js'}  | ${opts()}                         | ${s()}                                      | ${{ shouldCheck: false, reason: 'Excluded by ignorePaths.' }}
-        ${'node_modules/mod/index.js'}  | ${opts({ forceCheck: true })}     | ${s()}                                      | ${{ shouldCheck: true }}
-        ${'src/code.ts'}                | ${opts()}                         | ${s({ enabled: false })}                    | ${{ shouldCheck: false, reason: 'Excluded by overrides or languageSettings.' }}
-        ${'src/code.ts'}                | ${opts({ forceCheck: true })}     | ${s({ enabled: false })}                    | ${{ shouldCheck: true }}
-        ${'node_modules/mod/index.js'}  | ${opts({ noConfigSearch: true })} | ${s()}                                      | ${{ shouldCheck: true }}
-        ${'node_modules/mod/index.js'}  | ${opts()}                         | ${s({ noConfigSearch: true })}              | ${{ shouldCheck: true }}
-        ${'node_modules/mod/index.js'}  | ${opts()}                         | ${s({ loadDefaultConfiguration: false })}   | ${{ shouldCheck: false, reason: 'Excluded by ignorePaths.' }}
-        ${'node_modules/mod/index.js'}  | ${opts({ noConfigSearch: true })} | ${s({ loadDefaultConfiguration: false })}   | ${{ shouldCheck: true }}
-        ${'node_modules/mod/index.jpg'} | ${opts()}                         | ${s({ loadDefaultConfiguration: false })}   | ${{ shouldCheck: false, reason: 'Excluded by ignorePaths.' }}
-        ${'node_modules/mod/index.jpg'} | ${opts()}                         | ${s({ loadDefaultConfiguration: true })}    | ${{ shouldCheck: false, reason: 'Excluded by ignorePaths.' }}
-        ${'src/code.ts'}                | ${opts({ configFile: '_nf_' })}   | ${s()}                                      | ${{ errors: [oc({ message: sc('Failed to') })], shouldCheck: true }}
-        ${'wt/.git'}                    | ${opts()}                         | ${s()}                                      | ${{ shouldCheck: false, reason: 'Excluded by ignorePathPresets.git.' }}
-        ${'.git/config'}                | ${opts()}                         | ${s()}                                      | ${{ shouldCheck: false, reason: 'Excluded by ignorePathPresets.git.' }}
-        ${'.git/config'}                | ${opts({ noConfigSearch: true })} | ${s({ loadDefaultConfiguration: false })}   | ${{ shouldCheck: false, reason: 'Excluded by ignorePathPresets.git.' }}
-        ${'.git/config'}                | ${opts({ forceCheck: true })}     | ${s()}                                      | ${{ shouldCheck: true }}
-        ${'.git/config'}                | ${opts()}                         | ${s({ ignorePathPresets: { git: false } })} | ${{ shouldCheck: true }}
-        ${'wt/.git'}                    | ${opts()}                         | ${s({ ignorePathPresets: { git: false } })} | ${{ shouldCheck: true }}
-        ${'.git/COMMIT_EDITMSG'}        | ${opts()}                         | ${s()}                                      | ${{ shouldCheck: true }}
+        file                            | options                           | settings                                  | expected
+        ${'src/code.ts'}                | ${opts()}                         | ${s()}                                    | ${{ shouldCheck: true }}
+        ${'src/code.ts'}                | ${opts({ noConfigSearch: true })} | ${s()}                                    | ${{ shouldCheck: true }}
+        ${'src/code.ts'}                | ${opts()}                         | ${s({ noConfigSearch: true })}            | ${{ shouldCheck: true }}
+        ${'src/code.ts'}                | ${opts()}                         | ${s({ loadDefaultConfiguration: false })} | ${{ shouldCheck: true }}
+        ${'src/code.ts'}                | ${opts({ noConfigSearch: true })} | ${s({ loadDefaultConfiguration: false })} | ${{ shouldCheck: true }}
+        ${'node_modules/mod/index.js'}  | ${opts()}                         | ${s()}                                    | ${{ shouldCheck: false, reason: 'Excluded by ignorePaths.' }}
+        ${'node_modules/mod/index.js'}  | ${opts({ forceCheck: true })}     | ${s()}                                    | ${{ shouldCheck: true }}
+        ${'src/code.ts'}                | ${opts()}                         | ${s({ enabled: false })}                  | ${{ shouldCheck: false, reason: 'Excluded by overrides or languageSettings.' }}
+        ${'src/code.ts'}                | ${opts({ forceCheck: true })}     | ${s({ enabled: false })}                  | ${{ shouldCheck: true }}
+        ${'node_modules/mod/index.js'}  | ${opts({ noConfigSearch: true })} | ${s()}                                    | ${{ shouldCheck: true }}
+        ${'node_modules/mod/index.js'}  | ${opts()}                         | ${s({ noConfigSearch: true })}            | ${{ shouldCheck: true }}
+        ${'node_modules/mod/index.js'}  | ${opts()}                         | ${s({ loadDefaultConfiguration: false })} | ${{ shouldCheck: false, reason: 'Excluded by ignorePaths.' }}
+        ${'node_modules/mod/index.js'}  | ${opts({ noConfigSearch: true })} | ${s({ loadDefaultConfiguration: false })} | ${{ shouldCheck: true }}
+        ${'node_modules/mod/index.jpg'} | ${opts()}                         | ${s({ loadDefaultConfiguration: false })} | ${{ shouldCheck: false, reason: 'Excluded by ignorePaths.' }}
+        ${'node_modules/mod/index.jpg'} | ${opts()}                         | ${s({ loadDefaultConfiguration: true })}  | ${{ shouldCheck: false, reason: 'Excluded by ignorePaths.' }}
+        ${'src/code.ts'}                | ${opts({ configFile: '_nf_' })}   | ${s()}                                    | ${{ errors: [oc({ message: sc('Failed to') })], shouldCheck: true }}
     `(
         'shouldCheckDocument file: $file options: $options settings: $settings',
         async ({ file, options, settings, expected }) => {

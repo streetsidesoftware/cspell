@@ -2,7 +2,7 @@ import * as path from 'node:path';
 
 import { describe, expect, test } from 'vitest';
 
-import { calcIgnorePaths, findIgnorePathPreset } from './ignorePathPresets.js';
+import { calcIgnorePaths, isIgnoredByPathPresets } from './ignorePathPresets.js';
 
 const root = path.resolve('/repo');
 const gitGlob = { glob: '**/.git/!(EDIT_DESCRIPTION|*MSG)', source: 'ignorePathPresets.git' };
@@ -10,34 +10,34 @@ const gitGlob = { glob: '**/.git/!(EDIT_DESCRIPTION|*MSG)', source: 'ignorePathP
 describe('ignorePathPresets', () => {
     test.each`
         file                                  | presets           | expected
-        ${'src/code.ts'}                      | ${undefined}      | ${undefined}
-        ${'wt/.git'}                          | ${undefined}      | ${'git'}
-        ${'.git'}                             | ${undefined}      | ${'git'}
-        ${'.git/config'}                      | ${undefined}      | ${'git'}
-        ${'.git/HEAD'}                        | ${undefined}      | ${'git'}
-        ${'.git/objects/ab/cdef0123'}         | ${undefined}      | ${'git'}
-        ${'.git/hooks/commit-msg'}            | ${undefined}      | ${'git'}
-        ${'.git/COMMIT_EDITMSG'}              | ${undefined}      | ${undefined}
-        ${'.git/MERGE_MSG'}                   | ${undefined}      | ${undefined}
-        ${'.git/TAG_EDITMSG'}                 | ${undefined}      | ${undefined}
-        ${'.git/NOTES_EDITMSG'}               | ${undefined}      | ${undefined}
-        ${'.git/PULLREQ_EDITMSG'}             | ${undefined}      | ${undefined}
-        ${'.git/EDIT_DESCRIPTION'}            | ${undefined}      | ${undefined}
-        ${'.git/worktrees/wt/COMMIT_EDITMSG'} | ${undefined}      | ${'git'}
-        ${'.git/modules/sub/COMMIT_EDITMSG'}  | ${undefined}      | ${'git'}
-        ${'nested/clone/.git/HEAD'}           | ${undefined}      | ${'git'}
-        ${'nested/clone/.git/COMMIT_EDITMSG'} | ${undefined}      | ${undefined}
-        ${'nested/clone/src/code.ts'}         | ${undefined}      | ${undefined}
-        ${'.gitignore'}                       | ${undefined}      | ${undefined}
-        ${'.github/workflows/ci.yml'}         | ${undefined}      | ${undefined}
-        ${'src/.git-blame-ignore-revs'}       | ${undefined}      | ${undefined}
-        ${'..git/config'}                     | ${undefined}      | ${undefined}
-        ${'wt/.git'}                          | ${{}}             | ${'git'}
-        ${'.git/config'}                      | ${{ git: true }}  | ${'git'}
-        ${'wt/.git'}                          | ${{ git: false }} | ${undefined}
-        ${'.git/config'}                      | ${{ git: false }} | ${undefined}
-    `('findIgnorePathPreset $file $presets', ({ file, presets, expected }) => {
-        expect(findIgnorePathPreset(path.join(root, file), presets)).toBe(expected);
+        ${'src/code.ts'}                      | ${undefined}      | ${false}
+        ${'wt/.git'}                          | ${undefined}      | ${true}
+        ${'.git'}                             | ${undefined}      | ${true}
+        ${'.git/config'}                      | ${undefined}      | ${true}
+        ${'.git/HEAD'}                        | ${undefined}      | ${true}
+        ${'.git/objects/ab/cdef0123'}         | ${undefined}      | ${true}
+        ${'.git/hooks/commit-msg'}            | ${undefined}      | ${true}
+        ${'.git/COMMIT_EDITMSG'}              | ${undefined}      | ${false}
+        ${'.git/MERGE_MSG'}                   | ${undefined}      | ${false}
+        ${'.git/TAG_EDITMSG'}                 | ${undefined}      | ${false}
+        ${'.git/NOTES_EDITMSG'}               | ${undefined}      | ${false}
+        ${'.git/PULLREQ_EDITMSG'}             | ${undefined}      | ${false}
+        ${'.git/EDIT_DESCRIPTION'}            | ${undefined}      | ${false}
+        ${'.git/worktrees/wt/COMMIT_EDITMSG'} | ${undefined}      | ${true}
+        ${'.git/modules/sub/COMMIT_EDITMSG'}  | ${undefined}      | ${true}
+        ${'nested/clone/.git/HEAD'}           | ${undefined}      | ${true}
+        ${'nested/clone/.git/COMMIT_EDITMSG'} | ${undefined}      | ${false}
+        ${'nested/clone/src/code.ts'}         | ${undefined}      | ${false}
+        ${'.gitignore'}                       | ${undefined}      | ${false}
+        ${'.github/workflows/ci.yml'}         | ${undefined}      | ${false}
+        ${'src/.git-blame-ignore-revs'}       | ${undefined}      | ${false}
+        ${'..git/config'}                     | ${undefined}      | ${false}
+        ${'wt/.git'}                          | ${{}}             | ${true}
+        ${'.git/config'}                      | ${{ git: true }}  | ${true}
+        ${'wt/.git'}                          | ${{ git: false }} | ${false}
+        ${'.git/config'}                      | ${{ git: false }} | ${false}
+    `('isIgnoredByPathPresets $file $presets', ({ file, presets, expected }) => {
+        expect(isIgnoredByPathPresets(path.join(root, file), { ignorePathPresets: presets })).toBe(expected);
     });
 
     test.each`

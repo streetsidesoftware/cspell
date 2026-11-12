@@ -97,6 +97,16 @@ describe('lint with ignorePathPresets', () => {
         expect((await lint([], { file: [file] })).checked).toEqual(expected);
     });
 
+    test.each`
+        options
+        ${{}}
+        ${{ forceCheck: true }}
+    `('the .git file is reported as skipped: $options', async ({ options }) => {
+        const r = await lint([], { file: ['wt/.git'], ...options });
+        expect(r.checked).toEqual([]);
+        expect(r.result.skippedFiles).toBe(1);
+    });
+
     test('a file named on the command line with git: false', async () => {
         const r = await lint(['wt/.git', '.git/config'], {}, 'presets-off.json');
         expect(r.checked).toEqual(['.git/config', 'wt/.git']);

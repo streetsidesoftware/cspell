@@ -455,6 +455,14 @@ export declare function getDictionary(settings: CSpellUserSettings): Promise<Spe
  * @returns the globs to ignore.
  */
 export declare function calcIgnorePaths(settings: Pick<CSpellSettings, "ignorePathPresets">): GlobDef[];
+/**
+ * Check if the enabled `ignorePathPresets` ignore a file.
+ *
+ * @param filePath - absolute path of the file.
+ * @param settings - the settings with `ignorePathPresets`.
+ * @returns `true` if the file is ignored.
+ */
+export declare function isIgnoredByPathPresets(filePath: string, settings: Pick<CSpellSettings, "ignorePathPresets">): boolean;
 interface PerfTimer {
   readonly name: string;
   readonly startTime: number;

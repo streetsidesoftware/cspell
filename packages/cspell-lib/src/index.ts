@@ -86,6 +86,7 @@ export {
     ImportError,
     IncludeExcludeFlag,
     isBinaryFile,
+    isIgnoredByPathPresets,
     isSpellingDictionaryLoadError,
     Link,
     loadConfig,
