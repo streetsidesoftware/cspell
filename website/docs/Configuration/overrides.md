@@ -124,3 +124,34 @@ Example:
   }
 ]
 ```
+
+### Globs That Match Files Only
+
+By default, a `filename` glob also matches the files inside a folder with that name. For example, `examples.ts`
+matches a file named `examples.ts`, and also every file inside a folder named `examples.ts`.
+
+Turn on `overrideGlobsMatchFilesOnly` in `features` to make each glob match only the path it names. To apply an
+override to the files in a folder, end the glob with `/`.
+
+**`cspell.config.yaml`**
+
+```yaml
+features:
+  overrideGlobsMatchFilesOnly: true
+overrides:
+  # Only a file named `.git`, such as the one in a git worktree.
+  - filename: '**/.git'
+    enabled: false
+  # The files inside a `.git` folder.
+  - filename: '**/.git/'
+    enabled: true
+```
+
+| Glob          | Off (default)                                                         | On                              |
+| ------------- | --------------------------------------------------------------------- | ------------------------------- |
+| `examples.ts` | A file named `examples.ts`, and the files in a folder with that name. | A file named `examples.ts`.     |
+| `/src`        | A file named `src` at the root, and the files in the `src` folder.    | A file named `src` at the root. |
+| `/src/`       | The files in the `src` folder.                                        | The files in the `src` folder.  |
+| `src/**`      | The files in the `src` folder, and a file named `src`.                | The files in the `src` folder.  |
+
+Only `overrides` are affected. `ignorePaths`, `files`, and `--exclude` match as before.
