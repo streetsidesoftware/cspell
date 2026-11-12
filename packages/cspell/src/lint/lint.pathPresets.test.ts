@@ -18,13 +18,13 @@ const messageFiles = [
     '.git/NOTES_EDITMSG',
     '.git/PULLREQ_EDITMSG',
     '.git/TAG_EDITMSG',
+    '.git/worktrees/wt/COMMIT_EDITMSG',
 ];
 
 const gitFiles = [
     '.git/config',
     '.git/HEAD',
     '.git/objects/ab/cdef0123',
-    '.git/worktrees/wt/COMMIT_EDITMSG',
     '.git/worktrees/wt/HEAD',
     'nested/.git/HEAD',
     'wt/.git',
@@ -90,7 +90,7 @@ describe('lint with ignorePathPresets', () => {
         ${'.git/COMMIT_EDITMSG'}              | ${['.git/COMMIT_EDITMSG']}
         ${'.git/MERGE_MSG'}                   | ${['.git/MERGE_MSG']}
         ${'.git/config'}                      | ${[]}
-        ${'.git/worktrees/wt/COMMIT_EDITMSG'} | ${[]}
+        ${'.git/worktrees/wt/COMMIT_EDITMSG'} | ${['.git/worktrees/wt/COMMIT_EDITMSG']}
         ${'wt/.git'}                          | ${[]}
     `('a file named on the command line: $file', async ({ file, expected }) => {
         expect((await lint([file], {})).checked).toEqual(expected);

@@ -5,7 +5,10 @@ import { describe, expect, test } from 'vitest';
 import { calcIgnorePathGlobs, isIgnoredByPresets } from './ignorePathPresets.js';
 
 const root = path.resolve('/repo');
-const gitGlob = { glob: '**/.git/!(EDIT_DESCRIPTION|*MSG)', source: 'ignorePathPresets.git' };
+const gitGlobs = [
+    { glob: '**/.git/!(*MSG|EDIT_DESCRIPTION|worktrees)', source: 'ignorePathPresets.git' },
+    { glob: '**/.git/worktrees/*/!(*MSG|EDIT_DESCRIPTION)', source: 'ignorePathPresets.git' },
+];
 
 describe('ignorePathPresets', () => {
     test.each`
@@ -54,9 +57,9 @@ describe('ignorePathPresets', () => {
 
     test.each`
         settings                                 | expected
-        ${{}}                                    | ${[gitGlob]}
-        ${{ ignorePathPresets: {} }}             | ${[gitGlob]}
-        ${{ ignorePathPresets: { git: true } }}  | ${[gitGlob]}
+        ${{}}                                    | ${gitGlobs}
+        ${{ ignorePathPresets: {} }}             | ${gitGlobs}
+        ${{ ignorePathPresets: { git: true } }}  | ${gitGlobs}
         ${{ ignorePathPresets: { git: false } }} | ${[]}
     `('calcIgnorePathGlobs $settings', ({ settings, expected }) => {
         expect(calcIgnorePathGlobs(settings)).toEqual(expected);

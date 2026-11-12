@@ -2,8 +2,11 @@ import * as path from 'node:path';
 
 import type { CSpellSettings, GlobDef } from '@cspell/cspell-types';
 
-// Keeps git's message files, such as `COMMIT_EDITMSG`, for the `commit-msg` hook.
-const gitIgnorePaths: GlobDef[] = [{ glob: '**/.git/!(EDIT_DESCRIPTION|*MSG)', source: 'ignorePathPresets.git' }];
+// Keeps git's message files, such as `COMMIT_EDITMSG`, for the `commit-msg` hook, also those of linked worktrees.
+const gitIgnorePaths: GlobDef[] = [
+    { glob: '**/.git/!(*MSG|EDIT_DESCRIPTION|worktrees)', source: 'ignorePathPresets.git' },
+    { glob: '**/.git/worktrees/*/!(*MSG|EDIT_DESCRIPTION)', source: 'ignorePathPresets.git' },
+];
 
 /**
  * Get the globs of the enabled `ignorePathPresets`, for a file search to skip.
