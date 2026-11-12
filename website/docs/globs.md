@@ -195,19 +195,23 @@ A glob that starts with `!` behaves differently in each setting.
 
 ## How CSpell Selects the Files to Check
 
-1. CSpell takes the globs from the command line, or from `files` when there are none.
-1. It searches for files that match. The search skips the files and folders that `ignorePaths` and `--exclude`
-   match, and it does not look inside a skipped folder. A glob that names a file inside a skipped folder finds
-   nothing.
-1. It filters the files it found against `ignorePaths` and `--exclude` again.
-1. For each file, it loads the configuration file nearest that file. Its `ignorePaths` can still skip the file,
-   and so can an override that sets `"enabled": false`.
+CSpell selects files in two stages.
+
+**Finding files.** Only the main configuration file counts here: the one given with `--config`, or else the one
+found from the current folder.
+
+- The globs come from the command line, or from `files` when there are none.
+- Files and folders that match `ignorePaths` or `--exclude` are skipped. CSpell does not look inside a skipped
+  folder, so a glob that names a file inside one finds nothing.
+
+**Checking each file.** Before checking a file, CSpell loads the configuration file nearest that file. Its
+`ignorePaths` can still skip the file, and so can an override that sets `"enabled": false`.
 
 Files given with `--file`, `--files`, or `--file-list` are not searched for. They are still filtered:
 
 - by the globs on the command line, or by `files` when there are none;
 - by `ignorePaths` and `--exclude`;
-- by the configuration file nearest each file, as in step 4.
+- by the configuration file nearest each file, as above.
 
 Use `--force-check` to check them anyway.
 
