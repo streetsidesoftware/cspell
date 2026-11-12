@@ -1767,9 +1767,9 @@ interface FileSettings extends ExtendableSettings, CommandLineSettings {
    */
   ignorePaths?: Glob[];
   /**
-   * Ignore well-known paths, such as git's own files.
+   * Skip well-known files that are not spell checked, such as git's own files.
    *
-   * Each preset is turned on or off with `true` or `false`. A preset that is not set keeps its default.
+   * Each preset is enabled with `true` and disabled with `false`. A preset that is not set keeps its default.
    *
    * Example: check git's own files again.
    *
@@ -1849,17 +1849,18 @@ interface FileSettings extends ExtendableSettings, CommandLineSettings {
   engines?: CompatibleEngineVersions;
 }
 /**
- * Well-known paths to ignore, turned on or off one by one.
+ * Presets of files to skip. Each one is enabled or disabled on its own.
  */
 interface IgnorePathPresets {
   /**
-   * Ignore git's own files:
+   * Skip git's own files:
    * - a file named `.git`, which git puts in a worktree or a submodule
    * - everything inside a `.git` folder, except git's message files
    *
    * Git's message files stay checked, so a `commit-msg` hook can spell check the commit message. They are the files
-   * directly inside a `.git` folder whose names end in `MSG`, such as `COMMIT_EDITMSG`, `MERGE_MSG`, and
-   * `TAG_EDITMSG`, and `EDIT_DESCRIPTION`.
+   * whose names end in `MSG`, such as `COMMIT_EDITMSG`, `MERGE_MSG`, and `TAG_EDITMSG`, and `EDIT_DESCRIPTION`:
+   * - directly inside a `.git` folder
+   * - directly inside a linked worktree's folder in `.git/worktrees`
    *
    * @default true
    */

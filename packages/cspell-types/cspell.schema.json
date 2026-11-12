@@ -1224,13 +1224,13 @@
     },
     "IgnorePathPresets": {
       "additionalProperties": false,
-      "description": "Well-known paths to ignore, turned on or off one by one.",
-      "markdownDescription": "Well-known paths to ignore, turned on or off one by one.",
+      "description": "Presets of files to skip. Each one is enabled or disabled on its own.",
+      "markdownDescription": "Presets of files to skip. Each one is enabled or disabled on its own.",
       "properties": {
         "git": {
           "default": true,
-          "description": "Ignore git's own files:\n- a file named `.git`, which git puts in a worktree or a submodule\n- everything inside a `.git` folder, except git's message files\n\nGit's message files stay checked, so a `commit-msg` hook can spell check the commit message. They are the files directly inside a `.git` folder whose names end in `MSG`, such as `COMMIT_EDITMSG`, `MERGE_MSG`, and `TAG_EDITMSG`, and `EDIT_DESCRIPTION`.",
-          "markdownDescription": "Ignore git's own files:\n- a file named `.git`, which git puts in a worktree or a submodule\n- everything inside a `.git` folder, except git's message files\n\nGit's message files stay checked, so a `commit-msg` hook can spell check the commit message. They are the files\ndirectly inside a `.git` folder whose names end in `MSG`, such as `COMMIT_EDITMSG`, `MERGE_MSG`, and\n`TAG_EDITMSG`, and `EDIT_DESCRIPTION`.",
+          "description": "Skip git's own files:\n- a file named `.git`, which git puts in a worktree or a submodule\n- everything inside a `.git` folder, except git's message files\n\nGit's message files stay checked, so a `commit-msg` hook can spell check the commit message. They are the files whose names end in `MSG`, such as `COMMIT_EDITMSG`, `MERGE_MSG`, and `TAG_EDITMSG`, and `EDIT_DESCRIPTION`:\n- directly inside a `.git` folder\n- directly inside a linked worktree's folder in `.git/worktrees`",
+          "markdownDescription": "Skip git's own files:\n- a file named `.git`, which git puts in a worktree or a submodule\n- everything inside a `.git` folder, except git's message files\n\nGit's message files stay checked, so a `commit-msg` hook can spell check the commit message. They are the files\nwhose names end in `MSG`, such as `COMMIT_EDITMSG`, `MERGE_MSG`, and `TAG_EDITMSG`, and `EDIT_DESCRIPTION`:\n- directly inside a `.git` folder\n- directly inside a linked worktree's folder in `.git/worktrees`",
           "type": "boolean"
         }
       },
@@ -2322,8 +2322,8 @@
     },
     "ignorePathPresets": {
       "$ref": "#/definitions/IgnorePathPresets",
-      "description": "Ignore well-known paths, such as git's own files.\n\nEach preset is turned on or off with `true` or `false`. A preset that is not set keeps its default.\n\nExample: check git's own files again.\n\n```json \"ignorePathPresets\": { \"git\": false } ```",
-      "markdownDescription": "Ignore well-known paths, such as git's own files.\n\nEach preset is turned on or off with `true` or `false`. A preset that is not set keeps its default.\n\nExample: check git's own files again.\n\n```json\n\"ignorePathPresets\": { \"git\": false }\n```",
+      "description": "Skip well-known files that are not spell checked, such as git's own files.\n\nEach preset is enabled with `true` and disabled with `false`. A preset that is not set keeps its default.\n\nExample: check git's own files again.\n\n```json \"ignorePathPresets\": { \"git\": false } ```",
+      "markdownDescription": "Skip well-known files that are not spell checked, such as git's own files.\n\nEach preset is enabled with `true` and disabled with `false`. A preset that is not set keeps its default.\n\nExample: check git's own files again.\n\n```json\n\"ignorePathPresets\": { \"git\": false }\n```",
       "since": "10.5.0"
     },
     "ignorePaths": {
