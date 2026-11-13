@@ -175,6 +175,8 @@ A config option's comment is the most-read comment in cspell. It can be as long 
 - Say what the option does, and when someone would change it.
 - Show an example in a `json` code block when the setting's shape isn't obvious.
 - Link to a website page for a topic too long for the comment.
+- A `@title` is the name the VS Code extension's configuration editor shows for the option. It doesn't replace the
+  summary, which is still the first line of the comment.
 
 ### Changing a public comment
 
