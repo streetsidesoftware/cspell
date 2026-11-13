@@ -17,11 +17,8 @@ const hasGlobCharactersRegExp = /[*?{}[\]]/;
 
 const fileUrlBuilder = new FileUrlBuilder();
 
-/**
- * The platform's path module: `path.win32` on Windows, `path.posix` elsewhere.
- * `FileUrlBuilder` only declares the members it uses, but its default is the full module.
- */
-export const defaultPath: PathInterface = fileUrlBuilder.path as PathInterface;
+/** The platform's path module: `path.win32` on Windows, `path.posix` elsewhere. */
+export const defaultPath: PathInterface = fileUrlBuilder.path;
 
 export const GlobPlaceHolders = {
     cwd: '${cwd}',

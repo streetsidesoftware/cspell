@@ -122,7 +122,7 @@ describe('Validate Glob Normalization to root', () => {
         nodePath: PathInterface = Path,
     ): GlobPatternWithRoot {
         root = nodePath.normalize(nodePath.resolve(root || '.') + '/');
-        source = nodePath.join(root, source);
+        source = nodePath.resolve(root, source);
         pattern = typeof pattern === 'string' ? { glob: pattern } : pattern;
         const isGlobalPattern = isGlobalGlob(pattern.glob);
         root = nodePath.normalize((pattern.root ?? root) + nodePath.sep);
@@ -689,7 +689,6 @@ function makePathInterface(nodePath: PathInterface, cwd: string): PathInterface 
     return {
         sep: nodePath.sep,
         normalize: (p) => nodePath.normalize(p),
-        join: (...paths) => nodePath.join(...paths),
         isAbsolute: (p) => nodePath.isAbsolute(p),
         relative: (...p) => nodePath.relative(...p),
         parse: (...p) => nodePath.parse(...p),
