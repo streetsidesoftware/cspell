@@ -70,7 +70,7 @@ export class LintRequest {
 function mergeFiles(a: string[] | undefined, b: string[] | undefined): string[] | undefined {
     const files = merge(a, b);
     if (!files) return undefined;
-    return [...new Set(files.flatMap((a) => a.split('\n').map((a) => a.trim())).filter((a) => !!a))];
+    return [...new Set(files.flatMap((a) => a.split('\n').map((a) => a.trimEnd())).filter((a) => !!a))];
 }
 
 function merge<T>(a: T[] | undefined, b: T[] | undefined): T[] | undefined {

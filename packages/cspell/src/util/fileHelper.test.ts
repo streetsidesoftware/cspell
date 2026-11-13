@@ -51,6 +51,13 @@ describe('fileHelper', () => {
         }
     });
 
+    test('readFileListFile keeps leading spaces', async () => {
+        const mockStreamConsumersText = vi.mocked(streamConsumers.text);
+        mockStreamConsumersText.mockImplementation(async () => ' notes/readme.txt \r\n\r\nb\r\n');
+        const r = await readFileListFile('stdin');
+        expect(r).toEqual([path.resolve(' notes/readme.txt'), path.resolve('b')]);
+    });
+
     test('readFileListFiles', async () => {
         const files = ['file1', '../file2', 'dir/file3', 'nested/file2.txt'];
         const r = await asyncIterableToArray(readFileListFiles([fileListFile, fileListFile2]));
@@ -119,6 +126,7 @@ describe('fileHelper', () => {
         ${__dirname}           | ${undefined} | ${__dirname}
         ${'not_found'}         | ${__dirname} | ${path.join(__dirname, 'not_found')}
         ${'not_found'}         | ${undefined} | ${path.resolve('not_found')}
+        ${' notes/readme.txt'} | ${__dirname} | ${path.join(__dirname, ' notes/readme.txt')}
         ${'stdin'}             | ${undefined} | ${'stdin://'}
         ${'file://file.txt'}   | ${undefined} | ${path.resolve('file.txt')}
         ${'stdin://source.ts'} | ${undefined} | ${pathToFileURL('source.ts').href.replace(/^file:/, 'stdin:')}

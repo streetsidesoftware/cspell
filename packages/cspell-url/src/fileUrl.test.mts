@@ -103,6 +103,10 @@ describe('util', () => {
         path               | expected
         ${'path/to/file'}  | ${'path/to/file'}
         ${'/some/path%.c'} | ${'/some/path%25.c'}
+        ${' notes/file'}   | ${'%20notes/file'}
+        ${'notes/file '}   | ${'notes/file%20'}
+        ${'my notes/file'} | ${'my notes/file'}
+        ${'\x01notes/'}    | ${'%01notes/'}
     `('normalizePathForUrl $path', ({ path, expected }) => {
         expect(normalizeFilePathForUrl(path)).toEqual(expected);
     });
