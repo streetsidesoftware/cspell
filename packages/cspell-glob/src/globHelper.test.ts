@@ -8,6 +8,7 @@ import { describe, expect, test } from 'vitest';
 import type { NormalizeOptions } from './globHelper.ts';
 import {
     __testing__,
+    defaultPath,
     escapeGlobPath,
     fileOrGlobToGlob,
     normalizeGlobPattern,
@@ -450,6 +451,7 @@ describe('Validate Glob Normalization to root', () => {
         ${{ glob: '*.ts', root: '${cwd}/a' }}        | ${nOpts({ cwd: 'myCwd' })}      | ${[gN('*.ts', nOpts().nodePath.resolve('myCwd/a'), '*.ts', '${cwd}/a')]}
         ${{ glob: '${cwd}/*.ts', root: 'a' }}        | ${nOpts({ cwd: 'myCwd' })}      | ${[gN('*.ts', nOpts().nodePath.resolve('myCwd'), '${cwd}/*.ts', 'a')]}
         ${{ glob: 'a/*.ts', root: '${cwd}/myRoot' }} | ${nOpts({ root: 'otherRoot' })} | ${[gN('a/*.ts', nOpts().nodePath.resolve('myRoot'), 'a/*.ts', '${cwd}/myRoot')]}
+        ${{ glob: '*.ts', root: '${cwd}//a//b' }}    | ${nOpts()}                      | ${[gN('*.ts', nOpts().nodePath.resolve('a/b'), '*.ts', '${cwd}//a//b')]}
     `('normalizeGlobPattern glob: $glob, options: $options', ({ glob, options, expected }) => {
         expect(normalizeGlobPattern(glob, options)).toEqual(expected);
     });
@@ -606,6 +608,13 @@ describe('Validate cspell-glob assumptions', () => {
     test.each([' b', 'b ', '\tb\t', ' '])('trimGlob keeps the escaped whitespace of "%s"', (name) => {
         const escaped = escapeGlobPath(name);
         expect(trimGlob(escaped)).toBe(escaped);
+    });
+});
+
+describe('Validate @cspell/url assumptions', () => {
+    test('the default FileUrlBuilder path is the platform path module', () => {
+        expect(defaultPath).toBe(process.platform === 'win32' ? win32 : posix);
+        expect(new FileUrlBuilder().path).toBe(defaultPath);
     });
 });
 
