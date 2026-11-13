@@ -56,24 +56,20 @@ Cases that need care:
 | A function type                                                        | Third person, present tense                 | "Returns `true` when the file should be skipped." |
 | Any other class, interface, type or property, a constant or a variable | Noun phrase, or third person, present tense | "The locale to use for suggestions."              |
 
+In the last row, a noun phrase suits most comments, and a verb suits booleans.
+
 ## Every comment
 
 - A comment clears something up. It covers the "what" and, only when it isn't obvious, the "why".
-- A comment never takes longer to read than the code it describes.
+- Every sentence tells the reader something they need. Cut filler.
 - Write short sentences, one idea each, as many as the comment needs. Don't squeeze several facts into one long line.
-- Start a function or method comment with a verb in the imperative: "Read a file.", "Create a dictionary." A property
-  that holds a function does the same, since it runs when called.
-- Write the comment on a function type in the third person, present tense: "Returns…".
-- Open the comment on anything else with a noun phrase or a verb in the third person, whichever describes it best. Most
-  are best served by a noun phrase, and booleans by a verb.
 - Don't open with a verb that adds nothing. "Holds the locale." says no more than "The locale.", and "Describes a
   dictionary." no more than "A dictionary."
 - Use a list when a comment covers several cases. Don't write a one-line comment with several clauses.
 - Give a boolean a list when its values do different things, with a line for `undefined` when that behaves differently
   too. A boolean that only turns one effect on gets a sentence that says what `true` does.
-- Don't restate what a well-named identifier already says.
 - Don't write a paragraph full of `code` references. Split it into sentences or a list.
-- Give a reason once, not in every place it applies. Leave out alternatives you rejected.
+- Leave out alternatives you rejected.
 - Keep comment lines to 140 characters or fewer.
 - In tests, the test name states the intent. Comment only on setup that isn't obvious.
 
@@ -92,8 +88,11 @@ The name, the parameter names, the types and the comment work together. The comm
 Leave out:
 
 - what the code already says
+- what a well-named identifier already says
 - a step-by-step of how the body works
 - history, which belongs in the commit message
+
+Give a reason once, not in every place it applies.
 
 Most internal code needs no doc comment. Add one only when it carries something from the list above. Internal terms are
 fine here, and so is a `@param` when one argument needs explaining.
@@ -121,6 +120,7 @@ comment in a hover or on the website, which both render it as Markdown.
 - Help the reader choose. When something else fits a case better, point to it: "For text already in memory, use
   {@link spellCheckDocument}."
 - Use the words a user would use, not cspell's internal terms.
+- Each comment stands alone. Repeat a rule that applies instead of pointing to another comment for it.
 - Don't start a sentence with a code span; lead with a word. A `@param` description, like a list item, may start with
   code.
 
@@ -135,12 +135,13 @@ comment in a hover or on the website, which both render it as Markdown.
 
 ### The summary
 
-The summary is the first paragraph: one sentence that says what it does or what it is, in the [voice](#voice) above.
+The summary is the first line: one sentence on a line of its own, followed by a blank line. It says what it does or what
+it is, in the [voice](#voice) above.
 
 - Say what it does from the reader's side: "Read a file and check its spelling."
 - Keep advice out of it. "Use it in CI" tells the reader when to use something, not what it does.
 - Leave rules, exceptions and edge cases for the details.
-- A config option's summary also stands alone in the website's table of options, so it must make sense without the
+- The website's table of options shows only a config option's first line, so the summary must make sense without the
   details.
 
 ### The details
