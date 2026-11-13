@@ -131,8 +131,7 @@ describe('Validate Micromatch assumptions', () => {
         ${'constructor'} | ${'constructor'} | ${true}
         ${'__proto__'}   | ${'__proto__'}   | ${true}
         ${'toString'}    | ${'toString'}    | ${true}
-    `(`Workaround bugs in Micromatch glob: '$glob', filename: '$filename' expected: $expectedToMatch`, ({ glob, filename, expectedToMatch }) => {
-        glob = workaroundPicomatchBug(glob);
+    `(`Validate picomatch assumptions: names of Object properties, glob: '$glob', filename: '$filename' expected: $expectedToMatch`, ({ glob, filename, expectedToMatch }) => {
         const reg = mm.makeRe(glob);
         expect(reg.test(filename)).toEqual(expectedToMatch);
         expect(mm.isMatch(filename, glob, { windows: path.sep === '\\' })).toBe(expectedToMatch);
@@ -142,6 +141,10 @@ describe('Validate Micromatch assumptions', () => {
         const pmRegexp = pp.makeRe(glob);
         expect(pmRegexp.test(normalizedFilename)).toEqual(expectedToMatch);
         expect(picomatch(normalizedFilename)).toEqual(expectedToMatch);
+    });
+
+    test.each(['constructor', 'src/__proto__/*.ts', '**/toString/**'])('workaroundPicomatchBug returns %s unchanged', (glob) => {
+        expect(workaroundPicomatchBug(glob)).toBe(glob);
     });
 });
 

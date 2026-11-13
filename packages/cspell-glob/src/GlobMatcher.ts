@@ -7,7 +7,6 @@ import {
     isRelativeValueNested,
     normalizeGlobPatterns,
     normalizeGlobToRoot,
-    workaroundPicomatchBug,
 } from './globHelper.ts';
 import type {
     GlobMatch,
@@ -250,7 +249,7 @@ function buildMatcherFn(
             const matchNeg = pattern.glob.match(/^!/);
             const glob = pattern.glob.replace(/^!/, '');
             const isNeg = (matchNeg && matchNeg[0].length & 1 && true) || false;
-            const reg = pm.makeRe(workaroundPicomatchBug(glob), makeReOptions);
+            const reg = pm.makeRe(glob, makeReOptions);
             const fn = pattern.glob.endsWith(suffixDir)
                 ? (filename: string) => {
                       // Note: this is a hack to get around the limitations of globs.

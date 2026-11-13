@@ -237,6 +237,9 @@ describe('Validate tinyglobby assumptions', () => {
             'v w',
             ' a',
             'a',
+            // Names of Object properties, which an old picomatch could not match.
+            'constructor',
+            '__proto__',
         ];
         // Names that Windows does not allow.
         if (process.platform !== 'win32') folders.push('d*', 'da', 'e?', 'ef', 'f|g', 'x\\y', 'x/y');

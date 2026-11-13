@@ -619,12 +619,18 @@ export function globInFolder(folder: string, glob: string): string {
     return prefix + '/' + glob.replace(/^\.?\//, '');
 }
 
+/**
+ * Returns the glob unchanged.
+ *
+ * It used to work around a picomatch bug with folder names such as `constructor`. picomatch has fixed the bug, so
+ * the glob can be passed to picomatch as it is.
+ *
+ * @deprecated No longer needed. Pass the glob directly. It will be removed in a future major version.
+ * @param glob - a glob pattern.
+ * @returns the same glob.
+ */
 export function workaroundPicomatchBug(glob: string): string {
-    const obj: Record<string, string> = {};
-    return glob
-        .split('/')
-        .map((s) => (obj[s] ? `{${s},${s}}` : s))
-        .join('/');
+    return glob;
 }
 
 export const __testing__ = {
