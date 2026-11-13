@@ -462,7 +462,7 @@ export declare function createPerfTimer(name: string, onEnd?: (elapsed: number, 
  * @param root - the URL of the folder the presets apply to. The globs match only below it.
  * @returns the globs to ignore.
  */
-export declare function calcIgnorePathGlobs(settings: Pick<CSpellSettings, "ignorePathPresets">, root: URL): Promise<GlobDef[]>;
+export declare function calcIgnorePathGlobs(settings: CSpellSettings, root: URL): Promise<GlobDef[]>;
 /**
  * Check if the enabled `ignorePathPresets` ignore a file, by its path alone.
  *
@@ -473,7 +473,7 @@ export declare function calcIgnorePathGlobs(settings: Pick<CSpellSettings, "igno
  * @param settings - the settings with `ignorePathPresets`.
  * @returns `true` if the file is ignored.
  */
-export declare function isIgnoredByPresets(url: URL, root: URL, settings: Pick<CSpellSettings, "ignorePathPresets">): boolean;
+export declare function isIgnoredByPresets(url: URL, root: URL, settings: CSpellSettings): boolean;
 interface ListGlobalImportsResult {
   filename: string;
   name: string | undefined;

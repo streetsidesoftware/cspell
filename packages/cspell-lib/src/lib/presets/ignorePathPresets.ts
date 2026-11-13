@@ -19,10 +19,7 @@ const gitIgnorePaths = ['/**/.git/!(*MSG|EDIT_DESCRIPTION|worktrees)', '/**/.git
  * @param root - the URL of the folder the presets apply to. The globs match only below it.
  * @returns the globs to ignore.
  */
-export async function calcIgnorePathGlobs(
-    settings: Pick<CSpellSettings, 'ignorePathPresets'>,
-    root: URL,
-): Promise<GlobDef[]> {
+export async function calcIgnorePathGlobs(settings: CSpellSettings, root: URL): Promise<GlobDef[]> {
     const presets = settings.ignorePathPresets;
     const rootDir = toFileDirURL(root);
     const rootPath = toFilePathOrHref(rootDir);
@@ -47,7 +44,7 @@ export async function calcIgnorePathGlobs(
  * @param settings - the settings with `ignorePathPresets`.
  * @returns `true` if the file is ignored.
  */
-export function isIgnoredByPresets(url: URL, root: URL, settings: Pick<CSpellSettings, 'ignorePathPresets'>): boolean {
+export function isIgnoredByPresets(url: URL, root: URL, settings: CSpellSettings): boolean {
     return settings.ignorePathPresets?.git !== false && isGitFileInRoot(url, root);
 }
 
