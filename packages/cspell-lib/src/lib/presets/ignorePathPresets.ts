@@ -1,6 +1,5 @@
 import type { CSpellSettings, GlobDef } from '@cspell/cspell-types';
-import { toFileDirURL } from '@cspell/url';
-import { escapeGlobPath } from 'cspell-glob';
+import { toFileDirURL, toFilePathOrHref } from '@cspell/url';
 
 import { getFileSystem } from '../fileSystem.js';
 import { findNestedWorktrees } from './nestedWorktrees.js';
@@ -11,18 +10,13 @@ const nestedWorktreesSource = 'ignorePathPresets.nestedWorktrees';
 // Anchored to the root, so git files outside the root, such as a submodule's message file, are not matched.
 // Keeps git's message files, such as `COMMIT_EDITMSG`, for the `commit-msg` hook, also those of linked worktrees.
 // `isGitFileInRoot` checks the same files.
-const gitIgnorePaths: GlobDef[] = [
-    { glob: '/**/.git/!(*MSG|EDIT_DESCRIPTION|worktrees)', source },
-    { glob: '/**/.git/worktrees/*/!(*MSG|EDIT_DESCRIPTION)', source },
-];
+const gitIgnorePaths = ['/**/.git/!(*MSG|EDIT_DESCRIPTION|worktrees)', '/**/.git/worktrees/*/!(*MSG|EDIT_DESCRIPTION)'];
 
 /**
  * Get the globs of the enabled `ignorePathPresets`, for a file search to skip.
  *
- * The globs have no root. Resolve them against `root`: they match only below it.
- *
  * @param settings - the settings with `ignorePathPresets`.
- * @param root - the URL of the folder the globs apply to.
+ * @param root - the URL of the folder the presets apply to. The globs match only below it.
  * @returns the globs to ignore.
  */
 export async function calcIgnorePathGlobs(
@@ -30,13 +24,14 @@ export async function calcIgnorePathGlobs(
     root: URL,
 ): Promise<GlobDef[]> {
     const presets = settings.ignorePathPresets;
-    const globs = presets?.git === false ? [] : gitIgnorePaths;
-    if (presets?.nestedWorktrees === false) return globs;
     const rootDir = toFileDirURL(root);
+    const rootPath = toFilePathOrHref(rootDir);
+    const globs = presets?.git === false ? [] : gitIgnorePaths.map((glob) => ({ glob, root: rootPath, source }));
+    if (presets?.nestedWorktrees === false) return globs;
     const worktrees = await findNestedWorktrees(rootDir, getFileSystem());
-    if (!worktrees.length) return globs;
     const worktreeGlobs = worktrees.map((folder) => ({
-        glob: '/' + escapeGlobPath(decodeURIComponent(folder.href.slice(rootDir.href.length))) + '**',
+        glob: '/**',
+        root: toFilePathOrHref(folder),
         source: nestedWorktreesSource,
     }));
     return [...globs, ...worktreeGlobs];

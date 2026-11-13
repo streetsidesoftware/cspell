@@ -3,7 +3,7 @@ import * as os from 'node:os';
 import * as path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-import { toFileDirURL } from '@cspell/url';
+import { toFileDirURL, toFilePathOrHref } from '@cspell/url';
 import { GlobMatcher } from 'cspell-glob';
 import { afterAll, beforeAll, describe, expect, test } from 'vitest';
 
@@ -12,8 +12,16 @@ import { calcIgnorePathGlobs, isIgnoredByPresets } from './ignorePathPresets.js'
 const root = path.resolve('/repo');
 const rootUrl = toDirUrl(root);
 const gitGlobs = [
-    { glob: '/**/.git/!(*MSG|EDIT_DESCRIPTION|worktrees)', source: 'ignorePathPresets.git' },
-    { glob: '/**/.git/worktrees/*/!(*MSG|EDIT_DESCRIPTION)', source: 'ignorePathPresets.git' },
+    {
+        glob: '/**/.git/!(*MSG|EDIT_DESCRIPTION|worktrees)',
+        root: toFilePathOrHref(rootUrl),
+        source: 'ignorePathPresets.git',
+    },
+    {
+        glob: '/**/.git/worktrees/*/!(*MSG|EDIT_DESCRIPTION)',
+        root: toFilePathOrHref(rootUrl),
+        source: 'ignorePathPresets.git',
+    },
 ];
 
 const gitPresetFiles = [

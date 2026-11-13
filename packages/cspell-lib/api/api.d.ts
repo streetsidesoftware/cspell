@@ -458,10 +458,8 @@ export declare function createPerfTimer(name: string, onEnd?: (elapsed: number, 
 /**
  * Get the globs of the enabled `ignorePathPresets`, for a file search to skip.
  *
- * The globs have no root. Resolve them against `root`: they match only below it.
- *
  * @param settings - the settings with `ignorePathPresets`.
- * @param root - the URL of the folder the globs apply to.
+ * @param root - the URL of the folder the presets apply to. The globs match only below it.
  * @returns the globs to ignore.
  */
 export declare function calcIgnorePathGlobs(settings: Pick<CSpellSettings, "ignorePathPresets">, root: URL): Promise<GlobDef[]>;
