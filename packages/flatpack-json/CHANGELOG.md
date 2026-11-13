@@ -154,6 +154,72 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 </details>
 
+## v10.5.0 (2026-11-13)
+
+### Features
+
+- feat: Skip nested git worktrees by default (<a href="https://github.com/streetsidesoftware/cspell/pull/9604">#9604</a>)
+
+---
+
+</details>
+
+- feat: Add `ignorePathPresets` and skip git's own files by default (<a href="https://github.com/streetsidesoftware/cspell/pull/9600">#9600</a>)
+
+---
+
+</details>
+
+- feat: Add `features.overrideGlobsMatchFilesOnly` so override globs match only the path they name (<a href="https://github.com/streetsidesoftware/cspell/pull/9598">#9598</a>)
+
+---
+
+</details>
+
+- fix: Add a Vim file type for .vim files and .vimrc (<a href="https://github.com/streetsidesoftware/cspell/pull/9579">#9579</a>)
+
+### Fixes
+
+- fix: Check files in a folder whose name starts with a space (<a href="https://github.com/streetsidesoftware/cspell/pull/9608">#9608</a>)
+
+---
+
+</details>
+
+- fix: Check folders named on the command line with `#` or a leading space (<a href="https://github.com/streetsidesoftware/cspell/pull/9610">#9610</a>)
+
+---
+
+</details>
+
+- fix: Glob symbols in a config folder's name no longer match other folders (<a href="https://github.com/streetsidesoftware/cspell/pull/9605">#9605</a>)
+
+---
+
+</details>
+
+- fix: correct the `ignorePaths` default and its `.git/COMMIT_EDITMSG` advice (<a href="https://github.com/streetsidesoftware/cspell/pull/9599">#9599</a>)
+- fix: allow globs with `--file` again (<a href="https://github.com/streetsidesoftware/cspell/pull/9601">#9601</a>)
+
+- fix: Fix word splitter pruning for words following compound prefix joined by punctuation (<a href="https://github.com/streetsidesoftware/cspell/pull/9573">#9573</a>)
+- fix: Stop skipping files like console.log.ts as log files (<a href="https://github.com/streetsidesoftware/cspell/pull/9589">#9589</a>)
+
+---
+
+</details>
+
+- fix: Add a Vim file type for .vim files and .vimrc (<a href="https://github.com/streetsidesoftware/cspell/pull/9579">#9579</a>)
+- fix: Accept long words with many alternate characters (<a href="https://github.com/streetsidesoftware/cspell/pull/9574">#9574</a>)
+
+- fix: Stop `cspell trace` crashing on an empty word with compound words (<a href="https://github.com/streetsidesoftware/cspell/pull/9576">#9576</a>)
+- fix: Avoid slow checks on non-ASCII words with many repMap matches (<a href="https://github.com/streetsidesoftware/cspell/pull/9564">#9564</a>)
+
+- fix: Avoid running out of memory on words with many repMap matches (<a href="https://github.com/streetsidesoftware/cspell/pull/9543">#9543</a>)
+
+---
+
+</details>
+
 ## v10.4.1 (2026-11-06)
 
 ### Fixes
