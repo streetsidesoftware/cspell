@@ -1,5 +1,6 @@
 import type { CSpellSettings, GlobDef } from '@cspell/cspell-types';
 import { toFileDirURL } from '@cspell/url';
+import { escapeGlobPath } from 'cspell-glob';
 
 import { getFileSystem } from '../fileSystem.js';
 import { findNestedWorktrees } from './nestedWorktrees.js';
@@ -39,16 +40,6 @@ export async function calcIgnorePathGlobs(
         source: nestedWorktreesSource,
     }));
     return [...globs, ...worktreeGlobs];
-}
-
-/**
- * Escape the glob symbols in a path, like tinyglobby's `escapePath`.
- *
- * Each symbol becomes a character class, such as `[(]`, because on Windows globs are normalized by turning `\` into
- * `/`. A `]` needs no escape once every `[` is escaped, and `!`, `+`, and `@` are symbols only before `(`.
- */
-function escapeGlobPath(path: string): string {
-    return path.replaceAll(/[()[{}*?|]/g, '[$&]');
 }
 
 /**

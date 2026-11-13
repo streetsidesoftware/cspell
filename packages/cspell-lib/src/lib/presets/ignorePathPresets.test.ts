@@ -136,8 +136,21 @@ describe('ignorePathPresets', () => {
 
 describe('ignorePathPresets nestedWorktrees', () => {
     // Glob symbols that are allowed in folder names on every platform, and those allowed only outside Windows.
-    const worktrees = ['.worktrees/feat', 'wt (1)', 'a[b]', 'c{d,e}', 'f!(g)', 'h+(i)', 'j@(k)', 'l]m', 'n,o'];
-    const posixWorktrees = ['p*q', 'r?s', 't|u'];
+    const worktrees = [
+        '.worktrees/feat',
+        'wt (1)',
+        'a[b]',
+        'c{d,e}',
+        'f!(g)',
+        'h+(i)',
+        'j@(k)',
+        'l]m',
+        'n,o',
+        'wt #1',
+        '!imp',
+        ' lead',
+    ];
+    const posixWorktrees = ['p*q', 'r?s', 't|u', 'back\\slash', 'trail '];
     const allWorktrees = process.platform === 'win32' ? worktrees : [...worktrees, ...posixWorktrees];
     let tmp = '';
     let repo = '';
