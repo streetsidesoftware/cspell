@@ -330,7 +330,7 @@ export function normalizeGlobToRoot<Glob extends GlobPatternWithRoot>(
 
         return {
             ...glob,
-            glob: prefix + posix.join(escapeGlobPath(relGlob), g),
+            glob: prefix + globInFolder(relGlob, g),
             root,
         };
     }
@@ -368,8 +368,9 @@ export function rebaseGlob(glob: string, fromRootToGlob: string, fromGlobToRoot:
 
     // console.warn('rebaseGlob 1: %o', { glob, fromRootToGlob, fromGlobToRoot, relToParts, relFromParts });
 
-    if (glob.startsWith(fromGlobToRoot) && fromRootToGlob === '../'.repeat(relToParts.length - 1)) {
-        return glob.slice(fromGlobToRoot.length);
+    const globToRoot = escapeGlobPath(fromGlobToRoot);
+    if (glob.startsWith(globToRoot) && fromRootToGlob === '../'.repeat(relToParts.length - 1)) {
+        return glob.slice(globToRoot.length);
     }
 
     const lastRelIdx = relToParts.findIndex((s) => s !== '..');
@@ -392,7 +393,7 @@ export function rebaseGlob(glob: string, fromRootToGlob: string, fromGlobToRoot:
         if (!relSeg || globSeg === '**') {
             return globParts.slice(i).join('/');
         }
-        if (relSeg !== globSeg && globSeg !== '*') {
+        if (escapeGlobPath(relSeg) !== globSeg && globSeg !== '*') {
             break;
         }
     }
@@ -598,6 +599,21 @@ export function escapeGlobPath(path: string): string {
         .replace(/^!/, '@(!)')
         .replace(/^\s/, '[$&]')
         .replace(/\s$/, '[$&]');
+}
+
+/**
+ * Make a glob that matches inside a folder, such as `globInFolder('wt (1)', '**')`, which gives `wt [(]1[)]/**`.
+ *
+ * The folder's glob symbols are escaped, so the result matches only inside that folder.
+ *
+ * @param folder - a folder path that uses `/` as the separator. An empty path gives the glob unchanged.
+ * @param glob - the glob to match inside the folder.
+ * @returns the joined glob.
+ */
+export function globInFolder(folder: string, glob: string): string {
+    if (!folder) return glob;
+    const prefix = escapeGlobPath(folder.endsWith('/') ? folder.slice(0, -1) : folder);
+    return prefix + '/' + glob.replace(/^\.?\//, '');
 }
 
 export function workaroundPicomatchBug(glob: string): string {

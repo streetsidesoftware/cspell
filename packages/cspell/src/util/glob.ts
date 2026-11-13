@@ -1,10 +1,9 @@
 import { promises as fs } from 'node:fs';
 import * as path from 'node:path';
-import { posix } from 'node:path';
 
 import type { CSpellUserSettings, Glob } from '@cspell/cspell-types';
 import type { GlobPatternWithRoot } from 'cspell-glob';
-import { fileOrGlobToGlob, GlobMatcher, workaroundPicomatchBug } from 'cspell-glob';
+import { fileOrGlobToGlob, globInFolder, GlobMatcher, workaroundPicomatchBug } from 'cspell-glob';
 import type { GlobOptions as TinyGlobbyOptions } from 'tinyglobby';
 import { glob as tinyGlob } from 'tinyglobby';
 
@@ -173,7 +172,7 @@ async function adjustPossibleDirectory(glob: Glob, root: string): Promise<Glob> 
     try {
         const stat = await fs.stat(dirPath);
         if (stat.isDirectory()) {
-            const useGlob = posix.join(posixPath(g.glob), '**');
+            const useGlob = globInFolder(posixPath(g.glob), '**');
             return typeof glob === 'string' ? useGlob : { ...glob, glob: useGlob };
         }
     } catch {

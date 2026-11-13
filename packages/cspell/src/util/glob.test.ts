@@ -10,7 +10,7 @@ import { minimatch } from 'minimatch';
 import { glob as tinyGlob, isDynamicPattern } from 'tinyglobby';
 import { afterAll, beforeAll, describe, expect, test } from 'vitest';
 
-import { calcGlobs, normalizeGlobsToRoot } from './glob.js';
+import { calcGlobs, normalizeFileOrGlobsToRoot, normalizeGlobsToRoot } from './glob.js';
 
 interface MinimatchOptions {
     windowsPathsNoEscape?: boolean;
@@ -264,6 +264,11 @@ describe('Validate tinyglobby assumptions', () => {
             await fsp.writeFile(path.join(escRoot, 't'), 'text\n');
             const found = await tinyGlob(['t*'], { cwd: escRoot, ignore: [escapeGlobPath('t ')] });
             expect(found).toEqual(['t']);
+        });
+
+        test.each(['v #w', 'v w', ' a', 'a'])('the folder "%s" named on the command line', async (folder) => {
+            const globs = await normalizeFileOrGlobsToRoot([folder], escRoot);
+            expect(await tinyGlob(globs, { cwd: escRoot, dot: true })).toEqual([folder + '/file.txt']);
         });
 
         test.each(folders)('ignore a glob rooted in folder "%s"', async (folder) => {

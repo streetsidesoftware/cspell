@@ -2,6 +2,7 @@ export type { NormalizeOptions } from './globHelper.ts';
 export {
     escapeGlobPath,
     fileOrGlobToGlob,
+    globInFolder,
     isGlobPatternNormalized,
     isGlobPatternWithOptionalRoot,
     isGlobPatternWithRoot,
