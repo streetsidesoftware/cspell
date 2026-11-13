@@ -61,7 +61,6 @@ In the last row, a noun phrase suits most comments, and a verb suits booleans.
 ## Every comment
 
 - A comment clears something up. It covers the "what" and, only when it isn't obvious, the "why".
-- Every sentence tells the reader something they need. Cut filler.
 - Write short sentences, one idea each, as many as the comment needs. Don't squeeze several facts into one long line.
 - Don't open with a verb that adds nothing. "Holds the locale." says no more than "The locale.", and "Describes a
   dictionary." no more than "A dictionary."
@@ -92,7 +91,7 @@ Leave out:
 - a step-by-step of how the body works
 - history, which belongs in the commit message
 
-Give a reason once, not in every place it applies.
+A comment never takes longer to read than the code it describes. Give a reason once, not in every place it applies.
 
 Most internal code needs no doc comment. Add one only when it carries something from the list above. Internal terms are
 fine here, and so is a `@param` when one argument needs explaining.
