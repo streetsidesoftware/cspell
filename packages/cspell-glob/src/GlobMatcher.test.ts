@@ -6,7 +6,7 @@ import mm from 'micromatch';
 import pp from 'picomatch';
 import { describe, expect, test } from 'vitest';
 
-import { fileOrGlobToGlob, workaroundPicomatchBug } from './globHelper.ts';
+import { escapeGlobPath, fileOrGlobToGlob, workaroundPicomatchBug } from './globHelper.ts';
 import type { GlobMatchOptions, MatcherMode } from './GlobMatcher.ts';
 import { GlobMatcher } from './GlobMatcher.ts';
 import type { GlobMatch, GlobPattern, GlobPatternNormalized, GlobPatternWithOptionalRoot, PathInterface } from './GlobMatcherTypes.ts';
@@ -131,8 +131,7 @@ describe('Validate Micromatch assumptions', () => {
         ${'constructor'} | ${'constructor'} | ${true}
         ${'__proto__'}   | ${'__proto__'}   | ${true}
         ${'toString'}    | ${'toString'}    | ${true}
-    `(`Workaround bugs in Micromatch glob: '$glob', filename: '$filename' expected: $expectedToMatch`, ({ glob, filename, expectedToMatch }) => {
-        glob = workaroundPicomatchBug(glob);
+    `(`Validate picomatch assumptions: names of Object properties, glob: '$glob', filename: '$filename' expected: $expectedToMatch`, ({ glob, filename, expectedToMatch }) => {
         const reg = mm.makeRe(glob);
         expect(reg.test(filename)).toEqual(expectedToMatch);
         expect(mm.isMatch(filename, glob, { windows: path.sep === '\\' })).toBe(expectedToMatch);
@@ -142,6 +141,10 @@ describe('Validate Micromatch assumptions', () => {
         const pmRegexp = pp.makeRe(glob);
         expect(pmRegexp.test(normalizedFilename)).toEqual(expectedToMatch);
         expect(picomatch(normalizedFilename)).toEqual(expectedToMatch);
+    });
+
+    test.each(['constructor', 'src/__proto__/*.ts', '**/toString/**'])('workaroundPicomatchBug returns %s unchanged', (glob) => {
+        expect(workaroundPicomatchBug(glob)).toBe(glob);
     });
 });
 
@@ -154,7 +157,7 @@ function resolveFilename(pathInstance: PathInterface, filename: string | undefin
     const cwd = usingWin32 ? defaultCwdWin32 : defaultCwdPosix;
 
     filename = filename.replace('${cwd}', cwd);
-    filename = filename.startsWith('/') ? pathInstance.join(rootPrefix, filename) : filename;
+    filename = filename.startsWith('/') ? rootPrefix + filename : filename;
     filename = pathInstance.resolve(pathInstance.normalize(filename));
 
     return filename;
@@ -487,6 +490,17 @@ describe('Validate GlobMatcher', () => {
     }
 
     [pathWin32, pathPosix].forEach(runTestOn);
+
+    test.each`
+        glob                      | filename     | expected
+        ${'b'}                    | ${'/r/b '}   | ${false}
+        ${escapeGlobPath('b ')}   | ${'/r/b '}   | ${true}
+        ${'a/b'}                  | ${'/r/ a/b'} | ${false}
+        ${escapeGlobPath(' a/b')} | ${'/r/ a/b'} | ${true}
+    `('a name that starts or ends with a space: $glob $filename', ({ glob, filename, expected }) => {
+        const matcher = new GlobMatcher(glob, { root: '/r', nodePath: path.posix });
+        expect(matcher.match(filename)).toBe(expected);
+    });
 });
 
 describe('Validate GlobMatcher excludeMode patternsNormalizedToRoot', () => {

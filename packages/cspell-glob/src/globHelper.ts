@@ -1,6 +1,4 @@
 /* eslint-disable no-irregular-whitespace */
-import * as Path from 'node:path';
-
 import { FileUrlBuilder } from '@cspell/url';
 
 import type {
@@ -11,7 +9,6 @@ import type {
     PathInterface,
 } from './GlobMatcherTypes.ts';
 
-const { posix } = Path;
 // const relRegExp = /^\..?[\\/]/;
 /** test for glob patterns starting with `**` */
 const isGlobalPatternRegExp = /^!*[*]{2}/;
@@ -19,6 +16,9 @@ const isGlobalPatternRegExp = /^!*[*]{2}/;
 const hasGlobCharactersRegExp = /[*?{}[\]]/;
 
 const fileUrlBuilder = new FileUrlBuilder();
+
+/** The platform's path module: `path.win32` on Windows, `path.posix` elsewhere. */
+export const defaultPath: PathInterface = fileUrlBuilder.path;
 
 export const GlobPlaceHolders = {
     cwd: '${cwd}',
@@ -35,7 +35,7 @@ export const GlobPatterns = {
 
 let cacheCalls = 0;
 let cacheMisses = 0;
-let cachePath: PathInterface = Path;
+let cachePath: PathInterface = defaultPath;
 let cacheRoot: string = '<>';
 const cache = new Map<GlobPattern, GlobPatternWithRoot>();
 const debugCache = false;
@@ -49,7 +49,7 @@ const debugCache = false;
 export function fileOrGlobToGlob(
     fileOrGlob: string | GlobPattern,
     root: string,
-    path: PathInterface = Path,
+    path: PathInterface = defaultPath,
 ): GlobPatternWithRoot {
     if (cacheRoot !== root || cachePath !== path) {
         cache.clear();
@@ -79,7 +79,7 @@ export function fileOrGlobToGlob(
 function _fileOrGlobToGlob(
     fileOrGlob: string | GlobPattern,
     root: string,
-    path: PathInterface = Path,
+    path: PathInterface = defaultPath,
 ): GlobPatternWithRoot {
     const toForwardSlash = path.sep === '\\' ? (p: string) => p.replaceAll('\\', '/') : (p: string) => p;
     const builder = urlBuilder(path);
@@ -143,8 +143,8 @@ export function isGlobPatternNormalizedToRoot(
     return g.root === options.root;
 }
 
-function urlBuilder(path: PathInterface = Path): FileUrlBuilder {
-    return path === Path ? fileUrlBuilder : new FileUrlBuilder({ path });
+function urlBuilder(path: PathInterface = defaultPath): FileUrlBuilder {
+    return path === defaultPath ? fileUrlBuilder : new FileUrlBuilder({ path });
 }
 
 /**
@@ -234,7 +234,7 @@ export function normalizeGlobPatterns(patterns: GlobPattern[], options: Normaliz
             if (isGlobPatternNormalized(glob)) {
                 yield isGlobPatternNormalizedToRoot(glob, options)
                     ? glob
-                    : normalizeGlobToRoot(glob, options.root, options.nodePath || Path);
+                    : normalizeGlobToRoot(glob, options.root, options.nodePath || defaultPath);
                 continue;
             }
             yield* normalizeGlobPattern(glob, options);
@@ -245,7 +245,7 @@ export function normalizeGlobPatterns(patterns: GlobPattern[], options: Normaliz
 }
 
 export function normalizeGlobPattern(g: GlobPattern, options: NormalizeOptions): GlobPatternNormalized[] {
-    const { root, nodePath: path = Path, nested, extendNested = true } = options;
+    const { root, nodePath: path = defaultPath, nested, extendNested = true } = options;
     const builder = urlBuilder(path);
     const cwd = options.cwd ?? path.resolve();
     const cwdUrl = builder.toFileDirURL(cwd);
@@ -267,7 +267,8 @@ export function normalizeGlobPattern(g: GlobPattern, options: NormalizeOptions):
     if (gr.root.startsWith(GlobPlaceHolders.cwd)) {
         const relRoot = gr.root.replace(GlobPlaceHolders.cwd, './');
         const r = builder.toFileDirURL(relRoot, cwdUrl);
-        r.pathname = posix.normalize(r.pathname);
+        // `${cwd}/dir` becomes `.//dir`. The URL has already resolved `.` and `..`.
+        r.pathname = r.pathname.replaceAll(/\/{2,}/g, '/');
         gr.root = builder.urlToFilePathOrHref(r);
     }
     const isGlobalPattern = gIsGlobalPattern ?? isGlobalGlob(gr.glob);
@@ -580,9 +581,10 @@ function filePathOrGlobToGlob(filePathOrGlob: string, root: URL, builder: FileUr
 }
 
 /**
- * Escape a file path, so it can be used in a glob pattern to match only itself.
+ * Escape the glob symbols in a file path, so a glob made from it matches only that path.
  *
- * Use it to add a folder to a glob, such as `escapeGlobPath('wt (1)') + '/**'`.
+ * For example, the parentheses in `docs (old)` are escaped, so the glob does not also match `docs old`. To make a
+ * glob that matches inside a folder, use {@link globInFolder}.
  *
  * @param path - a file path that uses `/` as the separator.
  * @returns the path with its glob symbols escaped.
@@ -602,12 +604,13 @@ export function escapeGlobPath(path: string): string {
 }
 
 /**
- * Make a glob that matches inside a folder, such as `globInFolder('wt (1)', '**')`, which gives `wt [(]1[)]/**`.
+ * Join a folder path and a glob, with the folder's glob symbols escaped.
  *
- * The folder's glob symbols are escaped, so the result matches only inside that folder.
+ * For example, `globInFolder('src/components', '*.ts')` gives `src/components/*.ts`. In a folder named `docs (old)`,
+ * the parentheses are escaped, so the glob matches only inside that folder and not inside `docs old`.
  *
  * @param folder - a folder path that uses `/` as the separator. An empty path gives the glob unchanged.
- * @param glob - the glob to match inside the folder.
+ * @param glob - the glob to join to the folder.
  * @returns the joined glob.
  */
 export function globInFolder(folder: string, glob: string): string {
@@ -616,12 +619,18 @@ export function globInFolder(folder: string, glob: string): string {
     return prefix + '/' + glob.replace(/^\.?\//, '');
 }
 
+/**
+ * Returns the glob unchanged.
+ *
+ * It used to work around a picomatch bug with folder names such as `constructor`. picomatch has fixed the bug, so
+ * the glob can be passed to picomatch as it is.
+ *
+ * @deprecated No longer needed. Pass the glob directly. It will be removed in a future major version.
+ * @param glob - a glob pattern.
+ * @returns the same glob.
+ */
 export function workaroundPicomatchBug(glob: string): string {
-    const obj: Record<string, string> = {};
-    return glob
-        .split('/')
-        .map((s) => (obj[s] ? `{${s},${s}}` : s))
-        .join('/');
+    return glob;
 }
 
 export const __testing__ = {

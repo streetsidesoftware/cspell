@@ -12,6 +12,7 @@ describe('LintRequest', () => {
         ${{ files: ['one\ntwo'] }}                  | ${oc({ fileGlobs: [], files: ['one', 'two'] })}
         ${{ file: ['one', 'two'], files: ['two'] }} | ${oc({ fileGlobs: [], files: ['one', 'two'] })}
         ${{ file: ['one', 'two'] }}                 | ${oc({ fileGlobs: [], files: ['one', 'two'] })}
+        ${{ files: [' one \r\n two\n'] }}           | ${oc({ fileGlobs: [], files: [' one', ' two'] })}
         ${{ showContext: undefined }}               | ${oc({ showContext: 0 })}
         ${{ showContext: true }}                    | ${oc({ showContext: 20 })}
         ${{ showContext: 3 }}                       | ${oc({ showContext: 3 })}

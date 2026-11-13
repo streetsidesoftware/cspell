@@ -32,6 +32,9 @@ export const carriageReturnRegEx: RegExp = /\r/g;
 export const tabRegEx: RegExp = /\t/g;
 export const questionRegex: RegExp = /\?/g;
 export const hashRegex: RegExp = /#/g;
+/** The URL parser strips C0 control characters and spaces from both ends of its input. */
+// eslint-disable-next-line no-control-regex
+const edgeSpaceOrControlRegex = /^[\x00-\x20]+|[\x00-\x20]+$/g;
 
 export interface ParsedPath {
     /**
@@ -134,6 +137,7 @@ export class FileUrlBuilder {
         filePath = this.encodePathChars(filePath);
         filePath = filePath.replaceAll(questionRegex, '%3F');
         filePath = filePath.replaceAll(hashRegex, '%23');
+        filePath = filePath.replaceAll(edgeSpaceOrControlRegex, (s) => encodeURIComponent(s));
         const pathname = filePath.replaceAll('\\', '/');
         return pathname.replace(isWindowsPathRegEx, (drive) => `/${drive}`.toUpperCase());
     }

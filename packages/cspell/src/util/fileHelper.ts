@@ -177,7 +177,7 @@ export async function readFileListFile(listFile: string): Promise<string[]> {
         const content = await readFile(listFile);
         const lines = content
             .split('\n')
-            .map((a) => a.trim())
+            .map((a) => a.trimEnd())
             .filter((a) => !!a)
             .map((file) => path.resolve(relTo, file));
         return lines;

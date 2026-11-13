@@ -8,6 +8,7 @@ import { describe, expect, test } from 'vitest';
 import type { NormalizeOptions } from './globHelper.ts';
 import {
     __testing__,
+    defaultPath,
     escapeGlobPath,
     fileOrGlobToGlob,
     globInFolder,
@@ -121,7 +122,7 @@ describe('Validate Glob Normalization to root', () => {
         nodePath: PathInterface = Path,
     ): GlobPatternWithRoot {
         root = nodePath.normalize(nodePath.resolve(root || '.') + '/');
-        source = nodePath.join(root, source);
+        source = nodePath.resolve(root, source);
         pattern = typeof pattern === 'string' ? { glob: pattern } : pattern;
         const isGlobalPattern = isGlobalGlob(pattern.glob);
         root = nodePath.normalize((pattern.root ?? root) + nodePath.sep);
@@ -451,6 +452,7 @@ describe('Validate Glob Normalization to root', () => {
         ${{ glob: '*.ts', root: '${cwd}/a' }}        | ${nOpts({ cwd: 'myCwd' })}      | ${[gN('*.ts', nOpts().nodePath.resolve('myCwd/a'), '*.ts', '${cwd}/a')]}
         ${{ glob: '${cwd}/*.ts', root: 'a' }}        | ${nOpts({ cwd: 'myCwd' })}      | ${[gN('*.ts', nOpts().nodePath.resolve('myCwd'), '${cwd}/*.ts', 'a')]}
         ${{ glob: 'a/*.ts', root: '${cwd}/myRoot' }} | ${nOpts({ root: 'otherRoot' })} | ${[gN('a/*.ts', nOpts().nodePath.resolve('myRoot'), 'a/*.ts', '${cwd}/myRoot')]}
+        ${{ glob: '*.ts', root: '${cwd}//a//b' }}    | ${nOpts()}                      | ${[gN('*.ts', nOpts().nodePath.resolve('a/b'), '*.ts', '${cwd}//a//b')]}
     `('normalizeGlobPattern glob: $glob, options: $options', ({ glob, options, expected }) => {
         expect(normalizeGlobPattern(glob, options)).toEqual(expected);
     });
@@ -610,6 +612,13 @@ describe('Validate cspell-glob assumptions', () => {
     });
 });
 
+describe('Validate @cspell/url assumptions', () => {
+    test('the default FileUrlBuilder path is the platform path module', () => {
+        expect(defaultPath).toBe(process.platform === 'win32' ? win32 : posix);
+        expect(new FileUrlBuilder().path).toBe(defaultPath);
+    });
+});
+
 describe('globInFolder', () => {
     test.each`
         folder      | glob       | expected
@@ -680,7 +689,6 @@ function makePathInterface(nodePath: PathInterface, cwd: string): PathInterface 
     return {
         sep: nodePath.sep,
         normalize: (p) => nodePath.normalize(p),
-        join: (...paths) => nodePath.join(...paths),
         isAbsolute: (p) => nodePath.isAbsolute(p),
         relative: (...p) => nodePath.relative(...p),
         parse: (...p) => nodePath.parse(...p),
