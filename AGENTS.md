@@ -75,7 +75,7 @@ Each rule is written for people in the linked section. Read it before working in
   library's behavior, add a `Validate <library> assumptions` test for it. See [Tests](docs/development.md#tests).
 - **Comments:** few, short, and accurate. Leave existing comments alone unless you are changing that function. Read
   [Writing comments](docs/writing-comments.md) before writing or changing one.
-- **Doc comments** on published packages' public API, and on config options, are user documentation. Internal
+- **Doc comments** on the public API of every package, and on config options, are user documentation. Internal
   comments are for maintainers. See [Public or internal](docs/writing-comments.md#public-or-internal).
 - **Invisible characters:** write them as escape sequences. The one exception is in doc comments. See
   [Invisible characters](docs/code-style.md#invisible-characters).

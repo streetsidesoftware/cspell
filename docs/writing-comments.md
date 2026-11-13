@@ -26,15 +26,15 @@ A comment is public when users can read it without opening cspell's source. Two 
   `packages/cspell-eslint-plugin/src/common/options.cts`. Their doc comments become the descriptions in a JSON schema,
   which editors show while someone edits a config file. The `cspell-types` ones also make up the website's Properties
   page.
-- **The public API.** Everything a published package's `package.json` `exports` reach: each function, class, type and
-  constant exported from its entry files, and every member of those types. Other projects build on these packages, and
-  the doc comment is what their editor shows on hover.
+- **The public API.** Everything a package's `package.json` `exports` reach, whether or not the package is published
+  today: each function, class, type and constant exported from its entry files, and every member of those types. Other
+  projects build on these packages, and the doc comment is what their editor shows on hover.
 
 Everything else is internal:
 
 - code a package's entry files don't export, even when it has the `export` keyword
 - tests and scripts
-- the private package `@cspell/dictionary-bundler-plugin`
+- a package whose name starts with `@internal/`
 
 To check, follow the package's `exports` to its entry file. For `cspell-types`, `cspell-lib` and `cspell-trie-lib`, the
 committed [`api/` files](./build-and-packaging.md#the-api-files) list the public API.
