@@ -8,11 +8,13 @@ import { describe, expect, test } from 'vitest';
 import type { NormalizeOptions } from './globHelper.ts';
 import {
     __testing__,
+    escapeGlobPath,
     fileOrGlobToGlob,
     normalizeGlobPattern,
     normalizeGlobPatterns,
     normalizeGlobToRoot,
 } from './globHelper.ts';
+import { GlobMatcher } from './GlobMatcher.ts';
 import type {
     GlobPattern,
     GlobPatternNormalized,
@@ -533,6 +535,96 @@ describe('Validate minimatch assumptions', () => {
             expect(r).toBe(expected);
         },
     );
+});
+
+// Folder names with glob symbols, and names a wrong escape would match instead.
+const foldersWithSymbols = [
+    'a[b]',
+    'ab',
+    'wt (1)',
+    'wt 1',
+    'c{d,e}',
+    'cd',
+    'd*',
+    'da',
+    'e?',
+    'ef',
+    'f|g',
+    '!imp',
+    'imp',
+    'h/!i',
+    'h/!(i)',
+    'h/j',
+    '@(k)',
+    'k',
+    'l]m',
+    'v #w',
+    'v ',
+    ' a',
+    'a',
+    'b/c ',
+    'b/c',
+    'x/y',
+    // On Windows, `\` is a path separator.
+    ...(process.platform === 'win32' ? [] : ['x\\y']),
+];
+
+describe('escapeGlobPath', () => {
+    test.each`
+        path               | expected
+        ${''}              | ${''}
+        ${'src/code'}      | ${'src/code'}
+        ${'wt (1)'}        | ${'wt [(]1[)]'}
+        ${'a[b]'}          | ${'a[[]b]'}
+        ${'c{d,e}'}        | ${'c[{]d,e[}]'}
+        ${'d*/e?'}         | ${'d[*]/e[?]'}
+        ${'f|g'}           | ${'f[|]g'}
+        ${'v #w'}          | ${'v [#]w'}
+        ${'x\\y'}          | ${'x[\\\\]y'}
+        ${'!imp'}          | ${'@(!)imp'}
+        ${'h/!i'}          | ${'h/!i'}
+        ${'h/!(i)'}        | ${'h/![(]i[)]'}
+        ${'+(a)/@(b)'}     | ${'+[(]a[)]/@[(]b[)]'}
+        ${'l]m'}           | ${'l]m'}
+        ${' a/b '}         | ${'[ ]a/b[ ]'}
+        ${'\ta b\t'}       | ${'[\t]a b[\t]'}
+        ${' '}             | ${'[ ]'}
+        ${'.worktrees/wt'} | ${'.worktrees/wt'}
+    `('escapeGlobPath $path', ({ path, expected }) => {
+        expect(escapeGlobPath(path)).toBe(expected);
+    });
+});
+
+describe('Validate cspell-glob assumptions', () => {
+    test.each(foldersWithSymbols)('the escaped folder "%s" matches only itself', (folder) => {
+        const root = '/r';
+        const matcher = new GlobMatcher(escapeGlobPath(folder) + '/**', { root, nodePath: posix });
+        const matched = foldersWithSymbols.filter((f) => matcher.match(`${root}/${f}/file.txt`));
+        expect(matched).toEqual([folder]);
+    });
+
+    test.each([' b', 'b ', '\tb\t', ' '])('trimGlob keeps the escaped whitespace of "%s"', (name) => {
+        const escaped = escapeGlobPath(name);
+        expect(trimGlob(escaped)).toBe(escaped);
+    });
+});
+
+describe('normalizeGlobToRoot escapes the folder it adds', () => {
+    test.each(foldersWithSymbols)('folder "%s"', (folder) => {
+        const root = '/r/';
+        const glob: GlobPatternWithRoot = { glob: '*.md', root: `${root}${folder}/`, isGlobalPattern: false };
+        const result = normalizeGlobToRoot(glob, root, posix);
+        expect(result).toEqual({ ...glob, glob: escapeGlobPath(folder + '/') + '*.md', root });
+
+        const matcher = new GlobMatcher(result.glob, { root, nodePath: posix });
+        const matched = foldersWithSymbols.filter((f) => matcher.match(`${root}${f}/readme.md`));
+        expect(matched).toEqual([folder]);
+    });
+
+    test('a negated glob', () => {
+        const glob: GlobPatternWithRoot = { glob: '!*.md', root: '/r/!imp/', isGlobalPattern: false };
+        expect(normalizeGlobToRoot(glob, '/r', posix)).toEqual({ ...glob, glob: '!@(!)imp/*.md', root: '/r/' });
+    });
 });
 
 function makePathInterface(nodePath: PathInterface, cwd: string): PathInterface {
