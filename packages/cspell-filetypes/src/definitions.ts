@@ -158,7 +158,7 @@ export const definitions: FileTypeDefinitions = [
     { id: 'less', extensions: ['.less'] },
     { id: 'lisp', extensions: ['.fasl', '.l', '.lisp', '.lsp'] },
     { id: 'literate haskell', extensions: ['.lhs'] },
-    { id: 'lock', extensions: ['.lock'], filenames: ['Cargo.lock', 'berksfile.lock', 'composer.lock', 'package-lock.json'] },
+    { id: 'lock', extensions: ['.lock'], filenames: ['Cargo.lock', 'berksfile.lock', 'composer.lock', 'package-lock.json', 'pnpm-lock.yaml'] },
     { id: 'log', extensions: ['.log'], filenames: ['*.log.?'] },
     { id: 'lua', extensions: ['.lua'] },
     { id: 'makefile', extensions: ['.mak', '.mk'], filenames: ['GNUmakefile', 'Makefile', 'OCamlMakefile', 'makefile'] },
