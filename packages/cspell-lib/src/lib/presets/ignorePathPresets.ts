@@ -1,36 +1,50 @@
 import type { CSpellSettings, GlobDef } from '@cspell/cspell-types';
+import { toFileDirURL, toFilePathOrHref } from '@cspell/url';
+
+import { getFileSystem } from '../fileSystem.js';
+import { findNestedWorktrees } from './nestedWorktrees.js';
 
 const source = 'ignorePathPresets.git';
+const nestedWorktreesSource = 'ignorePathPresets.nestedWorktrees';
 
 // Anchored to the root, so git files outside the root, such as a submodule's message file, are not matched.
 // Keeps git's message files, such as `COMMIT_EDITMSG`, for the `commit-msg` hook, also those of linked worktrees.
 // `isGitFileInRoot` checks the same files.
-const gitIgnorePaths: GlobDef[] = [
-    { glob: '/**/.git/!(*MSG|EDIT_DESCRIPTION|worktrees)', source },
-    { glob: '/**/.git/worktrees/*/!(*MSG|EDIT_DESCRIPTION)', source },
-];
+const gitIgnorePaths = ['/**/.git/!(*MSG|EDIT_DESCRIPTION|worktrees)', '/**/.git/worktrees/*/!(*MSG|EDIT_DESCRIPTION)'];
 
 /**
  * Get the globs of the enabled `ignorePathPresets`, for a file search to skip.
  *
- * The globs have no root. They match only below the root they are resolved against.
- *
  * @param settings - the settings with `ignorePathPresets`.
+ * @param root - the URL of the folder the presets apply to. The globs match only below it.
  * @returns the globs to ignore.
  */
-export function calcIgnorePathGlobs(settings: Pick<CSpellSettings, 'ignorePathPresets'>): GlobDef[] {
-    return settings.ignorePathPresets?.git === false ? [] : gitIgnorePaths;
+export async function calcIgnorePathGlobs(settings: CSpellSettings, root: URL): Promise<GlobDef[]> {
+    const presets = settings.ignorePathPresets;
+    const rootDir = toFileDirURL(root);
+    const rootPath = toFilePathOrHref(rootDir);
+    const globs = presets?.git === false ? [] : gitIgnorePaths.map((glob) => ({ glob, root: rootPath, source }));
+    if (presets?.nestedWorktrees === false) return globs;
+    const worktrees = await findNestedWorktrees(rootDir, getFileSystem());
+    const worktreeGlobs = worktrees.map((folder) => ({
+        glob: '/**',
+        root: toFilePathOrHref(folder),
+        source: nestedWorktreesSource,
+    }));
+    return [...globs, ...worktreeGlobs];
 }
 
 /**
- * Check if the enabled `ignorePathPresets` ignore a file.
+ * Check if the enabled `ignorePathPresets` ignore a file, by its path alone.
+ *
+ * It does not look for nested worktrees: the globs from {@link calcIgnorePathGlobs} cover them.
  *
  * @param url - the URL of the file.
  * @param root - the URL of the folder the presets apply to. Files outside it are not ignored.
  * @param settings - the settings with `ignorePathPresets`.
  * @returns `true` if the file is ignored.
  */
-export function isIgnoredByPresets(url: URL, root: URL, settings: Pick<CSpellSettings, 'ignorePathPresets'>): boolean {
+export function isIgnoredByPresets(url: URL, root: URL, settings: CSpellSettings): boolean {
     return settings.ignorePathPresets?.git !== false && isGitFileInRoot(url, root);
 }
 

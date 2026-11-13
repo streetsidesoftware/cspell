@@ -6,7 +6,7 @@ import { isAsyncIterable, operators, opFilter, pipeAsync } from '@cspell/cspell-
 import { pipe } from '@cspell/cspell-pipe/sync';
 import type { Glob, RunResult } from '@cspell/cspell-types';
 import { MessageTypes } from '@cspell/cspell-types';
-import { toFileURL } from '@cspell/url';
+import { toFileDirURL, toFileURL } from '@cspell/url';
 import { unindent } from '@streetsidesoftware/unindent';
 import chalk from 'chalk';
 import { dictionaryCacheEnableLogging, dictionaryCacheGetLog } from 'cspell-dictionary';
@@ -338,34 +338,10 @@ async function determineFilesToCheck(
                 }
             }
         }
-        const { gitIgnore, allGlobs, excludeGlobs, normalizedExcludes } = globInfo;
-
-        // Get Exclusions from the config files.
+        const { gitIgnore, allGlobs } = globInfo;
         const { root } = cfg;
-        const globsToExcludeRaw = [
-            ...(configInfo.config.ignorePaths || []),
-            ...calcIgnorePathGlobs(configInfo.config),
-            ...excludeGlobs,
-        ];
-        const globsToExclude = globsToExcludeRaw.filter((g) => !globPattern(g).startsWith('!'));
-        if (globsToExclude.length !== globsToExcludeRaw.length) {
-            const globs = globsToExcludeRaw.map((g) => globPattern(g)).filter((g) => g.startsWith('!'));
-            const msg = `Negative glob exclusions are not supported: ${globs.join(', ')}`;
-            reporter.info(msg, MessageTypes.Warning);
-        }
-        const globMatcher = buildGlobMatcher(globsToExclude, root, true);
-        const ignoreGlobs = extractGlobsFromMatcher(globMatcher);
-        // cspell:word nodir
-        const globOptions: GlobOptions = {
-            root,
-            cwd: root,
-            ignore: [...ignoreGlobs, ...normalizedExcludes],
-            nodir: true,
-        };
+        const globMatcher = await buildExcludeGlobMatcher();
         const enableGlobDot = cfg.enableGlobDot ?? configInfo.config.enableGlobDot;
-        if (enableGlobDot !== undefined) {
-            globOptions.dot = enableGlobDot;
-        }
 
         // `--force-check` wins over the `files` setting, but not over globs on the command line.
         const includeFilter =
@@ -396,22 +372,9 @@ async function determineFilesToCheck(
     }
 
     async function determineFilesToCheckFromGlobs(): Promise<FileToProcess[] | AsyncIterable<FileToProcess>> {
-        const { gitIgnore, fileGlobs, excludeGlobs, normalizedExcludes } = globInfo;
-
-        // Get Exclusions from the config files.
+        const { gitIgnore, fileGlobs, normalizedExcludes } = globInfo;
         const { root } = cfg;
-        const globsToExcludeRaw = [
-            ...(configInfo.config.ignorePaths || []),
-            ...calcIgnorePathGlobs(configInfo.config),
-            ...excludeGlobs,
-        ];
-        const globsToExclude = globsToExcludeRaw.filter((g) => !globPattern(g).startsWith('!'));
-        if (globsToExclude.length !== globsToExcludeRaw.length) {
-            const globs = globsToExcludeRaw.map((g) => globPattern(g)).filter((g) => g.startsWith('!'));
-            const msg = `Negative glob exclusions are not supported: ${globs.join(', ')}`;
-            reporter.info(msg, MessageTypes.Warning);
-        }
-        const globMatcher = buildGlobMatcher(globsToExclude, root, true);
+        const globMatcher = await buildExcludeGlobMatcher();
         const ignoreGlobs = extractGlobsFromMatcher(globMatcher);
         // cspell:word nodir
         const globOptions: GlobOptions = {
@@ -447,6 +410,25 @@ async function determineFilesToCheck(
             : filesToProcess(pipe(filtered, opFilterExcludedFiles)).filter(countFiles());
 
         return files;
+    }
+
+    /**
+     * Build the matcher for the files to exclude: `ignorePaths`, the enabled `ignorePathPresets`, and `--exclude`.
+     */
+    async function buildExcludeGlobMatcher(): Promise<GlobMatcher> {
+        const { root } = cfg;
+        const globsToExcludeRaw = [
+            ...(configInfo.config.ignorePaths || []),
+            ...(await calcIgnorePathGlobs(configInfo.config, toFileDirURL(root))),
+            ...globInfo.excludeGlobs,
+        ];
+        const globsToExclude = globsToExcludeRaw.filter((g) => !globPattern(g).startsWith('!'));
+        if (globsToExclude.length !== globsToExcludeRaw.length) {
+            const globs = globsToExcludeRaw.map((g) => globPattern(g)).filter((g) => g.startsWith('!'));
+            const msg = `Negative glob exclusions are not supported: ${globs.join(', ')}`;
+            reporter.info(msg, MessageTypes.Warning);
+        }
+        return buildGlobMatcher(globsToExclude, root, true);
     }
 
     function isExcluded(filename: string, globMatcherExclude: GlobMatcher): boolean {
