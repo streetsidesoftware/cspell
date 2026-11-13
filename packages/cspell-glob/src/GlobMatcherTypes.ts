@@ -2,7 +2,6 @@
 
 export interface PathInterface {
     normalize(p: string): string;
-    join(...paths: string[]): string;
     resolve(...paths: string[]): string;
     relative(from: string, to: string): string;
     isAbsolute(p: string): boolean;

@@ -157,7 +157,7 @@ function resolveFilename(pathInstance: PathInterface, filename: string | undefin
     const cwd = usingWin32 ? defaultCwdWin32 : defaultCwdPosix;
 
     filename = filename.replace('${cwd}', cwd);
-    filename = filename.startsWith('/') ? pathInstance.join(rootPrefix, filename) : filename;
+    filename = filename.startsWith('/') ? rootPrefix + filename : filename;
     filename = pathInstance.resolve(pathInstance.normalize(filename));
 
     return filename;

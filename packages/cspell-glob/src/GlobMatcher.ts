@@ -1,9 +1,13 @@
-import * as Path from 'node:path';
-
 import { FileUrlBuilder } from '@cspell/url';
 import pm from 'picomatch';
 
-import { GlobPatterns, isRelativeValueNested, normalizeGlobPatterns, normalizeGlobToRoot } from './globHelper.ts';
+import {
+    defaultPath,
+    GlobPatterns,
+    isRelativeValueNested,
+    normalizeGlobPatterns,
+    normalizeGlobToRoot,
+} from './globHelper.ts';
 import type {
     GlobMatch,
     GlobPattern,
@@ -149,7 +153,7 @@ export class GlobMatcher {
                 : (rootOrOptions ?? {});
         const mode = options.mode ?? 'exclude';
         const isExcludeMode = mode !== 'include';
-        const nodePath = options.nodePath ?? _nodePath ?? Path;
+        const nodePath = options.nodePath ?? _nodePath ?? defaultPath;
         this.path = nodePath;
         const cwd = options.cwd ?? nodePath.resolve();
         const dot = options.dot ?? isExcludeMode;
