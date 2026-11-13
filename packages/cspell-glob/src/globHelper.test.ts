@@ -564,8 +564,9 @@ const foldersWithSymbols = [
     'a',
     'b/c ',
     'b/c',
-    'x\\y',
     'x/y',
+    // On Windows, `\` is a path separator.
+    ...(process.platform === 'win32' ? [] : ['x\\y']),
 ];
 
 describe('escapeGlobPath', () => {
