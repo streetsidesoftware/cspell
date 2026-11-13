@@ -936,6 +936,553 @@ Related: #8975, streetsidesoftware/vscode-spell-checker#3099, streetsidesoftware
 
 </details>
 
+## v10.5.0 (2026-11-13)
+
+### Features
+
+<details>
+<summary>feat: Skip nested git worktrees by default (<a href="https://github.com/streetsidesoftware/cspell/pull/9604">#9604</a>)</summary>
+
+### feat: Skip nested git worktrees by default ([#9604](https://github.com/streetsidesoftware/cspell/pull/9604))
+
+## Summary
+
+cspell now skips git worktrees inside the root folder, such as `.worktrees/feature` or `.claude/worktrees/feature`. A worktree is another checkout of the same repository, often of another branch, so its files are not the files being checked.
+
+A new preset in `ignorePathPresets`, `nestedWorktrees`, can disable this.
+
+Fixes #9515
+
+## Feature
+
+A repository with a worktree of its `feature` branch, made with `git worktree add worktrees/feature feature`:
+
+```text
+project/
+  README.md
+  worktrees/
+    feature/
+      README.md
+```
+
+Before, running cspell in `project/` checked both copies of `README.md`:
+
+```text
+$ cspell .
+README.md:3:21 - Unknown word (finshed) fix: (finished)
+worktrees/feature/README.md:3:21 - Unknown word (finshed) fix: (finished)
+CSpell: Files checked: 2, Issues found: 2 in 2 files.
+```
+
+After, it checks only the repository's own `README.md`:
+
+```text
+$ cspell .
+README.md:3:21 - Unknown word (finshed) fix: (finished)
+CSpell: Files checked: 1, Issues found: 1 in 1 file.
+```
+
+Running cspell in `worktrees/feature/` still checks that worktree.
+
+To check nested worktrees again:
+
+**`cspell.json`**
+
+```json
+{
+  "ignorePathPresets": { "nestedWorktrees": false }
+}
+```
+
+What the `nestedWorktrees` preset does:
+
+- It is enabled by default.
+- It skips the worktrees whether or not `.gitignore` excludes them, and with or without `--gitignore`.
+- It finds the worktrees in the repository's own records, in `.git/worktrees`. Finding them does not search the worktrees' folders, so it stays fast however many worktrees there are.
+- It skips only the worktrees of the repository that holds the root folder. Submodules and other repositories inside the root folder are still checked.
+- A run started inside a worktree checks that worktree's files.
+- When the path to the root folder goes through a symbolic link, it doesn't match the paths git recorded, so the worktrees are checked.
+- A file in a nested worktree named on the command line is skipped too, unless `--force-check` is given, as with `ignorePaths`.
+
+<details>
+<summary>Technical Details</summary>
+
+The worktree folders are added to the globs the file search ignores, so the search never enters them. Glob symbols in a folder's name, such as `(`, are escaped.
+
+</details>
+
+---
+
+</details>
+
+<details>
+<summary>feat: Add `ignorePathPresets` and skip git's own files by default (<a href="https://github.com/streetsidesoftware/cspell/pull/9600">#9600</a>)</summary>
+
+### feat: Add `ignorePathPresets` and skip git's own files by default ([#9600](https://github.com/streetsidesoftware/cspell/pull/9600))
+
+## Summary
+
+cspell now skips git's own files inside the root folder:
+
+- the `.git` file that git puts in a worktree or a submodule
+- the files inside `.git` folders
+
+Git's message files, such as `.git/COMMIT_EDITMSG`, are still checked, so a `commit-msg` hook that runs `cspell .git/COMMIT_EDITMSG` keeps working.
+
+A new setting, `ignorePathPresets`, can disable this.
+
+Fixes #9590
+
+## Feature
+
+cspell only reaches these files when dot files are checked (`--dot` or `enableGlobDot`), or when they are named on the command line.
+
+Before, checking a git worktree with `--dot` reported the words in its `.git` file:
+
+```text
+$ cspell --dot .
+.git:1:1 - Unknown word (gitdir)
+.git:1:31 - Unknown word (worktrees)
+CSpell: Files checked: 2, Issues found: 2 in 1 file.
+```
+
+After:
+
+```text
+$ cspell --dot .
+CSpell: Files checked: 1, skipped: 1, Issues found: 0 in 0 files.
+```
+
+No `ignorePaths` glob could do this before: one that ignores the `.git` file also ignores `.git/COMMIT_EDITMSG`. Rules you already have for `.git` keep working.
+
+To check git's own files again:
+
+**`cspell.json`**
+
+```json
+{
+  "ignorePathPresets": { "git": false }
+}
+```
+
+What the `git` preset does:
+
+- It is enabled by default.
+- It keeps git's message files: the files whose names end in `MSG`, such as `COMMIT_EDITMSG`, `MERGE_MSG`, and `TAG_EDITMSG`, and `EDIT_DESCRIPTION`. They are kept directly inside a `.git` folder, and inside a linked worktree's folder in `.git/worktrees`.
+- It skips only files inside the root folder. A hook in a worktree or a submodule that passes the message file with `--file` keeps working: git keeps that file in the main repository's `.git` folder, outside the root.
+- With the root inside a `.git` folder, the files there are checked.
+- A config that sets `ignorePathPresets` only changes the presets it names. Presets from imported configs are combined.
+
+<details>
+<summary>Technical Details</summary>
+
+The preset's globs are relative to the root, so they match only below it. The file search skips the files and folders inside a `.git` folder, except the message files and the folders that hold the message files of linked worktrees. A `.git` file it finds, or one named with `--file`, is reported as skipped.
+
+New exports:
+
+- `cspell-lib`: `calcIgnorePathGlobs`, which returns the globs of the enabled presets. The `cspell` command line adds them to the globs it ignores while searching.
+- `cspell-lib`: `isIgnoredByPresets`, which checks one file's URL against the enabled presets, relative to a root URL. The `cspell` command line uses it to skip a file such as the `.git` file.
+- `@cspell/cspell-types`: `IgnorePathPresets`, the type of the setting.
+
+</details>
+
+---
+
+</details>
+
+<details>
+<summary>feat: Add `features.overrideGlobsMatchFilesOnly` so override globs match only the path they name (<a href="https://github.com/streetsidesoftware/cspell/pull/9598">#9598</a>)</summary>
+
+### feat: Add `features.overrideGlobsMatchFilesOnly` so override globs match only the path they name ([#9598](https://github.com/streetsidesoftware/cspell/pull/9598))
+
+## Summary
+
+New feature option `features.overrideGlobsMatchFilesOnly`. When it is enabled, a `filename` glob in `overrides` matches only the path it names, not the files inside a folder with that name. It is disabled by default, so existing configs keep working.
+
+See #9590.
+
+## Feature
+
+Today an override glob also matches the files inside a folder with the same name. For example, `examples.ts` also matches every file inside a folder named `examples.ts`, and `src/**` also matches a file named `src`.
+
+With the option enabled, each glob matches only what it names. To apply an override to the files in a folder, end the glob with `/`.
+
+**`cspell.config.yaml`**
+
+```yaml
+features:
+  overrideGlobsMatchFilesOnly: true
+overrides:
+  # The files in every folder named `fixtures`.
+  - filename: 'fixtures/'
+    enabled: false
+```
+
+What a glob matches:
+
+| Glob          | Disabled (default)                                                    | Enabled                         |
+| ------------- | --------------------------------------------------------------------- | ------------------------------- |
+| `examples.ts` | A file named `examples.ts`, and the files in a folder with that name. | A file named `examples.ts`.     |
+| `/src`        | A file named `src` at the root, and the files in the `src` folder.    | A file named `src` at the root. |
+| `src/**`      | The files in the `src` folder, and a file named `src`.                | The files in the `src` folder.  |
+
+- The option can be set in an imported config. It applies to all overrides, including the ones from imported configs.
+- The default is planned to become `true` in v11.
+
+<details>
+<summary>Technical Details</summary>
+
+- `cspell-glob`: the glob matcher has a new option, `extendNested`. It defaults to `true`, which keeps today's behavior: a glob is extended to also match the files nested beneath a folder with that name. With `false`, the glob is not extended, and a glob ending in `/**` matches only the files beneath the folder.
+- With the feature enabled, override globs are matched with `extendNested: false`.
+
+</details>
+
+---
+
+</details>
+
+<details>
+<summary>fix: Add a Vim file type for .vim files and .vimrc (<a href="https://github.com/streetsidesoftware/cspell/pull/9579">#9579</a>)</summary>
+
+### fix: Add a Vim file type for .vim files and .vimrc ([#9579](https://github.com/streetsidesoftware/cspell/pull/9579))
+
+Adds a `vim` file type with the `.vim` extension and the filenames `.vimrc`, `_vimrc`, `vimrc`, `.gvimrc` and `_gvimrc`, as Jason3S confirmed on the issue. `filetypes.test.ts` checks each of them.
+
+Closes #9489
+
+---
+
+</details>
+
+### Fixes
+
+<details>
+<summary>fix: Check files in a folder whose name starts with a space (<a href="https://github.com/streetsidesoftware/cspell/pull/9608">#9608</a>)</summary>
+
+### fix: Check files in a folder whose name starts with a space ([#9608](https://github.com/streetsidesoftware/cspell/pull/9608))
+
+## Summary
+
+Files in a folder whose name starts with a space can now be checked. Before, cspell found the file but dropped the space from its path, then reported it as not found.
+
+This affects:
+
+- globs, such as `cspell "**/readme.txt"` or `cspell "./ notes/readme.txt"`
+- `--file` and `--file-list` entries, such as ` notes/readme.txt`
+
+Globs, such as those in `ignorePaths` and `overrides`, now match a file whose name ends with a space correctly. For a file named `b ` (with a trailing space):
+
+- `b` no longer matches it.
+- `b[ ]` now matches it.
+
+Before, with ` notes/readme.txt` (the folder name starts with a space):
+
+```text
+$ cspell --no-progress "**/readme.txt"
+Linter: File not found: "/projects/demo/notes/readme.txt"
+CSpell: Files checked: 0, skipped: 1, Issues found: 0 in 1 file with 1 error.
+```
+
+After:
+
+```text
+$ cspell --no-progress "**/readme.txt"
+ notes/readme.txt:1:12 - Unknown word (mispeling)
+CSpell: Files checked: 1, Issues found: 1 in 1 file.
+```
+
+Entries in `--file` and `--file-list` keep their leading spaces. Trailing spaces and Windows line endings are still removed.
+
+<details>
+<summary>Technical Details</summary>
+
+- Found paths and command-line paths are relative to the current folder, and cspell turns them into file URLs. The URL standard drops spaces and control characters from both ends of a relative URL, so ` notes/readme.txt` became `notes/readme.txt`. `@cspell/url` now encodes those characters before it builds the URL.
+- `--file` and `--file-list` entries were trimmed on both sides. Now only the end is trimmed.
+
+</details>
+
+---
+
+</details>
+
+<details>
+<summary>fix: Check folders named on the command line with `#` or a leading space (<a href="https://github.com/streetsidesoftware/cspell/pull/9610">#9610</a>)</summary>
+
+### fix: Check folders named on the command line with `#` or a leading space ([#9610](https://github.com/streetsidesoftware/cspell/pull/9610))
+
+## Summary
+
+A folder named on the command line is now checked when its name contains a `#` after a space, starts with `#`, or starts with a space. Before, cspell found no files in it, or checked a different folder.
+
+`cspell-glob` also exports `globInFolder`, to make a glob that matches inside a folder. The folder's glob symbols are escaped.
+
+## Fix
+
+A folder `notes #2` with `todo.md` inside.
+
+Before:
+
+```text
+$ cspell "notes #2"
+CSpell: Files checked: 0, Issues found: 0 in 0 files.
+No files found to check.
+```
+
+After:
+
+```text
+$ cspell "notes #2"
+notes #2/todo.md:1:25 - Unknown word (finshed) fix: (finished)
+CSpell: Files checked: 1, Issues found: 1 in 1 file.
+```
+
+Before, a folder named ` notes` (with a leading space) checked the folder `notes` instead.
+
+<details>
+<summary>Technical Details</summary>
+
+- When an argument names a folder, cspell adds `/**` to it. The folder name was used as glob text, so ` #2/**` was read as a comment, and a leading space was trimmed. The folder name is now escaped.
+- When cspell runs below a config file's folder, that config's globs are rebased to the new root. The folder names on the way are now escaped before they are compared with the globs, so globs with escaped folder names, such as `wt [(]1[)]/**`, are rebased fully. This only narrows the first pass of the file search; which files are checked does not change.
+
+</details>
+
+---
+
+</details>
+
+<details>
+<summary>fix: Glob symbols in a config folder's name no longer match other folders (<a href="https://github.com/streetsidesoftware/cspell/pull/9605">#9605</a>)</summary>
+
+### fix: Glob symbols in a config folder's name no longer match other folders ([#9605](https://github.com/streetsidesoftware/cspell/pull/9605))
+
+## Summary
+
+When a config file sits in a folder whose name has glob symbols, such as `docs (old)`, its `files` and `ignorePaths` globs could match files in other folders. The folder name was read as part of the glob, so `docs (old)` also matched `docs old`.
+
+Folder names are now escaped before they are added to a glob.
+
+`cspell-glob` also exports `escapeGlobPath`, to add a folder to a glob so that it matches only that folder.
+
+## Fix
+
+Files:
+
+- `docs (old)/cspell.json`: `{ "ignorePaths": ["*.md"] }`
+- `docs (old)/a.md`
+- `docs old/b.md`
+
+Before, `docs old/b.md` was skipped:
+
+```text
+$ cspell --no-progress --config "docs (old)/cspell.json" "**/*.md"
+CSpell: Files checked: 0, Issues found: 0 in 0 files.
+No files found to check.
+```
+
+After:
+
+```text
+$ cspell --no-progress --config "docs (old)/cspell.json" "**/*.md"
+docs old/b.md:1:1 - Unknown word (helo) fix: (hello)
+docs old/b.md:1:6 - Unknown word (wrold) fix: (world)
+CSpell: Files checked: 1, Issues found: 2 in 1 file.
+```
+
+With `{ "files": ["*.md"] }` in the same config, cspell used to check `docs old/b.md` instead of `docs (old)/a.md`. It now checks `docs (old)/a.md`.
+
+<details>
+<summary>Technical Details</summary>
+
+Each glob symbol in a folder name becomes a character class, such as `[(]`, so the escape also works on Windows, where a `\` in a glob becomes `/`. A `!` at the start becomes `@(!)`. Whitespace at the start or the end is escaped too, so it is not trimmed.
+
+</details>
+
+---
+
+</details>
+
+<details>
+<summary>fix: correct the `ignorePaths` default and its `.git/COMMIT_EDITMSG` advice (<a href="https://github.com/streetsidesoftware/cspell/pull/9599">#9599</a>)</summary>
+
+### fix: correct the `ignorePaths` default and its `.git/COMMIT_EDITMSG` advice ([#9599](https://github.com/streetsidesoftware/cspell/pull/9599))
+
+## Summary
+
+The documentation for `ignorePaths` (hover text, JSON schema, website) described a default and a `.git` workaround that don't match what cspell does. This corrects it. Nothing about how cspell works has changed.
+
+- The default is `[]`, not `["node_modules/"]`.
+- The `cspell` command line skips `node_modules/**` on its own, and only when no `--exclude` is given.
+- The warning about `.git/COMMIT_EDITMSG` now suggests `[".git/!(COMMIT_EDITMSG)"]`. It ignores everything in `.git` except the commit message. The old suggestion still let files such as `.git/config` and `.git/hooks/*` be checked.
+
+---
+
+</details>
+
+<details>
+<summary>fix: allow globs with `--file` again (<a href="https://github.com/streetsidesoftware/cspell/pull/9601">#9601</a>)</summary>
+
+### fix: allow globs with `--file` again ([#9601](https://github.com/streetsidesoftware/cspell/pull/9601))
+
+## Summary
+
+Since v10.2.0, `cspell lint` refused globs combined with `--file` or `--files`, with `error: mixing globs and --file is not supported`. That broke command lines that worked before, including two examples in `cspell lint --help`. They work again: the globs filter the files given with `--file`, as they did before v10.2.0.
+
+```sh
+cspell "/*.md" --no-must-find-files --files $FILES
+```
+
+This checks only the Markdown files at the root among `$FILES`, and exits without an error when none match.
+
+Globs combined with `--force-check` are still an error.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Fix word splitter pruning for words following compound prefix joined by punctuation (<a href="https://github.com/streetsidesoftware/cspell/pull/9573">#9573</a>)</summary>
+
+### fix: Fix word splitter pruning for words following compound prefix joined by punctuation ([#9573](https://github.com/streetsidesoftware/cspell/pull/9573))
+
+## Summary
+
+When segmenting identifiers with internal punctuation (`.`, `-`, `_`), the word splitter previously pruned search branches against `parentCost` stored in `knownPathsByIndex`. Because `knownPathsByIndex` holds the cost of the first path that reached the index rather than the optimal suffix cost, a later branch exploring a compound or sub-segmented dictionary word (such as `max_redirections` after `HTTPRedirectHandler.`) was prematurely skipped.
+
+Only prune punctuation-separated breaks against `parentCost` when `parentCost === 0` (which cannot be improved upon), allowing valid dictionary words following punctuation separators to be matched.
+
+Fixes #9469
+
+---
+
+</details>
+
+<details>
+<summary>fix: Stop skipping files like console.log.ts as log files (<a href="https://github.com/streetsidesoftware/cspell/pull/9589">#9589</a>)</summary>
+
+### fix: Stop skipping files like console.log.ts as log files ([#9589](https://github.com/streetsidesoftware/cspell/pull/9589))
+
+## Summary
+
+File type patterns that contain `*` matched anywhere in a file name instead of the whole name, so some files got the wrong file type and were skipped or misread:
+
+- `console.log.ts` was treated as a log file, so `cspell lint` skipped it, even with `--force`.
+- `cspell.env.config.js` was treated as a shell script.
+- `README.ignore.md` was treated as an ignore file.
+
+Each of them now gets the file type of its extension. Patterns now have to match the whole file name, as in VS Code.
+
+<details>
+<summary>Technical Details</summary>
+
+- The log pattern is `*.log.?`, so `app.log.1` is still a log file, but `app.log.10` and `app.log.old` no longer are.
+
+</details>
+
+---
+
+</details>
+
+<details>
+<summary>fix: Add a Vim file type for .vim files and .vimrc (<a href="https://github.com/streetsidesoftware/cspell/pull/9579">#9579</a>)</summary>
+
+### fix: Add a Vim file type for .vim files and .vimrc ([#9579](https://github.com/streetsidesoftware/cspell/pull/9579))
+
+Adds a `vim` file type with the `.vim` extension and the filenames `.vimrc`, `_vimrc`, `vimrc`, `.gvimrc` and `_gvimrc`, as Jason3S confirmed on the issue. `filetypes.test.ts` checks each of them.
+
+Closes #9489
+
+---
+
+</details>
+
+<details>
+<summary>fix: Accept long words with many alternate characters (<a href="https://github.com/streetsidesoftware/cspell/pull/9574">#9574</a>)</summary>
+
+### fix: Accept long words with many alternate characters ([#9574](https://github.com/streetsidesoftware/cspell/pull/9574))
+
+## Summary
+
+Fixes long words being reported as unknown even though the dictionary accepts their spelling. This could happen when a dictionary's `repMap` allowed alternate characters in many places in a word, because cspell only tried some of the combinations.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Stop `cspell trace` crashing on an empty word with compound words (<a href="https://github.com/streetsidesoftware/cspell/pull/9576">#9576</a>)</summary>
+
+### fix: Stop `cspell trace` crashing on an empty word with compound words ([#9576](https://github.com/streetsidesoftware/cspell/pull/9576))
+
+## Summary
+
+`cspell trace` no longer crashes when it is given an empty word and compound words are allowed. It now reports the word as not found in every dictionary, the same as any other unknown word.
+
+```sh
+cspell trace "" --allow-compound-words
+```
+
+Before:
+
+```text
+TypeError: Cannot read properties of undefined (reading 'length')
+```
+
+After:
+
+```text
+Word F Dictionary           Dictionary Location
+     - [flagWords]*         From Settings `flagWords`
+     - [ignoreWords]*       From Settings `ignoreWords`
+     ...
+```
+
+Code that uses `cspell-trie-lib` directly gets the same fix: looking up an empty word with legacy compounds now returns a not-found result instead of throwing.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Avoid slow checks on non-ASCII words with many repMap matches (<a href="https://github.com/streetsidesoftware/cspell/pull/9564">#9564</a>)</summary>
+
+### fix: Avoid slow checks on non-ASCII words with many repMap matches ([#9564](https://github.com/streetsidesoftware/cspell/pull/9564))
+
+## Summary
+
+Checking a non-ASCII word no longer takes seconds when a dictionary's `repMap` has many matches for that word.
+
+- With the `nn-no-alt` dictionary, `é` followed by 12 `a`s took about 3 seconds. It now takes a few milliseconds.
+- For non-ASCII words, the result of a replacement is no longer replaced again. With `a` → `b` and `b` → `c`, `éa` no longer matches `éc`. ASCII words already work this way.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Avoid running out of memory on words with many repMap matches (<a href="https://github.com/streetsidesoftware/cspell/pull/9543">#9543</a>)</summary>
+
+### fix: Avoid running out of memory on words with many repMap matches ([#9543](https://github.com/streetsidesoftware/cspell/pull/9543))
+
+## Summary
+
+Checking a word with many letters that match a dictionary's `repMap` no longer runs out of memory or fails with a `RangeError`.
+
+- Words with long runs of characters matching single-letter or multi-letter `repMap` entries (such as in `@cspell/dict-da-dk`, `@cspell/dict-de-de`, or custom `repMap` definitions) no longer crash `cspell`.
+- When a word has more than 256 replacement forms, only a sample of them is looked up, so a correct word can be reported as unknown. With `nn-no-alt`, this affected 65 of 34,077 words in a document with every `æ`, `ø`, and `å` written as `ae`, `oe`, and `aa`.
+
+Related to #9535
+
+<details>
+<summary>Technical Details</summary>
+
+- Keep at most 256 replacement forms at each letter of a word, instead of every combination. The kept forms are a sample across the full list, and they include the unedited word and one form with every match replaced.
+
+</details>
+
+---
+
+</details>
+
 ## v10.4.1 (2026-11-06)
 
 ### Fixes
