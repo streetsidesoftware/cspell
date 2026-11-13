@@ -60,7 +60,8 @@ Read the doc before changing that area. These are written for people.
 - [`docs/releasing.md`](docs/releasing.md): release-drafter, labels, the Prepare Release PR, prerelease mode.
 - [`docs/design-principles.md`](docs/design-principles.md): weigh every behavior change against these.
 - [`docs/glossary.md`](docs/glossary.md): config resolution, dictionaries, and other terms.
-- [`docs/code-style.md`](docs/code-style.md): comments, doc comments, invisible characters.
+- [`docs/code-style.md`](docs/code-style.md): formatting, invisible characters.
+- [`docs/writing-comments.md`](docs/writing-comments.md): comments and doc comments, public and internal.
 - [`docs/writing-for-users.md`](docs/writing-for-users.md): READMEs, the website, doc comments, and published PRs.
 
 ## Rules
@@ -72,10 +73,10 @@ Each rule is written for people in the linked section. Read it before working in
   [Compiler settings](docs/build-and-packaging.md#compiler-settings-that-catch-people-out).
 - **Tests** use vitest, next to the source. Paths use `node:path`: CI runs on Windows. When code relies on a
   library's behavior, add a `Validate <library> assumptions` test for it. See [Tests](docs/development.md#tests).
-- **Comments:** few, short, and accurate. Leave existing comments alone unless you are changing that function. See
-  [Comments](docs/code-style.md#comments).
-- **Doc comments** on published packages' public API, and on config options, are user documentation. See
-  [Comments](docs/code-style.md#comments).
+- **Comments:** few, short, and accurate. Leave existing comments alone unless you are changing that function. Read
+  [Writing comments](docs/writing-comments.md) before writing or changing one.
+- **Doc comments** on the public API of every package, and on config options, are user documentation. Internal
+  comments are for maintainers. See [Public or internal](docs/writing-comments.md#public-or-internal).
 - **Invisible characters:** write them as escape sequences. The one exception is in doc comments. See
   [Invisible characters](docs/code-style.md#invisible-characters).
 - **Writing for users:** READMEs, the website, doc comments, and published PRs. See
