@@ -2,7 +2,7 @@ import { promises as fsp } from 'node:fs';
 import * as os from 'node:os';
 import * as path from 'node:path';
 
-import { GlobMatcher } from 'cspell-glob';
+import { escapeGlobPath, GlobMatcher } from 'cspell-glob';
 import type { Glob } from 'cspell-lib';
 import type { Options as MicromatchOptions } from 'micromatch';
 import micromatch from 'micromatch';
@@ -215,6 +215,52 @@ describe('Validate tinyglobby assumptions', () => {
     test('followSymbolicLinks: true follows a link to a parent directory once', async () => {
         const found = await find('real/**', true);
         expect(found).toEqual(['real/b.txt', 'real/loop/b.txt']);
+    });
+
+    describe('escaped folder names', () => {
+        // Folder names with glob symbols, and names a wrong escape would match instead.
+        const folders = [
+            'a[b]',
+            'ab',
+            'wt (1)',
+            'wt 1',
+            'c{d,e}',
+            'cd',
+            '!imp',
+            'imp',
+            'h/!(i)',
+            'h/i',
+            '@(k)',
+            'k',
+            'l]m',
+            'v #w',
+            'v w',
+        ];
+        // Names that Windows does not allow.
+        if (process.platform !== 'win32') folders.push('d*', 'da', 'e?', 'ef', 'f|g', 'x\\y', 'x/y');
+        let escRoot = '';
+
+        beforeAll(async () => {
+            escRoot = path.join(tmp, 'escaped');
+            for (const folder of folders) {
+                await fsp.mkdir(path.join(escRoot, folder), { recursive: true });
+                await fsp.writeFile(path.join(escRoot, folder, 'file.txt'), 'text\n');
+            }
+        });
+
+        async function findSkipped(ignore: string[]): Promise<string[]> {
+            const found = new Set(await tinyGlob(['**/file.txt'], { cwd: escRoot, ignore, dot: true }));
+            return folders.filter((folder) => !found.has(folder + '/file.txt'));
+        }
+
+        test.each(folders)('ignore the escaped folder "%s"', async (folder) => {
+            expect(await findSkipped([escapeGlobPath(folder) + '/**'])).toEqual([folder]);
+        });
+
+        test.each(folders)('ignore a glob rooted in folder "%s"', async (folder) => {
+            const globs = normalizeGlobsToRoot([{ glob: '/**', root: path.join(escRoot, folder) }], escRoot, true);
+            expect(await findSkipped(globs)).toEqual([folder]);
+        });
     });
 
     test.each`

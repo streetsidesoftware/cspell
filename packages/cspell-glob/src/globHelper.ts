@@ -330,7 +330,7 @@ export function normalizeGlobToRoot<Glob extends GlobPatternWithRoot>(
 
         return {
             ...glob,
-            glob: prefix + posix.join(relGlob, g),
+            glob: prefix + posix.join(escapeGlobPath(relGlob), g),
             root,
         };
     }
@@ -576,6 +576,25 @@ function filePathOrGlobToGlob(filePathOrGlob: string, root: URL, builder: FileUr
     const { path, glob } = isAbsolute ? splitGlob(filePathOrGlob) : splitGlobRel(filePathOrGlob);
     const url = builder.toFileDirURL(path || './', root);
     return { root: builder.urlToFilePathOrHref(url), glob, isGlobalPattern };
+}
+
+/**
+ * Escape a file path, so it can be used in a glob pattern to match only itself.
+ *
+ * Use it to add a folder to a glob, such as `escapeGlobPath('wt (1)') + '/**'`.
+ *
+ * @param path - a file path that uses `/` as the separator.
+ * @returns the path with its glob symbols escaped.
+ */
+export function escapeGlobPath(path: string): string {
+    // Each symbol becomes a character class, such as `[(]`, because on Windows a `\` in a glob is turned into `/`.
+    // - A `]` needs no escape once every `[` is escaped.
+    // - `!`, `+`, and `@` are symbols only before `(`, except a `!` at the start, which negates the glob.
+    // - A `#` after a space would start a comment.
+    return path
+        .replaceAll(/[()[{}*?|#]/g, '[$&]')
+        .replaceAll('\\', '[\\\\]')
+        .replace(/^!/, '@(!)');
 }
 
 export function workaroundPicomatchBug(glob: string): string {
