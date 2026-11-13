@@ -581,9 +581,10 @@ function filePathOrGlobToGlob(filePathOrGlob: string, root: URL, builder: FileUr
 }
 
 /**
- * Escape a file path, so it can be used in a glob pattern to match only itself.
+ * Escape the glob symbols in a file path, so a glob made from it matches only that path.
  *
- * Use it to add a folder to a glob, such as `escapeGlobPath('wt (1)') + '/**'`.
+ * For example, the parentheses in `docs (old)` are escaped, so the glob does not also match `docs old`. To make a
+ * glob that matches inside a folder, use {@link globInFolder}.
  *
  * @param path - a file path that uses `/` as the separator.
  * @returns the path with its glob symbols escaped.
@@ -603,12 +604,13 @@ export function escapeGlobPath(path: string): string {
 }
 
 /**
- * Make a glob that matches inside a folder, such as `globInFolder('wt (1)', '**')`, which gives `wt [(]1[)]/**`.
+ * Join a folder path and a glob, with the folder's glob symbols escaped.
  *
- * The folder's glob symbols are escaped, so the result matches only inside that folder.
+ * For example, `globInFolder('src/components', '*.ts')` gives `src/components/*.ts`. In a folder named `docs (old)`,
+ * the parentheses are escaped, so the glob matches only inside that folder and not inside `docs old`.
  *
  * @param folder - a folder path that uses `/` as the separator. An empty path gives the glob unchanged.
- * @param glob - the glob to match inside the folder.
+ * @param glob - the glob to join to the folder.
  * @returns the joined glob.
  */
 export function globInFolder(folder: string, glob: string): string {
