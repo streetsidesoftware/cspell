@@ -57,8 +57,11 @@ Cases that need care:
 | Any other class, interface, type or property, a constant or a variable | Noun phrase, or third person, present tense | "The locale to use for suggestions."              |
 
 A property that holds a function runs when called, like a method, so its comment is imperative. A function type
-describes every function of that type, so its comment is in the third person. In the last row, a noun phrase suits most
-comments, and a verb suits booleans.
+describes every function of that type, so its comment is in the third person.
+
+In the last row, a noun phrase suits most comments. A boolean that turns one effect on takes a verb that says what `true`
+does. A boolean whose values each do something of their own takes a noun phrase, since a verb would describe only one of
+them.
 
 ## Every comment
 
