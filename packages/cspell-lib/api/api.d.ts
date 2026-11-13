@@ -468,7 +468,7 @@ export declare function calcIgnorePathGlobs(settings: Pick<CSpellSettings, "igno
 /**
  * Check if the enabled `ignorePathPresets` ignore a file, by its path alone.
  *
- * Nested worktrees are not checked. The globs from {@link calcIgnorePathGlobs} skip them.
+ * It does not look for nested worktrees: the globs from {@link calcIgnorePathGlobs} cover them.
  *
  * @param url - the URL of the file.
  * @param root - the URL of the folder the presets apply to. Files outside it are not ignored.

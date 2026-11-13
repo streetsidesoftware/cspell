@@ -1877,7 +1877,7 @@ interface IgnorePathPresets {
    * the folders. Only the worktrees of the repository that holds the root folder are skipped. Submodules and other
    * repositories inside the root folder are still checked.
    *
-   * Spell checking with the root folder inside a worktree still checks the worktree's files.
+   * When the root folder is inside a worktree, that worktree's files are still checked.
    *
    * @default true
    */

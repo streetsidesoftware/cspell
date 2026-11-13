@@ -3,10 +3,13 @@ import * as os from 'node:os';
 import * as path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { ENV_CSPELL_GLOB_ROOT } from 'cspell-lib';
+import { toFileDirURL } from '@cspell/url';
+import { calcIgnorePathGlobs, ENV_CSPELL_GLOB_ROOT } from 'cspell-lib';
 import { afterAll, afterEach, beforeAll, describe, expect, test } from 'vitest';
 
 import type { LinterCliOptions } from '../options.js';
+import { findFiles } from '../util/fileHelper.js';
+import { buildGlobMatcher, extractGlobsFromMatcher } from '../util/glob.js';
 import { InMemoryReporter } from '../util/InMemoryReporter.js';
 import { runLint } from './lint.js';
 import { LintRequest } from './LintRequest.js';
@@ -141,7 +144,8 @@ describe('lint with nestedWorktrees', () => {
         { name: 'wt1', folder: 'wt (1)', record: () => '../../../wt (1)/.git' },
     ];
     const worktreeFiles = ['.worktrees/feat/src/code.txt', 'wt (1)/readme.txt'];
-    const repoFiles = ['src/code.txt', 'sub/readme.txt'];
+    // `wt 1` is not a worktree, and its name is close to `wt (1)`.
+    const repoFiles = ['src/code.txt', 'sub/readme.txt', 'wt 1/readme.txt'];
     let tmp = '';
     let repo = '';
 
@@ -195,9 +199,19 @@ describe('lint with nestedWorktrees', () => {
     });
 
     test.each(worktreeFiles)('a file in a nested worktree named on the command line: %s', async (file) => {
-        expect(await lint([file], {})).toEqual([]);
+        // A name on the command line is a glob, so `wt (1)/readme.txt` also matches `wt 1/readme.txt`.
+        expect(await lint([file], {})).not.toContain(file);
+        expect(await lint([file], {}, 'worktrees-off.json')).toContain(file);
         expect(await lint([], { file: [file] })).toEqual([]);
-        expect(await lint([file], {}, 'worktrees-off.json')).toEqual([file]);
+        expect(await lint([], { file: [file], forceCheck: true })).toEqual([file]);
+    });
+
+    // The worktree globs are also the search's ignore globs, so the search never enters a worktree.
+    test('Validate tinyglobby assumptions: the search skips the worktrees', async () => {
+        const globs = await calcIgnorePathGlobs({}, toFileDirURL(repo));
+        const ignore = extractGlobsFromMatcher(buildGlobMatcher(globs, repo, true));
+        const found = await findFiles(['**/*.txt'], { root: repo, cwd: repo, ignore, dot: true, nodir: true });
+        expect(sorted(found.map((f) => toPosix(path.relative(repo, f))))).toEqual(repoFiles);
     });
 
     test.each`
@@ -217,4 +231,4 @@ function toPosix(p: string): string {
     return p.split(path.sep).join('/');
 }
 
-// cspell:ignore commondir EDITMSG PULLREQ zqxword
+// cspell:ignore commondir EDITMSG nodir PULLREQ zqxword
