@@ -10,6 +10,7 @@ import {
     __testing__,
     escapeGlobPath,
     fileOrGlobToGlob,
+    globInFolder,
     normalizeGlobPattern,
     normalizeGlobPatterns,
     normalizeGlobToRoot,
@@ -609,12 +610,56 @@ describe('Validate cspell-glob assumptions', () => {
     });
 });
 
+describe('globInFolder', () => {
+    test.each`
+        folder      | glob       | expected
+        ${''}       | ${'**'}    | ${'**'}
+        ${'src'}    | ${'**'}    | ${'src/**'}
+        ${'src/'}   | ${'*.md'}  | ${'src/*.md'}
+        ${'src'}    | ${'/*.md'} | ${'src/*.md'}
+        ${'src'}    | ${'./x'}   | ${'src/x'}
+        ${'a/b'}    | ${'**/x'}  | ${'a/b/**/x'}
+        ${'wt (1)'} | ${'**'}    | ${'wt [(]1[)]/**'}
+        ${'v #w'}   | ${'**'}    | ${'v [#]w/**'}
+        ${' a'}     | ${'**'}    | ${'[ ]a/**'}
+        ${'v '}     | ${'**'}    | ${'v[ ]/**'}
+        ${'!imp/'}  | ${'**'}    | ${'@(!)imp/**'}
+    `('globInFolder($folder, $glob)', ({ folder, glob, expected }) => {
+        expect(globInFolder(folder, glob)).toBe(expected);
+    });
+});
+
+describe('rebasing a glob to a root inside its folders', () => {
+    // The matcher's root is below the glob's root. The rebased globs are a first-pass filter for a file search.
+    test.each`
+        glob                 | rootFolder  | expected
+        ${'wt [(]1[)]/*.md'} | ${'wt (1)'} | ${'*.md'}
+        ${'wt [(]1[)]/*.md'} | ${'wt 1'}   | ${'../wt [(]1[)]/*.md'}
+        ${'src/*.md'}        | ${'src'}    | ${'*.md'}
+        ${'src/**/*.md'}     | ${'src'}    | ${'**/*.md'}
+        ${'[b]/*.md'}        | ${'b'}      | ${'../[b]/*.md'}
+    `('$glob rebased to the root $rootFolder is $expected', ({ glob, rootFolder, expected }) => {
+        const matcher = new GlobMatcher([{ glob, root: '/r' }], { root: `/r/${rootFolder}`, nodePath: posix });
+        expect(matcher.patternsNormalizedToRoot[0].glob).toBe(expected);
+    });
+
+    test.each`
+        glob                      | fromRootToGlob | fromGlobToRoot | expected
+        ${'wt [(]1[)]/*.md'}      | ${'../'}       | ${'wt (1)/'}   | ${'*.md'}
+        ${'v [#]w/src/*.md'}      | ${'../../'}    | ${'v #w/src/'} | ${'*.md'}
+        ${'a/wt [(]1[)]/**/*.md'} | ${'../../'}    | ${'a/wt (1)/'} | ${'**/*.md'}
+        ${'wt (1)/*.md'}          | ${'../'}       | ${'wt (1)/'}   | ${'../wt (1)/*.md'}
+    `('rebaseGlob($glob, $fromRootToGlob, $fromGlobToRoot)', ({ glob, fromRootToGlob, fromGlobToRoot, expected }) => {
+        expect(rebaseGlob(glob, fromRootToGlob, fromGlobToRoot)).toBe(expected);
+    });
+});
+
 describe('normalizeGlobToRoot escapes the folder it adds', () => {
     test.each(foldersWithSymbols)('folder "%s"', (folder) => {
         const root = '/r/';
         const glob: GlobPatternWithRoot = { glob: '*.md', root: `${root}${folder}/`, isGlobalPattern: false };
         const result = normalizeGlobToRoot(glob, root, posix);
-        expect(result).toEqual({ ...glob, glob: escapeGlobPath(folder + '/') + '*.md', root });
+        expect(result).toEqual({ ...glob, glob: globInFolder(folder, '*.md'), root });
 
         const matcher = new GlobMatcher(result.glob, { root, nodePath: posix });
         const matched = foldersWithSymbols.filter((f) => matcher.match(`${root}${f}/readme.md`));
