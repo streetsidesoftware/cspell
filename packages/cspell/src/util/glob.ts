@@ -3,7 +3,7 @@ import * as path from 'node:path';
 
 import type { CSpellUserSettings, Glob } from '@cspell/cspell-types';
 import type { GlobPatternWithRoot } from 'cspell-glob';
-import { fileOrGlobToGlob, globInFolder, GlobMatcher, workaroundPicomatchBug } from 'cspell-glob';
+import { fileOrGlobToGlob, globInFolder, GlobMatcher } from 'cspell-glob';
 import type { GlobOptions as TinyGlobbyOptions } from 'tinyglobby';
 import { glob as tinyGlob } from 'tinyglobby';
 
@@ -52,7 +52,7 @@ export async function globP(pattern: string | string[], options?: GlobOptions): 
     });
 
     const compare = new Intl.Collator('en').compare;
-    const absolutePaths = (await glob(patterns, useOptions)).sort(compare);
+    const absolutePaths = (await tinyGlob(patterns, useOptions)).sort(compare);
     const relativePaths = absolutePaths.map((absFilename) => path.relative(cwd, absFilename));
     return relativePaths;
 }
@@ -189,12 +189,4 @@ function posixPath(p: string): string {
 export async function normalizeFileOrGlobsToRoot(globs: Glob[], root: string): Promise<string[]> {
     const adjustedGlobs = await Promise.all(globs.map((g) => adjustPossibleDirectory(g, root)));
     return normalizeGlobsToRoot(adjustedGlobs, root, false);
-}
-
-function glob(patterns: string | string[], options: TinyGlobbyOptions): Promise<string[]> {
-    patterns =
-        typeof patterns === 'string'
-            ? workaroundPicomatchBug(patterns)
-            : patterns.map((g) => workaroundPicomatchBug(g));
-    return tinyGlob(patterns, options);
 }
