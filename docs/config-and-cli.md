@@ -27,7 +27,7 @@ The interface you add the property to decides where users can set it:
 
 Add the property with a doc comment. The doc comment is user documentation: it becomes the description in
 `cspell.schema.json`, the editor hover, and the Properties page. Follow
-[Writing for users](./writing-for-users.md).
+[Writing for users](./writing-for-users.md) and [Public comments](./writing-comments.md#public-comments).
 
 - Say what the option does and when to change it. Show an example if it helps.
 - Tags used in this file:

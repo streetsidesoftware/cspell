@@ -37,7 +37,8 @@ pull request, see [Development](./docs/development.md).
 - [Development](./docs/development.md): setting up, checks before a pull request, spelling
 - [Build and packaging](./docs/build-and-packaging.md): workspace layout, tooling, commands, generated files, CI
 - [Pull requests](./docs/pull-requests.md): the title's type, the body, and what goes in the release notes
-- [Code style](./docs/code-style.md): comments, doc comments, invisible characters
+- [Code style](./docs/code-style.md): formatting, invisible characters
+- [Writing comments](./docs/writing-comments.md): comments and doc comments, public and internal
 - [Writing for users](./docs/writing-for-users.md): READMEs, the website, doc comments, and published PRs
 - [Config options and CLI flags](./docs/config-and-cli.md): adding or changing one
 - [Design principles](./docs/design-principles.md)

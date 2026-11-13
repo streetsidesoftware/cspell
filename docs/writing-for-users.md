@@ -4,7 +4,7 @@ These rules apply to everything people who use cspell read:
 
 - `packages/*/README.md`, which are the npm pages, and the root `README.md`
 - the website, `website/docs/`
-- doc comments on config options and on public APIs: see [Comments](./code-style.md#comments)
+- doc comments on config options and on public APIs: see [Writing comments](./writing-comments.md#public-comments)
 - the titles and bodies of PRs that go into the release notes: see [Pull requests](./pull-requests.md)
 
 Those readers are [users](./glossary.md#users): people who run cspell, write its config, or build on its packages.
