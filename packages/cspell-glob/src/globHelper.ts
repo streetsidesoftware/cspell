@@ -1,6 +1,4 @@
 /* eslint-disable no-irregular-whitespace */
-import * as Path from 'node:path';
-
 import { FileUrlBuilder } from '@cspell/url';
 
 import type {
@@ -11,7 +9,6 @@ import type {
     PathInterface,
 } from './GlobMatcherTypes.ts';
 
-const { posix } = Path;
 // const relRegExp = /^\..?[\\/]/;
 /** test for glob patterns starting with `**` */
 const isGlobalPatternRegExp = /^!*[*]{2}/;
@@ -19,6 +16,9 @@ const isGlobalPatternRegExp = /^!*[*]{2}/;
 const hasGlobCharactersRegExp = /[*?{}[\]]/;
 
 const fileUrlBuilder = new FileUrlBuilder();
+
+/** The platform's path module: `path.win32` on Windows, `path.posix` elsewhere. */
+export const defaultPath: PathInterface = fileUrlBuilder.path;
 
 export const GlobPlaceHolders = {
     cwd: '${cwd}',
@@ -35,7 +35,7 @@ export const GlobPatterns = {
 
 let cacheCalls = 0;
 let cacheMisses = 0;
-let cachePath: PathInterface = Path;
+let cachePath: PathInterface = defaultPath;
 let cacheRoot: string = '<>';
 const cache = new Map<GlobPattern, GlobPatternWithRoot>();
 const debugCache = false;
@@ -49,7 +49,7 @@ const debugCache = false;
 export function fileOrGlobToGlob(
     fileOrGlob: string | GlobPattern,
     root: string,
-    path: PathInterface = Path,
+    path: PathInterface = defaultPath,
 ): GlobPatternWithRoot {
     if (cacheRoot !== root || cachePath !== path) {
         cache.clear();
@@ -79,7 +79,7 @@ export function fileOrGlobToGlob(
 function _fileOrGlobToGlob(
     fileOrGlob: string | GlobPattern,
     root: string,
-    path: PathInterface = Path,
+    path: PathInterface = defaultPath,
 ): GlobPatternWithRoot {
     const toForwardSlash = path.sep === '\\' ? (p: string) => p.replaceAll('\\', '/') : (p: string) => p;
     const builder = urlBuilder(path);
@@ -143,8 +143,8 @@ export function isGlobPatternNormalizedToRoot(
     return g.root === options.root;
 }
 
-function urlBuilder(path: PathInterface = Path): FileUrlBuilder {
-    return path === Path ? fileUrlBuilder : new FileUrlBuilder({ path });
+function urlBuilder(path: PathInterface = defaultPath): FileUrlBuilder {
+    return path === defaultPath ? fileUrlBuilder : new FileUrlBuilder({ path });
 }
 
 /**
@@ -234,7 +234,7 @@ export function normalizeGlobPatterns(patterns: GlobPattern[], options: Normaliz
             if (isGlobPatternNormalized(glob)) {
                 yield isGlobPatternNormalizedToRoot(glob, options)
                     ? glob
-                    : normalizeGlobToRoot(glob, options.root, options.nodePath || Path);
+                    : normalizeGlobToRoot(glob, options.root, options.nodePath || defaultPath);
                 continue;
             }
             yield* normalizeGlobPattern(glob, options);
@@ -245,7 +245,7 @@ export function normalizeGlobPatterns(patterns: GlobPattern[], options: Normaliz
 }
 
 export function normalizeGlobPattern(g: GlobPattern, options: NormalizeOptions): GlobPatternNormalized[] {
-    const { root, nodePath: path = Path, nested, extendNested = true } = options;
+    const { root, nodePath: path = defaultPath, nested, extendNested = true } = options;
     const builder = urlBuilder(path);
     const cwd = options.cwd ?? path.resolve();
     const cwdUrl = builder.toFileDirURL(cwd);
@@ -267,7 +267,8 @@ export function normalizeGlobPattern(g: GlobPattern, options: NormalizeOptions):
     if (gr.root.startsWith(GlobPlaceHolders.cwd)) {
         const relRoot = gr.root.replace(GlobPlaceHolders.cwd, './');
         const r = builder.toFileDirURL(relRoot, cwdUrl);
-        r.pathname = posix.normalize(r.pathname);
+        // `${cwd}/dir` becomes `.//dir`. The URL has already resolved `.` and `..`.
+        r.pathname = r.pathname.replaceAll(/\/{2,}/g, '/');
         gr.root = builder.urlToFilePathOrHref(r);
     }
     const isGlobalPattern = gIsGlobalPattern ?? isGlobalGlob(gr.glob);
