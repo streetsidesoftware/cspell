@@ -560,6 +560,10 @@ const foldersWithSymbols = [
     'l]m',
     'v #w',
     'v ',
+    ' a',
+    'a',
+    'b/c ',
+    'b/c',
     'x\\y',
     'x/y',
 ];
@@ -581,6 +585,9 @@ describe('escapeGlobPath', () => {
         ${'h/!(i)'}        | ${'h/![(]i[)]'}
         ${'+(a)/@(b)'}     | ${'+[(]a[)]/@[(]b[)]'}
         ${'l]m'}           | ${'l]m'}
+        ${' a/b '}         | ${'[ ]a/b[ ]'}
+        ${'\ta b\t'}       | ${'[\t]a b[\t]'}
+        ${' '}             | ${'[ ]'}
         ${'.worktrees/wt'} | ${'.worktrees/wt'}
     `('escapeGlobPath $path', ({ path, expected }) => {
         expect(escapeGlobPath(path)).toBe(expected);
@@ -594,6 +601,11 @@ describe('Validate cspell-glob assumptions', () => {
         const matched = foldersWithSymbols.filter((f) => matcher.match(`${root}/${f}/file.txt`));
         expect(matched).toEqual([folder]);
     });
+
+    test.each([' b', 'b ', '\tb\t', ' '])('trimGlob keeps the escaped whitespace of "%s"', (name) => {
+        const escaped = escapeGlobPath(name);
+        expect(trimGlob(escaped)).toBe(escaped);
+    });
 });
 
 describe('normalizeGlobToRoot escapes the folder it adds', () => {
@@ -601,7 +613,7 @@ describe('normalizeGlobToRoot escapes the folder it adds', () => {
         const root = '/r/';
         const glob: GlobPatternWithRoot = { glob: '*.md', root: `${root}${folder}/`, isGlobalPattern: false };
         const result = normalizeGlobToRoot(glob, root, posix);
-        expect(result).toEqual({ ...glob, glob: escapeGlobPath(folder) + '/*.md', root });
+        expect(result).toEqual({ ...glob, glob: escapeGlobPath(folder + '/') + '*.md', root });
 
         const matcher = new GlobMatcher(result.glob, { root, nodePath: posix });
         const matched = foldersWithSymbols.filter((f) => matcher.match(`${root}${f}/readme.md`));

@@ -235,6 +235,8 @@ describe('Validate tinyglobby assumptions', () => {
             'l]m',
             'v #w',
             'v w',
+            ' a',
+            'a',
         ];
         // Names that Windows does not allow.
         if (process.platform !== 'win32') folders.push('d*', 'da', 'e?', 'ef', 'f|g', 'x\\y', 'x/y');
@@ -255,6 +257,13 @@ describe('Validate tinyglobby assumptions', () => {
 
         test.each(folders)('ignore the escaped folder "%s"', async (folder) => {
             expect(await findSkipped([escapeGlobPath(folder) + '/**'])).toEqual([folder]);
+        });
+
+        test.runIf(process.platform !== 'win32')('ignore an escaped file name that ends in a space', async () => {
+            await fsp.writeFile(path.join(escRoot, 't '), 'text\n');
+            await fsp.writeFile(path.join(escRoot, 't'), 'text\n');
+            const found = await tinyGlob(['t*'], { cwd: escRoot, ignore: [escapeGlobPath('t ')] });
+            expect(found).toEqual(['t']);
         });
 
         test.each(folders)('ignore a glob rooted in folder "%s"', async (folder) => {

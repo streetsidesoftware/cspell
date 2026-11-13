@@ -591,10 +591,13 @@ export function escapeGlobPath(path: string): string {
     // - A `]` needs no escape once every `[` is escaped.
     // - `!`, `+`, and `@` are symbols only before `(`, except a `!` at the start, which negates the glob.
     // - A `#` after a space would start a comment.
+    // - Whitespace at the start or the end would be trimmed.
     return path
         .replaceAll(/[()[{}*?|#]/g, '[$&]')
         .replaceAll('\\', '[\\\\]')
-        .replace(/^!/, '@(!)');
+        .replace(/^!/, '@(!)')
+        .replace(/^\s/, '[$&]')
+        .replace(/\s$/, '[$&]');
 }
 
 export function workaroundPicomatchBug(glob: string): string {
