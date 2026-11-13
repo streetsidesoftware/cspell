@@ -35,6 +35,7 @@ format: md
 | [gitignoreRoot](#settings-gitignoreroot)                       | [`FsPath`](#fspath)<br/>[`FsPath`](#fspath)&ZeroWidthSpace;`[]`           | Tells the spell checker to stop searching for `.gitignore` files when it reaches a matching root.                                                                    |
 | [globRoot](#settings-globroot)                                 | [`FSPathResolvable`](#fspathresolvable)                                   | The root to use for glob patterns found in this configuration.                                                                                                       |
 | [id](#settings-id)                                             | `string`                                                                  | Optional identifier.                                                                                                                                                 |
+| [ignorePathPresets](#settings-ignorepathpresets)               | [`IgnorePathPresets`](#ignorepathpresets)                                 | Skip well-known files that are not meant to be spell checked, such as git's own files and nested git worktrees.                                                      |
 | [ignorePaths](#settings-ignorepaths)                           | [`Glob`](#glob)&ZeroWidthSpace;`[]`                                       | Glob patterns of files to be ignored.                                                                                                                                |
 | [ignoreRandomStrings](#settings-ignorerandomstrings)           | `boolean`                                                                 | Ignore sequences of characters that look like random strings.                                                                                                        |
 | [ignoreRegExpList](#settings-ignoreregexplist)                 | [`RegExpPatternList`](#regexppatternlist)                                 | List of regular expression patterns or pattern names to exclude from spell checking.                                                                                 |
@@ -645,6 +646,43 @@ Optional identifier.
 
 ---
 
+#### `ignorePathPresets` {#settings-ignorepathpresets}
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+Skip well-known files that are not meant to be spell checked, such as git's own files and nested git worktrees.
+
+Each preset is enabled with `true` and disabled with `false`. A preset that is not set keeps its default.
+
+Example: check git's own files again.
+
+```json
+"ignorePathPresets": { "git": false }
+```
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`IgnorePathPresets`](#ignorepathpresets)
+
+</dd>
+
+<dt>Since</dt>
+<dd>
+
+10.5.0
+
+</dd>
+
+</dl>
+
+---
+
 #### `ignorePaths` {#settings-ignorepaths}
 
 <dl>
@@ -656,9 +694,8 @@ Glob patterns of files to be ignored.
 
 Glob patterns are relative to the  [globRoot](#settings-globroot)  of the configuration file that defines them.
 
-The default is `["node_modules/"]`.
-
-Warning: if you ignore `".git/"` then it will also ignore `".git/COMMIT_EDITMSG"` which is needed for the `commit-msg` git hook; in that case, rather use `[".git/{info,lfs,logs,refs,objects}/**", ".git/{index,*refs,*HEAD}"]`.
+The default is `[]`.
+Separately, the `cspell` command line skips `node_modules/**` unless `--exclude` is given.
 
 </dd>
 
@@ -5785,11 +5822,50 @@ Special Properties:
 
 ## Features
 
-| Field                                                  | Type                                      | Description                                |
-| ------------------------------------------------------ | ----------------------------------------- | ------------------------------------------ |
-| [weighted-suggestions](#features-weighted-suggestions) | [`FeatureEnableOnly`](#featureenableonly) | Enable/disable using weighted suggestions. |
+| Field                                                                | Type                                      | Description                                                             |
+| -------------------------------------------------------------------- | ----------------------------------------- | ----------------------------------------------------------------------- |
+| [overrideGlobsMatchFilesOnly](#features-overrideglobsmatchfilesonly) | [`FeatureEnableOnly`](#featureenableonly) | Make the `filename` globs in `overrides` match only the path they name. |
+| [weighted-suggestions](#features-weighted-suggestions)               | [`FeatureEnableOnly`](#featureenableonly) | Enable/disable using weighted suggestions.                              |
 
 ### Features Fields
+
+---
+
+#### `overrideGlobsMatchFilesOnly` {#features-overrideglobsmatchfilesonly}
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+Make the `filename` globs in `overrides` match only the path they name.
+
+When disabled, a glob also matches the files inside a folder with that name. For example, `examples.ts`
+matches a file named `examples.ts` and every file inside a folder named `examples.ts`. A glob ending in `/**`,
+such as `src/**`, also matches a file named `src`.
+
+When enabled:
+
+- A glob such as `examples.ts` or `/src` matches only a file with that name.
+- To apply an override to the files in a folder, end the glob with `/`, for example `src/` or `/src/`.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`FeatureEnableOnly`](#featureenableonly)
+
+</dd>
+
+<dt>Since</dt>
+<dd>
+
+10.5.0
+
+</dd>
+
+</dl>
 
 ---
 
@@ -5927,6 +6003,79 @@ The costs to apply when using the hunspell settings
 <dd>
 
 `object`
+
+</dd>
+
+</dl>
+
+## IgnorePathPresets
+
+| Field                                                 | Type      | Description                                                                                                    |
+| ----------------------------------------------------- | --------- | -------------------------------------------------------------------------------------------------------------- |
+| [git](#ignorepathpresets-git)                         | `boolean` | Skip git's own files inside the root folder:                                                                   |
+| [nestedWorktrees](#ignorepathpresets-nestedworktrees) | `boolean` | Skip git worktrees inside the root folder, such as `.worktrees/feature`. A worktree is another checkout of the |
+
+### IgnorePathPresets Fields
+
+---
+
+#### `git` {#ignorepathpresets-git}
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+Skip git's own files inside the root folder:
+
+- a file named `.git`, which git puts in a worktree or a submodule
+- everything inside a `.git` folder, except git's message files
+
+Files outside the root folder are not skipped. For example, a submodule's commit message is in the parent
+repository's `.git` folder.
+
+Git's message files stay checked, so a `commit-msg` hook can spell check the commit message. They are the files
+whose names end in `MSG`, such as `COMMIT_EDITMSG`, `MERGE_MSG`, and `TAG_EDITMSG`, and `EDIT_DESCRIPTION`.
+They are kept in two places:
+
+- directly inside a `.git` folder
+- directly inside a linked worktree's folder in `.git/worktrees`
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
+
+</dl>
+
+---
+
+#### `nestedWorktrees` {#ignorepathpresets-nestedworktrees}
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+Skip git worktrees inside the root folder, such as `.worktrees/feature`. A worktree is another checkout of the
+same repository, often of another branch.
+
+The worktrees are found in the repository's own records, in `.git/worktrees`, so finding them does not search
+the folders. Only the worktrees of the repository that holds the root folder are skipped. Submodules and other
+repositories inside the root folder are still checked.
+
+When the root folder is inside a worktree, that worktree's files are still checked.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
 
 </dd>
 
