@@ -6,7 +6,7 @@ import mm from 'micromatch';
 import pp from 'picomatch';
 import { describe, expect, test } from 'vitest';
 
-import { fileOrGlobToGlob, workaroundPicomatchBug } from './globHelper.ts';
+import { escapeGlobPath, fileOrGlobToGlob, workaroundPicomatchBug } from './globHelper.ts';
 import type { GlobMatchOptions, MatcherMode } from './GlobMatcher.ts';
 import { GlobMatcher } from './GlobMatcher.ts';
 import type { GlobMatch, GlobPattern, GlobPatternNormalized, GlobPatternWithOptionalRoot, PathInterface } from './GlobMatcherTypes.ts';
@@ -487,6 +487,17 @@ describe('Validate GlobMatcher', () => {
     }
 
     [pathWin32, pathPosix].forEach(runTestOn);
+
+    test.each`
+        glob                      | filename     | expected
+        ${'b'}                    | ${'/r/b '}   | ${false}
+        ${escapeGlobPath('b ')}   | ${'/r/b '}   | ${true}
+        ${'a/b'}                  | ${'/r/ a/b'} | ${false}
+        ${escapeGlobPath(' a/b')} | ${'/r/ a/b'} | ${true}
+    `('a name that starts or ends with a space: $glob $filename', ({ glob, filename, expected }) => {
+        const matcher = new GlobMatcher(glob, { root: '/r', nodePath: path.posix });
+        expect(matcher.match(filename)).toBe(expected);
+    });
 });
 
 describe('Validate GlobMatcher excludeMode patternsNormalizedToRoot', () => {

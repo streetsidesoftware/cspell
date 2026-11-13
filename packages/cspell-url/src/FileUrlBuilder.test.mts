@@ -54,6 +54,10 @@ describe('FileUrlBuilder', () => {
         ${'file://host/E$/user/test/project/'} | ${undefined}                           | ${Path.win32} | ${'file://host/E$/user/test/project/'}
         ${'../sibling'}                        | ${'file://host/E$/user/test/project/'} | ${Path.win32} | ${'file://host/E$/user/test/sibling'}
         ${fileURLToPath(import.meta.url)}      | ${'file://host/E$/user/test/project/'} | ${Path.win32} | ${import.meta.url}
+        ${' notes/readme.txt'}                 | ${'file:///E:/user/project/'}          | ${Path.win32} | ${'file:///E:/user/project/%20notes/readme.txt'}
+        ${' notes/readme.txt'}                 | ${'file:///user/project/'}             | ${Path.posix} | ${'file:///user/project/%20notes/readme.txt'}
+        ${'notes/readme.txt '}                 | ${'file:///user/project/'}             | ${Path.posix} | ${'file:///user/project/notes/readme.txt%20'}
+        ${'/user/project/readme.txt '}         | ${'file:///'}                          | ${Path.posix} | ${'file:///user/project/readme.txt%20'}
     `('toFileURL $file $relativeTo', ({ file, relativeTo, path, expected }) => {
         const builder = new FileUrlBuilder({ path });
         const url = builder.toFileURL(file, relativeTo);
