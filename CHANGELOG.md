@@ -936,6 +936,60 @@ Related: #8975, streetsidesoftware/vscode-spell-checker#3099, streetsidesoftware
 
 </details>
 
+## v10.5.1 (2026-11-14)
+
+### Fixes
+
+<details>
+<summary>fix: Make `[!…]` in globs match characters that are not listed (<a href="https://github.com/streetsidesoftware/cspell/pull/9622">#9622</a>)</summary>
+
+### fix: Make `[!…]` in globs match characters that are not listed ([#9622](https://github.com/streetsidesoftware/cspell/pull/9622))
+
+## Summary
+
+A `[!…]` bracket in a glob now matches any character that is _not_ listed, as it does in git and shell globs. Before, `e[!a].txt` in `.gitignore` (with `useGitignore`) or `ignorePaths` matched `ea.txt` and `e!.txt` and skipped `eb.txt`, so cspell checked the files you meant to ignore and ignored the files you meant to check.
+
+- Applies to `ignorePaths`, `.gitignore` files read with `useGitignore`, `files`, and the `filename` globs in `overrides`.
+- `[^…]` already worked and is unchanged.
+
+Fixes #9621
+
+<details>
+<summary>Technical Details</summary>
+
+- `cspell-glob` now asks picomatch to read globs in POSIX mode. The only change this makes is that `[!` starts a negated bracket, like `[^`.
+- Include mode gets the same fix, so `[!a]` means the same thing in `files` and in `ignorePaths`.
+
+</details>
+
+---
+
+</details>
+
+<details>
+<summary>fix: Skip more lock files, including pnpm-lock.yaml (<a href="https://github.com/streetsidesoftware/cspell/pull/9619">#9619</a>)</summary>
+
+### fix: Skip more lock files, including pnpm-lock.yaml ([#9619](https://github.com/streetsidesoftware/cspell/pull/9619))
+
+## Summary
+
+cspell now recognizes more lock files. Lock files are generated, so cspell skips them when checking files, as it already does for `package-lock.json`, `yarn.lock`, and other files ending in `.lock`.
+
+Newly skipped:
+
+- `pnpm-lock.yaml` (pnpm)
+- `npm-shrinkwrap.json` (npm)
+- `bun.lockb` (Bun, before 1.2)
+- `packages.lock.json` (NuGet)
+- `Package.resolved` (Swift Package Manager)
+- `gradle.lockfile` (Gradle)
+- `.terraform.lock.hcl` (Terraform)
+- `go.sum` and `go.work.sum` (Go)
+
+---
+
+</details>
+
 ## v10.5.0 (2026-11-13)
 
 ### Features
