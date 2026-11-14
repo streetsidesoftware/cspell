@@ -233,9 +233,7 @@ describe('wordSplitter IntlSegmenter', async () => {
         // The following is an example of a very expensive split
         const sample = {
             locale: 'th-TH',
-            input: hyphenateThai(
-                'ถ้าคุณต้องการที่จะประสบความสำเร็จในการเรียนภาษาไทย คุณต้องมีความอดทนและฝึกฝนทุกวันอย่างสม่ำเสมอ',
-            ),
+            input: hyphenateThai('ถ้าคุณต้องการที่จะประสบความสำเร็จในการเรียนภาษาไทย คุณต้องมีความอดทนและฝึกฝนทุกวันอย่างสม่ำเสมอ'),
             expected:
                 'ถ้า คุณ ต้องการ ที่ จะ ประสบ ความ สำเร็จ ใน การ เรียน ภาษา ไทย คุณ ต้อง มี ความ อดทน และ ฝึกฝน ทุก วัน อย่าง สม่ำเสมอ',
         };
@@ -272,9 +270,7 @@ describe('wordSplitter IntlSegmenter', async () => {
                     'ไมล์ (160 กิโลเมตร) ซีแอตเทิลนับเป็นประตูการค้าหลักสู่เอเชีย โดยเป็นเมืองท่าที่ใหญ่เป็นอันดับที่ 4 ' +
                     'ในอเมริกาเหนือในแง่ของการรองรับตู้บรรจุสินค้าของปี ค.ศ. 2015',
             ),
-            expected: [
-                'ซีแอตเทิล ตั้ง อยู่ บน คอคอด ระ หว่าง พิว เจ็ต ซา วนด์ ใน มหาสมุทร แปซิฟิก และ ทะเลสาบ วอชิงตัน',
-            ],
+            expected: ['ซีแอตเทิล ตั้ง อยู่ บน คอคอด ระ หว่าง พิว เจ็ต ซา วนด์ ใน มหาสมุทร แปซิฟิก และ ทะเลสาบ วอชิงตัน'],
         };
         // cspell:enable
 
@@ -291,8 +287,7 @@ describe('wordSplitter IntlSegmenter', async () => {
         // Note this might break if Puget Sound is added to the Thai dictionary.
         expect(result.words.filter((w) => !w.isFound).map((w) => w.text)).toEqual(['พิว', 'วนด์']);
         expect(result.endOffset).toBe(
-            line.offset +
-                hyphenateThai('ซีแอตเทิลตั้งอยู่บนคอคอดระหว่างพิวเจ็ตซาวนด์ในมหาสมุทรแปซิฟิกและทะเลสาบวอชิงตัน').length,
+            line.offset + hyphenateThai('ซีแอตเทิลตั้งอยู่บนคอคอดระหว่างพิวเจ็ตซาวนด์ในมหาสมุทรแปซิฟิกและทะเลสาบวอชิงตัน').length,
         );
     });
 
