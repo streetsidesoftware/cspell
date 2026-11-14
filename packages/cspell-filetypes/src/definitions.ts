@@ -225,7 +225,6 @@ export const definitions: FileTypeDefinitions = [
             'appfile',
             'appraisals',
             'berksfile',
-            'berksfile.lock',
             'brewfile',
             'capfile',
             'cheffile',
