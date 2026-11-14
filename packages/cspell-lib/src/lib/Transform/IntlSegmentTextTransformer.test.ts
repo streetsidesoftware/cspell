@@ -10,7 +10,7 @@ describe('IntlSegmentTextTransformer', () => {
         ${'en-US'}                        | ${'Block(s) of text, 1234, sym $%.[]'} | ${'Block(s) of text, 1234, sym $%.[]'}
         ${'en-US'}                        | ${'one.two.three-four_five'}           | ${'one.two.three-four_five'}
         ${'fr-FR'}                        | ${'Bonjour le monde'}                  | ${'Bonjour le monde'}
-        ${'th-TH'}                        | ${'สวัสดีโลก'}                         | ${'สวัสดี\u00ADโลก' /* cspell:disable-line */}
+        ${'th-TH'}                        | ${'สวัสดีโลก'}                           | ${'สวัสดี\u00ADโลก' /* cspell:disable-line */}
         ${getSample('sampleThai').locale} | ${getSample('sampleThai').input}       | ${getSample('sampleThai').expected}
     `('should segment text correctly $locale $input', ({ locale, input, expected }) => {
         const t = new IntlSegmentTextTransformer(locale);
