@@ -58,6 +58,9 @@ describe('Validate LanguageIds', () => {
         ${'gradle.lockfile'}                 | ${['lock']}
         ${'npm-shrinkwrap.json'}             | ${['lock']}
         ${'packages.lock.json'}              | ${['lock']}
+        ${'.env'}                            | ${['properties', 'shellscript']}
+        ${'.env.local'}                      | ${['properties', 'shellscript']}
+        ${'.envrc'}                          | ${['shellscript'] /* cspell:ignore envrc */}
         ${'code.jl'}                         | ${['julia']}
         ${'code.m'}                          | ${['matlab', 'objective-c']}
         ${'script.matlab'}                   | ${['matlab']}
