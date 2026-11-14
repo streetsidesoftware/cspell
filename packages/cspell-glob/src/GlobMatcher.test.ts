@@ -148,6 +148,34 @@ describe('Validate Micromatch assumptions', () => {
     });
 });
 
+describe('Validate picomatch assumptions', () => {
+    // GlobMatcher compiles globs with `posix: true`, so `[!…]` negates a bracket the way `.gitignore` does.
+    test.each`
+        glob             | filename    | expectedToMatch
+        ${'e[!a].txt'}   | ${'eb.txt'} | ${true}
+        ${'e[!a].txt'}   | ${'e!.txt'} | ${true}
+        ${'e[!a].txt'}   | ${'ea.txt'} | ${false}
+        ${'e[!a]/x'}     | ${'e/b/x'}  | ${false}
+        ${'e[!a-c].txt'} | ${'ed.txt'} | ${true}
+        ${'e[!a-c].txt'} | ${'eb.txt'} | ${false}
+        ${'e[!!].txt'}   | ${'ea.txt'} | ${true}
+        ${'e[!!].txt'}   | ${'e!.txt'} | ${false}
+        ${'e[^a].txt'}   | ${'eb.txt'} | ${true}
+        ${'e[^a].txt'}   | ${'ea.txt'} | ${false}
+        ${'e[a!].txt'}   | ${'e!.txt'} | ${true}
+        ${'e[a!].txt'}   | ${'eb.txt'} | ${false}
+        ${'e[\\!a].txt'} | ${'e!.txt'} | ${true}
+        ${'e[\\!a].txt'} | ${'eb.txt'} | ${false}
+        ${'\\!a.txt'}    | ${'!a.txt'} | ${true}
+        ${'\\!a.txt'}    | ${'a.txt'}  | ${false}
+        ${'e!.txt'}      | ${'e!.txt'} | ${true}
+        ${'[[]!a]'}      | ${'[!a]'}   | ${true}
+        ${'[[]!a]'}      | ${'b'}      | ${false}
+    `('posix: true, glob: $glob, filename: $filename, expected: $expectedToMatch', ({ glob, filename, expectedToMatch }) => {
+        expect(pp.makeRe(glob, { posix: true }).test(filename)).toBe(expectedToMatch);
+    });
+});
+
 function resolveFilename(pathInstance: PathInterface, filename: string): string;
 function resolveFilename(pathInstance: PathInterface, filename: string | undefined): string | undefined;
 function resolveFilename(pathInstance: PathInterface, filename: string | undefined): string | undefined {
