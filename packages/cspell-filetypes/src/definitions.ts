@@ -107,7 +107,7 @@ export const definitions: FileTypeDefinitions = [
             '.vuerc',
             '.webmanifest',
         ],
-        filenames: ['.watchmanconfig', 'composer.lock'],
+        filenames: ['.watchmanconfig'],
     },
     {
         id: 'jsonc',
@@ -163,10 +163,8 @@ export const definitions: FileTypeDefinitions = [
         extensions: ['.lock'],
         filenames: [
             '.terraform.lock.hcl',
-            'Cargo.lock',
             'Package.resolved',
             'bun.lockb',
-            'composer.lock',
             'go.sum',
             'go.work.sum',
             'gradle.lockfile',
@@ -295,7 +293,7 @@ export const definitions: FileTypeDefinitions = [
     { id: 'tex', extensions: ['.bbx', '.cbx', '.cls', '.sty'] },
     { id: 'tfvars', extensions: ['.tfvars'], description: 'Terraform Variables' },
     { id: 'todo', extensions: [], filenames: ['todo'] },
-    { id: 'toml', extensions: ['.toml'], filenames: ['Cargo.lock', 'Cargo.toml'] },
+    { id: 'toml', extensions: ['.toml'], filenames: ['Cargo.toml'] },
     { id: 'typescript', extensions: ['.cts', '.mts', '.ts'] },
     { id: 'typescriptreact', extensions: ['.tsx'] },
     { id: 'typst', extensions: ['.typ', '.typst'] },

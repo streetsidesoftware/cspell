@@ -37,7 +37,7 @@ describe('Validate LanguageIds', () => {
         ${'.cspellcache'}                    | ${['cache_files']}
         ${'Gemfile'}                         | ${['ruby']}
         ${'path/Gemfile'}                    | ${['ruby']}
-        ${'Cargo.lock'}                      | ${['lock', 'toml']}
+        ${'Cargo.lock'}                      | ${['lock']}
         ${'.errors.log.2'}                   | ${['log']}
         ${'console.log.ts'}                  | ${['typescript']}
         ${'cspell.env.config.js'}            | ${['javascript']}
@@ -47,7 +47,7 @@ describe('Validate LanguageIds', () => {
         ${'Dockerfile'}                      | ${['dockerfile']}
         ${'Dockerfile.dev'}                  | ${['dockerfile']}
         ${'docker.aws.compose.yaml'}         | ${['dockercompose']}
-        ${'composer.lock'}                   | ${['json', 'lock']}
+        ${'composer.lock'}                   | ${['lock']}
         ${'pnpm-lock.yaml'}                  | ${['lock']}
         ${'yarn.lock'}                       | ${['lock']}
         ${'.terraform.lock.hcl'}             | ${['lock']}
