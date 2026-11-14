@@ -225,10 +225,10 @@ Files given with `--file`, `--files`, or `--file-list` are not searched for. The
 
 - by the globs on the command line, or by `files` when there are none;
 - by `ignorePaths` and `--exclude`;
+- since CSpell 10.5.0, by `ignorePathPresets`;
 - by the configuration file nearest each file, as above.
 
-Use `--force-check` to check them anyway. Since CSpell 10.5.0, files covered by `ignorePathPresets` are skipped even
-with `--force-check`.
+Use `--force-check` to check them anyway.
 
 - `--file` and `--files` cannot be combined with globs on the command line.
 - `--file-list` can be. The globs then filter the list.
