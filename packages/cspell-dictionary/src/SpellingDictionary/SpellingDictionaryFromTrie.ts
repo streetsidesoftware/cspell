@@ -10,6 +10,7 @@ import { CompoundWordsMethod, decodeTrie, suggestionCollector } from 'cspell-tri
 
 import { clean } from '../util/clean.js';
 import { measurePerf } from '../util/performance.js';
+import { isUpperCase } from '../util/text.js';
 import * as Defaults from './defaults.js';
 import type {
     FindOptionsRO,
@@ -166,10 +167,16 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
             if (findResult.found !== false) {
                 return findResult;
             }
-            for (const w of forms) {
-                const findResult = this.trie.findWord(w, optsUseCompounds);
-                if (findResult.found !== false) {
-                    return findResult;
+            // cspell:ignore eRRorcODE ERRORCODE
+            // Compound the word as written. Retrying the lower-case form would accept
+            // mixed case (`eRRorcODE` as `error` + `code`). All-caps still retries,
+            // matching `wordSearchAlternateForms`, so `ERRORCODE` can match.
+            if (ignoreCase || !this.isDictionaryCaseSensitive || isUpperCase(mWord)) {
+                for (const w of forms) {
+                    const findResult = this.trie.findWord(w, optsUseCompounds);
+                    if (findResult.found !== false) {
+                        return findResult;
+                    }
                 }
             }
         }
