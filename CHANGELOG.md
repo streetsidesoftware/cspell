@@ -936,6 +936,146 @@ Related: #8975, streetsidesoftware/vscode-spell-checker#3099, streetsidesoftware
 
 </details>
 
+## v10.5.1 (2026-11-14)
+
+### Fixes
+
+<details>
+<summary>fix: Let `--force-check` check files skipped by `ignorePathPresets` (<a href="https://github.com/streetsidesoftware/cspell/pull/9634">#9634</a>)</summary>
+
+### fix: Let `--force-check` check files skipped by `ignorePathPresets` ([#9634](https://github.com/streetsidesoftware/cspell/pull/9634))
+
+With `--force-check`, `cspell lint` now checks git's own files when they are named on the command line. Before, they were still skipped by the `git` preset of `ignorePathPresets`, even though `--force-check` already overrides `ignorePaths` and `--exclude`.
+
+```sh
+cspell lint --force-check --file .git/config
+```
+
+Before:
+
+```text
+CSpell: Files checked: 0, skipped: 1, Issues found: 0 in 0 files.
+No files found to check (1 skipped).
+```
+
+After:
+
+```text
+.git/config:1:1 - Unknown word (zqxword)
+CSpell: Files checked: 1, Issues found: 1 in 1 file.
+```
+
+This also covers the `.git` file that git puts in a worktree or a submodule.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Spell check .env files like .env.\* files (<a href="https://github.com/streetsidesoftware/cspell/pull/9624">#9624</a>)</summary>
+
+### fix: Spell check .env files like .env.\* files ([#9624](https://github.com/streetsidesoftware/cspell/pull/9624))
+
+## Summary
+
+`.env` and `.env.*` files, such as `.env.local`, are now spell checked the same way. Before, `.env` was treated as a properties file, while `.env.*` files were treated as shell scripts. A word could pass in `.env.local` and be flagged in `.env`.
+
+Both now have both file types, `properties` and `shellscript`. So `.env` files now also use the shell, Bash, and Git dictionaries, and any `languageSettings` for either file type apply to both. `.envrc` is still a shell script only.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Keep every locale in a locale directive followed by punctuation (<a href="https://github.com/streetsidesoftware/cspell/pull/9629">#9629</a>)</summary>
+
+### fix: Keep every locale in a locale directive followed by punctuation ([#9629](https://github.com/streetsidesoftware/cspell/pull/9629))
+
+## Summary
+
+A `locale` directive with punctuation right after a locale lost that locale and every locale after it. This was a regression in 10.4.1.
+
+For example, a Markdown guide that shows the directive in backticks:
+
+```markdown
+Use `cSpell:locale fr,en` here.
+```
+
+- 10.4.0: the locales are `fr,en`.
+- 10.4.1: the locale is `fr` only. English words in the file are reported as unknown.
+- Now: the locales are `fr,en` again.
+
+The fix for comment closers ([#9496](https://github.com/streetsidesoftware/cspell/pull/9496)) and the fix for locales that aren't valid ([#9501](https://github.com/streetsidesoftware/cspell/pull/9501)) still hold. Each of these gives `en`, or `fr,en` for the last one, because text after the locales that isn't a locale doesn't become one:
+
+```text
+<!-- cspell:locale en -->
+/* cspell:locale en*/
+cspell:locale fr,en -- the rest
+```
+
+<details>
+<summary>Technical Details</summary>
+
+A directive's text runs to the end of the line. Before, the locale list was split only on spaces and commas, and the list was cut at the first piece that didn't look like a locale. A piece like `` en` `` failed that check, so the list stopped at `fr`.
+
+Now the list ends at the first character that can't be part of a locale or a separator, such as a backtick or `*/`, or at `--`, as in `-->`. The rest is then split into pieces, and the list still ends at the first piece that isn't a locale.
+
+</details>
+
+---
+
+</details>
+
+<details>
+<summary>fix: Make `[!…]` in globs match characters that are not listed (<a href="https://github.com/streetsidesoftware/cspell/pull/9622">#9622</a>)</summary>
+
+### fix: Make `[!…]` in globs match characters that are not listed ([#9622](https://github.com/streetsidesoftware/cspell/pull/9622))
+
+## Summary
+
+A `[!…]` bracket in a glob now matches any character that is _not_ listed, as it does in git and shell globs. Before, `e[!a].txt` in `.gitignore` (with `useGitignore`) or `ignorePaths` matched `ea.txt` and `e!.txt` and skipped `eb.txt`, so cspell checked the files you meant to ignore and ignored the files you meant to check.
+
+- Applies to `ignorePaths`, `.gitignore` files read with `useGitignore`, `files`, and the `filename` globs in `overrides`.
+- `[^…]` already worked and is unchanged.
+
+Fixes #9621
+
+<details>
+<summary>Technical Details</summary>
+
+- `cspell-glob` now asks picomatch to read globs in POSIX mode. The only change this makes is that `[!` starts a negated bracket, like `[^`.
+- Include mode gets the same fix, so `[!a]` means the same thing in `files` and in `ignorePaths`.
+
+</details>
+
+---
+
+</details>
+
+<details>
+<summary>fix: Skip more lock files, including pnpm-lock.yaml (<a href="https://github.com/streetsidesoftware/cspell/pull/9619">#9619</a>)</summary>
+
+### fix: Skip more lock files, including pnpm-lock.yaml ([#9619](https://github.com/streetsidesoftware/cspell/pull/9619))
+
+## Summary
+
+cspell now recognizes more lock files. Lock files are generated, so cspell skips them when checking files, as it already does for `package-lock.json`, `yarn.lock`, and other files ending in `.lock`.
+
+Newly skipped:
+
+- `pnpm-lock.yaml` (pnpm)
+- `npm-shrinkwrap.json` (npm)
+- `bun.lockb` (Bun, before 1.2)
+- `packages.lock.json` (NuGet)
+- `Package.resolved` (Swift Package Manager)
+- `gradle.lockfile` (Gradle)
+- `.terraform.lock.hcl` (Terraform)
+- `go.sum` and `go.work.sum` (Go)
+
+---
+
+</details>
+
 ## v10.5.0 (2026-11-13)
 
 ### Features
