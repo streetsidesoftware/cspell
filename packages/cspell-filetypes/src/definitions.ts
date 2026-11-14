@@ -165,7 +165,6 @@ export const definitions: FileTypeDefinitions = [
             '.terraform.lock.hcl',
             'Cargo.lock',
             'Package.resolved',
-            'berksfile.lock',
             'bun.lockb',
             'composer.lock',
             'go.sum',
