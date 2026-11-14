@@ -49,6 +49,7 @@ describe('Validate LanguageIds', () => {
         ${'docker.aws.compose.yaml'}         | ${['dockercompose']}
         ${'composer.lock'}                   | ${['json', 'lock']}
         ${'pnpm-lock.yaml'}                  | ${['lock']}
+        ${'yarn.lock'}                       | ${['lock']}
         ${'code.jl'}                         | ${['julia']}
         ${'code.m'}                          | ${['matlab', 'objective-c']}
         ${'script.matlab'}                   | ${['matlab']}
