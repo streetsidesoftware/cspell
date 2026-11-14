@@ -50,6 +50,14 @@ describe('Validate LanguageIds', () => {
         ${'composer.lock'}                   | ${['json', 'lock']}
         ${'pnpm-lock.yaml'}                  | ${['lock']}
         ${'yarn.lock'}                       | ${['lock']}
+        ${'.terraform.lock.hcl'}             | ${['lock']}
+        ${'Package.resolved'}                | ${['lock']}
+        ${'bun.lockb'}                       | ${['lock']}
+        ${'go.sum'}                          | ${['lock']}
+        ${'go.work.sum'}                     | ${['lock']}
+        ${'gradle.lockfile'}                 | ${['lock']}
+        ${'npm-shrinkwrap.json'}             | ${['lock']}
+        ${'packages.lock.json'}              | ${['lock']}
         ${'code.jl'}                         | ${['julia']}
         ${'code.m'}                          | ${['matlab', 'objective-c']}
         ${'script.matlab'}                   | ${['matlab']}
