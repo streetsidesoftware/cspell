@@ -8,7 +8,10 @@ const cacheMergeListUnique = new CalcLeftRightResultWeakCache<ArrayAny, ArrayAny
 const cacheMergeLists = new CalcLeftRightResultWeakCache<ArrayAny, ArrayAny, ArrayAny>();
 
 /**
- * Merges two lists and removes duplicates.  Order is NOT preserved.
+ * Merge two lists and remove duplicates.
+ * - Order is preserved: the items of `left`, then the items of `right` not already in the result.
+ * - Duplicates are found with a `Set`, so an object only matches the same object.
+ * - When either list is missing or empty, the other is returned as is, duplicates included.
  */
 export function mergeListUnique(left: undefined, right: undefined): undefined;
 export function mergeListUnique<T>(left: T[], right: T[]): T[];
