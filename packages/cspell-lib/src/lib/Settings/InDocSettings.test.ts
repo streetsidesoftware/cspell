@@ -135,7 +135,26 @@ describe('Validate InDocSettings', () => {
         ${'/* cspell\u003Alocale en */'}           | ${'en'}
         ${'/* cspell\u003Alocale en-US, nl-NL */'} | ${'en-US,nl-NL'}
         ${'/* cspell\u003Alocale en*/'}            | ${'en'}
+        ${'/* cspell\u003Alocale en,fr*/'}         | ${'en,fr'}
+        ${'/** cspell\u003Alocale en_US **/'}      | ${'en_US'}
     `('locale directive ignores comment closers: $text', ({ text, expected }) => {
+        expect(InDoc.getInDocumentSettings(text).language).toBe(expected);
+    });
+
+    test.each`
+        text                                                                                        | expected
+        ${'Use `cSpell\u003Alocale fr,en` here.'}                                                   | ${'fr,en'}
+        ${'| `locale <locales>` | Set the locale, e.g. `cSpell\u003Alocale fr,en` | Entire file |'} | ${'fr,en'}
+        ${'Set it with "cspell\u003Alocale en-GB".'}                                                | ${'en-GB'}
+        ${'(cspell\u003Alocale nl, en)'}                                                            | ${'nl,en'}
+        ${'cspell\u003Alocale fr,en -- the rest is a comment'}                                      | ${'fr,en'}
+        ${'cspell\u003Alocale fr, en; not a locale'}                                                | ${'fr,en'}
+        ${'cspell\u003Alocale fr,en_US_with_more_than_eighteen'}                                    | ${'fr'}
+        ${'cspell\u003Alocale fr,-en'}                                                              | ${'fr'}
+        ${'cspell\u003Alocale `en`'}                                                                | ${undefined}
+        ${'cspell\u003Alocale'}                                                                     | ${undefined}
+        ${'cspell\u003Alocale:en'}                                                                  | ${undefined}
+    `('locale directive ends at the first piece that is not a locale: $text', ({ text, expected }) => {
         expect(InDoc.getInDocumentSettings(text).language).toBe(expected);
     });
 

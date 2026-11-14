@@ -314,23 +314,16 @@ function parseWords(acc: CSpellUserSettings, match: string): CSpellUserSettings 
     return reduceWordList(acc, match, 'words');
 }
 
-// a non-perfect but reasonable regex to match locale-like strings
-// must match "lorem-ipsum" and similar fake locale-like strings
-const localeLikeRegEx = /^[a-z][a-z0-9_-]{0,16}[a-z0-9]$/i;
+// A non-perfect but reasonable match for a locale. It must also match "lorem-ipsum" and similar fake locales.
+// A locale ends before any character that can't continue it, such as a backtick, `-->`, or `*/`.
+const localeLike = String.raw`[a-z][\w-]{0,16}[a-z0-9](?![-_]*[a-z0-9])`;
+// The directive name, then the locales. The list ends before the first piece that isn't a locale.
+const regExLocaleDirective = new RegExp(String.raw`^[a-z]+[\s,]+(${localeLike}(?:[\s,]+${localeLike})*)`, 'i');
 
 function parseLocale(acc: CSpellUserSettings, match: string): CSpellUserSettings {
-    // Remove the closing marker of an HTML or block comment, it is not a locale.
-    const parts = match
-        .replace(/[^a-z0-9]+$/i, '')
-        .split(/[\s,]+/)
-        .slice(1);
-    const stop = parts.findIndex((locale) => !localeLikeRegEx.test(locale));
-    if (stop !== -1) {
-        parts.splice(stop);
-    }
-    const language = parts.join(',');
-    if (language) {
-        acc.language = language;
+    const locales = match.match(regExLocaleDirective)?.[1];
+    if (locales) {
+        acc.language = locales.replaceAll(/[\s,]+/g, ',');
     }
     return acc;
 }
