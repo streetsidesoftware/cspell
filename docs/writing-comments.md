@@ -7,9 +7,9 @@ many long ones that drift out of date.
 
 Who reads a comment decides how to write it:
 
+- [Internal comments](#internal-comments) are for maintainers. They read them in the source.
 - [Public comments](#public-comments) are documentation for [users](./glossary.md#users). Users read them in their
   editor's hover, while editing a config file, and on the website.
-- [Internal comments](#internal-comments) are for maintainers. They read them in the source.
 
 [Public or internal](#public-or-internal) tells the two apart. [Voice](#voice) and [Every comment](#every-comment) apply
 to both.
@@ -56,7 +56,12 @@ Cases that need care:
 | A function type                                                        | Third person, present tense                 | "Returns `true` when the file should be skipped." |
 | Any other class, interface, type or property, a constant or a variable | Noun phrase, or third person, present tense | "The locale to use for suggestions."              |
 
-In the last row, a noun phrase suits most comments, and a verb suits booleans.
+A property that holds a function runs when called, like a method, so its comment is imperative. A function type
+describes every function of that type, so its comment is in the third person.
+
+In the last row, a noun phrase suits most comments. A boolean that turns one effect on takes a verb that says what `true`
+does. A boolean whose values each do something of their own takes a noun phrase, since a verb would describe only one of
+them.
 
 ## Every comment
 
@@ -115,7 +120,7 @@ When a function changes:
 The reader uses cspell. They might be writing a config file, or calling a package from their own code. They read the
 comment in a hover or on the website, which both render it as Markdown.
 
-- Describe what the reader gets. Never describe how cspell does it.
+- Describe what the reader sees and controls. Leave out internals they can neither observe nor change.
 - Help the reader choose. When something else fits a case better, point to it: "For text already in memory, use
   {@link spellCheckDocument}."
 - Use the words a user would use, not cspell's internal terms.
@@ -125,7 +130,8 @@ comment in a hover or on the website, which both render it as Markdown.
 
 ### What gets a comment
 
-- Every exported function, method and property gets a summary, and details where they're needed.
+- Every exported function, and every member of an exported class, interface or type, gets a summary, and details where
+  they're needed.
 - An exported class, interface or type gets a summary only when it says something its name and members can't: what it's
   for when the name doesn't say, what its values mean, or a rule its users must follow. Don't summarize its members or
   name the functions that use it, since both change.
@@ -295,7 +301,8 @@ After: says what the option accepts, with an example, and the cost of enabling i
 allowCompoundWords?: boolean;
 ```
 
-Good as it is: a boolean whose two values do different things gets a list.
+Before: a boolean whose two values do different things rightly gets a list. But the summary opens with a verb that adds
+nothing, and the `false` item packs two ideas into one wrapped line.
 
 ```ts
 /**
@@ -306,6 +313,22 @@ Good as it is: a boolean whose two values do different things gets a list.
  * - `false` - Case is ignored and accents can be missing on the entire word.
  *   Incorrect accents or partially missing accents will be marked as incorrect.
  * - `true` - Case and accents are enforced.
+ *
+ * @default false
+ */
+caseSensitive?: boolean;
+```
+
+After: the summary says what the option sets, and each value gets one line.
+
+```ts
+/**
+ * How strictly words must match case and accents.
+ *
+ * - `false` - Case is ignored. A word may be missing all its accents, but a wrong or partly missing accent is reported.
+ * - `true` - Case and accents must match.
+ *
+ * See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.
  *
  * @default false
  */
