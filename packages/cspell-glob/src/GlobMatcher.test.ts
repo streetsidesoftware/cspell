@@ -478,6 +478,19 @@ describe('Validate GlobMatcher', () => {
             ${g('*.js', 'a/b')}          | ${'a'}       | ${'a/b/settings.js'}                        | ${'include'} | ${true}  | ${'Matches files, *.js'}
             ${g('*.js', 'a/b')}          | ${'a'}       | ${'a/settings.js'}                          | ${'include'} | ${false} | ${'Does not match parent files, *.js'}
             ${g('*.js', 'a')}            | ${'a/b'}     | ${'a/b/src/settings.js'}                    | ${'include'} | ${false} | ${'Does not match nested files, *.js'}
+            ${['e[!a].txt']}             | ${undefined} | ${'${cwd}/eb.txt'}                          | ${'exclude'} | ${true}  | ${'[!a] matches a char other than a'}
+            ${['e[!a].txt']}             | ${undefined} | ${'${cwd}/ea.txt'}                          | ${'exclude'} | ${false} | ${'[!a] does not match a'}
+            ${['e[!a].txt']}             | ${undefined} | ${'${cwd}/e!.txt'}                          | ${'exclude'} | ${true}  | ${'[!a] matches !'}
+            ${['e[!a].txt']}             | ${undefined} | ${'${cwd}/src/eb.txt'}                      | ${'exclude'} | ${true}  | ${'[!a] matches nested files'}
+            ${['e[!ab].txt']}            | ${undefined} | ${'${cwd}/eb.txt'}                          | ${'exclude'} | ${false} | ${'[!ab] does not match b'}
+            ${['e[!a-c].txt']}           | ${undefined} | ${'${cwd}/ed.txt'}                          | ${'exclude'} | ${true}  | ${'[!a-c] matches d'}
+            ${['e[!a-c].txt']}           | ${undefined} | ${'${cwd}/eb.txt'}                          | ${'exclude'} | ${false} | ${'[!a-c] does not match b'}
+            ${['e[^a].txt']}             | ${undefined} | ${'${cwd}/eb.txt'}                          | ${'exclude'} | ${true}  | ${'[^a] matches a char other than a'}
+            ${['e[^a].txt']}             | ${undefined} | ${'${cwd}/ea.txt'}                          | ${'exclude'} | ${false} | ${'[^a] does not match a'}
+            ${['e[ab].txt']}             | ${undefined} | ${'${cwd}/ea.txt'}                          | ${'exclude'} | ${true}  | ${'[ab] matches a'}
+            ${['e[!a].txt']}             | ${undefined} | ${'${cwd}/eb.txt'}                          | ${'include'} | ${true}  | ${'[!a] matches a char other than a'}
+            ${['e[!a].txt']}             | ${undefined} | ${'${cwd}/ea.txt'}                          | ${'include'} | ${false} | ${'[!a] does not match a'}
+            ${['e[!a]/x.txt']}           | ${undefined} | ${'${cwd}/e/b/x.txt'}                       | ${'include'} | ${false} | ${'[!a] does not match /'}
         `(`${os} $mode: $description, patterns: $patterns, filename: $filename, root: $root, $expected`, ({ filename, root, patterns, mode, expected }: TestCaseMatcher) => {
             root = resolveFilename(pathInstance, root);
             filename = resolveFilename(pathInstance, filename);

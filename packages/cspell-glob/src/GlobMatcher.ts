@@ -239,7 +239,8 @@ function buildMatcherFn(
     // outputBuildMatcherFnPerfData(_id, patterns, options);
     const { nodePath, dot, nobrace } = options;
     const builder = new FileUrlBuilder({ path: nodePath });
-    const makeReOptions = { dot, nobrace };
+    // `posix: true` makes `[!a]` a negated bracket expression, like `.gitignore` and shell globs.
+    const makeReOptions = { dot, nobrace, posix: true };
     const suffixDir = GlobPatterns.suffixDir;
     const rules: GlobRule[] = patterns
         .map((pattern, index) => ({ pattern, index }))
