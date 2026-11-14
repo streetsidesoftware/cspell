@@ -48,6 +48,9 @@ describe('Validate LanguageIds', () => {
         ${'Dockerfile.dev'}                  | ${['dockerfile']}
         ${'docker.aws.compose.yaml'}         | ${['dockercompose']}
         ${'composer.lock'}                   | ${['json', 'lock']}
+        ${'.env'}                            | ${['properties', 'shellscript']}
+        ${'.env.local'}                      | ${['properties', 'shellscript']}
+        ${'.envrc'}                          | ${['shellscript'] /* cspell:ignore envrc */}
         ${'code.jl'}                         | ${['julia']}
         ${'code.m'}                          | ${['matlab', 'objective-c']}
         ${'script.matlab'}                   | ${['matlab']}
