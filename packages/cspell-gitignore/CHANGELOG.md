@@ -154,6 +154,18 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 </details>
 
+## v10.5.1 (2026-11-14)
+
+### Fixes
+
+- fix: Make `[!…]` in globs match characters that are not listed (<a href="https://github.com/streetsidesoftware/cspell/pull/9622">#9622</a>)
+
+---
+
+</details>
+
+- fix: Skip more lock files, including pnpm-lock.yaml (<a href="https://github.com/streetsidesoftware/cspell/pull/9619">#9619</a>)
+
 ## v10.5.0 (2026-11-13)
 
 ### Features
