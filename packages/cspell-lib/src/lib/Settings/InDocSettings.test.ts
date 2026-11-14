@@ -152,6 +152,7 @@ describe('Validate InDocSettings', () => {
         ${'cspell\u003Alocale fr,en_US_with_more_than_eighteen'}                                    | ${'fr'}
         ${'cspell\u003Alocale fr,-en'}                                                              | ${'fr'}
         ${'cspell\u003Alocale `en`'}                                                                | ${undefined}
+        ${'// cspell\u003A locale fr, en'}                                                          | ${'fr,en'}
         ${'cspell\u003Alocale'}                                                                     | ${undefined}
         ${'cspell\u003Alocale:en'}                                                                  | ${undefined}
     `('locale directive ends at the first piece that is not a locale: $text', ({ text, expected }) => {

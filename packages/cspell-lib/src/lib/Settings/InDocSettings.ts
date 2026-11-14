@@ -320,10 +320,11 @@ const localeLikeRegEx = /^[a-z][a-z0-9_-]{0,16}[a-z0-9]$/i;
 
 function parseLocale(acc: CSpellUserSettings, match: string): CSpellUserSettings {
     const parts = match
-        .replace(/^[a-z]+[\s,]*/i, '')
         // The locales end at the first character that can't be in a locale or a separator, or at a `--` like in `-->`.
         .replace(/(?:[^a-z0-9_\s,-]|--).*/i, '')
-        .split(/[\s,]+/);
+        .split(/[\s,]+/)
+        // Drop the directive name, `locale` or `language`.
+        .slice(1);
     const stop = parts.findIndex((locale) => !localeLikeRegEx.test(locale));
     if (stop !== -1) {
         parts.splice(stop);
