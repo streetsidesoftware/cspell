@@ -1,8 +1,6 @@
-import * as path from 'node:path';
-
 import type { CSpellUserSettings } from '@cspell/cspell-types';
 
-import { getLanguagesForBasename } from '../fileTypes.js';
+import { getLanguagesForFilename } from '../fileTypes.js';
 import type { TextDocument, TextDocumentRef } from '../Models/TextDocument.js';
 import type { CSpellSettingsInternal } from '../Settings/index.js';
 import { calcOverrideSettings, getDefaultSettings, getGlobalSettingsAsync, mergeSettings } from '../Settings/index.js';
@@ -37,14 +35,9 @@ export async function determineTextDocumentSettings(
         ? fileSettings.languageId
         : doc.languageId
           ? doc.languageId
-          : getLanguageForFilename(filename);
+          : getLanguagesForFilename(filename);
     if (doc.locale) {
         fileSettings.language = doc.locale;
     }
     return combineTextAndLanguageSettings(fileSettings, doc.text, languageIds);
-}
-
-function getLanguageForFilename(filename: string): string[] {
-    const basename = path.basename(filename);
-    return getLanguagesForBasename(basename);
 }

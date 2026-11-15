@@ -11,7 +11,7 @@ export {
 } from './FeatureFlags/index.js';
 export type { VFileSystemProvider, VirtualFS } from './fileSystem.js';
 export { FSCapabilityFlags, getVirtualFS } from './fileSystem.js';
-export { getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt } from './fileTypes.js';
+export { getLanguagesForFilename as getLanguageIdsForBaseFilename, getLanguagesForExt } from './fileTypes.js';
 export { getDictionary } from './getDictionary.js';
 export type {
     CreateTextDocumentParams,

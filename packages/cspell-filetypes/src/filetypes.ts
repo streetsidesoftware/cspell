@@ -34,6 +34,7 @@ interface RegExpMatchToFileTypeId {
 }
 
 const idsWithRegExp: RegExpMatchToFileTypeId[] = definitions.map(defToRegExp).filter((f) => !!f);
+const idsWithPathRegExp: RegExpMatchToFileTypeId[] = definitions.map(defToPathRegExp).filter((f) => !!f);
 
 /**
  * Checks to see if a file type is considered to be a binary file type.
@@ -50,7 +51,6 @@ export function isBinaryExt(ext: string): boolean {
  * @returns true if the file type is known to be binary.
  */
 export function isBinaryFile(filename: string): boolean {
-    filename = basename(filename);
     return isBinaryFileType(findMatchingFileTypes(filename));
 }
 
@@ -118,7 +118,7 @@ function buildLanguageExtensionMapSet(defs: FileTypeDefinitions): ExtensionToFil
         }
 
         def.extensions.forEach(addId);
-        def.filenames?.forEach((filename) => (typeof filename === 'string' ? addId(filename) : undefined));
+        def.filenames?.forEach((filename) => (isPathPattern(filename) ? undefined : addId(filename)));
         return map;
     }, new Map<string, Set<string>>());
 }
@@ -144,6 +144,10 @@ function matchPatternsToFilename(basename: string): FileTypeId[] {
     return idsWithRegExp.filter(({ regexp }) => regexp.test(basename)).map(({ id }) => id);
 }
 
+function matchPatternsToPath(filename: string): FileTypeId[] {
+    return idsWithPathRegExp.filter(({ regexp }) => regexp.test(filename)).map(({ id }) => id);
+}
+
 function _getLanguagesForBasename(basename: string): string[] | undefined {
     const found = mapExtensionToLanguageIds.get(basename);
     if (found) return found;
@@ -159,17 +163,24 @@ function _getLanguagesForBasename(basename: string): string[] | undefined {
     return undefined;
 }
 
+function _getLanguagesForFilename(filename: string): string[] | undefined {
+    const pathMatches = matchPatternsToPath(filename);
+    if (pathMatches.length) return pathMatches;
+
+    return _getLanguagesForBasename(basename(filename));
+}
+
 /**
  * Find the matching file types for a given filename.
  * @param filename - the full filename
  * @returns an array of language ids that match the filename. The array is empty if no matches are found.
  */
 export function findMatchingFileTypes(filename: string): FileTypeId[] {
-    filename = basename(filename);
-    return _getLanguagesForBasename(filename) || _getLanguagesForBasename(filename.toLowerCase()) || [];
+    return _getLanguagesForFilename(filename) || _getLanguagesForFilename(filename.toLowerCase()) || [];
 }
 
-const regExpPathSep = /[\\/]/g;
+// Not global: `test` on a global RegExp starts at the `lastIndex` left by the previous call.
+const regExpPathSep = /[\\/]/;
 
 function basename(filename: string): string {
     return regExpPathSep.test(filename) ? filename.split(regExpPathSep).slice(-1).join('') : filename;
@@ -212,9 +223,63 @@ function simpleGlob(s: string): RegExp {
     return new RegExp(`^${pattern}$`);
 }
 
+function isPathPattern(filename: string): boolean {
+    return filename.includes('/');
+}
+
+/**
+ * Convert a path pattern, such as `.git/config`, to the source of a RegExp that matches the end of a path.
+ * - `/` matches either path separator.
+ * - `*` and `?` stay within one path segment.
+ * - `**` crosses segments. Followed by `/`, it also matches no segment.
+ */
+export function pathPatternToRegExpSource(pattern: string): string {
+    let source = '';
+    for (let i = 0; i < pattern.length; ++i) {
+        const char = pattern[i];
+        if (pattern.startsWith('**/', i)) {
+            source += String.raw`(?:.*[\\/])?`;
+            i += 2;
+            continue;
+        }
+        if (pattern.startsWith('**', i)) {
+            source += '.*';
+            i += 1;
+            continue;
+        }
+        switch (char) {
+            case '/': {
+                source += String.raw`[\\/]`;
+                break;
+            }
+            case '*': {
+                source += String.raw`[^\\/]*`;
+                break;
+            }
+            case '?': {
+                source += String.raw`[^\\/]`;
+                break;
+            }
+            default: {
+                source += escapeRegEx(char);
+            }
+        }
+    }
+    return source;
+}
+
+function defToPathRegExp(def: FileTypeDefinition): RegExpMatchToFileTypeId | undefined {
+    const sources = def.filenames?.filter(isPathPattern).map(pathPatternToRegExpSource);
+    if (!sources?.length) return undefined;
+
+    const regexp = new RegExp(String.raw`(?:^|[\\/])(?:` + sources.join('|') + ')$');
+    return { regexp, id: def.id };
+}
+
 function defToRegExp(def: FileTypeDefinition): RegExpMatchToFileTypeId | undefined {
     if (!def.filenames) return undefined;
     const regExps = def.filenames
+        .filter((f) => !isPathPattern(f))
         .map(stringOrGlob)
         .map((f) => (f instanceof RegExp ? f : undefined))
         .filter((f) => !!f);
