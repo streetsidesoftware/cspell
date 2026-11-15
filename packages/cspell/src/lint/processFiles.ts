@@ -57,7 +57,7 @@ function prefetch(fileToProcess: FileToProcess, cfg: PrefetchConfig): PrefetchFi
             result: Promise.resolve({ skip: true, skipReason: 'Binary file.' }),
         };
     }
-    if (isIgnoredByPresets(url, cfg.rootUrl, cfg.config)) {
+    if (!cfg.forceCheck && isIgnoredByPresets(url, cfg.rootUrl, cfg.config)) {
         return {
             ...fileToProcess,
             result: Promise.resolve({ skip: true, skipReason: 'Excluded by ignorePathPresets.' }),
