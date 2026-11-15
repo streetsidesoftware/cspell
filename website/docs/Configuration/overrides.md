@@ -18,11 +18,13 @@ the current directory, or the one given with `--config`).
 
 - If globs are given on the command line, they are used to search for matching files. (If none are given, the
   configuration's `files` setting is used as the globs instead.) The results are filtered against the
-  configuration's `ignorePaths` (plus any `--exclude` globs) and its `ignorePathPresets`, which skip git's own
-  files by default. With `--gitignore` or `"useGitignore": true`, they are also filtered against `.gitignore`.
+  configuration's `ignorePaths` (plus any `--exclude` globs) and, since v10.5.0, its `ignorePathPresets`, which
+  skip git's own files by default. With `--gitignore` or `"useGitignore": true`, they are also filtered against
+  `.gitignore`.
 - If `--file`, `--files`, or `--file-list` is used, those are treated as exact file names instead of globs. They
   are still filtered the same way, and they must match the globs on the command line, or `files` when there are
-  none -- unless `--force-check` is given, which checks them anyway.
+  none -- unless `--force-check` is given, which checks them anyway. (In v10.2.0 through v10.4.x, `--file` and
+  `--files` cannot be combined with globs on the command line.)
 
 See [Understanding CSpell Globs](../globs.md) for glob syntax.
 

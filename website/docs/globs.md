@@ -30,7 +30,7 @@ different files depending on where it is used.
 - `?` matches one character.
 - `{md,txt}` matches any one of the comma-separated choices.
 - `[abc]` matches one of the characters.
-- `[!abc]` matches one character that is not listed.
+- `[!abc]` matches one character that is not listed. Since v10.5.1.
 - `!(COMMIT_EDITMSG|HEAD)` matches any name except the ones listed.
 - A leading `!` negates a glob. What it does depends on the setting: see [Negative Globs](#negative-globs).
 
@@ -124,7 +124,7 @@ By default, `*` and `**` do not match names that start with `.`, such as `.githu
 
 `--dot` and `enableGlobDot` only change strict matching. Loose matching always matches dot files.
 
-CSpell skips most of the `.git` files in these examples even when a glob matches them. See
+Since v10.5.0, CSpell skips most of the `.git` files in these examples even when a glob matches them. See
 [Git's Own Files](#gits-own-files).
 
 ## Loose Matching: `ignorePaths`, `--exclude`, and Overrides
@@ -143,13 +143,14 @@ CSpell skips most of the `.git` files in these examples even when a glob matches
 As in strict matching, a glob ending in `/**` also matches a file with that name: `**/test/**` matches a file named
 `test`.
 
-In overrides, these extra matches can be disabled with
+Since v10.5.0, these extra matches can be disabled in overrides with
 [`overrideGlobsMatchFilesOnly`](./Configuration/overrides.md#globs-that-match-files-only). With it enabled,
 `examples.ts` matches only a file named `examples.ts`, not the files inside a folder with that name, and `src/**`
 matches only the files inside `src`, not a file named `src`.
 
 A consequence of these rules: an override with `"filename": "**/.git"` applies to the file `sub/.git` and also to
-every file inside a `.git` folder. Use `.git/` for the files inside `.git` folders only.
+every file inside a `.git` folder. Use `.git/` for the files inside `.git` folders only. To apply settings only to a
+file named `.git`, see [A File Named `.git`](#a-file-named-git).
 
 ### `--exclude`
 
@@ -165,8 +166,8 @@ Globs given with `--exclude` use loose matching, with these differences from `ig
 ## What Each Glob Matches
 
 The files each glob matches in [the example folder](#the-example-folder), without `--dot`. The `ignorePaths` column
-also applies to `overrides[].filename`. A match on the command line or in `files` does not mean the file is checked:
-see [Git's Own Files](#gits-own-files).
+also applies to `overrides[].filename`. Since v10.5.0, a match on the command line or in `files` does not mean the
+file is checked: see [Git's Own Files](#gits-own-files).
 
 | Glob                 | Command line and `files`                                                         | `ignorePaths` and overrides                      | `--exclude`                |
 | -------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------ | -------------------------- |
@@ -217,7 +218,7 @@ The resolved configuration is used to find files.
 - The globs come from the command line, or from `files` when there are none.
 - Files and folders that match `ignorePaths` or `--exclude` are skipped. CSpell does not look inside a skipped
   folder, so a glob that names a file inside one finds nothing.
-- Git's own files and nested git worktrees are skipped. See [Git's Own Files](#gits-own-files).
+- Since v10.5.0, git's own files and nested git worktrees are skipped. See [Git's Own Files](#gits-own-files).
 
 ### Checking Each File
 
@@ -229,14 +230,18 @@ Files given with `--file`, `--files`, or `--file-list` are not searched for. The
 
 - by the globs on the command line, or by `files` when there are none;
 - by `ignorePaths` and `--exclude`;
-- by `ignorePathPresets`, which skip [git's own files](#gits-own-files);
+- since v10.5.0, by `ignorePathPresets`, which skip [git's own files](#gits-own-files);
 - by the configuration file nearest each file, as above.
 
-Use `--force-check` to check them anyway. It cannot be combined with globs on the command line.
+In v10.2.0 through v10.4.x, `--file` and `--files` cannot be combined with globs on the command line. `--file-list`
+can be.
+
+Use `--force-check` (since v10.2.0) to check them anyway. Since v10.4.0, it cannot be combined with globs on the
+command line.
 
 ### Git's Own Files
 
-By default, CSpell skips git's own files inside the root folder, even when a glob matches them:
+Since v10.5.0, CSpell skips git's own files inside the root folder by default, even when a glob matches them:
 
 - the files inside a `.git` folder, except git's message files, such as `COMMIT_EDITMSG`;
 - a file named `.git`, which git puts in a worktree or a submodule;
@@ -245,7 +250,11 @@ By default, CSpell skips git's own files inside the root folder, even when a glo
 A `commit-msg` git hook can still check the message with `cspell .git/COMMIT_EDITMSG`.
 
 [`ignorePathPresets`](./Configuration/auto_properties.md#settings-ignorepathpresets) controls this. Set `"git": false`
-to check git's own files, and `"nestedWorktrees": false` to check nested worktrees.
+to check git's own files, and `"nestedWorktrees": false` to check nested worktrees. Since v10.5.1, `--force-check`
+also checks the files given with `--file`, `--files`, or `--file-list` that these presets skip.
+
+For earlier versions, see [Ignore `.git` but Check the Commit Message](#ignore-git-but-check-the-commit-message) and
+[A File Named `.git`](#a-file-named-git).
 
 ## Recipes
 
@@ -283,5 +292,76 @@ These globs skip only `node_modules` folders under the root, and keep the files 
 [`--exclude`](#--exclude) treats some of these globs differently. `--exclude node_modules/` and
 `--exclude /**/node_modules/**` also report `No files found to check.` `--exclude /node_modules` keeps the files in
 `node_modules/my-package` and skips the `node_modules` folders under it.
+
+### Ignore `.git` but Check the Commit Message
+
+:::info
+
+For versions before v10.5.0. Since v10.5.0, CSpell does this by default: see [Git's Own Files](#gits-own-files).
+
+:::
+
+A `commit-msg` git hook can check the message with `cspell .git/COMMIT_EDITMSG`. If `ignorePaths` contains `.git`,
+`.git/`, or `.git/**`, that command reports `No files found to check.`
+
+Ignore everything in `.git` except the commit message:
+
+**`cspell.json`**
+
+```json
+{
+  "ignorePaths": [".git/!(COMMIT_EDITMSG)"]
+}
+```
+
+`cspell .git/COMMIT_EDITMSG` then checks the message, and `cspell --dot "**"` skips the rest of `.git`.
+
+### A File Named `.git`
+
+:::info
+
+Since v10.5.0, CSpell skips files named `.git` by default: see [Git's Own Files](#gits-own-files). The overrides
+below are for earlier versions, or for `"ignorePathPresets": { "git": false }`.
+
+:::
+
+In a git worktree or a submodule, `.git` is a file instead of a folder.
+
+- On the command line and in `files`, `**/.git` matches only files named `.git`.
+- In `ignorePaths` and overrides, `.git` and `**/.git` match files named `.git` and everything inside `.git`
+  folders. `.git/` matches only what is inside `.git` folders.
+- In an override, a negative glob limits the match to files named `.git`:
+
+**`cspell.json`**
+
+```json
+{
+  "overrides": [
+    {
+      "filename": ["**/.git", "!.git/"],
+      "enabled": false
+    }
+  ]
+}
+```
+
+Since v10.5.0, with [`overrideGlobsMatchFilesOnly`](./Configuration/overrides.md#globs-that-match-files-only)
+enabled, `.git` in an override matches only files named `.git`:
+
+**`cspell.json`**
+
+```json
+{
+  "features": {
+    "overrideGlobsMatchFilesOnly": true
+  },
+  "overrides": [
+    {
+      "filename": ".git",
+      "enabled": false
+    }
+  ]
+}
+```
 
 <!--- cspell:ignore EDITMSG -->
