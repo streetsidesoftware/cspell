@@ -47,7 +47,7 @@ export function isBinaryExt(ext: string): boolean {
 
 /**
  * Checks to see if a file type is considered to be a binary file type.
- * @param filename - the filename to check
+ * @param filename - the file name or path. A `\` is read as `/`.
  * @returns true if the file type is known to be binary.
  */
 export function isBinaryFile(filename: string): boolean {
@@ -78,7 +78,7 @@ export function isGeneratedExt(ext: string): boolean {
  * Check if a file is auto generated. Generated files are files that are not typically edited by a human.
  * Example:
  * - package-lock.json
- * @param filename - the full filename to check
+ * @param filename - the file name or path. A `\` is read as `/`.
  * @returns true if the file type known to be generated.
  */
 export function isGeneratedFile(filename: string): boolean {
@@ -172,7 +172,7 @@ function _getLanguagesForFilename(filename: string): string[] | undefined {
 
 /**
  * Find the matching file types for a given filename.
- * @param filename - the full filename
+ * @param filename - the file name or path. A `\` is read as `/`.
  * @returns an array of language ids that match the filename. The array is empty if no matches are found.
  */
 export function findMatchingFileTypes(filename: string): FileTypeId[] {

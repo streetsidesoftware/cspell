@@ -95,6 +95,11 @@ describe('Validate LanguageIds', () => {
         expect(LangId.findMatchingFileTypes(filename)).toEqual(expected);
     });
 
+    test('findMatchingFileTypes does not depend on the previous call', () => {
+        expect(LangId.findMatchingFileTypes('src/a/b.md')).toEqual(['markdown']);
+        expect(LangId.findMatchingFileTypes('src/Dockerfile')).toEqual(['dockerfile']);
+    });
+
     test.each`
         pattern                      | path                           | expected
         ${'.git/config'}             | ${'.git/config'}               | ${true}
@@ -116,6 +121,13 @@ describe('Validate LanguageIds', () => {
         for (const def of definitions) {
             const extsWithoutPeriod = def.extensions.filter((ext) => ext[0] !== '.');
             expect(extsWithoutPeriod).toEqual([]);
+        }
+    });
+
+    test('that no filename starts or ends with a /', () => {
+        for (const def of definitions) {
+            const filenames = def.filenames?.filter((f) => f.startsWith('/') || f.endsWith('/')) ?? [];
+            expect(filenames).toEqual([]);
         }
     });
 
