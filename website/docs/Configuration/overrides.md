@@ -52,8 +52,8 @@ settings (see [Merge Rules](#merge-rules) below for how array-like settings are 
    imports. A few CLI flags adjust these settings directly: `--dictionary <name>` / `--disable-dictionary <name>`
    (enable/disable dictionaries) and `--report <level>` (which categories of unknown words to report).
 1. **The configuration nearest the document** -- found by a second, independent search that starts at the
-   document's own directory and walks upward. It overrides everything above it. (Skipped when
-   `--no-config-search` is used, or when `--config` is given explicitly.)
+   document's own directory and walks upward. It overrides everything above it, even when `--config` is given.
+   (Skipped when `--no-config-search` is used, or when `noConfigSearch` is `true`.)
 
 This means a `cspell.json` placed next to (or above) an individual file always wins over the configuration file
 found from the current working directory.

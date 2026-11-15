@@ -1,6 +1,7 @@
 <!--- cspell:disable --->
 
 [<img alt="Contributor Jason3S" src="https://avatars.githubusercontent.com/u/3740137?v=4&size=128" width=64>](https://github.com/Jason3S)
+[<img alt="Contributor bardrop" src="https://avatars.githubusercontent.com/u/100354790?v=4&size=128" width=64>](https://github.com/bardrop)
 [<img alt="Contributor twotnguyen" src="https://avatars.githubusercontent.com/u/195888848?v=4&size=128" width=64>](https://github.com/twotnguyen)
 [<img alt="Contributor G26karthik" src="https://avatars.githubusercontent.com/u/144328549?v=4&size=128" width=64>](https://github.com/G26karthik)
 [<img alt="Contributor dleontev" src="https://avatars.githubusercontent.com/u/9162240?v=4&size=128" width=64>](https://github.com/dleontev)
