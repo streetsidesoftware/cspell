@@ -167,7 +167,7 @@ function _getLanguagesForFilename(filename: string): string[] | undefined {
     const pathMatches = matchPatternsToPath(filename);
     if (pathMatches.length) return pathMatches;
 
-    return _getLanguagesForBasename(basename(filename));
+    return _getLanguagesForBasename(filename.slice(filename.lastIndexOf('/') + 1));
 }
 
 /**
@@ -176,14 +176,8 @@ function _getLanguagesForFilename(filename: string): string[] | undefined {
  * @returns an array of language ids that match the filename. The array is empty if no matches are found.
  */
 export function findMatchingFileTypes(filename: string): FileTypeId[] {
+    filename = filename.replaceAll('\\', '/');
     return _getLanguagesForFilename(filename) || _getLanguagesForFilename(filename.toLowerCase()) || [];
-}
-
-// Not global: `test` on a global RegExp starts at the `lastIndex` left by the previous call.
-const regExpPathSep = /[\\/]/;
-
-function basename(filename: string): string {
-    return regExpPathSep.test(filename) ? filename.split(regExpPathSep).slice(-1).join('') : filename;
 }
 
 export function autoResolve<K, V>(map: Map<K, V>, key: K, resolve: (k: K) => V): V {
@@ -229,7 +223,6 @@ function isPathPattern(filename: string): boolean {
 
 /**
  * Convert a path pattern, such as `.git/config`, to the source of a RegExp that matches the end of a path.
- * - `/` matches either path separator.
  * - `*` and `?` stay within one path segment.
  * - `**` crosses segments. Followed by `/`, it also matches no segment.
  */
@@ -238,7 +231,7 @@ export function pathPatternToRegExpSource(pattern: string): string {
     for (let i = 0; i < pattern.length; ++i) {
         const char = pattern[i];
         if (pattern.startsWith('**/', i)) {
-            source += String.raw`(?:.*[\\/])?`;
+            source += '(?:.*/)?';
             i += 2;
             continue;
         }
@@ -248,16 +241,12 @@ export function pathPatternToRegExpSource(pattern: string): string {
             continue;
         }
         switch (char) {
-            case '/': {
-                source += String.raw`[\\/]`;
-                break;
-            }
             case '*': {
-                source += String.raw`[^\\/]*`;
+                source += '[^/]*';
                 break;
             }
             case '?': {
-                source += String.raw`[^\\/]`;
+                source += '[^/]';
                 break;
             }
             default: {
@@ -272,7 +261,7 @@ function defToPathRegExp(def: FileTypeDefinition): RegExpMatchToFileTypeId | und
     const sources = def.filenames?.filter(isPathPattern).map(pathPatternToRegExpSource);
     if (!sources?.length) return undefined;
 
-    const regexp = new RegExp(String.raw`(?:^|[\\/])(?:` + sources.join('|') + ')$');
+    const regexp = new RegExp('(?:^|/)(?:' + sources.join('|') + ')$');
     return { regexp, id: def.id };
 }
 

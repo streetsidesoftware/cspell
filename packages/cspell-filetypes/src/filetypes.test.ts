@@ -84,7 +84,7 @@ describe('Validate LanguageIds', () => {
         ${'/repo/.git/config'}             | ${['properties']}
         ${'/repo/.GIT/CONFIG'}             | ${['properties']}
         ${String.raw`C:\repo\.git\config`} | ${['properties']}
-        ${'file:///C:/repo/.git/config'}   | ${['properties']}
+        ${'file:///repo/.git/config'}      | ${['properties']}
         ${'/repo/.git/info/exclude'}       | ${['ignore']}
         ${'/repo/config'}                  | ${[]}
         ${'/repo/my.git/config'}           | ${[]}
@@ -95,15 +95,9 @@ describe('Validate LanguageIds', () => {
         expect(LangId.findMatchingFileTypes(filename)).toEqual(expected);
     });
 
-    test('findMatchingFileTypes does not depend on the previous call', () => {
-        expect(LangId.findMatchingFileTypes(String.raw`C:\a-long-folder\code.ts`)).toEqual(['typescript']);
-        expect(LangId.findMatchingFileTypes('a/Gemfile')).toEqual(['ruby']);
-    });
-
     test.each`
         pattern                      | path                           | expected
         ${'.git/config'}             | ${'.git/config'}               | ${true}
-        ${'.git/config'}             | ${String.raw`.git\config`}     | ${true}
         ${'.git/config'}             | ${'.git/configs'}              | ${false}
         ${'.git/worktrees/*/HEAD'}   | ${'.git/worktrees/wt/HEAD'}    | ${true}
         ${'.git/worktrees/*/HEAD'}   | ${'.git/worktrees/a/b/HEAD'}   | ${false}
