@@ -151,14 +151,14 @@ it is, in the [voice](#voice) above.
 
 ### The details
 
-The paragraphs after the summary answer what a user would ask next: what it accepts, what it gives back, when it fails,
-and what to use instead.
+The paragraphs after the summary answer what a user would ask next: what it accepts, what it gives back, whether it
+throws, and what to use instead.
 
 - One topic per paragraph or list. Every sentence in a paragraph is about that paragraph's subject.
 - Markdown joins consecutive lines into one paragraph. Separate ideas need a blank line between them, or a list.
 - Use a list when there are several parallel rules or cases.
 - Say what isn't allowed, and point to what allows it.
-- Say what makes it fail, and whether it throws or reports the problem in its result.
+- Say whether it throws or reports problems in its result. Don't list the ways it can fail.
 - Give units and defaults the type doesn't show.
 - Drop a sentence that answers nothing the reader would ask.
 
@@ -166,7 +166,7 @@ and what to use instead.
 
 - `@default` on a line of its own for a default: `@default true`. Quote a string: `@default "utf-8"`.
 - `@param` only where the name and type don't say enough. `@returns` only when it adds something.
-- No `@throws`. It goes stale and misleads. Say what makes it fail in the details instead.
+- No `@throws`. It goes stale and misleads.
 - Name another exported function or type with `{@link name}`, so the hover links to it.
 - `@example` when the summary and the types don't show how to call it. An example shows the call, then its result as
   `//` comments, and uses only what it documents, plus anything it can't do without.
