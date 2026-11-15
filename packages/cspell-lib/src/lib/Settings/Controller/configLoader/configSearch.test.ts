@@ -96,6 +96,16 @@ describe('ConfigSearch', () => {
             expect(result5).toStrictEqual(result4);
         });
 
+        test('that results found with different stop directories are kept apart', async () => {
+            const configSearch = new ConfigSearch(searchPlaces, allowedExtensionsByProtocol, getVirtualFS().fs);
+            const searchFrom = sURL('src/');
+            const expected = sURL('.cspell.json');
+
+            expect(await configSearch.searchForConfig(searchFrom)).toEqual(expected);
+            expect(await configSearch.searchForConfig(searchFrom, [searchFrom])).toBeUndefined();
+            expect(await configSearch.searchForConfig(searchFrom)).toEqual(expected);
+        });
+
         test('symbolic links', async () => {
             const dir = new URL('issues/issue-5120/', pathRepoTestFixturesURL);
             const info = await nfs.readdir(dir, { withFileTypes: true });

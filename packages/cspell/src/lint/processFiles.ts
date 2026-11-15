@@ -39,6 +39,7 @@ interface PrefetchConfig {
     readonly rootUrl: URL;
     readonly maxFileSize: LintRequest['maxFileSize'];
     readonly forceCheck: boolean;
+    readonly stopConfigSearchAt: string[] | undefined;
     readonly symlinks: SymlinkChecker;
     readonly followSymlinks: boolean;
     readonly verbose: boolean;
@@ -83,7 +84,7 @@ function prefetch(fileToProcess: FileToProcess, cfg: PrefetchConfig): PrefetchFi
         const { languageId, locale } = cfg;
         const checkResult = await shouldCheckDocument(
             { uri: url.href, languageId, locale },
-            { forceCheck: cfg.forceCheck },
+            { forceCheck: cfg.forceCheck, stopConfigSearchAt: cfg.stopConfigSearchAt },
             cfg.config,
         );
         if (!checkResult.shouldCheck) {
@@ -137,6 +138,7 @@ export async function processFiles(
         rootUrl: toFileDirURL(options.cfg.root),
         maxFileSize: options.cfg.maxFileSize,
         forceCheck: !!options.cfg.options.forceCheck,
+        stopConfigSearchAt: options.cfg.options.stopConfigSearchAt,
         symlinks: options.symlinks ?? createSymlinkChecker(options.cfg.root),
         followSymlinks: !!options.followSymlinks,
         verbose: options.verboseLevel > 0,

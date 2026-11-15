@@ -456,6 +456,15 @@ describe('Validate search/load config files', () => {
         );
     });
 
+    test('searchForConfig returns the same settings for equal options', async () => {
+        const loader = createConfigLoader();
+        const dir = sURL('bug-fixes/');
+        const settings = await loader.searchForConfig(dir, { stopSearchAt: [dir] });
+        const settings2 = await loader.searchForConfig(dir, { stopSearchAt: [dir] });
+        expect(settings?.__importRef?.filename).toEqual(s('bug-fixes/cspell.json'));
+        expect(settings2).toBe(settings);
+    });
+
     interface TestLoadConfig {
         file: string;
         expectedConfig: CSpellSettingsWithSourceTrace;

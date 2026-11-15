@@ -213,6 +213,7 @@ describe('Validate cli', () => {
 
     const vdConfig = pathFeat('validate-directives', 'cspell-validate.json');
     const failFastRoot = pathSamples('fail-fast');
+    const searchStopRoot = pathSamples('config-search/search-stop/src');
 
     test.each`
         msg                                            | testArgs                                                                                     | errorCheck                  | eError   | eLog     | eInfo
@@ -285,6 +286,8 @@ describe('Validate cli', () => {
         ${'--continue-on-error - missing dict'}        | ${[...rcFix('import/import-errors', 'missing-dict.yaml'), '--continue-on-error', '*.md']}    | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
         ${'--continue-on-error - import & spelling'}   | ${[...rcFix('import/import-errors', 'missing-import.yaml'), '--continue-on-error', '*.txt']} | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
         ${'--continue-on-error - missing config'}      | ${[...rcFix('import/import-errors', 'missing.yaml'), '--continue-on-error', '*.txt']}        | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
+        ${'nested file uses the parent config'}        | ${['-r', searchStopRoot, 'nested/notes.md']}                                                 | ${undefined}                | ${true}  | ${false} | ${false}
+        ${'--stop-config-search-at nested file'}       | ${['-r', searchStopRoot, '--stop-config-search-at', searchStopRoot, 'nested/notes.md']}      | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
     `('app $msg Expect Error: $errorCheck', async ({ testArgs, errorCheck, eError, eLog, eInfo }: TestCase) => {
         chalk.level = 1;
         const commander = getCommander();

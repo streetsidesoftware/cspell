@@ -62,6 +62,17 @@ describe('docValidator', () => {
         expect(dVal.checkDocument()).toEqual([]);
     });
 
+    test.each`
+        options                                                        | expected
+        ${{}}                                                          | ${['hello']}
+        ${{ stopConfigSearchAt: [fix('stop-config-search/project')] }} | ${[]}
+    `('checkDocument stops the config search: $options', async ({ options, expected }) => {
+        const doc = await loadDoc(fix('stop-config-search/project/notes.md'));
+        const dVal = new DocumentValidator(doc, { generateSuggestions: false, ...options }, {});
+        await dVal.prepare();
+        expect(dVal.checkDocument().map((issue) => issue.text)).toEqual(expected);
+    });
+
     describe('include ranges for a document that is not checked', () => {
         // cspell:ignore wrngwrd
         const text = 'This has a wrngwrd.';
@@ -456,6 +467,16 @@ describe('shouldCheckDocument', () => {
             expect({ ...result, settings: undefined }).toEqual(oc({ errors: [], reason: undefined, ...expected }));
         },
     );
+
+    test.each`
+        options                                                              | expected
+        ${opts()}                                                            | ${{ shouldCheck: false, reason: 'Excluded by ignorePaths.' }}
+        ${opts({ stopConfigSearchAt: [fix('stop-config-search/project')] })} | ${{ shouldCheck: true }}
+    `('shouldCheckDocument stops the config search: $options', async ({ options, expected }) => {
+        const uri = toUri(pathToFileURL(fix('stop-config-search/project/ignored.md')));
+        const result = await shouldCheckDocument({ uri }, options, s());
+        expect({ ...result, settings: undefined }).toEqual(oc({ errors: [], reason: undefined, ...expected }));
+    });
 });
 
 describe('docValidator trace', () => {

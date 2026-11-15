@@ -147,6 +147,19 @@ error"
 
 exports[`Validate cli > app '--no-validate-directives over config' Expect Error: undefined 3`] = `""`;
 
+exports[`Validate cli > app '--stop-config-search-at nested file' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app '--stop-config-search-at nested file' Expect Error: [Function CheckFailed] 2`] = `
+"error	1/1 nested/notes.md 0.00ms X
+error
+log	nested/notes.md:1:1 - Unknown word (misspelledword)
+log
+error	CSpell: Files checked: 1, Issues found: 1 in 1 file.
+error"
+`;
+
+exports[`Validate cli > app '--stop-config-search-at nested file' Expect Error: [Function CheckFailed] 3`] = `""`;
+
 exports[`Validate cli > app '--validate-directives' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app '--validate-directives' Expect Error: [Function CheckFailed] 2`] = `
@@ -6791,6 +6804,17 @@ error"
 `;
 
 exports[`Validate cli > app 'must find with error' Expect Error: [Function CheckFailed] 3`] = `""`;
+
+exports[`Validate cli > app 'nested file uses the parent config' Expect Error: undefined 1`] = `[]`;
+
+exports[`Validate cli > app 'nested file uses the parent config' Expect Error: undefined 2`] = `
+"error	1/1 nested/notes.md 0.00ms
+error
+error	CSpell: Files checked: 1, Issues found: 0 in 0 files.
+error"
+`;
+
+exports[`Validate cli > app 'nested file uses the parent config' Expect Error: undefined 3`] = `""`;
 
 exports[`Validate cli > app 'no-args' Expect Error: 'outputHelp' 1`] = `
 [

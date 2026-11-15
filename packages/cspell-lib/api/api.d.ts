@@ -778,6 +778,12 @@ interface DocumentValidatorOptions extends ValidateTextOptions {
    */
   noConfigSearch?: boolean;
   /**
+   * Directories at which to stop searching for a configuration file.
+   * The search starts in the document's directory and walks up toward the root.
+   * A configuration file in a stop directory is still found.
+   */
+  stopConfigSearchAt?: StopSearchAt;
+  /**
    * If `settings: CSpellUserSettings` contains imports, they will be resolved using this path.
    * If not set, the current working directory will be used.
    */
@@ -979,6 +985,12 @@ interface SpellCheckFileOptions extends ValidateTextOptions, Pick<CSpellUserSett
    * @defaultValue undefined
    */
   noConfigSearch?: boolean;
+  /**
+   * Directories at which to stop searching for a configuration file.
+   * The search starts in the document's directory and walks up toward the root.
+   * A configuration file in a stop directory is still found.
+   */
+  stopConfigSearchAt?: StopSearchAt;
   /**
    * If true, the document will be checked even if it would normally be excluded.
    */

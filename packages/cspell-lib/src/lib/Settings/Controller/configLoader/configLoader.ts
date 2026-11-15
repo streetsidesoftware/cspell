@@ -231,7 +231,7 @@ export class ConfigLoader implements IConfigLoader {
     protected globalSettings: CSpellSettingsI | undefined;
     protected cspellConfigFileReaderWriter: CSpellConfigFileReaderWriter;
     protected configSearch: ConfigSearch;
-    protected stopSearchAtCache: WeakMap<SearchForConfigFileOptions, URL[] | undefined> = new WeakMap();
+    protected stopSearchAtCache: WeakMap<readonly (URL | string)[], URL[]> = new WeakMap();
 
     protected toDispose: { dispose: () => void }[] = [];
 
@@ -308,7 +308,7 @@ export class ConfigLoader implements IConfigLoader {
         if (configFile instanceof CSpellConfigFileWithErrors) {
             return toInternalSettings(configFile.settings);
         }
-        return this.mergeConfigFileWithImports(configFile, options);
+        return this.mergeConfigFileWithImports(configFile, options && normalizePnPSettings(options));
     }
 
     public getGlobalSettings(): CSpellSettingsI {
@@ -668,16 +668,16 @@ export class ConfigLoader implements IConfigLoader {
     }
 
     async #extractStopSearchAtURLs(options: SearchForConfigOptions | undefined): Promise<URL[] | undefined> {
-        if (!options?.stopSearchAt) return undefined;
+        const stopSearchAt = options?.stopSearchAt;
+        if (!stopSearchAt) return undefined;
 
-        if (this.stopSearchAtCache.has(options)) {
-            return this.stopSearchAtCache.get(options);
-        }
+        const rawStops = Array.isArray(stopSearchAt) ? stopSearchAt : [stopSearchAt];
+        const cached = this.stopSearchAtCache.get(rawStops);
+        if (cached) return cached;
 
-        const rawStops = Array.isArray(options.stopSearchAt) ? options.stopSearchAt : [options.stopSearchAt];
         const stopURLs = await Promise.all(rawStops.map((s) => this.#normalizeDirURL(s)));
 
-        this.stopSearchAtCache.set(options, stopURLs);
+        this.stopSearchAtCache.set(rawStops, stopURLs);
         return stopURLs;
     }
 

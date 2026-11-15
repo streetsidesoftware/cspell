@@ -3,16 +3,17 @@ import { extname } from 'node:path/posix';
 import { urlBasename } from 'cspell-io';
 
 import type { VFileSystem, VfsDirEntry } from '../../../fileSystem.js';
-import { createAutoResolveCache } from '../../../util/AutoResolve.js';
+import { autoResolve, createAutoResolveCache } from '../../../util/AutoResolve.js';
 import { findUpFromUrl } from '../../../util/findUpFromUrl.js';
 
 type Href = string;
 
 export class ConfigSearch {
     /**
-     * Cache of search results.
+     * Cache of search results, keyed by the stop directories, then by the search directory.
+     * A result is only valid for the stop directories it was found with.
      */
-    #searchCache = new Map<Href, Promise<URL | undefined>>();
+    #searchCache = new Map<string, Map<Href, Promise<URL | undefined>>>();
     /**
      * The scanner to use to search for config files.
      */
@@ -47,7 +48,8 @@ export class ConfigSearch {
     }
 
     #findUp(fromDir: URL, stopDirUrls?: URL[]): Promise<URL | undefined> {
-        const searchDirCache = this.#searchCache;
+        const stopKey = stopDirUrls?.map((url) => url.href).join('\n') ?? '';
+        const searchDirCache = autoResolve(this.#searchCache, stopKey, () => new Map());
         const cached = searchDirCache.get(fromDir.href);
         if (cached) {
             return cached;

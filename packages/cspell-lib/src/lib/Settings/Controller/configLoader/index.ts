@@ -1,3 +1,4 @@
+export type { StopSearchAt } from './configLoader.js';
 export {
     __testing__,
     ConfigLoader,
