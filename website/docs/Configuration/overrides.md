@@ -52,11 +52,16 @@ settings (see [Merge Rules](#merge-rules) below for how array-like settings are 
    imports. A few CLI flags adjust these settings directly: `--dictionary <name>` / `--disable-dictionary <name>`
    (enable/disable dictionaries) and `--report <level>` (which categories of unknown words to report).
 1. **The configuration nearest the document** -- found by a second, independent search that starts at the
-   document's own directory and walks upward. It overrides everything above it, even when `--config` is given.
-   (Skipped when `--no-config-search` is used, or when `noConfigSearch` is `true`.)
+   document's own directory and walks upward. It overrides everything above it, including a file given with
+   `--config`. The search is skipped when `--no-config-search` is used, or when the configuration loaded at start
+   up sets `"noConfigSearch": true`. Setting `noConfigSearch` in the nearest configuration itself has no effect.
 
-This means a `cspell.json` placed next to (or above) an individual file always wins over the configuration file
-found from the current working directory.
+So a `cspell.json` next to or above a file wins over the configuration loaded at start up, even one given with
+`--config`. For example, run `cspell lint --config ci/cspell.ci.json` in a repository that has a root `cspell.json`.
+For a file with no configuration closer to it, the search finds the root `cspell.json` and merges it over
+`ci/cspell.ci.json`. To check with `ci/cspell.ci.json` alone, add `--no-config-search`.
+
+The `cspell check` command works differently: with `--config <path>`, it loads that file in place of this search.
 
 ### Merge Rules
 
