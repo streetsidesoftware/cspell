@@ -11,7 +11,6 @@ export {
 } from './FeatureFlags/index.js';
 export type { VFileSystemProvider, VirtualFS } from './fileSystem.js';
 export { FSCapabilityFlags, getVirtualFS } from './fileSystem.js';
-export { getLanguagesForFilename as getLanguageIdsForBaseFilename, getLanguagesForExt } from './fileTypes.js';
 export { getDictionary } from './getDictionary.js';
 export type {
     CreateTextDocumentParams,
@@ -111,6 +110,10 @@ export {
     type ValidationIssue,
 } from './validator.js';
 export * from '@cspell/cspell-types';
+export {
+    findMatchingFileTypes as getLanguageIdsForBaseFilename,
+    getFileTypesForExt as getLanguagesForExt,
+} from '@cspell/filetypes';
 export {
     asyncIterableToArray,
     readFileText as readFile,

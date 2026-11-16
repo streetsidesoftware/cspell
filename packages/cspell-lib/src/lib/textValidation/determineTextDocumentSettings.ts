@@ -1,6 +1,6 @@
 import type { CSpellUserSettings } from '@cspell/cspell-types';
+import { findMatchingFileTypes } from '@cspell/filetypes';
 
-import { getLanguagesForFilename } from '../fileTypes.js';
 import type { TextDocument, TextDocumentRef } from '../Models/TextDocument.js';
 import type { CSpellSettingsInternal } from '../Settings/index.js';
 import { calcOverrideSettings, getDefaultSettings, getGlobalSettingsAsync, mergeSettings } from '../Settings/index.js';
@@ -35,7 +35,7 @@ export async function determineTextDocumentSettings(
         ? fileSettings.languageId
         : doc.languageId
           ? doc.languageId
-          : getLanguagesForFilename(filename);
+          : findMatchingFileTypes(filename);
     if (doc.locale) {
         fileSettings.language = doc.locale;
     }

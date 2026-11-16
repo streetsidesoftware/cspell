@@ -1,9 +1,9 @@
 import assert from 'node:assert';
 
+import { findMatchingFileTypes } from '@cspell/filetypes';
 import { TextDocument as VsTextDocument } from 'vscode-languageserver-textdocument';
 
 import { getFileSystem } from '../fileSystem.js';
-import { getLanguagesForFilename } from '../fileTypes.js';
 import type { DocumentUri } from '../util/IUri.js';
 import { documentUriToURL, toUri } from '../util/Uri.js';
 
@@ -212,7 +212,7 @@ export function createTextDocument({
 }: CreateTextDocumentParams): TextDocument {
     version = version ?? 1;
     uri = toUri(uri);
-    languageId = languageId ?? getLanguagesForFilename(uri.path);
+    languageId = languageId ?? findMatchingFileTypes(uri.path);
     languageId = languageId.length === 0 ? 'text' : languageId;
     return new TextDocumentImpl(uri, content, languageId, locale, version);
 }
