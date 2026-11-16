@@ -3,13 +3,14 @@ Repository: sveltejs/svelte
 Url: https://github.com/sveltejs/svelte.git
 Args: '["**"]'
 Summary:
-  files: 9241
-  filesWithIssues: 638
-  issues: 4161
+  files: 9245
+  filesWithIssues: 639
+  issues: 4163
   errors: 0
 Errors: []
 
 issues:
+  - "AGENTS.md:22:124        behaviour       U       module or child component behaviour, so the test is more"
   - "benchmarking/analyze-compiler-profile.js:9:77           hotspot         U       only flame graph and hotspot summary."
   - "benchmarking/analyze-compiler-profile.js:10:19          callees         U       * Samples retain callees outside the compiler"
   - "benchmarking/analyze-compiler-profile.js:30:25          Hotspot         U       @type {Map<string, Hotspot>} */"
@@ -27,7 +28,6 @@ issues:
   - "benchmarking/utils.js:288:10        deopt       U       const deoptReason = typeof node"
   - "CONTRIBUTING.md:22:5        Triaging    U       ### Triaging issues and pull requests"
   - "documentation/docs/01-introduction/02-getting-started.md:8:15           myapp       U       npx sv create myapp"
-  - "documentation/docs/01-introduction/03-svelte-files.md:34:20         behaviour       U       <!-- TODO describe behaviour of `export` -->"
   - "documentation/docs/02-runes/01-what-are-runes.md:5:21           ruːn    U       > [!NOTE] **rune** /ruːn/ _noun_"
   - "documentation/docs/02-runes/02-$state.md:24:10          proxified       U       State is proxified recursively until Svelte"
   - "documentation/docs/02-runes/03-$derived.md:94:33        deriveds    U       Prior to Svelte 5.25, deriveds were read-only."
@@ -66,8 +66,8 @@ issues:
   - "documentation/docs/04-styling/03-custom-properties.md:18:28         desugars    U       above code essentially desugars to this:"
   - "documentation/docs/05-special-elements/01-svelte-boundary.md:114:50         stringifiable       U       function must return a JSON-stringifiable object which will be"
   - "documentation/docs/05-special-elements/07-svelte-options.md:13:111      mathml      U       default), \"svg\" or \"mathml\""
-  - "documentation/docs/06-runtime/01-stores.md:133:42       tock                U       sound === 'tick' ? 'tock' : 'tick'));"
-  - "documentation/docs/06-runtime/01-stores.md:307:159      unsubscription      U       rather than return the unsubscription function directly. Note"
+  - "documentation/docs/06-runtime/01-stores.md:164:42       tock                U       sound === 'tick' ? 'tock' : 'tick'));"
+  - "documentation/docs/06-runtime/01-stores.md:338:159      unsubscription      U       rather than return the unsubscription function directly. Note"
   - "documentation/docs/06-runtime/03-lifecycle-hooks.md:101:33      autoscrolls     U       implement a chat window that autoscrolls to the bottom when new"
   - "documentation/docs/06-runtime/05-hydratable.md:20:305       datafetching    U       the scenes by whatever datafetching library you use. For"
   - "documentation/docs/07-misc/01-best-practices.md:4:19        bestpractices       U       name: svelte-core-bestpractices"
@@ -1679,11 +1679,11 @@ issues:
   - "packages/svelte/src/compiler/phases/1-parse/utils/entities.js:1919:3        zopf                                U       'zopf;': 120171,"
   - "packages/svelte/src/compiler/phases/1-parse/utils/entities.js:1920:3        zscr                                U       'zscr;': 120015,"
   - "packages/svelte/src/compiler/phases/1-parse/utils/entities.js:1921:3        zwnj                                U       'zwnj;': 8204,"
-  - "packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:150:18       ICSS                U       // Global and ICSS export rules do not"
-  - "packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:159:63       scopable            U       head> are not style-scopable."
-  - "packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:367:18       combinators         U       // TODO other combinators"
-  - "packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:388:29       unscopeable         U       a `:global(...)` or unscopeable selector, or"
-  - "packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:872:42       selectedcontent     U       considered descendants of <selectedcontent>, which clones the selected"
+  - "packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:144:18       ICSS                U       // Global and ICSS export rules do not"
+  - "packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:151:63       scopable            U       head> are not style-scopable."
+  - "packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:359:18       combinators         U       // TODO other combinators"
+  - "packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:380:29       unscopeable         U       a `:global(...)` or unscopeable selector, or"
+  - "packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:864:42       selectedcontent     U       considered descendants of <selectedcontent>, which clones the selected"
   - "packages/svelte/src/compiler/phases/2-analyze/css/utils.js:34:29        cslx    U       will be processed by cslx, in which case falsy"
   - "packages/svelte/src/compiler/phases/2-analyze/index.js:738:18       nonstate    U       // warn on any nonstate declarations that are"
   - "packages/svelte/src/compiler/phases/2-analyze/index.js:1054:14      optimise    U       // TODO optimise this better"
@@ -1712,11 +1712,11 @@ issues:
   - "packages/svelte/src/compiler/phases/3-transform/utils.js:219:76         spaceand    U       text node with a single spaceand keep whitespace"
   - "packages/svelte/src/compiler/phases/patterns.js:20:43       aeiou       U       starts_with_vowel = /^[aeiou]/;"
   - "packages/svelte/src/compiler/phases/scope.js:866:59         rescanning      U       per name to avoid O(n) rescanning in generate/unique."
-  - "packages/svelte/src/compiler/print/index.js:842:30      esrap's     U       This is duplicated from esrap's handling of VariableDeclarati"
+  - "packages/svelte/src/compiler/print/index.js:839:30      esrap's     U       This is duplicated from esrap's handling of VariableDeclarati"
   - "packages/svelte/src/compiler/types/template.d.ts:26:41          mrow    U       for e.g. `<math>` or `<mrow>`"
   - "packages/svelte/src/compiler/utils/ast.js:560:40        subexpression       U       expression.expressions.some((subexpression) => is_expression_async"
   - "packages/svelte/src/compiler/utils/extract_svelte_ignore.js:16:16       eachblock       U       'invalid-rest-eachblock-binding': 'bind_invalid"
-  - "packages/svelte/src/compiler/utils/mapped_code.js:146:6         unswitched      U       // unswitched loops are faster"
+  - "packages/svelte/src/compiler/utils/mapped_code.js:135:6         unswitched      U       // unswitched loops are faster"
   - "packages/svelte/src/html-tree-validation.js:118:5       bgsound     U       'bgsound',"
   - "packages/svelte/src/internal/client/constants.js:81:47          downleveling    U       like this because after downleveling the pure comment may"
   - "packages/svelte/src/internal/client/dev/debug.js:118:28         cdeps           U       console.groupCollapsed('%cdeps', 'font-weight: normal"
@@ -1830,8 +1830,8 @@ issues:
   - "packages/svelte/tests/css/samples/unused-selector-string-concat/expected.css:10:4           aabar       U       .aabar.svelte-xyz {color: red"
   - "packages/svelte/tests/css/samples/unused-selector-string-concat/expected.css:17:4           fooddbar    U       .fooddbar.svelte-xyz {color: red"
   - "packages/svelte/tests/css/samples/unused-selector-ternary/_config.js:11:36          maybeactive     U       Unused CSS selector \".maybeactive\"',"
-  - "packages/svelte/tests/helpers.js:203:17         normalise       U       export function normalise_inspect_logs(logs)"
-  - "packages/svelte/tests/helpers.js:205:8          normalised      U       const normalised = [];"
+  - "packages/svelte/tests/helpers.js:311:17         normalise       U       export function normalise_inspect_logs(logs)"
+  - "packages/svelte/tests/helpers.js:313:8          normalised      U       const normalised = [];"
   - "packages/svelte/tests/hydration/samples/rich-select/main.svelte:164:10      coolerone       U       <option>coolerone</option>"
   - "packages/svelte/tests/hydration/test.ts:160:22      borks       U       // Error logger borks because of circular"
   - "packages/svelte/tests/manual/each-stress-test/main.svelte:23:5          adbc        U       \"adbc\","
