@@ -130,7 +130,7 @@ export class GitIgnore {
             // - otherwise, the `.gitignore` files above it do not apply to it.
             // Without a root, the walk stops here: there is no repository around it to look from.
             const outer = await this.findGitIgnoreHierarchy(parent);
-            if (outer.isIgnored(directory) && !(await this.isSubmodule(directory, parent))) return outer;
+            if (outer.isIgnored(directory) && !(await this.isSubmodule(directory, parent, outer))) return outer;
         }
         const git = await loadGitIgnore(directory, this._vfs);
         if (!git) {
@@ -140,9 +140,10 @@ export class GitIgnore {
         return new GitIgnoreHierarchy(chain);
     }
 
-    private async isSubmodule(directory: URL, parent: URL): Promise<boolean> {
+    private async isSubmodule(directory: URL, parent: URL, outer: GitIgnoreHierarchy): Promise<boolean> {
         const repoRoot = await findRepoRootUrl(parent, this._vfs);
-        if (!repoRoot) return false;
+        // The submodules of an ignored repository are ignored with it.
+        if (!repoRoot || outer.isIgnored(repoRoot)) return false;
         let folders = this.submoduleFolders.get(repoRoot.href);
         if (!folders) {
             folders = readSubmoduleFolders(repoRoot, this._vfs);

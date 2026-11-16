@@ -1,3 +1,4 @@
+import { toFileDirURL, toFileURL } from '@cspell/url';
 import type { VFileSystem } from 'cspell-io';
 import { getDefaultVirtualFs } from 'cspell-io';
 
@@ -11,7 +12,7 @@ export async function readSubmoduleFolders(repoRoot: URL, vfs?: VFileSystem): Pr
     const fs = vfs || getDefaultVirtualFs().getFS(repoRoot);
     try {
         const file = await fs.readFile(new URL('.gitmodules', repoRoot), 'utf8');
-        return new Set(parseSubmodulePaths(file.getText()).map((p) => toFolderUrl(p, repoRoot).href));
+        return new Set(parseSubmodulePaths(file.getText()).map((p) => toFileDirURL(toFileURL(p, repoRoot)).href));
     } catch {
         return new Set();
     }
@@ -46,13 +47,4 @@ function parseValue(value: string): string {
     const quoted = value.match(/^"((?:[^"\\]|\\.)*)"/);
     if (quoted) return quoted[1].replaceAll(/\\(["\\])/g, '$1');
     return value.replace(/\s*[#;].*$/, '').trim();
-}
-
-function toFolderUrl(path: string, repoRoot: URL): URL {
-    const relative = path
-        .split('/')
-        .filter((segment) => !!segment)
-        .map(encodeURIComponent)
-        .join('/');
-    return new URL(relative + '/', repoRoot);
 }
