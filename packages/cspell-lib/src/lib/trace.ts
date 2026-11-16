@@ -1,9 +1,9 @@
 import type { CSpellSettings, DictionaryId, LocaleId } from '@cspell/cspell-types';
+import type { FileTypeId } from '@cspell/filetypes';
 import type { ICSpellConfigFile } from 'cspell-config-lib';
 import { satisfiesCSpellConfigFile } from 'cspell-config-lib';
 import { genSequence } from 'gensequence';
 
-import type { LanguageId } from './fileTypes.js';
 import { toInternalSettings } from './Settings/CSpellSettingsServer.js';
 import type { CSpellSettingsInternal, DictionaryReferenceCollection } from './Settings/index.js';
 import {
@@ -28,7 +28,7 @@ export interface TraceResult extends DictionaryTraceResult {
 }
 
 export interface TraceOptions {
-    languageId?: LanguageId | LanguageId[];
+    languageId?: FileTypeId | FileTypeId[];
     locale?: LocaleId;
     ignoreCase?: boolean;
     allowCompoundWords?: boolean;

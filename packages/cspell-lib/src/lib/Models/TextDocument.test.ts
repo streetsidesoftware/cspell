@@ -14,6 +14,11 @@ describe('TextDocument', () => {
         expect(doc.uri.toString().toLowerCase()).toEqual(Uri.fromFilePath(__filename).toString().toLowerCase());
     });
 
+    test('create uses the full path for the languageId', () => {
+        const doc = createTextDocument({ uri: Uri.fromFilePath('/repo/.git/config'), content: '' });
+        expect(doc.languageId).toEqual(['properties']);
+    });
+
     test('update', () => {
         const doc = sampleDoc();
         expect(doc.version).toBe(1);
