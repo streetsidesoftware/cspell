@@ -21,9 +21,12 @@ export class GitIgnore {
 
     /**
      * @param roots - (search roots) an optional array of root paths to prevent searching for `.gitignore` files above the root.
-     *   If a file is under multiple roots, the closest root will apply. The search always stops at the root of
-     *   the git repository (a directory with a `.git` directory or file), as git does. If a file is not in a
-     *   repository and not under any root, then the search for `.gitignore` will go all the way to the system root of the file.
+     *   If a file is under multiple roots, the closest root will apply. If a file is not in a repository and not under
+     *   any root, then the search for `.gitignore` will go all the way to the system root of the file.
+     *
+     *   The search stops at the root of the file's git repository (a directory with a `.git` directory or file), as
+     *   git does. A repository nested below a root is seen from the repository around it: if that repository's
+     *   `.gitignore` files ignore its folder, it is ignored, unless `.gitmodules` lists it as a submodule.
      */
     constructor(roots: (string | URL)[] = [], vfs?: VFileSystem) {
         this._vfs = vfs;
