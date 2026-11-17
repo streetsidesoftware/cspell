@@ -27,9 +27,9 @@ export function parseSubmodulePaths(content: string): string[] {
     const paths: string[] = [];
     let inSubmodule = false;
     for (const line of content.split(/\r?\n/)) {
-        const section = line.match(/^\s*\[\s*([^\s\]"]+)/);
-        if (section) {
-            inSubmodule = section[1].toLowerCase() === 'submodule';
+        const header = line.trimStart();
+        if (header.startsWith('[')) {
+            inSubmodule = header.toLowerCase().startsWith('[submodule');
             continue;
         }
         if (!inSubmodule) continue;

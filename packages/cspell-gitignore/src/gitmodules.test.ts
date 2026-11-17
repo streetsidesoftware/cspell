@@ -12,6 +12,9 @@ describe('gitmodules', () => {
         ${'[submodule "a"]\n\tpath = "vendor/my \\"lib\\"" # comment\n'}  | ${['vendor/my "lib"']}
         ${'[submodule "a"]\n\tpath = a\n[submodule "b"]\n\tpath = b/c\n'} | ${['a', 'b/c']}
         ${'[other]\n\tpath = a\n[submodule "b"]\n\tpath = b\n'}           | ${['b']}
+        ${'  [Submodule "a"]\n\tpath = a\n'}                              | ${['a']}
+        ${'[submodule\t"a"]\n\tpath = a\n'}                               | ${['a']}
+        ${'[submodule.a]\n\tpath = a\n'}                                  | ${['a']}
         ${'# path = a\n[submodule "b"]\n\turl = b\n'}                     | ${[]}
     `('parseSubmodulePaths $content', ({ content, expected }) => {
         expect(parseSubmodulePaths(content)).toEqual(expected);
