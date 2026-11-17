@@ -26,14 +26,13 @@ export async function readSubmoduleFolders(repoRoot: URL, vfs?: VFileSystem): Pr
 export function parseSubmodulePaths(content: string): string[] {
     const paths: string[] = [];
     let inSubmodule = false;
-    for (const line of content.split(/\r?\n/)) {
-        const header = line.trimStart();
-        if (header.startsWith('[')) {
-            inSubmodule = header.toLowerCase().startsWith('[submodule');
+    for (const line of content.split('\n').map((text) => text.trim())) {
+        if (line.startsWith('[')) {
+            inSubmodule = line.toLowerCase().startsWith('[submodule');
             continue;
         }
         if (!inSubmodule) continue;
-        const value = line.match(/^\s*path\s*=\s*(.*)$/i)?.[1];
+        const value = line.match(/^path\s*=\s*(.*)$/i)?.[1];
         const path = value && parseValue(value);
         if (path) paths.push(path);
     }
@@ -46,5 +45,5 @@ export function parseSubmodulePaths(content: string): string[] {
 function parseValue(value: string): string {
     const quoted = value.match(/^"((?:[^"\\]|\\.)*)"/);
     if (quoted) return quoted[1].replaceAll(/\\(["\\])/g, '$1');
-    return value.replace(/\s*[#;].*$/, '').trim();
+    return value.replace(/\s*[#;].*$/, '');
 }
