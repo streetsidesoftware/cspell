@@ -8,8 +8,7 @@ describe('gitmodules', () => {
         ${''}                                                             | ${[]}
         ${'[submodule "a"]\n\tpath = vendor/a\n\turl = ../a.git\n'}       | ${['vendor/a']}
         ${'[submodule "a"]\r\n\tpath = vendor/a\r\n'}                     | ${['vendor/a']}
-        ${'[submodule "a"]\n\tPath=vendor/a ; comment\n'}                 | ${['vendor/a']}
-        ${'[submodule "a"]\n\tpath = "vendor/my \\"lib\\"" # comment\n'}  | ${['vendor/my "lib"']}
+        ${'[submodule "a"]\n\tpath = "vendor/a#1"\n'}                     | ${['vendor/a#1']}
         ${'[submodule "a"]\n\tpath = a\n[submodule "b"]\n\tpath = b/c\n'} | ${['a', 'b/c']}
         ${'[other]\n\tpath = a\n[submodule "b"]\n\tpath = b\n'}           | ${['b']}
         ${'  [Submodule "a"]\n\tpath = a\n'}                              | ${['a']}

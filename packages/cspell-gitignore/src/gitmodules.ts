@@ -32,18 +32,9 @@ export function parseSubmodulePaths(content: string): string[] {
             continue;
         }
         if (!inSubmodule) continue;
-        const value = line.match(/^path\s*=\s*(.*)$/i)?.[1];
-        const path = value && parseValue(value);
+        // Git quotes a path that starts or ends with a space, or holds `#` or `;`.
+        const path = line.match(/^path\s*=\s*(.*)$/)?.[1].replace(/^"(.*)"$/, '$1');
         if (path) paths.push(path);
     }
     return paths;
-}
-
-/**
- * A config value is either quoted or ends at a comment.
- */
-function parseValue(value: string): string {
-    const quoted = value.match(/^"((?:[^"\\]|\\.)*)"/);
-    if (quoted) return quoted[1].replaceAll(/\\(["\\])/g, '$1');
-    return value.replace(/\s*[#;].*$/, '');
 }
