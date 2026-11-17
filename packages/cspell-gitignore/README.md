@@ -27,7 +27,8 @@ const files = await gitIgnore.filterOutIgnored(allFiles);
 ## Logic
 
 - For each file, search for the `.gitignore` files in the directory hierarchy.
-- Stop at the root of the file's git repository, the nearest directory with a `.git` directory or file.
+- Stop at the root of the file's git repository, the nearest directory with a `.git` directory or file (see
+  [Nested repositories](#nested-repositories)).
 - Ignore any files that match the globs found in the `.gitignore` files.
 
 The `.gitignore` globs are evaluated from highest to lowest, matching the `git` behavior.
@@ -48,7 +49,7 @@ A git repository inside another one, such as a submodule, a worktree, or a clone
   ignored. A submodule listed in the outer repository's `.gitmodules` is the exception.
 
 For example, with `.cache/` in the outer `.gitignore`, a clone in `.cache/dep/` is ignored, but a submodule in
-`.cache/lib/` is not. Without roots, or with a root inside the nested repository, only the nested repository's own
+`.cache/lib/` is not. Without roots, or with a root at or inside the nested repository, only the nested repository's own
 `.gitignore` files apply.
 
 ## `cspell-gitignore` CLI
