@@ -8,11 +8,20 @@ import { getDefaultVirtualFs } from 'cspell-io';
  * @returns resolves to `.git` root or undefined
  */
 export async function findRepoRoot(directory: string | URL, vfs?: VFileSystem): Promise<string | undefined> {
+    const found = await findRepoRootUrl(directory, vfs);
+    return found && toFilePathOrHref(found);
+}
+
+/**
+ * Find the git repository root directory.
+ * @param directory - directory to search up from.
+ * @returns resolves to the url of the directory holding `.git`, or undefined.
+ */
+export async function findRepoRootUrl(directory: string | URL, vfs?: VFileSystem): Promise<URL | undefined> {
     const from = toFileDirURL(directory);
     const fs = vfs || getDefaultVirtualFs().getFS(from);
     const found = await fs.findUp((dir) => findDotGit(fs, dir), from);
-    if (!found) return undefined;
-    return toFilePathOrHref(new URL('.', found));
+    return found && new URL('.', found);
 }
 
 /**
