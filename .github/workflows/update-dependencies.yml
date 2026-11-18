@@ -78,6 +78,9 @@ jobs:
       - name: Install
         run: pnpm install
 
+      - name: Setup Corepack
+        uses: ./.github/actions/setup-corepack
+
       - name: Update Yarn
         run: |
           pnpm run update-yarn
