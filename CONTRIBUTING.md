@@ -16,8 +16,9 @@ remove words in a dictionary, go there.
 
 ## Quick start
 
+Install [pnpm](https://pnpm.io/installation), version 10 or later. In this repo, it switches to the pinned version.
+
 ```sh
-corepack enable
 pnpm ibt
 ```
 

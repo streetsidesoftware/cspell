@@ -5,12 +5,15 @@ generated files, see [Build and packaging](./build-and-packaging.md).
 
 ## Getting started
 
-Use the Node.js version in `engines` in `package.json` (`>=22.18.0`). The pnpm version is pinned by `packageManager`.
+Use the Node.js version in `engines` in `package.json` (`>=22.18.0`). Install [pnpm](https://pnpm.io/installation),
+version 10 or later. In this repo, it switches to the version pinned by `packageManager`.
 
 ```sh
-corepack enable
 pnpm ibt
 ```
+
+If `pnpm` fails with a Corepack error, an earlier `corepack enable` left Corepack's `pnpm` in place. Run
+`corepack disable pnpm`, then install pnpm.
 
 `pnpm ibt` installs, builds, and tests. When iterating, run `pnpm run build` before `pnpm test`: the tests need a built
 tree. To work on one package, see [Commands](./build-and-packaging.md#commands).

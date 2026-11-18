@@ -8,7 +8,6 @@ If a command here disagrees with `package.json`, `package.json` wins. Say so rat
 ## Commands
 
 ```sh
-corepack enable                            # once; pnpm is pinned by packageManager
 pnpm ibt                                   # install, build, test
 pnpm run build                             # always before pnpm test: the tests need a built tree
 pnpm test
@@ -20,7 +19,8 @@ pnpm run test:update-snapshots             # after a build
 pnpm run lint                              # writes fixes: eslint --fix, prettier -w
 ```
 
-Node.js `>=22.18.0` (`engines` in `package.json`).
+Node.js `>=22.18.0` (`engines` in `package.json`). pnpm 10 or later, which switches to the version pinned by
+`packageManager`. There's no need for `corepack enable`.
 
 ## Before you call it done
 
