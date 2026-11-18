@@ -56,6 +56,9 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
+      - name: Setup Corepack
+        uses: ./.github/actions/setup-corepack
+
       - run: pnpm run setup-yarn
 
       - run: pnpm run coverage
