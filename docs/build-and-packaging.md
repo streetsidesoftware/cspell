@@ -24,16 +24,15 @@ This is a pnpm workspace (`pnpm-workspace.yaml`). The main directories:
 
 - **Node.js:** the version in `engines` in the root `package.json` (`>=22.18.0`). CI tests 22.x, 24.x, and 26.x, and
   24.x on Windows.
-- **pnpm**, pinned by `packageManager`. Any pnpm from version 10 on switches to the pinned version. New dependency
-  versions are installed only once they're two days old (`minimumReleaseAge`), except `@cspell/dict-*`.
+- **pnpm**, pinned by `packageManager`. New dependency versions are installed only once they're two days old
+  (`minimumReleaseAge`), except `@cspell/dict-*`.
 - **Builds** use tsdown for bundles and type declarations, and `tsc`.
 - **Tests** use vitest, next to the source (`foo.test.ts` next to `foo.ts`). It's the only test runner.
   - The root `test` also runs `test-schema` last, which validates `cspell.schema.json`.
   - The Yarn test projects (`test-packages/yarn/yarn2` and `examples/yarn`) aren't installed by `pnpm install`.
     `pnpm run test:yarn` installs them with Yarn and runs their tests. The `cspell-lib` tests that load them run only
     when `CSPELL_TEST_YARN` is set; run `pnpm run setup-yarn` first. CI does both.
-  - These scripts run Yarn with `corepack yarn`, which uses the version each project pins in `packageManager`. Node.js
-    25 and later don't include Corepack: install it with `npm i -g corepack`.
+  - The Yarn scripts need Corepack: `npm i -g corepack`.
 - **Lint** is ESLint plus Prettier.
   - `pnpm run lint` fixes what it can and writes the fixes.
   - `pnpm run lint-ci` only checks.

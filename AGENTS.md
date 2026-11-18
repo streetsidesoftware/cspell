@@ -19,8 +19,7 @@ pnpm run test:update-snapshots             # after a build
 pnpm run lint                              # writes fixes: eslint --fix, prettier -w
 ```
 
-Node.js `>=22.18.0` (`engines` in `package.json`). pnpm 10 or later, which switches to the version pinned by
-`packageManager`. There's no need for `corepack enable`.
+Node.js `>=22.18.0` (`engines` in `package.json`).
 
 ## Before you call it done
 
