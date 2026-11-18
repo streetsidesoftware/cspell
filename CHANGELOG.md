@@ -936,6 +936,101 @@ Related: #8975, streetsidesoftware/vscode-spell-checker#3099, streetsidesoftware
 
 </details>
 
+## v10.5.2 (2026-11-18)
+
+### Fixes
+
+<details>
+<summary>fix: `--gitignore` skips nested repositories in ignored folders again (<a href="https://github.com/streetsidesoftware/cspell/pull/9648">#9648</a>)</summary>
+
+### fix: `--gitignore` skips nested repositories in ignored folders again ([#9648](https://github.com/streetsidesoftware/cspell/pull/9648))
+
+## Summary
+
+With `--gitignore` (`useGitignore`), cspell again skips a git repository kept in a folder that `.gitignore` excludes, such as a tool's cache of cloned dependencies. Since 10.4.0, these files were checked. A submodule in an ignored folder is still checked, as git does.
+
+Fixes #9645
+
+## Before and after
+
+A project with a clone in an ignored cache folder, and a submodule in an ignored `vendor/` folder:
+
+```text
+project/
+  .gitignore     .cache/ and vendor/
+  .gitmodules    lists vendor/lib
+  README.md
+  .cache/dep/    a clone, with its own .git
+  vendor/lib/    a submodule
+```
+
+Before, cspell checked the clone:
+
+```text
+$ cspell lint --gitignore --dot "**/*.md"
+.cache/dep/NOTES.md:1:1 - Unknown word (Thsi) fix: (This)
+.cache/dep/NOTES.md:1:9 - Unknown word (misspeled) fix: (misspelled)
+vendor/lib/NOTES.md:1:1 - Unknown word (Anothr) fix: (Another)
+vendor/lib/NOTES.md:1:8 - Unknown word (typpo) fix: (typo)
+CSpell: Files checked: 3, Issues found: 4 in 2 files.
+```
+
+After, it skips the clone and checks the submodule:
+
+```text
+$ cspell lint --gitignore --dot "**/*.md"
+vendor/lib/NOTES.md:1:1 - Unknown word (Anothr) fix: (Another)
+vendor/lib/NOTES.md:1:8 - Unknown word (typpo) fix: (typo)
+CSpell: Files checked: 2, Issues found: 2 in 1 file.
+```
+
+What to know:
+
+- A repository in an ignored folder is skipped with all its files, unless `.gitmodules` lists it as a submodule.
+- A repository added with plain `git add`, without a `.gitmodules` entry, is skipped too.
+- A worktree in an ignored folder is skipped too.
+- Running cspell inside the nested repository still checks its files.
+- In a folder that isn't ignored, the `.gitignore` files above a nested repository still don't apply to its files.
+
+<details>
+<summary>Technical Details</summary>
+
+- When the search for `.gitignore` files reaches a nested repository below `gitignoreRoot` (by default, the repository cspell runs in), it first asks the outer repository's `.gitignore` files whether the nested repository's folder is ignored. If it is, every file in it is ignored, whatever the `.gitignore` files inside it say.
+- Submodules are read from the outer repository's `.gitmodules` file. The submodules of an ignored repository are ignored with it.
+
+</details>
+
+---
+
+</details>
+
+<details>
+<summary>fix: Detect file types by folder, such as `.git/config` (<a href="https://github.com/streetsidesoftware/cspell/pull/9641">#9641</a>)</summary>
+
+### fix: Detect file types by folder, such as `.git/config` ([#9641](https://github.com/streetsidesoftware/cspell/pull/9641))
+
+## Summary
+
+File types can now be detected by the folder a file is in, not only by its name. The first two are git's own files, which had no file type before.
+
+- `.git/config` is detected as `properties`, like `.gitconfig`.
+- `.git/info/exclude` is detected as `ignore`, like `.gitignore`.
+
+<details>
+<summary>Technical Details</summary>
+
+- In `@cspell/filetypes`, an entry in a file type's `filenames` may now contain `/`. It matches the end of a path. A `\` in the path is read as `/`.
+- In such an entry, `*` stays within one folder, and `**` spans folders.
+- A match on the path wins over a match on the name or extension.
+- cspell-lib now passes the full path when it looks up a file's type.
+- `findMatchingFileTypes` could return no file type for a path, depending on the path given in the previous call. That is fixed.
+
+</details>
+
+---
+
+</details>
+
 ## v10.5.1 (2026-11-14)
 
 ### Fixes
