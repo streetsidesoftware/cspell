@@ -84,7 +84,8 @@ The working notes hold what the design leaves out while the feature is designed 
 - details tied to the code, such as function, type, and property names, and where things live;
 - the small defaults and edge cases settled along the way;
 - a checklist of what's left to design and build;
-- open questions: side questions, deferred points, and details parked until their part comes up;
+- open questions: side questions, deferred points, details parked until their part comes up, and rules that might
+  hold beyond this feature;
 - findings and research that aren't decisions.
 
 Anyone who works on the feature, a person or a coding agent, reads them to pick up where the last one stopped, and
@@ -105,7 +106,7 @@ source of truth.
 
 ## Open questions
 
-- <A side question, a deferred point, or a detail parked until its part comes up, in one line.>
+- <A side question, a deferred point, a parked detail, or a possible standing rule, in one line.>
 
 ## Notes
 
@@ -212,7 +213,8 @@ while building goes in the working notes.
 
 Finish the design in the PR that finishes the feature. This removes working detail from the design, not the reasons.
 
-- Add a `tl;dr` at the top: the choices that matter, in short, plain sentences. It also marks the design as finished.
+- Add a `tl;dr` at the top: the choices that matter, in short, plain sentences. Add it only now: it marks the design as
+  finished.
 - Add a line saying that the code and docs are the source of truth.
 - Keep each decision with its reason.
 - Keep an idea that wasn't chosen only when it's a real lesson that would save the next person from repeating it, and
@@ -226,7 +228,8 @@ Finish the design in the PR that finishes the feature. This removes working deta
 If the design set a rule that holds beyond this feature, add it to the [design principles](./design-principles.md) or
 the doc under `docs/` where it applies. When it could affect other designs, do that in its own `docs:` PR.
 
-That PR is the last one to edit the working notes. After it, nothing is left to do.
+The PR that finishes the feature is the last one to edit the working notes. After it, nothing in the feature's folder
+is left to do.
 
 ## Changing a design later
 

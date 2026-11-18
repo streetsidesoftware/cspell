@@ -16,8 +16,8 @@ Throughout:
 - At the overview level, names and shapes in an example are placeholders. Say so, and park each detail question under
   the working notes' Open questions in a line, even a hard-to-undo one, without asking it. It comes back with its part.
 - A question with only one reasonable answer, once you look at the code, isn't a decision. Note it and move on.
-- Detail goes in the working notes, not the design: function, type, and property names, where things live, internal
-  steps, small defaults, and edge cases. Keep their checklist current.
+- Code-level detail goes in the working notes, not the design: function, type, and property names, where things live,
+  internal steps, small defaults, and edge cases. Keep their checklist current.
 - Never write security-sensitive detail anywhere: not in the design, the working notes, a commit, or a PR. The guide's
   "Keep security details out" lists what counts. If the work needs it, stop and tell the user.
 - A remark made in passing is often a standing rule. Confirm it, and note it in the working notes' Open questions.
@@ -35,7 +35,8 @@ Throughout:
   ls docs/designs/
   ```
 
-- **Do:** if the feature's folder exists, read its `README.md` before anything else.
+- **Do:** if the feature's design exists, read it before anything else: its folder's `README.md`, or an older single
+  file.
   - If the design has a `tl;dr`, the feature is finished. Don't resume its working notes. To change a decision, go to
     step 12.
   - Otherwise, read `working-notes.md` too. The checklist says where the work stopped. Continue from there.
@@ -186,7 +187,7 @@ feature.
 - **Check:** `pnpm run lint-ci` and `pnpm run check-spelling` pass. Fix what they find, and run them again until they
   do.
 
-This PR is the last one to edit the working notes.
+The PR that finishes the feature is the last one to edit the working notes.
 
 ### 12. Change a merged design
 
