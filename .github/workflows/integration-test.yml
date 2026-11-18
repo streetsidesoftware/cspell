@@ -224,7 +224,76 @@ jobs:
           path: integration-tests/perf/perf-run-*.csv
           retention-days: 1
 
-  integration-tests-summary:
+  perf-comment:
+    if: github.event_name == 'pull_request'
+    permissions:
+      contents: read
+      pull-requests: write
+    needs:
+      - integration-tests
+      - prepare
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ needs.prepare.outputs.ref }}
+
+      - name: Install Using Cached Build
+        uses: ./.github/actions/build-for-integrations
+        with:
+          node-version: ${{ needs.prepare.outputs.node_version }}
+
+      - name: Create the temp directory
+        run: |
+          mkdir -p temp/perf
+
+      - name: restore repos perf
+        uses: actions/download-artifact@v8
+        with:
+          pattern: perf-*
+          merge-multiple: true
+          path: temp/perf
+
+      - name: show downloaded
+        run: ls -alF temp/perf
+
+      - name: append the runs
+        run: |
+          touch temp/perf/perf-run-empty.csv
+          # Skip rows already in perf.csv; cached runs upload their rows again.
+          cat temp/perf/perf-run-*.csv | sort | awk 'NR == FNR { seen[$0] = 1; next } !seen[$0]++' integration-tests/perf/perf.csv - > temp/perf-new-rows.csv
+          cat temp/perf-new-rows.csv >> integration-tests/perf/perf.csv
+
+      - name: Gen Report
+        id: report
+        run: |
+          echo 'report<<@@REPORT@@' >> $GITHUB_OUTPUT
+          ./tools/perf-chart/bin.ts ./integration-tests/perf/perf.csv >> $GITHUB_OUTPUT
+          echo '@@REPORT@@' >> $GITHUB_OUTPUT
+
+      - name: Show Report in Summary
+        uses: streetsidesoftware/actions/public/summary@v1
+        with:
+          text: |
+            ## Integration Tests Summary
+
+            - ref: "${{ needs.prepare.outputs.ref }}"
+            - runs_on: "${{ needs.prepare.outputs.runs_on }}"
+            - node_version: ${{ needs.prepare.outputs.node_version }}
+            - branch: ${{ github.ref_name }}
+
+            ${{ steps.report.outputs.report }}
+
+      # Fork PRs get a read-only token, so the comment can fail.
+      - name: Add comment to PR
+        continue-on-error: true
+        uses: mshick/add-pr-comment@v3
+        with:
+          message: ${{ steps.report.outputs.report }}
+
+  perf-history:
+    if: github.repository_owner == 'streetsidesoftware' && github.ref_name == 'main'
     permissions:
       contents: write
       pull-requests: write
@@ -232,14 +301,11 @@ jobs:
       - integration-tests
       - prepare
     runs-on: ubuntu-latest
-    # We do not want to fail the build if the user does not have permissions to comment on the PR.
-    continue-on-error: true
     steps:
-      # On main, use the latest commit, so the rows are appended to the latest perf data.
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: ${{ github.ref_name == 'main' && 'main' || needs.prepare.outputs.ref }}
+          ref: main
 
       - name: Install Using Cached Build
         uses: ./.github/actions/build-for-integrations
@@ -262,7 +328,6 @@ jobs:
 
       # A perf data PR may have merged since the checkout. Create PR builds on origin/main.
       - name: Move to the latest main
-        if: github.ref_name == 'main'
         run: |
           git fetch --no-tags --depth=1 origin +main:refs/remotes/origin/main
           git reset --hard origin/main
@@ -307,14 +372,7 @@ jobs:
           text: |
             ${{ steps.pr-body.outputs.body }}
 
-      - name: Add comment to PR
-        continue-on-error: true
-        uses: mshick/add-pr-comment@v3
-        with:
-          message: ${{ steps.report.outputs.report }}
-
       - name: Create PR
-        if: github.repository_owner == 'streetsidesoftware' && github.ref_name == 'main'
         uses: peter-evans/create-pull-request@v8
         with:
           commit-message: 'chore: ${{ steps.pr-body.outputs.title }}'
