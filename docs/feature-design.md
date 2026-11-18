@@ -236,6 +236,7 @@ changed. A fix for an edge case changes the code and its tests, not the design.
   repeating it.
 - When the overview changes, check the details that depend on it.
 - Delete a part that no longer applies. Git history keeps it.
+- An older design that is a single file moves to a folder, as its `README.md`, when one of its decisions changes.
 
 ## Designs and RFCs
 

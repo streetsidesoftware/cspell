@@ -1,7 +1,8 @@
 # Feature designs
 
 Each folder here is the design of one cspell feature: its decisions and the reasons for them, next to the working notes
-used while it was built. The code and the docs are the source of truth for how a feature behaves.
+used while it was built. Older designs are single files, until one of their decisions changes. The code and the docs are
+the source of truth for how a feature behaves.
 
 To write one, see:
 
