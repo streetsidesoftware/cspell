@@ -90,9 +90,8 @@ The maintainers of CSpell and thousands of other packages are working with Tidel
 
 ## Security contact information
 
-To report a security vulnerability, please email <security@streetsidesoftware.com> or use the
-[Tidelift security contact](https://tidelift.com/security).
-Tidelift will coordinate the fix and disclosure.
+To report a security vulnerability, see the
+[Security Policy](https://github.com/streetsidesoftware/cspell/security/policy).
 
 ## Versions
 
