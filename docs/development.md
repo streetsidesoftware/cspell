@@ -5,7 +5,7 @@ generated files, see [Build and packaging](./build-and-packaging.md).
 
 ## Getting started
 
-The current Node.js LTS release is suggested. Install [pnpm](https://pnpm.io/installation).
+We suggest the current Node.js LTS release. Install [pnpm](https://pnpm.io/installation).
 
 ```sh
 pnpm ibt
