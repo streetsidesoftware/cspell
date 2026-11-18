@@ -61,7 +61,8 @@ as how it's released.>
 
 ## <Part>
 
-<One section per part of the overview: its details, each with its reason.>
+<One section per part of the overview: the decisions that are hard to undo or could change the overview, each with its
+reason.>
 
 ## Open questions
 
@@ -85,11 +86,15 @@ as how it's released.>
 The working notes hold what the design leaves out while the feature is designed and built:
 
 - details tied to the code, such as function, type, and property names, and where things live;
+- the small defaults and edge cases settled along the way;
 - a checklist of what's left to design and build;
 - findings and research that aren't decisions.
 
 Anyone who works on the feature, a person or a coding agent, reads them to pick up where the last one stopped, and
 updates them as they go. Keep them short and current. Git history keeps what changed.
+
+Detail goes here, not in the design. That keeps the design to its decisions, so later changes to the code don't touch
+it.
 
 ```markdown
 # <Feature>: working notes
@@ -180,7 +185,7 @@ Take the parts one at a time, and for each, explore before deciding:
   and what's unclear. Pick up its parked details.
 - **Decide:** work through the detail questions in the [design questions](./design-questions.md). Spend time on a
   detail when it's hard to undo once it ships, or could change the overview. Settle the rest with sensible defaults,
-  and list them in the part's section, so a reviewer can check them at a glance.
+  and write them in the working notes, where a reviewer can check them at a glance.
 
 ### 6. Go back up when a detail challenges the overview
 
@@ -197,7 +202,8 @@ answers in the Overview. They don't reopen it, unless one shows the approach is 
 ### 8. Let the code settle the rest
 
 When a question is easier to answer by building or trying something, stop designing and build. Keep the checklist in
-the working notes current as you go. Update the design when the code shows a decision was wrong.
+the working notes current as you go. Update the design when the code shows a decision was wrong. An edge case found
+while building goes in the working notes.
 
 ## When the feature is finished
 
@@ -223,7 +229,7 @@ After that, the working notes stop being updated, and nothing is left to do.
 ## Changing a design later
 
 Update a design only when the design changes: a decision, or the reason for it. Don't update it because the code
-changed.
+changed. A fix for an edge case changes the code and its tests, not the design.
 
 - Rewrite the decision in place. Say what showed the old choice was wrong, if that would save the next person from
   repeating it.

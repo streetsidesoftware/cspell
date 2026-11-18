@@ -16,8 +16,8 @@ Throughout:
 - At the overview level, names and shapes in an example are placeholders. Say so, and park each detail question under
   Open questions in a line, even a hard-to-undo one, without asking it. It comes back with its part.
 - A question with only one reasonable answer, once you look at the code, isn't a decision. Note it and move on.
-- Code-level detail goes in the working notes, not the design: function, type, and property names, where things live,
-  internal steps. Keep their checklist current.
+- Detail goes in the working notes, not the design: function, type, and property names, where things live, internal
+  steps, small defaults, and edge cases. Keep their checklist current.
 - Never write security-sensitive detail anywhere: not in the design, the working notes, a commit, or a PR. The guide's
   "Keep security details out" lists what counts. If the work needs it, stop and tell the user.
 - A remark made in passing is often a standing rule. Confirm it, then record it where it applies:
@@ -125,12 +125,12 @@ The details level, one part at a time.
       gets flagged; or
     - could change the overview.
   - When you aren't sure which kind a detail is, treat it as hard to undo, and ask about it.
-  - Decide the rest yourself. Write them into the part's section with their reasons, and list them in the chat with a
-    link to the PR, so the user can skim them and correct any.
+  - Decide the rest yourself. Write them in the working notes, and list them in the chat with a link to the PR, so the
+    user can skim them and correct any.
   - The user can defer a detail until step 11.
-- **Do:** write the part's section as each detail is settled, with its reason, and the code-level detail in the working
-  notes. Commit and push. When a part can be read on its own, move it to its own file, as the guide's "Where it lives"
-  says.
+- **Do:** write the part's section as each hard-to-undo detail is settled, with its reason. Everything else goes in the
+  working notes. Commit and push. When a part can be read on its own, move it to its own file, as the guide's "Where it
+  lives" says.
 
 ### 8. Go back up when a detail challenges the overview
 
@@ -159,8 +159,8 @@ Hand the user a clear state, and leave building as a separate step.
   - the provisional names from step 9. Each needs a decision, or an issue saying when it must be decided;
   - where the work lives: the branch, the worktree's path, and the PR.
 - **Do:** stop at the design. A quick prototype is fine when it answers a question faster. Building is a separate step,
-  such as with the `config-option` or `cli-option` skill. Whoever builds keeps the working notes current, and updates
-  the design when the code shows a decision was wrong.
+  such as with the `config-option` or `cli-option` skill. Whoever builds keeps the working notes current, puts edge
+  cases found while building there, and updates the design only when the code shows a decision was wrong.
 
 ### 11. Finish the design when the feature is finished
 
@@ -174,9 +174,9 @@ feature.
   `docs/design-principles.md` or another doc. A rule that could affect other designs gets its own `docs:` PR.
 - **Check:** start a subagent that is given only the paths of the design, without the working notes, and told not to
   read the code. Ask it to say what was decided, why, and how the decisions fit together, and to list gaps,
-  contradictions, and anything it had to guess. If you can't start a subagent, write that request out in full for the
-  user, with the paths and a note that the reader has no other context. Ask them to run it in a new session and paste
-  its report back, and wait for it.
+  contradictions, and anything it had to guess. A missing decision or reason is a gap; a missing edge case isn't. If
+  you can't start a subagent, write that request out in full for the user, with the paths and a note that the reader
+  has no other context. Ask them to run it in a new session and paste its report back, and wait for it.
 - **Stop and ask:** show the user the report, and fix what they agree with.
 - **Check:** if the code is on the same branch, the PR is titled `feat:` or `fix:` and its body is written for the
   release notes, as `docs/pull-requests.md` describes.
