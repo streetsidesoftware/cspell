@@ -23,7 +23,8 @@ Always first.
 
 - Why are we doing this? What problem prompted it? Is there an issue?
 - Why now: a bug report, a feature request, a limit hit while building something else?
-- If the first answer is a solution ("we need an option"), ask why until the reason is clear.
+- If the first answer is a solution ("we need an option"), ask why until the reason is clear. For a security feature,
+  stop at what users gain, as [Keep security details out](./feature-design.md#keep-security-details-out) says.
 - Who is affected, and how? Usually some of:
   - people running the cspell command-line tool, locally and in CI;
   - people writing cspell config, including shared configs other projects `import`;

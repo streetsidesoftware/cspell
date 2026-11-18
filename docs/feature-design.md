@@ -27,8 +27,8 @@ Each feature gets a folder, `docs/designs/<feature>/`, named by a short kebab-ca
 `ignore-regex-per-language`:
 
 - `README.md` is the design: the why, the overview, and the parts.
-- `working-notes.md` holds the details, the checklist, and the open questions while the feature is designed and
-  built. See [Working notes](#working-notes).
+- `working-notes.md` holds the code-level detail, the checklist, and the open questions while the feature is
+  designed and built. See [Working notes](#working-notes).
 - When a part of the design can be read on its own, it gets its own file, named by a slug, such as `merging.md`. The
   `README.md` links to it.
 
@@ -162,7 +162,8 @@ back with its part.
 A feature usually starts as a problem to solve, or as a solution ("we need an option"). Ask "why?" until you reach the
 reason: who is affected, and what goes wrong for them today. Look at the issue and the code first, so the why rests on
 facts. Then settle why now, what success looks like, and what's out of scope. Fill in what the issue and the code show,
-and ask about the rest.
+and ask about the rest. For a security feature, the why is what users gain: see
+[Keep security details out](#keep-security-details-out).
 
 ### 2. Explore approaches
 
@@ -250,8 +251,8 @@ changed. A fix for an edge case changes the code and its tests, not the design.
 - Delete a part that no longer applies. Git history keeps it.
 - An older design that is a single file moves to a folder, as its `README.md`, when one of its decisions changes.
 
-A change that fits in one PR edits only the design. A larger change, such as a new part or a rework over several PRs,
-reopens the feature:
+A change that fits in one PR updates the design, and leaves finished working notes alone. A larger change, such as a
+new part or a rework over several PRs, reopens the feature:
 
 - Set the working notes' status back to `Status: in progress`, or start working notes if there are none.
 - Replace their contents with the change's checklist, open questions, and notes. Git history keeps the old ones.
