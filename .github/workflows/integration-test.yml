@@ -260,6 +260,13 @@ jobs:
       - name: show downloaded
         run: ls -alF temp/perf
 
+      # A perf data PR may have merged since the checkout. Create PR builds on origin/main.
+      - name: Move to the latest main
+        if: github.ref_name == 'main'
+        run: |
+          git fetch --no-tags --depth=1 origin +main:refs/remotes/origin/main
+          git reset --hard origin/main
+
       - name: append the runs
         run: |
           touch temp/perf/perf-run-empty.csv
