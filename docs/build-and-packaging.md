@@ -119,6 +119,7 @@ The `api/` files are committed so that changes to a package's public API show up
 | A package's public API                        | `pnpm run build`, then review and commit its [`api/` file](#the-api-files), if any. Add [doc comments](./writing-comments.md#public-comments). |
 | Bundled dictionaries                          | See [Bundled dictionaries](#bundled-dictionaries).                                                                                             |
 | `.github/release-drafter.yml`                 | `node ./scripts/check-release-drafter.mts`. See [Releasing](./releasing.md#changing-the-rules).                                                |
+| `.github/FUNDING.yml`                         | `node ./scripts/fix-package-json.mts`, which copies the links into each published package's `funding` field.                                   |
 
 ## Bundled dictionaries
 
