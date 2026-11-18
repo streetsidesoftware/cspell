@@ -23,8 +23,8 @@ This is a pnpm workspace (`pnpm-workspace.yaml`). The main directories:
 ## Tooling
 
 - **Node.js:** the current LTS release is suggested.
-- **pnpm**, pinned by `packageManager`. New dependency versions are installed only once they're two days old
-  (`minimumReleaseAge`), except `@cspell/dict-*`.
+- **pnpm**, pinned by `packageManager`. New dependency versions must reach a minimum age before pnpm installs them:
+  see `minimumReleaseAge` in `pnpm-workspace.yaml`.
 - **Builds** use tsdown for bundles and type declarations, and `tsc`.
 - **Tests** use vitest, next to the source (`foo.test.ts` next to `foo.ts`). It's the only test runner.
   - The root `test` also runs `test-schema` last, which validates `cspell.schema.json`.
