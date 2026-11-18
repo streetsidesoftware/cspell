@@ -97,6 +97,8 @@ so later changes to the code don't touch it.
 ```markdown
 # <Feature>: working notes
 
+Status: in progress
+
 Working notes for [the design](./README.md). They aren't kept current once the feature is finished. The code is the
 source of truth.
 
@@ -113,8 +115,10 @@ source of truth.
 <Names, where things live, internal steps, small defaults, edge cases, and findings, grouped by part.>
 ```
 
-The PR that finishes the feature is the last one to edit them. After it, leave them as they are, or delete them if
-nothing in them helps anymore.
+The status line says whether the feature is in progress or finished. The PR that finishes the feature sets it to
+`Status: finished`, and is the last one to edit the notes. After it, leave them as they are, or delete them if nothing
+in them helps anymore. A design without working notes is finished. A larger change reopens the feature, as
+[Changing a design later](#changing-a-design-later) describes.
 
 ## Keep security details out
 
@@ -216,14 +220,14 @@ while building goes in the working notes.
 
 Finish the design in the PR that finishes the feature. This removes working detail from the design, not the reasons.
 
-- Add a `tl;dr` at the top: the choices that matter, in short, plain sentences. Add it only now: it marks the design as
-  finished.
+- Add a `tl;dr` at the top: the choices that matter, in short, plain sentences.
 - Add a line saying that the code and docs are the source of truth.
 - Keep each decision with its reason.
 - Keep an idea that wasn't chosen only when it's a real lesson that would save the next person from repeating it, and
   write it in the decision's text. A list of rejected ideas reads as a firm ruling, and can stop a later improvement.
 - Move what only restates the code, such as function names and internal steps, to the working notes.
 - Settle or drop each open question in the working notes. Open an issue only for a real problem someone would act on.
+- Set the working notes' status to `Status: finished`.
 - Finish each part's own file the same way, and delete one that no longer adds anything.
 - Have someone new to the feature read only the design, without the code. They should be able to say what was decided,
   why, and how the decisions fit together. A missing decision or reason is a gap; a missing edge case isn't.
@@ -244,8 +248,15 @@ changed. A fix for an edge case changes the code and its tests, not the design.
 - When the overview changes, check the details that depend on it.
 - Update the `tl;dr` when it summarizes a decision that changed.
 - Delete a part that no longer applies. Git history keeps it.
-- An older design that is a single file moves to a folder, as its `README.md`, when one of its decisions changes. It
-  gets working notes only if the change needs them.
+- An older design that is a single file moves to a folder, as its `README.md`, when one of its decisions changes.
+
+A change that fits in one PR edits only the design. A larger change, such as a new part or a rework over several PRs,
+reopens the feature:
+
+- Set the working notes' status back to `Status: in progress`, or start working notes if there are none.
+- Replace their contents with the change's checklist, open questions, and notes. Git history keeps the old ones.
+- Keep the `tl;dr`, and update it as decisions change.
+- Finish it again as in [When the feature is finished](#when-the-feature-is-finished).
 
 ## Designs and RFCs
 

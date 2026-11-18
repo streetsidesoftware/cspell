@@ -37,8 +37,8 @@ Throughout:
 
 - **Do:** if the feature's design exists, read it before anything else: its folder's `README.md`, or an older single
   file.
-  - If the design has a `tl;dr`, the feature is finished. Don't resume its working notes. To change a decision, go to
-    step 12.
+  - If it has no `working-notes.md`, or they say `Status: finished`, the feature is finished. Don't resume the working
+    notes. To change it, go to step 12.
   - Otherwise, read `working-notes.md` too. The checklist says where the work stopped. Continue from there.
 
 ### 2. Name the feature and set up a branch
@@ -189,14 +189,17 @@ feature.
 - **Check:** `pnpm run lint-ci` and `pnpm run check-spelling` pass. Fix what they find, and run them again until they
   do.
 
-The PR that finishes the feature is the last one to edit the working notes.
+The PR that finishes the feature sets the working notes to `Status: finished`, and is the last one to edit them until
+a later change reopens the feature.
 
 ### 12. Change a merged design
 
 Keep a merged design true when a decision changes.
 
 - **Do:** follow the guide's "Changing a design later", on a branch set up as in step 2. A change to the overview goes
-  back up as in step 8. Don't touch finished working notes.
+  back up as in step 8.
+- **Do:** a change that fits in one PR edits only the design, and leaves finished working notes alone. A larger change
+  reopens the feature as the guide describes. Then work through it from the step it needs, and finish it at step 11.
 
 ## Check a change
 
