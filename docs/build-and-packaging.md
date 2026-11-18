@@ -182,6 +182,8 @@ When adding or changing a workflow:
   times per PR, like the integration tests, use `.github/actions/setup-pnpm` (`pnpm/setup`) instead. Its Node has no
   npm, npx, or Corepack. Only one of those jobs should save the pnpm store (`save-cache`), or each job saves its own
   copy and fills the cache.
+- A job that runs Yarn sets up Node with `.github/actions/setup-node` and adds `.github/actions/setup-corepack` before
+  that step.
 - Add `workflow_dispatch` when possible, so it can be run by hand.
 - Add `workflow_call` only to a new workflow, and only if it has no `concurrency` section: in a called workflow,
   `github.workflow` is the caller's name, so the groups can collide. Don't add it to existing workflows.
