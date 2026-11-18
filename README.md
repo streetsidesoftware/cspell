@@ -82,12 +82,6 @@ Join us on:
 | [rfc-0003](https://github.com/streetsidesoftware/cspell/tree/main/rfc/rfc-0003%20parsing%20files/)                    | Plug-ins: Adding file parsers   | In Progress |
 | [rfc-0004](https://github.com/streetsidesoftware/cspell/tree/main/rfc/rfc-0004%20known%20issues/)                     | Support Marking Issues as Known | Not started |
 
-## CSpell for enterprise
-
-Available as part of the Tidelift Subscription.
-
-The maintainers of CSpell and thousands of other packages are working with Tidelift to deliver commercial support and maintenance for the open source packages you use to build your applications. Save time, reduce risk, and improve code health, while paying the maintainers of the exact packages you use. [Learn more.](https://tidelift.com/subscription/pkg/npm-cspell?utm_source=npm-cspell&utm_medium=referral&utm_campaign=enterprise&utm_term=repo)
-
 ## Security contact information
 
 To report a security vulnerability, please email <security@streetsidesoftware.com> or use the
