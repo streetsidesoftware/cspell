@@ -3,8 +3,9 @@ Repository: sveltejs/svelte
 Url: "https://github.com/sveltejs/svelte.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 9241, Issues found: 4161 in 638 files.
+ CSpell: Files checked: 9245, Issues found: 4163 in 639 files.
  exit code: 1
+AGENTS.md:22:124    - Unknown word (behaviour)  -- module or child component behaviour, so the test is more
 CONTRIBUTING.md:22:5      - Unknown word (Triaging)   -- ### Triaging issues and pull requests
 benchmarking/analyze-compiler-profile.js:10:19     - Unknown word (callees)    -- * Samples retain callees outside the compiler
 benchmarking/analyze-compiler-profile.js:132:8     - Unknown word (speedscope) -- const speedscope = {
@@ -22,7 +23,6 @@ benchmarking/compiler-profiling.md:21:10     - Unknown word (cpuprofile) -- - `r
 benchmarking/utils.js:254:80    - Unknown word (Deopt)      -- Hit count | Children | Deopt reason |',
 benchmarking/utils.js:288:10    - Unknown word (deopt)      -- const deoptReason = typeof node
 documentation/docs/01-introduction/02-getting-started.md:8:15      - Unknown word (myapp)      -- npx sv create myapp
-documentation/docs/01-introduction/03-svelte-files.md:34:20     - Unknown word (behaviour)  -- <!-- TODO describe behaviour of `export` -->
 documentation/docs/02-runes/01-what-are-runes.md:5:21      - Unknown word (ruːn)       -- > [!NOTE] **rune** /ruːn/ _noun_
 documentation/docs/02-runes/02-$state.md:24:10     - Unknown word (proxified)  -- State is proxified recursively until Svelte
 documentation/docs/02-runes/03-$derived.md:94:33     - Unknown word (deriveds)   -- Prior to Svelte 5.25, deriveds were read-only.
@@ -61,8 +61,8 @@ documentation/docs/03-template-syntax/19-await-expressions.md:113:11    - Unknow
 documentation/docs/04-styling/03-custom-properties.md:18:28     - Unknown word (desugars)   -- above code essentially desugars to this:
 documentation/docs/05-special-elements/01-svelte-boundary.md:114:50    - Unknown word (stringifiable) -- function must return a JSON-stringifiable object which will be
 documentation/docs/05-special-elements/07-svelte-options.md:13:111    - Unknown word (mathml)     -- default), "svg" or "mathml"
-documentation/docs/06-runtime/01-stores.md:133:42    - Unknown word (tock)       -- sound === 'tick' ? 'tock' : 'tick'));
-documentation/docs/06-runtime/01-stores.md:307:159   - Unknown word (unsubscription) -- rather than return the unsubscription function directly. Note
+documentation/docs/06-runtime/01-stores.md:164:42    - Unknown word (tock)       -- sound === 'tick' ? 'tock' : 'tick'));
+documentation/docs/06-runtime/01-stores.md:338:159   - Unknown word (unsubscription) -- rather than return the unsubscription function directly. Note
 documentation/docs/06-runtime/03-lifecycle-hooks.md:101:33    - Unknown word (autoscrolls) -- implement a chat window that autoscrolls to the bottom when new
 documentation/docs/06-runtime/05-hydratable.md:20:305    - Unknown word (datafetching) -- the scenes by whatever datafetching library you use. For
 documentation/docs/07-misc/01-best-practices.md:4:19      - Unknown word (bestpractices) -- name: svelte-core-bestpractices
@@ -1674,11 +1674,11 @@ packages/svelte/src/compiler/phases/1-parse/utils/entities.js:995:3     - Unknow
 packages/svelte/src/compiler/phases/1-parse/utils/entities.js:996:3     - Unknown word (sstarf)     -- 'sstarf;': 8902,
 packages/svelte/src/compiler/phases/1-parse/utils/entities.js:997:3     - Unknown word (subdot)     -- 'subdot;': 10941,
 packages/svelte/src/compiler/phases/1-parse/utils/entities.js:999:3     - Unknown word (subsim)     -- 'subsim;': 10951,
-packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:150:18    - Unknown word (ICSS)       -- // Global and ICSS export rules do not
-packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:159:63    - Unknown word (scopable)   -- head> are not style-scopable.
-packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:367:18    - Unknown word (combinators) -- // TODO other combinators
-packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:388:29    - Unknown word (unscopeable) -- a `:global(...)` or unscopeable selector, or
-packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:872:42    - Unknown word (selectedcontent) -- considered descendants of <selectedcontent>, which clones the selected
+packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:144:18    - Unknown word (ICSS)       -- // Global and ICSS export rules do not
+packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:151:63    - Unknown word (scopable)   -- head> are not style-scopable.
+packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:359:18    - Unknown word (combinators) -- // TODO other combinators
+packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:380:29    - Unknown word (unscopeable) -- a `:global(...)` or unscopeable selector, or
+packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:864:42    - Unknown word (selectedcontent) -- considered descendants of <selectedcontent>, which clones the selected
 packages/svelte/src/compiler/phases/2-analyze/css/utils.js:34:29     - Unknown word (cslx)       -- will be processed by cslx, in which case falsy
 packages/svelte/src/compiler/phases/2-analyze/index.js:1054:14   - Unknown word (optimise)   -- // TODO optimise this better
 packages/svelte/src/compiler/phases/2-analyze/index.js:738:18    - Unknown word (nonstate)   -- // warn on any nonstate declarations that are
@@ -1707,11 +1707,11 @@ packages/svelte/src/compiler/phases/3-transform/server/visitors/shared/utils.js:
 packages/svelte/src/compiler/phases/3-transform/utils.js:219:76    - Unknown word (spaceand)   -- text node with a single spaceand keep whitespace
 packages/svelte/src/compiler/phases/patterns.js:20:43     - Unknown word (aeiou)      -- starts_with_vowel = /^[aeiou]/;
 packages/svelte/src/compiler/phases/scope.js:866:59    - Unknown word (rescanning) -- per name to avoid O(n) rescanning in generate/unique.
-packages/svelte/src/compiler/print/index.js:842:30    - Unknown word (esrap's)    -- This is duplicated from esrap's handling of VariableDeclarati
+packages/svelte/src/compiler/print/index.js:839:30    - Unknown word (esrap's)    -- This is duplicated from esrap's handling of VariableDeclarati
 packages/svelte/src/compiler/types/template.d.ts:26:41     - Unknown word (mrow)       -- for e.g. `<math>` or `<mrow>`
 packages/svelte/src/compiler/utils/ast.js:560:40    - Unknown word (subexpression) -- expression.expressions.some((subexpression) => is_expression_async
 packages/svelte/src/compiler/utils/extract_svelte_ignore.js:16:16     - Unknown word (eachblock)  -- 'invalid-rest-eachblock-binding': 'bind_invalid
-packages/svelte/src/compiler/utils/mapped_code.js:146:6     - Unknown word (unswitched) -- // unswitched loops are faster
+packages/svelte/src/compiler/utils/mapped_code.js:135:6     - Unknown word (unswitched) -- // unswitched loops are faster
 packages/svelte/src/html-tree-validation.js:118:5     - Unknown word (bgsound)    -- 'bgsound',
 packages/svelte/src/internal/client/constants.js:81:47     - Unknown word (downleveling) -- like this because after downleveling the pure comment may
 packages/svelte/src/internal/client/dev/debug.js:118:28    - Unknown word (cdeps)      -- console.groupCollapsed('%cdeps', 'font-weight: normal
@@ -1826,8 +1826,8 @@ packages/svelte/tests/css/samples/unused-selector-string-concat/expected.css:10:
 packages/svelte/tests/css/samples/unused-selector-string-concat/expected.css:17:4      - Unknown word (fooddbar)   -- .fooddbar.svelte-xyz {color: red
 packages/svelte/tests/css/samples/unused-selector-string-concat/expected.css:4:4       - Unknown word (foocc)      -- .foocc.svelte-xyz {color: red
 packages/svelte/tests/css/samples/unused-selector-ternary/_config.js:11:36     - Unknown word (maybeactive) -- Unused CSS selector ".maybeactive"',
-packages/svelte/tests/helpers.js:203:17    - Unknown word (normalise)  -- export function normalise_inspect_logs(logs)
-packages/svelte/tests/helpers.js:205:8     - Unknown word (normalised) -- const normalised = [];
+packages/svelte/tests/helpers.js:311:17    - Unknown word (normalise)  -- export function normalise_inspect_logs(logs)
+packages/svelte/tests/helpers.js:313:8     - Unknown word (normalised) -- const normalised = [];
 packages/svelte/tests/hydration/samples/rich-select/main.svelte:164:10    - Unknown word (coolerone)  -- <option>coolerone</option>
 packages/svelte/tests/hydration/test.ts:160:22    - Unknown word (borks)      -- // Error logger borks because of circular
 packages/svelte/tests/manual/each-stress-test/main.svelte:23:5      - Unknown word (adbc)       -- "adbc",

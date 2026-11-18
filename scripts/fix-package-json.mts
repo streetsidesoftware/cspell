@@ -1,6 +1,7 @@
 /*
  * Fix up packages/<dir>/package.json: `repository` and `homepage`, and for published packages `bugs`,
- * which lists the package's open issues by its label (see create-package-labels.mts). Fields are then sorted.
+ * which lists the package's open issues by its label (see create-package-labels.mts), and `funding`,
+ * from `.github/FUNDING.yml`. Fields are then sorted.
  * Usage: node ./scripts/fix-package-json.mts [--dry-run]
  *   --dry-run  Report which files need fixing without writing them; exit 1 if any do.
  */
@@ -11,6 +12,8 @@ import { parseArgs } from 'node:util';
 
 import { sortOrder as defaultSortOrder, sortPackageJson } from 'sort-package-json';
 
+import type { FundingEntry } from './lib/funding.mts';
+import { readFunding } from './lib/funding.mts';
 import type { PackageInfo, PackageJson } from './lib/packages.mts';
 import { readPackages, repoUrl, rootDir } from './lib/packages.mts';
 
@@ -56,7 +59,7 @@ function bugsWithUrl(bugs: unknown, url: string): Record<string, unknown> {
     return bugs && typeof bugs === 'object' ? { ...bugs, url } : { url };
 }
 
-function fixPackage(pkg: PackageInfo): PackageJson {
+function fixPackage(pkg: PackageInfo, funding: FundingEntry[]): PackageJson {
     let json = pkg.json;
     json = setField(json, 'repository', {
         type: 'git',
@@ -66,6 +69,7 @@ function fixPackage(pkg: PackageInfo): PackageJson {
     json = setField(json, 'homepage', homepages[pkg.dir] ?? `${repoUrl}/tree/main/packages/${pkg.dir}#readme`);
     if (!json.private) {
         json = setField(json, 'bugs', bugsWithUrl(json.bugs, bugsUrl(pkg.label)), 'repository');
+        json = setField(json, 'funding', funding, 'bugs');
     }
     return json;
 }
@@ -74,10 +78,11 @@ async function main(): Promise<void> {
     const { values } = parseArgs({ options: { 'dry-run': { type: 'boolean', default: false } } });
     const dryRun = values['dry-run'];
 
+    const funding = await readFunding();
     const packages = await readPackages();
     let needsFix = 0;
     for (const pkg of packages) {
-        const text = JSON.stringify(sortPackageJson(fixPackage(pkg), { sortOrder }), undefined, 2) + '\n';
+        const text = JSON.stringify(sortPackageJson(fixPackage(pkg, funding), { sortOrder }), undefined, 2) + '\n';
         if (text === pkg.text) continue;
         ++needsFix;
         const rel = path.relative(rootDir, pkg.file);

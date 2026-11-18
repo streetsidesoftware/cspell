@@ -1,0 +1,40 @@
+import { toFileDirURL, toFileURL } from '@cspell/url';
+import type { VFileSystem } from 'cspell-io';
+import { getDefaultVirtualFs } from 'cspell-io';
+
+/**
+ * Read the submodule folders listed in a repository's `.gitmodules` file.
+ * @param repoRoot - the repository's root directory.
+ * @param vfs - file system to read with.
+ * @returns the URLs of the submodule folders, as strings, empty when there is no `.gitmodules` file.
+ */
+export async function readSubmoduleFolders(repoRoot: URL, vfs?: VFileSystem): Promise<Set<string>> {
+    const fs = vfs || getDefaultVirtualFs().getFS(repoRoot);
+    try {
+        const file = await fs.readFile(new URL('.gitmodules', repoRoot), 'utf8');
+        return new Set(parseSubmodulePaths(file.getText()).map((p) => toFileDirURL(toFileURL(p, repoRoot)).href));
+    } catch {
+        return new Set();
+    }
+}
+
+/**
+ * Extract the `path` values of the `[submodule]` sections of a `.gitmodules` file.
+ * @param content - the text of the file, in git's config format.
+ * @returns the paths, relative to the repository root.
+ */
+export function parseSubmodulePaths(content: string): string[] {
+    const paths: string[] = [];
+    let inSubmodule = false;
+    for (const line of content.split('\n').map((text) => text.trim())) {
+        if (line.startsWith('[')) {
+            inSubmodule = line.toLowerCase().startsWith('[submodule');
+            continue;
+        }
+        if (!inSubmodule) continue;
+        // Git quotes a path that starts or ends with a space, or holds `#` or `;`.
+        const path = line.match(/^path\s*=\s*(.*)$/)?.[1].replace(/^"(.*)"$/, '$1');
+        if (path) paths.push(path);
+    }
+    return paths;
+}

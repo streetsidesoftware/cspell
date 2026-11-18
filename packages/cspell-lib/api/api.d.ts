@@ -1,9 +1,9 @@
 import { FSCapabilityFlags, VFileSystem, VFileSystem as VFileSystem$1, VFileSystemProvider, VirtualFS, VirtualFS as VirtualFS$1, asyncIterableToArray, readFileText as readFile, readFileTextSync as readFileSync, writeToFile, writeToFileIterable, writeToFileIterableP } from "cspell-io";
 import { AdvancedCSpellSettingsWithSourceTrace, CSpellSettings, CSpellSettingsWithSourceTrace, CSpellUserSettings, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, DictionaryDefinitionInline, DictionaryDefinitionPreferred, DictionaryDefinitionSimple, DictionaryId, DictionaryReference, DocumentParser, Glob, GlobDef, ImportFileRef, Issue, LocaleId, MappedText, ParsedText, Parser, PnPSettings, Range, ReportingConfiguration, TextDocumentOffset, TextOffset } from "@cspell/cspell-types";
-import { FileTypeId as LanguageId, findMatchingFileTypes as getLanguagesForBasename, getFileTypesForExt as getLanguagesForExt } from "@cspell/filetypes";
 import { CachingDictionary, SpellingDictionary, SpellingDictionaryCollection, SuggestOptions, SuggestionCollector, SuggestionResult, createCollection, createSpellingDictionary } from "cspell-dictionary";
 import { CompoundWordsMethod, WeightMap } from "cspell-trie-lib";
 import { CSpellConfigFile, CSpellConfigFile as CSpellConfigFile$1, ICSpellConfigFile, ICSpellConfigFile as ICSpellConfigFile$1 } from "cspell-config-lib";
+import { FileTypeId, findMatchingFileTypes as getLanguageIdsForBaseFilename, getFileTypesForExt as getLanguagesForExt } from "@cspell/filetypes";
 export * from "@cspell/cspell-types";
 /**
  * Clear the cached files and other cached data.
@@ -614,7 +614,7 @@ interface SuggestionOptions extends FromSuggestOptions {
   /**
    * languageId to use when determining file type.
    */
-  languageId?: LanguageId | LanguageId[];
+  languageId?: FileTypeId | FileTypeId[];
   /**
    * Locale to use.
    */
@@ -1082,7 +1082,7 @@ interface TraceResult extends DictionaryTraceResult {
   dictBlocked: boolean;
 }
 interface TraceOptions {
-  languageId?: LanguageId | LanguageId[];
+  languageId?: FileTypeId | FileTypeId[];
   locale?: LocaleId;
   ignoreCase?: boolean;
   allowCompoundWords?: boolean;
@@ -1159,4 +1159,4 @@ declare function removeAccents(text: string): string;
 declare namespace textApi_d_exports {
   export { calculateTextDocumentOffsets, camelToSnake, cleanText, cleanTextOffset, extractLinesOfText, extractPossibleWordsFromTextOffset, extractText, extractWordsFromCode, extractWordsFromCodeTextOffset, extractWordsFromText, extractWordsFromTextOffset, isFirstCharacterLower, isFirstCharacterUpper, isLowerCase, isUpperCase, lcFirst, match, matchCase, matchStringToTextOffset, matchToTextOffset, removeAccents, snakeToCamel, splitCamelCaseWord, splitCamelCaseWordWithOffset, stringToRegExpOrUndefined as stringToRegExp, textOffset, ucFirst };
 }
-export { type CSpellConfigFile, type CheckTextInfo, CompoundWordsMethod, type ConfigurationDependencies, type CreateTextDocumentParams, type DetermineFinalDocumentSettingsResult, type DictionaryReferenceCollection, type Document, type DocumentValidatorOptions, type ExcludeFilesGlobMap, type ExclusionFunction, exclusionHelper_d_exports as ExclusionHelper, FSCapabilityFlags, type FeatureFlag, type ICSpellConfigFile, type ImportFileRefWithError, type IncludeExcludeOptions, index_link_d_exports as Link, type Logger, type PerfTimer, type SpellCheckFileOptions, type SpellCheckFilePerf, type SpellCheckFileResult, type SpellingDictionary, type SpellingDictionaryCollection, type SuggestOptions, type SuggestedWord, type SuggestionCollector, type SuggestionOptions, type SuggestionResult, type SuggestionsForWordResult, textApi_d_exports as Text, type TextDocument, type TextDocumentLine, type TextDocumentRef, type TextInfoItem, type TraceOptions, type TraceResult, type TraceWordResult, type VFileSystemProvider, type ValidationIssue, type VirtualFS, asyncIterableToArray, checkFilenameMatchesExcludeGlob as checkFilenameMatchesGlob, combineTextAndLanguageSettings as constructSettingsForText, createSpellingDictionary, createCollection as createSpellingDictionaryCollection, defaultFileName as defaultSettingsFilename, getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt, readFile, readFileSync, writeToFile, writeToFileIterable, writeToFileIterableP };
+export { type CSpellConfigFile, type CheckTextInfo, CompoundWordsMethod, type ConfigurationDependencies, type CreateTextDocumentParams, type DetermineFinalDocumentSettingsResult, type DictionaryReferenceCollection, type Document, type DocumentValidatorOptions, type ExcludeFilesGlobMap, type ExclusionFunction, exclusionHelper_d_exports as ExclusionHelper, FSCapabilityFlags, type FeatureFlag, type ICSpellConfigFile, type ImportFileRefWithError, type IncludeExcludeOptions, index_link_d_exports as Link, type Logger, type PerfTimer, type SpellCheckFileOptions, type SpellCheckFilePerf, type SpellCheckFileResult, type SpellingDictionary, type SpellingDictionaryCollection, type SuggestOptions, type SuggestedWord, type SuggestionCollector, type SuggestionOptions, type SuggestionResult, type SuggestionsForWordResult, textApi_d_exports as Text, type TextDocument, type TextDocumentLine, type TextDocumentRef, type TextInfoItem, type TraceOptions, type TraceResult, type TraceWordResult, type VFileSystemProvider, type ValidationIssue, type VirtualFS, asyncIterableToArray, checkFilenameMatchesExcludeGlob as checkFilenameMatchesGlob, combineTextAndLanguageSettings as constructSettingsForText, createSpellingDictionary, createCollection as createSpellingDictionaryCollection, defaultFileName as defaultSettingsFilename, getLanguageIdsForBaseFilename, getLanguagesForExt, readFile, readFileSync, writeToFile, writeToFileIterable, writeToFileIterableP };

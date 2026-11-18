@@ -5,8 +5,7 @@ Bazel runfiles, can then be checked with a plain glob. Setting `CSPELL_GLOB_SYML
 default, and it can't be set in a configuration file. Followed links may point anywhere. Files are reported by the path
 through the link, not by where it points.
 
-This describes the design when it merged, in [#9342](https://github.com/streetsidesoftware/cspell/pull/9342). The
-code and the docs are the source of truth.
+The code and the docs are the source of truth.
 
 ## Why
 

@@ -78,10 +78,56 @@ describe('Validate LanguageIds', () => {
         expect(LangId.findMatchingFileTypes(filename)).toEqual(expected);
     });
 
+    test.each`
+        filename                           | expected
+        ${'.git/config'}                   | ${['properties']}
+        ${'/repo/.git/config'}             | ${['properties']}
+        ${'/repo/.GIT/CONFIG'}             | ${['properties']}
+        ${String.raw`C:\repo\.git\config`} | ${['properties']}
+        ${'file:///repo/.git/config'}      | ${['properties']}
+        ${'/repo/.git/info/exclude'}       | ${['ignore']}
+        ${'/repo/config'}                  | ${[]}
+        ${'/repo/my.git/config'}           | ${[]}
+        ${'/repo/.git/config/README.md'}   | ${['markdown']}
+        ${'/repo/.git/modules/sub/config'} | ${[]}
+        ${'/repo/.git/info/exclude.md'}    | ${['markdown']}
+    `('findMatchingFileTypes path $filename', ({ filename, expected }) => {
+        expect(LangId.findMatchingFileTypes(filename)).toEqual(expected);
+    });
+
+    test('findMatchingFileTypes does not depend on the previous call', () => {
+        expect(LangId.findMatchingFileTypes('src/a/b.md')).toEqual(['markdown']);
+        expect(LangId.findMatchingFileTypes('src/Dockerfile')).toEqual(['dockerfile']);
+    });
+
+    test.each`
+        pattern                      | path                           | expected
+        ${'.git/config'}             | ${'.git/config'}               | ${true}
+        ${'.git/config'}             | ${'.git/configs'}              | ${false}
+        ${'.git/worktrees/*/HEAD'}   | ${'.git/worktrees/wt/HEAD'}    | ${true}
+        ${'.git/worktrees/*/HEAD'}   | ${'.git/worktrees/a/b/HEAD'}   | ${false}
+        ${'.git/refs/**'}            | ${'.git/refs/heads/feature/x'} | ${true}
+        ${'.git/**/HEAD'}            | ${'.git/HEAD'}                 | ${true}
+        ${'.git/**/HEAD'}            | ${'.git/logs/HEAD'}            | ${true}
+        ${'.git/**/HEAD'}            | ${'.git/logs/ORIG_HEAD'}       | ${false}
+        ${'.github/workflows/?.yml'} | ${'.github/workflows/a.yml'}   | ${true}
+        ${'.github/workflows/?.yml'} | ${'.github/workflows/ab.yml'}  | ${false}
+    `('pathPatternToRegExpSource $pattern $path', ({ pattern, path, expected }) => {
+        const regexp = new RegExp(`^${LangId.pathPatternToRegExpSource(pattern)}$`);
+        expect(regexp.test(path)).toBe(expected);
+    });
+
     test('that all extensions start with a .', () => {
         for (const def of definitions) {
             const extsWithoutPeriod = def.extensions.filter((ext) => ext[0] !== '.');
             expect(extsWithoutPeriod).toEqual([]);
+        }
+    });
+
+    test('that no filename starts or ends with a /', () => {
+        for (const def of definitions) {
+            const filenames = def.filenames?.filter((f) => f.startsWith('/') || f.endsWith('/')) ?? [];
+            expect(filenames).toEqual([]);
         }
     });
 
