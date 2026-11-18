@@ -1,5 +1,5 @@
 /*
- * Fix up packages/<dir>/package.json: `repository` and `homepage`, and for published packages `bugs`,
+ * Fix up packages/<dir>/package.json: `repository` and `homepage`, and for published packages `funding` and `bugs`,
  * which lists the package's open issues by its label (see create-package-labels.mts). Fields are then sorted.
  * Usage: node ./scripts/fix-package-json.mts [--dry-run]
  *   --dry-run  Report which files need fixing without writing them; exit 1 if any do.
@@ -31,6 +31,9 @@ const sortOrder = [
         ...defaultSortOrder,
     ]),
 ];
+
+/** Opens the repository's Sponsor dialog, which lists the links in `.github/FUNDING.yml`. */
+const fundingUrl = `${repoUrl}?sponsor=1`;
 
 const homepages: Record<string, string> = {
     cspell: 'https://cspell.org/',
@@ -66,6 +69,7 @@ function fixPackage(pkg: PackageInfo): PackageJson {
     json = setField(json, 'homepage', homepages[pkg.dir] ?? `${repoUrl}/tree/main/packages/${pkg.dir}#readme`);
     if (!json.private) {
         json = setField(json, 'bugs', bugsWithUrl(json.bugs, bugsUrl(pkg.label)), 'repository');
+        json = setField(json, 'funding', fundingUrl, 'bugs');
     }
     return json;
 }
