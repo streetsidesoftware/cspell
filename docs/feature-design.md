@@ -41,7 +41,8 @@ in the PR as it grows, not in pieces in a chat or an issue.
 
 A small feature can ship its design and code together in one PR, and the code decides the PR's type. When a design is
 worth reviewing before it's built, merge it on its own with a `docs:` PR, so it stays out of the release notes. A
-feature built over several PRs updates its design and working notes in each one. See [Pull requests](./pull-requests.md).
+feature built over several PRs updates its design and working notes in each one. See
+[Pull requests](./pull-requests.md).
 
 ## The design
 
@@ -54,9 +55,9 @@ feature built over several PRs updates its design and working notes in each one.
 
 ## Overview
 
-<The approach and the whole shape: what a user writes (the config or the command line) and what cspell does, with one
-example. The main parts. Each decision the approach rests on, with its reason. After the parts are done, the
-whole-feature answers, such as how it's released.>
+<The approach and the whole shape: what a user writes (the config or the command line) and what cspell does. The main
+parts. Each decision the approach rests on, with its reason. After the parts are done, the whole-feature answers, such
+as how it's released.>
 
 ## <Part>
 
@@ -71,6 +72,9 @@ whole-feature answers, such as how it's released.>
 - Record what's out of scope only when a reader would otherwise assume the feature covers it.
 - Keep a name only when users see it and it's part of the decision, such as a config option, a CLI flag, or an export
   of a published package. Other names go in the working notes.
+- Add an example when it makes a decision clearer. An example that is the decision, such as a config shape or a command
+  line, changes only when the decision does. An example of behavior or output goes stale as the code changes, so add
+  one only when it explains a decision, and don't keep it in step with the code.
 - Say when a choice is only for now, such as "could be added later". Otherwise a later reader takes it as a lasting
   rule.
 - Define a new term where it's first used. If it's used across the repo, add it to the [glossary](./glossary.md) in the
@@ -154,8 +158,8 @@ you don't know. Write the approaches under Overview while you explore.
 
 ### 3. Decide the overview
 
-Choose an approach, and write the Overview in place of the approaches explored: the shape in a few lines with one
-example, the main parts, and each decision the approach rests on, with its reason.
+Choose an approach, and write the Overview in place of the approaches explored: the shape in a few lines, the main
+parts, and each decision the approach rests on, with its reason.
 
 ### 4. Agree on the whole overview
 

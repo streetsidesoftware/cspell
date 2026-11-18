@@ -82,8 +82,8 @@ The overview level, exploring. Discuss; don't decide yet.
 - **Do:** read `docs/design-principles.md`, `docs/design-questions.md`, `docs/glossary.md`, and, for a config option
   or a CLI flag, `docs/config-and-cli.md`. Look through `docs/designs/`, `rfc/`, and closed issues for earlier
   thinking, and link a matching RFC under Why.
-- **Do:** lay out the approaches, usually two or three. Give each one example: the config or command line a user
-  writes, and what cspell does. Compare them against the overview questions.
+- **Do:** lay out the approaches, usually two or three. Sketch each one: the config or command line a user writes,
+  and what cspell does. Compare them against the overview questions.
 - **Do:** check facts in the code, or by running `node ./bin.mjs`. When a question turns on facts outside the repo,
   offer to research it, and bring back a short summary with sources. Findings go in the working notes.
 - **Do:** write the approaches being explored under the design's Overview. Commit and push.
