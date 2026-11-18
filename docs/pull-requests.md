@@ -54,6 +54,8 @@ Start with `## Summary`: one or two sentences that stand on their own: what chan
 For `feat:`, `fix:`, and `revert:`, write for users deciding whether the change affects them.
 
 - Say which option, flag, command, or behavior changed, in their terms.
+- For a security feature, say what users gain, such as more control over which config code runs, not what it
+  prevents.
 - For `feat:`, add a `## Feature` section: what users can now do, with a config or command-line example.
 - Keep internal details out of the main text. How the change works can go in a closing
   [Technical Details](#technical-details) block.
