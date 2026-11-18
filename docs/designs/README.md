@@ -1,8 +1,7 @@
 # Feature designs
 
-Each file or folder here is the design of one cspell feature. A design is written to think a feature through before
-and while it's built, and is finished when the feature merges. It then describes the feature as it was at that point:
-what it does, how it behaves, and why it's shaped the way it is. The code and the docs are the source of truth.
+Each folder here is the design of one cspell feature: its decisions and the reasons for them, next to the working notes
+used while it was built. The code and the docs are the source of truth for how a feature behaves.
 
 To write one, see:
 
