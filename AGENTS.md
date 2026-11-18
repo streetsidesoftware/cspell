@@ -19,7 +19,7 @@ pnpm run test:update-snapshots             # after a build
 pnpm run lint                              # writes fixes: eslint --fix, prettier -w
 ```
 
-Node.js: the current LTS release.
+Node.js: the current LTS release is suggested.
 
 ## Before you call it done
 

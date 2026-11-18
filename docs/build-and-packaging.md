@@ -22,7 +22,7 @@ This is a pnpm workspace (`pnpm-workspace.yaml`). The main directories:
 
 ## Tooling
 
-- **Node.js:** the current LTS release.
+- **Node.js:** the current LTS release is suggested.
 - **pnpm**, pinned by `packageManager`. New dependency versions are installed only once they're two days old
   (`minimumReleaseAge`), except `@cspell/dict-*`.
 - **Builds** use tsdown for bundles and type declarations, and `tsc`.
