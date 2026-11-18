@@ -129,6 +129,9 @@ could help an attacker, whether against this repo or against people who use cspe
 An open checklist item can give one away as easily as a paragraph. Report and discuss a vulnerability privately, as
 [`SECURITY.md`](../SECURITY.md) describes.
 
+A security feature can still have a public design. Write it as what the feature gives users, such as more control over
+which config code runs, not as what it prevents, such as an attacker running code.
+
 ## How to design
 
 A design works at two levels:

@@ -71,6 +71,8 @@ Know why the feature exists before deciding anything.
 - **Do:** look up the facts first: the issue, the code, a reproduction.
 - **Do:** propose the why in one or two lines, and let the user correct it. If it still reads like a solution, ask "why
   does that matter?" and redraft.
+- **Do:** for a security feature, write the why as what users gain, such as more control over which config code runs.
+  Don't follow the whys down to the threat, as the guide's "Keep security details out" says.
 - **Do:** draft answers to the rest of `docs/design-questions.md`'s "Why and who" group from the facts: why now, who is
   affected, what success looks like, and what's out of scope. Show them in the chat together, mark the ones the facts
   don't answer, and let the user correct the rest.
