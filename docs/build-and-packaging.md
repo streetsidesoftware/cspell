@@ -22,8 +22,7 @@ This is a pnpm workspace (`pnpm-workspace.yaml`). The main directories:
 
 ## Tooling
 
-- **Node.js:** the version in `engines` in the root `package.json` (`>=22.18.0`). CI tests 22.x, 24.x, and 26.x, and
-  24.x on Windows.
+- **Node.js:** the version in `engines` in the root `package.json`. CI tests 22.x, 24.x, and 26.x, and 24.x on Windows.
 - **pnpm**, pinned by `packageManager`. New dependency versions are installed only once they're two days old
   (`minimumReleaseAge`), except `@cspell/dict-*`.
 - **Builds** use tsdown for bundles and type declarations, and `tsc`.

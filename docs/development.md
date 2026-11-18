@@ -5,7 +5,7 @@ generated files, see [Build and packaging](./build-and-packaging.md).
 
 ## Getting started
 
-Use the Node.js version in `engines` in `package.json` (`>=22.18.0`). Install [pnpm](https://pnpm.io/installation).
+Use the Node.js version in `engines` in `package.json`. Install [pnpm](https://pnpm.io/installation).
 
 ```sh
 pnpm ibt

@@ -19,7 +19,7 @@ pnpm run test:update-snapshots             # after a build
 pnpm run lint                              # writes fixes: eslint --fix, prettier -w
 ```
 
-Node.js `>=22.18.0` (`engines` in `package.json`).
+Node.js: the version in `engines` in `package.json`.
 
 ## Before you call it done
 
