@@ -20,8 +20,8 @@ Throughout:
   steps, small defaults, and edge cases. Keep their checklist current.
 - Never write security-sensitive detail anywhere: not in the design, the working notes, a commit, or a PR. The guide's
   "Keep security details out" lists what counts. If the work needs it, stop and tell the user.
-- A remark made in passing is often a standing rule. Confirm it, then record it where it applies:
-  `docs/design-principles.md` or another doc under `docs/`.
+- A remark made in passing is often a standing rule. Confirm it, and note it in the working notes' Open questions.
+  Step 11 settles where it goes.
 
 ## Workflow
 
@@ -35,8 +35,10 @@ Throughout:
   ls docs/designs/
   ```
 
-- **Do:** if the feature's folder exists, read its `README.md` and `working-notes.md` before anything else. The
-  checklist says where the work stopped. Continue from there.
+- **Do:** if the feature's folder exists, read its `README.md` before anything else.
+  - If the design has a `tl;dr`, the feature is finished. Don't resume its working notes. To change a decision, go to
+    step 12.
+  - Otherwise, read `working-notes.md` too. The checklist says where the work stopped. Continue from there.
 
 ### 2. Name the feature and set up a branch
 
@@ -146,7 +148,8 @@ Once, after the last part, or before stopping at step 10.
 
 - **Decide:** go through the whole-feature questions in `docs/design-questions.md`, as in step 7: ask about the
   hard-to-undo ones, such as whether it's breaking, and decide and list the rest.
-- **Do:** write the answers in the Overview, with their reasons. Commit and push. Adding them doesn't reopen the
+- **Do:** write the decisions in the Overview, with their reasons. Put the to-dos, such as the docs to change or a
+  name still to settle, in the working notes' checklist. Commit and push. Adding them doesn't reopen the
   overview. If one shows the approach is wrong, go back up as in step 8.
 
 ### 10. Stop when the code is the easier answer
@@ -156,7 +159,7 @@ Hand the user a clear state, and leave building as a separate step.
 - **Do:** bring the working notes' checklist up to date with what's left to build.
 - **Do:** tell the user:
   - what was decided, and what was left open;
-  - the provisional names from step 9. Each needs a decision, or an issue saying when it must be decided;
+  - the names still to settle from step 9. Each needs a decision, or an issue saying when it must be decided;
   - where the work lives: the branch, the worktree's path, and the PR.
 - **Do:** stop at the design. A quick prototype is fine when it answers a question faster. Building is a separate step,
   such as with the `config-option` or `cli-option` skill. Whoever builds keeps the working notes current, puts edge
@@ -170,7 +173,7 @@ feature.
 - **Stop and ask:** wait until the user says the feature is finished.
 - **Do:** follow the guide's "When the feature is finished". Settle or drop each open question and parked detail with
   the user.
-- **Do:** list side remarks that might be standing rules, and let the user pick which go into
+- **Do:** list the standing rules noted in the working notes, and let the user pick which go into
   `docs/design-principles.md` or another doc. A rule that could affect other designs gets its own `docs:` PR.
 - **Check:** start a subagent that is given only the paths of the design, without the working notes, and told not to
   read the code. Ask it to say what was decided, why, and how the decisions fit together, and to list gaps,
@@ -183,7 +186,7 @@ feature.
 - **Check:** `pnpm run lint-ci` and `pnpm run check-spelling` pass. Fix what they find, and run them again until they
   do.
 
-After this, the working notes are no longer updated.
+This PR is the last one to edit the working notes.
 
 ### 12. Change a merged design
 

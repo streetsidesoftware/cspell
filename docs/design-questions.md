@@ -8,11 +8,12 @@ kinds:
 - **[Detail questions](#detail-questions)** shape each part. Work through them part by part, once the overview is
   agreed.
 - **[Whole-feature questions](#whole-feature-questions)** cover the feature as one change. Work through them once,
-  after the last part.
+  after the last part, or before you stop designing to build.
 
 All the overview groups apply to every feature. Most features touch two or three groups of detail questions. Spend time
 on a question when its answer could change the overview or would be hard to undo once it ships. Settle the rest with a
-proposed default, such as "the other options do Y". When checking a small change, note every side effect you find.
+proposed default, such as "the other options do Y", and write it in the working notes. Answers about the code, such as
+which tests cover a part, go there too. When checking a small change, note every side effect you find.
 
 ## Overview questions
 
@@ -37,7 +38,7 @@ Always first.
 
 What cspell already fixes. Every approach has to fit them, and many questions are settled by pointing back at them. At
 the overview level, check the ones that could rule out an approach, rather than assuming them. The rest come up with
-their part. Note the ones that matter next to the decision they shape.
+their part. Note the ones that matter next to the decision they shape, in terms a user knows rather than code names.
 
 - **Config resolution:** config files, `import`, then matching `overrides`, then matching `languageSettings`, then
   in-document directives (see "Config resolution" in the [glossary](./glossary.md)).
@@ -69,7 +70,7 @@ If the feature needs a new principle, agree on it before the decisions that depe
 - **What it writes.** Does it write anything, such as a config file or a dictionary? Who chooses where?
 - **Existing users.** Does it change a default, what gets flagged, or the meaning of an existing option or flag?
 - **Hard to undo.** Which choices become public as soon as it ships: an option's name or shape, a flag, what gets
-  flagged, a published API?
+  flagged, a published API? Name them here. The exact names and shapes are settled with their part.
 
 ## Detail questions
 

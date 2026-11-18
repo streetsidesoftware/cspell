@@ -41,7 +41,7 @@ in the PR as it grows, not in pieces in a chat or an issue.
 
 A small feature can ship its design and code together in one PR, and the code decides the PR's type. When a design is
 worth reviewing before it's built, merge it on its own with a `docs:` PR, so it stays out of the release notes. A
-feature built over several PRs updates its design and working notes in each one. See
+feature built over several PRs updates its working notes in each one, and its design only when a decision changes. See
 [Pull requests](./pull-requests.md).
 
 ## The design
@@ -56,8 +56,8 @@ feature built over several PRs updates its design and working notes in each one.
 ## Overview
 
 <The approach and the whole shape: what a user writes (the config or the command line) and what cspell does. The main
-parts. Each decision the approach rests on, with its reason. After the parts are done, the whole-feature answers, such
-as how it's released.>
+parts. Each decision the approach rests on, with its reason. After the parts are done, the whole-feature decisions,
+such as whether it's breaking.>
 
 ## <Part>
 
@@ -90,8 +90,8 @@ The working notes hold what the design leaves out while the feature is designed 
 Anyone who works on the feature, a person or a coding agent, reads them to pick up where the last one stopped, and
 updates them as they go. Keep them short and current. Git history keeps what changed.
 
-Detail goes here, not in the design. That keeps the design to its decisions, so later changes to the code don't touch
-it.
+Code-level detail, small defaults, and edge cases go here, not in the design. That keeps the design to its decisions,
+so later changes to the code don't touch it.
 
 ```markdown
 # <Feature>: working notes
@@ -107,13 +107,13 @@ source of truth.
 
 - <A side question, a deferred point, or a detail parked until its part comes up, in one line.>
 
-## Details
+## Notes
 
-<Names, where things live, internal steps, and findings, grouped by part.>
+<Names, where things live, internal steps, small defaults, edge cases, and findings, grouped by part.>
 ```
 
-When the feature is finished, stop updating them. Leave them as they are, or delete them if nothing in them helps
-anymore.
+The PR that finishes the feature is the last one to edit them. After it, leave them as they are, or delete them if
+nothing in them helps anymore.
 
 ## Keep security details out
 
@@ -133,7 +133,7 @@ An open checklist item can give one away as easily as a paragraph. Report and di
 A design works at two levels:
 
 - **The overview:** the approach, and the whole shape of the feature.
-- **The details:** how each part works.
+- **The details:** the decisions within each part.
 
 A part is a piece of the feature that can be designed on its own, such as a config option, a CLI flag, or how a setting
 merges across config files. The overview names the parts.
@@ -173,7 +173,7 @@ parts, and each decision the approach rests on, with its reason.
 Read the whole overview as one piece, with whoever reviews the design. It's ready when these are all settled:
 
 - the approach;
-- what users see;
+- what users see: the kind of change and its rough shape. Exact names and shapes come with their part;
 - the parts;
 - the decisions the approach rests on.
 
@@ -198,8 +198,9 @@ details already decided that depend on what changed.
 ### 7. Settle the whole-feature questions
 
 After the last part, or before you stop designing to build, work through the whole-feature questions in the
-[design questions](./design-questions.md) once, such as how the feature is released and which docs change. Write the
-answers in the Overview. They don't reopen it, unless one shows the approach is wrong: then go back up as in step 6.
+[design questions](./design-questions.md) once, such as whether the feature is breaking and which docs change. Write the
+decisions in the Overview. Put the to-dos, such as the docs to change or a name still to settle, in the working notes'
+checklist. They don't reopen the overview, unless one shows the approach is wrong: then go back up as in step 6.
 
 ### 8. Let the code settle the rest
 
@@ -209,23 +210,23 @@ while building goes in the working notes.
 
 ## When the feature is finished
 
-Finish the design in the PR that finishes the feature. This removes the working notes from the design, not the reasons.
+Finish the design in the PR that finishes the feature. This removes working detail from the design, not the reasons.
 
-- Add a `tl;dr` at the top: the choices that matter, in short, plain sentences.
+- Add a `tl;dr` at the top: the choices that matter, in short, plain sentences. It also marks the design as finished.
 - Add a line saying that the code and docs are the source of truth.
 - Keep each decision with its reason.
 - Keep an idea that wasn't chosen only when it's a real lesson that would save the next person from repeating it, and
   write it in the decision's text. A list of rejected ideas reads as a firm ruling, and can stop a later improvement.
 - Move what only restates the code, such as function names and internal steps, to the working notes.
 - Settle or drop each open question in the working notes. Open an issue only for a real problem someone would act on.
-- Finish each other file in the folder the same way, and delete one that no longer adds anything.
+- Finish each part's own file the same way, and delete one that no longer adds anything.
 - Have someone new to the feature read only the design, without the code. They should be able to say what was decided,
-  why, and how the decisions fit together.
+  why, and how the decisions fit together. A missing decision or reason is a gap; a missing edge case isn't.
 
 If the design set a rule that holds beyond this feature, add it to the [design principles](./design-principles.md) or
 the doc under `docs/` where it applies. When it could affect other designs, do that in its own `docs:` PR.
 
-After that, the working notes stop being updated, and nothing is left to do.
+That PR is the last one to edit the working notes. After it, nothing is left to do.
 
 ## Changing a design later
 
@@ -235,8 +236,10 @@ changed. A fix for an edge case changes the code and its tests, not the design.
 - Rewrite the decision in place. Say what showed the old choice was wrong, if that would save the next person from
   repeating it.
 - When the overview changes, check the details that depend on it.
+- Update the `tl;dr` when it summarizes a decision that changed.
 - Delete a part that no longer applies. Git history keeps it.
-- An older design that is a single file moves to a folder, as its `README.md`, when one of its decisions changes.
+- An older design that is a single file moves to a folder, as its `README.md`, when one of its decisions changes. It
+  gets working notes only if the change needs them.
 
 ## Designs and RFCs
 
