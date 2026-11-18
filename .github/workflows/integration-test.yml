@@ -37,10 +37,6 @@ on:
       - '!website/**'
   # Run on demand
   workflow_dispatch:
-    inputs:
-      ref:
-        description: Optional Branch or hash
-        required: false
 
 permissions:
   contents: read
@@ -57,7 +53,7 @@ jobs:
   prepare:
     runs-on: ubuntu-latest
     env:
-      REF_BRANCH: ${{ github.event.inputs.ref || github.ref }}
+      REF_BRANCH: ${{ github.ref }}
     outputs:
       ref: ${{ env.REF_BRANCH }}
       runs_on: ${{ env.RUNS_ON }}
