@@ -26,9 +26,9 @@ Skip it for bug fixes, refactors, dependency updates, and changes whose behavior
 Each feature gets a folder, `docs/designs/<feature>/`, named by a short kebab-case slug, such as
 `ignore-regex-per-language`:
 
-- `README.md` is the design: the why, the overview, and the open questions.
-- `working-notes.md` holds the details and the checklist while the feature is designed and built. See
-  [Working notes](#working-notes).
+- `README.md` is the design: the why, the overview, and the parts.
+- `working-notes.md` holds the details, the checklist, and the open questions while the feature is designed and
+  built. See [Working notes](#working-notes).
 - When a part of the design can be read on its own, it gets its own file, named by a slug, such as `merging.md`. The
   `README.md` links to it.
 
@@ -63,10 +63,6 @@ as how it's released.>
 
 <One section per part of the overview: the decisions that are hard to undo or could change the overview, each with its
 reason.>
-
-## Open questions
-
-- <A side question, a deferred point, or a detail parked until its part comes up, in one line.>
 ```
 
 - Add anything else the reader needs to understand the why, such as who it affects, under Why.
@@ -88,6 +84,7 @@ The working notes hold what the design leaves out while the feature is designed 
 - details tied to the code, such as function, type, and property names, and where things live;
 - the small defaults and edge cases settled along the way;
 - a checklist of what's left to design and build;
+- open questions: side questions, deferred points, and details parked until their part comes up;
 - findings and research that aren't decisions.
 
 Anyone who works on the feature, a person or a coding agent, reads them to pick up where the last one stopped, and
@@ -105,6 +102,10 @@ source of truth.
 ## To do
 
 - [ ] <What's left to design or build, one item per line.>
+
+## Open questions
+
+- <A side question, a deferred point, or a detail parked until its part comes up, in one line.>
 
 ## Details
 
@@ -145,7 +146,8 @@ Each level has two phases:
 
 Finish the overview before starting on the details. A detail decided while the overview is still moving often has to
 be decided again. A design that dives into details early gets lost in them. Until the overview is agreed, names and
-shapes in an example are placeholders. A detail question is parked under Open questions, and comes back with its part.
+shapes in an example are placeholders. A detail question is parked in the working notes' Open questions, and comes
+back with its part.
 
 ### 1. Get to the why
 
@@ -215,8 +217,7 @@ Finish the design in the PR that finishes the feature. This removes the working 
 - Keep an idea that wasn't chosen only when it's a real lesson that would save the next person from repeating it, and
   write it in the decision's text. A list of rejected ideas reads as a firm ruling, and can stop a later improvement.
 - Move what only restates the code, such as function names and internal steps, to the working notes.
-- Settle or drop each open question, and remove the section. Open an issue only for a real problem someone would act
-  on.
+- Settle or drop each open question in the working notes. Open an issue only for a real problem someone would act on.
 - Finish each other file in the folder the same way, and delete one that no longer adds anything.
 - Have someone new to the feature read only the design, without the code. They should be able to say what was decided,
   why, and how the decisions fit together.

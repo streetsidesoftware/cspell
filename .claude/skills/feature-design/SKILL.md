@@ -14,7 +14,7 @@ Throughout:
 - When the level or the phase changes, say so in a line, such as "Overview: exploring approaches" or "Details, merging:
   deciding".
 - At the overview level, names and shapes in an example are placeholders. Say so, and park each detail question under
-  Open questions in a line, even a hard-to-undo one, without asking it. It comes back with its part.
+  the working notes' Open questions in a line, even a hard-to-undo one, without asking it. It comes back with its part.
 - A question with only one reasonable answer, once you look at the code, isn't a decision. Note it and move on.
 - Detail goes in the working notes, not the design: function, type, and property names, where things live, internal
   steps, small defaults, and edge cases. Keep their checklist current.
@@ -58,7 +58,7 @@ Keep the design out of the user's checkout, so it never sits as uncommitted chan
     worktree.
   - Open a draft PR once the design's first commit exists, and tell the user.
   - Push each decision as it's settled. Keep the PR body's status current: the level and part the design is at, with
-    a link to the design's Open questions. Link to the design rather than copying its decisions.
+    a link to the working notes' Open questions. Link to the design rather than copying its decisions.
   - Point the user to the design in the PR, rather than pasting long parts of it in the chat.
 
 ### 3. Get to the why
@@ -99,7 +99,7 @@ answer could change the approach or would be hard to undo. For anything else, pr
     cspell reports. Put your recommendation first, and say why.
   - Check facts before asking, and bring the result.
   - "You decide" is an answer: propose a default, and record it.
-  - The user can defer: note it under Open questions, and come back to it before step 6.
+  - The user can defer: note it under the working notes' Open questions, and come back to it before step 6.
 - **Do:** write the Overview as each decision is settled, with its reason, in place of the approaches explored. Keep a
   rejected approach only when it's a lesson, as the guide's "When the feature is finished" says. Commit and push.
 
