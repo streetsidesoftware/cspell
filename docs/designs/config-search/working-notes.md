@@ -28,7 +28,7 @@ source of truth.
 
 ### Release
 
-The new default is on in a v10 release, as a feature (`feat:`). It's a behavior change that might disrupt some setups,
+The new default ships in a v10 release, as a feature (`feat:`). It's a behavior change that might disrupt some setups,
 and patches should be light. There's an easy enough workaround, so it doesn't need a major version. That makes it an
 exception to "Existing configs keep working" in the [design principles](../../design-principles.md), which counts a
 changed default as breaking.
@@ -96,6 +96,7 @@ interface StopAtLocation {
 - `StopAtLocation` is a new public type in `packages/cspell-lib/api/api.d.ts`.
 - The RPC options (`SpellCheckFileOptionsRPC`) leave out `stopConfigSearchAt` for now. A `URL` can't be sent through a
   message port: structured clone throws `DataCloneError`. It could be added later, as resolved `file:` URL strings.
+  The RPC options extend `SpellCheckFileOptions`, so leaving it out takes an `Omit`.
 
 ### Defaults and edge cases
 

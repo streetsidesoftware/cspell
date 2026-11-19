@@ -2,9 +2,15 @@
 
 ## Why
 
-When `cspell lint` checks a file, it also uses the config file nearest that file, and that config is merged on top of
-the one cspell started with. That's on purpose: a config next to the files knows them best, such as a folder of German
-docs with `language: de` ([#4750](https://github.com/streetsidesoftware/cspell/issues/4750)).
+The `cspell lint` command looks for configs twice:
+
+- **At startup,** it loads one config: the file named with `--config`, or the nearest one found by searching up from
+  the root. The root is where cspell runs, unless `--root` names another folder.
+- **For each file,** it searches from the file's folder upward, and merges the first config it finds on top of the
+  startup config.
+
+The search for each file is on purpose: a config next to the files knows them best, such as a folder of German docs
+with `language: de` ([#4750](https://github.com/streetsidesoftware/cspell/issues/4750)).
 
 Few users are surprised by configs deeper in the project. What surprises them is config files in the current directory
 or above it getting loaded:
@@ -15,23 +21,15 @@ or above it getting loaded:
   config wasn't used for any file.
 - A config file in a parent folder, outside the project, is loaded for files in the project.
 
-Turning off the per-file search (`--no-config-search` or `noConfigSearch`) keeps them out, but it also drops the configs
-users want, such as the German docs folder. The `--stop-config-search-at` flag was meant to limit how far up the
+Disabling the search for each file (`--no-config-search` or `noConfigSearch`) keeps them out, but it also drops the
+configs users want, such as the German docs folder. The `--stop-config-search-at` flag was meant to limit how far up the
 search walks, but it limits only the search at startup ([#7477](https://github.com/streetsidesoftware/cspell/issues/7477)).
 
 ## Overview
 
-A config named on the command line replaces the configs at the root and above it. The root is where cspell runs,
-unless `--root` names another folder. For the files under the named config's own folder, it also replaces the configs
-in that folder and above it. Configs in the folders below still apply. The `--stop-config-search-at` flag lets you
-choose how far up the search looks.
-
-`cspell lint` looks for configs twice:
-
-- **At startup,** it loads one config: the file named with `--config`, or the nearest one found by searching up from
-  the root.
-- **For each file,** it searches from the file's folder upward, and merges the first config it finds on top of the
-  startup config.
+A config named on the command line replaces the configs at the root and above it. For the files under the named
+config's own folder, it also replaces the configs in that folder and above it. Configs in the folders below still
+apply. The `--stop-config-search-at` flag lets you choose how far up the search looks.
 
 ### With `--config`, the search stops at the root and at the named config's folder
 
@@ -80,8 +78,8 @@ files under its folder. Every other file still stops at those, so a file outside
 configs the named config replaces.
 
 The reason: "stop at" reads as "look up to," and the startup search already treats the flag that way. Users need the
-config where they run cspell kept out, which takes a stop that doesn't look in its folder. Naming a config already does
-that, so the flag can stay inclusive.
+config where they run cspell kept out, which takes a stop that doesn't look in its folder: an exclusive stop. Naming a
+config already does that, so the flag can stay inclusive.
 
 It also gives users who want today's behavior a way back. From `pkg/a`, this loads `pkg/a/cspell.json` too:
 
@@ -103,6 +101,26 @@ The startup search still walks up from the root, so running cspell from a subfol
 project's config. The search can't tell that config from one in a parent folder outside the project. Keeping the
 parent's config out still takes `--stop-config-search-at`.
 
+### cspell works out the stops, and cspell-lib takes them
+
+The cspell command-line package works out where each search stops, and passes the result to cspell-lib. It resolves
+the folders given on the command line, and works out the stops that come from naming a config. cspell-lib takes the
+stops as given, and doesn't know about command-line options. A stop it's given is inclusive unless it's marked
+exclusive, so a plain folder means the same everywhere. The search function that cspell uses at startup still accepts
+relative paths, for now.
+
+The reason: input people write, such as a command-line flag, comes in many forms, and cspell is where it arrives. A
+program that calls cspell-lib can pass exact values.
+
+### No config setting or opt-out for now
+
+There's no `stopConfigSearchAt` config setting for now. Most users never set a stop, and on the command line the flag
+covers the cases that need one. A setting ([#7477](https://github.com/streetsidesoftware/cspell/issues/7477)) could be
+added later.
+
+There's also no flag or config setting to disable the new default, for now. One could be added later if someone needs
+exactly the old behavior where `--stop-config-search-at` can't be passed, such as in cspell-action.
+
 ### Existing setups
 
 A setup that names a config, with `--config`, `CSPELL_CONFIG_PATH`, or cspell-action's `config` input, sees a change
@@ -122,22 +140,3 @@ To keep the old behavior:
   replaced config's did. The imported config also applies to files that have a config of their own further down.
 - Pass `--stop-config-search-at` with the folder that holds the replaced config. Configs up to that folder load as
   before. cspell-action has no input for this flag.
-
-There's no flag or config setting to turn the new default off, for now. One could be added later if someone needs
-exactly the old behavior where the flag can't be passed, such as in cspell-action.
-
-### No config setting for now
-
-There's no `stopConfigSearchAt` config setting for now. Most users never set a stop, and on the command line the flag
-covers the cases that need one. A setting ([#7477](https://github.com/streetsidesoftware/cspell/issues/7477)) could be
-added later.
-
-### cspell works out the stops, and cspell-lib takes them
-
-cspell works out where each search stops, and passes the result to cspell-lib. It resolves the folders given on the
-command line, and works out the stops that come from naming a config. cspell-lib takes the stops as given, and doesn't
-know about command-line options. Its startup search still accepts relative paths, for now. A stop it's given is
-inclusive unless it's marked exclusive, so a plain folder means the same everywhere.
-
-The reason: input people write, such as a command-line flag, comes in many forms, and cspell is where it arrives. A
-program that calls cspell-lib can pass exact values.
