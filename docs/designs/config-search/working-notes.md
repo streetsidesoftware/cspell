@@ -19,8 +19,6 @@ source of truth.
 
 ## Open questions
 
-- Does the public `StopSearchAt` type of `searchForConfig` gain `StopAtLocation`, or do exclusive stops reach the
-  per-file search only inside cspell-lib?
 - Matching by real folder: cspell can resolve the stops' real folders at startup, but the folders of each walk come
   from cspell-lib. Which side resolves them?
 
@@ -29,7 +27,9 @@ source of truth.
 ### Release
 
 The new default is on in a v10 release, as a feature (`feat:`). It's a behavior change that might disrupt some setups,
-and patches should be light. There's an easy enough workaround, so it doesn't need a major version.
+and patches should be light. There's an easy enough workaround, so it doesn't need a major version. That makes it an
+exception to "Existing configs keep working" in the [design principles](../../design-principles.md), which counts a
+changed default as breaking.
 
 - The release note says what changes with `--config` and who sees it, and gives the two ways to keep the old
   behavior. It also says that `--stop-config-search-at` now limits the search for each file. An example shows the
@@ -81,6 +81,9 @@ interface StopAtLocation {
   relative paths, and doesn't know about `--config`. It takes a URL without a trailing `/` as a file, and stops at
   that file's folder.
 - The startup search gets the same resolved URLs. `searchForConfig` keeps accepting strings in `StopSearchAt` for now.
+- The public `StopSearchAt` type doesn't change. The startup search never needs an exclusive stop: without `--config`
+  there are none, and with `--config` there's no startup search. Exclusive stops reach the per-file search only inside
+  cspell-lib.
 - `cspell lint` passes the flag's folders as inclusive. With `--config`, it also passes the root and the named config's
   folder as exclusive, except the ones at or below a given stop. The set is worked out once at startup, and the walk
   stops at the first stop it meets. Both kinds go through `stopConfigSearchAt` in the two per-file calls.
@@ -99,6 +102,9 @@ interface StopAtLocation {
 - Imports don't replace the config of their folder. Imports from configs found per file would make results depend on
   the order files are checked, and `import` is for sharing settings.
 - When the stop folder has no config, the walk still stops there. A config further up needs that folder named.
+- A stop below the root limits only the walks that reach it. The startup config is still the base for every file.
+  Keeping it out for the files under the stop would need a base config per stop, and several stops couldn't be given
+  at once.
 - A file outside the root never reaches the root on its walk, so configs above it still load. Left as is.
 
 ### Scenarios
