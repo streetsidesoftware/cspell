@@ -15,9 +15,6 @@ source of truth.
 
 ## Open questions
 
-- The off switch. A `features` setting set to `false`, read from the startup config, or only the stop flag and imports.
-  cspell-action users can't pass the flag. Today's only active feature, `overrideGlobsMatchFilesOnly`, is opt-in
-  (`@default false`), so a feature that's on by default and turned off would be new.
 - `cspell check --config` loads no other configs. After this change, `cspell lint` still merges deeper configs. Keep the
   difference, or align them?
 - How the per-file options in `cspell-lib` carry an exclusive stop. Today `StopSearchAt` has no kind. Two shapes:

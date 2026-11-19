@@ -99,6 +99,9 @@ To keep the old behavior:
 - Pass `--stop-config-search-at` with the folder that holds the replaced config. Configs up to that folder load as
   before. cspell-action has no input for this flag.
 
+There's no setting to turn the new default off, for now. One could be added later if someone needs exactly the old
+behavior where the flag can't be passed.
+
 ### No config setting for now
 
 There's no `stopConfigSearchAt` config setting for now. Most users never set a stop, and the flag covers the cases that
