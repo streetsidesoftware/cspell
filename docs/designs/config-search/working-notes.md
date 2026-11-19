@@ -94,6 +94,8 @@ interface StopAtLocation {
 - An exclusive folder goes in the walk's stop set, and the scan predicate in `ConfigSearch` skips it, so `cspell-io`
   doesn't change. The search cache key includes the kind.
 - `StopAtLocation` is a new public type in `packages/cspell-lib/api/api.d.ts`.
+- The RPC options (`SpellCheckFileOptionsRPC`) leave out `stopConfigSearchAt` for now. A `URL` can't be sent through a
+  message port: structured clone throws `DataCloneError`. It could be added later, as resolved `file:` URL strings.
 
 ### Defaults and edge cases
 
