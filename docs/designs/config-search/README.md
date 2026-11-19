@@ -62,8 +62,8 @@ in the folders below still apply. The rule holds when cspell runs from a subfold
 The named config's folder is a stop too, because a config beside the named one is the one it replaces. It works like
 the root: for the files under that folder, no config in it or above it loads, except the named config. From the top of
 the project, `--config packages/foo/cspell.strict.json` replaces `packages/foo/cspell.json` for the files in
-`packages/foo/`, and `packages/cspell.json` doesn't load for them either. To keep `packages/cspell.json`, import it from
-`cspell.strict.json`, or pass `--stop-config-search-at packages`.
+`packages/foo/`. If there's no `packages/foo/cspell.json`, `packages/cspell.json` doesn't load for them either. To keep
+it, import it from `cspell.strict.json`, or pass `--stop-config-search-at packages`.
 
 ### The root, not where the paths meet
 
@@ -88,8 +88,9 @@ It also gives users who want today's behavior a way back. From `pkg/a`, this loa
 cspell lint --config ../../cspell.ci.json --stop-config-search-at . "*.md"
 ```
 
-For a config further up, they name that folder. So with `--config`, a stop at or above the root brings back the configs
-up to it. A stop below the root narrows the search for the files under it.
+For a config further up, they name that folder. So with `--config`, a stop you give brings configs back when it's at or
+above where a file's search would stop anyway: the root, or the named config's folder for the files under it. A stop
+below that narrows the search.
 
 ### Without `--config`, the default doesn't change
 

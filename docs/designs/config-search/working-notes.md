@@ -7,7 +7,7 @@ source of truth.
 
 ## To do
 
-- [x] Work through the search for each file: which folders a named config replaces, and how the search skips them.
+- [x] Work through the search for each file: which folders a named config replaces, and where the search stops for them.
 - [x] Work through `--stop-config-search-at`: inclusive in both searches, and with `--config`, replacing the default
       stops at or below its folder.
 - [x] Settle the rest of the whole-feature questions in the [design questions](../../design-questions.md).
@@ -161,5 +161,8 @@ merged. "A + B" means B is merged on top of A.
     - Today: both files get `cspell.strict.json` + `packages/cspell.json`.
     - Proposed: `a.md` gets `cspell.strict.json`. `b.md` is unchanged.
     - Proposed with `--stop-config-search-at packages`: same as today.
+    - With `packages/foo/cspell.json` too, today `a.md` gets `cspell.strict.json` + `packages/foo/cspell.json`.
+      Proposed, it gets `cspell.strict.json`. With `--stop-config-search-at packages`, it's the same as today: the walk
+      finds `packages/foo/cspell.json` first, so only an import brings in `packages/cspell.json`.
 
 In scenario 4, `cspell.json` sits in the parent folder of `proj`, outside the project.
