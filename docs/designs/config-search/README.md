@@ -66,7 +66,9 @@ they don't meet at all, such as on two drives, there is no meeting point.
 ### The stop flag is inclusive
 
 With `--stop-config-search-at <dir>`, cspell looks for configs up to and including `<dir>`, and never above it. That
-holds in both searches. With `--config`, the flag replaces the default above.
+holds in both searches. With `--config`, a stop you give replaces the default for the files under its folder. Every
+other file keeps the default, so a file outside the given stops still doesn't load the configs the named config
+replaces.
 
 The reason: "stop at" reads as "look up to," and the startup search already treats the flag that way. The part users
 need to be exclusive, keeping out the config where they run cspell, comes from `--config` itself, so the flag doesn't

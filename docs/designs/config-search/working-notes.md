@@ -8,7 +8,8 @@ source of truth.
 ## To do
 
 - [ ] Work through the search for each file: which folders a named config replaces, and how the search skips them.
-- [ ] Work through `--stop-config-search-at`: inclusive in both searches, and replacing the default with `--config`.
+- [ ] Work through `--stop-config-search-at`: inclusive in both searches, and with `--config`, replacing the default
+      stops at or below its folder.
 - [ ] Match stops by their real folder, so different spellings of the same folder match.
 - [ ] Settle the rest of the whole-feature questions in the [design questions](../../design-questions.md).
 - [ ] Update the docs: the overrides page, the "Checking Each File" section of the globs page, and the flag's help text.
@@ -57,8 +58,11 @@ interface StopAtLocation {
 - A plain URL or string is inclusive, and so is a `StopAtLocation` without `exclusive: true`. "Inclusive unless marked"
   is one rule for both forms.
 - When `exclusive` is `true`, the search stops at that folder without looking in it.
-- `cspell lint` passes the flag's folders as inclusive. With `--config` and no flag, it passes the root and the named
-  config's folder as exclusive. Both go through `stopConfigSearchAt` in the two per-file calls.
+- `cspell lint` passes the flag's folders as inclusive. With `--config`, it also passes the root and the named config's
+  folder as exclusive, except the ones at or below a given stop. The set is worked out once at startup, and the walk
+  stops at the first stop it meets. Both kinds go through `stopConfigSearchAt` in the two per-file calls.
+- The flag can be given more than once (`collect` in `commandLint.ts`), so a file may sit under none of the given stops.
+  It keeps the default.
 - An exclusive folder goes in the walk's stop set, and the scan predicate in `ConfigSearch` skips it, so `cspell-io`
   doesn't change. The search cache key includes the kind.
 - `StopAtLocation` is a new public type in `packages/cspell-lib/api/api.d.ts`.
@@ -124,5 +128,10 @@ merged. "A + B" means B is merged on top of A.
 12. No config search. `cspell.json`, `cspell.custom.json`, `src/a.md`. From `.`,
     `cspell --config cspell.custom.json --no-config-search "**/*.md"`.
     - Today and proposed: `cspell.custom.json`.
+13. A stop below the root. `cspell.json`, `cspell.ci.json`, `packages/a/cspell.json`, `packages/a/x.md`, `src/x.md`.
+    From `.`, `cspell --config cspell.ci.json --stop-config-search-at packages/a "**/*.md"`.
+    - Today: `packages/a/x.md` gets `cspell.ci.json` + `packages/a/cspell.json`. `src/x.md` gets `cspell.ci.json` +
+      `cspell.json`.
+    - Proposed: `packages/a/x.md` is unchanged. `src/x.md` gets `cspell.ci.json`.
 
 In scenario 4, `cspell.json` sits in the parent folder of `proj`, outside the project.
