@@ -15,9 +15,7 @@ source of truth.
 
 ## Open questions
 
-- How the per-file options in `cspell-lib` carry an exclusive stop. Today `StopSearchAt` has no kind. Two shapes:
-  - a stop with a kind, inclusive or exclusive;
-  - a map from a folder to the config already loaded for it, which the walk returns instead of scanning the folder.
+- None right now.
 
 ## Notes
 
@@ -43,6 +41,27 @@ and patches should be light. There's an easy enough workaround, so it doesn't ne
 - Draft PR [#9640](https://github.com/streetsidesoftware/cspell/pull/9640) makes `--stop-config-search-at` apply to the
   search for each file, inclusive, and keys the search cache by the stop set. It adds `stopConfigSearchAt` to
   `DocumentValidatorOptions` and `SpellCheckFileOptions`, both public.
+
+### Exclusive stops
+
+`StopSearchAt` also accepts a `StopAtLocation`, alone or in the array:
+
+```ts
+interface StopAtLocation {
+  url: URL;
+  exclusive?: boolean;
+}
+```
+
+- A plain URL or string is inclusive, and so is a `StopAtLocation` without `exclusive: true`. "Inclusive unless marked"
+  is one rule for both forms.
+- When `exclusive` is `true`, the search stops at that folder without looking in it.
+- `cspell lint` passes the flag's folders as inclusive. With `--config` and no flag, it passes the root and the named
+  config's folder as exclusive. Both go through `stopConfigSearchAt` in the two per-file calls.
+- An exclusive folder goes in the walk's stop set, and the scan predicate in `ConfigSearch` skips it, so `cspell-io`
+  doesn't change. The search cache key includes the kind.
+- `StopAtLocation` is a new public type in `packages/cspell-lib/api/api.d.ts`.
+- PR #9640 can merge as it is. Its field keeps the `StopSearchAt` type, and the wider type comes with the feature PR.
 
 ### Defaults and edge cases
 
