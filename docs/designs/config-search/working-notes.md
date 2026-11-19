@@ -15,8 +15,6 @@ source of truth.
 
 ## Open questions
 
-- `cspell check --config` loads no other configs. After this change, `cspell lint` still merges deeper configs. Keep the
-  difference, or align them?
 - How the per-file options in `cspell-lib` carry an exclusive stop. Today `StopSearchAt` has no kind. Two shapes:
   - a stop with a kind, inclusive or exclusive;
   - a map from a folder to the config already loaded for it, which the walk returns instead of scanning the folder.
@@ -35,6 +33,9 @@ and patches should be light. There's an easy enough workaround, so it doesn't ne
 - The search for each file is `searchForDocumentConfig` in
   `packages/cspell-lib/src/lib/textValidation/docValidator.ts`. `cspell check` passes the named config as
   `configFile`, which replaces this search. `cspell lint` doesn't.
+- `cspell check` uses one config per file: the named one, or the nearest one found from the file. It never merges a
+  startup config with a deeper one, so it differs from `cspell lint` with and without `--config`. It stays out of this
+  change.
 - The walk is `findUpFromUrl` in `packages/cspell-io/src/VirtualFS/findUpFromUrl.ts`. Its stops are inclusive: a folder
   is searched before the stop test.
 - `DirConfigScanner` in `configSearch.ts` returns the first file in the fixed `searchPlaces` order from
