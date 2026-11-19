@@ -86,13 +86,10 @@ The startup search still walks up from the root, so running cspell from a subfol
 project's config. The default can't tell that config from one in a parent folder outside the project, so keeping that
 one out still takes `--stop-config-search-at`.
 
-### A bug fix in v10
+### On in v10
 
-The new default ships in a v10 release as a bug fix, not as a breaking change for v11. The help text for `--config`
-says "Configuration file to use," and users read it that way
-([#4750](https://github.com/streetsidesoftware/cspell/issues/4750)). Naming the config the search would have found gives
-the same result as before. Results change only when the named config is a different file, and a config in the root or
-above holds settings the user needs.
+The new default is on in a v10 release, as a feature (`feat:`). It's a behavior change that might disrupt some setups,
+and patches should be light. There's an easy enough workaround, so it doesn't need a major version.
 
 ### No config setting for now
 
