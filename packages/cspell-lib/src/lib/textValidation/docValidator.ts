@@ -9,7 +9,6 @@ import type {
     ParsedText,
     Parser,
     ParseResult,
-    PnPSettings,
 } from '@cspell/cspell-types';
 import { IssueType } from '@cspell/cspell-types';
 import { toFilePathOrHref, toFileURL } from '@cspell/url';
@@ -26,7 +25,7 @@ import type {
     CSpellSettingsInternal,
     CSpellSettingsInternalFinalized,
     ImportFileRefWithError,
-    StopSearchAt,
+    StopAtLocation,
 } from '../Settings/index.js';
 import {
     extractImportErrors,
@@ -35,7 +34,7 @@ import {
     mergeSettings,
     resolveConfigFileImports,
     resolveSettingsImports,
-    searchForConfig,
+    searchForConfigWithResolvedStops,
 } from '../Settings/index.js';
 import type { DirectiveIssue } from '../Settings/InDocSettings.js';
 import { validateInDocumentSettings } from '../Settings/InDocSettings.js';
@@ -83,11 +82,19 @@ export interface DocumentValidatorOptions extends ValidateTextOptions {
     noConfigSearch?: boolean;
 
     /**
-     * Directories at which to stop searching for a configuration file.
-     * The search starts in the document's directory and walks up toward the root.
-     * A configuration file in a stop directory is still found.
+     * Directories where the search for the document's configuration file stops.
+     *
+     * The search starts in the document's directory and moves up one directory at a time, up to the file system root.
+     * It stops sooner at the first stop directory it reaches:
+     * - A `URL`, or a {@link StopAtLocation} without `exclusive`, is inclusive: a configuration file in that directory
+     *   is still found.
+     * - A {@link StopAtLocation} with `exclusive: true` stops without looking in that directory.
+     *
+     * A URL that doesn't end in `/` is taken as a file, and the search stops at its directory.
+     *
+     * It has no effect when `configFile` is set, or when `noConfigSearch` disables the search.
      */
-    stopConfigSearchAt?: StopSearchAt;
+    stopConfigSearchAt?: readonly (URL | StopAtLocation)[] | undefined;
 
     /**
      * If `settings: CSpellUserSettings` contains imports, they will be resolved using this path.
@@ -200,7 +207,7 @@ export class DocumentValidator {
               ? timePromise(
                     this.perfTiming,
                     '__searchForDocumentConfig',
-                    searchForDocumentConfig(this._document, settings, settings, options.stopConfigSearchAt),
+                    searchForDocumentConfig(this._document, settings, options.stopConfigSearchAt),
                 )
               : undefined;
         if (pLocalConfig) {
@@ -668,18 +675,19 @@ function sanitizeSuggestion(sug: WordSuggestion): ExtendedSuggestion {
     return { word };
 }
 
+/**
+ * @param settings - the settings to fall back on, and the PnP settings for the search.
+ */
 async function searchForDocumentConfig(
     document: TextDocumentRef,
-    defaultConfig: CSpellSettingsWithSourceTrace,
-    pnpSettings: PnPSettings,
-    stopSearchAt: StopSearchAt,
+    settings: CSpellSettingsWithSourceTrace,
+    stopSearchAt: readonly (URL | StopAtLocation)[] | undefined,
 ): Promise<CSpellSettingsWithSourceTrace> {
     const url = documentUriToURL(document.uri);
-    const { usePnP, pnpFiles } = pnpSettings;
     try {
-        return await searchForConfig(url, { usePnP, pnpFiles, stopSearchAt }).then((s) => s || defaultConfig);
+        return await searchForConfigWithResolvedStops(url, stopSearchAt, settings).then((s) => s || settings);
     } catch (e) {
-        if (url.protocol !== 'file:') return defaultConfig;
+        if (url.protocol !== 'file:') return settings;
         throw e;
     }
 }
@@ -745,7 +753,7 @@ export async function shouldCheckDocument(
         const pLocalConfig = options.configFile
             ? loadConfig(options.configFile, settings)
             : useSearchForConfig
-              ? searchForDocumentConfig(doc, settings, settings, options.stopConfigSearchAt)
+              ? searchForDocumentConfig(doc, settings, options.stopConfigSearchAt)
               : undefined;
 
         const localConfig = (await catchPromiseError(pLocalConfig, addPossibleError)) || {};

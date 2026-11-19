@@ -10,7 +10,7 @@ import { createTextDocument } from './Models/TextDocument.js';
 import type { ValidationIssueRPC } from './Models/ValidationIssue.js';
 import { toValidationIssueRPC } from './Models/ValidationIssue.js';
 import { createPerfTimer } from './perf/index.js';
-import type { ImportFileRefWithError, StopSearchAt } from './Settings/index.js';
+import type { ImportFileRefWithError } from './Settings/index.js';
 import { determineTextDocumentSettings } from './textValidation/determineTextDocumentSettings.js';
 import type { DocumentValidatorOptions } from './textValidation/index.js';
 import { DocumentValidator } from './textValidation/index.js';
@@ -19,7 +19,11 @@ import type { Uri } from './util/IUri.js';
 import { toUri } from './util/Uri.js';
 import type { ValidateTextOptions, ValidationIssue } from './validator.js';
 
-export interface SpellCheckFileOptions extends ValidateTextOptions, Pick<CSpellUserSettings, 'unknownWords'> {
+export interface SpellCheckFileOptions
+    extends
+        ValidateTextOptions,
+        Pick<CSpellUserSettings, 'unknownWords'>,
+        Pick<DocumentValidatorOptions, 'stopConfigSearchAt'> {
     /**
      * Optional path to a configuration file.
      * If given, it will be used instead of searching for a configuration file.
@@ -40,18 +44,12 @@ export interface SpellCheckFileOptions extends ValidateTextOptions, Pick<CSpellU
      */
     noConfigSearch?: boolean;
     /**
-     * Directories at which to stop searching for a configuration file.
-     * The search starts in the document's directory and walks up toward the root.
-     * A configuration file in a stop directory is still found.
-     */
-    stopConfigSearchAt?: StopSearchAt;
-    /**
      * If true, the document will be checked even if it would normally be excluded.
      */
     forceCheck?: boolean;
 }
 
-export interface SpellCheckFileOptionsRPC extends SpellCheckFileOptions {
+export interface SpellCheckFileOptionsRPC extends Omit<SpellCheckFileOptions, 'stopConfigSearchAt'> {
     measurePerf?: boolean;
 }
 

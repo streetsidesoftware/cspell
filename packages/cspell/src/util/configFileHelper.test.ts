@@ -1,4 +1,5 @@
 import * as path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 import { searchForConfig } from 'cspell-lib';
 import { afterEach, describe, expect, test, vi } from 'vitest';
@@ -35,6 +36,7 @@ describe('Config File Helper', () => {
         const result = await readConfig(undefined, environmentSamples);
 
         expect(result.source).toBe(customConfig);
+        expect(result.namedConfigUrl).toEqual(pathToFileURL(customConfig));
     });
 
     test('falls back to CSPELL_DEFAULT_CONFIG_PATH when no config is set', async () => {
@@ -47,6 +49,7 @@ describe('Config File Helper', () => {
         const result = await readConfig(undefined, environmentSamples);
 
         expect(result.source).toBe(defaultConfig);
+        expect(result.namedConfigUrl).toBeUndefined();
     });
 
     test('throws an error when the specified config file does not exist', async () => {

@@ -9,6 +9,7 @@ import type {
     ImportFileRefWithError,
     Issue,
     SpellCheckFileResult,
+    StopAtLocation,
     TextDocumentOffset,
     ValidationIssue,
 } from 'cspell-lib';
@@ -42,6 +43,10 @@ export interface ProcessFileOptions {
     readonly configErrors: Set<string>;
     readonly chalk: ChalkInstance;
     readonly userSettings: CSpellSettingsWithSourceTrace;
+    /**
+     * Where the search for each file's config stops.
+     */
+    readonly stopConfigSearchAt: readonly (URL | StopAtLocation)[] | undefined;
 }
 
 export async function processFile(
@@ -53,7 +58,7 @@ export async function processFile(
     if (prefetch?.fileResult) return prefetch.fileResult;
     const { filename } = file;
 
-    const { cfg, configInfo, userSettings } = processFileOptions;
+    const { cfg, configInfo, userSettings, stopConfigSearchAt } = processFileOptions;
 
     const getElapsedTimeMs = getTimeMeasurer();
     const reportIssueOptions = prefetch?.reportIssueOptions;
@@ -97,13 +102,7 @@ export async function processFile(
 
     let spellResult: Partial<SpellCheckFileResult> = {};
     try {
-        const {
-            showSuggestions: generateSuggestions,
-            validateDirectives,
-            skipValidation,
-            forceCheck,
-            stopConfigSearchAt,
-        } = cfg.options;
+        const { showSuggestions: generateSuggestions, validateDirectives, skipValidation, forceCheck } = cfg.options;
         const numSuggestions = configInfo.config.numSuggestions ?? 5;
         const validateOptions = util.clean({
             generateSuggestions,

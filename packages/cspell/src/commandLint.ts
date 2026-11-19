@@ -71,7 +71,7 @@ export function commandLint(prog: Command, opts: CommandOptions): Command {
         .description('Check spelling')
         .option(
             '-c, --config <cspell.json>',
-            'Configuration file to use.  By default cspell looks for cspell.json in the current directory.',
+            'Configuration file to use. It replaces the configuration files in the root and above it, and, for the files under its folder, those in its folder and above it. Configuration files deeper in the project still apply. By default cspell looks for cspell.json in the current directory.',
         )
         .addOption(crOpt('--config-search', 'Allow searching for configuration files.', undefined).hideHelp())
         .option(
@@ -80,7 +80,7 @@ export function commandLint(prog: Command, opts: CommandOptions): Command {
         )
         .option(
             '--stop-config-search-at <dir>',
-            'Specify a directory at which to stop searching for configuration files when walking up from the files being checked. Useful for limiting config inheritance.',
+            "Stop the search for configuration files at <dir>, after looking in it. With --config, it takes the place of the root and the configuration file's folder as stopping points for the files under <dir>. Can be used more than once.",
             collect,
         )
         .option(

@@ -1,0 +1,1 @@
+rootword ciword packagesword strictword nestedword

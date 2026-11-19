@@ -20,6 +20,7 @@ export type {
     SpellCheckFileResult,
     SpellingDictionary,
     SpellingDictionaryCollection,
+    StopAtLocation,
     SuggestedWord,
     SuggestionCollector,
     SuggestionOptions,

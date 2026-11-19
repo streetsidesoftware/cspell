@@ -33,6 +33,7 @@ import { LintReporter } from '../reporters/index.js';
 import { calcCacheSettings } from '../util/cache/index.js';
 import type { ConfigInfo } from '../util/configFileHelper.js';
 import { readConfig } from '../util/configFileHelper.js';
+import { calcFileConfigSearchStops, resolveStopFolders } from '../util/configSearchStops.js';
 import { ApplicationError, CheckFailed, toApplicationError } from '../util/errors.js';
 import { findFiles, isFile, isNotDir, readFileListFiles, relativeToCwd, resolveFilename } from '../util/fileHelper.js';
 import type { GlobOptions } from '../util/glob.js';
@@ -98,9 +99,15 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             setEnvironmentVariable(ENV_CSPELL_GLOB_ROOT, cfg.root);
         }
 
-        const configInfo: ConfigInfo = await readConfig(cfg.configFile, cfg.root, cfg.options.stopConfigSearchAt);
+        const givenStops = resolveStopFolders(cfg.options.stopConfigSearchAt);
+        const configInfo: ConfigInfo = await readConfig(cfg.configFile, cfg.root, givenStops);
+        const stopConfigSearchAt = calcFileConfigSearchStops(
+            givenStops,
+            toFileDirURL(cfg.root),
+            configInfo.namedConfigUrl,
+        );
 
-        const processFileOptions = getProcessFileOptions(configInfo);
+        const processFileOptions = getProcessFileOptions(configInfo, stopConfigSearchAt);
 
         if (cfg.options.defaultConfiguration !== undefined) {
             configInfo.config.loadDefaultConfiguration = cfg.options.defaultConfiguration;
@@ -157,6 +164,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
                 userSettings: configInfo.config,
                 lintReporter: reporter,
                 cacheSettings,
+                stopConfigSearchAt,
                 symlinks,
                 followSymlinks: filesToCheck.followSymlinks,
             };
@@ -197,7 +205,10 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         );
     }
 
-    function getProcessFileOptions(configInfo: ConfigInfo): ProcessFileOptions {
+    function getProcessFileOptions(
+        configInfo: ConfigInfo,
+        stopConfigSearchAt: ProcessFileOptions['stopConfigSearchAt'],
+    ): ProcessFileOptions {
         const processFileOptionsGeneral: ProcessFileOptions = {
             chalk,
             configInfo,
@@ -206,6 +217,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             useColor,
             configErrors,
             userSettings: configInfo.config,
+            stopConfigSearchAt,
         };
         return processFileOptionsGeneral;
     }

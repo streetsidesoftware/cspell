@@ -12,15 +12,13 @@ source of truth.
       stops at or below its folder.
 - [x] Settle the rest of the whole-feature questions in the [design questions](../../design-questions.md).
 - [ ] Match stops by their real folder, so different spellings of the same folder match.
-- [ ] Update the docs: the overrides page, the "Checking Each File" section of the globs page, and the help text of
+- [x] Update the docs: the overrides page, the "Checking Each File" section of the globs page, and the help text of
       `--config` and `--stop-config-search-at`. The help text regenerates the `--help` snapshots, the cspell README,
       and the website's help page.
-- [ ] Add app tests for the scenarios below.
+- [x] Add app tests for the scenarios below.
 
 ## Open questions
 
-- The per-file option's type: it takes URLs and `StopAtLocation`s but no strings, so it can't be `StopSearchAt`. Does
-  it get a name of its own, or is it written inline on both interfaces?
 - Matching by real folder: cspell can resolve the stops' real folders at startup, but the folders of each walk come
   from cspell-lib. Which side resolves them?
 
@@ -37,8 +35,9 @@ changed default as breaking.
   behavior. It also says that `--stop-config-search-at` now limits the search for each file. An example shows the
   configs one command loads, before and after.
 - PR #9640 isn't merged on its own. Its per-file stop is part of the feature PR.
-- No name is provisional, except possibly the per-file option's type (see Open questions). There's no new config
-  option or CLI flag, and `StopAtLocation` is settled.
+- No name is provisional. There's no new config option or CLI flag, and `StopAtLocation` is settled. The per-file
+  option's type has no name of its own: it's written once on `DocumentValidatorOptions`, and `SpellCheckFileOptions`
+  picks it from there.
 - The generated Properties page doesn't change. cspell-action's `config` input text still holds.
 
 ### Today

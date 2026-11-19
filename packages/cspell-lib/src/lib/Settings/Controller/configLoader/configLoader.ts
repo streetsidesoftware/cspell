@@ -40,6 +40,7 @@ import { ImportError } from '../ImportError.js';
 import type { LoaderResult } from '../pnpLoader.js';
 import { pnpLoader } from '../pnpLoader.js';
 import { searchPlaces } from './configLocations.js';
+import type { StopAtLocation } from './configSearch.js';
 import { ConfigSearch } from './configSearch.js';
 import { configErrorToRawSettings, configToRawSettings } from './configToRawSettings.js';
 import { defaultSettings } from './defaultSettings.js';
@@ -231,7 +232,7 @@ export class ConfigLoader implements IConfigLoader {
     protected globalSettings: CSpellSettingsI | undefined;
     protected cspellConfigFileReaderWriter: CSpellConfigFileReaderWriter;
     protected configSearch: ConfigSearch;
-    protected stopSearchAtCache: WeakMap<readonly (URL | string)[], URL[]> = new WeakMap();
+    protected stopSearchAtCache: WeakMap<SearchForConfigFileOptions, URL[] | undefined> = new WeakMap();
 
     protected toDispose: { dispose: () => void }[] = [];
 
@@ -273,7 +274,7 @@ export class ConfigLoader implements IConfigLoader {
 
     async searchForConfigFileLocation(
         searchFrom: URL | string | undefined,
-        stopSearchAt?: URL[] | undefined,
+        stopSearchAt?: readonly (URL | StopAtLocation)[] | undefined,
     ): Promise<URL | undefined> {
         const searchFromURL = (await this.#normalizeDirURL(searchFrom)) || cwdURL();
         return this.configSearch.searchForConfig(searchFromURL, stopSearchAt);
@@ -281,7 +282,7 @@ export class ConfigLoader implements IConfigLoader {
 
     async searchForConfigFile(
         searchFrom: URL | string | undefined,
-        stopSearchAt?: URL[],
+        stopSearchAt?: readonly (URL | StopAtLocation)[],
     ): Promise<CSpellConfigFile | CSpellConfigFileWithErrors | undefined> {
         const location = await this.searchForConfigFileLocation(searchFrom, stopSearchAt);
         if (!location) return undefined;
@@ -303,12 +304,23 @@ export class ConfigLoader implements IConfigLoader {
         options?: SearchForConfigOptions,
     ): Promise<CSpellSettingsI | undefined> {
         const stopAt = await this.#extractStopSearchAtURLs(options);
-        const configFile = await this.searchForConfigFile(searchFrom, stopAt);
+        return this.searchForConfigWithResolvedStops(searchFrom, stopAt, options);
+    }
+
+    /**
+     * Like `searchForConfig`, but the stops are already resolved, and some may be exclusive.
+     */
+    async searchForConfigWithResolvedStops(
+        searchFrom: URL | string | undefined,
+        stopSearchAt: readonly (URL | StopAtLocation)[] | undefined,
+        pnpSettings: PnPSettingsOptional | undefined,
+    ): Promise<CSpellSettingsI | undefined> {
+        const configFile = await this.searchForConfigFile(searchFrom, stopSearchAt);
         if (!configFile) return undefined;
         if (configFile instanceof CSpellConfigFileWithErrors) {
             return toInternalSettings(configFile.settings);
         }
-        return this.mergeConfigFileWithImports(configFile, options && normalizePnPSettings(options));
+        return this.mergeConfigFileWithImports(configFile, pnpSettings);
     }
 
     public getGlobalSettings(): CSpellSettingsI {
@@ -668,16 +680,16 @@ export class ConfigLoader implements IConfigLoader {
     }
 
     async #extractStopSearchAtURLs(options: SearchForConfigOptions | undefined): Promise<URL[] | undefined> {
-        const stopSearchAt = options?.stopSearchAt;
-        if (!stopSearchAt) return undefined;
+        if (!options?.stopSearchAt) return undefined;
 
-        const rawStops = Array.isArray(stopSearchAt) ? stopSearchAt : [stopSearchAt];
-        const cached = this.stopSearchAtCache.get(rawStops);
-        if (cached) return cached;
+        if (this.stopSearchAtCache.has(options)) {
+            return this.stopSearchAtCache.get(options);
+        }
 
+        const rawStops = Array.isArray(options.stopSearchAt) ? options.stopSearchAt : [options.stopSearchAt];
         const stopURLs = await Promise.all(rawStops.map((s) => this.#normalizeDirURL(s)));
 
-        this.stopSearchAtCache.set(rawStops, stopURLs);
+        this.stopSearchAtCache.set(options, stopURLs);
         return stopURLs;
     }
 

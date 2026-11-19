@@ -32,8 +32,19 @@ describe('calcOptionsKey', () => {
         ${{ showSuggestions: false }}                           | ${'{"showSuggestions":false}'}
         ${{ validateDirectives: true }}                         | ${'{"validateDirectives":true}'}
         ${{ validateDirectives: true, languageId: 'markdown' }} | ${'{"languageId":"markdown","validateDirectives":true}'}
+        ${{ stopConfigSearchAt: [] }}                           | ${undefined}
+        ${{ stopConfigSearchAt: ['.'] }}                        | ${'{"stopConfigSearchAt":["."]}'}
+        ${{ stopConfigSearchAt: ['src', '..'] }}                | ${'{"stopConfigSearchAt":["..","src"]}'}
     `('calcOptionsKey $options', ({ options, expected }) => {
-        expect(calcOptionsKey(options)).toBe(expected);
+        expect(calcOptionsKey(options, process.cwd())).toBe(expected);
+    });
+
+    test('calcOptionsKey gives one key for each way to write the stop folder', () => {
+        const root = process.cwd();
+        const keys = ['.', './', root, root + path.sep].map((folder) =>
+            calcOptionsKey({ stopConfigSearchAt: [folder] }, root),
+        );
+        expect(new Set(keys)).toEqual(new Set(['{"stopConfigSearchAt":["."]}']));
     });
 
     test('calcCacheSettings includes the options only when set', async () => {

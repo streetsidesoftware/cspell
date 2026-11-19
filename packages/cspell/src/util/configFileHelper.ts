@@ -9,6 +9,10 @@ import { filenameToUrl } from './fileHelper.js';
 export interface ConfigInfo {
     source: string;
     config: CSpellUserSettings;
+    /**
+     * The config named with `--config` or `CSPELL_CONFIG_PATH`.
+     */
+    namedConfigUrl?: URL | undefined;
 }
 
 export interface FileConfigInfo {
@@ -21,13 +25,13 @@ export interface FileConfigInfo {
 export async function readConfig(
     configFile: string | CSpellConfigFile | undefined,
     root: string | undefined,
-    stopConfigSearchAt?: (URL | string)[] | undefined,
+    stopConfigSearchAt?: URL[] | undefined,
 ): Promise<ConfigInfo> {
     configFile ??= getEnvironmentVariable(environmentKeys.CSPELL_CONFIG_PATH);
 
     if (configFile) {
         const cfgFile = typeof configFile === 'string' ? await readConfigHandleError(configFile) : configFile;
-        return configFileToConfigInfo(cfgFile);
+        return { ...(await configFileToConfigInfo(cfgFile)), namedConfigUrl: cfgFile.url };
     }
     const config = await cspell.searchForConfig(root, { stopSearchAt: stopConfigSearchAt });
 

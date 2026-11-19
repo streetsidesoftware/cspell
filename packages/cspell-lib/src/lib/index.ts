@@ -28,6 +28,7 @@ export type {
     DictionaryReferenceCollection,
     ICSpellConfigFile,
     ImportFileRefWithError,
+    StopAtLocation,
 } from './Settings/index.js';
 export {
     calcOverrideSettings,

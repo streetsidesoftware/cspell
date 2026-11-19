@@ -419,6 +419,30 @@ describe('Linter File Caching', () => {
         }
     });
 
+    test('cached results follow the stop folders', async () => {
+        const reporter = new InMemoryReporter();
+        const cacheLocation = tempLocation('.cspellcache-stops');
+        await fs.rm(cacheLocation, { recursive: true }).catch(() => undefined);
+        const root = path.join(searchRoot, 'stop-above', 'project');
+        const stop: LinterCliOptions = { stopConfigSearchAt: [root] };
+
+        const runs: [LinterCliOptions, Partial<RunResult>][] = [
+            [{}, { cachedFiles: 0, issues: 0 }],
+            [{}, { cachedFiles: 1, issues: 0 }],
+            [stop, { cachedFiles: 0, issues: 1 }],
+            [stop, { cachedFiles: 1, issues: 1 }],
+            [{}, { cachedFiles: 0, issues: 0 }],
+        ];
+
+        let r = 0;
+        for (const [options, expected] of runs) {
+            ++r;
+            const result = await App.lint(['notes.md'], { ...WithCache, ...options, cacheLocation, root }, reporter);
+            expect(reporter.errors).toEqual([]);
+            expect(result, `run #${r} ${JSON.stringify(options)}`).toEqual(oc({ files: 1, ...expected }));
+        }
+    });
+
     test('cached issues are reported at the folder the cache was moved to', async () => {
         const dirA = tempLocation('a');
         const dirB = tempLocation('b');

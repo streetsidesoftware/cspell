@@ -3,6 +3,7 @@ import { opMap, pipe } from '@cspell/cspell-pipe/sync';
 import type { CSpellSettings, CSpellSettingsWithSourceTrace, RunResult } from '@cspell/cspell-types';
 import { toFileDirURL } from '@cspell/url';
 import type { ChalkInstance } from 'chalk';
+import type { StopAtLocation } from 'cspell-lib';
 import { isIgnoredByPresets, shouldCheckDocument } from 'cspell-lib';
 
 import type { LintFileReporter, LintFileResult } from '../reporters/LintFileResult.js';
@@ -39,7 +40,7 @@ interface PrefetchConfig {
     readonly rootUrl: URL;
     readonly maxFileSize: LintRequest['maxFileSize'];
     readonly forceCheck: boolean;
-    readonly stopConfigSearchAt: string[] | undefined;
+    readonly stopConfigSearchAt: readonly (URL | StopAtLocation)[] | undefined;
     readonly symlinks: SymlinkChecker;
     readonly followSymlinks: boolean;
     readonly verbose: boolean;
@@ -118,6 +119,10 @@ export interface ProcessFilesOptions {
     readonly chalk: ChalkInstance;
     readonly userSettings: CSpellSettingsWithSourceTrace;
     readonly cacheSettings: CreateCacheSettings;
+    /**
+     * Where the search for each file's config stops.
+     */
+    readonly stopConfigSearchAt: readonly (URL | StopAtLocation)[] | undefined;
     readonly symlinks?: SymlinkChecker | undefined;
     /**
      * Read files referenced by symbolic links.
@@ -138,7 +143,7 @@ export async function processFiles(
         rootUrl: toFileDirURL(options.cfg.root),
         maxFileSize: options.cfg.maxFileSize,
         forceCheck: !!options.cfg.options.forceCheck,
-        stopConfigSearchAt: options.cfg.options.stopConfigSearchAt,
+        stopConfigSearchAt: options.stopConfigSearchAt,
         symlinks: options.symlinks ?? createSymlinkChecker(options.cfg.root),
         followSymlinks: !!options.followSymlinks,
         verbose: options.verboseLevel > 0,
@@ -157,6 +162,7 @@ export async function processFiles(
         // We could use the cli settings here but it is much slower.
         // userSettings: cfg.cspellSettingsFromCliOptions,
         userSettings: options.configInfo.config,
+        stopConfigSearchAt: options.stopConfigSearchAt,
     };
 
     function* prefetchFiles(files: FileToProcess[]): Iterable<PrefetchFileResult> {

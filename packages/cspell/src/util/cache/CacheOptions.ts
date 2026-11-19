@@ -47,4 +47,5 @@ export interface CacheKeyOptions {
     report?: string | undefined;
     showSuggestions?: boolean;
     validateDirectives?: boolean;
+    stopConfigSearchAt?: string[] | undefined;
 }

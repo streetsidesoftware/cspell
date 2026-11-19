@@ -129,18 +129,25 @@ Examples:
 Check spelling
 
 Options:
-  -c, --config <cspell.json>     Configuration file to use.  By default
-                                 cspell looks for cspell.json in the
-                                 current directory.
+  -c, --config <cspell.json>     Configuration file to use. It replaces
+                                 the configuration files in the root and
+                                 above it, and, for the files under its
+                                 folder, those in its folder and above
+                                 it. Configuration files deeper in the
+                                 project still apply. By default cspell
+                                 looks for cspell.json in the current
+                                 directory.
   --no-config-search             Disable automatic searching for
                                  additional configuration files in
                                  parent directories. Only the specified
                                  config file (if any) will be used.
-  --stop-config-search-at <dir>  Specify a directory at which to stop
-                                 searching for configuration files when
-                                 walking up from the files being
-                                 checked. Useful for limiting config
-                                 inheritance.
+  --stop-config-search-at <dir>  Stop the search for configuration files
+                                 at <dir>, after looking in it. With
+                                 --config, it takes the place of the
+                                 root and the configuration file's
+                                 folder as stopping points for the files
+                                 under <dir>. Can be used more than
+                                 once.
   -v, --verbose                  Display more information about the
                                  files being checked. Add more than one
                                  -v for increased verbosity.

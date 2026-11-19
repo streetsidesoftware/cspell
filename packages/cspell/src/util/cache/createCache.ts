@@ -70,7 +70,7 @@ export async function calcCacheSettings(
     if (cacheOptions.cacheReset) {
         optionals.reset = true;
     }
-    const optionsKey = calcOptionsKey(cacheOptions);
+    const optionsKey = calcOptionsKey(cacheOptions, root);
     if (optionsKey) {
         optionals.optionsKey = optionsKey;
     }
@@ -84,17 +84,25 @@ export async function calcCacheSettings(
     };
 }
 
-function calcOptionsKey(cacheOptions: CacheKeyOptions): string | undefined {
-    const { languageId, locale, report, showSuggestions, validateDirectives } = cacheOptions;
+function calcOptionsKey(cacheOptions: CacheKeyOptions, root: string): string | undefined {
+    const { languageId, locale, report, showSuggestions, validateDirectives, stopConfigSearchAt } = cacheOptions;
     const options = {
         languageId: languageId || undefined,
         locale: locale || undefined,
         report: report || undefined,
         showSuggestions,
         validateDirectives,
+        stopConfigSearchAt: stopConfigSearchAt?.length ? relativeStopFolders(stopConfigSearchAt, root) : undefined,
     };
     const set = Object.entries(options).filter(([, value]) => value !== undefined);
     return set.length ? JSON.stringify(Object.fromEntries(set)) : undefined;
+}
+
+/**
+ * Relative to the root with `/` separators, so a shared cache matches on another machine.
+ */
+function relativeStopFolders(folders: string[], root: string): string[] {
+    return folders.map((folder) => path.relative(root, path.resolve(folder)).split(path.sep).join('/') || '.').sort();
 }
 
 async function resolveCacheLocation(cacheLocation: string): Promise<string> {
