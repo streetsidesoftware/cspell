@@ -58,7 +58,8 @@ in the folders below still apply. The rule holds when cspell runs from a subfold
 `--config ../../cspell.ci.json` replaces `pkg/a/cspell.json`.
 
 The named config's own folder counts too, because a config beside the named one is the one it replaces. From the top
-of the project, `--config packages/foo/cspell.strict.json` replaces `packages/foo/cspell.json` for the files in `packages/foo/`.
+of the project, `--config packages/foo/cspell.strict.json` replaces `packages/foo/cspell.json` for the files in
+`packages/foo/`.
 
 ### The stop is the root
 
@@ -114,5 +115,6 @@ exactly the old behavior where the flag can't be passed, such as in cspell-actio
 
 ### No config setting for now
 
-There's no `stopConfigSearchAt` config setting for now. Most users never set a stop, and on the command line the flag covers the cases that
-need one. A setting ([#7477](https://github.com/streetsidesoftware/cspell/issues/7477)) could be added later.
+There's no `stopConfigSearchAt` config setting for now. Most users never set a stop, and on the command line the flag
+covers the cases that need one. A setting ([#7477](https://github.com/streetsidesoftware/cspell/issues/7477)) could be
+added later.
