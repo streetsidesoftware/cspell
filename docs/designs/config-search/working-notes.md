@@ -7,12 +7,14 @@ source of truth.
 
 ## To do
 
-- [ ] Work through the search for each file: which folders a named config replaces, and how the search skips them.
-- [ ] Work through `--stop-config-search-at`: inclusive in both searches, and with `--config`, replacing the default
+- [x] Work through the search for each file: which folders a named config replaces, and how the search skips them.
+- [x] Work through `--stop-config-search-at`: inclusive in both searches, and with `--config`, replacing the default
       stops at or below its folder.
+- [x] Settle the rest of the whole-feature questions in the [design questions](../../design-questions.md).
 - [ ] Match stops by their real folder, so different spellings of the same folder match.
-- [ ] Settle the rest of the whole-feature questions in the [design questions](../../design-questions.md).
-- [ ] Update the docs: the overrides page, the "Checking Each File" section of the globs page, and the flag's help text.
+- [ ] Update the docs: the overrides page, the "Checking Each File" section of the globs page, and the help text of
+      `--config` and `--stop-config-search-at`. The help text regenerates the `--help` snapshots, the cspell README,
+      and the website's help page.
 - [ ] Add app tests for the scenarios below.
 
 ## Open questions
@@ -25,6 +27,12 @@ source of truth.
 
 The new default is on in a v10 release, as a feature (`feat:`). It's a behavior change that might disrupt some setups,
 and patches should be light. There's an easy enough workaround, so it doesn't need a major version.
+
+- The release note says what changes with `--config` and who sees it, and gives the two ways to keep the old
+  behavior. An example shows the configs one command loads, before and after.
+- PR #9640 ships first, as `fix:`.
+- No name is provisional. There's no new option or flag, and `StopAtLocation` is settled.
+- The generated Properties page doesn't change. cspell-action's `config` input text still holds.
 
 ### Today
 
