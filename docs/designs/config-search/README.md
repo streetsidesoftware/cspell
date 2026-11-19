@@ -101,9 +101,9 @@ when both are true:
 - The named config isn't the one cspell would find on its own from the root.
 - A config it no longer loads, in the root, above it, or beside the named config, holds settings the setup needs.
 
-A command that passes `--stop-config-search-at` sees a change too, with or without `--config`: the search for each file
-now stops at that folder, where before only the search at startup did. With the root or a folder above it, the command
-still loads the configs up to that folder.
+A command that passes `--stop-config-search-at` can see a change too, with or without `--config`: the search for each
+file now stops at that folder. Before, the flag limited only the search at startup. With the root or a folder above it,
+the command still loads the configs up to that folder.
 
 To keep the old behavior:
 
