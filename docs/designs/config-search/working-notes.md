@@ -35,7 +35,8 @@ and patches should be light. There's an easy enough workaround, so it doesn't ne
   behavior. It also says that `--stop-config-search-at` now limits the search for each file. An example shows the
   configs one command loads, before and after.
 - PR #9640 isn't merged on its own. Its per-file stop is part of the feature PR.
-- No name is provisional. There's no new config option or CLI flag, and `StopAtLocation` is settled.
+- No name is provisional, except possibly the per-file option's type (see Open questions). There's no new config
+  option or CLI flag, and `StopAtLocation` is settled.
 - The generated Properties page doesn't change. cspell-action's `config` input text still holds.
 
 ### Today
@@ -57,8 +58,8 @@ and patches should be light. There's an easy enough workaround, so it doesn't ne
 - Draft PR [#9640](https://github.com/streetsidesoftware/cspell/pull/9640) makes `--stop-config-search-at` apply to the
   search for each file, inclusive, and keys the search cache by the stop set. It adds `stopConfigSearchAt` to
   `DocumentValidatorOptions` and `SpellCheckFileOptions`, both public, and passes the flag's raw strings for cspell-lib
-  to resolve. It becomes the feature PR instead of merging on its own. The feature resolves the strings in cspell
-  instead (see Exclusive stops).
+  to resolve. It becomes the feature PR instead of merging on its own. The feature resolves them in cspell (see
+  Exclusive stops).
 
 ### Exclusive stops
 
