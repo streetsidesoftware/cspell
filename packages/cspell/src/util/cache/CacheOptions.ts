@@ -48,4 +48,6 @@ export interface CacheKeyOptions {
     showSuggestions?: boolean;
     validateDirectives?: boolean;
     stopConfigSearchAt?: string[] | undefined;
+    /** The config named with `--config` or `CSPELL_CONFIG_PATH`. */
+    namedConfig?: URL | undefined;
 }

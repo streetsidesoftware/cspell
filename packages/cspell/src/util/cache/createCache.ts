@@ -1,6 +1,7 @@
 import assert from 'node:assert';
 import { stat } from 'node:fs/promises';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import type { CacheSettings, CSpellSettings } from '@cspell/cspell-types';
 import { toFileURL } from '@cspell/url';
@@ -85,7 +86,8 @@ export async function calcCacheSettings(
 }
 
 function calcOptionsKey(cacheOptions: CacheKeyOptions, root: string): string | undefined {
-    const { languageId, locale, report, showSuggestions, validateDirectives, stopConfigSearchAt } = cacheOptions;
+    const { languageId, locale, report, showSuggestions, validateDirectives, stopConfigSearchAt, namedConfig } =
+        cacheOptions;
     const options = {
         languageId: languageId || undefined,
         locale: locale || undefined,
@@ -93,16 +95,25 @@ function calcOptionsKey(cacheOptions: CacheKeyOptions, root: string): string | u
         showSuggestions,
         validateDirectives,
         stopConfigSearchAt: stopConfigSearchAt?.length ? relativeStopFolders(stopConfigSearchAt, root) : undefined,
+        config: namedConfig && relativeConfigPath(namedConfig, root),
     };
     const set = Object.entries(options).filter(([, value]) => value !== undefined);
     return set.length ? JSON.stringify(Object.fromEntries(set)) : undefined;
 }
 
+function relativeStopFolders(folders: string[], root: string): string[] {
+    return folders.map((folder) => relativeToRoot(path.resolve(folder), root)).sort();
+}
+
+function relativeConfigPath(url: URL, root: string): string {
+    return url.protocol === 'file:' ? relativeToRoot(fileURLToPath(url), root) : url.href;
+}
+
 /**
  * Relative to the root with `/` separators, so a shared cache matches on another machine.
  */
-function relativeStopFolders(folders: string[], root: string): string[] {
-    return folders.map((folder) => path.relative(root, path.resolve(folder)).split(path.sep).join('/') || '.').sort();
+function relativeToRoot(file: string, root: string): string {
+    return path.relative(root, file).split(path.sep).join('/') || '.';
 }
 
 async function resolveCacheLocation(cacheLocation: string): Promise<string> {

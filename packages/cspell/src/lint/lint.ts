@@ -150,7 +150,11 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         const { root } = cfg;
 
         try {
-            const cacheSettings = await calcCacheSettings(configInfo.config, { ...cfg.options, version }, root);
+            const cacheSettings = await calcCacheSettings(
+                configInfo.config,
+                { ...cfg.options, version, namedConfig: configInfo.namedConfigUrl },
+                root,
+            );
             const symlinks = createSymlinkChecker(root);
             const filesToCheck = await determineFilesToCheck(configInfo, cfg, reporter, globInfo, symlinks);
 

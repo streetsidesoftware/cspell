@@ -57,8 +57,8 @@ settings (see [Merge Rules](#merge-rules) below for how array-like settings are 
    - With `--config`, the search stops when it reaches the root or the named file's folder, without looking in that
      folder. So it doesn't load the configuration file in the root or above it, or the one beside the named file.
      Configuration files deeper in the project still apply.
-   - With `--stop-config-search-at <dir>`, the search stops at `<dir>`, after looking in it. With `--config`, it takes
-     the place of the root and the named file's folder as stopping points, for the files under `<dir>`.
+   - With `--stop-config-search-at <dir>`, the search stops at `<dir>`, after looking in it. With `--config`, it
+     replaces the stops at the root and the named file's folder, for the files under `<dir>`.
 
 This means a `cspell.json` placed next to an individual file, or in a folder above it, wins over the configuration
 loaded at start up, as long as the search reaches it.

@@ -4,7 +4,7 @@ import type { StopAtLocation } from 'cspell-lib';
 /**
  * A config in one of these folders belongs to the folder above.
  */
-const nestedConfigFolders: ReadonlySet<string> = new Set(['.vscode/', '.config/']);
+export const nestedConfigFolders: ReadonlySet<string> = new Set(['.vscode/', '.config/']);
 
 /**
  * Resolve the `--stop-config-search-at` folders against the current directory.

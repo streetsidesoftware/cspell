@@ -1,6 +1,6 @@
 import * as path from 'node:path';
 import { resolve as r } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import { describe, expect, test } from 'vitest';
 
@@ -45,6 +45,22 @@ describe('calcOptionsKey', () => {
             calcOptionsKey({ stopConfigSearchAt: [folder] }, root),
         );
         expect(new Set(keys)).toEqual(new Set(['{"stopConfigSearchAt":["."]}']));
+    });
+
+    test.each`
+        config                        | expected
+        ${'cspell.custom.json'}       | ${'{"config":"cspell.custom.json"}'}
+        ${'packages/foo/cspell.json'} | ${'{"config":"packages/foo/cspell.json"}'}
+        ${'../cspell.json'}           | ${'{"config":"../cspell.json"}'}
+    `('calcOptionsKey names the config relative to the root: $config', ({ config, expected }) => {
+        const root = process.cwd();
+        const namedConfig = pathToFileURL(path.resolve(root, config));
+        expect(calcOptionsKey({ namedConfig }, root)).toBe(expected);
+    });
+
+    test('calcOptionsKey keeps the URL of a config that is not a file', () => {
+        const namedConfig = new URL('https://example.com/cspell.json');
+        expect(calcOptionsKey({ namedConfig }, process.cwd())).toBe('{"config":"https://example.com/cspell.json"}');
     });
 
     test('calcCacheSettings includes the options only when set', async () => {
