@@ -19,7 +19,10 @@ source of truth.
 
 ## Open questions
 
-- None right now.
+- Does the public `StopSearchAt` type of `searchForConfig` gain `StopAtLocation`, or do exclusive stops reach the
+  per-file search only inside cspell-lib?
+- Matching by real folder: cspell can resolve the stops' real folders at startup, but the folders of each walk come
+  from cspell-lib. Which side resolves them?
 
 ## Notes
 
@@ -32,7 +35,7 @@ and patches should be light. There's an easy enough workaround, so it doesn't ne
   behavior. It also says that `--stop-config-search-at` now limits the search for each file. An example shows the
   configs one command loads, before and after.
 - PR #9640 isn't merged on its own. Its per-file stop is part of the feature PR.
-- No name is provisional. There's no new option or flag, and `StopAtLocation` is settled.
+- No name is provisional. There's no new config option or CLI flag, and `StopAtLocation` is settled.
 - The generated Properties page doesn't change. cspell-action's `config` input text still holds.
 
 ### Today
@@ -54,11 +57,13 @@ and patches should be light. There's an easy enough workaround, so it doesn't ne
 - Draft PR [#9640](https://github.com/streetsidesoftware/cspell/pull/9640) makes `--stop-config-search-at` apply to the
   search for each file, inclusive, and keys the search cache by the stop set. It adds `stopConfigSearchAt` to
   `DocumentValidatorOptions` and `SpellCheckFileOptions`, both public, and passes the flag's raw strings for cspell-lib
-  to resolve. It becomes the feature PR instead of merging on its own.
+  to resolve. It becomes the feature PR instead of merging on its own. The feature resolves the strings in cspell
+  instead (see Exclusive stops).
 
 ### Exclusive stops
 
-The per-file option `stopConfigSearchAt` is new, so it takes only resolved locations: URLs and `StopAtLocation`s.
+The per-file option `stopConfigSearchAt` is new, so it can take only resolved locations without breaking anyone: URLs
+and `StopAtLocation`s.
 
 ```ts
 interface StopAtLocation {
@@ -70,9 +75,10 @@ interface StopAtLocation {
 - A URL is inclusive, and so is a `StopAtLocation` without `exclusive: true`. "Inclusive unless marked" is one rule for
   both forms.
 - When `exclusive` is `true`, the search stops at that folder without looking in it.
-- cspell does the resolving, and cspell-lib takes the result. cspell resolves the flag's strings against the current
-  directory once, at startup, and works out the stops for `--config`. cspell-lib doesn't resolve relative paths, and
-  doesn't know about `--config`.
+- cspell does the resolving, and cspell-lib takes the result. cspell resolves each of the flag's strings against the
+  current directory to a folder URL ending in `/`, and works out the stops for `--config`. cspell-lib doesn't resolve
+  relative paths, and doesn't know about `--config`. It takes a URL without a trailing `/` as a file, and stops at
+  that file's folder.
 - The startup search gets the same resolved URLs. `searchForConfig` keeps accepting strings in `StopSearchAt` for now.
 - `cspell lint` passes the flag's folders as inclusive. With `--config`, it also passes the root and the named config's
   folder as exclusive, except the ones at or below a given stop. The set is worked out once at startup, and the walk
