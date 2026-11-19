@@ -1,0 +1,107 @@
+# Config search: working notes
+
+Status: in progress
+
+Working notes for [the design](./README.md). They aren't kept current once the feature is finished. The code is the
+source of truth.
+
+## To do
+
+- [ ] Work through the search for each file: which folders a named config replaces, and how the search skips them.
+- [ ] Work through `--stop-config-search-at`: inclusive in both searches, and replacing the default with `--config`.
+- [ ] Settle the whole-feature questions in the [design questions](../../design-questions.md), including whether the
+      change is breaking and how it rolls out.
+- [ ] Update the docs: the overrides page, the "Checking Each File" section of the globs page, and the flag's help text.
+- [ ] Add app tests for the scenarios below.
+
+## Open questions
+
+- Rollout. The lean is on by default, with a feature flag to turn it off. It changes results for setups that rely on a
+  config beside a named one, so on by default fits v11
+  ([#9412](https://github.com/streetsidesoftware/cspell/issues/9412)). Today's features are opt-in, such as
+  `overrideGlobsMatchFilesOnly` (`@default false`). A feature that's on by default and turned off would be new.
+- `cspell check --config` loads no other configs. After this change, `cspell lint` still merges deeper configs. Keep the
+  difference, or align them?
+- How the per-file options in `cspell-lib` carry an exclusive stop. Today `StopSearchAt` has no kind. Two shapes:
+  - a stop with a kind, inclusive or exclusive;
+  - a map from a folder to the config already loaded for it, which the walk returns instead of scanning the folder.
+
+## Notes
+
+### Today
+
+- The startup search is `readConfig` in `packages/cspell/src/util/configFileHelper.ts`. It reads `--config`, then
+  `CSPELL_CONFIG_PATH`, and otherwise calls `searchForConfig(root, { stopSearchAt })`.
+- The search for each file is `searchForDocumentConfig` in
+  `packages/cspell-lib/src/lib/textValidation/docValidator.ts`. `cspell check` passes the named config as
+  `configFile`, which replaces this search. `cspell lint` doesn't.
+- The walk is `findUpFromUrl` in `packages/cspell-io/src/VirtualFS/findUpFromUrl.ts`. Its stops are inclusive: a folder
+  is searched before the stop test.
+- `DirConfigScanner` in `configSearch.ts` returns the first file in the fixed `searchPlaces` order from
+  `configLocations.ts`, so a folder always gives the same config.
+- Draft PR [#9640](https://github.com/streetsidesoftware/cspell/pull/9640) makes `--stop-config-search-at` apply to the
+  search for each file, inclusive, and keys the search cache by the stop set. It adds `stopConfigSearchAt` to
+  `DocumentValidatorOptions` and `SpellCheckFileOptions`, both public.
+
+### Defaults and edge cases
+
+- `CSPELL_CONFIG_PATH` gets the same default as `--config`.
+- A config in `.config/` or `.vscode/` belongs to the folder above.
+- Without `--config`, replacing the root's config changes nothing: the startup search already found the nearest config
+  at or above the root.
+- Imports don't replace the config of their folder. Imports from configs found per file would make results depend on
+  the order files are checked, and `import` is for sharing settings.
+- When the stop folder has no config, the walk still stops there. A config further up needs that folder named.
+- A file outside the root never reaches the root on its walk, so configs above it still load. Left as is.
+
+### Scenarios
+
+Today was measured with a 10.5 build. Each config flagged its own word, so the reported words showed which configs were
+merged. "A + B" means B is merged on top of A.
+
+1. Simple project. `cspell.json`, `src/a.md`. From `.`, `cspell "**/*.md"`.
+   - Today and proposed: `cspell.json`.
+2. Nested config. `cspell.json`, `i18n/de/cspell.json`, `i18n/de/README.md`. From `.`, `cspell "**/*.md"`, with or
+   without `--config cspell.json`.
+   - Today and proposed: `cspell.json` + `i18n/de/cspell.json`.
+3. Run from a subfolder. `cspell.json`, `pkg/a/README.md`. From `pkg/a`, `cspell "*.md"`.
+   - Today and proposed: `cspell.json`.
+4. Config above the project. `cspell.json`, `proj/README.md`, `proj/src/a.md`. From `proj`, `cspell "**/*.md"`.
+   - Today and proposed: `cspell.json`.
+   - Proposed with `--stop-config-search-at .`: no config.
+5. Named config beside `cspell.json`. `cspell.json`, `cspell.custom.json`, `README.md`. From `.`,
+   `cspell --config cspell.custom.json "*.md"`.
+   - Today: `cspell.custom.json` + `cspell.json`.
+   - Proposed: `cspell.custom.json`.
+6. Named config in the current directory, `cspell.json` above. `cspell.json`, `pkg/a/cspell.custom.yaml`,
+   `pkg/a/README.md`. From `pkg/a`, `cspell --config cspell.custom.yaml "*.md"`.
+   - Today: `cspell.custom.yaml` + `cspell.json`.
+   - Proposed: `cspell.custom.yaml`.
+   - Proposed with `--stop-config-search-at .`: `cspell.custom.yaml`. There's no config at `.`.
+   - Proposed with `--stop-config-search-at ../..`: same as today.
+7. Named config in a subfolder. `cspell.json`, `ci/cspell.ci.json`, `src/a.md`, `pkg/cspell.json`, `pkg/b.md`. From
+   `.`, `cspell --config ci/cspell.ci.json "**/*.md"`.
+   - Today: `src/a.md` gets `ci/cspell.ci.json` + `cspell.json`. `pkg/b.md` gets `ci/cspell.ci.json` +
+     `pkg/cspell.json`.
+   - Proposed: `src/a.md` gets `ci/cspell.ci.json`. `pkg/b.md` is unchanged.
+8. Named config above the root. `cspell.json`, `pkg/a/cspell.json`, `pkg/a/README.md`. From `pkg/a`,
+   `cspell --config ../../cspell.json "*.md"`.
+   - Today: `cspell.json` + `pkg/a/cspell.json`.
+   - Proposed: `cspell.json`.
+   - Proposed with `--stop-config-search-at .`: same as today.
+9. Named config outside the project. `configs/cspell.json`, `proj/cspell.json`, `proj/README.md`. From `proj`,
+   `cspell --config ../configs/cspell.json "*.md"`.
+   - Today: `configs/cspell.json` + `proj/cspell.json`.
+   - Proposed: `configs/cspell.json`.
+10. Two configs in one folder. `pkg/cspell.json`, `pkg/cspell.config.yaml`, `pkg/a.md`. From `.`.
+    - Today and proposed, `cspell "**/*.md"`: `pkg/cspell.json`. It comes first in `searchPlaces`.
+    - Today, `cspell --config pkg/cspell.config.yaml "**/*.md"`: `pkg/cspell.config.yaml` + `pkg/cspell.json`.
+    - Proposed, same command: `pkg/cspell.config.yaml`.
+11. File outside the root. `cspell.json`, `pkg/a/cspell.custom.yaml`, `pkg/b/b.md`. From `pkg/a`,
+    `cspell --config cspell.custom.yaml ../b/b.md`.
+    - Today and proposed: `cspell.custom.yaml` + `cspell.json`.
+12. No config search. `cspell.json`, `cspell.custom.json`, `src/a.md`. From `.`,
+    `cspell --config cspell.custom.json --no-config-search "**/*.md"`.
+    - Today and proposed: `cspell.custom.json`.
+
+In scenario 4, `cspell.json` sits in the parent folder of `proj`, outside the project.
