@@ -32,11 +32,11 @@ you choose how far up the search looks.
 - **For each file,** it searches from the file's folder upward, and merges the first config it finds on top of the
   startup config.
 
-### A named config replaces the configs where cspell runs
+### A named config replaces the configs at the root
 
 With `--config`, the search for each file doesn't load a config from the root, from a folder above it, or from the
-named config's own folder. Configs in folders below the root still apply. That keeps out a config in a parent folder,
-outside the project, too.
+named config's own folder, so a config in a parent folder outside the project stays out too. Configs in folders below
+the root still apply.
 
 ```text
 cspell.json
@@ -57,8 +57,8 @@ knows its files best. That gives users a rule they can state: the config I name 
 in the folders below still apply. The rule holds when cspell runs from a subfolder, too. From `pkg/a`,
 `--config ../../cspell.ci.json` replaces `pkg/a/cspell.json`.
 
-The named config's own folder counts too, because a config beside the named one is the one it replaces. Run from the
-root, `--config packages/foo/cspell.strict.json` replaces `packages/foo/cspell.json` for the files in `packages/foo/`.
+The named config's own folder counts too, because a config beside the named one is the one it replaces. From the top
+of the project, `--config packages/foo/cspell.strict.json` replaces `packages/foo/cspell.json` for the files in `packages/foo/`.
 
 ### The stop is the root
 
@@ -94,13 +94,13 @@ parent's config out still takes `--stop-config-search-at`.
 
 ### Existing setups
 
-A setup that names a config, with `--config` or `CSPELL_CONFIG_PATH`, sees a change when both are true:
+A setup that names a config, with `--config`, `CSPELL_CONFIG_PATH`, or cspell-action's `config` input, sees a change
+when both are true:
 
 - The named config isn't the one cspell would find on its own from the root.
 - A config it no longer loads, in the root, above it, or beside the named config, holds settings the setup needs.
 
-That includes cspell-action workflows with the `config` input. A command that already passes `--stop-config-search-at`
-with the root or a folder above it isn't affected.
+A command that already passes `--stop-config-search-at` with the root or a folder above it isn't affected.
 
 To keep the old behavior:
 
@@ -114,5 +114,5 @@ exactly the old behavior where the flag can't be passed, such as in cspell-actio
 
 ### No config setting for now
 
-There's no `stopConfigSearchAt` config setting for now. Most users never set a stop, and the flag covers the cases that
+There's no `stopConfigSearchAt` config setting for now. Most users never set a stop, and on the command line the flag covers the cases that
 need one. A setting ([#7477](https://github.com/streetsidesoftware/cspell/issues/7477)) could be added later.
