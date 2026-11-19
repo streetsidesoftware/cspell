@@ -29,7 +29,8 @@ The new default is on in a v10 release, as a feature (`feat:`). It's a behavior 
 and patches should be light. There's an easy enough workaround, so it doesn't need a major version.
 
 - The release note says what changes with `--config` and who sees it, and gives the two ways to keep the old
-  behavior. An example shows the configs one command loads, before and after.
+  behavior. It also says that `--stop-config-search-at` now limits the search for each file. An example shows the
+  configs one command loads, before and after.
 - PR #9640 isn't merged on its own. Its per-file stop is part of the feature PR.
 - No name is provisional. There's no new option or flag, and `StopAtLocation` is settled.
 - The generated Properties page doesn't change. cspell-action's `config` input text still holds.
