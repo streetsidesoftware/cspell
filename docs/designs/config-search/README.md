@@ -10,8 +10,8 @@ Few users are surprised by configs deeper in the project. What surprises them is
 or above it getting loaded:
 
 - With `cspell lint --config ci/cspell.ci.json`, the `cspell.json` in the current directory is still loaded
-  ([#4750](https://github.com/streetsidesoftware/cspell/issues/4750)). `cspell check --config` doesn't load it, and
-  until [#9635](https://github.com/streetsidesoftware/cspell/pull/9635) the docs said `cspell lint` didn't either.
+  ([#4750](https://github.com/streetsidesoftware/cspell/issues/4750)). Until
+  [#9635](https://github.com/streetsidesoftware/cspell/pull/9635), the docs said it wasn't.
 - A config file in a parent folder, outside the project, is loaded for files in the project.
 
 Turning off the per-file search (`--no-config-search` or `noConfigSearch`) keeps them out, but it also drops the configs
