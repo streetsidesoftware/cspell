@@ -22,8 +22,9 @@ search walks, but it limits only the search at startup ([#7477](https://github.c
 ## Overview
 
 A config named on the command line replaces the configs at the root and above it. The root is where cspell runs,
-unless `--root` names another folder. Configs deeper than the root still apply. The `--stop-config-search-at` flag lets
-you choose how far up the search looks.
+unless `--root` names another folder. For the files under the named config's own folder, it also replaces the configs
+in that folder and above it. Configs in the folders below still apply. The `--stop-config-search-at` flag lets you
+choose how far up the search looks.
 
 `cspell lint` looks for configs twice:
 
@@ -32,11 +33,12 @@ you choose how far up the search looks.
 - **For each file,** it searches from the file's folder upward, and merges the first config it finds on top of the
   startup config.
 
-### A named config replaces the configs at the root
+### With `--config`, the search stops at the root and at the named config's folder
 
-With `--config`, the search for each file doesn't load a config from the root, from a folder above it, or from the
-named config's own folder, so a config in a parent folder outside the project stays out too. Configs in folders below
-the root still apply.
+With `--config`, the search for each file stops when it reaches the root or the named config's folder, without looking
+in that folder. So it doesn't load the root's config, a config above the root, or the config beside the named one. A
+config in a parent folder outside the project stays out too. Configs the search finds before it reaches either folder
+still apply.
 
 ```text
 cspell.json
@@ -57,11 +59,13 @@ knows its files best. That gives users a rule they can state: the config I name 
 in the folders below still apply. The rule holds when cspell runs from a subfolder, too. From `pkg/a`,
 `--config ../../cspell.ci.json` replaces `pkg/a/cspell.json`.
 
-The named config's own folder counts too, because a config beside the named one is the one it replaces. From the top
-of the project, `--config packages/foo/cspell.strict.json` replaces `packages/foo/cspell.json` for the files in
-`packages/foo/`.
+The named config's folder is a stop too, because a config beside the named one is the one it replaces. It works like
+the root: for the files under that folder, no config in it or above it loads, except the named config. From the top of
+the project, `--config packages/foo/cspell.strict.json` replaces `packages/foo/cspell.json` for the files in
+`packages/foo/`, and `packages/cspell.json` doesn't load for them either. To keep `packages/cspell.json`, import it from
+`cspell.strict.json`, or pass `--stop-config-search-at packages`.
 
-### The stop is the root
+### The root, not where the paths meet
 
 The search stops at the root, not at the nearest folder that holds both the root and the named config. When the named
 config is above the root or outside the project, that folder is above the root. The search would then still load the
@@ -70,9 +74,9 @@ root's config, the one the named config replaces. On two drives, there is no suc
 ### The stop flag is inclusive
 
 With `--stop-config-search-at <dir>`, cspell looks for configs up to and including `<dir>`, and never above it. That
-holds in both searches. With `--config`, a stop you give replaces the default for the files under its folder. Every
-other file keeps the default, so a file outside the given stops still doesn't load the configs the named config
-replaces.
+holds in both searches. With `--config`, a stop you give takes the place of the root and the named config's folder as
+stops, for the files under its folder. Every other file still stops at those, so a file outside the given stops still
+doesn't load the configs the named config replaces.
 
 The reason: "stop at" reads as "look up to," and the startup search already treats the flag that way. Users need the
 config where they run cspell kept out, which takes a stop that doesn't look in its folder. Naming a config already does
@@ -99,7 +103,8 @@ A setup that names a config, with `--config`, `CSPELL_CONFIG_PATH`, or cspell-ac
 when both are true:
 
 - The named config isn't the one cspell would find on its own from the root.
-- A config it no longer loads, in the root, above it, or beside the named config, holds settings the setup needs.
+- A config it no longer loads holds settings the setup needs. That's a config in the root or above it, or, for the
+  files under the named config's folder, a config in that folder or above it.
 
 A command that passes `--stop-config-search-at` can see a change too, with or without `--config`: the search for each
 file now stops at that folder. Before, the flag limited only the search at startup. With the root or a folder above it,

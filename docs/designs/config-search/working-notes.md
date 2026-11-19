@@ -155,5 +155,11 @@ merged. "A + B" means B is merged on top of A.
     - Today: `packages/a/x.md` gets `cspell.ci.json` + `packages/a/cspell.json`. `src/x.md` gets `cspell.ci.json` +
       `cspell.json`.
     - Proposed: `packages/a/x.md` is unchanged. `src/x.md` gets `cspell.ci.json`.
+14. A config between the named config's folder and the root. `cspell.json`, `packages/cspell.json`,
+    `packages/foo/cspell.strict.json`, `packages/foo/src/a.md`, `packages/bar/b.md`. From `.`,
+    `cspell --config packages/foo/cspell.strict.json "**/*.md"`.
+    - Today: both files get `cspell.strict.json` + `packages/cspell.json`.
+    - Proposed: `a.md` gets `cspell.strict.json`. `b.md` is unchanged.
+    - Proposed with `--stop-config-search-at packages`: same as today.
 
 In scenario 4, `cspell.json` sits in the parent folder of `proj`, outside the project.
