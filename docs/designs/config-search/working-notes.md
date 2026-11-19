@@ -9,17 +9,15 @@ source of truth.
 
 - [ ] Work through the search for each file: which folders a named config replaces, and how the search skips them.
 - [ ] Work through `--stop-config-search-at`: inclusive in both searches, and replacing the default with `--config`.
-- [ ] Settle the whole-feature questions in the [design questions](../../design-questions.md), including whether the
-      change is breaking and how it rolls out.
+- [ ] Settle the rest of the whole-feature questions in the [design questions](../../design-questions.md).
 - [ ] Update the docs: the overrides page, the "Checking Each File" section of the globs page, and the flag's help text.
 - [ ] Add app tests for the scenarios below.
 
 ## Open questions
 
-- Rollout. The lean is on by default, with a feature flag to turn it off. It changes results for setups that rely on a
-  config beside a named one, so on by default fits v11
-  ([#9412](https://github.com/streetsidesoftware/cspell/issues/9412)). Today's features are opt-in, such as
-  `overrideGlobsMatchFilesOnly` (`@default false`). A feature that's on by default and turned off would be new.
+- The off switch. A `features` setting set to `false`, read from the startup config, or only the stop flag and imports.
+  cspell-action users can't pass the flag. Today's only active feature, `overrideGlobsMatchFilesOnly`, is opt-in
+  (`@default false`), so a feature that's on by default and turned off would be new.
 - `cspell check --config` loads no other configs. After this change, `cspell lint` still merges deeper configs. Keep the
   difference, or align them?
 - How the per-file options in `cspell-lib` carry an exclusive stop. Today `StopSearchAt` has no kind. Two shapes:
