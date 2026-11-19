@@ -4,9 +4,7 @@ import type { TextOffset } from '@cspell/cspell-types';
 import { PairingHeap } from '../PairingHeap.js';
 import { regExFirstUpper, regExNumericLiteral, regExWordsAndDigits } from '../textRegex.js';
 import type { BreakPairs, LineSegment, SortedBreaks, WordBreakOptions } from './generateWordBreaks.js';
-import { generateWordBreaks, softHyphen } from './generateWordBreaks.js';
-
-const ignoreBreak: BreakPairs = Object.freeze([]) as unknown as BreakPairs;
+import { generateWordBreaks, ignoreBreak, softHyphen } from './generateWordBreaks.js';
 
 const maxSkippedBreaks = 16; // Maximum number of breaks that can be skipped during word splitting.
 const maxAttempts = 64_000; // Maximum number of attempts to split words.
@@ -56,7 +54,7 @@ export function split(
     isValidWord: IsValidWordFn,
     options: SplitOptions = {},
 ): SplitResult {
-    using _x = measurePerf('wordSplitter.split');
+    using _perf = measurePerf('wordSplitter.split');
     counter('wordSplitter.split').inc();
     const relWordToSplit = findNextWordText({ text: line.text, offset: offset - line.offset });
     const hasSoftHyphen = relWordToSplit.text.includes(softHyphen);
@@ -311,7 +309,7 @@ function splitIntoWords(
         const br = breaks[bi];
         function calcBreakCost(bp: BreakPairs): Candidate {
             counter('wordSplitter.calcBreakCost').inc();
-            if (bp.length < 2) {
+            if (bp === ignoreBreak) {
                 // We are skipping this break pair.
                 return { p, i, j: len, bi, bs, bp, c: currentCost, ec: currentCost + len - i, text: undefined };
             }
@@ -394,7 +392,7 @@ function splitIntoWords(
             continue;
         }
         // Does it have a split?
-        if (best.bp.length) {
+        if (best.bp !== ignoreBreak) {
             // yes
             const i = best.bp[0];
             const j = best.bp[1];

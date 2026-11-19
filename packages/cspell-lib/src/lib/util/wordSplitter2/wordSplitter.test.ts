@@ -1,0 +1,480 @@
+import type { TextOffset } from '@cspell/cspell-types';
+import { describe, expect, test, vi } from 'vitest';
+
+import { getDictionary } from '../../getDictionary.js';
+import { finalizeSettings, getDefaultConfigLoader, getDefaultSettings } from '../../Settings/index.js';
+import { calcSettingsForLanguageId } from '../../Settings/LanguageSettings.js';
+import { autoResolve } from '../AutoResolve.js';
+import { softHyphen } from './generateWordBreaks.js';
+import { __testing__, split } from './wordSplitter.js';
+
+const { findNextWordText } = __testing__;
+
+const words = sampleWordSet();
+const regHasLetters = /\p{L}/u;
+
+describe('Validate wordSplitter', () => {
+    interface TestApplyWordBreaks {
+        text: string;
+        expected: string[];
+    }
+
+    test('expensive split', () => {
+        // cspell:disable
+        // The following is an example of a very expensive split
+        const randomText = 'token = "Usf3uVQOZ9m6uPfVonKR-EBXjPe7bjMbp3_Fq8MfsptgkkM1ojidN0BxYaT5HAEN1";';
+        // cspell:enable
+
+        const line = {
+            text: randomText,
+            offset: 0,
+        };
+        const result = split(line, 9, has);
+        const words = result.words.map((w) => w.text).join('|');
+        // cspell:ignore VQOZ Mfsptgkk ojid HAEN
+        expect(words).toBe('Usf|u|VQOZ|m|u|Pf|Von|KR|EB|Xj|Pe|bj|Mbp|Fq|Mfsptgkk|M|ojid|N|Bx|Ya|T|HAEN');
+        expect(result.words.filter((w) => !w.isFound).length).toBe(7);
+    });
+
+    test.each`
+        text                 | expected
+        ${'hello'}           | ${{ text: 'hello', offset: 0 }}
+        ${'1.25e7 hello'}    | ${{ text: 'hello', offset: 7 }}
+        ${'2+hello.there+'}  | ${{ text: '2+hello.there+', offset: 0 }}
+        ${'well-educated'}   | ${{ text: 'well-educated', offset: 0 }}
+        ${'ERRORCode'}       | ${{ text: 'ERRORCode', offset: 0 }}
+        ${'93 MOVSX_r_rm16'} | ${{ text: 'MOVSX_r_rm16', offset: 3 }}
+        ${'32bit-checksum'}  | ${{ text: '32bit-checksum', offset: 0 }}
+        ${' camelCase'}      | ${{ text: 'camelCase', offset: 1 }}
+    `('findNextWordText $text', ({ text, expected }: TestApplyWordBreaks) => {
+        const r = findNextWordText({ text, offset: 0 });
+        expect(r).toEqual(expected);
+    });
+
+    interface PartialTextOffsetWithIsFound {
+        text: string;
+        offset?: number;
+        isFound?: boolean;
+    }
+
+    interface TestSplit {
+        text: string;
+        expectedWords: PartialTextOffsetWithIsFound[];
+    }
+
+    /** to PartialTextOffsetWithIsFound */
+    function tov(p: PartialTextOffsetWithIsFound | string, defaultIsFound = true): PartialTextOffsetWithIsFound {
+        if (typeof p === 'string') {
+            p = { text: p };
+        }
+        const { isFound = defaultIsFound } = p;
+        return { ...p, isFound };
+    }
+
+    function splitTov(t: string): PartialTextOffsetWithIsFound[] {
+        if (!t) return [];
+        const parts = t.split('|');
+        return parts.map((p) => tov(p, has({ text: p, offset: 0 })));
+    }
+
+    // cspell:ignore CVTPD CVTSI CVTTSD words'separated'by errorcode
+    // cspell:word Geschäft gescha
+    test.each`
+        text                                | expectedWords
+        ${'hello'}                          | ${[tov({ text: 'hello', offset: 155 })]}
+        ${'well-educated'}                  | ${[tov('well'), tov('educated')]}
+        ${'MOVSX_r_rm16'}                   | ${splitTov('MOVSX_r_rm16')}
+        ${'32bit-checksum'}                 | ${splitTov('bit|checksum')}
+        ${'ERRORCode'}                      | ${splitTov('ERROR|Code')}
+        ${'camelCase'}                      | ${splitTov('camel|Case')}
+        ${'CVTPD2PS_x_xm'}                  | ${splitTov('CVTPD2PS|x|xm')}
+        ${'CVTSI2SD_x_rm'}                  | ${splitTov('CVTSI|SD|x|rm')}
+        ${'CVTTSD2SI_r_xm'}                 | ${splitTov('CVTTSD|SI|r|xm')}
+        ${'error_code42_one_two'}           | ${splitTov('error|code42|one|two')}
+        ${'_errorcode42_one_two'}           | ${splitTov('_errorcode42|one|two')}
+        ${"words'separated'by_singleQuote"} | ${splitTov(`words|separated|by|singleQuote`)}
+        ${"Tom's_hardware"}                 | ${splitTov("Tom's|hardware")}
+        ${'Geschäft'}                       | ${splitTov('Geschäft')}
+    `('split $text', ({ text, expectedWords }: TestSplit) => {
+        const prefix = 'this is some';
+        const line = {
+            text: `${prefix} ${text} to split.`,
+            offset: 142,
+        };
+        const offset = line.offset + prefix.length;
+        const r = split(line, offset, has);
+        expect(r.offset).toBe(offset);
+        expect(r.endOffset).toBe(r.text.offset + r.text.text.length);
+        expect(r.words).toEqual(expect.arrayContaining(expectedWords.map((v) => expect.objectContaining(v))));
+        expect(r.words).toHaveLength(expectedWords.length);
+    });
+
+    interface TestSplitWithCalls extends TestSplit {
+        calls: number;
+    }
+
+    // cspell:ignore MOVSX
+
+    test.each`
+        text                                | expectedWords                                 | calls
+        ${'hello'}                          | ${[tov({ text: 'hello', offset: 142 })]}      | ${1}
+        ${''}                               | ${[]}                                         | ${0}
+        ${'#@()&*'}                         | ${[]}                                         | ${0}
+        ${'well-educated'}                  | ${[tov('well'), tov('educated')]}             | ${3}
+        ${'MOVSX_r_rm16'}                   | ${splitTov('MOVSX_r_rm16')}                   | ${6}
+        ${'32bit-checksum'}                 | ${splitTov('bit|checksum')}                   | ${3}
+        ${'ERRORCodesTwo'}                  | ${splitTov('ERROR|Codes|Two')}                | ${5}
+        ${'camelCase'}                      | ${splitTov('camel|Case')}                     | ${3}
+        ${'CVTPD2PS_x_xm'}                  | ${splitTov('CVTPD2PS|x|xm')}                  | ${7}
+        ${'CVTSI2SD_x_rm'}                  | ${splitTov('CVTSI|SD|x|rm')}                  | ${10}
+        ${'errCVTTSD2SI_r_xm'}              | ${splitTov('err|CVTTSD|SI|r|xm')}             | ${12}
+        ${"words'separated'by_singleQuote"} | ${splitTov('words|separated|by|singleQuote')} | ${9}
+        ${"Tom's_hardware"}                 | ${splitTov("Tom's|hardware")}                 | ${6}
+    `('split edge cases `$text`', ({ text, expectedWords, calls }: TestSplitWithCalls) => {
+        const line = {
+            text,
+            offset: 142,
+        };
+        const offset = line.offset;
+        const h = vi.fn();
+        const hasCalls: string[] = [];
+        h.mockImplementation((t) => {
+            hasCalls.push(t.text);
+            return has(t);
+        });
+        const r = split(line, offset, h, { optionalWordBreakCharacters: `'` });
+        // console.log(hasCalls);
+        expect(r.offset).toBe(offset);
+        expect(r.endOffset).toBe(r.text.offset + r.text.text.length);
+        expect(r.words).toEqual(expect.arrayContaining(expectedWords.map((v) => expect.objectContaining(v))));
+        expect(r.words).toHaveLength(expectedWords.length);
+        expect(h).toHaveBeenCalledTimes(calls);
+    });
+
+    interface TestSplit2 {
+        text: string;
+        expectedWords: string;
+        calls: number;
+    }
+
+    // cspell:ignore nstatic techo n'cpp n'log refactor'd î
+    test.each`
+        text                  | expectedWords      | calls
+        ${'static'}           | ${'static'}        | ${1}
+        ${'nstatic'}          | ${'static'}        | ${2}
+        ${'techo'}            | ${'echo'}          | ${2}
+        ${`n'cpp`}            | ${'cpp'}           | ${3}
+        ${`î'cpp`}            | ${'î|cpp'}         | ${3}
+        ${`îphoneStatic`}     | ${'îphone|Static'} | ${3}
+        ${`êphoneStatic`}     | ${'êphone|Static'} | ${3}
+        ${`geschäft`}         | ${'geschäft'}      | ${1}
+        ${`n'log`}            | ${'log'}           | ${7}
+        ${'64-bit'}           | ${'bit'}           | ${2}
+        ${'128-bit'}          | ${'bit'}           | ${2}
+        ${'256-sha'}          | ${'256-sha'}       | ${2}
+        ${'64bit'}            | ${'bit'}           | ${2}
+        ${`REFACTOR'd`}       | ${'REFACTOR|d'}    | ${4}
+        ${`dogs'`}            | ${`dogs'`}         | ${2}
+        ${`planets’`}         | ${`planets’`}      | ${2}
+        ${'0.7e1-count+56'}   | ${`e|count`}       | ${2}
+        ${'+flow.tensor'}     | ${`flow|.tensor`}  | ${8}
+        ${'-torch.tensor+64'} | ${'torch|.tensor'} | ${7}
+        ${"'twas the night"}  | ${"'twas"}         | ${2}
+        ${'begin+end29'}      | ${'begin|+end'}    | ${5}
+    `('split `$text` in doc', ({ text, expectedWords, calls }: TestSplit2) => {
+        const expectedWordSegments = splitTov(expectedWords);
+        const doc = sampleText();
+        const line = findLine(doc, text);
+        const offset = line.offset + line.text.indexOf(text);
+        expect(offset).toBeGreaterThan(0);
+        const hasCalls = new Map<string, number>();
+        const h = vi.fn((t) => {
+            const n = autoResolve(hasCalls, t.text, () => 0);
+            hasCalls.set(t.text, n + 1);
+            return has(t);
+        });
+        const r = split(line, offset, h);
+        // console.log('%o', r);
+        expect(r.endOffset).toBe(r.text.offset + r.text.text.length);
+        expect(r.words).toEqual(expect.arrayContaining(expectedWordSegments.map((v) => expect.objectContaining(v))));
+        expect(r.words).toHaveLength(expectedWordSegments.length);
+        expect(h).toHaveBeenCalledTimes(calls);
+        expect(hasCalls).toMatchSnapshot();
+    });
+});
+
+describe('wordSplitter IntlSegmenter', async () => {
+    const loader = getDefaultConfigLoader();
+    const settings = await loader.resolveSettingsImports(
+        { import: ['@cspell/dict-th-th'], dictionaries: ['th-th'] },
+        import.meta.url,
+    );
+    const dict = await getDictionary(settings);
+
+    function has(t: TextOffset): boolean {
+        return dict.has(t.text);
+    }
+
+    test('split Thai text 1', () => {
+        // cspell:disable
+        // The following is an example of a very expensive split
+        const sample = {
+            locale: 'th-TH',
+            input: hyphenateThai(
+                'ถ้าคุณต้องการที่จะประสบความสำเร็จในการเรียนภาษาไทย คุณต้องมีความอดทนและฝึกฝนทุกวันอย่างสม่ำเสมอ',
+            ),
+            expected:
+                'ถ้า คุณ ต้องการ ที่ จะ ประสบ ความ สำเร็จ ใน การ เรียน ภาษา ไทย คุณ ต้อง มี ความ อดทน และ ฝึกฝน ทุก วัน อย่าง สม่ำเสมอ',
+        };
+        // cspell:enable
+
+        const line = {
+            text: sample.input,
+            offset: 130,
+        };
+        const result = split(line, 130, has);
+        const words = result.words.map((w) => w.text).join(' ');
+        // cspell:disable-next-line
+        expect(words).toBe('ถ้า คุณ ต้องการ ที่ จะ ประสบ ความ สำเร็จ ใน การ เรียน ภาษา ไทย');
+        expect(result.words.filter((w) => w.isFound)).toHaveLength(13);
+        expect(result.endOffset).toBe(
+            line.offset + hyphenateThai('ถ้าคุณต้องการที่จะประสบความสำเร็จในการเรียนภาษาไทย').length,
+        );
+
+        const result2 = split(line, result.endOffset, has);
+        const words2 = result2.words.map((w) => w.text).join(' ');
+        // cspell:disable-next-line
+        expect(words2).toBe('คุณ ต้อง มี ความ อดทน และ ฝึกฝน ทุก วัน อย่าง สม่ำเสมอ');
+        expect(result2.words.filter((w) => w.isFound)).toHaveLength(11);
+    });
+
+    test('split Thai text 2', () => {
+        // cspell:disable
+        // The following is an example of a very expensive split
+        const sample = {
+            locale: 'th-TH',
+            input: hyphenateThai(
+                'ซีแอตเทิลตั้งอยู่บนคอคอดระหว่างพิวเจ็ตซาวนด์ในมหาสมุทรแปซิฟิกและทะเลสาบวอชิงตัน ' +
+                    'เป็นเมืองใหญ่ที่อยู่ทางทิศเหนือสุดของสหรัฐ ซึ่งอยู่ห่างจากชายแดนแคนาดาไปทางทิศใต้ประมาณ 100 ' +
+                    'ไมล์ (160 กิโลเมตร) ซีแอตเทิลนับเป็นประตูการค้าหลักสู่เอเชีย โดยเป็นเมืองท่าที่ใหญ่เป็นอันดับที่ 4 ' +
+                    'ในอเมริกาเหนือในแง่ของการรองรับตู้บรรจุสินค้าของปี ค.ศ. 2015',
+            ),
+            expected: [
+                'ซีแอตเทิล ตั้ง อยู่ บน คอคอด ระ หว่าง พิว เจ็ต ซา วนด์ ใน มหาสมุทร แปซิฟิก และ ทะเลสาบ วอชิงตัน',
+            ],
+        };
+        // cspell:enable
+
+        const line = {
+            text: sample.input,
+            offset: 200,
+        };
+        const result = split(line, 200, has);
+        const words = result.words.map((w) => w.text).join(' ');
+        // cspell:disable-next-line
+        expect(words).toBe(sample.expected[0]);
+        expect(result.words.filter((w) => w.isFound)).toHaveLength(15);
+        // cspell:ignore วนด์
+        // Note this might break if Puget Sound is added to the Thai dictionary.
+        expect(result.words.filter((w) => !w.isFound).map((w) => w.text)).toEqual(['พิว', 'วนด์']);
+        expect(result.endOffset).toBe(
+            line.offset +
+                hyphenateThai('ซีแอตเทิลตั้งอยู่บนคอคอดระหว่างพิวเจ็ตซาวนด์ในมหาสมุทรแปซิฟิกและทะเลสาบวอชิงตัน').length,
+        );
+    });
+
+    test('split Thai text 3', () => {
+        // cspell:disable
+        // The following is an example of a very expensive split
+        const sample = {
+            locale: 'th-TH',
+            input: hyphenateThai('ซีแอตเทิลเป็นหนึ่งในเมืองใหญ่ที่เติบโตเร็วที่สุดของสหรัฐ'),
+            expected: 'ซีแอตเทิล เป็น หนึ่ง ใน เมือง ใหญ่ ที่ เติบโต เร็ว ที่สุด ของ สหรัฐ',
+        };
+        // cspell:enable
+
+        const line = {
+            text: sample.input,
+            offset: 200,
+        };
+        const result = split(line, 200, has);
+        const words = result.words.map((w) => w.text).join(' ');
+        const found = result.words.filter((w) => w.isFound);
+        expect(words).toBe(sample.expected);
+        expect(found.map((w) => w.text).join(' ')).toBe(sample.expected);
+        expect(found).toHaveLength(12);
+        // cspell:ignore วนด์
+        // Note this might break if Puget Sound is added to the Thai dictionary.
+        expect(result.words.filter((w) => !w.isFound).map((w) => w.text)).toEqual([]);
+        expect(result.endOffset).toBe(line.offset + hyphenateThai(sample.input).length);
+    });
+
+    function hyphenateThai(text: string, hyphen: string = softHyphen): string {
+        const parts: string[] = [];
+
+        const segments = new Intl.Segmenter('th-TH', { granularity: 'word' }).segment(text);
+        let lastWordEndIndex = -1;
+        for (const seg of segments) {
+            parts.push(seg.isWordLike && seg.index === lastWordEndIndex ? hyphen + seg.segment : seg.segment);
+            lastWordEndIndex = seg.isWordLike ? seg.index + seg.segment.length : lastWordEndIndex;
+        }
+        // Implement Thai hyphenation logic here if needed
+        return parts.join('');
+    }
+});
+
+describe('wordSplitter against dictionary', async () => {
+    const s = await getDefaultSettings();
+    s.ignoreWords = s.ignoreWords || [];
+    // cspell:disable
+    s.ignoreWords.push(
+        '5IAGEAcABwAHkAIABOAGUAdwAgAFkAZQBhAHIA',
+        'QmFzZTY0IHN0cmluZyBvZiB0ZXh0IGhlcmU',
+        'bool',
+        'NSURL',
+    );
+    // cspell:enable
+    const settings = calcSettingsForLanguageId(finalizeSettings(s), 'en,en-gb');
+    const dict = await getDictionary(settings);
+
+    function has(t: TextOffset): boolean {
+        return dict.has(t.text);
+    }
+
+    test.each`
+        text                                                    | expected
+        ${'hello'}                                              | ${'hello'}
+        ${'VkResul'}                                            | ${'<Vk>|<Resul>' /* cspell:disable-line */}
+        ${'VkSwapchainKHR'}                                     | ${'<Vk>|<Swapchain>|<KHR>' /* cspell:disable-line */}
+        ${'AbpBootstrapper.PlugInSources.AddFolder'}            | ${'<Abp>|<Bootstrapper>|Plug|In|Sources|Add|Folder' /* cspell:disable-line */}
+        ${"r'getMaxNumPictureInPictureActions"}                 | ${'r|get|Max|<Num>|Picture|In|Picture|Actions' /* cspell:disable-line */}
+        ${'//5IAGEAcABwAHkAIABOAGUAdwAgAFkAZQBhAHIA'}           | ${'5IAGEAcABwAHkAIABOAGUAdwAgAFkAZQBhAHIA' /* cspell:disable-line */}
+        ${'NSProgress_ffiVoidNSURLboolNSError_fnPtrTrampoline'} | ${'NS|Progress|<ffi>|Void|NSURL|bool|NS|Error|<fn>|<Ptr>|Trampoline' /* cspell:disable-line */}
+        ${'To_EntityDto_And_To_DrivedEntityDto'}                | ${'To|Entity|<Dto>|And|To|<Drived>|Entity|<Dto>' /* cspell:disable-line */}
+        ${'QmFzZTY0IHN0cmluZyBvZiB0ZXh0IGhlcmU.access'}         | ${'QmFzZTY0IHN0cmluZyBvZiB0ZXh0IGhlcmU|access' /* cspell:disable-line */}
+    `('validate against dictionary', ({ text, expected }) => {
+        expected = typeof expected === 'string' ? expected.split('|') : expected;
+        const line = {
+            text,
+            offset: 0,
+        };
+        const result = split(line, 0, has);
+        const words = result.words.map((w) => (w.isFound ? w.text : `<${w.text}>`));
+        expect(words).toEqual(expected);
+    });
+});
+
+function has({ text }: TextOffset): boolean {
+    const nfcText = text.normalize('NFC');
+    return text.length < 3 || !regHasLetters.test(text) || words.has(nfcText) || words.has(nfcText.toLowerCase());
+}
+
+function findLine(doc: string, text: string): TextOffset {
+    const index = doc.indexOf(text);
+    let lastLine: RegExpMatchArray | undefined = undefined;
+    for (const line of doc.matchAll(/.*/g)) {
+        if ((line.index || 0) < index) {
+            lastLine = line;
+        }
+    }
+    if (lastLine && lastLine.index) {
+        return {
+            text: lastLine[0],
+            offset: lastLine.index,
+        };
+    }
+    return {
+        text: '',
+        offset: -1,
+    };
+}
+
+function sampleWordSet() {
+    const words = `
+    .tensor
+    torch
+    'twas
+    _errorcode42
+    2SD
+    begin
+    +end
+    64-bit
+    bit checksum
+    camel case
+    can't
+    code42
+    const
+    count
+    cpp
+    CVTPD2PS
+    CVTTSD
+    echo
+    îphone
+    êphone
+    Geschäft
+    error codes
+    hello
+    MOVSX_r_rm16
+    one two
+    static
+    these are some sample words
+    Tom's hardware
+    well educated
+    words separated by singleQuote
+    256-sha
+    dogs'
+    leashes
+    writers
+    planets’
+    `
+        .split(/\s+/g)
+        .map((a) => a.trim())
+        .filter((a) => !!a);
+    return new Set(words);
+}
+
+function sampleText() {
+    return `
+    static const char new_stub1_1[] = "\\techo"
+    \\n'log' => 'text/plain'
+	static const char new_stub2[] = "';\\nconst LEN = ";
+    static const char new_stub3_0[] = ";\\n\\nstatic function go($return = false)\\n'cpp'"
+
+    /* The escape was a back (or forward) reference. We keep the offset in
+    order to give a more useful diagnostic for a bad forward reference. For
+    references to groups numbered less than 10 we can't use more than two items
+    in parsed_pattern because they may be just two characters in the input (and
+    in a 64-bit world an offset may need two elements). So for them, the offset
+    ERROR's
+    REFACTOR'd
+    of the first occurrent is held in a special vector. */
+
+    256-sha
+
+    - The dogs' leashes (multiple dogs).
+    - The writers' desks (multiple writers).
+    - The planets’ atmospheres (multiple planets).
+
+    128-bit values
+    64bit values
+
+    x = +flow.tensor
+    declare solid = -torch.tensor+64
+
+    quote: 'twas the night
+
+    begin+end29
+
+    0.7e1-count+56
+
+    î'cpp
+    îphoneStatic
+
+    geschäft
+
+    êphoneStatic
+
+`;
+}
+
+// cspell:ignore êphone îphone geschäft
