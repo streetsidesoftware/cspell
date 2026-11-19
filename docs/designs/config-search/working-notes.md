@@ -9,6 +9,7 @@ source of truth.
 
 - [ ] Work through the search for each file: which folders a named config replaces, and how the search skips them.
 - [ ] Work through `--stop-config-search-at`: inclusive in both searches, and replacing the default with `--config`.
+- [ ] Match stops by their real folder, so different spellings of the same folder match.
 - [ ] Settle the rest of the whole-feature questions in the [design questions](../../design-questions.md).
 - [ ] Update the docs: the overrides page, the "Checking Each File" section of the globs page, and the flag's help text.
 - [ ] Add app tests for the scenarios below.
