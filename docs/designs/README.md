@@ -16,5 +16,6 @@ To write one, see:
 
 | Feature                                     | Description                                                   |
 | ------------------------------------------- | ------------------------------------------------------------- |
+| [Config search](./config-search/README.md)  | A named config replaces the configs where `cspell lint` runs. |
 | [Dictionary locale](./dictionary-locale.md) | Change case by a dictionary's locale when looking up words.   |
 | [Glob symlinks](./glob-symlinks.md)         | Follow symbolic links in `cspell lint` glob searches, opt-in. |
