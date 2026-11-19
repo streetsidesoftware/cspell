@@ -101,7 +101,8 @@ when both are true:
 - The named config isn't the one cspell would find on its own from the root.
 - A config it no longer loads, in the root, above it, or beside the named config, holds settings the setup needs.
 
-A command that already passes `--stop-config-search-at` with the root or a folder above it isn't affected.
+A command that already passes `--stop-config-search-at` with the root or a folder above it still loads the configs up
+to that folder.
 
 To keep the old behavior:
 

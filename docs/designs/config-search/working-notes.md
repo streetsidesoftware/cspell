@@ -30,7 +30,7 @@ and patches should be light. There's an easy enough workaround, so it doesn't ne
 
 - The release note says what changes with `--config` and who sees it, and gives the two ways to keep the old
   behavior. An example shows the configs one command loads, before and after.
-- PR #9640 ships first, as `fix:`.
+- PR #9640 isn't merged on its own. Its per-file stop is part of the feature PR.
 - No name is provisional. There's no new option or flag, and `StopAtLocation` is settled.
 - The generated Properties page doesn't change. cspell-action's `config` input text still holds.
 
@@ -52,7 +52,8 @@ and patches should be light. There's an easy enough workaround, so it doesn't ne
   `configLocations.ts`, so a folder always gives the same config.
 - Draft PR [#9640](https://github.com/streetsidesoftware/cspell/pull/9640) makes `--stop-config-search-at` apply to the
   search for each file, inclusive, and keys the search cache by the stop set. It adds `stopConfigSearchAt` to
-  `DocumentValidatorOptions` and `SpellCheckFileOptions`, both public.
+  `DocumentValidatorOptions` and `SpellCheckFileOptions`, both public, and passes the flag's raw strings for cspell-lib
+  to resolve. It becomes the feature PR instead of merging on its own.
 
 ### Exclusive stops
 
@@ -76,7 +77,6 @@ interface StopAtLocation {
 - An exclusive folder goes in the walk's stop set, and the scan predicate in `ConfigSearch` skips it, so `cspell-io`
   doesn't change. The search cache key includes the kind.
 - `StopAtLocation` is a new public type in `packages/cspell-lib/api/api.d.ts`.
-- PR #9640 can merge as it is. Its field keeps the `StopSearchAt` type, and the wider type comes with the feature PR.
 
 ### Defaults and edge cases
 
