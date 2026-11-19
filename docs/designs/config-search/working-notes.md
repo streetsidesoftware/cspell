@@ -58,7 +58,7 @@ and patches should be light. There's an easy enough workaround, so it doesn't ne
 
 ### Exclusive stops
 
-The `StopSearchAt` type also accepts a `StopAtLocation`, alone or in the array:
+The per-file option `stopConfigSearchAt` is new, so it takes only resolved locations: URLs and `StopAtLocation`s.
 
 ```ts
 interface StopAtLocation {
@@ -67,9 +67,13 @@ interface StopAtLocation {
 }
 ```
 
-- A plain URL or string is inclusive, and so is a `StopAtLocation` without `exclusive: true`. "Inclusive unless marked"
-  is one rule for both forms.
+- A URL is inclusive, and so is a `StopAtLocation` without `exclusive: true`. "Inclusive unless marked" is one rule for
+  both forms.
 - When `exclusive` is `true`, the search stops at that folder without looking in it.
+- cspell does the resolving, and cspell-lib takes the result. cspell resolves the flag's strings against the current
+  directory once, at startup, and works out the stops for `--config`. cspell-lib doesn't resolve relative paths, and
+  doesn't know about `--config`.
+- The startup search gets the same resolved URLs. `searchForConfig` keeps accepting strings in `StopSearchAt` for now.
 - `cspell lint` passes the flag's folders as inclusive. With `--config`, it also passes the root and the named config's
   folder as exclusive, except the ones at or below a given stop. The set is worked out once at startup, and the walk
   stops at the first stop it meets. Both kinds go through `stopConfigSearchAt` in the two per-file calls.
