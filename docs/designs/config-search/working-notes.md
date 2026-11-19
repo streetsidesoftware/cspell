@@ -44,6 +44,8 @@ and patches should be light. There's an easy enough workaround, so it doesn't ne
 - `cspell check` uses one config per file: the named one, or the nearest one found from the file. It never merges a
   startup config with a deeper one, so it differs from `cspell lint` with and without `--config`. It stays out of this
   change.
+- The ESLint plugin's `configFile` option works the same way: `DocumentValidator` loads it in place of the search for
+  each file.
 - The walk is `findUpFromUrl` in `packages/cspell-io/src/VirtualFS/findUpFromUrl.ts`. Its stops are inclusive: a folder
   is searched before the stop test.
 - `DirConfigScanner` in `configSearch.ts` returns the first file in the fixed `searchPlaces` order from
@@ -54,7 +56,7 @@ and patches should be light. There's an easy enough workaround, so it doesn't ne
 
 ### Exclusive stops
 
-`StopSearchAt` also accepts a `StopAtLocation`, alone or in the array:
+The `StopSearchAt` type also accepts a `StopAtLocation`, alone or in the array:
 
 ```ts
 interface StopAtLocation {
