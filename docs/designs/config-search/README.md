@@ -62,8 +62,9 @@ in the folders below still apply. The rule holds when cspell runs from a subfold
 The named config's folder is a stop too, because a config beside the named one is the one it replaces. It works like
 the root: for the files under that folder, no config in it or above it loads, except the named config. From the top of
 the project, `--config packages/foo/cspell.strict.json` replaces `packages/foo/cspell.json` for the files in
-`packages/foo/`. If there's no `packages/foo/cspell.json`, `packages/cspell.json` doesn't load for them either. To keep
-it, import it from `cspell.strict.json`, or pass `--stop-config-search-at packages`.
+`packages/foo/`. Without a `packages/foo/cspell.json`, the search for those files used to reach `packages/cspell.json`.
+Now it stops at `packages/foo/`. To keep `packages/cspell.json`, import it from `cspell.strict.json`, or pass
+`--stop-config-search-at packages`.
 
 ### The root, not where the paths meet
 
