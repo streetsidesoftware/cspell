@@ -55,7 +55,7 @@ settings (see [Merge Rules](#merge-rules) below for how array-like settings are 
    document's own directory and walks upward. It overrides everything above it. (Skipped when `--no-config-search`
    is used, or when `noConfigSearch` is `true`.)
    - With `--config`, the search stops when it reaches the root or the named file's folder, without looking in that
-     folder. So it doesn't load the configuration file in the root or above it, or the one beside the named file.
+     folder. So a search that reaches one of them doesn't load the configuration file there, or one above it.
      Configuration files deeper in the project still apply.
    - With `--stop-config-search-at <dir>`, the search stops at `<dir>`, after looking in it. With `--config`, it
      replaces the stops at the root and the named file's folder, for the files under `<dir>`.
