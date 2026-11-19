@@ -19,6 +19,8 @@ source of truth.
 
 ## Open questions
 
+- The per-file option's type: it takes URLs and `StopAtLocation`s but no strings, so it can't be `StopSearchAt`. Does
+  it get a name of its own, or is it written inline on both interfaces?
 - Matching by real folder: cspell can resolve the stops' real folders at startup, but the folders of each walk come
   from cspell-lib. Which side resolves them?
 
@@ -77,13 +79,13 @@ interface StopAtLocation {
   both forms.
 - When `exclusive` is `true`, the search stops at that folder without looking in it.
 - cspell does the resolving, and cspell-lib takes the result. cspell resolves each of the flag's strings against the
-  current directory to a folder URL ending in `/`, and works out the stops for `--config`. cspell-lib doesn't resolve
-  relative paths, and doesn't know about `--config`. It takes a URL without a trailing `/` as a file, and stops at
-  that file's folder.
-- The startup search gets the same resolved URLs. `searchForConfig` keeps accepting strings in `StopSearchAt` for now.
-- The public `StopSearchAt` type doesn't change. The startup search never needs an exclusive stop: without `--config`
-  there are none, and with `--config` there's no startup search. Exclusive stops reach the per-file search only inside
-  cspell-lib.
+  current directory to a folder URL ending in `/`, and works out the stops for `--config`. cspell-lib takes the
+  per-file stops as given, and doesn't know about `--config`. It takes a URL without a trailing `/` as a file, and
+  stops at that file's folder.
+- The startup search gets the same resolved URLs. The public `StopSearchAt` type of `searchForConfig` doesn't change,
+  and keeps accepting strings for now. The startup search never needs an exclusive stop: without `--config` there are
+  none, and with `--config` there's no startup search. Exclusive stops reach the per-file search only inside
+  cspell-lib, so the per-file search no longer calls the public `searchForConfig`.
 - `cspell lint` passes the flag's folders as inclusive. With `--config`, it also passes the root and the named config's
   folder as exclusive, except the ones at or below a given stop. The set is worked out once at startup, and the walk
   stops at the first stop it meets. Both kinds go through `stopConfigSearchAt` in the two per-file calls.

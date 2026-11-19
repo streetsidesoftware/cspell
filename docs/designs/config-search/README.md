@@ -79,9 +79,6 @@ searches. With `--config`, a stop you give takes the place of the root and the n
 files under its folder. Every other file still stops at those, so a file outside the given stops still doesn't load the
 configs the named config replaces.
 
-A stop limits only the searches that reach it. A stop below the root doesn't keep out the config cspell starts with,
-which still applies to every file. That way, several stops can be given at once, each for the files under it.
-
 The reason: "stop at" reads as "look up to," and the startup search already treats the flag that way. Users need the
 config where they run cspell kept out, which takes a stop that doesn't look in its folder. Naming a config already does
 that, so the flag can stay inclusive.
@@ -95,6 +92,10 @@ cspell lint --config ../../cspell.ci.json --stop-config-search-at . "*.md"
 For a config further up, they name that folder. So with `--config`, a stop you give brings configs back when it's at or
 above where a file's search would stop anyway: the root, or the named config's folder for the files under it. A stop
 below that narrows the search.
+
+A stop limits only the searches that reach it. A stop below the root doesn't keep out the config cspell starts with,
+which still applies to every file. Keeping it out would take a different starting config for the files under each
+stop. Instead, several stops can be given at once, each limiting the search for the files under it.
 
 ### Without `--config`, the default doesn't change
 
@@ -134,9 +135,9 @@ added later.
 ### cspell works out the stops, and cspell-lib takes them
 
 cspell works out where each search stops, and passes the result to cspell-lib. It resolves the folders given on the
-command line, and the stops that come from naming a config. cspell-lib doesn't resolve relative paths, and doesn't know
-about command-line options. A stop it's given is inclusive unless it's marked exclusive, so a plain folder means the
-same everywhere.
+command line, and works out the stops that come from naming a config. cspell-lib takes the stops as given, and doesn't
+know about command-line options. Its startup search still accepts relative paths, for now. A stop it's given is
+inclusive unless it's marked exclusive, so a plain folder means the same everywhere.
 
 The reason: input people write, such as a command-line flag, comes in many forms, and cspell is where it arrives. A
 program that calls cspell-lib can pass exact values.
