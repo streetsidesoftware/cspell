@@ -1,5 +1,13 @@
 # Dictionary Locale
 
+**tl;dr:** A dictionary can declare its locale in `dictionaryInformation.locale`. When cspell changes case to look up a
+word in that dictionary, it uses that locale's rules, so Turkish words with `İ` and `I` are found. Each dictionary uses
+its own locale, not the document's, so one language's rules don't affect another's dictionaries. When case is ignored,
+cspell also tries the forms it uses today, so no word that passes today is reported. A dictionary without a locale works
+as before.
+
+The code and the docs are the source of truth.
+
 ## Why
 
 Languages differ in how letters change case. cspell uses the same case rules for every language. When a language's

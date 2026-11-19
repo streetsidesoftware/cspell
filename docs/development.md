@@ -5,10 +5,9 @@ generated files, see [Build and packaging](./build-and-packaging.md).
 
 ## Getting started
 
-Use the Node.js version in `engines` in `package.json` (`>=22.18.0`). The pnpm version is pinned by `packageManager`.
+We suggest the current Node.js LTS release. Install [pnpm](https://pnpm.io/installation).
 
 ```sh
-corepack enable
 pnpm ibt
 ```
 

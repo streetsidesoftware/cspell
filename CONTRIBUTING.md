@@ -16,8 +16,9 @@ remove words in a dictionary, go there.
 
 ## Quick start
 
+Install [pnpm](https://pnpm.io/installation), then run:
+
 ```sh
-corepack enable
 pnpm ibt
 ```
 

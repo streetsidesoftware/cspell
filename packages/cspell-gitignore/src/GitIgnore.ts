@@ -1,9 +1,10 @@
 import { toFileDirURL, toFileURL, urlDirname } from '@cspell/url';
 import type { VFileSystem } from 'cspell-io';
 
-import { isRepoRoot } from './findRepoRoot.js';
+import { findRepoRootUrl, isRepoRoot } from './findRepoRoot.js';
 import type { IsIgnoredExResult } from './GitIgnoreFile.js';
 import { GitIgnoreHierarchy, loadGitIgnore } from './GitIgnoreFile.js';
+import { readSubmoduleFolders } from './gitmodules.js';
 import { isParentOf } from './utils.js';
 
 /**
@@ -12,15 +13,20 @@ import { isParentOf } from './utils.js';
 export class GitIgnore {
     private resolvedGitIgnoreHierarchies = new Map<string, GitIgnoreHierarchy>();
     private knownGitIgnoreHierarchies = new Map<string, Promise<GitIgnoreHierarchy>>();
+    /** The submodule folders of each repository, by the href of its root. */
+    private submoduleFolders = new Map<string, Promise<Set<string>>>();
     private _roots: Set<string>;
     private _sortedRoots: string[];
     private _vfs: VFileSystem | undefined;
 
     /**
      * @param roots - (search roots) an optional array of root paths to prevent searching for `.gitignore` files above the root.
-     *   If a file is under multiple roots, the closest root will apply. The search always stops at the root of
-     *   the git repository (a directory with a `.git` directory or file), as git does. If a file is not in a
-     *   repository and not under any root, then the search for `.gitignore` will go all the way to the system root of the file.
+     *   If a file is under multiple roots, the closest root will apply. If a file is not in a repository and not under
+     *   any root, then the search for `.gitignore` will go all the way to the system root of the file.
+     *
+     *   The search stops at the root of the file's git repository (a directory with a `.git` directory or file), as
+     *   git does. A repository nested below a root is seen from the repository around it: if that repository's
+     *   `.gitignore` files ignore its folder, it is ignored, unless `.gitmodules` lists it as a submodule.
      */
     constructor(roots: (string | URL)[] = [], vfs?: VFileSystem) {
         this._vfs = vfs;
@@ -114,18 +120,36 @@ export class GitIgnore {
         directory = toFileDirURL(directory);
         const root = this.determineRoot(directory);
         const parent = urlDirname(directory);
-        // Like git, do not apply `.gitignore` files from above a repository, so a nested
-        // worktree or submodule is not ignored by the repository around it.
-        const parentHierarchy =
-            parent.href !== directory.href && isParentOf(root, parent) && !(await isRepoRoot(directory, this._vfs))
-                ? await this.findGitIgnoreHierarchy(parent)
-                : undefined;
+        const hasParent = parent.href !== directory.href && isParentOf(root, parent);
+        let parentHierarchy: GitIgnoreHierarchy | undefined;
+        if (hasParent && !(await isRepoRoot(directory, this._vfs))) {
+            parentHierarchy = await this.findGitIgnoreHierarchy(parent);
+        } else if (hasParent && this._roots.has(root)) {
+            // A nested repository, seen from the repository around it, as git sees it from there:
+            // - in an ignored folder, it is ignored with everything in it, unless it is a submodule.
+            // - otherwise, the `.gitignore` files above it do not apply to it.
+            // Without a root, the walk stops here: there is no repository around it to look from.
+            const outer = await this.findGitIgnoreHierarchy(parent);
+            if (outer.isIgnored(directory) && !(await this.isSubmodule(directory, parent, outer))) return outer;
+        }
         const git = await loadGitIgnore(directory, this._vfs);
         if (!git) {
             return parentHierarchy || new GitIgnoreHierarchy([]);
         }
         const chain = parentHierarchy ? [...parentHierarchy.gitIgnoreChain, git] : [git];
         return new GitIgnoreHierarchy(chain);
+    }
+
+    private async isSubmodule(directory: URL, parent: URL, outer: GitIgnoreHierarchy): Promise<boolean> {
+        const repoRoot = await findRepoRootUrl(parent, this._vfs);
+        // The submodules of an ignored repository are ignored with it.
+        if (!repoRoot || outer.isIgnored(repoRoot)) return false;
+        let folders = this.submoduleFolders.get(repoRoot.href);
+        if (!folders) {
+            folders = readSubmoduleFolders(repoRoot, this._vfs);
+            this.submoduleFolders.set(repoRoot.href, folders);
+        }
+        return (await folders).has(directory.href);
     }
 
     private determineRoot(directory: string | URL): string {
