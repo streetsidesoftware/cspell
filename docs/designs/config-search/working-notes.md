@@ -11,18 +11,19 @@ source of truth.
 - [x] Work through `--stop-config-search-at`: inclusive in both searches, and with `--config`, replacing the default
       stops at or below its folder.
 - [x] Settle the rest of the whole-feature questions in the [design questions](../../design-questions.md).
-- [ ] Match stops by their real folder, so different spellings of the same folder match.
+- [ ] Follow-up, only if it's needed: match stops by their real folder, so different spellings of the same folder
+      match.
 - [x] Update the docs: the overrides page, the "Checking Each File" section of the globs page, and the help text of
       `--config` and `--stop-config-search-at`. The help text regenerates the `--help` snapshots, the cspell README,
       and the website's help page.
 - [x] Add app tests for the scenarios below.
 
-## Open questions
-
-- Matching by real folder: cspell can resolve the stops' real folders at startup, but the folders of each walk come
-  from cspell-lib. Which side resolves them?
-
 ## Notes
+
+### Matching by real folder
+
+If it's needed, cspell normalizes the URLs before it passes them to cspell-lib, as it does with the rest of its
+input. cspell-lib takes them as given.
 
 ### Release
 
