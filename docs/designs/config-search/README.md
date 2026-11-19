@@ -86,10 +86,18 @@ The startup search still walks up from the root, so running cspell from a subfol
 project's config. The default can't tell that config from one in a parent folder outside the project, so keeping that
 one out still takes `--stop-config-search-at`.
 
-### On in v10
+### Existing setups
 
-The new default is on in a v10 release, as a feature (`feat:`). It's a behavior change that might disrupt some setups,
-and patches should be light. There's an easy enough workaround, so it doesn't need a major version.
+A setup that names a config sees a change only when the named config is a different file from the one the search would
+find, and a config in the root or above holds settings it needs. That includes cspell-action workflows with the
+`config` input. Naming the config the search would find gives the same result as before.
+
+To keep the old behavior:
+
+- Import the replaced config from the named config. The named config's own settings then win, where before the
+  replaced config's did.
+- Pass `--stop-config-search-at` with the folder that holds the replaced config. Configs up to that folder load as
+  before. cspell-action has no input for this flag.
 
 ### No config setting for now
 

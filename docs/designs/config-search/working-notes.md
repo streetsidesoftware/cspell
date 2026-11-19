@@ -26,6 +26,11 @@ source of truth.
 
 ## Notes
 
+### Release
+
+The new default is on in a v10 release, as a feature (`feat:`). It's a behavior change that might disrupt some setups,
+and patches should be light. There's an easy enough workaround, so it doesn't need a major version.
+
 ### Today
 
 - The startup search is `readConfig` in `packages/cspell/src/util/configFileHelper.ts`. It reads `--config`, then
