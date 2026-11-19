@@ -114,9 +114,9 @@ program that calls cspell-lib can pass exact values.
 
 ### No config setting or opt-out for now
 
-There's no `stopConfigSearchAt` config setting for now. Most users never set a stop, and on the command line the flag
-covers the cases that need one. A setting ([#7477](https://github.com/streetsidesoftware/cspell/issues/7477)) could be
-added later.
+There's no `stopConfigSearchAt` config setting for now. Most users never set a stop, and on the command line,
+`--stop-config-search-at` covers the cases that need one. A setting
+([#7477](https://github.com/streetsidesoftware/cspell/issues/7477)) could be added later.
 
 There's also no flag or config setting to disable the new default, for now. One could be added later if someone needs
 exactly the old behavior where `--stop-config-search-at` can't be passed, such as in cspell-action.
