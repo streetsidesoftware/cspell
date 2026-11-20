@@ -39,7 +39,7 @@ export interface CacheOptions {
 }
 
 /**
- * The command-line options that change a file's result. A cached result is only reused when they match.
+ * The options that change a file's result. A cached result is only reused when they match.
  */
 export interface CacheKeyOptions {
     languageId?: string;
@@ -48,6 +48,6 @@ export interface CacheKeyOptions {
     showSuggestions?: boolean;
     validateDirectives?: boolean;
     stopConfigSearchAt?: readonly URL[] | undefined;
-    /** The config named with `--config` or `CSPELL_CONFIG_PATH`. */
-    namedConfig?: URL | undefined;
+    /** The config file loaded at startup. */
+    configUrl?: URL | undefined;
 }

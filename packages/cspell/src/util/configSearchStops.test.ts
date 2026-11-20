@@ -39,18 +39,18 @@ describe('resolveStopFolders', () => {
 
 describe('calcFileConfigSearchStops', () => {
     test.each`
-        desc                                               | given                           | named    | expected
-        ${'no stops without a named config or a stop'}     | ${undefined}                    | ${false} | ${undefined}
-        ${'the given stops without a named config'}        | ${['src']}                      | ${false} | ${['src']}
-        ${'the root with a named config'}                  | ${undefined}                    | ${true}  | ${['!.']}
-        ${'a given stop at the root replaces the root'}    | ${['.']}                        | ${true}  | ${['.']}
-        ${'a given stop above the root replaces the root'} | ${['..']}                       | ${true}  | ${['..']}
-        ${'a given stop below the root keeps the root'}    | ${['packages']}                 | ${true}  | ${['packages', '!.']}
-        ${'a sibling folder is not a parent'}              | ${['../proj']}                  | ${true}  | ${['../proj', '!.']}
-        ${'several given stops'}                           | ${['packages/a', 'packages/b']} | ${true}  | ${['packages/a', 'packages/b', '!.']}
-    `('calcFileConfigSearchStops $desc', ({ given, named, expected }) => {
+        desc                                                 | given                           | found    | expected
+        ${'no stops for a config found by searching'}        | ${undefined}                    | ${true}  | ${undefined}
+        ${'the given stops for a config found by searching'} | ${['src']}                      | ${true}  | ${['src']}
+        ${'the root for a config not found by searching'}    | ${undefined}                    | ${false} | ${['!.']}
+        ${'a given stop at the root replaces the root'}      | ${['.']}                        | ${false} | ${['.']}
+        ${'a given stop above the root replaces the root'}   | ${['..']}                       | ${false} | ${['..']}
+        ${'a given stop below the root keeps the root'}      | ${['packages']}                 | ${false} | ${['packages', '!.']}
+        ${'a sibling folder is not a parent'}                | ${['../proj']}                  | ${false} | ${['../proj', '!.']}
+        ${'several given stops'}                             | ${['packages/a', 'packages/b']} | ${false} | ${['packages/a', 'packages/b', '!.']}
+    `('calcFileConfigSearchStops $desc', ({ given, found, expected }) => {
         const givenStops = given?.map((folder: string) => dirUrl(path.resolve(projectRoot, folder)));
-        const stops = calcFileConfigSearchStops(givenStops, dirUrl(projectRoot), named);
+        const stops = calcFileConfigSearchStops(givenStops, dirUrl(projectRoot), found);
         expect(stops?.map(toShortStop)).toEqual(expected);
     });
 });

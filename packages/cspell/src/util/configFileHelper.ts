@@ -10,9 +10,13 @@ export interface ConfigInfo {
     source: string;
     config: CSpellUserSettings;
     /**
-     * The config named with `--config` or `CSPELL_CONFIG_PATH`.
+     * The config file that was loaded. Not set when there is none.
      */
-    namedConfigUrl?: URL | undefined;
+    url?: URL | undefined;
+    /**
+     * The config file was found by searching, rather than given or taken from `CSPELL_DEFAULT_CONFIG_PATH`.
+     */
+    foundBySearch: boolean;
 }
 
 export interface FileConfigInfo {
@@ -31,7 +35,7 @@ export async function readConfig(
 
     if (configFile) {
         const cfgFile = typeof configFile === 'string' ? await readConfigHandleError(configFile) : configFile;
-        return configFileToConfigInfo(cfgFile, { named: true });
+        return configFileToConfigInfo(cfgFile);
     }
     const config = await cspell.searchForConfig(root, { stopSearchAt: stopConfigSearchAt });
 
@@ -43,19 +47,19 @@ export async function readConfig(
         }
     }
 
-    return { source: config?.__importRef?.filename || 'None found', config: config || {} };
+    const filename = config?.__importRef?.filename;
+    return {
+        source: filename || 'None found',
+        config: config || {},
+        url: filename ? filenameToUrl(filename) : undefined,
+        foundBySearch: !!config,
+    };
 }
 
-/**
- * @param options.named - the config was named with `--config` or `CSPELL_CONFIG_PATH`.
- */
-async function configFileToConfigInfo(
-    cfgFile: CSpellConfigFile,
-    { named = false }: { named?: boolean } = {},
-): Promise<ConfigInfo> {
+async function configFileToConfigInfo(cfgFile: CSpellConfigFile): Promise<ConfigInfo> {
     const config = await cspell.resolveConfigFileImports(cfgFile);
     const source = toFilePathOrHref(cfgFile.url);
-    return { source, config, namedConfigUrl: named ? cfgFile.url : undefined };
+    return { source, config, url: cfgFile.url, foundBySearch: false };
 }
 
 export function readConfigFile(filename: string | URL): Promise<CSpellConfigFile> {

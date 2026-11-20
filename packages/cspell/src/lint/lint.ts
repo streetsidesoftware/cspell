@@ -104,7 +104,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         const stopConfigSearchAt = calcFileConfigSearchStops(
             givenStops,
             toFileDirURL(cfg.root),
-            !!configInfo.namedConfigUrl,
+            configInfo.foundBySearch,
         );
 
         const processFileOptions = getProcessFileOptions(configInfo, stopConfigSearchAt);
@@ -152,7 +152,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         try {
             const cacheSettings = await calcCacheSettings(
                 configInfo.config,
-                { ...cfg.options, version, namedConfig: configInfo.namedConfigUrl, stopConfigSearchAt: givenStops },
+                { ...cfg.options, version, configUrl: configInfo.url, stopConfigSearchAt: givenStops },
                 root,
             );
             const symlinks = createSymlinkChecker(root);
