@@ -69,10 +69,7 @@ export function commandLint(prog: Command, opts: CommandOptions): Command {
     const spellCheckCommand = prog.command('lint', opts);
     spellCheckCommand
         .description('Check spelling')
-        .option(
-            '-c, --config <cspell.json>',
-            "Configuration file to use. The search for each file's configuration stops at the root, without looking in it. Configuration files deeper in the project still apply. Without it, cspell searches for a configuration file from the root upward.",
-        )
+        .option('-c, --config <cspell.json>', 'Configuration file to use instead of searching for one.')
         .addOption(crOpt('--config-search', 'Allow searching for configuration files.', undefined).hideHelp())
         .option(
             '--no-config-search',
@@ -80,7 +77,7 @@ export function commandLint(prog: Command, opts: CommandOptions): Command {
         )
         .option(
             '--stop-config-search-at <dir>',
-            'Stop the search for configuration files at <dir>, after looking in it. With --config, a <dir> at or above the root replaces the stop at the root. Can be used more than once.',
+            'Search for configuration files no further up than <dir>. Can be used more than once.',
             collect,
         )
         .option(
