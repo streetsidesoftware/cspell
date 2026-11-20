@@ -77,7 +77,7 @@ export function commandLint(prog: Command, opts: CommandOptions): Command {
         )
         .option(
             '--stop-config-search-at <dir>',
-            'Search for configuration files no further up than <dir>. Can be used more than once.',
+            'Prevent searching for configuration files past <dir>. This option can be used multiple times.',
             collect,
         )
         .option(
