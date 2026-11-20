@@ -92,4 +92,28 @@ describe('createFolderLookup', () => {
         expect(readdir).toHaveBeenCalledTimes(1);
         expect(readdir).toHaveBeenCalledWith(path.join(tmp, 'Proj'));
     });
+
+    test('a folder found in another letter case lets the next lookup list only below it', async ({ skip }) => {
+        skip(!ignoresCase, 'the file system matches letter case');
+        const lookup = createFolderLookup();
+        await lookup.find(path.join(tmp, 'PROJ'));
+        vi.mocked(readdir).mockClear();
+
+        expect(await lookup.find(path.join(tmp, 'PROJ/SUB'))).toBe(path.join(tmp, 'Proj', 'sub'));
+        expect(readdir).toHaveBeenCalledTimes(1);
+        expect(readdir).toHaveBeenCalledWith(path.join(tmp, 'Proj'));
+    });
+
+    test('a folder found in another letter case is known the next time', async ({ skip }) => {
+        skip(!ignoresCase, 'the file system matches letter case');
+        const lookup = createFolderLookup();
+        await lookup.find(path.join(tmp, 'PROJ/SUB'));
+        vi.mocked(readdir).mockClear();
+        vi.mocked(stat).mockClear();
+
+        expect(await lookup.find(path.join(tmp, 'PROJ/SUB'))).toBe(path.join(tmp, 'Proj', 'sub'));
+        expect(await lookup.find(path.join(tmp, 'Proj/sub'))).toBe(path.join(tmp, 'Proj', 'sub'));
+        expect(stat).not.toHaveBeenCalled();
+        expect(readdir).not.toHaveBeenCalled();
+    });
 });

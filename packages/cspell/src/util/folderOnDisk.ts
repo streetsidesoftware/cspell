@@ -13,36 +13,44 @@ export interface FolderLookup {
 }
 
 /**
- * The current directory and its parents are known from the start, and each folder found is added. A lookup only lists
- * the folders below the deepest known one, so looking up one folder at a time lets each use what the others found.
+ * The current directory and its parents are known from the start. Each folder found is remembered under the spelling
+ * it was given and its spelling on disk. A lookup only lists the folders below the deepest known one, so looking up one
+ * folder at a time lets each use what the others found.
  */
 export function createFolderLookup(): FolderLookup {
     const known = currentDirectoryAndParents();
     return { find: (folder) => findFolder(path.resolve(folder), known) };
 }
 
-async function findFolder(absolute: string, known: Set<string>): Promise<string | undefined> {
-    if (known.has(absolute)) return absolute;
+/**
+ * @param known - maps each folder, as given, to its spelling on disk.
+ */
+async function findFolder(absolute: string, known: Map<string, string>): Promise<string | undefined> {
+    const knownFolder = known.get(absolute);
+    if (knownFolder) return knownFolder;
     if (!(await isFolder(absolute))) return undefined;
     const segments: string[] = [];
-    let found = absolute;
-    while (!known.has(found) && path.dirname(found) !== found) {
-        segments.push(path.basename(found));
-        found = path.dirname(found);
+    let given = absolute;
+    while (!known.has(given) && path.dirname(given) !== given) {
+        segments.push(path.basename(given));
+        given = path.dirname(given);
     }
+    let found = known.get(given) ?? given;
     for (const segment of segments.reverse()) {
+        given = path.join(given, segment);
         found = path.join(found, await listedName(found, segment));
-        known.add(found);
+        known.set(given, found);
+        known.set(found, found);
     }
     return found;
 }
 
-function currentDirectoryAndParents(): Set<string> {
+function currentDirectoryAndParents(): Map<string, string> {
     let folder = process.cwd();
-    const known = new Set([folder]);
+    const known = new Map([[folder, folder]]);
     while (path.dirname(folder) !== folder) {
         folder = path.dirname(folder);
-        known.add(folder);
+        known.set(folder, folder);
     }
     return known;
 }
