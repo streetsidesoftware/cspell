@@ -33,7 +33,7 @@ import { LintReporter } from '../reporters/index.js';
 import { calcCacheSettings } from '../util/cache/index.js';
 import type { ConfigInfo } from '../util/configFileHelper.js';
 import { readConfig } from '../util/configFileHelper.js';
-import { calcFileConfigSearchStops, resolveStopFolders } from '../util/configSearchStops.js';
+import { calcFileConfigSearchStops } from '../util/configSearchStops.js';
 import { ApplicationError, CheckFailed, toApplicationError } from '../util/errors.js';
 import { findFiles, isFile, isNotDir, readFileListFiles, relativeToCwd, resolveFilename } from '../util/fileHelper.js';
 import type { GlobOptions } from '../util/glob.js';
@@ -99,7 +99,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             setEnvironmentVariable(ENV_CSPELL_GLOB_ROOT, cfg.root);
         }
 
-        const givenStops = resolveStopFolders(cfg.options.stopConfigSearchAt);
+        const givenStops = cfg.stopConfigSearchAt;
         const configInfo: ConfigInfo = await readConfig(cfg.configFile, cfg.root, givenStops);
         const stopConfigSearchAt = calcFileConfigSearchStops(
             givenStops,

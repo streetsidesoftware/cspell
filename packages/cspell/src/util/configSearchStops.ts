@@ -4,19 +4,27 @@ import { toFileDirURL } from '@cspell/url';
 import type { StopAtLocation } from 'cspell-lib';
 
 import { ApplicationError } from './errors.js';
-import { findFolderOnDisk } from './folderOnDisk.js';
+import type { FolderLookup } from './folderOnDisk.js';
 
 /**
  * Resolve the `--stop-config-search-at` folders against the current directory, spelled as on disk.
  */
-export function resolveStopFolders(folders: readonly string[] | undefined): URL[] | undefined {
+export async function resolveStopFolders(
+    folders: readonly string[] | undefined,
+    lookup: FolderLookup,
+): Promise<URL[] | undefined> {
     if (!folders?.length) return undefined;
-    return folders.map(resolveStopFolder);
+    const stops: URL[] = [];
+    // One at a time, so each lookup can use the folders found before it.
+    for (const folder of folders) {
+        stops.push(await resolveStopFolder(folder, lookup));
+    }
+    return stops;
 }
 
-function resolveStopFolder(folder: string): URL {
+async function resolveStopFolder(folder: string, lookup: FolderLookup): Promise<URL> {
     const url = toFileDirURL(folder);
-    const found = url.protocol === 'file:' ? findFolderOnDisk(fileURLToPath(url)) : undefined;
+    const found = url.protocol === 'file:' ? await lookup.find(fileURLToPath(url)) : undefined;
     if (!found) throw new ApplicationError('Each --stop-config-search-at path must be an existing folder.');
     return toFileDirURL(found);
 }

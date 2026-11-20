@@ -3,8 +3,9 @@ import { unknownWordsChoices } from '@cspell/cspell-types';
 
 import type { CSpellConfigFile, LinterCliOptions, LinterOptions } from '../options.js';
 import type { FinalizedReporter } from '../reporters/LintFileResult.js';
+import { resolveStopFolders } from '../util/configSearchStops.js';
 import { ApplicationError } from '../util/errors.js';
-import { findFolderOnDisk } from '../util/folderOnDisk.js';
+import { createFolderLookup } from '../util/folderOnDisk.js';
 import type { GlobSrcInfo } from '../util/glob.js';
 import { calcExcludeGlobInfo } from '../util/glob.js';
 import { sizeToNumber } from '../util/unitNumbers.js';
@@ -16,12 +17,36 @@ interface Deprecated {
     local?: LinterOptions['locale'];
 }
 
+/**
+ * The root and the `--stop-config-search-at` folders, as found on disk.
+ */
+export interface LintFolders {
+    readonly root: string;
+    readonly stopConfigSearchAt: URL[] | undefined;
+}
+
+/**
+ * Look up the root and the `--stop-config-search-at` folders on disk, then create the request.
+ */
+export async function createLintRequest(
+    fileGlobs: string[],
+    options: LinterCliOptions & Deprecated,
+    reporter: FinalizedReporter,
+): Promise<LintRequest> {
+    const lookup = createFolderLookup();
+    const root = await lookup.find(options.root || process.cwd());
+    if (!root) throw new ApplicationError('The --root path must be an existing folder.');
+    const stopConfigSearchAt = await resolveStopFolders(options.stopConfigSearchAt, lookup);
+    return new LintRequest(fileGlobs, options, reporter, { root, stopConfigSearchAt });
+}
+
 export class LintRequest {
     readonly locale: string;
 
     readonly configFile: string | CSpellConfigFile | undefined;
     readonly excludes: GlobSrcInfo[];
     readonly root: string;
+    readonly stopConfigSearchAt: URL[] | undefined;
     readonly showContext: number;
     readonly enableGlobDot: boolean | undefined;
     readonly fileLists: string[];
@@ -33,10 +58,10 @@ export class LintRequest {
         readonly fileGlobs: string[],
         readonly options: LinterCliOptions & Deprecated,
         readonly reporter: FinalizedReporter,
+        folders: LintFolders,
     ) {
-        const root = findFolderOnDisk(options.root || process.cwd());
-        if (!root) throw new ApplicationError('The --root path must be an existing folder.');
-        this.root = root;
+        this.root = folders.root;
+        this.stopConfigSearchAt = folders.stopConfigSearchAt;
         this.configFile = options.config;
         this.excludes = calcExcludeGlobInfo(this.root, options.exclude);
         this.locale = options.locale ?? options.local ?? '';

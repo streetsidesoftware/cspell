@@ -17,7 +17,7 @@ import { configInit } from './config/index.js';
 import { console } from './console.js';
 import type { TimedSuggestionsForWordResult } from './emitters/suggestionsEmitter.js';
 import { getFeatureFlags, parseFeatureFlags } from './featureFlags/index.js';
-import { extractUnknownWordsConfig, LintRequest, runLint } from './lint/index.js';
+import { createLintRequest, extractUnknownWordsConfig, runLint } from './lint/index.js';
 import type { CSpellReporterConfiguration } from './models.js';
 import type { BaseOptions, LegacyOptions, LinterCliOptions, SuggestionOptions, TraceOptions } from './options.js';
 import { fixLegacy } from './options.js';
@@ -53,7 +53,7 @@ export async function lint(
     const useOptions = { ...options, ...unknownWordsConfig };
 
     const reporterOptions: CSpellReporterConfiguration = { ...useOptions, console };
-    const cfg = new LintRequest(
+    const cfg = await createLintRequest(
         fileGlobs,
         useOptions,
         finalizeReporter(reporter) ?? getReporter({ ...useOptions, fileGlobs }, reporterOptions),

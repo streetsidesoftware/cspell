@@ -5,6 +5,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { describe, expect, test } from 'vitest';
 
 import { calcFileConfigSearchStops, resolveStopFolders } from './configSearchStops.js';
+import { createFolderLookup } from './folderOnDisk.js';
 
 const projectRoot = path.resolve('/project');
 
@@ -16,13 +17,13 @@ describe('resolveStopFolders', () => {
         ${['.']}         | ${[dirUrl(process.cwd())]}
         ${['./']}        | ${[dirUrl(process.cwd())]}
         ${['..', 'src']} | ${[dirUrl(path.resolve('..')), dirUrl(path.resolve('src'))]}
-    `('resolveStopFolders $folders', ({ folders, expected }) => {
-        expect(resolveStopFolders(folders)).toEqual(expected);
+    `('resolveStopFolders $folders', async ({ folders, expected }) => {
+        expect(await resolveStopFolders(folders, createFolderLookup())).toEqual(expected);
     });
 
-    test('resolveStopFolders spells a folder as on disk', ({ skip }) => {
+    test('resolveStopFolders spells a folder as on disk', async ({ skip }) => {
         skip(!existsSync('SRC'), 'the file system matches letter case');
-        expect(resolveStopFolders(['SRC'])).toEqual([dirUrl(path.resolve('src'))]);
+        expect(await resolveStopFolders(['SRC'], createFolderLookup())).toEqual([dirUrl(path.resolve('src'))]);
     });
 
     test.each`
@@ -30,8 +31,8 @@ describe('resolveStopFolders', () => {
         ${'missing-folder'}
         ${'package.json'}
         ${'https://example.com/folder/'}
-    `('resolveStopFolders $folder is not an existing folder', ({ folder }) => {
-        expect(() => resolveStopFolders([folder])).toThrow(
+    `('resolveStopFolders $folder is not an existing folder', async ({ folder }) => {
+        await expect(resolveStopFolders([folder], createFolderLookup())).rejects.toThrow(
             'Each --stop-config-search-at path must be an existing folder.',
         );
     });

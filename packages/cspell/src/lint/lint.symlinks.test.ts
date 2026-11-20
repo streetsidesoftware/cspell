@@ -9,7 +9,7 @@ import { environmentKeys } from '../environment.js';
 import type { LinterCliOptions } from '../options.js';
 import { InMemoryReporter } from '../util/InMemoryReporter.js';
 import { runLint } from './lint.js';
-import { LintRequest } from './LintRequest.js';
+import { createLintRequest } from './LintRequest.js';
 
 // cspell:ignore zqxtarget zqxinside zqxloop
 
@@ -67,7 +67,7 @@ describe('lint and symbolic links', () => {
 
     async function lint(globs: string[], options: LinterCliOptions) {
         const reporter = new ProgressReporter();
-        const result = await runLint(new LintRequest(globs, { root: repo, config, ...options }, reporter));
+        const result = await runLint(await createLintRequest(globs, { root: repo, config, ...options }, reporter));
         const words = reporter.issues.map((i) => i.text).sort();
         return { result, words, reporter };
     }
