@@ -58,8 +58,8 @@ in the folders below still apply. The rule holds when cspell runs from a subfold
 The named config's folder isn't a stop. Where the named config sits doesn't change which configs other files load. A
 stop there would check the files under that folder differently from the rest of the project: a surprising side effect
 that nothing in the command shows, and one that made the rule hard to explain. From the top of the project, with
-`--config packages/foo/cspell.strict.json`, the files in `packages/foo/` still load `packages/foo/cspell.json` and
-`packages/cspell.json`.
+`--config packages/foo/cspell.strict.json`, the files in `packages/foo/` still load `packages/cspell.json`, or
+`packages/foo/cspell.json` when there is one.
 
 ### The root, not where the paths meet
 
