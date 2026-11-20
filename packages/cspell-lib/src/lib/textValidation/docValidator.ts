@@ -62,50 +62,15 @@ import { settingsToValidateOptions } from './settingsToValidateOptions.js';
 import { calcTextInclusionRanges } from './textValidator.js';
 import type { TraceResult } from './traceWord.js';
 import { traceWord } from './traceWord.js';
-import type { ValidateTextOptions } from './ValidateTextOptions.js';
+import type { ValidateDocumentOptions } from './ValidateTextOptions.js';
 import type { MappedTextValidationResult } from './ValidationTypes.js';
 
-export interface DocumentValidatorOptions extends ValidateTextOptions {
-    /**
-     * Optional path to a configuration file.
-     * If given, it will be used instead of searching for a configuration file.
-     */
-    configFile?: string;
-    /**
-     * Prevents searching for local configuration files
-     * By default the spell checker looks for configuration files
-     * starting at the location of given filename.
-     * If `configFile` is defined it will still be loaded instead of searching.
-     * `false` will override the value in `settings.noConfigSearch`.
-     * @defaultValue undefined
-     */
-    noConfigSearch?: boolean;
-
-    /**
-     * Directories where the search for the document's configuration file stops.
-     *
-     * The search starts in the document's directory and moves up one directory at a time, up to the file system root.
-     * It stops sooner at the first stop directory it reaches:
-     * - A `URL`, or a {@link StopAtLocation} without `exclusive`, is inclusive: a configuration file in that directory
-     *   is still found.
-     * - A {@link StopAtLocation} with `exclusive: true` stops without looking in that directory.
-     *
-     * A URL that doesn't end in `/` is taken as a file, and the search stops at its directory.
-     *
-     * It has no effect when `configFile` is set, or when `noConfigSearch` disables the search.
-     */
-    stopConfigSearchAt?: readonly (URL | StopAtLocation)[] | undefined;
-
+export interface DocumentValidatorOptions extends ValidateDocumentOptions {
     /**
      * If `settings: CSpellUserSettings` contains imports, they will be resolved using this path.
      * If not set, the current working directory will be used.
      */
     resolveImportsRelativeTo?: string | URL;
-
-    /**
-     * If true, the document will be checked even if it would normally be excluded.
-     */
-    forceCheck?: boolean;
 
     /**
      * If true, the ranges of text that have been checked will be recorded and available for later using the `getCheckedRanges` method.

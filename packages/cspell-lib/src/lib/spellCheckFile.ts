@@ -12,41 +12,19 @@ import { toValidationIssueRPC } from './Models/ValidationIssue.js';
 import { createPerfTimer } from './perf/index.js';
 import type { ImportFileRefWithError } from './Settings/index.js';
 import { determineTextDocumentSettings } from './textValidation/determineTextDocumentSettings.js';
-import type { DocumentValidatorOptions } from './textValidation/index.js';
+import type { DocumentValidatorOptions, ValidateDocumentOptions } from './textValidation/index.js';
 import { DocumentValidator } from './textValidation/index.js';
 import { isError } from './util/errors.js';
 import type { Uri } from './util/IUri.js';
 import { toUri } from './util/Uri.js';
-import type { ValidateTextOptions, ValidationIssue } from './validator.js';
+import type { ValidationIssue } from './validator.js';
 
-export interface SpellCheckFileOptions
-    extends
-        ValidateTextOptions,
-        Pick<CSpellUserSettings, 'unknownWords'>,
-        Pick<DocumentValidatorOptions, 'stopConfigSearchAt'> {
-    /**
-     * Optional path to a configuration file.
-     * If given, it will be used instead of searching for a configuration file.
-     */
-    configFile?: string;
+export interface SpellCheckFileOptions extends ValidateDocumentOptions, Pick<CSpellUserSettings, 'unknownWords'> {
     /**
      * File encoding
      * @defaultValue 'utf-8'
      */
     encoding?: BufferEncoding;
-    /**
-     * Prevents searching for local configuration files
-     * By default the spell checker looks for configuration files
-     * starting at the location of given filename.
-     * If `configFile` is defined it will still be loaded instead of searching.
-     * `false` will override the value in `settings.noConfigSearch`.
-     * @defaultValue undefined
-     */
-    noConfigSearch?: boolean;
-    /**
-     * If true, the document will be checked even if it would normally be excluded.
-     */
-    forceCheck?: boolean;
 }
 
 export interface SpellCheckFileOptionsRPC extends Omit<SpellCheckFileOptions, 'stopConfigSearchAt'> {

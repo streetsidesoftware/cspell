@@ -779,7 +779,10 @@ interface ValidateTextOptions {
    */
   skipValidation?: boolean;
 }
-interface DocumentValidatorOptions extends ValidateTextOptions {
+/**
+ * Options for checking a document, shared by `spellCheckDocument` and `DocumentValidator`.
+ */
+interface ValidateDocumentOptions extends ValidateTextOptions {
   /**
    * Optional path to a configuration file.
    * If given, it will be used instead of searching for a configuration file.
@@ -809,14 +812,16 @@ interface DocumentValidatorOptions extends ValidateTextOptions {
    */
   stopConfigSearchAt?: readonly (URL | StopAtLocation)[] | undefined;
   /**
+   * If true, the document will be checked even if it would normally be excluded.
+   */
+  forceCheck?: boolean;
+}
+interface DocumentValidatorOptions extends ValidateDocumentOptions {
+  /**
    * If `settings: CSpellUserSettings` contains imports, they will be resolved using this path.
    * If not set, the current working directory will be used.
    */
   resolveImportsRelativeTo?: string | URL;
-  /**
-   * If true, the document will be checked even if it would normally be excluded.
-   */
-  forceCheck?: boolean;
   /**
    * If true, the ranges of text that have been checked will be recorded and available for later using the `getCheckedRanges` method.
    */
@@ -990,30 +995,12 @@ export declare function checkTextDocument(doc: TextDocument | Document, options:
  * @deprecationMessage Use spellCheckDocument
  */
 export declare function validateText(text: string, settings: CSpellUserSettings, options?: ValidateTextOptions): Promise<ValidationIssue[]>;
-interface SpellCheckFileOptions extends ValidateTextOptions, Pick<CSpellUserSettings, "unknownWords">, Pick<DocumentValidatorOptions, "stopConfigSearchAt"> {
-  /**
-   * Optional path to a configuration file.
-   * If given, it will be used instead of searching for a configuration file.
-   */
-  configFile?: string;
+interface SpellCheckFileOptions extends ValidateDocumentOptions, Pick<CSpellUserSettings, "unknownWords"> {
   /**
    * File encoding
    * @defaultValue 'utf-8'
    */
   encoding?: BufferEncoding;
-  /**
-   * Prevents searching for local configuration files
-   * By default the spell checker looks for configuration files
-   * starting at the location of given filename.
-   * If `configFile` is defined it will still be loaded instead of searching.
-   * `false` will override the value in `settings.noConfigSearch`.
-   * @defaultValue undefined
-   */
-  noConfigSearch?: boolean;
-  /**
-   * If true, the document will be checked even if it would normally be excluded.
-   */
-  forceCheck?: boolean;
 }
 interface SpellCheckFileOptionsRPC extends Omit<SpellCheckFileOptions, "stopConfigSearchAt"> {
   measurePerf?: boolean;
