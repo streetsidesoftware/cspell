@@ -48,7 +48,7 @@ settings (see [Merge Rules](#merge-rules) below for how array-like settings are 
 1. **Default Configuration** -- the settings built into `cspell` (disable with `--no-default-configuration`).
 1. **The configuration loaded at start up** -- the same configuration file used in Step 1, found by searching
    upward from the current directory (or `--root`), or given explicitly with `--config <path>`. Any files it
-   `import`s are merged in first, with the file's own settings merged in last so it always wins over what it
+   `import`s are merged in first, with the file's own settings merged in last, so they override the settings it
    imports. A few CLI flags adjust these settings directly: `--dictionary <name>` / `--disable-dictionary <name>`
    (enable/disable dictionaries) and `--report <level>` (which categories of unknown words to report).
 1. **The configuration nearest the document** -- found by a second, independent search that starts at the
@@ -60,8 +60,8 @@ settings (see [Merge Rules](#merge-rules) below for how array-like settings are 
    - With `--stop-config-search-at <dir>`, the search stops at `<dir>`, after looking in it. With `--config`, a `<dir>`
      at or above the root replaces the stop at the root.
 
-This means a `cspell.json` placed next to an individual file, or in a folder above it, wins over the configuration
-loaded at start up, as long as the search reaches it.
+This means the settings in a `cspell.json` next to a file, or in a folder above it, override the configuration loaded
+at start up, as long as the search reaches it.
 
 For example, with this layout:
 
@@ -73,7 +73,7 @@ i18n/de/cspell.json
 
 `cspell lint --config cspell.custom.json "**/*.md"` doesn't load `cspell.json`, and `i18n/de/cspell.json` still
 applies to the files in `i18n/de/`. To use `cspell.json` as well, import it from `cspell.custom.json`. The named file
-is merged after its imports, so its own settings still win.
+is merged after its imports, so its own settings override theirs.
 
 ### Merge Rules
 
