@@ -31,12 +31,30 @@ interface StopDir {
     exclusive: boolean;
 }
 
+/**
+ * One list of stops, converted for the search, and the results found with it.
+ */
+interface SearchStops {
+    stopAt: URL[] | undefined;
+    exclusiveStops: Set<Href>;
+    /**
+     * Search results, keyed by the search directory.
+     */
+    results: Map<Href, Promise<URL | undefined>>;
+}
+
 export class ConfigSearch {
     /**
      * Cache of search results, keyed by the stops, then by the search directory.
-     * A result is only valid for the stops it was found with.
+     * A result is only valid for the stops it was found with. Lists with the same stops share their results.
      */
     #searchCache = new Map<string, Map<Href, Promise<URL | undefined>>>();
+    /**
+     * The converted stops for each list given, so a list is only converted the first time.
+     * A list is not read again until the cache is cleared, even if it changes.
+     */
+    #stopsByList = new WeakMap<readonly (URL | StopAtLocation)[], SearchStops>();
+    #noStops: SearchStops = { stopAt: undefined, exclusiveStops: new Set(), results: new Map() };
     /**
      * The scanner to use to search for config files.
      */
@@ -59,24 +77,38 @@ export class ConfigSearch {
         searchFromURL: URL,
         stopSearchAt?: readonly (URL | StopAtLocation)[],
     ): Promise<URL | undefined> {
-        const dirUrl = toDirURL(searchFromURL);
-        const stops = stopSearchAt?.map(toStopDir);
+        const dirUrl = searchFromURL.pathname.endsWith('/') ? searchFromURL : new URL('./', searchFromURL);
+        if (!stopSearchAt) return this.#findUp(dirUrl, this.#noStops);
+        const stops = this.#stopsByList.get(stopSearchAt) ?? this.#addStops(stopSearchAt);
         return this.#findUp(dirUrl, stops);
     }
 
     clearCache(): void {
         this.#searchCache.clear();
+        this.#stopsByList = new WeakMap();
+        this.#noStops.results.clear();
         this.#scanner.clearCache();
     }
 
-    #findUp(fromDir: URL, stops?: StopDir[]): Promise<URL | undefined> {
-        const stopKey = stops?.map((stop) => (stop.exclusive ? '!' : '') + stop.url.href).join('\n') ?? '';
-        const searchDirCache = autoResolve(this.#searchCache, stopKey, () => new Map());
+    #addStops(stopSearchAt: readonly (URL | StopAtLocation)[]): SearchStops {
+        const stopDirs = stopSearchAt.map(toStopDir);
+        const stopKey = stopDirs.map((stop) => (stop.exclusive ? '!' : '') + stop.url.href).join('\n');
+        const stops: SearchStops = {
+            stopAt: stopDirs.map((stop) => stop.url),
+            exclusiveStops: new Set(stopDirs.filter((stop) => stop.exclusive).map((stop) => stop.url.href)),
+            results: autoResolve(this.#searchCache, stopKey, () => new Map()),
+        };
+        this.#stopsByList.set(stopSearchAt, stops);
+        return stops;
+    }
+
+    #findUp(fromDir: URL, stops: SearchStops): Promise<URL | undefined> {
+        const searchDirCache = stops.results;
         const cached = searchDirCache.get(fromDir.href);
         if (cached) {
             return cached;
         }
-        const exclusiveStops = new Set<Href>(stops?.filter((stop) => stop.exclusive).map((stop) => stop.url.href));
+        const { stopAt, exclusiveStops } = stops;
         const visited: URL[] = [];
         let result: Promise<URL | undefined> | undefined = undefined;
         const predicate = (dir: URL) => {
@@ -84,7 +116,6 @@ export class ConfigSearch {
             if (exclusiveStops.has(dir.href)) return undefined;
             return this.#scanner.scanDirForConfigFile(dir);
         };
-        const stopAt = stops?.map((stop) => stop.url);
         result = findUpFromUrl(predicate, fromDir, { type: 'file', ...(stopAt && { stopAt }) });
         searchDirCache.set(fromDir.href, result);
         visited.forEach((dir) => searchDirCache.set(dir.href, result));
