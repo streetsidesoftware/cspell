@@ -35,6 +35,9 @@ async function resolveStopFolder(folder: string, lookup: FolderLookup): Promise<
  * Unless the config loaded at startup was found by searching, the search stops at the root without looking in it. A
  * given stop at or above the root takes its place.
  *
+ * When the search at startup found no config, the stop at the root changes nothing: that search already looked in the
+ * root and above it.
+ *
  * @param givenStops - the resolved `--stop-config-search-at` folders.
  * @param configFoundBySearch - the config loaded at startup was found by searching.
  */
