@@ -15,6 +15,7 @@ source of truth.
 - [x] Update the docs: the overrides page, the "Checking Each File" section of the globs page, and the help text of
       `--config` and `--stop-config-search-at`. The help text regenerates the `--help` snapshots, the cspell README,
       and the website's help page.
+- [ ] Follow-up: website documentation.
 - [x] Add app tests for the scenarios below.
 
 ## Notes
