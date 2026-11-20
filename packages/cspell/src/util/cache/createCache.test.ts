@@ -33,18 +33,11 @@ describe('calcOptionsKey', () => {
         ${{ validateDirectives: true }}                         | ${'{"validateDirectives":true}'}
         ${{ validateDirectives: true, languageId: 'markdown' }} | ${'{"languageId":"markdown","validateDirectives":true}'}
         ${{ stopConfigSearchAt: [] }}                           | ${undefined}
-        ${{ stopConfigSearchAt: ['.'] }}                        | ${'{"stopConfigSearchAt":["."]}'}
-        ${{ stopConfigSearchAt: ['src', '..'] }}                | ${'{"stopConfigSearchAt":["..","src"]}'}
+        ${{ stopConfigSearchAt: stops('.') }}                   | ${'{"stopConfigSearchAt":["."]}'}
+        ${{ stopConfigSearchAt: stops('src', '..') }}           | ${'{"stopConfigSearchAt":["..","src"]}'}
+        ${{ stopConfigSearchAt: stops('src/a/b') }}             | ${'{"stopConfigSearchAt":["src/a/b"]}'}
     `('calcOptionsKey $options', ({ options, expected }) => {
         expect(calcOptionsKey(options, process.cwd())).toBe(expected);
-    });
-
-    test('calcOptionsKey gives one key for each way to write the stop folder', () => {
-        const root = process.cwd();
-        const keys = ['.', './', root, root + path.sep].map((folder) =>
-            calcOptionsKey({ stopConfigSearchAt: [folder] }, root),
-        );
-        expect(new Set(keys)).toEqual(new Set(['{"stopConfigSearchAt":["."]}']));
     });
 
     test.each`
@@ -158,4 +151,8 @@ function co(
     cacheFormat?: CacheOptions['cacheFormat'],
 ) {
     return { cache, cacheLocation, cacheStrategy, version, cacheFormat };
+}
+
+function stops(...folders: string[]): URL[] {
+    return folders.map((folder) => pathToFileURL(path.resolve(folder) + path.sep));
 }

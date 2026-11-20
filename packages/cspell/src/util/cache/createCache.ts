@@ -101,8 +101,8 @@ function calcOptionsKey(cacheOptions: CacheKeyOptions, root: string): string | u
     return set.length ? JSON.stringify(Object.fromEntries(set)) : undefined;
 }
 
-function relativeStopFolders(folders: string[], root: string): string[] {
-    return folders.map((folder) => relativeToRoot(path.resolve(folder), root)).sort();
+function relativeStopFolders(folders: readonly URL[], root: string): string[] {
+    return folders.map((folder) => relativeToRoot(fileURLToPath(folder), root)).sort();
 }
 
 function relativeConfigPath(url: URL, root: string): string {
