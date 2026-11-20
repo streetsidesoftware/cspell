@@ -36,6 +36,23 @@ Examples:
     cspell stdin://docs/doc.md      Check stdin as "./docs/doc.md"\
 `;
 
+const relativePaths = `
+Relative Paths:
+  Option                    Relative to
+  [globs...]                the root
+  [file://<path>]           the root
+  [stdin://<path>]          the root
+  --file                    the root
+  --exclude                 the root
+  --cache-location          the root
+  --root                    the current directory
+  --config                  the current directory
+  --file-list               the current directory
+    each path in the list   the list file's directory
+  --stop-config-search-at   the current directory
+  --gitignore-root          the current directory
+  --reporter                the current directory`;
+
 const advanced = `
 More Examples:
 
@@ -326,7 +343,11 @@ function lintHelpAfterOptions(command: Command, hiddenOptionsHeading: string): s
         }
         hiddenHelp.push(help.formatItem(options.flags, flagColWidth, options.description, help));
     }
-    output.push(...hiddenHelp, advanced);
+    output.push(...hiddenHelp);
+    if (showHidden) {
+        output.push(relativePaths);
+    }
+    output.push(advanced);
     return helpIssueTemplate(opts) + output.join('\n');
 }
 
