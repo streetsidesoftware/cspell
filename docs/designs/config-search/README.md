@@ -99,14 +99,17 @@ parent's config out still takes `--stop-config-search-at`.
 
 ### cspell works out the stops, and cspell-lib takes them
 
-The cspell command-line package works out where each search stops, and passes the result to cspell-lib. It resolves
-the folders given on the command line, and works out the stops that come from naming a config. cspell-lib takes the
-stops as given, and doesn't know about command-line options. A stop it's given is inclusive unless it's marked
-exclusive, so a plain folder means the same everywhere. The search function that cspell uses at startup still accepts
-relative paths, for now.
+The cspell command-line package works out where each search stops, and passes the result to cspell-lib. Once, at
+startup, it looks up the root and the folders given on the command line on disk, and works out the stops that come
+from naming a config. cspell-lib takes the stops as given, and doesn't know about command-line options. A stop it's
+given is inclusive unless it's marked exclusive, so a plain folder means the same everywhere. The search function that
+cspell uses at startup still accepts relative paths, for now.
 
 The reason: input people write, such as a command-line flag, comes in many forms, and cspell is where it arrives. A
 program that calls cspell-lib can pass exact values.
+
+The root and each stop must be an existing folder. When one isn't, cspell says so and stops. Guessing which folder was
+meant would hide a typo, and the search could go past where the user meant it to stop.
 
 ### No config setting or opt-out for now
 

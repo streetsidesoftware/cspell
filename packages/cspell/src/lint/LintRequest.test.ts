@@ -1,3 +1,6 @@
+import { existsSync } from 'node:fs';
+import * as path from 'node:path';
+
 import { describe, expect, test } from 'vitest';
 
 import { getReporter } from '../cli-reporter.js';
@@ -20,5 +23,21 @@ describe('LintRequest', () => {
         const fileGlobs: string[] = [];
         const request = new LintRequest(fileGlobs, options, getReporter({ fileGlobs }));
         expect(request).toEqual(expected);
+    });
+
+    test.each`
+        root
+        ${'missing-root'}
+        ${'package.json'}
+    `('the root $root is not an existing folder', ({ root }) => {
+        expect(() => new LintRequest([], { root }, getReporter({ fileGlobs: [] }))).toThrow(
+            'The --root path must be an existing folder.',
+        );
+    });
+
+    test('the root is spelled as on disk', ({ skip }) => {
+        skip(!existsSync('SRC'), 'the file system matches letter case');
+        const request = new LintRequest([], { root: 'SRC' }, getReporter({ fileGlobs: [] }));
+        expect(request.root).toBe(path.resolve('src'));
     });
 });

@@ -1,3 +1,4 @@
+import { existsSync } from 'node:fs';
 import * as fs from 'node:fs/promises';
 import * as path from 'node:path';
 import { resolve as r } from 'node:path';
@@ -168,6 +169,36 @@ describe('Validate the Application', () => {
         expect(reporter.issues[0].text).toBe('baddword'); // cspell:disable-line
         expect(consoleSpy).toHaveBeenCalledWith(expect.stringMatching(/Elapsed Time:/));
         return;
+    });
+
+    test('a root that is not an existing folder is an error', testOptions, async () => {
+        const options: LinterCliOptions = { root: j(searchRoot, 'missing-folder') };
+        await expect(App.lint(['*.md'], options, new InMemoryReporter())).rejects.toThrow(
+            'The --root path must be an existing folder.',
+        );
+    });
+
+    test('a stop that is not an existing folder is an error', testOptions, async () => {
+        const options: LinterCliOptions = { root: searchRoot, stopConfigSearchAt: [j(searchRoot, 'missing-folder')] };
+        await expect(App.lint(['*.md'], options, new InMemoryReporter())).rejects.toThrow(
+            'Each --stop-config-search-at path must be an existing folder.',
+        );
+    });
+
+    test('the root and a stop match in another letter case', testOptions, async ({ skip }) => {
+        const root = j(searchRoot, 'NAMED-config');
+        skip(!existsSync(root), 'the file system matches letter case');
+        const options: LinterCliOptions = {
+            root,
+            config: j(searchRoot, 'named-config', 'cspell.ci.json'),
+            stopConfigSearchAt: [j(searchRoot, 'Named-Config')],
+            report: 'flagged',
+        };
+        const reporter = new InMemoryReporter();
+        const result = await App.lint(['src/a.md'], options, reporter);
+        expect(reporter.errors).toEqual([]);
+        expect(result).toEqual(oc({ files: 1 }));
+        expect(reporter.issues.map((issue) => issue.text).sort()).toEqual(['ciword', 'rootword']);
     });
 
     test('Tests running the application with no config search', testOptions, async () => {

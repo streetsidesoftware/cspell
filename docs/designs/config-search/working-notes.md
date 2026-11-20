@@ -11,8 +11,7 @@ source of truth.
 - [x] Work through `--stop-config-search-at`: inclusive in both searches, and with `--config`, replacing the default
       stops at or below its folder.
 - [x] Settle the rest of the whole-feature questions in the [design questions](../../design-questions.md).
-- [ ] Follow-up, only if it's needed: match stops by their real folder, so different spellings of the same folder
-      match.
+- [x] Look up the root and each stop on disk once, at startup. One that isn't an existing folder is an error.
 - [x] Update the docs: the overrides page, the "Checking Each File" section of the globs page, and the help text of
       `--config` and `--stop-config-search-at`. The help text regenerates the `--help` snapshots, the cspell README,
       and the website's help page.
@@ -20,10 +19,12 @@ source of truth.
 
 ## Notes
 
-### Matching by real folder
+### Folders on disk
 
-If it's needed, cspell normalizes the URLs before it passes them to cspell-lib, as it does with the rest of its
-input. cspell-lib takes them as given.
+- Once, at startup, cspell looks up the root and each stop on disk, and passes the result on. Symbolic links are kept
+  as given. cspell-lib takes the stops as given.
+- A root or stop that isn't an existing folder is an error. Before, a missing root found no files, and the search at
+  startup used the parent folder of a missing stop.
 
 ### Release
 

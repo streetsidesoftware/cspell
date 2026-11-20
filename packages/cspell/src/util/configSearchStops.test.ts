@@ -1,3 +1,4 @@
+import { existsSync } from 'node:fs';
 import * as path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
@@ -17,6 +18,22 @@ describe('resolveStopFolders', () => {
         ${['..', 'src']} | ${[dirUrl(path.resolve('..')), dirUrl(path.resolve('src'))]}
     `('resolveStopFolders $folders', ({ folders, expected }) => {
         expect(resolveStopFolders(folders)).toEqual(expected);
+    });
+
+    test('resolveStopFolders spells a folder as on disk', ({ skip }) => {
+        skip(!existsSync('SRC'), 'the file system matches letter case');
+        expect(resolveStopFolders(['SRC'])).toEqual([dirUrl(path.resolve('src'))]);
+    });
+
+    test.each`
+        folder
+        ${'missing-folder'}
+        ${'package.json'}
+        ${'https://example.com/folder/'}
+    `('resolveStopFolders $folder is not an existing folder', ({ folder }) => {
+        expect(() => resolveStopFolders([folder])).toThrow(
+            'Each --stop-config-search-at path must be an existing folder.',
+        );
     });
 });
 

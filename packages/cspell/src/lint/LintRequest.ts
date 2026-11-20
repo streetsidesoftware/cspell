@@ -1,10 +1,10 @@
-import * as path from 'node:path';
-
 import type { CSpellUserSettings, UnknownWordsConfiguration } from '@cspell/cspell-types';
 import { unknownWordsChoices } from '@cspell/cspell-types';
 
 import type { CSpellConfigFile, LinterCliOptions, LinterOptions } from '../options.js';
 import type { FinalizedReporter } from '../reporters/LintFileResult.js';
+import { ApplicationError } from '../util/errors.js';
+import { findFolderOnDisk } from '../util/folderOnDisk.js';
 import type { GlobSrcInfo } from '../util/glob.js';
 import { calcExcludeGlobInfo } from '../util/glob.js';
 import { sizeToNumber } from '../util/unitNumbers.js';
@@ -34,7 +34,9 @@ export class LintRequest {
         readonly options: LinterCliOptions & Deprecated,
         readonly reporter: FinalizedReporter,
     ) {
-        this.root = path.resolve(options.root || process.cwd());
+        const root = findFolderOnDisk(options.root || process.cwd());
+        if (!root) throw new ApplicationError('The --root path must be an existing folder.');
+        this.root = root;
         this.configFile = options.config;
         this.excludes = calcExcludeGlobInfo(this.root, options.exclude);
         this.locale = options.locale ?? options.local ?? '';

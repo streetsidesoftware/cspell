@@ -43,7 +43,11 @@ export interface AppError extends Error {
     syscall?: string | undefined;
 }
 
-export function lint(fileGlobs: string[], options: LinterCliOptions, reporter?: CSpellReporter): Promise<RunResult> {
+export async function lint(
+    fileGlobs: string[],
+    options: LinterCliOptions,
+    reporter?: CSpellReporter,
+): Promise<RunResult> {
     options = fixLegacy(options);
     const unknownWordsConfig = extractUnknownWordsConfig(options);
     const useOptions = { ...options, ...unknownWordsConfig };
