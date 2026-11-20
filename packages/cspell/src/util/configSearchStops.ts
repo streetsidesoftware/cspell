@@ -1,6 +1,4 @@
-import { fileURLToPath } from 'node:url';
-
-import { toFileDirURL } from '@cspell/url';
+import { isUrlLike, toFileDirURL, toFilePathOrHref } from '@cspell/url';
 import type { StopAtLocation } from 'cspell-lib';
 
 import { ApplicationError } from './errors.js';
@@ -23,8 +21,8 @@ export async function resolveStopFolders(
 }
 
 async function resolveStopFolder(folder: string, lookup: FolderLookup): Promise<URL> {
-    const url = toFileDirURL(folder);
-    const found = url.protocol === 'file:' ? await lookup.find(fileURLToPath(url)) : undefined;
+    const filePath = toFilePathOrHref(toFileDirURL(folder));
+    const found = isUrlLike(filePath) ? undefined : await lookup.find(filePath);
     if (!found) throw new ApplicationError('Each --stop-config-search-at path must be an existing folder.');
     return toFileDirURL(found);
 }

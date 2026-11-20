@@ -31,6 +31,7 @@ describe('resolveStopFolders', () => {
         ${'missing-folder'}
         ${'package.json'}
         ${'https://example.com/folder/'}
+        ${'file://server/share/folder/'}
     `('resolveStopFolders $folder is not an existing folder', async ({ folder }) => {
         await expect(resolveStopFolders([folder], createFolderLookup())).rejects.toThrow(
             'Each --stop-config-search-at path must be an existing folder.',

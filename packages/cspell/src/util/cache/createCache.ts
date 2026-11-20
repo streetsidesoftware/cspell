@@ -1,10 +1,9 @@
 import assert from 'node:assert';
 import { stat } from 'node:fs/promises';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 
 import type { CacheSettings, CSpellSettings } from '@cspell/cspell-types';
-import { toFileURL } from '@cspell/url';
+import { isUrlLike, toFilePathOrHref, toFileURL } from '@cspell/url';
 
 import { isErrorLike } from '../errors.js';
 import type { CacheKeyOptions, CacheOptions } from './CacheOptions.js';
@@ -102,11 +101,12 @@ function calcOptionsKey(cacheOptions: CacheKeyOptions, root: string): string | u
 }
 
 function relativeStopFolders(folders: readonly URL[], root: string): string[] {
-    return folders.map((folder) => relativeToRoot(fileURLToPath(folder), root)).sort();
+    return folders.map((folder) => relativeToRoot(toFilePathOrHref(folder), root)).sort();
 }
 
 function relativeConfigPath(url: URL, root: string): string {
-    return url.protocol === 'file:' ? relativeToRoot(fileURLToPath(url), root) : url.href;
+    const filePath = toFilePathOrHref(url);
+    return isUrlLike(filePath) ? filePath : relativeToRoot(filePath, root);
 }
 
 /**
