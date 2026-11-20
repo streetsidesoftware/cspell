@@ -12,10 +12,9 @@ source of truth.
       stops at or below its folder.
 - [x] Settle the rest of the whole-feature questions in the [design questions](../../design-questions.md).
 - [x] Look up the root and each stop on disk once, at startup. One that isn't an existing folder is an error.
-- [x] Update the docs: the overrides page, the "Checking Each File" section of the globs page, and the help text of
-      `--config` and `--stop-config-search-at`. The help text regenerates the `--help` snapshots, the cspell README,
-      and the website's help page.
-- [ ] Follow-up: website documentation.
+- [x] Update the help text of `--config` and `--stop-config-search-at`. It regenerates the `--help` snapshots, the
+      cspell README, and the website's help page.
+- [ ] Follow-up, after the release: the [website changes](#website-changes).
 - [x] Add app tests for the scenarios below.
 
 ## Notes
@@ -26,6 +25,31 @@ source of truth.
   as given. cspell-lib takes the stops as given.
 - A root or stop that isn't an existing folder is an error. Before, a missing root found no files, and the search at
   startup used the parent folder of a missing stop.
+
+### Website changes
+
+These go in their own PR, after the release that ships the feature. The website deploys on every merge to `main` that
+touches `website/`, so docs merged with the feature would describe behavior users can't use yet.
+
+- The overrides page, "Loading Configuration":
+  - The configuration loaded at start up: the file's own settings are merged in last, "so they override the settings
+    it imports", in place of "so it always wins over what it imports".
+  - The configuration nearest the document: drop "even when `--config` is given". With `--config`, the search for
+    each file stops at the root without loading the configuration files there or above it, and configuration files
+    deeper in the project still apply. With `--stop-config-search-at <dir>`, the search stops at `<dir>`, after
+    looking in it. With `--config`, a `<dir>` at or above the root takes the place of the root, so the configuration
+    files from the root up to `<dir>` load again.
+  - In place of "always wins over the configuration file found from the current working directory": the settings in
+    a `cspell.json` next to a file, or in a folder above it, override the configuration loaded at start up, as long
+    as the search reaches it.
+  - An example with `cspell.json`, `cspell.custom.json`, and `i18n/de/cspell.json`.
+    `cspell lint --config cspell.custom.json "**/*.md"` doesn't load `cspell.json`, and `i18n/de/cspell.json` still
+    applies to the files in `i18n/de/`. To use `cspell.json` as well, import it from `cspell.custom.json`. The named
+    file is merged after its imports, so its own settings override theirs.
+- The globs page, "Checking Each File":
+  - "`--no-config-search` disables this search", in place of "turns this off".
+  - With `--config`, the search stops before the root, and `--stop-config-search-at` sets where it stops. Link to
+    "Loading Configuration" on the overrides page for the details.
 
 ### Release
 
