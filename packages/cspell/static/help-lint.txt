@@ -23,8 +23,7 @@ Check spelling
 Options:
   -c, --config <cspell.json>     Configuration file to use. The search
                                  for each file's configuration stops at
-                                 the root and at this configuration
-                                 file's folder, without looking in them.
+                                 the root, without looking in it.
                                  Configuration files deeper in the
                                  project still apply. Without it, cspell
                                  searches for a configuration file from
@@ -35,10 +34,9 @@ Options:
                                  config file (if any) will be used.
   --stop-config-search-at <dir>  Stop the search for configuration files
                                  at <dir>, after looking in it. With
-                                 --config, it replaces the stops at the
-                                 root and the configuration file's
-                                 folder, for the files under <dir>. Can
-                                 be used more than once.
+                                 --config, a <dir> at or above the root
+                                 replaces the stop at the root. Can be
+                                 used more than once.
   -v, --verbose                  Display more information about the
                                  files being checked. Add more than one
                                  -v for increased verbosity.

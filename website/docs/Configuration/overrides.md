@@ -54,11 +54,11 @@ settings (see [Merge Rules](#merge-rules) below for how array-like settings are 
 1. **The configuration nearest the document** -- found by a second, independent search that starts at the
    document's own directory and walks upward. It overrides everything above it. (Skipped when `--no-config-search`
    is used, or when `noConfigSearch` is `true`.)
-   - With `--config`, the search stops when it reaches the root or the named file's folder, without looking in that
-     folder. So a search that reaches one of them doesn't load the configuration file there, or one above it.
-     Configuration files deeper in the project still apply.
-   - With `--stop-config-search-at <dir>`, the search stops at `<dir>`, after looking in it. With `--config`, it
-     replaces the stops at the root and the named file's folder, for the files under `<dir>`.
+   - With `--config`, the search stops when it reaches the root, without looking in it. So a search that reaches the
+     root doesn't load the configuration file there, or one above it. Configuration files deeper in the project still
+     apply.
+   - With `--stop-config-search-at <dir>`, the search stops at `<dir>`, after looking in it. With `--config`, a `<dir>`
+     at or above the root replaces the stop at the root.
 
 This means a `cspell.json` placed next to an individual file, or in a folder above it, wins over the configuration
 loaded at start up, as long as the search reaches it.

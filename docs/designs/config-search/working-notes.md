@@ -86,9 +86,9 @@ interface StopAtLocation {
   and keeps accepting strings for now. The startup search never needs an exclusive stop: without `--config` there are
   none, and with `--config` there's no startup search. Exclusive stops reach the per-file search only inside
   cspell-lib, so the per-file search no longer calls the public `searchForConfig`.
-- `cspell lint` passes the flag's folders as inclusive. With `--config`, it also passes the root and the named config's
-  folder as exclusive, except the ones at or below a given stop. The set is worked out once at startup, and the walk
-  stops at the first stop it meets. Both kinds go through `stopConfigSearchAt` in the two per-file calls.
+- `cspell lint` passes the flag's folders as inclusive. With `--config`, it also passes the root as exclusive, unless a
+  given stop is at or above it. The set is worked out once at startup, and the walk stops at the first stop it
+  meets. Both kinds go through `stopConfigSearchAt` in the two per-file calls.
 - The flag can be given more than once (`collect` in `commandLint.ts`), so a file may sit under none of the given stops.
   It keeps the default.
 - An exclusive folder goes in the walk's stop set, and the scan predicate in `ConfigSearch` skips it, so `cspell-io`
@@ -153,8 +153,8 @@ merged. "A + B" means B is merged on top of A.
    - Proposed: `configs/cspell.json`.
 10. Two configs in one folder. `pkg/cspell.json`, `pkg/cspell.config.yaml`, `pkg/a.md`. From `.`.
     - Today and proposed, `cspell "**/*.md"`: `pkg/cspell.json`. It comes first in `searchPlaces`.
-    - Today, `cspell --config pkg/cspell.config.yaml "**/*.md"`: `pkg/cspell.config.yaml` + `pkg/cspell.json`.
-    - Proposed, same command: `pkg/cspell.config.yaml`.
+    - Today and proposed, `cspell --config pkg/cspell.config.yaml "**/*.md"`: `pkg/cspell.config.yaml` +
+      `pkg/cspell.json`. The named config's folder isn't a stop.
 11. File outside the root. `cspell.json`, `pkg/a/cspell.custom.yaml`, `pkg/b/b.md`. From `pkg/a`,
     `cspell --config cspell.custom.yaml ../b/b.md`.
     - Today and proposed: `cspell.custom.yaml` + `cspell.json`.
@@ -169,11 +169,8 @@ merged. "A + B" means B is merged on top of A.
 14. A config between the named config's folder and the root. `cspell.json`, `packages/cspell.json`,
     `packages/foo/cspell.strict.json`, `packages/foo/src/a.md`, `packages/bar/b.md`. From `.`,
     `cspell --config packages/foo/cspell.strict.json "**/*.md"`.
-    - Today: both files get `cspell.strict.json` + `packages/cspell.json`.
-    - Proposed: `a.md` gets `cspell.strict.json`. `b.md` is unchanged.
-    - Proposed with `--stop-config-search-at packages`: same as today.
-    - With `packages/foo/cspell.json` too, today `a.md` gets `cspell.strict.json` + `packages/foo/cspell.json`.
-      Proposed, it gets `cspell.strict.json`. With `--stop-config-search-at packages`, it's the same as today: the walk
-      finds `packages/foo/cspell.json` first, so only an import brings in `packages/cspell.json`.
+    - Today and proposed: both files get `cspell.strict.json` + `packages/cspell.json`.
+    - With `packages/foo/cspell.json` too, today and proposed: `a.md` gets `cspell.strict.json` +
+      `packages/foo/cspell.json`.
 
 In scenario 4, `cspell.json` sits in the parent folder of `proj`, outside the project.

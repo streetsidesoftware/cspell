@@ -104,7 +104,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         const stopConfigSearchAt = calcFileConfigSearchStops(
             givenStops,
             toFileDirURL(cfg.root),
-            configInfo.namedConfigUrl,
+            !!configInfo.namedConfigUrl,
         );
 
         const processFileOptions = getProcessFileOptions(configInfo, stopConfigSearchAt);
