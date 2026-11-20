@@ -35,6 +35,13 @@ export class IOError extends ApplicationError {
     }
 }
 
+/**
+ * For a user's mistake: the CLI prints only the message, with no stack.
+ */
+export function applicationAssert(value: unknown, message: string): asserts value {
+    if (!value) throw new ApplicationError(message);
+}
+
 export function toError(e: unknown): NodeError {
     if (isError(e)) return e;
     if (isErrorLike(e)) {

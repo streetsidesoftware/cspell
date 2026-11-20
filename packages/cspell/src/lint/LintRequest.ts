@@ -4,7 +4,7 @@ import { unknownWordsChoices } from '@cspell/cspell-types';
 import type { CSpellConfigFile, LinterCliOptions, LinterOptions } from '../options.js';
 import type { FinalizedReporter } from '../reporters/LintFileResult.js';
 import { resolveStopFolders } from '../util/configSearchStops.js';
-import { ApplicationError } from '../util/errors.js';
+import { applicationAssert } from '../util/errors.js';
 import { createFolderLookup } from '../util/folderOnDisk.js';
 import type { GlobSrcInfo } from '../util/glob.js';
 import { calcExcludeGlobInfo } from '../util/glob.js';
@@ -35,7 +35,7 @@ export async function createLintRequest(
 ): Promise<LintRequest> {
     const lookup = createFolderLookup();
     const root = await lookup.find(options.root || process.cwd());
-    if (!root) throw new ApplicationError('The --root path must be an existing folder.');
+    applicationAssert(root, 'The --root path must be an existing folder.');
     const stopConfigSearchAt = await resolveStopFolders(options.stopConfigSearchAt, lookup);
     return new LintRequest(fileGlobs, options, reporter, { root, stopConfigSearchAt });
 }
