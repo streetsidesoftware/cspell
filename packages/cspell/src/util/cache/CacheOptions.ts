@@ -50,4 +50,6 @@ export interface CacheKeyOptions {
     stopConfigSearchAt?: readonly URL[] | undefined;
     /** The config file loaded at startup. */
     configUrl?: URL | undefined;
+    /** From the command line. A config file's own value is tracked with that file. */
+    noConfigSearch?: boolean | undefined;
 }

@@ -476,6 +476,34 @@ describe('Linter File Caching', () => {
         }
     });
 
+    test('cached results follow --no-config-search', async () => {
+        const cacheLocation = tempLocation('.cspellcache-no-search');
+        await fs.rm(cacheLocation, { recursive: true }).catch(() => undefined);
+        const root = path.join(searchRoot, 'named-config');
+        const noSearch: LinterCliOptions = { configSearch: false };
+        const options: LinterCliOptions = { ...WithCache, cacheLocation, root, report: 'flagged' };
+
+        const runs: [LinterCliOptions, Partial<RunResult>, string[]][] = [
+            [{}, { cachedFiles: 0 }, ['rootword', 'nestedword']],
+            [{}, { cachedFiles: 1 }, ['rootword', 'nestedword']],
+            [noSearch, { cachedFiles: 0 }, ['rootword']],
+            [noSearch, { cachedFiles: 1 }, ['rootword']],
+            [{}, { cachedFiles: 0 }, ['rootword', 'nestedword']],
+        ];
+
+        let r = 0;
+        for (const [runOptions, expected, words] of runs) {
+            ++r;
+            const reporter = new InMemoryReporter();
+            const result = await App.lint(['packages/nested/c.md'], { ...options, ...runOptions }, reporter);
+            expect(reporter.errors).toEqual([]);
+            expect(result, `run #${r} ${JSON.stringify(runOptions)}`).toEqual(
+                oc({ files: 1, issues: words.length, ...expected }),
+            );
+            expect(reporter.issues.map((issue) => issue.text)).toEqual(words);
+        }
+    });
+
     test('cached results follow the stop folders', async () => {
         const reporter = new InMemoryReporter();
         const cacheLocation = tempLocation('.cspellcache-stops');
@@ -605,4 +633,4 @@ function sampleTests(): SampleTest[] {
     // cspell:enable
 }
 
-// cspell:ignore rootword ciword
+// cspell:ignore rootword ciword nestedword

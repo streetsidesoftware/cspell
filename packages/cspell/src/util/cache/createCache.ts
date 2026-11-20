@@ -85,8 +85,16 @@ export async function calcCacheSettings(
 }
 
 function calcOptionsKey(cacheOptions: CacheKeyOptions, root: string): string | undefined {
-    const { languageId, locale, report, showSuggestions, validateDirectives, stopConfigSearchAt, configUrl } =
-        cacheOptions;
+    const {
+        languageId,
+        locale,
+        report,
+        showSuggestions,
+        validateDirectives,
+        stopConfigSearchAt,
+        configUrl,
+        noConfigSearch,
+    } = cacheOptions;
     const options = {
         languageId: languageId || undefined,
         locale: locale || undefined,
@@ -95,6 +103,7 @@ function calcOptionsKey(cacheOptions: CacheKeyOptions, root: string): string | u
         validateDirectives,
         stopConfigSearchAt: stopConfigSearchAt?.length ? relativeStopFolders(stopConfigSearchAt, root) : undefined,
         config: configUrl && relativeConfigPath(configUrl, root),
+        noConfigSearch,
     };
     const set = Object.entries(options).filter(([, value]) => value !== undefined);
     return set.length ? JSON.stringify(Object.fromEntries(set)) : undefined;

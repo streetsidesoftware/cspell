@@ -36,6 +36,9 @@ describe('calcOptionsKey', () => {
         ${{ stopConfigSearchAt: stops('.') }}                   | ${'{"stopConfigSearchAt":["."]}'}
         ${{ stopConfigSearchAt: stops('src', '..') }}           | ${'{"stopConfigSearchAt":["..","src"]}'}
         ${{ stopConfigSearchAt: stops('src/a/b') }}             | ${'{"stopConfigSearchAt":["src/a/b"]}'}
+        ${{ noConfigSearch: undefined }}                        | ${undefined}
+        ${{ noConfigSearch: true }}                             | ${'{"noConfigSearch":true}'}
+        ${{ noConfigSearch: false }}                            | ${'{"noConfigSearch":false}'}
     `('calcOptionsKey $options', ({ options, expected }) => {
         expect(calcOptionsKey(options, process.cwd())).toBe(expected);
     });
