@@ -3,7 +3,7 @@ import { stat } from 'node:fs/promises';
 import path from 'node:path';
 
 import type { CacheSettings, CSpellSettings } from '@cspell/cspell-types';
-import { toFileURL } from '@cspell/url';
+import { isUrlLike, toFilePathOrHref, toFileURL } from '@cspell/url';
 
 import { isErrorLike } from '../errors.js';
 import type { CacheKeyOptions, CacheOptions } from './CacheOptions.js';
@@ -70,7 +70,7 @@ export async function calcCacheSettings(
     if (cacheOptions.cacheReset) {
         optionals.reset = true;
     }
-    const optionsKey = calcOptionsKey(cacheOptions);
+    const optionsKey = calcOptionsKey(cacheOptions, root);
     if (optionsKey) {
         optionals.optionsKey = optionsKey;
     }
@@ -84,17 +84,36 @@ export async function calcCacheSettings(
     };
 }
 
-function calcOptionsKey(cacheOptions: CacheKeyOptions): string | undefined {
-    const { languageId, locale, report, showSuggestions, validateDirectives } = cacheOptions;
+function calcOptionsKey(cacheOptions: CacheKeyOptions, root: string): string | undefined {
+    const { languageId, locale, report, showSuggestions, validateDirectives, stopConfigSearchAt, configUrl } =
+        cacheOptions;
     const options = {
         languageId: languageId || undefined,
         locale: locale || undefined,
         report: report || undefined,
         showSuggestions,
         validateDirectives,
+        stopConfigSearchAt: stopConfigSearchAt?.length ? relativeStopFolders(stopConfigSearchAt, root) : undefined,
+        config: configUrl && relativeConfigPath(configUrl, root),
     };
     const set = Object.entries(options).filter(([, value]) => value !== undefined);
     return set.length ? JSON.stringify(Object.fromEntries(set)) : undefined;
+}
+
+function relativeStopFolders(folders: readonly URL[], root: string): string[] {
+    return folders.map((folder) => relativeToRoot(toFilePathOrHref(folder), root)).sort();
+}
+
+function relativeConfigPath(url: URL, root: string): string {
+    const filePath = toFilePathOrHref(url);
+    return isUrlLike(filePath) ? filePath : relativeToRoot(filePath, root);
+}
+
+/**
+ * Relative to the root with `/` separators, so a shared cache matches on another machine.
+ */
+function relativeToRoot(file: string, root: string): string {
+    return path.relative(root, file).split(path.sep).join('/') || '.';
 }
 
 async function resolveCacheLocation(cacheLocation: string): Promise<string> {

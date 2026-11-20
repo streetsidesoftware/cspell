@@ -152,6 +152,7 @@
       "listAllFiles": true,
       "args": [
         "--config=${repoConfig}/cspell.json",
+        "--stop-config-search-at=${commonRoot}",
         "**/*.*"
       ]
     },
@@ -243,6 +244,7 @@
       "url": "https://github.com/googleapis/google-cloud-cpp.git",
       "args": [
         "--config=${repoConfig}/cspell.json",
+        "--stop-config-search-at=${commonRoot}",
         "**/*",
         "-e",
         "{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"

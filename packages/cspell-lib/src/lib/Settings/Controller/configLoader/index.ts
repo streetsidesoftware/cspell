@@ -7,6 +7,7 @@ export {
     sectionCSpell,
 } from './configLoader.js';
 export { defaultConfigFilenames } from './configLocations.js';
+export type { StopAtLocation } from './configSearch.js';
 export type { CSpellConfigFile, ICSpellConfigFile } from './defaultConfigLoader.js';
 export {
     clearCachedSettingsFiles,
@@ -20,6 +21,7 @@ export {
     resolveConfigFileImports,
     resolveSettingsImports,
     searchForConfig,
+    searchForConfigWithResolvedStops,
 } from './defaultConfigLoader.js';
 export { extractImportErrors, type ImportFileRefWithError } from './extractImportErrors.js';
 export { readSettings } from './readSettings.js';

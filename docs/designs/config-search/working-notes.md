@@ -11,20 +11,45 @@ source of truth.
 - [x] Work through `--stop-config-search-at`: inclusive in both searches, and with `--config`, replacing the default
       stops at or below its folder.
 - [x] Settle the rest of the whole-feature questions in the [design questions](../../design-questions.md).
-- [ ] Match stops by their real folder, so different spellings of the same folder match.
-- [ ] Update the docs: the overrides page, the "Checking Each File" section of the globs page, and the help text of
-      `--config` and `--stop-config-search-at`. The help text regenerates the `--help` snapshots, the cspell README,
-      and the website's help page.
-- [ ] Add app tests for the scenarios below.
-
-## Open questions
-
-- The per-file option's type: it takes URLs and `StopAtLocation`s but no strings, so it can't be `StopSearchAt`. Does
-  it get a name of its own, or is it written inline on both interfaces?
-- Matching by real folder: cspell can resolve the stops' real folders at startup, but the folders of each walk come
-  from cspell-lib. Which side resolves them?
+- [x] Look up the root and each stop on disk once, at startup. One that isn't an existing folder is an error.
+- [x] Update the help text of `--config` and `--stop-config-search-at`. It regenerates the `--help` snapshots, the
+      cspell README, and the website's help page.
+- [ ] Follow-up, after the release: the [website changes](#website-changes).
+- [x] Add app tests for the scenarios below.
 
 ## Notes
+
+### Folders on disk
+
+- Once, at startup, cspell looks up the root and each stop on disk, and passes the result on. Symbolic links are kept
+  as given. cspell-lib takes the stops as given.
+- A root or stop that isn't an existing folder is an error. Before, a missing root found no files, and the search at
+  startup used the parent folder of a missing stop.
+
+### Website changes
+
+These go in their own PR, after the release that ships the feature. The website deploys on every merge to `main` that
+touches `website/`, so docs merged with the feature would describe behavior users can't use yet.
+
+- The overrides page, "Loading Configuration":
+  - The configuration loaded at start up: the file's own settings are merged in last, "so they override the settings
+    it imports", in place of "so it always wins over what it imports".
+  - The configuration nearest the document: drop "even when `--config` is given". With `--config`, the search for
+    each file stops at the root without loading the configuration files there or above it, and configuration files
+    deeper in the project still apply. With `--stop-config-search-at <dir>`, the search stops at `<dir>`, after
+    looking in it. With `--config`, a `<dir>` at or above the root takes the place of the root, so the configuration
+    files from the root up to `<dir>` load again.
+  - In place of "always wins over the configuration file found from the current working directory": the settings in
+    a `cspell.json` next to a file, or in a folder above it, override the configuration loaded at start up, as long
+    as the search reaches it.
+  - An example with `cspell.json`, `cspell.custom.json`, and `i18n/de/cspell.json`.
+    `cspell lint --config cspell.custom.json "**/*.md"` doesn't load `cspell.json`, and `i18n/de/cspell.json` still
+    applies to the files in `i18n/de/`. To use `cspell.json` as well, import it from `cspell.custom.json`. The named
+    file is merged after its imports, so its own settings override theirs.
+- The globs page, "Checking Each File":
+  - "`--no-config-search` disables this search", in place of "turns this off".
+  - With `--config`, the search stops before the root, and `--stop-config-search-at` sets where it stops. Link to
+    "Loading Configuration" on the overrides page for the details.
 
 ### Release
 
@@ -37,8 +62,9 @@ changed default as breaking.
   behavior. It also says that `--stop-config-search-at` now limits the search for each file. An example shows the
   configs one command loads, before and after.
 - PR #9640 isn't merged on its own. Its per-file stop is part of the feature PR.
-- No name is provisional, except possibly the per-file option's type (see Open questions). There's no new config
-  option or CLI flag, and `StopAtLocation` is settled.
+- No name is provisional. There's no new config option or CLI flag, and `StopAtLocation` is settled. The per-file
+  option's type has no name of its own: it's written once on `DocumentValidatorOptions`, and `SpellCheckFileOptions`
+  picks it from there.
 - The generated Properties page doesn't change. cspell-action's `config` input text still holds.
 
 ### Today
@@ -86,9 +112,9 @@ interface StopAtLocation {
   and keeps accepting strings for now. The startup search never needs an exclusive stop: without `--config` there are
   none, and with `--config` there's no startup search. Exclusive stops reach the per-file search only inside
   cspell-lib, so the per-file search no longer calls the public `searchForConfig`.
-- `cspell lint` passes the flag's folders as inclusive. With `--config`, it also passes the root and the named config's
-  folder as exclusive, except the ones at or below a given stop. The set is worked out once at startup, and the walk
-  stops at the first stop it meets. Both kinds go through `stopConfigSearchAt` in the two per-file calls.
+- `cspell lint` passes the flag's folders as inclusive. With `--config`, it also passes the root as exclusive, unless a
+  given stop is at or above it. The set is worked out once at startup, and the walk stops at the first stop it
+  meets. Both kinds go through `stopConfigSearchAt` in the two per-file calls.
 - The flag can be given more than once (`collect` in `commandLint.ts`), so a file may sit under none of the given stops.
   It keeps the default.
 - An exclusive folder goes in the walk's stop set, and the scan predicate in `ConfigSearch` skips it, so `cspell-io`
@@ -153,8 +179,8 @@ merged. "A + B" means B is merged on top of A.
    - Proposed: `configs/cspell.json`.
 10. Two configs in one folder. `pkg/cspell.json`, `pkg/cspell.config.yaml`, `pkg/a.md`. From `.`.
     - Today and proposed, `cspell "**/*.md"`: `pkg/cspell.json`. It comes first in `searchPlaces`.
-    - Today, `cspell --config pkg/cspell.config.yaml "**/*.md"`: `pkg/cspell.config.yaml` + `pkg/cspell.json`.
-    - Proposed, same command: `pkg/cspell.config.yaml`.
+    - Today and proposed, `cspell --config pkg/cspell.config.yaml "**/*.md"`: `pkg/cspell.config.yaml` +
+      `pkg/cspell.json`. The named config's folder isn't a stop.
 11. File outside the root. `cspell.json`, `pkg/a/cspell.custom.yaml`, `pkg/b/b.md`. From `pkg/a`,
     `cspell --config cspell.custom.yaml ../b/b.md`.
     - Today and proposed: `cspell.custom.yaml` + `cspell.json`.
@@ -169,11 +195,8 @@ merged. "A + B" means B is merged on top of A.
 14. A config between the named config's folder and the root. `cspell.json`, `packages/cspell.json`,
     `packages/foo/cspell.strict.json`, `packages/foo/src/a.md`, `packages/bar/b.md`. From `.`,
     `cspell --config packages/foo/cspell.strict.json "**/*.md"`.
-    - Today: both files get `cspell.strict.json` + `packages/cspell.json`.
-    - Proposed: `a.md` gets `cspell.strict.json`. `b.md` is unchanged.
-    - Proposed with `--stop-config-search-at packages`: same as today.
-    - With `packages/foo/cspell.json` too, today `a.md` gets `cspell.strict.json` + `packages/foo/cspell.json`.
-      Proposed, it gets `cspell.strict.json`. With `--stop-config-search-at packages`, it's the same as today: the walk
-      finds `packages/foo/cspell.json` first, so only an import brings in `packages/cspell.json`.
+    - Today and proposed: both files get `cspell.strict.json` + `packages/cspell.json`.
+    - With `packages/foo/cspell.json` too, today and proposed: `a.md` gets `cspell.strict.json` +
+      `packages/foo/cspell.json`.
 
 In scenario 4, `cspell.json` sits in the parent folder of `proj`, outside the project.

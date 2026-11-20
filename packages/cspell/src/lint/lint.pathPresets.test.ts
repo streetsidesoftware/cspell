@@ -12,7 +12,7 @@ import { findFiles } from '../util/fileHelper.js';
 import { buildGlobMatcher, extractGlobsFromMatcher } from '../util/glob.js';
 import { InMemoryReporter } from '../util/InMemoryReporter.js';
 import { runLint } from './lint.js';
-import { LintRequest } from './LintRequest.js';
+import { createLintRequest } from './LintRequest.js';
 
 const messageFiles = [
     '.git/COMMIT_EDITMSG',
@@ -69,7 +69,7 @@ describe('lint with ignorePathPresets', () => {
         const reporter = new InMemoryReporter();
         const root = path.join(repo, runFrom);
         const config = path.join(repo, configFile);
-        const result = await runLint(new LintRequest(globs, { root, config, ...options }, reporter));
+        const result = await runLint(await createLintRequest(globs, { root, config, ...options }, reporter));
         const files = reporter.issues.map((i) => toPosix(path.relative(repo, fileURLToPath(i.uri || ''))));
         return { result, checked: sorted([...new Set(files)]) };
     }
@@ -185,7 +185,7 @@ describe('lint with nestedWorktrees', () => {
         const reporter = new InMemoryReporter();
         const root = path.join(repo, runFrom);
         const config = path.join(repo, configFile);
-        await runLint(new LintRequest(globs, { root, config, ...options }, reporter));
+        await runLint(await createLintRequest(globs, { root, config, ...options }, reporter));
         const files = reporter.issues.map((i) => toPosix(path.relative(repo, fileURLToPath(i.uri || ''))));
         return sorted([...new Set(files)]);
     }

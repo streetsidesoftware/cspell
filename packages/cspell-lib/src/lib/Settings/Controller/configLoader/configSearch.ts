@@ -3,16 +3,40 @@ import { extname } from 'node:path/posix';
 import { urlBasename } from 'cspell-io';
 
 import type { VFileSystem, VfsDirEntry } from '../../../fileSystem.js';
-import { createAutoResolveCache } from '../../../util/AutoResolve.js';
+import { autoResolve, createAutoResolveCache } from '../../../util/AutoResolve.js';
 import { findUpFromUrl } from '../../../util/findUpFromUrl.js';
 
 type Href = string;
 
+/**
+ * A directory where the search for a configuration file stops.
+ */
+export interface StopAtLocation {
+    /**
+     * The directory.
+     *
+     * A URL that doesn't end in `/` is taken as a file, and the search stops at its directory.
+     */
+    url: URL;
+    /**
+     * Stop without looking for a configuration file in the directory.
+     *
+     * By default, a configuration file in the directory is still found.
+     */
+    exclusive?: boolean | undefined;
+}
+
+interface StopDir {
+    url: URL;
+    exclusive: boolean;
+}
+
 export class ConfigSearch {
     /**
-     * Cache of search results.
+     * Cache of search results, keyed by the stops, then by the search directory.
+     * A result is only valid for the stops it was found with.
      */
-    #searchCache = new Map<Href, Promise<URL | undefined>>();
+    #searchCache = new Map<string, Map<Href, Promise<URL | undefined>>>();
     /**
      * The scanner to use to search for config files.
      */
@@ -31,14 +55,13 @@ export class ConfigSearch {
         this.#scanner = new DirConfigScanner(searchPlaces, allowedExtensionsByProtocol, fs);
     }
 
-    async searchForConfig(searchFromURL: URL, stopSearchAtURL?: URL[]): Promise<URL | undefined> {
-        const dirUrl = searchFromURL.pathname.endsWith('/') ? searchFromURL : new URL('./', searchFromURL);
-
-        const stopDirUrls = stopSearchAtURL
-            ? stopSearchAtURL.map((url) => (url.pathname.endsWith('/') ? url : new URL('./', url)))
-            : undefined;
-
-        return this.#findUp(dirUrl, stopDirUrls);
+    async searchForConfig(
+        searchFromURL: URL,
+        stopSearchAt?: readonly (URL | StopAtLocation)[],
+    ): Promise<URL | undefined> {
+        const dirUrl = toDirURL(searchFromURL);
+        const stops = stopSearchAt?.map(toStopDir);
+        return this.#findUp(dirUrl, stops);
     }
 
     clearCache(): void {
@@ -46,19 +69,23 @@ export class ConfigSearch {
         this.#scanner.clearCache();
     }
 
-    #findUp(fromDir: URL, stopDirUrls?: URL[]): Promise<URL | undefined> {
-        const searchDirCache = this.#searchCache;
+    #findUp(fromDir: URL, stops?: StopDir[]): Promise<URL | undefined> {
+        const stopKey = stops?.map((stop) => (stop.exclusive ? '!' : '') + stop.url.href).join('\n') ?? '';
+        const searchDirCache = autoResolve(this.#searchCache, stopKey, () => new Map());
         const cached = searchDirCache.get(fromDir.href);
         if (cached) {
             return cached;
         }
+        const exclusiveStops = new Set<Href>(stops?.filter((stop) => stop.exclusive).map((stop) => stop.url.href));
         const visited: URL[] = [];
         let result: Promise<URL | undefined> | undefined = undefined;
         const predicate = (dir: URL) => {
             visit(dir);
+            if (exclusiveStops.has(dir.href)) return undefined;
             return this.#scanner.scanDirForConfigFile(dir);
         };
-        result = findUpFromUrl(predicate, fromDir, { type: 'file', ...(stopDirUrls && { stopAt: stopDirUrls }) });
+        const stopAt = stops?.map((stop) => stop.url);
+        result = findUpFromUrl(predicate, fromDir, { type: 'file', ...(stopAt && { stopAt }) });
         searchDirCache.set(fromDir.href, result);
         visited.forEach((dir) => searchDirCache.set(dir.href, result));
         return result;
@@ -188,6 +215,15 @@ export class DirConfigScanner {
 
         return undefined;
     }
+}
+
+function toDirURL(url: URL): URL {
+    return url.pathname.endsWith('/') ? url : new URL('./', url);
+}
+
+function toStopDir(stop: URL | StopAtLocation): StopDir {
+    if (stop instanceof URL) return { url: toDirURL(stop), exclusive: false };
+    return { url: toDirURL(stop.url), exclusive: !!stop.exclusive };
 }
 
 function setupSearchPlacesByProtocol(

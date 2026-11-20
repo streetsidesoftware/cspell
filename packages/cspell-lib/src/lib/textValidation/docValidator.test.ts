@@ -62,6 +62,20 @@ describe('docValidator', () => {
         expect(dVal.checkDocument()).toEqual([]);
     });
 
+    test.each`
+        desc                                         | stopConfigSearchAt                                                            | expected
+        ${'uses the config above without a stop'}    | ${undefined}                                                                  | ${['hello']}
+        ${'ignores the config above the stop'}       | ${[fixDirURL('stop-config-search/project')]}                                  | ${[]}
+        ${'uses the config in an inclusive stop'}    | ${[fixDirURL('stop-config-search')]}                                          | ${['hello']}
+        ${'ignores the config in an exclusive stop'} | ${[{ url: fixDirURL('stop-config-search'), exclusive: true }]}                | ${[]}
+        ${'stops at the first stop it reaches'}      | ${[fixDirURL('stop-config-search'), fixDirURL('stop-config-search/project')]} | ${[]}
+    `('checkDocument $desc', async ({ stopConfigSearchAt, expected }) => {
+        const doc = await loadDoc(fix('stop-config-search/project/notes.md'));
+        const dVal = new DocumentValidator(doc, { generateSuggestions: false, stopConfigSearchAt }, {});
+        await dVal.prepare();
+        expect(dVal.checkDocument().map((issue) => issue.text)).toEqual(expected);
+    });
+
     describe('include ranges for a document that is not checked', () => {
         // cspell:ignore wrngwrd
         const text = 'This has a wrngwrd.';
@@ -456,6 +470,17 @@ describe('shouldCheckDocument', () => {
             expect({ ...result, settings: undefined }).toEqual(oc({ errors: [], reason: undefined, ...expected }));
         },
     );
+
+    test.each`
+        desc                                         | stopConfigSearchAt                                             | expected
+        ${'uses the config above without a stop'}    | ${undefined}                                                   | ${{ shouldCheck: false, reason: 'Excluded by ignorePaths.' }}
+        ${'ignores the config above the stop'}       | ${[fixDirURL('stop-config-search/project')]}                   | ${{ shouldCheck: true }}
+        ${'ignores the config in an exclusive stop'} | ${[{ url: fixDirURL('stop-config-search'), exclusive: true }]} | ${{ shouldCheck: true }}
+    `('shouldCheckDocument $desc', async ({ stopConfigSearchAt, expected }) => {
+        const uri = toUri(pathToFileURL(fix('stop-config-search/project/ignored.md')));
+        const result = await shouldCheckDocument({ uri }, { stopConfigSearchAt }, s());
+        expect({ ...result, settings: undefined }).toEqual(oc({ errors: [], reason: undefined, ...expected }));
+    });
 });
 
 describe('docValidator trace', () => {
@@ -525,6 +550,10 @@ function fixDir(...fixtureFile: string[]): string {
  */
 function fix(...fixtureFile: string[]): string {
     return fixDir('docValidator', ...fixtureFile);
+}
+
+function fixDirURL(...fixtureFile: string[]): URL {
+    return pathToFileURL(fix(...fixtureFile) + path.sep);
 }
 
 function fixSubs(...fixtureFile: string[]): string {
