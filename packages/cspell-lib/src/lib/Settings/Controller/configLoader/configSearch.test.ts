@@ -7,6 +7,7 @@ import { pathPackageSamplesURL, pathRepoTestFixturesURL } from '../../../../test
 import { getVirtualFS } from '../../../fileSystem.js';
 import { resolveFileWithURL, toURL } from '../../../util/url.js';
 import { defaultConfigFilenames as searchPlaces } from './configLocations.js';
+import type { StopAtLocation } from './configSearch.js';
 import { ConfigSearch } from './configSearch.js';
 
 const virtualURL = new URL('virtual-fs://github/cspell-io/');
@@ -120,6 +121,39 @@ describe('ConfigSearch', () => {
             expect(await configSearch.searchForConfig(searchFrom, [stopDir])).toEqual(expected);
         });
 
+        test('that a stop list is only read the first time it is given', async () => {
+            const configSearch = new ConfigSearch(searchPlaces, allowedExtensionsByProtocol, getVirtualFS().fs);
+            const stopDir = sURL('./');
+            const expected = sURL('.cspell.json');
+            let reads = 0;
+            const stop: StopAtLocation = {
+                get url() {
+                    ++reads;
+                    return stopDir;
+                },
+            };
+            const stops = [stop];
+
+            expect(await configSearch.searchForConfig(sURL('src/'), stops)).toEqual(expected);
+            expect(reads).toBe(1);
+            expect(await configSearch.searchForConfig(sURL('src/nested/'), stops)).toEqual(expected);
+            expect(reads).toBe(1);
+        });
+
+        test('that another list with the same stops gives the same result', async () => {
+            const configSearch = new ConfigSearch(searchPlaces, allowedExtensionsByProtocol, getVirtualFS().fs);
+            const stopDir = sURL('./');
+            const searchFrom = sURL('src/');
+            const expected = sURL('.cspell.json');
+
+            const result = await configSearch.searchForConfig(searchFrom, [stopDir]);
+            expect(result).toEqual(expected);
+            expect(await configSearch.searchForConfig(searchFrom, [stopDir])).toBe(result);
+            expect(await configSearch.searchForConfig(searchFrom, [{ url: stopDir }])).toBe(result);
+            expect(await configSearch.searchForConfig(searchFrom, [{ url: stopDir, exclusive: true }])).toBeUndefined();
+            expect(await configSearch.searchForConfig(searchFrom, [{ url: stopDir, exclusive: true }])).toBeUndefined();
+        });
+
         test('symbolic links', async () => {
             const dir = new URL('issues/issue-5120/', pathRepoTestFixturesURL);
             const info = await nfs.readdir(dir, { withFileTypes: true });
@@ -144,6 +178,21 @@ describe('ConfigSearch', () => {
             const result3 = await configSearch.searchForConfig(searchFrom);
             expect(result3).toEqual(expectedConfigUrl);
             expect(result3).not.toBe(result);
+        });
+
+        test('should clear the results found with stops', async () => {
+            const configSearch = new ConfigSearch(searchPlaces, allowedExtensionsByProtocol, getVirtualFS().fs);
+            const searchFrom = sURL('src/');
+            const stops = [sURL('./')];
+
+            const result = await configSearch.searchForConfig(searchFrom, stops);
+            expect(result).toEqual(sURL('.cspell.json'));
+            expect(await configSearch.searchForConfig(searchFrom, stops)).toBe(result);
+
+            configSearch.clearCache();
+            const result2 = await configSearch.searchForConfig(searchFrom, stops);
+            expect(result2).toEqual(result);
+            expect(result2).not.toBe(result);
         });
     });
 });
