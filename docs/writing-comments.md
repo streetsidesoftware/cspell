@@ -59,9 +59,9 @@ Cases that need care:
 A property that holds a function runs when called, like a method, so its comment is imperative. A function type
 describes every function of that type, so its comment is in the third person.
 
-In the last row, a noun phrase suits most comments. A boolean that turns one effect on takes a verb that says what `true`
-does. A boolean whose values each do something of their own takes a noun phrase, since a verb would describe only one of
-them.
+In the last row, a noun phrase suits most comments. A boolean that turns one effect on takes a verb that says what
+`true` does. A boolean whose values each do something of their own takes a noun phrase, since a verb would describe only
+one of them.
 
 ## Every comment
 
@@ -363,7 +363,8 @@ After: the contract, with the cases that return the glob unchanged, and why they
 async function adjustPossibleDirectory(glob: Glob, root: string): Promise<Glob>;
 ```
 
-Good as it is: what it does, why some locales disappear, and what `undefined` means.
+Good as it is: what it does, why some locales disappear, and what `undefined` means. The function has the `export`
+keyword, but cspell-lib's entry file doesn't export it, so it's internal.
 
 ```ts
 /**
