@@ -936,6 +936,137 @@ Related: #8975, streetsidesoftware/vscode-spell-checker#3099, streetsidesoftware
 
 </details>
 
+## v10.6.0 (2026-11-21)
+
+### Features
+
+<details>
+<summary>feat: Make `--config` replace the configuration files where cspell runs (<a href="https://github.com/streetsidesoftware/cspell/pull/9640">#9640</a>)</summary>
+
+### feat: Make `--config` replace the configuration files where cspell runs ([#9640](https://github.com/streetsidesoftware/cspell/pull/9640))
+
+## Summary
+
+The `--config <file>` and `--stop-config-search-at <dir>` options now give more control over which configuration files cspell loads.
+
+When cspell checks a file, it uses the nearest configuration file it finds by searching up the directory tree from that file. The `--stop-config-search-at <dir>` option now limits how far up that search goes, for every file. The `--no-config-search` option turns the search off.
+
+Specifying `--config <file>` now prevents loading configuration files from the current directory and the directories above it. Configuration files in subdirectories still apply.
+
+## Feature
+
+A project with two configuration files in its top directory, and one more for its German docs:
+
+```text
+project/
+  cspell.json              { "flagWords": ["hello"] }
+  cspell.custom.json       {}
+  README.md                hello world
+  i18n/de/
+    cspell.json            { "flagWords": ["hallo"] }
+    README.md              hallo welt
+```
+
+Before, running cspell in `project/` still checked `README.md` with `cspell.json`:
+
+```text
+$ cspell lint --config cspell.custom.json "**/*.md"
+i18n/de/README.md:1:1 - Forbidden word (hallo)
+README.md:1:1 - Forbidden word (hello)
+CSpell: Files checked: 2, Issues found: 2 in 2 files.
+```
+
+After, only `cspell.custom.json` applies in the current directory, and `i18n/de/cspell.json` still applies to the German docs:
+
+```text
+$ cspell lint --config cspell.custom.json "**/*.md"
+i18n/de/README.md:1:1 - Forbidden word (hallo)
+CSpell: Files checked: 2, Issues found: 1 in 1 file.
+```
+
+- The same applies to a configuration file named with the `CSPELL_CONFIG_PATH` environment variable, or with cspell-action's `config` input.
+- To also include the configuration file in the current directory, add `--stop-config-search-at .` to the command.
+- To build on `cspell.json`, add `"import": ["./cspell.json"]` to the file you name. Then `cspell.json` applies to every file, and the file you name wins where the two disagree.
+
+To ignore configuration files above the current directory, such as one in your home directory:
+
+```sh
+cspell lint --stop-config-search-at . "**/*.md"
+```
+
+<details>
+<summary>Technical Details</summary>
+
+- In `cspell-lib`, a new option, `stopConfigSearchAt`, sets the directories where the search for a document's configuration file stops. The search looks in each of those directories, and no further up.
+- It's in `SpellCheckFileOptions` and `DocumentValidatorOptions`.
+- An entry can also be a `StopAtLocation`, a new type. With `exclusive: true`, the search stops below that directory, so a configuration file in it isn't used.
+- The lint cache now also records the configuration file you name, or the one cspell finds on its own, and the `--stop-config-search-at` directories. A run where either one differs rechecks its files.
+- They're stored as relative paths, so a shared cache still matches on another machine.
+
+</details>
+
+---
+
+</details>
+
+### Fixes
+
+<details>
+<summary>fix: Show what relative paths are relative to in "cspell lint --help --verbose" (<a href="https://github.com/streetsidesoftware/cspell/pull/9682">#9682</a>)</summary>
+
+### fix: Show what relative paths are relative to in "cspell lint --help --verbose" ([#9682](https://github.com/streetsidesoftware/cspell/pull/9682))
+
+## Summary
+
+The verbose help for `cspell lint` now ends with a table of its path options and what a relative path in each is relative to: the root or the current directory.
+
+- It appears in `cspell lint --help --verbose` and `cspell --help --verbose`.
+- How paths are resolved doesn't change, and the normal `--help` output stays the same.
+
+## Before
+
+```text
+Hidden Options:
+  ...
+  --debug                        Output information useful for debugging cspell.json files.
+  -f,--flag <flag:value>         Declare an execution flag value
+
+More Examples:
+  ...
+```
+
+## After
+
+```text
+Hidden Options:
+  ...
+  --debug                        Output information useful for debugging cspell.json files.
+  -f,--flag <flag:value>         Declare an execution flag value
+
+Relative Paths:
+  Option                    Relative to
+  [globs...]                the root
+  [file://<path>]           the root
+  [stdin://<path>]          the root
+  --file                    the root
+  --exclude                 the root
+  --cache-location          the root
+  --root                    the current directory
+  --config                  the current directory
+  --file-list               the current directory
+    each path in the list   the list file's directory
+  --stop-config-search-at   the current directory
+  --gitignore-root          the current directory
+  --reporter                the current directory
+
+More Examples:
+  ...
+```
+
+---
+
+</details>
+
 ## v10.5.2 (2026-11-18)
 
 ### Fixes
