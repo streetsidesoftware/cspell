@@ -1,6 +1,6 @@
 import * as path from 'node:path';
 import { resolve as r } from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 
 import { describe, expect, test } from 'vitest';
 
@@ -19,54 +19,10 @@ const U = undefined;
 const T = true;
 const F = false;
 
-describe('calcOptionsKey', () => {
-    const { calcOptionsKey } = __testing__;
-
-    test.each`
-        options                                                 | expected
-        ${{}}                                                   | ${undefined}
-        ${{ languageId: '', locale: '' }}                       | ${undefined}
-        ${{ languageId: 'markdown' }}                           | ${'{"languageId":"markdown"}'}
-        ${{ locale: 'fr' }}                                     | ${'{"locale":"fr"}'}
-        ${{ report: 'flagged' }}                                | ${'{"report":"flagged"}'}
-        ${{ showSuggestions: false }}                           | ${'{"showSuggestions":false}'}
-        ${{ validateDirectives: true }}                         | ${'{"validateDirectives":true}'}
-        ${{ validateDirectives: true, languageId: 'markdown' }} | ${'{"languageId":"markdown","validateDirectives":true}'}
-        ${{ stopConfigSearchAt: [] }}                           | ${undefined}
-        ${{ stopConfigSearchAt: stops('.') }}                   | ${'{"stopConfigSearchAt":["."]}'}
-        ${{ stopConfigSearchAt: stops('src', '..') }}           | ${'{"stopConfigSearchAt":["..","src"]}'}
-        ${{ stopConfigSearchAt: stops('src/a/b') }}             | ${'{"stopConfigSearchAt":["src/a/b"]}'}
-    `('calcOptionsKey $options', ({ options, expected }) => {
-        expect(calcOptionsKey(options, process.cwd())).toBe(expected);
-    });
-
-    test.each`
-        config                        | expected
-        ${'cspell.custom.json'}       | ${'{"config":"cspell.custom.json"}'}
-        ${'packages/foo/cspell.json'} | ${'{"config":"packages/foo/cspell.json"}'}
-        ${'../cspell.json'}           | ${'{"config":"../cspell.json"}'}
-    `('calcOptionsKey names the config relative to the root: $config', ({ config, expected }) => {
-        const root = process.cwd();
-        const configUrl = pathToFileURL(path.resolve(root, config));
-        expect(calcOptionsKey({ configUrl }, root)).toBe(expected);
-    });
-
-    test('calcOptionsKey keeps the URL of a config that is not a file', () => {
-        const configUrl = new URL('https://example.com/cspell.json');
-        expect(calcOptionsKey({ configUrl }, process.cwd())).toBe('{"config":"https://example.com/cspell.json"}');
-    });
-
-    test('calcCacheSettings includes the options only when set', async () => {
-        expect(await calcCacheSettings({}, { version, languageId: 'markdown' }, '.')).toEqual(
-            expect.objectContaining({ optionsKey: '{"languageId":"markdown"}' }),
-        );
-        expect(await calcCacheSettings({}, { version }, '.')).not.toHaveProperty('optionsKey');
-    });
-});
-
 describe('Validate calcCacheSettings', () => {
     test.each`
         config                  | options                          | root             | expected                                | comment
+        ${U}                    | ${{}}                            | ${'.'}           | ${cco()}                                | ${'No cache settings'}
         ${{}}                   | ${{}}                            | ${process.cwd()} | ${cco()}                                | ${''}
         ${{}}                   | ${{}}                            | ${__dirname}     | ${cco(F, r(__dirname, '.cspellcache'))} | ${''}
         ${{}}                   | ${{}}                            | ${'.'}           | ${cco()}                                | ${''}
@@ -85,7 +41,14 @@ describe('Validate calcCacheSettings', () => {
         if (!options.version) {
             options.version = version;
         }
-        expect(await calcCacheSettings({ cache: config }, options, root)).toEqual(expected);
+        expect(await calcCacheSettings(config, options, root)).toEqual(expected);
+    });
+
+    test('calcCacheSettings includes the context tag only when set', async () => {
+        expect(await calcCacheSettings({}, { version }, '.', 'tag')).toEqual(
+            expect.objectContaining({ contextTag: 'tag' }),
+        );
+        expect(await calcCacheSettings({}, { version }, '.')).not.toHaveProperty('contextTag');
     });
 });
 
@@ -151,8 +114,4 @@ function co(
     cacheFormat?: CacheOptions['cacheFormat'],
 ) {
     return { cache, cacheLocation, cacheStrategy, version, cacheFormat };
-}
-
-function stops(...folders: string[]): URL[] {
-    return folders.map((folder) => pathToFileURL(path.resolve(folder) + path.sep));
 }
