@@ -152,13 +152,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         try {
             const cacheSettings = await calcCacheSettings(
                 configInfo.config,
-                {
-                    ...cfg.options,
-                    version,
-                    configUrl: configInfo.url,
-                    stopConfigSearchAt: givenStops,
-                    noConfigSearch: cfg.cspellSettingsFromCliOptions.noConfigSearch,
-                },
+                { ...cfg.options, version, configUrl: configInfo.url, stopConfigSearchAt: givenStops },
                 root,
             );
             const symlinks = createSymlinkChecker(root);

@@ -476,11 +476,12 @@ describe('Linter File Caching', () => {
         }
     });
 
-    test('cached results follow --no-config-search', async () => {
+    test('cached results follow whether the run searches for config files', async () => {
         const cacheLocation = tempLocation('.cspellcache-no-search');
         await fs.rm(cacheLocation, { recursive: true }).catch(() => undefined);
         const root = path.join(searchRoot, 'named-config');
         const noSearch: LinterCliOptions = { configSearch: false };
+        const search: LinterCliOptions = { configSearch: true };
         const options: LinterCliOptions = { ...WithCache, cacheLocation, root, report: 'flagged' };
 
         const runs: [LinterCliOptions, Partial<RunResult>, string[]][] = [
@@ -489,6 +490,7 @@ describe('Linter File Caching', () => {
             [noSearch, { cachedFiles: 0 }, ['rootword']],
             [noSearch, { cachedFiles: 1 }, ['rootword']],
             [{}, { cachedFiles: 0 }, ['rootword', 'nestedword']],
+            [search, { cachedFiles: 1 }, ['rootword', 'nestedword']],
         ];
 
         let r = 0;
