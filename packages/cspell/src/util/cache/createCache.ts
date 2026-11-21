@@ -70,7 +70,8 @@ export async function calcCacheSettings(
     if (cacheOptions.cacheReset) {
         optionals.reset = true;
     }
-    const optionsKey = calcOptionsKey(cacheOptions, root);
+    // The settings already hold the command line's value.
+    const optionsKey = calcOptionsKey(cacheOptions, root, !config.noConfigSearch);
     if (optionsKey) {
         optionals.optionsKey = optionsKey;
     }
@@ -84,7 +85,7 @@ export async function calcCacheSettings(
     };
 }
 
-function calcOptionsKey(cacheOptions: CacheKeyOptions, root: string): string | undefined {
+function calcOptionsKey(cacheOptions: CacheKeyOptions, root: string, configSearch: boolean): string | undefined {
     const { languageId, locale, report, showSuggestions, validateDirectives, stopConfigSearchAt, configUrl } =
         cacheOptions;
     const options = {
@@ -95,6 +96,7 @@ function calcOptionsKey(cacheOptions: CacheKeyOptions, root: string): string | u
         validateDirectives,
         stopConfigSearchAt: stopConfigSearchAt?.length ? relativeStopFolders(stopConfigSearchAt, root) : undefined,
         config: configUrl && relativeConfigPath(configUrl, root),
+        configSearch: configSearch ? undefined : false,
     };
     const set = Object.entries(options).filter(([, value]) => value !== undefined);
     return set.length ? JSON.stringify(Object.fromEntries(set)) : undefined;

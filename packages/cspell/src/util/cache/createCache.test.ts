@@ -37,7 +37,7 @@ describe('calcOptionsKey', () => {
         ${{ stopConfigSearchAt: stops('src', '..') }}           | ${'{"stopConfigSearchAt":["..","src"]}'}
         ${{ stopConfigSearchAt: stops('src/a/b') }}             | ${'{"stopConfigSearchAt":["src/a/b"]}'}
     `('calcOptionsKey $options', ({ options, expected }) => {
-        expect(calcOptionsKey(options, process.cwd())).toBe(expected);
+        expect(calcOptionsKey(options, process.cwd(), true)).toBe(expected);
     });
 
     test.each`
@@ -48,12 +48,30 @@ describe('calcOptionsKey', () => {
     `('calcOptionsKey names the config relative to the root: $config', ({ config, expected }) => {
         const root = process.cwd();
         const configUrl = pathToFileURL(path.resolve(root, config));
-        expect(calcOptionsKey({ configUrl }, root)).toBe(expected);
+        expect(calcOptionsKey({ configUrl }, root, true)).toBe(expected);
     });
 
     test('calcOptionsKey keeps the URL of a config that is not a file', () => {
         const configUrl = new URL('https://example.com/cspell.json');
-        expect(calcOptionsKey({ configUrl }, process.cwd())).toBe('{"config":"https://example.com/cspell.json"}');
+        expect(calcOptionsKey({ configUrl }, process.cwd(), true)).toBe('{"config":"https://example.com/cspell.json"}');
+    });
+
+    test.each`
+        configSearch | expected
+        ${true}      | ${undefined}
+        ${false}     | ${'{"configSearch":false}'}
+    `('calcOptionsKey records only a run that does not search: $configSearch', ({ configSearch, expected }) => {
+        expect(calcOptionsKey({}, process.cwd(), configSearch)).toBe(expected);
+    });
+
+    test.each`
+        noConfigSearch | expected
+        ${undefined}   | ${undefined}
+        ${false}       | ${undefined}
+        ${true}        | ${'{"configSearch":false}'}
+    `('calcCacheSettings keys on the noConfigSearch setting: $noConfigSearch', async ({ noConfigSearch, expected }) => {
+        const settings = await calcCacheSettings({ noConfigSearch }, { version }, '.');
+        expect(settings.optionsKey).toBe(expected);
     });
 
     test('calcCacheSettings includes the options only when set', async () => {
