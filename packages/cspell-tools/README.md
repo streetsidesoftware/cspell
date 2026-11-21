@@ -36,16 +36,6 @@ For large files, this process can take a long time and us a lot of memory.
 
 The tool `cspell-trie` can be used to read the contents of a `.trie` or `.trie.gz` file.
 
-## CSpell for Enterprise
-
-<!--- @@inject: ../../static/tidelift.md --->
-
-Available as part of the Tidelift Subscription.
-
-The maintainers of cspell and thousands of other packages are working with Tidelift to deliver commercial support and maintenance for the open source packages you use to build your applications. Save time, reduce risk, and improve code health, while paying the maintainers of the exact packages you use. [Learn more.](https://tidelift.com/subscription/pkg/npm-cspell?utm_source=npm-cspell&utm_medium=referral&utm_campaign=enterprise&utm_term=repo)
-
-<!--- @@inject-end: ../../static/tidelift.md --->
-
 <!--- @@inject: ../../static/footer.md --->
 
 <br/>

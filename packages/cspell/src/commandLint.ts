@@ -36,6 +36,23 @@ Examples:
     cspell stdin://docs/doc.md      Check stdin as "./docs/doc.md"\
 `;
 
+const relativePaths = `
+Relative Paths:
+  Option                    Relative to
+  [globs...]                the root
+  [file://<path>]           the root
+  [stdin://<path>]          the root
+  --file                    the root
+  --exclude                 the root
+  --cache-location          the root
+  --root                    the current directory
+  --config                  the current directory
+  --file-list               the current directory
+    each path in the list   the list file's directory
+  --stop-config-search-at   the current directory
+  --gitignore-root          the current directory
+  --reporter                the current directory`;
+
 const advanced = `
 More Examples:
 
@@ -69,10 +86,7 @@ export function commandLint(prog: Command, opts: CommandOptions): Command {
     const spellCheckCommand = prog.command('lint', opts);
     spellCheckCommand
         .description('Check spelling')
-        .option(
-            '-c, --config <cspell.json>',
-            'Configuration file to use.  By default cspell looks for cspell.json in the current directory.',
-        )
+        .option('-c, --config <cspell.json>', 'Configuration file to use instead of searching for one.')
         .addOption(crOpt('--config-search', 'Allow searching for configuration files.', undefined).hideHelp())
         .option(
             '--no-config-search',
@@ -80,7 +94,7 @@ export function commandLint(prog: Command, opts: CommandOptions): Command {
         )
         .option(
             '--stop-config-search-at <dir>',
-            'Specify a directory at which to stop searching for configuration files when walking up from the files being checked. Useful for limiting config inheritance.',
+            'Prevent searching for configuration files past <dir>. This option can be used multiple times.',
             collect,
         )
         .option(
@@ -329,7 +343,11 @@ function lintHelpAfterOptions(command: Command, hiddenOptionsHeading: string): s
         }
         hiddenHelp.push(help.formatItem(options.flags, flagColWidth, options.description, help));
     }
-    output.push(...hiddenHelp, advanced);
+    output.push(...hiddenHelp);
+    if (showHidden) {
+        output.push(relativePaths);
+    }
+    output.push(advanced);
     return helpIssueTemplate(opts) + output.join('\n');
 }
 

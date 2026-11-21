@@ -7,7 +7,7 @@ import { afterAll, beforeAll, describe, expect, test } from 'vitest';
 import type { LinterCliOptions } from '../options.js';
 import { InMemoryReporter } from '../util/InMemoryReporter.js';
 import { runLint } from './lint.js';
-import { LintRequest } from './LintRequest.js';
+import { createLintRequest } from './LintRequest.js';
 
 const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
 
@@ -30,7 +30,7 @@ describe('lint a folder whose name starts with a space', () => {
 
     async function lint(globs: string[], options: LinterCliOptions) {
         const reporter = new InMemoryReporter();
-        const result = await runLint(new LintRequest(globs, { root: tmp, config, ...options }, reporter));
+        const result = await runLint(await createLintRequest(globs, { root: tmp, config, ...options }, reporter));
         const words = reporter.issues.map((i) => i.text);
         return { result, words, reporter };
     }

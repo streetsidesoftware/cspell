@@ -1,2 +1,2 @@
 export { runLint } from './lint.js';
-export { extractUnknownWordsConfig, LintRequest } from './LintRequest.js';
+export { createLintRequest, extractUnknownWordsConfig } from './LintRequest.js';

@@ -1,6 +1,6 @@
 import * as path from 'node:path';
 import { resolve as r } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import { describe, expect, test } from 'vitest';
 
@@ -32,8 +32,28 @@ describe('calcOptionsKey', () => {
         ${{ showSuggestions: false }}                           | ${'{"showSuggestions":false}'}
         ${{ validateDirectives: true }}                         | ${'{"validateDirectives":true}'}
         ${{ validateDirectives: true, languageId: 'markdown' }} | ${'{"languageId":"markdown","validateDirectives":true}'}
+        ${{ stopConfigSearchAt: [] }}                           | ${undefined}
+        ${{ stopConfigSearchAt: stops('.') }}                   | ${'{"stopConfigSearchAt":["."]}'}
+        ${{ stopConfigSearchAt: stops('src', '..') }}           | ${'{"stopConfigSearchAt":["..","src"]}'}
+        ${{ stopConfigSearchAt: stops('src/a/b') }}             | ${'{"stopConfigSearchAt":["src/a/b"]}'}
     `('calcOptionsKey $options', ({ options, expected }) => {
-        expect(calcOptionsKey(options)).toBe(expected);
+        expect(calcOptionsKey(options, process.cwd())).toBe(expected);
+    });
+
+    test.each`
+        config                        | expected
+        ${'cspell.custom.json'}       | ${'{"config":"cspell.custom.json"}'}
+        ${'packages/foo/cspell.json'} | ${'{"config":"packages/foo/cspell.json"}'}
+        ${'../cspell.json'}           | ${'{"config":"../cspell.json"}'}
+    `('calcOptionsKey names the config relative to the root: $config', ({ config, expected }) => {
+        const root = process.cwd();
+        const configUrl = pathToFileURL(path.resolve(root, config));
+        expect(calcOptionsKey({ configUrl }, root)).toBe(expected);
+    });
+
+    test('calcOptionsKey keeps the URL of a config that is not a file', () => {
+        const configUrl = new URL('https://example.com/cspell.json');
+        expect(calcOptionsKey({ configUrl }, process.cwd())).toBe('{"config":"https://example.com/cspell.json"}');
     });
 
     test('calcCacheSettings includes the options only when set', async () => {
@@ -131,4 +151,8 @@ function co(
     cacheFormat?: CacheOptions['cacheFormat'],
 ) {
     return { cache, cacheLocation, cacheStrategy, version, cacheFormat };
+}
+
+function stops(...folders: string[]): URL[] {
+    return folders.map((folder) => pathToFileURL(path.resolve(folder) + path.sep));
 }

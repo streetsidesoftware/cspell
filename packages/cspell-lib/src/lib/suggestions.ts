@@ -1,10 +1,10 @@
 import assert from 'node:assert';
 
 import type { CSpellSettings, LocaleId } from '@cspell/cspell-types';
+import type { FileTypeId } from '@cspell/filetypes';
 import type { ICSpellConfigFile } from 'cspell-config-lib';
 import { satisfiesCSpellConfigFile } from 'cspell-config-lib';
 
-import type { LanguageId } from './fileTypes.js';
 import {
     finalizeSettings,
     getDefaultSettings,
@@ -49,7 +49,7 @@ export interface SuggestionOptions extends FromSuggestOptions {
     /**
      * languageId to use when determining file type.
      */
-    languageId?: LanguageId | LanguageId[];
+    languageId?: FileTypeId | FileTypeId[];
 
     /**
      * Locale to use.

@@ -154,6 +154,22 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 </details>
 
+## v10.5.2 (2026-11-18)
+
+### Fixes
+
+- fix: `--gitignore` skips nested repositories in ignored folders again (<a href="https://github.com/streetsidesoftware/cspell/pull/9648">#9648</a>)
+
+---
+
+</details>
+
+- fix: Detect file types by folder, such as `.git/config` (<a href="https://github.com/streetsidesoftware/cspell/pull/9641">#9641</a>)
+
+---
+
+</details>
+
 ## v10.5.1 (2026-11-14)
 
 ### Fixes

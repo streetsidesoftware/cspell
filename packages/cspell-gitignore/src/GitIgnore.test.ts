@@ -30,6 +30,11 @@ const pathPlain = path.join(pathTemp, 'plain');
 const pathClone = path.join(pathPlain, 'clone');
 const pathWorktree = path.join(pathClone, 'worktrees/wt');
 const pathSubmodule = path.join(pathClone, 'vendor/sub');
+const pathIgnoredClone = path.join(pathClone, '.cache/dep');
+const pathIgnoredSubmodule = path.join(pathClone, 'libs/sub');
+const pathIgnoredEmbedded = path.join(pathClone, 'libs/embedded');
+const pathIgnoredScopedSubmodule = path.join(pathClone, 'libs/@scope/sub');
+const pathIgnoredCloneSubmodule = path.join(pathIgnoredClone, 'third/sub');
 
 const oc = (obj: unknown) => expect.objectContaining(obj);
 
@@ -147,33 +152,63 @@ describe('GitIgnoreServer', () => {
     });
 
     describe('nested repositories', () => {
-        // A clone with a worktree and a submodule inside it, all in a folder that is not a repository.
+        // A clone with worktrees, submodules and other clones inside it, all in a folder that is not a repository.
+        // In the clone, `worktrees/`, `.cache/` and `libs/` are ignored, and `libs/sub` and `libs/@scope/sub` are
+        // submodules. The ignored clone in `.cache/dep` has a submodule of its own.
         beforeAll(async () => {
             await fs.rm(pathTemp, { force: true, recursive: true });
             await fs.mkdir(path.join(pathClone, '.git'), { recursive: true });
             await fs.mkdir(pathWorktree, { recursive: true });
             await fs.mkdir(pathSubmodule, { recursive: true });
+            await fs.mkdir(path.join(pathIgnoredClone, '.git'), { recursive: true });
+            await fs.mkdir(pathIgnoredSubmodule, { recursive: true });
+            await fs.mkdir(path.join(pathIgnoredEmbedded, '.git'), { recursive: true });
+            await fs.mkdir(pathIgnoredScopedSubmodule, { recursive: true });
+            await fs.mkdir(pathIgnoredCloneSubmodule, { recursive: true });
             await fs.writeFile(path.join(pathTemp, '.gitignore'), '*.log\n');
             await fs.writeFile(path.join(pathPlain, '.gitignore'), '*.tmp\n');
-            await fs.writeFile(path.join(pathClone, '.gitignore'), 'worktrees/\n*.md\n');
+            await fs.writeFile(path.join(pathClone, '.gitignore'), 'worktrees/\n*.md\n.cache/\nlibs/\n');
+            await fs.writeFile(
+                path.join(pathClone, '.gitmodules'),
+                '[submodule "sub"]\n\tpath = libs/sub\n[submodule "scoped"]\n\tpath = libs/@scope/sub\n',
+            );
+            await fs.writeFile(path.join(pathIgnoredSubmodule, '.git'), 'gitdir: ../../.git/modules/sub\n');
+            await fs.writeFile(path.join(pathIgnoredScopedSubmodule, '.git'), 'gitdir: ../../../.git/modules/scoped\n');
+            await fs.writeFile(path.join(pathIgnoredClone, '.gitmodules'), '[submodule "sub"]\n\tpath = third/sub\n');
+            await fs.writeFile(path.join(pathIgnoredCloneSubmodule, '.git'), 'gitdir: ../../.git/modules/sub\n');
             await fs.writeFile(path.join(pathWorktree, '.git'), 'gitdir: ../../.git/worktrees/wt\n');
             await fs.writeFile(path.join(pathWorktree, '.gitignore'), '*.txt\n');
             await fs.writeFile(path.join(pathSubmodule, '.git'), 'gitdir: ../../.git/modules/sub\n');
         });
 
         test.each`
-            file                             | roots          | expected
-            ${p(pathClone, 'README.md')}     | ${[pathTemp]}  | ${true}
-            ${p(pathClone, 'notes.tmp')}     | ${[pathTemp]}  | ${false}
-            ${p(pathWorktree, 'README.md')}  | ${[pathTemp]}  | ${false}
-            ${p(pathWorktree, 'notes.txt')}  | ${[pathTemp]}  | ${true}
-            ${p(pathWorktree, 'README.md')}  | ${[pathClone]} | ${false}
-            ${p(pathWorktree, 'README.md')}  | ${[]}          | ${false}
-            ${p(pathSubmodule, 'README.md')} | ${[pathTemp]}  | ${false}
-            ${p(pathSubmodule, 'README.md')} | ${[]}          | ${false}
-            ${p(pathPlain, 'notes.tmp')}     | ${[pathTemp]}  | ${true}
-            ${p(pathPlain, 'notes.log')}     | ${[pathTemp]}  | ${true}
-            ${p(pathPlain, 'notes.log')}     | ${[pathPlain]} | ${false}
+            file                                          | roots                    | expected
+            ${p(pathClone, 'README.md')}                  | ${[pathTemp]}            | ${true}
+            ${p(pathClone, 'notes.tmp')}                  | ${[pathTemp]}            | ${false}
+            ${p(pathWorktree, 'README.md')}               | ${[pathTemp]}            | ${true}
+            ${p(pathWorktree, 'notes.txt')}               | ${[pathTemp]}            | ${true}
+            ${p(pathWorktree, 'README.md')}               | ${[pathClone]}           | ${true}
+            ${p(pathWorktree, 'README.md')}               | ${[pathWorktree]}        | ${false}
+            ${p(pathWorktree, 'README.md')}               | ${[]}                    | ${false}
+            ${p(pathSubmodule, 'README.md')}              | ${[pathTemp]}            | ${false}
+            ${p(pathSubmodule, 'README.md')}              | ${[]}                    | ${false}
+            ${p(pathIgnoredClone, 'README.md')}           | ${[pathClone]}           | ${true}
+            ${p(pathIgnoredClone, 'src/README.md')}       | ${[pathClone]}           | ${true}
+            ${p(pathIgnoredClone, 'README.md')}           | ${[pathIgnoredClone]}    | ${false}
+            ${p(pathIgnoredClone, 'README.md')}           | ${[]}                    | ${false}
+            ${p(pathIgnoredClone, 'notes.txt')}           | ${[pathClone]}           | ${true}
+            ${p(pathIgnoredClone, 'notes.txt')}           | ${[pathIgnoredClone]}    | ${false}
+            ${p(pathIgnoredCloneSubmodule, 'notes.txt')}  | ${[pathClone]}           | ${true}
+            ${p(pathIgnoredCloneSubmodule, 'notes.txt')}  | ${[pathIgnoredClone]}    | ${false}
+            ${p(pathIgnoredSubmodule, 'README.md')}       | ${[pathClone]}           | ${false}
+            ${p(pathIgnoredSubmodule, 'src/README.md')}   | ${[pathClone]}           | ${false}
+            ${p(pathIgnoredSubmodule, 'notes.txt')}       | ${[pathClone]}           | ${false}
+            ${p(pathIgnoredScopedSubmodule, 'notes.txt')} | ${[pathClone]}           | ${false}
+            ${p(pathIgnoredEmbedded, 'README.md')}        | ${[pathClone]}           | ${true}
+            ${p(pathIgnoredEmbedded, 'README.md')}        | ${[pathIgnoredEmbedded]} | ${false}
+            ${p(pathPlain, 'notes.tmp')}                  | ${[pathTemp]}            | ${true}
+            ${p(pathPlain, 'notes.log')}                  | ${[pathTemp]}            | ${true}
+            ${p(pathPlain, 'notes.log')}                  | ${[pathPlain]}           | ${false}
         `('isIgnored $file $roots', async ({ file, roots, expected }) => {
             const gs = new GitIgnore(roots);
             expect(await gs.isIgnored(file)).toBe(expected);

@@ -3,7 +3,7 @@
     {
       "path": "php/php-src",
       "url": "https://github.com/php/php-src.git",
-      "commit": "32117fca70a9995f1fb77433d52c4da64473c881",
+      "commit": "7815b6c2209d65403fa807335c12825cd5aff9f5",
       "uniqueOnly": false,
       "args": [
         "--config=${repoConfig}/cspell.json",
@@ -13,7 +13,7 @@
     {
       "path": "w3c/specberus",
       "url": "https://github.com/w3c/specberus.git",
-      "commit": "bfb5bcf45f6d7ebd712454ae6cdff5716c29d3e1",
+      "commit": "a1305389b1a5ad3d05bd5071b3f86271177e50c3",
       "args": [
         "**/*.*"
       ]
@@ -29,7 +29,7 @@
     {
       "path": "liriliri/licia",
       "url": "https://github.com/liriliri/licia.git",
-      "commit": "199a7890ac7fadba1d466ed3203c42d813a7ce34",
+      "commit": "8dbee4c0fed8fb2468e96aa74c04501576f207aa",
       "args": [
         "**/*.*"
       ],
@@ -38,7 +38,7 @@
     {
       "path": "wireapp/wire-webapp",
       "url": "https://github.com/wireapp/wire-webapp.git",
-      "commit": "337dc98417ee449725009d7e82070ad13c1a7781",
+      "commit": "58099be299be09f38b819d552b5f45e407ba01b5",
       "args": [
         "{apps,docs}/**/*.{js,ts,tsx,md,mjs,mts,cjs,cts}"
       ],
@@ -99,13 +99,13 @@
     {
       "path": "prettier/prettier",
       "url": "https://github.com/prettier/prettier.git",
-      "commit": "303363c6fa0298d8032eac15f116bc3faae23831",
+      "commit": "2cc4f0fd2cc44a970229a5cb025cd47c63f31b04",
       "args": []
     },
     {
       "path": "webpack/webpack",
       "url": "https://github.com/webpack/webpack.git",
-      "commit": "ea5e6efa5ff81e8a1540e2fd93df38421bf67f7d",
+      "commit": "1987e0dc33e447f14ef986a9a9eb1ee6b869e1de",
       "args": [
         "{.github,benchmark,bin,examples,hot,lib,schemas,setup,tooling}/**/*.{md,yml,yaml,js,json}",
         "*.md"
@@ -114,7 +114,7 @@
     {
       "path": "w3c/aria-practices",
       "url": "https://github.com/w3c/aria-practices.git",
-      "commit": "0f765e4dc33e966026114ac12a8380db1de3b787",
+      "commit": "f14b2490a6728cda85fd7feafbd148b3c3eaf038",
       "args": [
         "**/*.*"
       ]
@@ -131,7 +131,7 @@
     {
       "path": "typescript-eslint/typescript-eslint",
       "url": "https://github.com/typescript-eslint/typescript-eslint.git",
-      "commit": "12e452f0292212bf9bf443b3988ec230f4ae7097",
+      "commit": "ca9c0eb71075c197e7c27c7eee2e65c6a3d24fc9",
       "args": [
         "--config=.cspell.json",
         "**/*.{md,ts,js}"
@@ -140,7 +140,7 @@
     {
       "path": "graphql/graphql-js",
       "url": "https://github.com/graphql/graphql-js.git",
-      "commit": "56a9830a16226ef8daa6ccb1375624e1c1933df4",
+      "commit": "52f67c02ffb6aeb72a0e67f4be150665aa229f43",
       "args": [
         "**/*.*"
       ]
@@ -148,10 +148,11 @@
     {
       "path": "microsoft/TypeScript-Website",
       "url": "https://github.com/microsoft/TypeScript-Website.git",
-      "commit": "a3ed0be5249fd75fae9c2f527de23f0fc16c5d0d",
+      "commit": "4ec663ac4412c3a7086401bd5a8811565589b11d",
       "listAllFiles": true,
       "args": [
         "--config=${repoConfig}/cspell.json",
+        "--stop-config-search-at=${commonRoot}",
         "**/*.*"
       ]
     },
@@ -163,7 +164,7 @@
         "--config=cspell.json",
         "**/*.{md,ts,js}"
       ],
-      "commit": "c50cd8396388d62a8b1d1c8b7c01e7e4fae6e658"
+      "commit": "0cc8b28f01f81fae5cef911b79d4bc7682764c52"
     },
     {
       "path": "pycontribs/jira",
@@ -186,7 +187,7 @@
     {
       "path": "TheAlgorithms/Python",
       "url": "https://github.com/TheAlgorithms/Python.git",
-      "commit": "574d100b7181956e9c8384552fd078165e4cc326",
+      "commit": "30507bbe41397065728167fb09aa820f9fce8dc7",
       "args": [
         "**/*.{md,py}"
       ]
@@ -194,7 +195,7 @@
     {
       "path": "django/django",
       "url": "https://github.com/django/django.git",
-      "commit": "6a8248f13fe7b51c4414eeaf3554a666464b2636",
+      "commit": "d3954c981368eb4439be63f2f165d400f33bcd70",
       "args": [
         "--issues-summary-report",
         "**/*.{md,py}"
@@ -243,11 +244,12 @@
       "url": "https://github.com/googleapis/google-cloud-cpp.git",
       "args": [
         "--config=${repoConfig}/cspell.json",
+        "--stop-config-search-at=${commonRoot}",
         "**/*",
         "-e",
         "{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"
       ],
-      "commit": "b1e9b104a63a16edf5a02947bdcdc9c6332a884b"
+      "commit": "3a1abc9fdb38114c15cef2e2a37927ebf89d6940"
     },
     {
       "path": "graphql/graphql-spec",
@@ -256,7 +258,7 @@
         "--issues-summary-report",
         "**/*.md"
       ],
-      "commit": "3f1ef846019884a8c9c3a32b65ea03168f24ecff"
+      "commit": "bfcc722b32f4a03fc1f418b23df4408cee97922f"
     },
     {
       "path": "plasticrake/tplink-smarthome-api",
@@ -293,7 +295,7 @@
       "args": [
         "site/**/*.{md,mdx}"
       ],
-      "commit": "9062790fdb2379593a2973416dc5a3bfb203e4e3"
+      "commit": "da71a1044296e82b047419f16a90ee0d6aa23886"
     },
     {
       "path": "apollographql/apollo-server",
@@ -303,7 +305,7 @@
       "args": [
         "**"
       ],
-      "commit": "176698186a5d0feb9ff5d85ffb26e4df07ab17cd"
+      "commit": "3b4fe8ce2f583c8bc8e4e1913b6e9330a3d41ed7"
     },
     {
       "path": "shoelace-style/shoelace",
@@ -332,7 +334,7 @@
         "**/*.go"
       ],
       "uniqueOnly": false,
-      "commit": "9ea3108377d2abec102866808133c40ac9582162"
+      "commit": "7ce9f0823762109fc67911f95f6af1a697345ab7"
     },
     {
       "path": "eslint/eslint",
@@ -349,7 +351,7 @@
         "--exclude=docs/src/_includes",
         "--exclude=docs/src/assets/{fonts,s?css,images}"
       ],
-      "commit": "0146008d6e99aa31dc62153c200e714f5afdcd0e"
+      "commit": "97efadd5eff8e3eb673f8746f7bb3ba2f3941251"
     },
     {
       "path": "iluwatar/java-design-patterns",
@@ -377,7 +379,7 @@
       "args": [
         "**"
       ],
-      "commit": "c60f6e1da05a79d39ea11fdc3153e4d07be35936"
+      "commit": "99c07450d2e093c0d637903dc2c94f28f264d70d"
     },
     {
       "path": "RustPython/RustPython",
@@ -387,7 +389,7 @@
       ],
       "uniqueOnly": false,
       "listAllFiles": true,
-      "commit": "172130ae61404c934a7a146b4f85c7c5dc2c7074"
+      "commit": "0175f1a21800c45fc9e3bf81894dd964c1a2432b"
     },
     {
       "path": "chef/chef",
@@ -397,7 +399,7 @@
         "**"
       ],
       "uniqueOnly": false,
-      "commit": "7dac144edc6d736628db8a7c1db0258fce3bf785"
+      "commit": "a01df165e727e4751551019c460193b339d6486a"
     },
     {
       "path": "gitbucket/gitbucket",
@@ -405,7 +407,7 @@
       "args": [
         "**"
       ],
-      "commit": "9801682cd14210e560c45899c1e281fbcc53ca64"
+      "commit": "d25630fd127a65115871fade42188a26effc9ec9"
     },
     {
       "path": "neovim/nvim-lspconfig",
@@ -413,7 +415,7 @@
       "args": [
         "**"
       ],
-      "commit": "993d048db0d83d8e8ba3f9cb376456321acdcce3"
+      "commit": "6a3ddecf60e19f164390308f502e67f3199f58e8"
     },
     {
       "path": "MicrosoftDocs/PowerShell-Docs",
@@ -433,7 +435,7 @@
         "--locale=en,en-GB",
         "."
       ],
-      "commit": "3a76b87324ecb8d25509cd009aa87fbe56819c39"
+      "commit": "efba8cbfe94b1402a7ccab8a73994cb389cffa4d"
     },
     {
       "path": "flutter/samples",
@@ -445,7 +447,7 @@
         "."
       ],
       "uniqueOnly": false,
-      "commit": "c6e58ab16342017bafed959d45a03e5180b21ed6"
+      "commit": "12a191622909214b516b0626fc1413be1000d12c"
     },
     {
       "path": "dart-lang/sdk",
@@ -465,7 +467,7 @@
         "--exclude=**/{third_party,assets}/**",
         "**/*.{dart,md}"
       ],
-      "commit": "d5cb00187db57dffb07526807bac49d78aabd000"
+      "commit": "288453e40453ed52d8ba24c6943e99db1a6dbc20"
     },
     {
       "path": "slint-ui/slint",
@@ -477,7 +479,7 @@
       ],
       "uniqueOnly": false,
       "listAllFiles": true,
-      "commit": "05b88440de61f721b4852e02826278862f2776f4"
+      "commit": "d577ae5e33a6e6f3ecb01f5a4845179408f66d0f"
     }
   ]
 }
