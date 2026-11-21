@@ -154,6 +154,20 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 </details>
 
+## v10.6.0 (2026-11-21)
+
+### Features
+
+- feat: Make `--config` replace the configuration files where cspell runs (<a href="https://github.com/streetsidesoftware/cspell/pull/9640">#9640</a>)
+
+---
+
+</details>
+
+### Fixes
+
+- fix: Show what relative paths are relative to in "cspell lint --help --verbose" (<a href="https://github.com/streetsidesoftware/cspell/pull/9682">#9682</a>)
+
 ## v10.5.2 (2026-11-18)
 
 ### Fixes
