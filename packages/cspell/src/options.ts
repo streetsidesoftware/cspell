@@ -166,7 +166,8 @@ export interface CacheOptions {
     cacheLocation?: string;
 
     /**
-     * Strategy to use for detecting changed files, default: content
+     * Strategy to use for detecting changed files.
+     * @default 'content'
      */
     cacheStrategy?: CacheStrategy;
 
