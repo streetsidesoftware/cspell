@@ -152,7 +152,13 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
 
         try {
             const contextTag = calcCacheFingerprint(
-                { ...cfg.options, configUrl: configInfo.url, stopConfigSearchAt: givenStops },
+                {
+                    ...cfg.options,
+                    configUrl: configInfo.url,
+                    stopConfigSearchAt: givenStops,
+                    // The merged settings, not the flag: a config file can also disable the search.
+                    configSearch: !configInfo.config.noConfigSearch,
+                },
                 root,
             );
             const cacheSettings = await calcCacheSettings(

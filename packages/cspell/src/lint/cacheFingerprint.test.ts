@@ -20,6 +20,8 @@ describe('calcCacheFingerprint', () => {
         ${{ stopConfigSearchAt: stops('.') }}                   | ${'{"stopConfigSearchAt":["."]}'}
         ${{ stopConfigSearchAt: stops('src', '..') }}           | ${'{"stopConfigSearchAt":["..","src"]}'}
         ${{ stopConfigSearchAt: stops('src/a/b') }}             | ${'{"stopConfigSearchAt":["src/a/b"]}'}
+        ${{ configSearch: true }}                               | ${undefined}
+        ${{ configSearch: false }}                              | ${'{"configSearch":false}'}
     `('calcCacheFingerprint $options', ({ options, expected }) => {
         expect(calcCacheFingerprint(options, process.cwd())).toBe(expected);
     });

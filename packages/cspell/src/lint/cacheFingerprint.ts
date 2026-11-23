@@ -14,6 +14,8 @@ export interface FingerprintOptions {
     stopConfigSearchAt?: readonly URL[] | undefined;
     /** The config file loaded at startup. */
     configUrl?: URL | undefined;
+    /** Whether the run searches for config files near each file. */
+    configSearch?: boolean;
 }
 
 /**
@@ -21,7 +23,16 @@ export interface FingerprintOptions {
  * `undefined` when none are set.
  */
 export function calcCacheFingerprint(options: FingerprintOptions, root: string): string | undefined {
-    const { languageId, locale, report, showSuggestions, validateDirectives, stopConfigSearchAt, configUrl } = options;
+    const {
+        languageId,
+        locale,
+        report,
+        showSuggestions,
+        validateDirectives,
+        stopConfigSearchAt,
+        configUrl,
+        configSearch,
+    } = options;
     const values = {
         languageId: languageId || undefined,
         locale: locale || undefined,
@@ -30,6 +41,7 @@ export function calcCacheFingerprint(options: FingerprintOptions, root: string):
         validateDirectives,
         stopConfigSearchAt: stopConfigSearchAt?.length ? relativeStopFolders(stopConfigSearchAt, root) : undefined,
         config: configUrl && relativeConfigPath(configUrl, root),
+        configSearch: configSearch === false ? false : undefined,
     };
     const set = Object.entries(values).filter(([, value]) => value !== undefined);
     return set.length ? JSON.stringify(Object.fromEntries(set)) : undefined;
