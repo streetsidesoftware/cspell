@@ -166,7 +166,8 @@ export interface CacheOptions {
     cacheLocation?: string;
 
     /**
-     * Strategy to use for detecting changed files, default: metadata
+     * Strategy to use for detecting changed files.
+     * @default 'content'
      */
     cacheStrategy?: CacheStrategy;
 
@@ -179,7 +180,7 @@ export interface CacheOptions {
      * Format of the cache file.
      * - `legacy` - use absolute paths in the cache file
      * - `universal` - use a sharable format.
-     * @default 'legacy'
+     * @default 'universal'
      */
     cacheFormat?: CacheFormat;
 }
