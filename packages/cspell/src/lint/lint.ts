@@ -50,6 +50,7 @@ import { getTimeMeasurer } from '../util/timer.js';
 import * as util from '../util/util.js';
 import { wordWrapAnsiText } from '../util/wrap.js';
 import { writeFileOrStream } from '../util/writeFile.js';
+import { calcCacheFingerprint } from './cacheFingerprint.js';
 import type { LintRequest } from './LintRequest.js';
 import type { ProcessFileOptions } from './processFile.js';
 import { countConfigErrors } from './processFile.js';
@@ -150,10 +151,15 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         const { root } = cfg;
 
         try {
-            const cacheSettings = await calcCacheSettings(
-                configInfo.config,
-                { ...cfg.options, version, configUrl: configInfo.url, stopConfigSearchAt: givenStops },
+            const contextTag = calcCacheFingerprint(
+                { ...cfg.options, configUrl: configInfo.url, stopConfigSearchAt: givenStops },
                 root,
+            );
+            const cacheSettings = await calcCacheSettings(
+                configInfo.config.cache,
+                { ...cfg.options, version },
+                root,
+                contextTag,
             );
             const symlinks = createSymlinkChecker(root);
             const filesToCheck = await determineFilesToCheck(configInfo, cfg, reporter, globInfo, symlinks);

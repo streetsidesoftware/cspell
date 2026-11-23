@@ -37,17 +37,3 @@ export interface CacheOptions {
      */
     cacheFormat?: CacheFormat;
 }
-
-/**
- * The options that change a file's result. A cached result is only reused when they match.
- */
-export interface CacheKeyOptions {
-    languageId?: string;
-    locale?: string;
-    report?: string | undefined;
-    showSuggestions?: boolean;
-    validateDirectives?: boolean;
-    stopConfigSearchAt?: readonly URL[] | undefined;
-    /** The config file loaded at startup. */
-    configUrl?: URL | undefined;
-}

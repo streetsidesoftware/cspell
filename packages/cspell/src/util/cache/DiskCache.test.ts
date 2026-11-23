@@ -145,11 +145,11 @@ describe('DiskCache', () => {
         });
     });
 
-    describe('command-line options', () => {
-        const optionsKey = '{"languageId":"markdown"}';
+    describe('context tag', () => {
+        const contextTag = 'tag-a';
 
-        async function createCacheWithOptions(key: string | undefined) {
-            const cache = await createDiskCache(pathToFileURL('.foobar'), false, 'version', false, key);
+        async function createCacheWithTag(tag: string | undefined) {
+            const cache = await createDiskCache(pathToFileURL('.foobar'), false, 'version', false, tag);
             const fileEntryCache = await mockCreateFileEntryCache.mock.results.at(-1)?.value;
             return { cache, fileEntryCache };
         }
@@ -159,30 +159,27 @@ describe('DiskCache', () => {
         });
 
         test.each`
-            cacheKey      | entryKey             | expected
-            ${undefined}  | ${undefined}         | ${true}
-            ${optionsKey} | ${optionsKey}        | ${true}
-            ${optionsKey} | ${undefined}         | ${false}
-            ${undefined}  | ${optionsKey}        | ${false}
-            ${optionsKey} | ${'{"locale":"fr"}'} | ${false}
-        `(
-            'cache options $cacheKey, entry options $entryKey, reused: $expected',
-            async ({ cacheKey, entryKey, expected }) => {
-                const { cache, fileEntryCache } = await createCacheWithOptions(cacheKey);
-                fileEntryCache.getFileDescriptor.mockReturnValue(entry(RESULT_NO_ISSUES, [], 100, entryKey));
+            cacheTag      | entryTag      | expected
+            ${undefined}  | ${undefined}  | ${true}
+            ${contextTag} | ${contextTag} | ${true}
+            ${contextTag} | ${undefined}  | ${false}
+            ${undefined}  | ${contextTag} | ${false}
+            ${contextTag} | ${'tag-b'}    | ${false}
+        `('cache tag $cacheTag, entry tag $entryTag, reused: $expected', async ({ cacheTag, entryTag, expected }) => {
+            const { cache, fileEntryCache } = await createCacheWithTag(cacheTag);
+            fileEntryCache.getFileDescriptor.mockReturnValue(entry(RESULT_NO_ISSUES, [], 100, entryTag));
 
-                const cachedResult = await cache.getCachedLintResults('file');
+            const cachedResult = await cache.getCachedLintResults('file');
 
-                expect(!!cachedResult).toBe(expected);
-            },
-        );
+            expect(!!cachedResult).toBe(expected);
+        });
 
         test.each`
-            cacheKey
+            cacheTag
             ${undefined}
-            ${optionsKey}
-        `('writes the options $cacheKey only when set', async ({ cacheKey }) => {
-            const { cache, fileEntryCache } = await createCacheWithOptions(cacheKey);
+            ${contextTag}
+        `('writes the tag $cacheTag only when set', async ({ cacheTag }) => {
+            const { cache, fileEntryCache } = await createCacheWithTag(cacheTag);
             const descriptor: { meta: CSpellCacheMeta } = { meta: { size: 0 } };
             fileEntryCache.getFileDescriptor.mockReturnValue(descriptor);
 
@@ -191,8 +188,8 @@ describe('DiskCache', () => {
                 [],
             );
 
-            expect(descriptor.meta?.data && 'o' in descriptor.meta.data).toBe(!!cacheKey);
-            expect(descriptor.meta?.data?.o).toBe(cacheKey);
+            expect(descriptor.meta?.data && 'o' in descriptor.meta.data).toBe(!!cacheTag);
+            expect(descriptor.meta?.data?.o).toBe(cacheTag);
         });
     });
 
@@ -306,7 +303,7 @@ function entry(
     result: CachedFileResult,
     dependencies: string[] = [],
     size = 100,
-    optionsKey?: string,
+    contextTag?: string,
 ): { meta: CSpellCacheMeta } {
     return {
         meta: {
@@ -315,7 +312,7 @@ function entry(
                 r: result,
                 d: dependencies.map((f) => ({ f, h: 'hash' })),
                 v: calcVersion('version'),
-                ...(optionsKey ? { o: optionsKey } : {}),
+                ...(contextTag ? { o: contextTag } : {}),
             },
         },
     };
