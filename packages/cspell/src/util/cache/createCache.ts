@@ -1,4 +1,3 @@
-import type { CacheFormat, CacheStrategy } from '@cspell/cspell-types';
 import { toFileURL } from '@cspell/url';
 
 import type { CSpellLintResultCache } from './CSpellLintResultCache.js';
@@ -16,9 +15,19 @@ export interface CreateCacheSettings {
      */
     cacheLocation: string;
 
-    cacheStrategy: CacheStrategy;
+    /**
+     * How a file's change is detected:
+     * - `content`: a hash of the file's content.
+     * - `metadata`: the file's size and modification time.
+     */
+    cacheStrategy: 'content' | 'metadata';
 
-    cacheFormat: CacheFormat;
+    /**
+     * How file paths are stored:
+     * - `universal`: relative to the cache file, so the cache can be shared.
+     * - `legacy`: absolute.
+     */
+    cacheFormat: 'universal' | 'legacy';
 
     /**
      * An entry is only reused when its version matches exactly.
@@ -39,7 +48,7 @@ export interface CreateCacheSettings {
 }
 
 /**
- * Creates CSpellLintResultCache (disk cache if caching is enabled in config or dummy otherwise)
+ * Creates the cache: on disk when `useCache` is set, otherwise one that stores nothing.
  */
 export async function createCache(options: CreateCacheSettings): Promise<CSpellLintResultCache> {
     const { useCache, cacheLocation, cacheStrategy, reset, version } = options;

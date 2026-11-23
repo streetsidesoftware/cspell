@@ -18,7 +18,7 @@ const versionSuffix = '';
 /**
  * The cache settings for a lint run.
  * @param config - The run's settings, merged with the command line.
- * @param options - The command-line options.
+ * @param options - The command-line options, plus the loaded config file and the search stops for the context tag.
  * @param root - Command-line paths are relative to it.
  * @param version - The cspell version.
  */
