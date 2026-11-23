@@ -45,6 +45,20 @@ describe('Validate calcCacheSettings', () => {
         );
         expect(await calcCacheSettings({}, {}, '.', version)).not.toHaveProperty('contextTag');
     });
+
+    test.each`
+        noConfigSearch | configSearch | expected
+        ${undefined}   | ${undefined} | ${undefined}
+        ${false}       | ${undefined} | ${undefined}
+        ${true}        | ${undefined} | ${'{"configSearch":false}'}
+        ${undefined}   | ${false}     | ${undefined}
+    `(
+        'calcCacheSettings keys on whether the run searches for config files: $noConfigSearch $configSearch',
+        async ({ noConfigSearch, configSearch, expected }) => {
+            const settings = await calcCacheSettings({ noConfigSearch }, { configSearch }, '.', version);
+            expect(settings.contextTag).toBe(expected);
+        },
+    );
 });
 
 describe('validate normalizeVersion', () => {
