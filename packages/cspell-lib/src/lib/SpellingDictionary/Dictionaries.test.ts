@@ -113,6 +113,20 @@ describe('Validate getDictionary', () => {
     });
 
     test.each`
+        noSuggestDictionaries
+        ${[]}
+        ${['companies', 'software-term-suggestions']}
+    `('dictionaries are reused, noSuggestDictionaries: $noSuggestDictionaries', async ({ noSuggestDictionaries }) => {
+        const settings = csi({ ...(await getDefaultBundledSettingsAsync()), noSuggestDictionaries });
+        const a = await Dictionaries.getDictionaryInternal(settings);
+        const b = await Dictionaries.getDictionaryInternal(settings);
+        const names = a.dictionaries.map((d) => d.name);
+        expect(names).toEqual(expect.arrayContaining(['companies', 'software-term-suggestions']));
+        const reused = new Set(a.dictionaries);
+        expect(b.dictionaries.filter((d) => !reused.has(d)).map((d) => d.name)).toEqual([]);
+    });
+
+    test.each`
         word       | opts               | expected
         ${'zero'}  | ${undefined}       | ${false}
         ${'Rhône'} | ${ignoreCaseFalse} | ${true}
