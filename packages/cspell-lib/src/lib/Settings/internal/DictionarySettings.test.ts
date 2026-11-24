@@ -10,7 +10,9 @@ import { describe, expect, test } from 'vitest';
 import { isDefined } from '../../util/util.js';
 import { getDefaultBundledSettingsAsync } from '../DefaultSettings.js';
 import { createDictionaryReferenceCollection as createRefCol } from '../DictionaryReferenceCollection.js';
+import { createCSpellSettingsInternal as csi } from './CSpellSettingsInternalDef.js';
 import * as DictSettings from './DictionarySettings.js';
+import type { DictionaryDefinitionInternal } from './InternalDictionaryDef.js';
 import { isDictionaryDefinitionInlineInternal } from './InternalDictionaryDef.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -145,5 +147,55 @@ describe('Validate DictionarySettings', () => {
         ${DictSettings.mapDictDefToInternal({ name: 'def', path: './dict.txt' }, pathToFileURL(__filename))} | ${{ name: 'def', path: expect.stringContaining('dict.txt') }}
     `('toJSON', ({ def, expected }) => {
         expect(def.toJSON()).toEqual(expected);
+    });
+
+    test('filterDictDefsToLoad returns the given definitions', () => {
+        const defs = defaultSettings.dictionaryDefinitions;
+        assert(defs);
+        const inlineDefs = defs.filter(isDictionaryDefinitionInlineInternal);
+        expect(inlineDefs.length).toBeGreaterThan(0);
+        const loaded = DictSettings.filterDictDefsToLoad(createRefCol(defs.map((def) => def.name)), defs);
+        expect(loaded.length).toBeGreaterThan(inlineDefs.length);
+        const given = new Set(defs);
+        expect(loaded.filter((def) => !given.has(def))).toEqual([]);
+    });
+
+    test('filterDictDefsToLoad resolves `file`', () => {
+        const def = { name: 'words', path: 'some/dir', file: 'words.txt' };
+        const loaded = DictSettings.filterDictDefsToLoad(createRefCol(['words']), [
+            def as unknown as DictionaryDefinitionInternal,
+        ]);
+        expect(loaded).toEqual([{ name: 'words', path: path.join('some/dir', 'words.txt') }]);
+    });
+
+    const source = pathToFileURL(__filename);
+    const fileDef = () => DictSettings.mapDictDefToInternal({ name: 'file', path: './dict.txt' }, source);
+    const inlineDef = () => DictSettings.mapDictDefToInternal({ name: 'inline', words: ['one'] }, source);
+
+    test.each`
+        name        | createDef
+        ${'file'}   | ${fileDef}
+        ${'inline'} | ${inlineDef}
+    `('calcDictionaryDefsToLoad reuses the noSuggest definition: $name', ({ name, createDef }) => {
+        const dictionaryDefinitions = [createDef()];
+        const load = (noSuggestDictionaries: string[]) => {
+            const settings = csi({ dictionaryDefinitions, dictionaries: [name], noSuggestDictionaries });
+            const [def] = DictSettings.calcDictionaryDefsToLoad(settings);
+            return def;
+        };
+
+        expect(load([])).toBe(dictionaryDefinitions[0]);
+
+        const noSuggest = load([name]);
+        expect(noSuggest).toEqual(oc({ name, noSuggest: true }));
+        expect(load([name])).toBe(noSuggest);
+
+        const suggest = load(['!' + name]);
+        expect(suggest).toEqual(oc({ name, noSuggest: false }));
+        expect(load(['!' + name])).toBe(suggest);
+
+        expect(load([name])).toEqual(noSuggest);
+        expect(load([])).toBe(dictionaryDefinitions[0]);
+        expect(dictionaryDefinitions[0].noSuggest).toBeUndefined();
     });
 });
