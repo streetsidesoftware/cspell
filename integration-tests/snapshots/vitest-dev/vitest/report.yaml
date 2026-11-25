@@ -3,7 +3,7 @@ Repository: vitest-dev/vitest
 Url: https://github.com/vitest-dev/vitest
 Args: '["--issues-summary-report","--locale=en,en-GB","."]'
 Summary:
-  files: 2967
+  files: 2974
   filesWithIssues: 504
   issues: 1956
   errors: 0
@@ -92,7 +92,7 @@ issues:
   - "docs/api/expect.md:2091:28      closeto                         U       expect.closeTo {#expect-closeto}"
   - "docs/api/expect.md:2232:23      arktype                         U       import { type } from 'arktype'"
   - "docs/api/expect.md:2325:39      addequalitytesters              U       addEqualityTesters {#expect-addequalitytesters}"
-  - "docs/api/hooks.md:372:22        ontestfinished      U       ## onTestFinished {#ontestfinished}"
+  - "docs/api/hooks.md:388:22        ontestfinished      U       ## onTestFinished {#ontestfinished}"
   - "docs/api/mock.md:163:7          Nellies             U       const NelliesBucket = mockFn(0)"
   - "docs/api/mock.md:429:41         mockthrow           U       Version>4.1.0</Version> {#mockthrow}"
   - "docs/api/mock.md:443:45         mockthrowonce       U       Version>4.1.0</Version> {#mockthrowonce}"
@@ -147,8 +147,8 @@ issues:
   - "docs/config/experimental.md:317:89      vcsprovider                     U       Version> {#experimental-vcsprovider}"
   - "docs/config/experimental.md:420:96      recorddependencies              U       Version> {#experimental-recorddependencies}"
   - "docs/config/experimental.md:463:91      tracetimeline                   U       Version> {#experimental-tracetimeline}"
-  - "docs/config/experimental.md:496:88      nodeloader                      U       Version> {#experimental-nodeloader}"
-  - "docs/config/experimental.md:505:86      preparse                        U       Version> {#experimental-preparse}"
+  - "docs/config/experimental.md:498:88      nodeloader                      U       Version> {#experimental-nodeloader}"
+  - "docs/config/experimental.md:507:86      preparse                        U       Version> {#experimental-preparse}"
   - "docs/config/faketimers.md:69:59         faketimers          U       Version>5.1.0</Version> {#faketimers-fakenodebuiltins}"
   - "docs/config/faketimers.md:69:70         fakenodebuiltins    U       Version> {#faketimers-fakenodebuiltins}"
   - "docs/config/outputfile.md:6:26          outputfile      U       outputFile <CRoot /> {#outputfile}"
@@ -181,9 +181,9 @@ issues:
   - "docs/guide/browser/visual-regression-testing.md:274:75      GMSD        U       , a single-threaded GMSD (Gradient Magnitude"
   - "docs/guide/browser/visual-regression-testing.md:280:15      Ssim        U       import type { SsimOptionsExtended } from"
   - "docs/guide/browser/visual-regression-testing.md:900:15      chromaui    U       uses: chromaui/action@latest"
-  - "docs/guide/cli.md:73:9          lintstagedrc        U       ```js [.lintstagedrc.js]"
-  - "docs/guide/cli.md:172:10        Autocompletions     U       ## Shell Autocompletions"
-  - "docs/guide/cli.md:174:23        autocompletions     U       Vitest provides shell autocompletions for commands, options"
+  - "docs/guide/cli.md:75:9          lintstagedrc        U       ```js [.lintstagedrc.js]"
+  - "docs/guide/cli.md:174:10        Autocompletions     U       ## Shell Autocompletions"
+  - "docs/guide/cli.md:176:23        autocompletions     U       Vitest provides shell autocompletions for commands, options"
   - "docs/guide/common-errors.md:240:7       extensionless       U       - use extensionless relative imports in"
   - "docs/guide/comparisons.md:11:46         sodatea         U       Jest in Vite setups. [@sodatea](https://bsky.app/profile"
   - "docs/guide/comparisons.md:31:140        Vitesse         U       their App's UI using [Vitesse](https://github.com"
@@ -223,7 +223,7 @@ issues:
   - "docs/package.json:26:7          shikijs     U       \"@shikijs/transformers\": \"^4."
   - "docs/package.json:28:7          unocss      U       \"@unocss/reset\": \"catalog:\","
   - "docs/package.json:32:7          voidzero    U       \"@voidzero-dev/vitepress-theme"
-  - "docs/package.json:41:23         llms        U       \"vitepress-plugin-llms\": \"^1.14.0\","
+  - "docs/package.json:41:23         llms        U       \"vitepress-plugin-llms\": \"^1.15.0\","
   - "docs/public/_headers:4:27           nosniff     U       Content-Type-Options: nosniff"
   - "docs/public/_redirects:24:16        webdriverio     U       /guide/browser/webdriverio /config/browser/webdriverio"
   - "docs/public/bolt.svg:1:542          evenodd     U       \"/><path fill-rule=\"evenodd\" clip-rule=\"evenodd"
@@ -304,7 +304,7 @@ issues:
   - "packages/ui/client/composables/client/static.ts:4:44        fflate      U       mpressSync, strFromU8 } from 'fflate'"
   - "packages/ui/client/composables/codemirror.ts:16:33          simplescrollbars    U       codemirror/addon/scroll/simplescrollbars'"
   - "packages/ui/client/composables/explorer/collector.ts:1:15           Arrayable       U       import type { Arrayable } from '@vitest/utils"
-  - "packages/ui/client/composables/trace-view.ts:159:4          Vueuse      U       // Vueuse URL watcher pauses while"
+  - "packages/ui/client/composables/trace-view.ts:161:4          Vueuse      U       // Vueuse URL watcher pauses while"
   - "packages/ui/client/styles/main.css:4:17         Readex          U       font-family: 'Readex Pro', sans-serif;"
   - "packages/ui/client/styles/main.css:16:54        vitest          U       too, for example the @vitest/istanbuljs html reporter"
   - "packages/ui/client/styles/main.css:16:61        istanbuljs      U       example the @vitest/istanbuljs html reporter */"
@@ -445,7 +445,7 @@ issues:
   - "pnpm-workspace.yaml:65:11       yauzl           U       '@types/yauzl': ^3.4.0"
   - "pnpm-workspace.yaml:67:5        vitejs          U       '@vitejs/plugin-vue': ^6.0.1"
   - "pnpm-workspace.yaml:72:3        ansivision      U       ansivision: ^0.4.0"
-  - "pnpm-workspace.yaml:77:3        knip            U       knip: ^6.44.1"
+  - "pnpm-workspace.yaml:77:3        knip            U       knip: ^6.45.1"
   - "pnpm-workspace.yaml:91:3        sirv            U       sirv: ^3.0.2"
   - "pnpm-workspace.yaml:94:3        tinybench       U       tinybench: ^6.2.3"
   - "pnpm-workspace.yaml:96:3        tinyglobby      U       tinyglobby: ^0.2.17"
@@ -586,8 +586,8 @@ issues:
   - "test/e2e/test/config/sequence-shuffle.test.ts:66:17         unshuffle       U       describe('unshuffle', { shuffle: false"
   - "test/e2e/test/console-color.test.ts:19:36       mtrue       U       stdout).toContain('\\x1B[33mtrue\\x1B[39m\\n')"
   - "test/e2e/test/detect-async-leaks.test.ts:240:5          FSEVENTWRAP     U       FSEVENTWRAP leaking in packages"
-  - "test/e2e/test/git-changed.test.ts:93:10         größe       U       'src/größe.js': 'export const size"
-  - "test/e2e/test/git-changed.test.ts:104:25        gpgsign     U       git('config', 'commit.gpgsign', 'false')"
+  - "test/e2e/test/git-changed.test.ts:117:10        größe       U       'src/größe.js': 'export const size"
+  - "test/e2e/test/git-changed.test.ts:128:25        gpgsign     U       git('config', 'commit.gpgsign', 'false')"
   - "test/e2e/test/location-filters.test.ts:129:36       doesn       U       fixturePath}/:a/file/that/doesn-t/exit:10`,"
   - "test/e2e/test/mocker-redirect-traversal.test.ts:81:43       inroot      U       sterRedirect(port, 'traversal:inroot.js')"
   - "test/e2e/test/mocking.test.ts:47:28         autospied       U       mockReset works with autospied Node modules', async"
