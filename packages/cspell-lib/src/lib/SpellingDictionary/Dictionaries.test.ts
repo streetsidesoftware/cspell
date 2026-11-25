@@ -285,7 +285,7 @@ describe('Validate collection reuse', () => {
             await getDict({ dictionaries: ['colors'], words: ['word' + i] });
             if (i % 50 === 0) await collectGarbage();
         }
-        expect(cleanKeys).toHaveBeenCalled();
+        expect(cleanKeys.mock.calls.length).toBeGreaterThan(1);
         const map = cleanKeys.mock.contexts[0] as StrongWeakMap<string, object>;
         expect(map.size).toBeLessThan(250);
     });
