@@ -1,4 +1,4 @@
-import { promises as fs } from 'node:fs';
+import { promises as fs, realpath } from 'node:fs';
 import * as path from 'node:path';
 
 import type { CSpellUserSettings, Glob } from '@cspell/cspell-types';
@@ -7,6 +7,7 @@ import { fileOrGlobToGlob, globInFolder, GlobMatcher } from 'cspell-glob';
 import type { GlobOptions as TinyGlobbyOptions } from 'tinyglobby';
 import { glob as tinyGlob } from 'tinyglobby';
 
+import { createSymlinkChecker, isMissingPathError } from './symlinks.js';
 import { clean } from './util.js';
 
 // cspell:ignore tinyglobby
@@ -24,6 +25,7 @@ export interface GlobOptions {
      * Follow symbolic links.
      */
     followSymlinks?: boolean | undefined;
+    onBrokenSymlink?: ((filename: string) => void) | undefined;
 }
 
 const defaultExcludeGlobs = ['node_modules/**'];
@@ -51,8 +53,33 @@ export async function globP(pattern: string | string[], options?: GlobOptions): 
         // debug: true,
     });
 
+    const onBrokenSymlink = options?.followSymlinks ? options.onBrokenSymlink : undefined;
+    const unresolvedLinks = onBrokenSymlink ? new Set<string>() : undefined;
+    if (unresolvedLinks) {
+        // The crawler resolves links with the two-argument, string-path form of realpath.
+        const observeRealpath = (filename: string, callback: Parameters<typeof realpath>[1]): void =>
+            realpath(filename, (error, resolvedPath) => {
+                if (isMissingPathError(error)) unresolvedLinks.add(path.resolve(filename));
+                callback(error, resolvedPath);
+            });
+        useOptions.fs = { realpath: observeRealpath as typeof realpath };
+    }
+
     const compare = new Intl.Collator('en').compare;
     const absolutePaths = (await tinyGlob(patterns, useOptions)).sort(compare);
+    if (unresolvedLinks && onBrokenSymlink) {
+        const symlinks = createSymlinkChecker(cwd);
+        const matcher = new GlobMatcher(patterns, { root: cwd, mode: 'include', dot: dot ?? false });
+        const broken = new Set<string>();
+        for (const filename of unresolvedLinks) {
+            if (matcher.matchEx(filename).matched && (await symlinks.isBrokenSymlink(filename))) broken.add(filename);
+        }
+        for (const glob of patterns) {
+            const filename = await symlinks.findBrokenSymlinkInGlob(glob);
+            if (filename) broken.add(filename);
+        }
+        [...broken].sort(compare).forEach(onBrokenSymlink);
+    }
     const relativePaths = absolutePaths.map((absFilename) => path.relative(cwd, absFilename));
     return relativePaths;
 }

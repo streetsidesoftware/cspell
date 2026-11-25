@@ -405,14 +405,17 @@ async function determineFilesToCheck(
             globOptions.dot = enableGlobDot;
         }
         const globSymlinks = cfg.options.globSymlinks ?? truthy(getEnvironmentVariable('CSPELL_GLOB_SYMLINKS'));
+        const verbose = calcVerboseLevel(cfg.options) > 0;
         globOptions.followSymlinks = globSymlinks;
         result.followSymlinks = globSymlinks;
+        const brokenSymlinks: string[] = [];
+        if (globSymlinks && verbose) globOptions.onBrokenSymlink = (filename) => brokenSymlinks.push(filename);
 
         const opFilterExcludedFiles = opFilter(filterOutExcludedFilesFn(globMatcher));
         const globsToSearch: string[] = [];
         for (const glob of fileGlobs) {
             if (!globSymlinks && (await symlinks.isGlobReachedThroughSymlink(glob))) {
-                if (calcVerboseLevel(cfg.options) > 0) {
+                if (verbose) {
                     reporter.info(`Glob not searched: "${glob}" goes through a symbolic link.`, MessageTypes.Info);
                 }
                 continue;
@@ -420,6 +423,12 @@ async function determineFilesToCheck(
             globsToSearch.push(glob);
         }
         const foundFiles = await findFiles(globsToSearch, globOptions);
+        if (brokenSymlinks.length) {
+            const paths = brokenSymlinks.filter((filename) => !globMatcher.matchEx(filename).matched);
+            for (const filename of gitIgnore ? await gitIgnore.filterOutIgnored(paths) : paths) {
+                reporter.info(`Broken symbolic link skipped: "${path.relative(root, filename)}".`, MessageTypes.Info);
+            }
+        }
         const filtered = gitIgnore ? await gitIgnore.filterOutIgnored(foundFiles) : foundFiles;
 
         const files = isAsyncIterable(filtered)
