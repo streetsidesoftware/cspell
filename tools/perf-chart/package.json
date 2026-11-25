@@ -13,6 +13,7 @@
   "scripts": {
     "build": "pnpm run build:tsc",
     "build:tsc": "tsc -p .",
+    "test": "vitest run",
     "test-run": "./bin.ts  ../../integration-tests/perf/perf.csv -o ../../perf-report.md --daily-csv ../../static/daily-stats.csv",
     "watch": "tsc -p . -w"
   },

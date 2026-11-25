@@ -1,4 +1,5 @@
 import { promises as fs } from 'node:fs';
+import os from 'node:os';
 
 import type { CSpellReporter, Issue, ReporterConfiguration, RunResult } from '@cspell/cspell-types';
 import { parse as parseCsv } from 'csv-parse/sync';
@@ -32,6 +33,10 @@ interface CsvRecord {
     usageSystem: number;
     /** number of kilobytes processed */
     kilobytes: number;
+    /** CPU model of the machine, empty if it is not known. */
+    cpuModel: string;
+    /** number of cores available to the process */
+    cpuCores: number;
 }
 const csvHeaders = [
     'timestamp',
@@ -45,6 +50,8 @@ const csvHeaders = [
     'usageUser',
     'usageSystem',
     'kilobytes',
+    'cpuModel',
+    'cpuCores',
 ] as const;
 
 const reformatCsv = false;
@@ -98,6 +105,8 @@ export function getReporter(_settings: unknown, config?: Config): CSpellReporter
             usageUser: usage.user / 1000,
             usageSystem: usage.system / 1000,
             kilobytes: await getFileSizes([...files]),
+            cpuModel: getCpuModel(os.cpus()),
+            cpuCores: os.availableParallelism(),
         };
         await writePerfCsvRecord(csvRecord, root);
     }
@@ -198,13 +207,23 @@ function extractFieldFromCsv(csvRecord: CsvRecord, field: keyof CsvRecord): numb
     return csvRecord[field];
 }
 
+/**
+ * Line breaks are removed because the workflow sorts and deduplicates the perf rows by line.
+ */
+function getCpuModel(cpus: readonly Pick<os.CpuInfo, 'model'>[]): string {
+    return (cpus[0]?.model ?? '').replaceAll(/\s+/g, ' ').trim();
+}
+
+function stringifyCsvRecord(csvRecord: CsvRecord): string {
+    return stringifyCsv([csvHeaders.map((key) => extractFieldFromCsv(csvRecord, key))]);
+}
+
 async function writePerfCsvRecord(csvRecord: CsvRecord, root: vscodeUri.URI): Promise<void> {
     const url = getPerfCsvFileUrl(root);
 
     await createCsvFile(url);
 
-    const record = csvHeaders.map((key) => extractFieldFromCsv(csvRecord, key));
-    await fs.appendFile(url, stringifyCsv([record]));
+    await fs.appendFile(url, stringifyCsvRecord(csvRecord));
 }
 
 /**
@@ -241,3 +260,9 @@ function isReporterSettings(settings: unknown): settings is ReporterSettings {
 export function getReporterListAll(_settings: unknown, config?: Config): CSpellReporter {
     return getReporter({ listAllFiles: true }, config);
 }
+
+export const __testing__: {
+    csvHeaders: typeof csvHeaders;
+    getCpuModel: typeof getCpuModel;
+    stringifyCsvRecord: typeof stringifyCsvRecord;
+} = { csvHeaders, getCpuModel, stringifyCsvRecord };

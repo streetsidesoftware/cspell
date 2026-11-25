@@ -258,7 +258,8 @@ jobs:
         run: |
           touch temp/perf/perf-run-empty.csv
           # Skip rows already in perf.csv; cached runs upload their rows again.
-          cat temp/perf/perf-run-*.csv | sort | awk 'NR == FNR { seen[$0] = 1; next } !seen[$0]++' integration-tests/perf/perf.csv - > temp/perf-new-rows.csv
+          # Skip header lines; they can differ from the one in perf.csv.
+          cat temp/perf/perf-run-*.csv | sort | awk 'NR == FNR { seen[$0] = 1; next } !/^timestamp,/ && !seen[$0]++' integration-tests/perf/perf.csv - > temp/perf-new-rows.csv
           cat temp/perf-new-rows.csv >> integration-tests/perf/perf.csv
 
       - name: Gen Report
@@ -336,7 +337,8 @@ jobs:
             git show FETCH_HEAD:integration-tests/perf/perf.csv > temp/perf/perf-run-pending.csv
           fi
           # Skip rows already in perf.csv; cached runs upload their rows again.
-          cat temp/perf/perf-run-*.csv | sort | awk 'NR == FNR { seen[$0] = 1; next } !seen[$0]++' integration-tests/perf/perf.csv - > temp/perf-new-rows.csv
+          # Skip header lines; they can differ from the one in perf.csv.
+          cat temp/perf/perf-run-*.csv | sort | awk 'NR == FNR { seen[$0] = 1; next } !/^timestamp,/ && !seen[$0]++' integration-tests/perf/perf.csv - > temp/perf-new-rows.csv
           cat temp/perf-new-rows.csv >> integration-tests/perf/perf.csv
           ./tools/perf-chart/bin.ts ./integration-tests/perf/perf.csv -o perf-report.md --daily-csv ./static/daily-stats.csv
 
