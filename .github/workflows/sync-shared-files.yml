@@ -1,0 +1,45 @@
+name: Sync Shared Files
+
+on:
+  schedule:
+    - cron: '0 6 * * 1' # Monday at 6 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    if: github.repository_owner == 'streetsidesoftware'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+
+      - name: Setup
+        uses: ./.github/actions/setup
+
+      - name: Copy the sponsor and footer blocks
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: pnpm exec copy-github-files streetsidesoftware/.github 'static/*.md'
+
+      - name: Copy the sponsor images
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: pnpm exec copy-github-files streetsidesoftware/streetsidesoftware.github.io 'website/static/img/sponsor/*'
+
+      # The PR action looks for changes with `git diff`, which skips new files.
+      - name: Include new files
+        run: git add --intent-to-add .
+
+      - name: PR
+        uses: ./.github/actions/pr
+        with:
+          commit-message: 'chore: Workflow Bot -- Sync Shared Files'
+          branch: sync-shared-files
+          base: main
+          app_id: ${{ secrets.AUTOMATION_APP_ID }}
+          app_private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
