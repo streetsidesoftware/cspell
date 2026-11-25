@@ -88,6 +88,8 @@ Never edit these by hand. Change the source and regenerate, or let the workflow 
 | `packages/cspell-bundled-dicts/cspell-default.config.js`                                  | `cspell-default.config.ts`                  | `pnpm run build`                                                                          |
 | `__snapshots__/`                                                                          | the tests                                   | `pnpm run test:update-snapshots`                                                          |
 | Injected regions of `README.md`, `packages/*/README.md`, `website/src/**/*.md`            | `@@inject` sources, such as `static/*.md`   | `pnpm run build:readme`, and the Update README workflow after every merge to `main`       |
+| `static/sponsor.md`, `static/sponsor-pub.md`, `static/footer.md`                          | `streetsidesoftware/.github` repository     | The Sync Shared Files workflow (`sync-shared-files.yml`), weekly                          |
+| `website/static/img/sponsor/`                                                             | `streetsidesoftware.github.io` repository   | The Sync Shared Files workflow (`sync-shared-files.yml`), weekly                          |
 | `packages/cspell/static/help-*.txt`                                                       | `cspell lint --help`, `cspell trace --help` | `pnpm run build:readme`                                                                   |
 | `website/docs/Configuration/auto_properties.md`, `website/src/components/help-lint.md`    | `cspell-types`, the CLI                     | The Build Docs workflow (`update-docs.yml`) after a `cspell-types` change lands on `main` |
 | `CHANGELOG.md`, `packages/*/CHANGELOG.md`, `.release.json`                                | merged PRs                                  | The Release Drafter workflow. See [Releasing](./releasing.md).                            |
@@ -173,7 +175,7 @@ The main workflows in `.github/workflows/`:
 - `integration-test.yml`, `smoke-test.yml`, `coverage.yml`.
 - `website-*.yml`, `lint-docs.yml`, `test-build-docs.yml`: the website.
 - Bots that open PRs: `update-dictionaries.yml`, `update-dependencies.yml`, `update-pnpm.yml`, `update-readme.yml`,
-  `update-docs.yml`, `update-integration-repositories.yml`.
+  `update-docs.yml`, `update-integration-repositories.yml`, `sync-shared-files.yml`.
 - Releases: see [Releasing](./releasing.md).
 
 When adding or changing a workflow:
