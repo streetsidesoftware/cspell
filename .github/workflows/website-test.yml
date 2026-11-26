@@ -36,7 +36,7 @@ jobs:
           node-version: 'lts/*'
 
       - name: Build
-        run: pnpm build
+        run: pnpm run build:prod
 
       # Ensure the repository is clean after the build. Updating the READMEs below can change them.
       - run: git --no-pager diff --compact-summary --exit-code
