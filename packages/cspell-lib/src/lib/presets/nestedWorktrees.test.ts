@@ -1,10 +1,11 @@
 import { promises as fsp } from 'node:fs';
-import * as os from 'node:os';
 import * as path from 'node:path';
 
 import { toFileDirURL } from '@cspell/url';
+import { CSPELL_VFS_PROTOCOL } from 'cspell-io';
 import { afterAll, beforeAll, describe, expect, test } from 'vitest';
 
+import { createTempFolder } from '../../test-util/index.mjs';
 import { getFileSystem } from '../fileSystem.js';
 import { findNestedWorktrees } from './nestedWorktrees.js';
 
@@ -13,7 +14,7 @@ describe('findNestedWorktrees', () => {
     let repo = '';
 
     beforeAll(async () => {
-        tmp = await fsp.mkdtemp(path.join(os.tmpdir(), 'cspell-nested-worktrees-'));
+        tmp = await createTempFolder(import.meta.url);
         repo = path.join(tmp, 'repo');
         const outside = path.join(tmp, 'outside');
 
@@ -55,7 +56,9 @@ describe('findNestedWorktrees', () => {
     });
 
     test('a folder outside a repository', async () => {
-        expect(await findNestedWorktrees(toFileDirURL(path.join(tmp, 'outside-repo')), getFileSystem())).toEqual([]);
+        // Every folder in the checkout is in cspell's own repository, so this one is in the in-memory file system.
+        const folder = new URL(CSPELL_VFS_PROTOCOL + '///outside-repo/');
+        expect(await findNestedWorktrees(folder, getFileSystem())).toEqual([]);
     });
 });
 

@@ -1,10 +1,10 @@
 import { existsSync, promises as fsp } from 'node:fs';
 import { readdir, stat } from 'node:fs/promises';
-import * as os from 'node:os';
 import * as path from 'node:path';
 
 import { afterAll, beforeAll, beforeEach, describe, expect, test, vi } from 'vitest';
 
+import { createTempFolder } from '../test/test.helper.js';
 import { createFolderLookup } from './folderOnDisk.js';
 
 vi.mock('node:fs/promises', async (importOriginal) => {
@@ -21,7 +21,7 @@ describe('createFolderLookup', () => {
     let ignoresUnicodeForm = false;
 
     beforeAll(async () => {
-        tmp = await fsp.mkdtemp(path.join(os.tmpdir(), 'cspell-folder-on-disk-'));
+        tmp = await createTempFolder(import.meta.url);
         await fsp.mkdir(path.join(tmp, 'Proj/sub'), { recursive: true });
         await fsp.mkdir(path.join(tmp, nfdName));
         await fsp.writeFile(path.join(tmp, 'Proj/file.txt'), 'text\n');

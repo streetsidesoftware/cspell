@@ -3,11 +3,15 @@ name: Website - Build and Test
 on:
   pull_request:
     paths:
+      - '.github/workflows/website-test.yml'
+      - 'static/**'
       - 'website/**'
   push:
     branches:
       - main
     paths:
+      - '.github/workflows/website-test.yml'
+      - 'static/**'
       - 'website/**'
   # Run on demand
   workflow_dispatch:
@@ -31,10 +35,17 @@ jobs:
         with:
           node-version: 'lts/*'
 
-      - name: Build website
-        run: |
-          pnpm build
-          pnpm --filter website run build:site
+      - name: Build
+        run: pnpm run build:prod
 
-      # Ensure the repository is clean after build & test
+      # Ensure the repository is clean after the build. Updating the READMEs below can change them.
       - run: git --no-pager diff --compact-summary --exit-code
+
+      # The website includes some READMEs. Inject the blocks from `static/` into them,
+      # as Update README does after a merge.
+      - name: Update the READMEs
+        run: pnpm run build:readme
+
+      - name: Build website
+        working-directory: website
+        run: pnpm run build:site
