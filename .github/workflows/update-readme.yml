@@ -7,8 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
 
 jobs:
   build-docs:
@@ -50,12 +49,12 @@ jobs:
 
       - name: Create PR
         if: github.ref_name == 'main'
-        uses: peter-evans/create-pull-request@v8
+        uses: ./.github/actions/pr
         with:
           commit-message: 'chore: ${{ steps.pr-body.outputs.title }}'
           branch: update-readme
           base: main
           title: 'chore: ${{ steps.pr-body.outputs.title }}'
           body: ${{ steps.pr-body.outputs.body }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          sign-commits: true # Sign commits made by the action
+          app_id: ${{ secrets.AUTOMATION_APP_ID }}
+          app_private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
