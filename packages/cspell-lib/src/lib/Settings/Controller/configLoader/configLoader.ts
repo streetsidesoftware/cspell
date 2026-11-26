@@ -608,13 +608,14 @@ export class ConfigLoader implements IConfigLoader {
     }
 
     createCSpellConfigFile(filename: URL | string, settings: CSpellUserSettings): CSpellConfigFile {
+        const url = toFileURL(filename);
         const map = autoResolveWeak(
             this.cachedCSpellConfigFileInMemory,
             settings,
             () => new Map<string, CSpellConfigFile>(),
         );
-        return autoResolve(map, filename, () =>
-            this.cspellConfigFileReaderWriter.toCSpellConfigFile({ url: toFileURL(filename), settings }),
+        return autoResolve(map, url.href, () =>
+            this.cspellConfigFileReaderWriter.toCSpellConfigFile({ url, settings }),
         );
     }
 
