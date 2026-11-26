@@ -8,6 +8,7 @@ import { createRedirectProvider, createVirtualFS, getDefaultVirtualFs } from 'cs
 import { afterEach, assert, beforeEach, describe, expect, test, vi } from 'vitest';
 import { URI } from 'vscode-uri';
 
+import { createTempFolder } from '../../../../test-util/index.mjs';
 import {
     pathPackageRoot,
     pathPackageSamples,
@@ -411,9 +412,7 @@ describe('Validate search/load config files', () => {
     });
 
     test('that clearing the cache clears the stops found for a search', async () => {
-        const tempDir = path.join(pathPackageRoot, 'temp');
-        await fsp.mkdir(tempDir, { recursive: true });
-        const testDir = await fsp.mkdtemp(path.join(tempDir, 'stop-search-at-'));
+        const testDir = await createTempFolder(import.meta.url);
         try {
             await fsp.writeFile(path.join(testDir, 'cspell.json'), JSON.stringify({ words: ['root'] }));
             const sub = path.join(testDir, 'sub');
