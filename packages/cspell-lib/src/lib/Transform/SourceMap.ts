@@ -373,7 +373,7 @@ function advanceCursors(cursor1: SourceMapMergeCursor, cursor2: SourceMapMergeCu
     if (cursor2.done) {
         const adjB = cursor2.end0 - cursor2.p0;
         const adjC = cursor2.end1 - cursor2.p1;
-        const adjustment = adjB - adjC;
+        const adjustment = adjC - adjB;
         const dA = cursor1.end0 - cursor1.p0;
         const dC = cursor1.end1 - cursor1.p1 + adjustment;
         if (dA === dC && (!cursor1.linear || adjustment !== 0)) {
