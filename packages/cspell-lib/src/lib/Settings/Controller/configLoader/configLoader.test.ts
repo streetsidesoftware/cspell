@@ -19,7 +19,7 @@ import {
     pathRepoTestFixturesURL,
 } from '../../../../test-util/test.locations.js';
 import { logError, logWarning } from '../../../util/logger.js';
-import { cwdURL, resolveFileWithURL, toFilePathOrHref, toFileUrl } from '../../../util/url.js';
+import { cwdURL, resolveFileWithURL, toFileDirURL, toFilePathOrHref, toFileUrl } from '../../../util/url.js';
 import { currentSettingsFileVersion, defaultConfigFileModuleRef, ENV_CSPELL_GLOB_ROOT } from '../../constants.js';
 import type { ImportFileRefWithError } from '../../CSpellSettingsServer.js';
 import { extractDependencies, getSources, mergeSettings } from '../../CSpellSettingsServer.js';
@@ -416,7 +416,7 @@ describe('Validate search/load config files', () => {
         try {
             await fsp.writeFile(path.join(tmp, 'cspell.json'), JSON.stringify({ words: ['root'] }));
             const sub = path.join(tmp, 'sub');
-            const searchFrom = pathToFileURL(path.join(sub, 'deep') + '/');
+            const searchFrom = toFileDirURL(path.join(sub, 'deep'));
             // Without a trailing slash, `sub` is taken as a directory only if it is one.
             const options = { stopSearchAt: sub };
 
