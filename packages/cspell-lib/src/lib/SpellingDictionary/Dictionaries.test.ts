@@ -1,8 +1,12 @@
 import * as fs from 'node:fs/promises';
 import * as path from 'node:path';
+import { setTimeout } from 'node:timers/promises';
+import { setFlagsFromString } from 'node:v8';
+import { runInNewContext } from 'node:vm';
 
 import type { CSpellUserSettings } from '@cspell/cspell-types';
-import { describe, expect, test } from 'vitest';
+import { StrongWeakMap } from '@cspell/strong-weak-map';
+import { afterEach, describe, expect, test, vi } from 'vitest';
 
 import { pathPackageRoot } from '../../test-util/test.locations.js';
 import { createDictionaryReferenceCollection } from '../Settings/DictionaryReferenceCollection.js';
@@ -113,6 +117,20 @@ describe('Validate getDictionary', () => {
     });
 
     test.each`
+        noSuggestDictionaries
+        ${[]}
+        ${['companies', 'software-term-suggestions']}
+    `('dictionaries are reused, noSuggestDictionaries: $noSuggestDictionaries', async ({ noSuggestDictionaries }) => {
+        const settings = csi({ ...(await getDefaultBundledSettingsAsync()), noSuggestDictionaries });
+        const a = await Dictionaries.getDictionaryInternal(settings);
+        const b = await Dictionaries.getDictionaryInternal(settings);
+        const names = a.dictionaries.map((d) => d.name);
+        expect(names).toEqual(expect.arrayContaining(['companies', 'software-term-suggestions']));
+        const reused = new Set(a.dictionaries);
+        expect(b.dictionaries.filter((d) => !reused.has(d)).map((d) => d.name)).toEqual([]);
+    });
+
+    test.each`
         word       | opts               | expected
         ${'zero'}  | ${undefined}       | ${false}
         ${'Rhône'} | ${ignoreCaseFalse} | ${true}
@@ -195,6 +213,84 @@ describe('Validate getDictionary', () => {
     );
 });
 
+describe('Validate collection reuse', () => {
+    afterEach(() => {
+        vi.restoreAllMocks();
+    });
+
+    const dictionaryDefinitions = [
+        di({ name: 'colors', words: ['red', 'green'] }, __filenameURL),
+        di({ name: 'numbers', words: ['one', 'two'] }, __filenameURL),
+    ];
+
+    function getDict(settings: CSpellUserSettings) {
+        return Dictionaries.getDictionaryInternal(csi({ ...settings, dictionaryDefinitions }));
+    }
+
+    test('the same dictionaries share a collection', async () => {
+        const a = await getDict({ dictionaries: ['colors', 'numbers'], words: ['apple'] });
+        const b = await getDict({ dictionaries: ['numbers', 'colors'], words: ['apple'] });
+        expect(b).toBe(a);
+    });
+
+    test.each`
+        settings
+        ${{ dictionaries: ['colors'], words: ['apple'] }}
+        ${{ dictionaries: ['colors', 'numbers'], words: ['pear'] }}
+        ${{ dictionaries: ['colors', 'numbers'], words: ['apple'], userWords: ['pear'] }}
+        ${{ dictionaries: ['colors', 'numbers'], words: ['apple'], flagWords: ['pear'] }}
+        ${{ dictionaries: ['colors', 'numbers'], words: ['apple'], ignoreWords: ['pear'] }}
+        ${{ dictionaries: ['colors', 'numbers'], words: ['apple'], suggestWords: ['pear->apple'] }}
+        ${{ dictionaries: ['colors', 'numbers'], words: ['apple'], noSuggestDictionaries: ['numbers'] }}
+    `('different dictionaries do not share a collection: $settings', async ({ settings }) => {
+        const a = await getDict({ dictionaries: ['colors', 'numbers'], words: ['apple'] });
+        const b = await getDict(settings);
+        expect(b).not.toBe(a);
+    });
+
+    test('a reloaded dictionary gets a new collection', async () => {
+        const file = tempPath('words.txt');
+        await mkdirp(path.dirname(file));
+        await fs.writeFile(file, 'one\n');
+        const settings = csi({
+            dictionaryDefinitions: [di({ name: 'temp', path: file }, __filenameURL)],
+            dictionaries: ['temp'],
+        });
+
+        const a = await Dictionaries.getDictionaryInternal(settings);
+        expect(a.has('two')).toBe(false);
+
+        await fs.writeFile(file, 'one\ntwo\n');
+        await Dictionaries.refreshDictionaryCache(0);
+
+        const b = await Dictionaries.getDictionaryInternal(settings);
+        expect(b).not.toBe(a);
+        expect(b.has('two')).toBe(true);
+        expect(a.has('two')).toBe(false);
+    });
+
+    test('collections are released', async () => {
+        const getRef = async (word: string) => new WeakRef(await getDict({ dictionaries: ['colors'], words: [word] }));
+        const ref = await getRef('released');
+        const held = await getDict({ dictionaries: ['colors'], words: ['held'] });
+        const heldRef = await getRef('held');
+        await collectGarbage();
+        expect(ref.deref()).toBeUndefined();
+        expect(heldRef.deref()).toBe(held);
+    });
+
+    test('the keys of released collections are removed', async () => {
+        const cleanKeys = vi.spyOn(StrongWeakMap.prototype, 'cleanKeys');
+        for (let i = 0; i < 250; ++i) {
+            await getDict({ dictionaries: ['colors'], words: ['word' + i] });
+            if (i % 50 === 0) await collectGarbage();
+        }
+        expect(cleanKeys.mock.calls.length).toBeGreaterThan(1);
+        const map = cleanKeys.mock.contexts[0] as StrongWeakMap<string, object>;
+        expect(map.size).toBeLessThan(250);
+    });
+});
+
 describe('Validate Refresh', () => {
     test('Refresh Dictionary Cache', async () => {
         log(`Start: ${expect.getState().currentTestName}; ts: ${Date.now()}`);
@@ -245,6 +341,15 @@ describe('Validate Refresh', () => {
         log(`End: ${expect.getState().currentTestName} at ${Date.now()}`);
     });
 });
+
+async function collectGarbage() {
+    setFlagsFromString('--expose-gc');
+    const gc: () => void = runInNewContext('gc');
+    // A `WeakRef` keeps its target until the current job has finished.
+    await setTimeout(1);
+    gc();
+    await setTimeout(1);
+}
 
 function tempPath(file: string) {
     const testState = expect.getState();

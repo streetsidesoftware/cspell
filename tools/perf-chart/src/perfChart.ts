@@ -1,12 +1,11 @@
 import { promises as fs } from 'node:fs';
 import Path from 'node:path';
 
-import { parse as parseCsv } from 'csv-parse/sync';
-
 import type { CsvRecord, CsvRecordsRO } from './CsvRecord.ts';
 import { createDailyStats, dailyStatsToCsv } from './dailyStats.ts';
 import type { Options } from './options.ts';
 import { perfReportMd } from './perfChartMD.ts';
+import { readCsvData } from './readCsvData.ts';
 import { filterOutIncompleteRuns, groupCsvRecordsByRun } from './runs.ts';
 
 const debug = false;
@@ -121,12 +120,6 @@ function deltaTimeSInDHMS(deltaSec: number): string {
     if (minutes > 0) result += `${minutes}m `;
     result += `${seconds.toFixed(2)}s`;
     return result;
-}
-
-async function readCsvData(csvFile: string | URL): Promise<CsvRecord[]> {
-    const csv = await fs.readFile(csvFile, 'utf8');
-    const records = parseCsv(csv, { columns: true, cast: true }) as CsvRecord[];
-    return records;
 }
 
 function changeDate(date: Date, deltaDays: number): Date {

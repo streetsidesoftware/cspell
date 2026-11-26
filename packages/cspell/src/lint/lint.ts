@@ -30,7 +30,6 @@ import type { CSpellReporterConfiguration } from '../models.js';
 import { npmPackage } from '../pkgInfo.js';
 import type { FinalizedReporter } from '../reporters/index.js';
 import { LintReporter } from '../reporters/index.js';
-import { calcCacheSettings } from '../util/cache/index.js';
 import type { ConfigInfo } from '../util/configFileHelper.js';
 import { readConfig } from '../util/configFileHelper.js';
 import { calcFileConfigSearchStops } from '../util/configSearchStops.js';
@@ -50,6 +49,7 @@ import { getTimeMeasurer } from '../util/timer.js';
 import * as util from '../util/util.js';
 import { wordWrapAnsiText } from '../util/wrap.js';
 import { writeFileOrStream } from '../util/writeFile.js';
+import { calcCacheSettings } from './cache/index.js';
 import type { LintRequest } from './LintRequest.js';
 import type { ProcessFileOptions } from './processFile.js';
 import { countConfigErrors } from './processFile.js';
@@ -152,8 +152,9 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         try {
             const cacheSettings = await calcCacheSettings(
                 configInfo.config,
-                { ...cfg.options, version, configUrl: configInfo.url, stopConfigSearchAt: givenStops },
+                { ...cfg.options, configUrl: configInfo.url, stopConfigSearchAt: givenStops },
                 root,
+                version,
             );
             const symlinks = createSymlinkChecker(root);
             const filesToCheck = await determineFilesToCheck(configInfo, cfg, reporter, globInfo, symlinks);

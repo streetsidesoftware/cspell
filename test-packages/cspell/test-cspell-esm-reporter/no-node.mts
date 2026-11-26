@@ -2,3 +2,4 @@
 export type Cspell = typeof import('cspell');
 export type CspellApp = typeof import('cspell/app');
 export type CspellApplication = typeof import('cspell/application');
+export type CspellCjs = typeof import('cspell', { with: { 'resolution-mode': 'require' } });

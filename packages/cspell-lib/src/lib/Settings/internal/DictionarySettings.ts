@@ -50,9 +50,8 @@ export function filterDictDefsToLoad(
 }
 
 function fixPath(def: DictionaryDefinitionInternal): DictionaryDefinitionInternal {
-    if (def instanceof _DictionaryDefinitionInternalWithSource) {
-        return def;
-    }
+    // Only `file` needs fixing. Dictionaries are cached by definition, so avoid making a copy.
+    if (!def.file) return def;
     const newPath = fixDicPath(def.path, def.file);
     const newBTriePath = def.btrie ? fixDicPath(def.btrie, def.file) : undefined;
     return {
@@ -112,14 +111,26 @@ function determineName(filename: string, options: DictionaryDefinition): string 
     return options.name || path.basename(filename);
 }
 
+const noSuggestDefs = new WeakMap<DictionaryDefinitionInternal, DictionaryDefinitionInternal>();
+
+/**
+ * Set `noSuggest` on a copy of the definition. The copy is reused until `noSuggest` changes.
+ */
+function withNoSuggest(def: DictionaryDefinitionInternal, noSuggest: boolean): DictionaryDefinitionInternal {
+    const found = noSuggestDefs.get(def);
+    if (found?.noSuggest === noSuggest) return found;
+    const copy = { ...def, noSuggest };
+    noSuggestDefs.set(def, copy);
+    return copy;
+}
+
 export function calcDictionaryDefsToLoad(settings: CSpellSettingsInternal): DictionaryDefinitionInternal[] {
     const { dictionaries = [], dictionaryDefinitions = [], noSuggestDictionaries = [] } = settings;
     const colNoSug = createDictionaryReferenceCollection(noSuggestDictionaries);
     const colDicts = createDictionaryReferenceCollection([...dictionaries, ...colNoSug.enabled()]);
     const modDefs = dictionaryDefinitions.map((def) => {
         const enabled = colNoSug.isEnabled(def.name);
-        if (enabled === undefined) return def;
-        return { ...def, noSuggest: enabled };
+        return enabled === undefined ? def : withNoSuggest(def, enabled);
     });
     return filterDictDefsToLoad(colDicts, modDefs);
 }

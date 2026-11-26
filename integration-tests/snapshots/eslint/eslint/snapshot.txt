@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: [".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 2090, Issues found: 1548 in 300 files.
+ CSpell: Files checked: 2090, Issues found: 1549 in 300 files.
  exit code: 1
 AGENTS.md:76:15     - Unknown word (frontmatter) -- Rule docs use frontmatter with `title` and `rule
 Makefile.js:1043:18   - Unknown word (Multifiles) -- function downloadMultifilesTestTarget() {
@@ -99,7 +99,7 @@ docs/src/rules/key-spacing.md:213:5     - Unknown word (ijkl)       -- ijkl: 'No
 docs/src/rules/max-lines-per-function.md:30:45     - Unknown word (dbname)     -- return m("tr", {key: db.dbname}, [
 docs/src/rules/no-dupe-keys.md:56:5      - Unknown word (quxx)       -- quxx: "qux"
 docs/src/rules/no-empty-character-class.md:40:13     - Unknown word (abcefg)     -- regex.test("abcefg"); // false, the nested
-docs/src/rules/no-eq-null.md:67:41     - Unknown word (eqnull)     -- rule corresponds to `eqnull` rule of JSHint.
+docs/src/rules/no-eq-null.md:80:41     - Unknown word (eqnull)     -- rule corresponds to `eqnull` rule of JSHint.
 docs/src/rules/no-extend-native.md:74:34     - Unknown word (muhahaha)   -- prototype.forEach = 'muhahaha'");
 docs/src/rules/no-fallthrough.md:59:12     - Unknown word (fallsthrough) -- // fallsthrough
 docs/src/rules/no-irregular-whitespace.md:43:30     - Unknown word (OGSP)       -- Ogham Space Mark - <OGSP>
@@ -207,7 +207,7 @@ lib/cli-engine/formatters/html.js:247:66    - Unknown word (noopener)   -- targe
 lib/cli-engine/formatters/html.js:247:75    - Unknown word (noreferrer) -- blank" rel="noopener noreferrer">${encodeHTML(ruleId
 lib/cli-engine/formatters/html.js:46:48     - Unknown word (Neue)       -- family: Arial, "Helvetica Neue", Helvetica, sans-serif
 lib/cli-engine/lint-result-cache.js:14:58     - Unknown word (jsonify)    -- stable-stringify-without-jsonify");
-lib/config/config.js:672:47    - Unknown word (inting)     -- configuration rules while inting.
+lib/config/config.js:673:47    - Unknown word (inting)     -- configuration rules while inting.
 lib/config/flat-config-schema.js:264:36    - Unknown word (incompat)   -- messageTemplate = "eslintrc-incompat";
 lib/eslint/eslint-helpers.js:207:33    - Unknown word (humanfs)       -- hfs } = await import("@humanfs/node");
 lib/eslint/eslint-helpers.js:45:31     - Unknown word (humanwhocodes) -- import { Retrier } from "@humanwhocodes/retry";
@@ -261,7 +261,7 @@ lib/rules/no-useless-escape.js:45:13     - Unknown word (CLASSSET)   -- const RE
 lib/rules/space-unary-ops.js:167:22    - Unknown word (Doesnt)     -- function verifyWordDoesntHaveSpaces(
 lib/rules/space-unary-ops.js:303:26    - Unknown word (Dont)       -- function verifyNonWordsDontHaveSpaces(node, firstToken
 lib/rules/use-isnan.js:150:13    - Unknown word (Suggestable) -- const isSuggestable =
-lib/rules/utils/ast-utils.js:486:34    - Unknown word (samely)     -- a.b` and `a?.b` are samely.
+lib/rules/utils/ast-utils.js:488:34    - Unknown word (samely)     -- a.b` and `a?.b` are samely.
 lib/services/processor-service.js:87:5      - Unknown word (Postprocesses) -- * Postprocesses the given messages synchronou
 lib/shared/text-table.js:36:8      - Unknown word (hsep)       -- const hsep = "  ";
 package.json:191:6     - Unknown word (eslump)     -- "eslump": "^3.0.0",
@@ -286,7 +286,7 @@ tests/lib/cli-engine/formatters/stylish.js:247:32    - Unknown word (mred)      
 tests/lib/cli-engine/lint-result-cache.js:300:42    - Unknown word (anotherfile) -- path.resolve(testDir, "anotherfile.js");
 tests/lib/cli.js:2012:37   - Unknown word (oldx)          -- = `--flag test_only_oldx --config ${configPath
 tests/lib/cli.js:351:11    - Unknown word (fakeformatter) -- `-f fakeformatter ${filePath} --no-config
-tests/lib/config/config.js:1153:39   - Unknown word (myns)       -- schema: [], languages: ["myns/lang"] },
+tests/lib/config/config.js:1183:39   - Unknown word (myns)       -- schema: [], languages: ["myns/lang"] },
 tests/lib/config/flat-config-array.js:1967:17   - Unknown word (truex)       -- foo: "truex",
 tests/lib/config/flat-config-array.js:222:19    - Unknown word (noniterable) -- it("should allow noniterable baseConfig objects"
 tests/lib/config/flat-config-array.js:2569:9    - Unknown word (foox)        -- foox: [1, "bar"],
@@ -381,7 +381,7 @@ tests/lib/rules/no-loop-func.js:856:52    - Unknown word (unconfig)     -- confi
 tests/lib/rules/no-prototype-builtins.js:48:28     - Unknown word (Enumerabl)  -- code: "foo?.['propertyIsEnumerabl']('bar')",
 tests/lib/rules/no-restricted-imports.js:799:27    - Unknown word (subimports) -- message: "some foo subimports are restricted",
 tests/lib/rules/no-script-url.js:25:15     - Unknown word (xjavascript) -- "var url = 'xjavascript:'",
-tests/lib/rules/no-shadow.js:3555:17   - Unknown word (Foopy)      -- declare class Foopy1 {
+tests/lib/rules/no-shadow.js:3618:17   - Unknown word (Foopy)      -- declare class Foopy1 {
 tests/lib/rules/no-tabs.js:23:34     - Unknown word (sdfdsf)     -- test(){\n" + "  //   sdfdsf \n" + "}",
 tests/lib/rules/no-tabs.js:60:39     - Unknown word (tsdfdsf)    -- function test(){\n" + "  //\tsdfdsf \n" + "}",
 tests/lib/rules/no-undefined.js:42:4      - Unknown word (ndefined)   -- "ndefined",
@@ -407,8 +407,8 @@ tests/lib/rules/semi.js:380:59    - Unknown word (mylib)      -- named2 } from '
 tests/lib/rules/sort-keys.js:509:24    - Unknown word (abce)       -- // abce
 tests/lib/rules/spaced-comment.js:150:45    - Unknown word (xmldoc)     -- comment\n//----\n/// xmldoc style comment\n//!<
 tests/lib/rules/spaced-comment.js:769:14    - Unknown word (endregionfoo) -- code: "//#endregionfoo",
-tests/lib/rules/utils/ast-utils.js:1411:8    - Unknown word (ncde)       -- "ab\ncde\n": [
-tests/lib/rules/utils/ast-utils.js:2188:10   - Unknown word (invalidtoken) -- [["123invalidtoken", "("], false],
+tests/lib/rules/utils/ast-utils.js:1466:8    - Unknown word (ncde)       -- "ab\ncde\n": [
+tests/lib/rules/utils/ast-utils.js:2243:10   - Unknown word (invalidtoken) -- [["123invalidtoken", "("], false],
 tests/lib/rules/utils/unicode/is-combining-character.js:22:78     - Unknown word (Visarga)    -- // Devanagari Sign Visarga
 tests/lib/rules/utils/unicode/is-combining-character.js:23:76     - Unknown word (Etnahta)    -- true); // Hebrew Accent Etnahta
 tests/lib/rules/valid-typeof.js:98:31     - Unknown word (umdefined)  -- if (typeof bar === 'umdefined') {}",
