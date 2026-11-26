@@ -347,6 +347,7 @@ export class ConfigLoader implements IConfigLoader {
         this.cspellConfigFileReaderWriter.clearCachedFiles();
         this.cachedMergedConfig = new WeakMap();
         this.cachedCSpellConfigFileInMemory = new WeakMap();
+        this.stopSearchAtCache = new WeakMap();
         this.prefetchGlobalSettingsAsync();
         this.#knownVirtualFiles.clear();
     }
