@@ -31,17 +31,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: pnpm exec copy-github-files streetsidesoftware/streetsidesoftware.github.io 'website/static/img/sponsor/*'
 
-      # Put the copied blocks into the READMEs, and stop before the PR if the website can't build them.
-      - name: Build
-        run: pnpm run build:prod
-
-      - name: Update the READMEs
-        run: pnpm run build:readme
-
-      - name: Build the website
-        working-directory: website
-        run: pnpm run build:site
-
       # The PR action looks for changes with `git diff`, which skips new files.
       - name: Include new files
         run: git add --intent-to-add .
