@@ -511,6 +511,14 @@ describe('Validate looking up words', () => {
 
     const testDictCollection = createCollection(testDicts, 'test');
 
+    test('the list it is given is not changed', () => {
+        const names = testDicts.map((d) => d.name);
+        const collection = createCollection(testDicts, 'test');
+        expect(testDicts.map((d) => d.name)).toEqual(names);
+        expect(collection.dictionaries).not.toBe(testDicts);
+        expect(collection.dictionaries.map((d) => d.name).toSorted()).toEqual(names.toSorted());
+    });
+
     interface HasWordTest {
         word: string;
         found: boolean;
