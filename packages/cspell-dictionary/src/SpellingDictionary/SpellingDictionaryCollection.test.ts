@@ -511,11 +511,12 @@ describe('Validate looking up words', () => {
 
     const testDictCollection = createCollection(testDicts, 'test');
 
-    test('the list it is given is not changed', () => {
-        const names = testDicts.map((d) => d.name);
-        const collection = createCollection(testDicts, 'test');
-        expect(testDicts.map((d) => d.name)).toEqual(names);
-        expect(collection.dictionaries).not.toBe(testDicts);
+    test('the list it is given is not reordered', () => {
+        const given = testDicts.toSorted((a, b) => a.size - b.size);
+        const names = given.map((d) => d.name);
+        const collection = createCollection(given, 'test');
+        expect(given.map((d) => d.name)).toEqual(names);
+        expect(collection.dictionaries).not.toBe(given);
         expect(collection.dictionaries.map((d) => d.name).toSorted()).toEqual(names.toSorted());
     });
 
