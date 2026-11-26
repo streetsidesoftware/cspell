@@ -227,8 +227,7 @@ export class ConfigLoader implements IConfigLoader {
     protected cachedConfigFiles: Map<string, CSpellConfigFile> = new Map();
     protected cachedPendingConfigFile: AutoResolveMap<string, Promise<Error | CSpellConfigFile>> = new AutoResolveMap();
     protected cachedMergedConfig: WeakMap<CSpellConfigFile, CacheMergeConfigFileWithImports> = new WeakMap();
-    protected cachedCSpellConfigFileInMemory: WeakMap<CSpellSettings, Map<string | URL, CSpellConfigFile>> =
-        new WeakMap();
+    protected cachedCSpellConfigFileInMemory: WeakMap<CSpellSettings, Map<string, CSpellConfigFile>> = new WeakMap();
     protected globalSettings: CSpellSettingsI | undefined;
     protected cspellConfigFileReaderWriter: CSpellConfigFileReaderWriter;
     protected configSearch: ConfigSearch;
@@ -608,13 +607,14 @@ export class ConfigLoader implements IConfigLoader {
     }
 
     createCSpellConfigFile(filename: URL | string, settings: CSpellUserSettings): CSpellConfigFile {
+        const url = toFileURL(filename);
         const map = autoResolve(
             this.cachedCSpellConfigFileInMemory,
             settings,
-            () => new Map<string | URL, CSpellConfigFile>(),
+            () => new Map<string, CSpellConfigFile>(),
         );
-        return autoResolve(map, filename, () =>
-            this.cspellConfigFileReaderWriter.toCSpellConfigFile({ url: toFileURL(filename), settings }),
+        return autoResolve(map, url.href, () =>
+            this.cspellConfigFileReaderWriter.toCSpellConfigFile({ url, settings }),
         );
     }
 
