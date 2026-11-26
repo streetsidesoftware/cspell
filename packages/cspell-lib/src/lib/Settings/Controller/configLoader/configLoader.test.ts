@@ -1,3 +1,5 @@
+import { promises as fsp } from 'node:fs';
+import * as os from 'node:os';
 import * as path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
@@ -407,6 +409,25 @@ describe('Validate search/load config files', () => {
                 ),
             ),
         );
+    });
+
+    test('that clearing the cache clears the stops found for a search', async () => {
+        const tmp = await fsp.mkdtemp(path.join(os.tmpdir(), 'cspell-stop-search-at-'));
+        try {
+            await fsp.writeFile(path.join(tmp, 'cspell.json'), JSON.stringify({ words: ['root'] }));
+            const sub = path.join(tmp, 'sub');
+            const searchFrom = pathToFileURL(path.join(sub, 'deep') + '/');
+            // Without a trailing slash, `sub` is taken as a directory only if it is one.
+            const options = { stopSearchAt: sub };
+
+            expect((await searchForConfig(searchFrom, options))?.words).toEqual(['root']);
+
+            await fsp.mkdir(sub);
+            clearCachedSettingsFiles();
+            expect(await searchForConfig(searchFrom, options)).toBeUndefined();
+        } finally {
+            await fsp.rm(tmp, { recursive: true, force: true });
+        }
     });
 
     test.each`
