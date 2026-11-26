@@ -1,6 +1,5 @@
 import { execFile } from 'node:child_process';
 import { promises as fs } from 'node:fs';
-import * as os from 'node:os';
 import * as path from 'node:path';
 import { promisify } from 'node:util';
 
@@ -9,7 +8,7 @@ import { cspellConfigFileSchema } from 'cspell-config-lib';
 import { afterEach, beforeEach, describe, expect, test } from 'vitest';
 
 import { run } from './app.mjs';
-import { pathPackageRoot } from './test/test.helper.js';
+import { createTempFolder, pathPackageRoot } from './test/test.helper.js';
 
 const execFileAsync = promisify(execFile);
 
@@ -20,7 +19,7 @@ describe('cspell init', () => {
     let tempDir: string;
 
     beforeEach(async () => {
-        tempDir = await fs.mkdtemp(path.join(os.tmpdir(), 'cspell-init-'));
+        tempDir = await createTempFolder(import.meta.url);
     });
 
     afterEach(async () => {

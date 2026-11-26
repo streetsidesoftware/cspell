@@ -53,6 +53,12 @@ const defaultConfig = {
             ],
         },
     },
+    server: {
+        watch: {
+            // Tests write files in `temp`. A `package.json` written there would rerun every test file.
+            ignored: ['**/temp/**'],
+        },
+    },
 };
 
 export default defineConfig(defaultConfig);
