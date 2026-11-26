@@ -663,6 +663,17 @@ describe('Validate search/load config files', () => {
         expect(cfgFile).toBeInstanceOf(CSpellConfigFileInMemory);
         expect(cfgFile.virtual).toBe(true);
     });
+
+    test('create with a path or a URL to the same file', () => {
+        const loader = getDefaultConfigLoader();
+        const settings: CSpellUserSettings = {};
+        const filename = fileURLToPath(import.meta.url);
+        const cfgFile = loader.createCSpellConfigFile(filename, settings);
+
+        expect(loader.createCSpellConfigFile(filename, settings)).toBe(cfgFile);
+        expect(loader.createCSpellConfigFile(new URL(import.meta.url), settings)).toBe(cfgFile);
+        expect(loader.createCSpellConfigFile(import.meta.url, settings)).toBe(cfgFile);
+    });
 });
 
 describe('ConfigLoader with VirtualFS', () => {
