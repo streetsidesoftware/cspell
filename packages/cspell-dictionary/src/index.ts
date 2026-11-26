@@ -33,3 +33,7 @@ export {
     createSuggestDictionaryFromTrieFile,
     createSuggestOptions,
 } from './SpellingDictionary/index.js';
+export {
+    getPreferredSuggestionsWithLocale,
+    suggestWithLocale,
+} from './SpellingDictionary/SpellingDictionaryCollection.js';

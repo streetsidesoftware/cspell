@@ -203,7 +203,7 @@ async function _suggestionsForWordAsync(
         : settings;
     const opts: SuggestOptions = { ignoreCase, numChanges, numSuggestions, includeTies };
     const suggestionsByDictionary = dictionaryCollection.dictionaries.flatMap((dict) =>
-        dict.suggest(word, opts).map((r) => ({ ...r, dictName: dict.name })),
+        dict.suggest(word, opts).map((r) => ({ ...r, dictName: dict.name, dictionaryLocale: dict.options.locale })),
     );
     const locale = normalizeLocaleForIntl(language || config.language || undefined);
     const collator = Intl.Collator(locale);
@@ -219,7 +219,7 @@ async function _suggestionsForWordAsync(
         ignoreCase,
         extendsDictionaryCollection,
     );
-    const allSugs = sugsAdjusted.map((sug) => {
+    const allSugs = sugsAdjusted.map(({ dictionaryLocale: _dictionaryLocale, ...sug }) => {
         const found = extendsDictionaryCollection.find(sug.word);
         return {
             ...sug,
@@ -236,13 +236,19 @@ async function _suggestionsForWordAsync(
 
 interface SuggestionResultWithDictionaryName extends SuggestionResult {
     dictName: string;
+    dictionaryLocale: string | undefined;
 }
 
-function combine(suggestions: SuggestionResultWithDictionaryName[]): SuggestedWordBase[] {
-    const words: Map<string, SuggestedWordBase> = new Map();
+interface CombinedSuggestion extends SuggestedWordBase {
+    dictionaryLocale: string | undefined;
+}
+
+function combine(suggestions: SuggestionResultWithDictionaryName[]): CombinedSuggestion[] {
+    const words: Map<string, CombinedSuggestion> = new Map();
 
     for (const sug of suggestions) {
         const { word, cost, dictName, ...rest } = sug;
+        // The results are sorted by cost, so keep the locale of the first result for each word.
         const f = words.get(word) || { word, cost, ...rest, dictionaries: [] };
         f.cost = Math.min(f.cost, cost);
         f.dictionaries.push(dictName);
@@ -253,7 +259,9 @@ function combine(suggestions: SuggestionResultWithDictionaryName[]): SuggestedWo
     return [...words.values()];
 }
 
-export function calcSuggestionAdjustedToToMatchCase<T extends SuggestionResult>(
+export function calcSuggestionAdjustedToToMatchCase<
+    T extends SuggestionResult & { dictionaryLocale?: string | undefined },
+>(
     originalWord: string,
     sugs: T[],
     locale: string | string[] | undefined,
@@ -262,10 +270,10 @@ export function calcSuggestionAdjustedToToMatchCase<T extends SuggestionResult>(
 ): (T & WordSuggestion)[] {
     locale = normalizeLocaleForIntl(locale);
     const knownSugs = new Set(sugs.map((sug) => sug.word));
-    const matchStyle = { ...analyzeCase(originalWord), locale, ignoreCase };
+    const matchStyle = { ...analyzeCase(originalWord), ignoreCase };
     /* Add adjusted words */
     return sugs.map((sug) => {
-        const alt = matchCase(sug.word, !!sug.isPreferred, matchStyle);
+        const alt = matchCase(sug.word, !!sug.isPreferred, matchStyle, sug.dictionaryLocale ?? locale);
         if (alt === sug.word || knownSugs.has(alt)) return sug;
 
         const found = dict.find(alt);
@@ -302,8 +310,12 @@ function validateDictionaries(settings: CSpellSettings, dictionaries: string[] |
     }
 }
 
-function matchCase(word: string, isPreferred: boolean, style: CaseStyle): string {
-    const locale = style.locale;
+function matchCase(
+    word: string,
+    isPreferred: boolean,
+    style: CaseStyle,
+    locale: string | string[] | undefined,
+): string {
     if (style.isMixedCaps) {
         /**
          * Do not try matching mixed caps.
@@ -323,7 +335,6 @@ function matchCase(word: string, isPreferred: boolean, style: CaseStyle): string
 }
 
 interface CaseStyle extends AnalyzeCaseResult {
-    locale: string | string[] | undefined;
     ignoreCase: boolean;
 }
 

@@ -393,7 +393,10 @@ interface SuggestionCollectorOptions extends Omit<GenSuggestionOptionsStrictRO, 
   weightMap?: WeightMap | undefined;
 }
 type SuggestionCollectorOptionsRO = Readonly<SuggestionCollectorOptions>;
-export declare function suggestionCollector(wordToMatch: string, options: SuggestionCollectorOptionsRO): SuggestionCollector;
+/**
+ * @param onBestSuggestion - called when a word is added or its cost improves.
+ */
+export declare function suggestionCollector(wordToMatch: string, options: SuggestionCollectorOptionsRO, onBestSuggestion?: (word: string) => void): SuggestionCollector;
 /**
  * Impersonating a Collector, allows searching for multiple variants on the same word.
  * The collection is still in the original collector.

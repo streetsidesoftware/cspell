@@ -6,6 +6,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import type { CSpellUserSettings } from '@cspell/cspell-types';
 import { afterEach, describe, expect, test, vi } from 'vitest';
 
+import { createTempFolder } from '../../test-util/test.helper.mjs';
 import { pathPackageFixtures, pathPackageRoot, pathRepoTestFixtures } from '../../test-util/test.locations.js';
 import type { TextDocument } from '../Models/TextDocument.js';
 import { createTextDocument } from '../Models/TextDocument.js';
@@ -269,6 +270,51 @@ describe('docValidator', () => {
         const result = dVal.checkText(range, text, []);
         expect(result).toEqual(expected);
         expect(dVal.prepTime).toBeGreaterThan(0);
+    });
+
+    // cspell:ignore İncelemee inceleme İnceleme
+    test.each([true, false])('uses the dictionary locale with generateSuggestions: %s', async (generateSuggestions) => {
+        const text = 'İncelemee';
+        const doc = td('file:///turkish.txt', text, 'plaintext');
+        const settings: CSpellUserSettings = {
+            language: 'en,tr',
+            loadDefaultConfiguration: false,
+            unknownWords: 'report-simple',
+            dictionaries: ['turkish'],
+            dictionaryDefinitions: [
+                {
+                    name: 'turkish',
+                    path: path.join(pathPackageRoot, 'samples', 'turkish-words.txt'),
+                    dictionaryInformation: { locale: 'tr-TR' },
+                },
+            ],
+        };
+        const validator = new DocumentValidator(doc, { generateSuggestions, noConfigSearch: true }, settings);
+        await validator.prepare();
+
+        expect(validator.checkDocument()).toEqual([
+            oc({ text, suggestionsEx: [{ word: 'inceleme', wordAdjustedToMatchCase: 'İnceleme' }] }),
+        ]);
+    });
+
+    test('uses the dictionary locale for preferred suggestions', async () => {
+        const directory = await createTempFolder(import.meta.url, 'preferred-suggestions');
+        const dictionary = path.join(directory, 'turkish.txt');
+        const text = 'İncelemee';
+        await fs.writeFile(dictionary, `:${text}:inceleme\n`);
+        const doc = td('file:///turkish.txt', text, 'plaintext');
+        const settings: CSpellUserSettings = {
+            language: 'en,tr',
+            loadDefaultConfiguration: false,
+            dictionaries: ['turkish'],
+            dictionaryDefinitions: [{ name: 'turkish', path: dictionary, dictionaryInformation: { locale: 'tr-TR' } }],
+        };
+        const validator = new DocumentValidator(doc, { generateSuggestions: false, noConfigSearch: true }, settings);
+        await validator.prepare();
+
+        expect(validator.checkDocument()).toEqual([
+            oc({ text, suggestionsEx: [{ word: 'inceleme', wordAdjustedToMatchCase: 'İnceleme', isPreferred: true }] }),
+        ]);
     });
 
     // cspell:ignore kount naame colector Reciever reciever recievers serrors sissues

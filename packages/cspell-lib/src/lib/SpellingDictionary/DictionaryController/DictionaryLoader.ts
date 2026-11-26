@@ -227,7 +227,7 @@ export class DictionaryLoader {
         const path = def.path;
         const loaderType = determineType(toFileURL(path), def);
         const optValues = importantOptionKeys.map((k) => def[k]?.toString() || '');
-        const parts = [path, loaderType, ...optValues];
+        const parts = [path, loaderType, ...optValues, def.dictionaryInformation?.locale ?? ''];
 
         return parts.join('|');
     }

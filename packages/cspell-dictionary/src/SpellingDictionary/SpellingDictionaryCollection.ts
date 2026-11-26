@@ -6,6 +6,7 @@ import * as Defaults from './defaults.js';
 import type {
     FindResult,
     HasOptionsRO,
+    PreferredSuggestion,
     SearchOptionsRO,
     SpellingDictionary,
     SpellingDictionaryOptionsRO,
@@ -17,6 +18,14 @@ export interface SpellingDictionaryCollection extends SpellingDictionary {
     readonly type: 'SpellingDictionaryCollection';
     readonly dictionaries: SpellingDictionary[];
     getErrors(): Error[];
+}
+
+interface SuggestionResultWithLocale extends SuggestionResult {
+    dictionaryLocale?: string | undefined;
+}
+
+interface PreferredSuggestionWithLocale extends PreferredSuggestion {
+    dictionaryLocale?: string | undefined;
 }
 
 class SpellingDictionaryCollectionImpl implements SpellingDictionaryCollection {
@@ -61,7 +70,15 @@ class SpellingDictionaryCollectionImpl implements SpellingDictionaryCollection {
         return this._suggest(word, suggestOptions);
     }
 
-    public _suggest(word: string, suggestOptions: SuggestOptionsRO): SuggestionResult[] {
+    public suggestWithLocale(word: string, suggestOptions: SuggestOptionsRO): SuggestionResultWithLocale[] {
+        return this._suggest(word, suggestOptions, true);
+    }
+
+    private _suggest(
+        word: string,
+        suggestOptions: SuggestOptionsRO,
+        includeDictionaryLocale = false,
+    ): SuggestionResultWithLocale[] {
         const { numSuggestions = defaultNumSuggestions, numChanges, ignoreCase, includeTies, timeout } = suggestOptions;
         const prefixNoCase = CASE_INSENSITIVE_PREFIX;
         const filter = (word: string, _cost: number) => {
@@ -79,17 +96,42 @@ class SpellingDictionaryCollectionImpl implements SpellingDictionaryCollection {
             ignoreCase,
             timeout,
         };
-        const collector = suggestionCollector(word, collectorOptions);
-        this.genSuggestions(collector, suggestOptions);
-        return collector.suggestions;
+        if (!includeDictionaryLocale) {
+            const collector = suggestionCollector(word, collectorOptions);
+            this.genSuggestions(collector, suggestOptions);
+            return collector.suggestions;
+        }
+
+        let locale: string | undefined;
+        const locales = new Map<string, string>();
+        const collector = suggestionCollector(word, collectorOptions, (word) => {
+            if (locale) {
+                locales.set(word, locale);
+            } else {
+                locales.delete(word);
+            }
+        });
+        this.genSuggestions(collector, suggestOptions, (dict) => {
+            locale = dict.options.locale;
+        });
+        return collector.suggestions.map((result) => {
+            const dictionaryLocale = locales.get(result.compoundWord ?? result.word);
+            return dictionaryLocale ? { ...result, dictionaryLocale } : result;
+        });
     }
 
     public get size(): number {
         return this.dictionaries.reduce((a, b) => a + b.size, 0);
     }
 
-    getPreferredSuggestions(word: string) {
-        const sugs = this.dictionaries.flatMap((dict) => dict.getPreferredSuggestions?.(word)).filter(isDefined);
+    public getPreferredSuggestions(word: string, includeDictionaryLocale = false): PreferredSuggestionWithLocale[] {
+        const sugs = this.dictionaries
+            .flatMap((dict) =>
+                includeDictionaryLocale
+                    ? getPreferredSuggestionsWithLocale(dict, word)
+                    : dict.getPreferredSuggestions?.(word),
+            )
+            .filter(isDefined);
         if (sugs.length <= 1) return sugs;
         const unique = new Set<string>();
         return sugs.filter((sug) => {
@@ -99,11 +141,22 @@ class SpellingDictionaryCollectionImpl implements SpellingDictionaryCollection {
         });
     }
 
-    public genSuggestions(collector: SuggestionCollector, suggestOptions: SuggestOptionsRO): void {
+    public genSuggestions(
+        collector: SuggestionCollector,
+        suggestOptions: SuggestOptionsRO,
+        onDictionary?: (dict: SpellingDictionary) => void,
+    ): void {
         const _suggestOptions = { ...suggestOptions };
         const { compoundMethod = CompoundWordsMethod.SEPARATE_WORDS } = suggestOptions;
         _suggestOptions.compoundMethod = this.options.useCompounds ? CompoundWordsMethod.JOIN_WORDS : compoundMethod;
-        this.dictionaries.forEach((dict) => dict.genSuggestions(collector, _suggestOptions));
+        for (const dict of this.dictionaries) {
+            if (onDictionary && dict instanceof SpellingDictionaryCollectionImpl) {
+                dict.genSuggestions(collector, _suggestOptions, onDictionary);
+                continue;
+            }
+            onDictionary?.(dict);
+            dict.genSuggestions(collector, _suggestOptions);
+        }
     }
 
     public getErrors(): Error[] {
@@ -126,6 +179,30 @@ export function createCollection(
     source?: string,
 ): SpellingDictionaryCollection {
     return new SpellingDictionaryCollectionImpl(dictionaries, name, source);
+}
+
+/** Collect suggestions and include the locale of the dictionary that supplied the best match for each word. */
+export function suggestWithLocale(
+    dictionary: SpellingDictionaryCollection,
+    word: string,
+    options: SuggestOptionsRO = {},
+): SuggestionResultWithLocale[] {
+    return dictionary instanceof SpellingDictionaryCollectionImpl
+        ? dictionary.suggestWithLocale(word, options)
+        : dictionary.suggest(word, options);
+}
+
+/** Collect preferred suggestions and include the locale of the first dictionary to supply each word. */
+export function getPreferredSuggestionsWithLocale(
+    dictionary: SpellingDictionary,
+    word: string,
+): PreferredSuggestionWithLocale[] {
+    if (dictionary instanceof SpellingDictionaryCollectionImpl) {
+        return dictionary.getPreferredSuggestions(word, true);
+    }
+    const suggestions = dictionary.getPreferredSuggestions?.(word) ?? [];
+    const dictionaryLocale = dictionary.options.locale;
+    return dictionaryLocale ? suggestions.map((suggestion) => ({ ...suggestion, dictionaryLocale })) : suggestions;
 }
 
 function isWordInAnyDictionary(
