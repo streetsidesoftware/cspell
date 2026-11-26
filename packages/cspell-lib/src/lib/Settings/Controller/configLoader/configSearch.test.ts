@@ -1,7 +1,7 @@
 import { promises as nfs } from 'node:fs';
 
 import { createRedirectProvider, createVirtualFS, FSCapabilityFlags } from 'cspell-io';
-import { describe, expect, test } from 'vitest';
+import { afterEach, describe, expect, test, vi } from 'vitest';
 
 import { pathPackageSamplesURL, pathRepoTestFixturesURL } from '../../../../test-util/index.mjs';
 import { getVirtualFS } from '../../../fileSystem.js';
@@ -24,6 +24,10 @@ const allowedExtensionsByProtocol = new Map<string, readonly string[]>([
 ]);
 
 describe('ConfigSearch', () => {
+    afterEach(() => {
+        vi.restoreAllMocks();
+    });
+
     describe('searchForConfig', () => {
         test('should return the URL of the config file if found', async () => {
             const configSearch = new ConfigSearch(searchPlaces, allowedExtensionsByProtocol, getVirtualFS().fs);
@@ -140,18 +144,20 @@ describe('ConfigSearch', () => {
             expect(reads).toBe(1);
         });
 
-        test('that another list with the same stops gives the same result', async () => {
+        test('that lists with the same stops share their results', async () => {
             const configSearch = new ConfigSearch(searchPlaces, allowedExtensionsByProtocol, getVirtualFS().fs);
+            const findUp = vi.spyOn(getVirtualFS().fs, 'findUp');
             const stopDir = sURL('./');
             const searchFrom = sURL('src/');
             const expected = sURL('.cspell.json');
 
-            const result = await configSearch.searchForConfig(searchFrom, [stopDir]);
-            expect(result).toEqual(expected);
-            expect(await configSearch.searchForConfig(searchFrom, [stopDir])).toBe(result);
-            expect(await configSearch.searchForConfig(searchFrom, [{ url: stopDir }])).toBe(result);
+            expect(await configSearch.searchForConfig(searchFrom, [stopDir])).toEqual(expected);
+            expect(await configSearch.searchForConfig(searchFrom, [stopDir])).toEqual(expected);
+            expect(await configSearch.searchForConfig(searchFrom, [{ url: stopDir }])).toEqual(expected);
+            expect(findUp).toHaveBeenCalledTimes(1);
             expect(await configSearch.searchForConfig(searchFrom, [{ url: stopDir, exclusive: true }])).toBeUndefined();
             expect(await configSearch.searchForConfig(searchFrom, [{ url: stopDir, exclusive: true }])).toBeUndefined();
+            expect(findUp).toHaveBeenCalledTimes(2);
         });
 
         test('symbolic links', async () => {
