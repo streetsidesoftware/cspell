@@ -32,7 +32,7 @@ interface StopDir {
 }
 
 /**
- * One list of stops, converted for the search, and the results found with it.
+ * What the search keeps for each list of stops it's given.
  */
 interface SearchStops {
     stopAt: URL[] | undefined;
@@ -50,8 +50,8 @@ export class ConfigSearch {
      */
     #searchCache = new Map<string, Map<Href, Promise<URL | undefined>>>();
     /**
-     * The converted stops for each list given, so a list is only converted the first time.
-     * A list is not read again until the cache is cleared, even if it changes.
+     * The converted stops for each list given, so a list is converted only once.
+     * A list isn't read again until the cache is cleared. A caller that changes its stops clears the cache.
      */
     #stopsByList = new WeakMap<readonly (URL | StopAtLocation)[], SearchStops>();
     #noStops: SearchStops = { stopAt: undefined, exclusiveStops: new Set(), results: new Map() };
