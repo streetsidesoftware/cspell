@@ -70,8 +70,9 @@ Each rule is written for people in the linked section. Read it before working in
 - **If you change X, also do Y:** see [the table](docs/build-and-packaging.md#if-you-change-x-also-do-y).
 - **Compiler settings:** `node16` resolution needs `.js` on relative imports, and exports need explicit types. See
   [Compiler settings](docs/build-and-packaging.md#compiler-settings-that-catch-people-out).
-- **Tests** use vitest, next to the source. Paths use `node:path`: CI runs on Windows. When code relies on a
-  library's behavior, add a `Validate <library> assumptions` test for it. See [Tests](docs/development.md#tests).
+- **Tests** use vitest, next to the source. Paths use `node:path`: CI runs on Windows. Tests write files only in
+  their package's `temp/` folder, never outside the repo, not even in `os.tmpdir()`. When code relies on a library's
+  behavior, add a `Validate <library> assumptions` test for it. See [Tests](docs/development.md#tests).
 - **Comments:** few, short, and accurate. Leave existing comments alone unless you are changing that function. Read
   [Writing comments](docs/writing-comments.md) before writing or changing one.
 - **Doc comments** on the public API of every package, and on config options, are user documentation. Internal

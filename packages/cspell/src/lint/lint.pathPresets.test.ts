@@ -1,5 +1,4 @@
 import { promises as fsp } from 'node:fs';
-import * as os from 'node:os';
 import * as path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -8,6 +7,7 @@ import { calcIgnorePathGlobs, ENV_CSPELL_GLOB_ROOT } from 'cspell-lib';
 import { afterAll, afterEach, beforeAll, describe, expect, test } from 'vitest';
 
 import type { LinterCliOptions } from '../options.js';
+import { createTempFolder } from '../test/test.helper.js';
 import { findFiles } from '../util/fileHelper.js';
 import { buildGlobMatcher, extractGlobsFromMatcher } from '../util/glob.js';
 import { InMemoryReporter } from '../util/InMemoryReporter.js';
@@ -44,7 +44,7 @@ describe('lint with ignorePathPresets', () => {
     let repo = '';
 
     beforeAll(async () => {
-        tmp = await fsp.mkdtemp(path.join(os.tmpdir(), 'cspell-lint-presets-'));
+        tmp = await createTempFolder(import.meta.url, 'presets');
         repo = path.join(tmp, 'repo');
         for (const file of allFiles) {
             const filePath = path.join(repo, file);
@@ -152,7 +152,7 @@ describe('lint with nestedWorktrees', () => {
     let repo = '';
 
     beforeAll(async () => {
-        tmp = await fsp.mkdtemp(path.join(os.tmpdir(), 'cspell-lint-worktrees-'));
+        tmp = await createTempFolder(import.meta.url, 'worktrees');
         repo = path.join(tmp, 'repo');
         for (const file of [...worktreeFiles, ...repoFiles]) {
             // Every file has the same unknown word, so the issues show which files were checked.
