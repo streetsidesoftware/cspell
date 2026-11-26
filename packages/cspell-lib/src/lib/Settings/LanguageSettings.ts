@@ -6,8 +6,8 @@ import type {
     LocaleId,
     Settings,
 } from '@cspell/cspell-types';
+import { AutoResolveMap, AutoResolveWeakMap } from '@streetsidesoftware/auto-resolve-map';
 
-import { AutoResolveCache, createAutoResolveCache, createAutoResolveWeakCache } from '../util/AutoResolve.js';
 import { doSetsIntersect } from '../util/util.js';
 import * as SpellSettings from './CSpellSettingsServer.js';
 
@@ -36,8 +36,8 @@ function stringToList(sList: string): string[] {
 }
 
 function memoize<K, V>(resolver: (k: K) => V): (k: K) => V {
-    const cache = createAutoResolveCache<K, V>();
-    return (k: K) => cache.get(k, resolver);
+    const cache = new AutoResolveMap<K, V>();
+    return (k: K) => cache.getOrInsertComputed(k, resolver);
 }
 
 const _normalizeLanguageId = memoize(__normalizeLanguageId);
@@ -111,9 +111,9 @@ export function normalizeLocaleForIntl(locale: LocaleId | LocaleId[] | undefined
     return locales;
 }
 
-const cacheCalcSettingsForLanguage = createAutoResolveWeakCache<
+const cacheCalcSettingsForLanguage = new AutoResolveWeakMap<
     LanguageSettings,
-    AutoResolveCache<LanguageId, AutoResolveCache<LocaleId, BaseSetting>>
+    AutoResolveMap<LanguageId, AutoResolveMap<LocaleId, BaseSetting>>
 >();
 
 export function calcSettingsForLanguage(
@@ -122,9 +122,9 @@ export function calcSettingsForLanguage(
     locale: LocaleId,
 ): BaseSetting {
     return cacheCalcSettingsForLanguage
-        .get(languageSettings, () => new AutoResolveCache())
-        .get(languageId, () => new AutoResolveCache())
-        .get(locale, () => _calcSettingsForLanguage(languageSettings, languageId, locale));
+        .getOrInsertComputed(languageSettings, () => new AutoResolveMap())
+        .getOrInsertComputed(languageId, () => new AutoResolveMap())
+        .getOrInsertComputed(locale, () => _calcSettingsForLanguage(languageSettings, languageId, locale));
 }
 
 function _calcSettingsForLanguage(
@@ -147,15 +147,15 @@ function _calcSettingsForLanguage(
     return ls;
 }
 
-const cacheDoesLanguageSettingMatchLanguageId = createAutoResolveWeakCache<
+const cacheDoesLanguageSettingMatchLanguageId = new AutoResolveWeakMap<
     LanguageSetting,
-    AutoResolveCache<LanguageId, boolean>
+    AutoResolveMap<LanguageId, boolean>
 >();
 
 function doesLanguageSettingMatchLanguageId(s: LanguageSetting, languageId: LanguageId): boolean {
     return cacheDoesLanguageSettingMatchLanguageId
-        .get(s, () => new AutoResolveCache())
-        .get(languageId, () => _doesLanguageSettingMatchLanguageId(s, languageId));
+        .getOrInsertComputed(s, () => new AutoResolveMap())
+        .getOrInsertComputed(languageId, () => _doesLanguageSettingMatchLanguageId(s, languageId));
 }
 
 function _doesLanguageSettingMatchLanguageId(s: LanguageSetting, languageId: LanguageId): boolean {

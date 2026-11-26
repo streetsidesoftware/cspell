@@ -1,6 +1,7 @@
 import { opConcatMap, opFilter, pipe } from '@cspell/cspell-pipe/sync';
 import type { ParsedText } from '@cspell/cspell-types';
 import { defaultCSpellSettings, unknownWordsChoices } from '@cspell/cspell-types';
+import { autoResolve } from '@streetsidesoftware/auto-resolve-map';
 import type {
     CachingDictionary,
     PreferredSuggestion,
@@ -14,7 +15,6 @@ import type { ValidationIssue } from '../Models/ValidationIssue.js';
 import * as RxPat from '../Settings/RegExpPatterns.js';
 import type { TextTransformer } from '../Transform/index.js';
 import { mapRangeBackToOriginalPos } from '../Transform/index.js';
-import { autoResolve } from '../util/AutoResolve.js';
 import {
     extractPossibleWordsFromTextOffset,
     extractText,

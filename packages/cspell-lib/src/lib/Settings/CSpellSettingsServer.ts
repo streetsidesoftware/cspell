@@ -11,9 +11,9 @@ import type {
     Plugin,
     Source,
 } from '@cspell/cspell-types';
+import { autoResolve, AutoResolveWeakMap } from '@streetsidesoftware/auto-resolve-map';
 
 import { onClearCache } from '../events/index.js';
-import { autoResolveWeak, AutoResolveWeakCache } from '../util/AutoResolve.js';
 import type { OptionalOrUndefined } from '../util/types.js';
 import { toFileUrl } from '../util/url.js';
 import * as util from '../util/util.js';
@@ -39,16 +39,16 @@ export { stats as getMergeStats } from './mergeList.js';
 const emptyWords: string[] = [];
 Object.freeze(emptyWords);
 
-const cachedMerges = new AutoResolveWeakCache<string[], WeakMap<string[], string[]>>();
+const cachedMerges = new AutoResolveWeakMap<string[], WeakMap<string[], string[]>>();
 
-const mergeCache = new AutoResolveWeakCache<
+const mergeCache = new AutoResolveWeakMap<
     CSpellSettingsWSTO | CSpellSettingsI,
     WeakMap<CSpellSettingsWSTO | CSpellSettingsI, CSpellSettingsI>
 >();
 
-const cacheInternalSettings = new AutoResolveWeakCache<CSpellSettingsI | CSpellSettingsWSTO, CSpellSettingsI>();
+const cacheInternalSettings = new AutoResolveWeakMap<CSpellSettingsI | CSpellSettingsWSTO, CSpellSettingsI>();
 
-const parserCache = new AutoResolveWeakCache<
+const parserCache = new AutoResolveWeakMap<
     Exclude<CSpellSettingsI['plugins'], undefined>,
     Map<string, Parser | DocumentParser>
 >();
@@ -67,8 +67,8 @@ onClearCache(() => {
 });
 
 function _mergeWordsCached(left: string[], right: string[]): string[] {
-    const map = autoResolveWeak(cachedMerges, left, () => new WeakMap<string[], string[]>());
-    return autoResolveWeak(map, right, () => [...left, ...right]);
+    const map = autoResolve(cachedMerges, left, () => new WeakMap<string[], string[]>());
+    return autoResolve(map, right, () => [...left, ...right]);
 }
 
 /**
@@ -129,8 +129,8 @@ function isEmpty(obj: object) {
 }
 
 function merge(left: CSpellSettingsI, right: CSpellSettingsWSTO | CSpellSettingsI): CSpellSettingsI {
-    const map = mergeCache.get(left, () => new WeakMap());
-    return autoResolveWeak(map, right, () => _merge(left, right));
+    const map = mergeCache.getOrInsertComputed(left, () => new WeakMap());
+    return autoResolve(map, right, () => _merge(left, right));
 }
 
 function _merge(
@@ -296,7 +296,7 @@ export function toInternalSettings(settings?: CSpellSettingsI | CSpellSettingsWS
     if (settings === undefined) return undefined;
     if (isCSpellSettingsInternal(settings)) return settings;
 
-    return cacheInternalSettings.get(settings, _toInternalSettings);
+    return cacheInternalSettings.getOrInsertComputed(settings, _toInternalSettings);
 }
 
 function _toInternalSettings(settings: CSpellSettingsI | CSpellSettingsWSTO): CSpellSettingsI {
@@ -429,7 +429,7 @@ function mapPlugins(plugins: Exclude<CSpellSettingsI['plugins'], undefined>): Ma
 function extractParsers(plugins: CSpellSettingsI['plugins']): Map<string, Parser | DocumentParser> {
     if (!plugins || !plugins.length) return emptyParserMap;
 
-    return parserCache.get(plugins, mapPlugins);
+    return parserCache.getOrInsertComputed(plugins, mapPlugins);
 }
 
 export const __testing__: {

@@ -656,6 +656,9 @@ importers:
       '@cspell/cspell-types':
         specifier: workspace:*
         version: link:../cspell-types
+      '@streetsidesoftware/auto-resolve-map':
+        specifier: ^1.0.0
+        version: 1.0.0
       cspell-trie-lib:
         specifier: workspace:*
         version: link:../cspell-trie-lib
@@ -834,7 +837,11 @@ importers:
         specifier: 2.9.0
         version: 2.9.0
 
-  packages/cspell-filetypes: {}
+  packages/cspell-filetypes:
+    dependencies:
+      '@streetsidesoftware/auto-resolve-map':
+        specifier: ^1.0.0
+        version: 1.0.0
 
   packages/cspell-gitignore:
     dependencies:
@@ -933,12 +940,12 @@ importers:
       '@cspell/rpc':
         specifier: workspace:*
         version: link:../rpc
-      '@cspell/strong-weak-map':
-        specifier: workspace:*
-        version: link:../cspell-strong-weak-map
       '@cspell/url':
         specifier: workspace:*
         version: link:../cspell-url
+      '@streetsidesoftware/auto-resolve-map':
+        specifier: ^1.0.0
+        version: 1.0.0
       cspell-config-lib:
         specifier: workspace:*
         version: link:../cspell-config-lib
@@ -4771,6 +4778,10 @@ packages:
 
   '@standard-schema/spec@1.1.0':
     resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
+
+  '@streetsidesoftware/auto-resolve-map@1.0.0':
+    resolution: {integrity: sha512-Qwc4Ep06Rh0pFLv4h6vGZUkUAnpw89IQc4a3MDr0meaaT2J8jLN+D+gv2zQZJAuHl22wNg8cp9gGmpk1NhFm0w==}
+    engines: {node: '>=22.18.0'}
 
   '@streetsidesoftware/copy-github-files@1.1.0':
     resolution: {integrity: sha512-FIY64vVK7TJfriCJbVzM+imoCeCGPDf0iyj1ZsoZ7PmAN0ELFcWoCrv0N06JdTxYCyxML08ZOoivI6+kyL3oQg==}
@@ -15421,6 +15432,8 @@ snapshots:
       micromark-util-symbol: 1.1.0
 
   '@standard-schema/spec@1.1.0': {}
+
+  '@streetsidesoftware/auto-resolve-map@1.0.0': {}
 
   '@streetsidesoftware/copy-github-files@1.1.0': {}
 

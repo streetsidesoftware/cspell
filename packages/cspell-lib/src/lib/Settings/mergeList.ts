@@ -1,4 +1,5 @@
-import type { CacheStats } from '../util/AutoResolve.js';
+import type { CacheStats } from '@streetsidesoftware/auto-resolve-map';
+
 import { CalcLeftRightResultWeakCache } from './mergeCache.js';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
