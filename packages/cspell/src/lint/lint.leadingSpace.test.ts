@@ -1,10 +1,10 @@
 import { promises as fsp } from 'node:fs';
-import * as os from 'node:os';
 import * as path from 'node:path';
 
 import { afterAll, beforeAll, describe, expect, test } from 'vitest';
 
 import type { LinterCliOptions } from '../options.js';
+import { createTempFolder } from '../test/test.helper.js';
 import { InMemoryReporter } from '../util/InMemoryReporter.js';
 import { runLint } from './lint.js';
 import { createLintRequest } from './LintRequest.js';
@@ -16,7 +16,7 @@ describe('lint a folder whose name starts with a space', () => {
     let config = '';
 
     beforeAll(async () => {
-        tmp = await fsp.mkdtemp(path.join(os.tmpdir(), 'cspell-lint-leading-space-'));
+        tmp = await createTempFolder(import.meta.url);
         await fsp.mkdir(path.join(tmp, ' notes'));
         await fsp.writeFile(path.join(tmp, ' notes/readme.txt'), 'zqxnotes\n');
         await fsp.writeFile(path.join(tmp, 'list.txt'), ' notes/readme.txt\n');
