@@ -45,4 +45,5 @@ jobs:
         run: pnpm run build:readme
 
       - name: Build website
-        run: pnpm --filter website run build:site
+        working-directory: website
+        run: pnpm run build:site
