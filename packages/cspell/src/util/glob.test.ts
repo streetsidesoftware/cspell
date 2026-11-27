@@ -1,5 +1,4 @@
 import { promises as fsp } from 'node:fs';
-import * as os from 'node:os';
 import * as path from 'node:path';
 
 import { escapeGlobPath, GlobMatcher } from 'cspell-glob';
@@ -10,6 +9,7 @@ import { minimatch } from 'minimatch';
 import { glob as tinyGlob, isDynamicPattern } from 'tinyglobby';
 import { afterAll, beforeAll, describe, expect, test } from 'vitest';
 
+import { createTempFolder } from '../test/test.helper.js';
 import { calcGlobs, globP, normalizeFileOrGlobsToRoot, normalizeGlobsToRoot } from './glob.js';
 
 interface MinimatchOptions {
@@ -170,7 +170,7 @@ describe('Validate tinyglobby assumptions', () => {
     let canLinkFiles = true;
 
     beforeAll(async () => {
-        tmp = await fsp.mkdtemp(path.join(os.tmpdir(), 'cspell-tinyglobby-'));
+        tmp = await createTempFolder(import.meta.url);
         root = path.join(tmp, 'root');
         await fsp.mkdir(path.join(root, 'real'), { recursive: true });
         await fsp.mkdir(path.join(tmp, 'target'), { recursive: true });

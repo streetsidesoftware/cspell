@@ -6,12 +6,12 @@
 
 <!--- @@inject: ../../static/sponsor.md --->
 
-If our spell checkers save you time, please consider supporting their development.
+If our tools save you time, please consider supporting their development.
 
 Please show your support through one of the following sites:
 
 <p align="left">
-  <a href="https://github.com/sponsors/streetsidesoftware" title="GitHub Sponsor"><picture><source media="(prefers-color-scheme: dark)" srcset="https://cspell.org/img/sponsor/github-sponsor-dark.png" /><img alt="GitHub Sponsor" src="https://cspell.org/img/sponsor/github-sponsor.png" width="180" /></picture></a>&nbsp;<a href="https://www.paypal.com/donate/?hosted_button_id=26LNBP2Q6MKCY" title="PayPal"><picture><source media="(prefers-color-scheme: dark)" srcset="https://cspell.org/img/sponsor/paypal-dark.png" /><img alt="PayPal" src="https://cspell.org/img/sponsor/paypal.png" width="180" /></picture></a> <a href="https://opencollective.com/cspell" title="Open Collective"><picture><source media="(prefers-color-scheme: dark)" srcset="https://cspell.org/img/sponsor/open-collective-dark.png" /><img alt="Open Collective" src="https://cspell.org/img/sponsor/open-collective.png" width="180" /></picture></a>&nbsp;<a href="https://streetsidesoftware.com/sponsor/" title="Street Side Software"><picture><source media="(prefers-color-scheme: dark)" srcset="https://cspell.org/img/sponsor/cspell-dark.png" /><img alt="CSpell" src="https://cspell.org/img/sponsor/cspell.png" width="180" /></picture></a>
+  <a href="https://github.com/sponsors/streetsidesoftware" title="GitHub Sponsor"><picture><source media="(prefers-color-scheme: dark)" srcset="https://streetsidesoftware.com/img/sponsor/github-sponsor-dark.png" /><img alt="GitHub Sponsor" src="https://streetsidesoftware.com/img/sponsor/github-sponsor.png" width="180" /></picture></a> &nbsp; <a href="https://thanks.dev/u/gh/streetsidesoftware" title="thanks.dev"><picture><source media="(prefers-color-scheme: dark)" srcset="https://streetsidesoftware.com/img/sponsor/thanks-dev-dark.png" /><img alt="thanks.dev" src="https://streetsidesoftware.com/img/sponsor/thanks-dev.png" width="180" /></picture></a> &nbsp; <a href="https://opencollective.com/cspell" title="Open Collective"><picture><source media="(prefers-color-scheme: dark)" srcset="https://streetsidesoftware.com/img/sponsor/open-collective-dark.png" /><img alt="Open Collective" src="https://streetsidesoftware.com/img/sponsor/open-collective.png" width="180" /></picture></a> &nbsp; <a href="https://streetsidesoftware.com/sponsor/" title="Street Side Software"><picture><source media="(prefers-color-scheme: dark)" srcset="https://streetsidesoftware.com/img/sponsor/cspell-dark.png" /><img alt="CSpell" src="https://streetsidesoftware.com/img/sponsor/cspell.png" width="180" /></picture></a>
 </p>
 
 <!--- @@inject-end: ../../static/sponsor.md --->
@@ -81,6 +81,6 @@ export async function checkFile(filename: string) {
 
 ---
 
-<p align="center">Brought to you by<a href="https://streetsidesoftware.com" title="Street Side Software"><img width="16" alt="Street Side Software Logo" src="https://i.imgur.com/CyduuVY.png" /> Street Side Software</a></p>
+<p align="center">Brought to you by <a href="https://streetsidesoftware.com" title="Street Side Software"><img width="16" alt="Street Side Software Logo" src="https://i.imgur.com/CyduuVY.png" /> Street Side Software</a></p>
 
 <!--- @@inject-end: ../../static/footer.md --->

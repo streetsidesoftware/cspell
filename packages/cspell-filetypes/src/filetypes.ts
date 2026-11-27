@@ -1,3 +1,5 @@
+import { autoResolve } from '@streetsidesoftware/auto-resolve-map';
+
 import { definitions } from './definitions.js';
 import type { FileTypeDefinition, FileTypeDefinitions, FileTypeId } from './types.js';
 
@@ -178,14 +180,6 @@ function _getLanguagesForFilename(filename: string): string[] | undefined {
 export function findMatchingFileTypes(filename: string): FileTypeId[] {
     filename = filename.replaceAll('\\', '/');
     return _getLanguagesForFilename(filename) || _getLanguagesForFilename(filename.toLowerCase()) || [];
-}
-
-export function autoResolve<K, V>(map: Map<K, V>, key: K, resolve: (k: K) => V): V {
-    const found = map.get(key);
-    if (found !== undefined || map.has(key)) return found as V;
-    const value = resolve(key);
-    map.set(key, value);
-    return value;
 }
 
 function escapeRegEx(s: string): string {

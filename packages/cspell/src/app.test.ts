@@ -1,5 +1,4 @@
 import { promises as fsp } from 'node:fs';
-import * as os from 'node:os';
 import * as Path from 'node:path';
 import * as readline from 'node:readline';
 import { fileURLToPath } from 'node:url';
@@ -13,7 +12,7 @@ import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, test, vi 
 import * as app from './app.mjs';
 import { console } from './console.js';
 import * as Link from './link.js';
-import { pathPackageRoot } from './test/test.helper.js';
+import { createTempFolder, pathPackageRoot } from './test/test.helper.js';
 import { mergeAsyncIterables } from './util/async.js';
 
 interface Constructable {
@@ -484,7 +483,7 @@ describe('Validate cli', () => {
         let tmp = '';
 
         beforeAll(async () => {
-            tmp = await fsp.mkdtemp(Path.join(os.tmpdir(), 'cspell-app-symlinks-'));
+            tmp = await createTempFolder(import.meta.url, 'follow-symlinks');
             await fsp.mkdir(Path.join(tmp, 'target'));
             await fsp.mkdir(Path.join(tmp, 'repo'));
             await fsp.writeFile(Path.join(tmp, 'target/words.txt'), 'zqxtarget\n');

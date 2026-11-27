@@ -3,7 +3,7 @@ Repository: liriliri/licia
 Url: "https://github.com/liriliri/licia.git"
 Args: ["**/*.*"]
 Lines:
- CSpell: Files checked: 1470, Issues found: 382 in 102 files.
+ CSpell: Files checked: 1481, Issues found: 405 in 107 files.
  exit code: 1
 CHANGELOG.md:354:26    - Unknown word (unenumerable) -- feat(allKeys): support unenumerable and symbol
 DOC.md:10130:2   - Unknown word (metas)            -- |metas|Object of name content
@@ -12,17 +12,20 @@ DOC.md:10933:29  - Unknown word (babca)            -- abc', 5, 'ab'); // -> 'bab
 DOC.md:10934:28  - Unknown word (ababa)            -- ab', 5, 'ab'); // -> 'ababa'
 DOC.md:11265:30  - Unknown word (pointerdown)      -- pointerEvent('down'); // -> 'pointerdown' if supported
 DOC.md:11610:28  - Unknown word (cbbcb)            -- randomId(5, 'abc'); // -> 'cbbcb'
-DOC.md:12096:30  - Unknown word (abcab)            -- abc', 5, 'ab'); // -> 'abcab'
-DOC.md:13092:9   - Unknown word (unenumerable)     -- unenumerable?: boolean;
-DOC.md:13114:2   - Unknown word (unenumerable)     -- |unenumerable=false|Include unenumerable
-DOC.md:13155:20  - Unknown word (mcake)            -- stripAnsi('\u001b[4mcake\u001b[0m'); // -> 'cake
-DOC.md:13177:16  - Unknown word (Flicia)           -- stripBom('\uFEFFlicia'); // -> 'licia'
-DOC.md:13221:22  - Unknown word (mred)             -- stripColor('\u001b[31mred\u001b[39m'); // ->
-DOC.md:13984:43  - Unknown word (mouseup)          -- getElementById('test'), 'mouseup');
-DOC.md:14412:9   - Unknown word (Uppercased)       -- |return|Uppercased string|
-DOC.md:14600:38  - Unknown word (Hwcqx)            -- 456, 789]); // -> '2HwcqxB'
-DOC.md:14602:14  - Unknown word (Hwcqx)            -- vlq.decode('2HwcqxB'); // -> [123, 456
-DOC.md:14733:9   - Unknown word (Workerized)       -- |return|Workerized Function|
+DOC.md:12210:30  - Unknown word (abcab)            -- abc', 5, 'ab'); // -> 'abcab'
+DOC.md:12837:30  - Unknown word (hmac)             -- Options, `mode` is `hmac` by default|
+DOC.md:12844:24  - Unknown word (hmac)             -- mode|Hash mode, only `hmac` is supported
+DOC.md:12845:7   - Unknown word (HMAC)             -- |key |HMAC key, string is treated
+DOC.md:13308:9   - Unknown word (unenumerable)     -- unenumerable?: boolean;
+DOC.md:13330:2   - Unknown word (unenumerable)     -- |unenumerable=false|Include unenumerable
+DOC.md:13371:20  - Unknown word (mcake)            -- stripAnsi('\u001b[4mcake\u001b[0m'); // -> 'cake
+DOC.md:13393:16  - Unknown word (Flicia)           -- stripBom('\uFEFFlicia'); // -> 'licia'
+DOC.md:13437:22  - Unknown word (mred)             -- stripColor('\u001b[31mred\u001b[39m'); // ->
+DOC.md:14200:43  - Unknown word (mouseup)          -- getElementById('test'), 'mouseup');
+DOC.md:14628:9   - Unknown word (Uppercased)       -- |return|Uppercased string|
+DOC.md:14816:38  - Unknown word (Hwcqx)            -- 456, 789]); // -> '2HwcqxB'
+DOC.md:14818:14  - Unknown word (Hwcqx)            -- vlq.decode('2HwcqxB'); // -> [123, 456
+DOC.md:14949:9   - Unknown word (Workerized)       -- |return|Workerized Function|
 DOC.md:1586:9    - Unknown word (lastname)         -- lastname: 'Su',
 DOC.md:1587:9    - Unknown word (firstname)        -- firstname: 'RedHood'
 DOC.md:1594:19   - Unknown word (firstname)        -- return author.firstname + author.lastname;
@@ -50,15 +53,18 @@ DOC_CN.md:10924:29  - Unknown word (babca)        -- abc', 5, 'ab'); // -> 'babc
 DOC_CN.md:10925:28  - Unknown word (ababa)        -- ab', 5, 'ab'); // -> 'ababa'
 DOC_CN.md:11256:30  - Unknown word (pointerdown)  -- pointerEvent('down'); // -> 'pointerdown' if supported
 DOC_CN.md:11601:28  - Unknown word (cbbcb)        -- randomId(5, 'abc'); // -> 'cbbcb'
-DOC_CN.md:12087:30  - Unknown word (abcab)        -- abc', 5, 'ab'); // -> 'abcab'
-DOC_CN.md:13083:9   - Unknown word (unenumerable) -- unenumerable?: boolean;
-DOC_CN.md:13105:2   - Unknown word (unenumerable) -- |unenumerable=false|包含不可枚举值|
-DOC_CN.md:13146:20  - Unknown word (mcake)        -- stripAnsi('\u001b[4mcake\u001b[0m'); // -> 'cake
-DOC_CN.md:13168:16  - Unknown word (Flicia)       -- stripBom('\uFEFFlicia'); // -> 'licia'
-DOC_CN.md:13212:22  - Unknown word (mred)         -- stripColor('\u001b[31mred\u001b[39m'); // ->
-DOC_CN.md:13973:43  - Unknown word (mouseup)      -- getElementById('test'), 'mouseup');
-DOC_CN.md:14589:38  - Unknown word (Hwcqx)        -- 456, 789]); // -> '2HwcqxB'
-DOC_CN.md:14591:14  - Unknown word (Hwcqx)        -- vlq.decode('2HwcqxB'); // -> [123, 456
+DOC_CN.md:12201:30  - Unknown word (abcab)        -- abc', 5, 'ab'); // -> 'abcab'
+DOC_CN.md:12828:25  - Unknown word (hmac)         -- options|选项，`mode` 默认为 `hmac`|
+DOC_CN.md:12835:19  - Unknown word (hmac)         -- |mode|摘要模式，目前仅支持 `hmac`|
+DOC_CN.md:12836:6   - Unknown word (HMAC)         -- |key|HMAC 密钥，字符串会被当作十六进制字符串处理
+DOC_CN.md:13291:9   - Unknown word (unenumerable) -- unenumerable?: boolean;
+DOC_CN.md:13313:2   - Unknown word (unenumerable) -- |unenumerable=false|包含不可枚举值|
+DOC_CN.md:13354:20  - Unknown word (mcake)        -- stripAnsi('\u001b[4mcake\u001b[0m'); // -> 'cake
+DOC_CN.md:13376:16  - Unknown word (Flicia)       -- stripBom('\uFEFFlicia'); // -> 'licia'
+DOC_CN.md:13420:22  - Unknown word (mred)         -- stripColor('\u001b[31mred\u001b[39m'); // ->
+DOC_CN.md:14181:43  - Unknown word (mouseup)      -- getElementById('test'), 'mouseup');
+DOC_CN.md:14797:38  - Unknown word (Hwcqx)        -- 456, 789]); // -> '2HwcqxB'
+DOC_CN.md:14799:14  - Unknown word (Hwcqx)        -- vlq.decode('2HwcqxB'); // -> [123, 456
 DOC_CN.md:1578:9    - Unknown word (lastname)   -- lastname: 'Su',
 DOC_CN.md:1579:9    - Unknown word (firstname)  -- firstname: 'RedHood'
 DOC_CN.md:1586:19   - Unknown word (firstname)  -- return author.firstname + author.lastname;
@@ -92,6 +98,9 @@ i18n/QuickLru.md:5:5       - Unknown word (hashlru)    -- 参考 [hashlru 算法
 i18n/allKeys.md:16:2      - Unknown word (unenumerable) -- |unenumerable=false|包含不可枚举键名|
 i18n/fetch.md:5:17      - Unknown word (pollyfill)  -- 注意：这并不是 fetch 的 pollyfill。
 i18n/meta.md:21:2      - Unknown word (metas)      -- |metas|包含所有 meta 键值对的对象|
+i18n/sm3.md:15:19     - Unknown word (hmac)       -- |mode|摘要模式，目前仅支持 `hmac`|
+i18n/sm3.md:16:6      - Unknown word (HMAC)       -- |key|HMAC 密钥，字符串会被当作十六进制字符串处理
+i18n/sm3.md:8:25      - Unknown word (hmac)       -- options|选项，`mode` 默认为 `hmac`|
 i18n/stringifyAll.md:15:2      - Unknown word (unenumerable) -- |unenumerable=false|包含不可枚举值|
 index.json:276:25    - Unknown word (Interconnectable) -- "description": "Interconnectable Message channel.",
 lib/tpl/karma.conf.tpl:19:32     - Unknown word (lcovonly)   -- reports: ['html', 'lcovonly', 'text', 'text-summary
@@ -102,9 +111,9 @@ lib/tpl/karma.sauce.tpl:21:45     - Unknown word (jquery)     -- mocha', 'chai',
 lib/tpl/karma.sauce.tpl:21:55     - Unknown word (jquery)     -- chai', 'chai-jquery', 'jquery-1.8.3'],
 lib/tpl/karma.sauce.tpl:27:20     - Unknown word (jquery)     -- 'karma-jquery',
 lib/tpl/karma.sauce.tpl:33:30     - Unknown word (saucelabs)  -- reporters: ['dots', 'saucelabs'],
-skills/licia/INDEX.md:44:15     - Unknown word (Interconnectable) -- | `Channel` | Interconnectable Message channel. |
+skills/licia/INDEX.md:40:15     - Unknown word (Interconnectable) -- | `Channel` | Interconnectable Message channel. |
 skills/licia/SKILL.md:6:11      - Unknown word (liriliri)   -- author: liriliri
-skills/licia/SKILL.md:82:18     - Unknown word (iteratees)  -- `map` / `filter` iteratees receive `(value, index
+skills/licia/SKILL.md:97:18     - Unknown word (iteratees)  -- `map` / `filter` iteratees receive `(value, index
 skills/licia/references/a.md:158:9     - Unknown word (unenumerable) -- unenumerable?: boolean;
 skills/licia/references/a.md:184:2     - Unknown word (unenumerable) -- |unenumerable=false|Include unenumerable
 skills/licia/references/a.md:184:29    - Unknown word (unenumerable) -- unenumerable=false|Include unenumerable keys|
@@ -132,13 +141,16 @@ skills/licia/references/p.md:145:28    - Unknown word (ababa)      -- ab', 5, 'a
 skills/licia/references/p.md:476:30    - Unknown word (pointerdown) -- pointerEvent('down'); // -> 'pointerdown' if supported
 skills/licia/references/q.md:94:18     - Unknown word (hashlru)    -- Inspired by the [hashlru algorithm](https://github
 skills/licia/references/r.md:300:28    - Unknown word (cbbcb)      -- randomId(5, 'abc'); // -> 'cbbcb'
-skills/licia/references/r.md:786:30    - Unknown word (abcab)      -- abc', 5, 'ab'); // -> 'abcab'
-skills/licia/references/s.md:1437:9    - Unknown word (unenumerable) -- unenumerable?: boolean;
-skills/licia/references/s.md:1459:2    - Unknown word (unenumerable) -- |unenumerable=false|Include unenumerable
-skills/licia/references/s.md:1459:29   - Unknown word (unenumerable) -- unenumerable=false|Include unenumerable keys|
-skills/licia/references/s.md:1500:20   - Unknown word (mcake)        -- stripAnsi('\u001b[4mcake\u001b[0m'); // -> 'cake
-skills/licia/references/s.md:1522:16   - Unknown word (Flicia)       -- stripBom('\uFEFFlicia'); // -> 'licia'
-skills/licia/references/s.md:1566:22   - Unknown word (mred)         -- stripColor('\u001b[31mred\u001b[39m'); // ->
+skills/licia/references/r.md:900:30    - Unknown word (abcab)      -- abc', 5, 'ab'); // -> 'abcab'
+skills/licia/references/s.md:1068:30   - Unknown word (hmac)        -- Options, `mode` is `hmac` by default|
+skills/licia/references/s.md:1075:24   - Unknown word (hmac)        -- mode|Hash mode, only `hmac` is supported
+skills/licia/references/s.md:1076:7    - Unknown word (HMAC)        -- |key |HMAC key, string is treated
+skills/licia/references/s.md:1539:9    - Unknown word (unenumerable) -- unenumerable?: boolean;
+skills/licia/references/s.md:1561:2    - Unknown word (unenumerable) -- |unenumerable=false|Include unenumerable
+skills/licia/references/s.md:1561:29   - Unknown word (unenumerable) -- unenumerable=false|Include unenumerable keys|
+skills/licia/references/s.md:1602:20   - Unknown word (mcake)        -- stripAnsi('\u001b[4mcake\u001b[0m'); // -> 'cake
+skills/licia/references/s.md:1624:16   - Unknown word (Flicia)       -- stripBom('\uFEFFlicia'); // -> 'licia'
+skills/licia/references/s.md:1668:22   - Unknown word (mred)         -- stripColor('\u001b[31mred\u001b[39m'); // ->
 skills/licia/references/s.md:28:5      - Unknown word (desdendants) -- Get desdendants of current matched elements
 skills/licia/references/t.md:943:43    - Unknown word (mouseup)    -- getElementById('test'), 'mouseup');
 skills/licia/references/u.md:375:9     - Unknown word (Uppercased) -- |return|Uppercased string|
@@ -300,6 +312,14 @@ src/randomId.js:27:35     - Unknown word (ABCDEFGHIJKLNQRTUVWXYZ) -- ModuleSymbh
 src/randomId.js:27:58     - Unknown word (cfgijkpqtvxz)           -- ABCDEFGHIJKLNQRTUVWXYZ_cfgijkpqtvxz';
 src/rpad.js:15:33     - Unknown word (abcab)      -- abc', 5, 'ab'); // -> 'abcab'
 src/slugify.js:43:2024   - Unknown word (shequel)    -- ₨ rupee,₩ won,₪ new shequel,₫ dong,€ euro,₭ kip
+src/sm3.js:153:11    - Unknown word (opad)       -- const opad = [];
+src/sm3.js:157:9     - Unknown word (opad)       -- opad.push(byte ^ 0x5c);
+src/sm3.js:160:19    - Unknown word (opad)       -- return digest(opad.concat(digest(ipad.concat
+src/sm4.js:321:11    - Unknown word (SBOX)       -- ((SBOX[(x >>> 24) & 0xff]
+src/sm4.js:322:14    - Unknown word (SBOX)       -- (SBOX[(x >>> 16) & 0xff]
+src/sm4.js:323:14    - Unknown word (SBOX)       -- (SBOX[(x >>> 8) & 0xff] <
+src/sm4.js:324:13    - Unknown word (SBOX)       -- SBOX[x & 0xff]) >>>
+src/sm4.js:73:7      - Unknown word (SBOX)       -- const SBOX = [
 src/stringifyAll.js:13:32     - Unknown word (unenumerable) -- unenumerable=false|Include unenumerable keys|
 src/stringifyAll.js:13:5      - Unknown word (unenumerable) -- * |unenumerable=false|Include unenumerable
 src/stringifyAll.js:48:12     - Unknown word (unenumerable) -- * unenumerable?: boolean;
@@ -367,6 +387,9 @@ test/lpad.js:5:23      - Unknown word (ababc)      -- ['abc', 5, 'ab', 'ababc'],
 test/pad.js:5:23      - Unknown word (babca)      -- ['abc', 5, 'ab', 'babca'],
 test/pad.js:6:22      - Unknown word (babab)      -- ['ab', 5, 'ab', 'babab'],
 test/rpad.js:5:23      - Unknown word (abcab)      -- ['abc', 5, 'ab', 'abcab'],
+test/sm3.js:28:10     - Unknown word (abcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcd) -- 'abcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcd',
+test/sm3.js:44:26     - Unknown word (juneandgreen)                                                     -- 'hello world! 我是 juneandgreen.',
+test/sm4.js:39:30     - Unknown word (juneandgreen) -- msg = 'hello world! 我是 juneandgreen.';
 test/stringifyAll.js:149:9     - Unknown word (inifinity)    -- inifinity: Number.POSITIVE_INFINITY
 test/stringifyAll.js:150:17    - Unknown word (Inifinity)    -- negativeInifinity: Number.NEGATIVE_INFINITY
 test/stringifyAll.js:158:33    - Unknown word (unenumerable) -- defineProperty(obj, 'unenumerable', {

@@ -3,7 +3,7 @@ Repository: vitest-dev/vitest
 Url: "https://github.com/vitest-dev/vitest"
 Args: ["--issues-summary-report","--locale=en,en-GB","."]
 Lines:
- CSpell: Files checked: 2962, skipped: 5, Issues found: 1956 in 504 files.
+ CSpell: Files checked: 2969, skipped: 5, Issues found: 1956 in 504 files.
  exit code: 1
 AGENTS.md:146:46    - Unknown word (ivya)       -- do not import from `ivya` outside the files that
 AGENTS.md:170:51    - Unknown word (overexplain) -- be BRIEF and do not overexplain. If you wrote a big
@@ -90,7 +90,7 @@ docs/api/expect.md:2091:28   - Unknown word (closeto)                   -- expec
 docs/api/expect.md:2232:23   - Unknown word (arktype)                   -- import { type } from 'arktype'
 docs/api/expect.md:2325:39   - Unknown word (addequalitytesters)        -- addEqualityTesters {#expect-addequalitytesters}
 docs/api/expect.md:740:11    - Unknown word (applefruits) -- expect('applefruits').toMatch('fruit')
-docs/api/hooks.md:372:22    - Unknown word (ontestfinished) -- ## onTestFinished {#ontestfinished}
+docs/api/hooks.md:388:22    - Unknown word (ontestfinished) -- ## onTestFinished {#ontestfinished}
 docs/api/mock.md:163:7     - Unknown word (Nellies)    -- const NelliesBucket = mockFn(0)
 docs/api/mock.md:429:41    - Unknown word (mockthrow)  -- Version>4.1.0</Version> {#mockthrow}
 docs/api/mock.md:443:45    - Unknown word (mockthrowonce) -- Version>4.1.0</Version> {#mockthrowonce}
@@ -144,8 +144,8 @@ docs/config/experimental.md:180:94    - Unknown word (vitemodulerunner)         
 docs/config/experimental.md:317:89    - Unknown word (vcsprovider)                 -- Version> {#experimental-vcsprovider}
 docs/config/experimental.md:420:96    - Unknown word (recorddependencies)          -- Version> {#experimental-recorddependencies}
 docs/config/experimental.md:463:91    - Unknown word (tracetimeline)               -- Version> {#experimental-tracetimeline}
-docs/config/experimental.md:496:88    - Unknown word (nodeloader)                  -- Version> {#experimental-nodeloader}
-docs/config/experimental.md:505:86    - Unknown word (preparse)                    -- Version> {#experimental-preparse}
+docs/config/experimental.md:498:88    - Unknown word (nodeloader)                  -- Version> {#experimental-nodeloader}
+docs/config/experimental.md:507:86    - Unknown word (preparse)                    -- Version> {#experimental-preparse}
 docs/config/experimental.md:82:93     - Unknown word (importdurations) -- Version> {#experimental-importdurations}
 docs/config/faketimers.md:69:59     - Unknown word (faketimers) -- Version>5.1.0</Version> {#faketimers-fakenodebuiltins}
 docs/config/faketimers.md:69:70     - Unknown word (fakenodebuiltins) -- Version> {#faketimers-fakenodebuiltins}
@@ -179,9 +179,9 @@ docs/guide/browser/visual-regression-testing.md:274:16    - Unknown word (gmsd) 
 docs/guide/browser/visual-regression-testing.md:274:75    - Unknown word (GMSD)       -- , a single-threaded GMSD (Gradient Magnitude
 docs/guide/browser/visual-regression-testing.md:280:15    - Unknown word (Ssim)       -- import type { SsimOptionsExtended } from
 docs/guide/browser/visual-regression-testing.md:900:15    - Unknown word (chromaui)   -- uses: chromaui/action@latest
-docs/guide/cli.md:172:10    - Unknown word (Autocompletions) -- ## Shell Autocompletions
-docs/guide/cli.md:174:23    - Unknown word (autocompletions) -- Vitest provides shell autocompletions for commands, options
-docs/guide/cli.md:73:9      - Unknown word (lintstagedrc) -- ```js [.lintstagedrc.js]
+docs/guide/cli.md:174:10    - Unknown word (Autocompletions) -- ## Shell Autocompletions
+docs/guide/cli.md:176:23    - Unknown word (autocompletions) -- Vitest provides shell autocompletions for commands, options
+docs/guide/cli.md:75:9      - Unknown word (lintstagedrc) -- ```js [.lintstagedrc.js]
 docs/guide/common-errors.md:240:7     - Unknown word (extensionless) -- - use extensionless relative imports in
 docs/guide/comparisons.md:11:46     - Unknown word (sodatea)    -- Jest in Vite setups. [@sodatea](https://bsky.app/profile
 docs/guide/comparisons.md:31:140    - Unknown word (Vitesse)    -- their App's UI using [Vitesse](https://github.com
@@ -221,7 +221,7 @@ docs/package.json:23:7      - Unknown word (iconify)    -- "@iconify-json/carbon
 docs/package.json:26:7      - Unknown word (shikijs)    -- "@shikijs/transformers": "^4.
 docs/package.json:28:7      - Unknown word (unocss)     -- "@unocss/reset": "catalog:",
 docs/package.json:32:7      - Unknown word (voidzero)   -- "@voidzero-dev/vitepress-theme
-docs/package.json:41:23     - Unknown word (llms)       -- "vitepress-plugin-llms": "^1.14.0",
+docs/package.json:41:23     - Unknown word (llms)       -- "vitepress-plugin-llms": "^1.15.0",
 docs/public/_headers:4:27      - Unknown word (nosniff)    -- Content-Type-Options: nosniff
 docs/public/_redirects:24:16     - Unknown word (webdriverio) -- /guide/browser/webdriverio /config/browser/webdriverio
 docs/public/bolt.svg:1:542     - Unknown word (evenodd)    -- "/><path fill-rule="evenodd" clip-rule="evenodd
@@ -301,7 +301,7 @@ packages/ui/client/components/views/ViewReportError.vue:25:13     - Unknown word
 packages/ui/client/composables/client/static.ts:4:44      - Unknown word (fflate)     -- mpressSync, strFromU8 } from 'fflate'
 packages/ui/client/composables/codemirror.ts:16:33     - Unknown word (simplescrollbars) -- codemirror/addon/scroll/simplescrollbars'
 packages/ui/client/composables/explorer/collector.ts:1:15      - Unknown word (Arrayable)  -- import type { Arrayable } from '@vitest/utils
-packages/ui/client/composables/trace-view.ts:159:4     - Unknown word (Vueuse)     -- // Vueuse URL watcher pauses while
+packages/ui/client/composables/trace-view.ts:161:4     - Unknown word (Vueuse)     -- // Vueuse URL watcher pauses while
 packages/ui/client/styles/main.css:165:13    - Unknown word (simplescroll) -- .CodeMirror-simplescroll-horizontal,
 packages/ui/client/styles/main.css:16:54     - Unknown word (vitest)     -- too, for example the @vitest/istanbuljs html reporter
 packages/ui/client/styles/main.css:16:61     - Unknown word (istanbuljs) -- example the @vitest/istanbuljs html reporter */
@@ -448,7 +448,7 @@ pnpm-workspace.yaml:61:11     - Unknown word (estree)     -- '@types/estree': ^1
 pnpm-workspace.yaml:65:11     - Unknown word (yauzl)      -- '@types/yauzl': ^3.4.0
 pnpm-workspace.yaml:67:5      - Unknown word (vitejs)     -- '@vitejs/plugin-vue': ^6.0.1
 pnpm-workspace.yaml:72:3      - Unknown word (ansivision) -- ansivision: ^0.4.0
-pnpm-workspace.yaml:77:3      - Unknown word (knip)       -- knip: ^6.44.1
+pnpm-workspace.yaml:77:3      - Unknown word (knip)       -- knip: ^6.45.1
 pnpm-workspace.yaml:91:3      - Unknown word (sirv)       -- sirv: ^3.0.2
 pnpm-workspace.yaml:94:3      - Unknown word (tinybench)  -- tinybench: ^6.2.3
 pnpm-workspace.yaml:96:3      - Unknown word (tinyglobby) -- tinyglobby: ^0.2.17
@@ -581,8 +581,8 @@ test/e2e/test/config/browser-configs.test.ts:499:16    - Unknown word (myproject
 test/e2e/test/config/sequence-shuffle.test.ts:66:17     - Unknown word (unshuffle)  -- describe('unshuffle', { shuffle: false
 test/e2e/test/console-color.test.ts:19:36     - Unknown word (mtrue)      -- stdout).toContain('\x1B[33mtrue\x1B[39m\n')
 test/e2e/test/detect-async-leaks.test.ts:240:5     - Unknown word (FSEVENTWRAP) -- FSEVENTWRAP leaking in packages
-test/e2e/test/git-changed.test.ts:104:25    - Unknown word (gpgsign)    -- git('config', 'commit.gpgsign', 'false')
-test/e2e/test/git-changed.test.ts:93:10     - Unknown word (größe)      -- 'src/größe.js': 'export const size
+test/e2e/test/git-changed.test.ts:117:10    - Unknown word (größe)      -- 'src/größe.js': 'export const size
+test/e2e/test/git-changed.test.ts:128:25    - Unknown word (gpgsign)    -- git('config', 'commit.gpgsign', 'false')
 test/e2e/test/location-filters.test.ts:129:36    - Unknown word (doesn)      -- fixturePath}/:a/file/that/doesn-t/exit:10`,
 test/e2e/test/mocker-redirect-traversal.test.ts:81:43     - Unknown word (inroot)     -- sterRedirect(port, 'traversal:inroot.js')
 test/e2e/test/mocking.test.ts:47:28     - Unknown word (autospied)  -- mockReset works with autospied Node modules', async

@@ -1,6 +1,6 @@
 import { opConcatMap, opFilter, opMap, pipe } from '@cspell/cspell-pipe/sync';
 import type { DictionaryFileTypes } from '@cspell/cspell-types';
-import { StrongWeakMap } from '@cspell/strong-weak-map';
+import { AutoResolveWeakMap, StrongWeakMap, WeakWeakMap } from '@streetsidesoftware/auto-resolve-map';
 import type { SpellingDictionary, SpellingDictionaryOptions } from 'cspell-dictionary';
 import {
     createFailedToLoadDictionary,
@@ -24,7 +24,6 @@ import type {
 } from '../../Settings/index.js';
 import { isDictionaryDefinitionInlineInternal, isDictionaryFileDefinitionInternal } from '../../Settings/index.js';
 import { normalizeLocaleForIntl } from '../../Settings/LanguageSettings.js';
-import { AutoResolveWeakCache, AutoResolveWeakWeakCache } from '../../util/AutoResolve.js';
 import { toError } from '../../util/errors.js';
 import { SimpleCache } from '../../util/simpleCache.js';
 import { SpellingDictionaryLoadError } from '../SpellingDictionaryError.js';
@@ -80,8 +79,8 @@ type KvPair = { key: string; entry: CacheEntry };
 
 export class DictionaryLoader {
     private dictionaryCache = new StrongWeakMap<string, CacheEntry>();
-    private inlineDictionaryCache = new AutoResolveWeakCache<DictionaryDefinitionInlineInternal, SpellingDictionary>();
-    private dictionaryCacheByDef = new AutoResolveWeakWeakCache<DictionaryDefinitionInternal, KvPair>();
+    private inlineDictionaryCache = new AutoResolveWeakMap<DictionaryDefinitionInlineInternal, SpellingDictionary>();
+    private dictionaryCacheByDef = new WeakWeakMap<DictionaryDefinitionInternal, KvPair>();
     private reader: Reader;
     /** The keepAliveCache is to hold onto the most recently loaded dictionaries. */
     private keepAliveCache: SimpleCache<DictionaryDefinitionInternal, CacheEntry>;
@@ -214,7 +213,7 @@ export class DictionaryLoader {
     }
 
     private loadInlineDict(def: DictionaryDefinitionInlineInternal): SpellingDictionary {
-        return this.inlineDictionaryCache.get(def, (def) =>
+        return this.inlineDictionaryCache.getOrInsertComputed(def, (def) =>
             createInlineSpellingDictionary(def, def.__source || 'memory'),
         );
     }

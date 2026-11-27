@@ -19,7 +19,6 @@ const defaultConfig = {
             '**/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress,tsup,build}.config.*',
         ],
         // reporters: 'verbose',
-        watchExclude: ['**/node_modules/**', '**/dist/**', '**/.temp/**', '**/temp/**', '**/coverage/**'],
         coverage: {
             // enabled: true,
             provider: 'istanbul',
@@ -51,6 +50,12 @@ const defaultConfig = {
                 'coverage',
                 'vitest*',
             ],
+        },
+    },
+    server: {
+        watch: {
+            // Tests write files in `temp`. A `package.json` written there would rerun every test file.
+            ignored: ['**/temp/**'],
         },
     },
 };

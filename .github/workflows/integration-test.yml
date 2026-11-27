@@ -174,8 +174,10 @@ jobs:
             env.repo-info: ${{ steps.step-repo-info.outputs.repo-info }}
             $repo-hash
 
+      # Not on main: the perf history needs a fresh measurement from every run.
       - name: Cache Integration Run
         id: step-cache-run
+        if: ${{ github.ref != 'refs/heads/main' }}
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           key: integration-run--${{ env.REF_BRANCH }}-${{ steps.repo-hash.outputs.value }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}-1
@@ -258,7 +260,8 @@ jobs:
         run: |
           touch temp/perf/perf-run-empty.csv
           # Skip rows already in perf.csv; cached runs upload their rows again.
-          cat temp/perf/perf-run-*.csv | sort | awk 'NR == FNR { seen[$0] = 1; next } !seen[$0]++' integration-tests/perf/perf.csv - > temp/perf-new-rows.csv
+          # Skip header lines; they can differ from the one in perf.csv.
+          cat temp/perf/perf-run-*.csv | sort | awk 'NR == FNR { seen[$0] = 1; next } !/^timestamp,/ && !seen[$0]++' integration-tests/perf/perf.csv - > temp/perf-new-rows.csv
           cat temp/perf-new-rows.csv >> integration-tests/perf/perf.csv
 
       - name: Gen Report
@@ -335,8 +338,9 @@ jobs:
           if git fetch --no-tags --depth=1 origin update-perf-main; then
             git show FETCH_HEAD:integration-tests/perf/perf.csv > temp/perf/perf-run-pending.csv
           fi
-          # Skip rows already in perf.csv; cached runs upload their rows again.
-          cat temp/perf/perf-run-*.csv | sort | awk 'NR == FNR { seen[$0] = 1; next } !seen[$0]++' integration-tests/perf/perf.csv - > temp/perf-new-rows.csv
+          # Skip rows already in perf.csv; the open perf data PR's file repeats them.
+          # Skip header lines; they can differ from the one in perf.csv.
+          cat temp/perf/perf-run-*.csv | sort | awk 'NR == FNR { seen[$0] = 1; next } !/^timestamp,/ && !seen[$0]++' integration-tests/perf/perf.csv - > temp/perf-new-rows.csv
           cat temp/perf-new-rows.csv >> integration-tests/perf/perf.csv
           ./tools/perf-chart/bin.ts ./integration-tests/perf/perf.csv -o perf-report.md --daily-csv ./static/daily-stats.csv
 

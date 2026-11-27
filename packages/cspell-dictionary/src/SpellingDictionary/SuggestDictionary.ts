@@ -1,8 +1,8 @@
 import { pipe } from '@cspell/cspell-pipe/sync';
+import { AutoResolveWeakMap } from '@streetsidesoftware/auto-resolve-map';
 import type { CompoundWordsMethod, SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';
 import { decodeTrie } from 'cspell-trie-lib';
 
-import { createAutoResolveWeakCache } from '../util/AutoResolve.js';
 import { mapperRemoveCaseAndAccents } from '../util/textMappers.js';
 import * as defaults from './defaults.js';
 import type {
@@ -129,7 +129,7 @@ class SuggestDictionaryImpl implements SuggestDictionary {
     }
 }
 
-const createCache = createAutoResolveWeakCache<string[] | TyposDef | Iterable<TypoEntry>, SuggestDictionary>();
+const createCache = new AutoResolveWeakMap<string[] | TyposDef | Iterable<TypoEntry>, SuggestDictionary>();
 
 /**
  * Create a dictionary where all words are to be forbidden.
@@ -143,7 +143,7 @@ export function createSuggestDictionary(
     name: string,
     source: string,
 ): SuggestDictionary {
-    return createCache.get(entries, () => {
+    return createCache.getOrInsertComputed(entries, () => {
         const def = processEntriesToTyposDef(entries);
         return new SuggestDictionaryImpl(name, source, def);
     });

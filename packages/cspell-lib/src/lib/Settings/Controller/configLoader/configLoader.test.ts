@@ -1,3 +1,4 @@
+import { promises as fsp } from 'node:fs';
 import * as path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
@@ -7,6 +8,7 @@ import { createRedirectProvider, createVirtualFS, getDefaultVirtualFs } from 'cs
 import { afterEach, assert, beforeEach, describe, expect, test, vi } from 'vitest';
 import { URI } from 'vscode-uri';
 
+import { createTempFolder } from '../../../../test-util/index.mjs';
 import {
     pathPackageRoot,
     pathPackageSamples,
@@ -17,7 +19,7 @@ import {
     pathRepoTestFixturesURL,
 } from '../../../../test-util/test.locations.js';
 import { logError, logWarning } from '../../../util/logger.js';
-import { cwdURL, resolveFileWithURL, toFilePathOrHref, toFileUrl } from '../../../util/url.js';
+import { cwdURL, resolveFileWithURL, toFileDirURL, toFilePathOrHref, toFileUrl } from '../../../util/url.js';
 import { currentSettingsFileVersion, defaultConfigFileModuleRef, ENV_CSPELL_GLOB_ROOT } from '../../constants.js';
 import type { ImportFileRefWithError } from '../../CSpellSettingsServer.js';
 import { extractDependencies, getSources, mergeSettings } from '../../CSpellSettingsServer.js';
@@ -409,6 +411,25 @@ describe('Validate search/load config files', () => {
         );
     });
 
+    test('that clearing the cache clears the stops found for a search', async () => {
+        const testDir = await createTempFolder(import.meta.url);
+        try {
+            await fsp.writeFile(path.join(testDir, 'cspell.json'), JSON.stringify({ words: ['root'] }));
+            const sub = path.join(testDir, 'sub');
+            const searchFrom = toFileDirURL(path.join(sub, 'deep'));
+            // Without a trailing slash, `sub` is taken as a directory only if it is one.
+            const options = { stopSearchAt: sub };
+
+            expect((await searchForConfig(searchFrom, options))?.words).toEqual(['root']);
+
+            await fsp.mkdir(sub);
+            clearCachedSettingsFiles();
+            expect(await searchForConfig(searchFrom, options)).toBeUndefined();
+        } finally {
+            await fsp.rm(testDir, { recursive: true, force: true });
+        }
+    });
+
     test.each`
         dir                                | expectedConfig
         ${pathToFileURL(samplesSrc + '/')} | ${toFileUrl(s('.cspell.json'))}
@@ -641,6 +662,17 @@ describe('Validate search/load config files', () => {
         expect(cfgFile).toBeInstanceOf(CSpellConfigFile);
         expect(cfgFile).toBeInstanceOf(CSpellConfigFileInMemory);
         expect(cfgFile.virtual).toBe(true);
+    });
+
+    test('create with a path or a URL to the same file', () => {
+        const loader = getDefaultConfigLoader();
+        const settings: CSpellUserSettings = {};
+        const filename = fileURLToPath(import.meta.url);
+        const cfgFile = loader.createCSpellConfigFile(filename, settings);
+
+        expect(loader.createCSpellConfigFile(filename, settings)).toBe(cfgFile);
+        expect(loader.createCSpellConfigFile(new URL(import.meta.url), settings)).toBe(cfgFile);
+        expect(loader.createCSpellConfigFile(import.meta.url, settings)).toBe(cfgFile);
     });
 });
 
