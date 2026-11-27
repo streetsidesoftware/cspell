@@ -1,9 +1,9 @@
 import { extname } from 'node:path/posix';
 
+import { autoResolve, AutoResolveMap } from '@streetsidesoftware/auto-resolve-map';
 import { urlBasename } from 'cspell-io';
 
 import type { VFileSystem, VfsDirEntry } from '../../../fileSystem.js';
-import { autoResolve, createAutoResolveCache } from '../../../util/AutoResolve.js';
 import { findUpFromUrl } from '../../../util/findUpFromUrl.js';
 
 type Href = string;
@@ -181,7 +181,7 @@ export class DirConfigScanner {
     }
 
     #createHasFileDirSearch(): (file: URL) => Promise<boolean> {
-        const dirInfoCache = createAutoResolveCache<Href, Promise<Map<string, VfsDirEntry>>>();
+        const dirInfoCache = new AutoResolveMap<Href, Promise<Map<string, VfsDirEntry>>>();
 
         const hasFile = async (filename: URL): Promise<boolean> => {
             const dir = new URL('.', filename);
@@ -195,7 +195,7 @@ export class DirConfigScanner {
                 if (!found?.isDirectory() && !found?.isSymbolicLink()) return false;
             }
             const dirUrlHref = dir.href;
-            const dirInfo = await dirInfoCache.get(dirUrlHref, async () => await this.#readDir(dir));
+            const dirInfo = await dirInfoCache.getOrInsertComputed(dirUrlHref, async () => await this.#readDir(dir));
 
             const name = urlBasename(filename);
             const found = dirInfo.get(name);

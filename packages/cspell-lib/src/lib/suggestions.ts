@@ -2,6 +2,7 @@ import assert from 'node:assert';
 
 import type { CSpellSettings, LocaleId } from '@cspell/cspell-types';
 import type { FileTypeId } from '@cspell/filetypes';
+import { AutoResolveMap } from '@streetsidesoftware/auto-resolve-map';
 import type { ICSpellConfigFile } from 'cspell-config-lib';
 import { satisfiesCSpellConfigFile } from 'cspell-config-lib';
 
@@ -15,7 +16,6 @@ import {
 import { calcSettingsForLanguageId, normalizeLocaleForIntl } from './Settings/LanguageSettings.js';
 import type { SpellingDictionaryCollection, SuggestionResult, SuggestOptions } from './SpellingDictionary/index.js';
 import { getDictionaryInternal, refreshDictionaryCache } from './SpellingDictionary/index.js';
-import { createAutoResolveCache } from './util/AutoResolve.js';
 import { memoizeLastCall } from './util/memoizeLastCall.js';
 import * as util from './util/util.js';
 
@@ -115,8 +115,8 @@ function cacheSuggestionsForWord(
     options: SuggestOptions,
     settings: CSpellSettings,
 ): (word: string) => Promise<SuggestionsForWordResult> {
-    const cache = createAutoResolveCache<string, Promise<SuggestionsForWordResult>>();
-    return (word) => cache.get(word, (word) => _suggestionsForWord(word, options, settings));
+    const cache = new AutoResolveMap<string, Promise<SuggestionsForWordResult>>();
+    return (word) => cache.getOrInsertComputed(word, (word) => _suggestionsForWord(word, options, settings));
 }
 
 export async function suggestionsForWord(

@@ -1,5 +1,5 @@
 import type { CSpellSettings } from '@cspell/cspell-types';
-import { StrongWeakMap } from '@cspell/strong-weak-map';
+import { AutoResolveWeakMap, StrongWeakMap } from '@streetsidesoftware/auto-resolve-map';
 import type { SpellingDictionary, SpellingDictionaryCollection } from 'cspell-dictionary';
 import {
     createCollection,
@@ -11,7 +11,6 @@ import {
 
 import type { CSpellSettingsInternal, DictionaryDefinitionInternal } from '../Settings/index.js';
 import { calcDictionaryDefsToLoad } from '../Settings/index.js';
-import { AutoResolveWeakCache } from '../util/AutoResolve.js';
 import { isDefined } from '../util/util.js';
 import { loadDictionary, refreshCacheEntries } from './DictionaryLoader.js';
 
@@ -102,10 +101,8 @@ function _getDictionaryInternal(
     return getCollection(dictionaries);
 }
 
-const minCollectionsToClean = 100;
-let collectionsToClean = minCollectionsToClean;
 let numDictionaryIds = 0;
-const dictionaryIds = new AutoResolveWeakCache<SpellingDictionary, number>();
+const dictionaryIds = new AutoResolveWeakMap<SpellingDictionary, number>();
 /**
  * Collections by the ids of their dictionaries. Word lookups are cached per collection, so files that use the same
  * dictionaries share one. The collections are held weakly, to let their dictionaries be released.
@@ -113,16 +110,6 @@ const dictionaryIds = new AutoResolveWeakCache<SpellingDictionary, number>();
 const collections = new StrongWeakMap<string, SpellingDictionaryCollection>();
 
 function getCollection(dictionaries: SpellingDictionary[]): SpellingDictionaryCollection {
-    const key = dictionaries.map((dict) => dictionaryIds.get(dict, () => ++numDictionaryIds)).join(',');
-    return collections.autoGet(key, () => {
-        cleanCollections();
-        return createCollection(dictionaries, 'dictionary collection');
-    });
-}
-
-/** Remove the keys of released collections. Wait until the number of keys doubles before doing it again. */
-function cleanCollections() {
-    if (collections.size < collectionsToClean) return;
-    collections.cleanKeys();
-    collectionsToClean = Math.max(minCollectionsToClean, collections.size * 2);
+    const key = dictionaries.map((dict) => dictionaryIds.getOrInsertComputed(dict, () => ++numDictionaryIds)).join(',');
+    return collections.getOrInsertComputed(key, () => createCollection(dictionaries, 'dictionary collection'));
 }

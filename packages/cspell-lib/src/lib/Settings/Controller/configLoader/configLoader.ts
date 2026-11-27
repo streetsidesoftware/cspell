@@ -3,6 +3,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import type { CSpellSettings, CSpellUserSettings, ImportFileRef, Source } from '@cspell/cspell-types';
+import type { CacheStats } from '@streetsidesoftware/auto-resolve-map';
+import { autoResolve, AutoResolveMap } from '@streetsidesoftware/auto-resolve-map';
 import type { CSpellConfigFileReaderWriter, ICSpellConfigFile, IO, TextFile } from 'cspell-config-lib';
 import { createReaderWriter, CSpellConfigFile, CSpellConfigFileWithErrors } from 'cspell-config-lib';
 import { CSPELL_VFS_PROTOCOL, isUrlLike, toFileURL } from 'cspell-io';
@@ -12,8 +14,6 @@ import { onClearCache } from '../../../events/index.js';
 import type { VFileSystem } from '../../../fileSystem.js';
 import { getVirtualFS } from '../../../fileSystem.js';
 import { srcDirectory } from '../../../pkg-info.mjs';
-import type { CacheStats } from '../../../util/AutoResolve.js';
-import { autoResolve, AutoResolveCache, autoResolveWeak } from '../../../util/AutoResolve.js';
 import { logError, logWarning } from '../../../util/logger.js';
 import { FileResolver } from '../../../util/resolveFile.js';
 import { envToTemplateVars } from '../../../util/templates.js';
@@ -225,8 +225,7 @@ export class ConfigLoader implements IConfigLoader {
 
     protected cachedConfig: Map<string, ImportedConfigEntry> = new Map();
     protected cachedConfigFiles: Map<string, CSpellConfigFile> = new Map();
-    protected cachedPendingConfigFile: AutoResolveCache<string, Promise<Error | CSpellConfigFile>> =
-        new AutoResolveCache();
+    protected cachedPendingConfigFile: AutoResolveMap<string, Promise<Error | CSpellConfigFile>> = new AutoResolveMap();
     protected cachedMergedConfig: WeakMap<CSpellConfigFile, CacheMergeConfigFileWithImports> = new WeakMap();
     protected cachedCSpellConfigFileInMemory: WeakMap<CSpellSettings, Map<string, CSpellConfigFile>> = new WeakMap();
     protected globalSettings: CSpellSettingsI | undefined;
@@ -257,7 +256,7 @@ export class ConfigLoader implements IConfigLoader {
         if (ref.error) return new ImportError(`Failed to read config file: "${ref.filename}"`, ref.error);
         const cached = this.cachedConfigFiles.get(href);
         if (cached) return cached;
-        return this.cachedPendingConfigFile.get(href, async () => {
+        return this.cachedPendingConfigFile.getOrInsertComputed(href, async () => {
             try {
                 const file = await this.cspellConfigFileReaderWriter.readConfig(href);
                 this.cachedConfigFiles.set(href, file);
@@ -609,7 +608,7 @@ export class ConfigLoader implements IConfigLoader {
 
     createCSpellConfigFile(filename: URL | string, settings: CSpellUserSettings): CSpellConfigFile {
         const url = toFileURL(filename);
-        const map = autoResolveWeak(
+        const map = autoResolve(
             this.cachedCSpellConfigFileInMemory,
             settings,
             () => new Map<string, CSpellConfigFile>(),

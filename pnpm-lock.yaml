@@ -656,6 +656,9 @@ importers:
       '@cspell/cspell-types':
         specifier: workspace:*
         version: link:../cspell-types
+      '@streetsidesoftware/auto-resolve-map':
+        specifier: ^1.0.0
+        version: 1.0.0
       cspell-trie-lib:
         specifier: workspace:*
         version: link:../cspell-trie-lib
@@ -834,7 +837,11 @@ importers:
         specifier: 2.9.0
         version: 2.9.0
 
-  packages/cspell-filetypes: {}
+  packages/cspell-filetypes:
+    dependencies:
+      '@streetsidesoftware/auto-resolve-map':
+        specifier: ^1.0.0
+        version: 1.0.0
 
   packages/cspell-gitignore:
     dependencies:
@@ -933,12 +940,12 @@ importers:
       '@cspell/rpc':
         specifier: workspace:*
         version: link:../rpc
-      '@cspell/strong-weak-map':
-        specifier: workspace:*
-        version: link:../cspell-strong-weak-map
       '@cspell/url':
         specifier: workspace:*
         version: link:../cspell-url
+      '@streetsidesoftware/auto-resolve-map':
+        specifier: ^1.0.0
+        version: 1.0.0
       cspell-config-lib:
         specifier: workspace:*
         version: link:../cspell-config-lib
