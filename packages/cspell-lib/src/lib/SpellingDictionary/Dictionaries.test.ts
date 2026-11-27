@@ -282,6 +282,8 @@ describe('Validate collection reuse', () => {
     test('the keys of released collections are removed', async () => {
         const getOrInsertComputed = vi.spyOn(StrongWeakMap.prototype, 'getOrInsertComputed');
         await getDict({ dictionaries: ['colors'], words: ['find the map'] });
+        // A collection key is the dictionary ids joined by ','.
+        expect(getOrInsertComputed.mock.calls[0][0]).toMatch(/^\d+(,\d+)*$/);
         const map = getOrInsertComputed.mock.contexts[0] as StrongWeakMap<string, object>;
         // The spy keeps every result alive.
         getOrInsertComputed.mockRestore();
