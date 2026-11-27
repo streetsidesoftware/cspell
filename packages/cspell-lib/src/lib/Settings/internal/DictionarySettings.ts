@@ -9,10 +9,10 @@ import type {
     DictionaryInformation,
     ReplaceMap,
 } from '@cspell/cspell-types';
+import { WeakWeakMap } from '@streetsidesoftware/auto-resolve-map';
 import type { WeightMap } from 'cspell-trie-lib';
 import { mapDictionaryInformationToWeightMap } from 'cspell-trie-lib';
 
-import { createAutoResolveWeakWeakCache } from '../../util/AutoResolve.js';
 import { resolveRelativeTo } from '../../util/resolveFile.js';
 import type { RequireOptional, UnionFields } from '../../util/types.js';
 import { toFilePathOrHref } from '../../util/url.js';
@@ -83,13 +83,13 @@ export function mapDictDefsToInternal(
     return defs?.map((def) => mapDictDefToInternal(def, pathToSettingsFile));
 }
 
-const internalDefs = createAutoResolveWeakWeakCache<DictionaryDefinition, DictionaryDefinitionInternalWithSource>();
+const internalDefs = new WeakWeakMap<DictionaryDefinition, DictionaryDefinitionInternalWithSource>();
 
 export function mapDictDefToInternal(
     def: DictionaryDefinition,
     pathToSettingsFile: URL,
 ): DictionaryDefinitionInternalWithSource {
-    return internalDefs.get(def, (def) => _mapDictDefToInternal(def, pathToSettingsFile));
+    return internalDefs.getOrInsertComputed(def, (def) => _mapDictDefToInternal(def, pathToSettingsFile));
 }
 
 function _mapDictDefToInternal(
