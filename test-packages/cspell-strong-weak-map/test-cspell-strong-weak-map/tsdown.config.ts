@@ -5,7 +5,7 @@ const config: UserConfig = createConfig({
     entry: ['src/index.ts', 'src/bin.ts'],
     outDir: 'dist/tsdown',
     format: ['esm', 'cjs'],
-    ...deps({ alwaysBundle: ['@cspell/strong-weak-map'] }),
+    ...deps({ alwaysBundle: ['@cspell/strong-weak-map'], onlyBundle: ['@streetsidesoftware/auto-resolve-map'] }),
     fixedExtension: false,
     dts: true,
     sourcemap: false,

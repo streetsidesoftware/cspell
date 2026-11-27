@@ -1061,7 +1061,11 @@ importers:
 
   packages/cspell-service-bus: {}
 
-  packages/cspell-strong-weak-map: {}
+  packages/cspell-strong-weak-map:
+    dependencies:
+      '@streetsidesoftware/auto-resolve-map':
+        specifier: ^1.0.0
+        version: 1.0.0
 
   packages/cspell-tools:
     dependencies:
