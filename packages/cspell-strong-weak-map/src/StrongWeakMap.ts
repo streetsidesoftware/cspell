@@ -24,7 +24,7 @@ export class StrongWeakMap<K, V extends object> extends AutoResolveStrongWeakMap
      * The map also removes them on its own, some time after the values are garbage collected.
      */
     cleanKeys(): this {
-        for (const key of [...this.keys()]) {
+        for (const key of this.keys()) {
             if (!this.has(key)) this.delete(key);
         }
         return this;
