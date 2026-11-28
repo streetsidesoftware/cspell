@@ -105,6 +105,25 @@ Things to know:
   for the same language.
 - Substitutions were added in CSpell 9.7.0.
 
+### Built-in Substitutions
+
+CSpell's default settings define these substitutions:
+
+| Name                | Applies to                    | What it does                                                         |
+| ------------------- | ----------------------------- | -------------------------------------------------------------------- |
+| `yaml-single-quote` | YAML and Docker Compose files | Reads `''` as `'`, so `'it''s'` in a single-quoted string is `it's`. |
+| `latex-accents`     | LaTeX files                   | Reads accent commands as accented letters, such as `\'e` as `é`.     |
+
+To disable one, redefine it with no entries:
+
+**`cspell.config.yaml`**
+
+```yaml
+substitutionDefinitions:
+  - name: yaml-single-quote
+    entries: []
+```
+
 See [`substitutionDefinitions`](./auto_properties.md#settings-substitutiondefinitions) and
 [`substitutions`](./auto_properties.md#settings-substitutions) in the properties reference.
 

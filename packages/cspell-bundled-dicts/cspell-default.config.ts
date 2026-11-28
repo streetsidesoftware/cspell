@@ -41,6 +41,13 @@ const settings: AdvancedCSpellSettings = {
             pattern: /(?<=<a\s+id=")[^"\s]+/g,
         },
     ],
+    substitutionDefinitions: [
+        {
+            name: 'yaml-single-quote',
+            description: 'YAML single-quoted strings write a single quote as two single quotes.',
+            entries: [["''", "'"]],
+        },
+    ],
     languageSettings: [
         {
             languageId: 'javascript,javascriptreact',
@@ -100,8 +107,7 @@ const settings: AdvancedCSpellSettings = {
         },
         {
             languageId: 'yaml,dockercompose',
-            // In a single-quoted string, `''` is an escaped `'`.
-            substitutions: [["''", "'"]],
+            substitutions: ['yaml-single-quote'],
         },
     ],
     import: [
