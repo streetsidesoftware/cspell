@@ -44,8 +44,13 @@ describe('lint and symbolic links', () => {
         );
         config = path.join(repo, 'cspell.json');
         await fsp.writeFile(config, '{"version": "0.2", "ignorePaths": ["lists/**"]}\n');
+        await fsp.writeFile(path.join(repo, '.gitignore'), 'dangling-dir\ndangling.md\n');
         await fsp.symlink(path.join(tmp, 'target'), path.join(repo, 'linked-dir'), 'junction');
+        await fsp.symlink(path.join(tmp, 'missing-dir'), path.join(repo, 'dangling-dir'), 'junction');
+        await fsp.mkdir(path.join(tmp, 'outside'));
+        await fsp.symlink(path.join(tmp, 'missing-dir'), path.join(tmp, 'outside/gone-dir'), 'junction');
         try {
+            await fsp.symlink(path.join(tmp, 'target/missing.txt'), path.join(tmp, 'outside/gone.md'), 'file');
             await fsp.symlink(path.join(tmp, 'target/words.txt'), path.join(repo, 'doc.md'), 'file');
             await fsp.symlink(path.join(tmp, 'target/missing.txt'), path.join(repo, 'dangling.md'), 'file');
             await fsp.symlink(path.join(repo, 'sub/inside.txt'), path.join(repo, 'inside-link.md'), 'file');
@@ -141,6 +146,66 @@ describe('lint and symbolic links', () => {
             : ['zqxinside', 'zqxtarget'];
         expect(r.words).toEqual(expected);
         expect(r.result).toEqual(oc({ errors: 0 }));
+    });
+
+    test.each([
+        { globs: ['**'], options: { globSymlinks: true, verbose: true }, expected: ['dangling-dir', 'dangling.md'] },
+        {
+            globs: ['**', 'dangling-dir/**'],
+            options: { globSymlinks: true, verbose: true },
+            expected: ['dangling-dir', 'dangling.md'],
+        },
+        {
+            globs: ['dangling-dir/nested/**'],
+            options: { globSymlinks: true, verbose: true },
+            expected: ['dangling-dir'],
+        },
+        { globs: ['dangling.md'], options: { globSymlinks: true, verbose: true }, expected: ['dangling.md'] },
+        { globs: ['*.md'], options: { globSymlinks: true, verbose: true }, expected: ['dangling.md'] },
+        {
+            globs: ['missing-dir/**', 'linked-dir/missing.txt'],
+            options: { globSymlinks: true, verbose: true },
+            expected: [],
+        },
+        {
+            globs: ['dangling-dir/nested/**'],
+            options: { globSymlinks: true, verbose: true, exclude: ['dangling-dir/**'] },
+            expected: [],
+        },
+        {
+            globs: ['../outside/**'],
+            options: { globSymlinks: true, verbose: true },
+            expected: ['../outside/gone-dir', '../outside/gone.md'],
+        },
+        {
+            globs: ['../outside/*.md'],
+            options: { globSymlinks: true, verbose: true },
+            expected: ['../outside/gone.md'],
+        },
+        {
+            globs: ['**', '../outside/*.txt'],
+            options: { globSymlinks: true, verbose: true },
+            expected: ['dangling-dir', 'dangling.md'],
+        },
+        { globs: ['**'], options: { globSymlinks: true }, expected: [] },
+        { globs: ['**'], options: { verbose: true }, expected: [] },
+    ])('reports broken links for $globs with $options', async ({ globs, options, expected }) => {
+        const { reporter, result } = await lint(globs, options);
+        const paths = expected.filter((filename) => canLinkFiles || !filename.endsWith('.md'));
+        expect(reporter.log.filter((line) => line.startsWith('Info: Broken symbolic link skipped:'))).toEqual(
+            paths.map((filename) => `Info: Broken symbolic link skipped: "${path.normalize(filename)}".`),
+        );
+        expect(result).toEqual(oc({ errors: 0, skippedFiles: 0 }));
+    });
+
+    test('does not report broken links ignored by git', async () => {
+        const { reporter } = await lint(['**', 'dangling-dir/nested/**'], {
+            globSymlinks: true,
+            verbose: true,
+            gitignore: true,
+            gitignoreRoot: [repo],
+        });
+        expect(reporter.log.some((line) => line.startsWith('Info: Broken symbolic link skipped:'))).toBe(false);
     });
 
     test('globSymlinks stops at a link to a parent directory', async () => {

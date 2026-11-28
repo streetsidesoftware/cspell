@@ -68,9 +68,8 @@ A file that can be reached by two paths, for example through a link and directly
 each path. A link that loops back to a parent directory is followed one level, and the search goes no deeper down
 that path.
 
-A broken link, one whose target doesn't exist, is skipped without a message, whether it was meant to point to a file or
-a directory. Reporting them is tracked in
-[#9441](https://github.com/streetsidesoftware/cspell/issues/9441).
+A broken link, one whose target doesn't exist, is skipped. With `--verbose`, cspell names matching broken links and
+broken links in the fixed part of a glob. This message doesn't count as a spelling issue or change the exit status.
 
 ### What happens when it's off
 
