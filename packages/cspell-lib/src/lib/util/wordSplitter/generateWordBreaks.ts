@@ -12,7 +12,7 @@ import {
 
 export const softHyphen = '\u00AD';
 
-const ignoreBreak: BreakPairs = Object.freeze([]) as unknown as BreakPairs;
+export const ignoreBreak: BreakPairs = Object.freeze([]) as unknown as BreakPairs;
 
 export interface LineSegment {
     line: TextOffset;
