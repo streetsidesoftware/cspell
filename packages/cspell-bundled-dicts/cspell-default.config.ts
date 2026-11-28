@@ -98,6 +98,11 @@ const settings: AdvancedCSpellSettings = {
             languageId: 'markdown',
             ignoreRegExpList: ['MARKDOWN-link-reference', 'MARKDOWN-link-footer', 'MARKDOWN-link', 'MARKDOWN-anchor'],
         },
+        {
+            languageId: 'yaml,dockercompose',
+            // In a single-quoted string, `''` is an escaped `'`.
+            substitutions: [["''", "'"]],
+        },
     ],
     import: [
         '@cspell/dict-ada/cspell-ext.json',
@@ -163,3 +168,5 @@ const settings: AdvancedCSpellSettings = {
 };
 
 export default settings;
+
+// cspell:ignore dockercompose

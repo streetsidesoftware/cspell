@@ -32,7 +32,7 @@ interface CachedData {
     r?: CachedFileResult | undefined;
     /** dependencies */
     d?: Dependency[] | undefined;
-    /** the command-line options that change the result, when any are set */
+    /** the context tag, when the cache has one */
     o?: string | undefined;
 }
 
@@ -96,7 +96,7 @@ export class DiskCache implements CSpellLintResultCache {
         readonly cspellVersion: string,
         readonly useUniversalCache: boolean,
         private fileEntryCache: FileEntryCache,
-        readonly optionsKey?: string | undefined,
+        readonly contextTag?: string | undefined,
     ) {
         this.cacheDir = fileURLToPath(new URL('./', cacheFileLocation));
         this.version = calcVersion(cspellVersion);
@@ -109,13 +109,13 @@ export class DiskCache implements CSpellLintResultCache {
         const data = meta?.data;
         const result = data?.r;
         const versionMatches = this.version === data?.v;
-        const optionsMatch = this.optionsKey === data?.o;
+        const contextMatches = this.contextTag === data?.o;
 
         // Cached lint results are valid if and only if:
         // 1. The file is present in the filesystem
         // 2. The file has not changed since the time it was previously linted
         // 3. The CSpell configuration has not changed since the time the file was previously linted
-        // 4. The command-line options that change the result are the same
+        // 4. The context tag is the same
         // If any of these are not true, we will not reuse the lint results.
         if (
             fileDescriptor.notFound ||
@@ -123,7 +123,7 @@ export class DiskCache implements CSpellLintResultCache {
             !meta ||
             !result ||
             !versionMatches ||
-            !optionsMatch ||
+            !contextMatches ||
             !(await this.checkDependencies(data.d))
         ) {
             return undefined;
@@ -171,7 +171,7 @@ export class DiskCache implements CSpellLintResultCache {
             v: this.version,
             r: this.normalizeResult({ ...result, issues }),
             d: await this.calcDependencyHashes(dependsUponFiles),
-            ...(this.optionsKey ? { o: this.optionsKey } : {}),
+            ...(this.contextTag ? { o: this.contextTag } : {}),
         });
 
         meta.data = data;
@@ -301,7 +301,7 @@ export async function createDiskCache(
     useCheckSum: boolean,
     cspellVersion: string,
     useUniversalCache: boolean,
-    optionsKey?: string | undefined,
+    contextTag?: string | undefined,
 ): Promise<DiskCache> {
     const fileEntryCache = await createFromFile(cacheFileLocation, useCheckSum, useUniversalCache);
     const cache = new DiskCache(
@@ -310,7 +310,7 @@ export async function createDiskCache(
         cspellVersion,
         useUniversalCache,
         fileEntryCache,
-        optionsKey,
+        contextTag,
     );
     return cache;
 }

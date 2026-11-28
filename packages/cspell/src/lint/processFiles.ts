@@ -3,6 +3,7 @@ import { opMap, pipe } from '@cspell/cspell-pipe/sync';
 import type { CSpellSettings, CSpellSettingsWithSourceTrace, RunResult } from '@cspell/cspell-types';
 import { toFileDirURL } from '@cspell/url';
 import type { ChalkInstance } from 'chalk';
+import type { StopAtLocation } from 'cspell-lib';
 import { isIgnoredByPresets, shouldCheckDocument } from 'cspell-lib';
 
 import type { LintFileReporter, LintFileResult } from '../reporters/LintFileResult.js';
@@ -39,6 +40,7 @@ interface PrefetchConfig {
     readonly rootUrl: URL;
     readonly maxFileSize: LintRequest['maxFileSize'];
     readonly forceCheck: boolean;
+    readonly stopConfigSearchAt: readonly (URL | StopAtLocation)[] | undefined;
     readonly symlinks: SymlinkChecker;
     readonly followSymlinks: boolean;
     readonly verbose: boolean;
@@ -83,7 +85,7 @@ function prefetch(fileToProcess: FileToProcess, cfg: PrefetchConfig): PrefetchFi
         const { languageId, locale } = cfg;
         const checkResult = await shouldCheckDocument(
             { uri: url.href, languageId, locale },
-            { forceCheck: cfg.forceCheck },
+            { forceCheck: cfg.forceCheck, stopConfigSearchAt: cfg.stopConfigSearchAt },
             cfg.config,
         );
         if (!checkResult.shouldCheck) {
@@ -117,6 +119,10 @@ export interface ProcessFilesOptions {
     readonly chalk: ChalkInstance;
     readonly userSettings: CSpellSettingsWithSourceTrace;
     readonly cacheSettings: CreateCacheSettings;
+    /**
+     * Where the search for each file's config stops.
+     */
+    readonly stopConfigSearchAt: readonly (URL | StopAtLocation)[] | undefined;
     readonly symlinks?: SymlinkChecker | undefined;
     /**
      * Read files referenced by symbolic links.
@@ -137,6 +143,7 @@ export async function processFiles(
         rootUrl: toFileDirURL(options.cfg.root),
         maxFileSize: options.cfg.maxFileSize,
         forceCheck: !!options.cfg.options.forceCheck,
+        stopConfigSearchAt: options.stopConfigSearchAt,
         symlinks: options.symlinks ?? createSymlinkChecker(options.cfg.root),
         followSymlinks: !!options.followSymlinks,
         verbose: options.verboseLevel > 0,
@@ -155,6 +162,7 @@ export async function processFiles(
         // We could use the cli settings here but it is much slower.
         // userSettings: cfg.cspellSettingsFromCliOptions,
         userSettings: options.configInfo.config,
+        stopConfigSearchAt: options.stopConfigSearchAt,
     };
 
     function* prefetchFiles(files: FileToProcess[]): Iterable<PrefetchFileResult> {

@@ -17,6 +17,8 @@ export default defineConfig({
         'package-lock.json',
         'coverage/**',
         'dist/**',
+        'temp/**',
+        'CHANGELOG.md',
         'package.json',
         '.cspell.json',
         '.vscode/**',

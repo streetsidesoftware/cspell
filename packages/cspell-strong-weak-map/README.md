@@ -6,6 +6,14 @@ JavaScript [WeakMap](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Ref
 
 `StrongWeakMap` allows for strong keys and weak values while providing the same API as [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map).
 
+> [!NOTE]
+> Use [`@streetsidesoftware/auto-resolve-map`](https://www.npmjs.com/package/@streetsidesoftware/auto-resolve-map) instead.
+>
+> This package's `StrongWeakMap` is now built on the one in `@streetsidesoftware/auto-resolve-map`. It adds only `autoGet` and `cleanKeys`:
+>
+> - In place of `autoGet`, use `getOrInsertComputed`.
+> - `cleanKeys` isn't needed: the map removes the keys of released values on its own.
+
 ## Install
 
 ```sh
@@ -46,6 +54,6 @@ See: [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glo
 
 ---
 
-<p align="center">Brought to you by<a href="https://streetsidesoftware.com" title="Street Side Software"><img width="16" alt="Street Side Software Logo" src="https://i.imgur.com/CyduuVY.png" /> Street Side Software</a></p>
+<p align="center">Brought to you by <a href="https://streetsidesoftware.com" title="Street Side Software"><img width="16" alt="Street Side Software Logo" src="https://i.imgur.com/CyduuVY.png" /> Street Side Software</a></p>
 
 <!--- @@inject-end: ../../static/footer.md --->

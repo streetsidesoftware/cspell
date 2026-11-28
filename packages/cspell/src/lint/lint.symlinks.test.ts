@@ -1,5 +1,4 @@
 import { promises as fsp } from 'node:fs';
-import * as os from 'node:os';
 import * as path from 'node:path';
 
 import type { ProgressItem } from '@cspell/cspell-types';
@@ -7,9 +6,10 @@ import { afterAll, afterEach, beforeAll, describe, expect, test } from 'vitest';
 
 import { environmentKeys } from '../environment.js';
 import type { LinterCliOptions } from '../options.js';
+import { createTempFolder } from '../test/test.helper.js';
 import { InMemoryReporter } from '../util/InMemoryReporter.js';
 import { runLint } from './lint.js';
-import { LintRequest } from './LintRequest.js';
+import { createLintRequest } from './LintRequest.js';
 
 // cspell:ignore zqxtarget zqxinside zqxloop
 
@@ -30,7 +30,7 @@ describe('lint and symbolic links', () => {
     let canLinkFiles = true;
 
     beforeAll(async () => {
-        tmp = await fsp.mkdtemp(path.join(os.tmpdir(), 'cspell-lint-symlinks-'));
+        tmp = await createTempFolder(import.meta.url);
         repo = path.join(tmp, 'repo');
         await fsp.mkdir(path.join(tmp, 'target'), { recursive: true });
         await fsp.mkdir(path.join(repo, 'sub'), { recursive: true });
@@ -67,7 +67,7 @@ describe('lint and symbolic links', () => {
 
     async function lint(globs: string[], options: LinterCliOptions) {
         const reporter = new ProgressReporter();
-        const result = await runLint(new LintRequest(globs, { root: repo, config, ...options }, reporter));
+        const result = await runLint(await createLintRequest(globs, { root: repo, config, ...options }, reporter));
         const words = reporter.issues.map((i) => i.text).sort();
         return { result, words, reporter };
     }

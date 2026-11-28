@@ -1,4 +1,5 @@
 import type { CSpellSettings } from '@cspell/cspell-types';
+import { AutoResolveWeakMap, StrongWeakMap } from '@streetsidesoftware/auto-resolve-map';
 import type { SpellingDictionary, SpellingDictionaryCollection } from 'cspell-dictionary';
 import {
     createCollection,
@@ -97,5 +98,18 @@ function _getDictionaryInternal(
     spellDictionaries: SpellingDictionary[],
 ): SpellingDictionaryCollection {
     const dictionaries = [...spellDictionaries, ...getInlineConfigDictionaries(settings)];
-    return createCollection(dictionaries, 'dictionary collection');
+    return getCollection(dictionaries);
+}
+
+let numDictionaryIds = 0;
+const dictionaryIds = new AutoResolveWeakMap<SpellingDictionary, number>();
+/**
+ * Collections by the ids of their dictionaries. Word lookups are cached per collection, so files that use the same
+ * dictionaries share one. The collections are held weakly, to let their dictionaries be released.
+ */
+const collections = new StrongWeakMap<string, SpellingDictionaryCollection>();
+
+function getCollection(dictionaries: SpellingDictionary[]): SpellingDictionaryCollection {
+    const key = dictionaries.map((dict) => dictionaryIds.getOrInsertComputed(dict, () => ++numDictionaryIds)).join(',');
+    return collections.getOrInsertComputed(key, () => createCollection(dictionaries, 'dictionary collection'));
 }

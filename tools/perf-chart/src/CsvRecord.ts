@@ -10,6 +10,10 @@ export interface CsvRecord {
     usageUser: number;
     usageSystem: number;
     kilobytes: number | undefined | null;
+    /** Missing in older rows, empty if it was not known. */
+    cpuModel?: string | undefined;
+    /** Missing in older rows. */
+    cpuCores?: number | undefined;
     runId?: number | undefined;
 }
 

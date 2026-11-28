@@ -15,12 +15,12 @@ The CSpell mono-repo, a spell checker for code.
 
 <!--- @@inject: static/sponsor.md --->
 
-If our spell checkers save you time, please consider supporting their development.
+If our tools save you time, please consider supporting their development.
 
 Please show your support through one of the following sites:
 
 <p align="left">
-  <a href="https://github.com/sponsors/streetsidesoftware" title="GitHub Sponsor"><picture><source media="(prefers-color-scheme: dark)" srcset="https://cspell.org/img/sponsor/github-sponsor-dark.png" /><img alt="GitHub Sponsor" src="https://cspell.org/img/sponsor/github-sponsor.png" width="180" /></picture></a>&nbsp;<a href="https://www.paypal.com/donate/?hosted_button_id=26LNBP2Q6MKCY" title="PayPal"><picture><source media="(prefers-color-scheme: dark)" srcset="https://cspell.org/img/sponsor/paypal-dark.png" /><img alt="PayPal" src="https://cspell.org/img/sponsor/paypal.png" width="180" /></picture></a> <a href="https://opencollective.com/cspell" title="Open Collective"><picture><source media="(prefers-color-scheme: dark)" srcset="https://cspell.org/img/sponsor/open-collective-dark.png" /><img alt="Open Collective" src="https://cspell.org/img/sponsor/open-collective.png" width="180" /></picture></a>&nbsp;<a href="https://streetsidesoftware.com/sponsor/" title="Street Side Software"><picture><source media="(prefers-color-scheme: dark)" srcset="https://cspell.org/img/sponsor/cspell-dark.png" /><img alt="CSpell" src="https://cspell.org/img/sponsor/cspell.png" width="180" /></picture></a>
+  <a href="https://github.com/sponsors/streetsidesoftware" title="GitHub Sponsor"><picture><source media="(prefers-color-scheme: dark)" srcset="https://streetsidesoftware.com/img/sponsor/github-sponsor-dark.png" /><img alt="GitHub Sponsor" src="https://streetsidesoftware.com/img/sponsor/github-sponsor.png" width="180" /></picture></a> &nbsp; <a href="https://thanks.dev/u/gh/streetsidesoftware" title="thanks.dev"><picture><source media="(prefers-color-scheme: dark)" srcset="https://streetsidesoftware.com/img/sponsor/thanks-dev-dark.png" /><img alt="thanks.dev" src="https://streetsidesoftware.com/img/sponsor/thanks-dev.png" width="180" /></picture></a> &nbsp; <a href="https://opencollective.com/cspell" title="Open Collective"><picture><source media="(prefers-color-scheme: dark)" srcset="https://streetsidesoftware.com/img/sponsor/open-collective-dark.png" /><img alt="Open Collective" src="https://streetsidesoftware.com/img/sponsor/open-collective.png" width="180" /></picture></a> &nbsp; <a href="https://streetsidesoftware.com/sponsor/" title="Street Side Software"><picture><source media="(prefers-color-scheme: dark)" srcset="https://streetsidesoftware.com/img/sponsor/cspell-dark.png" /><img alt="CSpell" src="https://streetsidesoftware.com/img/sponsor/cspell.png" width="180" /></picture></a>
 </p>
 
 <!--- @@inject-end: static/sponsor.md --->
@@ -112,8 +112,9 @@ Contributions are welcome! See our [contribution notes](CONTRIBUTING.md). **Note
 <!--- cspell:disable --->
 
 [<img alt="Contributor Jason3S" src="https://avatars.githubusercontent.com/u/3740137?v=4&size=128" width=64>](https://github.com/Jason3S)
-[<img alt="Contributor Smokeybear10" src="https://avatars.githubusercontent.com/u/208901042?v=4&size=128" width=64>](https://github.com/Smokeybear10)
 [<img alt="Contributor bardrop" src="https://avatars.githubusercontent.com/u/100354790?v=4&size=128" width=64>](https://github.com/bardrop)
+[<img alt="Contributor harrismalik" src="https://avatars.githubusercontent.com/u/43353055?v=4&size=128" width=64>](https://github.com/harrismalik)
+[<img alt="Contributor Smokeybear10" src="https://avatars.githubusercontent.com/u/208901042?v=4&size=128" width=64>](https://github.com/Smokeybear10)
 [<img alt="Contributor twotnguyen" src="https://avatars.githubusercontent.com/u/195888848?v=4&size=128" width=64>](https://github.com/twotnguyen)
 [<img alt="Contributor G26karthik" src="https://avatars.githubusercontent.com/u/144328549?v=4&size=128" width=64>](https://github.com/G26karthik)
 [<img alt="Contributor dleontev" src="https://avatars.githubusercontent.com/u/9162240?v=4&size=128" width=64>](https://github.com/dleontev)
@@ -216,7 +217,7 @@ Contributions are welcome! See our [contribution notes](CONTRIBUTING.md). **Note
 
 ---
 
-<p align="center">Brought to you by<a href="https://streetsidesoftware.com" title="Street Side Software"><img width="16" alt="Street Side Software Logo" src="https://i.imgur.com/CyduuVY.png" /> Street Side Software</a></p>
+<p align="center">Brought to you by <a href="https://streetsidesoftware.com" title="Street Side Software"><img width="16" alt="Street Side Software Logo" src="https://i.imgur.com/CyduuVY.png" /> Street Side Software</a></p>
 
 <!--- @@inject-end: static/footer.md --->
 

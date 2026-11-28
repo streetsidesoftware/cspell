@@ -1,4 +1,5 @@
-import { createAutoResolveWeakCache } from '../util/AutoResolve.js';
+import { AutoResolveWeakMap } from '@streetsidesoftware/auto-resolve-map';
+
 import { isDefined } from '../util/util.js';
 import { createSpellingDictionary } from './createSpellingDictionary.js';
 import { createFlagWordsDictionary } from './FlagWordsDictionary.js';
@@ -7,13 +8,13 @@ import type { DictionaryDefinitionInline, SpellingDictionary } from './SpellingD
 import { createCollection } from './SpellingDictionaryCollection.js';
 import { createSuggestDictionary } from './SuggestDictionary.js';
 
-const cache = createAutoResolveWeakCache<DictionaryDefinitionInline, SpellingDictionary>();
+const cache = new AutoResolveWeakMap<DictionaryDefinitionInline, SpellingDictionary>();
 
 export function createInlineSpellingDictionary(
     inlineDict: DictionaryDefinitionInline,
     source: string,
 ): SpellingDictionary {
-    return cache.get(inlineDict, () => {
+    return cache.getOrInsertComputed(inlineDict, () => {
         const { words, flagWords, ignoreWords, suggestWords, name, supportNonStrictSearches } = inlineDict;
         const options = { supportNonStrictSearches };
 

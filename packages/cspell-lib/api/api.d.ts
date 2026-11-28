@@ -1,9 +1,9 @@
-import { FSCapabilityFlags, VFileSystem, VFileSystem as VFileSystem$1, VFileSystemProvider, VirtualFS, VirtualFS as VirtualFS$1, asyncIterableToArray, readFileText as readFile, readFileTextSync as readFileSync, writeToFile, writeToFileIterable, writeToFileIterableP } from "cspell-io";
 import { AdvancedCSpellSettingsWithSourceTrace, CSpellSettings, CSpellSettingsWithSourceTrace, CSpellUserSettings, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, DictionaryDefinitionInline, DictionaryDefinitionPreferred, DictionaryDefinitionSimple, DictionaryId, DictionaryReference, DocumentParser, Glob, GlobDef, ImportFileRef, Issue, LocaleId, MappedText, ParsedText, Parser, PnPSettings, Range, ReportingConfiguration, TextDocumentOffset, TextOffset } from "@cspell/cspell-types";
-import { CachingDictionary, SpellingDictionary, SpellingDictionaryCollection, SuggestOptions, SuggestionCollector, SuggestionResult, createCollection, createSpellingDictionary } from "cspell-dictionary";
+import { FSCapabilityFlags, VFileSystem, VFileSystem as VFileSystem$1, VFileSystemProvider, VirtualFS, VirtualFS as VirtualFS$1, asyncIterableToArray, readFileText as readFile, readFileTextSync as readFileSync, writeToFile, writeToFileIterable, writeToFileIterableP } from "cspell-io";
 import { CompoundWordsMethod, WeightMap } from "cspell-trie-lib";
 import { CSpellConfigFile, CSpellConfigFile as CSpellConfigFile$1, ICSpellConfigFile, ICSpellConfigFile as ICSpellConfigFile$1 } from "cspell-config-lib";
 import { FileTypeId, findMatchingFileTypes as getLanguageIdsForBaseFilename, getFileTypesForExt as getLanguagesForExt } from "@cspell/filetypes";
+import { CachingDictionary, SpellingDictionary, SpellingDictionaryCollection, SuggestOptions, SuggestionCollector, SuggestionResult, createCollection, createSpellingDictionary } from "cspell-dictionary";
 export * from "@cspell/cspell-types";
 /**
  * Clear the cached files and other cached data.
@@ -293,6 +293,23 @@ interface ResolveFileResult {
 }
 export declare function resolveFile(filename: string | URL, relativeTo: string | URL, fs?: VFileSystem$1): Promise<ResolveFileResult>;
 type LoaderResult = URL | undefined;
+/**
+ * A directory where the search for a configuration file stops.
+ */
+interface StopAtLocation {
+  /**
+   * The directory.
+   *
+   * A URL that doesn't end in `/` is taken as a file, and the search stops at its directory.
+   */
+  url: URL;
+  /**
+   * Stop without looking for a configuration file in the directory.
+   *
+   * By default, a configuration file in the directory is still found.
+   */
+  exclusive?: boolean | undefined;
+}
 type PnPSettingsOptional = OptionalOrUndefined<PnPSettings>;
 type CSpellSettingsWST = CSpellSettingsWithSourceTrace;
 type CSpellSettingsI = CSpellSettingsInternal;
@@ -442,6 +459,8 @@ export declare class SpellingDictionaryLoadError extends Error {
 export declare function isSpellingDictionaryLoadError(e: Error): e is SpellingDictionaryLoadError;
 /**
  * Load a dictionary collection defined by the settings.
+ *
+ * The collection can be shared with other callers. Don't change its list of dictionaries.
  * @param settings - that defines the dictionaries and the ones to load.
  * @returns a dictionary collection that represents all the enabled dictionaries.
  */
@@ -762,7 +781,10 @@ interface ValidateTextOptions {
    */
   skipValidation?: boolean;
 }
-interface DocumentValidatorOptions extends ValidateTextOptions {
+/**
+ * Options for checking a document, shared by `spellCheckDocument` and `DocumentValidator`.
+ */
+interface ValidateDocumentOptions extends ValidateTextOptions {
   /**
    * Optional path to a configuration file.
    * If given, it will be used instead of searching for a configuration file.
@@ -778,14 +800,30 @@ interface DocumentValidatorOptions extends ValidateTextOptions {
    */
   noConfigSearch?: boolean;
   /**
-   * If `settings: CSpellUserSettings` contains imports, they will be resolved using this path.
-   * If not set, the current working directory will be used.
+   * Directories where the search for the document's configuration file stops.
+   *
+   * The search starts in the document's directory and moves up one directory at a time, up to the file system root.
+   * It stops sooner at the first stop directory it reaches:
+   * - A `URL`, or a {@link StopAtLocation} without `exclusive`, is inclusive: a configuration file in that directory
+   *   is still found.
+   * - A {@link StopAtLocation} with `exclusive: true` stops without looking in that directory.
+   *
+   * A URL that doesn't end in `/` is taken as a file, and the search stops at its directory.
+   *
+   * It has no effect when `configFile` is set, or when `noConfigSearch` disables the search.
    */
-  resolveImportsRelativeTo?: string | URL;
+  stopConfigSearchAt?: readonly (URL | StopAtLocation)[] | undefined;
   /**
    * If true, the document will be checked even if it would normally be excluded.
    */
   forceCheck?: boolean;
+}
+interface DocumentValidatorOptions extends ValidateDocumentOptions {
+  /**
+   * If `settings: CSpellUserSettings` contains imports, they will be resolved using this path.
+   * If not set, the current working directory will be used.
+   */
+  resolveImportsRelativeTo?: string | URL;
   /**
    * If true, the ranges of text that have been checked will be recorded and available for later using the `getCheckedRanges` method.
    */
@@ -959,32 +997,14 @@ export declare function checkTextDocument(doc: TextDocument | Document, options:
  * @deprecationMessage Use spellCheckDocument
  */
 export declare function validateText(text: string, settings: CSpellUserSettings, options?: ValidateTextOptions): Promise<ValidationIssue[]>;
-interface SpellCheckFileOptions extends ValidateTextOptions, Pick<CSpellUserSettings, "unknownWords"> {
-  /**
-   * Optional path to a configuration file.
-   * If given, it will be used instead of searching for a configuration file.
-   */
-  configFile?: string;
+interface SpellCheckFileOptions extends ValidateDocumentOptions, Pick<CSpellUserSettings, "unknownWords"> {
   /**
    * File encoding
    * @defaultValue 'utf-8'
    */
   encoding?: BufferEncoding;
-  /**
-   * Prevents searching for local configuration files
-   * By default the spell checker looks for configuration files
-   * starting at the location of given filename.
-   * If `configFile` is defined it will still be loaded instead of searching.
-   * `false` will override the value in `settings.noConfigSearch`.
-   * @defaultValue undefined
-   */
-  noConfigSearch?: boolean;
-  /**
-   * If true, the document will be checked even if it would normally be excluded.
-   */
-  forceCheck?: boolean;
 }
-interface SpellCheckFileOptionsRPC extends SpellCheckFileOptions {
+interface SpellCheckFileOptionsRPC extends Omit<SpellCheckFileOptions, "stopConfigSearchAt"> {
   measurePerf?: boolean;
 }
 interface SpellCheckFilePerf extends Record<string, number | undefined> {
@@ -1147,4 +1167,4 @@ declare function removeAccents(text: string): string;
 declare namespace textApi_d_exports {
   export { calculateTextDocumentOffsets, camelToSnake, cleanText, cleanTextOffset, extractLinesOfText, extractPossibleWordsFromTextOffset, extractText, extractWordsFromCode, extractWordsFromCodeTextOffset, extractWordsFromText, extractWordsFromTextOffset, isFirstCharacterLower, isFirstCharacterUpper, isLowerCase, isUpperCase, lcFirst, match, matchCase, matchStringToTextOffset, matchToTextOffset, removeAccents, snakeToCamel, splitCamelCaseWord, splitCamelCaseWordWithOffset, stringToRegExpOrUndefined as stringToRegExp, textOffset, ucFirst };
 }
-export { type CSpellConfigFile, type CheckTextInfo, CompoundWordsMethod, type ConfigurationDependencies, type CreateTextDocumentParams, type DetermineFinalDocumentSettingsResult, type DictionaryReferenceCollection, type Document, type DocumentValidatorOptions, type ExcludeFilesGlobMap, type ExclusionFunction, exclusionHelper_d_exports as ExclusionHelper, FSCapabilityFlags, type FeatureFlag, type ICSpellConfigFile, type ImportFileRefWithError, type IncludeExcludeOptions, index_link_d_exports as Link, type Logger, type PerfTimer, type SpellCheckFileOptions, type SpellCheckFilePerf, type SpellCheckFileResult, type SpellingDictionary, type SpellingDictionaryCollection, type SuggestOptions, type SuggestedWord, type SuggestionCollector, type SuggestionOptions, type SuggestionResult, type SuggestionsForWordResult, textApi_d_exports as Text, type TextDocument, type TextDocumentLine, type TextDocumentRef, type TextInfoItem, type TraceOptions, type TraceResult, type TraceWordResult, type VFileSystemProvider, type ValidationIssue, type VirtualFS, asyncIterableToArray, checkFilenameMatchesExcludeGlob as checkFilenameMatchesGlob, combineTextAndLanguageSettings as constructSettingsForText, createSpellingDictionary, createCollection as createSpellingDictionaryCollection, defaultFileName as defaultSettingsFilename, getLanguageIdsForBaseFilename, getLanguagesForExt, readFile, readFileSync, writeToFile, writeToFileIterable, writeToFileIterableP };
+export { type CSpellConfigFile, type CheckTextInfo, CompoundWordsMethod, type ConfigurationDependencies, type CreateTextDocumentParams, type DetermineFinalDocumentSettingsResult, type DictionaryReferenceCollection, type Document, type DocumentValidatorOptions, type ExcludeFilesGlobMap, type ExclusionFunction, exclusionHelper_d_exports as ExclusionHelper, FSCapabilityFlags, type FeatureFlag, type ICSpellConfigFile, type ImportFileRefWithError, type IncludeExcludeOptions, index_link_d_exports as Link, type Logger, type PerfTimer, type SpellCheckFileOptions, type SpellCheckFilePerf, type SpellCheckFileResult, type SpellingDictionary, type SpellingDictionaryCollection, type StopAtLocation, type SuggestOptions, type SuggestedWord, type SuggestionCollector, type SuggestionOptions, type SuggestionResult, type SuggestionsForWordResult, textApi_d_exports as Text, type TextDocument, type TextDocumentLine, type TextDocumentRef, type TextInfoItem, type TraceOptions, type TraceResult, type TraceWordResult, type VFileSystemProvider, type ValidationIssue, type VirtualFS, asyncIterableToArray, checkFilenameMatchesExcludeGlob as checkFilenameMatchesGlob, combineTextAndLanguageSettings as constructSettingsForText, createSpellingDictionary, createCollection as createSpellingDictionaryCollection, defaultFileName as defaultSettingsFilename, getLanguageIdsForBaseFilename, getLanguagesForExt, readFile, readFileSync, writeToFile, writeToFileIterable, writeToFileIterableP };

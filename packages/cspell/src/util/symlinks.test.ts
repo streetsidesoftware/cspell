@@ -1,9 +1,9 @@
 import { promises as fsp } from 'node:fs';
-import * as os from 'node:os';
 import * as path from 'node:path';
 
 import { afterAll, beforeAll, describe, expect, test } from 'vitest';
 
+import { createTempFolder } from '../test/test.helper.js';
 import { createSymlinkChecker } from './symlinks.js';
 
 describe('symlinks', () => {
@@ -12,7 +12,7 @@ describe('symlinks', () => {
     let canLinkFiles = true;
 
     beforeAll(async () => {
-        tmp = await fsp.mkdtemp(path.join(os.tmpdir(), 'cspell-symlinks-'));
+        tmp = await createTempFolder(import.meta.url);
         root = path.join(tmp, 'repo');
         await fsp.mkdir(path.join(tmp, 'target'), { recursive: true });
         await fsp.mkdir(path.join(root, 'sub'), { recursive: true });

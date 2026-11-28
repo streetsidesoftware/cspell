@@ -3,7 +3,7 @@ Repository: wireapp/wire-desktop
 Url: "https://github.com/wireapp/wire-desktop.git"
 Args: ["*.md","electron/renderer/**/*.jsx","electron/src/**/*.ts","electron/html/*.html"]
 Lines:
- CSpell: Files checked: 86, Issues found: 72 in 14 files.
+ CSpell: Files checked: 90, Issues found: 74 in 15 files.
  exit code: 1
 README.md:115:211   - Unknown word (PKCE)       -- not a single-use-code/PKCE exchange.
 README.md:58:50     - Unknown word (HKLM)       -- SOFTWARE\Policies\Wire` (HKLM, HKCU fallback) | `applockOve
@@ -12,6 +12,7 @@ README.md:73:44     - Unknown word (Intune)     -- automatically on an Intune/MD
 README.md:75:77     - Unknown word (zclient)    -- production is `com.wearezeta.zclient.mac`; dev/internal differ
 electron/src/auth/WebAuthn.ts:35:22     - Unknown word (webauthn)   -- session.on('select-webauthn-account', async (_event
 electron/src/lib/desktopAppConfig.ts:25:27     - Unknown word (Popout)     -- readonly supportsCallingPopoutWindow?: boolean;
+electron/src/lib/webappLoggingCompatibility.ts:26:46     - Unknown word (Webapps)    -- compatibility until supported Webapps no longer need enableLogging
 electron/src/locale/index.ts:121:8     - Unknown word (Čeština)    -- cs: 'Čeština',
 electron/src/locale/index.ts:122:8     - Unknown word (Dansk)      -- da: 'Dansk',
 electron/src/locale/index.ts:123:8     - Unknown word (Deutsch)    -- de: 'Deutsch',
@@ -32,15 +33,15 @@ electron/src/locale/index.ts:139:8     - Unknown word (Slovenščina) -- sl: 'Sl
 electron/src/locale/index.ts:141:8     - Unknown word (Türkçe)      -- tr: 'Türkçe',
 electron/src/locale/index.ts:142:8     - Unknown word (Українська)  -- uk: 'Українська',
 electron/src/logging/logCleanupScheduler.ts:20:13     - Unknown word (Unrefable)  -- export type UnrefableInterval = {
-electron/src/logging/rendererDiagnostics.spec.ts:161:8     - Unknown word (Subframe)   -- 'Subframe failure',
-electron/src/mainProcess.ts:481:51    - Unknown word (webrtc)     -- disable-features', 'webrtc-hide-local-ips-with
-electron/src/mainProcess.ts:481:78    - Unknown word (mdns)       -- hide-local-ips-with-mdns');
+electron/src/logging/rendererDiagnostics.spec.ts:163:8     - Unknown word (Subframe)   -- 'Subframe failure',
+electron/src/mainProcess.ts:506:51    - Unknown word (webrtc)     -- disable-features', 'webrtc-hide-local-ips-with
+electron/src/mainProcess.ts:506:78    - Unknown word (mdns)       -- hide-local-ips-with-mdns');
 electron/src/managed/ManagedConfig.ts:34:3      - Unknown word (applock)    -- applockOverride: boolean;
 electron/src/managed/ManagedConfig.ts:39:16     - Unknown word (Applock)    -- function detectApplockOverride(): boolean
 electron/src/managed/backends/macos.ts:33:45     - Unknown word (APPLOCK)    -- temPreferences.getUserDefault(APPLOCK_OVERRIDE_KEY, 'boolean
 electron/src/managed/backends/windows.ts:37:33     - Unknown word (subkey)     -- enumerateKeys: (hive: number, subkey: string) => string[
-electron/src/preload/preload-webview.ts:289:37    - Unknown word (polyfilling) -- This can be improved by polyfilling getDisplayMedia function
-electron/src/preload/preload-webview.ts:347:8     - Unknown word (SQSERVICES)  -- // see SQSERVICES-1882 and SQSERVICES
+electron/src/preload/preload-webview.ts:295:37    - Unknown word (polyfilling) -- This can be improved by polyfilling getDisplayMedia function
+electron/src/preload/preload-webview.ts:353:8     - Unknown word (SQSERVICES)  -- // see SQSERVICES-1882 and SQSERVICES
 electron/src/sso/MacWebAuthentication.ts:22:6      - Unknown word (Nobjc)      -- type NobjcObject = {[selector:
 electron/src/sso/MacWebAuthentication.ts:51:84     - Unknown word (objc)       -- typedBlock} = require('objc-js');
 electron/src/sso/MacWebAuthentication.ts:78:59     - Unknown word (TSFN)       -- always dispatch through a TSFN in Electron,

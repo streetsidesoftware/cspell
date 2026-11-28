@@ -1,7 +1,7 @@
 import * as path from 'node:path';
 import { MessageChannel } from 'node:worker_threads';
 
-import type { CSpellUserSettings } from '@cspell/cspell-types';
+import type { CSpellUserSettings, SubstitutionDefinition } from '@cspell/cspell-types';
 import type { CSpellConfigFile } from 'cspell-config-lib';
 import { CSpellConfigFileInMemory } from 'cspell-config-lib';
 import { describe, expect, test } from 'vitest';
@@ -69,6 +69,44 @@ describe('Validate CSpellSettingsServer', () => {
         ${{}}                                    | ${{ ignorePathPresets: { git: false } }} | ${{ git: false }}
     `('mergeSettings combines ignorePathPresets $left $right', ({ left, right, expected }) => {
         expect(mergeSettings(left, right).ignorePathPresets).toEqual(expected);
+    });
+
+    test.each`
+        left                                    | right                                   | expected
+        ${{ substitutions: ['a'] }}             | ${{}}                                   | ${['a']}
+        ${{ substitutions: ['a'] }}             | ${{ substitutions: [] }}                | ${['a']}
+        ${{ substitutions: ['a', ['x', 'y']] }} | ${{ substitutions: [['x', 'z'], 'b'] }} | ${['a', ['x', 'y'], ['x', 'z'], 'b']}
+        ${{ substitutions: ['a'] }}             | ${{ substitutions: [['x', 'z'], 'a'] }} | ${['a', ['x', 'z'], 'a']}
+        ${{}}                                   | ${{ substitutions: ['b'] }}             | ${['b']}
+    `('mergeSettings combines substitutions $left $right', ({ left, right, expected }) => {
+        expect(mergeSettings(left, right).substitutions).toEqual(expected);
+    });
+
+    test('mergeSettings combines substitutionDefinitions', () => {
+        const latex: SubstitutionDefinition = { name: 'latex-accents', entries: [[String.raw`\'e`, 'é']] };
+        const html: SubstitutionDefinition = { name: 'html-apostrophe', entries: [['&#39;', "'"]] };
+        const left = csi({ substitutionDefinitions: [latex] });
+        const right = csi({ substitutionDefinitions: [html] });
+        expect(mergeSettings(left, right).substitutionDefinitions).toEqual([latex, html]);
+    });
+
+    test.each`
+        left                                 | right                                           | expected
+        ${{ softWordBreaks: { ptr: true } }} | ${{}}                                           | ${{ ptr: true }}
+        ${{ softWordBreaks: { ptr: true } }} | ${{ softWordBreaks: {} }}                       | ${{ ptr: true }}
+        ${{ softWordBreaks: { ptr: true } }} | ${{ softWordBreaks: { ptr: false, my: true } }} | ${{ ptr: false, my: true }}
+        ${{}}                                | ${{ softWordBreaks: { my: true } }}             | ${{ my: true }}
+    `('mergeSettings combines softWordBreaks $left $right', ({ left, right, expected }) => {
+        expect(mergeSettings(left, right).softWordBreaks).toEqual(expected);
+    });
+
+    test.each`
+        left                                              | right                                                       | expected
+        ${{ softWordBreakDefinitions: { ptr: '^ptr|' } }} | ${{}}                                                       | ${{ ptr: '^ptr|' }}
+        ${{ softWordBreakDefinitions: { ptr: '^ptr|' } }} | ${{ softWordBreakDefinitions: { ptr: '^p|', my: '^my|' } }} | ${{ ptr: '^p|', my: '^my|' }}
+        ${{}}                                             | ${{ softWordBreakDefinitions: { my: '^my|' } }}             | ${{ my: '^my|' }}
+    `('mergeSettings combines softWordBreakDefinitions $left $right', ({ left, right, expected }) => {
+        expect(mergeSettings(left, right).softWordBreakDefinitions).toEqual(expected);
     });
 
     test('tests mergeSettings with conflicting "enabled"', () => {

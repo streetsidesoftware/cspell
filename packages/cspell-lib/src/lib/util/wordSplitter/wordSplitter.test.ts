@@ -1,10 +1,10 @@
 import type { TextOffset } from '@cspell/cspell-types';
+import { autoResolve } from '@streetsidesoftware/auto-resolve-map';
 import { describe, expect, test, vi } from 'vitest';
 
 import { getDictionary } from '../../getDictionary.js';
 import { finalizeSettings, getDefaultConfigLoader, getDefaultSettings } from '../../Settings/index.js';
 import { calcSettingsForLanguageId } from '../../Settings/LanguageSettings.js';
-import { autoResolve } from '../AutoResolve.js';
 import { softHyphen } from './generateWordBreaks.js';
 import { __testing__, split } from './wordSplitter.js';
 

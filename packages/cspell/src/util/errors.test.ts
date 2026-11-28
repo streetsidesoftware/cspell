@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { ApplicationError, CheckFailed, IOError, isErrorLike, toError } from './errors.js';
+import { applicationAssert, ApplicationError, CheckFailed, IOError, isErrorLike, toError } from './errors.js';
 
 const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
 
@@ -59,5 +59,14 @@ describe('errors', () => {
         const err = new IOError('io', cause);
         expect(err.code).toBe('ENOENT');
         expect(err.isNotFound()).toBe(true);
+    });
+
+    test('applicationAssert passes a truthy value', () => {
+        expect(() => applicationAssert('folder', 'Must be a folder.')).not.toThrow();
+    });
+
+    test.each([undefined, '', 0, false])('applicationAssert throws an ApplicationError for %o', (value) => {
+        expect(() => applicationAssert(value, 'Must be a folder.')).toThrow(ApplicationError);
+        expect(() => applicationAssert(value, 'Must be a folder.')).toThrow('Must be a folder.');
     });
 });

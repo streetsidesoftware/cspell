@@ -5,6 +5,7 @@ import { toError } from '../../../util/errors.js';
 import { toFileUrl } from '../../../util/url.js';
 import type { IConfigLoader, SearchForConfigOptions } from './configLoader.js';
 import { getDefaultConfigLoaderInternal } from './configLoader.js';
+import type { StopAtLocation } from './configSearch.js';
 import { configErrorToRawSettings, configToRawSettings } from './configToRawSettings.js';
 import type { PnPSettingsOptional } from './PnPSettings.js';
 import type { CSpellSettingsI, CSpellSettingsWST } from './types.js';
@@ -24,6 +25,17 @@ export function searchForConfig(
     options?: SearchForConfigOptions,
 ): Promise<CSpellSettingsI | undefined> {
     return gcl().searchForConfig(searchFrom, options);
+}
+
+/**
+ * Like `searchForConfig`, but the stops are already resolved, and some may be exclusive.
+ */
+export function searchForConfigWithResolvedStops(
+    searchFrom: URL,
+    stopSearchAt: readonly (URL | StopAtLocation)[] | undefined,
+    pnpSettings: PnPSettingsOptional,
+): Promise<CSpellSettingsI | undefined> {
+    return gcl().searchForConfigWithResolvedStops(searchFrom, stopSearchAt, pnpSettings);
 }
 /**
  * Load a CSpell configuration files.
