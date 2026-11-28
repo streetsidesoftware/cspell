@@ -10,7 +10,7 @@ import { glob as tinyGlob, isDynamicPattern } from 'tinyglobby';
 import { afterAll, beforeAll, describe, expect, test } from 'vitest';
 
 import { createTempFolder } from '../test/test.helper.js';
-import { calcGlobs, normalizeFileOrGlobsToRoot, normalizeGlobsToRoot } from './glob.js';
+import { calcGlobs, globP, normalizeFileOrGlobsToRoot, normalizeGlobsToRoot } from './glob.js';
 
 interface MinimatchOptions {
     windowsPathsNoEscape?: boolean;
@@ -178,6 +178,7 @@ describe('Validate tinyglobby assumptions', () => {
         await fsp.writeFile(path.join(root, 'real/b.txt'), 'b\n');
         await fsp.writeFile(path.join(tmp, 'target/c.txt'), 'c\n');
         await fsp.symlink(path.join(tmp, 'target'), path.join(root, 'linked-dir'), 'junction');
+        await fsp.symlink(path.join(tmp, 'missing'), path.join(root, 'broken-link'), 'junction');
         await fsp.symlink(path.join(root, 'real'), path.join(root, 'real/loop'), 'junction');
         try {
             await fsp.symlink(path.join(tmp, 'target/c.txt'), path.join(root, 'linked-file.txt'), 'file');
@@ -215,6 +216,13 @@ describe('Validate tinyglobby assumptions', () => {
     test('followSymbolicLinks: true follows a link to a parent directory once', async () => {
         const found = await find('real/**', true);
         expect(found).toEqual(['real/b.txt', 'real/loop/b.txt']);
+    });
+
+    test('the realpath adapter observes a broken link during a wildcard search', async () => {
+        const broken: string[] = [];
+        const files = await globP('**', { root, followSymlinks: true, onBrokenSymlink: (file) => broken.push(file) });
+        expect(broken).toEqual([path.join(root, 'broken-link')]);
+        expect(files).not.toContain('broken-link');
     });
 
     describe('escaped folder names', () => {

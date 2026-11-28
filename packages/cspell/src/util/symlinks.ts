@@ -4,6 +4,7 @@ import * as path from 'node:path';
 import { isDynamicPattern } from 'tinyglobby';
 
 import { STDIN } from './constants.js';
+import { isError } from './errors.js';
 import { isStdinUrl } from './stdinUrl.js';
 
 export interface SymlinkChecker {
@@ -19,6 +20,8 @@ export interface SymlinkChecker {
      * @param pattern - a glob pattern relative to the root, or absolute.
      */
     isGlobReachedThroughSymlink(pattern: string): Promise<boolean>;
+    isBrokenSymlink(filename: string): Promise<boolean>;
+    findBrokenSymlinkInGlob(pattern: string): Promise<string | undefined>;
 }
 
 export function createSymlinkChecker(root: string): SymlinkChecker {
@@ -54,16 +57,48 @@ export function createSymlinkChecker(root: string): SymlinkChecker {
     }
 
     async function isGlobReachedThroughSymlink(pattern: string): Promise<boolean> {
-        const segments = pattern.split('/');
-        const fixed: string[] = [];
-        for (const segment of segments) {
-            if (isDynamicPattern(segment)) break;
-            fixed.push(segment);
-        }
-        const base = fixed.join('/');
+        const base = getGlobFixedPath(pattern);
         if (!base) return false;
         return isReachedThroughSymlink(path.resolve(rootPath, base));
     }
 
-    return { isReachedThroughSymlink, isGlobReachedThroughSymlink };
+    async function isBrokenSymlink(filename: string): Promise<boolean> {
+        return (await isSymlink(filename)) && (await hasMissingTarget(filename));
+    }
+
+    async function findBrokenSymlinkInGlob(pattern: string): Promise<string | undefined> {
+        const base = getGlobFixedPath(pattern);
+        if (!base) return undefined;
+
+        for (let filename = path.resolve(rootPath, base); filename !== rootPath; filename = path.dirname(filename)) {
+            if (filename === path.dirname(filename)) break;
+            const link = await fsp.lstat(filename).then(
+                (stat) => stat.isSymbolicLink(),
+                (error: unknown) => (isMissingPathError(error) ? undefined : false),
+            );
+            if (link !== undefined) {
+                return link && (await hasMissingTarget(filename)) ? filename : undefined;
+            }
+        }
+        return undefined;
+    }
+
+    return { isReachedThroughSymlink, isGlobReachedThroughSymlink, isBrokenSymlink, findBrokenSymlinkInGlob };
+}
+
+function getGlobFixedPath(pattern: string): string {
+    const fixed: string[] = [];
+    for (const segment of pattern.split('/')) {
+        if (isDynamicPattern(segment)) break;
+        fixed.push(segment);
+    }
+    return fixed.join('/');
+}
+
+function hasMissingTarget(filename: string): Promise<boolean> {
+    return fsp.stat(filename).then(() => false, isMissingPathError);
+}
+
+export function isMissingPathError(error: unknown): boolean {
+    return isError(error) && (error.code === 'ENOENT' || error.code === 'ENOTDIR');
 }
