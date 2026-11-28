@@ -89,6 +89,25 @@ describe('Validate CSpellSettingsServer', () => {
         expect(mergeSettings(left, right).substitutionDefinitions).toEqual([latex, html]);
     });
 
+    test.each`
+        left                                 | right                                           | expected
+        ${{ softWordBreaks: { ptr: true } }} | ${{}}                                           | ${{ ptr: true }}
+        ${{ softWordBreaks: { ptr: true } }} | ${{ softWordBreaks: {} }}                       | ${{ ptr: true }}
+        ${{ softWordBreaks: { ptr: true } }} | ${{ softWordBreaks: { ptr: false, my: true } }} | ${{ ptr: false, my: true }}
+        ${{}}                                | ${{ softWordBreaks: { my: true } }}             | ${{ my: true }}
+    `('mergeSettings combines softWordBreaks $left $right', ({ left, right, expected }) => {
+        expect(mergeSettings(left, right).softWordBreaks).toEqual(expected);
+    });
+
+    test.each`
+        left                                              | right                                                       | expected
+        ${{ softWordBreakDefinitions: { ptr: '^ptr|' } }} | ${{}}                                                       | ${{ ptr: '^ptr|' }}
+        ${{ softWordBreakDefinitions: { ptr: '^ptr|' } }} | ${{ softWordBreakDefinitions: { ptr: '^p|', my: '^my|' } }} | ${{ ptr: '^p|', my: '^my|' }}
+        ${{}}                                             | ${{ softWordBreakDefinitions: { my: '^my|' } }}             | ${{ my: '^my|' }}
+    `('mergeSettings combines softWordBreakDefinitions $left $right', ({ left, right, expected }) => {
+        expect(mergeSettings(left, right).softWordBreakDefinitions).toEqual(expected);
+    });
+
     test('tests mergeSettings with conflicting "enabled"', () => {
         const right = csi({ id: 'right', enabled: false });
         const left = csi({ id: 'left', enabled: true });

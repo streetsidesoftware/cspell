@@ -187,6 +187,8 @@ function _merge(
         patterns: mergeListUnique(_left.patterns, _right.patterns),
         substitutionDefinitions: mergeListUnique(_left.substitutionDefinitions, _right.substitutionDefinitions),
         substitutions: mergeListUnique(_left.substitutions, _right.substitutions),
+        softWordBreakDefinitions: mergeObjects(_left.softWordBreakDefinitions, _right.softWordBreakDefinitions),
+        softWordBreaks: mergeObjects(_left.softWordBreaks, _right.softWordBreaks),
         dictionaryDefinitions: mergeListUnique(_left.dictionaryDefinitions, _right.dictionaryDefinitions),
         dictionaries: mergeListUnique(_left.dictionaries, _right.dictionaries),
         noSuggestDictionaries: mergeListUnique(_left.noSuggestDictionaries, _right.noSuggestDictionaries),
