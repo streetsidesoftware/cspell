@@ -14,7 +14,7 @@ Spell checking is a two step process:
 ## Step 1: Determine Which Files to Check
 
 This is based on the command line together with the configuration file loaded at start up (the file nearest
-the current directory, or the one given with `--config`).
+the current directory, or the one given with `--config` or `CSPELL_CONFIG_PATH`).
 
 - If globs are given on the command line, they are used to search for matching files. (If none are given, the
   configuration's `files` setting is used as the globs instead.) The results are filtered against the
@@ -63,8 +63,8 @@ Where the search for the nearest configuration stops:
   without looking in it. The configuration files in the root and the folders above it aren't loaded. Configuration
   files deeper in the project still apply.
 - With `--stop-config-search-at <dir>`, the search stops at `<dir>`, after looking in it. With `--config`, a `<dir>`
-  at or above the root takes the place of the root, so the configuration files from the root up to `<dir>` load
-  again.
+  at or above the root takes the place of the root, so the search looks in the root and the folders above it, up to
+  `<dir>`.
 
 So the settings in a `cspell.json` next to a file, or in a folder above it, override the configuration loaded at
 start up, as long as the search reaches it.
