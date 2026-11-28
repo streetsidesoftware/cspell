@@ -1,4 +1,4 @@
-import type { SuggestionResult } from 'cspell-trie-lib';
+import type { SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';
 import * as Trie from 'cspell-trie-lib';
 import { CompoundWordsMethod } from 'cspell-trie-lib';
 import { describe, expect, test } from 'vitest';
@@ -7,10 +7,59 @@ import { createFailedToLoadDictionary, createSpellingDictionary } from './create
 import { createFlagWordsDictionary } from './FlagWordsDictionary.js';
 import { createIgnoreWordsDictionary } from './IgnoreWordsDictionary.js';
 import type { SpellingDictionaryOptions } from './SpellingDictionary.js';
-import { createCollection } from './SpellingDictionaryCollection.js';
+import {
+    createCollection,
+    getPreferredSuggestionsWithLocale,
+    suggestWithLocale,
+} from './SpellingDictionaryCollection.js';
 import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie.js';
 import { createSuggestDictionary } from './SuggestDictionary.js';
 import { createSuggestOptions as sugOpts } from './SuggestOptions.js';
+
+// cspell:ignore thisside
+test('keeps the best suggestion source without changing collection suggestions', () => {
+    const turkish = Object.assign(createSpellingDictionary(['inside'], 'turkish', 'test', { locale: 'tr-TR' }), {
+        genSuggestions(collector: SuggestionCollector) {
+            collector
+                .add({ word: 'inside', cost: 75 })
+                .add({ word: 'outside', cost: 100 })
+                .add({ word: 'island', cost: 80 });
+        },
+    });
+    const english = Object.assign(createSpellingDictionary(['inside'], 'english', 'test', {}), {
+        genSuggestions(collector: SuggestionCollector) {
+            collector
+                .add({ word: 'inside', cost: 50 })
+                .add({ word: 'outside', cost: 100 })
+                .add({ word: 'island', cost: 85 });
+        },
+    });
+    const collection = createCollection([createCollection([turkish], 'nested'), english], 'mixed');
+    const suggestions = collection.suggest('thisside');
+    const localized = suggestWithLocale(collection, 'thisside');
+
+    expect(localized.map(({ dictionaryLocale, ...suggestion }) => suggestion)).toEqual(suggestions);
+    expect(localized.map(({ word, dictionaryLocale }) => [word, dictionaryLocale])).toEqual([
+        ['inside', undefined],
+        ['island', 'tr-TR'],
+        ['outside', 'tr-TR'],
+    ]);
+});
+
+test('keeps preferred suggestion order and the first dictionary locale for duplicates', () => {
+    const turkish = createSpellingDictionary([':inside:island,outside'], 'turkish', 'test', { locale: 'tr-TR' });
+    const english = createSpellingDictionary([':inside:outside,beside'], 'english', 'test');
+    const collection = createCollection([createCollection([turkish], 'nested'), english], 'mixed');
+    const suggestions = collection.getPreferredSuggestions?.('inside');
+    const localized = getPreferredSuggestionsWithLocale(collection, 'inside');
+
+    expect(localized.map(({ dictionaryLocale, ...suggestion }) => suggestion)).toEqual(suggestions);
+    expect(localized.map(({ word, dictionaryLocale }) => [word, dictionaryLocale])).toEqual([
+        ['island', 'tr-TR'],
+        ['outside', 'tr-TR'],
+        ['beside', undefined],
+    ]);
+});
 
 describe('Verify using multiple dictionaries', () => {
     const wordsA = [

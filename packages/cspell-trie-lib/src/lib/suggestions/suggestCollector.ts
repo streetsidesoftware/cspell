@@ -132,7 +132,14 @@ export const defaultSuggestionCollectorOptions: Readonly<RequireOptional<Suggest
     compoundMethod: undefined,
 });
 
-export function suggestionCollector(wordToMatch: string, options: SuggestionCollectorOptionsRO): SuggestionCollector {
+/**
+ * @param onBestSuggestion - called when a word is added or its cost improves.
+ */
+export function suggestionCollector(
+    wordToMatch: string,
+    options: SuggestionCollectorOptionsRO,
+    onBestSuggestion?: (word: string) => void,
+): SuggestionCollector {
     const {
         filter = () => true,
         changeLimit = MAX_NUM_CHANGES,
@@ -198,10 +205,13 @@ export function suggestionCollector(wordToMatch: string, options: SuggestionColl
         if (cost <= maxCost && filter(suggestion.word, cost)) {
             const known = sugs.get(word);
             if (known) {
+                const isCheaper = cost < known.cost;
                 known.cost = Math.min(known.cost, cost);
                 known.isPreferred = known.isPreferred || isPreferred;
+                if (isCheaper) onBestSuggestion?.(word);
             } else {
                 sugs.set(word, { word, cost, isPreferred });
+                onBestSuggestion?.(word);
                 if (cost < maxCost && sugs.size > numSugToHold) {
                     dropMax();
                 }

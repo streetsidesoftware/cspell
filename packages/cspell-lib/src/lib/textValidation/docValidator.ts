@@ -14,6 +14,7 @@ import { IssueType } from '@cspell/cspell-types';
 import { toFilePathOrHref, toFileURL } from '@cspell/url';
 import type { ICSpellConfigFile } from 'cspell-config-lib';
 import { satisfiesCSpellConfigFile } from 'cspell-config-lib';
+import { getPreferredSuggestionsWithLocale, suggestWithLocale } from 'cspell-dictionary';
 
 import { getGlobMatcherForExcluding } from '../globs/getGlobMatcher.js';
 import type { ExtendedSuggestion } from '../Models/Suggestion.js';
@@ -38,7 +39,7 @@ import {
 } from '../Settings/index.js';
 import type { DirectiveIssue } from '../Settings/InDocSettings.js';
 import { validateInDocumentSettings } from '../Settings/InDocSettings.js';
-import type { SpellingDictionaryCollection, SuggestionResult } from '../SpellingDictionary/index.js';
+import type { SpellingDictionaryCollection } from '../SpellingDictionary/index.js';
 import { getDictionaryInternal } from '../SpellingDictionary/index.js';
 import type { WordSuggestion } from '../suggestions.js';
 import { calcSuggestionAdjustedToToMatchCase } from '../suggestions.js';
@@ -81,6 +82,7 @@ export interface DocumentValidatorOptions extends ValidateDocumentOptions {
 const ERROR_NOT_PREPARED = 'Validator Must be prepared before calling this function.';
 
 type PerfTimings = Record<string, number>;
+type SuggestionResultWithLocale = ReturnType<typeof suggestWithLocale>[number];
 
 /**
  * Represents a list of ranges in a flattened format, where each pair of numbers corresponds to the start and end of a range.
@@ -284,7 +286,10 @@ export class DocumentValidator {
         const rangeTransformer = finalSettings.substitutions?.length ? sub.transformer : undefined;
         const text = this._document.text;
         const calcIncludeRanges = () => calcTextInclusionRanges(text, validateOptions, rangeTransformer);
-        const textValidator = textValidatorFactory(dict, validateOptions);
+        const textValidator = textValidatorFactory(dict, validateOptions, {
+            suggest: (word, suggestOptions) => suggestWithLocale(dict, word, suggestOptions),
+            getPreferredSuggestions: (word) => getPreferredSuggestionsWithLocale(dict, word),
+        });
 
         return { textValidator, calcIncludeRanges, validateOptions, transformer };
     }
@@ -518,13 +523,13 @@ export class DocumentValidator {
             numChanges: settings.suggestionNumChanges,
         } as const;
 
-        const rawSuggestions = dict.suggest(text, sugOptions);
+        const rawSuggestions = suggestWithLocale(dict, text, sugOptions);
         return this.adjustSuggestions(text, rawSuggestions);
     }
 
     private adjustSuggestions(
         text: string,
-        rawSuggestions: (ExtendedSuggestion | SuggestionResult)[],
+        rawSuggestions: (ExtendedSuggestion | SuggestionResultWithLocale)[],
     ): ExtendedSuggestion[] {
         assert(this._preparations, ERROR_NOT_PREPARED);
         const settings = this._preparations.docSettings;
@@ -668,7 +673,7 @@ function isDocumentParser(parser: DocumentParser | Parser): parser is DocumentPa
     return typeof (parser as DocumentParser).parseDocument === 'function';
 }
 
-function mapSug(sug: ExtendedSuggestion | SuggestionResult): SuggestionResult {
+function mapSug(sug: ExtendedSuggestion | SuggestionResultWithLocale): SuggestionResultWithLocale {
     return { cost: 999, ...sug };
 }
 

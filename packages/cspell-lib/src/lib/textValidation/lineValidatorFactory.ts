@@ -42,6 +42,8 @@ interface LineValidator {
     dict: CachingDictionary;
 }
 
+type DictionarySuggestions = Pick<SpellingDictionary, 'getPreferredSuggestions' | 'suggest'>;
+
 interface WordStatusInfo {
     word: string;
     isFound: boolean | undefined;
@@ -57,7 +59,11 @@ interface KnownIssuesForWord {
 
 const MIN_HEX_SEQUENCE_LENGTH = 8;
 
-export function lineValidatorFactory(sDict: SpellingDictionary, options: ValidationOptions): LineValidator {
+export function lineValidatorFactory(
+    sDict: SpellingDictionary,
+    options: ValidationOptions,
+    dictionarySuggestions?: DictionarySuggestions,
+): LineValidator {
     const {
         minWordLength = defaultMinWordLength,
         flagWords = [],
@@ -74,6 +80,7 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
     };
 
     const dictCol = createCachingDictionary(sDict, hasWordOptions);
+    const suggestions = dictionarySuggestions ?? dictCol;
 
     const knownWords = new Map<string, WordStatusInfo>();
 
@@ -124,14 +131,14 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
 
     const cacheGetPreferredSuggestions = new Map<string, PreferredSuggestion[] | undefined>();
     function getPreferredSuggestions(word: string) {
-        return autoResolve(cacheGetPreferredSuggestions, word, () => dictCol.getPreferredSuggestions(word));
+        return autoResolve(cacheGetPreferredSuggestions, word, () => suggestions.getPreferredSuggestions?.(word));
     }
 
     const cacheHasSimpleSuggestions = new Map<string, Suggestion[]>();
     function getSimpleSuggestions(word: string): Suggestion[] {
         const numSug = numSuggestions ?? 5;
         return autoResolve(cacheHasSimpleSuggestions, word, () => {
-            const sugs = dictCol.suggest(word, {
+            const sugs = suggestions.suggest(word, {
                 numSuggestions: 1,
                 compoundMethod: 0,
                 includeTies: true, // We want the top suggestions even if there are ties
@@ -462,8 +469,12 @@ export interface TextValidationFactoryOptions extends ValidationOptions {
     transformer: TextTransformer | undefined;
 }
 
-export function textValidatorFactory(dict: SpellingDictionary, options: TextValidationFactoryOptions): TextValidator {
-    const lineValidator = lineValidatorFactory(dict, options);
+export function textValidatorFactory(
+    dict: SpellingDictionary,
+    options: TextValidationFactoryOptions,
+    dictionarySuggestions?: DictionarySuggestions,
+): TextValidator {
+    const lineValidator = lineValidatorFactory(dict, options, dictionarySuggestions);
     const lineValidatorFn = lineValidator.fn;
     const transformer = options.transformer;
 

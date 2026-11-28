@@ -1,9 +1,17 @@
+import { fileURLToPath } from 'node:url';
+
 import type { CSpellSettings } from '@cspell/cspell-types';
 import type { ICSpellConfigFile } from 'cspell-config-lib';
 import { describe, expect, test } from 'vitest';
 
+import { createCollection } from './SpellingDictionary/index.js';
 import type { SuggestedWord, SuggestionOptions } from './suggestions.js';
-import { SuggestionError, suggestionsForWord, suggestionsForWords } from './suggestions.js';
+import {
+    calcSuggestionAdjustedToToMatchCase,
+    SuggestionError,
+    suggestionsForWord,
+    suggestionsForWords,
+} from './suggestions.js';
 import { asyncIterableToArray } from './util/util.js';
 
 const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
@@ -87,6 +95,80 @@ describe('Suggestions English', async () => {
             sug('orangier', 200),
             sug('orangiest'),
         ]);
+    });
+});
+
+describe('Suggestions with dictionary locales', () => {
+    const settings: CSpellSettings = {
+        language: 'en,tr',
+        dictionaries: ['turkish', 'english'],
+        dictionaryDefinitions: [
+            {
+                name: 'turkish',
+                path: fileURLToPath(new URL('../../samples/turkish-words.txt', import.meta.url)),
+                dictionaryInformation: { locale: 'tr_TR' },
+            },
+            { name: 'english', words: ['inside', 'inclement'] },
+        ],
+    };
+
+    // cspell:ignore İncelemee inceleme İnceleme İNCELEMEE İNCELEME Ispanakk ıspanak Ispanak Insidde
+    test.each`
+        word           | dictionary   | suggestion    | adjusted
+        ${'İncelemee'} | ${'turkish'} | ${'inceleme'} | ${'İnceleme'}
+        ${'İNCELEMEE'} | ${'turkish'} | ${'inceleme'} | ${'İNCELEME'}
+        ${'Ispanakk'}  | ${'turkish'} | ${'ıspanak'}  | ${'Ispanak'}
+        ${'Insidde'}   | ${'english'} | ${'inside'}   | ${'Inside'}
+    `('matches $word using the $dictionary dictionary', async ({ word, dictionary, suggestion, adjusted }) => {
+        const results = await suggestionsForWord(word, { includeDefaultConfig: false }, settings);
+        expect(results.suggestions).toContainEqual(
+            oc({ word: suggestion, wordAdjustedToMatchCase: adjusted, dictionaries: [dictionary] }),
+        );
+        expect(results.suggestions.every((suggestion) => !Object.hasOwn(suggestion, 'dictionaryLocale'))).toBe(true);
+    });
+
+    test('keeps suggestions from both dictionaries in cost order', async () => {
+        const results = await suggestionsForWord('İncelemee', { includeDefaultConfig: false }, settings);
+        expect(results.suggestions).toEqual([
+            oc({ word: 'inceleme', wordAdjustedToMatchCase: 'İnceleme', dictionaries: ['turkish'] }),
+            oc({ word: 'inclement', wordAdjustedToMatchCase: 'Inclement', dictionaries: ['english'] }),
+        ]);
+    });
+
+    // cspell:ignore Inceleme
+    test('uses the configured locale when two settings share a dictionary file and name', async () => {
+        const path = fileURLToPath(new URL('../../samples/turkish-words.txt', import.meta.url));
+        const name = 'shared-words';
+        const options = { includeDefaultConfig: false };
+        const untagged = await suggestionsForWord('İncelemee', options, {
+            language: 'en,tr',
+            dictionaries: [name],
+            dictionaryDefinitions: [{ name, path }],
+        });
+        const turkish = await suggestionsForWord('İncelemee', options, {
+            language: 'en,tr',
+            dictionaries: [name],
+            dictionaryDefinitions: [{ name, path, dictionaryInformation: { locale: 'tr-TR' } }],
+        });
+
+        expect(untagged.suggestions).toContainEqual(oc({ word: 'inceleme', wordAdjustedToMatchCase: 'Inceleme' }));
+        expect(turkish.suggestions).toContainEqual(oc({ word: 'inceleme', wordAdjustedToMatchCase: 'İnceleme' }));
+    });
+
+    // cspell:ignore irakk Irak ırak
+    test('lowercases each suggestion using its own locale', () => {
+        const suggestions = [
+            { word: 'Irak', cost: 100, dictionaryLocale: 'tr-TR' },
+            { word: 'Irks', cost: 200 },
+        ];
+        const adjusted = calcSuggestionAdjustedToToMatchCase(
+            'irakk',
+            suggestions,
+            'en,tr',
+            true,
+            createCollection([], 'test'),
+        );
+        expect(adjusted.map((suggestion) => suggestion.wordAdjustedToMatchCase)).toEqual(['ırak', 'irks']);
     });
 });
 

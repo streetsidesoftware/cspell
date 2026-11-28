@@ -1,6 +1,11 @@
 import { describe, expect, test } from 'vitest';
 
-import { hasOptionToSearchOption, impersonateCollector, suggestionCollector } from './SpellingDictionaryMethods.js';
+import {
+    hasOptionToSearchOption,
+    impersonateCollector,
+    suggestionCollector,
+    wordSuggestForms,
+} from './SpellingDictionaryMethods.js';
 
 describe('SpellingDictionaryMethods', () => {
     test('impersonateCollector', () => {
@@ -13,6 +18,19 @@ describe('SpellingDictionaryMethods', () => {
         expect(ic.maxNumSuggestions).toBe(1);
         expect(ic.word).toBe('Hello');
         expect(collector.word).toBe('hello');
+    });
+
+    // cspell:ignore İncelemee incelemee ncelemee Ispanakk ıspanakk ispanakk İSTANBULL istanbull İstanbull
+    test.each`
+        word           | locale       | ignoreCase | expected
+        ${'İncelemee'} | ${'tr-TR'}   | ${false}   | ${['İncelemee', 'incelemee']}
+        ${'İncelemee'} | ${undefined} | ${false}   | ${['İncelemee', 'i\u0307ncelemee']}
+        ${'Ispanakk'}  | ${'tr-TR'}   | ${false}   | ${['Ispanakk', 'ıspanakk']}
+        ${'Ispanakk'}  | ${'tr-TR'}   | ${true}    | ${['Ispanakk', 'ıspanakk', 'ispanakk']}
+        ${'İSTANBULL'} | ${'tr-TR'}   | ${false}   | ${['İSTANBULL', 'istanbull', 'İstanbull']}
+        ${'incelemee'} | ${'tr-TR'}   | ${true}    | ${['incelemee']}
+    `('wordSuggestForms $word $locale ignoreCase: $ignoreCase', ({ word, locale, ignoreCase, expected }) => {
+        expect([...wordSuggestForms(word, locale, ignoreCase)]).toEqual(expected);
     });
 
     test.each`

@@ -46,6 +46,23 @@ describe('Validate suggestCollector', () => {
         expect(collector.suggestions[0].cost).toBe(75);
     });
 
+    test('reports new and cheaper candidates, including a word added after pruning', () => {
+        const accepted: string[] = [];
+        const collector = suggestionCollector('ordinary', sugOpts({ numSuggestions: 1, changeLimit: 1 }), (word) =>
+            accepted.push(word),
+        );
+        collector
+            .add({ word: 'priority', cost: 100, isPreferred: true })
+            .add({ word: 'ordinary', cost: 10 })
+            .add({ word: 'ordinary', cost: 10 })
+            .add({ word: 'ordinary', cost: 11 })
+            .add({ word: 'ordinary', cost: 9 })
+            .add({ word: 'preferred', cost: 25, isPreferred: true })
+            .add({ word: 'ordinary', cost: 20 });
+
+        expect(accepted).toEqual(['priority', 'ordinary', 'ordinary', 'preferred', 'ordinary']);
+    });
+
     test('collect', () => {
         const spellResults = [
             { word: 'joyfuller', cost: 200 },

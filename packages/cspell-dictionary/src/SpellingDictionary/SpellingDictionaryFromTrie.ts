@@ -218,7 +218,8 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         const _compoundMethod =
             suggestOptions.compoundMethod ??
             (this.options.useCompounds ? CompoundWordsMethod.JOIN_WORDS : CompoundWordsMethod.NONE);
-        for (const w of wordSuggestForms(collector.word)) {
+        const locale = this.isDictionaryCaseSensitive ? this.#locale : undefined;
+        for (const w of wordSuggestForms(collector.word, locale, collector.ignoreCase)) {
             this.trie.genSuggestions(impersonateCollector(collector, w), _compoundMethod);
         }
     }
