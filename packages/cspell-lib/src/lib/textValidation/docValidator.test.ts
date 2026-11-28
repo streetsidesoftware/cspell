@@ -3,7 +3,7 @@ import { promises as fs } from 'node:fs';
 import * as path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
-import type { CSpellUserSettings } from '@cspell/cspell-types';
+import type { AdvancedCSpellSettings, CSpellUserSettings } from '@cspell/cspell-types';
 import { afterEach, describe, expect, test, vi } from 'vitest';
 
 import { pathPackageFixtures, pathPackageRoot, pathRepoTestFixtures } from '../../test-util/test.locations.js';
@@ -60,6 +60,60 @@ describe('docValidator', () => {
         await dVal.prepare();
 
         expect(dVal.checkDocument()).toEqual([]);
+    });
+
+    // cspell:ignore doesn
+    test.each(['message.yml', 'message.yaml', 'compose.yaml'])(
+        'YAML escaped apostrophes preserve the source location of spelling issues in %s',
+        async (filename) => {
+            // cspell:ignore wrngwrd
+            const text = "message: 'It doesn''t work. It isn''t a wrngwrd.'\r\n";
+            const doc = td(`file:///${filename}`, text);
+            const validator = new DocumentValidator(doc, { noConfigSearch: true, generateSuggestions: false }, {});
+
+            expect(await validator.checkDocumentAsync()).toEqual([
+                oc({ text: 'wrngwrd', offset: text.indexOf('wrngwrd'), length: 'wrngwrd'.length }),
+            ]);
+        },
+    );
+
+    test('YAML escaped apostrophes are included in the source span of a flagged word', async () => {
+        const text = "message: 'It doesn''t work.'";
+        const doc = td('file:///message.yaml', text);
+        const validator = new DocumentValidator(
+            doc,
+            { noConfigSearch: true, generateSuggestions: false },
+            { flagWords: ["doesn't"] },
+        );
+
+        expect(await validator.checkDocumentAsync()).toEqual([
+            oc({ text: "doesn't", offset: text.indexOf('doesn'), length: "doesn''t".length }),
+        ]);
+    });
+
+    test('YAML respects a configured parser', async () => {
+        const doc = td('file:///message.yaml', "message: 'It doesn''t work.'");
+        const parse = vi.fn(() => ({ parsedTexts: [] }));
+        const settings: AdvancedCSpellSettings = {
+            parser: 'custom',
+            plugins: [{ parsers: [{ name: 'custom', parse }] }],
+        };
+        const validator = new DocumentValidator(doc, { noConfigSearch: true, generateSuggestions: false }, settings);
+
+        expect(await validator.checkDocumentAsync()).toEqual([]);
+        expect(parse).toHaveBeenCalledOnce();
+    });
+
+    test('YAML escaped apostrophes are unchanged in plain text', async () => {
+        // cspell:ignore wrngwrd
+        const text = "message: 'It doesn''t work. It isn''t a wrngwrd.'\r\n";
+        const doc = td('file:///message.txt', text);
+        const validator = new DocumentValidator(doc, { noConfigSearch: true, generateSuggestions: false }, {});
+
+        expect(await validator.checkDocumentAsync()).toEqual([
+            oc({ text: 'doesn', offset: text.indexOf('doesn'), length: 'doesn'.length }),
+            oc({ text: 'wrngwrd', offset: text.indexOf('wrngwrd'), length: 'wrngwrd'.length }),
+        ]);
     });
 
     test.each`
