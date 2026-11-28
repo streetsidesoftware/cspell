@@ -77,6 +77,54 @@ describe('Verify building Dictionary', () => {
         expect(dict.has('MCGREYER', ignoreCase)).toBe(true); // cspell:disable-line
     });
 
+    // cspell:ignore erroRcode eRRorcODE eRRor
+    test('case-sensitive legacy compounds keep the written case', () => {
+        const dict = createSpellingDictionary(
+            ['error', 'code', 'Paris'],
+            'words',
+            'test',
+            opts({ caseSensitive: true, useCompounds: true }),
+        );
+        const useCase = { ignoreCase: false };
+
+        expect(dict.has('erroRcode', useCase)).toBe(false);
+        expect(dict.has('eRRorcODE', useCase)).toBe(false);
+        expect(dict.has('errorCode', useCase)).toBe(false);
+        expect(dict.find('erroRcode', useCase)).toBe(undefined);
+        expect(dict.find('error', useCase)?.found).toBe('error');
+
+        expect(dict.has('error', useCase)).toBe(true);
+        expect(dict.has('code', useCase)).toBe(true);
+        expect(dict.has('Paris', useCase)).toBe(true);
+        expect(dict.has('errorcode', useCase)).toBe(true);
+        expect(dict.has('errorParis', useCase)).toBe(true);
+        expect(dict.has('ERRORCODE', useCase)).toBe(true);
+        expect(dict.has('PARIS', useCase)).toBe(true);
+
+        expect(dict.has('eRRor', useCase)).toBe(true);
+        expect(dict.has('paris', useCase)).toBe(false);
+        expect(dict.has('erroRcode', { ignoreCase: true, useCompounds: true })).toBe(true);
+        expect(dict.has('errorCode', { ignoreCase: true, useCompounds: true })).toBe(true);
+
+        const titled = createSpellingDictionary(
+            ['Error', 'Code'],
+            'words',
+            'test',
+            opts({ caseSensitive: true, useCompounds: true }),
+        );
+        expect(titled.has('ErrorCode', useCase)).toBe(true);
+
+        const plain = createSpellingDictionary(
+            ['error', 'code', 'Paris'],
+            'words',
+            'test',
+            opts({ caseSensitive: true }),
+        );
+        expect(plain.has('errorcode', useCase)).toBe(false);
+        expect(plain.has('ERRORCODE', useCase)).toBe(false);
+        expect(plain.has('erroRcode', { ignoreCase: false, useCompounds: true })).toBe(false);
+    });
+
     test('Suggest Trie', () => {
         const words = [
             'apple',
