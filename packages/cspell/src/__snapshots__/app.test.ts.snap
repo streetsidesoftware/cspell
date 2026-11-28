@@ -9902,6 +9902,17 @@ error"
 
 exports[`Validate cli > app 'with spelling errors Dutch.txt' Expect Error: [Function CheckFailed] 3`] = `""`;
 
+exports[`Validate cli > app 'yaml quote disabled' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'yaml quote disabled' Expect Error: [Function CheckFailed] 2`] = `
+"log	notes.yaml:2:11 - Unknown word (doesn)
+log
+error	CSpell: Files checked: 2, Issues found: 1 in 1 file.
+error"
+`;
+
+exports[`Validate cli > app 'yaml quote disabled' Expect Error: [Function CheckFailed] 3`] = `""`;
+
 exports[`Validate cli > app --force-check 'lint --file package.json --force-check' Expect Error: undefined 1`] = `[]`;
 
 exports[`Validate cli > app --force-check 'lint --file package.json --force-check' Expect Error: undefined 2`] = `

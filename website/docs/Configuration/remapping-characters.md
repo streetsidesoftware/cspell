@@ -100,10 +100,29 @@ Things to know:
   the file, in every language, code included.
 - Substitutions and their definitions add up across configs: the default config, imported configs, your own config,
   and matching `overrides` and `languageSettings`. A definition replaces an earlier one with the same name. An entry
-  overrides an earlier entry with the same `find`. To turn off an inherited substitution, redefine it with no
+  overrides an earlier entry with the same `find`. To disable an inherited substitution, redefine it with no
   entries. For one written in place, map its `find` to itself where it is set, such as in a `languageSettings` entry
   for the same language.
 - Substitutions were added in CSpell 9.7.0.
+
+### Built-in Substitutions
+
+CSpell's default settings define these substitutions:
+
+| Name                | Applies to                    | What it does                                                         |
+| ------------------- | ----------------------------- | -------------------------------------------------------------------- |
+| `yaml-single-quote` | YAML and Docker Compose files | Reads `''` as `'`, so `'it''s'` in a single-quoted string is `it's`. |
+| `latex-accents`     | LaTeX files                   | Reads accent commands as accented letters, such as `\'e` as `é`.     |
+
+To disable one, redefine it with no entries:
+
+**`cspell.config.yaml`**
+
+```yaml
+substitutionDefinitions:
+  - name: yaml-single-quote
+    entries: []
+```
 
 See [`substitutionDefinitions`](./auto_properties.md#settings-substitutiondefinitions) and
 [`substitutions`](./auto_properties.md#settings-substitutions) in the properties reference.
