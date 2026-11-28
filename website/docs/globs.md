@@ -219,7 +219,9 @@ The resolved configuration is used to find files.
 
 Before checking a file, CSpell loads the configuration file nearest it: the first one found in the file's folder or
 the folders above it. Its `ignorePaths` can still skip the file, and so can an override that sets `"enabled": false`.
-`--no-config-search` turns this off.
+`--no-config-search` disables this search. With `--config`, the search stops before the root, and
+`--stop-config-search-at` sets where it stops. See
+[Loading Configuration](./Configuration/overrides.md#loading-configuration) for the details.
 
 Files given with `--file`, `--files`, or `--file-list` are not searched for. They are still filtered:
 
