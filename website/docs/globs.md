@@ -37,7 +37,7 @@ Write globs with `/` between folder names, also on Windows.
 
 ## The Example Folder
 
-The examples on this page run `cspell` in this folder. Each file is listed with its full relative path.
+The examples on this page run `cspell` in a folder with these files, each listed by its path from that folder:
 
 ```text
 README.md
