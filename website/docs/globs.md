@@ -37,7 +37,8 @@ Write globs with `/` between folder names, also on Windows.
 
 ## The Example Folder
 
-The examples on this page use this folder as the root. Each file is listed with its full relative path.
+The examples on this page run `cspell` in this folder, with the configuration file in it. Each file is listed with
+its full relative path.
 
 ```text
 README.md
@@ -53,29 +54,30 @@ test/a.md
 a/test/b.md
 ```
 
-## Glob Roots
+## What a Glob Is Relative To
 
-A glob is relative to a folder, its root.
+A glob is relative to a folder. Usually that is the folder you run `cspell` in, which also holds the configuration
+file.
 
-- Globs on the command line and `--exclude` globs are relative to the current working folder, or to the folder given
-  with `--root`.
+- Globs on the command line and `--exclude` globs are relative to the current folder, or to the folder given with
+  `--root`.
 - A glob in a configuration file is relative to that file's `globRoot`. By default, `globRoot` is the folder that
   holds the configuration file, with these exceptions:
   - For a configuration file inside a `.vscode` or `.config` folder, it is the folder above that one.
   - For a `.vscode/cspell.json` without a `version` field, or a configuration with `"version": "0.1"`, it is
     [`${cwd}`](#cwd).
-- A glob that starts with `/` is tied to the root. In `ignorePaths`, `/test` matches `test/a.md` but not
+- A glob that starts with `/` is tied to that folder. In `ignorePaths`, `/test` matches `test/a.md` but not
   `a/test/b.md`.
-- A glob that starts with `**/` is tested against the file's full path, so folders above the root count. See
+- A glob that starts with `**/` is tested against the file's full path, so folders above that folder count. See
   [A Project Inside a `node_modules` Folder](#a-project-inside-a-node_modules-folder).
 
 ### `${cwd}`
 
-`${cwd}` stands for the current working folder.
+`${cwd}` stands for the current folder.
 
 - Set `globRoot` to `${cwd}` to make the globs in a configuration file relative to where `cspell` runs, instead of
   to the configuration file.
-- Start a glob with `${cwd}` to make that one glob relative to the current working folder: `${cwd}/docs`.
+- Start a glob with `${cwd}` to make that one glob relative to the current folder: `${cwd}/docs`.
 
 **`cspell.json`**
 
@@ -100,16 +102,16 @@ For each file it checks, CSpell also loads the configuration file nearest that f
 The globs on the command line select the files to check: `cspell "**/*.md"`. When there are none, CSpell uses `files`
 from the configuration. A glob in `files` matches the same files as on the command line, except where noted.
 
-- `cspell "*.md"` checks only the Markdown files in the root, here `README.md`.
+- `cspell "*.md"` checks only the Markdown files in the current folder, here `README.md`.
 - `cspell "**/*.md"` checks Markdown files at any depth, except names that start with `.` and files inside folders
   that start with `.`.
 - `cspell docs` checks all files in the `docs` folder. This works for any existing folder, such as `docs/api`.
 - `cspell .` checks all files.
 - A glob ending in `/**` also matches a file with that name. `cspell "**/.git/**"` checks the file `sub/.git`.
-- On the command line, a glob that starts with `/` is an absolute path. It must be inside the root: an absolute glob
-  outside the root finds no files. In `files`, a leading `/` ties the glob to the root.
-- A glob can start with `../` to check files outside the root: `cspell "../shared/**/*.md"`. Only the folders before
-  the first wildcard or `{}` can hold `..`, so `cspell "{../shared,docs}/*.md"` finds no files.
+- On the command line, a glob that starts with `/` is an absolute path. It must point inside the current folder. In
+  `files`, a leading `/` ties the glob to the configuration file's folder.
+- A glob can start with `../` to check a folder next to the current folder: `cspell "../shared/**/*.md"`. Other uses
+  of `..` in a glob aren't supported.
 - A glob that starts with `!` skips the files it matches, using [loose matching](#what-loose-matching-adds).
   `cspell "**/*.md" "!test"` skips both `test/a.md` and `a/test/b.md`. So does `["**/*.md", "!test"]` in `files`.
 
@@ -155,10 +157,10 @@ file named `.git`, see [A File Named `.git`](#a-file-named-git).
 
 Globs given with `--exclude` use loose matching, with these differences from `ignorePaths`:
 
-- Without `--exclude`, CSpell skips `node_modules/**`. That is only the `node_modules` folder in the root. Any
-  `--exclude` replaces this default.
-- A leading `/` does not tie a name without other slashes to the root: `--exclude /test` skips both `test/a.md` and
-  `a/test/b.md`. `--exclude /test/` skips only `test/a.md`.
+- Without `--exclude`, CSpell skips `node_modules/**`. That is only the `node_modules` folder in the current folder.
+  Any `--exclude` replaces this default.
+- A leading `/` does not tie a name without other slashes to the current folder: `--exclude /test` skips both
+  `test/a.md` and `a/test/b.md`. `--exclude /test/` skips only `test/a.md`.
 - A glob that matches at any depth is tested against the full path, as if it started with `**/`. This applies to
   `node_modules`, `node_modules/`, `/**/node_modules/**`, and `${cwd}/**/node_modules/**`.
 
@@ -247,13 +249,13 @@ Use `--force-check` to check them anyway.
 }
 ```
 
-This skips the contents of every `node_modules` folder under the root. Without it, CSpell skips only the
-`node_modules` folder in the root, and only when no `--exclude` is given.
+This skips the contents of every `node_modules` folder at any depth. Without it, CSpell skips only the
+`node_modules` folder in the current folder, and only when no `--exclude` is given.
 
 ### A Project Inside a `node_modules` Folder
 
-A glob that starts with `**/` is tested against the full path. When the root itself is inside a `node_modules`
-folder, for example when checking an installed package, `**/node_modules/**` matches every file:
+A glob that starts with `**/` is tested against the full path. When the current folder is itself inside a
+`node_modules` folder, for example when checking an installed package, `**/node_modules/**` matches every file:
 
 ```text
 $ cd node_modules/my-package
@@ -261,7 +263,8 @@ $ cspell "**"            # with "ignorePaths": ["**/node_modules/**"]
 No files found to check.
 ```
 
-These globs skip only `node_modules` folders under the root, and keep the files in `node_modules/my-package`:
+These globs skip only `node_modules` folders under the current folder, and keep the files in
+`node_modules/my-package`:
 
 - `node_modules/`
 - `node_modules`
