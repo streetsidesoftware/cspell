@@ -419,6 +419,7 @@ describe('Validate cli', () => {
         ${'language-id locale fr'}    | ${[rpFeat('language-id'), '--no-progress', '--locale=fr', 'notes.txt']}            | ${app.CheckFailed} | ${true} | ${true}  | ${false}
         ${'soft word breaks merged'}  | ${[rpFeat('soft-word-breaks'), '--no-progress', '.']}                              | ${app.CheckFailed} | ${true} | ${true}  | ${false}
         ${'substitutions merged'}     | ${[rpFeat('substitutions'), '--no-progress', '.']}                                 | ${app.CheckFailed} | ${true} | ${true}  | ${false}
+        ${'yaml quote disabled'}      | ${[rpFeat('yaml-single-quote-disabled'), '--no-progress', '.']}                    | ${app.CheckFailed} | ${true} | ${true}  | ${false}
     `('app $msg Expect Error: $errorCheck', async ({ testArgs, errorCheck, eError, eLog, eInfo }: TestCase) => {
         chalk.level = 1;
         const commander = getCommander();
