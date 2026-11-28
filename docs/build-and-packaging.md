@@ -22,16 +22,16 @@ This is a pnpm workspace (`pnpm-workspace.yaml`). The main directories:
 
 ## Tooling
 
-- **Node.js:** the version in `engines` in the root `package.json` (`>=22.18.0`). CI tests 22.x, 24.x, and 26.x, and
-  24.x on Windows.
-- **pnpm**, pinned by `packageManager`. Run `corepack enable` once. New dependency versions are installed only once
-  they're two days old (`minimumReleaseAge`), except `@cspell/dict-*`.
+- **Node.js:** the current LTS release is suggested.
+- **pnpm**, pinned by `packageManager`. New dependency versions must reach a minimum age before pnpm installs them:
+  see `minimumReleaseAge` in `pnpm-workspace.yaml`.
 - **Builds** use tsdown for bundles and type declarations, and `tsc`.
 - **Tests** use vitest, next to the source (`foo.test.ts` next to `foo.ts`). It's the only test runner.
   - The root `test` also runs `test-schema` last, which validates `cspell.schema.json`.
   - The Yarn test projects (`test-packages/yarn/yarn2` and `examples/yarn`) aren't installed by `pnpm install`.
     `pnpm run test:yarn` installs them with Yarn and runs their tests. The `cspell-lib` tests that load them run only
     when `CSPELL_TEST_YARN` is set; run `pnpm run setup-yarn` first. CI does both.
+  - The Yarn scripts need Corepack: `npm i -g corepack`.
 - **Lint** is ESLint plus Prettier.
   - `pnpm run lint` fixes what it can and writes the fixes.
   - `pnpm run lint-ci` only checks.
@@ -62,7 +62,6 @@ CI runs on Windows. Use `node:path` and URL helpers. Never join paths with strin
 ## Commands
 
 ```sh
-corepack enable
 pnpm ibt                                   # install, build, test
 pnpm run build                             # build everything; always before testing
 pnpm test
@@ -89,6 +88,8 @@ Never edit these by hand. Change the source and regenerate, or let the workflow 
 | `packages/cspell-bundled-dicts/cspell-default.config.js`                                  | `cspell-default.config.ts`                  | `pnpm run build`                                                                          |
 | `__snapshots__/`                                                                          | the tests                                   | `pnpm run test:update-snapshots`                                                          |
 | Injected regions of `README.md`, `packages/*/README.md`, `website/src/**/*.md`            | `@@inject` sources, such as `static/*.md`   | `pnpm run build:readme`, and the Update README workflow after every merge to `main`       |
+| `static/sponsor.md`, `static/sponsor-pub.md`, `static/footer.md`                          | `streetsidesoftware/.github` repository     | The Sync Shared Files workflow (`sync-shared-files.yml`), weekly                          |
+| `website/static/img/sponsor/`                                                             | `streetsidesoftware.github.io` repository   | The Sync Shared Files workflow (`sync-shared-files.yml`), weekly                          |
 | `packages/cspell/static/help-*.txt`                                                       | `cspell lint --help`, `cspell trace --help` | `pnpm run build:readme`                                                                   |
 | `website/docs/Configuration/auto_properties.md`, `website/src/components/help-lint.md`    | `cspell-types`, the CLI                     | The Build Docs workflow (`update-docs.yml`) after a `cspell-types` change lands on `main` |
 | `CHANGELOG.md`, `packages/*/CHANGELOG.md`, `.release.json`                                | merged PRs                                  | The Release Drafter workflow. See [Releasing](./releasing.md).                            |
@@ -120,6 +121,7 @@ The `api/` files are committed so that changes to a package's public API show up
 | A package's public API                        | `pnpm run build`, then review and commit its [`api/` file](#the-api-files), if any. Add [doc comments](./writing-comments.md#public-comments). |
 | Bundled dictionaries                          | See [Bundled dictionaries](#bundled-dictionaries).                                                                                             |
 | `.github/release-drafter.yml`                 | `node ./scripts/check-release-drafter.mts`. See [Releasing](./releasing.md#changing-the-rules).                                                |
+| `.github/FUNDING.yml`                         | `node ./scripts/fix-package-json.mts`, which copies the links into each published package's `funding` field.                                   |
 
 ## Bundled dictionaries
 
@@ -156,7 +158,7 @@ Then fill in the fields the repo manages, and create the package's issue label. 
 name, and `bugs` links to its open issues.
 
 ```sh
-node ./scripts/fix-package-json.mts      # sets repository, homepage, and (if published) bugs; sorts fields
+node ./scripts/fix-package-json.mts      # sets repository, homepage, and (if published) bugs and funding; sorts fields
 node ./scripts/create-package-labels.mts # creates missing package labels on GitHub
 ```
 
@@ -173,7 +175,7 @@ The main workflows in `.github/workflows/`:
 - `integration-test.yml`, `smoke-test.yml`, `coverage.yml`.
 - `website-*.yml`, `lint-docs.yml`, `test-build-docs.yml`: the website.
 - Bots that open PRs: `update-dictionaries.yml`, `update-dependencies.yml`, `update-pnpm.yml`, `update-readme.yml`,
-  `update-docs.yml`, `update-integration-repositories.yml`.
+  `update-docs.yml`, `update-integration-repositories.yml`, `sync-shared-files.yml`.
 - Releases: see [Releasing](./releasing.md).
 
 When adding or changing a workflow:
@@ -182,6 +184,8 @@ When adding or changing a workflow:
   times per PR, like the integration tests, use `.github/actions/setup-pnpm` (`pnpm/setup`) instead. Its Node has no
   npm, npx, or Corepack. Only one of those jobs should save the pnpm store (`save-cache`), or each job saves its own
   copy and fills the cache.
+- A job that runs Yarn sets up Node with `.github/actions/setup-node` and adds `.github/actions/setup-corepack` before
+  that step.
 - Add `workflow_dispatch` when possible, so it can be run by hand.
 - Add `workflow_call` only to a new workflow, and only if it has no `concurrency` section: in a called workflow,
   `github.workflow` is the caller's name, so the groups can collide. Don't add it to existing workflows.

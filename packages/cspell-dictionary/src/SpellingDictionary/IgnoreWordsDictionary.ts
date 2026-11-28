@@ -1,8 +1,8 @@
 import { opFilter, opMap, pipe } from '@cspell/cspell-pipe/sync';
+import { AutoResolveWeakMap } from '@streetsidesoftware/auto-resolve-map';
 import type { CompoundWordsMethod, SuggestionResult } from 'cspell-trie-lib';
 import { parseDictionaryLines } from 'cspell-trie-lib';
 
-import { createAutoResolveWeakCache } from '../util/AutoResolve.js';
 import { createSpellingDictionary } from './createSpellingDictionary.js';
 import * as Defaults from './defaults.js';
 import type {
@@ -99,7 +99,7 @@ class IgnoreWordsDictionary implements SpellingDictionary {
     }
 }
 
-const createCache = createAutoResolveWeakCache<readonly string[], SpellingDictionary>();
+const createCache = new AutoResolveWeakMap<readonly string[], SpellingDictionary>();
 
 export interface CreateIgnoreWordsDictionaryOptions {
     supportNonStrictSearches?: boolean | undefined;
@@ -119,7 +119,7 @@ export function createIgnoreWordsDictionary(
     source: string,
     options?: CreateIgnoreWordsDictionaryOptions,
 ): SpellingDictionary {
-    return createCache.get(wordList, () => {
+    return createCache.getOrInsertComputed(wordList, () => {
         const testSpecialCharacters = /[*+]/;
         const parseOptions = { stripCaseAndAccents: options?.supportNonStrictSearches ?? true };
 

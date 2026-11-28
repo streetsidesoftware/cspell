@@ -1,5 +1,4 @@
 import { promises as fsp } from 'node:fs';
-import * as os from 'node:os';
 import * as path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
@@ -7,6 +6,7 @@ import { toFileDirURL, toFilePathOrHref } from '@cspell/url';
 import { GlobMatcher } from 'cspell-glob';
 import { afterAll, beforeAll, describe, expect, test } from 'vitest';
 
+import { createTempFolder } from '../../test-util/index.mjs';
 import { calcIgnorePathGlobs, isIgnoredByPresets } from './ignorePathPresets.js';
 
 const root = path.resolve('/repo');
@@ -164,7 +164,7 @@ describe('ignorePathPresets nestedWorktrees', () => {
     let repo = '';
 
     beforeAll(async () => {
-        tmp = await fsp.mkdtemp(path.join(os.tmpdir(), 'cspell-presets-worktrees-'));
+        tmp = await createTempFolder(import.meta.url);
         repo = path.join(tmp, 'repo');
         await fsp.mkdir(path.join(repo, '.git'), { recursive: true });
         for (const [i, folder] of allWorktrees.entries()) {

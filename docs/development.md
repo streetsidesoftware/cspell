@@ -5,10 +5,9 @@ generated files, see [Build and packaging](./build-and-packaging.md).
 
 ## Getting started
 
-Use the Node.js version in `engines` in `package.json` (`>=22.18.0`). The pnpm version is pinned by `packageManager`.
+We suggest the current Node.js LTS release. Install [pnpm](https://pnpm.io/installation).
 
 ```sh
-corepack enable
 pnpm ibt
 ```
 
@@ -40,6 +39,12 @@ Tests use vitest, next to the source. To run one package or one file, see
   whole. Put these tests in a `describe('Validate <library> assumptions', …)` block next to the code that depends on it,
   as [`globHelper.test.ts`](../packages/cspell-glob/src/globHelper.test.ts) does for micromatch and minimatch. If an
   upgrade or a replacement behaves differently, CI shows it instead of a release.
+- Tests write files only inside the repo, in their package's `temp/` folder, which git ignores. They never write to the
+  system's temp folder, such as `os.tmpdir()`, and they read files outside the repo only for a very good reason.
+  Reaching outside the repo ties the tests to the layout of the machine that runs them, such as a CI runner. In cspell
+  and cspell-lib, `createTempFolder(import.meta.url)` from the [cspell](../packages/cspell/src/test/test.helper.ts) and
+  [cspell-lib](../packages/cspell-lib/src/test-util/test.helper.mts) test helpers gives a test file an empty folder of
+  its own in `temp/`.
 
 ## Spelling
 

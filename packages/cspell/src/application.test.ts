@@ -1,3 +1,4 @@
+import { existsSync } from 'node:fs';
 import * as fs from 'node:fs/promises';
 import * as path from 'node:path';
 import { resolve as r } from 'node:path';
@@ -168,6 +169,36 @@ describe('Validate the Application', () => {
         expect(reporter.issues[0].text).toBe('baddword'); // cspell:disable-line
         expect(consoleSpy).toHaveBeenCalledWith(expect.stringMatching(/Elapsed Time:/));
         return;
+    });
+
+    test('a root that is not an existing folder is an error', testOptions, async () => {
+        const options: LinterCliOptions = { root: j(searchRoot, 'missing-folder') };
+        await expect(App.lint(['*.md'], options, new InMemoryReporter())).rejects.toThrow(
+            'The --root path must be an existing folder.',
+        );
+    });
+
+    test('a stop that is not an existing folder is an error', testOptions, async () => {
+        const options: LinterCliOptions = { root: searchRoot, stopConfigSearchAt: [j(searchRoot, 'missing-folder')] };
+        await expect(App.lint(['*.md'], options, new InMemoryReporter())).rejects.toThrow(
+            'Each --stop-config-search-at path must be an existing folder.',
+        );
+    });
+
+    test('the root and a stop match in another letter case', testOptions, async ({ skip }) => {
+        const root = j(searchRoot, 'NAMED-config');
+        skip(!existsSync(root), 'the file system matches letter case');
+        const options: LinterCliOptions = {
+            root,
+            config: j(searchRoot, 'named-config', 'cspell.ci.json'),
+            stopConfigSearchAt: [j(searchRoot, 'Named-Config')],
+            report: 'flagged',
+        };
+        const reporter = new InMemoryReporter();
+        const result = await App.lint(['src/a.md'], options, reporter);
+        expect(reporter.errors).toEqual([]);
+        expect(result).toEqual(oc({ files: 1 }));
+        expect(reporter.issues.map((issue) => issue.text).sort()).toEqual(['ciword', 'rootword']);
     });
 
     test('Tests running the application with no config search', testOptions, async () => {
@@ -419,6 +450,86 @@ describe('Linter File Caching', () => {
         }
     });
 
+    test('cached results follow the named config', async () => {
+        const cacheLocation = tempLocation('.cspellcache-named');
+        await fs.rm(cacheLocation, { recursive: true }).catch(() => undefined);
+        const root = path.join(searchRoot, 'named-config');
+        const ci: LinterCliOptions = { config: path.join(root, 'cspell.ci.json') };
+        const options: LinterCliOptions = { ...WithCache, cacheLocation, root, report: 'flagged' };
+
+        const runs: [LinterCliOptions, Partial<RunResult>, string][] = [
+            [{}, { cachedFiles: 0 }, 'rootword'],
+            [{}, { cachedFiles: 1 }, 'rootword'],
+            [ci, { cachedFiles: 0 }, 'ciword'],
+            [ci, { cachedFiles: 1 }, 'ciword'],
+            [{}, { cachedFiles: 0 }, 'rootword'],
+        ];
+
+        let r = 0;
+        for (const [runOptions, expected, word] of runs) {
+            ++r;
+            const reporter = new InMemoryReporter();
+            const result = await App.lint(['src/a.md'], { ...options, ...runOptions }, reporter);
+            expect(reporter.errors).toEqual([]);
+            expect(result, `run #${r} ${JSON.stringify(runOptions)}`).toEqual(oc({ files: 1, issues: 1, ...expected }));
+            expect(reporter.issues.map((issue) => issue.text)).toEqual([word]);
+        }
+    });
+
+    test('cached results follow whether the run searches for config files', async () => {
+        const cacheLocation = tempLocation('.cspellcache-no-search');
+        await fs.rm(cacheLocation, { recursive: true }).catch(() => undefined);
+        const root = path.join(searchRoot, 'named-config');
+        const noSearch: LinterCliOptions = { configSearch: false };
+        const search: LinterCliOptions = { configSearch: true };
+        const options: LinterCliOptions = { ...WithCache, cacheLocation, root, report: 'flagged' };
+
+        const runs: [LinterCliOptions, Partial<RunResult>, string[]][] = [
+            [{}, { cachedFiles: 0 }, ['rootword', 'nestedword']],
+            [{}, { cachedFiles: 1 }, ['rootword', 'nestedword']],
+            [noSearch, { cachedFiles: 0 }, ['rootword']],
+            [noSearch, { cachedFiles: 1 }, ['rootword']],
+            [{}, { cachedFiles: 0 }, ['rootword', 'nestedword']],
+            [search, { cachedFiles: 1 }, ['rootword', 'nestedword']],
+        ];
+
+        let r = 0;
+        for (const [runOptions, expected, words] of runs) {
+            ++r;
+            const reporter = new InMemoryReporter();
+            const result = await App.lint(['packages/nested/c.md'], { ...options, ...runOptions }, reporter);
+            expect(reporter.errors).toEqual([]);
+            expect(result, `run #${r} ${JSON.stringify(runOptions)}`).toEqual(
+                oc({ files: 1, issues: words.length, ...expected }),
+            );
+            expect(reporter.issues.map((issue) => issue.text)).toEqual(words);
+        }
+    });
+
+    test('cached results follow the stop folders', async () => {
+        const reporter = new InMemoryReporter();
+        const cacheLocation = tempLocation('.cspellcache-stops');
+        await fs.rm(cacheLocation, { recursive: true }).catch(() => undefined);
+        const root = path.join(searchRoot, 'stop-above', 'project');
+        const stop: LinterCliOptions = { stopConfigSearchAt: [root] };
+
+        const runs: [LinterCliOptions, Partial<RunResult>][] = [
+            [{}, { cachedFiles: 0, issues: 0 }],
+            [{}, { cachedFiles: 1, issues: 0 }],
+            [stop, { cachedFiles: 0, issues: 1 }],
+            [stop, { cachedFiles: 1, issues: 1 }],
+            [{}, { cachedFiles: 0, issues: 0 }],
+        ];
+
+        let r = 0;
+        for (const [options, expected] of runs) {
+            ++r;
+            const result = await App.lint(['notes.md'], { ...WithCache, ...options, cacheLocation, root }, reporter);
+            expect(reporter.errors).toEqual([]);
+            expect(result, `run #${r} ${JSON.stringify(options)}`).toEqual(oc({ files: 1, ...expected }));
+        }
+    });
+
     test('cached issues are reported at the folder the cache was moved to', async () => {
         const dirA = tempLocation('a');
         const dirB = tempLocation('b');
@@ -523,3 +634,5 @@ function sampleTests(): SampleTest[] {
     ];
     // cspell:enable
 }
+
+// cspell:ignore rootword ciword nestedword

@@ -8,7 +8,7 @@ import { pathPackageRoot } from '../test/test.helper.js';
 import { readConfig } from '../util/configFileHelper.js';
 import { InMemoryReporter } from '../util/InMemoryReporter.js';
 import { runLint } from './lint.js';
-import { LintRequest } from './LintRequest.js';
+import { createLintRequest } from './LintRequest.js';
 
 const root = pathPackageRoot;
 const samples = path.resolve(root, 'samples');
@@ -37,9 +37,9 @@ describe('Linter Validation Tests', () => {
     test('globs on the command line override globs in the config.', async () => {
         const options = { root: latexSamples };
         const reporter = new InMemoryReporter();
-        const rWithoutFiles = await runLint(new LintRequest([], options, reporter));
+        const rWithoutFiles = await runLint(await createLintRequest([], options, reporter));
         expect(rWithoutFiles.files).toBe(4);
-        const rWithFiles = await runLint(new LintRequest(['**/ebook.tex'], options, reporter));
+        const rWithFiles = await runLint(await createLintRequest(['**/ebook.tex'], options, reporter));
         expect(rWithFiles.files).toBe(1);
     });
 
@@ -50,7 +50,7 @@ describe('Linter Validation Tests', () => {
 
         process.env[environmentKeys.CSPELL_CONFIG_PATH] = customConfig;
 
-        const result = await runLint(new LintRequest(['**/*.txt'], options, reporter));
+        const result = await runLint(await createLintRequest(['**/*.txt'], options, reporter));
         expect(result.errors).toBe(0);
         expect(result.files).toBe(1);
         expect(result.issues).toBe(6);
@@ -73,7 +73,7 @@ describe('Linter Validation Tests', () => {
         const options = { root: environmentSamples };
         const reporter = new InMemoryReporter();
 
-        const result = await runLint(new LintRequest(['**/*.txt'], options, reporter));
+        const result = await runLint(await createLintRequest(['**/*.txt'], options, reporter));
         expect(result.files).toBe(0);
         expect(result.errors).toBe(1);
         expect(result.issues).toBe(0);
@@ -124,7 +124,7 @@ describe('Linter Validation Tests', () => {
         ${['**/*.txt']}     | ${{ root: forceCheck, fileLists: [j(forceCheck, 'file-list.txt')], forceCheck: true }}                 | ${oc({ errors: 0, files: 2, skippedFiles: 1 })} | ${oc({ errorCount: 0, errors: [], issues: [oc({ text: 'mispeled' })] })}
     `('runLint $files $options', async ({ files, options, expectedRunResult, expectedReport }) => {
         const reporter = new InMemoryReporter();
-        const runResult = await runLint(new LintRequest(files, options, reporter));
+        const runResult = await runLint(await createLintRequest(files, options, reporter));
         expect(report(reporter)).toEqual(expectedReport);
         expect(runResult).toEqual(expectedRunResult);
         expect(runResult).toEqual(reporter.runResult);
@@ -143,7 +143,7 @@ describe('Linter Validation Tests', () => {
         ${['code.ts']}   | ${{ root: pUnknownWords }}                    | ${oc({ errors: 0, files: 1, issues: 1 })} | ${oc({ issues: [oc({ text: 'Orangges' })] })}
     `('runLint $files $options', async ({ files, options, expectedRunResult, expectedReport }) => {
         const reporter = new InMemoryReporter();
-        const runResult = await runLint(new LintRequest(files, options, reporter));
+        const runResult = await runLint(await createLintRequest(files, options, reporter));
         expect(report(reporter)).toEqual(expectedReport);
         expect(runResult).toEqual(expectedRunResult);
         expect(runResult).toEqual(reporter.runResult);
@@ -158,7 +158,7 @@ describe('Linter Validation Tests', () => {
         process.env[environmentKeys.CSPELL_ENABLE_DICTIONARY_LOG_FILE] = 'stdout';
         process.env[environmentKeys.CSPELL_ENABLE_DICTIONARY_LOG_FIELDS] = 'word, value';
         const stdout = vi.spyOn(process.stdout, 'write').mockImplementation(mockWrite);
-        const runResult = await runLint(new LintRequest(files, { ...options }, reporter));
+        const runResult = await runLint(await createLintRequest(files, { ...options }, reporter));
         expect(runResult).toEqual(reporter.runResult);
         expect(stdout).toHaveBeenCalledOnce();
         await expect(stdout.mock.calls.map(([data]) => data).join('')).toMatchFileSnapshot(

@@ -3,12 +3,11 @@
 Instructions for coding agents working in the CSpell monorepo. `CLAUDE.md` imports this file, and
 `.github/copilot-instructions.md` points to it.
 
-If a command here disagrees with `package.json`, `package.json` wins. Say so rather than working around it.
+If a command here disagrees with `package.json`, use the one in `package.json`. Say so rather than working around it.
 
 ## Commands
 
 ```sh
-corepack enable                            # once; pnpm is pinned by packageManager
 pnpm ibt                                   # install, build, test
 pnpm run build                             # always before pnpm test: the tests need a built tree
 pnpm test
@@ -20,7 +19,7 @@ pnpm run test:update-snapshots             # after a build
 pnpm run lint                              # writes fixes: eslint --fix, prettier -w
 ```
 
-Node.js `>=22.18.0` (`engines` in `package.json`).
+Node.js: the current LTS release is suggested.
 
 ## Before you call it done
 
@@ -62,7 +61,8 @@ Read the doc before changing that area. These are written for people.
 - [`docs/glossary.md`](docs/glossary.md): config resolution, dictionaries, and other terms.
 - [`docs/code-style.md`](docs/code-style.md): formatting, invisible characters.
 - [`docs/writing-comments.md`](docs/writing-comments.md): comments and doc comments, public and internal.
-- [`docs/writing-for-users.md`](docs/writing-for-users.md): READMEs, the website, doc comments, and published PRs.
+- [`docs/writing-for-users.md`](docs/writing-for-users.md): READMEs, the website, doc comments, published PRs, and
+  word choice for all text.
 
 ## Rules
 
@@ -71,8 +71,9 @@ Each rule is written for people in the linked section. Read it before working in
 - **If you change X, also do Y:** see [the table](docs/build-and-packaging.md#if-you-change-x-also-do-y).
 - **Compiler settings:** `node16` resolution needs `.js` on relative imports, and exports need explicit types. See
   [Compiler settings](docs/build-and-packaging.md#compiler-settings-that-catch-people-out).
-- **Tests** use vitest, next to the source. Paths use `node:path`: CI runs on Windows. When code relies on a
-  library's behavior, add a `Validate <library> assumptions` test for it. See [Tests](docs/development.md#tests).
+- **Tests** use vitest, next to the source. Paths use `node:path`: CI runs on Windows. Tests write files only in
+  their package's `temp/` folder, never outside the repo, not even in `os.tmpdir()`. When code relies on a library's
+  behavior, add a `Validate <library> assumptions` test for it. See [Tests](docs/development.md#tests).
 - **Comments:** few, short, and accurate. Leave existing comments alone unless you are changing that function. Read
   [Writing comments](docs/writing-comments.md) before writing or changing one.
 - **Doc comments** on the public API of every package, and on config options, are user documentation. Internal
@@ -81,6 +82,9 @@ Each rule is written for people in the linked section. Read it before working in
   [Invisible characters](docs/code-style.md#invisible-characters).
 - **Writing for users:** READMEs, the website, doc comments, and published PRs. See
   [Writing for users](docs/writing-for-users.md).
+- **Word choice:** for settings and features, "enable" and "disable", not "on" and "off". For precedence, say what
+  happens, such as "overrides" or "replaces", not "wins". This applies to comments and `docs/` too. See
+  [Word choice](docs/writing-for-users.md#word-choice).
 - **Workflows:** give a new or changed workflow `workflow_dispatch` when possible. Add `workflow_call` only to a new
   workflow without a `concurrency` section. See
   [CI](docs/build-and-packaging.md#ci).

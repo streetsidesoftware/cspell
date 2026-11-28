@@ -154,6 +154,68 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 </details>
 
+## v10.6.0 (2026-11-28)
+
+### Features
+
+- feat: Make `--config` replace the configuration files where cspell runs (<a href="https://github.com/streetsidesoftware/cspell/pull/9640">#9640</a>)
+
+---
+
+</details>
+
+### Fixes
+
+- fix: Name the YAML single-quote substitution so it can be disabled (<a href="https://github.com/streetsidesoftware/cspell/pull/9733">#9733</a>)
+- fix: Combine substitutions and soft word breaks from all configs (<a href="https://github.com/streetsidesoftware/cspell/pull/9732">#9732</a>)
+
+- fix: Treat `''` in YAML as an escaped single quote (<a href="https://github.com/streetsidesoftware/cspell/pull/9731">#9731</a>)
+
+---
+
+</details>
+
+- fix: Build `@cspell/strong-weak-map` on `@streetsidesoftware/auto-resolve-map` (<a href="https://github.com/streetsidesoftware/cspell/pull/9726">#9726</a>)
+- fix: Make the list of dictionaries in a collection read-only (<a href="https://github.com/streetsidesoftware/cspell/pull/9721">#9721</a>)
+
+- fix: Reuse in-memory config files given as a `URL` (<a href="https://github.com/streetsidesoftware/cspell/pull/9719">#9719</a>)
+- fix: Clear the stops `searchForConfig` remembers when the caches are cleared (<a href="https://github.com/streetsidesoftware/cspell/pull/9709">#9709</a>)
+
+- fix: Check files faster by sharing word lookups between files (<a href="https://github.com/streetsidesoftware/cspell/pull/9699">#9699</a>)
+
+---
+
+</details>
+
+- fix: Reuse dictionary definitions between files (<a href="https://github.com/streetsidesoftware/cspell/pull/9696">#9696</a>)
+
+---
+
+</details>
+
+- fix: Don't reuse cached results between runs with and without "--no-config-search" (<a href="https://github.com/streetsidesoftware/cspell/pull/9683">#9683</a>)
+- fix: Show what relative paths are relative to in "cspell lint --help --verbose" (<a href="https://github.com/streetsidesoftware/cspell/pull/9682">#9682</a>)
+
+### Dictionary Updates
+
+- fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/9704">#9704</a>)
+
+## v10.5.2 (2026-11-18)
+
+### Fixes
+
+- fix: `--gitignore` skips nested repositories in ignored folders again (<a href="https://github.com/streetsidesoftware/cspell/pull/9648">#9648</a>)
+
+---
+
+</details>
+
+- fix: Detect file types by folder, such as `.git/config` (<a href="https://github.com/streetsidesoftware/cspell/pull/9641">#9641</a>)
+
+---
+
+</details>
+
 ## v10.5.1 (2026-11-14)
 
 ### Fixes

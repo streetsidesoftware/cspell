@@ -1,7 +1,7 @@
+import { AutoResolveWeakMap } from '@streetsidesoftware/auto-resolve-map';
 import type { CompoundWordsMethod, ITrie, SuggestionResult } from 'cspell-trie-lib';
 import { decodeTrie, parseDictionary, parseDictionaryLines } from 'cspell-trie-lib';
 
-import { createAutoResolveWeakCache } from '../util/AutoResolve.js';
 import * as Defaults from './defaults.js';
 import type {
     FindResult,
@@ -140,7 +140,7 @@ export class FlagWordsDictionary implements SpellingDictionary {
     }
 }
 
-const createCache = createAutoResolveWeakCache<readonly string[], SpellingDictionary>();
+const createCache = new AutoResolveWeakMap<readonly string[], SpellingDictionary>();
 
 /**
  * Create a dictionary where all words are to be forbidden.
@@ -155,7 +155,7 @@ export function createFlagWordsDictionary(
     name: string,
     source: string,
 ): SpellingDictionary {
-    return createCache.get(wordList, () => {
+    return createCache.getOrInsertComputed(wordList, () => {
         const testSpecialCharacters = /[~*+]/;
 
         const { t: specialWords, f: typoWords } = bisect(

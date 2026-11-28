@@ -9,10 +9,10 @@ import type {
     DictionaryInformation,
     ReplaceMap,
 } from '@cspell/cspell-types';
+import { WeakWeakMap } from '@streetsidesoftware/auto-resolve-map';
 import type { WeightMap } from 'cspell-trie-lib';
 import { mapDictionaryInformationToWeightMap } from 'cspell-trie-lib';
 
-import { createAutoResolveWeakWeakCache } from '../../util/AutoResolve.js';
 import { resolveRelativeTo } from '../../util/resolveFile.js';
 import type { RequireOptional, UnionFields } from '../../util/types.js';
 import { toFilePathOrHref } from '../../util/url.js';
@@ -50,9 +50,8 @@ export function filterDictDefsToLoad(
 }
 
 function fixPath(def: DictionaryDefinitionInternal): DictionaryDefinitionInternal {
-    if (def instanceof _DictionaryDefinitionInternalWithSource) {
-        return def;
-    }
+    // Only `file` needs fixing. Dictionaries are cached by definition, so avoid making a copy.
+    if (!def.file) return def;
     const newPath = fixDicPath(def.path, def.file);
     const newBTriePath = def.btrie ? fixDicPath(def.btrie, def.file) : undefined;
     return {
@@ -84,13 +83,13 @@ export function mapDictDefsToInternal(
     return defs?.map((def) => mapDictDefToInternal(def, pathToSettingsFile));
 }
 
-const internalDefs = createAutoResolveWeakWeakCache<DictionaryDefinition, DictionaryDefinitionInternalWithSource>();
+const internalDefs = new WeakWeakMap<DictionaryDefinition, DictionaryDefinitionInternalWithSource>();
 
 export function mapDictDefToInternal(
     def: DictionaryDefinition,
     pathToSettingsFile: URL,
 ): DictionaryDefinitionInternalWithSource {
-    return internalDefs.get(def, (def) => _mapDictDefToInternal(def, pathToSettingsFile));
+    return internalDefs.getOrInsertComputed(def, (def) => _mapDictDefToInternal(def, pathToSettingsFile));
 }
 
 function _mapDictDefToInternal(
@@ -112,14 +111,26 @@ function determineName(filename: string, options: DictionaryDefinition): string 
     return options.name || path.basename(filename);
 }
 
+const noSuggestDefs = new WeakMap<DictionaryDefinitionInternal, DictionaryDefinitionInternal>();
+
+/**
+ * Set `noSuggest` on a copy of the definition. The copy is reused until `noSuggest` changes.
+ */
+function withNoSuggest(def: DictionaryDefinitionInternal, noSuggest: boolean): DictionaryDefinitionInternal {
+    const found = noSuggestDefs.get(def);
+    if (found?.noSuggest === noSuggest) return found;
+    const copy = { ...def, noSuggest };
+    noSuggestDefs.set(def, copy);
+    return copy;
+}
+
 export function calcDictionaryDefsToLoad(settings: CSpellSettingsInternal): DictionaryDefinitionInternal[] {
     const { dictionaries = [], dictionaryDefinitions = [], noSuggestDictionaries = [] } = settings;
     const colNoSug = createDictionaryReferenceCollection(noSuggestDictionaries);
     const colDicts = createDictionaryReferenceCollection([...dictionaries, ...colNoSug.enabled()]);
     const modDefs = dictionaryDefinitions.map((def) => {
         const enabled = colNoSug.isEnabled(def.name);
-        if (enabled === undefined) return def;
-        return { ...def, noSuggest: enabled };
+        return enabled === undefined ? def : withNoSuggest(def, enabled);
     });
     return filterDictDefsToLoad(colDicts, modDefs);
 }

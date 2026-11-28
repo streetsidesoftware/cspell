@@ -77,7 +77,7 @@ export const definitions: FileTypeDefinitions = [
     { id: 'haxe', extensions: ['.hx'] },
     { id: 'hlsl', extensions: ['.cginc', '.compute', '.fx', '.fxh', '.hlsl', '.hlsli', '.psh', '.vsh'] },
     { id: 'html', extensions: ['.asp', '.aspx', '.ejs', '.htm', '.html', '.jshtm', '.jsp', '.mdoc', '.rhtml', '.shtml', '.volt', '.vue', '.xht', '.xhtml'] },
-    { id: 'ignore', extensions: ['.git-blame-ignore-revs', '.gitignore', '.gitignore_global', '.npmignore'], filenames: ['.*ignore'] },
+    { id: 'ignore', extensions: ['.git-blame-ignore-revs', '.gitignore', '.gitignore_global', '.npmignore'], filenames: ['.*ignore', '.git/info/exclude'] },
     { id: 'ini', extensions: ['.conf', '.ini'] },
     { id: 'jade', extensions: ['.jade', '.pug'] },
     { id: 'java', extensions: ['.jav', '.java'] },
@@ -202,7 +202,7 @@ export const definitions: FileTypeDefinitions = [
     {
         id: 'properties',
         extensions: ['.cfg', '.conf', '.directory', '.editorconfig', '.gitattributes', '.gitconfig', '.gitmodules', '.npmrc', '.properties', '.repo'],
-        filenames: ['.env', '.env.*', 'gitconfig'],
+        filenames: ['.env', '.env.*', '.git/config', 'gitconfig'],
     },
     { id: 'protobuf', extensions: ['.proto', '.txtpb', '.textproto', '.textpb', '.pbtxt'] },
     { id: 'puppet', extensions: ['.puppet'] },

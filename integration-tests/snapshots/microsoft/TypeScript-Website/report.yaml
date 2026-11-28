@@ -1,11 +1,11 @@
 ---
 Repository: microsoft/TypeScript-Website
 Url: https://github.com/microsoft/TypeScript-Website.git
-Args: '["--config=${repoConfig}/cspell.json","**/*.*"]'
+Args: '["--config=${repoConfig}/cspell.json","--stop-config-search-at=${commonRoot}","**/*.*"]'
 Summary:
-  files: 809
-  filesWithIssues: 184
-  issues: 897
+  files: 814
+  filesWithIssues: 188
+  issues: 916
   errors: 0
 Errors: []
 
@@ -409,10 +409,10 @@ issues:
   - "packages/playground-handbook/README.md:1:1\tNo issues found"
   - "packages/playground-handbook/scripts/generateJSON.mjs:1:1\tNo issues found"
   - "packages/playground-v2/README.md:1:1\tNo issues found"
-  - "packages/playground-v2/scripts/build.mjs:19:65          serviceworker       U       import.meta.resolve(\"coi-serviceworker/coi-serviceworker.min"
-  - "packages/playground-v2/scripts/build.mjs:41:6           strada              U       \"strada.worker\": resolve(packageDirec"
-  - "packages/playground-v2/scripts/build.mjs:63:5           servedir            U       servedir: outputDirectory,"
-  - "packages/playground-v2/scripts/build.mjs:69:52          wasip               U       typescript\\/)?typescript(?:-wasip1-wasm)?\\//.test(path"
+  - "packages/playground-v2/scripts/build.mjs:20:65          serviceworker       U       import.meta.resolve(\"coi-serviceworker/coi-serviceworker.min"
+  - "packages/playground-v2/scripts/build.mjs:62:6           strada              U       \"strada.worker\": resolve(packageDirec"
+  - "packages/playground-v2/scripts/build.mjs:85:5           servedir            U       servedir: outputDirectory,"
+  - "packages/playground-v2/scripts/build.mjs:91:52          wasip               U       typescript\\/)?typescript(?:-wasip1-wasm)?\\//.test(path"
   - "packages/playground-v2/scripts/routes.mjs:1:1\tNo issues found"
   - "packages/playground-v2/scripts/smoke-test.mjs:1:1\tNo issues found"
   - "packages/playground-v2/scripts/test-ata.mjs:1:1\tNo issues found"
@@ -455,14 +455,14 @@ issues:
   - "packages/playground-v2/src/lsp-filesystem.ts:258:5          oflags          U       oflags: number,"
   - "packages/playground-v2/src/lsp-filesystem.ts:261:5          fdflags         U       fdflags: number"
   - "packages/playground-v2/src/lsp-filesystem.ts:265:68         CREAT           U       oflags & wasi.OFLAGS_CREAT) !== 0) {"
-  - "packages/playground-v2/src/main.ts:37:10        Strada              U       import { StradaBackend } from \"./strada"
-  - "packages/playground-v2/src/main.ts:181:11       Resizer             U       const fileResizer = getElement(\"file-resizer"
-  - "packages/playground-v2/src/main.ts:181:38       resizer             U       ileResizer = getElement(\"file-resizer\")"
+  - "packages/playground-v2/src/main.ts:36:10        Strada              U       import { StradaBackend } from \"./strada"
+  - "packages/playground-v2/src/main.ts:180:11       Resizer             U       const fileResizer = getElement(\"file-resizer"
+  - "packages/playground-v2/src/main.ts:180:38       resizer             U       ileResizer = getElement(\"file-resizer\")"
   - "packages/playground-v2/src/main.ts:314:52       dcdcaa              U       foreground: darkMode ? \"dcdcaa\" : \"795e26\" },"
   - "packages/playground-v2/src/main.ts:316:54       cdcfe               U       foreground: darkMode ? \"9cdcfe\" : \"001080\" },"
-  - "packages/playground-v2/src/main.ts:702:32       valuenow            U       element.setAttribute(\"aria-valuenow\", String(width))"
-  - "packages/playground-v2/src/main.ts:703:32       valuetext           U       element.setAttribute(\"aria-valuetext\", `${width} pixels`"
-  - "packages/playground-v2/src/main.ts:1181:32      menuitemradio       U       setAttribute(\"role\", \"menuitemradio\")"
+  - "packages/playground-v2/src/main.ts:729:32       valuenow            U       element.setAttribute(\"aria-valuenow\", String(width))"
+  - "packages/playground-v2/src/main.ts:730:32       valuetext           U       element.setAttribute(\"aria-valuetext\", `${width} pixels`"
+  - "packages/playground-v2/src/main.ts:1206:32      menuitemradio       U       setAttribute(\"role\", \"menuitemradio\")"
   - "packages/playground-v2/src/native-compiler.test.ts:200:75       unmirrored      U       except for incorrect or unmirrored builds\", () => {"
   - "packages/playground-v2/src/native-compiler.ts:1:1\tNo issues found"
   - "packages/playground-v2/src/native.ts:1:1\tNo issues found"
@@ -822,7 +822,6 @@ issues:
   - "packages/typescriptlang-org/scripts/ensureDepsAreBuilt.js:1:1\tNo issues found"
   - "packages/typescriptlang-org/scripts/getTypeScriptNPMVersions.js:121:6       Incase      U       // Incase the MD hasn't been ported"
   - "packages/typescriptlang-org/scripts/updateIndexTwoslashExamples.js:1:1\tNo issues found"
-  - "packages/typescriptlang-org/src/__generated__/gatsby-types.ts:1:1\tNo issues found"
   - "packages/typescriptlang-org/src/assets/typescript-handbook.epub/index.html:1:1\tNo issues found"
   - "packages/typescriptlang-org/src/assets/typescript-handbook.pdf/index.html:1:1\tNo issues found"
   - "packages/typescriptlang-org/src/components/devNav.tsx:1:1\tNo issues found"
@@ -1044,10 +1043,24 @@ issues:
   - "patches/coi-serviceworker@0.1.7.patch:19:771        Embedder        U       r.set(\"Cross-Origin-Embedder-Policy\",coepCredentialless"
   - "patches/coi-serviceworker@0.1.7.patch:19:1744       updatefound     U       s.addEventListener(\"updatefound\",(()=>{!e.quiet&&console"
   - "patches/coi-serviceworker@0.1.7.patch:1:1\tNo issues found"
+  - "patches/dts-cli@2.0.5.patch:6:8         figlet      U       const figlet_1 = tslib_1.__importDefault"
+  - "patches/dts-cli@2.0.5.patch:12:8        execa       U       const execa_1 = tslib_1.__importDefault"
+  - "patches/dts-cli@2.0.5.patch:19:8        jpjs        U       const jpjs_1 = require(\"jpjs\")"
+  - "patches/dts-cli@2.0.5.patch:1:1\tNo issues found"
+  - "patches/gatsby-core-utils@4.16.0.patch:13:7         fastq       U       var _fastq = _interopRequireDefault"
+  - "patches/gatsby-core-utils@4.16.0.patch:1:1\tNo issues found"
+  - "patches/gatsby-parcel-config@1.16.0.patch:1:1\tNo issues found"
   - "patches/gatsby-remark-shiki-twoslash@3.0.38.patch:17:49         focusable       U       twoslash code blocks focusable; not needed in modern"
   - "patches/gatsby-remark-shiki-twoslash@3.0.38.patch:1:1\tNo issues found"
-  - "patches/monaco-editor-core@0.56.0.patch:51:61       Contextmenu     U       newGestureEvent(EventType.Contextmenu, data.initialTarget"
-  - "patches/monaco-editor-core@0.56.0.patch:1:1\tNo issues found"
+  - "patches/gatsby@5.16.1.patch:7:68        pmmmwh          U       teropRequireDefault(require(\"@pmmmwh/react-refresh-webpack"
+  - "patches/gatsby@5.16.1.patch:8:7         browserslist    U       var _browserslist = require(\"./browserslist"
+  - "patches/gatsby@5.16.1.patch:1:1\tNo issues found"
+  - "patches/monaco-editor@0.56.0.patch:8:24         dompurify       U       import purify from './dompurify/dompurify.js';"
+  - "patches/monaco-editor@0.56.0.patch:67:61        Contextmenu     U       newGestureEvent(EventType.Contextmenu, data.initialTarget"
+  - "patches/monaco-editor@0.56.0.patch:1:1\tNo issues found"
+  - "patches/node-stdlib-browser@1.3.1.patch:11:8        dgram       U       const dgram = resolvePath('./mock"
+  - "patches/node-stdlib-browser@1.3.1.patch:1:1\tNo issues found"
+  - "patches/query-string@6.14.1.patch:1:1\tNo issues found"
   - "pnpm-workspace.yaml:1:1\tNo issues found"
   - "README.md:1:1\tNo issues found"
   - "SECURITY.md:13:72       MSRC    U       Security Response Center (MSRC) at [https://msrc.microsoft"

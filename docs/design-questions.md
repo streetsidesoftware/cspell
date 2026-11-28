@@ -1,52 +1,79 @@
 # Design questions
 
-The questions a design interview covers, and where cspell's hard-to-undo decisions hide. Go through the groups that
-apply, one question at a time. Spend time on a question when its answer could change the sketch or would be hard to
-undo once it ships; settle the rest with a proposed default. When checking a small change, note every side effect you
-find.
+The questions a [design](./feature-design.md) covers, and where cspell's hard-to-undo decisions hide. There are three
+kinds:
 
-## Stakeholders
+- **[Overview questions](#overview-questions)** shape the approach. Work through them while exploring approaches and
+  deciding the overview.
+- **[Detail questions](#detail-questions)** shape each part. Work through them part by part, once the overview is
+  agreed.
+- **[Whole-feature questions](#whole-feature-questions)** cover the feature as one change. Work through them once,
+  after the last part, or before you stop designing to build.
 
-In this repo, a feature usually affects some of:
+All the overview groups apply to every feature. Most features touch two or three groups of detail questions. Spend time
+on a question when its answer could change the overview or would be hard to undo once it ships. Settle the rest with a
+proposed default, such as "the other options do Y", and write it in the working notes. Answers about the code, such as
+which tests cover a part, go there too. When checking a small change, note every side effect you find.
 
-- people running the cspell command-line tool, locally and in CI;
-- people writing cspell config, including shared configs other projects `import`;
-- projects that use `cspell-lib` and the other published packages;
-- the other front ends that read the same config: the ESLint plugin, the VS Code extension, cspell-action;
-- dictionary authors in cspell-dicts;
-- maintainers of this repo.
+## Overview questions
 
-## cspell's fixed rules
+### Why and who
 
-What cspell already fixes, and the sketch has to fit. Many questions are settled by pointing back at these. Check each
-one in the code rather than assuming it, and note the ones that matter in the Design section, next to the choice they
-shape.
+Always first.
+
+- Why are we doing this? What problem prompted it? Is there an issue?
+- Why now: a bug report, a feature request, a limit hit while building something else?
+- If the first answer is a solution ("we need an option"), ask why until the reason is clear. For a security feature,
+  stop at what users gain, as [Keep security details out](./feature-design.md#keep-security-details-out) says.
+- Who is affected, and how? Usually some of:
+  - people running the cspell command-line tool, locally and in CI;
+  - people writing cspell config, including shared configs other projects `import`;
+  - projects that use `cspell-lib` and the other published packages;
+  - the other front ends that read the same config: the ESLint plugin, the VS Code extension, cspell-action;
+  - dictionary authors in cspell-dicts;
+  - maintainers of this repo.
+- What does success look like, as something a user can do or a config they can write, that they can't today?
+- What's out of scope?
+
+### cspell's fixed rules
+
+What cspell already fixes. Every approach has to fit them, and many questions are settled by pointing back at them. At
+the overview level, check the ones that could rule out an approach, rather than assuming them. The rest come up with
+their part. Note the ones that matter next to the decision they shape, in terms a user knows rather than code names.
 
 - **Config resolution:** config files, `import`, then matching `overrides`, then matching `languageSettings`, then
   in-document directives (see "Config resolution" in the [glossary](./glossary.md)).
-- **Merging:** single values are last-wins; lists and objects combine only if `_merge` in
+- **Merging:** a later single value overrides an earlier one; lists and objects combine only if `_merge` in
   `packages/cspell-lib/src/lib/Settings/CSpellSettingsServer.ts` says so.
-- **CLI versus config:** a CLI flag wins over the config file (`cfg.options.x ?? configInfo.config.x`).
+- **CLI versus config:** a CLI flag overrides the config file (`cfg.options.x ?? configInfo.config.x`).
 - **Where an option can be set:** decided by the interface in `CSpellSettingsDef.ts` (see
   [Config options and CLI flags](./config-and-cli.md)).
 - **Trust:** JavaScript config files and plugins aren't loaded in untrusted locations (`WorkspaceTrustSettings`).
 
-## Principles
+### Principles
 
-Read the [design principles](./design-principles.md) and check the sketch against it:
+Check each approach against the [design principles](./design-principles.md):
 
-- **Keep false positives low.** Does any option flag more words by default?
-- **Existing configs keep working.** Does any option change a default or the meaning of an existing value?
+- **Keep false positives low.** Does it flag more words by default?
+- **Existing configs keep working.** Does it change a default or the meaning of an existing value?
 - **Same config, same result.** Would the CLI and the library, the ESLint plugin, or the extension disagree?
-- **A command changes only what the user named.** Does any option write somewhere the user didn't ask for?
-- **Cost scales with the files checked.** Does any option add per-file or per-word work?
+- **A command changes only what the user named.** Does it write somewhere the user didn't ask for?
+- **Cost scales with the files checked.** Does it add per-file or per-word work?
 
-If the feature needs a new principle, agree on it before the decisions that depend on it. Note it under Open questions,
-so it can be added to the design principles before merge if it holds beyond this feature.
+If the feature needs a new principle, agree on it before the decisions that depend on it.
 
-## Where hard-to-undo decisions hide
+### The approach
 
-These become public as soon as the feature ships. Look here for inflection points.
+- **What users see.** What does a user write, in the config or on the command line, and what does cspell do in return?
+  Is it a config option, a CLI command or flag, a change to what gets flagged, or a change to a published API?
+- **Where it belongs.** Which packages does it touch? Does it belong in cspell, in cspell-dicts, or in one of the
+  front ends?
+- **What it writes.** Does it write anything, such as a config file or a dictionary? Who chooses where?
+- **Existing users.** Does it change a default, what gets flagged, or the meaning of an existing option or flag?
+- **Hard to undo.** Which choices become public as soon as it ships: an option's name or shape, a flag, what gets
+  flagged, a published API? Name them here. The exact names and shapes are settled with their part.
+
+## Detail questions
 
 ### Config options
 
@@ -69,8 +96,8 @@ For a new or changed option (see [Config options and CLI flags](./config-and-cli
 
 - **Name and short form.** Does the flag fit the existing groups (config resolution, file selection, reporting)? Does
   a short form conflict with an existing one?
-- **Matching config option.** Does the flag need one, so CI and editors can set the same thing? Which wins when both
-  are set?
+- **Matching config option.** Does the flag need one, so CI and editors can set the same thing? Which one overrides the
+  other when both are set?
 - **Negation.** Is a `--no-` form needed?
 - **Output.** What do `--help` and the reporter output say? Is the output machine-read, for example with `--reporter`
   or JSON?
@@ -94,15 +121,22 @@ For a change to a published package's API, such as `cspell-lib` or `cspell-types
 - Is it additive, or does it change an existing signature or behavior?
 - What does its doc comment say on hover?
 
-## Performance and platforms
+### Performance and platforms
 
 - Could it run per file, per word, or per line on a large repo? Is the cost bounded, cached, or opt-in?
 - Paths: does it work with Windows paths, and with case-insensitive file systems?
 - Does it work with the cache (`--cache`)?
 
-## Testing and release surface
+### Testing
 
-- Which tests cover it, and in which package? Does it need a fixture, an `app.test.ts` case, or a sample in
-  `test-packages/`?
-- Is it `feat:` or `fix:`, and is it breaking? What does the release note say, for someone using cspell?
+- Which tests cover it, and in which package?
+- Does it need a fixture, an `app.test.ts` case, or a sample in `test-packages/`?
+
+## Whole-feature questions
+
+### Release surface
+
+- Is it `feat:` or `fix:`, and is it breaking? What does the release note say, for someone using cspell? See
+  [Pull requests](./pull-requests.md).
 - Which docs change: the website, a package README, the generated Properties page?
+- Is any name still provisional? Each needs a decision, or an issue saying when it must be decided.

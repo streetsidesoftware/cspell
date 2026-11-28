@@ -1,9 +1,9 @@
 
 Repository: microsoft/TypeScript-Website
 Url: "https://github.com/microsoft/TypeScript-Website.git"
-Args: ["--config=../../../../config/repositories/microsoft/TypeScript-Website/cspell.json","**/*.*"]
+Args: ["--config=../../../../config/repositories/microsoft/TypeScript-Website/cspell.json","--stop-config-search-at=../../../../repositories","**/*.*"]
 Lines:
- CSpell: Files checked: 803, skipped: 6, Issues found: 897 in 184 files.
+ CSpell: Files checked: 808, skipped: 6, Issues found: 916 in 188 files.
  exit code: 1
 SECURITY.md:13:72     - Unknown word (MSRC)       -- Security Response Center (MSRC) at [https://msrc.microsoft
 SECURITY.md:17:205    - Unknown word (msrc)       -- found at [microsoft.com/msrc](https://aka.ms/opensource
@@ -193,10 +193,10 @@ packages/playground-examples/copy/en/TypeScript/Primitives/Unknown and Never.ts:
 packages/playground-examples/copy/en/TypeScript/Type Primitives/Tuples.ts:42:19     - Unknown word (adankwo)    -- [0, "Adankwo", "adankwo.e@"],
 packages/playground-examples/copy/en/TypeScript/Type Primitives/Tuples.ts:42:8      - Unknown word (Adankwo)    -- [0, "Adankwo", "adankwo.e@"],
 packages/playground-handbook/copy/en/Writing DTS Files.md:3:94      - Unknown word (realise)    -- feeling when you first realise that you may have wrote
-packages/playground-v2/scripts/build.mjs:19:65     - Unknown word (serviceworker) -- import.meta.resolve("coi-serviceworker/coi-serviceworker.min
-packages/playground-v2/scripts/build.mjs:41:6      - Unknown word (strada)        -- "strada.worker": resolve(packageDirec
-packages/playground-v2/scripts/build.mjs:63:5      - Unknown word (servedir)      -- servedir: outputDirectory,
-packages/playground-v2/scripts/build.mjs:69:52     - Unknown word (wasip)         -- typescript\/)?typescript(?:-wasip1-wasm)?\//.test(path
+packages/playground-v2/scripts/build.mjs:20:65     - Unknown word (serviceworker) -- import.meta.resolve("coi-serviceworker/coi-serviceworker.min
+packages/playground-v2/scripts/build.mjs:62:6      - Unknown word (strada)        -- "strada.worker": resolve(packageDirec
+packages/playground-v2/scripts/build.mjs:85:5      - Unknown word (servedir)      -- servedir: outputDirectory,
+packages/playground-v2/scripts/build.mjs:91:52     - Unknown word (wasip)         -- typescript\/)?typescript(?:-wasip1-wasm)?\//.test(path
 packages/playground-v2/src/ata/ata.test.ts:11:3      - Unknown word (corsa)      -- corsaDiscovery,
 packages/playground-v2/src/compiler-overrides.ts:31:4      - Unknown word (noerrors)   -- "noerrors",
 packages/playground-v2/src/compiler-overrides.ts:32:4      - Unknown word (showemit)   -- "showemit",
@@ -222,14 +222,14 @@ packages/playground-v2/src/lsp-filesystem.ts:258:5     - Unknown word (oflags)  
 packages/playground-v2/src/lsp-filesystem.ts:261:5     - Unknown word (fdflags)     -- fdflags: number
 packages/playground-v2/src/lsp-filesystem.ts:265:68    - Unknown word (CREAT)       -- oflags & wasi.OFLAGS_CREAT) !== 0) {
 packages/playground-v2/src/lsp-filesystem.ts:44:36     - Unknown word (lookupflags) -- does not export WASI's lookupflags.SYMLINK_FOLLOW constant
-packages/playground-v2/src/main.ts:1181:32   - Unknown word (menuitemradio) -- setAttribute("role", "menuitemradio")
-packages/playground-v2/src/main.ts:181:11    - Unknown word (Resizer)    -- const fileResizer = getElement("file-resizer
-packages/playground-v2/src/main.ts:181:38    - Unknown word (resizer)    -- ileResizer = getElement("file-resizer")
+packages/playground-v2/src/main.ts:1206:32   - Unknown word (menuitemradio) -- setAttribute("role", "menuitemradio")
+packages/playground-v2/src/main.ts:180:11    - Unknown word (Resizer)    -- const fileResizer = getElement("file-resizer
+packages/playground-v2/src/main.ts:180:38    - Unknown word (resizer)    -- ileResizer = getElement("file-resizer")
 packages/playground-v2/src/main.ts:314:52    - Unknown word (dcdcaa)     -- foreground: darkMode ? "dcdcaa" : "795e26" },
 packages/playground-v2/src/main.ts:316:54    - Unknown word (cdcfe)      -- foreground: darkMode ? "9cdcfe" : "001080" },
-packages/playground-v2/src/main.ts:37:10     - Unknown word (Strada)     -- import { StradaBackend } from "./strada
-packages/playground-v2/src/main.ts:702:32    - Unknown word (valuenow)   -- element.setAttribute("aria-valuenow", String(width))
-packages/playground-v2/src/main.ts:703:32    - Unknown word (valuetext)  -- element.setAttribute("aria-valuetext", `${width} pixels`
+packages/playground-v2/src/main.ts:36:10     - Unknown word (Strada)     -- import { StradaBackend } from "./strada
+packages/playground-v2/src/main.ts:729:32    - Unknown word (valuenow)   -- element.setAttribute("aria-valuenow", String(width))
+packages/playground-v2/src/main.ts:730:32    - Unknown word (valuetext)  -- element.setAttribute("aria-valuetext", `${width} pixels`
 packages/playground-v2/src/native-compiler.test.ts:200:75    - Unknown word (unmirrored) -- except for incorrect or unmirrored builds", () => {
 packages/playground-v2/src/styles.css:1:11      - Unknown word (fontsource) -- @import "@fontsource/nunito-sans/400.css
 packages/playground-v2/src/tsgo-lsp.worker.ts:116:39    - Unknown word (nwritten)   -- wasi.ERRNO_SUCCESS, nwritten: data.length }
@@ -378,6 +378,14 @@ patches/@vscode__monaco-lsp-client@0.1.0.patch:7:5       - Unknown word (rollup)
 patches/coi-serviceworker@0.1.7.patch:18:39     - Unknown word (Zuidhof)    -- serviceworker v0.1.7 - Guido Zuidhof and contributors, licensed
 patches/coi-serviceworker@0.1.7.patch:19:1744   - Unknown word (updatefound) -- s.addEventListener("updatefound",(()=>{!e.quiet&&console
 patches/coi-serviceworker@0.1.7.patch:19:771    - Unknown word (Embedder)   -- r.set("Cross-Origin-Embedder-Policy",coepCredentialless
+patches/dts-cli@2.0.5.patch:12:8      - Unknown word (execa)      -- const execa_1 = tslib_1.__importDefault
+patches/dts-cli@2.0.5.patch:19:8      - Unknown word (jpjs)       -- const jpjs_1 = require("jpjs")
+patches/dts-cli@2.0.5.patch:6:8       - Unknown word (figlet)     -- const figlet_1 = tslib_1.__importDefault
+patches/gatsby-core-utils@4.16.0.patch:13:7      - Unknown word (fastq)      -- var _fastq = _interopRequireDefault
 patches/gatsby-remark-shiki-twoslash@3.0.38.patch:17:49     - Unknown word (focusable)  -- twoslash code blocks focusable; not needed in modern
-patches/monaco-editor-core@0.56.0.patch:51:61     - Unknown word (Contextmenu) -- newGestureEvent(EventType.Contextmenu, data.initialTarget
+patches/gatsby@5.16.1.patch:7:68      - Unknown word (pmmmwh)     -- teropRequireDefault(require("@pmmmwh/react-refresh-webpack
+patches/gatsby@5.16.1.patch:8:7       - Unknown word (browserslist) -- var _browserslist = require("./browserslist
+patches/monaco-editor@0.56.0.patch:67:61     - Unknown word (Contextmenu) -- newGestureEvent(EventType.Contextmenu, data.initialTarget
+patches/monaco-editor@0.56.0.patch:8:24      - Unknown word (dompurify)  -- import purify from './dompurify/dompurify.js';
+patches/node-stdlib-browser@1.3.1.patch:11:8      - Unknown word (dgram)      -- const dgram = resolvePath('./mock
 watcher.js:194:40    - Unknown word (afplay)     -- (path, volume) => `afplay \"${path}\" -v ${volume

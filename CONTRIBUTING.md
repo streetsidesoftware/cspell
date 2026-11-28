@@ -16,8 +16,9 @@ remove words in a dictionary, go there.
 
 ## Quick start
 
+Install [pnpm](https://pnpm.io/installation), then run:
+
 ```sh
-corepack enable
 pnpm ibt
 ```
 
@@ -39,7 +40,8 @@ pull request, see [Development](./docs/development.md).
 - [Pull requests](./docs/pull-requests.md): the title's type, the body, and what goes in the release notes
 - [Code style](./docs/code-style.md): formatting, invisible characters
 - [Writing comments](./docs/writing-comments.md): comments and doc comments, public and internal
-- [Writing for users](./docs/writing-for-users.md): READMEs, the website, doc comments, and published PRs
+- [Writing for users](./docs/writing-for-users.md): READMEs, the website, doc comments, published PRs, and word
+  choice for all text
 - [Config options and CLI flags](./docs/config-and-cli.md): adding or changing one
 - [Design principles](./docs/design-principles.md)
 - [Designing a feature](./docs/feature-design.md): thinking a feature through before and while you build it

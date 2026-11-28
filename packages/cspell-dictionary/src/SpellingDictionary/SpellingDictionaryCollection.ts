@@ -15,7 +15,7 @@ import type { SuggestOptionsRO } from './SuggestOptions.js';
 
 export interface SpellingDictionaryCollection extends SpellingDictionary {
     readonly type: 'SpellingDictionaryCollection';
-    readonly dictionaries: SpellingDictionary[];
+    readonly dictionaries: readonly SpellingDictionary[];
     getErrors(): Error[];
 }
 
@@ -23,17 +23,18 @@ class SpellingDictionaryCollectionImpl implements SpellingDictionaryCollection {
     readonly options: SpellingDictionaryOptionsRO = { weightMap: undefined };
     readonly mapWord = undefined;
     readonly type = 'SpellingDictionaryCollection';
+    readonly dictionaries: readonly SpellingDictionary[];
     readonly source: string;
     readonly isDictionaryCaseSensitive: boolean;
     readonly containsNoSuggestWords: boolean;
 
     constructor(
-        readonly dictionaries: SpellingDictionary[],
+        dictionaries: readonly SpellingDictionary[],
         readonly name: string,
         source?: string,
     ) {
-        this.dictionaries = this.dictionaries.sort((a, b) => b.size - a.size);
-        this.source = source || dictionaries.map((d) => d.name).join(', ');
+        this.dictionaries = [...dictionaries].sort((a, b) => b.size - a.size);
+        this.source = source || this.dictionaries.map((d) => d.name).join(', ');
         this.isDictionaryCaseSensitive = this.dictionaries.reduce((a, b) => a || b.isDictionaryCaseSensitive, false);
         this.containsNoSuggestWords = this.dictionaries.reduce((a, b) => a || b.containsNoSuggestWords, false);
     }
@@ -121,7 +122,7 @@ class SpellingDictionaryCollectionImpl implements SpellingDictionaryCollection {
 }
 
 export function createCollection(
-    dictionaries: SpellingDictionary[],
+    dictionaries: readonly SpellingDictionary[],
     name: string,
     source?: string,
 ): SpellingDictionaryCollection {
@@ -129,7 +130,7 @@ export function createCollection(
 }
 
 function isWordInAnyDictionary(
-    dicts: SpellingDictionary[],
+    dicts: readonly SpellingDictionary[],
     word: string,
     options: SearchOptionsRO,
 ): SpellingDictionary | undefined {
@@ -137,7 +138,7 @@ function isWordInAnyDictionary(
 }
 
 function findInAnyDictionary(
-    dicts: SpellingDictionary[],
+    dicts: readonly SpellingDictionary[],
     word: string,
     options: SearchOptionsRO,
 ): FindResult | undefined {
@@ -151,7 +152,7 @@ function findInAnyDictionary(
 }
 
 function isNoSuggestWordInAnyDictionary(
-    dicts: SpellingDictionary[],
+    dicts: readonly SpellingDictionary[],
     word: string,
     options: HasOptionsRO,
 ): SpellingDictionary | undefined {
@@ -159,7 +160,7 @@ function isNoSuggestWordInAnyDictionary(
 }
 
 function isWordForbiddenInAnyDictionary(
-    dicts: SpellingDictionary[],
+    dicts: readonly SpellingDictionary[],
     word: string,
     ignoreCase: boolean | undefined,
 ): SpellingDictionary | undefined {

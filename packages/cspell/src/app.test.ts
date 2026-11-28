@@ -1,5 +1,4 @@
 import { promises as fsp } from 'node:fs';
-import * as os from 'node:os';
 import * as Path from 'node:path';
 import * as readline from 'node:readline';
 import { fileURLToPath } from 'node:url';
@@ -13,7 +12,7 @@ import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, test, vi 
 import * as app from './app.mjs';
 import { console } from './console.js';
 import * as Link from './link.js';
-import { pathPackageRoot } from './test/test.helper.js';
+import { createTempFolder, pathPackageRoot } from './test/test.helper.js';
 import { mergeAsyncIterables } from './util/async.js';
 
 interface Constructable {
@@ -213,78 +212,97 @@ describe('Validate cli', () => {
 
     const vdConfig = pathFeat('validate-directives', 'cspell-validate.json');
     const failFastRoot = pathSamples('fail-fast');
+    const searchStopRoot = pathSamples('config-search/search-stop/src');
+    const stopAboveRoot = pathSamples('config-search/stop-above/project');
+    const namedRoot = pathSamples('config-search/named-config');
+    const namedArgs = (config: string, ...args: string[]) => [
+        ...['-r', namedRoot, '--config', Path.join(namedRoot, config), '--report', 'flagged', '**/*.md'],
+        ...args,
+    ];
+    const namedCi = namedArgs('cspell.ci.json');
+    const namedStrict = namedArgs('packages/foo/cspell.strict.json');
+    const stopAt = (dir: string) => ['--stop-config-search-at', Path.join(namedRoot, dir)];
 
     test.each`
-        msg                                            | testArgs                                                                                     | errorCheck                  | eError   | eLog     | eInfo
-        ${'with errors and excludes'}                  | ${['-r', 'samples', '*', '-e', 'Dutch.txt', '-c', 'samples/.cspell.json']}                   | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
-        ${'no-args'}                                   | ${[]}                                                                                        | ${'outputHelp'}             | ${false} | ${false} | ${false}
-        ${'current_file'}                              | ${[__filename]}                                                                              | ${undefined}                | ${true}  | ${false} | ${false}
-        ${'current_file --show-perf-summary'}          | ${[__filename, '--show-perf-summary']}                                                       | ${undefined}                | ${true}  | ${false} | ${false}
-        ${'with spelling errors Dutch.txt'}            | ${[pathSamples('Dutch.txt')]}                                                                | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
-        ${'with spelling errors Dutch.txt words only'} | ${[pathSamples('Dutch.txt'), '--wordsOnly']}                                                 | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
-        ${'with spelling errors Dutch.txt --legacy'}   | ${[pathSamples('Dutch.txt'), '--legacy']}                                                    | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
-        ${'with spelling errors --silent Dutch.txt'}   | ${['--silent', pathSamples('Dutch.txt')]}                                                    | ${app.CheckFailed}          | ${false} | ${false} | ${false}
-        ${'current_file languageId'}                   | ${[__filename, '--languageId=typescript']}                                                   | ${undefined}                | ${true}  | ${false} | ${false}
-        ${'check help'}                                | ${['check', '--help']}                                                                       | ${'outputHelp'}             | ${false} | ${false} | ${false}
-        ${'check LICENSE'}                             | ${['check', pathRoot('LICENSE')]}                                                            | ${undefined}                | ${false} | ${true}  | ${false}
-        ${'check missing'}                             | ${['check', pathRoot('missing-file.txt')]}                                                   | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
-        ${'check with spelling errors'}                | ${['check', pathSamples('Dutch.txt')]}                                                       | ${app.CheckFailed}          | ${false} | ${true}  | ${false}
-        ${'LICENSE'}                                   | ${[pathRoot('LICENSE')]}                                                                     | ${undefined}                | ${true}  | ${false} | ${false}
-        ${'samples/Dutch.txt'}                         | ${[pathSamples('Dutch.txt')]}                                                                | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
-        ${'with forbidden words'}                      | ${[pathSamples('src/sample-with-forbidden-words.md')]}                                       | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
-        ${'current_file --verbose'}                    | ${['--verbose', __filename]}                                                                 | ${undefined}                | ${true}  | ${false} | ${false}
-        ${'current_file --verbose --verbose'}          | ${['--verbose', '--verbose', __filename]}                                                    | ${undefined}                | ${true}  | ${false} | ${true}
-        ${'bad config'}                                | ${['-c', __filename + '.x', __filename]}                                                     | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
-        ${'not found error by default'}                | ${['*.not']}                                                                                 | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
-        ${'must find with error'}                      | ${['*.not', '--must-find-files']}                                                            | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
-        ${'must find force no error'}                  | ${['*.not', '--no-must-find-files']}                                                         | ${undefined}                | ${true}  | ${false} | ${false}
-        ${'must find --file checked'}                  | ${[rpFeat('must-find-files'), '--file', 'checked.md']}                                       | ${undefined}                | ${true}  | ${false} | ${false}
-        ${'must find --file ignorePaths'}              | ${[rpFeat('must-find-files'), '--file', 'excluded/excluded.md']}                             | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
-        ${'must find --file not in files'}             | ${[rpFeat('must-find-files'), '--file', 'not-in-files.txt']}                                 | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
-        ${'must find --file disabled'}                 | ${[rpFeat('must-find-files'), '--file', 'disabled.md']}                                      | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
-        ${'must find --file binary'}                   | ${[rpFeat('must-find-files'), '--file', Path.join(repoRoot, 'resources/patreon.png')]}       | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
-        ${'must find --file checked and skipped'}      | ${[rpFeat('must-find-files'), '--file', 'checked.md', '--file', 'excluded/excluded.md']}     | ${undefined}                | ${true}  | ${false} | ${false}
-        ${'must find glob disabled'}                   | ${[rpFeat('must-find-files'), 'disabled.md']}                                                | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
-        ${'must find --no-must-find-files skipped'}    | ${[rpFeat('must-find-files'), '--file', 'disabled.md', '--no-must-find-files']}              | ${undefined}                | ${true}  | ${false} | ${false}
-        ${'must find --silent skipped'}                | ${[rpFeat('must-find-files'), '--silent', '--file', 'disabled.md']}                          | ${app.CheckFailed}          | ${false} | ${false} | ${false}
-        ${'globs filter --file'}                       | ${[rpFeat('must-find-files'), '*.md', '--file', 'checked.md', '--file', 'not-in-files.txt']} | ${undefined}                | ${true}  | ${false} | ${false}
-        ${'globs filter out every --file'}             | ${[rpFeat('must-find-files'), '*.txt', '--file', 'checked.md']}                              | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
-        ${'globs replace files setting for --file'}    | ${[rpFeat('must-find-files'), '*.txt', '--file', 'not-in-files.txt']}                        | ${undefined}                | ${true}  | ${false} | ${false}
-        ${'cspell-bad.json'}                           | ${['-c', pathSamples('cspell-bad.json'), __filename]}                                        | ${undefined}                | ${true}  | ${false} | ${false}
-        ${'cspell-import-missing.json'}                | ${['-c', pathSamples('linked/cspell-import-missing.json'), __filename]}                      | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
-        ${'--fail-fast no option'}                     | ${['-r', failFastRoot, '*.txt']}                                                             | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
-        ${'--fail-fast with option'}                   | ${['-r', failFastRoot, '--fail-fast', '*.txt']}                                              | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
-        ${'--fail-fast with config'}                   | ${['-r', failFastRoot, '-c', failFastConfig, '*.txt']}                                       | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
-        ${'--no-fail-fast with config'}                | ${['-r', failFastRoot, '--no-fail-fast', '-c', failFastConfig, '*.txt']}                     | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
-        ${'Explicit file://'}                          | ${[rpFix('misc'), 'file://star-not.md']}                                                     | ${undefined}                | ${true}  | ${false} | ${false}
-        ${'Explicit not found file://'}                | ${[rpFix('misc'), 'file://not-fond.md']}                                                     | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
-        ${'typos'}                                     | ${[rpFix('features/typos'), '--no-progress', '.']}                                           | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
-        ${'typos --color'}                             | ${[rpFix('features/typos'), '--no-progress', '--color', '.']}                                | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
-        ${'typos --no-color'}                          | ${[rpFix('features/typos'), '--no-progress', '--no-color', '.']}                             | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
-        ${'typos --no-show-suggestions'}               | ${[rpFix('features/typos'), '--no-progress', '--no-show-suggestions', '.']}                  | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
-        ${'typos --show-suggestions'}                  | ${[rpFix('features/typos'), '--no-progress', '--show-suggestions', '**']}                    | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
-        ${'typos --issue-template'}                    | ${[rpFix('features/typos'), '--no-progress', '.', '--issue-template', '$text']}              | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
-        ${'inline suggest'}                            | ${[rpFix('features/inline-suggest'), '--no-progress', '--show-suggestions', '.']}            | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
-        ${'reporter'}                                  | ${[rpFeat('reporter'), '-e', 'issues.md']}                                                   | ${undefined}                | ${false} | ${true}  | ${false}
-        ${'reporter with spelling issues'}             | ${[rpFeat('reporter')]}                                                                      | ${app.CheckFailed}          | ${false} | ${true}  | ${false}
-        ${'verify globRoot works'}                     | ${[rpFix('globRoot'), '.']}                                                                  | ${undefined}                | ${true}  | ${false} | ${false}
-        ${'reporting level flagged'}                   | ${[rpFeat('unknown-words'), '--report=flagged', '.']}                                        | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
-        ${'reporting level typos'}                     | ${[rpFeat('unknown-words'), '--report=typos', '.']}                                          | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
-        ${'reporting level simple'}                    | ${[rpFeat('unknown-words'), '--report=simple', '.']}                                         | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
-        ${'reporting level all'}                       | ${[rpFeat('unknown-words'), '--report=all', '.']}                                            | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
-        ${'validate directives off'}                   | ${[rpFeat('validate-directives'), '--no-progress', 'notes.md']}                              | ${undefined}                | ${true}  | ${false} | ${false}
-        ${'--validate-directives'}                     | ${[rpFeat('validate-directives'), '--no-progress', '--validate-directives', 'notes.md']}     | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
-        ${'validateDirectives in config'}              | ${[rpFeat('validate-directives'), '-c', vdConfig, 'notes.md']}                               | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
-        ${'--no-validate-directives over config'}      | ${[rpFeat('validate-directives'), '-c', vdConfig, '--no-validate-directives', 'notes.md']}   | ${undefined}                | ${true}  | ${false} | ${false}
-        ${'max-file-size'}                             | ${[rpFeat('max-file-size'), '.']}                                                            | ${undefined}                | ${true}  | ${false} | ${false}
-        ${'max-file-size 1mb'}                         | ${[rpFeat('max-file-size'), '--max-file-size=1mb', '.']}                                     | ${undefined}                | ${true}  | ${false} | ${false}
-        ${'max-file-size 1meg'}                        | ${[rpFeat('max-file-size'), '--max-file-size=1meg', '.']}                                    | ${Commander.CommanderError} | ${false} | ${false} | ${false}
-        ${'max-file-size bad'}                         | ${[rpFeat('max-file-size'), '-c', 'bad-size.cspell.config.yaml', '.']}                       | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
-        ${'--continue-on-error'}                       | ${[...rcFix('import/import-errors', 'cspell.config.yaml'), '--continue-on-error', '*.md']}   | ${undefined}                | ${true}  | ${false} | ${false}
-        ${'--continue-on-error - missing import'}      | ${[...rcFix('import/import-errors', 'missing-import.yaml'), '--continue-on-error', '*.md']}  | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
-        ${'--continue-on-error - missing dict'}        | ${[...rcFix('import/import-errors', 'missing-dict.yaml'), '--continue-on-error', '*.md']}    | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
-        ${'--continue-on-error - import & spelling'}   | ${[...rcFix('import/import-errors', 'missing-import.yaml'), '--continue-on-error', '*.txt']} | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
-        ${'--continue-on-error - missing config'}      | ${[...rcFix('import/import-errors', 'missing.yaml'), '--continue-on-error', '*.txt']}        | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
+        msg                                                  | testArgs                                                                                                                                                 | errorCheck                  | eError   | eLog     | eInfo
+        ${'with errors and excludes'}                        | ${['-r', 'samples', '*', '-e', 'Dutch.txt', '-c', 'samples/.cspell.json']}                                                                               | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
+        ${'no-args'}                                         | ${[]}                                                                                                                                                    | ${'outputHelp'}             | ${false} | ${false} | ${false}
+        ${'current_file'}                                    | ${[__filename]}                                                                                                                                          | ${undefined}                | ${true}  | ${false} | ${false}
+        ${'current_file --show-perf-summary'}                | ${[__filename, '--show-perf-summary']}                                                                                                                   | ${undefined}                | ${true}  | ${false} | ${false}
+        ${'with spelling errors Dutch.txt'}                  | ${[pathSamples('Dutch.txt')]}                                                                                                                            | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
+        ${'with spelling errors Dutch.txt words only'}       | ${[pathSamples('Dutch.txt'), '--wordsOnly']}                                                                                                             | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
+        ${'with spelling errors Dutch.txt --legacy'}         | ${[pathSamples('Dutch.txt'), '--legacy']}                                                                                                                | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
+        ${'with spelling errors --silent Dutch.txt'}         | ${['--silent', pathSamples('Dutch.txt')]}                                                                                                                | ${app.CheckFailed}          | ${false} | ${false} | ${false}
+        ${'current_file languageId'}                         | ${[__filename, '--languageId=typescript']}                                                                                                               | ${undefined}                | ${true}  | ${false} | ${false}
+        ${'check help'}                                      | ${['check', '--help']}                                                                                                                                   | ${'outputHelp'}             | ${false} | ${false} | ${false}
+        ${'check LICENSE'}                                   | ${['check', pathRoot('LICENSE')]}                                                                                                                        | ${undefined}                | ${false} | ${true}  | ${false}
+        ${'check missing'}                                   | ${['check', pathRoot('missing-file.txt')]}                                                                                                               | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
+        ${'check with spelling errors'}                      | ${['check', pathSamples('Dutch.txt')]}                                                                                                                   | ${app.CheckFailed}          | ${false} | ${true}  | ${false}
+        ${'LICENSE'}                                         | ${[pathRoot('LICENSE')]}                                                                                                                                 | ${undefined}                | ${true}  | ${false} | ${false}
+        ${'samples/Dutch.txt'}                               | ${[pathSamples('Dutch.txt')]}                                                                                                                            | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
+        ${'with forbidden words'}                            | ${[pathSamples('src/sample-with-forbidden-words.md')]}                                                                                                   | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
+        ${'current_file --verbose'}                          | ${['--verbose', __filename]}                                                                                                                             | ${undefined}                | ${true}  | ${false} | ${false}
+        ${'current_file --verbose --verbose'}                | ${['--verbose', '--verbose', __filename]}                                                                                                                | ${undefined}                | ${true}  | ${false} | ${true}
+        ${'bad config'}                                      | ${['-c', __filename + '.x', __filename]}                                                                                                                 | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
+        ${'not found error by default'}                      | ${['*.not']}                                                                                                                                             | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
+        ${'must find with error'}                            | ${['*.not', '--must-find-files']}                                                                                                                        | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
+        ${'must find force no error'}                        | ${['*.not', '--no-must-find-files']}                                                                                                                     | ${undefined}                | ${true}  | ${false} | ${false}
+        ${'must find --file checked'}                        | ${[rpFeat('must-find-files'), '--file', 'checked.md']}                                                                                                   | ${undefined}                | ${true}  | ${false} | ${false}
+        ${'must find --file ignorePaths'}                    | ${[rpFeat('must-find-files'), '--file', 'excluded/excluded.md']}                                                                                         | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
+        ${'must find --file not in files'}                   | ${[rpFeat('must-find-files'), '--file', 'not-in-files.txt']}                                                                                             | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
+        ${'must find --file disabled'}                       | ${[rpFeat('must-find-files'), '--file', 'disabled.md']}                                                                                                  | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
+        ${'must find --file binary'}                         | ${[rpFeat('must-find-files'), '--file', Path.join(repoRoot, 'resources/patreon.png')]}                                                                   | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
+        ${'must find --file checked and skipped'}            | ${[rpFeat('must-find-files'), '--file', 'checked.md', '--file', 'excluded/excluded.md']}                                                                 | ${undefined}                | ${true}  | ${false} | ${false}
+        ${'must find glob disabled'}                         | ${[rpFeat('must-find-files'), 'disabled.md']}                                                                                                            | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
+        ${'must find --no-must-find-files skipped'}          | ${[rpFeat('must-find-files'), '--file', 'disabled.md', '--no-must-find-files']}                                                                          | ${undefined}                | ${true}  | ${false} | ${false}
+        ${'must find --silent skipped'}                      | ${[rpFeat('must-find-files'), '--silent', '--file', 'disabled.md']}                                                                                      | ${app.CheckFailed}          | ${false} | ${false} | ${false}
+        ${'globs filter --file'}                             | ${[rpFeat('must-find-files'), '*.md', '--file', 'checked.md', '--file', 'not-in-files.txt']}                                                             | ${undefined}                | ${true}  | ${false} | ${false}
+        ${'globs filter out every --file'}                   | ${[rpFeat('must-find-files'), '*.txt', '--file', 'checked.md']}                                                                                          | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
+        ${'globs replace files setting for --file'}          | ${[rpFeat('must-find-files'), '*.txt', '--file', 'not-in-files.txt']}                                                                                    | ${undefined}                | ${true}  | ${false} | ${false}
+        ${'cspell-bad.json'}                                 | ${['-c', pathSamples('cspell-bad.json'), __filename]}                                                                                                    | ${undefined}                | ${true}  | ${false} | ${false}
+        ${'cspell-import-missing.json'}                      | ${['-c', pathSamples('linked/cspell-import-missing.json'), __filename]}                                                                                  | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
+        ${'--fail-fast no option'}                           | ${['-r', failFastRoot, '*.txt']}                                                                                                                         | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
+        ${'--fail-fast with option'}                         | ${['-r', failFastRoot, '--fail-fast', '*.txt']}                                                                                                          | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
+        ${'--fail-fast with config'}                         | ${['-r', failFastRoot, '-c', failFastConfig, '*.txt']}                                                                                                   | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
+        ${'--no-fail-fast with config'}                      | ${['-r', failFastRoot, '--no-fail-fast', '-c', failFastConfig, '*.txt']}                                                                                 | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
+        ${'Explicit file://'}                                | ${[rpFix('misc'), 'file://star-not.md']}                                                                                                                 | ${undefined}                | ${true}  | ${false} | ${false}
+        ${'Explicit not found file://'}                      | ${[rpFix('misc'), 'file://not-fond.md']}                                                                                                                 | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
+        ${'typos'}                                           | ${[rpFix('features/typos'), '--no-progress', '.']}                                                                                                       | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
+        ${'typos --color'}                                   | ${[rpFix('features/typos'), '--no-progress', '--color', '.']}                                                                                            | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
+        ${'typos --no-color'}                                | ${[rpFix('features/typos'), '--no-progress', '--no-color', '.']}                                                                                         | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
+        ${'typos --no-show-suggestions'}                     | ${[rpFix('features/typos'), '--no-progress', '--no-show-suggestions', '.']}                                                                              | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
+        ${'typos --show-suggestions'}                        | ${[rpFix('features/typos'), '--no-progress', '--show-suggestions', '**']}                                                                                | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
+        ${'typos --issue-template'}                          | ${[rpFix('features/typos'), '--no-progress', '.', '--issue-template', '$text']}                                                                          | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
+        ${'inline suggest'}                                  | ${[rpFix('features/inline-suggest'), '--no-progress', '--show-suggestions', '.']}                                                                        | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
+        ${'reporter'}                                        | ${[rpFeat('reporter'), '-e', 'issues.md']}                                                                                                               | ${undefined}                | ${false} | ${true}  | ${false}
+        ${'reporter with spelling issues'}                   | ${[rpFeat('reporter')]}                                                                                                                                  | ${app.CheckFailed}          | ${false} | ${true}  | ${false}
+        ${'verify globRoot works'}                           | ${[rpFix('globRoot'), '.']}                                                                                                                              | ${undefined}                | ${true}  | ${false} | ${false}
+        ${'reporting level flagged'}                         | ${[rpFeat('unknown-words'), '--report=flagged', '.']}                                                                                                    | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
+        ${'reporting level typos'}                           | ${[rpFeat('unknown-words'), '--report=typos', '.']}                                                                                                      | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
+        ${'reporting level simple'}                          | ${[rpFeat('unknown-words'), '--report=simple', '.']}                                                                                                     | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
+        ${'reporting level all'}                             | ${[rpFeat('unknown-words'), '--report=all', '.']}                                                                                                        | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
+        ${'validate directives off'}                         | ${[rpFeat('validate-directives'), '--no-progress', 'notes.md']}                                                                                          | ${undefined}                | ${true}  | ${false} | ${false}
+        ${'--validate-directives'}                           | ${[rpFeat('validate-directives'), '--no-progress', '--validate-directives', 'notes.md']}                                                                 | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
+        ${'validateDirectives in config'}                    | ${[rpFeat('validate-directives'), '-c', vdConfig, 'notes.md']}                                                                                           | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
+        ${'--no-validate-directives over config'}            | ${[rpFeat('validate-directives'), '-c', vdConfig, '--no-validate-directives', 'notes.md']}                                                               | ${undefined}                | ${true}  | ${false} | ${false}
+        ${'max-file-size'}                                   | ${[rpFeat('max-file-size'), '.']}                                                                                                                        | ${undefined}                | ${true}  | ${false} | ${false}
+        ${'max-file-size 1mb'}                               | ${[rpFeat('max-file-size'), '--max-file-size=1mb', '.']}                                                                                                 | ${undefined}                | ${true}  | ${false} | ${false}
+        ${'max-file-size 1meg'}                              | ${[rpFeat('max-file-size'), '--max-file-size=1meg', '.']}                                                                                                | ${Commander.CommanderError} | ${false} | ${false} | ${false}
+        ${'max-file-size bad'}                               | ${[rpFeat('max-file-size'), '-c', 'bad-size.cspell.config.yaml', '.']}                                                                                   | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
+        ${'--continue-on-error'}                             | ${[...rcFix('import/import-errors', 'cspell.config.yaml'), '--continue-on-error', '*.md']}                                                               | ${undefined}                | ${true}  | ${false} | ${false}
+        ${'--continue-on-error - missing import'}            | ${[...rcFix('import/import-errors', 'missing-import.yaml'), '--continue-on-error', '*.md']}                                                              | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
+        ${'--continue-on-error - missing dict'}              | ${[...rcFix('import/import-errors', 'missing-dict.yaml'), '--continue-on-error', '*.md']}                                                                | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
+        ${'--continue-on-error - import & spelling'}         | ${[...rcFix('import/import-errors', 'missing-import.yaml'), '--continue-on-error', '*.txt']}                                                             | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
+        ${'--continue-on-error - missing config'}            | ${[...rcFix('import/import-errors', 'missing.yaml'), '--continue-on-error', '*.txt']}                                                                    | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
+        ${'--continue-on-error - import & spelling, stop'}   | ${[...rcFix('import/import-errors', 'missing-import.yaml'), '--stop-config-search-at', pathFix('import/import-errors'), '--continue-on-error', '*.txt']} | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
+        ${'nested file uses the parent config'}              | ${['-r', searchStopRoot, 'nested/notes.md']}                                                                                                             | ${undefined}                | ${true}  | ${false} | ${false}
+        ${'--stop-config-search-at nested file'}             | ${['-r', searchStopRoot, '--stop-config-search-at', searchStopRoot, 'nested/notes.md']}                                                                  | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
+        ${'--stop-config-search-at skips ignorePaths above'} | ${['-r', stopAboveRoot, '--stop-config-search-at', stopAboveRoot, 'ignored/notes.md']}                                                                   | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
+        ${'named-config without --config'}                   | ${['-r', namedRoot, '--report', 'flagged', '**/*.md']}                                                                                                   | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
+        ${'--config beside the root config'}                 | ${namedCi}                                                                                                                                               | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
+        ${'--config in a subfolder'}                         | ${namedStrict}                                                                                                                                           | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
+        ${'--config with a stop at the root'}                | ${[...namedCi, ...stopAt('.')]}                                                                                                                          | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
+        ${'--config with a stop below the root'}             | ${[...namedCi, ...stopAt('packages/foo')]}                                                                                                               | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
     `('app $msg Expect Error: $errorCheck', async ({ testArgs, errorCheck, eError, eLog, eInfo }: TestCase) => {
         chalk.level = 1;
         const commander = getCommander();
@@ -389,6 +407,7 @@ describe('Validate cli', () => {
         ${'issue-2998 --language-id'} | ${[rpFix('issue-2998'), '-v', '-v', '--language-id=fix', 'fix-words.txt']}         | ${undefined}       | ${true} | ${false} | ${true}
         ${'issue-4811 **/README.md'}  | ${['-r', pIssues('issue-4811'), '--no-progress', '**/README.md']}                  | ${undefined}       | ${true} | ${false} | ${false}
         ${'issue-4811'}               | ${['-r', pIssues('issue-4811'), '--no-progress', '.']}                             | ${app.CheckFailed} | ${true} | ${true}  | ${false}
+        ${'issue-5150'}               | ${[rpFix('issue-5150'), '--no-progress', '.']}                                     | ${app.CheckFailed} | ${true} | ${true}  | ${false}
         ${'issue-6373 .'}             | ${[rpFix('issue-6373'), '--no-progress', '.']}                                     | ${app.CheckFailed} | ${true} | ${true}  | ${false}
         ${'issue-6373'}               | ${[rpFix('issue-6373'), '--no-progress']}                                          | ${undefined}       | ${true} | ${false} | ${false}
         ${'issue-6353'}               | ${[rpFix('issue-6353'), '--no-progress']}                                          | ${undefined}       | ${true} | ${false} | ${true}
@@ -398,6 +417,9 @@ describe('Validate cli', () => {
         ${'language-id disabled'}     | ${[rpFeat('language-id'), '--no-progress', 'notes.txt']}                           | ${app.CheckFailed} | ${true} | ${false} | ${false}
         ${'language-id markdown'}     | ${[rpFeat('language-id'), '--no-progress', '--language-id=markdown', 'notes.txt']} | ${app.CheckFailed} | ${true} | ${true}  | ${false}
         ${'language-id locale fr'}    | ${[rpFeat('language-id'), '--no-progress', '--locale=fr', 'notes.txt']}            | ${app.CheckFailed} | ${true} | ${true}  | ${false}
+        ${'soft word breaks merged'}  | ${[rpFeat('soft-word-breaks'), '--no-progress', '.']}                              | ${app.CheckFailed} | ${true} | ${true}  | ${false}
+        ${'substitutions merged'}     | ${[rpFeat('substitutions'), '--no-progress', '.']}                                 | ${app.CheckFailed} | ${true} | ${true}  | ${false}
+        ${'yaml quote disabled'}      | ${[rpFeat('yaml-single-quote-disabled'), '--no-progress', '.']}                    | ${app.CheckFailed} | ${true} | ${true}  | ${false}
     `('app $msg Expect Error: $errorCheck', async ({ testArgs, errorCheck, eError, eLog, eInfo }: TestCase) => {
         chalk.level = 1;
         const commander = getCommander();
@@ -465,7 +487,7 @@ describe('Validate cli', () => {
         let tmp = '';
 
         beforeAll(async () => {
-            tmp = await fsp.mkdtemp(Path.join(os.tmpdir(), 'cspell-app-symlinks-'));
+            tmp = await createTempFolder(import.meta.url, 'follow-symlinks');
             await fsp.mkdir(Path.join(tmp, 'target'));
             await fsp.mkdir(Path.join(tmp, 'repo'));
             await fsp.writeFile(Path.join(tmp, 'target/words.txt'), 'zqxtarget\n');

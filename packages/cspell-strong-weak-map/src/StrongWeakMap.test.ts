@@ -62,7 +62,7 @@ describe('StrongWeakMap', () => {
         expect(gc).toBeDefined();
         await wait(1);
         gc?.();
-        await wait(1);
+        // The map removes the keys on its own only in a later task.
         expect([...map.keys()]).toEqual(allKeys);
         map.cleanKeys();
         expect([...map.keys()]).toEqual(expected);
@@ -73,20 +73,14 @@ describe('StrongWeakMap', () => {
         init                                    | hold   | expected
         ${[['a', 'a'], ['b', 'b'], ['c', 'c']]} | ${'a'} | ${['a']}
         ${[['a', 'a'], ['b', 'b'], ['c', 'c']]} | ${'b'} | ${['b']}
-    `('Garbage Collection cleanKeys', async ({ init, hold, expected }) => {
+    `('Garbage Collection entries', async ({ init, hold, expected }) => {
         const map = new StrongWeakMap(safeBoxKeyValues(init));
-        const allKeys = keys(map);
         const v = map.get(hold);
         expect(v).toBeDefined();
-        expect([...map.keys()]).toEqual(allKeys);
         expect(gc).toBeDefined();
         await wait(1);
         gc?.();
-        await wait(1);
-        expect([...map.keys()]).toEqual(allKeys);
-        // getting values will clean up keys
-        [...map];
-        expect([...map.keys()]).toEqual(expected);
+        expect(keys(map)).toEqual(expected);
         expect(map.get(hold)).toBe(v);
     });
 

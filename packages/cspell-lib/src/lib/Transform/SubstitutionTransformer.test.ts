@@ -49,6 +49,24 @@ describe('SubstitutionTransformer', () => {
     });
 
     test.each`
+        substitutions                        | expectedText
+        ${['quotes']}                        | ${'"x"'}
+        ${['quotes', ["''", '`']]}           | ${'`x`'}
+        ${[["''", '`'], 'quotes']}           | ${'"x"'}
+        ${['quotes', ["''", '`'], 'quotes']} | ${'"x"'}
+    `('a later definition or entry overrides an earlier one $substitutions', ({ substitutions, expectedText }) => {
+        const info: SubstitutionInfo = {
+            substitutions,
+            substitutionDefinitions: [
+                { name: 'quotes', entries: [["''", "'"]] },
+                { name: 'quotes', entries: [["''", '"']] },
+            ],
+        };
+        const { transformer } = createSubstitutionTransformer(info);
+        expect(transformer.transform("''x''").text).toBe(expectedText);
+    });
+
+    test.each`
         input                                | expectedText                 | expectedMap
         ${"\\'"}                             | ${"'"}                       | ${[2, 1]}
         ${'&apos;'}                          | ${"'"}                       | ${[6, 1]}

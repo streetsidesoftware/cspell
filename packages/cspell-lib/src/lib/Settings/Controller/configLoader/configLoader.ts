@@ -3,6 +3,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import type { CSpellSettings, CSpellUserSettings, ImportFileRef, Source } from '@cspell/cspell-types';
+import type { CacheStats } from '@streetsidesoftware/auto-resolve-map';
+import { autoResolve, AutoResolveMap } from '@streetsidesoftware/auto-resolve-map';
 import type { CSpellConfigFileReaderWriter, ICSpellConfigFile, IO, TextFile } from 'cspell-config-lib';
 import { createReaderWriter, CSpellConfigFile, CSpellConfigFileWithErrors } from 'cspell-config-lib';
 import { CSPELL_VFS_PROTOCOL, isUrlLike, toFileURL } from 'cspell-io';
@@ -12,8 +14,6 @@ import { onClearCache } from '../../../events/index.js';
 import type { VFileSystem } from '../../../fileSystem.js';
 import { getVirtualFS } from '../../../fileSystem.js';
 import { srcDirectory } from '../../../pkg-info.mjs';
-import type { CacheStats } from '../../../util/AutoResolve.js';
-import { autoResolve, AutoResolveCache, autoResolveWeak } from '../../../util/AutoResolve.js';
 import { logError, logWarning } from '../../../util/logger.js';
 import { FileResolver } from '../../../util/resolveFile.js';
 import { envToTemplateVars } from '../../../util/templates.js';
@@ -40,6 +40,7 @@ import { ImportError } from '../ImportError.js';
 import type { LoaderResult } from '../pnpLoader.js';
 import { pnpLoader } from '../pnpLoader.js';
 import { searchPlaces } from './configLocations.js';
+import type { StopAtLocation } from './configSearch.js';
 import { ConfigSearch } from './configSearch.js';
 import { configErrorToRawSettings, configToRawSettings } from './configToRawSettings.js';
 import { defaultSettings } from './defaultSettings.js';
@@ -224,8 +225,7 @@ export class ConfigLoader implements IConfigLoader {
 
     protected cachedConfig: Map<string, ImportedConfigEntry> = new Map();
     protected cachedConfigFiles: Map<string, CSpellConfigFile> = new Map();
-    protected cachedPendingConfigFile: AutoResolveCache<string, Promise<Error | CSpellConfigFile>> =
-        new AutoResolveCache();
+    protected cachedPendingConfigFile: AutoResolveMap<string, Promise<Error | CSpellConfigFile>> = new AutoResolveMap();
     protected cachedMergedConfig: WeakMap<CSpellConfigFile, CacheMergeConfigFileWithImports> = new WeakMap();
     protected cachedCSpellConfigFileInMemory: WeakMap<CSpellSettings, Map<string, CSpellConfigFile>> = new WeakMap();
     protected globalSettings: CSpellSettingsI | undefined;
@@ -256,7 +256,7 @@ export class ConfigLoader implements IConfigLoader {
         if (ref.error) return new ImportError(`Failed to read config file: "${ref.filename}"`, ref.error);
         const cached = this.cachedConfigFiles.get(href);
         if (cached) return cached;
-        return this.cachedPendingConfigFile.get(href, async () => {
+        return this.cachedPendingConfigFile.getOrInsertComputed(href, async () => {
             try {
                 const file = await this.cspellConfigFileReaderWriter.readConfig(href);
                 this.cachedConfigFiles.set(href, file);
@@ -273,7 +273,7 @@ export class ConfigLoader implements IConfigLoader {
 
     async searchForConfigFileLocation(
         searchFrom: URL | string | undefined,
-        stopSearchAt?: URL[] | undefined,
+        stopSearchAt?: readonly (URL | StopAtLocation)[] | undefined,
     ): Promise<URL | undefined> {
         const searchFromURL = (await this.#normalizeDirURL(searchFrom)) || cwdURL();
         return this.configSearch.searchForConfig(searchFromURL, stopSearchAt);
@@ -281,7 +281,7 @@ export class ConfigLoader implements IConfigLoader {
 
     async searchForConfigFile(
         searchFrom: URL | string | undefined,
-        stopSearchAt?: URL[],
+        stopSearchAt?: readonly (URL | StopAtLocation)[],
     ): Promise<CSpellConfigFile | CSpellConfigFileWithErrors | undefined> {
         const location = await this.searchForConfigFileLocation(searchFrom, stopSearchAt);
         if (!location) return undefined;
@@ -303,12 +303,23 @@ export class ConfigLoader implements IConfigLoader {
         options?: SearchForConfigOptions,
     ): Promise<CSpellSettingsI | undefined> {
         const stopAt = await this.#extractStopSearchAtURLs(options);
-        const configFile = await this.searchForConfigFile(searchFrom, stopAt);
+        return this.searchForConfigWithResolvedStops(searchFrom, stopAt, options);
+    }
+
+    /**
+     * Like `searchForConfig`, but the stops are already resolved, and some may be exclusive.
+     */
+    async searchForConfigWithResolvedStops(
+        searchFrom: URL | string | undefined,
+        stopSearchAt: readonly (URL | StopAtLocation)[] | undefined,
+        pnpSettings: PnPSettingsOptional | undefined,
+    ): Promise<CSpellSettingsI | undefined> {
+        const configFile = await this.searchForConfigFile(searchFrom, stopSearchAt);
         if (!configFile) return undefined;
         if (configFile instanceof CSpellConfigFileWithErrors) {
             return toInternalSettings(configFile.settings);
         }
-        return this.mergeConfigFileWithImports(configFile, options);
+        return this.mergeConfigFileWithImports(configFile, pnpSettings);
     }
 
     public getGlobalSettings(): CSpellSettingsI {
@@ -335,6 +346,7 @@ export class ConfigLoader implements IConfigLoader {
         this.cspellConfigFileReaderWriter.clearCachedFiles();
         this.cachedMergedConfig = new WeakMap();
         this.cachedCSpellConfigFileInMemory = new WeakMap();
+        this.stopSearchAtCache = new WeakMap();
         this.prefetchGlobalSettingsAsync();
         this.#knownVirtualFiles.clear();
     }
@@ -595,13 +607,14 @@ export class ConfigLoader implements IConfigLoader {
     }
 
     createCSpellConfigFile(filename: URL | string, settings: CSpellUserSettings): CSpellConfigFile {
-        const map = autoResolveWeak(
+        const url = toFileURL(filename);
+        const map = autoResolve(
             this.cachedCSpellConfigFileInMemory,
             settings,
             () => new Map<string, CSpellConfigFile>(),
         );
-        return autoResolve(map, filename, () =>
-            this.cspellConfigFileReaderWriter.toCSpellConfigFile({ url: toFileURL(filename), settings }),
+        return autoResolve(map, url.href, () =>
+            this.cspellConfigFileReaderWriter.toCSpellConfigFile({ url, settings }),
         );
     }
 

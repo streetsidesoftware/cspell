@@ -936,6 +936,552 @@ Related: #8975, streetsidesoftware/vscode-spell-checker#3099, streetsidesoftware
 
 </details>
 
+## v10.6.0 (2026-11-28)
+
+### Features
+
+<details>
+<summary>feat: Make `--config` replace the configuration files where cspell runs (<a href="https://github.com/streetsidesoftware/cspell/pull/9640">#9640</a>)</summary>
+
+### feat: Make `--config` replace the configuration files where cspell runs ([#9640](https://github.com/streetsidesoftware/cspell/pull/9640))
+
+## Summary
+
+The `--config <file>` and `--stop-config-search-at <dir>` options now give more control over which configuration files cspell loads.
+
+When cspell checks a file, it uses the nearest configuration file it finds by searching up the directory tree from that file. The `--stop-config-search-at <dir>` option now limits how far up that search goes, for every file. The `--no-config-search` option turns the search off.
+
+Specifying `--config <file>` now prevents loading configuration files from the current directory and the directories above it. Configuration files in subdirectories still apply.
+
+## Feature
+
+A project with two configuration files in its top directory, and one more for its German docs:
+
+```text
+project/
+  cspell.json              { "flagWords": ["hello"] }
+  cspell.custom.json       {}
+  README.md                hello world
+  i18n/de/
+    cspell.json            { "flagWords": ["hallo"] }
+    README.md              hallo welt
+```
+
+Before, running cspell in `project/` still checked `README.md` with `cspell.json`:
+
+```text
+$ cspell lint --config cspell.custom.json "**/*.md"
+i18n/de/README.md:1:1 - Forbidden word (hallo)
+README.md:1:1 - Forbidden word (hello)
+CSpell: Files checked: 2, Issues found: 2 in 2 files.
+```
+
+After, only `cspell.custom.json` applies in the current directory, and `i18n/de/cspell.json` still applies to the German docs:
+
+```text
+$ cspell lint --config cspell.custom.json "**/*.md"
+i18n/de/README.md:1:1 - Forbidden word (hallo)
+CSpell: Files checked: 2, Issues found: 1 in 1 file.
+```
+
+- The same applies to a configuration file named with the `CSPELL_CONFIG_PATH` environment variable, or with cspell-action's `config` input.
+- To also include the configuration file in the current directory, add `--stop-config-search-at .` to the command.
+- To build on `cspell.json`, add `"import": ["./cspell.json"]` to the file you name. Then `cspell.json` applies to every file, and the file you name wins where the two disagree.
+
+To ignore configuration files above the current directory, such as one in your home directory:
+
+```sh
+cspell lint --stop-config-search-at . "**/*.md"
+```
+
+<details>
+<summary>Technical Details</summary>
+
+- In `cspell-lib`, a new option, `stopConfigSearchAt`, sets the directories where the search for a document's configuration file stops. The search looks in each of those directories, and no further up.
+- It's in `SpellCheckFileOptions` and `DocumentValidatorOptions`.
+- An entry can also be a `StopAtLocation`, a new type. With `exclusive: true`, the search stops below that directory, so a configuration file in it isn't used.
+- The lint cache now also records the configuration file you name, or the one cspell finds on its own, and the `--stop-config-search-at` directories. A run where either one differs rechecks its files.
+- They're stored as relative paths, so a shared cache still matches on another machine.
+
+</details>
+
+---
+
+</details>
+
+### Fixes
+
+<details>
+<summary>fix: Name the YAML single-quote substitution so it can be disabled (<a href="https://github.com/streetsidesoftware/cspell/pull/9733">#9733</a>)</summary>
+
+### fix: Name the YAML single-quote substitution so it can be disabled ([#9733](https://github.com/streetsidesoftware/cspell/pull/9733))
+
+## Summary
+
+The default handling of `''` in YAML single-quoted strings is now a named substitution, `yaml-single-quote`. You can disable it by redefining it with no entries.
+
+**`cspell.config.yaml`**
+
+```yaml
+substitutionDefinitions:
+  - name: yaml-single-quote
+    entries: []
+```
+
+With this, `'doesn''t'` in a YAML or Docker Compose file is checked as written again, and `doesn` is reported.
+
+The Remapping Characters page now lists the built-in substitutions, `yaml-single-quote` and `latex-accents`, and shows how to disable one.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Combine substitutions and soft word breaks from all configs (<a href="https://github.com/streetsidesoftware/cspell/pull/9732">#9732</a>)</summary>
+
+### fix: Combine substitutions and soft word breaks from all configs ([#9732](https://github.com/streetsidesoftware/cspell/pull/9732))
+
+## Summary
+
+Substitutions and soft word breaks now add up across configs instead of the later config replacing the earlier one. This covers the default config, imported configs, your own config, and matching `overrides` and `languageSettings`.
+
+The settings affected:
+
+- `substitutionDefinitions` and `substitutions`
+- `softWordBreakDefinitions` and `softWordBreaks`
+
+This fixes three problems:
+
+- A config that defined its own `substitutionDefinitions` dropped the `latex-accents` definition that ships with the LaTeX dictionary. Every `.tex` file then failed to check.
+- A `languageSettings` entry for YAML with its own `substitutions` turned off the default handling of `''` in YAML single-quoted strings.
+- A config that defined its own soft word breaks dropped the ones from the configs it imports.
+
+## Substitutions
+
+**`cspell.config.yaml`**
+
+```yaml
+substitutionDefinitions:
+  - name: html-apostrophe
+    entries:
+      - ['&#39;', "'"]
+languageSettings:
+  - languageId: yaml
+    substitutions:
+      - html-apostrophe
+```
+
+**Before:**
+
+```text
+notes.yaml:3:9 - Unknown word (doesn)
+Failed to process "paper.tex" Error: Missing substitutions: latex-accents
+```
+
+**After:** both files are checked, and only real misspellings are reported.
+
+## Soft word breaks
+
+**`cspell.config.yaml`**
+
+```yaml
+import:
+  - ./shared.cspell.yaml # defines and enables `ptr: '^ptr|'`
+softWordBreakDefinitions:
+  my: '^my|'
+softWordBreaks:
+  my: true
+```
+
+**Before:** the imported `ptr` rule is lost.
+
+```text
+notes.txt:1:6 - Unknown word (ptrvalue)
+```
+
+**After:** both rules apply, so `ptrvalue` and `myvalue` are accepted.
+
+## What to know
+
+- A definition or soft word break replaces an earlier one with the same name. A substitution entry overrides an earlier entry with the same `find`.
+- An empty `substitutions` list no longer clears inherited substitutions. To turn one off, redefine it with no entries. For one written in place, map its `find` to itself where it is set, such as in a `languageSettings` entry for the same language.
+- To turn off an inherited soft word break, set it to `false` in `softWordBreaks`.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Treat `''` in YAML as an escaped single quote (<a href="https://github.com/streetsidesoftware/cspell/pull/9731">#9731</a>)</summary>
+
+### fix: Treat `''` in YAML as an escaped single quote ([#9731](https://github.com/streetsidesoftware/cspell/pull/9731))
+
+## Summary
+
+In YAML single-quoted strings, `''` is an escaped single quote. CSpell now reads it that way, so `'doesn''t'` is checked as `doesn't` and no longer reports `doesn`.
+
+This applies to YAML and Docker Compose files.
+
+Fixes #5150
+
+**Before:**
+
+```text
+sample.yaml:3:29 - Unknown word (doesn)
+```
+
+**After:** no issue for `doesn''t`. Real misspellings in the same string are still reported, at the same position as before.
+
+<details>
+<summary>Technical Details</summary>
+
+- The default configuration adds a `languageSettings` entry for `yaml` and `dockercompose` with a substitution that replaces `''` with `'` before the text is checked.
+- An empty string, `''`, becomes a single `'`, which is not a word, so nothing new is reported.
+
+</details>
+
+---
+
+</details>
+
+<details>
+<summary>fix: Build `@cspell/strong-weak-map` on `@streetsidesoftware/auto-resolve-map` (<a href="https://github.com/streetsidesoftware/cspell/pull/9726">#9726</a>)</summary>
+
+### fix: Build `@cspell/strong-weak-map` on `@streetsidesoftware/auto-resolve-map` ([#9726](https://github.com/streetsidesoftware/cspell/pull/9726))
+
+## Summary
+
+`@cspell/strong-weak-map` now builds on the `StrongWeakMap` from [`@streetsidesoftware/auto-resolve-map`](https://www.npmjs.com/package/@streetsidesoftware/auto-resolve-map). New code should use that package instead, and the README now says so.
+
+## Changes
+
+- `StrongWeakMap` keeps `autoGet` and `cleanKeys`.
+- It gains `getOrInsert` and `getOrInsertComputed`.
+- The map removes the keys of released values on its own, some time after they are garbage collected. Calling `cleanKeys` is no longer needed.
+
+## Differences in behavior
+
+- `delete()` returns `true` only when the value hadn't been released. It used to return `true` whenever the key was there.
+- Reading a released value, with `get()` or by looping over the map, no longer removes its key at once. Until the map removes it, `size` and `keys()` still include it.
+- The constructor accepts any iterable of entries, not only an array.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Make the list of dictionaries in a collection read-only (<a href="https://github.com/streetsidesoftware/cspell/pull/9721">#9721</a>)</summary>
+
+### fix: Make the list of dictionaries in a collection read-only ([#9721](https://github.com/streetsidesoftware/cspell/pull/9721))
+
+## Summary
+
+For users of the `cspell-lib` and `cspell-dictionary` APIs: the list of dictionaries in a `SpellingDictionaryCollection` is now read-only. Loading the dictionaries for the same settings with `getDictionary` can return the same collection more than once, and cspell uses it too. A change to its list would affect everyone using it.
+
+- TypeScript code that changes the list, such as `push` or `sort`, no longer compiles. Neither does code that assigns the list to a `SpellingDictionary[]` or passes it to a parameter of that type. Code that only reads it, such as `for…of` or `map`, still compiles.
+
+- A list that needs changing, or that has to be a `SpellingDictionary[]`, can be copied first:
+
+  ```ts
+  const dictionaries = [...collection.dictionaries];
+  ```
+
+- Creating a collection accepts a read-only list, and no longer reorders the list it is given. The function is `createCollection` in `cspell-dictionary` and `createSpellingDictionaryCollection` in `cspell-lib`.
+
+- The doc comment of `getDictionary` now says that the collection can be shared.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Reuse in-memory config files given as a `URL` (<a href="https://github.com/streetsidesoftware/cspell/pull/9719">#9719</a>)</summary>
+
+### fix: Reuse in-memory config files given as a `URL` ([#9719](https://github.com/streetsidesoftware/cspell/pull/9719))
+
+## Summary
+
+`cspell-lib` remembers the config files it creates from settings in memory. A file given as a `URL` was never found again, so its imports were resolved and merged again on every call. Now the same settings for the same file are found, whether the file is given as a path, a `file:` string, or a `URL`.
+
+This affects:
+
+- `resolveConfigFileImports`, when it's given a config file object that `cspell-lib` didn't create.
+- The config loader's `resolveSettingsImports` and `createCSpellConfigFile`, when the file is given as a `URL`.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Clear the stops `searchForConfig` remembers when the caches are cleared (<a href="https://github.com/streetsidesoftware/cspell/pull/9709">#9709</a>)</summary>
+
+### fix: Clear the stops `searchForConfig` remembers when the caches are cleared ([#9709](https://github.com/streetsidesoftware/cspell/pull/9709))
+
+`searchForConfig` remembers the stops it works out from `stopSearchAt`, for each options object it's given. Clearing cspell-lib's caches didn't clear them, so a program that reused an options object kept the stops from before.
+
+Working out a stop can depend on the disk: a path without a trailing slash is taken as a directory only if it is one. After such a directory was created and the caches were cleared, the search could still stop in the wrong place, and use the wrong configuration file.
+
+`clearCachedFiles()` and `clearCaches()` now clear these stops too.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Check files faster by sharing word lookups between files (<a href="https://github.com/streetsidesoftware/cspell/pull/9699">#9699</a>)</summary>
+
+### fix: Check files faster by sharing word lookups between files ([#9699](https://github.com/streetsidesoftware/cspell/pull/9699))
+
+## Summary
+
+Check files faster. cspell remembers the words it has already looked up, but it started over with every file. Files that use the same dictionaries now share what it remembers.
+
+- `googleapis/google-cloud-cpp`: 31% faster, 59.4 s to 41.1 s for 22,223 files.
+- `flutter/samples`: 9% faster, 4.56 s to 4.15 s for 1,703 files.
+- `microsoft/TypeScript-Website`: 8% faster, 2.44 s to 2.25 s for 803 files.
+
+The issues found are the same, and so is the memory used. The more files share the same dictionaries, the bigger the gain: a repository where many files have dictionaries of their own sees little or no difference.
+
+<details>
+<summary>Technical Details</summary>
+
+- Looking up a word means searching every dictionary that applies to the file, so cspell keeps the results. Each file kept its own, even when another file used the same dictionaries.
+- Files with the same dictionaries now share the results. On `googleapis/google-cloud-cpp`, the dictionaries are searched 1.3 million times instead of 8.3 million.
+- Sharing the results doesn't keep dictionaries in memory. A repository with a lot of dictionaries can still release the ones it has finished with.
+- A dictionary that is reloaded, or a word list that changes, starts with no results.
+- For users of the `cspell-lib` API: loading the dictionaries for the same settings can return the same object more than once. Don't change the list of dictionaries in it.
+
+</details>
+
+---
+
+</details>
+
+<details>
+<summary>fix: Reuse dictionary definitions between files (<a href="https://github.com/streetsidesoftware/cspell/pull/9696">#9696</a>)</summary>
+
+### fix: Reuse dictionary definitions between files ([#9696](https://github.com/streetsidesoftware/cspell/pull/9696))
+
+## Summary
+
+Reuse dictionary definitions between files. A dictionary whose words are listed in a configuration file got a new copy of its definition for every file that was checked.
+
+- This includes bundled dictionaries, such as `software-term-suggestions` and `en-common-misspellings`.
+- It also applies when such a dictionary is named in `noSuggestDictionaries`.
+- The issues found are the same. The time is the same, within noise.
+
+Dictionaries loaded from files were already shared. Files now also share the dictionaries listed in a configuration file. On `googleapis/google-cloud-cpp`, 22,223 files use 6 sets of dictionaries, instead of one set per file.
+
+<details>
+<summary>Technical Details</summary>
+
+- A dictionary is looked up by its definition. With a new copy for each file, a dictionary whose words are in a configuration file was never found, so it was put together again. Its words were not loaded again: they were already kept.
+- For `noSuggestDictionaries`, the copy that a definition needs is kept, and used again until the setting changes for that dictionary.
+
+</details>
+
+---
+
+</details>
+
+<details>
+<summary>fix: Don't reuse cached results between runs with and without "--no-config-search" (<a href="https://github.com/streetsidesoftware/cspell/pull/9683">#9683</a>)</summary>
+
+### fix: Don't reuse cached results between runs with and without "--no-config-search" ([#9683](https://github.com/streetsidesoftware/cspell/pull/9683))
+
+## Summary
+
+With `--cache`, `cspell lint` no longer reuses a file's cached result between runs with and without `--no-config-search`.
+
+Before this fix:
+
+- A run with `--no-config-search` could reuse the result of a run that used configuration files found near the file.
+- A run without the flag could reuse the result of a run with `--no-config-search`, which didn't use them.
+
+Either way, the run could report issues it shouldn't, or miss issues it should report.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Show what relative paths are relative to in "cspell lint --help --verbose" (<a href="https://github.com/streetsidesoftware/cspell/pull/9682">#9682</a>)</summary>
+
+### fix: Show what relative paths are relative to in "cspell lint --help --verbose" ([#9682](https://github.com/streetsidesoftware/cspell/pull/9682))
+
+## Summary
+
+The verbose help for `cspell lint` now ends with a table of its path options and what a relative path in each is relative to: the root or the current directory.
+
+- It appears in `cspell lint --help --verbose` and `cspell --help --verbose`.
+- How paths are resolved doesn't change, and the normal `--help` output stays the same.
+
+## Before
+
+```text
+Hidden Options:
+  ...
+  --debug                        Output information useful for debugging cspell.json files.
+  -f,--flag <flag:value>         Declare an execution flag value
+
+More Examples:
+  ...
+```
+
+## After
+
+```text
+Hidden Options:
+  ...
+  --debug                        Output information useful for debugging cspell.json files.
+  -f,--flag <flag:value>         Declare an execution flag value
+
+Relative Paths:
+  Option                    Relative to
+  [globs...]                the root
+  [file://<path>]           the root
+  [stdin://<path>]          the root
+  --file                    the root
+  --exclude                 the root
+  --cache-location          the root
+  --root                    the current directory
+  --config                  the current directory
+  --file-list               the current directory
+    each path in the list   the list file's directory
+  --stop-config-search-at   the current directory
+  --gitignore-root          the current directory
+  --reporter                the current directory
+
+More Examples:
+  ...
+```
+
+---
+
+</details>
+
+### Dictionary Updates
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/9704">#9704</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#9704](https://github.com/streetsidesoftware/cspell/pull/9704))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../snapshots/AdaDoom3/AdaDoom3/report.yaml        | 11 +---
+ .../snapshots/AdaDoom3/AdaDoom3/snapshot.txt       | 11 +---
+ .../MartinThoma/LaTeX-examples/report.yaml         |  3 +-
+ .../MartinThoma/LaTeX-examples/snapshot.txt        |  3 +-
+ .../snapshots/neovim/nvim-lspconfig/report.yaml    |  3 +-
+ .../snapshots/neovim/nvim-lspconfig/snapshot.txt   | 11 ++--
+ packages/cspell-bundled-dicts/package.json         | 12 ++--
+ pnpm-lock.yaml                                     | 70 +++++++++++++---------
+ 8 files changed, 57 insertions(+), 67 deletions(-)
+```
+
+---
+
+</details>
+
+## v10.5.2 (2026-11-18)
+
+### Fixes
+
+<details>
+<summary>fix: `--gitignore` skips nested repositories in ignored folders again (<a href="https://github.com/streetsidesoftware/cspell/pull/9648">#9648</a>)</summary>
+
+### fix: `--gitignore` skips nested repositories in ignored folders again ([#9648](https://github.com/streetsidesoftware/cspell/pull/9648))
+
+## Summary
+
+With `--gitignore` (`useGitignore`), cspell again skips a git repository kept in a folder that `.gitignore` excludes, such as a tool's cache of cloned dependencies. Since 10.4.0, these files were checked. A submodule in an ignored folder is still checked, as git does.
+
+Fixes #9645
+
+## Before and after
+
+A project with a clone in an ignored cache folder, and a submodule in an ignored `vendor/` folder:
+
+```text
+project/
+  .gitignore     .cache/ and vendor/
+  .gitmodules    lists vendor/lib
+  README.md
+  .cache/dep/    a clone, with its own .git
+  vendor/lib/    a submodule
+```
+
+Before, cspell checked the clone:
+
+```text
+$ cspell lint --gitignore --dot "**/*.md"
+.cache/dep/NOTES.md:1:1 - Unknown word (Thsi) fix: (This)
+.cache/dep/NOTES.md:1:9 - Unknown word (misspeled) fix: (misspelled)
+vendor/lib/NOTES.md:1:1 - Unknown word (Anothr) fix: (Another)
+vendor/lib/NOTES.md:1:8 - Unknown word (typpo) fix: (typo)
+CSpell: Files checked: 3, Issues found: 4 in 2 files.
+```
+
+After, it skips the clone and checks the submodule:
+
+```text
+$ cspell lint --gitignore --dot "**/*.md"
+vendor/lib/NOTES.md:1:1 - Unknown word (Anothr) fix: (Another)
+vendor/lib/NOTES.md:1:8 - Unknown word (typpo) fix: (typo)
+CSpell: Files checked: 2, Issues found: 2 in 1 file.
+```
+
+What to know:
+
+- A repository in an ignored folder is skipped with all its files, unless `.gitmodules` lists it as a submodule.
+- A repository added with plain `git add`, without a `.gitmodules` entry, is skipped too.
+- A worktree in an ignored folder is skipped too.
+- Running cspell inside the nested repository still checks its files.
+- In a folder that isn't ignored, the `.gitignore` files above a nested repository still don't apply to its files.
+
+<details>
+<summary>Technical Details</summary>
+
+- When the search for `.gitignore` files reaches a nested repository below `gitignoreRoot` (by default, the repository cspell runs in), it first asks the outer repository's `.gitignore` files whether the nested repository's folder is ignored. If it is, every file in it is ignored, whatever the `.gitignore` files inside it say.
+- Submodules are read from the outer repository's `.gitmodules` file. The submodules of an ignored repository are ignored with it.
+
+</details>
+
+---
+
+</details>
+
+<details>
+<summary>fix: Detect file types by folder, such as `.git/config` (<a href="https://github.com/streetsidesoftware/cspell/pull/9641">#9641</a>)</summary>
+
+### fix: Detect file types by folder, such as `.git/config` ([#9641](https://github.com/streetsidesoftware/cspell/pull/9641))
+
+## Summary
+
+File types can now be detected by the folder a file is in, not only by its name. The first two are git's own files, which had no file type before.
+
+- `.git/config` is detected as `properties`, like `.gitconfig`.
+- `.git/info/exclude` is detected as `ignore`, like `.gitignore`.
+
+<details>
+<summary>Technical Details</summary>
+
+- In `@cspell/filetypes`, an entry in a file type's `filenames` may now contain `/`. It matches the end of a path. A `\` in the path is read as `/`.
+- In such an entry, `*` stays within one folder, and `**` spans folders.
+- A match on the path wins over a match on the name or extension.
+- cspell-lib now passes the full path when it looks up a file's type.
+- `findMatchingFileTypes` could return no file type for a path, depending on the path given in the previous call. That is fixed.
+
+</details>
+
+---
+
+</details>
+
 ## v10.5.1 (2026-11-14)
 
 ### Fixes

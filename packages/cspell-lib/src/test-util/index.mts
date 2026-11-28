@@ -1,3 +1,4 @@
+export { createTempFolder } from './test.helper.mjs';
 export {
     pathPackageFixtures,
     pathPackageFixturesURL,

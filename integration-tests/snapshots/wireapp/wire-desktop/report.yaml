@@ -3,15 +3,16 @@ Repository: wireapp/wire-desktop
 Url: https://github.com/wireapp/wire-desktop.git
 Args: '["*.md","electron/renderer/**/*.jsx","electron/src/**/*.ts","electron/html/*.html"]'
 Summary:
-  files: 86
-  filesWithIssues: 14
-  issues: 72
+  files: 90
+  filesWithIssues: 15
+  issues: 74
   errors: 0
 Errors: []
 
 issues:
   - "electron/src/auth/WebAuthn.ts:35:22         webauthn    U       session.on('select-webauthn-account', async (_event"
   - "electron/src/lib/desktopAppConfig.ts:25:27          Popout      U       readonly supportsCallingPopoutWindow?: boolean;"
+  - "electron/src/lib/webappLoggingCompatibility.ts:26:46        Webapps     U       compatibility until supported Webapps no longer need enableLogging"
   - "electron/src/locale/index.ts:121:8          Čeština         U       cs: 'Čeština',"
   - "electron/src/locale/index.ts:122:8          Dansk           U       da: 'Dansk',"
   - "electron/src/locale/index.ts:123:8          Deutsch         U       de: 'Deutsch',"
@@ -32,15 +33,15 @@ issues:
   - "electron/src/locale/index.ts:141:8          Türkçe          U       tr: 'Türkçe',"
   - "electron/src/locale/index.ts:142:8          Українська      U       uk: 'Українська',"
   - "electron/src/logging/logCleanupScheduler.ts:20:13       Unrefable       U       export type UnrefableInterval = {"
-  - "electron/src/logging/rendererDiagnostics.spec.ts:161:8          Subframe    U       'Subframe failure',"
-  - "electron/src/mainProcess.ts:481:51      webrtc      U       disable-features', 'webrtc-hide-local-ips-with"
-  - "electron/src/mainProcess.ts:481:78      mdns        U       hide-local-ips-with-mdns');"
+  - "electron/src/logging/rendererDiagnostics.spec.ts:163:8          Subframe    U       'Subframe failure',"
+  - "electron/src/mainProcess.ts:506:51      webrtc      U       disable-features', 'webrtc-hide-local-ips-with"
+  - "electron/src/mainProcess.ts:506:78      mdns        U       hide-local-ips-with-mdns');"
   - "electron/src/managed/backends/macos.ts:33:45        APPLOCK     U       temPreferences.getUserDefault(APPLOCK_OVERRIDE_KEY, 'boolean"
   - "electron/src/managed/backends/windows.ts:37:33          subkey      U       enumerateKeys: (hive: number, subkey: string) => string["
   - "electron/src/managed/ManagedConfig.ts:34:3          applock     U       applockOverride: boolean;"
   - "electron/src/managed/ManagedConfig.ts:39:16         Applock     U       function detectApplockOverride(): boolean"
-  - "electron/src/preload/preload-webview.ts:289:37      polyfilling     U       This can be improved by polyfilling getDisplayMedia function"
-  - "electron/src/preload/preload-webview.ts:347:8       SQSERVICES      U       // see SQSERVICES-1882 and SQSERVICES"
+  - "electron/src/preload/preload-webview.ts:295:37      polyfilling     U       This can be improved by polyfilling getDisplayMedia function"
+  - "electron/src/preload/preload-webview.ts:353:8       SQSERVICES      U       // see SQSERVICES-1882 and SQSERVICES"
   - "electron/src/sso/MacWebAuthentication.ts:22:6           Nobjc       U       type NobjcObject = {[selector:"
   - "electron/src/sso/MacWebAuthentication.ts:51:84          objc        U       typedBlock} = require('objc-js');"
   - "electron/src/sso/MacWebAuthentication.ts:78:59          TSFN        U       always dispatch through a TSFN in Electron,"

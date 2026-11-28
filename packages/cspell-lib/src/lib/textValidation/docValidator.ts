@@ -9,7 +9,6 @@ import type {
     ParsedText,
     Parser,
     ParseResult,
-    PnPSettings,
 } from '@cspell/cspell-types';
 import { IssueType } from '@cspell/cspell-types';
 import { toFilePathOrHref, toFileURL } from '@cspell/url';
@@ -26,6 +25,7 @@ import type {
     CSpellSettingsInternal,
     CSpellSettingsInternalFinalized,
     ImportFileRefWithError,
+    StopAtLocation,
 } from '../Settings/index.js';
 import {
     extractImportErrors,
@@ -34,7 +34,7 @@ import {
     mergeSettings,
     resolveConfigFileImports,
     resolveSettingsImports,
-    searchForConfig,
+    searchForConfigWithResolvedStops,
 } from '../Settings/index.js';
 import type { DirectiveIssue } from '../Settings/InDocSettings.js';
 import { validateInDocumentSettings } from '../Settings/InDocSettings.js';
@@ -62,35 +62,15 @@ import { settingsToValidateOptions } from './settingsToValidateOptions.js';
 import { calcTextInclusionRanges } from './textValidator.js';
 import type { TraceResult } from './traceWord.js';
 import { traceWord } from './traceWord.js';
-import type { ValidateTextOptions } from './ValidateTextOptions.js';
+import type { ValidateDocumentOptions } from './ValidateTextOptions.js';
 import type { MappedTextValidationResult } from './ValidationTypes.js';
 
-export interface DocumentValidatorOptions extends ValidateTextOptions {
-    /**
-     * Optional path to a configuration file.
-     * If given, it will be used instead of searching for a configuration file.
-     */
-    configFile?: string;
-    /**
-     * Prevents searching for local configuration files
-     * By default the spell checker looks for configuration files
-     * starting at the location of given filename.
-     * If `configFile` is defined it will still be loaded instead of searching.
-     * `false` will override the value in `settings.noConfigSearch`.
-     * @defaultValue undefined
-     */
-    noConfigSearch?: boolean;
-
+export interface DocumentValidatorOptions extends ValidateDocumentOptions {
     /**
      * If `settings: CSpellUserSettings` contains imports, they will be resolved using this path.
      * If not set, the current working directory will be used.
      */
     resolveImportsRelativeTo?: string | URL;
-
-    /**
-     * If true, the document will be checked even if it would normally be excluded.
-     */
-    forceCheck?: boolean;
 
     /**
      * If true, the ranges of text that have been checked will be recorded and available for later using the `getCheckedRanges` method.
@@ -192,7 +172,7 @@ export class DocumentValidator {
               ? timePromise(
                     this.perfTiming,
                     '__searchForDocumentConfig',
-                    searchForDocumentConfig(this._document, settings, settings),
+                    searchForDocumentConfig(this._document, settings, options.stopConfigSearchAt),
                 )
               : undefined;
         if (pLocalConfig) {
@@ -660,16 +640,19 @@ function sanitizeSuggestion(sug: WordSuggestion): ExtendedSuggestion {
     return { word };
 }
 
+/**
+ * @param settings - the settings to fall back on, and the PnP settings for the search.
+ */
 async function searchForDocumentConfig(
     document: TextDocumentRef,
-    defaultConfig: CSpellSettingsWithSourceTrace,
-    pnpSettings: PnPSettings,
+    settings: CSpellSettingsWithSourceTrace,
+    stopSearchAt: readonly (URL | StopAtLocation)[] | undefined,
 ): Promise<CSpellSettingsWithSourceTrace> {
     const url = documentUriToURL(document.uri);
     try {
-        return await searchForConfig(url, pnpSettings).then((s) => s || defaultConfig);
+        return await searchForConfigWithResolvedStops(url, stopSearchAt, settings).then((s) => s || settings);
     } catch (e) {
-        if (url.protocol !== 'file:') return defaultConfig;
+        if (url.protocol !== 'file:') return settings;
         throw e;
     }
 }
@@ -735,7 +718,7 @@ export async function shouldCheckDocument(
         const pLocalConfig = options.configFile
             ? loadConfig(options.configFile, settings)
             : useSearchForConfig
-              ? searchForDocumentConfig(doc, settings, settings)
+              ? searchForDocumentConfig(doc, settings, options.stopConfigSearchAt)
               : undefined;
 
         const localConfig = (await catchPromiseError(pLocalConfig, addPossibleError)) || {};

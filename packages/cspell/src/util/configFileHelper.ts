@@ -9,6 +9,14 @@ import { filenameToUrl } from './fileHelper.js';
 export interface ConfigInfo {
     source: string;
     config: CSpellUserSettings;
+    /**
+     * The config file that was loaded. Not set when there is none.
+     */
+    url?: URL | undefined;
+    /**
+     * The config file was found by searching, rather than given or taken from `CSPELL_DEFAULT_CONFIG_PATH`.
+     */
+    foundBySearch: boolean;
 }
 
 export interface FileConfigInfo {
@@ -21,7 +29,7 @@ export interface FileConfigInfo {
 export async function readConfig(
     configFile: string | CSpellConfigFile | undefined,
     root: string | undefined,
-    stopConfigSearchAt?: (URL | string)[] | undefined,
+    stopConfigSearchAt?: URL[] | undefined,
 ): Promise<ConfigInfo> {
     configFile ??= getEnvironmentVariable(environmentKeys.CSPELL_CONFIG_PATH);
 
@@ -39,13 +47,19 @@ export async function readConfig(
         }
     }
 
-    return { source: config?.__importRef?.filename || 'None found', config: config || {} };
+    const filename = config?.__importRef?.filename;
+    return {
+        source: filename || 'None found',
+        config: config || {},
+        url: filename ? filenameToUrl(filename) : undefined,
+        foundBySearch: !!config,
+    };
 }
 
 async function configFileToConfigInfo(cfgFile: CSpellConfigFile): Promise<ConfigInfo> {
     const config = await cspell.resolveConfigFileImports(cfgFile);
     const source = toFilePathOrHref(cfgFile.url);
-    return { source, config };
+    return { source, config, url: cfgFile.url, foundBySearch: false };
 }
 
 export function readConfigFile(filename: string | URL): Promise<CSpellConfigFile> {
