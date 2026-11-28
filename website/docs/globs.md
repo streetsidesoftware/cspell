@@ -37,8 +37,7 @@ Write globs with `/` between folder names, also on Windows.
 
 ## The Example Folder
 
-The examples on this page run `cspell` in this folder, with the configuration file in it. Each file is listed with
-its full relative path.
+The examples on this page run `cspell` in this folder. Each file is listed with its full relative path.
 
 ```text
 README.md
@@ -109,7 +108,7 @@ from the configuration. A glob in `files` matches the same files as on the comma
 - `cspell .` checks all files.
 - A glob ending in `/**` also matches a file with that name. `cspell "**/.git/**"` checks the file `sub/.git`.
 - On the command line, a glob that starts with `/` is an absolute path. It must point inside the current folder. In
-  `files`, a leading `/` ties the glob to the configuration file's folder.
+  `files`, a leading `/` ties the glob to [the folder it is relative to](#what-a-glob-is-relative-to).
 - A glob can start with `../` to check a folder next to the current folder: `cspell "../shared/**/*.md"`. Other uses
   of `..` in a glob aren't supported.
 - A glob that starts with `!` skips the files it matches, using [loose matching](#what-loose-matching-adds).
@@ -249,7 +248,7 @@ Use `--force-check` to check them anyway.
 }
 ```
 
-This skips the contents of every `node_modules` folder at any depth. Without it, CSpell skips only the
+This skips the contents of every `node_modules` folder under the current folder. Without it, CSpell skips only the
 `node_modules` folder in the current folder, and only when no `--exclude` is given.
 
 ### A Project Inside a `node_modules` Folder
