@@ -7822,6 +7822,30 @@ error"
 
 exports[`Validate cli > app 'samples/Dutch.txt' Expect Error: [Function CheckFailed] 3`] = `""`;
 
+exports[`Validate cli > app 'soft word breaks merged' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'soft word breaks merged' Expect Error: [Function CheckFailed] 2`] = `
+"log	notes.txt:2:6 - Unknown word (sentense) fix: (sentence)
+log
+error	CSpell: Files checked: 3, Issues found: 1 in 1 file.
+error"
+`;
+
+exports[`Validate cli > app 'soft word breaks merged' Expect Error: [Function CheckFailed] 3`] = `""`;
+
+exports[`Validate cli > app 'substitutions merged' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'substitutions merged' Expect Error: [Function CheckFailed] 2`] = `
+"log	notes.yaml:5:24 - Unknown word (corectly) fix: (correctly)
+log
+log	paper.tex:4:6 - Unknown word (sentense) fix: (sentence)
+log
+error	CSpell: Files checked: 3, Issues found: 2 in 2 files.
+error"
+`;
+
+exports[`Validate cli > app 'substitutions merged' Expect Error: [Function CheckFailed] 3`] = `""`;
+
 exports[`Validate cli > app 'trace café' Expect Error: undefined 1`] = `[]`;
 
 exports[`Validate cli > app 'trace café' Expect Error: undefined 2`] = `
