@@ -69,7 +69,10 @@ export async function globP(pattern: string | string[], options?: GlobOptions): 
     const absolutePaths = (await tinyGlob(patterns, useOptions)).sort(compare);
     if (unresolvedLinks && onBrokenSymlink) {
         const symlinks = createSymlinkChecker(cwd);
-        const matcher = new GlobMatcher(patterns, { root: cwd, mode: 'include', dot: dot ?? false });
+        // Match the way the search does: a glob such as `../other/*.md` starts in `../other`, and `**` doesn't leave
+        // the folder a glob starts in.
+        const globs = patterns.map((glob) => ({ ...fileOrGlobToGlob(glob, cwd), isGlobalPattern: false }));
+        const matcher = new GlobMatcher(globs, { root: cwd, mode: 'include', dot: dot ?? false });
         const broken = new Set<string>();
         for (const filename of unresolvedLinks) {
             if (matcher.matchEx(filename).matched && (await symlinks.isBrokenSymlink(filename))) broken.add(filename);
