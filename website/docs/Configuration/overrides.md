@@ -14,7 +14,7 @@ Spell checking is a two step process:
 ## Step 1: Determine Which Files to Check
 
 This is based on the command line together with the configuration file loaded at start up (the file nearest
-the current directory, or the one given with `--config`).
+the current directory, or the one given with `--config` or `CSPELL_CONFIG_PATH`).
 
 - If globs are given on the command line, they are used to search for matching files. (If none are given, the
   configuration's `files` setting is used as the globs instead.) The results are filtered against the
@@ -47,16 +47,50 @@ settings (see [Merge Rules](#merge-rules) below for how array-like settings are 
 
 1. **Default Configuration** -- the settings built into `cspell` (disable with `--no-default-configuration`).
 1. **The configuration loaded at start up** -- the same configuration file used in Step 1, found by searching
-   upward from the current directory (or `--root`), or given explicitly with `--config <path>`. Any files it
-   `import`s are merged in first, with the file's own settings merged in last so it always wins over what it
-   imports. A few CLI flags adjust these settings directly: `--dictionary <name>` / `--disable-dictionary <name>`
-   (enable/disable dictionaries) and `--report <level>` (which categories of unknown words to report).
+   upward from the current directory (or `--root`), or given explicitly with `--config <path>` or the
+   `CSPELL_CONFIG_PATH` environment variable. Any files it `import`s are merged in first, with the file's own
+   settings merged in last, so they override the settings it imports. A few CLI flags adjust these settings
+   directly: `--dictionary <name>` / `--disable-dictionary <name>` (enable/disable dictionaries) and
+   `--report <level>` (which categories of unknown words to report).
 1. **The configuration nearest the document** -- found by a second, independent search that starts at the
-   document's own directory and walks upward. It overrides everything above it, even when `--config` is given.
-   (Skipped when `--no-config-search` is used, or when `noConfigSearch` is `true`.)
+   document's own directory and walks upward. Its settings override the configuration loaded at start up. The
+   search is skipped when `--no-config-search` is used, or when the configuration loaded at start up sets
+   `"noConfigSearch": true`. Setting `noConfigSearch` in the nearest configuration itself has no effect.
 
-This means a `cspell.json` placed next to (or above) an individual file always wins over the configuration file
-found from the current working directory.
+Where the search for the nearest configuration stops:
+
+- With `--config <path>` or `CSPELL_CONFIG_PATH`, the search stops at the root (the current directory, or `--root`)
+  without looking in it. The configuration files in the root and the folders above it aren't loaded. Configuration
+  files deeper in the project still apply.
+- With `--stop-config-search-at <dir>`, the search stops at `<dir>`, after looking in it. With `--config`, a `<dir>`
+  at or above the root takes the place of the root, so the search looks in the root and the folders above it, up to
+  `<dir>`.
+
+So the settings in a `cspell.json` next to a file, or in a folder above it, override the configuration loaded at
+start up, as long as the search reaches it.
+
+For example, take a project with these configuration files:
+
+```text
+cspell.json
+cspell.custom.json
+i18n/de/cspell.json
+```
+
+`cspell lint --config cspell.custom.json "**/*.md"` doesn't load `cspell.json`, and `i18n/de/cspell.json` still
+applies to the files in `i18n/de/`. To use `cspell.json` as well, import it from `cspell.custom.json`. The named file
+is merged after its imports, so its own settings override theirs.
+
+**`cspell.custom.json`**
+
+```json
+{
+  "import": ["./cspell.json"],
+  "words": ["mkdirp"]
+}
+```
+
+To check with `cspell.custom.json` alone, add `--no-config-search`.
 
 ### Merge Rules
 
