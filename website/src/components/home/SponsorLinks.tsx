@@ -21,6 +21,7 @@ function getIconPath(iconName?: string): string | null {
   const icons: Record<string, string> = {
     github: '/img/icons/github.svg',
     patreon: '/img/icons/patreon.svg',
+    paypal: '/img/icons/paypal.svg',
     'thanks-dev': '/img/icons/thanks-dev.svg',
     opencollective: '/img/icons/open-collective.svg',
     cspell: '/img/logo.png',
