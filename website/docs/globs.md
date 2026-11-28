@@ -30,7 +30,7 @@ different files depending on where it is used.
 - `?` matches one character.
 - `{md,txt}` matches any one of the comma-separated choices.
 - `[abc]` matches one of the characters.
-- `!(COMMIT_EDITMSG|HEAD)` matches any name except the ones listed.
+- `!(README.md|CHANGELOG.md)` matches any name except the ones listed.
 - A leading `!` negates a glob. What it does depends on the setting: see [Negative Globs](#negative-globs).
 
 Write globs with `/` between folder names, also on Windows.
@@ -42,12 +42,11 @@ The examples on this page assume the current folder holds these files:
 ```text
 README.md
 .hidden.md
-.git/config
-.git/COMMIT_EDITMSG
+.github/CONTRIBUTING.md
+.github/workflows/ci.yml
 docs/a.md
 docs/.x.md
 node_modules/x/a.md
-sub/.git                 (a file, as in a git worktree)
 sub/node_modules/y/b.md
 test/a.md
 a/test/b.md
@@ -106,7 +105,7 @@ from the configuration. A glob in `files` matches the same files as on the comma
   that start with `.`.
 - `cspell docs` checks all files in the `docs` folder. This works for any existing folder, such as `docs/api`.
 - `cspell .` checks all files.
-- A glob ending in `/**` also matches a file with that name. `cspell "**/.git/**"` checks the file `sub/.git`.
+- A glob ending in `/**` also matches a file with that name: `cspell "**/test/**"` checks a file named `test`.
 - On the command line, a glob that starts with `/` is an absolute path. It must point inside the current folder. In
   `files`, a leading `/` ties the glob to [the folder it is relative to](#what-a-glob-is-relative-to).
 - A glob can start with `../` to check a folder next to the current folder: `cspell "../shared/**/*.md"`. Other uses
@@ -119,11 +118,10 @@ from the configuration. A glob in `files` matches the same files as on the comma
 By default, `*` and `**` do not match names that start with `.`, such as `.github` or `.hidden.md`.
 
 - Use `--dot` on the command line, or `"enableGlobDot": true` in the configuration, to include them.
-- A glob that names the dot explicitly matches without `--dot`: `cspell "**/.*"` checks `.hidden.md`, `docs/.x.md`,
-  and `sub/.git`.
+- A glob that names the dot explicitly matches without `--dot`: `cspell "**/.*"` checks `.hidden.md` and
+  `docs/.x.md`.
 - Without `--dot`, the search does not enter folders that start with `.`. A glob that starts with the folder's name
-  still works: `cspell ".git/**"` checks the files in `.git`, but `cspell "**/.git/**"` checks only the file
-  `sub/.git`.
+  still works: `cspell ".github/**"` checks the files in `.github`, but `cspell "**/.github/**"` checks nothing.
 
 `--dot` and `enableGlobDot` only change strict matching. Loose matching always matches dot files.
 
@@ -136,8 +134,8 @@ By default, `*` and `**` do not match names that start with `.`, such as `.githu
 | Glob                 | Examples                        | Matches                                                                                |
 | -------------------- | ------------------------------- | -------------------------------------------------------------------------------------- |
 | No `/`               | `node_modules`, `*.md`          | The name at any depth, and everything inside a folder with that name.                  |
-| A `/` before the end | `/src`, `lib/src`, `**/.git`    | The path, and everything inside a folder with that path.                               |
-| Ends with `/`        | `.git/`, `/src/`, `lib/src/`    | Only the contents of the folder. A single name, such as `.git/`, matches at any depth. |
+| A `/` before the end | `/src`, `lib/src`, `**/docs`    | The path, and everything inside a folder with that path.                               |
+| Ends with `/`        | `docs/`, `/src/`, `lib/src/`    | Only the contents of the folder. A single name, such as `docs/`, matches at any depth. |
 | Ends with `**`       | `node_modules/**`, `**/test/**` | As written.                                                                            |
 
 As in strict matching, a glob ending in `/**` also matches a file with that name: `**/test/**` matches a file named
@@ -147,10 +145,6 @@ In overrides, these extra matches can be disabled with
 [`overrideGlobsMatchFilesOnly`](./Configuration/overrides.md#globs-that-match-files-only). With it enabled,
 `examples.ts` matches only a file named `examples.ts`, not the files inside a folder with that name, and `src/**`
 matches only the files inside `src`, not a file named `src`.
-
-A consequence of these rules: an override with `"filename": "**/.git"` applies to the file `sub/.git` and also to
-every file inside a `.git` folder. Use `.git/` for the files inside `.git` folders only. To apply settings only to a
-file named `.git`, see [A File Named `.git`](#a-file-named-git).
 
 ### `--exclude`
 
@@ -168,28 +162,28 @@ Globs given with `--exclude` use loose matching, with these differences from `ig
 The files each glob matches in [the example folder](#the-example-folder), without `--dot`. The `ignorePaths` column
 also applies to `overrides[].filename`.
 
-| Glob                 | Command line and `files`                                                         | `ignorePaths` and overrides                      | `--exclude`                |
-| -------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------ | -------------------------- |
-| `*.md`               | `README.md`                                                                      | All `.md` files                                  | Same as `ignorePaths`      |
-| `**/*.md`            | All `.md` files except `.hidden.md` and `docs/.x.md`                             | All `.md` files                                  | Same as `ignorePaths`      |
-| `docs`               | `docs/a.md`                                                                      | `docs/a.md`, `docs/.x.md`                        | Same as `ignorePaths`      |
-| `test`               | `test/a.md`                                                                      | `test/a.md`, `a/test/b.md`                       | Same as `ignorePaths`      |
-| `/test`              | Nothing                                                                          | `test/a.md`                                      | `test/a.md`, `a/test/b.md` |
-| `test/`              | `test/a.md`                                                                      | `test/a.md`, `a/test/b.md`                       | Same as `ignorePaths`      |
-| `/test/`             | Nothing on the command line, `test/a.md` in `files`                              | `test/a.md`                                      | Same as `ignorePaths`      |
-| `test/**`            | `test/a.md`                                                                      | `test/a.md`                                      | Same as `ignorePaths`      |
-| `**/test/**`         | `test/a.md`, `a/test/b.md`                                                       | `test/a.md`, `a/test/b.md`                       | Same as `ignorePaths`      |
-| `node_modules`       | `node_modules/x/a.md`                                                            | `node_modules/x/a.md`, `sub/node_modules/y/b.md` | Same as `ignorePaths`      |
-| `node_modules/`      | `node_modules/x/a.md`                                                            | `node_modules/x/a.md`, `sub/node_modules/y/b.md` | Same as `ignorePaths`      |
-| `node_modules/**`    | `node_modules/x/a.md`                                                            | `node_modules/x/a.md`                            | Same as `ignorePaths`      |
-| `**/node_modules/**` | `node_modules/x/a.md`, `sub/node_modules/y/b.md`                                 | `node_modules/x/a.md`, `sub/node_modules/y/b.md` | Same as `ignorePaths`      |
-| `.git`               | `.git/config`, `.git/COMMIT_EDITMSG`                                             | `.git/config`, `.git/COMMIT_EDITMSG`, `sub/.git` | Same as `ignorePaths`      |
-| `.git/`              | `.git/config`, `.git/COMMIT_EDITMSG`                                             | `.git/config`, `.git/COMMIT_EDITMSG`             | Same as `ignorePaths`      |
-| `.git/**`            | `.git/config`, `.git/COMMIT_EDITMSG`                                             | `.git/config`, `.git/COMMIT_EDITMSG`             | Same as `ignorePaths`      |
-| `**/.git`            | `sub/.git`                                                                       | `.git/config`, `.git/COMMIT_EDITMSG`, `sub/.git` | Same as `ignorePaths`      |
-| `**/.git/**`         | `sub/.git`                                                                       | `.git/config`, `.git/COMMIT_EDITMSG`, `sub/.git` | Same as `ignorePaths`      |
-| `**/.git/*`          | Nothing                                                                          | `.git/config`, `.git/COMMIT_EDITMSG`             | Same as `ignorePaths`      |
-| `**`                 | All files except `.hidden.md`, `docs/.x.md`, `sub/.git`, and the files in `.git` | All files                                        | Same as `ignorePaths`      |
+| Glob                 | Command line and `files`                                                | `ignorePaths` and overrides                      | `--exclude`                |
+| -------------------- | ----------------------------------------------------------------------- | ------------------------------------------------ | -------------------------- |
+| `*.md`               | `README.md`                                                             | All `.md` files                                  | Same as `ignorePaths`      |
+| `**/*.md`            | All `.md` files except `.hidden.md` and `docs/.x.md`                    | All `.md` files                                  | Same as `ignorePaths`      |
+| `docs`               | `docs/a.md`                                                             | `docs/a.md`, `docs/.x.md`                        | Same as `ignorePaths`      |
+| `test`               | `test/a.md`                                                             | `test/a.md`, `a/test/b.md`                       | Same as `ignorePaths`      |
+| `/test`              | Nothing                                                                 | `test/a.md`                                      | `test/a.md`, `a/test/b.md` |
+| `test/`              | `test/a.md`                                                             | `test/a.md`, `a/test/b.md`                       | Same as `ignorePaths`      |
+| `/test/`             | Nothing on the command line, `test/a.md` in `files`                     | `test/a.md`                                      | Same as `ignorePaths`      |
+| `test/**`            | `test/a.md`                                                             | `test/a.md`                                      | Same as `ignorePaths`      |
+| `**/test/**`         | `test/a.md`, `a/test/b.md`                                              | `test/a.md`, `a/test/b.md`                       | Same as `ignorePaths`      |
+| `node_modules`       | `node_modules/x/a.md`                                                   | `node_modules/x/a.md`, `sub/node_modules/y/b.md` | Same as `ignorePaths`      |
+| `node_modules/`      | `node_modules/x/a.md`                                                   | `node_modules/x/a.md`, `sub/node_modules/y/b.md` | Same as `ignorePaths`      |
+| `node_modules/**`    | `node_modules/x/a.md`                                                   | `node_modules/x/a.md`                            | Same as `ignorePaths`      |
+| `**/node_modules/**` | `node_modules/x/a.md`, `sub/node_modules/y/b.md`                        | `node_modules/x/a.md`, `sub/node_modules/y/b.md` | Same as `ignorePaths`      |
+| `.github`            | The files in `.github`                                                  | The files in `.github`                           | Same as `ignorePaths`      |
+| `.github/`           | The files in `.github`                                                  | The files in `.github`                           | Same as `ignorePaths`      |
+| `.github/**`         | The files in `.github`                                                  | The files in `.github`                           | Same as `ignorePaths`      |
+| `**/.github`         | Nothing                                                                 | The files in `.github`                           | Same as `ignorePaths`      |
+| `**/.github/**`      | Nothing                                                                 | The files in `.github`                           | Same as `ignorePaths`      |
+| `**/.github/*`       | Nothing                                                                 | The files in `.github`                           | Same as `ignorePaths`      |
+| `**`                 | All files except `.hidden.md`, `docs/.x.md`, and the files in `.github` | All files                                        | Same as `ignorePaths`      |
 
 ## Negative Globs
 
@@ -198,7 +192,7 @@ A glob that starts with `!` behaves differently in each setting.
 - On the command line and in `files`, it skips the files it matches: `cspell "**/*.md" "!test"`. See
   [Strict Matching](#strict-matching-the-command-line-and-files).
 - In `ignorePaths` and `--exclude`, it is not used. CSpell warns, for example
-  `Negative glob exclusions are not supported: !.git/COMMIT_EDITMSG`, and applies the other globs.
+  `Negative glob exclusions are not supported: !docs/a.md`, and applies the other globs.
 - In `overrides[].filename`, it removes files from the match. When several globs match a file, the last one wins:
   `["**/*.md", "!docs/**"]` matches every Markdown file outside `docs`.
 
@@ -273,63 +267,3 @@ These globs skip only `node_modules` folders under the current folder, and keep 
 [`--exclude`](#--exclude) treats some of these globs differently. `--exclude node_modules/` and
 `--exclude /**/node_modules/**` also report `No files found to check.` `--exclude /node_modules` keeps the files in
 `node_modules/my-package` and skips the `node_modules` folders under it.
-
-### Ignore `.git` but Check the Commit Message
-
-To check the message in a git hook, use the [`commit-msg` hook](./git.md#commit-msg). It checks the message even when
-`ignorePaths` contains `.git`.
-
-To check the message along with the rest of the project, ignore everything in `.git` except the commit message:
-
-**`cspell.json`**
-
-```json
-{
-  "ignorePaths": [".git/!(COMMIT_EDITMSG)"]
-}
-```
-
-Then `cspell --dot "**"` checks the message and skips the rest of `.git`.
-
-### A File Named `.git`
-
-In a git worktree or a submodule, `.git` is a file instead of a folder.
-
-- On the command line and in `files`, `**/.git` matches only files named `.git`.
-- In `ignorePaths` and overrides, `.git` and `**/.git` match files named `.git` and everything inside `.git`
-  folders. `.git/` matches only what is inside `.git` folders.
-- In an override, a negative glob limits the match to files named `.git`:
-
-**`cspell.json`**
-
-```json
-{
-  "overrides": [
-    {
-      "filename": ["**/.git", "!.git/"],
-      "enabled": false
-    }
-  ]
-}
-```
-
-With [`overrideGlobsMatchFilesOnly`](./Configuration/overrides.md#globs-that-match-files-only) enabled, `.git` in an
-override matches only files named `.git`:
-
-**`cspell.json`**
-
-```json
-{
-  "features": {
-    "overrideGlobsMatchFilesOnly": true
-  },
-  "overrides": [
-    {
-      "filename": ".git",
-      "enabled": false
-    }
-  ]
-}
-```
-
-<!--- cspell:ignore EDITMSG -->
