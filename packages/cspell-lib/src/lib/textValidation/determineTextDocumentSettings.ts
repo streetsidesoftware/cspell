@@ -4,8 +4,16 @@ import { findMatchingFileTypes } from '@cspell/filetypes';
 import type { TextDocument, TextDocumentRef } from '../Models/TextDocument.js';
 import type { CSpellSettingsInternal } from '../Settings/index.js';
 import { calcOverrideSettings, getDefaultSettings, getGlobalSettingsAsync, mergeSettings } from '../Settings/index.js';
+import { normalizeLanguageId } from '../Settings/LanguageSettings.js';
 import { combineTextAndLanguageSettings } from '../Settings/TextDocumentSettings.js';
 import { uriToFilePath } from '../util/Uri.js';
+
+// cspell:ignore dockercompose
+const yamlParser = { parser: 'yaml' };
+const defaultFileTypeParsers = new Map([
+    ['yaml', yamlParser],
+    ['dockercompose', yamlParser],
+]);
 
 /**
  * Combines all relevant setting values into a final configuration to be used for spell checking.
@@ -39,5 +47,12 @@ export async function determineTextDocumentSettings(
     if (doc.locale) {
         fileSettings.language = doc.locale;
     }
-    return combineTextAndLanguageSettings(fileSettings, doc.text, languageIds);
+    const docSettings = combineTextAndLanguageSettings(fileSettings, doc.text, languageIds);
+    if (docSettings.parser !== undefined) return docSettings;
+
+    for (const languageId of normalizeLanguageId(languageIds)) {
+        const parser = defaultFileTypeParsers.get(languageId);
+        if (parser) return mergeSettings(docSettings, parser);
+    }
+    return docSettings;
 }

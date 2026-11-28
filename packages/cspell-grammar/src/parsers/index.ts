@@ -1,2 +1,4 @@
 import { parser as parserTypeScript } from './typescript/index.js';
-export const parsers = [parserTypeScript];
+import { parser as parserYaml } from './yaml/YamlParser.js';
+
+export const parsers = [parserTypeScript, parserYaml];
