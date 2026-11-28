@@ -92,8 +92,6 @@ is merged after its imports, so its own settings override theirs.
 
 To check with `cspell.custom.json` alone, add `--no-config-search`.
 
-The `cspell check` command works differently: with `--config <path>`, it loads that file in place of this search.
-
 ### Merge Rules
 
 Most individual settings will overwrite the settings from the previous step / file. There are a few important exceptions.
