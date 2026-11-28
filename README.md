@@ -112,12 +112,12 @@ Contributions are welcome! See our [contribution notes](CONTRIBUTING.md). **Note
 <!--- cspell:disable --->
 
 [<img alt="Contributor Jason3S" src="https://avatars.githubusercontent.com/u/3740137?v=4&size=128" width=64>](https://github.com/Jason3S)
+[<img alt="Contributor dleontev" src="https://avatars.githubusercontent.com/u/9162240?v=4&size=128" width=64>](https://github.com/dleontev)
 [<img alt="Contributor bardrop" src="https://avatars.githubusercontent.com/u/100354790?v=4&size=128" width=64>](https://github.com/bardrop)
 [<img alt="Contributor harrismalik" src="https://avatars.githubusercontent.com/u/43353055?v=4&size=128" width=64>](https://github.com/harrismalik)
 [<img alt="Contributor Smokeybear10" src="https://avatars.githubusercontent.com/u/208901042?v=4&size=128" width=64>](https://github.com/Smokeybear10)
 [<img alt="Contributor twotnguyen" src="https://avatars.githubusercontent.com/u/195888848?v=4&size=128" width=64>](https://github.com/twotnguyen)
 [<img alt="Contributor G26karthik" src="https://avatars.githubusercontent.com/u/144328549?v=4&size=128" width=64>](https://github.com/G26karthik)
-[<img alt="Contributor dleontev" src="https://avatars.githubusercontent.com/u/9162240?v=4&size=128" width=64>](https://github.com/dleontev)
 [<img alt="Contributor peremunoz" src="https://avatars.githubusercontent.com/u/73690199?v=4&size=128" width=64>](https://github.com/peremunoz)
 [<img alt="Contributor akashchamp" src="https://avatars.githubusercontent.com/u/116457960?v=4&size=128" width=64>](https://github.com/akashchamp)
 [<img alt="Contributor ScribleSean" src="https://avatars.githubusercontent.com/u/56331494?v=4&size=128" width=64>](https://github.com/ScribleSean)
