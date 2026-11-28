@@ -106,8 +106,10 @@ from the configuration. A glob in `files` matches the same files as on the comma
 - `cspell docs` checks all files in the `docs` folder. This works for any existing folder, such as `docs/api`.
 - `cspell .` checks all files.
 - A glob ending in `/**` also matches a file with that name. `cspell "**/.git/**"` checks the file `sub/.git`.
-- On the command line, a glob that starts with `/` is an absolute path. In `files`, a leading `/` ties the glob to
-  the root.
+- On the command line, a glob that starts with `/` is an absolute path. It must be inside the root: an absolute glob
+  outside the root finds no files. In `files`, a leading `/` ties the glob to the root.
+- A glob can start with `../` to check files outside the root: `cspell "../shared/**/*.md"`. Only the folders before
+  the first wildcard or `{}` can hold `..`, so `cspell "{../shared,docs}/*.md"` finds no files.
 - A glob that starts with `!` skips the files it matches, using [loose matching](#what-loose-matching-adds).
   `cspell "**/*.md" "!test"` skips both `test/a.md` and `a/test/b.md`. So does `["**/*.md", "!test"]` in `files`.
 
