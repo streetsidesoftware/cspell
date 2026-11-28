@@ -100,7 +100,7 @@ Things to know:
   the file, in every language, code included.
 - Substitutions and their definitions add up across configs: the default config, imported configs, your own config,
   and matching `overrides` and `languageSettings`. A definition replaces an earlier one with the same name. An entry
-  overrides an earlier entry with the same `find`. To turn off an inherited substitution, redefine it with no
+  overrides an earlier entry with the same `find`. To disable an inherited substitution, redefine it with no
   entries. For one written in place, map its `find` to itself where it is set, such as in a `languageSettings` entry
   for the same language.
 - Substitutions were added in CSpell 9.7.0.
