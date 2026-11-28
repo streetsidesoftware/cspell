@@ -20,3 +20,12 @@ Those readers are [users](./glossary.md#users): people who run cspell, write its
 - Never edit between `@@inject` markers, or the generated website pages. See
   [Generated files](./build-and-packaging.md#generated-files).
 - In a Markdown file with deliberate misspellings, list them in a `cspell:ignore` comment at the end of the file.
+
+## Word choice
+
+These also apply to comments, internal ones included, and to the docs in `docs/`.
+
+- For settings and features, write "enable" and "disable", and "enabled" and "disabled". Not "turn on" or "turn off",
+  and not "on" or "off".
+- When one value takes precedence over another, say what happens to the other one: "overrides", "replaces", or "is used
+  instead of". Don't write "wins". For example: "A later definition replaces an earlier one with the same name."

@@ -3,7 +3,7 @@
 Instructions for coding agents working in the CSpell monorepo. `CLAUDE.md` imports this file, and
 `.github/copilot-instructions.md` points to it.
 
-If a command here disagrees with `package.json`, `package.json` wins. Say so rather than working around it.
+If a command here disagrees with `package.json`, use the one in `package.json`. Say so rather than working around it.
 
 ## Commands
 
@@ -81,6 +81,9 @@ Each rule is written for people in the linked section. Read it before working in
   [Invisible characters](docs/code-style.md#invisible-characters).
 - **Writing for users:** READMEs, the website, doc comments, and published PRs. See
   [Writing for users](docs/writing-for-users.md).
+- **Word choice:** "enable" and "disable", not "on" and "off". For precedence, say what happens, such as "overrides" or
+  "replaces", not "wins". This applies to comments and `docs/` too. See
+  [Word choice](docs/writing-for-users.md#word-choice).
 - **Workflows:** give a new or changed workflow `workflow_dispatch` when possible. Add `workflow_call` only to a new
   workflow without a `concurrency` section. See
   [CI](docs/build-and-packaging.md#ci).
