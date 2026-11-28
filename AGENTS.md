@@ -61,7 +61,8 @@ Read the doc before changing that area. These are written for people.
 - [`docs/glossary.md`](docs/glossary.md): config resolution, dictionaries, and other terms.
 - [`docs/code-style.md`](docs/code-style.md): formatting, invisible characters.
 - [`docs/writing-comments.md`](docs/writing-comments.md): comments and doc comments, public and internal.
-- [`docs/writing-for-users.md`](docs/writing-for-users.md): READMEs, the website, doc comments, and published PRs.
+- [`docs/writing-for-users.md`](docs/writing-for-users.md): READMEs, the website, doc comments, published PRs, and
+  word choice for all text.
 
 ## Rules
 
@@ -81,8 +82,8 @@ Each rule is written for people in the linked section. Read it before working in
   [Invisible characters](docs/code-style.md#invisible-characters).
 - **Writing for users:** READMEs, the website, doc comments, and published PRs. See
   [Writing for users](docs/writing-for-users.md).
-- **Word choice:** "enable" and "disable", not "on" and "off". For precedence, say what happens, such as "overrides" or
-  "replaces", not "wins". This applies to comments and `docs/` too. See
+- **Word choice:** for settings and features, "enable" and "disable", not "on" and "off". For precedence, say what
+  happens, such as "overrides" or "replaces", not "wins". This applies to comments and `docs/` too. See
   [Word choice](docs/writing-for-users.md#word-choice).
 - **Workflows:** give a new or changed workflow `workflow_dispatch` when possible. Add `workflow_call` only to a new
   workflow without a `concurrency` section. See
