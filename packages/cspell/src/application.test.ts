@@ -674,4 +674,4 @@ function sampleTests(): SampleTest[] {
     // cspell:enable
 }
 
-// cspell:ignore rootword ciword nestedword
+// cspell:ignore rootword ciword nestedword zzextraword zzteamword
