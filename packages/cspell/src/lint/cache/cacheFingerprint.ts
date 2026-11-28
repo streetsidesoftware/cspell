@@ -16,6 +16,12 @@ export interface FingerprintOptions {
     configUrl?: URL | undefined;
     /** Whether the run searches for config files near each file. */
     configSearch?: boolean;
+    /** Whether the run loads cspell's default configuration. */
+    defaultConfiguration?: boolean;
+    dictionary?: string[] | undefined;
+    disableDictionary?: string[] | undefined;
+    forceCheck?: boolean;
+    maxFileSize?: string | undefined;
 }
 
 /**
@@ -32,6 +38,11 @@ export function calcCacheFingerprint(options: FingerprintOptions, root: string):
         stopConfigSearchAt,
         configUrl,
         configSearch,
+        defaultConfiguration,
+        dictionary,
+        disableDictionary,
+        forceCheck,
+        maxFileSize,
     } = options;
     const values = {
         languageId: languageId || undefined,
@@ -42,6 +53,11 @@ export function calcCacheFingerprint(options: FingerprintOptions, root: string):
         stopConfigSearchAt: stopConfigSearchAt?.length ? relativeStopFolders(stopConfigSearchAt, root) : undefined,
         config: configUrl && relativeConfigPath(configUrl, root),
         configSearch: configSearch === false ? false : undefined,
+        defaultConfiguration: defaultConfiguration === false ? false : undefined,
+        dictionary: dictionary?.length ? dictionary : undefined,
+        disableDictionary: disableDictionary?.length ? disableDictionary : undefined,
+        forceCheck: forceCheck || undefined,
+        maxFileSize: maxFileSize || undefined,
     };
     const set = Object.entries(values).filter(([, value]) => value !== undefined);
     return set.length ? JSON.stringify(Object.fromEntries(set)) : undefined;

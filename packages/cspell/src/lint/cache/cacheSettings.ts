@@ -40,8 +40,15 @@ export async function calcCacheSettings(
     if (options.cacheReset) {
         optionals.reset = true;
     }
-    // The merged settings, not the flag: a config file can also disable the search.
-    const contextTag = calcCacheFingerprint({ ...options, configSearch: !config.noConfigSearch }, root);
+    // The merged settings, not the flags: a config file can also set these.
+    const contextTag = calcCacheFingerprint(
+        {
+            ...options,
+            configSearch: !config.noConfigSearch,
+            defaultConfiguration: config.loadDefaultConfiguration ?? true,
+        },
+        root,
+    );
     if (contextTag) {
         optionals.contextTag = contextTag;
     }

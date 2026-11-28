@@ -506,6 +506,45 @@ describe('Linter File Caching', () => {
         }
     });
 
+    const skipped = undefined;
+
+    test.each`
+        flag                                     | file             | plain              | withFlag
+        ${{ dictionary: ['extra-words'] }}       | ${'notes.md'}    | ${['zzextraword']} | ${[]}
+        ${{ dictionary: ['!team-words'] }}       | ${'notes.md'}    | ${['zzextraword']} | ${['zzextraword', 'zzteamword']}
+        ${{ disableDictionary: ['team-words'] }} | ${'notes.md'}    | ${['zzextraword']} | ${['zzextraword', 'zzteamword']}
+        ${{ defaultConfiguration: false }}       | ${'notes.md'}    | ${['zzextraword']} | ${['hello', 'zzextraword']}
+        ${{ maxFileSize: '1B' }}                 | ${'notes.md'}    | ${['zzextraword']} | ${skipped}
+        ${{ forceCheck: true }}                  | ${'disabled.md'} | ${skipped}         | ${['zzextraword']}
+    `('cached results follow the command-line flag $flag', async ({ flag, file, plain, withFlag }) => {
+        const cacheLocation = tempLocation('.cspellcache-flags');
+        await fs.rm(cacheLocation, { recursive: true }).catch(() => undefined);
+        const options: LinterCliOptions = { ...WithCache, cacheLocation, root: fr('cached-flags'), file: [file] };
+        // Only a checked file is cached. When the flag skips the file, the first run's entry is still there.
+        const flagChecksFile = withFlag !== skipped;
+        const plainChecksFile = plain !== skipped;
+
+        const runs: [LinterCliOptions, string[] | undefined, number][] = [
+            [{}, plain, 0],
+            [flag, withFlag, 0],
+            [flag, withFlag, flagChecksFile ? 1 : 0],
+            [{}, plain, plainChecksFile && !flagChecksFile ? 1 : 0],
+        ];
+
+        let r = 0;
+        for (const [runOptions, words, cachedFiles] of runs) {
+            ++r;
+            const reporter = new InMemoryReporter();
+            const result = await App.lint([], { ...options, ...runOptions }, reporter);
+            const expected = words ? { issues: words.length } : { skippedFiles: 1 };
+            expect(reporter.errors).toEqual([]);
+            expect(result, `run #${r} ${JSON.stringify(runOptions)}`).toEqual(
+                oc({ files: 1, cachedFiles, ...expected }),
+            );
+            expect(reporter.issues.map((issue) => issue.text)).toEqual(words ?? []);
+        }
+    });
+
     test('cached results follow the stop folders', async () => {
         const reporter = new InMemoryReporter();
         const cacheLocation = tempLocation('.cspellcache-stops');
@@ -635,4 +674,4 @@ function sampleTests(): SampleTest[] {
     // cspell:enable
 }
 
-// cspell:ignore rootword ciword nestedword
+// cspell:ignore rootword ciword nestedword zzextraword zzteamword
