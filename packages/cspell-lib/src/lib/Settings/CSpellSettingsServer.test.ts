@@ -76,6 +76,7 @@ describe('Validate CSpellSettingsServer', () => {
         ${{ substitutions: ['a'] }}             | ${{}}                                   | ${['a']}
         ${{ substitutions: ['a'] }}             | ${{ substitutions: [] }}                | ${['a']}
         ${{ substitutions: ['a', ['x', 'y']] }} | ${{ substitutions: [['x', 'z'], 'b'] }} | ${['a', ['x', 'y'], ['x', 'z'], 'b']}
+        ${{ substitutions: ['a'] }}             | ${{ substitutions: [['x', 'z'], 'a'] }} | ${['a', ['x', 'z'], 'a']}
         ${{}}                                   | ${{ substitutions: ['b'] }}             | ${['b']}
     `('mergeSettings combines substitutions $left $right', ({ left, right, expected }) => {
         expect(mergeSettings(left, right).substitutions).toEqual(expected);
