@@ -22,6 +22,16 @@ describe('calcCacheFingerprint', () => {
         ${{ stopConfigSearchAt: stops('src/a/b') }}             | ${'{"stopConfigSearchAt":["src/a/b"]}'}
         ${{ configSearch: true }}                               | ${undefined}
         ${{ configSearch: false }}                              | ${'{"configSearch":false}'}
+        ${{ defaultConfiguration: true }}                       | ${undefined}
+        ${{ defaultConfiguration: false }}                      | ${'{"defaultConfiguration":false}'}
+        ${{ dictionary: [] }}                                   | ${undefined}
+        ${{ dictionary: ['a', '!b'] }}                          | ${'{"dictionary":["a","!b"]}'}
+        ${{ disableDictionary: [] }}                            | ${undefined}
+        ${{ disableDictionary: ['a'] }}                         | ${'{"disableDictionary":["a"]}'}
+        ${{ forceCheck: false }}                                | ${undefined}
+        ${{ forceCheck: true }}                                 | ${'{"forceCheck":true}'}
+        ${{ maxFileSize: '' }}                                  | ${undefined}
+        ${{ maxFileSize: '1MB' }}                               | ${'{"maxFileSize":"1MB"}'}
     `('calcCacheFingerprint $options', ({ options, expected }) => {
         expect(calcCacheFingerprint(options, process.cwd())).toBe(expected);
     });

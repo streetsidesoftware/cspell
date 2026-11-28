@@ -506,6 +506,39 @@ describe('Linter File Caching', () => {
         }
     });
 
+    test.each`
+        flag                                     | file             | plain                  | withFlag
+        ${{ dictionary: ['extra-words'] }}       | ${'notes.md'}    | ${{ issues: 1 }}       | ${{ issues: 0 }}
+        ${{ dictionary: ['!team-words'] }}       | ${'notes.md'}    | ${{ issues: 1 }}       | ${{ issues: 2 }}
+        ${{ disableDictionary: ['team-words'] }} | ${'notes.md'}    | ${{ issues: 1 }}       | ${{ issues: 2 }}
+        ${{ defaultConfiguration: false }}       | ${'notes.md'}    | ${{ issues: 1 }}       | ${{ issues: 2 }}
+        ${{ maxFileSize: '1B' }}                 | ${'notes.md'}    | ${{ issues: 1 }}       | ${{ skippedFiles: 1 }}
+        ${{ forceCheck: true }}                  | ${'disabled.md'} | ${{ skippedFiles: 1 }} | ${{ issues: 1 }}
+    `('cached results follow the command-line flag $flag', async ({ flag, file, plain, withFlag }) => {
+        const cacheLocation = tempLocation('.cspellcache-flags');
+        await fs.rm(cacheLocation, { recursive: true }).catch(() => undefined);
+        const options: LinterCliOptions = { ...WithCache, cacheLocation, root: fr('cached-flags'), file: [file] };
+        // Only a checked file is cached. When the flag skips the file, the first run's entry is still there.
+        const flagChecksFile = !withFlag.skippedFiles;
+        const plainChecksFile = !plain.skippedFiles;
+
+        const runs: [LinterCliOptions, Partial<RunResult>][] = [
+            [{}, { ...plain, cachedFiles: 0 }],
+            [flag, { ...withFlag, cachedFiles: 0 }],
+            [flag, { ...withFlag, cachedFiles: flagChecksFile ? 1 : 0 }],
+            [{}, { ...plain, cachedFiles: plainChecksFile && !flagChecksFile ? 1 : 0 }],
+        ];
+
+        let r = 0;
+        for (const [runOptions, expected] of runs) {
+            ++r;
+            const reporter = new InMemoryReporter();
+            const result = await App.lint([], { ...options, ...runOptions }, reporter);
+            expect(reporter.errors).toEqual([]);
+            expect(result, `run #${r} ${JSON.stringify(runOptions)}`).toEqual(oc({ files: 1, ...expected }));
+        }
+    });
+
     test('cached results follow the stop folders', async () => {
         const reporter = new InMemoryReporter();
         const cacheLocation = tempLocation('.cspellcache-stops');

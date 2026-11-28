@@ -59,6 +59,25 @@ describe('Validate calcCacheSettings', () => {
             expect(settings.contextTag).toBe(expected);
         },
     );
+
+    test.each`
+        loadDefaultConfiguration | defaultConfiguration | expected
+        ${undefined}             | ${undefined}         | ${undefined}
+        ${true}                  | ${undefined}         | ${undefined}
+        ${false}                 | ${undefined}         | ${'{"defaultConfiguration":false}'}
+        ${undefined}             | ${false}             | ${undefined}
+    `(
+        'calcCacheSettings keys on whether the run loads the default configuration: $loadDefaultConfiguration $defaultConfiguration',
+        async ({ loadDefaultConfiguration, defaultConfiguration, expected }) => {
+            const settings = await calcCacheSettings(
+                { loadDefaultConfiguration },
+                { defaultConfiguration },
+                '.',
+                version,
+            );
+            expect(settings.contextTag).toBe(expected);
+        },
+    );
 });
 
 describe('validate normalizeVersion', () => {
