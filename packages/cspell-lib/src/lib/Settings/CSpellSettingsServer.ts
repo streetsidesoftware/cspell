@@ -185,6 +185,8 @@ function _merge(
         enabledFileTypes: mergeObjects(_left.enabledFileTypes, _right.enabledFileTypes),
         ignoreRegExpList: mergeListUnique(_left.ignoreRegExpList, _right.ignoreRegExpList),
         patterns: mergeListUnique(_left.patterns, _right.patterns),
+        substitutionDefinitions: mergeListUnique(_left.substitutionDefinitions, _right.substitutionDefinitions),
+        substitutions: mergeListUnique(_left.substitutions, _right.substitutions),
         dictionaryDefinitions: mergeListUnique(_left.dictionaryDefinitions, _right.dictionaryDefinitions),
         dictionaries: mergeListUnique(_left.dictionaries, _right.dictionaries),
         noSuggestDictionaries: mergeListUnique(_left.noSuggestDictionaries, _right.noSuggestDictionaries),

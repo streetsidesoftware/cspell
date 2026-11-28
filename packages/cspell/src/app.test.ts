@@ -417,6 +417,7 @@ describe('Validate cli', () => {
         ${'language-id disabled'}     | ${[rpFeat('language-id'), '--no-progress', 'notes.txt']}                           | ${app.CheckFailed} | ${true} | ${false} | ${false}
         ${'language-id markdown'}     | ${[rpFeat('language-id'), '--no-progress', '--language-id=markdown', 'notes.txt']} | ${app.CheckFailed} | ${true} | ${true}  | ${false}
         ${'language-id locale fr'}    | ${[rpFeat('language-id'), '--no-progress', '--locale=fr', 'notes.txt']}            | ${app.CheckFailed} | ${true} | ${true}  | ${false}
+        ${'substitutions merged'}     | ${[rpFeat('substitutions'), '--no-progress', '.']}                                 | ${app.CheckFailed} | ${true} | ${true}  | ${false}
     `('app $msg Expect Error: $errorCheck', async ({ testArgs, errorCheck, eError, eLog, eInfo }: TestCase) => {
         chalk.level = 1;
         const commander = getCommander();

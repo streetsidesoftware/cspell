@@ -98,6 +98,10 @@ Things to know:
   substitution cannot offer alternatives.
 - Every match is replaced, everywhere the substitution applies. A single-letter `find` such as `a` changes every `a` in
   the file, in every language, code included.
+- Substitutions and their definitions add up across configs: the default config, imported configs, your own config,
+  and matching `overrides` and `languageSettings`. When two definitions share a name, or two entries share a `find`,
+  the later one wins. To turn off an inherited substitution, redefine it with no entries. For one written in place, map
+  its `find` to itself where it is set, such as in a `languageSettings` entry for the same language.
 - Substitutions were added in CSpell 9.7.0.
 
 See [`substitutionDefinitions`](./auto_properties.md#settings-substitutiondefinitions) and
