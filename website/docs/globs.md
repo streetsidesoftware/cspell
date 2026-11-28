@@ -276,10 +276,10 @@ These globs skip only `node_modules` folders under the current folder, and keep 
 
 ### Ignore `.git` but Check the Commit Message
 
-A `commit-msg` git hook can check the message with `cspell .git/COMMIT_EDITMSG`. If `ignorePaths` contains `.git`,
-`.git/`, or `.git/**`, that command reports `No files found to check.`
+To check the message in a git hook, use the [`commit-msg` hook](./git.md#commit-msg). It checks the message even when
+`ignorePaths` contains `.git`.
 
-Ignore everything in `.git` except the commit message:
+To check the message along with the rest of the project, ignore everything in `.git` except the commit message:
 
 **`cspell.json`**
 
@@ -289,7 +289,7 @@ Ignore everything in `.git` except the commit message:
 }
 ```
 
-`cspell .git/COMMIT_EDITMSG` then checks the message, and `cspell --dot "**"` skips the rest of `.git`.
+Then `cspell --dot "**"` checks the message and skips the rest of `.git`.
 
 ### A File Named `.git`
 
