@@ -54,7 +54,7 @@ describe('SubstitutionTransformer', () => {
         ${['quotes', ["''", '`']]}           | ${'`x`'}
         ${[["''", '`'], 'quotes']}           | ${'"x"'}
         ${['quotes', ["''", '`'], 'quotes']} | ${'"x"'}
-    `('the later definition or entry wins $substitutions', ({ substitutions, expectedText }) => {
+    `('a later definition or entry overrides an earlier one $substitutions', ({ substitutions, expectedText }) => {
         const info: SubstitutionInfo = {
             substitutions,
             substitutionDefinitions: [

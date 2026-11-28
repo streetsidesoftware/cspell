@@ -23,7 +23,7 @@ since both take `[find, replacement]` pairs, but they work at different stages a
 | What it changes                      | The forms of a word that are looked up in that dictionary | The document text, before it is split into words  |
 | Which dictionaries it affects        | Only the one it is defined on                             | All of them                                       |
 | Is the original text still checked   | Yes, first                                                | No, only the replaced text is checked             |
-| One `find` with several replacements | Each one is tried                                         | The last one wins                                 |
+| One `find` with several replacements | Each one is tried                                         | The last one overrides the others                 |
 | Can split or join words              | No                                                        | Yes                                               |
 
 ## `repMap`: Other Ways to Spell a Word
@@ -94,14 +94,15 @@ A substitution is listed by name, as above, or written in place as a `[find, rep
 Things to know:
 
 - A `find` is exact text, not a regular expression.
-- The longest matching `find` is used. If the same `find` appears more than once, the last entry wins, so a
-  substitution cannot offer alternatives.
+- The longest matching `find` is used. If the same `find` appears more than once, the last entry overrides the earlier
+  ones, so a substitution cannot offer alternatives.
 - Every match is replaced, everywhere the substitution applies. A single-letter `find` such as `a` changes every `a` in
   the file, in every language, code included.
 - Substitutions and their definitions add up across configs: the default config, imported configs, your own config,
-  and matching `overrides` and `languageSettings`. When two definitions share a name, or two entries share a `find`,
-  the later one wins. To turn off an inherited substitution, redefine it with no entries. For one written in place, map
-  its `find` to itself where it is set, such as in a `languageSettings` entry for the same language.
+  and matching `overrides` and `languageSettings`. A definition replaces an earlier one with the same name. An entry
+  overrides an earlier entry with the same `find`. To turn off an inherited substitution, redefine it with no
+  entries. For one written in place, map its `find` to itself where it is set, such as in a `languageSettings` entry
+  for the same language.
 - Substitutions were added in CSpell 9.7.0.
 
 See [`substitutionDefinitions`](./auto_properties.md#settings-substitutiondefinitions) and
