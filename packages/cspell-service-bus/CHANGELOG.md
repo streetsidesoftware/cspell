@@ -154,6 +154,12 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 </details>
 
+## v10.6.1 (2026-11-28)
+
+### Fixes
+
+- fix: Show broken symbolic links in verbose glob searches (<a href="https://github.com/streetsidesoftware/cspell/pull/9700">#9700</a>)
+
 ## v10.6.0 (2026-11-28)
 
 ### Features

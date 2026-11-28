@@ -936,6 +936,27 @@ Related: #8975, streetsidesoftware/vscode-spell-checker#3099, streetsidesoftware
 
 </details>
 
+## v10.6.1 (2026-11-28)
+
+### Fixes
+
+<details>
+<summary>fix: Show broken symbolic links in verbose glob searches (<a href="https://github.com/streetsidesoftware/cspell/pull/9700">#9700</a>)</summary>
+
+### fix: Show broken symbolic links in verbose glob searches ([#9700](https://github.com/streetsidesoftware/cspell/pull/9700))
+
+## Summary
+
+When you run `cspell lint --glob-symlinks --verbose`, CSpell reports broken symbolic links that match a glob or block a path named in one. This helps explain why an expected file or directory was skipped.
+
+CSpell reports each link as an informational message and uses the normal lint result for its exit status.
+
+Fixes #9441.
+
+---
+
+</details>
+
 ## v10.6.0 (2026-11-28)
 
 ### Features
