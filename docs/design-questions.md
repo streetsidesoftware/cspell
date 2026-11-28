@@ -43,9 +43,9 @@ their part. Note the ones that matter next to the decision they shape, in terms 
 
 - **Config resolution:** config files, `import`, then matching `overrides`, then matching `languageSettings`, then
   in-document directives (see "Config resolution" in the [glossary](./glossary.md)).
-- **Merging:** single values are last-wins; lists and objects combine only if `_merge` in
+- **Merging:** a later single value overrides an earlier one; lists and objects combine only if `_merge` in
   `packages/cspell-lib/src/lib/Settings/CSpellSettingsServer.ts` says so.
-- **CLI versus config:** a CLI flag wins over the config file (`cfg.options.x ?? configInfo.config.x`).
+- **CLI versus config:** a CLI flag overrides the config file (`cfg.options.x ?? configInfo.config.x`).
 - **Where an option can be set:** decided by the interface in `CSpellSettingsDef.ts` (see
   [Config options and CLI flags](./config-and-cli.md)).
 - **Trust:** JavaScript config files and plugins aren't loaded in untrusted locations (`WorkspaceTrustSettings`).
@@ -96,8 +96,8 @@ For a new or changed option (see [Config options and CLI flags](./config-and-cli
 
 - **Name and short form.** Does the flag fit the existing groups (config resolution, file selection, reporting)? Does
   a short form conflict with an existing one?
-- **Matching config option.** Does the flag need one, so CI and editors can set the same thing? Which wins when both
-  are set?
+- **Matching config option.** Does the flag need one, so CI and editors can set the same thing? Which one overrides the
+  other when both are set?
 - **Negation.** Is a `--no-` form needed?
 - **Output.** What do `--help` and the reporter output say? Is the output machine-read, for example with `--reporter`
   or JSON?

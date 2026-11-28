@@ -58,7 +58,7 @@ Follow the doc's steps. Don't skip one:
 - Register it in `configFields.ts`, `merge.ts`, and `sanitizeSettings.ts`. The build fails until all three have it.
 - If it's an array or object that should combine across config files, add it to `_merge` in
   `packages/cspell-lib/src/lib/Settings/CSpellSettingsServer.ts`. Nothing checks this for you.
-- Wire it into the code that uses it. For a rename, read the old option too, and let the new one win.
+- Wire it into the code that uses it. For a rename, read the old option too, and let the new one override it.
 - Add tests next to the code. For a rename, cover old only, new only, and both.
 
 Never edit generated files by hand. Regenerate them:
