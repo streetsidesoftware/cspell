@@ -32,5 +32,5 @@ exec git diff --cached --name-only | npx cspell --no-summary --no-progress --no-
 ```sh
 #!/bin/sh
 
-exec npx cspell --no-summary --no-progress --language-id commit-msg --file "$1"
+exec npx cspell --no-summary --no-progress --language-id commit-msg --force-check --file "$1"
 ```
