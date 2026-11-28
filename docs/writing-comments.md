@@ -59,7 +59,7 @@ Cases that need care:
 A property that holds a function runs when called, like a method, so its comment is imperative. A function type
 describes every function of that type, so its comment is in the third person.
 
-In the last row, a noun phrase suits most comments. A boolean that turns one effect on takes a verb that says what
+In the last row, a noun phrase suits most comments. A boolean that enables one effect takes a verb that says what
 `true` does. A boolean whose values each do something of their own takes a noun phrase, since a verb would describe only
 one of them.
 
@@ -71,11 +71,12 @@ one of them.
   dictionary." no more than "A dictionary."
 - Use a list when a comment covers several cases. Don't write a one-line comment with several clauses.
 - Give a boolean a list when its values do different things, with a line for `undefined` when that behaves differently
-  too. A boolean that only turns one effect on gets a sentence that says what `true` does.
+  too. A boolean that only enables one effect gets a sentence that says what `true` does.
 - Don't write a paragraph full of `code` references. Split it into sentences or a list.
 - Leave out alternatives you rejected.
 - Keep comment lines to 140 characters or fewer.
 - In tests, the test name states the intent. Comment only on setup that isn't obvious.
+- Follow the [Word choice](./writing-for-users.md#word-choice) rules, in internal comments too.
 
 Write invisible characters as escape sequences. The one exception is a zero-width space in a doc comment. See
 [Invisible characters](./code-style.md#invisible-characters).
