@@ -407,6 +407,7 @@ describe('Validate cli', () => {
         ${'issue-2998 --language-id'} | ${[rpFix('issue-2998'), '-v', '-v', '--language-id=fix', 'fix-words.txt']}         | ${undefined}       | ${true} | ${false} | ${true}
         ${'issue-4811 **/README.md'}  | ${['-r', pIssues('issue-4811'), '--no-progress', '**/README.md']}                  | ${undefined}       | ${true} | ${false} | ${false}
         ${'issue-4811'}               | ${['-r', pIssues('issue-4811'), '--no-progress', '.']}                             | ${app.CheckFailed} | ${true} | ${true}  | ${false}
+        ${'issue-5150'}               | ${[rpFix('issue-5150'), '--no-progress', '.']}                                     | ${app.CheckFailed} | ${true} | ${true}  | ${false}
         ${'issue-6373 .'}             | ${[rpFix('issue-6373'), '--no-progress', '.']}                                     | ${app.CheckFailed} | ${true} | ${true}  | ${false}
         ${'issue-6373'}               | ${[rpFix('issue-6373'), '--no-progress']}                                          | ${undefined}       | ${true} | ${false} | ${false}
         ${'issue-6353'}               | ${[rpFix('issue-6353'), '--no-progress']}                                          | ${undefined}       | ${true} | ${false} | ${true}
