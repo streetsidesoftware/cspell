@@ -118,8 +118,7 @@ from the configuration. A glob in `files` matches the same files as on the comma
 By default, `*` and `**` do not match names that start with `.`, such as `.github` or `.hidden.md`.
 
 - Use `--dot` on the command line, or `"enableGlobDot": true` in the configuration, to include them.
-- A glob that names the dot explicitly matches without `--dot`: `cspell "**/.*"` checks `.hidden.md` and
-  `docs/.x.md`.
+- A glob that names the dot explicitly matches without `--dot`: `cspell "**/.*"` checks `.hidden.md` and `docs/.x.md`.
 - Without `--dot`, the search does not enter folders that start with `.`. A glob that starts with the folder's name
   still works: `cspell ".github/**"` checks the files in `.github`, but `cspell "**/.github/**"` checks nothing.
 
